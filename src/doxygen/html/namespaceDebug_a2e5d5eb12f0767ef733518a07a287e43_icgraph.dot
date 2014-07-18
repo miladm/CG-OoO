@@ -1,0 +1,21 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="Debug::allFlags",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Debug::AllFlags::disable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structDebug_1_1AllFlags.html#a7a8e72f1538934d8c9fa7fdac21b5615"];
+  Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="dumpDebugFlags",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$debug_8cc.html#a7ff54327ec09fb36dac3f025eb37af0a"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Debug::AllFlags::enable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structDebug_1_1AllFlags.html#a2a932c436b017c14d6c3c874fb13bd6b"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Debug::findFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceDebug.html#a09cf38987e4932dd5e0bc71954f2b637"];
+  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Debug::changeFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceDebug.html#ae27d4c45a021062ae81d1321c3490326"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="clearDebugFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$debug_8cc.html#aecb36a775ee01ef097d7e23111a27852"];
+  Node6 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="setDebugFlag",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$debug_8cc.html#aeb703e006fe182d90424fcd595b68570"];
+}

@@ -1,0 +1,45 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="instruction::br_dependencyTable",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="dependencyTable::addBr",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdependencyTable.html#a68cb3b1cdf38c24d1bfd5913112f6f24"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="List::Append",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a473190098e38206d0125b0737245e613"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="instruction::addDep",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#aeb756cec429aca99a341f069df268465"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="dependencyTable::brLookup",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdependencyTable.html#a7896f0b48411dcb469ebb2647b84541c"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="instruction::getBrBias",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#ac75c130a63a934b5e7e6ea4317a92a73"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="instruction::getBrMode",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a5ec270309f416ce62db5ea8e6478819d"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="instruction::getMemType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a8051847b8731d697107d682564a7385f"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="instruction::getMissrate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a7f04521e22bec22c519fdc44d7c8b83a"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="instruction::getType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a47623362d505a662b974624f81288389"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="instruction::setAsAncestor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#aee7e55cf32812b46267a22bcb53da670"];
+  Node13 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="instruction::getInsID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a0856c8a7411c298a51cd8d8d5e2f8b12"];
+  Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="instruction::setAsBrAncestor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a508aeb795698276978932acb2d81cfe2"];
+  Node15 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node15 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid"];
+  Node16 [label="instruction::setAsBrDependent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#af3e4f5b3744955fa671e22f75da8b0a5"];
+  Node16 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node16 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node17 [color="midnightblue",fontsize="10",style="solid"];
+  Node17 [label="instruction::setAsDependent",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#ab2ba6828f1256186a787d933a6ca0868"];
+  Node17 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+}

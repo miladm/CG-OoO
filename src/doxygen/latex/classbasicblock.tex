@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$basicblock.h$>$}
 
-Inheritance diagram for basicblock:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classbasicblock}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for basicblock:
+
+
+Collaboration diagram for basicblock:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -245,6 +245,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _bbAddr = 0;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}{
 \index{basicblock@{basicblock}!$\sim$basicblock@{$\sim$basicblock}}
 \index{$\sim$basicblock@{$\sim$basicblock}!basicblock@{basicblock}}
@@ -272,6 +277,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         delete _insAddrList;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_ac6d735b981c1d367ad93f62ab0394974}{
 \index{basicblock@{basicblock}!basicblock@{basicblock}}
 \index{basicblock@{basicblock}!basicblock@{basicblock}}
@@ -312,6 +322,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _bbAddr = bbAddr;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ab20f99e31cfc155ec00b9027f9c3d454}{
 \index{basicblock@{basicblock}!addBBtoPBList@{addBBtoPBList}}
 \index{addBBtoPBList@{addBBtoPBList}!basicblock@{basicblock}}
@@ -327,6 +342,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _bbListForPhraseblock->Append(bbID);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_abb47633a30d4722992c2d961a4a4ad14}{
 \index{basicblock@{basicblock}!addChild@{addChild}}
 \index{addChild@{addChild}!basicblock@{basicblock}}
@@ -342,6 +367,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _childrenMap.insert(pair<ADDR,basicblock*>(child->getID(), child));
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a17a204547c41f4ba744ac49b1f375477}{
 \index{basicblock@{basicblock}!addIns@{addIns}}
 \index{addIns@{addIns}!basicblock@{basicblock}}
@@ -380,6 +415,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
       uble)ins->getNumReg());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a881f41cc184c5aafa1e0881bb67f6868}{
 \index{basicblock@{basicblock}!addIns@{addIns}}
 \index{addIns@{addIns}!basicblock@{basicblock}}
@@ -419,6 +464,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
       uble)ins->getNumReg());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_ad741200a033f41ca0e08dadbbbc82060}{
 \index{basicblock@{basicblock}!addToBB@{addToBB}}
 \index{addToBB@{addToBB}!basicblock@{basicblock}}
@@ -435,6 +485,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _o_insList->Append(ins);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_ad7aa6001155731e9af6347220d48d702}{
 \index{basicblock@{basicblock}!addToBB@{addToBB}}
 \index{addToBB@{addToBB}!basicblock@{basicblock}}
@@ -453,6 +508,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _insAddrList->Append(insAddr);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_abb72488dac0d405735a4cf82a1cdd0ce}{
 \index{basicblock@{basicblock}!addToBB\_\-ListSchedule@{addToBB\_\-ListSchedule}}
 \index{addToBB\_\-ListSchedule@{addToBB\_\-ListSchedule}!basicblock@{basicblock}}
@@ -470,6 +535,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _insListSchList->Append(ins);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_abfaebb9413fe26d42607c09949e9d5cb}{
 \index{basicblock@{basicblock}!addToDFset@{addToDFset}}
 \index{addToDFset@{addToDFset}!basicblock@{basicblock}}
@@ -485,6 +560,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _dominanceFrontier.insert(pair<ADDR,basicblock*>(node->getID(), node));
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_af48f1b1d1c2618185cf63aa36098092c}{
 \index{basicblock@{basicblock}!basicblockToPhrase@{basicblockToPhrase}}
 \index{basicblockToPhrase@{basicblockToPhrase}!basicblock@{basicblock}}
@@ -517,6 +602,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         printf("\n");
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a8e7863ba06ca7f2418f1f423e6f71e8a}{
 \index{basicblock@{basicblock}!buildDomTree@{buildDomTree}}
 \index{buildDomTree@{buildDomTree}!basicblock@{basicblock}}
@@ -536,6 +631,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a668baef0263404790b8b03e336b96dda}{
 \index{basicblock@{basicblock}!buildImmediateDominators@{buildImmediateDominators}}
 \index{buildImmediateDominators@{buildImmediateDominators}!basicblock@{basicblock}}
@@ -566,6 +671,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
                 _idomSet.insert(it1->first);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ad88c3d7891025016b9de9f3bfb2b3ddb}{
 \index{basicblock@{basicblock}!buildSDominators@{buildSDominators}}
 \index{buildSDominators@{buildSDominators}!basicblock@{basicblock}}
@@ -584,6 +694,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
       f.end(),std::inserter(_sDominatorMap, _sDominatorMap.begin()));
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a27c168ce65c2d5ead06682ea41af8473}{
 \index{basicblock@{basicblock}!elimPhiFuncs@{elimPhiFuncs}}
 \index{elimPhiFuncs@{elimPhiFuncs}!basicblock@{basicblock}}
@@ -623,6 +743,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return temp*_phiFuncMap.size();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ad5a6467f9a1628c658671d2f432cbeba}{
 \index{basicblock@{basicblock}!getAllasDominators@{getAllasDominators}}
 \index{getAllasDominators@{getAllasDominators}!basicblock@{basicblock}}
@@ -638,6 +768,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _domSetIsAll;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a006ea6066123e6c2a0ba76784dfcee1c}{
 \index{basicblock@{basicblock}!getAncestorList@{getAncestorList}}
 \index{getAncestorList@{getAncestorList}!basicblock@{basicblock}}
@@ -653,6 +788,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _ancestorBbList;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a0aa9e7f9af5171d5cd4bad3503cc45c8}{
 \index{basicblock@{basicblock}!getBackEdgeDest@{getBackEdgeDest}}
 \index{getBackEdgeDest@{getBackEdgeDest}!basicblock@{basicblock}}
@@ -669,6 +809,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _backEdgeDest;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a20313080c67808c6db8fc8c311ba5165}{
 \index{basicblock@{basicblock}!getBackEdgeSourceList@{getBackEdgeSourceList}}
 \index{getBackEdgeSourceList@{getBackEdgeSourceList}!basicblock@{basicblock}}
@@ -701,6 +846,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _brHeaderAddr;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a4a68932d0628e028f4c5877cb888654c}{
 \index{basicblock@{basicblock}!getBBListForPB@{getBBListForPB}}
 \index{getBBListForPB@{getBBListForPB}!basicblock@{basicblock}}
@@ -731,6 +881,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _insList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a6dde8501c965eb860dcc5bf63fcb06f2}{
 \index{basicblock@{basicblock}!getChildren@{getChildren}}
 \index{getChildren@{getChildren}!basicblock@{basicblock}}
@@ -746,6 +906,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _childrenMap;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a150ce672b4864265713b242b74b3ca30}{
 \index{basicblock@{basicblock}!getChildrenSize@{getChildrenSize}}
 \index{getChildrenSize@{getChildrenSize}!basicblock@{basicblock}}
@@ -761,6 +926,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _childrenMap.size();
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a208aa13365196998e48936c287242a77}{
 \index{basicblock@{basicblock}!getDefSet@{getDefSet}}
 \index{getDefSet@{getDefSet}!basicblock@{basicblock}}
@@ -776,6 +946,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _defSet;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_afac9781fe5c67f0d3f983d60e468dc8d}{
 \index{basicblock@{basicblock}!getDescendentList@{getDescendentList}}
 \index{getDescendentList@{getDescendentList}!basicblock@{basicblock}}
@@ -807,6 +982,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _dominanceFrontier;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_aec14cf5254976daec791c62e1b684ecf}{
 \index{basicblock@{basicblock}!getDominators@{getDominators}}
 \index{getDominators@{getDominators}!basicblock@{basicblock}}
@@ -822,6 +1002,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _dominatorMap;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a8024f7c124db80125950b2582ee28e81}{
 \index{basicblock@{basicblock}!getFallThrough@{getFallThrough}}
 \index{getFallThrough@{getFallThrough}!basicblock@{basicblock}}
@@ -838,6 +1023,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _fallThroughBB;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_aff434c369968fe5fb3151d8ec00665b4}{
 \index{basicblock@{basicblock}!getID@{getID}}
 \index{getID@{getID}!basicblock@{basicblock}}
@@ -854,6 +1044,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return bbID;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a449cfdd7832d738451da0d773f45a120}{
 \index{basicblock@{basicblock}!getInSet@{getInSet}}
 \index{getInSet@{getInSet}!basicblock@{basicblock}}
@@ -869,6 +1064,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _inSet;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_adc40d816c82feedc1f7027fc29470d90}{
 \index{basicblock@{basicblock}!getInsList@{getInsList}}
 \index{getInsList@{getInsList}!basicblock@{basicblock}}
@@ -884,6 +1084,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _insList;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a87440b1ddb945365a4d32b356756ae24}{
 \index{basicblock@{basicblock}!getInsList\_\-ListSchedule@{getInsList\_\-ListSchedule}}
 \index{getInsList\_\-ListSchedule@{getInsList\_\-ListSchedule}!basicblock@{basicblock}}
@@ -901,6 +1106,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _insListSchList;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_a99fb16d14456bb07b0033a0489ced872}{
 \index{basicblock@{basicblock}!getLastIns@{getLastIns}}
 \index{getLastIns@{getLastIns}!basicblock@{basicblock}}
@@ -917,6 +1127,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _insList->Nth(_insList->NumElements()-1);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a5c04fc7ec170aa4d395928b7c4ca0392}{
 \index{basicblock@{basicblock}!getLastInsDst@{getLastInsDst}}
 \index{getLastInsDst@{getLastInsDst}!basicblock@{basicblock}}
@@ -933,6 +1153,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _insList->Nth(_insList->NumElements()-1)->getBrDst();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a17c48156a5eefea6d8ca831dced719e3}{
 \index{basicblock@{basicblock}!getListIndx@{getListIndx}}
 \index{getListIndx@{getListIndx}!basicblock@{basicblock}}
@@ -949,6 +1179,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _listIndx;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a656948a155ce6ed622a31581c4d3c2f0}{
 \index{basicblock@{basicblock}!getLiveVarSize@{getLiveVarSize}}
 \index{getLiveVarSize@{getLiveVarSize}!basicblock@{basicblock}}
@@ -984,6 +1219,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _localRegSet;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a24ef17acb451da40eb9ecca3a05c9fb3}{
 \index{basicblock@{basicblock}!getNthAncestor@{getNthAncestor}}
 \index{getNthAncestor@{getNthAncestor}!basicblock@{basicblock}}
@@ -1001,6 +1241,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _ancestorBbList->Nth(indx);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a7c5a3da3287691450420e3a6cf3105b1}{
 \index{basicblock@{basicblock}!getNthBackEdgeSource@{getNthBackEdgeSource}}
 \index{getNthBackEdgeSource@{getNthBackEdgeSource}!basicblock@{basicblock}}
@@ -1016,6 +1266,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _backEdgeSourceBbList->Nth(i);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ae37c61e43378f8cf5e5b116217c295b1}{
 \index{basicblock@{basicblock}!getNthBBIns\_\-o@{getNthBBIns\_\-o}}
 \index{getNthBBIns\_\-o@{getNthBBIns\_\-o}!basicblock@{basicblock}}
@@ -1031,6 +1291,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _o_insList->Nth(indx);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ac215ec20abf70ad5a3a6e4c086a529de}{
 \index{basicblock@{basicblock}!getNthBBIns\_\-s@{getNthBBIns\_\-s}}
 \index{getNthBBIns\_\-s@{getNthBBIns\_\-s}!basicblock@{basicblock}}
@@ -1046,6 +1316,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _s_insList->Nth(indx);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a571a65129ed999a167803d516cb9455e}{
 \index{basicblock@{basicblock}!getNthDescendent@{getNthDescendent}}
 \index{getNthDescendent@{getNthDescendent}!basicblock@{basicblock}}
@@ -1063,6 +1343,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _descendantBbList->Nth(indx);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_af95ff01c9b4eb7a12cd58558771c92b2}{
 \index{basicblock@{basicblock}!getNumAncestors@{getNumAncestors}}
 \index{getNumAncestors@{getNumAncestors}!basicblock@{basicblock}}
@@ -1078,6 +1368,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _ancestorBbList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a4e6b8abafbdff3155477bdefd7546ef9}{
 \index{basicblock@{basicblock}!getNumBackEdgeSource@{getNumBackEdgeSource}}
 \index{getNumBackEdgeSource@{getNumBackEdgeSource}!basicblock@{basicblock}}
@@ -1093,6 +1393,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _backEdgeSourceBbList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a435d01a9a4869893c0a8eaaf4f62cd22}{
 \index{basicblock@{basicblock}!getNumBBIns\_\-o@{getNumBBIns\_\-o}}
 \index{getNumBBIns\_\-o@{getNumBBIns\_\-o}!basicblock@{basicblock}}
@@ -1108,6 +1418,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _o_insList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a40ff2e382e333d5515bd55508b49247a}{
 \index{basicblock@{basicblock}!getNumBBIns\_\-s@{getNumBBIns\_\-s}}
 \index{getNumBBIns\_\-s@{getNumBBIns\_\-s}!basicblock@{basicblock}}
@@ -1123,6 +1443,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _s_insList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a42700afdf9102a0f287690f4f8c487f9}{
 \index{basicblock@{basicblock}!getNumDescendents@{getNumDescendents}}
 \index{getNumDescendents@{getNumDescendents}!basicblock@{basicblock}}
@@ -1138,6 +1468,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _descendantBbList->NumElements();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_aae1b2e9429abfe8474fb5f1bc5a204b2}{
 \index{basicblock@{basicblock}!getNxtBB@{getNxtBB}}
 \index{getNxtBB@{getNxtBB}!basicblock@{basicblock}}
@@ -1165,6 +1505,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a3b5148a1563478d689e1e3796ebd7dba}{
 \index{basicblock@{basicblock}!getPhiFuncs@{getPhiFuncs}}
 \index{getPhiFuncs@{getPhiFuncs}!basicblock@{basicblock}}
@@ -1180,6 +1530,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _phiFuncMap;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ab3f5925d649492e0a3e73f4f9075ca7d}{
 \index{basicblock@{basicblock}!getSDominatorSize@{getSDominatorSize}}
 \index{getSDominatorSize@{getSDominatorSize}!basicblock@{basicblock}}
@@ -1195,6 +1550,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _sDominatorMap.size();
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_afdffc2f38dc3e93c9125a1e4d205f4e9}{
 \index{basicblock@{basicblock}!getTakenBias@{getTakenBias}}
 \index{getTakenBias@{getTakenBias}!basicblock@{basicblock}}
@@ -1210,6 +1570,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return getLastIns()->getBrTakenBias();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a4be1cedc2d2596df89d3b9f118c0e445}{
 \index{basicblock@{basicblock}!getTakenTarget@{getTakenTarget}}
 \index{getTakenTarget@{getTakenTarget}!basicblock@{basicblock}}
@@ -1226,6 +1596,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _takenTargetBB;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a2acbd3c9e5af1bcfc60ed44827126d90}{
 \index{basicblock@{basicblock}!hasBBheader@{hasBBheader}}
 \index{hasBBheader@{hasBBheader}!basicblock@{basicblock}}
@@ -1256,6 +1631,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _hasBrHeader;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a86973a86f54f7d42ee2e3871a0ff47e1}{
 \index{basicblock@{basicblock}!insertMOVop@{insertMOVop}}
 \index{insertMOVop@{insertMOVop}!basicblock@{basicblock}}
@@ -1265,6 +1645,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
 \end{DoxyParamCaption}
 )}}
 \label{classbasicblock_a86973a86f54f7d42ee2e3871a0ff47e1}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a85e079721ac3397044a6148e4d5fc688}{
 \index{basicblock@{basicblock}!insertMOVop@{insertMOVop}}
 \index{insertMOVop@{insertMOVop}!basicblock@{basicblock}}
@@ -1305,6 +1690,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         addIns(newIns); // _insList->Append(newIns);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_a1aeb2fc7325b987bced690cabf8d296d}{
 \index{basicblock@{basicblock}!insertPhiFunc@{insertPhiFunc}}
 \index{insertPhiFunc@{insertPhiFunc}!basicblock@{basicblock}}
@@ -1331,6 +1721,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_a88276960d345d6849dbe02c9debbb94e}{
 \index{basicblock@{basicblock}!isAPhraseblock@{isAPhraseblock}}
 \index{isAPhraseblock@{isAPhraseblock}!basicblock@{basicblock}}
@@ -1350,6 +1745,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ab16dc9da49df4b6bf4c6573bfb31217a}{
 \index{basicblock@{basicblock}!isASDominator@{isASDominator}}
 \index{isASDominator@{isASDominator}!basicblock@{basicblock}}
@@ -1368,6 +1773,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
                 return true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a0da29a0f57618d2a13bfdfc9926319b9}{
 \index{basicblock@{basicblock}!isBackEdge@{isBackEdge}}
 \index{isBackEdge@{isBackEdge}!basicblock@{basicblock}}
@@ -1391,6 +1801,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_aa3e4afae3ad78659454d5747931ee455}{
 \index{basicblock@{basicblock}!isBBcomplete@{isBBcomplete}}
 \index{isBBcomplete@{isBBcomplete}!basicblock@{basicblock}}
@@ -1409,6 +1829,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a81b824d2e109bb3b9484eb021fdd0a80}{
 \index{basicblock@{basicblock}!isEntryPoint@{isEntryPoint}}
 \index{isEntryPoint@{isEntryPoint}!basicblock@{basicblock}}
@@ -1424,6 +1854,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _entryPoint;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a026b949adeca19875d0a8a43784d2c9d}{
 \index{basicblock@{basicblock}!isInIDom@{isInIDom}}
 \index{isInIDom@{isInIDom}!basicblock@{basicblock}}
@@ -1442,6 +1877,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
                 return true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_afe08d56238e85bb143c4a0bb79c585b1}{
 \index{basicblock@{basicblock}!isInLocalRegSet@{isInLocalRegSet}}
 \index{isInLocalRegSet@{isInLocalRegSet}!basicblock@{basicblock}}
@@ -1477,6 +1917,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ad40cc70b314779ab7d0990813d3053d4}{
 \index{basicblock@{basicblock}!isVisited@{isVisited}}
 \index{isVisited@{isVisited}!basicblock@{basicblock}}
@@ -1492,6 +1937,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return _visited;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a3da24f399435a4ba33a464925d4ded05}{
 \index{basicblock@{basicblock}!markAsEntryPoint@{markAsEntryPoint}}
 \index{markAsEntryPoint@{markAsEntryPoint}!basicblock@{basicblock}}
@@ -1507,6 +1957,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _entryPoint = true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ad05a1a1f24dfb10d2c637065eaea2835}{
 \index{basicblock@{basicblock}!numNonBackEdgeAncestors@{numNonBackEdgeAncestors}}
 \index{numNonBackEdgeAncestors@{numNonBackEdgeAncestors}!basicblock@{basicblock}}
@@ -1540,6 +1995,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return count;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a7fee16556188be2c9501c1062589e7a6}{
 \index{basicblock@{basicblock}!operator=@{operator=}}
 \index{operator=@{operator=}!basicblock@{basicblock}}
@@ -1593,6 +2058,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_a8493801bbd0b56aac41aa8cd2aedcea4}{
 \index{basicblock@{basicblock}!renameAllInsRegs@{renameAllInsRegs}}
 \index{renameAllInsRegs@{renameAllInsRegs}!basicblock@{basicblock}}
@@ -1629,6 +2099,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a129efbec925894799b11962ee9ec8b72}{
 \index{basicblock@{basicblock}!replaceNthPhiOperand@{replaceNthPhiOperand}}
 \index{replaceNthPhiOperand@{replaceNthPhiOperand}!basicblock@{basicblock}}
@@ -1647,6 +2127,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
                 _phiFuncMap[var].at(indx) = subscript;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a11c8e9c8e6e38864552bafcd041e7a08}{
 \index{basicblock@{basicblock}!setAllasDominators@{setAllasDominators}}
 \index{setAllasDominators@{setAllasDominators}!basicblock@{basicblock}}
@@ -1662,6 +2147,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _domSetIsAll = domSetIsAll;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a731087012c909b6d3875fa6fb5731bab}{
 \index{basicblock@{basicblock}!setAncestor@{setAncestor}}
 \index{setAncestor@{setAncestor}!basicblock@{basicblock}}
@@ -1677,6 +2167,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _ancestorBbList->Append(bb);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a26f134ff2983953107999162e764c52a}{
 \index{basicblock@{basicblock}!setAsBackEdgeSource@{setAsBackEdgeSource}}
 \index{setAsBackEdgeSource@{setAsBackEdgeSource}!basicblock@{basicblock}}
@@ -1692,6 +2192,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _backEdgeSourceBbList->Append(bb);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a810b34c12cbddff700700341734ddc5d}{
 \index{basicblock@{basicblock}!setAsUnvisited@{setAsUnvisited}}
 \index{setAsUnvisited@{setAsUnvisited}!basicblock@{basicblock}}
@@ -1707,6 +2217,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _visited = false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_adb3d7c691e7974f77619409fe4a24335}{
 \index{basicblock@{basicblock}!setAsVisited@{setAsVisited}}
 \index{setAsVisited@{setAsVisited}!basicblock@{basicblock}}
@@ -1723,6 +2238,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _visited = true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a08a435779d5c69e560f81d76511033f8}{
 \index{basicblock@{basicblock}!setBBbrHeader@{setBBbrHeader}}
 \index{setBBbrHeader@{setBBbrHeader}!basicblock@{basicblock}}
@@ -1756,6 +2276,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         bb->setAncestor(this); //Create duplex links
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a9e417b7d2b2cb87281b4c8ed1b10d566}{
 \index{basicblock@{basicblock}!setDominators@{setDominators}}
 \index{setDominators@{setDominators}!basicblock@{basicblock}}
@@ -1800,6 +2330,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         //}
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_aafd371f1d5701ae15546178a153ca23d}{
 \index{basicblock@{basicblock}!setDominators@{setDominators}}
 \index{setDominators@{setDominators}!basicblock@{basicblock}}
@@ -1828,6 +2363,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}{
 \index{basicblock@{basicblock}!setDominators@{setDominators}}
 \index{setDominators@{setDominators}!basicblock@{basicblock}}
@@ -1852,6 +2392,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_ad97dd41248a01abbf1baa313845ff526}{
 \index{basicblock@{basicblock}!setFallThrough@{setFallThrough}}
 \index{setFallThrough@{setFallThrough}!basicblock@{basicblock}}
@@ -1868,6 +2418,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _fallThroughBB = bb;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a1d85d5fd059f1658ce3c67357502ed71}{
 \index{basicblock@{basicblock}!setListIndx@{setListIndx}}
 \index{setListIndx@{setListIndx}!basicblock@{basicblock}}
@@ -1884,6 +2439,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _listIndx = listIndx;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a8b4180d38d685e0def92a4512ab4f1ce}{
 \index{basicblock@{basicblock}!setPhiWriteVar@{setPhiWriteVar}}
 \index{setPhiWriteVar@{setPhiWriteVar}!basicblock@{basicblock}}
@@ -1900,6 +2460,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _phiDestMap.insert(pair<long int, long int>(var,subscript));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_af0d0269f9c9a3b52062170c667f436b2}{
 \index{basicblock@{basicblock}!setTakenTarget@{setTakenTarget}}
 \index{setTakenTarget@{setTakenTarget}!basicblock@{basicblock}}
@@ -1916,6 +2481,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _takenTargetBB = bb;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a46149b611069f8c2f1328311ea4b7803}{
 \index{basicblock@{basicblock}!setupBackEdge@{setupBackEdge}}
 \index{setupBackEdge@{setupBackEdge}!basicblock@{basicblock}}
@@ -1939,6 +2509,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a828499c93c05d54ff789feed38051428}{
 \index{basicblock@{basicblock}!setupDefUseSets@{setupDefUseSets}}
 \index{setupDefUseSets@{setupDefUseSets}!basicblock@{basicblock}}
@@ -1969,6 +2549,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a8f58f53b0f1ab88f2909116193cfa953}{
 \index{basicblock@{basicblock}!transferPointersToNewList@{transferPointersToNewList}}
 \index{transferPointersToNewList@{transferPointersToNewList}!basicblock@{basicblock}}
@@ -2009,6 +2599,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_af543b2aba60aec6408825fe513736a8d}{
 \index{basicblock@{basicblock}!update\_\-InOutSet@{update\_\-InOutSet}}
 \index{update\_\-InOutSet@{update\_\-InOutSet}!basicblock@{basicblock}}
@@ -2055,6 +2655,16 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         return change;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_aa30a3590075a3c30fa5406e3cf81a2e1}{
 \index{basicblock@{basicblock}!updateDefSet@{updateDefSet}}
 \index{updateDefSet@{updateDefSet}!basicblock@{basicblock}}
@@ -2070,6 +2680,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _defSet.insert(reg);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_abae11bf0376749457259a6d2a2ef8fe7}{
 \index{basicblock@{basicblock}!updateLocalRegSet@{updateLocalRegSet}}
 \index{updateLocalRegSet@{updateLocalRegSet}!basicblock@{basicblock}}
@@ -2109,6 +2724,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
 */
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_a13aad72bd6dce3b9d6fd47dd324504d3}{
 \index{basicblock@{basicblock}!updateUseSet@{updateUseSet}}
 \index{updateUseSet@{updateUseSet}!basicblock@{basicblock}}
@@ -2124,6 +2744,11 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
         _useSet.insert(reg);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 \subsection{Member Data Documentation}

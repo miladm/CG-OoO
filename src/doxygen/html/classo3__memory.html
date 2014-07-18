@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,12 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for o3_memory:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classo3__memory.png" usemap="#o3_memory_map" alt=""/>
-  <map id="o3_memory_map" name="o3_memory_map">
-<area href="classstage.html" alt="stage" shape="rect" coords="0,0,77,24"/>
+<div class="center"><img src="classo3__memory__inherit__graph.png" border="0" usemap="#o3__memory_inherit__map" alt="Inheritance graph"/></div>
+<map name="o3__memory_inherit__map" id="o3__memory_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for o3_memory:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory__coll__graph.png" border="0" usemap="#o3__memory_coll__map" alt="Collaboration graph"/></div>
+<map name="o3__memory_coll__map" id="o3__memory_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classo3__memory-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -235,6 +240,24 @@ Public Member Functions</h2></td></tr>
 <span class="comment">//  }</span>
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph.png" border="0" usemap="#classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph" alt=""/></div>
+<map name="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph" id="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph.png" border="0" usemap="#classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph" alt=""/></div>
+<map name="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph" id="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a14fb30065edbb1758d0e4c9ac3f92433"></a><!-- doxytag: member="o3_memory::doMEMORY" ref="a14fb30065edbb1758d0e4c9ac3f92433" args="(sysClock &amp;clk)" -->
@@ -269,6 +292,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph.png" border="0" usemap="#classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph" alt=""/></div>
+<map name="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph" id="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph.png" border="0" usemap="#classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph" alt=""/></div>
+<map name="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph" id="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a755d83e89f2fc0d95db93d688c40b9a4"></a><!-- doxytag: member="o3_memory::forward" ref="a755d83e89f2fc0d95db93d688c40b9a4" args="(dynInstruction *, CYCLE, sysClock &amp;)" -->
@@ -312,6 +353,15 @@ Public Member Functions</h2></td></tr>
     <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Forward wr ops of ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph.png" border="0" usemap="#classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph" alt=""/></div>
+<map name="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph" id="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a826fdfa882dd202970984027e32e2c33"></a><!-- doxytag: member="o3_memory::manageMEMbuffer" ref="a826fdfa882dd202970984027e32e2c33" args="()" -->
@@ -387,6 +437,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph.png" border="0" usemap="#classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph" alt=""/></div>
+<map name="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph" id="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph.png" border="0" usemap="#classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph" alt=""/></div>
+<map name="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph" id="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ad44b31e95afd6e63f85401be8e58318d"></a><!-- doxytag: member="o3_memory::memoryImpl" ref="ad44b31e95afd6e63f85401be8e58318d" args="(sysClock &amp;clk)" -->
@@ -420,7 +488,7 @@ Public Member Functions</h2></td></tr>
         <span class="comment">//   (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) break;</span>
         <span class="comment">//if (mem_ins-&gt;getMemType () == STORE &amp;&amp; </span>
         <span class="comment">//   (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWrPort (clk.now ()))) break;</span>
-        <span class="keywordflow">if</span> (_mshr.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a> || !_mshr.<a class="code" href="classtable.html#a4da7f6326c21da45dbed8d618c3aabce">hasFreeWrPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO only on miss? here or in g_LSQ_MGR?</span>
+        <span class="keywordflow">if</span> (_mshr.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a> || !_mshr.hasFreeWrPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO only on miss? here or in g_LSQ_MGR?</span>
 
         <span class="comment">/* MEM ACCESS */</span>
         <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a9e44a6173a6b099fa6e7644960aac5cf">issueToMem</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
@@ -436,6 +504,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">return</span> pipe_stall;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph.png" border="0" usemap="#classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph" alt=""/></div>
+<map name="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph" id="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph.png" border="0" usemap="#classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph" alt=""/></div>
+<map name="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph" id="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a806f0676eb61e344a0feb87fd823779a"></a><!-- doxytag: member="o3_memory::regStat" ref="a806f0676eb61e344a0feb87fd823779a" args="(sysClock &amp;clk)" -->
@@ -456,6 +542,24 @@ Public Member Functions</h2></td></tr>
     _execution_to_memory_port-&gt;<a class="code" href="classport.html#a966cfeb3b369ec22e8081275481abe32">regStat</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph.png" border="0" usemap="#classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph" alt=""/></div>
+<map name="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph" id="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph.png" border="0" usemap="#classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph" alt=""/></div>
+<map name="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph" id="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ab2f9b9b56a73d1f14564f68680fc9fc4"></a><!-- doxytag: member="o3_memory::squash" ref="ab2f9b9b56a73d1f14564f68680fc9fc4" args="(sysClock &amp;clk)" -->
@@ -482,6 +586,24 @@ Public Member Functions</h2></td></tr>
     <span class="comment">//_st_buff.flushTable ();</span>
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph.png" border="0" usemap="#classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph" alt=""/></div>
+<map name="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph" id="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph.png" border="0" usemap="#classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph" alt=""/></div>
+<map name="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph" id="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

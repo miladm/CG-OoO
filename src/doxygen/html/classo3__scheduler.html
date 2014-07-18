@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,12 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for o3_scheduler:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classo3__scheduler.png" usemap="#o3_scheduler_map" alt=""/>
-  <map id="o3_scheduler_map" name="o3_scheduler_map">
-<area href="classstage.html" alt="stage" shape="rect" coords="0,0,89,24"/>
+<div class="center"><img src="classo3__scheduler__inherit__graph.png" border="0" usemap="#o3__scheduler_inherit__map" alt="Inheritance graph"/></div>
+<map name="o3__scheduler_inherit__map" id="o3__scheduler_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for o3_scheduler:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler__coll__graph.png" border="0" usemap="#o3__scheduler_coll__map" alt="Collaboration graph"/></div>
+<map name="o3__scheduler_coll__map" id="o3__scheduler_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classo3__scheduler-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -164,6 +169,15 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a5aa72000043c2ff5cf065160560da9be_cgraph.png" border="0" usemap="#classo3__scheduler_a5aa72000043c2ff5cf065160560da9be_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a5aa72000043c2ff5cf065160560da9be_cgraph" id="classo3__scheduler_a5aa72000043c2ff5cf065160560da9be_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ad9624ab36caacb50f844098a32b1fa94"></a><!-- doxytag: member="o3_scheduler::~o3_scheduler" ref="ad9624ab36caacb50f844098a32b1fa94" args="()" -->
@@ -185,6 +199,15 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94_cgraph.png" border="0" usemap="#classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94_cgraph" alt=""/></div>
+<map name="classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94_cgraph" id="classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -203,8 +226,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                             {
+    <span class="comment">/* STAT + DEBUG */</span>
     <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea12a1eaad09b7844ce8c43ee4243ccbb0">DBG_SCHEDULER</a>, <span class="stringliteral">&quot;** %s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <span class="comment">/* STAT */</span>
     <a class="code" href="classo3__scheduler.html#a3ca0bc2505c006ce212a82f58b243e43">regStat</a> (clk);
     <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
 
@@ -218,6 +241,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_cgraph.png" border="0" usemap="#classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_cgraph" id="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_icgraph.png" border="0" usemap="#classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_icgraph" id="classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a13b34d2dae20e349ee7bb614d0d33d46"></a><!-- doxytag: member="o3_scheduler::forwardFromCDB" ref="a13b34d2dae20e349ee7bb614d0d33d46" args="(dynInstruction *ins, sysClock &amp;clk)" -->
@@ -296,6 +337,15 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46_cgraph.png" border="0" usemap="#classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46_cgraph" id="classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a46d9cb288bfbd52069935fa96d9de38f"></a><!-- doxytag: member="o3_scheduler::hasReadyInsInResStn" ref="a46d9cb288bfbd52069935fa96d9de38f" args="(WIDTH resStnId, LENGTH &amp;readyInsIndx)" -->
@@ -324,7 +374,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                                            {
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(resStnId)-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>(); i++) {
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(resStnId)-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(resStnId)-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         readyInsIndx = i;
         <span class="keywordflow">if</span> (!<a class="code" href="o3_2rfManager_8cpp.html#a4854625c830da92eb9831cbc4dbf4e3f">g_GRF_MGR</a>.<a class="code" href="classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7">isReady</a> (ins)) <span class="keywordflow">continue</span>;
         <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">true</span>;
@@ -332,6 +382,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_cgraph.png" border="0" usemap="#classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_cgraph" id="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_icgraph.png" border="0" usemap="#classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_icgraph" id="classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a5dfd1ae3623b060e60867808e78b224a"></a><!-- doxytag: member="o3_scheduler::manageCDB" ref="a5dfd1ae3623b060e60867808e78b224a" args="(sysClock &amp;clk)" -->
@@ -356,6 +424,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_cgraph.png" border="0" usemap="#classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_cgraph" id="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_icgraph.png" border="0" usemap="#classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_icgraph" id="classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a3ca0bc2505c006ce212a82f58b243e43"></a><!-- doxytag: member="o3_scheduler::regStat" ref="a3ca0bc2505c006ce212a82f58b243e43" args="(sysClock &amp;clk)" -->
@@ -381,6 +467,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_cgraph.png" border="0" usemap="#classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_cgraph" id="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_icgraph.png" border="0" usemap="#classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_icgraph" id="classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ade8fe27e00ac0430122634af01c0639c"></a><!-- doxytag: member="o3_scheduler::schedulerImpl" ref="ade8fe27e00ac0430122634af01c0639c" args="(sysClock &amp;clk)" -->
@@ -408,10 +512,10 @@ Public Member Functions</h2></td></tr>
             <span class="comment">/* CHECKS */</span>
             <span class="keywordflow">if</span> (_scheduler_to_execution_port-&gt;<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ()) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">break</span>;
             <span class="keywordflow">if</span> (_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">continue</span>;
-            <span class="keywordflow">if</span> (!_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a8c3b8032622fa8c6e85e9a4d5ded1a80">hasFreeRdPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">continue</span>;
+            <span class="keywordflow">if</span> (!_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;hasFreeRdPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">continue</span>;
             <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> readyInsIndx;
             <span class="keywordflow">if</span> (!<a class="code" href="classo3__scheduler.html#a46d9cb288bfbd52069935fa96d9de38f">hasReadyInsInResStn</a> (<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>, readyInsIndx)) <span class="keywordflow">break</span>;
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (readyInsIndx);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (readyInsIndx);
             <span class="keywordflow">if</span> (!<a class="code" href="o3_2rfManager_8cpp.html#a4854625c830da92eb9831cbc4dbf4e3f">g_GRF_MGR</a>.<a class="code" href="classo3__rfManager.html#a0883b605da49fe18bf7a1a04219307ab">hasFreeRdPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> (), ins-&gt;<a class="code" href="classdynInstruction.html#ad7fa2d930aa5ad7836d2c50c1ada3faa">getNumRdPR</a> ())) <span class="keywordflow">break</span>;
             <span class="comment">//forwardFromCDB (ins, clk); TODO - made execution worse - WHY?!</span>
 
@@ -432,6 +536,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">return</span> pipe_stall;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_cgraph.png" border="0" usemap="#classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_cgraph" alt=""/></div>
+<map name="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_cgraph" id="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_icgraph.png" border="0" usemap="#classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_icgraph" alt=""/></div>
+<map name="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_icgraph" id="classo3__scheduler_ade8fe27e00ac0430122634af01c0639c_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a53e17bdeda48c023a7f24e6871eeed4c"></a><!-- doxytag: member="o3_scheduler::squash" ref="a53e17bdeda48c023a7f24e6871eeed4c" args="(sysClock &amp;clk)" -->
@@ -456,14 +578,32 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; _num_res_stns; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = (<span class="keywordtype">int</span>)_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1; i &gt;= 0; i--) {
             <span class="keywordflow">if</span> (_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &gt;= squashSeqNum) {
-                _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a55389eaae41800d77cacc97c563491f0">removeNth_unsafe</a> (i);
+                _ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
             }
         }
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_cgraph.png" border="0" usemap="#classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_cgraph" id="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_icgraph.png" border="0" usemap="#classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_icgraph" id="classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a3eaa3373cbbd123523a9cbf4d7326692"></a><!-- doxytag: member="o3_scheduler::updateResStns" ref="a3eaa3373cbbd123523a9cbf4d7326692" args="(sysClock &amp;clk)" -->
@@ -485,9 +625,9 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
             <span class="comment">/* CHECKS */</span>
             <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">break</span>;
-            <span class="keywordflow">if</span> (!_iROB-&gt;<a class="code" href="classtable.html#a4da7f6326c21da45dbed8d618c3aabce">hasFreeWrPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
+            <span class="keywordflow">if</span> (!_iROB-&gt;hasFreeWrPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
             <span class="keywordflow">if</span> (_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">continue</span>;
-            <span class="keywordflow">if</span> (!_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;<a class="code" href="classtable.html#a4da7f6326c21da45dbed8d618c3aabce">hasFreeWrPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">continue</span>;
+            <span class="keywordflow">if</span> (!_ResStns.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>)-&gt;hasFreeWrPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">continue</span>;
             <span class="keywordflow">if</span> (_decode_to_scheduler_port-&gt;<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ()) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
             <span class="keywordflow">if</span> (!_decode_to_scheduler_port-&gt;<a class="code" href="classport.html#a57a6cc5a8388feaf7fd09bd9616f0ee7">isReady</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
             <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _decode_to_scheduler_port-&gt;<a class="code" href="classport.html#afe64047b4e7df87d4a031097ea159852">getFront</a> ();
@@ -513,6 +653,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_cgraph.png" border="0" usemap="#classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_cgraph" alt=""/></div>
+<map name="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_cgraph" id="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_icgraph.png" border="0" usemap="#classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_icgraph" alt=""/></div>
+<map name="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_icgraph" id="classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

@@ -1,0 +1,19 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="phrase::getState",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="phraseGen::closeOldPhrase",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#a35e9879ba8c8931661e112c579ead2b4"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="phraseGen::runPhraseGen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#a27c8b0d81592bc45e7f25e9cb7a4d1c4"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="phraseGen::isPhraseOld",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#a582a2a74fe8029250138b0736b1fa6f5"];
+  Node4 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="phraseGen::isPhraseReady",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#aa63dd2ce73bcee18bea216bbc4899c76"];
+  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="phraseGen::findReadyPhrases",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#ab1fd52686e66bea06bd08d7fc8a4eb23"];
+  Node6 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+}

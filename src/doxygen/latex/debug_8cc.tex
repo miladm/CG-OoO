@@ -11,6 +11,7 @@
 {\ttfamily \#include \char`\"{}base/cprintf.hh\char`\"{}}\par
 {\ttfamily \#include \char`\"{}base/debug.hh\char`\"{}}\par
 {\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+Include dependency graph for debug.cc:
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,7 +49,7 @@ void \hyperlink{debug_8cc_a7ff54327ec09fb36dac3f025eb37af0a}{dumpDebugFlags} ()
 \item 
 int \hyperlink{namespaceDebug_a6eec1fa1c405c62968ca11295758d429}{Debug::allFlagsVersion} = 0
 \item 
-AllFlags \hyperlink{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{Debug::theAllFlags}
+\hyperlink{structDebug_1_1AllFlags}{AllFlags} \hyperlink{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{Debug::theAllFlags}
 \item 
 Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{Debug::All} = \&theAllFlags
 \end{DoxyCompactItemize}
@@ -70,6 +71,11 @@ Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{De
     Debug::changeFlag(string, false);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{debug_8cc_a7ff54327ec09fb36dac3f025eb37af0a}{
 \index{debug.cc@{debug.cc}!dumpDebugFlags@{dumpDebugFlags}}
 \index{dumpDebugFlags@{dumpDebugFlags}!debug.cc@{debug.cc}}
@@ -92,6 +98,11 @@ Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{De
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{debug_8cc_aeb703e006fe182d90424fcd595b68570}{
 \index{debug.cc@{debug.cc}!setDebugFlag@{setDebugFlag}}
 \index{setDebugFlag@{setDebugFlag}!debug.cc@{debug.cc}}
@@ -107,3 +118,8 @@ Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{De
     Debug::changeFlag(string, true);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+

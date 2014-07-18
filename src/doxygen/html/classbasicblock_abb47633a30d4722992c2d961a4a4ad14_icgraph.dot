@@ -1,0 +1,15 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="basicblock::addChild",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="basicblock::buildDomTree",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a8e7863ba06ca7f2418f1f423e6f71e8a"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="build_dominator_tree",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8cpp.html#ae1e6243692da1cc811e3a6bf6e363cf8"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="setup_dominance_frontier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8h.html#af9f49ffe6819033df685a4eb97ef74be"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+}

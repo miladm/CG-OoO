@@ -1,0 +1,38 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="phraseGen::genPhraseStat",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="phrase::getNumFrags",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#aad5e612377e6573abc754ad5b9dc2618"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="phrase::getNumPhraseAncestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#a8233a60f6da58ab8a72762da871e202f"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="phrase::getNumRootIns",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#a15938fc7a89b507ee68da569a8446552"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="phrase::getNumSoftBounds",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#afed9a471ff76a9155ccf016441753456"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="List::Append",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a473190098e38206d0125b0737245e613"];
+  Node6 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="instruction::getInsID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a0856c8a7411c298a51cd8d8d5e2f8b12"];
+  Node6 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="instruction::getNthAncestor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#aee9c18eaa3dfe56eacc82ac31b8231d5"];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node6 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="instruction::getNumAncestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a2e29e3536ad20c65b6c7b76ba6e37ad8"];
+  Node11 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="List::RemoveAt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#af17f72d263f90d53ea8501b5b1853470"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="phrase::getNumUPLDancestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#abcf56d6bce291a90c7a95f336b9230ea"];
+  Node13 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="phrase::getNumUPLDops",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#a48e689fefaabe6f63f6987e25fd70159"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

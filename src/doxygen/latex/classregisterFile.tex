@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$registerFile.h$>$}
 
-Inheritance diagram for registerFile:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classregisterFile}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for registerFile:
+
+
+Collaboration diagram for registerFile:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -116,6 +116,11 @@ bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPo
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{
 \index{registerFile@{registerFile}!hasFreeWrPort@{hasFreeWrPort}}
 \index{hasFreeWrPort@{hasFreeWrPort}!registerFile@{registerFile}}
@@ -146,6 +151,11 @@ bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPo
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}{
 \index{registerFile@{registerFile}!isRegBusy@{isRegBusy}}
 \index{isRegBusy@{isRegBusy}!registerFile@{registerFile}}
@@ -165,6 +175,11 @@ bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPo
     return (_RF[reg]->_reg_state == WAIT_ON_WRITE_REG ? true : false);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}{
 \index{registerFile@{registerFile}!isRegValid@{isRegValid}}
 \index{isRegValid@{isRegValid}!registerFile@{registerFile}}
@@ -198,6 +213,11 @@ NOTE: only works for INO
     return _RF[reg]->_reg_state == DONE_WRITE_REG ? true : false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_a2731695462957c3ac0a8888e7fce3bd3}{
 \index{registerFile@{registerFile}!reserveReg@{reserveReg}}
 \index{reserveReg@{reserveReg}!registerFile@{registerFile}}
@@ -218,6 +238,11 @@ NOTE: only works for INO
     _RF[reg]->_reg_state = WAIT_ON_WRITE_REG;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_a9e487acbcecb5a905a4ee1c80adf48e4}{
 \index{registerFile@{registerFile}!resetRF@{resetRF}}
 \index{resetRF@{resetRF}!registerFile@{registerFile}}
@@ -236,6 +261,11 @@ NOTE: only works for INO
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterFile_a57aa14508810da286ee60ef6cd033d6b}{
 \index{registerFile@{registerFile}!updateReg@{updateReg}}
 \index{updateReg@{updateReg}!registerFile@{registerFile}}
@@ -255,6 +285,11 @@ NOTE: only works for INO
     _RF[reg]->_reg_state = DONE_WRITE_REG;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

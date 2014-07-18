@@ -1,0 +1,29 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="scheduler",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir=back,color="darkgreen",fontsize="10",style="solid"];
+  Node2 [label="stage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstage.html"];
+  Node3 -> Node2 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_ins_cnt\ns_stall_cycles\ns_squash_cycles"];
+  Node3 [label="ScalarStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScalarStat.html"];
+  Node4 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_iWindow"];
+  Node4 [label="FIFOtable\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFIFOtable.html"];
+  Node5 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="table\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable.html"];
+  Node6 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="unit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunit.html"];
+  Node7 -> Node5 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_rd_port\n_wr_port"];
+  Node7 [label="wires",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classwires.html"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node8 -> Node5 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_table"];
+  Node8 [label="List\< TableElement\< dynInstruction * \> * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node9 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_execution_to_scheduler_port\n_scheduler_to_execution_port\n_memory_to_scheduler_port\n_decode_to_scheduler_port"];
+  Node9 [label="port\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classport.html"];
+  Node6 -> Node9 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node9 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_port_empty_cyc\ns_port_full_cyc"];
+  Node10 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_iROB"];
+  Node10 [label="CAMtable\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCAMtable.html"];
+  Node5 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+}

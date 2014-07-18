@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,12 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for commit:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classcommit.png" usemap="#commit_map" alt=""/>
-  <map id="commit_map" name="commit_map">
-<area href="classstage.html" alt="stage" shape="rect" coords="0,0,50,24"/>
+<div class="center"><img src="classcommit__inherit__graph.png" border="0" usemap="#commit_inherit__map" alt="Inheritance graph"/></div>
+<map name="commit_inherit__map" id="commit_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for commit:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit__coll__graph.png" border="0" usemap="#commit_coll__map" alt="Collaboration graph"/></div>
+<map name="commit_coll__map" id="commit_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classcommit-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -180,7 +185,7 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
         <span class="comment">/* CHECKS */</span>
         <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!_iROB-&gt;<a class="code" href="classtable.html#a8c3b8032622fa8c6e85e9a4d5ded1a80">hasFreeRdPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
+        <span class="keywordflow">if</span> (!_iROB-&gt;<a class="code" href="classtable.html#ade9af281ee70b0cf544060c478ffbfe1">hasFreeWire</a> (clk, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)) <span class="keywordflow">break</span>;
         <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _iROB-&gt;<a class="code" href="classCAMtable.html#a1111b552094db836302ac5ce0671794a">getFront</a> ();
         <span class="comment">//Assert (ins-&gt;getNumRegRd () == 0 &amp;&amp; &quot;instruction must have been ready long ago!&quot;);</span>
         <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> ()) <span class="keywordflow">break</span>;
@@ -198,6 +203,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">return</span> pipe_stall;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph.png" border="0" usemap="#classcommit_a50f823d551a57bbaccde41c32737b737_cgraph" alt=""/></div>
+<map name="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph" id="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph.png" border="0" usemap="#classcommit_a50f823d551a57bbaccde41c32737b737_icgraph" alt=""/></div>
+<map name="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph" id="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a9eb2bb492ac2b103102be4ef7d018e8b"></a><!-- doxytag: member="commit::doCOMMIT" ref="a9eb2bb492ac2b103102be4ef7d018e8b" args="(sysClock &amp;)" -->
@@ -228,6 +251,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph.png" border="0" usemap="#classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph" alt=""/></div>
+<map name="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph" id="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph.png" border="0" usemap="#classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph" alt=""/></div>
+<map name="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph" id="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a207fab9b88bbf27cae6f6388aa6ef6ad"></a><!-- doxytag: member="commit::regStat" ref="a207fab9b88bbf27cae6f6388aa6ef6ad" args="(sysClock &amp;clk)" -->
@@ -248,6 +289,15 @@ Public Member Functions</h2></td></tr>
     <span class="comment">//_iROB-&gt;regStat (); TODO - fix this</span>
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph.png" border="0" usemap="#classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph" alt=""/></div>
+<map name="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph" id="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="afb05caa27f671bb59e3462e161c2c2f1"></a><!-- doxytag: member="commit::squash" ref="afb05caa27f671bb59e3462e161c2c2f1" args="(sysClock &amp;clk)" -->
@@ -273,7 +323,7 @@ Public Member Functions</h2></td></tr>
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> start_indx = 0, stop_indx = _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1;
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>(); i++) {
         <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-        ins = _iROB-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () != <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a887d2cbfd9131de5cc3745731421b34b">EXECUTE</a>);<span class="comment">// &amp;&amp; ins-&gt;getPipeStage () != MEM_ACCESS);</span>
         <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () == squashSeqNum) {
             start_indx = i;
@@ -289,23 +339,41 @@ Public Member Functions</h2></td></tr>
     <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() &gt; stop_indx &amp;&amp; stop_indx &gt;= start_indx &amp;&amp; start_indx &gt;= 0);
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1; i &gt; stop_indx; i--) {
         <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-        ins = _iROB-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         ins-&gt;<a class="code" href="classdynInstruction.html#a9d4e4bce20dd4c1fd4d85270d828550e">resetStates</a> ();
         <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#ac6cd30370c34c5a0862aa9a4c56049db">insertFrontCodeCache</a>(ins);
-        _iROB-&gt;<a class="code" href="classtable.html#a55389eaae41800d77cacc97c563491f0">removeNth_unsafe</a> (i);
+        _iROB-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
         s_squash_ins_cnt++;
     }
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = stop_indx; i &gt;= start_indx; i--) {
         <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-        ins = _iROB-&gt;<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> () == <span class="keyword">true</span>);
         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &gt;= squashSeqNum);
-        _iROB-&gt;<a class="code" href="classtable.html#a55389eaae41800d77cacc97c563491f0">removeNth_unsafe</a> (i);
+        _iROB-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
         s_squash_ins_cnt++;
         <span class="keyword">delete</span> ins;
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph.png" border="0" usemap="#classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph" alt=""/></div>
+<map name="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph" id="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph.png" border="0" usemap="#classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph" alt=""/></div>
+<map name="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph" id="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

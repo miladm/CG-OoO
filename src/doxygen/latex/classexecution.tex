@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$execution.h$>$}
 
-Inheritance diagram for execution:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classexecution}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for execution:
+
+
+Collaboration diagram for execution:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -66,6 +66,11 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classexecution_a686c28582542ecb0a4d41f9a649a6357}{
 \index{execution@{execution}!$\sim$execution@{$\sim$execution}}
 \index{$\sim$execution@{$\sim$execution}!execution@{execution}}
@@ -135,6 +140,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     return COMPLETE_NORMAL;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_a972207b1dde6a4bb8731c3fc0908bac6}{
 \index{execution@{execution}!doEXECUTION@{doEXECUTION}}
 \index{doEXECUTION@{doEXECUTION}!execution@{execution}}
@@ -172,6 +187,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_adc2d24703f3425df6107514535fea88b}{
 \index{execution@{execution}!executionImpl@{executionImpl}}
 \index{executionImpl@{executionImpl}!execution@{execution}}
@@ -217,6 +242,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     return pipe_stall;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_a9271c55da8555444f0882c9027ab68a0}{
 \index{execution@{execution}!forward@{forward}}
 \index{forward@{forward}!execution@{execution}}
@@ -243,6 +278,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_af6a859d27808b6db44c92b0ff79ef426}{
 \index{execution@{execution}!regStat@{regStat}}
 \index{regStat@{regStat}!execution@{execution}}
@@ -258,6 +303,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     _scheduler_to_execution_port->regStat (clk.now ());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_a243c30ebc13c7e2e6c1eb46a8fcac55e}{
 \index{execution@{execution}!squash@{squash}}
 \index{squash@{squash}!execution@{execution}}
@@ -278,6 +333,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     _execution_to_memory_port->flushPort (squashSeqNum, clk.now ());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classexecution_a3e12895813ee78b1a7d2d10894db1204}{
 \index{execution@{execution}!squashCtrl@{squashCtrl}}
 \index{squashCtrl@{squashCtrl}!execution@{execution}}
@@ -314,10 +379,11 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
     } else if (g_var.g_pipe_state == PIPE_FLUSH) {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
-    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeRdPort (clk.now 
-      ()) && 
+    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeWire (clk, READ)
+       && 
                _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
+        _iROB->updateWireState (clk, READ);
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
     } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 
       0) {
@@ -332,6 +398,16 @@ void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyp
       witch.c_str(), clk.now ());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

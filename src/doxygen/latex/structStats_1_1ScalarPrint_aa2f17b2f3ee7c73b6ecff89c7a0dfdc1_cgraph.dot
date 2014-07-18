@@ -1,0 +1,9 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="Stats::ScalarPrint::operator()",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Stats::ValueToString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceStats.html#abf675b5476be37bbbe5d1abacbe4071e"];
+}

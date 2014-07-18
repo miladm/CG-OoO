@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$table.h$>$}
 
-Inheritance diagram for FIFOtable$<$ tableType\_\-T $>$:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{classFIFOtable}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for FIFOtable$<$ tableType\_\-T $>$:
+
+
+Collaboration diagram for FIFOtable$<$ tableType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -76,8 +76,8 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
                                               {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
-      available ports count first");
+    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
+       checked the available ports count first");
 #endif
     return table<tableType_T>::_table.Nth (0)->_element;
 }
@@ -96,8 +96,8 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
                                               {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
-      available ports count first");
+    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
+       checked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
@@ -105,6 +105,11 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
     return dyIns;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

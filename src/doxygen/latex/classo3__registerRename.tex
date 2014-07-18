@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$registerRename.h$>$}
 
-Inheritance diagram for o3\_\-registerRename:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classo3__registerRename}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for o3\_\-registerRename:
+
+
+Collaboration diagram for o3\_\-registerRename:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -215,6 +215,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         return p_reg->_reg;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_af3dacac6db9095e6aa73da550e2c71bc}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!getNumAvailablePR@{getNumAvailablePR}}
 \index{getNumAvailablePR@{getNumAvailablePR}!o3_registerRename@{o3\_\-registerRename}}
@@ -230,6 +235,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         return _availablePRset.size ();
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_ab76f162d8e2a6228404670bda2bad322}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!getPrevPR@{getPrevPR}}
 \index{getPrevPR@{getPrevPR}!o3_registerRename@{o3\_\-registerRename}}
@@ -247,6 +257,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         return _RF[p_reg]->_prev_pr->_reg;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_a62accbd82ef62f8c411975e824d644af}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!getPRstate@{getPRstate}}
 \index{getPRstate@{getPRstate}!o3_registerRename@{o3\_\-registerRename}}
@@ -292,6 +307,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeWrPort@{hasFreeWrPort}}
 \index{hasFreeWrPort@{hasFreeWrPort}!o3_registerRename@{o3\_\-registerRename}}
@@ -338,6 +358,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
     return (_availablePRset.size () == 0) ? false : true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!isPRvalid@{isPRvalid}}
 \index{isPRvalid@{isPRvalid}!o3_registerRename@{o3\_\-registerRename}}
@@ -359,6 +384,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
     return (state == ARCH_REG || state == RENAMED_VALID) ? true : false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_a1e65eca8eb066cf294a056d015469992}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!renameReg@{renameReg}}
 \index{renameReg@{renameReg}!o3_registerRename@{o3\_\-registerRename}}
@@ -376,6 +406,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         return _fRAT[a_reg]->_reg;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_aae9d93d826236d42ba090d1d53ba62af}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!setAsAvailablePR@{setAsAvailablePR}}
 \index{setAsAvailablePR@{setAsAvailablePR}!o3_registerRename@{o3\_\-registerRename}}
@@ -395,6 +430,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
       oo large (size violation).");
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_aebbf6e056ef5e4c50081db9dc1817a2b}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!squashPRstate@{squashPRstate}}
 \index{squashPRstate@{squashPRstate}!o3_registerRename@{o3\_\-registerRename}}
@@ -456,6 +496,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
       arge (size violation).");
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_af8f4e3c178f20fbee9a17d5781cd8f84}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!update\_\-cRAT@{update\_\-cRAT}}
 \index{update\_\-cRAT@{update\_\-cRAT}!o3_registerRename@{o3\_\-registerRename}}
@@ -478,6 +523,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         _cRAT.insert (pair<AR, o3_regElem*> (a_reg, _RF[p_reg]));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_ac29d3ca88b64d065d8f52b4384895c4b}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!update\_\-fRAT@{update\_\-fRAT}}
 \index{update\_\-fRAT@{update\_\-fRAT}!o3_registerRename@{o3\_\-registerRename}}
@@ -499,6 +549,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         _fRAT.insert (pair<AR, o3_regElem*> (a_reg, _RF[p_reg]));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_a6e6d2444676ba95b85d0a84908f6e5fe}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!updatePR@{updatePR}}
 \index{updatePR@{updatePR}!o3_registerRename@{o3\_\-registerRename}}
@@ -522,6 +577,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         _RF[new_pr]->_reg_state = state;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__registerRename_a6e6c35b5b477597e3eafed6def8c574b}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!updatePRstate@{updatePRstate}}
 \index{updatePRstate@{updatePRstate}!o3_registerRename@{o3\_\-registerRename}}
@@ -549,6 +609,11 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         _RF[p_reg]->_reg_state = state;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

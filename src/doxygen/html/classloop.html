@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,12 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for loop:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classloop.png" usemap="#loop_map" alt=""/>
-  <map id="loop_map" name="loop_map">
-<area href="classbasicblock.html" alt="basicblock" shape="rect" coords="0,0,72,24"/>
+<div class="center"><img src="classloop__inherit__graph.png" border="0" usemap="#loop_inherit__map" alt="Inheritance graph"/></div>
+<map name="loop_inherit__map" id="loop_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for loop:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop__coll__graph.png" border="0" usemap="#loop_coll__map" alt="Collaboration graph"/></div>
+<map name="loop_coll__map" id="loop_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classloop-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -178,6 +183,24 @@ Public Member Functions</h2></td></tr>
         _loop-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(bb);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_aa9324a68eb1fc3b86eabff7815132443_cgraph.png" border="0" usemap="#classloop_aa9324a68eb1fc3b86eabff7815132443_cgraph" alt=""/></div>
+<map name="classloop_aa9324a68eb1fc3b86eabff7815132443_cgraph" id="classloop_aa9324a68eb1fc3b86eabff7815132443_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_aa9324a68eb1fc3b86eabff7815132443_icgraph.png" border="0" usemap="#classloop_aa9324a68eb1fc3b86eabff7815132443_icgraph" alt=""/></div>
+<map name="classloop_aa9324a68eb1fc3b86eabff7815132443_icgraph" id="classloop_aa9324a68eb1fc3b86eabff7815132443_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a20ecb89d8b7cb21867fe53c6ad56f0f4"></a><!-- doxytag: member="loop::findFallThroughBBs" ref="a20ecb89d8b7cb21867fe53c6ad56f0f4" args="()" -->
@@ -214,6 +237,24 @@ Public Member Functions</h2></td></tr>
         printf(<span class="stringliteral">&quot;\n&quot;</span>);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_cgraph.png" border="0" usemap="#classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_cgraph" alt=""/></div>
+<map name="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_cgraph" id="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_icgraph.png" border="0" usemap="#classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_icgraph" alt=""/></div>
+<map name="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_icgraph" id="classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a6d90e411616771613671b11dd58d380d"></a><!-- doxytag: member="loop::getFallThroughBBs" ref="a6d90e411616771613671b11dd58d380d" args="()" -->
@@ -234,6 +275,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">if</span> (_fallThroughBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() &lt;= 0) printf(<span class="stringliteral">&quot;\tWARNING: No loop fallthrough found in loop %llx\n&quot;</span>, <a class="code" href="classloop.html#a6abf8e7d6763e76673f8287fe15785d4">getLoopEntryID</a>()); <span class="comment">//TOOD bring this back to an assert soon</span>
         <span class="keywordflow">return</span> _fallThroughBBList;
 }</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a6d90e411616771613671b11dd58d380d_cgraph.png" border="0" usemap="#classloop_a6d90e411616771613671b11dd58d380d_cgraph" alt=""/></div>
+<map name="classloop_a6d90e411616771613671b11dd58d380d_cgraph" id="classloop_a6d90e411616771613671b11dd58d380d_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a6d90e411616771613671b11dd58d380d_icgraph.png" border="0" usemap="#classloop_a6d90e411616771613671b11dd58d380d_icgraph" alt=""/></div>
+<map name="classloop_a6d90e411616771613671b11dd58d380d_icgraph" id="classloop_a6d90e411616771613671b11dd58d380d_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="af5ef5dd07e6d5b52f318320cc7d6b037"></a><!-- doxytag: member="loop::getLoop" ref="af5ef5dd07e6d5b52f318320cc7d6b037" args="()" -->
@@ -277,6 +336,24 @@ Public Member Functions</h2></td></tr>
         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;The loop entry was not found. Aborting execution.&quot;</span>);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a30c7019f2202671a81d8a33f9a33593e_cgraph.png" border="0" usemap="#classloop_a30c7019f2202671a81d8a33f9a33593e_cgraph" alt=""/></div>
+<map name="classloop_a30c7019f2202671a81d8a33f9a33593e_cgraph" id="classloop_a30c7019f2202671a81d8a33f9a33593e_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a30c7019f2202671a81d8a33f9a33593e_icgraph.png" border="0" usemap="#classloop_a30c7019f2202671a81d8a33f9a33593e_icgraph" alt=""/></div>
+<map name="classloop_a30c7019f2202671a81d8a33f9a33593e_icgraph" id="classloop_a30c7019f2202671a81d8a33f9a33593e_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a6abf8e7d6763e76673f8287fe15785d4"></a><!-- doxytag: member="loop::getLoopEntryID" ref="a6abf8e7d6763e76673f8287fe15785d4" args="()" -->
@@ -297,6 +374,15 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> _loopEntryID;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a6abf8e7d6763e76673f8287fe15785d4_icgraph.png" border="0" usemap="#classloop_a6abf8e7d6763e76673f8287fe15785d4_icgraph" alt=""/></div>
+<map name="classloop_a6abf8e7d6763e76673f8287fe15785d4_icgraph" id="classloop_a6abf8e7d6763e76673f8287fe15785d4_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a69d626e1bbfa64a45f3ddf805998967a"></a><!-- doxytag: member="loop::getNthBB" ref="a69d626e1bbfa64a45f3ddf805998967a" args="(int indx)" -->
@@ -317,6 +403,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> _loop-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(indx);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a69d626e1bbfa64a45f3ddf805998967a_cgraph.png" border="0" usemap="#classloop_a69d626e1bbfa64a45f3ddf805998967a_cgraph" alt=""/></div>
+<map name="classloop_a69d626e1bbfa64a45f3ddf805998967a_cgraph" id="classloop_a69d626e1bbfa64a45f3ddf805998967a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a69d626e1bbfa64a45f3ddf805998967a_icgraph.png" border="0" usemap="#classloop_a69d626e1bbfa64a45f3ddf805998967a_icgraph" alt=""/></div>
+<map name="classloop_a69d626e1bbfa64a45f3ddf805998967a_icgraph" id="classloop_a69d626e1bbfa64a45f3ddf805998967a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a81113f34513c9e9ae41886ea150cbd3d"></a><!-- doxytag: member="loop::getNumBB" ref="a81113f34513c9e9ae41886ea150cbd3d" args="()" -->
@@ -336,6 +440,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> _loop-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a81113f34513c9e9ae41886ea150cbd3d_cgraph.png" border="0" usemap="#classloop_a81113f34513c9e9ae41886ea150cbd3d_cgraph" alt=""/></div>
+<map name="classloop_a81113f34513c9e9ae41886ea150cbd3d_cgraph" id="classloop_a81113f34513c9e9ae41886ea150cbd3d_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a81113f34513c9e9ae41886ea150cbd3d_icgraph.png" border="0" usemap="#classloop_a81113f34513c9e9ae41886ea150cbd3d_icgraph" alt=""/></div>
+<map name="classloop_a81113f34513c9e9ae41886ea150cbd3d_icgraph" id="classloop_a81113f34513c9e9ae41886ea150cbd3d_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a550955b42ceff7c89445322abc564e28"></a><!-- doxytag: member="loop::isBbFallThrough" ref="a550955b42ceff7c89445322abc564e28" args="(ADDR bbID)" -->
@@ -359,6 +481,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a550955b42ceff7c89445322abc564e28_cgraph.png" border="0" usemap="#classloop_a550955b42ceff7c89445322abc564e28_cgraph" alt=""/></div>
+<map name="classloop_a550955b42ceff7c89445322abc564e28_cgraph" id="classloop_a550955b42ceff7c89445322abc564e28_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a550955b42ceff7c89445322abc564e28_icgraph.png" border="0" usemap="#classloop_a550955b42ceff7c89445322abc564e28_icgraph" alt=""/></div>
+<map name="classloop_a550955b42ceff7c89445322abc564e28_icgraph" id="classloop_a550955b42ceff7c89445322abc564e28_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="aff5df3cffef530a6e4f81ecd4deed86e"></a><!-- doxytag: member="loop::isBbInLoop" ref="aff5df3cffef530a6e4f81ecd4deed86e" args="(ADDR bbID)" -->
@@ -383,6 +523,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_aff5df3cffef530a6e4f81ecd4deed86e_cgraph.png" border="0" usemap="#classloop_aff5df3cffef530a6e4f81ecd4deed86e_cgraph" alt=""/></div>
+<map name="classloop_aff5df3cffef530a6e4f81ecd4deed86e_cgraph" id="classloop_aff5df3cffef530a6e4f81ecd4deed86e_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_aff5df3cffef530a6e4f81ecd4deed86e_icgraph.png" border="0" usemap="#classloop_aff5df3cffef530a6e4f81ecd4deed86e_icgraph" alt=""/></div>
+<map name="classloop_aff5df3cffef530a6e4f81ecd4deed86e_icgraph" id="classloop_aff5df3cffef530a6e4f81ecd4deed86e_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a6a34ac2a05496bd2192638280e42c316"></a><!-- doxytag: member="loop::isInnerLoop" ref="a6a34ac2a05496bd2192638280e42c316" args="(loop *lp)" -->
@@ -411,6 +569,24 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a6a34ac2a05496bd2192638280e42c316_cgraph.png" border="0" usemap="#classloop_a6a34ac2a05496bd2192638280e42c316_cgraph" alt=""/></div>
+<map name="classloop_a6a34ac2a05496bd2192638280e42c316_cgraph" id="classloop_a6a34ac2a05496bd2192638280e42c316_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a6a34ac2a05496bd2192638280e42c316_icgraph.png" border="0" usemap="#classloop_a6a34ac2a05496bd2192638280e42c316_icgraph" alt=""/></div>
+<map name="classloop_a6a34ac2a05496bd2192638280e42c316_icgraph" id="classloop_a6a34ac2a05496bd2192638280e42c316_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a49a50718778d9b23d51385a93aed10a8"></a><!-- doxytag: member="loop::resetVisitBits" ref="a49a50718778d9b23d51385a93aed10a8" args="()" -->
@@ -432,6 +608,24 @@ Public Member Functions</h2></td></tr>
         }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a49a50718778d9b23d51385a93aed10a8_cgraph.png" border="0" usemap="#classloop_a49a50718778d9b23d51385a93aed10a8_cgraph" alt=""/></div>
+<map name="classloop_a49a50718778d9b23d51385a93aed10a8_cgraph" id="classloop_a49a50718778d9b23d51385a93aed10a8_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classloop_a49a50718778d9b23d51385a93aed10a8_icgraph.png" border="0" usemap="#classloop_a49a50718778d9b23d51385a93aed10a8_icgraph" alt=""/></div>
+<map name="classloop_a49a50718778d9b23d51385a93aed10a8_icgraph" id="classloop_a49a50718778d9b23d51385a93aed10a8_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

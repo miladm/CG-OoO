@@ -1,0 +1,11 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="parseRegisters",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="regFile::getRegNum",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregFile.html#a8e27b1edd7cbb6d8820a73fb1d7d8c71"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="instruction::setRegister",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a456de8aa26ff79d2b7cd203f7c59f2cb"];
+}

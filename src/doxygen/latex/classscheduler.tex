@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$schedulers.h$>$}
 
-Inheritance diagram for scheduler:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classscheduler}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for scheduler:
+
+
+Collaboration diagram for scheduler:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -110,6 +110,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_a50c4d8d6c754c342adbd0750eacd7a64}{
 \index{scheduler@{scheduler}!forwardFromCDB@{forwardFromCDB}}
 \index{forwardFromCDB@{forwardFromCDB}!scheduler@{scheduler}}
@@ -182,6 +192,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_ad2cdc34a3fc36cf56755e73842a47d49}{
 \index{scheduler@{scheduler}!manageCDB@{manageCDB}}
 \index{manageCDB@{manageCDB}!scheduler@{scheduler}}
@@ -203,6 +223,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_ab1cdff1168591f0166016829d460928a}{
 \index{scheduler@{scheduler}!regStat@{regStat}}
 \index{regStat@{regStat}!scheduler@{scheduler}}
@@ -221,6 +251,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     //_iWindow.regStat (); -TODO fix this - put it back
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_a22fd96ca05e81346965e87c0e46b9cca}{
 \index{scheduler@{scheduler}!schedulerImpl@{schedulerImpl}}
 \index{schedulerImpl@{schedulerImpl}!scheduler@{scheduler}}
@@ -241,7 +281,7 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (_iWindow.getTableState () == EMPTY_BUFF) break;
-        if (!_iWindow.hasFreeRdPort (clk.now ())) break;
+        if (!_iWindow.hasFreeWire (clk, READ)) break;
         if (_scheduler_to_execution_port->getBuffState (clk.now ()) == FULL_BUFF)
        break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
@@ -256,6 +296,9 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
       , "Issue ins", ins->getInsID (), clk.now ());
 
+        /* UPDATE WIRES */
+        _iWindow.updateWireState (clk, READ);
+
         /* STAT */
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
@@ -266,6 +309,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     return pipe_stall;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_aa2248008ac06d971f08807593b9a09c2}{
 \index{scheduler@{scheduler}!squash@{squash}}
 \index{squash@{squash}!scheduler@{scheduler}}
@@ -292,6 +345,16 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classscheduler_a16ab416645e159625f83cf53bfa408cc}{
 \index{scheduler@{scheduler}!updateInsWin@{updateInsWin}}
 \index{updateInsWin@{updateInsWin}!scheduler@{scheduler}}
@@ -307,9 +370,9 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (_iROB->getTableState () == FULL_BUFF) break;
-        if (!_iROB->hasFreeWrPort (clk.now ())) break;
+        if (!_iROB->hasFreeWire (clk, WRITE)) break;
         if (_iWindow.getTableState () == FULL_BUFF) break;
-        if (!_iWindow.hasFreeWrPort (clk.now ())) break;
+        if (!_iWindow.hasFreeWire (clk, WRITE)) break;
         if (_decode_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) b
       reak;
         if (!_decode_to_scheduler_port->isReady (clk.now ())) break;
@@ -321,9 +384,23 @@ void \hyperlink{classscheduler_ab1cdff1168591f0166016829d460928a}{regStat} (\hyp
         _iROB->pushBack (ins);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
       , "Write iWin ins", ins->getInsID (), clk.now ());
+
+        /* UPDATE WIRES */
+        _iWindow.updateWireState (clk, WRITE);
+        _iROB->updateWireState (clk, WRITE);
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

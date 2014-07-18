@@ -1,0 +1,19 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="instruction::squashRenameReg",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="registerRename::setAsAvailablePR",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterRename.html#a897a4855df90b6dbd2b44a96a48b1a9e"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="registerRename::squashARST",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterRename.html#ae1d746f5735c22c34f2f28b194ef1a55"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="registerRename::squashPRFSM",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterRename.html#aa2e122bca28af9d31425752115a0bceb"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="registerRename::squashRAT",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterRename.html#afd0ae2c9363f1f9067da25ef2ff03001"];
+}

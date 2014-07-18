@@ -1,0 +1,47 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="basicblock::getNumAncestors",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="build_dominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8cpp.html#ad9854552aeba1a66453864500ed2dfc0"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="setup_dominance_frontier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8h.html#af9f49ffe6819033df685a4eb97ef74be"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="basicblock::elimPhiFuncs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a27c168ce65c2d5ead06682ea41af8473"];
+  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="eliminatePhiFuncs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#aa1b9aef4bd270d92ee493acef4c5cffa"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662"];
+  Node7 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="findEntryPoints",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a3511145027350bf1c4fab3a22f79be40"];
+  Node8 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node9 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="findLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#a56af37350d658e4fa9ba3e67058f82a2"];
+  Node9 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="makeNaturalLoops",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#a533375cdbcbdab104ffd8c23db3f2b9d"];
+  Node10 -> Node11 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="make_phraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#af5aea5750e9482dfe18f886b91b680b4"];
+  Node1 -> Node12 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="basicblock::insertPhiFunc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a1aeb2fc7325b987bced690cabf8d296d"];
+  Node1 -> Node13 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="make_interference_nodes_network",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a44ba610b0d634eb37dc4a1228f9fe6d7"];
+  Node13 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node14 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="set_arch_reg_for_all_ins",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#aaf92c40633364d00817ec3f029a77f3c"];
+  Node14 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node15 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="ssa_renaming",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8cpp.html#a804de8f00b7ea9e5487315dc9ff01d77"];
+  Node15 -> Node16 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node16 [label="build_ssa_form",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8h.html#a99d7839751286ac78c627aabd383cb51"];
+  Node16 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node17 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node17 [label="whichPred",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8cpp.html#ad51f0106de926496f1a6b24bfd21bc32"];
+  Node17 -> Node18 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node18 [label="search",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9"];
+  Node18 -> Node15 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+}

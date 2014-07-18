@@ -1,0 +1,38 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="build_dominators",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="basicblock::getAllasDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ad5a6467f9a1628c658671d2f432cbeba"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="basicblock::getDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#aec14cf5254976daec791c62e1b684ecf"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="basicblock::getID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="basicblock::getNthAncestor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a24ef17acb451da40eb9ecca3a05c9fb3"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="basicblock::getNumAncestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#af95ff01c9b4eb7a12cd58558771c92b2"];
+  Node8 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="basicblock::isEntryPoint",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a81b824d2e109bb3b9484eb021fdd0a80"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="basicblock::markAsEntryPoint",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a3da24f399435a4ba33a464925d4ded05"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="basicblock::numNonBackEdgeAncestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ad05a1a1f24dfb10d2c637065eaea2835"];
+  Node11 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="basicblock::setAllasDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a11c8e9c8e6e38864552bafcd041e7a08"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="basicblock::setDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#aae21234b7ccd801b037a3a26a11d44e7"];
+  Node13 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

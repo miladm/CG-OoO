@@ -6,6 +6,9 @@
 
 {\ttfamily \#include $<$g\_\-variable.h$>$}
 
+
+
+Collaboration diagram for g\_\-variable:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -209,6 +212,16 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         return newIns;
     }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}{
 \index{g\_\-variable@{g\_\-variable}!getSquashSN@{getSquashSN}}
 \index{getSquashSN@{getSquashSN}!g_variable@{g\_\-variable}}
@@ -222,6 +235,11 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 \begin{DoxyCode}
 {Assert (g_squash_seq_num > 0); return g_squash_seq_num;}
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}{
 \index{g\_\-variable@{g\_\-variable}!insertFrontCodeCache@{insertFrontCodeCache}}
 \index{insertFrontCodeCache@{insertFrontCodeCache}!g_variable@{g\_\-variable}}
@@ -237,6 +255,16 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         g_codeCache->InsertAt(ins, 0);
     }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_a4b5f6627f388c34df7af5168a119778d}{
 \index{g\_\-variable@{g\_\-variable}!isCodeCacheEmpty@{isCodeCacheEmpty}}
 \index{isCodeCacheEmpty@{isCodeCacheEmpty}!g_variable@{g\_\-variable}}
@@ -253,6 +281,16 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         return result;
     }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}{
 \index{g\_\-variable@{g\_\-variable}!isOnWrongPath@{isOnWrongPath}}
 \index{isOnWrongPath@{isOnWrongPath}!g_variable@{g\_\-variable}}
@@ -268,6 +306,11 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         return (g_squash_seq_num != g_old_squash_seq_num) ? true : false;
     }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_abb078ae60bb65db485a0cc2382bd4457}{
 \index{g\_\-variable@{g\_\-variable}!popCodeCache@{popCodeCache}}
 \index{popCodeCache@{popCodeCache}!g_variable@{g\_\-variable}}
@@ -283,6 +326,16 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         return g_codeCache->Nth(0);
     }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_ab351194ce2a3de088813ae861c7e3d10}{
 \index{g\_\-variable@{g\_\-variable}!remFromCodeCache@{remFromCodeCache}}
 \index{remFromCodeCache@{remFromCodeCache}!g_variable@{g\_\-variable}}
@@ -299,6 +352,16 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         g_codeCache->RemoveAt(0);
     }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}{
 \index{g\_\-variable@{g\_\-variable}!resetSquashSN@{resetSquashSN}}
 \index{resetSquashSN@{resetSquashSN}!g_variable@{g\_\-variable}}
@@ -312,6 +375,11 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 \begin{DoxyCode}
 { g_squash_seq_num = 0; g_old_squash_seq_num = 0;}
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_adc6b682b4875fa3af7d390099c93dc88}{
 \index{g\_\-variable@{g\_\-variable}!setOldSquashSN@{setOldSquashSN}}
 \index{setOldSquashSN@{setOldSquashSN}!g_variable@{g\_\-variable}}
@@ -327,6 +395,11 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
             g_old_squash_seq_num = g_squash_seq_num;
     }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}{
 \index{g\_\-variable@{g\_\-variable}!setSquashSN@{setSquashSN}}
 \index{setSquashSN@{setSquashSN}!g_variable@{g\_\-variable}}
@@ -347,6 +420,11 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         }
     }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 \subsection{Member Data Documentation}

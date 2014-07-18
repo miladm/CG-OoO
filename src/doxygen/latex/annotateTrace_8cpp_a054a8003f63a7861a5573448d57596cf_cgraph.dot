@@ -1,0 +1,39 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="annotateTrace_forPB",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="List::Append",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a473190098e38206d0125b0737245e613"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="DynBBSizeStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$binaryTranslator_2stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="findBB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$annotateTrace_8cpp.html#a1886834b5b714acdb0775054212d3db9"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="basicblock::getBbSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="instruction::getInsAddr",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="basicblock::getInsList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#adc40d816c82feedc1f7027fc29470d90"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="basicblock::isAPhraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a88276960d345d6849dbe02c9debbb94e"];
+  Node9 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="basicblock::isInsAddrInBB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#afd299af5d08655c4fbd10221f5edb556"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="List::RemoveAt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#af17f72d263f90d53ea8501b5b1853470"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="removeBB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$annotateTrace_8cpp.html#afb131832ec53a28a9d071765d3c3a7e4"];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="storeToFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$annotateTrace_8cpp.html#a4ea14bccc7cc3ac11b499dcc35fddec8"];
+  Node14 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+}

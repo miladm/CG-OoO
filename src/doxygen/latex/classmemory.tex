@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$memory.h$>$}
 
-Inheritance diagram for memory:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classmemory}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for memory:
+
+
+Collaboration diagram for memory:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -126,6 +126,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_ae667b5ac087faff10a52913146d6b627}{
 \index{memory@{memory}!doMEMORY@{doMEMORY}}
 \index{doMEMORY@{doMEMORY}!memory@{memory}}
@@ -155,6 +165,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_a7b6cc36f06ee64246e6dfbda76a3cf34}{
 \index{memory@{memory}!forward@{forward}}
 \index{forward@{forward}!memory@{memory}}
@@ -181,6 +201,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
       ard wr ops of ins", ins->getInsID (), clk.now ());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_a12d98865ad7d63dd9010ff931a5806b2}{
 \index{memory@{memory}!manageMEMbuffer@{manageMEMbuffer}}
 \index{manageMEMbuffer@{manageMEMbuffer}!memory@{memory}}
@@ -219,8 +249,8 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
                                           {
     while (true) {
         /* CHECKS */
-        if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeRdPort (c
-      lk.now ())) break;
+        if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeWire (clk
+      , READ)) break;
         //if (_dcache.getNumAvialablePorts () == 0) break;
 
         /* MEM ACCESS */
@@ -235,9 +265,22 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
         (lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
       Store to cach ins", st_ins->getInsID (), clk.now ());
+
+        /* UPDATE WIRES */
+        _st_buff.updateWireState (clk, READ);
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_a3c2b4025c057acb762cc6630f324d3dc}{
 \index{memory@{memory}!memoryImpl@{memoryImpl}}
 \index{memoryImpl@{memoryImpl}!memory@{memory}}
@@ -265,11 +308,11 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
            (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
       PIPE_FLUSH)) break;
         if (mem_ins->getMemType () == STORE && 
-           (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWrPort (cl
-      k.now ()))) break;
+           (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWire (clk,
+       WRITE))) break;
         if (mem_ins->getMemType () == LOAD &&
-           (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWrPort (clk.now 
-      ()))) break; //TODO only on miss?
+           (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWire (clk, 
+      WRITE))) break; //TODO only on miss?
 
         /* MEM ACCESS */
         mem_ins = _execution_to_memory_port->popFront (clk.now ());
@@ -301,6 +344,10 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
        (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, clk.now (
       ));
 
+        /* UPDATE WIRES */
+        _st_buff.updateWireState (clk, WRITE);
+        _mshr.updateWireState (clk, WRITE);
+
         /* STAT */
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
@@ -311,6 +358,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
     return pipe_stall;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_a2f2be279e08cd2180fb070a954fbc674}{
 \index{memory@{memory}!regStat@{regStat}}
 \index{regStat@{regStat}!memory@{memory}}
@@ -326,6 +383,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
     _execution_to_memory_port->regStat (clk.now ());
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmemory_a88818ea5e9263294dc5e1fef01fb068f}{
 \index{memory@{memory}!squash@{squash}}
 \index{squash@{squash}!memory@{memory}}
@@ -347,6 +414,16 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
     //_st_buff.flushTable ();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

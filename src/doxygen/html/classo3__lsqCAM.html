@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,14 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for o3_lsqCAM:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classo3__lsqCAM.png" usemap="#o3_lsqCAM_map" alt=""/>
-  <map id="o3_lsqCAM_map" name="o3_lsqCAM_map">
-<area href="classCAMtable.html" alt="CAMtable&lt; dynInstruction * &gt;" shape="rect" coords="0,112,183,136"/>
-<area href="classtable.html" alt="table&lt; dynInstruction * &gt;" shape="rect" coords="0,56,183,80"/>
-<area href="classunit.html" alt="unit" shape="rect" coords="0,0,183,24"/>
+<div class="center"><img src="classo3__lsqCAM__inherit__graph.png" border="0" usemap="#o3__lsqCAM_inherit__map" alt="Inheritance graph"/></div>
+<map name="o3__lsqCAM_inherit__map" id="o3__lsqCAM_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for o3_lsqCAM:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM__coll__graph.png" border="0" usemap="#o3__lsqCAM_coll__map" alt="Collaboration graph"/></div>
+<map name="o3__lsqCAM_coll__map" id="o3__lsqCAM_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classo3__lsqCAM-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -173,7 +176,7 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
         <span class="keywordflow">if</span> (<a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;_delay.isValidStopTime () &amp;&amp;
             <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;_delay.getStopTime () &lt;= now) {
-            <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i)-&gt;getSQstate () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba857bfc5150ca03a3587a5714ac06ed89">SQ_CACHE_DISPATCH</a>);
+            <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i)-&gt;getSQstate () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba857bfc5150ca03a3587a5714ac06ed89">SQ_CACHE_DISPATCH</a>);
             <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classCAMtable.html#a9644548c43e912d1cd1d0431fc5179e9">pullNth</a> (i);
             <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Found a finished ST ins: &quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
             <span class="keyword">delete</span> ins;
@@ -183,6 +186,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_cgraph.png" border="0" usemap="#classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_cgraph" id="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_icgraph.png" border="0" usemap="#classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_icgraph" id="classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a7db68789c8d9af13bbc9ec485b4972bc"></a><!-- doxytag: member="o3_lsqCAM::findPendingMemIns" ref="a7db68789c8d9af13bbc9ec485b4972bc" args="(LSQ_ID)" -->
@@ -203,11 +224,11 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>) {
         <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
         <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () == <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a1ae3399502bd66af21b15736d4fae1a1">COMMIT</a> &amp;&amp;
                 ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba158f60bba8d7e9e98a8a261d750796fb">SQ_COMMIT</a>) {
                 <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;ST ins issued:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
-                <span class="keywordflow">return</span> <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+                <span class="keywordflow">return</span> <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             }
         }
         <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;No ST ins issued.&quot;</span>);
@@ -215,11 +236,11 @@ Public Member Functions</h2></td></tr>
     } <span class="keywordflow">else</span> {
         <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
         <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () == <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a53fb5aa2857c0a91f19941cce3f537b2">MEM_ACCESS</a> &amp;&amp;
                 ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a34b43e9f7edc49a637ff52bd2774d377">LQ_PENDING_CACHE_DISPATCH</a>) {
                 <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;LD ins issued:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
-                <span class="keywordflow">return</span> <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+                <span class="keywordflow">return</span> <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             }
         }
         <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;No LD ins issued.&quot;</span>);
@@ -227,6 +248,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_cgraph.png" border="0" usemap="#classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_cgraph" id="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_icgraph.png" border="0" usemap="#classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_icgraph" id="classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ac3fca99875017c6639bfeccafe904c83"></a><!-- doxytag: member="o3_lsqCAM::hasAnyCompleteLdFromAddr" ref="ac3fca99875017c6639bfeccafe904c83" args="(INS_ID, dynInstruction *)" -->
@@ -257,7 +296,7 @@ Public Member Functions</h2></td></tr>
     violating_ld = NULL;
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = table_size - 1; i &gt;= 0; i--) {
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> () == completed_st_mem_addr) {
             <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a2bcce72017d6960ec6f79e6d8afb1af4">LQ_COMPLETE</a>) {
                 violating_ld = ins;
@@ -275,6 +314,24 @@ Public Member Functions</h2></td></tr>
     <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_cgraph.png" border="0" usemap="#classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_cgraph" id="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_icgraph.png" border="0" usemap="#classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_icgraph" id="classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ad3d6f79a7377317fc859080d337d428a"></a><!-- doxytag: member="o3_lsqCAM::hasCommit" ref="ad3d6f79a7377317fc859080d337d428a" args="()" -->
@@ -293,13 +350,31 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                           {
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-        <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i)-&gt;getSQstate () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba158f60bba8d7e9e98a8a261d750796fb">SQ_COMMIT</a>) {
+        <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i)-&gt;getSQstate () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba158f60bba8d7e9e98a8a261d750796fb">SQ_COMMIT</a>) {
             <span class="keywordflow">return</span> <span class="keyword">true</span>;
         }
     }
     <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_cgraph.png" border="0" usemap="#classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_cgraph" id="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_icgraph.png" border="0" usemap="#classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_icgraph" id="classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="aad5ca9d9f84c657635d39de62e1ec32a"></a><!-- doxytag: member="o3_lsqCAM::hasFinishedIns" ref="aad5ca9d9f84c657635d39de62e1ec32a" args="(LSQ_ID, CYCLE)" -->
@@ -330,7 +405,7 @@ Public Member Functions</h2></td></tr>
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
     <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
         <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             <span class="keywordflow">if</span> ((ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a9dc631d745576cd4fce2a568381077e8">LQ_FWD_FROM_SQ</a> ||
                  ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a0acb1e8a1ea2ca563055c19411a475e3">LQ_MSHR_WAIT</a> ||
                  ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205acffbcdda4562e66debce12525459be46">LQ_CACHE_WAIT</a>) &amp;&amp;
@@ -345,7 +420,7 @@ Public Member Functions</h2></td></tr>
         <span class="keywordflow">return</span> pair&lt;bool, dynInstruction*&gt; (<span class="keyword">false</span>, NULL);
     } <span class="keywordflow">else</span> {
         <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+            <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
             <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba857bfc5150ca03a3587a5714ac06ed89">SQ_CACHE_DISPATCH</a> &amp;&amp;
                 <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;_delay.isValidStopTime () &amp;&amp;
                 <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;_delay.getStopTime () &lt;= now) {
@@ -359,6 +434,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_cgraph.png" border="0" usemap="#classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_cgraph" id="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_icgraph.png" border="0" usemap="#classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_icgraph" id="classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a12159149dc0b13cda6edfb1213ce6197"></a><!-- doxytag: member="o3_lsqCAM::setTimer" ref="a12159149dc0b13cda6edfb1213ce6197" args="(dynInstruction *, CYCLE, CYCLE)" -->
@@ -394,7 +487,7 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                                                         {
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; table_size; i++) {
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i);
+        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () == elem-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ()) {
             <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu (lat: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Set mem access lat. for ins:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), axes_lat);
             <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;_delay.setNewTime (now, axes_lat);
@@ -405,6 +498,24 @@ Public Member Functions</h2></td></tr>
     <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;The LSQ enetry not found.&quot;</span>);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_cgraph.png" border="0" usemap="#classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_cgraph" id="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_icgraph.png" border="0" usemap="#classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_icgraph" id="classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a95e286b95f3651e40d57206eb2a41308"></a><!-- doxytag: member="o3_lsqCAM::squash" ref="a95e286b95f3651e40d57206eb2a41308" args="(INS_ID)" -->
@@ -424,7 +535,7 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                          {
     <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> table_size = <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = table_size - 1; i &gt;= 0; i--) {
-        <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (i)-&gt;getInsID () &gt;= ins_seq_num) {
+        <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i)-&gt;getInsID () &gt;= ins_seq_num) {
             <span class="keyword">delete</span> <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
             <a class="code" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a>.<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i);
         } <span class="keywordflow">else</span> {
@@ -433,6 +544,24 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_cgraph.png" border="0" usemap="#classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_cgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_cgraph" id="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_icgraph.png" border="0" usemap="#classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_icgraph" alt=""/></div>
+<map name="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_icgraph" id="classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

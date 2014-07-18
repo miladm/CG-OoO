@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$table.h$>$}
 
-Inheritance diagram for CAMtable$<$ tableType\_\-T $>$:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{classCAMtable}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for CAMtable$<$ tableType\_\-T $>$:
+
+
+Collaboration diagram for CAMtable$<$ tableType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -82,12 +82,17 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
                                              {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
-      available ports count first");
+    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
+       checked the available ports count first");
 #endif
      return table<tableType_T>::_table.Nth (0)->_element;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{
 \index{CAMtable@{CAMtable}!getNth@{getNth}}
 \index{getNth@{getNth}!CAMtable@{CAMtable}}
@@ -102,8 +107,8 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
                                                       {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert (table<tableType_T>::_num_free_rd_port > 0 && "must have checked the a
-      vailable ports count first");
+    Assert (table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have 
+      checked the available ports count first");
 #endif
      return table<tableType_T>::_table.Nth (indx)->_element;
 }
@@ -122,8 +127,8 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
                                              {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
-      available ports count first");
+    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
+       checked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
@@ -131,6 +136,11 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
     return dyIns;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}{
 \index{CAMtable@{CAMtable}!pullNextReady@{pullNextReady}}
 \index{pullNextReady@{pullNextReady}!CAMtable@{CAMtable}}
@@ -149,6 +159,11 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
     return obj;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{
 \index{CAMtable@{CAMtable}!pullNth@{pullNth}}
 \index{pullNth@{pullNth}!CAMtable@{CAMtable}}
@@ -163,8 +178,8 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
                                                        {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
-      available ports count first");
+    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
+       checked the available ports count first");
 #endif
      tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
      table<tableType_T>::_table.RemoveAt (indx);

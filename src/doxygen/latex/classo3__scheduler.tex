@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$schedulers.h$>$}
 
-Inheritance diagram for o3\_\-scheduler:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classo3__scheduler}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for o3\_\-scheduler:
+
+
+Collaboration diagram for o3\_\-scheduler:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,6 +72,11 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!$\sim$o3\_\-scheduler@{$\sim$o3\_\-scheduler}}
 \index{$\sim$o3\_\-scheduler@{$\sim$o3\_\-scheduler}!o3_scheduler@{o3\_\-scheduler}}
@@ -91,6 +96,11 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!doSCHEDULER@{doSCHEDULER}}
@@ -104,9 +114,9 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
 
 \begin{DoxyCode}
                                              {
+    /* STAT + DEBUG */
     dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.
       now ());
-    /* STAT */
     regStat (clk);
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
@@ -121,6 +131,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!forwardFromCDB@{forwardFromCDB}}
 \index{forwardFromCDB@{forwardFromCDB}!o3_scheduler@{o3\_\-scheduler}}
@@ -193,6 +213,11 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!hasReadyInsInResStn@{hasReadyInsInResStn}}
 \index{hasReadyInsInResStn@{hasReadyInsInResStn}!o3_scheduler@{o3\_\-scheduler}}
@@ -215,6 +240,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!manageCDB@{manageCDB}}
 \index{manageCDB@{manageCDB}!o3_scheduler@{o3\_\-scheduler}}
@@ -236,6 +271,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!regStat@{regStat}}
 \index{regStat@{regStat}!o3_scheduler@{o3\_\-scheduler}}
@@ -256,6 +301,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_ade8fe27e00ac0430122634af01c0639c}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!schedulerImpl@{schedulerImpl}}
 \index{schedulerImpl@{schedulerImpl}!o3_scheduler@{o3\_\-scheduler}}
@@ -305,6 +360,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     return pipe_stall;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!squash@{squash}}
 \index{squash@{squash}!o3_scheduler@{o3\_\-scheduler}}
@@ -333,6 +398,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!updateResStns@{updateResStns}}
 \index{updateResStns@{updateResStns}!o3_scheduler@{o3\_\-scheduler}}
@@ -381,6 +456,16 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

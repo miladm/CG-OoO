@@ -6,6 +6,9 @@
 
 {\ttfamily \#include $<$registerRename.h$>$}
 
+
+
+Collaboration diagram for registerRename:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -181,6 +184,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _ARST.erase(p_reg);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a6784336e03b69e69d69de839a0ab1b07}{
 \index{registerRename@{registerRename}!flush\_\-fRAT@{flush\_\-fRAT}}
 \index{flush\_\-fRAT@{flush\_\-fRAT}!registerRename@{registerRename}}
@@ -202,6 +210,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         Assert(_fRAT.size() == _cRAT.size());
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_aba974402b7e3ff4992f994dc37de0c3d}{
 \index{registerRename@{registerRename}!getARST@{getARST}}
 \index{getARST@{getARST}!registerRename@{registerRename}}
@@ -219,6 +232,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return _ARST[p_reg];
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a7770265e6fed2584304a0d80f35efa04}{
 \index{registerRename@{registerRename}!getAvailablePR@{getAvailablePR}}
 \index{getAvailablePR@{getAvailablePR}!registerRename@{registerRename}}
@@ -239,6 +257,16 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return p_reg;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_ad878188f50dae0a8f49627cf6e769481}{
 \index{registerRename@{registerRename}!getNumAvailablePR@{getNumAvailablePR}}
 \index{getNumAvailablePR@{getNumAvailablePR}!registerRename@{registerRename}}
@@ -254,6 +282,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return _availablePRset.size();
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a50d06999c2233fad684905c741cef0ac}{
 \index{registerRename@{registerRename}!getPRFSM@{getPRFSM}}
 \index{getPRFSM@{getPRFSM}!registerRename@{registerRename}}
@@ -272,6 +305,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return _PRFSM[p_reg];
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a0c6a47ff2437f76f6577609ebea23ce8}{
 \index{registerRename@{registerRename}!getRenamedReg@{getRenamedReg}}
 \index{getRenamedReg@{getRenamedReg}!registerRename@{registerRename}}
@@ -290,6 +328,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return _fRAT[a_reg];
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_aa3bd5ef65a4970358775855abbd3f91e}{
 \index{registerRename@{registerRename}!getWriterIns@{getWriterIns}}
 \index{getWriterIns@{getWriterIns}!registerRename@{registerRename}}
@@ -310,6 +353,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         return writerIns;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_ae0834c228a3bf0f44ca603556b583046}{
 \index{registerRename@{registerRename}!isAnyPRavailable@{isAnyPRavailable}}
 \index{isAnyPRavailable@{isAnyPRavailable}!registerRename@{registerRename}}
@@ -328,6 +376,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
                 return true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a50c7682df34d06395b71032f82492b94}{
 \index{registerRename@{registerRename}!setARST@{setARST}}
 \index{setARST@{setARST}!registerRename@{registerRename}}
@@ -346,6 +399,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _ARST.insert(pair<PR,PR>(new_pr,old_pr));
 } //TODO any checks for old_pr as key?
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a897a4855df90b6dbd2b44a96a48b1a9e}{
 \index{registerRename@{registerRename}!setAsAvailablePR@{setAsAvailablePR}}
 \index{setAsAvailablePR@{setAsAvailablePR}!registerRename@{registerRename}}
@@ -363,6 +421,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
        large (size violation).");
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_ae1d746f5735c22c34f2f28b194ef1a55}{
 \index{registerRename@{registerRename}!squashARST@{squashARST}}
 \index{squashARST@{squashARST}!registerRename@{registerRename}}
@@ -378,6 +441,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _ARST.erase(p_reg);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{
 \index{registerRename@{registerRename}!squashPRFSM@{squashPRFSM}}
 \index{squashPRFSM@{squashPRFSM}!registerRename@{registerRename}}
@@ -404,6 +472,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_afd0ae2c9363f1f9067da25ef2ff03001}{
 \index{registerRename@{registerRename}!squashRAT@{squashRAT}}
 \index{squashRAT@{squashRAT}!registerRename@{registerRename}}
@@ -422,6 +495,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _fRAT.insert(pair<AR,PR>(a_reg,_cRAT[a_reg]));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_ae45ea1c346f9d31c032672f18123e7b8}{
 \index{registerRename@{registerRename}!update\_\-cRAT@{update\_\-cRAT}}
 \index{update\_\-cRAT@{update\_\-cRAT}!registerRename@{registerRename}}
@@ -442,6 +520,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _cRAT.insert(pair<AR,PR>(a_reg,p_reg));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a28a11ff6b483aba951f8a88280a8695d}{
 \index{registerRename@{registerRename}!update\_\-fRAT@{update\_\-fRAT}}
 \index{update\_\-fRAT@{update\_\-fRAT}!registerRename@{registerRename}}
@@ -463,6 +546,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _fRAT.insert(pair<AR,PR>(a_reg,p_reg));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_a205b3b75802c8362753e382b46f6f4c5}{
 \index{registerRename@{registerRename}!updatePRFSM@{updatePRFSM}}
 \index{updatePRFSM@{updatePRFSM}!registerRename@{registerRename}}
@@ -490,6 +578,11 @@ void \hyperlink{classregisterRename_aa2e122bca28af9d31425752115a0bceb}{squashPRF
         _writeInstructions.insert(pair<PR,instruction*>(p_reg,writerIns));
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classregisterRename_ae474a2f30f2db7459192ff2b685d4be5}{
 \index{registerRename@{registerRename}!updatePRFSM@{updatePRFSM}}
 \index{updatePRFSM@{updatePRFSM}!registerRename@{registerRename}}

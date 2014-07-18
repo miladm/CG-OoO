@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -72,15 +72,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for table&lt; tableType_T &gt;:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classtable.png" usemap="#table&lt; tableType_T &gt;_map" alt=""/>
-  <map id="table&lt; tableType_T &gt;_map" name="table&lt; tableType_T &gt;_map">
-<area href="classunit.html" alt="unit" shape="rect" coords="171,0,332,24"/>
-<area href="classCAMtable.html" alt="CAMtable&lt; tableType_T &gt;" shape="rect" coords="0,112,161,136"/>
-<area href="classFIFOtable.html" alt="FIFOtable&lt; tableType_T &gt;" shape="rect" coords="171,112,332,136"/>
-<area href="classRAMtable.html" alt="RAMtable&lt; tableType_T &gt;" shape="rect" coords="342,112,503,136"/>
+<div class="center"><img src="classtable__inherit__graph.png" border="0" usemap="#table_3_01tableType__T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="table_3_01tableType__T_01_4_inherit__map" id="table_3_01tableType__T_01_4_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for table&lt; tableType_T &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable__coll__graph.png" border="0" usemap="#table_3_01tableType__T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="table_3_01tableType__T_01_4_coll__map" id="table_3_01tableType__T_01_4_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classtable-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -91,24 +93,22 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6">pushBack</a> (tableType_T)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a2fbaa1bd5450556efff7dddd33e5b6d1">popBack</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a9a0482a7594596a539e815bbe9c6aa7b">getBack</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a8c3b8032622fa8c6e85e9a4d5ded1a80">hasFreeRdPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a4da7f6326c21da45dbed8d618c3aabce">hasFreeWrPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a6876501119e77aa58a373c1f12c70b8d">getNth_unsafe</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> indx)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a55389eaae41800d77cacc97c563491f0">removeNth_unsafe</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> indx)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#af252520f4025cbc80e7bff8d9b811ba7">regStat</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#aafcfb08640fda68a1a09b81afc3c1dd7">updateWireState</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;, <a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#ade9af281ee70b0cf544060c478ffbfe1">hasFreeWire</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;, <a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="structTableElement.html">TableElement</a><br class="typebreak"/>
 &lt; tableType_T &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#aea78e74d4f44c1879df0c44e69d7bc26">_table</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a81119aad0ba83d08ba21cd6d0d040347">_num_free_rd_port</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwires.html">wires</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwires.html">wires</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158">TABLE_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#ae804042049b8e94591efe22ae05c0371">_table_type</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a></td></tr>
 </table>
 <h3>template&lt;typename tableType_T&gt;<br/>
  class table&lt; tableType_T &gt;</h3>
@@ -161,17 +161,15 @@ template&lt;typename tableType_T &gt; </div>
 <div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (table_name),
       <span class="comment">//s_table_empty_cyc (g_stats.newScalarStat (table_name, &quot;table_empty_cyc&quot;, &quot;Number of cycles with table empty&quot;, 0, NO_PRINT_ZERO)),</span>
       <span class="comment">//s_table_full_cyc  (g_stats.newScalarStat (table_name, &quot;table_full_cyc&quot;, &quot;Number of cycles with table full&quot;, 0, NO_PRINT_ZERO)),</span>
+      <a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a> (wr_port_cnt, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>, table_name + <span class="stringliteral">&quot;.wr_wire&quot;</span>),
+      <a class="code" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a> (rd_port_cnt, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>,  table_name + <span class="stringliteral">&quot;.rd_wire&quot;</span>),
       <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a> (len),
       <a class="code" href="classtable.html#ae804042049b8e94591efe22ae05c0371">_table_type</a> (table_type),
-      <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a> (wr_port_cnt),
-      <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a> (rd_port_cnt)
 {
         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a> &gt; 0 &amp;&amp; 
-            <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a> &gt; 0 &amp;&amp; <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a> &lt;= <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a> &amp;&amp;
-            <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a> &gt; 0 &amp;&amp; <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a> &lt;= <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a>);
+            rd_port_cnt &gt; 0 &amp;&amp; rd_port_cnt &lt;= <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a> &amp;&amp;
+            wr_port_cnt &gt; 0 &amp;&amp; wr_port_cnt &lt;= <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a>);
     <a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> = <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>;
-    <a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> = <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a>;
-    <a class="code" href="classtable.html#a81119aad0ba83d08ba21cd6d0d040347">_num_free_rd_port</a> = <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a>;
 }
 </pre></div>
 </div>
@@ -212,14 +210,14 @@ template&lt;typename tableType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                         {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#a464c90345006d2077ba1023ba77b59f1">getNumFreeWire</a> (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
     <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () &gt; 0);
         <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Last ()-&gt;_element;
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a6876501119e77aa58a373c1f12c70b8d"></a><!-- doxytag: member="table::getNth_unsafe" ref="a6876501119e77aa58a373c1f12c70b8d" args="(LENGTH indx)" -->
+<a class="anchor" id="a20191b8e05f6882b38655c5fffb42389"></a><!-- doxytag: member="table::getNth_unsafe" ref="a20191b8e05f6882b38655c5fffb42389" args="(LENGTH)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -242,6 +240,15 @@ template&lt;typename tableType_T &gt; </div>
 <span class="preprocessor"></span>     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (indx)-&gt;_element;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_a20191b8e05f6882b38655c5fffb42389_icgraph.png" border="0" usemap="#classtable_a20191b8e05f6882b38655c5fffb42389_icgraph" alt=""/></div>
+<map name="classtable_a20191b8e05f6882b38655c5fffb42389_icgraph" id="classtable_a20191b8e05f6882b38655c5fffb42389_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="af9c07419ae48bd029f03a9e7ca29c43f"></a><!-- doxytag: member="table::getTableSize" ref="af9c07419ae48bd029f03a9e7ca29c43f" args="()" -->
@@ -263,6 +270,15 @@ template&lt;typename tableType_T &gt; </div>
     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements ();
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_af9c07419ae48bd029f03a9e7ca29c43f_icgraph.png" border="0" usemap="#classtable_af9c07419ae48bd029f03a9e7ca29c43f_icgraph" alt=""/></div>
+<map name="classtable_af9c07419ae48bd029f03a9e7ca29c43f_icgraph" id="classtable_af9c07419ae48bd029f03a9e7ca29c43f_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="abab8f70b8b32bb7342f5107edb328d18"></a><!-- doxytag: member="table::getTableState" ref="abab8f70b8b32bb7342f5107edb328d18" args="()" -->
@@ -290,72 +306,68 @@ template&lt;typename tableType_T &gt; </div>
     } <span class="keywordflow">else</span> {<span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489ca0d232b6772b997898322e695ec19c831">AVAILABLE_BUFF</a>;}
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_abab8f70b8b32bb7342f5107edb328d18_cgraph.png" border="0" usemap="#classtable_abab8f70b8b32bb7342f5107edb328d18_cgraph" alt=""/></div>
+<map name="classtable_abab8f70b8b32bb7342f5107edb328d18_cgraph" id="classtable_abab8f70b8b32bb7342f5107edb328d18_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_abab8f70b8b32bb7342f5107edb328d18_icgraph.png" border="0" usemap="#classtable_abab8f70b8b32bb7342f5107edb328d18_icgraph" alt=""/></div>
+<map name="classtable_abab8f70b8b32bb7342f5107edb328d18_icgraph" id="classtable_abab8f70b8b32bb7342f5107edb328d18_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="a8c3b8032622fa8c6e85e9a4d5ded1a80"></a><!-- doxytag: member="table::hasFreeRdPort" ref="a8c3b8032622fa8c6e85e9a4d5ded1a80" args="(CYCLE)" -->
+<a class="anchor" id="ade9af281ee70b0cf544060c478ffbfe1"></a><!-- doxytag: member="table::hasFreeWire" ref="ade9af281ee70b0cf544060c478ffbfe1" args="(sysClock &amp;, AXES_TYPE)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename tableType_T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::hasFreeRdPort </td>
+          <td class="memname">tableType_T <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::hasFreeWire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
-          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                 {
-    <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> &lt; now) {
-        <a class="code" href="classtable.html#a81119aad0ba83d08ba21cd6d0d040347">_num_free_rd_port</a> = <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a>;
-        <a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> = <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a>;
-        <a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> = now;
-        <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> == now) {
-        <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a>--;
-        <span class="keywordflow">if</span> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a> &gt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;
-    }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a4da7f6326c21da45dbed8d618c3aabce"></a><!-- doxytag: member="table::hasFreeWrPort" ref="a4da7f6326c21da45dbed8d618c3aabce" args="(CYCLE)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename tableType_T &gt; </div>
-      <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::hasFreeWrPort </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                 {
-    <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> &lt; now) {
-        <a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> = <a class="code" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a>;
-        <a class="code" href="classtable.html#a81119aad0ba83d08ba21cd6d0d040347">_num_free_rd_port</a> = <a class="code" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a>;
-        <a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> = now;
-        <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> == now) {
-        <a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a>--;
-        <span class="keywordflow">if</span> (<a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> &gt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;
-    }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<div class="fragment"><pre class="fragment">                                                                               {
+    <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+        <span class="keywordflow">return</span> <a class="code" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a>-&gt;<a class="code" href="classwires.html#a771fb9276284f0780918b49484a66abf">hasFreeWire</a> (clk);
+    <span class="keywordflow">else</span>
+        <span class="keywordflow">return</span> <a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#a771fb9276284f0780918b49484a66abf">hasFreeWire</a> (clk);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_ade9af281ee70b0cf544060c478ffbfe1_icgraph.png" border="0" usemap="#classtable_ade9af281ee70b0cf544060c478ffbfe1_icgraph" alt=""/></div>
+<map name="classtable_ade9af281ee70b0cf544060c478ffbfe1_icgraph" id="classtable_ade9af281ee70b0cf544060c478ffbfe1_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a2fbaa1bd5450556efff7dddd33e5b6d1"></a><!-- doxytag: member="table::popBack" ref="a2fbaa1bd5450556efff7dddd33e5b6d1" args="()" -->
@@ -374,7 +386,7 @@ template&lt;typename tableType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                         {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#a464c90345006d2077ba1023ba77b59f1">getNumFreeWire</a> (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
     <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () &gt; 0);
         tableType_T elem = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Last ()-&gt;_element;
         <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () - 1);
@@ -401,7 +413,7 @@ template&lt;typename tableType_T&gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                        {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#a464c90345006d2077ba1023ba77b59f1">getNumFreeWire</a> (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
         <span class="keywordflow">if</span> (<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () &gt;= <a class="code" href="classtable.html#a812d699882bfa6230532dad66a5004bd">_table_size</a>) {
         <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: )\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>);
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>;
@@ -411,6 +423,24 @@ template&lt;typename tableType_T&gt; </div>
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489ca0d232b6772b997898322e695ec19c831">AVAILABLE_BUFF</a>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_cgraph.png" border="0" usemap="#classtable_a8810ab4eeba365c36687d4c6c02fe1f6_cgraph" alt=""/></div>
+<map name="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_cgraph" id="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_icgraph.png" border="0" usemap="#classtable_a8810ab4eeba365c36687d4c6c02fe1f6_icgraph" alt=""/></div>
+<map name="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_icgraph" id="classtable_a8810ab4eeba365c36687d4c6c02fe1f6_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="af252520f4025cbc80e7bff8d9b811ba7"></a><!-- doxytag: member="table::regStat" ref="af252520f4025cbc80e7bff8d9b811ba7" args="()" -->
@@ -436,9 +466,18 @@ template&lt;typename tableType_T &gt; </div>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_af252520f4025cbc80e7bff8d9b811ba7_icgraph.png" border="0" usemap="#classtable_af252520f4025cbc80e7bff8d9b811ba7_icgraph" alt=""/></div>
+<map name="classtable_af252520f4025cbc80e7bff8d9b811ba7_icgraph" id="classtable_af252520f4025cbc80e7bff8d9b811ba7_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="a55389eaae41800d77cacc97c563491f0"></a><!-- doxytag: member="table::removeNth_unsafe" ref="a55389eaae41800d77cacc97c563491f0" args="(LENGTH indx)" -->
+<a class="anchor" id="ae5c57c137b681a823a1bb0d830520e82"></a><!-- doxytag: member="table::removeNth_unsafe" ref="ae5c57c137b681a823a1bb0d830520e82" args="(LENGTH)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -462,6 +501,75 @@ template&lt;typename tableType_T &gt; </div>
     <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (indx);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_ae5c57c137b681a823a1bb0d830520e82_icgraph.png" border="0" usemap="#classtable_ae5c57c137b681a823a1bb0d830520e82_icgraph" alt=""/></div>
+<map name="classtable_ae5c57c137b681a823a1bb0d830520e82_icgraph" id="classtable_ae5c57c137b681a823a1bb0d830520e82_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aafcfb08640fda68a1a09b81afc3c1dd7"></a><!-- doxytag: member="table::updateWireState" ref="aafcfb08640fda68a1a09b81afc3c1dd7" args="(sysClock &amp;, AXES_TYPE)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename tableType_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">tableType_T <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::updateWireState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                                   {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> &lt; now) {
+        <a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#ace9558373a8974248bf4d126574f0758">updateWireState</a> (clk);
+        <a class="code" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a>-&gt;<a class="code" href="classwires.html#ace9558373a8974248bf4d126574f0758">updateWireState</a> (clk);
+        <a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> = now;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classtable.html#a64d740f2c6bbb938aac4a89bcbd76674">_cycle</a> == now) {
+        <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+            <a class="code" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a>-&gt;<a class="code" href="classwires.html#ace9558373a8974248bf4d126574f0758">updateWireState</a> (clk);
+        <span class="keywordflow">else</span>
+            <a class="code" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a>-&gt;<a class="code" href="classwires.html#ace9558373a8974248bf4d126574f0758">updateWireState</a> (clk);
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_cgraph.png" border="0" usemap="#classtable_aafcfb08640fda68a1a09b81afc3c1dd7_cgraph" alt=""/></div>
+<map name="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_cgraph" id="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_icgraph.png" border="0" usemap="#classtable_aafcfb08640fda68a1a09b81afc3c1dd7_icgraph" alt=""/></div>
+<map name="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_icgraph" id="classtable_aafcfb08640fda68a1a09b81afc3c1dd7_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -480,44 +588,14 @@ template&lt;typename tableType_T&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a81119aad0ba83d08ba21cd6d0d040347"></a><!-- doxytag: member="table::_num_free_rd_port" ref="a81119aad0ba83d08ba21cd6d0d040347" args="" -->
+<a class="anchor" id="a55194c16991775949c0bc2e2ce0dd1de"></a><!-- doxytag: member="table::_rd_port" ref="a55194c16991775949c0bc2e2ce0dd1de" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename tableType_T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#a81119aad0ba83d08ba21cd6d0d040347">_num_free_rd_port</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa4bac855debc70614138237634c81bcd"></a><!-- doxytag: member="table::_num_free_wr_port" ref="aa4bac855debc70614138237634c81bcd" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename tableType_T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#aa4bac855debc70614138237634c81bcd">_num_free_wr_port</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a91630e4de8867734d127999fcfd60fa6"></a><!-- doxytag: member="table::_rd_port_cnt" ref="a91630e4de8867734d127999fcfd60fa6" args="" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename tableType_T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#a91630e4de8867734d127999fcfd60fa6">_rd_port_cnt</a></td>
+          <td class="memname"><a class="el" href="classwires.html">wires</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#a55194c16991775949c0bc2e2ce0dd1de">_rd_port</a></td>
         </tr>
       </table>
 </div>
@@ -570,14 +648,14 @@ template&lt;typename tableType_T&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8ce1d116f2fa5d7fd3d9177c2037cfb3"></a><!-- doxytag: member="table::_wr_port_cnt" ref="a8ce1d116f2fa5d7fd3d9177c2037cfb3" args="" -->
+<a class="anchor" id="a7c068dc525606b03270d704ea3494f91"></a><!-- doxytag: member="table::_wr_port" ref="a7c068dc525606b03270d704ea3494f91" args="" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename tableType_T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#a8ce1d116f2fa5d7fd3d9177c2037cfb3">_wr_port_cnt</a></td>
+          <td class="memname"><a class="el" href="classwires.html">wires</a> <a class="el" href="classtable.html">table</a>&lt; tableType_T &gt;::<a class="el" href="classtable.html#a7c068dc525606b03270d704ea3494f91">_wr_port</a></td>
         </tr>
       </table>
 </div>

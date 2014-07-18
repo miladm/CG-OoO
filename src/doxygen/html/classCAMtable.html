@@ -54,7 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -71,13 +71,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="dynheader">
 Inheritance diagram for CAMtable&lt; tableType_T &gt;:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classCAMtable.png" usemap="#CAMtable&lt; tableType_T &gt;_map" alt=""/>
-  <map id="CAMtable&lt; tableType_T &gt;_map" name="CAMtable&lt; tableType_T &gt;_map">
-<area href="classtable.html" alt="table&lt; tableType_T &gt;" shape="rect" coords="0,56,161,80"/>
-<area href="classunit.html" alt="unit" shape="rect" coords="0,0,161,24"/>
+<div class="center"><img src="classCAMtable__inherit__graph.png" border="0" usemap="#CAMtable_3_01tableType__T_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="CAMtable_3_01tableType__T_01_4_inherit__map" id="CAMtable_3_01tableType__T_01_4_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for CAMtable&lt; tableType_T &gt;:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable__coll__graph.png" border="0" usemap="#CAMtable_3_01tableType__T_01_4_coll__map" alt="Collaboration graph"/></div>
+<map name="CAMtable_3_01tableType__T_01_4_coll__map" id="CAMtable_3_01tableType__T_01_4_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classCAMtable-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -177,11 +181,20 @@ template&lt;typename tableType_T &gt; </div>
 <div class="fragment"><pre class="fragment">                                             {
 <span class="preprocessor">#ifdef ASSERTION</span>
 <span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph.png" border="0" usemap="#classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph" alt=""/></div>
+<map name="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph" id="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="abef54f1e30ed42845d48c98917de32e1"></a><!-- doxytag: member="CAMtable::getNth" ref="abef54f1e30ed42845d48c98917de32e1" args="(LENGTH indx)" -->
@@ -203,7 +216,7 @@ template&lt;typename tableType_T &gt; </div>
 <div class="fragment"><pre class="fragment">                                                      {
 <span class="preprocessor">#ifdef ASSERTION</span>
 <span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (indx)-&gt;_element;
 }
@@ -228,7 +241,7 @@ template&lt;typename tableType_T &gt; </div>
 <div class="fragment"><pre class="fragment">                                             {
 <span class="preprocessor">#ifdef ASSERTION</span>
 <span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    tableType_T dyIns = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
     <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0);
@@ -236,6 +249,15 @@ template&lt;typename tableType_T &gt; </div>
     <span class="keywordflow">return</span> dyIns;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_icgraph.png" border="0" usemap="#classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_icgraph" alt=""/></div>
+<map name="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_icgraph" id="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a07cd94cd88b502e5b0e2699b8762f560"></a><!-- doxytag: member="CAMtable::pullNextReady" ref="a07cd94cd88b502e5b0e2699b8762f560" args="(LENGTH)" -->
@@ -261,6 +283,15 @@ template&lt;typename tableType_T &gt; </div>
     <span class="keywordflow">return</span> obj;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph.png" border="0" usemap="#classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph" alt=""/></div>
+<map name="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph" id="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a9644548c43e912d1cd1d0431fc5179e9"></a><!-- doxytag: member="CAMtable::pullNth" ref="a9644548c43e912d1cd1d0431fc5179e9" args="(LENGTH indx)" -->
@@ -282,7 +313,7 @@ template&lt;typename tableType_T &gt; </div>
 <div class="fragment"><pre class="fragment">                                                       {
 <span class="preprocessor">#ifdef ASSERTION</span>
 <span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_num_free_rd_port</a> &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>     tableType_T elem = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth(indx)-&gt;_element;
      <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (indx);

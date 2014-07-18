@@ -6,6 +6,9 @@
 
 {\ttfamily \#include $<$lsq.h$>$}
 
+
+
+Collaboration diagram for lsq:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -136,6 +139,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return 0; //does nothing - for compiler
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_ad7a4b49b4bd82e13bc8b7ab99e94ac93}{
 \index{lsq@{lsq}!get\_\-oldestCommittedUncachedSQentry\_\-MemAddr@{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr}}
 \index{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr@{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr}!lsq@{lsq}}
@@ -168,6 +176,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return 0; //does nothing - for compiler
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a7ce41db29b4e1dedeb1ed4342f4cd8f8}{
 \index{lsq@{lsq}!getLQheadId@{getLQheadId}}
 \index{getLQheadId@{getLQheadId}!lsq@{lsq}}
@@ -186,6 +199,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return _lq[lqHead]->_id;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a1df6ccddeb9b7461b87af3629294f179}{
 \index{lsq@{lsq}!getLQsize@{getLQsize}}
 \index{getLQsize@{getLQsize}!lsq@{lsq}}
@@ -201,6 +219,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return _lqSize;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_ac9a2a8f09749bd97d5ae525cffbdbda9}{
 \index{lsq@{lsq}!getSQhead@{getSQhead}}
 \index{getSQhead@{getSQhead}!lsq@{lsq}}
@@ -219,6 +242,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return _sq[sqHead]->_ins;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a6ead3324d0ec847b50ad6bf8a460aa83}{
 \index{lsq@{lsq}!getSQsize@{getSQsize}}
 \index{getSQsize@{getSQsize}!lsq@{lsq}}
@@ -234,6 +262,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return _sqSize;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a286e28a30ce1b7752d5ce9eb0f77d6ae}{
 \index{lsq@{lsq}!getSQtail@{getSQtail}}
 \index{getSQtail@{getSQtail}!lsq@{lsq}}
@@ -250,6 +283,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return _sq[_sqTail]->_ins;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a93b8919385546da53590c68cb739838e}{
 \index{lsq@{lsq}!hasCommittedUncachedSQentry@{hasCommittedUncachedSQentry}}
 \index{hasCommittedUncachedSQentry@{hasCommittedUncachedSQentry}!lsq@{lsq}}
@@ -280,6 +318,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return false; //Didn't find an uncached committed ST op
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a34c826839b11b966e3f0c27f43168f99}{
 \index{lsq@{lsq}!insertLQ\_\-addr@{insertLQ\_\-addr}}
 \index{insertLQ\_\-addr@{insertLQ\_\-addr}!lsq@{lsq}}
@@ -311,6 +354,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         Assert(false == true && "Operation Entry not Found in LQ");
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a9a1d52c28adf6f9b59a82b876a29af53}{
 \index{lsq@{lsq}!insertSQ\_\-addrNdata@{insertSQ\_\-addrNdata}}
 \index{insertSQ\_\-addrNdata@{insertSQ\_\-addrNdata}!lsq@{lsq}}
@@ -344,6 +397,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         Assert(false == true && "Operation Entry not Found in SQ");
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a4eddb5e00ca783798e83971c467e6017}{
 \index{lsq@{lsq}!isFrontSQdoneWritingCache@{isFrontSQdoneWritingCache}}
 \index{isFrontSQdoneWritingCache@{isFrontSQdoneWritingCache}!lsq@{lsq}}
@@ -365,6 +428,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return (_sq[sqHead]->_storeToCacheEndCycle == cycle);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a4f8f0a8bc6315319a749384b78ccdfe7}{
 \index{lsq@{lsq}!isLQempty@{isLQempty}}
 \index{isLQempty@{isLQempty}!lsq@{lsq}}
@@ -383,6 +451,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_af9716eece00fa2c3782af7eac2584f56}{
 \index{lsq@{lsq}!isLQfull@{isLQfull}}
 \index{isLQfull@{isLQfull}!lsq@{lsq}}
@@ -401,6 +474,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a9f240390c165b00ead843f037ab28262}{
 \index{lsq@{lsq}!isSQempty@{isSQempty}}
 \index{isSQempty@{isSQempty}!lsq@{lsq}}
@@ -419,6 +497,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_afc76def93e0f2ac0c56a92e1dc8d7efd}{
 \index{lsq@{lsq}!isSQfull@{isSQfull}}
 \index{isSQfull@{isSQfull}!lsq@{lsq}}
@@ -437,6 +520,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_adcfc80bd04c62a423991ac914d5d2454}{
 \index{lsq@{lsq}!lookupLQ@{lookupLQ}}
 \index{lookupLQ@{lookupLQ}!lsq@{lsq}}
@@ -467,6 +555,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return 0; //all speculations are find wrt this ST op
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_ab0f9350bede75f5dd0f46abd71a3fc20}{
 \index{lsq@{lsq}!lookupSQ@{lookupSQ}}
 \index{lookupSQ@{lookupSQ}!lsq@{lsq}}
@@ -496,6 +594,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return false; //Didn't find LD mem addr in SQ
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a07cc87b52ca829c2c3cd3fe89eadec14}{
 \index{lsq@{lsq}!popFrontLQ@{popFrontLQ}}
 \index{popFrontLQ@{popFrontLQ}!lsq@{lsq}}
@@ -516,6 +624,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         _lqSize--;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_aca2f5a9e6e6c483b11eec879cda2100e}{
 \index{lsq@{lsq}!popFrontSQ@{popFrontSQ}}
 \index{popFrontSQ@{popFrontSQ}!lsq@{lsq}}
@@ -536,6 +649,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         //printf("REMOVE %d\n",_sqSize);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_afd8f458e37a4132439d67b346950e7b8}{
 \index{lsq@{lsq}!pushBackLQ@{pushBackLQ}}
 \index{pushBackLQ@{pushBackLQ}!lsq@{lsq}}
@@ -565,6 +683,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         _lqSize++;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a9a3ea7ed05bbcf12b332a18fc84a317a}{
 \index{lsq@{lsq}!pushBackSQ@{pushBackSQ}}
 \index{pushBackSQ@{pushBackSQ}!lsq@{lsq}}
@@ -597,6 +725,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         //printf("INSERT %d\n", _sqSize);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a330107fe2884a0e3f0b7d5bdfb457a14}{
 \index{lsq@{lsq}!set\_\-OldestCommittedUncachedSQentry\_\-setLatency@{set\_\-OldestCommittedUncachedSQentry\_\-setLatency}}
 \index{set\_\-OldestCommittedUncachedSQentry\_\-setLatency@{set\_\-OldestCommittedUncachedSQentry\_\-setLatency}!lsq@{lsq}}
@@ -634,6 +772,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         Assert(true == false && "Expected to find a committed, uncached ST op");
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_ae1c6ebc9bb617e8076b1f53feaa734ff}{
 \index{lsq@{lsq}!setForwardData@{setForwardData}}
 \index{setForwardData@{setForwardData}!lsq@{lsq}}
@@ -665,6 +808,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         Assert(false == true && "Operation Entry not Found in LQ");
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_a6cef821f12c3616018959338e23a8578}{
 \index{lsq@{lsq}!SQhasIncompleteIns@{SQhasIncompleteIns}}
 \index{SQhasIncompleteIns@{SQhasIncompleteIns}!lsq@{lsq}}
@@ -691,6 +844,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_af5c64a015fd83b47c632f67358b10cf6}{
 \index{lsq@{lsq}!squashLQ@{squashLQ}}
 \index{squashLQ@{squashLQ}!lsq@{lsq}}
@@ -744,6 +902,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return squashInsCount;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_ac4c427683d9be2a048a1d843a6f5b3a2}{
 \index{lsq@{lsq}!squashSQ@{squashSQ}}
 \index{squashSQ@{squashSQ}!lsq@{lsq}}
@@ -788,6 +951,11 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         return squashInsCount;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classlsq_aa78ff1e0d38eabd68022968e8cd31c5d}{
 \index{lsq@{lsq}!updateSQcommitSet@{updateSQcommitSet}}
 \index{updateSQcommitSet@{updateSQcommitSet}!lsq@{lsq}}
@@ -821,6 +989,16 @@ int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
         Assert(false == true && "Operation Entry not Found in SQ");
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

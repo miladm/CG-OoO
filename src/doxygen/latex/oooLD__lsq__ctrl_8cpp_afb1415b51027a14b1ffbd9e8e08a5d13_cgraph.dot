@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="oooLD_lsqHazard",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="instruction::getMemType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a8051847b8731d697107d682564a7385f"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="lsq::isLQfull",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlsq.html#af9716eece00fa2c3782af7eac2584f56"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="lsq::isSQfull",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classlsq.html#afc76def93e0f2ac0c56a92e1dc8d7efd"];
+}

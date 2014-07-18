@@ -1,0 +1,20 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="fragment::getFrScore",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="partitionFragScore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$backend_2quickSort_8h.html#a502b9584bfccbf92fa1e7a9e69dd738a"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="quicksortFragScore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$backend_2quickSort_8h.html#ad49df7de5ccbd11f8db47ce994864034"];
+  Node3 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="phrase::printToFileFragment",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#a555253effe54e3dc88d47d5e33a7baa1"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="phraseGen::storeToFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#aba7134610613016de2d7d91d47c5dd4e"];
+  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="phraseGen::findReadyPhrases",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#ab1fd52686e66bea06bd08d7fc8a4eb23"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="phraseGen::runPhraseGen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#a27c8b0d81592bc45e7f25e9cb7a4d1c4"];
+}

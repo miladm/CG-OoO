@@ -1,0 +1,20 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="basicblock::getChildren",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="build_dominance_frontier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8cpp.html#ad80ee601bfd16b0c1cffd3501bf0c93f"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="setup_dominance_frontier",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dominator_8h.html#af9f49ffe6819033df685a4eb97ef74be"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="search",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9"];
+  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="ssa_renaming",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8cpp.html#a804de8f00b7ea9e5487315dc9ff01d77"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="build_ssa_form",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ssa_8h.html#a99d7839751286ac78c627aabd383cb51"];
+  Node7 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

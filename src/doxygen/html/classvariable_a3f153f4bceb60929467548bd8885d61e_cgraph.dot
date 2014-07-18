@@ -1,0 +1,11 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="variable::getTopStack",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="variable::getC",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvariable.html#a57838c6bf0ac170ee02a0e3a099aec35"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="variable::setC",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvariable.html#ac570372e439e2d75875b8b2253069ce6"];
+}

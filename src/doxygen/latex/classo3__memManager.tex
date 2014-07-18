@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$memManager.h$>$}
 
-Inheritance diagram for o3\_\-memManager:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classo3__memManager}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for o3\_\-memManager:
+
+
+Collaboration diagram for o3\_\-memManager:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -120,6 +120,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{
 \index{o3\_\-memManager@{o3\_\-memManager}!completeLd@{completeLd}}
 \index{completeLd@{completeLd}!o3_memManager@{o3\_\-memManager}}
@@ -135,6 +145,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     ins->setLQstate (LQ_COMPLETE);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}{
 \index{o3\_\-memManager@{o3\_\-memManager}!delAfinishedSt@{delAfinishedSt}}
 \index{delAfinishedSt@{delAfinishedSt}!o3_memManager@{o3\_\-memManager}}
@@ -150,6 +170,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     _SQ.delFinishedMemAxes (now);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}{
 \index{o3\_\-memManager@{o3\_\-memManager}!getTableState@{getTableState}}
 \index{getTableState@{getTableState}!o3_memManager@{o3\_\-memManager}}
@@ -169,6 +199,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}{
 \index{o3\_\-memManager@{o3\_\-memManager}!hasCommitSt@{hasCommitSt}}
 \index{hasCommitSt@{hasCommitSt}!o3_memManager@{o3\_\-memManager}}
@@ -184,6 +224,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     return _SQ.hasCommit ();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}{
 \index{o3\_\-memManager@{o3\_\-memManager}!hasFinishedIns@{hasFinishedIns}}
 \index{hasFinishedIns@{hasFinishedIns}!o3_memManager@{o3\_\-memManager}}
@@ -205,6 +255,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}{
 \index{o3\_\-memManager@{o3\_\-memManager}!hasFreeRdPort@{hasFreeRdPort}}
 \index{hasFreeRdPort@{hasFreeRdPort}!o3_memManager@{o3\_\-memManager}}
@@ -225,26 +285,26 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}{
 \index{o3\_\-memManager@{o3\_\-memManager}!hasFreeWrPort@{hasFreeWrPort}}
 \index{hasFreeWrPort@{hasFreeWrPort}!o3_memManager@{o3\_\-memManager}}
 \subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeWrPort (
 \begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf LSQ\_\-ID}}]{, }
+\item[{{\bf CYCLE}}]{}
 \end{DoxyParamCaption}
 )}}
 \label{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}
 
-\begin{DoxyCode}
-                                                           {
-    if (lsq_id == LD_QU) {
-        return _LQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
-    } else {
-        return _SQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
-    }
-}
-\end{DoxyCode}
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}{
 \index{o3\_\-memManager@{o3\_\-memManager}!isLQviolation@{isLQviolation}}
 \index{isLQviolation@{isLQviolation}!o3_memManager@{o3\_\-memManager}}
@@ -268,6 +328,11 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     return violation;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}{
 \index{o3\_\-memManager@{o3\_\-memManager}!issueToMem@{issueToMem}}
 \index{issueToMem@{issueToMem}!o3_memManager@{o3\_\-memManager}}
@@ -314,6 +379,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_a401c114902989a9296444795c28cd5fb}{
 \index{o3\_\-memManager@{o3\_\-memManager}!memAddrReady@{memAddrReady}}
 \index{memAddrReady@{memAddrReady}!o3_memManager@{o3\_\-memManager}}
@@ -333,6 +408,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}{
 \index{o3\_\-memManager@{o3\_\-memManager}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!o3_memManager@{o3\_\-memManager}}
@@ -357,6 +442,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}{
 \index{o3\_\-memManager@{o3\_\-memManager}!squash@{squash}}
 \index{squash@{squash}!o3_memManager@{o3\_\-memManager}}
@@ -373,6 +468,16 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
     _SQ.squash (squash_seq_num);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

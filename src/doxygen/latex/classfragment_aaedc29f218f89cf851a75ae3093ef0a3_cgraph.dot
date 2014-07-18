@@ -1,0 +1,22 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="fragment::computeFrScore",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="fragment::getFrRelAvgAge",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classfragment.html#ac9b66a971cbeae791ce85b5939b40595"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="instruction::getInsID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a0856c8a7411c298a51cd8d8d5e2f8b12"];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="fragment::getFrRelNumDepLinksToNxtPh",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classfragment.html#a77dbeb3aff85e771b16a3d9af59cb13f"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="fragment::getFrRelNumUPLDops",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classfragment.html#aeedd611d7a3bdf4699b0fb64d85fb6b3"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="fragment::getFrRelSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classfragment.html#a8693d4747ded8fc10f1356aa5558c232"];
+  Node8 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+}

@@ -6,6 +6,9 @@
 
 {\ttfamily \#include $<$cache.h$>$}
 
+
+
+Collaboration diagram for cache:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -151,6 +154,11 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classcache_a93fb585ef6a736b9831dc21bb193d96f}{
 \index{cache@{cache}!findWord@{findWord}}
 \index{findWord@{findWord}!cache@{cache}}
@@ -176,6 +184,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return _cacheLines[0][indx].getExpectData();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_a92b70abaf05ef86b5ee4e70b087f30a2}{
 \index{cache@{cache}!getTag@{getTag}}
 \index{getTag@{getTag}!cache@{cache}}
@@ -196,6 +214,11 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return tempTag;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_a5b239f74c2467fdf30f0cf2fceebf820}{
 \index{cache@{cache}!getWBAddr@{getWBAddr}}
 \index{getWBAddr@{getWBAddr}!cache@{cache}}
@@ -215,6 +238,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return ((tag+indx) << (BLOCK_OFFSET+WORD_OFFSET)); //Construct ~full addr
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_ab1edc7f06068472ac043cbd293ae83ea}{
 \index{cache@{cache}!isDirty@{isDirty}}
 \index{isDirty@{isDirty}!cache@{cache}}
@@ -231,6 +264,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return _cacheLines[0][indx].isDirty();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_af39bc5f11fbca905873c840a8dcfb9b9}{
 \index{cache@{cache}!isHit@{isHit}}
 \index{isHit@{isHit}!cache@{cache}}
@@ -257,6 +300,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_a2c8e87daacbe31a4780e06db9d571742}{
 \index{cache@{cache}!isValid@{isValid}}
 \index{isValid@{isValid}!cache@{cache}}
@@ -273,6 +326,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     return _cacheLines[0][indx].isValid();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_a8543792b7d9060b3701cb1b67d417b44}{
 \index{cache@{cache}!readCache@{readCache}}
 \index{readCache@{readCache}!cache@{cache}}
@@ -305,6 +368,11 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
 //  }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_a88790ea3a4e3583eaae71a365e9568e7}{
 \index{cache@{cache}!setClean@{setClean}}
 \index{setClean@{setClean}!cache@{cache}}
@@ -321,6 +389,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     _cacheLines[0][indx].setClean();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_aa78f9197a0412b6e53bf6463869e16e0}{
 \index{cache@{cache}!setExpectData@{setExpectData}}
 \index{setExpectData@{setExpectData}!cache@{cache}}
@@ -338,6 +416,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
     _cacheLines[0][indx].setExpectData(expct);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classcache_ab3b31a1d08bf67d960705e8b7e631546}{
 \index{cache@{cache}!writeCache@{writeCache}}
 \index{writeCache@{writeCache}!cache@{cache}}
@@ -368,6 +456,16 @@ int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
 //  }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 \subsection{Member Data Documentation}

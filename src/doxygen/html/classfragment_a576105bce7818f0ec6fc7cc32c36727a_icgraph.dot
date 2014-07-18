@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="fragment::setFragID",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="phrase::makeFragment",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphrase.html#ad596b3bf1c197e53a509dc02f41957cd"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="phraseGen::findReadyPhrases",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#ab1fd52686e66bea06bd08d7fc8a4eb23"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="phraseGen::runPhraseGen",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classphraseGen.html#a27c8b0d81592bc45e7f25e9cb7a4d1c4"];
+}

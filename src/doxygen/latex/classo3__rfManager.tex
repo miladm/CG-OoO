@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$rfManager.h$>$}
 
-Inheritance diagram for o3\_\-rfManager:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classo3__rfManager}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for o3\_\-rfManager:
+
+
+Collaboration diagram for o3\_\-rfManager:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -88,6 +88,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!commitRegs@{commitRegs}}
 \index{commitRegs@{commitRegs}!o3_rfManager@{o3\_\-rfManager}}
@@ -114,6 +124,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!completeRegs@{completeRegs}}
 \index{completeRegs@{completeRegs}!o3_rfManager@{o3\_\-rfManager}}
@@ -133,6 +153,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeRdPort@{hasFreeRdPort}}
 \index{hasFreeRdPort@{hasFreeRdPort}!o3_rfManager@{o3\_\-rfManager}}
@@ -149,6 +179,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     return _GRF.hasFreeRdPort (now, numRegRdPorts);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a95bfea851bf8107f208e550839749063}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeWrPort@{hasFreeWrPort}}
 \index{hasFreeWrPort@{hasFreeWrPort}!o3_rfManager@{o3\_\-rfManager}}
@@ -160,10 +200,24 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
 \label{classo3__rfManager_a95bfea851bf8107f208e550839749063}
 
 \begin{DoxyCode}
-                                           {
-    return _GRF.hasFreeWrPort (now);
+                                                               {
+    if (lsq_id == LD_QU) {
+        return _LQ.hasFreeWire (clk, WRITE); //TODO set state to LQ_ADDR_WAIT
+    } else {
+        return _SQ.hasFreeWire (clk, WRITE); //TODO set state to LQ_ADDR_WAIT
+    }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!isReady@{isReady}}
 \index{isReady@{isReady}!o3_rfManager@{o3\_\-rfManager}}
@@ -191,6 +245,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     return false; /* not all operands available */
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!renameRegs@{renameRegs}}
 \index{renameRegs@{renameRegs}!o3_rfManager@{o3\_\-rfManager}}
@@ -228,6 +292,16 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
     return false; /* DON'T STALL FETCH */
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!squashRenameReg@{squashRenameReg}}
 \index{squashRenameReg@{squashRenameReg}!o3_rfManager@{o3\_\-rfManager}}
@@ -247,7 +321,18 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+
+
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8h}{rfManager.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8cpp}{memManager.cpp}\item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8cpp}{rfManager.cpp}\end{DoxyCompactItemize}

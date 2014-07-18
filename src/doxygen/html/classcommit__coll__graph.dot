@@ -1,0 +1,26 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="commit",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir=back,color="darkgreen",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="stage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstage.html"];
+  Node3 -> Node2 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_ins_cnt\ns_stall_cycles\ns_squash_cycles",fontname="Helvetica"];
+  Node3 [label="ScalarStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScalarStat.html"];
+  Node3 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_squash_ins_cnt",fontname="Helvetica"];
+  Node4 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_commit_to_scheduler_port\n_commit_to_bp_port",fontname="Helvetica"];
+  Node4 [label="port\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classport.html"];
+  Node5 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="unit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunit.html"];
+  Node3 -> Node4 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_port_empty_cyc\ns_port_full_cyc",fontname="Helvetica"];
+  Node6 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_iROB",fontname="Helvetica"];
+  Node6 [label="CAMtable\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCAMtable.html"];
+  Node7 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="table\< dynInstruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable.html"];
+  Node5 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 -> Node7 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_rd_port\n_wr_port",fontname="Helvetica"];
+  Node8 [label="wires",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classwires.html"];
+  Node5 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node7 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_table",fontname="Helvetica"];
+  Node9 [label="List\< TableElement\< dynInstruction * \> * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+}

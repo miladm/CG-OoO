@@ -1,0 +1,37 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="bkEnd_finish",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="hitCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a6c69913a7afd8abaf58cd16339f046b5"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="hitLatency",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a80ed63139b2bc6c0549c9a133e9c41aa"];
+  Node3 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="inFileName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bkEnd_8cpp.html#a4bdab479a34b2695251fda1824813fbc"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="L1hitCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a29e02607afb06c9bfd12b3d92bbe3bf7"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="L2hitCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a16e62b1ebbfa0478d2719d9762edca32"];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="L3hitCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a99e1cafb791f5b031f7ef4ef684f12d9"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="MEMhitCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#af4f25038ca2a69181aef3c934f8aec10"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="missCount",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a1be97bc9cf68b3b46b080a590d83622a"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="missLatency",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a410a7338919589b71f5bb6227dd5cea0"];
+  Node10 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="outFileName1",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bkEnd_8cpp.html#a4cf2d67fd505b560c46cfc3386bdab9a"];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="phrasingFileName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bkEnd_8cpp.html#a263d48d5587cc05b4b3c9fe77bf86fe8"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="hist::report",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classhist.html#a3db06ab39b05f5b95d49f3e3ef9bda74"];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="reScheduleFileName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$bkEnd_8cpp.html#a8a7960f44b590e5ca0e8cc8273f64dd4"];
+  Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="totalLatency",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$latency_8cpp.html#a422041125c06ee0e58134360d80e55aa"];
+}

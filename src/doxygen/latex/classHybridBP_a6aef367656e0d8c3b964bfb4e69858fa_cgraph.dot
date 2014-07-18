@@ -1,0 +1,15 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="HybridBP::lookup",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="HybridBP::computeChoiceIndex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#a198dcbee6554ca9471fba00734e31319"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="HybridBP::computeLocalIndex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#a3775bffe64cdade937a9f92746c21ce0"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="HybridBP::updateGlobalHistNotTaken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#aa5cd12f887d1f51947dc37cdad283124"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="HybridBP::updateGlobalHistTaken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#a19172b0c80d04265cb00f249bbf5eecd"];
+}

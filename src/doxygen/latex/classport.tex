@@ -6,12 +6,12 @@
 
 {\ttfamily \#include $<$port.h$>$}
 
-Inheritance diagram for port$<$ queType\_\-T $>$:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classport}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for port$<$ queType\_\-T $>$:
+
+
+Collaboration diagram for port$<$ queType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -119,6 +119,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a58991733cd9bb95beb7303826b9b3d3f}{
 \index{port@{port}!flushPort@{flushPort}}
 \index{flushPort@{flushPort}!port@{port}}
@@ -147,6 +152,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a53d30f96ac41c4f3a60174cd66b1656e}{
 \index{port@{port}!getBack@{getBack}}
 \index{getBack@{getBack}!port@{port}}
@@ -203,6 +218,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         else {return AVAILABLE_BUFF;}
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_afe64047b4e7df87d4a031097ea159852}{
 \index{port@{port}!getFront@{getFront}}
 \index{getFront@{getFront}!port@{port}}
@@ -219,6 +244,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         return (_buff.front ())._dynIns;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a8930ed8cec58814709f4515a33d62141}{
 \index{port@{port}!hasReady@{hasReady}}
 \index{hasReady@{hasReady}!port@{port}}
@@ -244,6 +274,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classport_af03e53249eff9bb17c76531d3a72880f}{
 \index{port@{port}!hasReadyNow@{hasReadyNow}}
 \index{hasReadyNow@{hasReadyNow}!port@{port}}
@@ -269,6 +304,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}{
 \index{port@{port}!isReady@{isReady}}
 \index{isReady@{isReady}!port@{port}}
@@ -292,6 +337,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}{
 \index{port@{port}!isReadyNow@{isReadyNow}}
 \index{isReadyNow@{isReadyNow}!port@{port}}
@@ -315,6 +370,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     return false;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_aa102d5f7c3e925382f62a37d220888ff}{
 \index{port@{port}!popBack@{popBack}}
 \index{popBack@{popBack}!port@{port}}
@@ -356,6 +421,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         return popFront (); //place holder
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}{
 \index{port@{port}!popNextReady@{popNextReady}}
 \index{popNextReady@{popNextReady}!port@{port}}
@@ -410,6 +485,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         return popFront (); //place holder
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a52ad1c5223f028930491b024f26467fa}{
 \index{port@{port}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!port@{port}}
@@ -433,6 +513,16 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         return AVAILABLE_BUFF;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classport_a7c709a92ed8525cf8a310b294e606267}{
 \index{port@{port}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!port@{port}}
@@ -457,6 +547,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
         return AVAILABLE_BUFF;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classport_a966cfeb3b369ec22e8081275481abe32}{
 \index{port@{port}!regStat@{regStat}}
 \index{regStat@{regStat}!port@{port}}
@@ -476,6 +571,11 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
