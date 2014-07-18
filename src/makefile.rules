@@ -1,0 +1,201 @@
+##############################################################
+#
+# This file includes all the test targets as well as all the
+# non-default build rules and test recipes.
+#
+##############################################################
+
+
+##############################################################
+#
+# Test targets
+#
+##############################################################
+
+###### Place all generic definitions here ######
+
+# This defines tests which run tools of the same name.  This is simply for convenience to avoid
+# defining the test name twice (once in TOOL_ROOTS and again in TEST_ROOTS).
+# Tests defined here should not be defined in TOOL_ROOTS and TEST_ROOTS.
+TEST_TOOL_ROOTS :=main_pars
+
+# This defines the tests to be run that were not already defined in TEST_TOOL_ROOTS.
+TEST_ROOTS :=
+
+# This defines a list of tests that should run in the "short" sanity. Tests in this list must also
+# appear either in the TEST_TOOL_ROOTS or the TEST_ROOTS list.
+# If the entire directory should be tested in sanity, assign TEST_TOOL_ROOTS and TEST_ROOTS to the
+# SANITY_SUBSET variable in the tests section below (see example in makefile.rules.tmpl).
+SANITY_SUBSET :=testbench/port_test
+
+# This defines the tools which will be run during the the tests, and were not already defined in
+# TEST_TOOL_ROOTS.
+TOOL_ROOTS :=
+
+# This defines all the applications that will be run during the tests.
+APP_ROOTS :=
+
+# This defines any additional object files that need to be compiled.
+OBJECT_ROOTS :=
+
+# This defines any additional dlls (shared objects), other than the pintools, that need to be compiled.
+DLL_ROOTS :=
+
+# This defines any static libraries (archives), that need to be built.
+LIB_ROOTS :=
+
+###### Place architecture-specific definitions here ######
+
+###### Place OS-specific definitions here ######
+
+###### Handle exceptions here ######
+
+# topopcode can't be compiled on 64b Windows
+ifeq ($(TARGET_OS)-$(TARGET),windows-intel64)
+    TEST_TOOL_ROOTS := $(filter-out topopcode, $(TEST_TOOL_ROOTS))
+endif
+
+# We can't compile the get_source_app application on Windows due to a cygwin bug.
+# For details see: http://cygwin.com/ml/cygwin/2008-08/msg00157.html.
+ifeq ($(TARGET_OS),windows)
+    TEST_TOOL_ROOTS := $(filter-out get_source_location, $(TEST_TOOL_ROOTS))
+    SANITY_SUBSET := $(filter-out get_source_location, $(SANITY_SUBSET))
+    APP_ROOTS := $(filter-out get_source_app, $(APP_ROOTS))
+endif
+
+# TODO: These tests fail on KNC - fix and remove the following:
+# for get_source_location see Mantis 2960
+ifeq ($(TARGET),mic)
+    TEST_TOOL_ROOTS := $(filter-out get_source_location, $(TEST_TOOL_ROOTS))
+    SANITY_SUBSET := $(filter-out get_source_location, $(SANITY_SUBSET))
+    APP_ROOTS := $(filter-out get_source_app, $(APP_ROOTS))
+endif
+
+# TODO: These tests fail on Mac - fix and remove the following:
+ifeq ($(TARGET_OS),mac)
+    TEST_TOOL_ROOTS := $(filter-out get_source_location, $(TEST_TOOL_ROOTS))
+    SANITY_SUBSET := $(filter-out get_source_location, $(SANITY_SUBSET))
+    APP_ROOTS := $(filter-out get_source_app, $(APP_ROOTS))
+endif
+
+# TODO: These tests did not run before the changes - fix and remove the following:
+TEST_TOOL_ROOTS := $(filter-out fence, $(TEST_TOOL_ROOTS))
+
+# GetSourceLocation api not currently supported in android. See mantis 2913.
+ifeq ($(TARGET_OS),android)
+    TEST_TOOL_ROOTS := $(filter-out get_source_location, $(TEST_TOOL_ROOTS))
+    SANITY_SUBSET := $(filter-out get_source_location, $(SANITY_SUBSET))
+    APP_ROOTS := $(filter-out get_source_app, $(APP_ROOTS))
+endif
+
+
+##############################################################
+#
+# Test recipes
+#
+##############################################################
+
+# This section contains recipes for tests other than the default.
+# See makefile.default.rules for the default test rules.
+# All tests in this section should adhere to the naming convention: <testname>.test
+
+get_source_location.test: $(OBJDIR)get_source_location$(PINTOOL_SUFFIX) $(OBJDIR)get_source_app$(EXE_SUFFIX)
+	$(PIN) -t $(OBJDIR)get_source_location$(PINTOOL_SUFFIX) \
+	  -- $(OBJDIR)get_source_app$(EXE_SUFFIX) > $(OBJDIR)get_source_location.out 2>&1
+	$(QGREP) "get_source_app.cpp:3" $(OBJDIR)get_source_location.out 
+	$(QGREP) "get_source_app.cpp:4" $(OBJDIR)get_source_location.out 
+	$(QGREP) "get_source_app.cpp:5" $(OBJDIR)get_source_location.out 
+	$(RM) $(OBJDIR)get_source_location.out
+
+regval.test: $(OBJDIR)regval$(PINTOOL_SUFFIX) $(OBJDIR)regval_app$(EXE_SUFFIX)
+	$(PIN) -t $(OBJDIR)regval$(PINTOOL_SUFFIX) -o $(OBJDIR)regval.out -- $(OBJDIR)regval_app$(EXE_SUFFIX)
+	$(RM) $(OBJDIR)regval.out
+
+
+##############################################################
+#
+# Build rules
+#
+##############################################################
+
+# This section contains the build rules for all binaries that have special build rules.
+# See makefile.default.rules for the default build rules.
+
+###### Special tools' build rules ######
+
+
+$(OBJDIR)main_pars$(PINTOOL_SUFFIX): \
+$(OBJDIR)main_pars$(OBJ_SUFFIX) \
+$(OBJDIR)config$(OBJ_SUFFIX) \
+$(OBJDIR)global/g_info$(OBJ_SUFFIX) \
+$(OBJDIR)global/g_variable$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/pars$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/memlog$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/tournament$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/uop_gen$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/sat_counter$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/staticCodeParser$(OBJ_SUFFIX) \
+$(OBJDIR)lib/utility$(OBJ_SUFFIX) \
+$(OBJDIR)lib/message$(OBJ_SUFFIX) \
+$(OBJDIR)lib/statistic$(OBJ_SUFFIX) \
+$(OBJDIR)lib/timer$(OBJ_SUFFIX) \
+$(OBJDIR)lib/debug$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bkEnd$(OBJ_SUFFIX) \
+$(OBJDIR)backend/instruction$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cacheLine$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cacheCtrl$(OBJ_SUFFIX) \
+$(OBJDIR)backend/lsq$(OBJ_SUFFIX) \
+$(OBJDIR)backend/oooLD_lsq_ctrl$(OBJ_SUFFIX) \
+$(OBJDIR)backend/registerRename$(OBJ_SUFFIX) \
+$(OBJDIR)backend/dependencyTable$(OBJ_SUFFIX) \
+$(OBJDIR)backend/hist$(OBJ_SUFFIX) \
+$(OBJDIR)backend/dot$(OBJ_SUFFIX) \
+$(OBJDIR)backend/parser$(OBJ_SUFFIX) \
+$(OBJDIR)backend/regFile$(OBJ_SUFFIX) \
+$(OBJDIR)backend/quickSort$(OBJ_SUFFIX) \
+$(OBJDIR)backend/phraseGen$(OBJ_SUFFIX) \
+$(OBJDIR)backend/phrase$(OBJ_SUFFIX) \
+$(OBJDIR)backend/fragment$(OBJ_SUFFIX) \
+$(OBJDIR)backend/vliwScheduler$(OBJ_SUFFIX) \
+$(OBJDIR)backend/sideBuff$(OBJ_SUFFIX) \
+$(OBJDIR)backend/latency$(OBJ_SUFFIX) \
+$(OBJDIR)backend/binarySearch$(OBJ_SUFFIX) \
+$(OBJDIR)backend/heapTree$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unique$(OBJ_SUFFIX) \
+$(OBJDIR)backend/basicblock$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/registerFile$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/rfManager$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/memory$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/branchPred$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/decode$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/schedulers$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/execution$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/commit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/fetch$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/sysCore$(OBJ_SUFFIX) \
+$(OBJDIR)backend/ino/inoBkEnd$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/memManager$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/lsq$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/registerRename$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/rfManager$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/memory$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/branchPred$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/decode$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/schedulers$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/execution$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/commit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/fetch$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/sysCore$(OBJ_SUFFIX) \
+$(OBJDIR)backend/o3/oooBkEnd$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/unit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/dynInstruction$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
+$(SUPPORTS_AVX_OBJ) 
+	$(LINKER) $(TOOL_LDFLAGS) $(LINK_EXE)$@ $^ $(TOOL_LPATHS) $(TOOL_LIBS)
+
+###### Special applications' build rules ######
