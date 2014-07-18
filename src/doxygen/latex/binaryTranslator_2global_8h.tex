@@ -1,0 +1,416 @@
+\hypertarget{binaryTranslator_2global_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h File Reference}
+\label{binaryTranslator_2global_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h}}
+}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_af8a3dc82520357052a935b31b2d51962}{CFG\_\-STRING\_\-SIZE}~400
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a2d7378feb9600bfab350b59ffa442991}{INS\_\-STRING\_\-SIZE}~330
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a3088356e3c44bedd210a9cc28246cf82}{REG\_\-STRING\_\-SIZE}~20
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a39e5885c044e32ec0145024bd99c1594}{OPCODE\_\-STRING\_\-SIZE}~30
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a09af7f6f05439583552ca729af9dc232}{UPLD\_\-THRESHOLD}~0.01
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ab03221b2744b3969f9076d40f6dcef32}{WBB\_\-LOWER\_\-BOUND}~0.1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a5b19e872c39de2e1e86de7d8edc1097e}{WBB\_\-UPPER\_\-BOUND}~0.9
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a1581dcc96e74323eac4fd2076d130d5a}{DEBUG\_\-MAIN}~0
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_abe30d718bad127b80ec29e14015266e3}{DEBUG\_\-INS}~0
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a2dbada0a68b078321361284b7a9d0342}{DEBUG\_\-BB}~0
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_acf9515d937decb706ea7ebbda3a150e9}{DEBUG\_\-PB}~0
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a61e8258fb37eadf049db0df07da08a57}{DEBUG\_\-RA}~0
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{NUM\_\-REGISTERS}~40
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ad8311f5862e4dc4169d73a4247cda68a}{INIT\_\-RENAME\_\-REG\_\-NUM}~100
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_aeb4d8089eb3260321096eb086103e7db}{ALU\_\-LATENCY}~1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a753d700110906067fd49977b974bf796}{FPU\_\-LATENCY}~5
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a4bf4c1ea14b80c27d053c30d9f2c1ff7}{BR\_\-LATENCY}~3
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ad8c37508452198256fb620a3e34b1839}{L1\_\-LATENCY}~4
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a309e83b9da517e9fbef1b90cf1f57f3c}{L2\_\-LATENCY}~20
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a38203106c3880cd1424cc56c578d335a}{L3\_\-LATENCY}~40
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a517bf62a403a62dce2971e32491251b6}{MEM\_\-LATENCY}~100
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_af265aead8a1318c386b4b55b36c56420}{MEM\_\-HIGHERARCHY}~4
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a6741e5ed99f4591d0f0b717579594369}{NUM\_\-EU}~4
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}{LRF\_\-SIZE}~2000
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}{GRF\_\-SIZE}~6000
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a0df157b433ce2c25de636f833235ff67}{LRF\_\-LO}~100
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}{LRF\_\-HI}~LRF\_\-LO+LRF\_\-SIZE-\/1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}{GRF\_\-LO}~LRF\_\-HI+1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}{GRF\_\-HI}~GRF\_\-LO+GRF\_\-SIZE-\/1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}{X86\_\-REG\_\-LO}~1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}{X86\_\-REG\_\-HI}~67
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ac2e4520b753f883cd8050dbf1864db08}{INVALID\_\-REG}~-\/1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a382722368f23110d49ee8908aac999f8}{PHI\_\-INS\_\-ADDR}~1
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef long unsigned \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} \{ \par
+\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}{none}, 
+\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}{READ}, 
+\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}{WRITE}, 
+\hyperlink{global_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}{none}, 
+\par
+\hyperlink{global_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}{READ}, 
+\hyperlink{global_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}{WRITE}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type} \{ \par
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}{noType}, 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}{ALU}, 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}{MEM}, 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}{FPU}, 
+\par
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}{BR}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}{noType}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}{ALU}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}{MEM}, 
+\par
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}{FPU}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}{BR}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da52a9b031766fa116251f70e65a84c01a}{ASSIGN}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}{NOP}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{regKind} \{ \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54}{LRF}, 
+\hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038a3bc1a8c1e51890ee550a964766b76aab}{GRF}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{binaryTranslator_2global_8h_aeb4d8089eb3260321096eb086103e7db}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ALU\_\-LATENCY@{ALU\_\-LATENCY}}
+\index{ALU\_\-LATENCY@{ALU\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{ALU\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define ALU\_\-LATENCY~1}}
+\label{binaryTranslator_2global_8h_aeb4d8089eb3260321096eb086103e7db}
+\hypertarget{binaryTranslator_2global_8h_a4bf4c1ea14b80c27d053c30d9f2c1ff7}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!BR\_\-LATENCY@{BR\_\-LATENCY}}
+\index{BR\_\-LATENCY@{BR\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{BR\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define BR\_\-LATENCY~3}}
+\label{binaryTranslator_2global_8h_a4bf4c1ea14b80c27d053c30d9f2c1ff7}
+\hypertarget{binaryTranslator_2global_8h_af8a3dc82520357052a935b31b2d51962}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!CFG\_\-STRING\_\-SIZE@{CFG\_\-STRING\_\-SIZE}}
+\index{CFG\_\-STRING\_\-SIZE@{CFG\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{CFG\_\-STRING\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define CFG\_\-STRING\_\-SIZE~400}}
+\label{binaryTranslator_2global_8h_af8a3dc82520357052a935b31b2d51962}
+\hypertarget{binaryTranslator_2global_8h_a2dbada0a68b078321361284b7a9d0342}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!DEBUG\_\-BB@{DEBUG\_\-BB}}
+\index{DEBUG\_\-BB@{DEBUG\_\-BB}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{DEBUG\_\-BB}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-BB~0}}
+\label{binaryTranslator_2global_8h_a2dbada0a68b078321361284b7a9d0342}
+\hypertarget{binaryTranslator_2global_8h_abe30d718bad127b80ec29e14015266e3}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!DEBUG\_\-INS@{DEBUG\_\-INS}}
+\index{DEBUG\_\-INS@{DEBUG\_\-INS}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{DEBUG\_\-INS}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-INS~0}}
+\label{binaryTranslator_2global_8h_abe30d718bad127b80ec29e14015266e3}
+\hypertarget{binaryTranslator_2global_8h_a1581dcc96e74323eac4fd2076d130d5a}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!DEBUG\_\-MAIN@{DEBUG\_\-MAIN}}
+\index{DEBUG\_\-MAIN@{DEBUG\_\-MAIN}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{DEBUG\_\-MAIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-MAIN~0}}
+\label{binaryTranslator_2global_8h_a1581dcc96e74323eac4fd2076d130d5a}
+\hypertarget{binaryTranslator_2global_8h_acf9515d937decb706ea7ebbda3a150e9}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!DEBUG\_\-PB@{DEBUG\_\-PB}}
+\index{DEBUG\_\-PB@{DEBUG\_\-PB}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{DEBUG\_\-PB}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-PB~0}}
+\label{binaryTranslator_2global_8h_acf9515d937decb706ea7ebbda3a150e9}
+\hypertarget{binaryTranslator_2global_8h_a61e8258fb37eadf049db0df07da08a57}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!DEBUG\_\-RA@{DEBUG\_\-RA}}
+\index{DEBUG\_\-RA@{DEBUG\_\-RA}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{DEBUG\_\-RA}]{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-RA~0}}
+\label{binaryTranslator_2global_8h_a61e8258fb37eadf049db0df07da08a57}
+\hypertarget{binaryTranslator_2global_8h_a753d700110906067fd49977b974bf796}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!FPU\_\-LATENCY@{FPU\_\-LATENCY}}
+\index{FPU\_\-LATENCY@{FPU\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{FPU\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define FPU\_\-LATENCY~5}}
+\label{binaryTranslator_2global_8h_a753d700110906067fd49977b974bf796}
+\hypertarget{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-HI@{GRF\_\-HI}}
+\index{GRF\_\-HI@{GRF\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{GRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-HI~GRF\_\-LO+GRF\_\-SIZE-\/1}}
+\label{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}
+\hypertarget{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-LO@{GRF\_\-LO}}
+\index{GRF\_\-LO@{GRF\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{GRF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-LO~LRF\_\-HI+1}}
+\label{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}
+\hypertarget{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-SIZE@{GRF\_\-SIZE}}
+\index{GRF\_\-SIZE@{GRF\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{GRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-SIZE~6000}}
+\label{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}
+\hypertarget{binaryTranslator_2global_8h_ad8311f5862e4dc4169d73a4247cda68a}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!INIT\_\-RENAME\_\-REG\_\-NUM@{INIT\_\-RENAME\_\-REG\_\-NUM}}
+\index{INIT\_\-RENAME\_\-REG\_\-NUM@{INIT\_\-RENAME\_\-REG\_\-NUM}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{INIT\_\-RENAME\_\-REG\_\-NUM}]{\setlength{\rightskip}{0pt plus 5cm}\#define INIT\_\-RENAME\_\-REG\_\-NUM~100}}
+\label{binaryTranslator_2global_8h_ad8311f5862e4dc4169d73a4247cda68a}
+\hypertarget{binaryTranslator_2global_8h_a2d7378feb9600bfab350b59ffa442991}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!INS\_\-STRING\_\-SIZE@{INS\_\-STRING\_\-SIZE}}
+\index{INS\_\-STRING\_\-SIZE@{INS\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{INS\_\-STRING\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define INS\_\-STRING\_\-SIZE~330}}
+\label{binaryTranslator_2global_8h_a2d7378feb9600bfab350b59ffa442991}
+\hypertarget{binaryTranslator_2global_8h_ac2e4520b753f883cd8050dbf1864db08}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!INVALID\_\-REG@{INVALID\_\-REG}}
+\index{INVALID\_\-REG@{INVALID\_\-REG}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{INVALID\_\-REG}]{\setlength{\rightskip}{0pt plus 5cm}\#define INVALID\_\-REG~-\/1}}
+\label{binaryTranslator_2global_8h_ac2e4520b753f883cd8050dbf1864db08}
+\hypertarget{binaryTranslator_2global_8h_ad8c37508452198256fb620a3e34b1839}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!L1\_\-LATENCY@{L1\_\-LATENCY}}
+\index{L1\_\-LATENCY@{L1\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{L1\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define L1\_\-LATENCY~4}}
+\label{binaryTranslator_2global_8h_ad8c37508452198256fb620a3e34b1839}
+\hypertarget{binaryTranslator_2global_8h_a309e83b9da517e9fbef1b90cf1f57f3c}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!L2\_\-LATENCY@{L2\_\-LATENCY}}
+\index{L2\_\-LATENCY@{L2\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{L2\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define L2\_\-LATENCY~20}}
+\label{binaryTranslator_2global_8h_a309e83b9da517e9fbef1b90cf1f57f3c}
+\hypertarget{binaryTranslator_2global_8h_a38203106c3880cd1424cc56c578d335a}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!L3\_\-LATENCY@{L3\_\-LATENCY}}
+\index{L3\_\-LATENCY@{L3\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{L3\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define L3\_\-LATENCY~40}}
+\label{binaryTranslator_2global_8h_a38203106c3880cd1424cc56c578d335a}
+\hypertarget{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-HI@{LRF\_\-HI}}
+\index{LRF\_\-HI@{LRF\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{LRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-HI~LRF\_\-LO+LRF\_\-SIZE-\/1}}
+\label{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}
+\hypertarget{binaryTranslator_2global_8h_a0df157b433ce2c25de636f833235ff67}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-LO@{LRF\_\-LO}}
+\index{LRF\_\-LO@{LRF\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{LRF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-LO~100}}
+\label{binaryTranslator_2global_8h_a0df157b433ce2c25de636f833235ff67}
+\hypertarget{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-SIZE@{LRF\_\-SIZE}}
+\index{LRF\_\-SIZE@{LRF\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{LRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-SIZE~2000}}
+\label{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}
+\hypertarget{binaryTranslator_2global_8h_af265aead8a1318c386b4b55b36c56420}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM\_\-HIGHERARCHY@{MEM\_\-HIGHERARCHY}}
+\index{MEM\_\-HIGHERARCHY@{MEM\_\-HIGHERARCHY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{MEM\_\-HIGHERARCHY}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-HIGHERARCHY~4}}
+\label{binaryTranslator_2global_8h_af265aead8a1318c386b4b55b36c56420}
+\hypertarget{binaryTranslator_2global_8h_a517bf62a403a62dce2971e32491251b6}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM\_\-LATENCY@{MEM\_\-LATENCY}}
+\index{MEM\_\-LATENCY@{MEM\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{MEM\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define MEM\_\-LATENCY~100}}
+\label{binaryTranslator_2global_8h_a517bf62a403a62dce2971e32491251b6}
+\hypertarget{binaryTranslator_2global_8h_a6741e5ed99f4591d0f0b717579594369}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NUM\_\-EU@{NUM\_\-EU}}
+\index{NUM\_\-EU@{NUM\_\-EU}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{NUM\_\-EU}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-EU~4}}
+\label{binaryTranslator_2global_8h_a6741e5ed99f4591d0f0b717579594369}
+\hypertarget{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NUM\_\-REGISTERS@{NUM\_\-REGISTERS}}
+\index{NUM\_\-REGISTERS@{NUM\_\-REGISTERS}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{NUM\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-REGISTERS~40}}
+\label{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}
+\hypertarget{binaryTranslator_2global_8h_a39e5885c044e32ec0145024bd99c1594}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!OPCODE\_\-STRING\_\-SIZE@{OPCODE\_\-STRING\_\-SIZE}}
+\index{OPCODE\_\-STRING\_\-SIZE@{OPCODE\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{OPCODE\_\-STRING\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define OPCODE\_\-STRING\_\-SIZE~30}}
+\label{binaryTranslator_2global_8h_a39e5885c044e32ec0145024bd99c1594}
+\hypertarget{binaryTranslator_2global_8h_a382722368f23110d49ee8908aac999f8}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!PHI\_\-INS\_\-ADDR@{PHI\_\-INS\_\-ADDR}}
+\index{PHI\_\-INS\_\-ADDR@{PHI\_\-INS\_\-ADDR}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{PHI\_\-INS\_\-ADDR}]{\setlength{\rightskip}{0pt plus 5cm}\#define PHI\_\-INS\_\-ADDR~1}}
+\label{binaryTranslator_2global_8h_a382722368f23110d49ee8908aac999f8}
+\hypertarget{binaryTranslator_2global_8h_a3088356e3c44bedd210a9cc28246cf82}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!REG\_\-STRING\_\-SIZE@{REG\_\-STRING\_\-SIZE}}
+\index{REG\_\-STRING\_\-SIZE@{REG\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{REG\_\-STRING\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-STRING\_\-SIZE~20}}
+\label{binaryTranslator_2global_8h_a3088356e3c44bedd210a9cc28246cf82}
+\hypertarget{binaryTranslator_2global_8h_a09af7f6f05439583552ca729af9dc232}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!UPLD\_\-THRESHOLD@{UPLD\_\-THRESHOLD}}
+\index{UPLD\_\-THRESHOLD@{UPLD\_\-THRESHOLD}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{UPLD\_\-THRESHOLD}]{\setlength{\rightskip}{0pt plus 5cm}\#define UPLD\_\-THRESHOLD~0.01}}
+\label{binaryTranslator_2global_8h_a09af7f6f05439583552ca729af9dc232}
+\hypertarget{binaryTranslator_2global_8h_ab03221b2744b3969f9076d40f6dcef32}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!WBB\_\-LOWER\_\-BOUND@{WBB\_\-LOWER\_\-BOUND}}
+\index{WBB\_\-LOWER\_\-BOUND@{WBB\_\-LOWER\_\-BOUND}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{WBB\_\-LOWER\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}\#define WBB\_\-LOWER\_\-BOUND~0.1}}
+\label{binaryTranslator_2global_8h_ab03221b2744b3969f9076d40f6dcef32}
+\hypertarget{binaryTranslator_2global_8h_a5b19e872c39de2e1e86de7d8edc1097e}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!WBB\_\-UPPER\_\-BOUND@{WBB\_\-UPPER\_\-BOUND}}
+\index{WBB\_\-UPPER\_\-BOUND@{WBB\_\-UPPER\_\-BOUND}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{WBB\_\-UPPER\_\-BOUND}]{\setlength{\rightskip}{0pt plus 5cm}\#define WBB\_\-UPPER\_\-BOUND~0.9}}
+\label{binaryTranslator_2global_8h_a5b19e872c39de2e1e86de7d8edc1097e}
+\hypertarget{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-REG\_\-HI@{X86\_\-REG\_\-HI}}
+\index{X86\_\-REG\_\-HI@{X86\_\-REG\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{X86\_\-REG\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-HI~67}}
+\label{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}
+\hypertarget{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-REG\_\-LO@{X86\_\-REG\_\-LO}}
+\index{X86\_\-REG\_\-LO@{X86\_\-REG\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{X86\_\-REG\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-LO~1}}
+\label{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ADDR@{ADDR}}
+\index{ADDR@{ADDR}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{ADDR}]{\setlength{\rightskip}{0pt plus 5cm}typedef long unsigned {\bf ADDR}}}
+\label{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!memType@{memType}}
+\index{memType@{memType}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{memType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf memType}}}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{none@{none}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!none@{none}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}{
+none}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}
+}]\index{READ@{READ}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!READ@{READ}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}{
+READ}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}
+}]\index{WRITE@{WRITE}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!WRITE@{WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}{
+WRITE}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}
+}]\index{none@{none}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!none@{none}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}{
+none}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0}
+}]\index{READ@{READ}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!READ@{READ}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}{
+READ}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6}
+}]\index{WRITE@{WRITE}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!WRITE@{WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}{
+WRITE}
+\label{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{none, READ, WRITE} memType;
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!regKind@{regKind}}
+\index{regKind@{regKind}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{regKind}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf regKind}}}
+\label{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{LRF@{LRF}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF@{LRF}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54}{
+LRF}
+\label{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54}
+}]\index{GRF@{GRF}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF@{GRF}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038a3bc1a8c1e51890ee550a964766b76aab}{
+GRF}
+\label{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038a3bc1a8c1e51890ee550a964766b76aab}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{LRF, GRF} regKind;
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!type@{type}}
+\index{type@{type}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf type}}}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{noType@{noType}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!noType@{noType}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}{
+noType}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}
+}]\index{ALU@{ALU}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ALU@{ALU}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}{
+ALU}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}
+}]\index{MEM@{MEM}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM@{MEM}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}{
+MEM}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}
+}]\index{FPU@{FPU}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!FPU@{FPU}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}{
+FPU}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}
+}]\index{BR@{BR}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!BR@{BR}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}{
+BR}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}
+}]\index{noType@{noType}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!noType@{noType}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}{
+noType}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c}
+}]\index{ALU@{ALU}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ALU@{ALU}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}{
+ALU}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35}
+}]\index{MEM@{MEM}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM@{MEM}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}{
+MEM}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2}
+}]\index{FPU@{FPU}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!FPU@{FPU}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}{
+FPU}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}
+}]\index{BR@{BR}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!BR@{BR}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}{
+BR}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}
+}]\index{ASSIGN@{ASSIGN}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ASSIGN@{ASSIGN}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da52a9b031766fa116251f70e65a84c01a}{
+ASSIGN}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da52a9b031766fa116251f70e65a84c01a}
+}]\index{NOP@{NOP}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NOP@{NOP}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}{
+NOP}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{noType, ALU, MEM, FPU, BR} type;
+\end{DoxyCode}

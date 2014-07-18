@@ -1,0 +1,1273 @@
+\hypertarget{pars_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.cpp File Reference}
+\label{pars_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.cpp@{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.cpp}}
+}
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$set$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$signal.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$cassert$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$setjmp.h$>$}\par
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pin\_\-isa.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instlib.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}lib/bp\_\-lib/types.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}tournament.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}lib/bp\_\-lib/intmath.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}utilities.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pars.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/utility.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../config.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}uop\_\-gen.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}memlog.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}staticCodeParser.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/statistic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/g\_\-info.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/g\_\-variable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/bkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/ino/inoBkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/o3/oooBkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/dynInstruction.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pars_8cpp_aac9e46837cb485689883754c8bd83023}{G\_\-I\_\-INFO\_\-EN}~1
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{pars_8cpp_a505f360905b4ad0fa6e18f19405539ea}{recover} ()
+\item 
+EXCEPT\_\-HANDLING\_\-RESULT \hyperlink{pars_8cpp_a14053986557d22a3e7d5d06d3f3b5bee}{handlePinException} (THREADID tid, EXCEPTION\_\-INFO $\ast$pExceptInfo, PHYSICAL\_\-CONTEXT $\ast$pPhysCtxt, VOID $\ast$v)
+\item 
+BOOL \hyperlink{pars_8cpp_a5f145c9581fdc13b0459253871f0338a}{signal\_\-handler} (THREADID tid, INT32 sig, CONTEXT $\ast$ctxt, BOOL hasHandler, const EXCEPTION\_\-INFO $\ast$pExceptInfo, VOID $\ast$v)
+\item 
+VOID \hyperlink{pars_8cpp_a4f97b9fe13219e7257f0199e22d96637}{HandleInst} (UINT32 uid, BOOL \_\-\_\-is\_\-call, BOOL \_\-\_\-is\_\-ret, BOOL \_\-\_\-is\_\-far\_\-ret)
+\item 
+VOID \hyperlink{pars_8cpp_a2648ea029809fc0d174d8b1021b99523}{countTrace} (TRACE trace, VOID $\ast$v)
+\item 
+VOID \hyperlink{pars_8cpp_ad357c3e6fd5bfcbcdfafb58d203f464c}{FlushOnFull} (UINT32 trace\_\-size, UINT32 stub\_\-size)
+\item 
+void \hyperlink{pars_8cpp_ac1488590ca5d1f74327b23f8180cdfa7}{getBBheader} (ADDRINT bbAddr)
+\item 
+void \hyperlink{pars_8cpp_a85c4fe92fc339f576e3bec066fc7cefc}{getNewBB} (ADDRINT insAddr)
+\item 
+VOID \hyperlink{pars_8cpp_afeffa2ead47ca07b047fd4ff89c6159a}{manageBBbuff} (ADDRINT insAddr)
+\item 
+VOID \hyperlink{pars_8cpp_a93bbaf34e7ec7f041f2d2ff398fd5e28}{manageInsBuff} (ADDRINT insAddr)
+\item 
+VOID \hyperlink{pars_8cpp_aadc78553d6c767ac2c7315e443a4c0c1}{runPARS} (char $\ast$cfgFile)
+\item 
+VOID \hyperlink{pars_8cpp_a0269e469bbd12d528db5073402dd6c4e}{parseConfig} (char $\ast$cfgFile)
+\item 
+VOID \hyperlink{pars_8cpp_a96e565b2ab0bebcb0ffa565e9b7a4c9f}{Init} (char $\ast$cfgFile)
+\item 
+VOID \hyperlink{pars_8cpp_aa61669c70de306a0ba47bf5878b9f806}{Fini} (INT32 code, VOID $\ast$v)
+\item 
+EXCEPT\_\-HANDLING\_\-RESULT \hyperlink{pars_8cpp_aeba21456eeaae4baf6f7d0137dc3b242}{handle} (THREADID tid, EXCEPTION\_\-INFO $\ast$pExceptInfo, PHYSICAL\_\-CONTEXT $\ast$pPhysCtxt, VOID $\ast$v)
+\item 
+void \hyperlink{pars_8cpp_a0958ec4bf081af6c5cf63c9b50a3b65e}{read\_\-mem\_\-orig} (ADDRINT eaddr, ADDRINT len)
+\item 
+VOID \hyperlink{pars_8cpp_acb954ff3c5105a038d6722b6debb2056}{GetMemWriteOrigValue} (UINT32 uid, CONTEXT $\ast$\hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c}, ADDRINT eaddr, ADDRINT len)
+\item 
+VOID \hyperlink{pars_8cpp_aa22b6461bb9abbe232edce2559997942}{GetMemWriteNewValue} (UINT32 uid, CONTEXT $\ast$\hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+\item 
+VOID \hyperlink{pars_8cpp_aefef2ba62649f25c8db406d1a4272061}{GetMemReadBypass} (UINT32 uid, CONTEXT $\ast$\hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c}, ADDRINT eaddr, ADDRINT len)
+\item 
+VOID \hyperlink{pars_8cpp_af775f76dfe3a4c23693437b0bd126acf}{HandleBranch} (UINT32 uid, CONTEXT $\ast$\hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c}, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT \_\-\_\-pc, BOOL \_\-\_\-has\_\-ft)
+\item 
+VOID \hyperlink{pars_8cpp_abdf3999377ed06fdc9507279d3381d70}{HandleSyscall} (UINT32 uid, CONTEXT $\ast$\hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+\item 
+BOOL \hyperlink{pars_8cpp_a316b3c4d2f2c15570934fed127e549f5}{simpointMode} ()
+\item 
+VOID \hyperlink{pars_8cpp_a6ab1b8fff0431951e74418ae02cf556e}{doCount} ()
+\item 
+VOID \hyperlink{pars_8cpp_a5f99a19752c6653593d32acd1c5708bd}{doImpCallCount\_\-} (BOOL isCall)
+\item 
+VOID \hyperlink{pars_8cpp_a7566704c3c3d79d0673aa11d846feac0}{doImpMemCount\_\-} (UINT32 isMem)
+\item 
+VOID \hyperlink{pars_8cpp_a4254ddc7317164f6cb03afabf4b11770}{Instruction} (TRACE trace, VOID $\ast$val)
+\item 
+ADDRINT \hyperlink{pars_8cpp_a6c563e02c0b7b634beaaf53ada126817}{PredictAndUpdate} (ADDRINT \_\-\_\-pc, INT32 \_\-\_\-taken, ADDRINT tgt, ADDRINT fthru)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+FILTER \hyperlink{pars_8cpp_aa415b778ddffd669c113279e23602671}{filter}
+\item 
+unsigned char \hyperlink{pars_8cpp_a5e14965f9e14d6406bb5b10e49d24b85}{g\_\-store\_\-buffer} \mbox{[}MAX\_\-MEM\_\-WRITE\_\-LEN\mbox{]}
+\item 
+map$<$ unsigned, i\_\-info $>$ \hyperlink{pars_8cpp_aab998b67eb0b3b2e5a85862cd87c17db}{g\_\-i\_\-info}
+\item 
+clock\_\-t \hyperlink{pars_8cpp_a0161597891c90043c55ef8ecc6855e49}{start\_\-pars}
+\item 
+clock\_\-t \hyperlink{pars_8cpp_aae1c5d9a4ab56767590309b25a7dfa67}{stop\_\-pars}
+\item 
+\hyperlink{classTournamentBP}{TournamentBP} $\ast$ \hyperlink{pars_8cpp_a773762181364482488166d354460bc98}{g\_\-predictor} = NULL
+\item 
+PIN\_\-SEMAPHORE \hyperlink{pars_8cpp_a3780f840dcb4b8cfe00bde4a6cd55d16}{semaphore0}
+\item 
+PIN\_\-SEMAPHORE \hyperlink{pars_8cpp_ad27290b1818ecaa97935c4d181a158f0}{semaphore1}
+\item 
+void $\ast$ \hyperlink{pars_8cpp_a1e853eca8d9b1c61c314eed5b83b538a}{rootThreadArg} = (void $\ast$)0xABBA
+\item 
+PIN\_\-THREAD\_\-UID \hyperlink{pars_8cpp_a5b351a9cd233c0a893b976831dce607c}{rootThreadUid}
+\item 
+\hyperlink{classconfig}{config} $\ast$ \hyperlink{pars_8cpp_ac300c5dd1553141a19aac3739ab59c78}{g\_\-cfg}
+\item 
+\hyperlink{classstaticCodeParser}{staticCodeParser} $\ast$ \hyperlink{pars_8cpp_ae1f49acdc02bc860091a9c0826042e9a}{g\_\-staticCode}
+\item 
+FILE $\ast$ \hyperlink{pars_8cpp_a675aead22d8ea8c089cc7cfc1720bed1}{\_\-\_\-outFile}
+\item 
+\hyperlink{classmemory__buffer}{memory\_\-buffer} \hyperlink{pars_8cpp_a627bf9888cdd16a64ce1336bca064d71}{g\_\-log}
+\item 
+long unsigned \hyperlink{pars_8cpp_a86846b0c2e5650e69c2a5ef0538775b1}{imgInsCallCount\_\-} = 0
+\item 
+long unsigned \hyperlink{pars_8cpp_aea4af54ecf740d35ec391b44f6154d17}{imgInsMemCount\_\-} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{pars_8cpp_aac9e46837cb485689883754c8bd83023}{
+\index{pars.cpp@{pars.cpp}!G\_\-I\_\-INFO\_\-EN@{G\_\-I\_\-INFO\_\-EN}}
+\index{G\_\-I\_\-INFO\_\-EN@{G\_\-I\_\-INFO\_\-EN}!pars.cpp@{pars.cpp}}
+\subsubsection[{G\_\-I\_\-INFO\_\-EN}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\_\-I\_\-INFO\_\-EN~1}}
+\label{pars_8cpp_aac9e46837cb485689883754c8bd83023}
+
+
+\subsection{Function Documentation}
+\hypertarget{pars_8cpp_a2648ea029809fc0d174d8b1021b99523}{
+\index{pars.cpp@{pars.cpp}!countTrace@{countTrace}}
+\index{countTrace@{countTrace}!pars.cpp@{pars.cpp}}
+\subsubsection[{countTrace}]{\setlength{\rightskip}{0pt plus 5cm}VOID countTrace (
+\begin{DoxyParamCaption}
+\item[{TRACE}]{trace, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a2648ea029809fc0d174d8b1021b99523}
+
+\begin{DoxyCode}
+{
+    g_var.g_traceCount++;
+    g_var.g_codeCacheSize +=  TRACE_CodeCacheSize (trace);
+    if (g_var.g_debug_level & DBG_CC) std::cout << "--Code Cache Size Limit: " <<
+       CODECACHE_CacheSizeLimit ()/ (1024*1024) << "MB.\n";
+    if (g_var.g_debug_level & DBG_CC) std::cout << "Adding Trace #" << g_var.
+      g_traceCount << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache 
+      with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
+    if (g_var.g_debug_level & DBG_CC) std::cout << "Total code cache size: " << 
+      g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a6ab1b8fff0431951e74418ae02cf556e}{
+\index{pars.cpp@{pars.cpp}!doCount@{doCount}}
+\index{doCount@{doCount}!pars.cpp@{pars.cpp}}
+\subsubsection[{doCount}]{\setlength{\rightskip}{0pt plus 5cm}VOID doCount (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a6ab1b8fff0431951e74418ae02cf556e}
+
+\begin{DoxyCode}
+{
+        g_var.insCount++; /*total ins count: wrong and right path*/
+        if (!g_var.g_wrong_path) g_var.g_insCountRightPath++;
+        unsigned long countRem = g_var.insCount%BILLION;
+        unsigned long countQ = g_var.insCount/MILLION;
+        static clock_t past = 0.0;
+        static clock_t now = double (clock ())/CLOCKS_PER_SEC;
+        simpointMode ();
+        if (countRem == 0) {
+            now = double (clock ())/CLOCKS_PER_SEC;
+                cout << countQ << " million passed at " << double (clock ())/CLOC
+      KS_PER_SEC << " seconds. (Diff Time: " << now-past << ")\n";
+                cout << "  correct path ins count: " << g_var.
+      g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath)/doubl
+      e (g_var.insCount) << ")\n";
+                cout << "  wrong path ins count: " << g_var.
+      g_total_wrong_path_count << "\n";
+                cout << "  wrong path count: " << g_var.g_wrong_path_number << "\
+      n";
+                cout << "  trace count: " << g_var.g_traceCount << "\n";
+                cout << "  app signal count: " << g_var.g_app_signal_count << "\n
+      ";
+                cout << "  pin signal count: " << g_var.g_pin_signal_count << "\n
+      ";
+                cout << "  out of mem count: " << g_var.g_flushes << "\n";
+                cout << "  recovery count: " << g_var.g_recovery_count << "\n";
+                cout << "  code cache flush count: " << g_var.g_flushes << "\n";
+                cout << "  avg wrong-path length: " << double (g_var.
+      g_total_wrong_path_count)/double (g_var.g_wrong_path_number) << "\n";
+                cout << "  code cache size (MB): " << double (g_var.
+      g_codeCacheSize)/ (1024.0*1024.0) << "\n\n";
+                past = now;
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a5f99a19752c6653593d32acd1c5708bd}{
+\index{pars.cpp@{pars.cpp}!doImpCallCount\_\-@{doImpCallCount\_\-}}
+\index{doImpCallCount\_\-@{doImpCallCount\_\-}!pars.cpp@{pars.cpp}}
+\subsubsection[{doImpCallCount\_\-}]{\setlength{\rightskip}{0pt plus 5cm}VOID doImpCallCount\_\- (
+\begin{DoxyParamCaption}
+\item[{BOOL}]{isCall}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a5f99a19752c6653593d32acd1c5708bd}
+
+\begin{DoxyCode}
+{
+        if (isCall)
+                imgInsCallCount_++;
+        unsigned long countRem = g_var.insCount%BILLION;
+        if (countRem == 0) {
+                cout << " (CALL_) :" << imgInsCallCount_ << "\n";
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a7566704c3c3d79d0673aa11d846feac0}{
+\index{pars.cpp@{pars.cpp}!doImpMemCount\_\-@{doImpMemCount\_\-}}
+\index{doImpMemCount\_\-@{doImpMemCount\_\-}!pars.cpp@{pars.cpp}}
+\subsubsection[{doImpMemCount\_\-}]{\setlength{\rightskip}{0pt plus 5cm}VOID doImpMemCount\_\- (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{isMem}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a7566704c3c3d79d0673aa11d846feac0}
+
+\begin{DoxyCode}
+{
+        if (isMem > 0)
+                imgInsMemCount_++;
+        unsigned long countRem = g_var.insCount%BILLION;
+        if (countRem == 0) {
+                cout << " (MEM_) :" << imgInsMemCount_ << "\n";
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_aa61669c70de306a0ba47bf5878b9f806}{
+\index{pars.cpp@{pars.cpp}!Fini@{Fini}}
+\index{Fini@{Fini}!pars.cpp@{pars.cpp}}
+\subsubsection[{Fini}]{\setlength{\rightskip}{0pt plus 5cm}VOID Fini (
+\begin{DoxyParamCaption}
+\item[{INT32}]{code, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_aa61669c70de306a0ba47bf5878b9f806}
+
+\begin{DoxyCode}
+{
+        g_var.msg.simStep ("FRONTEND TERMINATED");
+        stop_pars = clock ();
+        g_var.g_appEnd = true;
+        delete g_var.g_insList;
+        delete g_var.g_codeCache;
+        delete g_var.g_BBlist;
+        cout << "finishing" << endl;
+        PIN_SemaphoreSet (&semaphore0);
+        PIN_SemaphoreSet (&semaphore1);
+        cout << "finished" << endl;
+        double exe_time = double (stop_pars-start_pars)/CLOCKS_PER_SEC;
+        double ins_per_sec = double (g_var.insCount)/exe_time;
+        cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed 
+      Ops: " << g_var.insCount << endl;
+        cout << "Instructions Executed Per Second Under Pin: " << ins_per_sec << 
+      endl;
+        cout << "Num traces generated: " << g_var.g_traceCount << "; Code cach us
+      ed for traces: " << g_var.g_codeCacheSize/ (1024*1024) << " MB; Code cache flush 
+      count: " << g_var.g_flushes << endl;
+        delete g_predictor;
+        delete g_staticCode;
+        PIN_SemaphoreFini (&semaphore0);
+        PIN_SemaphoreFini (&semaphore1);
+        g_var.msg.simStep ("BACKEND TERMINATED");
+
+        //finish backend
+        //bkEnd_finish (); TODO REMOVE THIS
+    g_stats.dump ();
+        g_var.msg.simStep ("END OF SIMULATION");
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_ad357c3e6fd5bfcbcdfafb58d203f464c}{
+\index{pars.cpp@{pars.cpp}!FlushOnFull@{FlushOnFull}}
+\index{FlushOnFull@{FlushOnFull}!pars.cpp@{pars.cpp}}
+\subsubsection[{FlushOnFull}]{\setlength{\rightskip}{0pt plus 5cm}VOID FlushOnFull (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{trace\_\-size, }
+\item[{UINT32}]{stub\_\-size}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_ad357c3e6fd5bfcbcdfafb58d203f464c}
+
+\begin{DoxyCode}
+{
+        g_var.g_flushes++;
+    if (g_var.g_debug_level & DBG_CC) std::cout << "Trying to insert trace size "
+       << trace_size << " and exit stub size " << stub_size << ".\n";
+        CODECACHE_FlushCache ();
+        if (g_var.g_debug_level & DBG_CC) std::cout << "Code Cache Flushed at siz
+      e " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << g_var.
+      g_flushes << ")" << endl;
+        g_var.g_codeCacheSize=0;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_ac1488590ca5d1f74327b23f8180cdfa7}{
+\index{pars.cpp@{pars.cpp}!getBBheader@{getBBheader}}
+\index{getBBheader@{getBBheader}!pars.cpp@{pars.cpp}}
+\subsubsection[{getBBheader}]{\setlength{\rightskip}{0pt plus 5cm}void getBBheader (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbAddr}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_ac1488590ca5d1f74327b23f8180cdfa7}
+
+\begin{DoxyCode}
+                                  {
+        if (g_staticCode->BBhasHeader (bbAddr) == true) {
+                string* elem = new string;
+                *elem = g_staticCode->getBBheader (bbAddr);
+                g_var.g_BBlist->Last ()->addBBheader (elem, bbAddr);
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_aefef2ba62649f25c8db406d1a4272061}{
+\index{pars.cpp@{pars.cpp}!GetMemReadBypass@{GetMemReadBypass}}
+\index{GetMemReadBypass@{GetMemReadBypass}!pars.cpp@{pars.cpp}}
+\subsubsection[{GetMemReadBypass}]{\setlength{\rightskip}{0pt plus 5cm}VOID GetMemReadBypass (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{CONTEXT $\ast$}]{c, }
+\item[{ADDRINT}]{eaddr, }
+\item[{ADDRINT}]{len}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_aefef2ba62649f25c8db406d1a4272061}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) return;
+    if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
+
+#ifdef G_I_INFO_EN
+        assert (g_i_info.find (uid)!=g_i_info.end ());
+        const i_info &i = g_i_info[uid];
+        if (g_var.g_debug_level & DBG_READ_MEM) std::cout << "EXEC rb " << (
+      g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.
+      pc << " " << i.diss << " : ";
+#endif
+
+        // TODO: bypass real memory?
+        return;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_aa22b6461bb9abbe232edce2559997942}{
+\index{pars.cpp@{pars.cpp}!GetMemWriteNewValue@{GetMemWriteNewValue}}
+\index{GetMemWriteNewValue@{GetMemWriteNewValue}!pars.cpp@{pars.cpp}}
+\subsubsection[{GetMemWriteNewValue}]{\setlength{\rightskip}{0pt plus 5cm}VOID GetMemWriteNewValue (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{CONTEXT $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_aa22b6461bb9abbe232edce2559997942}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) return;
+    if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
+
+#ifdef G_I_INFO_EN
+        assert (g_i_info.find (uid)!=g_i_info.end ());
+        const i_info &i = g_i_info[uid];
+        if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wa " << (
+      g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.
+      pc << " " << i.diss << " : ";
+#endif
+
+        // TODO: bypass real memory?
+        // read_mem_new ();
+        // restore_mem_orig ();
+        return;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_acb954ff3c5105a038d6722b6debb2056}{
+\index{pars.cpp@{pars.cpp}!GetMemWriteOrigValue@{GetMemWriteOrigValue}}
+\index{GetMemWriteOrigValue@{GetMemWriteOrigValue}!pars.cpp@{pars.cpp}}
+\subsubsection[{GetMemWriteOrigValue}]{\setlength{\rightskip}{0pt plus 5cm}VOID GetMemWriteOrigValue (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{CONTEXT $\ast$}]{c, }
+\item[{ADDRINT}]{eaddr, }
+\item[{ADDRINT}]{len}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_acb954ff3c5105a038d6722b6debb2056}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) return;
+    if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
+
+#ifdef G_I_INFO_EN
+        assert (g_i_info.find (uid)!=g_i_info.end ());
+        const i_info &i = g_i_info[uid];
+        if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wb " << (
+      g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.
+      pc << " " << i.diss << " : ";
+#endif
+        read_mem_orig (eaddr, len);
+        return;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a85c4fe92fc339f576e3bec066fc7cefc}{
+\index{pars.cpp@{pars.cpp}!getNewBB@{getNewBB}}
+\index{getNewBB@{getNewBB}!pars.cpp@{pars.cpp}}
+\subsubsection[{getNewBB}]{\setlength{\rightskip}{0pt plus 5cm}void getNewBB (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a85c4fe92fc339f576e3bec066fc7cefc}
+
+\begin{DoxyCode}
+                                {
+        if (g_staticCode->isNewBB (insAddr)) {
+                basicblock * newBB = new basicblock;
+                g_var.g_BBlist->Append (newBB);
+                getBBheader (insAddr);
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_aeba21456eeaae4baf6f7d0137dc3b242}{
+\index{pars.cpp@{pars.cpp}!handle@{handle}}
+\index{handle@{handle}!pars.cpp@{pars.cpp}}
+\subsubsection[{handle}]{\setlength{\rightskip}{0pt plus 5cm}EXCEPT\_\-HANDLING\_\-RESULT handle (
+\begin{DoxyParamCaption}
+\item[{THREADID}]{tid, }
+\item[{EXCEPTION\_\-INFO $\ast$}]{pExceptInfo, }
+\item[{PHYSICAL\_\-CONTEXT $\ast$}]{pPhysCtxt, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_aeba21456eeaae4baf6f7d0137dc3b242}
+
+\begin{DoxyCode}
+{
+        g_var.g_pintool_signal_count++;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " pintool signal count =
+       " << dec << g_var.g_pintool_signal_count << std::endl;
+        longjmp (g_var.g_env,1);
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_af775f76dfe3a4c23693437b0bd126acf}{
+\index{pars.cpp@{pars.cpp}!HandleBranch@{HandleBranch}}
+\index{HandleBranch@{HandleBranch}!pars.cpp@{pars.cpp}}
+\subsubsection[{HandleBranch}]{\setlength{\rightskip}{0pt plus 5cm}VOID HandleBranch (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{CONTEXT $\ast$}]{c, }
+\item[{BOOL}]{taken, }
+\item[{ADDRINT}]{tgt, }
+\item[{ADDRINT}]{fthru, }
+\item[{ADDRINT}]{\_\-\_\-pc, }
+\item[{BOOL}]{\_\-\_\-has\_\-ft}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_af775f76dfe3a4c23693437b0bd126acf}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) {
+                //PIN_SemaphoreSet (&semaphore0);
+                //PIN_SemaphoreWait (&semaphore1); 
+                //PIN_SemaphoreClear (&semaphore1);
+                return;
+        }
+    if (g_var.g_enable_wp && g_var.g_wrong_path) return;
+#ifdef G_I_INFO_EN
+        assert (g_i_info.find (uid)!=g_i_info.end ());
+        //const i_info &i = g_i_info[uid];
+#endif
+        bool was_wp = g_var.g_wrong_path;
+
+        ADDRINT pred_eip = tgt;
+        if (true) { // uasd to be if (__has_ft) { - clean up? (TODO)
+                g_var.g_pc = __pc;
+                g_var.g_taken = taken;
+                g_var.g_tgt = tgt;
+                g_var.g_fthru = fthru;
+                PIN_SemaphoreSet (&semaphore0);
+                PIN_SemaphoreWait (&semaphore1); 
+                PIN_SemaphoreClear (&semaphore1);
+                pred_eip = g_var.g_pred_eip;
+    }
+        if (g_var.g_wrong_path && !was_wp) {
+                g_var.g_wrong_path_number++;
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << "  *** transitio
+      ning to wrong path ***\n";
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << "  wrong path nu
+      mber = " << dec << g_var.g_wrong_path_number << std::endl;
+                PIN_SaveContext (c,&g_var.g_context);
+        }
+
+        ADDRINT eip = taken?tgt:fthru;
+        if (eip != pred_eip) {
+                assert (g_var.g_wrong_path);
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << "  *** forcing P
+      IN to change control flow ***\n";
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << "      predicted
+       EIP = " << hex << pred_eip << "\n";
+                if (g_var.g_enable_wp) {
+                        PIN_SetContextReg (c,REG_INST_PTR, pred_eip);
+                        g_var.g_context_call_depth=0;
+                        PIN_ExecuteAt (c);
+                }
+        }
+        return;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a4f97b9fe13219e7257f0199e22d96637}{
+\index{pars.cpp@{pars.cpp}!HandleInst@{HandleInst}}
+\index{HandleInst@{HandleInst}!pars.cpp@{pars.cpp}}
+\subsubsection[{HandleInst}]{\setlength{\rightskip}{0pt plus 5cm}VOID HandleInst (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{BOOL}]{\_\-\_\-is\_\-call, }
+\item[{BOOL}]{\_\-\_\-is\_\-ret, }
+\item[{BOOL}]{\_\-\_\-is\_\-far\_\-ret}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a4f97b9fe13219e7257f0199e22d96637}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) return;
+#ifdef G_I_INFO_EN
+    assert (g_i_info.find (uid)!=g_i_info.end ());
+    const i_info &i = g_i_info[uid];
+#endif
+
+    g_var.g_seqnum++;
+    if (!g_var.g_wrong_path) g_var.g_icount++;
+
+#ifdef G_I_INFO_EN
+    if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC i  " << (g_var.
+      g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << 
+      " " << i.diss << " : ";
+#endif
+
+    if (g_var.g_wrong_path) {
+        g_var.g_wrong_path_count++;
+        if (__is_call) g_var.g_context_call_depth++;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** wrong path *** cou
+      nt = " << dec << g_var.g_wrong_path_count << "\n";
+        if ((g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
+                ((g_var.g_context_call_depth==0) && __is_ret) ||
+                g_var.g_invalid_size || g_var.g_invalid_addr || g_var.
+      g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
+            recover ();
+            if (g_var.g_enable_wp) {
+                PIN_ExecuteAt (&g_var.g_context);
+            }
+        }
+    } else if (g_var.g_debug_level & DBG_EXEC) std::cout << "\n";
+    return;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a14053986557d22a3e7d5d06d3f3b5bee}{
+\index{pars.cpp@{pars.cpp}!handlePinException@{handlePinException}}
+\index{handlePinException@{handlePinException}!pars.cpp@{pars.cpp}}
+\subsubsection[{handlePinException}]{\setlength{\rightskip}{0pt plus 5cm}EXCEPT\_\-HANDLING\_\-RESULT handlePinException (
+\begin{DoxyParamCaption}
+\item[{THREADID}]{tid, }
+\item[{EXCEPTION\_\-INFO $\ast$}]{pExceptInfo, }
+\item[{PHYSICAL\_\-CONTEXT $\ast$}]{pPhysCtxt, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a14053986557d22a3e7d5d06d3f3b5bee}
+
+\begin{DoxyCode}
+{
+        g_var.g_pin_signal_count++;
+    if (g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
+       << PIN_GetExceptionCode (pExceptInfo) << " on wrong path " << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " execption Info: " << P
+      IN_ExceptionToString (pExceptInfo) << endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " pin signal count = " <
+      < dec << g_var.g_pin_signal_count << std::endl;
+        recover ();
+        PIN_ExecuteAt (&g_var.g_context);
+    } else {
+        std::cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionC
+      ode (pExceptInfo) << " on correct path " << std::endl;
+        std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) <
+      < endl;
+        std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count <<
+       std::endl;
+    }
+        return EHR_UNHANDLED;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_abdf3999377ed06fdc9507279d3381d70}{
+\index{pars.cpp@{pars.cpp}!HandleSyscall@{HandleSyscall}}
+\index{HandleSyscall@{HandleSyscall}!pars.cpp@{pars.cpp}}
+\subsubsection[{HandleSyscall}]{\setlength{\rightskip}{0pt plus 5cm}VOID HandleSyscall (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{uid, }
+\item[{CONTEXT $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_abdf3999377ed06fdc9507279d3381d70}
+
+\begin{DoxyCode}
+{
+    if (!g_var.g_enable_wp) return;
+#ifdef G_I_INFO_EN
+        assert (g_i_info.find (uid)!=g_i_info.end ());
+        const i_info &i = g_i_info[uid];
+        if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC hs " << (g_var.
+      g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << 
+      " " << i.diss << " : ";
+#endif
+        if (g_var.g_wrong_path) {
+            if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** detected syste
+      m call on wrong path ***\n";
+                g_var.g_spec_syscall = true;    
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a96e565b2ab0bebcb0ffa565e9b7a4c9f}{
+\index{pars.cpp@{pars.cpp}!Init@{Init}}
+\index{Init@{Init}!pars.cpp@{pars.cpp}}
+\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}VOID Init (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{cfgFile}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a96e565b2ab0bebcb0ffa565e9b7a4c9f}
+
+\begin{DoxyCode}
+{
+        parseConfig (cfgFile);
+        g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
+        PIN_SemaphoreInit (&semaphore0);
+        PIN_SemaphoreInit (&semaphore1);
+        PIN_SemaphoreClear (&semaphore0);
+        PIN_SemaphoreClear (&semaphore1);
+    g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+      
+        g_var.msg.simStep ("PARS COMPILED CODE");
+        g_staticCode = new staticCodeParser (&g_var, g_cfg);
+
+        g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
+        char const * dummy_argv[] = {"TraceSim", 
+                                 "-o", "/scratch/tracesim/specint2006/results/ooo
+      _listSch_dynBP_manyCache/401.bzip2.txt", 
+                                 "-i", "/scratch/tracesim/specint2006/bb_trace_ar
+      chReg/401.bzip2.trace", 
+                                 "-c", "1", "-n", "4", "-s", "1", "-y", "1", "-j"
+      , "1", "-w", "160", 
+                                 "-x", "/home/milad/esc_project/svn/memTraceMilad
+      /TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv", 
+                                 "-e", "num_wbb_bypassed_in_scheduling_each_ins",
+       
+                                 "-z", "/home/milad/esc_project/svn/memTraceMilad
+      /TraceSim/results/bzip2/branch_exe_count_map.csv", 
+                                 NULL};
+        int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
+        g_var.g_insList = new List<string*>;
+        g_var.g_codeCache = new List<dynInstruction*>;
+        g_var.g_BBlist = new List<basicblock*>;
+        bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
+        bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
+        //inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+        oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+        g_var.msg.simStep ("START OF SIMULATION");
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a4254ddc7317164f6cb03afabf4b11770}{
+\index{pars.cpp@{pars.cpp}!Instruction@{Instruction}}
+\index{Instruction@{Instruction}!pars.cpp@{pars.cpp}}
+\subsubsection[{Instruction}]{\setlength{\rightskip}{0pt plus 5cm}VOID Instruction (
+\begin{DoxyParamCaption}
+\item[{TRACE}]{trace, }
+\item[{VOID $\ast$}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a4254ddc7317164f6cb03afabf4b11770}
+
+\begin{DoxyCode}
+{
+        if (!filter.SelectTrace (trace)) {
+                printf ("NOTE: SKIPPING TRACE\n");
+                return;
+        }
+
+        for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bb
+      l))
+        {
+                for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next
+       (ins))
+        {
+            ADDRINT pc = INS_Address (ins);
+            string diss =  INS_Disassemble (ins);
+            static unsigned long uid=0;
+            ++uid;
+#ifdef G_I_INFO_EN
+            OPCODE opcode = INS_Opcode (ins);
+            bool is_call = INS_IsCall (ins);
+            bool is_ret = INS_IsRet (ins);
+            bool has_ft = INS_HasFallThrough (ins);
+            g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+            if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,has_f
+      t);
+#endif
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount,
+                    IARG_END);
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpMemCount_,
+                    IARG_UINT32, INS_MemoryOperandCount (ins),
+                    IARG_END);
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpCallCount_,
+                    IARG_BOOL, INS_IsCall (ins),
+                    IARG_END);
+
+            if (g_var.g_enable_instrumentation) {
+                //cout << g_var.g_insCountRightPath << " instrumentation enabled\
+      n";
+                get_uop (ins);
+                //if (g_cfg->coreType == PHRASEBLOCK)
+                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuf
+      f,
+                //              IARG_ADDRINT, INS_Address (ins),
+                //              IARG_END);
+                //else {
+                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageInsBu
+      ff,
+                //              IARG_ADDRINT, INS_Address (ins),
+                //              IARG_END);
+                //}
+                if (INS_IsMemoryWrite (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
+      x << pc << " " << diss << " [mem write]\n";
+                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) 
+      GetMemWriteOrigValue,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_MEMORYWRITE_EA,
+                            IARG_MEMORYWRITE_SIZE,
+                            IARG_END);
+                    /*
+                       if (INS_IsCall (ins) || INS_IsProcedureCall (ins)) {
+                       INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) GetMem
+      WriteNewValue,
+                       IARG_UINT32, uid,
+                       IARG_CONTEXT,
+                       IARG_END);
+                       } else {
+                       INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) GetMemWriteNe
+      wValue,
+                       IARG_UINT32, uid,
+                       IARG_CONTEXT,
+                       IARG_END);
+                       }
+                       */
+                }
+                /*
+                   if (INS_IsMemoryRead (ins)) {
+                   if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex
+       << pc << " " << diss << " [mem read]\n";
+                   INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemReadBypass
+      ,
+                   IARG_UINT32, uid,
+                   IARG_CONTEXT,
+                   IARG_MEMORYREAD_EA,
+                   IARG_MEMORYREAD_SIZE,
+                   IARG_END);
+                   }
+                   */
+
+                if (INS_IsBranchOrCall (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
+      x << pc << " " << diss << " [branch]\n";
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) 
+      HandleBranch,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_BRANCH_TAKEN,
+                            IARG_BRANCH_TARGET_ADDR, 
+                            IARG_FALLTHROUGH_ADDR,
+                            IARG_ADDRINT, INS_Address (ins),
+                            IARG_BOOL, INS_HasFallThrough (ins),
+                            IARG_END);
+                }
+
+                if (INS_IsSyscall (ins)) {
+                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleSyscall,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_END);
+                }
+
+                INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleInst,
+                        IARG_UINT32, uid,
+                        IARG_BOOL, INS_IsCall (ins),
+                        IARG_BOOL, INS_IsRet (ins),
+                        IARG_BOOL, INS_IsFarRet (ins),
+                        IARG_END);
+            }
+        }
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_afeffa2ead47ca07b047fd4ff89c6159a}{
+\index{pars.cpp@{pars.cpp}!manageBBbuff@{manageBBbuff}}
+\index{manageBBbuff@{manageBBbuff}!pars.cpp@{pars.cpp}}
+\subsubsection[{manageBBbuff}]{\setlength{\rightskip}{0pt plus 5cm}VOID manageBBbuff (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_afeffa2ead47ca07b047fd4ff89c6159a}
+
+\begin{DoxyCode}
+                                    {
+    if (g_var.g_debug_level & DBG_INSBUF) {
+        std::cout << "In manageBBbuff:" << std::endl;
+        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
+        std::cout << "\tNum BB to Del: " << g_var.g_BBlist_indx << std::endl;
+    }
+    if (g_staticCode->isNewBB (insAddr)) {
+        if (g_var.g_BBlist->NumElements () >= 20) {
+            PIN_SemaphoreSet (&semaphore0);
+            PIN_SemaphoreWait (&semaphore1); 
+            PIN_SemaphoreClear (&semaphore1);
+        }
+        getNewBB (insAddr);
+    }
+    if (g_var.g_BBlist->NumElements () > 0 && g_var.g_ins != "\0") {
+        string* elem = new string;
+        *elem = g_var.g_ins;
+        g_var.g_BBlist->Last ()->addToBB (elem,insAddr);
+        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever
+       make it from uop_gen to here. this should eventually go away
+    } else {
+        ;//cout << "shit" << endl;
+        //TODO add stat to keep track of ignored instructions - should be very ne
+      gligible.
+    }
+    if (g_var.g_BBlist_indx == -1) return;
+    //Flush BB's used already
+    Assert (g_var.g_BBlist_indx <= g_var.g_BBlist->NumElements ());
+    for (int indx = 0; indx <= g_var.g_BBlist_indx; indx++) {
+        //delete g_var.g_BBlist->Nth (0);
+        g_var.g_BBlist->RemoveAt (0);
+    }
+    g_var.g_BBlist_indx = -1;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a93bbaf34e7ec7f041f2d2ff398fd5e28}{
+\index{pars.cpp@{pars.cpp}!manageInsBuff@{manageInsBuff}}
+\index{manageInsBuff@{manageInsBuff}!pars.cpp@{pars.cpp}}
+\subsubsection[{manageInsBuff}]{\setlength{\rightskip}{0pt plus 5cm}VOID manageInsBuff (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a93bbaf34e7ec7f041f2d2ff398fd5e28}
+
+\begin{DoxyCode}
+                                     {
+    if (g_var.g_debug_level & DBG_INSBUF) {
+        std::cout << "In manageInsBuff:" << std::endl;
+        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
+        std::cout << "\tNum Ins. to Del: " << g_var.g_insList_indx << std::endl;
+    }
+    if (g_var.g_ins != "\0") {
+        string* elem = new string;
+        *elem = g_var.g_ins;
+        g_var.g_insList->Append (elem);
+        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever
+       make it from uop_gen to here. this should eventually go away
+        //cout << "put in queue x: " << (*g_var.g_insList->Nth (g_var.g_insList->
+      NumElements ()-1)).c_str ()  << endl;
+    }
+    Assert (g_var.g_insList_indx <= g_var.g_insList->NumElements ());
+    int indx = 0;
+    for (indx = 0; indx < g_var.g_insList_indx; indx++) {
+        //delete g_var.g_codeCache->Nth (0);
+        delete g_var.g_insList->Nth (0);
+        //g_var.g_codeCache->RemoveAt (0);
+        g_var.g_insList->RemoveAt (0);
+    }
+    g_var.g_insList_indx = 0;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a0269e469bbd12d528db5073402dd6c4e}{
+\index{pars.cpp@{pars.cpp}!parseConfig@{parseConfig}}
+\index{parseConfig@{parseConfig}!pars.cpp@{pars.cpp}}
+\subsubsection[{parseConfig}]{\setlength{\rightskip}{0pt plus 5cm}VOID parseConfig (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{cfgFile}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a0269e469bbd12d528db5073402dd6c4e}
+
+\begin{DoxyCode}
+                                 {
+        g_cfg = new config (cfgFile, &g_var);
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a6c563e02c0b7b634beaaf53ada126817}{
+\index{pars.cpp@{pars.cpp}!PredictAndUpdate@{PredictAndUpdate}}
+\index{PredictAndUpdate@{PredictAndUpdate}!pars.cpp@{pars.cpp}}
+\subsubsection[{PredictAndUpdate}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT PredictAndUpdate (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{\_\-\_\-pc, }
+\item[{INT32}]{\_\-\_\-taken, }
+\item[{ADDRINT}]{tgt, }
+\item[{ADDRINT}]{fthru}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a6c563e02c0b7b634beaaf53ada126817}
+
+\begin{DoxyCode}
+{
+    bool taken = __taken;
+    ADDRINT pc = __pc;
+    void *bp_hist = NULL;
+    bool pred = g_predictor->lookup (pc, bp_hist);
+    if (g_var.g_debug_level & DBG_BP) std::cout << "  prediction = " << (pred?"T"
+      :"N");
+        if (!g_var.g_wrong_path) {
+                if (g_var.g_debug_level & DBG_BP) std::cout << ", actual = " << (
+      taken?"T":"N") << " : "; 
+                if (pred != taken) {
+                    if (g_var.g_debug_level & DBG_BP) std::cout << "mispredicted!
+      \n";
+                        g_var.g_wrong_path = true;
+                        //printf ("\nSTART OF WRONG PATH\n");
+                        //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
+                } else {
+                    if (g_var.g_debug_level & DBG_BP) std::cout << "correct predi
+      ction\n";
+                }
+                g_predictor->update (pc, taken, bp_hist, false);
+        } else {
+                if (g_var.g_debug_level & DBG_BP) std::cout << " on wrong path\n"
+      ;
+        }
+    return  pred ? tgt : fthru;
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a0958ec4bf081af6c5cf63c9b50a3b65e}{
+\index{pars.cpp@{pars.cpp}!read\_\-mem\_\-orig@{read\_\-mem\_\-orig}}
+\index{read\_\-mem\_\-orig@{read\_\-mem\_\-orig}!pars.cpp@{pars.cpp}}
+\subsubsection[{read\_\-mem\_\-orig}]{\setlength{\rightskip}{0pt plus 5cm}void read\_\-mem\_\-orig (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{eaddr, }
+\item[{ADDRINT}]{len}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a0958ec4bf081af6c5cf63c9b50a3b65e}
+
+\begin{DoxyCode}
+{
+        if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "  mem[" << hex << 
+      eaddr << " ] = ";
+        //assert (len <= MAX_MEM_WRITE_LEN);
+        g_var.g_invalid_size = false;
+        if (len > MAX_MEM_WRITE_LEN) {
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memor
+      y access size - read_mem_orig ()) - " << (int)len << "Bytes\n";
+                g_var.g_invalid_size = true;
+                return;
+        }
+        g_var.g_last_len = len;
+        g_var.g_last_eaddr = eaddr;
+        g_var.g_invalid_addr = false;
+
+        THREADID tid=PIN_ThreadId ();
+        if (tid==INVALID_THREADID) {
+                std::cout << " could not get thread id\n";
+                exit (1);
+        }
+
+        PIN_TryStart (tid,handle,0);
+        int val = setjmp (g_var.g_env);
+        if (val) {
+                if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memor
+      y location - read_mem_orig ())\n";
+                g_var.g_invalid_addr = true;
+                PIN_TryEnd (tid);
+                return;
+        }
+
+        for (int i=len-1; i >= 0; i--) {
+                PIN_SafeCopy (&g_store_buffer[i], (ADDRINT*) (eaddr+i), sizeof (u
+      nsigned char));
+                //g_store_buffer[i] = * (((unsigned char*)eaddr)+i);
+                if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << hex << (uns
+      igned) g_store_buffer[i] << " ";
+        }
+
+        PIN_TryEnd (tid);
+
+        g_log.save (eaddr, len, g_store_buffer);
+
+        if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "\n";
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a505f360905b4ad0fa6e18f19405539ea}{
+\index{pars.cpp@{pars.cpp}!recover@{recover}}
+\index{recover@{recover}!pars.cpp@{pars.cpp}}
+\subsubsection[{recover}]{\setlength{\rightskip}{0pt plus 5cm}void recover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a505f360905b4ad0fa6e18f19405539ea}
+
+\begin{DoxyCode}
+{
+        g_var.g_wrong_path = false;
+        g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
+        g_var.g_recovery_count++;
+        if (g_var.g_debug_level & DBG_SPEC) {
+                std::cout << " *** recovering to correct path ***\n";
+                std::cout << " recovery count = " << dec << g_var.
+      g_recovery_count << std::endl;
+                std::cout << " wrong path ins count = " << g_var.
+      g_wrong_path_count << " instructions (avg: " 
+                          << (double)g_var.g_total_wrong_path_count/ (double)
+      g_var.g_recovery_count << ")\n";
+        }
+        g_var.g_wrong_path_count = 0;
+        g_var.g_spec_syscall = false;
+        g_var.g_context_call_depth=0;
+        g_log.recover ();
+        //printf ("\nEND OF WRONG PATH\n");
+        //fprintf (__outFile, "\nEND OF WRONG PATH\n");
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_aadc78553d6c767ac2c7315e443a4c0c1}{
+\index{pars.cpp@{pars.cpp}!runPARS@{runPARS}}
+\index{runPARS@{runPARS}!pars.cpp@{pars.cpp}}
+\subsubsection[{runPARS}]{\setlength{\rightskip}{0pt plus 5cm}VOID runPARS (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{cfgFile}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_aadc78553d6c767ac2c7315e443a4c0c1}
+
+\begin{DoxyCode}
+{
+    Init (cfgFile);
+
+        // Register a routine that gets called every time the trace is inserted
+    CODECACHE_AddTraceInsertedFunction (countTrace, 0);
+        // Register a routine that gets called every time the cache is full
+        CODECACHE_AddFullCacheFunction (FlushOnFull, 0); 
+
+        //Handle pin-generated exceptions
+        PIN_AddInternalExceptionHandler (handlePinException,NULL);
+        //Handle application-generated exceptions
+        PIN_InterceptSignal (SIGTRAP,signal_handler,NULL);
+        PIN_UnblockSignal (SIGTRAP,TRUE);
+        PIN_InterceptSignal (SIGILL,signal_handler,NULL);
+        PIN_UnblockSignal (SIGILL,TRUE);
+        PIN_InterceptSignal (SIGSEGV,signal_handler,NULL);
+        PIN_UnblockSignal (SIGSEGV,TRUE);
+        PIN_InterceptSignal (SIGFPE,signal_handler,NULL);
+        PIN_UnblockSignal (SIGFPE,TRUE);
+        PIN_InterceptSignal (SIGBUS,signal_handler,NULL);
+        PIN_UnblockSignal (SIGBUS,TRUE);
+        PIN_InterceptSignal (SIGABRT,signal_handler,NULL);
+        PIN_UnblockSignal (SIGABRT,TRUE);
+
+        __outFile = fopen ("junky", "w");
+        uop_gen (__outFile, *g_staticCode);
+    TRACE_AddInstrumentFunction (Instruction, 0);
+    PIN_AddFiniFunction (Fini, 0);
+
+    PIN_SpawnInternalThread (backEnd, rootThreadArg, 0, &rootThreadUid);
+
+        filter.Activate ();
+
+        start_pars = clock ();
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a5f145c9581fdc13b0459253871f0338a}{
+\index{pars.cpp@{pars.cpp}!signal\_\-handler@{signal\_\-handler}}
+\index{signal\_\-handler@{signal\_\-handler}!pars.cpp@{pars.cpp}}
+\subsubsection[{signal\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}BOOL signal\_\-handler (
+\begin{DoxyParamCaption}
+\item[{THREADID}]{tid, }
+\item[{INT32}]{sig, }
+\item[{CONTEXT $\ast$}]{ctxt, }
+\item[{BOOL}]{hasHandler, }
+\item[{const EXCEPTION\_\-INFO $\ast$}]{pExceptInfo, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8cpp_a5f145c9581fdc13b0459253871f0338a}
+
+\begin{DoxyCode}
+{
+    if (sig != 11 && sig != 4 && sig != 7) cout << sig << ',' << g_var.
+      g_wrong_path << endl;
+    g_var.g_app_signal_count++;
+    if (g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
+       << sig << " on wrong path " << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " application signal cou
+      nt = " << dec << g_var.g_app_signal_count << std::endl;
+        recover ();
+        PIN_SaveContext (&g_var.g_context,ctxt);
+        return FALSE;
+    } else {
+        std::cout << "ERROR for REAL: caught signal " << dec << sig << " on corre
+      ct path " << std::endl;
+        std::cout << " application signal count = " << dec << g_var.
+      g_app_signal_count << std::endl;
+        return TRUE; // pass exception 
+    }
+}
+\end{DoxyCode}
+\hypertarget{pars_8cpp_a316b3c4d2f2c15570934fed127e549f5}{
+\index{pars.cpp@{pars.cpp}!simpointMode@{simpointMode}}
+\index{simpointMode@{simpointMode}!pars.cpp@{pars.cpp}}
+\subsubsection[{simpointMode}]{\setlength{\rightskip}{0pt plus 5cm}BOOL simpointMode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{pars_8cpp_a316b3c4d2f2c15570934fed127e549f5}
+
+\begin{DoxyCode}
+                            {
+        static int simpCount=0; 
+        unsigned long next_simp=g_cfg->_simpoint.begin ()->first; 
+        if (g_var.g_enable_simpoint && !g_var.g_wrong_path) {
+                if (g_var.g_inSimpoint) {
+                        g_var.g_simpInsCnt++;
+                        if (g_var.g_simpInsCnt >= SIMP_WINDOW_SIZE) {
+                                cout << "*** Simpoint end\n\n";
+                                g_var.g_inSimpoint = false;
+                                g_var.g_enable_wp = false;
+                                g_var.g_simpInsCnt = 0;
+                                PIN_RemoveInstrumentation ();
+                                g_var.g_enable_instrumentation = false;
+                        }
+                } else {
+                        if (next_simp == g_var.g_insCountRightPath) {
+                                g_var.g_inSimpoint = true;
+                                g_var.g_enable_wp = true;
+                                g_var.g_simpInsCnt = 0;
+                                g_var.g_enable_instrumentation = true;
+                                g_cfg->_simpoint.erase (next_simp);
+                                next_simp = g_cfg->_simpoint.begin ()->first;
+                                cout << "\n*** Simpoint #" << ++simpCount << ": "
+       << g_var.g_insCountRightPath << "\n";
+                                cout << "*** Next Simpoint is: #" << next_simp <<
+       "\n";
+                        }
+                }
+        }
+        return g_var.g_inSimpoint;
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{pars_8cpp_a675aead22d8ea8c089cc7cfc1720bed1}{
+\index{pars.cpp@{pars.cpp}!\_\-\_\-outFile@{\_\-\_\-outFile}}
+\index{\_\-\_\-outFile@{\_\-\_\-outFile}!pars.cpp@{pars.cpp}}
+\subsubsection[{\_\-\_\-outFile}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf \_\-\_\-outFile}}}
+\label{pars_8cpp_a675aead22d8ea8c089cc7cfc1720bed1}
+\hypertarget{pars_8cpp_aa415b778ddffd669c113279e23602671}{
+\index{pars.cpp@{pars.cpp}!filter@{filter}}
+\index{filter@{filter}!pars.cpp@{pars.cpp}}
+\subsubsection[{filter}]{\setlength{\rightskip}{0pt plus 5cm}FILTER {\bf filter}}}
+\label{pars_8cpp_aa415b778ddffd669c113279e23602671}
+\hypertarget{pars_8cpp_ac300c5dd1553141a19aac3739ab59c78}{
+\index{pars.cpp@{pars.cpp}!g\_\-cfg@{g\_\-cfg}}
+\index{g\_\-cfg@{g\_\-cfg}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-cfg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf config}$\ast$ {\bf g\_\-cfg}}}
+\label{pars_8cpp_ac300c5dd1553141a19aac3739ab59c78}
+\hypertarget{pars_8cpp_aab998b67eb0b3b2e5a85862cd87c17db}{
+\index{pars.cpp@{pars.cpp}!g\_\-i\_\-info@{g\_\-i\_\-info}}
+\index{g\_\-i\_\-info@{g\_\-i\_\-info}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-i\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}map$<$unsigned,i\_\-info$>$ {\bf g\_\-i\_\-info}}}
+\label{pars_8cpp_aab998b67eb0b3b2e5a85862cd87c17db}
+\hypertarget{pars_8cpp_a627bf9888cdd16a64ce1336bca064d71}{
+\index{pars.cpp@{pars.cpp}!g\_\-log@{g\_\-log}}
+\index{g\_\-log@{g\_\-log}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-log}]{\setlength{\rightskip}{0pt plus 5cm}{\bf memory\_\-buffer} {\bf g\_\-log}}}
+\label{pars_8cpp_a627bf9888cdd16a64ce1336bca064d71}
+\hypertarget{pars_8cpp_a773762181364482488166d354460bc98}{
+\index{pars.cpp@{pars.cpp}!g\_\-predictor@{g\_\-predictor}}
+\index{g\_\-predictor@{g\_\-predictor}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-predictor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TournamentBP}$\ast$ {\bf g\_\-predictor} = NULL}}
+\label{pars_8cpp_a773762181364482488166d354460bc98}
+\hypertarget{pars_8cpp_ae1f49acdc02bc860091a9c0826042e9a}{
+\index{pars.cpp@{pars.cpp}!g\_\-staticCode@{g\_\-staticCode}}
+\index{g\_\-staticCode@{g\_\-staticCode}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-staticCode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf staticCodeParser}$\ast$ {\bf g\_\-staticCode}}}
+\label{pars_8cpp_ae1f49acdc02bc860091a9c0826042e9a}
+\hypertarget{pars_8cpp_a5e14965f9e14d6406bb5b10e49d24b85}{
+\index{pars.cpp@{pars.cpp}!g\_\-store\_\-buffer@{g\_\-store\_\-buffer}}
+\index{g\_\-store\_\-buffer@{g\_\-store\_\-buffer}!pars.cpp@{pars.cpp}}
+\subsubsection[{g\_\-store\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char {\bf g\_\-store\_\-buffer}\mbox{[}MAX\_\-MEM\_\-WRITE\_\-LEN\mbox{]}}}
+\label{pars_8cpp_a5e14965f9e14d6406bb5b10e49d24b85}
+\hypertarget{pars_8cpp_a86846b0c2e5650e69c2a5ef0538775b1}{
+\index{pars.cpp@{pars.cpp}!imgInsCallCount\_\-@{imgInsCallCount\_\-}}
+\index{imgInsCallCount\_\-@{imgInsCallCount\_\-}!pars.cpp@{pars.cpp}}
+\subsubsection[{imgInsCallCount\_\-}]{\setlength{\rightskip}{0pt plus 5cm}long unsigned {\bf imgInsCallCount\_\-} = 0}}
+\label{pars_8cpp_a86846b0c2e5650e69c2a5ef0538775b1}
+\hypertarget{pars_8cpp_aea4af54ecf740d35ec391b44f6154d17}{
+\index{pars.cpp@{pars.cpp}!imgInsMemCount\_\-@{imgInsMemCount\_\-}}
+\index{imgInsMemCount\_\-@{imgInsMemCount\_\-}!pars.cpp@{pars.cpp}}
+\subsubsection[{imgInsMemCount\_\-}]{\setlength{\rightskip}{0pt plus 5cm}long unsigned {\bf imgInsMemCount\_\-} = 0}}
+\label{pars_8cpp_aea4af54ecf740d35ec391b44f6154d17}
+\hypertarget{pars_8cpp_a1e853eca8d9b1c61c314eed5b83b538a}{
+\index{pars.cpp@{pars.cpp}!rootThreadArg@{rootThreadArg}}
+\index{rootThreadArg@{rootThreadArg}!pars.cpp@{pars.cpp}}
+\subsubsection[{rootThreadArg}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ {\bf rootThreadArg} = (void $\ast$)0xABBA}}
+\label{pars_8cpp_a1e853eca8d9b1c61c314eed5b83b538a}
+\hypertarget{pars_8cpp_a5b351a9cd233c0a893b976831dce607c}{
+\index{pars.cpp@{pars.cpp}!rootThreadUid@{rootThreadUid}}
+\index{rootThreadUid@{rootThreadUid}!pars.cpp@{pars.cpp}}
+\subsubsection[{rootThreadUid}]{\setlength{\rightskip}{0pt plus 5cm}PIN\_\-THREAD\_\-UID {\bf rootThreadUid}}}
+\label{pars_8cpp_a5b351a9cd233c0a893b976831dce607c}
+\hypertarget{pars_8cpp_a3780f840dcb4b8cfe00bde4a6cd55d16}{
+\index{pars.cpp@{pars.cpp}!semaphore0@{semaphore0}}
+\index{semaphore0@{semaphore0}!pars.cpp@{pars.cpp}}
+\subsubsection[{semaphore0}]{\setlength{\rightskip}{0pt plus 5cm}PIN\_\-SEMAPHORE {\bf semaphore0}}}
+\label{pars_8cpp_a3780f840dcb4b8cfe00bde4a6cd55d16}
+\hypertarget{pars_8cpp_ad27290b1818ecaa97935c4d181a158f0}{
+\index{pars.cpp@{pars.cpp}!semaphore1@{semaphore1}}
+\index{semaphore1@{semaphore1}!pars.cpp@{pars.cpp}}
+\subsubsection[{semaphore1}]{\setlength{\rightskip}{0pt plus 5cm}PIN\_\-SEMAPHORE {\bf semaphore1}}}
+\label{pars_8cpp_ad27290b1818ecaa97935c4d181a158f0}
+\hypertarget{pars_8cpp_a0161597891c90043c55ef8ecc6855e49}{
+\index{pars.cpp@{pars.cpp}!start\_\-pars@{start\_\-pars}}
+\index{start\_\-pars@{start\_\-pars}!pars.cpp@{pars.cpp}}
+\subsubsection[{start\_\-pars}]{\setlength{\rightskip}{0pt plus 5cm}clock\_\-t {\bf start\_\-pars}}}
+\label{pars_8cpp_a0161597891c90043c55ef8ecc6855e49}
+\hypertarget{pars_8cpp_aae1c5d9a4ab56767590309b25a7dfa67}{
+\index{pars.cpp@{pars.cpp}!stop\_\-pars@{stop\_\-pars}}
+\index{stop\_\-pars@{stop\_\-pars}!pars.cpp@{pars.cpp}}
+\subsubsection[{stop\_\-pars}]{\setlength{\rightskip}{0pt plus 5cm}clock\_\-t {\bf stop\_\-pars}}}
+\label{pars_8cpp_aae1c5d9a4ab56767590309b25a7dfa67}

@@ -1,0 +1,733 @@
+\hypertarget{classfragment}{
+\section{fragment Class Reference}
+\label{classfragment}\index{fragment@{fragment}}
+}
+
+
+{\ttfamily \#include $<$fragment.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfragment_a4d2571d9d7d4a6c63a1104f80b93c459}{fragment} ()
+\item 
+\hyperlink{classfragment_a64e398a019d40e5876b1f6d949debb62}{$\sim$fragment} ()
+\item 
+void \hyperlink{classfragment_a576105bce7818f0ec6fc7cc32c36727a}{setFragID} (long int id)
+\item 
+void \hyperlink{classfragment_ac13cdd18e40da61acc3b7e36c4772c88}{setMyPhID} (long int id)
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classfragment_a384635ae9d4415bb76246355bbd53e87}{getFragID} ()
+\item 
+void \hyperlink{classfragment_a536afae1860d52f35d230572958c5a48}{addToFrag} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classfragment_abad5ebb5003e717717832818787a0fce}{getNthIns} (int i)
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{classfragment_a9347b7f348f9d7844f8367eb6d331906}{getInsList} ()
+\item 
+int \hyperlink{classfragment_ad6928ee70f8db4c3081b1322103647cd}{getFragSize} ()
+\item 
+void \hyperlink{classfragment_abee934c501a60519bc610cd01208480f}{setNumBits} (int numBits)
+\item 
+int \hyperlink{classfragment_a33cff43f87509017ab6b5a5fbf954820}{getNumBits} ()
+\item 
+void \hyperlink{classfragment_a6082d6576975ec4166aedf50e3db8143}{computeFrIdealLat} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+long int \hyperlink{classfragment_a153c54dc61a825abfb1bc31c2361ad0f}{getFrIdealLat} ()
+\item 
+void \hyperlink{classfragment_ad85462ff233b30289592d30a7f912e69}{setAllFrAncestors} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classfragment_af7ddc8217902791945779675f4727181}{removeAncestorIns} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{classfragment_abf56277a83dfaf8d9e772dc975f3d2c6}{isReady} ()
+\item 
+void \hyperlink{classfragment_aaedc29f218f89cf851a75ae3093ef0a3}{computeFrScore} ()
+\item 
+double \hyperlink{classfragment_af8b6f798c7514a296855ba3032df9149}{getFrScore} ()
+\item 
+long double \hyperlink{classfragment_ac9b66a971cbeae791ce85b5939b40595}{getFrRelAvgAge} ()
+\item 
+double \hyperlink{classfragment_a77dbeb3aff85e771b16a3d9af59cb13f}{getFrRelNumDepLinksToNxtPh} ()
+\item 
+double \hyperlink{classfragment_aeedd611d7a3bdf4699b0fb64d85fb6b3}{getFrRelNumUPLDops} ()
+\item 
+double \hyperlink{classfragment_a8693d4747ded8fc10f1356aa5558c232}{getFrRelSize} ()
+\item 
+void \hyperlink{classfragment_a9b5625e3a82798624e16a747baf93078}{setPhAvgAge} (long double phAvgAge)
+\item 
+void \hyperlink{classfragment_a98217830bdd67193cc3cd784b427a15e}{setPhNumDepLinksToNxtPh} (int phNumDepLinksToNxtPh)
+\item 
+void \hyperlink{classfragment_a9614895d86593a6967506e1c424a46ef}{setPhNumUPLDops} (int phNumUPLDops)
+\item 
+void \hyperlink{classfragment_ae2cf355111d2112a3f388b8749a3bddb}{setPhSize} (int phSize)
+\item 
+void \hyperlink{classfragment_a0d271d84f4f7dc3fc50f92ff84bcc38a}{setScore} (double frScore)
+\item 
+void \hyperlink{classfragment_aec9f0320f42a1417a2fb59c57df575f2}{VLIWfrag} (int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}, int \hyperlink{phraseGen_8cpp_ae0b3cf4db09e8c26c2ab03dbe18bfb19}{numFU})
+\item 
+void \hyperlink{classfragment_a6159b12f01d9a5214aa35c6612a58316}{setFragNum} (long int num)
+\item 
+long int \hyperlink{classfragment_ae9387817bc211427231780adf9973fe4}{getFragNum} ()
+\item 
+void \hyperlink{classfragment_a50d5fb572b0336f5c4fd28f3f4877d97}{setStart} (long int \hyperlink{bkEnd_8cpp_ada310e7f72b38fadd4b24d80ed3438ee}{start})
+\item 
+void \hyperlink{classfragment_a8de0712e74090643f9a65862b296b995}{setEnd} (long int \hyperlink{bkEnd_8cpp_ada310e7f72b38fadd4b24d80ed3438ee}{start})
+\item 
+long int \hyperlink{classfragment_a5e3e805070f60f4498372e304835d162}{getLat} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classfragment_a4d2571d9d7d4a6c63a1104f80b93c459}{
+\index{fragment@{fragment}!fragment@{fragment}}
+\index{fragment@{fragment}!fragment@{fragment}}
+\subsubsection[{fragment}]{\setlength{\rightskip}{0pt plus 5cm}fragment::fragment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a4d2571d9d7d4a6c63a1104f80b93c459}
+
+\begin{DoxyCode}
+                   {
+        _id      = -1;
+        _frNum   = -1;
+        _numBits = -1;
+        _fragmentInsList_sort = new List<instruction*>;
+        _fragmentInsList_vliw = new List<instruction*>;
+        _memReadAncestorsID   = new List<int>;
+        _fragmentInsList      = new List<instruction*>;
+        _allAncestors         = new List<instruction*>; //All ancestors
+        _frScore      = -1.0;
+        _phSize       = -1.0;
+        _phAvgAge     = -1.0;
+        _idealLat     = 0;
+        _numUPMEMops  = 0;
+        _phNumUPLDops = -1.0;
+        _phNumDepLinksToNxtPh = -1.0;
+        _startCycle   = -1;
+        _endCycle     = -1;
+        _latency      = -1;
+
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a64e398a019d40e5876b1f6d949debb62}{
+\index{fragment@{fragment}!$\sim$fragment@{$\sim$fragment}}
+\index{$\sim$fragment@{$\sim$fragment}!fragment@{fragment}}
+\subsubsection[{$\sim$fragment}]{\setlength{\rightskip}{0pt plus 5cm}fragment::$\sim$fragment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a64e398a019d40e5876b1f6d949debb62}
+
+\begin{DoxyCode}
+                    {
+        while(_fragmentInsList_sort->NumElements() > 0) {
+            _fragmentInsList_sort->RemoveAt(0);
+        }
+        while(_fragmentInsList_vliw->NumElements() > 0) {
+            _fragmentInsList_vliw->RemoveAt(0);
+        }
+        while(_fragmentInsList->NumElements() > 0) {
+            _fragmentInsList->RemoveAt(0);
+        }
+        while(_allAncestors->NumElements() > 0) {
+            _allAncestors->RemoveAt(0);
+        }
+        delete _fragmentInsList_sort;
+        delete _fragmentInsList_vliw;
+        delete _memReadAncestorsID;
+        delete _fragmentInsList;
+        delete _allAncestors;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classfragment_a536afae1860d52f35d230572958c5a48}{
+\index{fragment@{fragment}!addToFrag@{addToFrag}}
+\index{addToFrag@{addToFrag}!fragment@{fragment}}
+\subsubsection[{addToFrag}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::addToFrag (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a536afae1860d52f35d230572958c5a48}
+
+\begin{DoxyCode}
+                                         {
+        _fragmentInsList->Append(ins);
+        _fragmentInsList_sort->Append(ins);
+        computeFrIdealLat(ins);
+        setAllFrAncestors(ins);
+        if (ins->getMissrate() > unpredMemOpThreshold) _numUPMEMops++;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a6082d6576975ec4166aedf50e3db8143}{
+\index{fragment@{fragment}!computeFrIdealLat@{computeFrIdealLat}}
+\index{computeFrIdealLat@{computeFrIdealLat}!fragment@{fragment}}
+\subsubsection[{computeFrIdealLat}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::computeFrIdealLat (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a6082d6576975ec4166aedf50e3db8143}
+
+\begin{DoxyCode}
+                                                 {
+        type insType = ins->getType();
+        switch (insType) {
+                case ALU:
+                        _idealLat += ALU_LATENCY;
+                        break;
+                case MEM:
+                        _idealLat += 1; //cacheLat[0];
+                        break;
+                case FPU:
+                        _idealLat += FPU_LATENCY;
+                        break;
+                default:
+                        printf("Instruction type unrecognized. Terminating.\n");
+                        exit(-1);
+                        break;
+        };
+}
+\end{DoxyCode}
+\hypertarget{classfragment_aaedc29f218f89cf851a75ae3093ef0a3}{
+\index{fragment@{fragment}!computeFrScore@{computeFrScore}}
+\index{computeFrScore@{computeFrScore}!fragment@{fragment}}
+\subsubsection[{computeFrScore}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::computeFrScore (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_aaedc29f218f89cf851a75ae3093ef0a3}
+
+\begin{DoxyCode}
+                              {
+        //printf("%f, %f, %f, %f\n",    getFrRelNumDepLinksToNxtPh(), 
+        //                              getFrRelNumUPLDops(), 
+        //                              getFrRelAvgAge(), 
+        //                              getFrRelSize());
+        _frScore = getFrRelNumDepLinksToNxtPh() + 
+                   getFrRelNumUPLDops() + 
+                   getFrRelAvgAge() + 
+                   getFrRelSize();
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a384635ae9d4415bb76246355bbd53e87}{
+\index{fragment@{fragment}!getFragID@{getFragID}}
+\index{getFragID@{getFragID}!fragment@{fragment}}
+\subsubsection[{getFragID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} fragment::getFragID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a384635ae9d4415bb76246355bbd53e87}
+
+\begin{DoxyCode}
+                           {
+        Assert(_id >= 0);
+        return _id;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ae9387817bc211427231780adf9973fe4}{
+\index{fragment@{fragment}!getFragNum@{getFragNum}}
+\index{getFragNum@{getFragNum}!fragment@{fragment}}
+\subsubsection[{getFragNum}]{\setlength{\rightskip}{0pt plus 5cm}long int fragment::getFragNum (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ae9387817bc211427231780adf9973fe4}
+
+\begin{DoxyCode}
+                              {
+        Assert(_frNum > -1);
+        return _frNum;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ad6928ee70f8db4c3081b1322103647cd}{
+\index{fragment@{fragment}!getFragSize@{getFragSize}}
+\index{getFragSize@{getFragSize}!fragment@{fragment}}
+\subsubsection[{getFragSize}]{\setlength{\rightskip}{0pt plus 5cm}int fragment::getFragSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ad6928ee70f8db4c3081b1322103647cd}
+
+\begin{DoxyCode}
+                          {
+        return _fragmentInsList->NumElements();
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a153c54dc61a825abfb1bc31c2361ad0f}{
+\index{fragment@{fragment}!getFrIdealLat@{getFrIdealLat}}
+\index{getFrIdealLat@{getFrIdealLat}!fragment@{fragment}}
+\subsubsection[{getFrIdealLat}]{\setlength{\rightskip}{0pt plus 5cm}long int fragment::getFrIdealLat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a153c54dc61a825abfb1bc31c2361ad0f}
+
+\begin{DoxyCode}
+                                 {
+        Assert(_idealLat > 0);
+        return _idealLat;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ac9b66a971cbeae791ce85b5939b40595}{
+\index{fragment@{fragment}!getFrRelAvgAge@{getFrRelAvgAge}}
+\index{getFrRelAvgAge@{getFrRelAvgAge}!fragment@{fragment}}
+\subsubsection[{getFrRelAvgAge}]{\setlength{\rightskip}{0pt plus 5cm}long double fragment::getFrRelAvgAge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ac9b66a971cbeae791ce85b5939b40595}
+
+\begin{DoxyCode}
+                                     {
+        Assert(_phAvgAge != -1.0);
+        long double totalAge = 0.0;
+        for (int i = 0; i < _fragmentInsList_sort->NumElements(); i++) {
+                totalAge += _fragmentInsList_sort->Nth(i)->getInsID();
+        }
+        long double avgAge = totalAge;// / (double)_fragmentInsList_sort->NumElem
+      ents();
+        if (avgAge > _phAvgAge) printf("%Lf,%Lf",avgAge,_phAvgAge);
+        Assert(avgAge <= _phAvgAge);
+        return (1.0 - avgAge / _phAvgAge); //Smaller value means older
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a77dbeb3aff85e771b16a3d9af59cb13f}{
+\index{fragment@{fragment}!getFrRelNumDepLinksToNxtPh@{getFrRelNumDepLinksToNxtPh}}
+\index{getFrRelNumDepLinksToNxtPh@{getFrRelNumDepLinksToNxtPh}!fragment@{fragment}}
+\subsubsection[{getFrRelNumDepLinksToNxtPh}]{\setlength{\rightskip}{0pt plus 5cm}double fragment::getFrRelNumDepLinksToNxtPh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a77dbeb3aff85e771b16a3d9af59cb13f}
+
+\begin{DoxyCode}
+                                            {
+        //Assert(_phNumDepLinksToNxtPh != -1.0);
+        //double numDepLinksToNxtPh = (double) !;
+        //return numDepLinksToNxtPh / _phNumDepLinksToNxtPh;
+        return 0.0;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_aeedd611d7a3bdf4699b0fb64d85fb6b3}{
+\index{fragment@{fragment}!getFrRelNumUPLDops@{getFrRelNumUPLDops}}
+\index{getFrRelNumUPLDops@{getFrRelNumUPLDops}!fragment@{fragment}}
+\subsubsection[{getFrRelNumUPLDops}]{\setlength{\rightskip}{0pt plus 5cm}double fragment::getFrRelNumUPLDops (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_aeedd611d7a3bdf4699b0fb64d85fb6b3}
+
+\begin{DoxyCode}
+                                    {
+        Assert(_phNumUPLDops != -1.0);
+        double numUPLDops = (double) _numUPMEMops;
+        Assert(numUPLDops <= _phNumUPLDops);
+        if (_phNumUPLDops == 0.0) {
+                return 0.0;
+        } else {
+                return (numUPLDops / _phNumUPLDops);
+        }
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a8693d4747ded8fc10f1356aa5558c232}{
+\index{fragment@{fragment}!getFrRelSize@{getFrRelSize}}
+\index{getFrRelSize@{getFrRelSize}!fragment@{fragment}}
+\subsubsection[{getFrRelSize}]{\setlength{\rightskip}{0pt plus 5cm}double fragment::getFrRelSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a8693d4747ded8fc10f1356aa5558c232}
+
+\begin{DoxyCode}
+                              {
+        Assert(_phSize > 0.0);
+        double fragSize = (double) _fragmentInsList_sort->NumElements();
+        Assert(fragSize <= _phSize);
+        return (fragSize / _phSize);
+}
+\end{DoxyCode}
+\hypertarget{classfragment_af8b6f798c7514a296855ba3032df9149}{
+\index{fragment@{fragment}!getFrScore@{getFrScore}}
+\index{getFrScore@{getFrScore}!fragment@{fragment}}
+\subsubsection[{getFrScore}]{\setlength{\rightskip}{0pt plus 5cm}double fragment::getFrScore (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_af8b6f798c7514a296855ba3032df9149}
+
+\begin{DoxyCode}
+                            {
+        Assert(_frScore != -1.0 && _frScore <= 4.0);
+        return _frScore;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a9347b7f348f9d7844f8367eb6d331906}{
+\index{fragment@{fragment}!getInsList@{getInsList}}
+\index{getInsList@{getInsList}!fragment@{fragment}}
+\subsubsection[{getInsList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$ fragment::getInsList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a9347b7f348f9d7844f8367eb6d331906}
+
+\begin{DoxyCode}
+                                         {
+        return _fragmentInsList;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a5e3e805070f60f4498372e304835d162}{
+\index{fragment@{fragment}!getLat@{getLat}}
+\index{getLat@{getLat}!fragment@{fragment}}
+\subsubsection[{getLat}]{\setlength{\rightskip}{0pt plus 5cm}long int fragment::getLat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a5e3e805070f60f4498372e304835d162}
+
+\begin{DoxyCode}
+                          {
+        Assert(_latency > 0);
+        return _latency;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_abad5ebb5003e717717832818787a0fce}{
+\index{fragment@{fragment}!getNthIns@{getNthIns}}
+\index{getNthIns@{getNthIns}!fragment@{fragment}}
+\subsubsection[{getNthIns}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction} $\ast$ fragment::getNthIns (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_abad5ebb5003e717717832818787a0fce}
+
+\begin{DoxyCode}
+                                      {
+        return _fragmentInsList->Nth(i);
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a33cff43f87509017ab6b5a5fbf954820}{
+\index{fragment@{fragment}!getNumBits@{getNumBits}}
+\index{getNumBits@{getNumBits}!fragment@{fragment}}
+\subsubsection[{getNumBits}]{\setlength{\rightskip}{0pt plus 5cm}int fragment::getNumBits (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a33cff43f87509017ab6b5a5fbf954820}
+
+\begin{DoxyCode}
+                         {
+        Assert(_numBits > -1);
+        return _numBits;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_abf56277a83dfaf8d9e772dc975f3d2c6}{
+\index{fragment@{fragment}!isReady@{isReady}}
+\index{isReady@{isReady}!fragment@{fragment}}
+\subsubsection[{isReady}]{\setlength{\rightskip}{0pt plus 5cm}bool fragment::isReady (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_abf56277a83dfaf8d9e772dc975f3d2c6}
+
+\begin{DoxyCode}
+                       {
+        if (_allAncestors->NumElements() == 0)
+                return true;
+        else
+                return false;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_af7ddc8217902791945779675f4727181}{
+\index{fragment@{fragment}!removeAncestorIns@{removeAncestorIns}}
+\index{removeAncestorIns@{removeAncestorIns}!fragment@{fragment}}
+\subsubsection[{removeAncestorIns}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::removeAncestorIns (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_af7ddc8217902791945779675f4727181}
+
+\begin{DoxyCode}
+                                                 {
+        //TODO would be nice if the ins had a map of dependent phraes + index
+        //Assume there no duplicaetes of an instructin in list
+        for (int i = _allAncestors->NumElements()-1; i >= 0; i--) {
+                if (_allAncestors->Nth(i)->getInsID() == ins->getInsID()) {
+                        _allAncestors->RemoveAt(i);
+                        //break;
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ad85462ff233b30289592d30a7f912e69}{
+\index{fragment@{fragment}!setAllFrAncestors@{setAllFrAncestors}}
+\index{setAllFrAncestors@{setAllFrAncestors}!fragment@{fragment}}
+\subsubsection[{setAllFrAncestors}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setAllFrAncestors (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ad85462ff233b30289592d30a7f912e69}
+
+
+$\ast$-\/-\/-\/-\/-\/STAT-\/-\/-\/-\/-\/$\ast$/
+
+$\ast$-\/-\/-\/-\/-\/STAT-\/-\/-\/-\/-\/$\ast$/ 
+
+
+\begin{DoxyCode}
+                                                 {
+        quicksortInsList(_fragmentInsList_sort, 0, _fragmentInsList_sort->
+      NumElements()-1);
+        quicksortInsList(_allAncestors,  0, _allAncestors->NumElements()-1);
+        for (int i = 0; i < ins->getNumAncestors(); i++) {
+                int insID = ins->getNthAncestor(i)->getInsID();
+                if (binarySearch(_fragmentInsList_sort, insID, 0, _fragmentInsLis
+      t_sort->NumElements()-1) == -1) {
+                        if (binarySearch(_allAncestors, insID, 0, _allAncestors->
+      NumElements()-1) == -1) {
+                                _allAncestors->Append(ins->getNthAncestor(i));
+                                ins->getNthAncestor(i)->addDepFrag(this);
+                                quicksortInsList(_allAncestors,  0, _allAncestors
+      ->NumElements()-1);
+                                //_numPhraseAncestors++;
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a8de0712e74090643f9a65862b296b995}{
+\index{fragment@{fragment}!setEnd@{setEnd}}
+\index{setEnd@{setEnd}!fragment@{fragment}}
+\subsubsection[{setEnd}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setEnd (
+\begin{DoxyParamCaption}
+\item[{long int}]{start}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a8de0712e74090643f9a65862b296b995}
+
+\begin{DoxyCode}
+                                  {
+        Assert(end > _startCycle && _endCycle == -1 && _latency == -1);
+        _endCycle = end;
+        _latency = _endCycle - _startCycle;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a576105bce7818f0ec6fc7cc32c36727a}{
+\index{fragment@{fragment}!setFragID@{setFragID}}
+\index{setFragID@{setFragID}!fragment@{fragment}}
+\subsubsection[{setFragID}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setFragID (
+\begin{DoxyParamCaption}
+\item[{long int}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a576105bce7818f0ec6fc7cc32c36727a}
+
+\begin{DoxyCode}
+                                    {
+        if (id <= -1) printf("bad id: %ld\n", id);
+        Assert(id > -1);
+        _id = id;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a6159b12f01d9a5214aa35c6612a58316}{
+\index{fragment@{fragment}!setFragNum@{setFragNum}}
+\index{setFragNum@{setFragNum}!fragment@{fragment}}
+\subsubsection[{setFragNum}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setFragNum (
+\begin{DoxyParamCaption}
+\item[{long int}]{num}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a6159b12f01d9a5214aa35c6612a58316}
+
+\begin{DoxyCode}
+                                      {
+        if (num <= -1) printf("bad num: %ld\n", num);
+        Assert(num > -1);
+        _frNum = num;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ac13cdd18e40da61acc3b7e36c4772c88}{
+\index{fragment@{fragment}!setMyPhID@{setMyPhID}}
+\index{setMyPhID@{setMyPhID}!fragment@{fragment}}
+\subsubsection[{setMyPhID}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setMyPhID (
+\begin{DoxyParamCaption}
+\item[{long int}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ac13cdd18e40da61acc3b7e36c4772c88}
+
+\begin{DoxyCode}
+                                    {
+        Assert(id >= 0);
+        _muPhID = id;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_abee934c501a60519bc610cd01208480f}{
+\index{fragment@{fragment}!setNumBits@{setNumBits}}
+\index{setNumBits@{setNumBits}!fragment@{fragment}}
+\subsubsection[{setNumBits}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setNumBits (
+\begin{DoxyParamCaption}
+\item[{int}]{numBits}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_abee934c501a60519bc610cd01208480f}
+
+\begin{DoxyCode}
+                                     {
+        Assert(numBits > -1);
+        _numBits = numBits;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a9b5625e3a82798624e16a747baf93078}{
+\index{fragment@{fragment}!setPhAvgAge@{setPhAvgAge}}
+\index{setPhAvgAge@{setPhAvgAge}!fragment@{fragment}}
+\subsubsection[{setPhAvgAge}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setPhAvgAge (
+\begin{DoxyParamCaption}
+\item[{long double}]{phAvgAge}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a9b5625e3a82798624e16a747baf93078}
+
+\begin{DoxyCode}
+                                               {
+        _phAvgAge = phAvgAge;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a98217830bdd67193cc3cd784b427a15e}{
+\index{fragment@{fragment}!setPhNumDepLinksToNxtPh@{setPhNumDepLinksToNxtPh}}
+\index{setPhNumDepLinksToNxtPh@{setPhNumDepLinksToNxtPh}!fragment@{fragment}}
+\subsubsection[{setPhNumDepLinksToNxtPh}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setPhNumDepLinksToNxtPh (
+\begin{DoxyParamCaption}
+\item[{int}]{phNumDepLinksToNxtPh}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a98217830bdd67193cc3cd784b427a15e}
+
+\begin{DoxyCode}
+                                                               {
+        _phNumDepLinksToNxtPh = 0.0; //(double) phNumDepLinksToNxtPh; //TODO to b
+      e implemented
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a9614895d86593a6967506e1c424a46ef}{
+\index{fragment@{fragment}!setPhNumUPLDops@{setPhNumUPLDops}}
+\index{setPhNumUPLDops@{setPhNumUPLDops}!fragment@{fragment}}
+\subsubsection[{setPhNumUPLDops}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setPhNumUPLDops (
+\begin{DoxyParamCaption}
+\item[{int}]{phNumUPLDops}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a9614895d86593a6967506e1c424a46ef}
+
+\begin{DoxyCode}
+                                               {
+        _phNumUPLDops = (double) phNumUPLDops;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_ae2cf355111d2112a3f388b8749a3bddb}{
+\index{fragment@{fragment}!setPhSize@{setPhSize}}
+\index{setPhSize@{setPhSize}!fragment@{fragment}}
+\subsubsection[{setPhSize}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setPhSize (
+\begin{DoxyParamCaption}
+\item[{int}]{phSize}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_ae2cf355111d2112a3f388b8749a3bddb}
+
+\begin{DoxyCode}
+                                   {
+        _phSize = (double) phSize;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a0d271d84f4f7dc3fc50f92ff84bcc38a}{
+\index{fragment@{fragment}!setScore@{setScore}}
+\index{setScore@{setScore}!fragment@{fragment}}
+\subsubsection[{setScore}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setScore (
+\begin{DoxyParamCaption}
+\item[{double}]{frScore}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a0d271d84f4f7dc3fc50f92ff84bcc38a}
+
+\begin{DoxyCode}
+                                      {
+        Assert(frScore >= 0.0 && frScore <= 4.0);
+        _frScore = frScore;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_a50d5fb572b0336f5c4fd28f3f4877d97}{
+\index{fragment@{fragment}!setStart@{setStart}}
+\index{setStart@{setStart}!fragment@{fragment}}
+\subsubsection[{setStart}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::setStart (
+\begin{DoxyParamCaption}
+\item[{long int}]{start}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_a50d5fb572b0336f5c4fd28f3f4877d97}
+
+\begin{DoxyCode}
+                                      {
+        Assert(start > 0 && _startCycle == -1);
+        _startCycle = start;
+}
+\end{DoxyCode}
+\hypertarget{classfragment_aec9f0320f42a1417a2fb59c57df575f2}{
+\index{fragment@{fragment}!VLIWfrag@{VLIWfrag}}
+\index{VLIWfrag@{VLIWfrag}!fragment@{fragment}}
+\subsubsection[{VLIWfrag}]{\setlength{\rightskip}{0pt plus 5cm}void fragment::VLIWfrag (
+\begin{DoxyParamCaption}
+\item[{int}]{cycle, }
+\item[{int}]{numFU}
+\end{DoxyParamCaption}
+)}}
+\label{classfragment_aec9f0320f42a1417a2fb59c57df575f2}
+
+\begin{DoxyCode}
+                                            {
+        vliwScheduler* vliwSch = new vliwScheduler;
+        long int numElem = _fragmentInsList->NumElements();
+        if (numFU > 1) {
+                vliwSch->scheduleIns(_fragmentInsList, _fragmentInsList_vliw, 0, 
+      true, _muPhID);
+        } else if (numFU == 1) {
+                vliwSch->scheduleIns_1FU(_fragmentInsList, _fragmentInsList_vliw,
+       0, true, _muPhID);
+        } else {
+                Assert(numFU >= 1);
+        }
+        Assert(_fragmentInsList->NumElements() == 0);
+        Assert(_fragmentInsList_vliw->NumElements() == numElem);
+        for (int i = 0; i < _fragmentInsList_vliw->NumElements(); i++) {
+                _fragmentInsList->Append(_fragmentInsList_vliw->Nth(i));
+        }
+        Assert(getFragSize() == numElem);
+        delete vliwSch;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{fragment_8h}{fragment.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{fragment_8cpp}{fragment.cpp}\end{DoxyCompactItemize}

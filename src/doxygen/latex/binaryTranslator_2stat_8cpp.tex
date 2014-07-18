@@ -1,0 +1,119 @@
+\hypertarget{binaryTranslator_2stat_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/stat.cpp File Reference}
+\label{binaryTranslator_2stat_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/stat.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/stat.cpp}}
+}
+{\ttfamily \#include \char`\"{}stat.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e}{StatBBSizeStat} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, string $\ast$program\_\-name)
+\item 
+void \hyperlink{binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48}{DynBBSizeStat} (map$<$ int, int $>$ \&bbSizeHist, string $\ast$program\_\-name)
+\item 
+void \hyperlink{binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93}{StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, string $\ast$program\_\-name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48}{
+\index{binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}!DynBBSizeStat@{DynBBSizeStat}}
+\index{DynBBSizeStat@{DynBBSizeStat}!binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}}
+\subsubsection[{DynBBSizeStat}]{\setlength{\rightskip}{0pt plus 5cm}void DynBBSizeStat (
+\begin{DoxyParamCaption}
+\item[{map$<$ int, int $>$ \&}]{bbSizeHist, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48}
+
+\begin{DoxyCode}
+                                                                   {
+        FILE *statOutputFile;
+        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
+      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_DynBBSizeHist_sta
+      t.csv").c_str(), "w")) == NULL)
+                Assert("Unable to open the statistics output file.");
+        for (map<int,int>::iterator it = bbSizeHist.begin(); it != bbSizeHist.end
+      (); it++) {
+                fprintf(statOutputFile, "%d, %d\n", it->first, it->second);
+        }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e}{
+\index{binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}!StatBBSizeStat@{StatBBSizeStat}}
+\index{StatBBSizeStat@{StatBBSizeStat}!binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}}
+\subsubsection[{StatBBSizeStat}]{\setlength{\rightskip}{0pt plus 5cm}void StatBBSizeStat (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e}
+
+\begin{DoxyCode}
+                                                                     {
+        map<int,int> bbSizeDensity;
+        int totalBBsize = 0;
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                int size = bbList->Nth(i)->getBbSize();
+                totalBBsize += size;
+                if (bbSizeDensity.find(size) != bbSizeDensity.end())
+                        bbSizeDensity[size] += 1;
+                else
+                        bbSizeDensity[size] = 1;
+        }
+        FILE *statOutputFile;
+        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
+      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_StatBBSizeCDF_sta
+      t.csv").c_str(), "w")) == NULL)
+                Assert("Unable to open the statistics output file.");
+        float cdf = 0.0;
+        for (map<int,int>::iterator it = bbSizeDensity.begin(); it != bbSizeDensi
+      ty.end(); it++) {
+                cdf += (float)it->second / (float)bbList->NumElements();
+                fprintf(statOutputFile, "%d, %f\n", it->first, cdf);
+        }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93}{
+\index{binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}!StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs@{StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs}}
+\index{StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs@{StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs}!binaryTranslator/stat.cpp@{binaryTranslator/stat.cpp}}
+\subsubsection[{StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs}]{\setlength{\rightskip}{0pt plus 5cm}void StatNum\_\-interBB\_\-and\_\-intra\_\-BB\_\-regs (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93}
+
+\begin{DoxyCode}
+                                                                                 
+             {
+        FILE *statOutputFile;
+        long int num_interBB_regs = 0, num_intraBB_regs = 0;
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                List<instruction*>* insList = bb->getInsList();
+                for (int j = 0; j < insList->NumElements(); j ++) {
+                        instruction *ins = insList->Nth(j);
+                        List<instruction*>* ancestors = ins->getRegAncestors();
+                        for (int k = 0; k < ancestors->NumElements(); k++) {
+                                instruction *anc = ancestors->Nth(k);
+                                if (bb->isInsAddrInBB(anc->getInsAddr())) {
+                                        num_intraBB_regs++;
+                                } else {
+                                        num_interBB_regs++;
+                                }
+                        }
+                }
+        }
+        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
+      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_inter_n_intra_BB_
+      reg_stat.txt").c_str(), "w")) == NULL)
+                Assert("Unable to open the statistics output file.");
+
+        fprintf(statOutputFile, "Avg. Num INTRA-BB Regs: %f\n", (float)num_intraB
+      B_regs/(float)bbList->NumElements());
+        fprintf(statOutputFile, "Avg. Num INTER-BB Regs: %f\n", (float)num_interB
+      B_regs/(float)bbList->NumElements());
+}\end{DoxyCode}

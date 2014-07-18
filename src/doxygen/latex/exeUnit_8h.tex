@@ -1,0 +1,108 @@
+\hypertarget{exeUnit_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/exeUnit.h File Reference}
+\label{exeUnit_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/exeUnit.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/exeUnit.h}}
+}
+{\ttfamily \#include \char`\"{}unit.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dynInstruction.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structexeUnitLat}{exeUnitLat}
+\item 
+struct \hyperlink{structexeUnit}{exeUnit}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}{EU\_\-TYPE} \{ \par
+\hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da135ec74119997c64ec05f8c4914a97a7}{GENERIC\_\-EU}, 
+\hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5dacfccd38a6cdabbb1c23afad8d522658f}{ALU\_\-EU}, 
+\hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da1ff4f3eace1bbdf87c01560b4cb0d97f}{FPU\_\-EU}, 
+\hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da883dddb02c1460673bc1b19aa8c27ba7}{MEM\_\-EU}, 
+\par
+\hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da55bb18b30d5cf6d91613842568e172f5}{BRU\_\-EU}
+ \}
+\item 
+enum \hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8}{EU\_\-STATE} \{ \hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba}{AVAILABLE\_\-EU}, 
+\hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616}{RUNNING\_\-EU}, 
+\hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542}{COMPLETE\_\-EU}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structexeUnitLat}{exeUnitLat} \hyperlink{exeUnit_8h_a02b52478da6151a364f54791e40fb6a4}{g\_\-eu\_\-lat}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8}{
+\index{exeUnit.h@{exeUnit.h}!EU\_\-STATE@{EU\_\-STATE}}
+\index{EU\_\-STATE@{EU\_\-STATE}!exeUnit.h@{exeUnit.h}}
+\subsubsection[{EU\_\-STATE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf EU\_\-STATE}}}
+\label{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{AVAILABLE\_\-EU@{AVAILABLE\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!AVAILABLE\_\-EU@{AVAILABLE\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba}{
+AVAILABLE\_\-EU}
+\label{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba}
+}]\index{RUNNING\_\-EU@{RUNNING\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!RUNNING\_\-EU@{RUNNING\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616}{
+RUNNING\_\-EU}
+\label{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616}
+}]\index{COMPLETE\_\-EU@{COMPLETE\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!COMPLETE\_\-EU@{COMPLETE\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542}{
+COMPLETE\_\-EU}
+\label{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{AVAILABLE_EU, RUNNING_EU, COMPLETE_EU} EU_STATE;
+\end{DoxyCode}
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}{
+\index{exeUnit.h@{exeUnit.h}!EU\_\-TYPE@{EU\_\-TYPE}}
+\index{EU\_\-TYPE@{EU\_\-TYPE}!exeUnit.h@{exeUnit.h}}
+\subsubsection[{EU\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf EU\_\-TYPE}}}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{GENERIC\_\-EU@{GENERIC\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!GENERIC\_\-EU@{GENERIC\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da135ec74119997c64ec05f8c4914a97a7}{
+GENERIC\_\-EU}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da135ec74119997c64ec05f8c4914a97a7}
+}]\index{ALU\_\-EU@{ALU\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!ALU\_\-EU@{ALU\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5dacfccd38a6cdabbb1c23afad8d522658f}{
+ALU\_\-EU}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5dacfccd38a6cdabbb1c23afad8d522658f}
+}]\index{FPU\_\-EU@{FPU\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!FPU\_\-EU@{FPU\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da1ff4f3eace1bbdf87c01560b4cb0d97f}{
+FPU\_\-EU}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da1ff4f3eace1bbdf87c01560b4cb0d97f}
+}]\index{MEM\_\-EU@{MEM\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!MEM\_\-EU@{MEM\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da883dddb02c1460673bc1b19aa8c27ba7}{
+MEM\_\-EU}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da883dddb02c1460673bc1b19aa8c27ba7}
+}]\index{BRU\_\-EU@{BRU\_\-EU}!exeUnit.h@{exeUnit.h}}\index{exeUnit.h@{exeUnit.h}!BRU\_\-EU@{BRU\_\-EU}}\item[{\em 
+\hypertarget{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da55bb18b30d5cf6d91613842568e172f5}{
+BRU\_\-EU}
+\label{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5da55bb18b30d5cf6d91613842568e172f5}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{GENERIC_EU, ALU_EU, FPU_EU, MEM_EU, BRU_EU} EU_TYPE;
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{exeUnit_8h_a02b52478da6151a364f54791e40fb6a4}{
+\index{exeUnit.h@{exeUnit.h}!g\_\-eu\_\-lat@{g\_\-eu\_\-lat}}
+\index{g\_\-eu\_\-lat@{g\_\-eu\_\-lat}!exeUnit.h@{exeUnit.h}}
+\subsubsection[{g\_\-eu\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf exeUnitLat} {\bf g\_\-eu\_\-lat}}}
+\label{exeUnit_8h_a02b52478da6151a364f54791e40fb6a4}

@@ -1,0 +1,612 @@
+\hypertarget{structg__variable}{
+\section{g\_\-variable Struct Reference}
+\label{structg__variable}\index{g\_\-variable@{g\_\-variable}}
+}
+
+
+{\ttfamily \#include $<$g\_\-variable.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structg__variable_a0b12751ab1f92b2345771c45290fc19e}{g\_\-variable} ()
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}{getSquashSN} ()
+\item 
+void \hyperlink{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}{resetSquashSN} ()
+\item 
+void \hyperlink{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}{setSquashSN} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} sn)
+\item 
+void \hyperlink{structg__variable_adc6b682b4875fa3af7d390099c93dc88}{setOldSquashSN} ()
+\item 
+bool \hyperlink{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}{isOnWrongPath} ()
+\item 
+\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{structg__variable_a8ba648162a8abae37194625703d094c9}{getNewCodeCacheIns} ()
+\item 
+void \hyperlink{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}{insertFrontCodeCache} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+void \hyperlink{structg__variable_ab351194ce2a3de088813ae861c7e3d10}{remFromCodeCache} ()
+\item 
+\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{structg__variable_abb078ae60bb65db485a0cc2382bd4457}{popCodeCache} ()
+\item 
+bool \hyperlink{structg__variable_a4b5f6627f388c34df7af5168a119778d}{isCodeCacheEmpty} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a619e353ba382aa0b346af08d3dc0729b}{g\_\-seq\_\-num}
+\item 
+unsigned long long \hyperlink{structg__variable_a8ab71de244f2279885143ea11f7e7a5c}{g\_\-seqnum}
+\item 
+unsigned long long \hyperlink{structg__variable_a9ab79f56074bb46d6ae7d797c52442f3}{g\_\-icount}
+\item 
+unsigned \hyperlink{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}{g\_\-debug\_\-level}
+\item 
+unsigned \hyperlink{structg__variable_ac965e96976bbbeb71833c68438b5fc47}{g\_\-verbose\_\-level}
+\item 
+unsigned \hyperlink{structg__variable_aa7d9d96654c800965904eab03e9fde48}{g\_\-branch\_\-mispredict\_\-delay}
+\item 
+unsigned \hyperlink{structg__variable_a56cbb365fc7e39e093326334864e243a}{g\_\-wrong\_\-path\_\-count}
+\item 
+unsigned \hyperlink{structg__variable_a155baf9caa1600f209b109f6eebf50eb}{g\_\-total\_\-wrong\_\-path\_\-count}
+\item 
+unsigned \hyperlink{structg__variable_a8065e226bc2987122b831ffc1d58052a}{g\_\-app\_\-signal\_\-count}
+\item 
+unsigned \hyperlink{structg__variable_a248d8225c555d7573d3c830af054e13e}{g\_\-pin\_\-signal\_\-count}
+\item 
+unsigned long \hyperlink{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}{insCount}
+\item 
+unsigned \hyperlink{structg__variable_a4e19c0e3b77b96a6130c215059fa7d53}{g\_\-recovery\_\-count}
+\item 
+unsigned \hyperlink{structg__variable_ac3a9cb982af4deac7d5d6183df424560}{g\_\-pintool\_\-signal\_\-count}
+\item 
+unsigned \hyperlink{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}{g\_\-wrong\_\-path\_\-number}
+\item 
+int \hyperlink{structg__variable_ac18a5c9f33e0c2731c83204eba76be37}{g\_\-context\_\-call\_\-depth}
+\item 
+BOOL \hyperlink{structg__variable_aeeef678f78f34f8743dc14c035ef56dd}{g\_\-wrong\_\-path}
+\item 
+bool \hyperlink{structg__variable_a2527496ce273ca32855343e8401fb4f8}{g\_\-spec\_\-syscall}
+\item 
+bool \hyperlink{structg__variable_ac0ace8e752b855d8a33cd9c9a5d62511}{g\_\-appEnd}
+\item 
+bool \hyperlink{structg__variable_a1bfe24cfc139671202d50d3617bc3095}{g\_\-inSimpoint}
+\item 
+bool \hyperlink{structg__variable_a1e6b96906fa24ada5ee9e969e65adb86}{g\_\-enable\_\-simpoint}
+\item 
+bool \hyperlink{structg__variable_a77b6c2a82a2eb4c8216123f75080ec16}{g\_\-enable\_\-wp}
+\item 
+bool \hyperlink{structg__variable_a24cc6242b0cf003080328df4b4e3ddca}{g\_\-enable\_\-instrumentation}
+\item 
+long unsigned \hyperlink{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}{g\_\-simpInsCnt}
+\item 
+long int \hyperlink{structg__variable_ad00b3634585f9cc7e89adb907114a290}{g\_\-traceCount}
+\item 
+long int \hyperlink{structg__variable_aa65753112ddcc38c6ecea36b807a9a38}{g\_\-codeCacheSize}
+\item 
+unsigned long \hyperlink{structg__variable_a9849ae320434c4f9d060f131e24509fd}{g\_\-insCountRightPath}
+\item 
+UINT32 \hyperlink{structg__variable_aee7d9a2652e4ea63755601664d7f2a00}{g\_\-flushes}
+\item 
+bool \hyperlink{structg__variable_a259dcd1135795c605246fdbae100601f}{g\_\-invalid\_\-addr}
+\item 
+bool \hyperlink{structg__variable_a5256c1a4113a6054f2a8e07a108faaf5}{g\_\-invalid\_\-size}
+\item 
+unsigned \hyperlink{structg__variable_a310b38dcf23edbd0a80618cbb9fc9e55}{g\_\-last\_\-len}
+\item 
+jmp\_\-buf \hyperlink{structg__variable_ae22303265d64707d4e5c29a9fc9bae70}{g\_\-env}
+\item 
+CONTEXT \hyperlink{structg__variable_a5b23f6047c40d03de740f5d82416307d}{g\_\-context}
+\item 
+ADDRINT \hyperlink{structg__variable_a35c782efa4c2f2d4dc350ec814e77018}{g\_\-last\_\-eaddr}
+\item 
+ADDRINT \hyperlink{structg__variable_abb0cb377249c922c2132cd5bbabb0509}{g\_\-pc}
+\item 
+ADDRINT \hyperlink{structg__variable_a34e0ec891cac1d35b52ed384463a0cf9}{g\_\-tgt}
+\item 
+ADDRINT \hyperlink{structg__variable_ab5c10d6f80328bc1f3c99709d7d5db46}{g\_\-fthru}
+\item 
+ADDRINT \hyperlink{structg__variable_a3dbb2ea81b5f338970379213c36590ee}{g\_\-pred\_\-eip}
+\item 
+BOOL \hyperlink{structg__variable_a992a1e746b4ab8d8ef422b522300f769}{g\_\-taken}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}{g\_\-BBlist}
+\item 
+\hyperlink{classList}{List}$<$ string $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a527a8f416e63493c83e0f6e50a6bdc79}{g\_\-insList}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a51bca1da5081c41f7769211509c0358e}{g\_\-codeCache}
+\item 
+int \hyperlink{structg__variable_aabbfa0530ffffdecf990fb2d64998f4e}{g\_\-insList\_\-indx}
+\item 
+int \hyperlink{structg__variable_a383af2308cefc8a72db47b1d7a41a702}{g\_\-BBlist\_\-indx}
+\item 
+string \hyperlink{structg__variable_aa7824f9bbc1a8ff7548bcf42922c0c2b}{g\_\-ins}
+\item 
+int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
+\item 
+\hyperlink{classdynInstruction}{dynInstruction} \hyperlink{structg__variable_aa245bb5b2c0655d82e43c16d5ee4a284}{g\_\-insObj}
+\item 
+\hyperlink{classmessage}{message} \hyperlink{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}{msg}
+\item 
+\hyperlink{classstatistic}{statistic} \hyperlink{structg__variable_a548b9947f5c28cff1174da06598b4903}{stat}
+\item 
+\hyperlink{global_2global_8h_a06d96fbb727831f9371a39d5486ed5e0}{PIPE\_\-STATE} \hyperlink{structg__variable_a16962c0660efbbd6683962d295e85607}{g\_\-pipe\_\-state}
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a5a33fdb5e89c73f560a2e4ced38ecbf5}{g\_\-squash\_\-seq\_\-num}
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a8d882e5b7f306bd36a428abece71acaf}{g\_\-old\_\-squash\_\-seq\_\-num}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structg__variable_a0b12751ab1f92b2345771c45290fc19e}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-variable@{g\_\-variable}}
+\index{g\_\-variable@{g\_\-variable}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-variable}]{\setlength{\rightskip}{0pt plus 5cm}g\_\-variable::g\_\-variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a0b12751ab1f92b2345771c45290fc19e}
+
+\begin{DoxyCode}
+                 {
+        g_seq_num = 1;
+        g_seqnum = 1;
+        g_icount = 0;
+        insCount = 0;
+        g_debug_level = DBG_SPEC; //DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC
+      |DBG_INSBUF;
+        g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
+        g_branch_mispredict_delay = 20;
+        g_wrong_path_count = 0;
+        g_total_wrong_path_count = 0;
+        g_app_signal_count = 0;
+        g_pin_signal_count = 0;
+        g_recovery_count = 0;
+        g_pintool_signal_count = 0;
+        g_wrong_path_number = 0;
+        g_context_call_depth = 0;
+        g_wrong_path = false;
+        g_spec_syscall = false;
+        g_appEnd = false;
+        g_inSimpoint = false;
+        g_simpInsCnt = 0;
+        g_insCountRightPath = 0;
+        g_traceCount = 0;
+        g_codeCacheSize = 0;
+        g_flushes = 0;
+        g_enable_simpoint = true;
+        g_enable_wp = true;
+        g_enable_instrumentation = true;
+
+        g_pipe_state = PIPE_NORMAL;
+        g_squash_seq_num = 0;
+        g_old_squash_seq_num = 0;
+
+        g_insList_indx = 0;
+        g_BBlist_indx = -1;
+        numPBinList = 0;
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structg__variable_a8ba648162a8abae37194625703d094c9}{
+\index{g\_\-variable@{g\_\-variable}!getNewCodeCacheIns@{getNewCodeCacheIns}}
+\index{getNewCodeCacheIns@{getNewCodeCacheIns}!g_variable@{g\_\-variable}}
+\subsubsection[{getNewCodeCacheIns}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction}$\ast$ g\_\-variable::getNewCodeCacheIns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a8ba648162a8abae37194625703d094c9}
+
+\begin{DoxyCode}
+                                          {
+        dynInstruction* newIns = new dynInstruction;
+        g_codeCache->Append(newIns);
+        return newIns;
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}{
+\index{g\_\-variable@{g\_\-variable}!getSquashSN@{getSquashSN}}
+\index{getSquashSN@{getSquashSN}!g_variable@{g\_\-variable}}
+\subsubsection[{getSquashSN}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} g\_\-variable::getSquashSN (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}
+
+\begin{DoxyCode}
+{Assert (g_squash_seq_num > 0); return g_squash_seq_num;}
+\end{DoxyCode}
+\hypertarget{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}{
+\index{g\_\-variable@{g\_\-variable}!insertFrontCodeCache@{insertFrontCodeCache}}
+\index{insertFrontCodeCache@{insertFrontCodeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{insertFrontCodeCache}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::insertFrontCodeCache (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}
+
+\begin{DoxyCode}
+                                                    {
+        g_codeCache->InsertAt(ins, 0);
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_a4b5f6627f388c34df7af5168a119778d}{
+\index{g\_\-variable@{g\_\-variable}!isCodeCacheEmpty@{isCodeCacheEmpty}}
+\index{isCodeCacheEmpty@{isCodeCacheEmpty}!g_variable@{g\_\-variable}}
+\subsubsection[{isCodeCacheEmpty}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isCodeCacheEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a4b5f6627f388c34df7af5168a119778d}
+
+\begin{DoxyCode}
+                             {
+        bool result = g_codeCache->NumElements() == 0 ? true : false;
+        return result;
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}{
+\index{g\_\-variable@{g\_\-variable}!isOnWrongPath@{isOnWrongPath}}
+\index{isOnWrongPath@{isOnWrongPath}!g_variable@{g\_\-variable}}
+\subsubsection[{isOnWrongPath}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isOnWrongPath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}
+
+\begin{DoxyCode}
+                          {
+        return (g_squash_seq_num != g_old_squash_seq_num) ? true : false;
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_abb078ae60bb65db485a0cc2382bd4457}{
+\index{g\_\-variable@{g\_\-variable}!popCodeCache@{popCodeCache}}
+\index{popCodeCache@{popCodeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{popCodeCache}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction}$\ast$ g\_\-variable::popCodeCache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_abb078ae60bb65db485a0cc2382bd4457}
+
+\begin{DoxyCode}
+                                    {
+        return g_codeCache->Nth(0);
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_ab351194ce2a3de088813ae861c7e3d10}{
+\index{g\_\-variable@{g\_\-variable}!remFromCodeCache@{remFromCodeCache}}
+\index{remFromCodeCache@{remFromCodeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{remFromCodeCache}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::remFromCodeCache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_ab351194ce2a3de088813ae861c7e3d10}
+
+\begin{DoxyCode}
+                             {
+        Assert (g_codeCache->NumElements() > 0);
+        g_codeCache->RemoveAt(0);
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}{
+\index{g\_\-variable@{g\_\-variable}!resetSquashSN@{resetSquashSN}}
+\index{resetSquashSN@{resetSquashSN}!g_variable@{g\_\-variable}}
+\subsubsection[{resetSquashSN}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::resetSquashSN (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}
+
+\begin{DoxyCode}
+{ g_squash_seq_num = 0; g_old_squash_seq_num = 0;}
+\end{DoxyCode}
+\hypertarget{structg__variable_adc6b682b4875fa3af7d390099c93dc88}{
+\index{g\_\-variable@{g\_\-variable}!setOldSquashSN@{setOldSquashSN}}
+\index{setOldSquashSN@{setOldSquashSN}!g_variable@{g\_\-variable}}
+\subsubsection[{setOldSquashSN}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::setOldSquashSN (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_adc6b682b4875fa3af7d390099c93dc88}
+
+\begin{DoxyCode}
+                           {
+            g_old_squash_seq_num = g_squash_seq_num;
+    }
+\end{DoxyCode}
+\hypertarget{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}{
+\index{g\_\-variable@{g\_\-variable}!setSquashSN@{setSquashSN}}
+\index{setSquashSN@{setSquashSN}!g_variable@{g\_\-variable}}
+\subsubsection[{setSquashSN}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::setSquashSN (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{sn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}
+
+\begin{DoxyCode}
+                                 { 
+        Assert (sn > 0);
+        if (g_squash_seq_num > 0 && sn < g_squash_seq_num) {
+            g_squash_seq_num = sn;
+        } else if (g_squash_seq_num == 0) {
+            g_squash_seq_num = sn;
+        }
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structg__variable_a8065e226bc2987122b831ffc1d58052a}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-app\_\-signal\_\-count@{g\_\-app\_\-signal\_\-count}}
+\index{g\_\-app\_\-signal\_\-count@{g\_\-app\_\-signal\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-app\_\-signal\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-app\_\-signal\_\-count}}}
+\label{structg__variable_a8065e226bc2987122b831ffc1d58052a}
+\hypertarget{structg__variable_ac0ace8e752b855d8a33cd9c9a5d62511}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-appEnd@{g\_\-appEnd}}
+\index{g\_\-appEnd@{g\_\-appEnd}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-appEnd}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-appEnd}}}
+\label{structg__variable_ac0ace8e752b855d8a33cd9c9a5d62511}
+\hypertarget{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-BBlist@{g\_\-BBlist}}
+\index{g\_\-BBlist@{g\_\-BBlist}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-BBlist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf basicblock}$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-BBlist}}}
+\label{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}
+\hypertarget{structg__variable_a383af2308cefc8a72db47b1d7a41a702}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-BBlist\_\-indx@{g\_\-BBlist\_\-indx}}
+\index{g\_\-BBlist\_\-indx@{g\_\-BBlist\_\-indx}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-BBlist\_\-indx}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::g\_\-BBlist\_\-indx}}}
+\label{structg__variable_a383af2308cefc8a72db47b1d7a41a702}
+\hypertarget{structg__variable_aa7d9d96654c800965904eab03e9fde48}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-branch\_\-mispredict\_\-delay@{g\_\-branch\_\-mispredict\_\-delay}}
+\index{g\_\-branch\_\-mispredict\_\-delay@{g\_\-branch\_\-mispredict\_\-delay}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-branch\_\-mispredict\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-branch\_\-mispredict\_\-delay}}}
+\label{structg__variable_aa7d9d96654c800965904eab03e9fde48}
+\hypertarget{structg__variable_a51bca1da5081c41f7769211509c0358e}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-codeCache@{g\_\-codeCache}}
+\index{g\_\-codeCache@{g\_\-codeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-codeCache}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf dynInstruction}$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-codeCache}}}
+\label{structg__variable_a51bca1da5081c41f7769211509c0358e}
+\hypertarget{structg__variable_aa65753112ddcc38c6ecea36b807a9a38}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-codeCacheSize@{g\_\-codeCacheSize}}
+\index{g\_\-codeCacheSize@{g\_\-codeCacheSize}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-codeCacheSize}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf g\_\-variable::g\_\-codeCacheSize}}}
+\label{structg__variable_aa65753112ddcc38c6ecea36b807a9a38}
+\hypertarget{structg__variable_a5b23f6047c40d03de740f5d82416307d}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-context@{g\_\-context}}
+\index{g\_\-context@{g\_\-context}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-context}]{\setlength{\rightskip}{0pt plus 5cm}CONTEXT {\bf g\_\-variable::g\_\-context}}}
+\label{structg__variable_a5b23f6047c40d03de740f5d82416307d}
+\hypertarget{structg__variable_ac18a5c9f33e0c2731c83204eba76be37}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-context\_\-call\_\-depth@{g\_\-context\_\-call\_\-depth}}
+\index{g\_\-context\_\-call\_\-depth@{g\_\-context\_\-call\_\-depth}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-context\_\-call\_\-depth}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::g\_\-context\_\-call\_\-depth}}}
+\label{structg__variable_ac18a5c9f33e0c2731c83204eba76be37}
+\hypertarget{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-debug\_\-level@{g\_\-debug\_\-level}}
+\index{g\_\-debug\_\-level@{g\_\-debug\_\-level}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-debug\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-debug\_\-level}}}
+\label{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}
+\hypertarget{structg__variable_a24cc6242b0cf003080328df4b4e3ddca}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-enable\_\-instrumentation@{g\_\-enable\_\-instrumentation}}
+\index{g\_\-enable\_\-instrumentation@{g\_\-enable\_\-instrumentation}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-enable\_\-instrumentation}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-enable\_\-instrumentation}}}
+\label{structg__variable_a24cc6242b0cf003080328df4b4e3ddca}
+\hypertarget{structg__variable_a1e6b96906fa24ada5ee9e969e65adb86}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-enable\_\-simpoint@{g\_\-enable\_\-simpoint}}
+\index{g\_\-enable\_\-simpoint@{g\_\-enable\_\-simpoint}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-enable\_\-simpoint}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-enable\_\-simpoint}}}
+\label{structg__variable_a1e6b96906fa24ada5ee9e969e65adb86}
+\hypertarget{structg__variable_a77b6c2a82a2eb4c8216123f75080ec16}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-enable\_\-wp@{g\_\-enable\_\-wp}}
+\index{g\_\-enable\_\-wp@{g\_\-enable\_\-wp}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-enable\_\-wp}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-enable\_\-wp}}}
+\label{structg__variable_a77b6c2a82a2eb4c8216123f75080ec16}
+\hypertarget{structg__variable_ae22303265d64707d4e5c29a9fc9bae70}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-env@{g\_\-env}}
+\index{g\_\-env@{g\_\-env}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-env}]{\setlength{\rightskip}{0pt plus 5cm}jmp\_\-buf {\bf g\_\-variable::g\_\-env}}}
+\label{structg__variable_ae22303265d64707d4e5c29a9fc9bae70}
+\hypertarget{structg__variable_aee7d9a2652e4ea63755601664d7f2a00}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-flushes@{g\_\-flushes}}
+\index{g\_\-flushes@{g\_\-flushes}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-flushes}]{\setlength{\rightskip}{0pt plus 5cm}UINT32 {\bf g\_\-variable::g\_\-flushes}}}
+\label{structg__variable_aee7d9a2652e4ea63755601664d7f2a00}
+\hypertarget{structg__variable_ab5c10d6f80328bc1f3c99709d7d5db46}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-fthru@{g\_\-fthru}}
+\index{g\_\-fthru@{g\_\-fthru}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-fthru}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT {\bf g\_\-variable::g\_\-fthru}}}
+\label{structg__variable_ab5c10d6f80328bc1f3c99709d7d5db46}
+\hypertarget{structg__variable_a9ab79f56074bb46d6ae7d797c52442f3}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-icount@{g\_\-icount}}
+\index{g\_\-icount@{g\_\-icount}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-icount}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long long {\bf g\_\-variable::g\_\-icount}}}
+\label{structg__variable_a9ab79f56074bb46d6ae7d797c52442f3}
+\hypertarget{structg__variable_aa7824f9bbc1a8ff7548bcf42922c0c2b}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-ins@{g\_\-ins}}
+\index{g\_\-ins@{g\_\-ins}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-ins}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf g\_\-variable::g\_\-ins}}}
+\label{structg__variable_aa7824f9bbc1a8ff7548bcf42922c0c2b}
+\hypertarget{structg__variable_a9849ae320434c4f9d060f131e24509fd}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-insCountRightPath@{g\_\-insCountRightPath}}
+\index{g\_\-insCountRightPath@{g\_\-insCountRightPath}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-insCountRightPath}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf g\_\-variable::g\_\-insCountRightPath}}}
+\label{structg__variable_a9849ae320434c4f9d060f131e24509fd}
+\hypertarget{structg__variable_a1bfe24cfc139671202d50d3617bc3095}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-inSimpoint@{g\_\-inSimpoint}}
+\index{g\_\-inSimpoint@{g\_\-inSimpoint}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-inSimpoint}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-inSimpoint}}}
+\label{structg__variable_a1bfe24cfc139671202d50d3617bc3095}
+\hypertarget{structg__variable_a527a8f416e63493c83e0f6e50a6bdc79}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-insList@{g\_\-insList}}
+\index{g\_\-insList@{g\_\-insList}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-insList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$string$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-insList}}}
+\label{structg__variable_a527a8f416e63493c83e0f6e50a6bdc79}
+\hypertarget{structg__variable_aabbfa0530ffffdecf990fb2d64998f4e}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-insList\_\-indx@{g\_\-insList\_\-indx}}
+\index{g\_\-insList\_\-indx@{g\_\-insList\_\-indx}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-insList\_\-indx}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::g\_\-insList\_\-indx}}}
+\label{structg__variable_aabbfa0530ffffdecf990fb2d64998f4e}
+\hypertarget{structg__variable_aa245bb5b2c0655d82e43c16d5ee4a284}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-insObj@{g\_\-insObj}}
+\index{g\_\-insObj@{g\_\-insObj}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-insObj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction} {\bf g\_\-variable::g\_\-insObj}}}
+\label{structg__variable_aa245bb5b2c0655d82e43c16d5ee4a284}
+\hypertarget{structg__variable_a259dcd1135795c605246fdbae100601f}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-invalid\_\-addr@{g\_\-invalid\_\-addr}}
+\index{g\_\-invalid\_\-addr@{g\_\-invalid\_\-addr}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-invalid\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-invalid\_\-addr}}}
+\label{structg__variable_a259dcd1135795c605246fdbae100601f}
+\hypertarget{structg__variable_a5256c1a4113a6054f2a8e07a108faaf5}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-invalid\_\-size@{g\_\-invalid\_\-size}}
+\index{g\_\-invalid\_\-size@{g\_\-invalid\_\-size}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-invalid\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-invalid\_\-size}}}
+\label{structg__variable_a5256c1a4113a6054f2a8e07a108faaf5}
+\hypertarget{structg__variable_a35c782efa4c2f2d4dc350ec814e77018}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-last\_\-eaddr@{g\_\-last\_\-eaddr}}
+\index{g\_\-last\_\-eaddr@{g\_\-last\_\-eaddr}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-last\_\-eaddr}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT {\bf g\_\-variable::g\_\-last\_\-eaddr}}}
+\label{structg__variable_a35c782efa4c2f2d4dc350ec814e77018}
+\hypertarget{structg__variable_a310b38dcf23edbd0a80618cbb9fc9e55}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-last\_\-len@{g\_\-last\_\-len}}
+\index{g\_\-last\_\-len@{g\_\-last\_\-len}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-last\_\-len}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-last\_\-len}}}
+\label{structg__variable_a310b38dcf23edbd0a80618cbb9fc9e55}
+\hypertarget{structg__variable_a8d882e5b7f306bd36a428abece71acaf}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-old\_\-squash\_\-seq\_\-num@{g\_\-old\_\-squash\_\-seq\_\-num}}
+\index{g\_\-old\_\-squash\_\-seq\_\-num@{g\_\-old\_\-squash\_\-seq\_\-num}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-old\_\-squash\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf g\_\-variable::g\_\-old\_\-squash\_\-seq\_\-num}}}
+\label{structg__variable_a8d882e5b7f306bd36a428abece71acaf}
+\hypertarget{structg__variable_abb0cb377249c922c2132cd5bbabb0509}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-pc@{g\_\-pc}}
+\index{g\_\-pc@{g\_\-pc}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-pc}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT {\bf g\_\-variable::g\_\-pc}}}
+\label{structg__variable_abb0cb377249c922c2132cd5bbabb0509}
+\hypertarget{structg__variable_a248d8225c555d7573d3c830af054e13e}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-pin\_\-signal\_\-count@{g\_\-pin\_\-signal\_\-count}}
+\index{g\_\-pin\_\-signal\_\-count@{g\_\-pin\_\-signal\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-pin\_\-signal\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-pin\_\-signal\_\-count}}}
+\label{structg__variable_a248d8225c555d7573d3c830af054e13e}
+\hypertarget{structg__variable_ac3a9cb982af4deac7d5d6183df424560}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-pintool\_\-signal\_\-count@{g\_\-pintool\_\-signal\_\-count}}
+\index{g\_\-pintool\_\-signal\_\-count@{g\_\-pintool\_\-signal\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-pintool\_\-signal\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-pintool\_\-signal\_\-count}}}
+\label{structg__variable_ac3a9cb982af4deac7d5d6183df424560}
+\hypertarget{structg__variable_a16962c0660efbbd6683962d295e85607}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-pipe\_\-state@{g\_\-pipe\_\-state}}
+\index{g\_\-pipe\_\-state@{g\_\-pipe\_\-state}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-pipe\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-STATE} {\bf g\_\-variable::g\_\-pipe\_\-state}}}
+\label{structg__variable_a16962c0660efbbd6683962d295e85607}
+\hypertarget{structg__variable_a3dbb2ea81b5f338970379213c36590ee}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-pred\_\-eip@{g\_\-pred\_\-eip}}
+\index{g\_\-pred\_\-eip@{g\_\-pred\_\-eip}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-pred\_\-eip}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT {\bf g\_\-variable::g\_\-pred\_\-eip}}}
+\label{structg__variable_a3dbb2ea81b5f338970379213c36590ee}
+\hypertarget{structg__variable_a4e19c0e3b77b96a6130c215059fa7d53}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-recovery\_\-count@{g\_\-recovery\_\-count}}
+\index{g\_\-recovery\_\-count@{g\_\-recovery\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-recovery\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-recovery\_\-count}}}
+\label{structg__variable_a4e19c0e3b77b96a6130c215059fa7d53}
+\hypertarget{structg__variable_a619e353ba382aa0b346af08d3dc0729b}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-seq\_\-num@{g\_\-seq\_\-num}}
+\index{g\_\-seq\_\-num@{g\_\-seq\_\-num}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf g\_\-variable::g\_\-seq\_\-num}}}
+\label{structg__variable_a619e353ba382aa0b346af08d3dc0729b}
+\hypertarget{structg__variable_a8ab71de244f2279885143ea11f7e7a5c}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-seqnum@{g\_\-seqnum}}
+\index{g\_\-seqnum@{g\_\-seqnum}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-seqnum}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long long {\bf g\_\-variable::g\_\-seqnum}}}
+\label{structg__variable_a8ab71de244f2279885143ea11f7e7a5c}
+\hypertarget{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-simpInsCnt@{g\_\-simpInsCnt}}
+\index{g\_\-simpInsCnt@{g\_\-simpInsCnt}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-simpInsCnt}]{\setlength{\rightskip}{0pt plus 5cm}long unsigned {\bf g\_\-variable::g\_\-simpInsCnt}}}
+\label{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}
+\hypertarget{structg__variable_a2527496ce273ca32855343e8401fb4f8}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-spec\_\-syscall@{g\_\-spec\_\-syscall}}
+\index{g\_\-spec\_\-syscall@{g\_\-spec\_\-syscall}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-spec\_\-syscall}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-spec\_\-syscall}}}
+\label{structg__variable_a2527496ce273ca32855343e8401fb4f8}
+\hypertarget{structg__variable_a5a33fdb5e89c73f560a2e4ced38ecbf5}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-squash\_\-seq\_\-num@{g\_\-squash\_\-seq\_\-num}}
+\index{g\_\-squash\_\-seq\_\-num@{g\_\-squash\_\-seq\_\-num}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-squash\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf g\_\-variable::g\_\-squash\_\-seq\_\-num}}}
+\label{structg__variable_a5a33fdb5e89c73f560a2e4ced38ecbf5}
+\hypertarget{structg__variable_a992a1e746b4ab8d8ef422b522300f769}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-taken@{g\_\-taken}}
+\index{g\_\-taken@{g\_\-taken}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-taken}]{\setlength{\rightskip}{0pt plus 5cm}BOOL {\bf g\_\-variable::g\_\-taken}}}
+\label{structg__variable_a992a1e746b4ab8d8ef422b522300f769}
+\hypertarget{structg__variable_a34e0ec891cac1d35b52ed384463a0cf9}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-tgt@{g\_\-tgt}}
+\index{g\_\-tgt@{g\_\-tgt}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-tgt}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT {\bf g\_\-variable::g\_\-tgt}}}
+\label{structg__variable_a34e0ec891cac1d35b52ed384463a0cf9}
+\hypertarget{structg__variable_a155baf9caa1600f209b109f6eebf50eb}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-total\_\-wrong\_\-path\_\-count@{g\_\-total\_\-wrong\_\-path\_\-count}}
+\index{g\_\-total\_\-wrong\_\-path\_\-count@{g\_\-total\_\-wrong\_\-path\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-total\_\-wrong\_\-path\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-total\_\-wrong\_\-path\_\-count}}}
+\label{structg__variable_a155baf9caa1600f209b109f6eebf50eb}
+\hypertarget{structg__variable_ad00b3634585f9cc7e89adb907114a290}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-traceCount@{g\_\-traceCount}}
+\index{g\_\-traceCount@{g\_\-traceCount}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-traceCount}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf g\_\-variable::g\_\-traceCount}}}
+\label{structg__variable_ad00b3634585f9cc7e89adb907114a290}
+\hypertarget{structg__variable_ac965e96976bbbeb71833c68438b5fc47}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-verbose\_\-level@{g\_\-verbose\_\-level}}
+\index{g\_\-verbose\_\-level@{g\_\-verbose\_\-level}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-verbose\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-verbose\_\-level}}}
+\label{structg__variable_ac965e96976bbbeb71833c68438b5fc47}
+\hypertarget{structg__variable_aeeef678f78f34f8743dc14c035ef56dd}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-wrong\_\-path@{g\_\-wrong\_\-path}}
+\index{g\_\-wrong\_\-path@{g\_\-wrong\_\-path}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-wrong\_\-path}]{\setlength{\rightskip}{0pt plus 5cm}BOOL {\bf g\_\-variable::g\_\-wrong\_\-path}}}
+\label{structg__variable_aeeef678f78f34f8743dc14c035ef56dd}
+\hypertarget{structg__variable_a56cbb365fc7e39e093326334864e243a}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-wrong\_\-path\_\-count@{g\_\-wrong\_\-path\_\-count}}
+\index{g\_\-wrong\_\-path\_\-count@{g\_\-wrong\_\-path\_\-count}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-wrong\_\-path\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-wrong\_\-path\_\-count}}}
+\label{structg__variable_a56cbb365fc7e39e093326334864e243a}
+\hypertarget{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-wrong\_\-path\_\-number@{g\_\-wrong\_\-path\_\-number}}
+\index{g\_\-wrong\_\-path\_\-number@{g\_\-wrong\_\-path\_\-number}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-wrong\_\-path\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-wrong\_\-path\_\-number}}}
+\label{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}
+\hypertarget{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}{
+\index{g\_\-variable@{g\_\-variable}!insCount@{insCount}}
+\index{insCount@{insCount}!g_variable@{g\_\-variable}}
+\subsubsection[{insCount}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf g\_\-variable::insCount}}}
+\label{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}
+\hypertarget{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}{
+\index{g\_\-variable@{g\_\-variable}!msg@{msg}}
+\index{msg@{msg}!g_variable@{g\_\-variable}}
+\subsubsection[{msg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf message} {\bf g\_\-variable::msg}}}
+\label{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}
+\hypertarget{structg__variable_a1b0b5933340788334ca1884e1e63707e}{
+\index{g\_\-variable@{g\_\-variable}!numPBinList@{numPBinList}}
+\index{numPBinList@{numPBinList}!g_variable@{g\_\-variable}}
+\subsubsection[{numPBinList}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::numPBinList}}}
+\label{structg__variable_a1b0b5933340788334ca1884e1e63707e}
+\hypertarget{structg__variable_a548b9947f5c28cff1174da06598b4903}{
+\index{g\_\-variable@{g\_\-variable}!stat@{stat}}
+\index{stat@{stat}!g_variable@{g\_\-variable}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf statistic} {\bf g\_\-variable::stat}}}
+\label{structg__variable_a548b9947f5c28cff1174da06598b4903}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/global/\hyperlink{g__variable_8h}{g\_\-variable.h}\end{DoxyCompactItemize}

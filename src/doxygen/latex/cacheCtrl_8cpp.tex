@@ -1,0 +1,390 @@
+\hypertarget{cacheCtrl_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/cacheCtrl.cpp File Reference}
+\label{cacheCtrl_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/cacheCtrl.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/cacheCtrl.cpp}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include \char`\"{}cacheCtrl.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/utility.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{cacheCtrl_8cpp_a2b7fac6feef0a70c72a45d493088b270}{writeUp} (int memCode1, int memCode2, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int $\ast$\&latency, int8\_\-t $\ast$\&data, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw)
+\item 
+void \hyperlink{cacheCtrl_8cpp_a3c95fb18f45bc2704ececadb8e7a3200}{writeBack} (int memCode1, int memCode2, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int $\ast$\&latency, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw)
+\item 
+int \hyperlink{cacheCtrl_8cpp_aca22aa31c1e2231d94dea96de677955a}{doRead} (\hyperlink{classcache}{cache} $\ast$L, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int8\_\-t $\ast$\&data, int $\ast$\&latency, int memCode, char \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type}, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw)
+\item 
+int \hyperlink{cacheCtrl_8cpp_a940d1bcbe86e71d64bd1eede69d55324}{doWrite} (\hyperlink{classcache}{cache} $\ast$L, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int8\_\-t $\ast$\&data, int $\ast$\&latency, int memCode, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw)
+\item 
+void \hyperlink{cacheCtrl_8cpp_ad486f7e0df47675ca2833eff41afcff5}{report} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int8\_\-t $\ast$\&data, int $\ast$\&latency, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw)
+\item 
+int \hyperlink{cacheCtrl_8cpp_a647b95d4a9cb0f09d95d2adfaf25e1d7}{cacheCtrl} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} rORw, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize, \hyperlink{classcache}{cache} $\ast$\hyperlink{bkEnd_8cpp_aff6a511d0f79b17fa32081abfd2b5bc6}{\_\-L1}, \hyperlink{classcache}{cache} $\ast$\hyperlink{bkEnd_8cpp_a36621f4e017586bf3fd070b443755da2}{\_\-L2}, \hyperlink{classcache}{cache} $\ast$\hyperlink{bkEnd_8cpp_ad3c630a534ba16b1ffdc565033ad36ee}{\_\-L3})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcache}{cache} $\ast$ \hyperlink{cacheCtrl_8cpp_a904f7bbbcd8bbc3bb081f3e36f5e5b71}{L1}
+\item 
+\hyperlink{classcache}{cache} $\ast$ \hyperlink{cacheCtrl_8cpp_a8b8ae1aa2c2b29777a67b6cd22390163}{L2}
+\item 
+\hyperlink{classcache}{cache} $\ast$ \hyperlink{cacheCtrl_8cpp_ab16155fa59d263f4c35d0885d820605d}{L3}
+\item 
+bool \hyperlink{cacheCtrl_8cpp_a398527b3e9e358c345c5047b16871957}{debug} = true
+\item 
+bool \hyperlink{cacheCtrl_8cpp_a5276c3ddd3d4cea294055b1f903a7322}{debug1} = false
+\item 
+int \hyperlink{cacheCtrl_8cpp_a60025585bccd1055da0bdf1b5877a3fe}{hitLevel}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{cacheCtrl_8cpp_a647b95d4a9cb0f09d95d2adfaf25e1d7}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!cacheCtrl@{cacheCtrl}}
+\index{cacheCtrl@{cacheCtrl}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{cacheCtrl}]{\setlength{\rightskip}{0pt plus 5cm}int cacheCtrl (
+\begin{DoxyParamCaption}
+\item[{{\bf memType}}]{rORw, }
+\item[{{\bf ADDRS}}]{addr, }
+\item[{{\bf BYTES}}]{memAxesSize, }
+\item[{{\bf cache} $\ast$}]{\_\-L1, }
+\item[{{\bf cache} $\ast$}]{\_\-L2, }
+\item[{{\bf cache} $\ast$}]{\_\-L3}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_a647b95d4a9cb0f09d95d2adfaf25e1d7}
+
+\begin{DoxyCode}
+{
+    int* latency = new int;
+        L1 = _L1;
+        L2 = _L2;
+        L3 = _L3;
+        // initialize random seed
+        srand ( time(NULL) );
+
+        //Generate Random Data (TODO: this should be removed)
+        int8_t *data = (int8_t *) malloc(sizeof(int8_t)*8);
+        int8_t *inData = (int8_t *) malloc(sizeof(int8_t)*8);
+        //for (int i = 0; i < 8; i++) {inData[i] = 0;}
+        
+        //printf("cache address = %x\n", &L2);
+
+        /*----Handle READS & WRITES----*/
+        if (rORw == READ) { //Handle READ
+            //printf("----READ: addr = %x\n", addr);
+            hitLevel = 1;
+            doRead(L1, addr, data, latency, 1, 'R', rORw);
+            //return getLatency(hitLevel);
+            //if (lineNum >= 71272839)
+            //    fprintf(outFile, "%d,%lx\n", getLatency(hitLevel), addr);
+        } else if (rORw == WRITE) { //Handle WRITE
+            //printf("----WRITE: addr = %x\n", addr);
+            hitLevel = 1;
+            doWrite(L1, addr, inData, latency, 1, rORw);
+            hitLevel = 1;//Hack to make write always a hit!
+            //return getLatency(hitLevel);
+            //if (lineNum >= 71272839)
+            //    fprintf(outFile, "%d,%lx\n", getLatency(hitLevel), addr);
+        } else {
+            printf("WARNING: the memory access type is not specified\n");
+            return -1;
+        }
+
+        delete [] data;
+        delete [] inData;
+    delete latency;
+        if(hitLevel == 0) printf("ERROR: hit level is 0\n");
+        Assert (hitLevel != 0);
+        if (debug1) printf("***********DONE MEM OP****************\n");
+        return  getLatency(hitLevel, 0);
+}
+\end{DoxyCode}
+\hypertarget{cacheCtrl_8cpp_aca22aa31c1e2231d94dea96de677955a}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!doRead@{doRead}}
+\index{doRead@{doRead}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{doRead}]{\setlength{\rightskip}{0pt plus 5cm}int doRead (
+\begin{DoxyParamCaption}
+\item[{{\bf cache} $\ast$}]{L, }
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int8\_\-t $\ast$\&}]{data, }
+\item[{int $\ast$\&}]{latency, }
+\item[{int}]{memCode, }
+\item[{char}]{type, }
+\item[{{\bf memType}}]{rORw}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_aca22aa31c1e2231d94dea96de677955a}
+
+\begin{DoxyCode}
+{
+        //if(memCode > hitLevel) hitLevel = memCode;
+        if(debug1) printf("Onto Reading L%d - ADDRS=%llx\n", memCode,addr); 
+        if (memCode <= 3) {
+                if (L->isValid(addr)) {
+                        if (L->isHit(addr)) {
+                                if(debug1) printf("   R, V, H\n");
+                                if(memCode > hitLevel && rORw == READ) hitLevel =
+       memCode;
+                                L->readCache(addr, data);
+                                return 0; //Cache Hit
+                        } else {
+                                if(L->isDirty(addr)) {
+                                        if(debug1) printf("   R, V, M, D\n");
+                                        //if(debug1) printf("   ** why dirty: %x\
+      n", L->getTag(addr)); //TODO getTag must go back to being provate...
+                                        if (type == 'W') printf("      ADDRESSSSS
+      SSS %llx\n", addr);
+                                        writeBack(memCode, memCode+1, addr, laten
+      cy, rORw);
+                                        if (type == 'R') {writeUp(memCode, memCod
+      e+1, addr, latency, data, rORw);}
+                                } else {
+                                        if(debug1) printf("   R, V, M, C\n");
+                                        writeUp(memCode, memCode+1, addr, latency
+      , data, rORw);
+                                }
+                                L->readCache(addr, data);
+                                return 0; //Cache miss (conflict) - check for dir
+      tiness
+                        }
+                } else {
+                        if(debug1) printf("   R, I\n");
+                        writeUp(memCode, memCode+1, addr, latency, data, rORw);
+                        if (memCode == 1) L->readCache(addr, data);
+                        return 0; //Cache miss (compulsary) (fetch-> read)
+                }
+        } else {
+                if(memCode > hitLevel && rORw == READ) hitLevel = memCode; //TODO
+       can a write ever make it here?
+                //We don't care about the number from DRAM. So gen a rand val
+                if(debug1) printf("   R, L4\n");
+                if(debug1) printf("   Data to Write: ");
+                //for (int i = 0; i < 8; i++)
+                //{
+                //    data[i] = rand() % 100 + 1;
+                //    if(debug1) printf("%d ", data[i]);
+                //}
+                if(debug1) printf("\n");
+        }
+        return 0;
+}
+\end{DoxyCode}
+\hypertarget{cacheCtrl_8cpp_a940d1bcbe86e71d64bd1eede69d55324}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!doWrite@{doWrite}}
+\index{doWrite@{doWrite}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{doWrite}]{\setlength{\rightskip}{0pt plus 5cm}int doWrite (
+\begin{DoxyParamCaption}
+\item[{{\bf cache} $\ast$}]{L, }
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int8\_\-t $\ast$\&}]{data, }
+\item[{int $\ast$\&}]{latency, }
+\item[{int}]{memCode, }
+\item[{{\bf memType}}]{rORw}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_a940d1bcbe86e71d64bd1eede69d55324}
+
+\begin{DoxyCode}
+{
+        //if(memCode > hitLevel) hitLevel = memCode;
+        if(debug1) printf("Onto Writing L%d - ADDRS=%llx\n", memCode, addr); 
+        if (memCode <= 3) {
+                if (L->isValid(addr)) {
+                        if (L->isHit(addr)) {
+                                if(debug1) printf("   W, V, H\n");
+                                L->writeCache(addr, data);
+                                return 0; //Cache Hit (no care for dirty flag)
+                        } else {
+                                //int8_t *inData = (int8_t *) malloc(sizeof(int8_
+      t)*8);
+                                //for (int i = 0; i < 8; i++) {inData[i] = data[i
+      ];}
+                                if (L->isDirty(addr)) {
+                                        if(debug1) printf("   W, V, M, D\n");
+                                        if(debug1) printf("   ** why dirty: %llx\
+      n", L->getTag(addr));
+                                        writeBack(memCode, memCode+1, addr, laten
+      cy, rORw);
+                                        writeUp(memCode, memCode+1, addr, latency
+      , data, rORw); //TODO fix? need it?
+                                        //Cache Miss (writeback -> fetch -> write
+      )
+                                        L->writeCache(addr, data);
+                                } else {
+                                        if(debug1) printf("   W, V, M, C\n");
+                                        if (L->getExpectData(addr) == false) {
+                                                L->setExpectData(addr,true);
+                                                writeUp(memCode, memCode+1, addr,
+       latency, data, rORw);
+                                                L->setExpectData(addr,false);
+                                                L->writeCache(addr, data);
+                                        } else {
+                                                L->writeCache(addr, data);
+                                        }
+                                        //Cache Miss (fetch -> write)
+                                }
+                                return 0;
+                        }
+                } else {
+                        if(debug1) printf("   W, I\n");
+                                        //writeUp(memCode, memCode+1, addr, laten
+      cy, data, rORw); //TODO: should not need it
+                        if (L->getExpectData(addr) == false) {
+                                L->setExpectData(addr,true);
+                                writeUp(memCode, memCode+1, addr, latency, data, 
+      rORw);
+                                L->setExpectData(addr,false);
+                                L->writeCache(addr, data);
+                        } else {
+                                L->writeCache(addr, data);
+                        }
+                        return 0; //Cache Miss (fetch -> write)
+                }
+        } else {
+                if(debug1) printf("   W, L4\n");
+                return 0;
+        }
+}
+\end{DoxyCode}
+\hypertarget{cacheCtrl_8cpp_ad486f7e0df47675ca2833eff41afcff5}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!report@{report}}
+\index{report@{report}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{report}]{\setlength{\rightskip}{0pt plus 5cm}void report (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int8\_\-t $\ast$\&}]{data, }
+\item[{int $\ast$\&}]{latency, }
+\item[{{\bf memType}}]{rORw}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_ad486f7e0df47675ca2833eff41afcff5}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+\hypertarget{cacheCtrl_8cpp_a3c95fb18f45bc2704ececadb8e7a3200}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!writeBack@{writeBack}}
+\index{writeBack@{writeBack}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{writeBack}]{\setlength{\rightskip}{0pt plus 5cm}void writeBack (
+\begin{DoxyParamCaption}
+\item[{int}]{memCode1, }
+\item[{int}]{memCode2, }
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int $\ast$\&}]{latency, }
+\item[{{\bf memType}}]{rORw}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_a3c95fb18f45bc2704ececadb8e7a3200}
+
+\begin{DoxyCode}
+                                                                                 
+         {
+        int8_t *tempData = (int8_t *) malloc(sizeof(int8_t)*8);
+
+        if (memCode1 == 1 && memCode2 == 2) {
+                ADDRS tempAddr = L1->getWBAddr(addr);
+                if(debug1) printf("   WB, memcCode:%d - ADDRS:%llx\n", memCode1, 
+      addr);
+                doRead (L1, tempAddr, tempData, latency, 1, 'W', rORw);
+                doWrite (L2, tempAddr, tempData, latency, 2, rORw);
+                L1->setClean(addr); //reset the dirty flag
+                delete [] tempData;
+        } else if (memCode1 == 2 && memCode2 == 3) {
+                ADDRS tempAddr = L2->getWBAddr(addr);
+                if(debug1) printf("   WB, memcCode:%d\n", memCode1);
+                doRead (L2, tempAddr, tempData, latency, 2, 'W', rORw);
+                doWrite (L3, tempAddr, tempData, latency, 3, rORw);
+                L2->setClean(addr); //reset the dirty flag
+                delete [] tempData;
+        } else if (memCode1 == 3 && memCode2 == 4) {
+                //ADDRS tempAddr = L3->getWBAddr(addr);
+                if(debug1) printf("   WB, memcCode:%d\n", memCode1);
+                //Skip actually writing into the memory (to avoid crazy mem. cons
+      umption)
+                //doRead (L2, tempAddr, tempData, latency, 2, 'W', rORw);
+                //doWrite (L3, tempAddr, tempData, latency, 3, rORw);
+                L3->setClean(addr); //reset the dirty flag
+                delete [] tempData;
+        }
+}
+\end{DoxyCode}
+\hypertarget{cacheCtrl_8cpp_a2b7fac6feef0a70c72a45d493088b270}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!writeUp@{writeUp}}
+\index{writeUp@{writeUp}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{writeUp}]{\setlength{\rightskip}{0pt plus 5cm}void writeUp (
+\begin{DoxyParamCaption}
+\item[{int}]{memCode1, }
+\item[{int}]{memCode2, }
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int $\ast$\&}]{latency, }
+\item[{int8\_\-t $\ast$\&}]{data, }
+\item[{{\bf memType}}]{rORw}
+\end{DoxyParamCaption}
+)}}
+\label{cacheCtrl_8cpp_a2b7fac6feef0a70c72a45d493088b270}
+
+\begin{DoxyCode}
+{
+        int8_t *tempData = (int8_t *) malloc(sizeof(int8_t)*8);
+
+        if (memCode1 == 1 && memCode2 == 2) {
+                if(debug1) printf("   WU, memcCode:%d, addr = %llx\n", memCode1, 
+      addr);
+                doRead (L2, addr, data, latency, 2, 'R', rORw);
+                doWrite (L1, addr, data, latency, 1, rORw);
+                L1->setClean(addr); //reset the dirty flag
+        } else if (memCode1 == 2 && memCode2 == 3) {
+                if(debug1) printf("   WU, memcCode:%d, addr = %llx\n", memCode1, 
+      addr);
+                doRead (L3, addr, data, latency, 3, 'R', rORw);
+                doWrite (L2, addr, data, latency, 2, rORw);
+                L2->setClean(addr); //reset the dirty flag
+        } else if (memCode1 == 3 && memCode2 == 4) {
+                if(debug1) printf("   WU, memcCode:%d\n", memCode1);
+                //Skip actually writing into the memory (to avoid crazy mem. cons
+      umption)
+                doRead (L3, addr, data, latency, 4, 'R', rORw); //L2 is dummy... 
+      not being used or modified here
+                //Generate Random Data (TODO: this should be removed)
+                doWrite (L3, addr, data, latency, 3, rORw); //TODO this is WRONG 
+      and must be fixed
+                L3->setClean(addr); //reset the dirty flag
+        }
+        delete [] tempData;
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{cacheCtrl_8cpp_a398527b3e9e358c345c5047b16871957}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!debug@{debug}}
+\index{debug@{debug}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf debug} = true}}
+\label{cacheCtrl_8cpp_a398527b3e9e358c345c5047b16871957}
+\hypertarget{cacheCtrl_8cpp_a5276c3ddd3d4cea294055b1f903a7322}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!debug1@{debug1}}
+\index{debug1@{debug1}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{debug1}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf debug1} = false}}
+\label{cacheCtrl_8cpp_a5276c3ddd3d4cea294055b1f903a7322}
+\hypertarget{cacheCtrl_8cpp_a60025585bccd1055da0bdf1b5877a3fe}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!hitLevel@{hitLevel}}
+\index{hitLevel@{hitLevel}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{hitLevel}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf hitLevel}}}
+\label{cacheCtrl_8cpp_a60025585bccd1055da0bdf1b5877a3fe}
+\hypertarget{cacheCtrl_8cpp_a904f7bbbcd8bbc3bb081f3e36f5e5b71}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!L1@{L1}}
+\index{L1@{L1}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{L1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cache}$\ast$ {\bf L1}}}
+\label{cacheCtrl_8cpp_a904f7bbbcd8bbc3bb081f3e36f5e5b71}
+\hypertarget{cacheCtrl_8cpp_a8b8ae1aa2c2b29777a67b6cd22390163}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!L2@{L2}}
+\index{L2@{L2}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{L2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cache}$\ast$ {\bf L2}}}
+\label{cacheCtrl_8cpp_a8b8ae1aa2c2b29777a67b6cd22390163}
+\hypertarget{cacheCtrl_8cpp_ab16155fa59d263f4c35d0885d820605d}{
+\index{cacheCtrl.cpp@{cacheCtrl.cpp}!L3@{L3}}
+\index{L3@{L3}!cacheCtrl.cpp@{cacheCtrl.cpp}}
+\subsubsection[{L3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cache}$\ast$ {\bf L3}}}
+\label{cacheCtrl_8cpp_ab16155fa59d263f4c35d0885d820605d}

@@ -1,0 +1,43 @@
+\hypertarget{binaryTranslator_2config_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/config.h File Reference}
+\label{binaryTranslator_2config_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/config.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/config.h}}
+}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{binaryTranslator_2config_8h_ac828341c2a17efc2acfe41458414588f}{parse\_\-config\_\-file} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2config_8h_ac828341c2a17efc2acfe41458414588f}{
+\index{binaryTranslator/config.h@{binaryTranslator/config.h}!parse\_\-config\_\-file@{parse\_\-config\_\-file}}
+\index{parse\_\-config\_\-file@{parse\_\-config\_\-file}!binaryTranslator/config.h@{binaryTranslator/config.h}}
+\subsubsection[{parse\_\-config\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}void parse\_\-config\_\-file (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2config_8h_ac828341c2a17efc2acfe41458414588f}
+
+\begin{DoxyCode}
+                         {
+        FILE * input_config;
+        if ((input_config = fopen("config/param.cfg", "r")) == NULL) {
+                Assert("Cannot open config file.");
+        }
+        
+        //
+        char param[CFG_STRING_SIZE], value[CFG_STRING_SIZE];
+        if (fscanf(input_config, "%s %s\n", &param, &value) == EOF) Assert("Corru
+      pted config file.");
+        const char* input_asm_file = param;
+        printf("\t%s %s\n", param, value);
+        if (value[0] == 'y')
+
+        fclose(input_config);
+}\end{DoxyCode}

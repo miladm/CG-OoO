@@ -1,0 +1,123 @@
+\hypertarget{exec__ecoff_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-ecoff.h File Reference}
+\label{exec__ecoff_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-ecoff.h@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-ecoff.h}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structecoff__filehdr}{ecoff\_\-filehdr}
+\item 
+struct \hyperlink{structecoff__aouthdr}{ecoff\_\-aouthdr}
+\item 
+struct \hyperlink{structecoff__scnhdr}{ecoff\_\-scnhdr}
+\item 
+struct \hyperlink{structecoff__exechdr}{ecoff\_\-exechdr}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{exec__ecoff_8h_a130ebe25b5f2a2f3182fd31c9aad1838}{ECOFF\_\-HDR\_\-SIZE}~(sizeof(struct \hyperlink{structecoff__exechdr}{ecoff\_\-exechdr}))
+\item 
+\#define \hyperlink{exec__ecoff_8h_a6fdde98e84008bb99917e1d5949b66cd}{ECOFF\_\-OMAGIC}~0407
+\item 
+\#define \hyperlink{exec__ecoff_8h_a45f227c67261450028b8edf7fa309c16}{ECOFF\_\-NMAGIC}~0410
+\item 
+\#define \hyperlink{exec__ecoff_8h_a7099c4097e6af34dc8d2c307635e878f}{ECOFF\_\-ZMAGIC}~0413
+\item 
+\#define \hyperlink{exec__ecoff_8h_ab45ed82c8e0a19e56d32fd3bdb268c7c}{ECOFF\_\-ROUND}(value, by)~(((value) + (by) -\/ 1) \& $\sim$((by) -\/ 1))
+\item 
+\#define \hyperlink{exec__ecoff_8h_a2ea94226f2a5422220c2d2539f56d151}{ECOFF\_\-BLOCK\_\-ALIGN}(ep, value)
+\item 
+\#define \hyperlink{exec__ecoff_8h_a8c62d287d749af1201cfc91e32a16530}{ECOFF\_\-TXTOFF}(ep)
+\item 
+\#define \hyperlink{exec__ecoff_8h_a52e143eebf46a034de89d48fb03c8aea}{ECOFF\_\-DATOFF}(ep)~(ECOFF\_\-BLOCK\_\-ALIGN((ep), ECOFF\_\-TXTOFF(ep) + (ep)-\/$>$a.tsize))
+\item 
+\#define \hyperlink{exec__ecoff_8h_a7a47d40d371df824f343bba39276a043}{ECOFF\_\-SEGMENT\_\-ALIGN}(ep, value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{exec__ecoff_8h_a2ea94226f2a5422220c2d2539f56d151}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-BLOCK\_\-ALIGN@{ECOFF\_\-BLOCK\_\-ALIGN}}
+\index{ECOFF\_\-BLOCK\_\-ALIGN@{ECOFF\_\-BLOCK\_\-ALIGN}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-BLOCK\_\-ALIGN}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-BLOCK\_\-ALIGN(
+\begin{DoxyParamCaption}
+\item[{}]{ep, }
+\item[{}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{exec__ecoff_8h_a2ea94226f2a5422220c2d2539f56d151}
+{\bfseries Value:}
+\begin{DoxyCode}
+((ep)->a.magic == ECOFF_ZMAGIC ? ECOFF_ROUND((value), ECOFF_LDPGSZ) : \
+         (value))
+\end{DoxyCode}
+\hypertarget{exec__ecoff_8h_a52e143eebf46a034de89d48fb03c8aea}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-DATOFF@{ECOFF\_\-DATOFF}}
+\index{ECOFF\_\-DATOFF@{ECOFF\_\-DATOFF}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-DATOFF}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-DATOFF(
+\begin{DoxyParamCaption}
+\item[{}]{ep}
+\end{DoxyParamCaption}
+)~(ECOFF\_\-BLOCK\_\-ALIGN((ep), ECOFF\_\-TXTOFF(ep) + (ep)-\/$>$a.tsize))}}
+\label{exec__ecoff_8h_a52e143eebf46a034de89d48fb03c8aea}
+\hypertarget{exec__ecoff_8h_a130ebe25b5f2a2f3182fd31c9aad1838}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-HDR\_\-SIZE@{ECOFF\_\-HDR\_\-SIZE}}
+\index{ECOFF\_\-HDR\_\-SIZE@{ECOFF\_\-HDR\_\-SIZE}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-HDR\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-HDR\_\-SIZE~(sizeof(struct {\bf ecoff\_\-exechdr}))}}
+\label{exec__ecoff_8h_a130ebe25b5f2a2f3182fd31c9aad1838}
+\hypertarget{exec__ecoff_8h_a45f227c67261450028b8edf7fa309c16}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-NMAGIC@{ECOFF\_\-NMAGIC}}
+\index{ECOFF\_\-NMAGIC@{ECOFF\_\-NMAGIC}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-NMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-NMAGIC~0410}}
+\label{exec__ecoff_8h_a45f227c67261450028b8edf7fa309c16}
+\hypertarget{exec__ecoff_8h_a6fdde98e84008bb99917e1d5949b66cd}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-OMAGIC@{ECOFF\_\-OMAGIC}}
+\index{ECOFF\_\-OMAGIC@{ECOFF\_\-OMAGIC}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-OMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-OMAGIC~0407}}
+\label{exec__ecoff_8h_a6fdde98e84008bb99917e1d5949b66cd}
+\hypertarget{exec__ecoff_8h_ab45ed82c8e0a19e56d32fd3bdb268c7c}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-ROUND@{ECOFF\_\-ROUND}}
+\index{ECOFF\_\-ROUND@{ECOFF\_\-ROUND}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-ROUND}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-ROUND(
+\begin{DoxyParamCaption}
+\item[{}]{value, }
+\item[{}]{by}
+\end{DoxyParamCaption}
+)~(((value) + (by) -\/ 1) \& $\sim$((by) -\/ 1))}}
+\label{exec__ecoff_8h_ab45ed82c8e0a19e56d32fd3bdb268c7c}
+\hypertarget{exec__ecoff_8h_a7a47d40d371df824f343bba39276a043}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-SEGMENT\_\-ALIGN@{ECOFF\_\-SEGMENT\_\-ALIGN}}
+\index{ECOFF\_\-SEGMENT\_\-ALIGN@{ECOFF\_\-SEGMENT\_\-ALIGN}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-SEGMENT\_\-ALIGN}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-SEGMENT\_\-ALIGN(
+\begin{DoxyParamCaption}
+\item[{}]{ep, }
+\item[{}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{exec__ecoff_8h_a7a47d40d371df824f343bba39276a043}
+{\bfseries Value:}
+\begin{DoxyCode}
+(ECOFF_ROUND((value), ((ep)->a.magic == ECOFF_ZMAGIC ? ECOFF_LDPGSZ : \
+         ECOFF_SEGMENT_ALIGNMENT(ep))))
+\end{DoxyCode}
+\hypertarget{exec__ecoff_8h_a8c62d287d749af1201cfc91e32a16530}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-TXTOFF@{ECOFF\_\-TXTOFF}}
+\index{ECOFF\_\-TXTOFF@{ECOFF\_\-TXTOFF}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-TXTOFF}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-TXTOFF(
+\begin{DoxyParamCaption}
+\item[{}]{ep}
+\end{DoxyParamCaption}
+)}}
+\label{exec__ecoff_8h_a8c62d287d749af1201cfc91e32a16530}
+{\bfseries Value:}
+\begin{DoxyCode}
+((ep)->a.magic == ECOFF_ZMAGIC ? 0 : \
+         ECOFF_ROUND(ECOFF_HDR_SIZE + (ep)->f.f_nscns * \
+                     sizeof(struct ecoff_scnhdr), ECOFF_SEGMENT_ALIGNMENT(ep)))
+\end{DoxyCode}
+\hypertarget{exec__ecoff_8h_a7099c4097e6af34dc8d2c307635e878f}{
+\index{exec\_\-ecoff.h@{exec\_\-ecoff.h}!ECOFF\_\-ZMAGIC@{ECOFF\_\-ZMAGIC}}
+\index{ECOFF\_\-ZMAGIC@{ECOFF\_\-ZMAGIC}!exec_ecoff.h@{exec\_\-ecoff.h}}
+\subsubsection[{ECOFF\_\-ZMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define ECOFF\_\-ZMAGIC~0413}}
+\label{exec__ecoff_8h_a7099c4097e6af34dc8d2c307635e878f}

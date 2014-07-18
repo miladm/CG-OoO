@@ -1,0 +1,306 @@
+\hypertarget{namespaceStats}{
+\section{Stats Namespace Reference}
+\label{namespaceStats}\index{Stats@{Stats}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structStats_1_1ScalarPrint}{ScalarPrint}
+\item 
+struct \hyperlink{structStats_1_1VectorPrint}{VectorPrint}
+\item 
+struct \hyperlink{structStats_1_1DistPrint}{DistPrint}
+\item 
+struct \hyperlink{structStats_1_1SparseHistPrint}{SparseHistPrint}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef map$<$ const void $\ast$, Info $\ast$ $>$ \hyperlink{namespaceStats_abf12e88b5899310c1adcf5be61d6bee3}{MapType}
+\item 
+typedef map$<$ std::string, Info $\ast$ $>$ \hyperlink{namespaceStats_aa5595c5604b2fec03e55b1f32b521595}{NameMapType}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+list$<$ Info $\ast$ $>$ \& \hyperlink{namespaceStats_a52f464eb02d70d04e60fd6c090366560}{statsList} ()
+\item 
+\hyperlink{namespaceStats_abf12e88b5899310c1adcf5be61d6bee3}{MapType} \& \hyperlink{namespaceStats_a3eb4a123811e05e9b29748cf23cbdc31}{statsMap} ()
+\item 
+\hyperlink{namespaceStats_aa5595c5604b2fec03e55b1f32b521595}{NameMapType} \& \hyperlink{namespaceStats_aae51efeedd0840ece6e968c96df90038}{nameMap} ()
+\item 
+bool \hyperlink{namespaceStats_a6bae8e555771c8cb0819d78c60359656}{validateStatName} (const string \&name)
+\item 
+void \hyperlink{namespaceStats_a105c595669b79620fce95c825f745bce}{registerResetCallback} (Callback $\ast$cb)
+\item 
+bool \hyperlink{namespaceStats_ae5a14285f2510051bae7923aa2612d96}{enabled} ()
+\item 
+void \hyperlink{namespaceStats_a03d2f1935a0ef6250fa5df657a82310b}{enable} ()
+\item 
+void \hyperlink{namespaceStats_ace78801422912439fb2f81572cc9c373}{registerDumpCallback} (Callback $\ast$cb)
+\item 
+string \hyperlink{namespaceStats_abf675b5476be37bbbe5d1abacbe4071e}{ValueToString} (Result value, int precision)
+\item 
+Output $\ast$ \hyperlink{namespaceStats_aff4528f6c0e99aac2ae6bfbba25349aa}{initText} (const string \&filename, bool desc)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceStats_abacf74f0010f42902b864f51751d05c9}{debug\_\-break\_\-id} = -\/1
+\item 
+CallbackQueue \hyperlink{namespaceStats_a84952ecad0a9644e0ea9526b3736c8b7}{dumpQueue}
+\item 
+CallbackQueue \hyperlink{namespaceStats_a052117624dd534c773035ba2e03f4474}{resetQueue}
+\item 
+bool \hyperlink{namespaceStats_ae793c31e3372c51a4996ce57cc219a54}{\_\-enabled} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceStats_abf12e88b5899310c1adcf5be61d6bee3}{
+\index{Stats@{Stats}!MapType@{MapType}}
+\index{MapType@{MapType}!Stats@{Stats}}
+\subsubsection[{MapType}]{\setlength{\rightskip}{0pt plus 5cm}typedef map$<$const void $\ast$, Info $\ast$$>$ {\bf Stats::MapType}}}
+\label{namespaceStats_abf12e88b5899310c1adcf5be61d6bee3}
+\hypertarget{namespaceStats_aa5595c5604b2fec03e55b1f32b521595}{
+\index{Stats@{Stats}!NameMapType@{NameMapType}}
+\index{NameMapType@{NameMapType}!Stats@{Stats}}
+\subsubsection[{NameMapType}]{\setlength{\rightskip}{0pt plus 5cm}typedef map$<$std::string, Info $\ast$$>$ {\bf Stats::NameMapType}}}
+\label{namespaceStats_aa5595c5604b2fec03e55b1f32b521595}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceStats_a03d2f1935a0ef6250fa5df657a82310b}{
+\index{Stats@{Stats}!enable@{enable}}
+\index{enable@{enable}!Stats@{Stats}}
+\subsubsection[{enable}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::enable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_a03d2f1935a0ef6250fa5df657a82310b}
+
+\begin{DoxyCode}
+{
+    if (_enabled)
+        fatal("Stats are already enabled");
+
+    _enabled = true;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_ae5a14285f2510051bae7923aa2612d96}{
+\index{Stats@{Stats}!enabled@{enabled}}
+\index{enabled@{enabled}!Stats@{Stats}}
+\subsubsection[{enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool Stats::enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_ae5a14285f2510051bae7923aa2612d96}
+
+\begin{DoxyCode}
+{
+    return _enabled;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_aff4528f6c0e99aac2ae6bfbba25349aa}{
+\index{Stats@{Stats}!initText@{initText}}
+\index{initText@{initText}!Stats@{Stats}}
+\subsubsection[{initText}]{\setlength{\rightskip}{0pt plus 5cm}Output$\ast$ Stats::initText (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{filename, }
+\item[{bool}]{desc}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_aff4528f6c0e99aac2ae6bfbba25349aa}
+
+\begin{DoxyCode}
+{
+    static Text text;
+    static bool connected = false;
+
+    if (!connected) {
+        ostream *os = simout.find(filename);
+        if (!os)
+            os = simout.create(filename);
+
+        text.open(*os);
+        text.descriptions = desc;
+        connected = true;
+    }
+
+    return &text;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_aae51efeedd0840ece6e968c96df90038}{
+\index{Stats@{Stats}!nameMap@{nameMap}}
+\index{nameMap@{nameMap}!Stats@{Stats}}
+\subsubsection[{nameMap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf NameMapType}\& Stats::nameMap (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_aae51efeedd0840ece6e968c96df90038}
+
+\begin{DoxyCode}
+{
+    static NameMapType the_map;
+    return the_map;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_ace78801422912439fb2f81572cc9c373}{
+\index{Stats@{Stats}!registerDumpCallback@{registerDumpCallback}}
+\index{registerDumpCallback@{registerDumpCallback}!Stats@{Stats}}
+\subsubsection[{registerDumpCallback}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::registerDumpCallback (
+\begin{DoxyParamCaption}
+\item[{Callback $\ast$}]{cb}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_ace78801422912439fb2f81572cc9c373}
+
+\begin{DoxyCode}
+{
+    dumpQueue.add(cb);
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_a105c595669b79620fce95c825f745bce}{
+\index{Stats@{Stats}!registerResetCallback@{registerResetCallback}}
+\index{registerResetCallback@{registerResetCallback}!Stats@{Stats}}
+\subsubsection[{registerResetCallback}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::registerResetCallback (
+\begin{DoxyParamCaption}
+\item[{Callback $\ast$}]{cb}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_a105c595669b79620fce95c825f745bce}
+
+\begin{DoxyCode}
+{
+    resetQueue.add(cb);
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_a52f464eb02d70d04e60fd6c090366560}{
+\index{Stats@{Stats}!statsList@{statsList}}
+\index{statsList@{statsList}!Stats@{Stats}}
+\subsubsection[{statsList}]{\setlength{\rightskip}{0pt plus 5cm}std::list$<$ Info $\ast$ $>$ \& Stats::statsList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_a52f464eb02d70d04e60fd6c090366560}
+
+\begin{DoxyCode}
+{
+    static list<Info *> the_list;
+    return the_list;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_a3eb4a123811e05e9b29748cf23cbdc31}{
+\index{Stats@{Stats}!statsMap@{statsMap}}
+\index{statsMap@{statsMap}!Stats@{Stats}}
+\subsubsection[{statsMap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MapType}\& Stats::statsMap (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_a3eb4a123811e05e9b29748cf23cbdc31}
+
+\begin{DoxyCode}
+{
+    static MapType the_map;
+    return the_map;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_a6bae8e555771c8cb0819d78c60359656}{
+\index{Stats@{Stats}!validateStatName@{validateStatName}}
+\index{validateStatName@{validateStatName}!Stats@{Stats}}
+\subsubsection[{validateStatName}]{\setlength{\rightskip}{0pt plus 5cm}bool Stats::validateStatName (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_a6bae8e555771c8cb0819d78c60359656}
+
+\begin{DoxyCode}
+{
+    if (name.empty())
+        return false;
+
+    vector<string> vec;
+    tokenize(vec, name, '.');
+    vector<string>::const_iterator item = vec.begin();
+    while (item != vec.end()) {
+        if (item->empty())
+            return false;
+
+        string::const_iterator c = item->begin();
+
+        // The first character is different
+        if (!isalpha(*c) && *c != '_')
+            return false;
+
+        // The rest of the characters have different rules.
+        while (++c != item->end()) {
+            if (!isalnum(*c) && *c != '_')
+                return false;
+        }
+
+        ++item;
+    }
+
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{namespaceStats_abf675b5476be37bbbe5d1abacbe4071e}{
+\index{Stats@{Stats}!ValueToString@{ValueToString}}
+\index{ValueToString@{ValueToString}!Stats@{Stats}}
+\subsubsection[{ValueToString}]{\setlength{\rightskip}{0pt plus 5cm}string Stats::ValueToString (
+\begin{DoxyParamCaption}
+\item[{Result}]{value, }
+\item[{int}]{precision}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceStats_abf675b5476be37bbbe5d1abacbe4071e}
+
+\begin{DoxyCode}
+{
+    stringstream val;
+
+    if (!std::isnan(value)) {
+        if (precision != -1)
+            val.precision(precision);
+        else if (value == rint(value))
+            val.precision(0);
+
+        val.unsetf(ios::showpoint);
+        val.setf(ios::fixed);
+        val << value;
+    } else {
+        val << "nan";
+    }
+
+    return val.str();
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceStats_ae793c31e3372c51a4996ce57cc219a54}{
+\index{Stats@{Stats}!\_\-enabled@{\_\-enabled}}
+\index{\_\-enabled@{\_\-enabled}!Stats@{Stats}}
+\subsubsection[{\_\-enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Stats::\_\-enabled} = false}}
+\label{namespaceStats_ae793c31e3372c51a4996ce57cc219a54}
+\hypertarget{namespaceStats_abacf74f0010f42902b864f51751d05c9}{
+\index{Stats@{Stats}!debug\_\-break\_\-id@{debug\_\-break\_\-id}}
+\index{debug\_\-break\_\-id@{debug\_\-break\_\-id}!Stats@{Stats}}
+\subsubsection[{debug\_\-break\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Stats::debug\_\-break\_\-id} = -\/1}}
+\label{namespaceStats_abacf74f0010f42902b864f51751d05c9}
+\hypertarget{namespaceStats_a84952ecad0a9644e0ea9526b3736c8b7}{
+\index{Stats@{Stats}!dumpQueue@{dumpQueue}}
+\index{dumpQueue@{dumpQueue}!Stats@{Stats}}
+\subsubsection[{dumpQueue}]{\setlength{\rightskip}{0pt plus 5cm}CallbackQueue {\bf Stats::dumpQueue}}}
+\label{namespaceStats_a84952ecad0a9644e0ea9526b3736c8b7}
+\hypertarget{namespaceStats_a052117624dd534c773035ba2e03f4474}{
+\index{Stats@{Stats}!resetQueue@{resetQueue}}
+\index{resetQueue@{resetQueue}!Stats@{Stats}}
+\subsubsection[{resetQueue}]{\setlength{\rightskip}{0pt plus 5cm}CallbackQueue {\bf Stats::resetQueue}}}
+\label{namespaceStats_a052117624dd534c773035ba2e03f4474}

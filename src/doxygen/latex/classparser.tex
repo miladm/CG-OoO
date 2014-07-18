@@ -1,0 +1,114 @@
+\hypertarget{classparser}{
+\section{parser Class Reference}
+\label{classparser}\index{parser@{parser}}
+}
+
+
+{\ttfamily \#include $<$parser.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classparser_ac4cb16e924a735dfb5837772afa1a1a9}{parser} ()
+\item 
+\hyperlink{classparser_acdd4eb1b51b876954c2f7605f65388ce}{$\sim$parser} ()
+\item 
+bool \hyperlink{classparser_a6433223120dd1acca009c5c3bdddcf54}{parseIns} (\hyperlink{classinstruction}{instruction} $\ast$newIns)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classparser_ac4cb16e924a735dfb5837772afa1a1a9}{
+\index{parser@{parser}!parser@{parser}}
+\index{parser@{parser}!parser@{parser}}
+\subsubsection[{parser}]{\setlength{\rightskip}{0pt plus 5cm}parser::parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classparser_ac4cb16e924a735dfb5837772afa1a1a9}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+\hypertarget{classparser_acdd4eb1b51b876954c2f7605f65388ce}{
+\index{parser@{parser}!$\sim$parser@{$\sim$parser}}
+\index{$\sim$parser@{$\sim$parser}!parser@{parser}}
+\subsubsection[{$\sim$parser}]{\setlength{\rightskip}{0pt plus 5cm}parser::$\sim$parser (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classparser_acdd4eb1b51b876954c2f7605f65388ce}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classparser_a6433223120dd1acca009c5c3bdddcf54}{
+\index{parser@{parser}!parseIns@{parseIns}}
+\index{parseIns@{parseIns}!parser@{parser}}
+\subsubsection[{parseIns}]{\setlength{\rightskip}{0pt plus 5cm}bool parser::parseIns (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{newIns}
+\end{DoxyParamCaption}
+)}}
+\label{classparser_a6433223120dd1acca009c5c3bdddcf54}
+
+\begin{DoxyCode}
+                                         {
+        //int activeWinRange = iROB->NumElements() - iWinPointer;
+        newIns->setStatus(FETCH, cycle, -1);
+        while(true) {
+                int result = fetchIns(newIns);
+                if (result == -1 || (insParseCap > 0 && insParseCap <= insID)) {
+                        printf("Reached End of File.\n");
+                        eof = true; //TODO add this line later
+                        //iROB->RemoveAt(iROB->NumElements()-1);
+                        delete newIns;
+                        return false;
+                } //EOF
+                else if (result == -2) {
+                        //iROB->RemoveAt(iROB->NumElements()-1);
+                        //i--;
+                        continue; //Skip the line and read next line
+                } else {
+                        insID++;
+                        //printf("insID = %d\n",insID);
+                        newIns->setInsID(insID);
+                        newIns->noRRdependencyTable(depTables, coreType);
+                        //TODO put the block back in when you have the right para
+      meters defined.
+                        // newIns->br_dependencyTable(depTables);
+                        // /* Manage LSQ */ 
+                        // if (memoryModel == PERFECT) {
+                        //      newIns->perfetc_MemDependencyTable(depTables, cor
+      eType, numSideBuffs);
+                        // } else if (memoryModel == TOTAL_ORDER) {
+                        //      newIns->totalOrder_MemDependencyTable(totalOrderL
+      SQ);
+                        // }
+                        /*-----STAT-----*/
+                        //numParentsHist->addElem(newIns->getNumAncestors());
+                        /*-----STAT-----*/
+                        if (reschedule == false && makePhrase == false)
+                                iWindow->Append(newIns);
+                        iROB->Append(newIns);
+                        newIns->findPhraseAncestors(); //TODO this should go some
+      where else
+                        //printf("TEST: newIndx = %d, ROB size = %d\n", *iWindow-
+      >Nth(iWindow->NumElements()-1), iROB->NumElements());
+                        break;
+                }
+        }
+        return true;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{parser_8h}{parser.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2parser_8cpp}{parser.cpp}\end{DoxyCompactItemize}

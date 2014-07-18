@@ -1,0 +1,330 @@
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/frontend/parser.cpp File Reference}
+\label{binaryTranslator_2frontend_2parser_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/frontend/parser.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/frontend/parser.cpp}}
+}
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_aac584d3205df6f221fb0ccee5214a89d}{trace\_\-info} (ADDRINT ins\_\-addr)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49}{setDestination} (INS ins)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_af3289249552a1470203b0101341ecc73}{setType} (INS ins)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76}{setReg} (INS ins)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2}{RecordMemRead} (VOID $\ast$ip, VOID $\ast$addr)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257}{RecordMemWrite} (VOID $\ast$ip, VOID $\ast$addr)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}{ImageLoad} (IMG img, VOID $\ast$v)
+\item 
+VOID \hyperlink{binaryTranslator_2frontend_2parser_8cpp_aa61669c70de306a0ba47bf5878b9f806}{Fini} (INT32 code, VOID $\ast$v)
+\item 
+INT32 \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a9c89b15666dec97b4af91ba247b6a230}{Usage} ()
+\item 
+int \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+FILE $\ast$ \hyperlink{binaryTranslator_2frontend_2parser_8cpp_acaa45cdca33f92d94cf63e2e4498487a}{trace\_\-static}
+\item 
+FILE $\ast$ \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a7ed1bcdb23803dfda2895ff76f785d1a}{mem\_\-trace}
+\item 
+FILE $\ast$ \hyperlink{binaryTranslator_2frontend_2parser_8cpp_a42bc6696a6158fb473715316f0902236}{insAddrs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_aa61669c70de306a0ba47bf5878b9f806}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!Fini@{Fini}}
+\index{Fini@{Fini}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{Fini}]{\setlength{\rightskip}{0pt plus 5cm}VOID Fini (
+\begin{DoxyParamCaption}
+\item[{INT32}]{code, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_aa61669c70de306a0ba47bf5878b9f806}
+
+\begin{DoxyCode}
+{
+    fclose(trace_static);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!ImageLoad@{ImageLoad}}
+\index{ImageLoad@{ImageLoad}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{ImageLoad}]{\setlength{\rightskip}{0pt plus 5cm}VOID ImageLoad (
+\begin{DoxyParamCaption}
+\item[{IMG}]{img, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}
+
+\begin{DoxyCode}
+{
+    for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec))
+    {
+        for (RTN rtn = SEC_RtnHead(sec); RTN_Valid(rtn); rtn = RTN_Next(rtn))
+        {
+            // Open the RTN.
+            RTN_Open( rtn );            
+            // Examine each instruction in the routine.
+            for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) 
+      )
+            {
+                                setType(ins);
+                                fprintf(trace_static, "#%s\n", INS_Mnemonic(ins).
+      c_str());
+                                fprintf(trace_static, "%s\n", INS_Disassemble(ins
+      ).c_str());
+                                fprintf(trace_static, "%lx\n", INS_Address(ins));
+      
+                                //fprintf(insAddrs, "%lx\n", INS_Address(ins)); /
+      /for debugging address space
+                                setDestination(ins);
+                                setReg(ins);
+                                fprintf(trace_static, "---\n");
+                                // Instruments memory accesses using a predicated
+       call
+                            UINT32 memOperands = INS_MemoryOperandCount(ins);
+                            // Iterate over each memory operand of the instructio
+      n.
+                            for (UINT32 memOp = 0; memOp < memOperands; memOp++)
+                            {
+                                if (INS_MemoryOperandIsRead(ins, memOp))
+                                {
+                                    INS_InsertPredicatedCall(
+                                        ins, IPOINT_BEFORE, (AFUNPTR)
+      RecordMemRead,
+                                        IARG_INST_PTR,
+                                        IARG_MEMORYOP_EA, memOp,
+                                        IARG_END);
+                                }
+                                if (INS_MemoryOperandIsWritten(ins, memOp))
+                                {
+                                    INS_InsertPredicatedCall(
+                                        ins, IPOINT_BEFORE, (AFUNPTR)
+      RecordMemWrite,
+                                        IARG_INST_PTR,
+                                        IARG_MEMORYOP_EA, memOp,
+                                        IARG_END);
+                                }
+                            }
+            }
+            // Close the RTN.
+            RTN_Close( rtn );
+        }
+    }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!main@{main}}
+\index{main@{main}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+{
+        const string ioPath = "/home/milad/esc_project/svn/memTraceMilad/TraceSim
+      /phraseblock_framework/frontend/"; //argv[argc-2];
+        trace_static = fopen((ioPath+"/static_trace.s").c_str(), "w");  
+        mem_trace    = fopen("/scratch/tracesim/specint2006/mem_trace.csv", "w");
+        
+        insAddrs     = fopen("/scratch/tracesim/specint2006/ins_addrs.csv", "w");
+        
+
+    // Initialize pin & symbol manager
+    if (PIN_Init(argc, argv)) return Usage();
+    PIN_InitSymbols();
+
+    // Register ImageLoad to be called to instrument instructions
+    IMG_AddInstrumentFunction(ImageLoad, 0);
+    PIN_AddFiniFunction(Fini, 0);
+    
+    // Start the program, never returns
+    PIN_StartProgram();
+    
+    return 0;
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!RecordMemRead@{RecordMemRead}}
+\index{RecordMemRead@{RecordMemRead}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{RecordMemRead}]{\setlength{\rightskip}{0pt plus 5cm}VOID RecordMemRead (
+\begin{DoxyParamCaption}
+\item[{VOID $\ast$}]{ip, }
+\item[{VOID $\ast$}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2}
+
+\begin{DoxyCode}
+{
+        //fprintf(mem_trace,"%lx: R %lx\n", ip, addr);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!RecordMemWrite@{RecordMemWrite}}
+\index{RecordMemWrite@{RecordMemWrite}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{RecordMemWrite}]{\setlength{\rightskip}{0pt plus 5cm}VOID RecordMemWrite (
+\begin{DoxyParamCaption}
+\item[{VOID $\ast$}]{ip, }
+\item[{VOID $\ast$}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257}
+
+\begin{DoxyCode}
+{
+    //fprintf(mem_trace,"%lx: W %lx\n", ip, addr);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!setDestination@{setDestination}}
+\index{setDestination@{setDestination}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{setDestination}]{\setlength{\rightskip}{0pt plus 5cm}VOID setDestination (
+\begin{DoxyParamCaption}
+\item[{INS}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49}
+
+\begin{DoxyCode}
+                              {
+        if (INS_IsDirectBranchOrCall(ins)) {
+                fprintf(trace_static, "%lx\n", INS_DirectBranchOrCallTargetAddres
+      s(ins));
+        }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!setReg@{setReg}}
+\index{setReg@{setReg}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{setReg}]{\setlength{\rightskip}{0pt plus 5cm}VOID setReg (
+\begin{DoxyParamCaption}
+\item[{INS}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76}
+
+\begin{DoxyCode}
+                      {
+        // UINT32 operandCount = INS_MaxNumRRegs(ins)+INS_MaxNumWRegs(ins);
+        if (INS_MaxNumRRegs(ins) > 0) {
+                for (int i = 0; i < INS_MaxNumRRegs(ins); i++) {
+                        fprintf(trace_static,"%s\n%d\n", REG_StringShort(INS_RegR
+      (ins,i)).c_str(), 1);
+                }
+        }
+        if (INS_MaxNumWRegs(ins) > 0) {
+                for (int i = 0; i < INS_MaxNumWRegs(ins); i++) {
+                        fprintf(trace_static,"%s\n%d\n", REG_StringShort(INS_RegW
+      (ins,i)).c_str(), 2);
+                }
+        }               
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_af3289249552a1470203b0101341ecc73}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!setType@{setType}}
+\index{setType@{setType}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{setType}]{\setlength{\rightskip}{0pt plus 5cm}VOID setType (
+\begin{DoxyParamCaption}
+\item[{INS}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_af3289249552a1470203b0101341ecc73}
+
+\begin{DoxyCode}
+                       {
+        bool noType = true;
+        if (INS_IsCall(ins) || INS_IsSyscall(ins)) {
+                fprintf(trace_static, "c\n");
+                noType = false;
+        } if (INS_IsRet(ins) || INS_IsSysret(ins)) {
+                fprintf(trace_static, "r\n");
+                noType = false;
+        } if (INS_IsBranch(ins) && INS_HasFallThrough(ins)) {
+                fprintf(trace_static, "b\n");
+                noType = false;
+        } if (INS_IsBranch(ins) && !INS_HasFallThrough(ins)) {
+                fprintf(trace_static, "j\n");
+                noType = false;
+        } if (INS_IsMemoryRead(ins)) {
+                fprintf(trace_static, "R\n");
+                fprintf(trace_static, "%d\n", INS_MemoryReadSize(ins)); //size in
+       bytes
+                noType = false;
+        } if (INS_IsMemoryWrite(ins)) {
+                fprintf(trace_static, "W\n");
+                fprintf(trace_static, "%d\n", INS_MemoryWriteSize(ins)); //size i
+      n bytes
+                noType = false;
+        } if (noType == true) {
+                fprintf(trace_static, "o\n");
+        }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_aac584d3205df6f221fb0ccee5214a89d}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!trace\_\-info@{trace\_\-info}}
+\index{trace\_\-info@{trace\_\-info}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{trace\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}VOID trace\_\-info (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{ins\_\-addr}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_aac584d3205df6f221fb0ccee5214a89d}
+
+\begin{DoxyCode}
+                                  {
+    fprintf(trace_static, "%lld\n", ins_addr);  
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a9c89b15666dec97b4af91ba247b6a230}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!Usage@{Usage}}
+\index{Usage@{Usage}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{Usage}]{\setlength{\rightskip}{0pt plus 5cm}INT32 Usage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a9c89b15666dec97b4af91ba247b6a230}
+
+\begin{DoxyCode}
+{
+    cerr << "This is the invocation pintool" << endl;
+    cerr << endl << KNOB_BASE::StringKnobSummary() << endl;
+    return -1;
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a42bc6696a6158fb473715316f0902236}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!insAddrs@{insAddrs}}
+\index{insAddrs@{insAddrs}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{insAddrs}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf insAddrs}}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a42bc6696a6158fb473715316f0902236}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_a7ed1bcdb23803dfda2895ff76f785d1a}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!mem\_\-trace@{mem\_\-trace}}
+\index{mem\_\-trace@{mem\_\-trace}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{mem\_\-trace}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf mem\_\-trace}}}
+\label{binaryTranslator_2frontend_2parser_8cpp_a7ed1bcdb23803dfda2895ff76f785d1a}
+\hypertarget{binaryTranslator_2frontend_2parser_8cpp_acaa45cdca33f92d94cf63e2e4498487a}{
+\index{binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}!trace\_\-static@{trace\_\-static}}
+\index{trace\_\-static@{trace\_\-static}!binaryTranslator/frontend/parser.cpp@{binaryTranslator/frontend/parser.cpp}}
+\subsubsection[{trace\_\-static}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf trace\_\-static}}}
+\label{binaryTranslator_2frontend_2parser_8cpp_acaa45cdca33f92d94cf63e2e4498487a}

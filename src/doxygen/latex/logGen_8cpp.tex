@@ -1,0 +1,68 @@
+\hypertarget{logGen_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/logGen.cpp File Reference}
+\label{logGen_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/logGen.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/logGen.cpp}}
+}
+{\ttfamily \#include \char`\"{}logGen.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15}{writeToFile} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, string $\ast$program\_\-name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15}{
+\index{logGen.cpp@{logGen.cpp}!writeToFile@{writeToFile}}
+\index{writeToFile@{writeToFile}!logGen.cpp@{logGen.cpp}}
+\subsubsection[{writeToFile}]{\setlength{\rightskip}{0pt plus 5cm}void writeToFile (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15}
+
+\begin{DoxyCode}
+                                                                   {
+        FILE* outFile;
+        if ((outFile  = fopen(("/home/milad/esc_project/svn/PARS/src/binaryTransl
+      ator/output_files/"+(*program_name)+"_obj.s").c_str(), "w")) == NULL) 
+                Assert("Unable to open the output file.");
+        
+        for (int i =  0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                fprintf(outFile, "{,%ld\n", bb->getID());
+                if (bb->hasHeader()) {
+                        fprintf(outFile, "H,%ld\n", bb->getBBbrHeader());
+                }
+                for (int j = 0; j < bb->getBbSize(); j++) {
+                        instruction* ins = bb->getInsList()->Nth(j);
+                        if (ins->getType() == 'M') {
+                                if (ins->isWrMemType()) {
+                                        fprintf(outFile, "W,-memAddr-,%ld,%d,%s",
+       ins->getInsAddr(), ins->getMemAccessSize(), ins->getArchRegisterStr().c_str());
+                                } else if (ins->isRdMemType()) {
+                                        fprintf(outFile, "R,-memAddr-,%ld,%d,%s",
+       ins->getInsAddr(), ins->getMemAccessSize(), ins->getArchRegisterStr().c_str());
+                                } else {
+                                        Assert(true == false && "ERROR: A memory 
+      operation is either read or write");
+                                }
+                        } else if (ins->getType() == 'j' || ins->getType() == 'c'
+       || ins->getType() == 'b' || ins->getType() == 'r') {
+                                fprintf(outFile, "%c,%ld,-brTaken-,%ld,%s", ins->
+      getType(), ins->getInsAddr(), ins->getBrDst(), ins->getArchRegisterStr().c_str())
+      ;
+                        } else if (ins->getType() == 'o') { //A, D, F for ins->ge
+      tType()
+                                fprintf(outFile, "%c,%ld,%s", ins->getType(), ins
+      ->getInsAddr(), ins->getArchRegisterStr().c_str());
+                        } else {
+                                Assert(true == false && "Unrecognized instruction
+       type");
+                        }
+                }
+                fprintf(outFile, "}\n");
+        }
+}
+\end{DoxyCode}

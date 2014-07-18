@@ -1,0 +1,263 @@
+\hypertarget{namespaceNet}{
+\section{Net Namespace Reference}
+\label{namespaceNet}\index{Net@{Net}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceNet_a4b92de0ee07f219e85e35c312222cd0d}{operator==} (const EthAddr \&left, const EthAddr \&right)
+\item 
+ostream \& \hyperlink{namespaceNet_a6ee6ae0fe485e2f01a9b42ab77329d7d}{operator$<$$<$} (ostream \&stream, const EthAddr \&ea)
+\item 
+bool \hyperlink{namespaceNet_a6bfbfd9938a1a16b23a8f1643757b6bf}{operator==} (const IpAddress \&left, const IpAddress \&right)
+\item 
+ostream \& \hyperlink{namespaceNet_a375cbbb01685429061c5da6797bdfcf5}{operator$<$$<$} (ostream \&stream, const IpAddress \&ia)
+\item 
+bool \hyperlink{namespaceNet_aa01345ac21b16ed1d6d439732a4c366e}{operator==} (const IpNetmask \&left, const IpNetmask \&right)
+\item 
+ostream \& \hyperlink{namespaceNet_ac5d1eaf544b16bb39dbcf35cf2630b24}{operator$<$$<$} (ostream \&stream, const IpNetmask \&in)
+\item 
+bool \hyperlink{namespaceNet_a4fb587c01e10364c1d27edbd958fc92d}{operator==} (const IpWithPort \&left, const IpWithPort \&right)
+\item 
+ostream \& \hyperlink{namespaceNet_a0e836533fd8b6ae417355a2122f2f48c}{operator$<$$<$} (ostream \&stream, const IpWithPort \&iwp)
+\item 
+uint16\_\-t \hyperlink{namespaceNet_a5ec87e377d6c9fd11933ed008df58af2}{cksum} (const IpPtr \&ptr)
+\item 
+uint16\_\-t \hyperlink{namespaceNet_ae251828c44688309e4fb244bc10ebc97}{\_\-\_\-tu\_\-cksum} (const IpPtr \&ip)
+\item 
+uint16\_\-t \hyperlink{namespaceNet_ac84753b54a83d2be58b29ad2e9aa0fa4}{cksum} (const TcpPtr \&tcp)
+\item 
+uint16\_\-t \hyperlink{namespaceNet_a93ab2a596dafaf0f685a65a2ee68c91e}{cksum} (const UdpPtr \&udp)
+\item 
+int \hyperlink{namespaceNet_a7e50a230aeed27f50f5dd05a5768c74c}{hsplit} (const EthPacketPtr \&ptr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceNet_ae251828c44688309e4fb244bc10ebc97}{
+\index{Net@{Net}!\_\-\_\-tu\_\-cksum@{\_\-\_\-tu\_\-cksum}}
+\index{\_\-\_\-tu\_\-cksum@{\_\-\_\-tu\_\-cksum}!Net@{Net}}
+\subsubsection[{\_\-\_\-tu\_\-cksum}]{\setlength{\rightskip}{0pt plus 5cm}uint16\_\-t Net::\_\-\_\-tu\_\-cksum (
+\begin{DoxyParamCaption}
+\item[{const IpPtr \&}]{ip}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_ae251828c44688309e4fb244bc10ebc97}
+
+\begin{DoxyCode}
+{
+    int tcplen = ip->len() - ip->hlen();
+    int sum = ip_cksum_add(ip->payload(), tcplen, 0);
+    sum = ip_cksum_add(&ip->ip_src, 8, sum); // source and destination
+    sum += htons(ip->ip_p + tcplen);
+    return ip_cksum_carry(sum);
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a5ec87e377d6c9fd11933ed008df58af2}{
+\index{Net@{Net}!cksum@{cksum}}
+\index{cksum@{cksum}!Net@{Net}}
+\subsubsection[{cksum}]{\setlength{\rightskip}{0pt plus 5cm}uint16\_\-t Net::cksum (
+\begin{DoxyParamCaption}
+\item[{const IpPtr \&}]{ptr}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a5ec87e377d6c9fd11933ed008df58af2}
+
+\begin{DoxyCode}
+{
+    int sum = ip_cksum_add(ptr->bytes(), ptr->hlen(), 0);
+    return ip_cksum_carry(sum);
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_ac84753b54a83d2be58b29ad2e9aa0fa4}{
+\index{Net@{Net}!cksum@{cksum}}
+\index{cksum@{cksum}!Net@{Net}}
+\subsubsection[{cksum}]{\setlength{\rightskip}{0pt plus 5cm}uint16\_\-t Net::cksum (
+\begin{DoxyParamCaption}
+\item[{const TcpPtr \&}]{tcp}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_ac84753b54a83d2be58b29ad2e9aa0fa4}
+
+\begin{DoxyCode}
+{ return __tu_cksum(IpPtr(tcp.packet())); }
+\end{DoxyCode}
+\hypertarget{namespaceNet_a93ab2a596dafaf0f685a65a2ee68c91e}{
+\index{Net@{Net}!cksum@{cksum}}
+\index{cksum@{cksum}!Net@{Net}}
+\subsubsection[{cksum}]{\setlength{\rightskip}{0pt plus 5cm}uint16\_\-t Net::cksum (
+\begin{DoxyParamCaption}
+\item[{const UdpPtr \&}]{udp}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a93ab2a596dafaf0f685a65a2ee68c91e}
+
+\begin{DoxyCode}
+{ return __tu_cksum(IpPtr(udp.packet())); }
+\end{DoxyCode}
+\hypertarget{namespaceNet_a7e50a230aeed27f50f5dd05a5768c74c}{
+\index{Net@{Net}!hsplit@{hsplit}}
+\index{hsplit@{hsplit}!Net@{Net}}
+\subsubsection[{hsplit}]{\setlength{\rightskip}{0pt plus 5cm}int Net::hsplit (
+\begin{DoxyParamCaption}
+\item[{const EthPacketPtr \&}]{ptr}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a7e50a230aeed27f50f5dd05a5768c74c}
+
+\begin{DoxyCode}
+{
+    int split_point = 0;
+
+    IpPtr ip(ptr);
+    if (ip) {
+        split_point = ip.pstart();
+
+        TcpPtr tcp(ip);
+        if (tcp)
+            split_point = tcp.pstart();
+
+        UdpPtr udp(ip);
+        if (udp)
+            split_point = udp.pstart();
+    }
+    return split_point;
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a375cbbb01685429061c5da6797bdfcf5}{
+\index{Net@{Net}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Net@{Net}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& Net::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream, }
+\item[{const IpAddress \&}]{ia}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a375cbbb01685429061c5da6797bdfcf5}
+
+\begin{DoxyCode}
+{
+    uint32_t ip = ia.ip();
+    ccprintf(stream, "%x.%x.%x.%x",
+            (uint8_t)(ip >> 24), (uint8_t)(ip >> 16),
+            (uint8_t)(ip >> 8),  (uint8_t)(ip >> 0));
+    return stream;
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a0e836533fd8b6ae417355a2122f2f48c}{
+\index{Net@{Net}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Net@{Net}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& Net::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream, }
+\item[{const IpWithPort \&}]{iwp}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a0e836533fd8b6ae417355a2122f2f48c}
+
+\begin{DoxyCode}
+{
+    ccprintf(stream, "%s:%d", (const IpAddress &)iwp, iwp.port());
+    return stream;
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_ac5d1eaf544b16bb39dbcf35cf2630b24}{
+\index{Net@{Net}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Net@{Net}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& Net::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream, }
+\item[{const IpNetmask \&}]{in}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_ac5d1eaf544b16bb39dbcf35cf2630b24}
+
+\begin{DoxyCode}
+{
+    ccprintf(stream, "%s/%d", (const IpAddress &)in, in.netmask());
+    return stream;
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a6ee6ae0fe485e2f01a9b42ab77329d7d}{
+\index{Net@{Net}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Net@{Net}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& Net::operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream, }
+\item[{const EthAddr \&}]{ea}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a6ee6ae0fe485e2f01a9b42ab77329d7d}
+
+\begin{DoxyCode}
+{
+    const uint8_t *a = ea.addr();
+    ccprintf(stream, "%x:%x:%x:%x:%x:%x", a[0], a[1], a[2], a[3], a[4], a[5]);
+    return stream;
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a4b92de0ee07f219e85e35c312222cd0d}{
+\index{Net@{Net}!operator==@{operator==}}
+\index{operator==@{operator==}!Net@{Net}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Net::operator== (
+\begin{DoxyParamCaption}
+\item[{const EthAddr \&}]{left, }
+\item[{const EthAddr \&}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a4b92de0ee07f219e85e35c312222cd0d}
+
+\begin{DoxyCode}
+{
+    return memcmp(left.bytes(), right.bytes(), ETH_ADDR_LEN);
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a6bfbfd9938a1a16b23a8f1643757b6bf}{
+\index{Net@{Net}!operator==@{operator==}}
+\index{operator==@{operator==}!Net@{Net}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Net::operator== (
+\begin{DoxyParamCaption}
+\item[{const IpAddress \&}]{left, }
+\item[{const IpAddress \&}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a6bfbfd9938a1a16b23a8f1643757b6bf}
+
+\begin{DoxyCode}
+{
+    return left.ip() == right.ip();
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_aa01345ac21b16ed1d6d439732a4c366e}{
+\index{Net@{Net}!operator==@{operator==}}
+\index{operator==@{operator==}!Net@{Net}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Net::operator== (
+\begin{DoxyParamCaption}
+\item[{const IpNetmask \&}]{left, }
+\item[{const IpNetmask \&}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_aa01345ac21b16ed1d6d439732a4c366e}
+
+\begin{DoxyCode}
+{
+    return (left.ip() == right.ip()) &&
+        (left.netmask() == right.netmask());
+}
+\end{DoxyCode}
+\hypertarget{namespaceNet_a4fb587c01e10364c1d27edbd958fc92d}{
+\index{Net@{Net}!operator==@{operator==}}
+\index{operator==@{operator==}!Net@{Net}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}bool Net::operator== (
+\begin{DoxyParamCaption}
+\item[{const IpWithPort \&}]{left, }
+\item[{const IpWithPort \&}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceNet_a4fb587c01e10364c1d27edbd958fc92d}
+
+\begin{DoxyCode}
+{
+    return (left.ip() == right.ip()) && (left.port() == right.port());
+}
+\end{DoxyCode}

@@ -1,0 +1,81 @@
+\hypertarget{object__file_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/object\_\-file.cc File Reference}
+\label{object__file_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/object\_\-file.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/object\_\-file.cc}}
+}
+{\ttfamily \#include $<$sys/mman.h$>$}\par
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$fcntl.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$cstdio$>$}\par
+{\ttfamily \#include $<$list$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}base/loader/aout\_\-object.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/ecoff\_\-object.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/elf\_\-object.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/object\_\-file.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/raw\_\-object.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/symtab.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/cprintf.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}mem/port\_\-proxy.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ObjectFile $\ast$ \hyperlink{object__file_8cc_af9c937baadd807efe7819a5214ca652f}{createObjectFile} (const string \&fname, bool raw)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{object__file_8cc_af9c937baadd807efe7819a5214ca652f}{
+\index{object\_\-file.cc@{object\_\-file.cc}!createObjectFile@{createObjectFile}}
+\index{createObjectFile@{createObjectFile}!object_file.cc@{object\_\-file.cc}}
+\subsubsection[{createObjectFile}]{\setlength{\rightskip}{0pt plus 5cm}ObjectFile$\ast$ createObjectFile (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{fname, }
+\item[{bool}]{raw}
+\end{DoxyParamCaption}
+)}}
+\label{object__file_8cc_af9c937baadd807efe7819a5214ca652f}
+
+\begin{DoxyCode}
+{
+    // open the file
+    int fd = open(fname.c_str(), O_RDONLY);
+    if (fd < 0) {
+        return NULL;
+    }
+
+    // find the length of the file by seeking to the end
+    size_t len = (size_t)lseek(fd, 0, SEEK_END);
+
+    // mmap the whole shebang
+    uint8_t *fileData =
+        (uint8_t *)mmap(NULL, len, PROT_READ, MAP_SHARED, fd, 0);
+    if (fileData == MAP_FAILED) {
+        close(fd);
+        return NULL;
+    }
+
+    ObjectFile *fileObj = NULL;
+
+    // figure out what we have here
+    if ((fileObj = EcoffObject::tryFile(fname, fd, len, fileData)) != NULL) {
+        return fileObj;
+    }
+
+    if ((fileObj = AoutObject::tryFile(fname, fd, len, fileData)) != NULL) {
+        return fileObj;
+    }
+
+    if ((fileObj = ElfObject::tryFile(fname, fd, len, fileData)) != NULL) {
+        return fileObj;
+    }
+
+    if (raw)
+        return RawObject::tryFile(fname, fd, len, fileData);
+
+    // don't know what it is
+    close(fd);
+    munmap((char*)fileData, len);
+    return NULL;
+}
+\end{DoxyCode}

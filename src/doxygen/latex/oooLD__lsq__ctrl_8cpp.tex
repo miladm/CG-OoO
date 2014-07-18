@@ -1,0 +1,280 @@
+\hypertarget{oooLD__lsq__ctrl_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/oooLD\_\-lsq\_\-ctrl.cpp File Reference}
+\label{oooLD__lsq__ctrl_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/oooLD\_\-lsq\_\-ctrl.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/oooLD\_\-lsq\_\-ctrl.cpp}}
+}
+{\ttfamily \#include \char`\"{}oooLD\_\-lsq\_\-ctrl.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_a7a106e3227c6b993bfcfcdb3d72889b6}{oooLD\_\-lsqEnque} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{oooLD__lsq__ctrl_8cpp_afb1415b51027a14b1ffbd9e8e08a5d13}{oooLD\_\-lsqHazard} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{oooLD__lsq__ctrl_8cpp_a8817b63972be2cb9076a5a63421d8da1}{oooLD\_\-MemForwarding} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_a5bb290e28377d9e51e94f53b81f22031}{oooLD\_\-insertSQ\_\-addrNdata} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{oooLD__lsq__ctrl_8cpp_a2c6f2e873a180eb8ae5dc87d5edf6014}{oooLD\_\-insertLQ\_\-addr} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_a8c7219fc3bfabaedf710e52fecbdffb2}{oooLD\_\-insertLQ\_\-data} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+int \hyperlink{oooLD__lsq__ctrl_8cpp_a7d4f9d0d16b3b2e46649a78fcade92fd}{oooLD\_\-squashSQ} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{global_2global_8h_a1d35a3946fb219a5e6a04417d1930e40}{INS\_\-ADDR} insId)
+\item 
+int \hyperlink{oooLD__lsq__ctrl_8cpp_aca15f4ac47f09261b50050235c712e6b}{oooLD\_\-squashLQ} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{global_2global_8h_a1d35a3946fb219a5e6a04417d1930e40}{INS\_\-ADDR} insId)
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{oooLD__lsq__ctrl_8cpp_a6e4b07233a71c09de9b5a3bf754b1c54}{oooLD\_\-findLQviolation} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_a860fd15d69fb0988e98bbe52f0f037ee}{oooLD\_\-updateSQcommitSet} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_adf82a4db2ba1adbcfcc9beaf0d922026}{oooLD\_\-lqDequ} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, \hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{oooLD__lsq__ctrl_8cpp_a3854ed3eb65d30f102ffc7477b1e1df7}{oooLD\_\-sqDequ} (\hyperlink{classlsq}{lsq} $\ast$oooLd\_\-inoSt\_\-LSQ, int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a6e4b07233a71c09de9b5a3bf754b1c54}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-findLQviolation@{oooLD\_\-findLQviolation}}
+\index{oooLD\_\-findLQviolation@{oooLD\_\-findLQviolation}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-findLQviolation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} oooLD\_\-findLQviolation (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a6e4b07233a71c09de9b5a3bf754b1c54}
+
+\begin{DoxyCode}
+                                                                     {
+        Assert(ins->getMemType() == WRITE);
+        Assert(ins->getStatus() == complete);
+        INS_ID id = oooLd_inoSt_LSQ->lookupLQ(ins);
+        return id;
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a2c6f2e873a180eb8ae5dc87d5edf6014}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-insertLQ\_\-addr@{oooLD\_\-insertLQ\_\-addr}}
+\index{oooLD\_\-insertLQ\_\-addr@{oooLD\_\-insertLQ\_\-addr}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-insertLQ\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}bool oooLD\_\-insertLQ\_\-addr (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a2c6f2e873a180eb8ae5dc87d5edf6014}
+
+\begin{DoxyCode}
+                                                                 {
+        Assert(ins->getMemType() == READ);
+        oooLd_inoSt_LSQ->insertLQ_addr(ins);
+        return oooLD_MemForwarding (oooLd_inoSt_LSQ, ins);
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a8c7219fc3bfabaedf710e52fecbdffb2}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-insertLQ\_\-data@{oooLD\_\-insertLQ\_\-data}}
+\index{oooLD\_\-insertLQ\_\-data@{oooLD\_\-insertLQ\_\-data}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-insertLQ\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-insertLQ\_\-data (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a8c7219fc3bfabaedf710e52fecbdffb2}
+
+\begin{DoxyCode}
+                                                                 {
+        Assert(ins->getMemType() == READ);
+        //not modeled - placeholder
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a5bb290e28377d9e51e94f53b81f22031}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-insertSQ\_\-addrNdata@{oooLD\_\-insertSQ\_\-addrNdata}}
+\index{oooLD\_\-insertSQ\_\-addrNdata@{oooLD\_\-insertSQ\_\-addrNdata}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-insertSQ\_\-addrNdata}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-insertSQ\_\-addrNdata (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a5bb290e28377d9e51e94f53b81f22031}
+
+\begin{DoxyCode}
+                                                                      {
+        Assert(ins->getMemType() == WRITE);
+        oooLd_inoSt_LSQ->insertSQ_addrNdata(ins);
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_adf82a4db2ba1adbcfcc9beaf0d922026}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-lqDequ@{oooLD\_\-lqDequ}}
+\index{oooLD\_\-lqDequ@{oooLD\_\-lqDequ}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-lqDequ}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-lqDequ (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_adf82a4db2ba1adbcfcc9beaf0d922026}
+
+\begin{DoxyCode}
+                                                           {
+        Assert(ins->getStatus() == complete);
+        if (oooLd_inoSt_LSQ->isLQempty()) {
+                printf("ERROR: LQ element not found!\n"); //Assert(oooLd_inoSt_LS
+      Q->isLQempty() == false);
+                return;
+        }
+        Assert(oooLd_inoSt_LSQ->getLQheadId() == ins->getInsID());
+        oooLd_inoSt_LSQ->popFrontLQ();
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a7a106e3227c6b993bfcfcdb3d72889b6}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-lsqEnque@{oooLD\_\-lsqEnque}}
+\index{oooLD\_\-lsqEnque@{oooLD\_\-lsqEnque}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-lsqEnque}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-lsqEnque (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a7a106e3227c6b993bfcfcdb3d72889b6}
+
+\begin{DoxyCode}
+                                                             {
+        if (ins->getMemType() == READ) {
+                Assert (!oooLd_inoSt_LSQ->isLQfull());
+                oooLd_inoSt_LSQ->pushBackLQ(ins);
+        } else if (ins->getMemType() == WRITE) {
+                Assert(!oooLd_inoSt_LSQ->isSQfull());
+                oooLd_inoSt_LSQ->pushBackSQ(ins);
+        }
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_afb1415b51027a14b1ffbd9e8e08a5d13}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-lsqHazard@{oooLD\_\-lsqHazard}}
+\index{oooLD\_\-lsqHazard@{oooLD\_\-lsqHazard}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-lsqHazard}]{\setlength{\rightskip}{0pt plus 5cm}bool oooLD\_\-lsqHazard (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_afb1415b51027a14b1ffbd9e8e08a5d13}
+
+\begin{DoxyCode}
+                                                              {
+        if (ins->getMemType() == READ) {
+                if (oooLd_inoSt_LSQ->isLQfull()) {
+                        //printf("full LQ\n");
+                        return true; //STALL FETCH
+                }
+        } else if (ins->getMemType() == WRITE) {
+                if (oooLd_inoSt_LSQ->isSQfull()) {
+                        //printf("full SQ\n");
+                        return true; //STALL FETCH
+                }
+        }
+        return false;
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a8817b63972be2cb9076a5a63421d8da1}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-MemForwarding@{oooLD\_\-MemForwarding}}
+\index{oooLD\_\-MemForwarding@{oooLD\_\-MemForwarding}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-MemForwarding}]{\setlength{\rightskip}{0pt plus 5cm}bool oooLD\_\-MemForwarding (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a8817b63972be2cb9076a5a63421d8da1}
+
+\begin{DoxyCode}
+                                                                  {
+        Assert(ins->getMemType() == READ);
+        bool isMemAddrInSQ = oooLd_inoSt_LSQ->lookupSQ(ins);
+        if (isMemAddrInSQ) {
+                //Forward value
+                oooLd_inoSt_LSQ->setForwardData(ins);
+                return true;
+                //TODO make sure cache is no longer accessed + latency is properl
+      y set
+        } else {
+                return false;
+                //lookup cache
+                //TODO
+        }
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a3854ed3eb65d30f102ffc7477b1e1df7}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-sqDequ@{oooLD\_\-sqDequ}}
+\index{oooLD\_\-sqDequ@{oooLD\_\-sqDequ}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-sqDequ}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-sqDequ (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{int}]{cycle}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a3854ed3eb65d30f102ffc7477b1e1df7}
+
+\begin{DoxyCode}
+                                                    {
+        //corresponding ins is commited already and non-existant in ROB
+        //Don't access ins element of SQ struct here (the obj is deleted already)
+      
+        if (oooLd_inoSt_LSQ->isSQempty()) return;
+        //DeQueue as many ST operations as possible (TODO makes sense in hardware
+      ?)
+        while (!oooLd_inoSt_LSQ->isSQempty() && oooLd_inoSt_LSQ->
+      isFrontSQdoneWritingCache(cycle)) {
+                oooLd_inoSt_LSQ->popFrontSQ();
+        }
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_aca15f4ac47f09261b50050235c712e6b}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-squashLQ@{oooLD\_\-squashLQ}}
+\index{oooLD\_\-squashLQ@{oooLD\_\-squashLQ}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-squashLQ}]{\setlength{\rightskip}{0pt plus 5cm}int oooLD\_\-squashLQ (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf INS\_\-ADDR}}]{insId}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_aca15f4ac47f09261b50050235c712e6b}
+
+\begin{DoxyCode}
+                                                          {
+        return oooLd_inoSt_LSQ->squashLQ(insId);
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a7d4f9d0d16b3b2e46649a78fcade92fd}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-squashSQ@{oooLD\_\-squashSQ}}
+\index{oooLD\_\-squashSQ@{oooLD\_\-squashSQ}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-squashSQ}]{\setlength{\rightskip}{0pt plus 5cm}int oooLD\_\-squashSQ (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf INS\_\-ADDR}}]{insId}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a7d4f9d0d16b3b2e46649a78fcade92fd}
+
+\begin{DoxyCode}
+                                                          {
+        return oooLd_inoSt_LSQ->squashSQ(insId);
+}
+\end{DoxyCode}
+\hypertarget{oooLD__lsq__ctrl_8cpp_a860fd15d69fb0988e98bbe52f0f037ee}{
+\index{oooLD\_\-lsq\_\-ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}!oooLD\_\-updateSQcommitSet@{oooLD\_\-updateSQcommitSet}}
+\index{oooLD\_\-updateSQcommitSet@{oooLD\_\-updateSQcommitSet}!oooLD_lsq_ctrl.cpp@{oooLD\_\-lsq\_\-ctrl.cpp}}
+\subsubsection[{oooLD\_\-updateSQcommitSet}]{\setlength{\rightskip}{0pt plus 5cm}void oooLD\_\-updateSQcommitSet (
+\begin{DoxyParamCaption}
+\item[{{\bf lsq} $\ast$}]{oooLd\_\-inoSt\_\-LSQ, }
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{oooLD__lsq__ctrl_8cpp_a860fd15d69fb0988e98bbe52f0f037ee}
+
+\begin{DoxyCode}
+                                                                     {
+        Assert(ins->getMemType() == WRITE);
+        oooLd_inoSt_LSQ->updateSQcommitSet(ins);
+}
+\end{DoxyCode}

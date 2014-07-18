@@ -1,0 +1,790 @@
+\hypertarget{classphraseGen}{
+\section{phraseGen Class Reference}
+\label{classphraseGen}\index{phraseGen@{phraseGen}}
+}
+
+
+{\ttfamily \#include $<$phraseGen.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classphraseGen_a94e47ed50271fd9e5f5335a1160b7216}{phraseGen} ()
+\item 
+\hyperlink{classphraseGen_a348ab4d28c08b7e77241cd0c7a0f3796}{$\sim$phraseGen} ()
+\item 
+int \hyperlink{classphraseGen_a27c8b0d81592bc45e7f25e9cb7a4d1c4}{runPhraseGen} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_a901b5b3874c558101a1c250f2f2d0662}{iWindow}, FILE $\ast$\hyperlink{bkEnd_8cpp_a77fc2d35c5f7077be762435e06e16bd2}{phraseFile}, \hyperlink{classdependencyTable}{dependencyTable} $\ast$\hyperlink{vliwScheduler_8cpp_ab1dae06b10269a1b683512c8ecb25def}{depTables}, bool \hyperlink{backend_2parser_8cpp_a6c052602d1d43227768ad3807f7b7268}{eof}, int \hyperlink{bkEnd_8cpp_a06a6e046fd7b9a66b03d334b1df5e3ad}{ROBsize})
+\item 
+void \hyperlink{classphraseGen_a8aa6ac2c304d3545c10da7c70ae6445d}{genPhraseStat} (int indx)
+\item 
+void \hyperlink{classphraseGen_a35e9879ba8c8931661e112c579ead2b4}{closeOldPhrase} (int phIndx)
+\item 
+int \hyperlink{classphraseGen_a04d54cfe18dfef407499f3e6829c32d3}{findMyPhrase} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classphraseGen_aba7134610613016de2d7d91d47c5dd4e}{storeToFile} (int indx, FILE $\ast$\hyperlink{bkEnd_8cpp_a77fc2d35c5f7077be762435e06e16bd2}{phraseFile}, \hyperlink{classdependencyTable}{dependencyTable} $\ast$\hyperlink{vliwScheduler_8cpp_ab1dae06b10269a1b683512c8ecb25def}{depTables})
+\item 
+void \hyperlink{classphraseGen_ab1fd52686e66bea06bd08d7fc8a4eb23}{findReadyPhrases} (FILE $\ast$\hyperlink{bkEnd_8cpp_a77fc2d35c5f7077be762435e06e16bd2}{phraseFile}, \hyperlink{classdependencyTable}{dependencyTable} $\ast$\hyperlink{vliwScheduler_8cpp_ab1dae06b10269a1b683512c8ecb25def}{depTables}, \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB})
+\item 
+int \hyperlink{classphraseGen_aa1371990d9d8c3f0804bea4a6129cbae}{commitIns} (int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}, \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB})
+\item 
+bool \hyperlink{classphraseGen_a582a2a74fe8029250138b0736b1fa6f5}{isPhraseOld} (int phIndx)
+\item 
+bool \hyperlink{classphraseGen_aa63dd2ce73bcee18bea216bbc4899c76}{isPhraseReady} (int phIndx)
+\item 
+int \hyperlink{classphraseGen_ae79ea02ec875c2586543f8c844c721a0}{takeMax} (int a, int b)
+\item 
+long int \hyperlink{classphraseGen_a6e9a854159318aafbdb4aeb1d6c7609e}{getTotNumPhrases} ()
+\item 
+long int \hyperlink{classphraseGen_ac91b5f9a9b4e038cb397e79ecea98c40}{getTotNumSoftBound} ()
+\item 
+long int \hyperlink{classphraseGen_ad853722a4f3ef17f583cd236a6c4f397}{getTotNumPhraseUPLD} ()
+\item 
+long int \hyperlink{classphraseGen_a40b524e55853cfb78e019db073e225a7}{getTotNumRootIns} ()
+\item 
+long int \hyperlink{classphraseGen_abcaefae560beb7b38bd23262084b3106}{getTotNumPhraseAncestors} ()
+\item 
+long int \hyperlink{classphraseGen_a05531ef5a4c9b60ce2454c7353f504f2}{getNumPhGenReset} ()
+\item 
+long int \hyperlink{classphraseGen_ac8303811636725258f09c09ab61342b3}{getTotNumIns} ()
+\item 
+long int \hyperlink{classphraseGen_aa0b1991a44addd0187d03d62319a3876}{getTotNumFrags} ()
+\item 
+long int \hyperlink{classphraseGen_a394ade353944ef69fc1cc675f8a7a458}{getTotNumRootPh} ()
+\item 
+long int \hyperlink{classphraseGen_a4d1fdc45f4608ba6fc5b1f0034a5757e}{getTotNumCritPathViolations} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classphraseGen_a94e47ed50271fd9e5f5335a1160b7216}{
+\index{phraseGen@{phraseGen}!phraseGen@{phraseGen}}
+\index{phraseGen@{phraseGen}!phraseGen@{phraseGen}}
+\subsubsection[{phraseGen}]{\setlength{\rightskip}{0pt plus 5cm}phraseGen::phraseGen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a94e47ed50271fd9e5f5335a1160b7216}
+
+\begin{DoxyCode}
+                     {
+        openPh = new List<phrase*>;
+        closePh = new List<phrase*>;
+        topPhraseID = FIRST_PHRASE;
+        resetCount = 0;
+
+        totNumPhraseAncestors = 0;
+        totNumRootIns = 0;
+        totNumPhUnpredMemOp = 0;
+        insCount = 0;
+        totNumSoftBounds = 0;
+        totRootPhrases = 0;
+        totNumFragments = 0;
+        numCritPathViolations = 0;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a348ab4d28c08b7e77241cd0c7a0f3796}{
+\index{phraseGen@{phraseGen}!$\sim$phraseGen@{$\sim$phraseGen}}
+\index{$\sim$phraseGen@{$\sim$phraseGen}!phraseGen@{phraseGen}}
+\subsubsection[{$\sim$phraseGen}]{\setlength{\rightskip}{0pt plus 5cm}phraseGen::$\sim$phraseGen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a348ab4d28c08b7e77241cd0c7a0f3796}
+
+\begin{DoxyCode}
+                      {
+        while(openPh->NumElements() > 0) {
+            openPh->RemoveAt(0);
+        }
+        delete openPh;
+
+        while(closePh->NumElements() > 0) {
+            closePh->RemoveAt(0);
+        }
+        delete closePh;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classphraseGen_a35e9879ba8c8931661e112c579ead2b4}{
+\index{phraseGen@{phraseGen}!closeOldPhrase@{closeOldPhrase}}
+\index{closeOldPhrase@{closeOldPhrase}!phraseGen@{phraseGen}}
+\subsubsection[{closeOldPhrase}]{\setlength{\rightskip}{0pt plus 5cm}void phraseGen::closeOldPhrase (
+\begin{DoxyParamCaption}
+\item[{int}]{phIndx}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a35e9879ba8c8931661e112c579ead2b4}
+
+\begin{DoxyCode}
+                                         {
+        //Add closed phrase to closePh &
+        //Remove close phrase from openPh
+        phrase* ph = openPh->Nth(phIndx);
+        //printf("close old phrase %d\n", ph->getPhraseID());
+        if (ph->getState() == phClosed) {
+                closePh->Append(ph);
+                openPh->RemoveAt(phIndx);
+        }
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_aa1371990d9d8c3f0804bea4a6129cbae}{
+\index{phraseGen@{phraseGen}!commitIns@{commitIns}}
+\index{commitIns@{commitIns}!phraseGen@{phraseGen}}
+\subsubsection[{commitIns}]{\setlength{\rightskip}{0pt plus 5cm}int phraseGen::commitIns (
+\begin{DoxyParamCaption}
+\item[{int}]{cycle, }
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{iROB}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_aa1371990d9d8c3f0804bea4a6129cbae}
+
+\begin{DoxyCode}
+                                                             {
+        if (iROB->NumElements() > 0) {
+                for (int i = iROB->NumElements()-1; i >= 0; i--) {
+                        if ((iROB->Nth(i))->getStatus() == complete) {
+                                //printf("commiting instructions\n");
+                                //Report execution timing
+                                //if (reportTrace == true) reportInsTiming(0);
+                                //if (reportTraceAndHitMiss == true) createTraceA
+      ndHitMiss(0);
+                                //Remove item
+                                delete iROB->Nth(i);
+                                iROB->RemoveAt(i); //Commit
+                                //if (debug) printf("completed something - Window
+       Size = %d\n", iROB->NumElements());
+                        } //else {
+                        //      //if (debug) 
+                        //      break;
+                        //}
+                }
+                return 0;
+        } else {
+                printf("The iROB is empty\n");
+                return -1;
+        }
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a04d54cfe18dfef407499f3e6829c32d3}{
+\index{phraseGen@{phraseGen}!findMyPhrase@{findMyPhrase}}
+\index{findMyPhrase@{findMyPhrase}!phraseGen@{phraseGen}}
+\subsubsection[{findMyPhrase}]{\setlength{\rightskip}{0pt plus 5cm}int phraseGen::findMyPhrase (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a04d54cfe18dfef407499f3e6829c32d3}
+
+\begin{DoxyCode}
+                                            {
+        int myPhrase  = -1;
+        int myPhrase1 = -1;
+        int myPhrase2 = -1;
+        static int myPhrase3 = 0;
+        //phrase *ph;
+
+        //bool rootPhrase = false;
+        //Find the phrase
+        if (ins->getNumMemRdAncestors() > 0) {
+                for (int j = 0; j < ins->getNumMemRdAncestors(); j++) {
+                        if (myPhrase1 < ins->getNthMemRdAncestor(j)->getMyPhraseI
+      D()) {
+                                myPhrase1 = ins->getNthMemRdAncestor(j)->
+      getMyPhraseID();
+                        }
+                }
+                myPhrase1 += NEXT_PHRASE;
+        } 
+        if (ins->getNumAncestors() > 0) {
+                for (int j = 0; j < ins->getNumAncestors(); j++) {
+                        if (myPhrase2 < ins->getNthAncestor(j)->getMyPhraseID()) 
+      {
+                                myPhrase2 = ins->getNthAncestor(j)->
+      getMyPhraseID();
+                        }
+                }
+        }
+        //if (ins->getNumAncestors() == 0 &&
+        //    ins->getNumMemRdAncestors() == 0) {
+        //      //if (openPh->NumElements() > 0) {
+        //      //      if (openPh->Nth(0)->getPhraseID() == FIRST_PHRASE)
+        //      //              myPhrase = FIRST_PHRASE;
+        //      //      else
+        //      //              myPhrase = topPhraseID + NEXT_PHRASE;
+        //      //} else {
+        //      //      myPhrase = FIRST_PHRASE;
+        //      //}
+        //      if (myPhrase3 == -1) myPhrase = 0;
+        //      else myPhrase = myPhrase3;
+        //      rootPhrase = true;
+        //}
+        if (ins->getDepOnUPLD() == false) {
+                myPhrase = myPhrase3;
+        } else {
+                myPhrase = takeMax(myPhrase1,myPhrase2);
+                myPhrase = takeMax(myPhrase3,myPhrase);
+        }
+        //if (ins->isOnCritiPath(myPhrase) == true) {
+        //      //if (myPhrase == myPhrase3) {
+        //              myPhrase += NEXT_PHRASE;
+        //      //}
+        //      //else if (takeMax(myPhrase,myPhrase3) == myPhrase3) { //TODO wha
+      t happens if the two were equal?
+        //      //      myPhrase = myPhrase3;
+        //      //} else {
+        //      //      myPhrase += NEXT_PHRASE;
+        //      //      /*-----STAT-----*/
+        //      //      numCritPathViolations++;
+        //      //      /*-----STAT-----*/
+        //      //}
+        //}
+        //printf("my phrase id: %d, %d\n", myPhrase, ins->getInsID());
+        Assert (myPhrase > -1 && myPhrase >= myPhrase2);
+
+        bool found = false;
+        int phIndx;
+        while (!found) {
+                if (topPhraseID > myPhrase) {
+                        for (int i = openPh->NumElements()-1; i >= 0; i--) {
+                                phrase* ph = openPh->Nth(i);
+                                //if (rootPhrase==true) {
+                                //      //if (ph->getPhraseID() == myPhrase && 
+                                //      //    ph->getNumAllPhraseAncestors() == 0
+      ) {
+                                //              phrase* ph = openPh->Nth(0);
+                                //              ins->setMyPhrase(ph);
+                                //              ph->addToPhrase(ins);
+                                //              ph->incPhraseAge();
+                                //              found = true;
+                                //              phIndx = 0;
+                                //              myPhrase3 = ph->getPhraseID();
+                                //              /*-----STAT-----*/
+                                //              insCount++;
+                                //              /*-----STAT-----*/
+                                //              break;
+                                //      //}
+                                //} else 
+                                if (ph->getPhraseID() == myPhrase) {
+                                        ins->setMyPhrase(ph);
+                                        ph->addToPhrase(ins);
+                                        ph->incPhraseAge();
+                                        found = true;
+                                        phIndx = i;
+                                        if (ins->getDepOnUPLD() == false ||
+                                            ins->getMissrate() > 
+      unpredMemOpThreshold) 
+                                                myPhrase3 = ph->getPhraseID();
+                                        /*-----STAT-----*/
+                                        insCount++;
+                                        /*-----STAT-----*/
+                                        break;
+                                }
+                        }
+                        if (!found) {
+                                myPhrase += NEXT_PHRASE;
+                        }
+                } else {
+                        phrase* ph = new phrase(topPhraseID);
+                        topPhraseID++;
+                        ins->setMyPhrase(ph);
+                        ph->addToPhrase(ins);
+                        ph->incPhraseAge();
+                        openPh->Append(ph);
+                        phIndx = openPh->NumElements()-1;
+                        found = true;
+                        if (ins->getDepOnUPLD() == false ||
+                            ins->getMissrate() > unpredMemOpThreshold) 
+                                myPhrase3 = ph->getPhraseID();
+                        /*-----STAT-----*/
+                        insCount++;
+                        /*-----STAT-----*/
+                        //printf("new phrase ID = %d\n", topPhraseID);
+                }
+        }
+        //static int prev = -1;
+        //if (prev > myPhrase) printf("%d \n",myPhrase);
+        //prev = myPhrase;
+
+        //for (int i = 0; i < openPh->NumElements(); i++) {
+        //      printf("%d, ", openPh->Nth(i)->getPhraseSize_unsort());
+        //}
+        //printf("\n");
+
+        //Add ins to its phrase
+        //int phIndx;
+        //if (openPh->NumElements() > myPhrase) {
+        //      ph = openPh->Nth(myPhrase);
+        //      phIndx = myPhrase;
+        //      Assert(myPhrase == openPh->Nth(myPhrase)->getPhraseID());
+        //} else {
+        //      printf("my phrase = %d, %d\n", myPhrase,openPh->NumElements());
+        //      ph = new phrase(myPhrase);
+        //      openPh->Append(ph);
+        //      Assert(myPhrase == openPh->Nth(openPh->NumElements()-1)->getPhras
+      eID());
+        //      phIndx = openPh->NumElements()-1;
+        //      //Assert(myPhrase == openPh->NumElements()-1);
+        //}
+        //ins->setMyPhrase(ph);
+        //ph->addToPhrase(ins);
+        //ph->incPhraseAge();
+        //printf("phrase ID = %d\n", phIndx);
+        //printf("find my phrase\n");
+
+        return phIndx;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_ab1fd52686e66bea06bd08d7fc8a4eb23}{
+\index{phraseGen@{phraseGen}!findReadyPhrases@{findReadyPhrases}}
+\index{findReadyPhrases@{findReadyPhrases}!phraseGen@{phraseGen}}
+\subsubsection[{findReadyPhrases}]{\setlength{\rightskip}{0pt plus 5cm}void phraseGen::findReadyPhrases (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{phraseFile, }
+\item[{{\bf dependencyTable} $\ast$}]{depTables, }
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{iROB}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_ab1fd52686e66bea06bd08d7fc8a4eb23}
+
+\begin{DoxyCode}
+                                                                                 
+                            {
+        bool hadReadyPh=true;
+        while (hadReadyPh==true) {
+                hadReadyPh=false;
+                for (int i = 0; i < closePh->NumElements();) {
+                        //printf("find ready phraes\n");
+                        if (isPhraseReady(i) == true) {
+                                hadReadyPh = true;
+                                //printf("found ready phraes (id:%d)\n", closePh-
+      >Nth(i)->getPhraseID());
+                                if (coreType == FRAGMENT || coreType == 
+      FRAGMENT2) {
+                                        closePh->Nth(i)->makeFragment();
+                                }
+                                genPhraseStat(i);
+                                storeToFile(i, phraseFile, depTables);
+                                commitIns(-1,iROB);
+                                break; //TODO remove this? this is oldest ready f
+      irst
+                        } else {
+                                i++;
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a8aa6ac2c304d3545c10da7c70ae6445d}{
+\index{phraseGen@{phraseGen}!genPhraseStat@{genPhraseStat}}
+\index{genPhraseStat@{genPhraseStat}!phraseGen@{phraseGen}}
+\subsubsection[{genPhraseStat}]{\setlength{\rightskip}{0pt plus 5cm}void phraseGen::genPhraseStat (
+\begin{DoxyParamCaption}
+\item[{int}]{indx}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a8aa6ac2c304d3545c10da7c70ae6445d}
+
+\begin{DoxyCode}
+                                      {
+        phrase* ph = closePh->Nth(indx);
+        totNumPhraseAncestors += ph->getNumPhraseAncestors(); //TODO this line is
+       broken
+        totNumRootIns         += ph->getNumRootIns();
+        totNumPhUnpredMemOp   += ph->getNumUPLDops();
+        totNumSoftBounds      += ph->getNumSoftBounds();
+        totNumFragments       += ph->getNumFrags();
+        //printf("%ld, %ld, %ld, %ld, %ld, %ld\n", ph->getNumFrags(), 
+        //                                       ph->getNumUPLDancestors(), 
+        //                                       ph->getNumUPLDops(), 
+        //                                       ph->getNumRootIns(),
+        //                                       ph->getPhraseSize(),
+        //                                       ph->getNumPhraseAncestors());
+        if (ph->getNumUPLDancestors() == 0) totRootPhrases++;
+
+        //printf("*************PHRASE SUMMARY*******************\n");
+        //printf("Num Phrases: %d\n", topPhraseID);
+        //printf("Num of Resetting Times: %d\n", resetCount);
+        //printf("Phrase Sizes: \n");
+        //for (int i = 0; i < openPh->NumElements(); i++) {
+        //      printf("%d, ", openPh->Nth(i)->getPhraseSize());
+        //}
+        //for (int i = 0; i < closePh->NumElements(); i++) {
+        //      printf("%d, ", closePh->Nth(i)->getPhraseSize());
+        //}
+
+        //printf("\nPhrase Num Unpred-Mem Op Ancestors: \n");
+        //for (int i = 0; i < openPh->NumElements(); i++) {
+        //      printf("%d, ", openPh->Nth(i)->getNumPhraseAncestors());
+        //}
+        //for (int i = 0; i < closePh->NumElements(); i++) {
+        //      printf("%d, ", closePh->Nth(i)->getNumPhraseAncestors());
+        //}
+        //
+        //printf("\nPhrase Num All Ancestors: \n");
+        //for (int i = 0; i < openPh->NumElements(); i++) {
+        //      printf("%d, ", openPh->Nth(i)->getNumAllPhraseAncestors());
+        //}
+        //for (int i = 0; i < closePh->NumElements(); i++) {
+        //      printf("%d, ", closePh->Nth(i)->getNumAllPhraseAncestors());
+        //}
+        //printf("\n******************************************\n");
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a05531ef5a4c9b60ce2454c7353f504f2}{
+\index{phraseGen@{phraseGen}!getNumPhGenReset@{getNumPhGenReset}}
+\index{getNumPhGenReset@{getNumPhGenReset}!phraseGen@{phraseGen}}
+\subsubsection[{getNumPhGenReset}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getNumPhGenReset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a05531ef5a4c9b60ce2454c7353f504f2}
+
+\begin{DoxyCode}
+                                     {
+        return resetCount;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a4d1fdc45f4608ba6fc5b1f0034a5757e}{
+\index{phraseGen@{phraseGen}!getTotNumCritPathViolations@{getTotNumCritPathViolations}}
+\index{getTotNumCritPathViolations@{getTotNumCritPathViolations}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumCritPathViolations}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumCritPathViolations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a4d1fdc45f4608ba6fc5b1f0034a5757e}
+
+\begin{DoxyCode}
+                                                {
+        return numCritPathViolations;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_aa0b1991a44addd0187d03d62319a3876}{
+\index{phraseGen@{phraseGen}!getTotNumFrags@{getTotNumFrags}}
+\index{getTotNumFrags@{getTotNumFrags}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumFrags}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumFrags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_aa0b1991a44addd0187d03d62319a3876}
+
+\begin{DoxyCode}
+                                    {
+        return totNumFragments;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_ac8303811636725258f09c09ab61342b3}{
+\index{phraseGen@{phraseGen}!getTotNumIns@{getTotNumIns}}
+\index{getTotNumIns@{getTotNumIns}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumIns}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumIns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_ac8303811636725258f09c09ab61342b3}
+
+\begin{DoxyCode}
+                                 {
+        return insCount;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_abcaefae560beb7b38bd23262084b3106}{
+\index{phraseGen@{phraseGen}!getTotNumPhraseAncestors@{getTotNumPhraseAncestors}}
+\index{getTotNumPhraseAncestors@{getTotNumPhraseAncestors}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumPhraseAncestors}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumPhraseAncestors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_abcaefae560beb7b38bd23262084b3106}
+
+\begin{DoxyCode}
+                                             {
+        return totNumPhraseAncestors;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a6e9a854159318aafbdb4aeb1d6c7609e}{
+\index{phraseGen@{phraseGen}!getTotNumPhrases@{getTotNumPhrases}}
+\index{getTotNumPhrases@{getTotNumPhrases}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumPhrases}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumPhrases (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a6e9a854159318aafbdb4aeb1d6c7609e}
+
+\begin{DoxyCode}
+                                     {
+        return topPhraseID;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_ad853722a4f3ef17f583cd236a6c4f397}{
+\index{phraseGen@{phraseGen}!getTotNumPhraseUPLD@{getTotNumPhraseUPLD}}
+\index{getTotNumPhraseUPLD@{getTotNumPhraseUPLD}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumPhraseUPLD}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumPhraseUPLD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_ad853722a4f3ef17f583cd236a6c4f397}
+
+\begin{DoxyCode}
+                                        {
+        return totNumPhUnpredMemOp;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a40b524e55853cfb78e019db073e225a7}{
+\index{phraseGen@{phraseGen}!getTotNumRootIns@{getTotNumRootIns}}
+\index{getTotNumRootIns@{getTotNumRootIns}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumRootIns}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumRootIns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a40b524e55853cfb78e019db073e225a7}
+
+\begin{DoxyCode}
+                                     {
+        return totNumRootIns;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a394ade353944ef69fc1cc675f8a7a458}{
+\index{phraseGen@{phraseGen}!getTotNumRootPh@{getTotNumRootPh}}
+\index{getTotNumRootPh@{getTotNumRootPh}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumRootPh}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumRootPh (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a394ade353944ef69fc1cc675f8a7a458}
+
+\begin{DoxyCode}
+                                     {
+        return totRootPhrases;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_ac91b5f9a9b4e038cb397e79ecea98c40}{
+\index{phraseGen@{phraseGen}!getTotNumSoftBound@{getTotNumSoftBound}}
+\index{getTotNumSoftBound@{getTotNumSoftBound}!phraseGen@{phraseGen}}
+\subsubsection[{getTotNumSoftBound}]{\setlength{\rightskip}{0pt plus 5cm}long int phraseGen::getTotNumSoftBound (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_ac91b5f9a9b4e038cb397e79ecea98c40}
+
+\begin{DoxyCode}
+                                       {
+        return totNumSoftBounds;
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a582a2a74fe8029250138b0736b1fa6f5}{
+\index{phraseGen@{phraseGen}!isPhraseOld@{isPhraseOld}}
+\index{isPhraseOld@{isPhraseOld}!phraseGen@{phraseGen}}
+\subsubsection[{isPhraseOld}]{\setlength{\rightskip}{0pt plus 5cm}bool phraseGen::isPhraseOld (
+\begin{DoxyParamCaption}
+\item[{int}]{phIndx}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a582a2a74fe8029250138b0736b1fa6f5}
+
+\begin{DoxyCode}
+                                      {
+        //printf("is phrase old?\n");
+        phrase* ph = openPh->Nth(phIndx);
+        Assert(ph->getState() == phOpen);
+
+        if (ph->getPhraseAge() == phraseSizeBound) {
+                ph->setState(phClosed);
+                for (int i = 0; i <= phIndx; i++) {
+                        openPh->Nth(i)->setState(phClosed);
+                }
+                return true;
+        } else {
+                return false;
+        }
+        printf("is phrase old?2\n");
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_aa63dd2ce73bcee18bea216bbc4899c76}{
+\index{phraseGen@{phraseGen}!isPhraseReady@{isPhraseReady}}
+\index{isPhraseReady@{isPhraseReady}!phraseGen@{phraseGen}}
+\subsubsection[{isPhraseReady}]{\setlength{\rightskip}{0pt plus 5cm}bool phraseGen::isPhraseReady (
+\begin{DoxyParamCaption}
+\item[{int}]{phIndx}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_aa63dd2ce73bcee18bea216bbc4899c76}
+
+\begin{DoxyCode}
+                                        {
+        phrase* ph = closePh->Nth(phIndx);
+        Assert(ph->getState() == phClosed);
+        //printf(">>> %d\n", ph->getPhraseID());
+
+        if (ph->getNumAllPhraseAncestors() == 0) {
+                ph->setState(phReady);
+                return true;
+        } else {
+                return false;
+        }
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_a27c8b0d81592bc45e7f25e9cb7a4d1c4}{
+\index{phraseGen@{phraseGen}!runPhraseGen@{runPhraseGen}}
+\index{runPhraseGen@{runPhraseGen}!phraseGen@{phraseGen}}
+\subsubsection[{runPhraseGen}]{\setlength{\rightskip}{0pt plus 5cm}int phraseGen::runPhraseGen (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{iROB, }
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{iWindow, }
+\item[{FILE $\ast$}]{phraseFile, }
+\item[{{\bf dependencyTable} $\ast$}]{depTables, }
+\item[{bool}]{eof, }
+\item[{int}]{ROBsize}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_a27c8b0d81592bc45e7f25e9cb7a4d1c4}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                           {
+        if (iWindow->NumElements() > 0) {
+                instruction* ins = iWindow->Nth(0);
+                ins->findPhraseAncestors();
+                int phIndx = findMyPhrase(ins);
+                if (isPhraseOld(phIndx) == true) {
+                        //force close older phrases
+                        for (int i = 0; i <= phIndx; i++) {
+                                openPh->Nth(i)->setState(phClosed);
+                        }
+                        for (int i = 0; i <= phIndx; i++) {
+                                closeOldPhrase(0);
+                        }
+                }
+                //printf("ins id = %d, %d\n", iWindow->Nth(0)->getInsID(), phIndx
+      );
+                iWindow->RemoveAt(0);
+        } else if (eof == true || 
+                   (iWindow->NumElements() == 0 &&
+                   iROB->NumElements() >= ROBsize)) {
+                //Mark all phrases closed &
+                //Move old phrases to closePh
+                for (int i = 0; i < openPh->NumElements(); i++) {
+                        openPh->Nth(i)->setState(phClosed);
+                }
+                while (openPh->NumElements() > 0) {
+                        closeOldPhrase(0);
+                }
+                if (iWindow->NumElements() == 0 &&
+                    iROB->NumElements() >= ROBsize) {
+                        resetCount++;
+                }
+        }
+        findReadyPhrases(phraseFile, depTables, iROB);
+        //for (int i = 0; i < openPh->NumElements(); i++) {
+        //      if (openPh->Nth(i)->getPhraseSize() == 1) 
+        //              printf("id: %d, %s\n",openPh->Nth(i)->getNthIns(0)->getIn
+      sID(), openPh->Nth(i)->getNthIns(0)->getCmdStr());
+        //}
+
+        //for (int i = 0; i < closePh->NumElements(); i++) {
+        //      printf("\n");
+        //      printf("ph: %d#%d - ", closePh->Nth(i)->getPhraseID(), closePh->N
+      th(i)->getNumAllPhraseAncestors());
+        //      for (int j = 0; j < closePh->Nth(i)->getNumAllPhraseAncestors(); 
+      j++) {
+        //              printf("%d#%d#s, ", closePh->Nth(i)->getNthPhraseAncestor
+      (j)->getInsID(), closePh->Nth(i)->getNthPhraseAncestor(j)->getMyPhraseID());
+        //              if (closePh->Nth(i)->getPhraseID() == 568 ||
+        //                  closePh->Nth(i)->getPhraseID() == 569)
+        //                      printf("%s ||| ", closePh->Nth(i)->getNthPhraseAn
+      cestor(j)->getCmdStr());
+        //      }
+        //      printf("\nmembers:\n");
+        //      for (int j = 0; j < closePh->Nth(i)->getPhraseSize(); j++) {
+        //              if (closePh->Nth(i)->getPhraseID() == 568 ||
+        //                  closePh->Nth(i)->getPhraseID() == 569)
+        //                      printf("%d, %s >>> ", closePh->Nth(i)->getNthIns(
+      j)->getInsID(), closePh->Nth(i)->getNthIns(j)->getCmdStr());
+        //      }
+        //}
+        return closePh->NumElements()+openPh->NumElements();
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_aba7134610613016de2d7d91d47c5dd4e}{
+\index{phraseGen@{phraseGen}!storeToFile@{storeToFile}}
+\index{storeToFile@{storeToFile}!phraseGen@{phraseGen}}
+\subsubsection[{storeToFile}]{\setlength{\rightskip}{0pt plus 5cm}void phraseGen::storeToFile (
+\begin{DoxyParamCaption}
+\item[{int}]{indx, }
+\item[{FILE $\ast$}]{phraseFile, }
+\item[{{\bf dependencyTable} $\ast$}]{depTables}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_aba7134610613016de2d7d91d47c5dd4e}
+
+\begin{DoxyCode}
+                                                                                 
+       {
+        phrase* ph = closePh->Nth(indx);
+        if (coreType == FRAGMENT || coreType == FRAGMENT2) {
+                ph->printToFileFragment(phraseFile);
+                while (ph->getPhraseSize() > 0) {
+                        ph->getNthIns(0)->notifyMyDepPhrasesICompleted();
+                        ph->getNthIns(0)->setStatus(complete, -1, -1);
+                        ph->removeFromPhrase(0);
+                }
+                delete closePh->Nth(indx);
+                closePh->RemoveAt(indx);
+        } else if (coreType == PHRASE) {
+                //ph->VLIWphrase(0,numFU);
+                ph->printToFilePhrase(phraseFile);
+                while (ph->getPhraseSize() > 0) {
+                        ph->getNthIns(0)->notifyAllDepICompleted(); //NOTE: doesn
+      't remove unpred. ld op ancestors
+                        ph->getNthIns(0)->notifyMyDepPhrasesICompleted();
+                        ph->getNthIns(0)->delDepTableEntris(depTables, -1, true);
+       //assuming always perfect register renaming (04/24/13)
+                        ph->getNthIns(0)->setStatus(complete, -1, -1);
+                        //delete ph->getNthIns(0);
+                        ph->removeFromPhrase(0);
+                }
+                delete closePh->Nth(indx);
+                closePh->RemoveAt(indx);
+                //printf("store to file\n");
+        }
+}
+\end{DoxyCode}
+\hypertarget{classphraseGen_ae79ea02ec875c2586543f8c844c721a0}{
+\index{phraseGen@{phraseGen}!takeMax@{takeMax}}
+\index{takeMax@{takeMax}!phraseGen@{phraseGen}}
+\subsubsection[{takeMax}]{\setlength{\rightskip}{0pt plus 5cm}int phraseGen::takeMax (
+\begin{DoxyParamCaption}
+\item[{int}]{a, }
+\item[{int}]{b}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseGen_ae79ea02ec875c2586543f8c844c721a0}
+
+\begin{DoxyCode}
+                                   {
+        //printf("%d, %d, %d\t|", a,b,c);
+        if (a >= b) {
+                return a;
+        } else {
+                return b;
+        }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{phraseGen_8h}{phraseGen.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{phraseGen_8cpp}{phraseGen.cpp}\end{DoxyCompactItemize}

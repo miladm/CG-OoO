@@ -1,0 +1,264 @@
+\hypertarget{classvariable}{
+\section{variable Class Reference}
+\label{classvariable}\index{variable@{variable}}
+}
+
+
+{\ttfamily \#include $<$variable.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classvariable_a0eaf13bf7764096058482fc8573673bb}{variable} (long int var)
+\item 
+\hyperlink{classvariable_a0d4f33ab2b101379df069ff881c4c03f}{$\sim$variable} ()
+\item 
+long int \hyperlink{classvariable_a1134c24e98e73b266b91d02eb253e031}{getID} ()
+\item 
+void \hyperlink{classvariable_acab6f948f07a2935c12917a4a2a8c46a}{addBB} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+\item 
+int \hyperlink{classvariable_a53fb79e20c7ca14c872830461025c11c}{getNumAssignedBB} ()
+\item 
+\hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classvariable_a651a5439b34d9eae8ceacca7ecbfc3e8}{getNthAssignedBB} (int indx)
+\item 
+int \hyperlink{classvariable_a57838c6bf0ac170ee02a0e3a099aec35}{getC} ()
+\item 
+void \hyperlink{classvariable_ac570372e439e2d75875b8b2253069ce6}{setC} (int \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+\item 
+void \hyperlink{classvariable_a0d0cee61944333e78fecef0365d35cbe}{popFromStack} ()
+\item 
+void \hyperlink{classvariable_ae0d9d0c11701ccb08719cb5f27fa75e4}{pushToStack} (int s)
+\item 
+int \hyperlink{classvariable_a3f153f4bceb60929467548bd8885d61e}{getTopStack} ()
+\item 
+\hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classvariable_a3c88482acd58a7f9f38b5467d6edcff7}{getTopBbStack} ()
+\item 
+void \hyperlink{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}{popHackPushes} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classvariable_a0eaf13bf7764096058482fc8573673bb}{
+\index{variable@{variable}!variable@{variable}}
+\index{variable@{variable}!variable@{variable}}
+\subsubsection[{variable}]{\setlength{\rightskip}{0pt plus 5cm}variable::variable (
+\begin{DoxyParamCaption}
+\item[{long int}]{var}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a0eaf13bf7764096058482fc8573673bb}
+
+\begin{DoxyCode}
+                                {
+        Assert(var >= X86_REG_LO && var <= X86_REG_HI && "invalid x86 variable.")
+      ;
+        _var = var;
+        _c = 0;
+        _hackPushCount = 0;
+        bbList = new List<basicblock*>;
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a0d4f33ab2b101379df069ff881c4c03f}{
+\index{variable@{variable}!$\sim$variable@{$\sim$variable}}
+\index{$\sim$variable@{$\sim$variable}!variable@{variable}}
+\subsubsection[{$\sim$variable}]{\setlength{\rightskip}{0pt plus 5cm}variable::$\sim$variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a0d4f33ab2b101379df069ff881c4c03f}
+
+\begin{DoxyCode}
+                    {
+        delete bbList;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classvariable_acab6f948f07a2935c12917a4a2a8c46a}{
+\index{variable@{variable}!addBB@{addBB}}
+\index{addBB@{addBB}!variable@{variable}}
+\subsubsection[{addBB}]{\setlength{\rightskip}{0pt plus 5cm}void variable::addBB (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_acab6f948f07a2935c12917a4a2a8c46a}
+
+\begin{DoxyCode}
+                                   {
+        bbList->Append(bb);
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a57838c6bf0ac170ee02a0e3a099aec35}{
+\index{variable@{variable}!getC@{getC}}
+\index{getC@{getC}!variable@{variable}}
+\subsubsection[{getC}]{\setlength{\rightskip}{0pt plus 5cm}int variable::getC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a57838c6bf0ac170ee02a0e3a099aec35}
+
+\begin{DoxyCode}
+                   {
+        return _c;
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a1134c24e98e73b266b91d02eb253e031}{
+\index{variable@{variable}!getID@{getID}}
+\index{getID@{getID}!variable@{variable}}
+\subsubsection[{getID}]{\setlength{\rightskip}{0pt plus 5cm}long int variable::getID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a1134c24e98e73b266b91d02eb253e031}
+
+\begin{DoxyCode}
+                         {
+        return _var;
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a651a5439b34d9eae8ceacca7ecbfc3e8}{
+\index{variable@{variable}!getNthAssignedBB@{getNthAssignedBB}}
+\index{getNthAssignedBB@{getNthAssignedBB}!variable@{variable}}
+\subsubsection[{getNthAssignedBB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf basicblock} $\ast$ variable::getNthAssignedBB (
+\begin{DoxyParamCaption}
+\item[{int}]{indx}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a651a5439b34d9eae8ceacca7ecbfc3e8}
+
+\begin{DoxyCode}
+                                               {
+        return bbList->Nth(indx);
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a53fb79e20c7ca14c872830461025c11c}{
+\index{variable@{variable}!getNumAssignedBB@{getNumAssignedBB}}
+\index{getNumAssignedBB@{getNumAssignedBB}!variable@{variable}}
+\subsubsection[{getNumAssignedBB}]{\setlength{\rightskip}{0pt plus 5cm}int variable::getNumAssignedBB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a53fb79e20c7ca14c872830461025c11c}
+
+\begin{DoxyCode}
+                               {
+        return bbList->NumElements();
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a3c88482acd58a7f9f38b5467d6edcff7}{
+\index{variable@{variable}!getTopBbStack@{getTopBbStack}}
+\index{getTopBbStack@{getTopBbStack}!variable@{variable}}
+\subsubsection[{getTopBbStack}]{\setlength{\rightskip}{0pt plus 5cm}{\bf basicblock}$\ast$ variable::getTopBbStack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a3c88482acd58a7f9f38b5467d6edcff7}
+\hypertarget{classvariable_a3f153f4bceb60929467548bd8885d61e}{
+\index{variable@{variable}!getTopStack@{getTopStack}}
+\index{getTopStack@{getTopStack}!variable@{variable}}
+\subsubsection[{getTopStack}]{\setlength{\rightskip}{0pt plus 5cm}int variable::getTopStack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a3f153f4bceb60929467548bd8885d61e}
+
+\begin{DoxyCode}
+                          {
+        /* The block of code here is a hack. This is not
+           aligned with how the stack is poped. In fact the
+           elements pushed here are not poped. A cleaner hack
+           would be to track this hack and pop it crrectly.
+        */
+        if (_s.size() == 0) {
+                int k = getC();
+                _s.push_back(k);
+                setC(k+1);
+                _hackPushCount++;
+        } //means don't assign anything
+        // if (_s.size() == 0) { printf("read stack: %d_-2\n", _var); return -2; 
+      }
+        // printf("read stack: %d_%d\n", _var, _s.back());
+        // Assert(_s.size() > 0 && "Invalid variable stack size.");
+        return _s.back();
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a0d0cee61944333e78fecef0365d35cbe}{
+\index{variable@{variable}!popFromStack@{popFromStack}}
+\index{popFromStack@{popFromStack}!variable@{variable}}
+\subsubsection[{popFromStack}]{\setlength{\rightskip}{0pt plus 5cm}void variable::popFromStack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a0d0cee61944333e78fecef0365d35cbe}
+
+\begin{DoxyCode}
+                            {
+        // printf("pop from stack %d_%d\n", _var, _s.back());
+        _s.pop_back();
+}
+\end{DoxyCode}
+\hypertarget{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}{
+\index{variable@{variable}!popHackPushes@{popHackPushes}}
+\index{popHackPushes@{popHackPushes}!variable@{variable}}
+\subsubsection[{popHackPushes}]{\setlength{\rightskip}{0pt plus 5cm}void variable::popHackPushes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}
+
+\begin{DoxyCode}
+                             {
+        while (_hackPushCount > 0) {
+                _hackPushCount--;
+                _s.pop_back();
+        }
+}\end{DoxyCode}
+\hypertarget{classvariable_ae0d9d0c11701ccb08719cb5f27fa75e4}{
+\index{variable@{variable}!pushToStack@{pushToStack}}
+\index{pushToStack@{pushToStack}!variable@{variable}}
+\subsubsection[{pushToStack}]{\setlength{\rightskip}{0pt plus 5cm}void variable::pushToStack (
+\begin{DoxyParamCaption}
+\item[{int}]{s}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_ae0d9d0c11701ccb08719cb5f27fa75e4}
+
+\begin{DoxyCode}
+                                {
+        // printf("pushing to stack %d_%d\n", _var, s);
+        Assert(s >= 0 && "Invalid s value inserted.");
+        _s.push_back(s);
+}
+\end{DoxyCode}
+\hypertarget{classvariable_ac570372e439e2d75875b8b2253069ce6}{
+\index{variable@{variable}!setC@{setC}}
+\index{setC@{setC}!variable@{variable}}
+\subsubsection[{setC}]{\setlength{\rightskip}{0pt plus 5cm}void variable::setC (
+\begin{DoxyParamCaption}
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{classvariable_ac570372e439e2d75875b8b2253069ce6}
+
+\begin{DoxyCode}
+                         {
+        Assert(c >= 0 && "Invalid c value inserted.");
+        _c = c;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{variable_8h}{variable.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{variable_8cpp}{variable.cpp}\end{DoxyCompactItemize}

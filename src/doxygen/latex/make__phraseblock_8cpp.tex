@@ -1,0 +1,288 @@
+\hypertarget{make__phraseblock_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/make\_\-phraseblock.cpp File Reference}
+\label{make__phraseblock_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/make\_\-phraseblock.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/make\_\-phraseblock.cpp}}
+}
+{\ttfamily \#include $<$algorithm$>$}\par
+{\ttfamily \#include \char`\"{}make\_\-phraseblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}listSchedule.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{make__phraseblock_8cpp_a3543e771f434420f9c6b083779be83c1}{replicateBBList} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$newBbList)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a0fd3688b0a2b0bdd2631792fdc31467e}{resetVisitBits} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a56af37350d658e4fa9ba3e67058f82a2}{findLoop} (\hyperlink{classbasicblock}{basicblock} $\ast$bb, \hyperlink{classloop}{loop} $\ast$lp, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \&domList, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} startLoopID, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} endLoopID)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a533375cdbcbdab104ffd8c23db3f2b9d}{makeNaturalLoops} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classloop}{loop} $\ast$ $>$ $\ast$loopList, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ \&loopHeaders)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a4e95f750f0d24e4910e36a25f9733238}{makeLoopNests} (\hyperlink{classList}{List}$<$ \hyperlink{classloop}{loop} $\ast$ $>$ $\ast$loopList, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ \&loopHeaders)
+\item 
+void \hyperlink{make__phraseblock_8cpp_ac72dbca1136ae6ee5ad7d722fa23f3f9}{mk\_\-phraseblock} (\hyperlink{classList}{List}$<$ \hyperlink{classphraseblock}{phraseblock} $\ast$ $>$ $\ast$pbList, \hyperlink{classList}{List}$<$ \hyperlink{classloop}{loop} $\ast$ $>$ $\ast$loopList, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ \&loopHeaders, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$newBbList)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a7eed5687b1a5832bd311490b19e7f8a3}{mk\_\-phrase} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$newBbList)
+\item 
+void \hyperlink{make__phraseblock_8cpp_a65aeab967a815a10deb65ad6d6ce5116}{listSchedule\_\-phraseblock} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$pbList)
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$ \hyperlink{make__phraseblock_8cpp_af5aea5750e9482dfe18f886b91b680b4}{make\_\-phraseblock} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$brBiasMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$bpAccuracyMap)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{make__phraseblock_8cpp_a56af37350d658e4fa9ba3e67058f82a2}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!findLoop@{findLoop}}
+\index{findLoop@{findLoop}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{findLoop}]{\setlength{\rightskip}{0pt plus 5cm}void findLoop (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb, }
+\item[{{\bf loop} $\ast$}]{lp, }
+\item[{map$<$ {\bf ADDR}, {\bf basicblock} $\ast$ $>$ \&}]{domList, }
+\item[{{\bf ADDR}}]{startLoopID, }
+\item[{{\bf ADDR}}]{endLoopID}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a56af37350d658e4fa9ba3e67058f82a2}
+
+\begin{DoxyCode}
+                                                                                 
+                               {
+        if (bb->isVisited() == true) return;
+        bb->setAsVisited();
+        //if (domList.find(bb->getID()) != domList.end()) {
+                printf("%llx, ", bb->getID());
+                lp->addBB(bb);
+        //}
+        if (bb->getID() != startLoopID) {
+                for (int i = 0; i < bb->getNumAncestors(); i++) {
+                        basicblock *parent = bb->getNthAncestor(i);
+                        findLoop(parent, lp, domList, startLoopID, endLoopID);
+                }
+        } else {
+                //printf("==%llx, %d\n", bb->getID(), bb->getNumBackEdgeSource())
+      ;
+                for (int i = 0; i < bb->getNumBackEdgeSource(); i++) {
+                        basicblock *parent = bb->getNthBackEdgeSource(i);
+                        findLoop(parent, lp, domList, startLoopID, endLoopID);
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a65aeab967a815a10deb65ad6d6ce5116}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!listSchedule\_\-phraseblock@{listSchedule\_\-phraseblock}}
+\index{listSchedule\_\-phraseblock@{listSchedule\_\-phraseblock}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{listSchedule\_\-phraseblock}]{\setlength{\rightskip}{0pt plus 5cm}void listSchedule\_\-phraseblock (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{pbList}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a65aeab967a815a10deb65ad6d6ce5116}
+
+\begin{DoxyCode}
+                                                         {
+        //Perform list Scheduling on PB's only. BB's are already list-scheduled
+        for (int i = 0; i < pbList->NumElements(); i++) {
+                basicblock* bb = pbList->Nth(i);
+                if (bb->isAPhraseblock())
+                        listSchedule(bb);
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_af5aea5750e9482dfe18f886b91b680b4}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!make\_\-phraseblock@{make\_\-phraseblock}}
+\index{make\_\-phraseblock@{make\_\-phraseblock}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{make\_\-phraseblock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf basicblock}$\ast$$>$$\ast$ make\_\-phraseblock (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ {\bf ADDR}, double $>$ $\ast$}]{brBiasMap, }
+\item[{map$<$ {\bf ADDR}, double $>$ $\ast$}]{bpAccuracyMap}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_af5aea5750e9482dfe18f886b91b680b4}
+
+\begin{DoxyCode}
+                                                                                 
+                               {
+        List<phraseblock*>* pbList   = new List<phraseblock*>;
+        List<basicblock*>* newBbList = new List<basicblock*>;
+        List<loop*>* loopList        = new List<loop*>;
+        set<ADDR> loopHeaders;
+        printf("\treplicate basiblocks\n");
+        replicateBBList(bbList, newBbList);
+        printf("\tmake natural loops\n");
+        makeNaturalLoops(newBbList, loopList, loopHeaders);
+        printf("\tmake loop nests\n");
+        makeLoopNests(loopList, loopHeaders);
+        printf("\tmake phraseblock\n");
+        resetVisitBits(newBbList);
+        mk_phraseblock(pbList, loopList, loopHeaders, newBbList);
+        printf("\tlist schedule phraseblock\n");
+        listSchedule_phraseblock(newBbList);
+        printf("\tmake phrase\n");
+        mk_phrase(newBbList);
+        delete loopList;
+        return newBbList;
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a4e95f750f0d24e4910e36a25f9733238}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!makeLoopNests@{makeLoopNests}}
+\index{makeLoopNests@{makeLoopNests}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{makeLoopNests}]{\setlength{\rightskip}{0pt plus 5cm}void makeLoopNests (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf loop} $\ast$ $>$ $\ast$}]{loopList, }
+\item[{set$<$ {\bf ADDR} $>$ \&}]{loopHeaders}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a4e95f750f0d24e4910e36a25f9733238}
+
+\begin{DoxyCode}
+                                                                  {
+        for (int i = 0; i < loopList->NumElements(); i++) {
+                loop* lp = loopList->Nth(i);
+                for (int j = 0; j < loopList->NumElements(); j++) {
+                        if (i == j) continue;
+                        if (lp->isInnerLoop(loopList->Nth(j)) == true) {
+                                //TODO do something here nest loops or something?
+      
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a533375cdbcbdab104ffd8c23db3f2b9d}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!makeNaturalLoops@{makeNaturalLoops}}
+\index{makeNaturalLoops@{makeNaturalLoops}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{makeNaturalLoops}]{\setlength{\rightskip}{0pt plus 5cm}void makeNaturalLoops (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf loop} $\ast$ $>$ $\ast$}]{loopList, }
+\item[{set$<$ {\bf ADDR} $>$ \&}]{loopHeaders}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a533375cdbcbdab104ffd8c23db3f2b9d}
+
+\begin{DoxyCode}
+                                                                                 
+                     {
+        printf("\tstart of natural loops\n");
+        //Generate backedges
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                if (bb->getBbSize() == 0) continue;
+                bb->setupBackEdge();
+        }
+
+        //Find loops
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                if (bb->getBbSize() == 0) continue;
+                if (bb->isBackEdge() == true) {
+                        ADDR startLoopID = bb->getBackEdgeDest();
+                        ADDR endLoopID = bb->getLastIns()->getInsAddr();
+                        if (loopHeaders.find(startLoopID) != loopHeaders.end()) 
+                                continue;
+                        else
+                                loopHeaders.insert(startLoopID);
+                        loop* lp = new loop(startLoopID, endLoopID);
+                        loopList->Append(lp);
+                        printf("(%llx, %llx): ", startLoopID, endLoopID);
+                        map<ADDR,basicblock*> domList = bb->getDominators();
+                        resetVisitBits(bbList);
+                        findLoop(bb, lp, domList, startLoopID, endLoopID);
+                        printf("\n");
+                }
+        }
+        
+        //Find loop fallthrough paths
+        for (int i = 0; i < loopList->NumElements(); i++) {
+                loopList->Nth(i)->findFallThroughBBs();
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a7eed5687b1a5832bd311490b19e7f8a3}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!mk\_\-phrase@{mk\_\-phrase}}
+\index{mk\_\-phrase@{mk\_\-phrase}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{mk\_\-phrase}]{\setlength{\rightskip}{0pt plus 5cm}void mk\_\-phrase (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{newBbList}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a7eed5687b1a5832bd311490b19e7f8a3}
+
+\begin{DoxyCode}
+                                             {
+        for (int i = 0; i < newBbList->NumElements(); i++) {
+                basicblock* bb = newBbList->Nth(i);
+                bb->basicblockToPhrase();
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_ac72dbca1136ae6ee5ad7d722fa23f3f9}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!mk\_\-phraseblock@{mk\_\-phraseblock}}
+\index{mk\_\-phraseblock@{mk\_\-phraseblock}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{mk\_\-phraseblock}]{\setlength{\rightskip}{0pt plus 5cm}void mk\_\-phraseblock (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf phraseblock} $\ast$ $>$ $\ast$}]{pbList, }
+\item[{{\bf List}$<$ {\bf loop} $\ast$ $>$ $\ast$}]{loopList, }
+\item[{set$<$ {\bf ADDR} $>$ \&}]{loopHeaders, }
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{newBbList}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_ac72dbca1136ae6ee5ad7d722fa23f3f9}
+
+\begin{DoxyCode}
+                                                                                 
+                                                  {
+        //TODO: must sort the loops based on nest level - LATER
+        //Phraseblocks from loops
+        ADDR* phID = new ADDR;
+        (*phID) = 0;
+        for (int i = 0; i < loopList->NumElements(); i++) {
+                loop* lp = loopList->Nth(i);
+                phraseblock* pb = new phraseblock ();
+                pb->loopToPhraseblock(lp);
+                pb->PhraseblockToBB(newBbList, lp, phID);
+                pbList->Append(pb);
+        }
+        //Phraseblock from the rest of program
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a3543e771f434420f9c6b083779be83c1}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!replicateBBList@{replicateBBList}}
+\index{replicateBBList@{replicateBBList}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{replicateBBList}]{\setlength{\rightskip}{0pt plus 5cm}void replicateBBList (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{newBbList}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a3543e771f434420f9c6b083779be83c1}
+
+\begin{DoxyCode}
+                                                                              {
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* newBB = new basicblock;
+                *newBB = *(bbList->Nth(i));
+                newBbList->Append(newBB);
+        }
+        for (int i = 0; i < newBbList->NumElements(); i++) {
+                newBbList->Nth(i)->transferPointersToNewList(newBbList);
+        }
+}
+\end{DoxyCode}
+\hypertarget{make__phraseblock_8cpp_a0fd3688b0a2b0bdd2631792fdc31467e}{
+\index{make\_\-phraseblock.cpp@{make\_\-phraseblock.cpp}!resetVisitBits@{resetVisitBits}}
+\index{resetVisitBits@{resetVisitBits}!make_phraseblock.cpp@{make\_\-phraseblock.cpp}}
+\subsubsection[{resetVisitBits}]{\setlength{\rightskip}{0pt plus 5cm}void resetVisitBits (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{make__phraseblock_8cpp_a0fd3688b0a2b0bdd2631792fdc31467e}
+
+\begin{DoxyCode}
+                                               {
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                bbList->Nth(i)->setAsUnvisited();
+        }
+}
+\end{DoxyCode}

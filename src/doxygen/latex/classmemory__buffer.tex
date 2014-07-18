@@ -1,0 +1,86 @@
+\hypertarget{classmemory__buffer}{
+\section{memory\_\-buffer Class Reference}
+\label{classmemory__buffer}\index{memory\_\-buffer@{memory\_\-buffer}}
+}
+
+
+{\ttfamily \#include $<$memlog.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmemory__buffer_a1c784e5ce690816642856e079f8e0a0a}{memory\_\-buffer} ()
+\item 
+void \hyperlink{classmemory__buffer_a48602834671a8f2c8e9245c42a9eaecb}{save} (ADDRINT addr, unsigned len, unsigned char $\ast$buf)
+\item 
+void \hyperlink{classmemory__buffer_aeba532b66854fbd90e6ea96e8ee36e74}{recover} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmemory__buffer_a1c784e5ce690816642856e079f8e0a0a}{
+\index{memory\_\-buffer@{memory\_\-buffer}!memory\_\-buffer@{memory\_\-buffer}}
+\index{memory\_\-buffer@{memory\_\-buffer}!memory_buffer@{memory\_\-buffer}}
+\subsubsection[{memory\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}memory\_\-buffer::memory\_\-buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classmemory__buffer_a1c784e5ce690816642856e079f8e0a0a}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmemory__buffer_aeba532b66854fbd90e6ea96e8ee36e74}{
+\index{memory\_\-buffer@{memory\_\-buffer}!recover@{recover}}
+\index{recover@{recover}!memory_buffer@{memory\_\-buffer}}
+\subsubsection[{recover}]{\setlength{\rightskip}{0pt plus 5cm}void memory\_\-buffer::recover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classmemory__buffer_aeba532b66854fbd90e6ea96e8ee36e74}
+
+\begin{DoxyCode}
+{
+        map<ADDRINT,unsigned char>::iterator i;
+        for( i=m_buf.begin(); i != m_buf.end(); i++ ) {
+                ADDRINT eaddr = i->first;
+                unsigned char value = i->second;
+                PIN_SafeCopy((ADDRINT*)(eaddr), &value, sizeof(unsigned char));
+        }       
+        //cout << "m_buf: " << m_buf.size() << endl;
+        m_buf.clear();
+}
+\end{DoxyCode}
+\hypertarget{classmemory__buffer_a48602834671a8f2c8e9245c42a9eaecb}{
+\index{memory\_\-buffer@{memory\_\-buffer}!save@{save}}
+\index{save@{save}!memory_buffer@{memory\_\-buffer}}
+\subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}void memory\_\-buffer::save (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{addr, }
+\item[{unsigned}]{len, }
+\item[{unsigned char $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}
+\label{classmemory__buffer_a48602834671a8f2c8e9245c42a9eaecb}
+
+\begin{DoxyCode}
+{
+        for( unsigned i=0; i<len; i++ ) {
+                ADDRINT eaddr = addr+i;
+                if( m_buf.find(eaddr) == m_buf.end() ) // save only the first "or
+      iginal" value
+                        m_buf[eaddr]=buf[i];
+        }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/\hyperlink{memlog_8h}{memlog.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/\hyperlink{memlog_8cpp}{memlog.cpp}\end{DoxyCompactItemize}

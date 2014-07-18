@@ -1,0 +1,52 @@
+\hypertarget{classAnnotateDumpCallback}{
+\section{AnnotateDumpCallback Class Reference}
+\label{classAnnotateDumpCallback}\index{AnnotateDumpCallback@{AnnotateDumpCallback}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classAnnotateDumpCallback_a16408d22c1e6c762e5f3d3f07dbacfdb}{process} ()
+\item 
+\hyperlink{classAnnotateDumpCallback_a91f085bdb3f7eee98b69178e60f4ef09}{AnnotateDumpCallback} (CPA $\ast$\_\-cpa)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classAnnotateDumpCallback_a91f085bdb3f7eee98b69178e60f4ef09}{
+\index{AnnotateDumpCallback@{AnnotateDumpCallback}!AnnotateDumpCallback@{AnnotateDumpCallback}}
+\index{AnnotateDumpCallback@{AnnotateDumpCallback}!AnnotateDumpCallback@{AnnotateDumpCallback}}
+\subsubsection[{AnnotateDumpCallback}]{\setlength{\rightskip}{0pt plus 5cm}AnnotateDumpCallback::AnnotateDumpCallback (
+\begin{DoxyParamCaption}
+\item[{CPA $\ast$}]{\_\-cpa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classAnnotateDumpCallback_a91f085bdb3f7eee98b69178e60f4ef09}
+
+\begin{DoxyCode}
+        : cpa(_cpa)
+    {}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classAnnotateDumpCallback_a16408d22c1e6c762e5f3d3f07dbacfdb}{
+\index{AnnotateDumpCallback@{AnnotateDumpCallback}!process@{process}}
+\index{process@{process}!AnnotateDumpCallback@{AnnotateDumpCallback}}
+\subsubsection[{process}]{\setlength{\rightskip}{0pt plus 5cm}void AnnotateDumpCallback::process (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classAnnotateDumpCallback_a16408d22c1e6c762e5f3d3f07dbacfdb}
+
+\begin{DoxyCode}
+{
+    cpa->dump(true);
+    cpa->dumpKey();
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/\hyperlink{cp__annotate_8cc}{cp\_\-annotate.cc}\end{DoxyCompactItemize}

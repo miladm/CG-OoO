@@ -1,0 +1,77 @@
+\hypertarget{binaryTranslator_2registerRename_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerRename.h File Reference}
+\label{binaryTranslator_2registerRename_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerRename.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerRename.h}}
+}
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{binaryTranslator_2registerRename_8h_ab4be99d68d9b262e36521317e69f38bd}{renameWriteReg} (long int reg)
+\item 
+void \hyperlink{binaryTranslator_2registerRename_8h_aa13c11dc0f96d5f5bc6e427de195e4ae}{renameReadReg} (int indx, long int renReg)
+\item 
+long int \hyperlink{binaryTranslator_2registerRename_8h_a05732597451bbcd77440195659cf7af5}{getRenamedReg} (long int reg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2registerRename_8h_a05732597451bbcd77440195659cf7af5}{
+\index{binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}!getRenamedReg@{getRenamedReg}}
+\index{getRenamedReg@{getRenamedReg}!binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}}
+\subsubsection[{getRenamedReg}]{\setlength{\rightskip}{0pt plus 5cm}long int getRenamedReg (
+\begin{DoxyParamCaption}
+\item[{long int}]{reg}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2registerRename_8h_a05732597451bbcd77440195659cf7af5}
+
+\begin{DoxyCode}
+                                     {
+        if (writeRegRenMap.count(reg) > 0)
+        return writeRegRenMap.find(reg)->second;
+    else
+        return -1; //reg is not returned
+}\end{DoxyCode}
+\hypertarget{binaryTranslator_2registerRename_8h_aa13c11dc0f96d5f5bc6e427de195e4ae}{
+\index{binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}!renameReadReg@{renameReadReg}}
+\index{renameReadReg@{renameReadReg}!binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}}
+\subsubsection[{renameReadReg}]{\setlength{\rightskip}{0pt plus 5cm}void renameReadReg (
+\begin{DoxyParamCaption}
+\item[{int}]{indx, }
+\item[{long int}]{renReg}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2registerRename_8h_aa13c11dc0f96d5f5bc6e427de195e4ae}
+
+\begin{DoxyCode}
+                                              {
+        Assert(_rt->Nth(indx) == READ);
+    int num1 = _r->NumElements();
+    if (renReg != -1) {
+        _r->RemoveAt(indx);
+        _r->InsertAt(renReg,indx);
+    }
+    int num2 = _r->NumElements();
+    Assert (num1 == num2);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2registerRename_8h_ab4be99d68d9b262e36521317e69f38bd}{
+\index{binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}!renameWriteReg@{renameWriteReg}}
+\index{renameWriteReg@{renameWriteReg}!binaryTranslator/registerRename.h@{binaryTranslator/registerRename.h}}
+\subsubsection[{renameWriteReg}]{\setlength{\rightskip}{0pt plus 5cm}void renameWriteReg (
+\begin{DoxyParamCaption}
+\item[{long int}]{reg}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2registerRename_8h_ab4be99d68d9b262e36521317e69f38bd}
+
+\begin{DoxyCode}
+                                      {
+        nextRenReg++;
+    Assert(reg < NUM_REGISTERS && "Invalid Register Number");
+    Assert(nextRenReg > INIT_RENAME_REG_NUM && "Invalid Rename Register Number");
+      
+    writeRegRenMap.insert(pair<long int,long int>(reg,nextRenReg));
+}
+\end{DoxyCode}

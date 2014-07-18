@@ -1,0 +1,90 @@
+\hypertarget{backend_2phrase_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/phrase.h File Reference}
+\label{backend_2phrase_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/phrase.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/phrase.h}}
+}
+{\ttfamily \#include \char`\"{}../lib/list.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}latency.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}quickSort.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}binarySearch.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}unique.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}fragment.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classphrase}{phrase}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{backend_2phrase_8h_a34b9c1760cbd5f1941ded0134e3f00b7}{MAX\_\-NUM\_\-INS\_\-VISITORS}~100
+\item 
+\#define \hyperlink{backend_2phrase_8h_a9f1a6472555e2d3411ffefe3c02309e0}{CRIT\_\-PATH\_\-LEN\_\-LIMIT}~10
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acb}{phraseState} \{ \par
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbae9835ccde3e142c81a3018df44811715}{noPhStatus}, 
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba74df93575420f7516e224044ed2cde6a}{phOpen}, 
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba87980d59f247c0ce60cd67170ca58091}{phClosed}, 
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba03000e9824c07734f64506a36c383043}{phWaitList}, 
+\par
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbaac88679df1de082fc0ef3f0e4aee732b}{phReady}, 
+\hyperlink{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba967449c8e2cdee48d28b1374c227b176}{phDone}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{backend_2phrase_8h_a9f1a6472555e2d3411ffefe3c02309e0}{
+\index{backend/phrase.h@{backend/phrase.h}!CRIT\_\-PATH\_\-LEN\_\-LIMIT@{CRIT\_\-PATH\_\-LEN\_\-LIMIT}}
+\index{CRIT\_\-PATH\_\-LEN\_\-LIMIT@{CRIT\_\-PATH\_\-LEN\_\-LIMIT}!backend/phrase.h@{backend/phrase.h}}
+\subsubsection[{CRIT\_\-PATH\_\-LEN\_\-LIMIT}]{\setlength{\rightskip}{0pt plus 5cm}\#define CRIT\_\-PATH\_\-LEN\_\-LIMIT~10}}
+\label{backend_2phrase_8h_a9f1a6472555e2d3411ffefe3c02309e0}
+\hypertarget{backend_2phrase_8h_a34b9c1760cbd5f1941ded0134e3f00b7}{
+\index{backend/phrase.h@{backend/phrase.h}!MAX\_\-NUM\_\-INS\_\-VISITORS@{MAX\_\-NUM\_\-INS\_\-VISITORS}}
+\index{MAX\_\-NUM\_\-INS\_\-VISITORS@{MAX\_\-NUM\_\-INS\_\-VISITORS}!backend/phrase.h@{backend/phrase.h}}
+\subsubsection[{MAX\_\-NUM\_\-INS\_\-VISITORS}]{\setlength{\rightskip}{0pt plus 5cm}\#define MAX\_\-NUM\_\-INS\_\-VISITORS~100}}
+\label{backend_2phrase_8h_a34b9c1760cbd5f1941ded0134e3f00b7}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acb}{
+\index{backend/phrase.h@{backend/phrase.h}!phraseState@{phraseState}}
+\index{phraseState@{phraseState}!backend/phrase.h@{backend/phrase.h}}
+\subsubsection[{phraseState}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf phraseState}}}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acb}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{noPhStatus@{noPhStatus}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!noPhStatus@{noPhStatus}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbae9835ccde3e142c81a3018df44811715}{
+noPhStatus}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbae9835ccde3e142c81a3018df44811715}
+}]\index{phOpen@{phOpen}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!phOpen@{phOpen}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba74df93575420f7516e224044ed2cde6a}{
+phOpen}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba74df93575420f7516e224044ed2cde6a}
+}]\index{phClosed@{phClosed}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!phClosed@{phClosed}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba87980d59f247c0ce60cd67170ca58091}{
+phClosed}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba87980d59f247c0ce60cd67170ca58091}
+}]\index{phWaitList@{phWaitList}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!phWaitList@{phWaitList}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba03000e9824c07734f64506a36c383043}{
+phWaitList}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba03000e9824c07734f64506a36c383043}
+}]\index{phReady@{phReady}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!phReady@{phReady}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbaac88679df1de082fc0ef3f0e4aee732b}{
+phReady}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acbaac88679df1de082fc0ef3f0e4aee732b}
+}]\index{phDone@{phDone}!backend/phrase.h@{backend/phrase.h}}\index{backend/phrase.h@{backend/phrase.h}!phDone@{phDone}}\item[{\em 
+\hypertarget{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba967449c8e2cdee48d28b1374c227b176}{
+phDone}
+\label{backend_2phrase_8h_a3294774a0e37027c6448a427863a2acba967449c8e2cdee48d28b1374c227b176}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;
+\end{DoxyCode}

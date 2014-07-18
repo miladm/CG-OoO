@@ -1,0 +1,45 @@
+\hypertarget{ssa_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.h File Reference}
+\label{ssa_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.h}}
+}
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}variable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ssa_8h_a99d7839751286ac78c627aabd383cb51}{build\_\-ssa\_\-form} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ssa_8h_a99d7839751286ac78c627aabd383cb51}{
+\index{ssa.h@{ssa.h}!build\_\-ssa\_\-form@{build\_\-ssa\_\-form}}
+\index{build\_\-ssa\_\-form@{build\_\-ssa\_\-form}!ssa.h@{ssa.h}}
+\subsubsection[{build\_\-ssa\_\-form}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-ssa\_\-form (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8h_a99d7839751286ac78c627aabd383cb51}
+
+\begin{DoxyCode}
+                                                                            {
+        printf("\tBuild Def-Use Sets\n");
+        buildDefUseSets(bbList);
+        printf("\tBuild Variable Def Lists From DefSets\n");
+        buildVarList(bbList,varList);
+        printf("\tBuild Phi-Funcations\n");
+        phi_func_placement(bbList, varList);
+        printf("\tRun SSA Renaming\n");
+        ssa_renaming(bbList, varList);
+        printf("\tDistroy VarList\n");
+        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
+      (); it++) {
+                delete it->second;
+        }
+}
+\end{DoxyCode}

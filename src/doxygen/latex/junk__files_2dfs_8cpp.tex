@@ -1,0 +1,103 @@
+\hypertarget{junk__files_2dfs_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/junk\_\-files/dfs.cpp File Reference}
+\label{junk__files_2dfs_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/junk\_\-files/dfs.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/junk\_\-files/dfs.cpp}}
+}
+{\ttfamily \#include $<$set$>$}\par
+{\ttfamily \#include \char`\"{}dfs.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{junk__files_2dfs_8cpp_a6f5fa54188b331d250c5485aaaacfa82}{findBB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} addr)
+\item 
+void \hyperlink{junk__files_2dfs_8cpp_a3ea3fd529789cd5e9b4a8532b26cea07}{findPath} (\hyperlink{classbasicblock}{basicblock} $\ast$bb, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} loopEntryID)
+\item 
+void \hyperlink{junk__files_2dfs_8cpp_ae3a14356537513b82f21bcbbade5eec0}{dfs} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} bbID\_\-seed)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ \hyperlink{junk__files_2dfs_8cpp_a180314230c6427e560bd980be01919b0}{path\_\-visit\_\-set}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{junk__files_2dfs_8cpp_ae3a14356537513b82f21bcbbade5eec0}{
+\index{junk\_\-files/dfs.cpp@{junk\_\-files/dfs.cpp}!dfs@{dfs}}
+\index{dfs@{dfs}!junk_files/dfs.cpp@{junk\_\-files/dfs.cpp}}
+\subsubsection[{dfs}]{\setlength{\rightskip}{0pt plus 5cm}void dfs (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf ADDR}}]{bbID\_\-seed}
+\end{DoxyParamCaption}
+)}}
+\label{junk__files_2dfs_8cpp_ae3a14356537513b82f21bcbbade5eec0}
+
+\begin{DoxyCode}
+                                                    {
+        basicblock* bb_seed = findBB(bbList, bbID_seed);
+        for (int i = 0; i < bb_seed->getNumDescendents(); i++) {
+                printf("(%llx)  %llx, ", bbID_seed, bb_seed->getNthDescendent(i)-
+      >getID());
+                path_visit_set.insert(bb_seed->getID());
+                findPath(bb_seed->getNthDescendent(i), bbID_seed);
+        }
+}
+\end{DoxyCode}
+\hypertarget{junk__files_2dfs_8cpp_a6f5fa54188b331d250c5485aaaacfa82}{
+\index{junk\_\-files/dfs.cpp@{junk\_\-files/dfs.cpp}!findBB@{findBB}}
+\index{findBB@{findBB}!junk_files/dfs.cpp@{junk\_\-files/dfs.cpp}}
+\subsubsection[{findBB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf basicblock}$\ast$ findBB (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf ADDR}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{junk__files_2dfs_8cpp_a6f5fa54188b331d250c5485aaaacfa82}
+
+\begin{DoxyCode}
+                                                         {
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                if (bbList->Nth(i)->getID() == addr) {
+                        return bbList->Nth(i);
+                }
+        }
+        printf("ERROR: didn't find the requested BB\n");
+        exit(1);
+}
+\end{DoxyCode}
+\hypertarget{junk__files_2dfs_8cpp_a3ea3fd529789cd5e9b4a8532b26cea07}{
+\index{junk\_\-files/dfs.cpp@{junk\_\-files/dfs.cpp}!findPath@{findPath}}
+\index{findPath@{findPath}!junk_files/dfs.cpp@{junk\_\-files/dfs.cpp}}
+\subsubsection[{findPath}]{\setlength{\rightskip}{0pt plus 5cm}void findPath (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb, }
+\item[{{\bf ADDR}}]{loopEntryID}
+\end{DoxyParamCaption}
+)}}
+\label{junk__files_2dfs_8cpp_a3ea3fd529789cd5e9b4a8532b26cea07}
+
+\begin{DoxyCode}
+                                                {
+        if (bb->getID() == loopEntryID ||
+            bb->getNumDescendents() == 0 ||
+            path_visit_set.find(bb->getID()) != path_visit_set.end()) {
+                printf("%llx\n", bb->getID());
+                path_visit_set.insert(bb->getID());
+                return;
+        } else {
+                for (int i = 0; i < bb->getNumDescendents(); i++) {
+                        printf("%llx, ", bb->getNthDescendent(i)->getID());
+                        path_visit_set.insert(bb->getNthDescendent(i)->getID());
+                        findPath(bb->getNthDescendent(i), loopEntryID);
+                }
+        }
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{junk__files_2dfs_8cpp_a180314230c6427e560bd980be01919b0}{
+\index{junk\_\-files/dfs.cpp@{junk\_\-files/dfs.cpp}!path\_\-visit\_\-set@{path\_\-visit\_\-set}}
+\index{path\_\-visit\_\-set@{path\_\-visit\_\-set}!junk_files/dfs.cpp@{junk\_\-files/dfs.cpp}}
+\subsubsection[{path\_\-visit\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}set$<${\bf ADDR}$>$ {\bf path\_\-visit\_\-set}}}
+\label{junk__files_2dfs_8cpp_a180314230c6427e560bd980be01919b0}

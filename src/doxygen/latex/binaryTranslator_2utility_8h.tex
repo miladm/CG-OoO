@@ -1,0 +1,152 @@
+\hypertarget{binaryTranslator_2utility_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.h File Reference}
+\label{binaryTranslator_2utility_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.h}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f}{Assert}(expr)~((expr) ? (void)0 : Failure(\char`\"{}Assertion failed: \%s, line \%d:$\backslash$n    \%s\char`\"{}, \_\-\_\-FILE\_\-\_\-, \_\-\_\-LINE\_\-\_\-, \#expr))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{binaryTranslator_2utility_8h_af9857b7ce67739b0c36e49ad70c1befa}{Failure} (const char $\ast$format,...)
+\item 
+void \hyperlink{binaryTranslator_2utility_8h_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug} (const char $\ast$key, const char $\ast$format,...)
+\item 
+void \hyperlink{binaryTranslator_2utility_8h_a5adfde7c853956a87b33ff8f2b3effc2}{SetDebugForKey} (const char $\ast$key, bool val)
+\item 
+bool \hyperlink{binaryTranslator_2utility_8h_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn} (const char $\ast$key)
+\item 
+void \hyperlink{binaryTranslator_2utility_8h_afdda6d1c4184e16b014a78ae53ddf958}{ParseCommandLine} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!Assert@{Assert}}
+\index{Assert@{Assert}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{Assert}]{\setlength{\rightskip}{0pt plus 5cm}\#define Assert(
+\begin{DoxyParamCaption}
+\item[{}]{expr}
+\end{DoxyParamCaption}
+)~((expr) ? (void)0 : Failure(\char`\"{}Assertion failed: \%s, line \%d:$\backslash$n    \%s\char`\"{}, \_\-\_\-FILE\_\-\_\-, \_\-\_\-LINE\_\-\_\-, \#expr))}}
+\label{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f}
+Macro: \hyperlink{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f}{Assert()} Usage: \hyperlink{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f}{Assert(num $>$ 0)}; -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ This macro is designed to assert the truth of a necessary condition. It tests the given expression, and if it evalutes true, nothing happens. If it is false, it calls Failure to print a message and abort. For example: Assert(ptr != NULL) will print something similar to the following if ptr is NULL: $\ast$$\ast$$\ast$ Failure: Assertion failed: hashtable.cc, line 55: ptr != NULL 
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2utility_8h_af9857b7ce67739b0c36e49ad70c1befa}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!Failure@{Failure}}
+\index{Failure@{Failure}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{Failure}]{\setlength{\rightskip}{0pt plus 5cm}void Failure (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{format, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2utility_8h_af9857b7ce67739b0c36e49ad70c1befa}
+Function: \hyperlink{backend_2utility_8cpp_af9857b7ce67739b0c36e49ad70c1befa}{Failure()} Usage: Failure(\char`\"{}Out of memory!\char`\"{}); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Reports an error and exits the program immediately. You should not need to call this since you should always try to continue parsing, even after an error is encountered. Some of the provided code calls this in unrecoverable error situations (cannot allocate memory, etc.) Failure accepts printf-\/style arguments in the message to be printed. 
+\begin{DoxyCode}
+                                      {
+  va_list args;
+  char errbuf[BufferSize];
+  
+  va_start(args, format);
+  vsprintf(errbuf, format, args);
+  va_end(args);
+  fflush(stdout);
+  fprintf(stderr,"\n*** Failure: %s\n\n", errbuf);
+  abort();
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2utility_8h_a07f87be0a7c65a41d29ddfca31d0cb89}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!IsDebugOn@{IsDebugOn}}
+\index{IsDebugOn@{IsDebugOn}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{IsDebugOn}]{\setlength{\rightskip}{0pt plus 5cm}bool IsDebugOn (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2utility_8h_a07f87be0a7c65a41d29ddfca31d0cb89}
+Function: \hyperlink{backend_2utility_8cpp_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn()} Usage: if (IsDebugOn(\char`\"{}scope\char`\"{})) ... -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Return true/false based on whether this key is currently on for debug printing. 
+\begin{DoxyCode}
+                                {
+  return (IndexOf(key) != -1);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2utility_8h_afdda6d1c4184e16b014a78ae53ddf958}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!ParseCommandLine@{ParseCommandLine}}
+\index{ParseCommandLine@{ParseCommandLine}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{ParseCommandLine}]{\setlength{\rightskip}{0pt plus 5cm}void ParseCommandLine (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2utility_8h_afdda6d1c4184e16b014a78ae53ddf958}
+Function: ParseCommandLine -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on the debugging flags from the command line. Verifies that first argument is -\/d, and then interpret all the arguments that follow as being flags to turn on. 
+\begin{DoxyCode}
+                                              {
+  if (argc == 1)
+    return;
+  
+  if (strcmp(argv[1], "-d") != 0) { // first arg is not -d
+    printf("Incorrect Use:   ");
+    for (int i = 1; i < argc; i++) printf("%s ", argv[i]);
+    printf("\n");
+    printf("Correct Usage:   -d <debug-key-1> <debug-key-2> ... \n");
+    exit(2);
+  }
+
+  for (int i = 2; i < argc; i++)
+    SetDebugForKey(argv[i], true);
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2utility_8h_a792c588e9321d93476dec66f6cdd53a3}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!PrintDebug@{PrintDebug}}
+\index{PrintDebug@{PrintDebug}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{PrintDebug}]{\setlength{\rightskip}{0pt plus 5cm}void PrintDebug (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key, }
+\item[{const char $\ast$}]{format, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2utility_8h_a792c588e9321d93476dec66f6cdd53a3}
+Function: \hyperlink{backend_2utility_8cpp_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug()} Usage: PrintDebug(\char`\"{}parser\char`\"{}, \char`\"{}found ident \%s$\backslash$n\char`\"{}, ident); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Print a message if we have turned debugging messages on for the given key. For example, the usage line shown above will only print a message if the call is preceded by a call to SetDebugForKey(\char`\"{}parser\char`\"{},true). The function accepts printf arguments. The provided main.cc parses the command line to turn on debug flags. 
+\begin{DoxyCode}
+                                                          {
+  va_list args;
+  char buf[BufferSize];
+
+  if (!IsDebugOn(key))
+     return;
+  
+  va_start(args, format);
+  vsprintf(buf, format, args);
+  va_end(args);
+  printf("+++ (%s): %s%s", key, buf, buf[strlen(buf)-1] != '\n'? "\n" : "");
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2utility_8h_a5adfde7c853956a87b33ff8f2b3effc2}{
+\index{binaryTranslator/utility.h@{binaryTranslator/utility.h}!SetDebugForKey@{SetDebugForKey}}
+\index{SetDebugForKey@{SetDebugForKey}!binaryTranslator/utility.h@{binaryTranslator/utility.h}}
+\subsubsection[{SetDebugForKey}]{\setlength{\rightskip}{0pt plus 5cm}void SetDebugForKey (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key, }
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2utility_8h_a5adfde7c853956a87b33ff8f2b3effc2}
+Function: \hyperlink{backend_2utility_8cpp_a34c8948d2a64f846bb064b02016ec243}{SetDebugForKey()} Usage: SetDebugForKey(\char`\"{}scope\char`\"{}, true); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on debugging messages for the given key. See PrintDebug for an example. Can be called manually when desired and will be called from the provided main for flags passed with -\/d. 
+\begin{DoxyCode}
+                                                 {
+  int k = IndexOf(key);
+  if (!value && k != -1)
+    debugKeys.erase(debugKeys.begin() + k);
+  else if (value && k == -1)
+    debugKeys.push_back(key);
+}
+\end{DoxyCode}

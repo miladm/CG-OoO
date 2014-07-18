@@ -1,0 +1,117 @@
+\hypertarget{classo3__branchPred}{
+\section{o3\_\-branchPred Class Reference}
+\label{classo3__branchPred}\index{o3\_\-branchPred@{o3\_\-branchPred}}
+}
+
+
+{\ttfamily \#include $<$branchPred.h$>$}
+
+Inheritance diagram for o3\_\-branchPred:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__branchPred}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}{o3\_\-branchPred} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} bp\_\-width, string stage\_\-name)
+\item 
+\hyperlink{classo3__branchPred_ab497c6edb4266e04ae0b20969caeb525}{$\sim$o3\_\-branchPred} ()
+\item 
+void \hyperlink{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}{doBP} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}{
+\index{o3\_\-branchPred@{o3\_\-branchPred}!o3\_\-branchPred@{o3\_\-branchPred}}
+\index{o3\_\-branchPred@{o3\_\-branchPred}!o3_branchPred@{o3\_\-branchPred}}
+\subsubsection[{o3\_\-branchPred}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-branchPred::o3\_\-branchPred (
+\begin{DoxyParamCaption}
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-bp\_\-port, }
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{bp\_\-to\_\-fetch\_\-port, }
+\item[{{\bf WIDTH}}]{bp\_\-width, }
+\item[{string}]{stage\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}
+
+\begin{DoxyCode}
+        : stage (bp_width, stage_name)
+{ 
+    _fetch_to_bp_port = &fetch_to_bp_port;
+    _bp_to_fetch_port = &bp_to_fetch_port;
+}
+\end{DoxyCode}
+\hypertarget{classo3__branchPred_ab497c6edb4266e04ae0b20969caeb525}{
+\index{o3\_\-branchPred@{o3\_\-branchPred}!$\sim$o3\_\-branchPred@{$\sim$o3\_\-branchPred}}
+\index{$\sim$o3\_\-branchPred@{$\sim$o3\_\-branchPred}!o3_branchPred@{o3\_\-branchPred}}
+\subsubsection[{$\sim$o3\_\-branchPred}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-branchPred::$\sim$o3\_\-branchPred (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__branchPred_ab497c6edb4266e04ae0b20969caeb525}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}{
+\index{o3\_\-branchPred@{o3\_\-branchPred}!doBP@{doBP}}
+\index{doBP@{doBP}!o3_branchPred@{o3\_\-branchPred}}
+\subsubsection[{doBP}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::doBP (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}
+
+\begin{DoxyCode}
+                                       {
+    /* STAT */
+    regStat (clk);
+}
+\end{DoxyCode}
+\hypertarget{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{
+\index{o3\_\-branchPred@{o3\_\-branchPred}!regStat@{regStat}}
+\index{regStat@{regStat}!o3_branchPred@{o3\_\-branchPred}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::regStat (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}
+
+\begin{DoxyCode}
+                                          {
+    _fetch_to_bp_port->regStat (clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}{
+\index{o3\_\-branchPred@{o3\_\-branchPred}!squash@{squash}}
+\index{squash@{squash}!o3_branchPred@{o3\_\-branchPred}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::squash (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}
+
+\begin{DoxyCode}
+                                         {
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2branchPred_8h}{branchPred.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2branchPred_8cpp}{branchPred.cpp}\end{DoxyCompactItemize}

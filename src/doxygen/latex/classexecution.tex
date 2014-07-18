@@ -1,0 +1,340 @@
+\hypertarget{classexecution}{
+\section{execution Class Reference}
+\label{classexecution}\index{execution@{execution}}
+}
+
+
+{\ttfamily \#include $<$execution.h$>$}
+
+Inheritance diagram for execution:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classexecution}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classexecution_a87b2844b03233ad768fa1ad67e1f93df}{execution} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&scheduler\_\-to\_\-execution\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-memory\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} execution\_\-width, string stage\_\-name)
+\item 
+\hyperlink{classexecution_a686c28582542ecb0a4d41f9a649a6357}{$\sim$execution} ()
+\item 
+void \hyperlink{classexecution_a972207b1dde6a4bb8731c3fc0908bac6}{doEXECUTION} (\hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classexecution_a3e12895813ee78b1a7d2d10894db1204}{squashCtrl} (\hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classexecution_a243c30ebc13c7e2e6c1eb46a8fcac55e}{squash} (\hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classexecution_af6a859d27808b6db44c92b0ff79ef426}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classexecution_adc2d24703f3425df6107514535fea88b}{executionImpl} (\hyperlink{classsysClock}{sysClock} \&)
+\item 
+\hyperlink{unit_2stage_8h_a7de04de95175471455cf906d80af3968}{COMPLETE\_\-STATUS} \hyperlink{classexecution_a0c823fb6010268a0da3a706a9452d5e0}{completeIns} (\hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classexecution_a9271c55da8555444f0882c9027ab68a0}{forward} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{classsysClock}{sysClock} \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classexecution_a87b2844b03233ad768fa1ad67e1f93df}{
+\index{execution@{execution}!execution@{execution}}
+\index{execution@{execution}!execution@{execution}}
+\subsubsection[{execution}]{\setlength{\rightskip}{0pt plus 5cm}execution::execution (
+\begin{DoxyParamCaption}
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{scheduler\_\-to\_\-execution\_\-port, }
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{execution\_\-to\_\-scheduler\_\-port, }
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{execution\_\-to\_\-memory\_\-port, }
+\item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
+\item[{{\bf WIDTH}}]{execution\_\-width, }
+\item[{string}]{stage\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a87b2844b03233ad768fa1ad67e1f93df}
+
+\begin{DoxyCode}
+        : stage (execution_width, stage_name)
+{
+    _scheduler_to_execution_port = &scheduler_to_execution_port;
+    _execution_to_scheduler_port = &execution_to_scheduler_port;
+    _execution_to_memory_port = &execution_to_memory_port;
+    _iROB = iROB;
+    _aluExeUnits = new List<exeUnit*>;
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU); //TODO make 
+      this config better with more EU types
+        _aluExeUnits->Append (newEU);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classexecution_a686c28582542ecb0a4d41f9a649a6357}{
+\index{execution@{execution}!$\sim$execution@{$\sim$execution}}
+\index{$\sim$execution@{$\sim$execution}!execution@{execution}}
+\subsubsection[{$\sim$execution}]{\setlength{\rightskip}{0pt plus 5cm}execution::$\sim$execution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a686c28582542ecb0a4d41f9a649a6357}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classexecution_a0c823fb6010268a0da3a706a9452d5e0}{
+\index{execution@{execution}!completeIns@{completeIns}}
+\index{completeIns@{completeIns}!execution@{execution}}
+\subsubsection[{completeIns}]{\setlength{\rightskip}{0pt plus 5cm}{\bf COMPLETE\_\-STATUS} execution::completeIns (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a0c823fb6010268a0da3a706a9452d5e0}
+
+\begin{DoxyCode}
+                                                     {
+    g_var.setOldSquashSN ();
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        exeUnit* EU = _aluExeUnits->Nth (i);
+        dynInstruction* ins = EU->getEUins ();
+
+        /* CHECKS */
+        if (g_var.g_pipe_state == PIPE_FLUSH) break;
+        if (ins != NULL && ins->getInsType () == MEM && 
+            _execution_to_memory_port->getBuffState (clk.now ()) == FULL_BUFF) br
+      eak;
+        if (EU->getEUstate (clk.now (), true) != COMPLETE_EU) continue;
+
+        /* COMPLETE INS */
+        if (ins->getInsType () == MEM) {
+            _execution_to_memory_port->pushBack (ins, clk.now ());
+            ins->setPipeStage (MEM_ACCESS);
+        } else {
+            if (!g_RF_MGR.hasFreeWrPort (clk.now ())) break;
+            ins->setPipeStage (COMPLETE);
+            g_RF_MGR.writeToRF (ins);
+        }
+        EU->resetEU ();
+
+        /* SQUASH DETECT */
+        if (ins->isOnWrongPath ()) {
+            g_var.setSquashSN (ins->getInsID ());
+        }
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
+      , "Complete ins", ins->getInsID (), clk.now ());
+    }
+
+    if (g_var.isOnWrongPath()) {
+        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str
+       (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", clk.now ());
+        return COMPLETE_SQUASH;
+    }
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on
+       Right Path", clk.now ());
+    return COMPLETE_NORMAL;
+}
+\end{DoxyCode}
+\hypertarget{classexecution_a972207b1dde6a4bb8731c3fc0908bac6}{
+\index{execution@{execution}!doEXECUTION@{doEXECUTION}}
+\index{doEXECUTION@{doEXECUTION}!execution@{execution}}
+\subsubsection[{doEXECUTION}]{\setlength{\rightskip}{0pt plus 5cm}void execution::doEXECUTION (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a972207b1dde6a4bb8731c3fc0908bac6}
+
+\begin{DoxyCode}
+                                          {
+    dbg.print (DBG_EXECUTION, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ()
+      );
+    /* STAT */
+    regStat (clk);
+    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
+
+    /* WRITEBACK RESULT */
+    COMPLETE_STATUS cmpl_status;
+    cmpl_status = completeIns (clk);
+
+    /* EXECUTE INS */
+    if (cmpl_status == COMPLETE_NORMAL) {
+        pipe_stall = executionImpl (clk);
+    }
+
+    /* SQUASH CONTROL */
+    squashCtrl (clk);
+    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "P
+      IPELINE STATE:", g_var.g_pipe_state, clk.now ());
+
+    /* STAT */
+    if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
+    if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+}
+\end{DoxyCode}
+\hypertarget{classexecution_adc2d24703f3425df6107514535fea88b}{
+\index{execution@{execution}!executionImpl@{executionImpl}}
+\index{executionImpl@{executionImpl}!execution@{execution}}
+\subsubsection[{executionImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} execution::executionImpl (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_adc2d24703f3425df6107514535fea88b}
+
+\begin{DoxyCode}
+                                                     {
+    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
+
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        /* CHECKS */
+        if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
+      PIPE_FLUSH) break;
+        if (_scheduler_to_execution_port->getBuffState (clk.now ()) == 
+      EMPTY_BUFF) break;
+        if (!_scheduler_to_execution_port->isReady (clk.now ())) break;
+        dynInstruction* ins = _scheduler_to_execution_port->getFront ();
+        if (!g_RF_MGR.isReady (ins) || !g_RF_MGR.canReserveRF (ins)) break; // IN
+      O EXE
+        exeUnit* EU = _aluExeUnits->Nth (i);
+        if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) continue;
+
+        /* EXE INS */
+        ins = _scheduler_to_execution_port->popFront (clk.now ());
+        g_RF_MGR.reserveRF (ins);
+        EU->_eu_timer.setNewTime (clk.now ());
+        EU->setEUins (ins);
+        EU->runEU ();
+        ins->setPipeStage (EXECUTE);
+        forward (ins, EU->_eu_timer.getLatency (), clk);
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
+      , "Execute ins", ins->getInsID (), clk.now ());
+
+        /* STAT */
+        s_ins_cnt++;
+        pipe_stall = PIPE_BUSY;
+    }
+    return pipe_stall;
+}
+\end{DoxyCode}
+\hypertarget{classexecution_a9271c55da8555444f0882c9027ab68a0}{
+\index{execution@{execution}!forward@{forward}}
+\index{forward@{forward}!execution@{execution}}
+\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}void execution::forward (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins, }
+\item[{{\bf CYCLE}}]{eu\_\-latency, }
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a9271c55da8555444f0882c9027ab68a0}
+
+\begin{DoxyCode}
+                                                                             {
+    if (_execution_to_scheduler_port->getBuffState (clk.now ()) == FULL_BUFF) ret
+      urn;
+    if (ins->getInsType () != MEM) {
+        CYCLE cdb_ready_latency = eu_latency - 1;
+        Assert (cdb_ready_latency >= 0);
+        _execution_to_scheduler_port->pushBack (ins, clk.now (), cdb_ready_latenc
+      y);
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
+      , "Forward wr ops of ins", ins->getInsID (), clk.now ());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classexecution_af6a859d27808b6db44c92b0ff79ef426}{
+\index{execution@{execution}!regStat@{regStat}}
+\index{regStat@{regStat}!execution@{execution}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void execution::regStat (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_af6a859d27808b6db44c92b0ff79ef426}
+
+\begin{DoxyCode}
+                                      {
+    _scheduler_to_execution_port->regStat (clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classexecution_a243c30ebc13c7e2e6c1eb46a8fcac55e}{
+\index{execution@{execution}!squash@{squash}}
+\index{squash@{squash}!execution@{execution}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void execution::squash (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a243c30ebc13c7e2e6c1eb46a8fcac55e}
+
+\begin{DoxyCode}
+                                     {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Execution
+       Ports Flush", clk.now ());
+    Assert (g_var.g_pipe_state == PIPE_FLUSH);
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    _execution_to_scheduler_port->flushPort (squashSeqNum, clk.now ());
+    _execution_to_memory_port->flushPort (squashSeqNum, clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classexecution_a3e12895813ee78b1a7d2d10894db1204}{
+\index{execution@{execution}!squashCtrl@{squashCtrl}}
+\index{squashCtrl@{squashCtrl}!execution@{execution}}
+\subsubsection[{squashCtrl}]{\setlength{\rightskip}{0pt plus 5cm}void execution::squashCtrl (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classexecution_a3e12895813ee78b1a7d2d10894db1204}
+
+\begin{DoxyCode}
+                                         {
+    string state_switch;
+    if ((g_var.g_pipe_state == PIPE_NORMAL || g_var.g_pipe_state == 
+      PIPE_SQUASH_ROB) && 
+        g_var.g_squash_seq_num != g_var.g_old_squash_seq_num) {
+        g_var.g_pipe_state = PIPE_WAIT_FLUSH;
+        state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
+    } else if (g_var.g_pipe_state == PIPE_NORMAL) {
+        g_var.resetSquashSN ();
+        return;
+    } else if (g_var.g_pipe_state == PIPE_WAIT_FLUSH) {
+        for (WIDTH i = 0; i < _stage_width; i++) {
+            exeUnit* EU = _aluExeUnits->Nth (i);
+            if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) return;
+        }
+        g_var.g_pipe_state = PIPE_FLUSH;
+        state_switch =  "PIPE_WAIT_FLUSH -> PIPE_FLUSH";
+        for (WIDTH i = 0; i < _stage_width; i++) {
+            exeUnit* EU = _aluExeUnits->Nth (i);
+            EU->resetEU ();
+        }
+        squash (clk);
+    } else if (g_var.g_pipe_state == PIPE_FLUSH) {
+        g_var.g_pipe_state = PIPE_DRAIN;
+        state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
+    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeRdPort (clk.now 
+      ()) && 
+               _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
+        g_var.g_pipe_state = PIPE_SQUASH_ROB;
+        state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
+    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 
+      0) {
+        g_var.resetSquashSN ();
+        g_var.g_pipe_state = PIPE_NORMAL;
+        state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
+        g_RF_MGR.resetRF ();
+    } else {
+        return; /* No state change */
+    }
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_s
+      witch.c_str(), clk.now ());
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2execution_8h}{execution.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2execution_8cpp}{execution.cpp}\end{DoxyCompactItemize}

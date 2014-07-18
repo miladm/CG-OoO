@@ -1,0 +1,252 @@
+\hypertarget{structStats_1_1DistPrint}{
+\section{Stats::DistPrint Struct Reference}
+\label{structStats_1_1DistPrint}\index{Stats::DistPrint@{Stats::DistPrint}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structStats_1_1DistPrint_a02bef5dd3b54fc1e6cc78cad64c32bd0}{DistPrint} (const Text $\ast$text, const DistInfo \&info)
+\item 
+\hyperlink{structStats_1_1DistPrint_a37e35a85600748fd9d6a55f7cc13a3a3}{DistPrint} (const Text $\ast$text, const VectorDistInfo \&info, int i)
+\item 
+void \hyperlink{structStats_1_1DistPrint_a452bd30d5d3b11bebbd78143888afa2e}{init} (const Text $\ast$text, const Info \&info)
+\item 
+void \hyperlink{structStats_1_1DistPrint_aa51349aa88ffc6493871b704b51deb16}{operator()} (ostream \&stream) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{structStats_1_1DistPrint_a8effa42b5694542dac7f6fb7f1df4230}{name}
+\item 
+string \hyperlink{structStats_1_1DistPrint_a9efef83fe3bbe8076c1b902e00204ca7}{separatorString}
+\item 
+string \hyperlink{structStats_1_1DistPrint_a20c3c6840bcaefcbd8a9ecbc468421da}{desc}
+\item 
+Flags \hyperlink{structStats_1_1DistPrint_a29f5554b5ad6a9b573fa8e0c4286a128}{flags}
+\item 
+bool \hyperlink{structStats_1_1DistPrint_a9b91df398053c0c61986dafcc2576c01}{descriptions}
+\item 
+int \hyperlink{structStats_1_1DistPrint_ac1229f4102622ff8182e625410a7dfc5}{precision}
+\item 
+const DistData \& \hyperlink{structStats_1_1DistPrint_a5a1a2f61a36cddf75ea5b9de60c02aa1}{data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structStats_1_1DistPrint_a02bef5dd3b54fc1e6cc78cad64c32bd0}{
+\index{Stats::DistPrint@{Stats::DistPrint}!DistPrint@{DistPrint}}
+\index{DistPrint@{DistPrint}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{DistPrint}]{\setlength{\rightskip}{0pt plus 5cm}Stats::DistPrint::DistPrint (
+\begin{DoxyParamCaption}
+\item[{const Text $\ast$}]{text, }
+\item[{const DistInfo \&}]{info}
+\end{DoxyParamCaption}
+)}}
+\label{structStats_1_1DistPrint_a02bef5dd3b54fc1e6cc78cad64c32bd0}
+
+\begin{DoxyCode}
+    : data(info.data)
+{
+    init(text, info);
+}
+\end{DoxyCode}
+\hypertarget{structStats_1_1DistPrint_a37e35a85600748fd9d6a55f7cc13a3a3}{
+\index{Stats::DistPrint@{Stats::DistPrint}!DistPrint@{DistPrint}}
+\index{DistPrint@{DistPrint}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{DistPrint}]{\setlength{\rightskip}{0pt plus 5cm}Stats::DistPrint::DistPrint (
+\begin{DoxyParamCaption}
+\item[{const Text $\ast$}]{text, }
+\item[{const VectorDistInfo \&}]{info, }
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{structStats_1_1DistPrint_a37e35a85600748fd9d6a55f7cc13a3a3}
+
+\begin{DoxyCode}
+    : data(info.data[i])
+{
+    init(text, info);
+
+    name = info.name + "_" +
+        (info.subnames[i].empty() ? (to_string(i)) : info.subnames[i]);
+
+    if (!info.subdescs[i].empty())
+        desc = info.subdescs[i];
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structStats_1_1DistPrint_a452bd30d5d3b11bebbd78143888afa2e}{
+\index{Stats::DistPrint@{Stats::DistPrint}!init@{init}}
+\index{init@{init}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::DistPrint::init (
+\begin{DoxyParamCaption}
+\item[{const Text $\ast$}]{text, }
+\item[{const Info \&}]{info}
+\end{DoxyParamCaption}
+)}}
+\label{structStats_1_1DistPrint_a452bd30d5d3b11bebbd78143888afa2e}
+
+\begin{DoxyCode}
+{
+    name = info.name;
+    separatorString = info.separatorString;
+    desc = info.desc;
+    flags = info.flags;
+    precision = info.precision;
+    descriptions = text->descriptions;
+}
+\end{DoxyCode}
+\hypertarget{structStats_1_1DistPrint_aa51349aa88ffc6493871b704b51deb16}{
+\index{Stats::DistPrint@{Stats::DistPrint}!operator()@{operator()}}
+\index{operator()@{operator()}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::DistPrint::operator() (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream}
+\end{DoxyParamCaption}
+) const}}
+\label{structStats_1_1DistPrint_aa51349aa88ffc6493871b704b51deb16}
+
+\begin{DoxyCode}
+{
+    string base = name + separatorString;
+
+    ScalarPrint print;
+    print.precision = precision;
+    print.flags = flags;
+    print.descriptions = descriptions;
+    print.desc = desc;
+    print.pdf = NAN;
+    print.cdf = NAN;
+
+    print.name = base + "samples";
+    print.value = data.samples;
+    print(stream);
+
+    print.name = base + "mean";
+    print.value = data.samples ? data.sum / data.samples : NAN;
+    print(stream);
+
+    if (data.type == Hist) {
+        print.name = base + "gmean";
+        print.value = data.samples ? exp(data.logs / data.samples) : NAN;
+        print(stream);
+    }
+
+    Result stdev = NAN;
+    if (data.samples)
+        stdev = sqrt((data.samples * data.squares - data.sum * data.sum) /
+                     (data.samples * (data.samples - 1.0)));
+    print.name = base + "stdev";
+    print.value = stdev;
+    print(stream);
+
+    if (data.type == Deviation)
+        return;
+
+    size_t size = data.cvec.size();
+
+    Result total = 0.0;
+    if (data.type == Dist && data.underflow != NAN)
+        total += data.underflow;
+    for (off_type i = 0; i < size; ++i)
+        total += data.cvec[i];
+    if (data.type == Dist && data.overflow != NAN)
+        total += data.overflow;
+
+    if (total) {
+        print.pdf = 0.0;
+        print.cdf = 0.0;
+    }
+
+    if (data.type == Dist && data.underflow != NAN) {
+        print.name = base + "underflows";
+        print.update(data.underflow, total);
+        print(stream);
+    }
+
+    for (off_type i = 0; i < size; ++i) {
+        stringstream namestr;
+        namestr << base;
+
+        Counter low = i * data.bucket_size + data.min;
+        Counter high = ::min(low + data.bucket_size - 1.0, data.max);
+        namestr << low;
+        if (low < high)
+            namestr << "-" << high;
+
+        print.name = namestr.str();
+        print.update(data.cvec[i], total);
+        print(stream);
+    }
+
+    if (data.type == Dist && data.overflow != NAN) {
+        print.name = base + "overflows";
+        print.update(data.overflow, total);
+        print(stream);
+    }
+
+    print.pdf = NAN;
+    print.cdf = NAN;
+
+    if (data.type == Dist && data.min_val != NAN) {
+        print.name = base + "min_value";
+        print.value = data.min_val;
+        print(stream);
+    }
+
+    if (data.type == Dist && data.max_val != NAN) {
+        print.name = base + "max_value";
+        print.value = data.max_val;
+        print(stream);
+    }
+
+    print.name = base + "total";
+    print.value = total;
+    print(stream);
+}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structStats_1_1DistPrint_a5a1a2f61a36cddf75ea5b9de60c02aa1}{
+\index{Stats::DistPrint@{Stats::DistPrint}!data@{data}}
+\index{data@{data}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}const DistData\& {\bf Stats::DistPrint::data}}}
+\label{structStats_1_1DistPrint_a5a1a2f61a36cddf75ea5b9de60c02aa1}
+\hypertarget{structStats_1_1DistPrint_a20c3c6840bcaefcbd8a9ecbc468421da}{
+\index{Stats::DistPrint@{Stats::DistPrint}!desc@{desc}}
+\index{desc@{desc}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{desc}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::DistPrint::desc}}}
+\label{structStats_1_1DistPrint_a20c3c6840bcaefcbd8a9ecbc468421da}
+\hypertarget{structStats_1_1DistPrint_a9b91df398053c0c61986dafcc2576c01}{
+\index{Stats::DistPrint@{Stats::DistPrint}!descriptions@{descriptions}}
+\index{descriptions@{descriptions}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{descriptions}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Stats::DistPrint::descriptions}}}
+\label{structStats_1_1DistPrint_a9b91df398053c0c61986dafcc2576c01}
+\hypertarget{structStats_1_1DistPrint_a29f5554b5ad6a9b573fa8e0c4286a128}{
+\index{Stats::DistPrint@{Stats::DistPrint}!flags@{flags}}
+\index{flags@{flags}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}Flags {\bf Stats::DistPrint::flags}}}
+\label{structStats_1_1DistPrint_a29f5554b5ad6a9b573fa8e0c4286a128}
+\hypertarget{structStats_1_1DistPrint_a8effa42b5694542dac7f6fb7f1df4230}{
+\index{Stats::DistPrint@{Stats::DistPrint}!name@{name}}
+\index{name@{name}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::DistPrint::name}}}
+\label{structStats_1_1DistPrint_a8effa42b5694542dac7f6fb7f1df4230}
+\hypertarget{structStats_1_1DistPrint_ac1229f4102622ff8182e625410a7dfc5}{
+\index{Stats::DistPrint@{Stats::DistPrint}!precision@{precision}}
+\index{precision@{precision}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{precision}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Stats::DistPrint::precision}}}
+\label{structStats_1_1DistPrint_ac1229f4102622ff8182e625410a7dfc5}
+\hypertarget{structStats_1_1DistPrint_a9efef83fe3bbe8076c1b902e00204ca7}{
+\index{Stats::DistPrint@{Stats::DistPrint}!separatorString@{separatorString}}
+\index{separatorString@{separatorString}!Stats::DistPrint@{Stats::DistPrint}}
+\subsubsection[{separatorString}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::DistPrint::separatorString}}}
+\label{structStats_1_1DistPrint_a9efef83fe3bbe8076c1b902e00204ca7}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/\hyperlink{text_8cc}{text.cc}\end{DoxyCompactItemize}

@@ -1,0 +1,188 @@
+\hypertarget{classo3__sysCore}{
+\section{o3\_\-sysCore Class Reference}
+\label{classo3__sysCore}\index{o3\_\-sysCore@{o3\_\-sysCore}}
+}
+
+
+{\ttfamily \#include $<$sysCore.h$>$}
+
+Inheritance diagram for o3\_\-sysCore:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__sysCore}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__sysCore_aa2fc24a24dd599ff3393c62910cbcb06}{o3\_\-sysCore} (\hyperlink{global_2global_8h_a32516e1b668a88eb546e9b6ee2e3345d}{GHz} clk\_\-frequency, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} bp\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} fetch\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} decode\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} scheduler\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} execution\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} memory\_\-width, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} commit\_\-width, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} fetch\_\-to\_\-decode\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} fetch\_\-to\_\-decode\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} fetch\_\-to\_\-bp\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} fetch\_\-to\_\-bp\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} bp\_\-to\_\-fetch\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} bp\_\-to\_\-fetch\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} decode\_\-to\_\-scheduler\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} decode\_\-to\_\-scheduler\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} scheduler\_\-to\_\-execution\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} scheduler\_\-to\_\-execution\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} execution\_\-to\_\-scheduler\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} execution\_\-to\_\-scheduler\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} execution\_\-to\_\-memory\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} execution\_\-to\_\-memory\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} memory\_\-to\_\-scheduler\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} memory\_\-to\_\-scheduler\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} commit\_\-to\_\-bp\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} commit\_\-to\_\-bp\_\-buff\_\-len, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} commit\_\-to\_\-scheduler\_\-delay, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} commit\_\-to\_\-scheduler\_\-buff\_\-len)
+\item 
+\hyperlink{classo3__sysCore_af4d8e609d9501b5511b70fbdfa218772}{$\sim$o3\_\-sysCore} ()
+\item 
+void \hyperlink{classo3__sysCore_ab97edaa7f8ea74d7315b71d7d03a736c}{runCore} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__sysCore_aa2fc24a24dd599ff3393c62910cbcb06}{
+\index{o3\_\-sysCore@{o3\_\-sysCore}!o3\_\-sysCore@{o3\_\-sysCore}}
+\index{o3\_\-sysCore@{o3\_\-sysCore}!o3_sysCore@{o3\_\-sysCore}}
+\subsubsection[{o3\_\-sysCore}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-sysCore::o3\_\-sysCore (
+\begin{DoxyParamCaption}
+\item[{{\bf GHz}}]{clk\_\-frequency, }
+\item[{{\bf WIDTH}}]{bp\_\-width, }
+\item[{{\bf WIDTH}}]{fetch\_\-width, }
+\item[{{\bf WIDTH}}]{decode\_\-width, }
+\item[{{\bf WIDTH}}]{scheduler\_\-width, }
+\item[{{\bf WIDTH}}]{execution\_\-width, }
+\item[{{\bf WIDTH}}]{memory\_\-width, }
+\item[{{\bf WIDTH}}]{commit\_\-width, }
+\item[{{\bf CYCLE}}]{fetch\_\-to\_\-decode\_\-delay, }
+\item[{{\bf LENGTH}}]{fetch\_\-to\_\-decode\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{fetch\_\-to\_\-bp\_\-delay, }
+\item[{{\bf LENGTH}}]{fetch\_\-to\_\-bp\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{bp\_\-to\_\-fetch\_\-delay, }
+\item[{{\bf LENGTH}}]{bp\_\-to\_\-fetch\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{decode\_\-to\_\-scheduler\_\-delay, }
+\item[{{\bf LENGTH}}]{decode\_\-to\_\-scheduler\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{scheduler\_\-to\_\-execution\_\-delay, }
+\item[{{\bf LENGTH}}]{scheduler\_\-to\_\-execution\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{execution\_\-to\_\-scheduler\_\-delay, }
+\item[{{\bf LENGTH}}]{execution\_\-to\_\-scheduler\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{execution\_\-to\_\-memory\_\-delay, }
+\item[{{\bf LENGTH}}]{execution\_\-to\_\-memory\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{memory\_\-to\_\-scheduler\_\-delay, }
+\item[{{\bf LENGTH}}]{memory\_\-to\_\-scheduler\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{commit\_\-to\_\-bp\_\-delay, }
+\item[{{\bf LENGTH}}]{commit\_\-to\_\-bp\_\-buff\_\-len, }
+\item[{{\bf CYCLE}}]{commit\_\-to\_\-scheduler\_\-delay, }
+\item[{{\bf LENGTH}}]{commit\_\-to\_\-scheduler\_\-buff\_\-len}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__sysCore_aa2fc24a24dd599ff3393c62910cbcb06}
+
+\begin{DoxyCode}
+        : unit("SysCore"),
+      _fetch_to_decode_delay (fetch_to_decode_delay),
+          _fetch_to_decode_buff_len (fetch_to_decode_buff_len),
+          _fetch_to_bp_delay (fetch_to_bp_delay),
+          _fetch_to_bp_buff_len (fetch_to_bp_buff_len),
+          _bp_to_fetch_delay (bp_to_fetch_delay),
+          _bp_to_fetch_buff_len (bp_to_fetch_buff_len),
+          _decode_to_scheduler_delay (decode_to_scheduler_delay),
+          _decode_to_scheduler_buff_len (decode_to_scheduler_buff_len),
+          _scheduler_to_execution_delay (scheduler_to_execution_delay),
+          _scheduler_to_execution_buff_len (scheduler_to_execution_buff_len),
+          _execution_to_scheduler_delay (execution_to_scheduler_delay),
+          _execution_to_scheduler_buff_len (execution_to_scheduler_buff_len),
+          _execution_to_memory_delay (execution_to_memory_delay),
+          _execution_to_memory_buff_len (execution_to_memory_buff_len),
+          _memory_to_scheduler_delay (memory_to_scheduler_delay),
+          _memory_to_scheduler_buff_len (memory_to_scheduler_buff_len),
+          _commit_to_bp_delay (commit_to_bp_delay),
+          _commit_to_bp_buff_len (commit_to_bp_buff_len),
+          _commit_to_scheduler_delay (commit_to_scheduler_delay),
+          _commit_to_scheduler_buff_len (commit_to_scheduler_buff_len),
+      // INIT PORTS
+      _bp_to_fetch_port (bp_to_fetch_buff_len, bp_to_fetch_delay, "bp_to_fetch_po
+      rt"),
+      _fetch_to_bp_port (fetch_to_bp_buff_len, fetch_to_bp_delay, "fetch_to_bp_po
+      rt"),
+      _fetch_to_decode_port (fetch_to_decode_buff_len, fetch_to_decode_delay, "fe
+      tch_to_decode_port"),
+      _decode_to_scheduler_port (decode_to_scheduler_buff_len, decode_to_schedule
+      r_delay, "decode_to_scheduler_port"),
+      _scheduler_to_execution_port (scheduler_to_execution_buff_len, scheduler_to
+      _execution_delay, "scheduler_to_execution_port"),
+      _execution_to_scheduler_port (execution_to_scheduler_buff_len, execution_to
+      _scheduler_delay, "execution_to_scheduler_port"),
+      _execution_to_memory_port (execution_to_memory_buff_len, execution_to_memor
+      y_delay, "execution_to_memory_port"),
+      _memory_to_scheduler_port (memory_to_scheduler_buff_len, memory_to_schedule
+      r_delay, "memory_to_scheduler_port"),
+      _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, "commit_to_b
+      p_port"),
+      _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_schedule
+      r_delay, "commit_to_scheduler_port"),
+          _clk (clk_frequency)
+{
+    _iROB = new CAMtable<dynInstruction*>(100, 32, 32, "iROB");
+    // INIT STAGES
+    dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
+    _bp = new o3_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, "bra
+      nchPred");
+    _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp
+      _port, fetch_width, "fetch");
+    _decode = new o3_decode (_fetch_to_decode_port, _decode_to_scheduler_port, de
+      code_width, "decode");
+    _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_sched
+      uler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, schedu
+      ler_width, "schedule");
+    _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_sc
+      heduler_port, _execution_to_memory_port, _iROB, execution_width, "execution");
+    _memory = new o3_memory (_execution_to_memory_port, _memory_to_scheduler_port
+      , _iROB, memory_width, "memory");
+    _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB
+      , commit_width, "commit");
+}
+\end{DoxyCode}
+\hypertarget{classo3__sysCore_af4d8e609d9501b5511b70fbdfa218772}{
+\index{o3\_\-sysCore@{o3\_\-sysCore}!$\sim$o3\_\-sysCore@{$\sim$o3\_\-sysCore}}
+\index{$\sim$o3\_\-sysCore@{$\sim$o3\_\-sysCore}!o3_sysCore@{o3\_\-sysCore}}
+\subsubsection[{$\sim$o3\_\-sysCore}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-sysCore::$\sim$o3\_\-sysCore (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__sysCore_af4d8e609d9501b5511b70fbdfa218772}
+
+\begin{DoxyCode}
+                         {
+    delete _iROB;
+    delete _bp;
+    delete _fetch;
+    delete _decode;
+    delete _scheduler;
+    delete _execution;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__sysCore_ab97edaa7f8ea74d7315b71d7d03a736c}{
+\index{o3\_\-sysCore@{o3\_\-sysCore}!runCore@{runCore}}
+\index{runCore@{runCore}!o3_sysCore@{o3\_\-sysCore}}
+\subsubsection[{runCore}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-sysCore::runCore (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__sysCore_ab97edaa7f8ea74d7315b71d7d03a736c}
+
+\begin{DoxyCode}
+                          {
+        while (true) {
+                _clk.tick ();
+        dbg.print (DBG_PORT, "\n** CYCLE %d **\n", _clk.now ());
+            _commit->doCOMMIT (_clk);
+            _memory->doMEMORY (_clk);
+            _execution->doEXECUTION (_clk);
+        if (g_var.g_pipe_state == PIPE_SQUASH_ROB) _commit->squash (_clk);
+            _scheduler->doSCHEDULER (_clk);
+            _decode->doDECODE (_clk);
+            if (_fetch->doFETCH (_clk) == FRONT_END && g_var.g_pipe_state == 
+      PIPE_NORMAL) {
+            dbg.print (DBG_CORE, "SWITCH TO FRONTEND\n");
+            break;
+        }
+        _bp->doBP (_clk);
+        //if (_clk.now () == 1000) exit (-1);
+        }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2sysCore_8h}{sysCore.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2sysCore_8cpp}{sysCore.cpp}\end{DoxyCompactItemize}

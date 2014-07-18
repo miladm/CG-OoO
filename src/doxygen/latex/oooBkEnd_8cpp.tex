@@ -1,0 +1,70 @@
+\hypertarget{oooBkEnd_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.cpp File Reference}
+\label{oooBkEnd_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.cpp}}
+}
+{\ttfamily \#include \char`\"{}oooBkEnd.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{oooBkEnd_8cpp_aaa2cf7fe88073cf54894d48f17271d93}{oooBkEndRun} ()
+\item 
+void \hyperlink{oooBkEnd_8cpp_a310255971234b2af81175fcc914422d5}{oooBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__sysCore}{o3\_\-sysCore} $\ast$ \hyperlink{oooBkEnd_8cpp_a807eb0e0ae8e9c52b70d5191d90a78a6}{\_\-ooo\_\-core}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{oooBkEnd_8cpp_a310255971234b2af81175fcc914422d5}{
+\index{oooBkEnd.cpp@{oooBkEnd.cpp}!oooBkEnd\_\-init@{oooBkEnd\_\-init}}
+\index{oooBkEnd\_\-init@{oooBkEnd\_\-init}!oooBkEnd.cpp@{oooBkEnd.cpp}}
+\subsubsection[{oooBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEnd\_\-init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{oooBkEnd_8cpp_a310255971234b2af81175fcc914422d5}
+
+\begin{DoxyCode}
+                                                   {
+    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+    _ooo_core = new o3_sysCore (1, 4, 32, 32, 32, 4, 4, 4,
+                            2, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10);
+}
+\end{DoxyCode}
+\hypertarget{oooBkEnd_8cpp_aaa2cf7fe88073cf54894d48f17271d93}{
+\index{oooBkEnd.cpp@{oooBkEnd.cpp}!oooBkEndRun@{oooBkEndRun}}
+\index{oooBkEndRun@{oooBkEndRun}!oooBkEnd.cpp@{oooBkEnd.cpp}}
+\subsubsection[{oooBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEndRun (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{oooBkEnd_8cpp_aaa2cf7fe88073cf54894d48f17271d93}
+
+\begin{DoxyCode}
+                   {
+    _ooo_core->runCore();
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{oooBkEnd_8cpp_a807eb0e0ae8e9c52b70d5191d90a78a6}{
+\index{oooBkEnd.cpp@{oooBkEnd.cpp}!\_\-ooo\_\-core@{\_\-ooo\_\-core}}
+\index{\_\-ooo\_\-core@{\_\-ooo\_\-core}!oooBkEnd.cpp@{oooBkEnd.cpp}}
+\subsubsection[{\_\-ooo\_\-core}]{\setlength{\rightskip}{0pt plus 5cm}{\bf o3\_\-sysCore}$\ast$ {\bf \_\-ooo\_\-core}}}
+\label{oooBkEnd_8cpp_a807eb0e0ae8e9c52b70d5191d90a78a6}

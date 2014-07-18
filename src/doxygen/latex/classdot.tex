@@ -1,0 +1,385 @@
+\hypertarget{classdot}{
+\section{dot Class Reference}
+\label{classdot}\index{dot@{dot}}
+}
+
+
+{\ttfamily \#include $<$dot.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdot_afca1c1f39b692528483b78569751068a}{dot} (int fileCode)
+\item 
+\hyperlink{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{$\sim$dot} ()
+\item 
+void \hyperlink{classdot_a23bb05ec40259de7239b166b664bfdb4}{runDot} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$list, int subGraphID)
+\item 
+void \hyperlink{classdot_a5841f9acea9e636b9630e8a2ebe25382}{init} ()
+\item 
+void \hyperlink{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{defn} ()
+\item 
+void \hyperlink{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{createSubGraph} (int subGraphID)
+\item 
+void \hyperlink{classdot_aac4be16ebdd60983177619a8b7df658f}{createGraph} ()
+\item 
+void \hyperlink{classdot_accd0278010df6b72404449831d51cd4e}{finish} ()
+\item 
+void \hyperlink{classdot_acc4e61396656da0a5a0ec085c88e414e}{closeBlock} ()
+\item 
+\hyperlink{classdot_af11dd579c7b133d259ac9fe60e7ae629}{dot} (int mode, string $\ast$program\_\-name)
+\item 
+\hyperlink{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{$\sim$dot} ()
+\item 
+void \hyperlink{classdot_a613147e95e44f245a63a5b08418c95f9}{runDot} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$list)
+\item 
+void \hyperlink{classdot_a5841f9acea9e636b9630e8a2ebe25382}{init} ()
+\item 
+void \hyperlink{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{defn} ()
+\item 
+void \hyperlink{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{createSubGraph} (int subGraphID)
+\item 
+void \hyperlink{classdot_aac4be16ebdd60983177619a8b7df658f}{createGraph} ()
+\item 
+void \hyperlink{classdot_accd0278010df6b72404449831d51cd4e}{finish} ()
+\item 
+void \hyperlink{classdot_acc4e61396656da0a5a0ec085c88e414e}{closeBlock} ()
+\item 
+void \hyperlink{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}{setupBox} (string color)
+\item 
+void \hyperlink{classdot_ad5acf38fae453ba70cd1532ec2be4b36}{finishBox} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classdot_afca1c1f39b692528483b78569751068a}{
+\index{dot@{dot}!dot@{dot}}
+\index{dot@{dot}!dot@{dot}}
+\subsubsection[{dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::dot (
+\begin{DoxyParamCaption}
+\item[{int}]{fileCode}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_afca1c1f39b692528483b78569751068a}
+
+\begin{DoxyCode}
+                     {
+        //char* hi = new char[10];
+        //itoa(fileCode, hi, 10);
+
+        if((_outFile=fopen("dotFiles/hi.dot", "w+")) == NULL) {
+            printf("ERROR: Cannot open file(s).\n");
+            exit(1);
+        }
+        init();
+}
+\end{DoxyCode}
+\hypertarget{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{
+\index{dot@{dot}!$\sim$dot@{$\sim$dot}}
+\index{$\sim$dot@{$\sim$dot}!dot@{dot}}
+\subsubsection[{$\sim$dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::$\sim$dot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a7c31a26ba233474fd5c7857bd3d8158f}
+
+\begin{DoxyCode}
+          {
+}
+\end{DoxyCode}
+\hypertarget{classdot_af11dd579c7b133d259ac9fe60e7ae629}{
+\index{dot@{dot}!dot@{dot}}
+\index{dot@{dot}!dot@{dot}}
+\subsubsection[{dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::dot (
+\begin{DoxyParamCaption}
+\item[{int}]{mode, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_af11dd579c7b133d259ac9fe60e7ae629}
+
+\begin{DoxyCode}
+                                       {
+        if (mode == 0) { //Make CFG
+                if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/Tr
+      aceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg.dot").c_str(), "w+"
+      )) == NULL) {
+                    Assert("Cannot open dot file(s).");
+                }               
+        } else if (mode = 1) { //Make Phrase CFG
+                if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/Tr
+      aceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg_phrase.dot").c_str(
+      ), "w+")) == NULL) {
+                    Assert("Cannot open dot file(s).");
+                }               
+        } else {
+                Assert("ILLEGAL Control Flow Graph file.");
+        }
+        init();
+}
+\end{DoxyCode}
+\hypertarget{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{
+\index{dot@{dot}!$\sim$dot@{$\sim$dot}}
+\index{$\sim$dot@{$\sim$dot}!dot@{dot}}
+\subsubsection[{$\sim$dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::$\sim$dot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a7c31a26ba233474fd5c7857bd3d8158f}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classdot_acc4e61396656da0a5a0ec085c88e414e}{
+\index{dot@{dot}!closeBlock@{closeBlock}}
+\index{closeBlock@{closeBlock}!dot@{dot}}
+\subsubsection[{closeBlock}]{\setlength{\rightskip}{0pt plus 5cm}void dot::closeBlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_acc4e61396656da0a5a0ec085c88e414e}
+
+\begin{DoxyCode}
+                     {
+        fprintf(_outFile, "\t}\n");
+}
+\end{DoxyCode}
+\hypertarget{classdot_acc4e61396656da0a5a0ec085c88e414e}{
+\index{dot@{dot}!closeBlock@{closeBlock}}
+\index{closeBlock@{closeBlock}!dot@{dot}}
+\subsubsection[{closeBlock}]{\setlength{\rightskip}{0pt plus 5cm}void dot::closeBlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_acc4e61396656da0a5a0ec085c88e414e}
+\hypertarget{classdot_aac4be16ebdd60983177619a8b7df658f}{
+\index{dot@{dot}!createGraph@{createGraph}}
+\index{createGraph@{createGraph}!dot@{dot}}
+\subsubsection[{createGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createGraph (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_aac4be16ebdd60983177619a8b7df658f}
+\hypertarget{classdot_aac4be16ebdd60983177619a8b7df658f}{
+\index{dot@{dot}!createGraph@{createGraph}}
+\index{createGraph@{createGraph}!dot@{dot}}
+\subsubsection[{createGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createGraph (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_aac4be16ebdd60983177619a8b7df658f}
+
+\begin{DoxyCode}
+                      {
+        for (int i = 0; i < _list->NumElements(); i++) {
+                for (int j = 0; j < _list->Nth(i)->getNumAncestors(); j++) {
+                        if (_list->Nth(i)->getNthAncestor(j)->getMissrate() <= 
+      unpredMemOpThreshold) {
+                                fprintf(_outFile, "\t\tn%llu->n%llu[label=\"%d\"]
+      ;\n",_list->Nth(i)->getNthAncestor(j)->getInsAddr(),_list->Nth(i)->getInsAddr(),_
+      list->Nth(i)->getNthAncestor(j)->getMyPathLen());
+                        } else {
+                                fprintf(_outFile, "\t\tn%llu->n%llu[label=\"%d\",
+      color=orangered];\n",_list->Nth(i)->getNthAncestor(j)->getInsAddr(),_list->Nth(i)
+      ->getInsAddr(),_list->Nth(i)->getNthAncestor(j)->getMyPathLen());
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{
+\index{dot@{dot}!createSubGraph@{createSubGraph}}
+\index{createSubGraph@{createSubGraph}!dot@{dot}}
+\subsubsection[{createSubGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createSubGraph (
+\begin{DoxyParamCaption}
+\item[{int}]{subGraphID}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}
+
+\begin{DoxyCode}
+                                       {
+        fprintf(_outFile, "\n\n");
+        fprintf(_outFile, "\tsubgraph cluster_%d {\n", subGraphID);
+        fprintf(_outFile, "\tlabel = \"Wavefront #%d\";\n", subGraphID);
+}
+\end{DoxyCode}
+\hypertarget{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{
+\index{dot@{dot}!createSubGraph@{createSubGraph}}
+\index{createSubGraph@{createSubGraph}!dot@{dot}}
+\subsubsection[{createSubGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createSubGraph (
+\begin{DoxyParamCaption}
+\item[{int}]{subGraphID}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}
+\hypertarget{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{
+\index{dot@{dot}!defn@{defn}}
+\index{defn@{defn}!dot@{dot}}
+\subsubsection[{defn}]{\setlength{\rightskip}{0pt plus 5cm}void dot::defn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}
+\hypertarget{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{
+\index{dot@{dot}!defn@{defn}}
+\index{defn@{defn}!dot@{dot}}
+\subsubsection[{defn}]{\setlength{\rightskip}{0pt plus 5cm}void dot::defn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}
+
+\begin{DoxyCode}
+               {
+        for (int i = 0; i < _list->NumElements(); i++) {
+                if (_list->Nth(i)->getMissrate() <= unpredMemOpThreshold) {
+                        fprintf(_outFile, "\t\tn%llu[label=\"n%llu\"];\n",_list->
+      Nth(i)->getInsAddr(),_list->Nth(i)->getInsAddr());
+                } else {
+                        fprintf(_outFile, "\t\tn%llu[label=\"n%llu\",style=filled
+      ,fillcolor=orangered];\n",_list->Nth(i)->getInsAddr(),_list->Nth(i)->getInsAddr()
+      );
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classdot_accd0278010df6b72404449831d51cd4e}{
+\index{dot@{dot}!finish@{finish}}
+\index{finish@{finish}!dot@{dot}}
+\subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_accd0278010df6b72404449831d51cd4e}
+\hypertarget{classdot_accd0278010df6b72404449831d51cd4e}{
+\index{dot@{dot}!finish@{finish}}
+\index{finish@{finish}!dot@{dot}}
+\subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_accd0278010df6b72404449831d51cd4e}
+
+\begin{DoxyCode}
+                 {
+        fprintf(_outFile, "}\n");
+        //chdir("dotFiles");
+        //system("make");
+        //chdir("../");
+        fclose(_outFile);
+}
+\end{DoxyCode}
+\hypertarget{classdot_ad5acf38fae453ba70cd1532ec2be4b36}{
+\index{dot@{dot}!finishBox@{finishBox}}
+\index{finishBox@{finishBox}!dot@{dot}}
+\subsubsection[{finishBox}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finishBox (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_ad5acf38fae453ba70cd1532ec2be4b36}
+
+\begin{DoxyCode}
+                    {
+        fprintf(_outFile, "\t\t</table>> ];\n");
+}
+\end{DoxyCode}
+\hypertarget{classdot_a5841f9acea9e636b9630e8a2ebe25382}{
+\index{dot@{dot}!init@{init}}
+\index{init@{init}!dot@{dot}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void dot::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a5841f9acea9e636b9630e8a2ebe25382}
+\hypertarget{classdot_a5841f9acea9e636b9630e8a2ebe25382}{
+\index{dot@{dot}!init@{init}}
+\index{init@{init}!dot@{dot}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void dot::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a5841f9acea9e636b9630e8a2ebe25382}
+
+\begin{DoxyCode}
+               {
+        fprintf(_outFile, "digraph G {\n");
+}
+\end{DoxyCode}
+\hypertarget{classdot_a23bb05ec40259de7239b166b664bfdb4}{
+\index{dot@{dot}!runDot@{runDot}}
+\index{runDot@{runDot}!dot@{dot}}
+\subsubsection[{runDot}]{\setlength{\rightskip}{0pt plus 5cm}void dot::runDot (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{list, }
+\item[{int}]{subGraphID}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a23bb05ec40259de7239b166b664bfdb4}
+
+\begin{DoxyCode}
+                                                         {
+        _list = list;
+        createSubGraph(subGraphID);
+        defn();
+        createGraph();
+        closeBlock();
+}
+\end{DoxyCode}
+\hypertarget{classdot_a613147e95e44f245a63a5b08418c95f9}{
+\index{dot@{dot}!runDot@{runDot}}
+\index{runDot@{runDot}!dot@{dot}}
+\subsubsection[{runDot}]{\setlength{\rightskip}{0pt plus 5cm}void dot::runDot (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{list}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a613147e95e44f245a63a5b08418c95f9}
+
+\begin{DoxyCode}
+                                        {
+        _bBlist = list;
+        //createSubGraph(subGraphID);
+        defn();
+        createGraph();
+        closeBlock();
+}
+\end{DoxyCode}
+\hypertarget{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}{
+\index{dot@{dot}!setupBox@{setupBox}}
+\index{setupBox@{setupBox}!dot@{dot}}
+\subsubsection[{setupBox}]{\setlength{\rightskip}{0pt plus 5cm}void dot::setupBox (
+\begin{DoxyParamCaption}
+\item[{string}]{color}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}
+
+\begin{DoxyCode}
+                               {
+        fprintf(_outFile, "[  style = \"filled\" penwidth = 1 fillcolor = \"%s\" 
+      fontname = \"Courier New\" shape = \"Mrecord\"\n"
+                           "\t\tlabel =<<table border=\"0\" cellborder=\"0\" cell
+      padding=\"3\" bgcolor=\"%s\">\n", color.c_str(), color.c_str());
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dot_8h}{dot.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dot_8h}{dot.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dot_8cpp}{dot.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dot_8cpp}{dot.cpp}\end{DoxyCompactItemize}

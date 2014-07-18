@@ -1,0 +1,42 @@
+\hypertarget{harness__tournament_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/harness\_\-tournament.cc File Reference}
+\label{harness__tournament_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/harness\_\-tournament.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/harness\_\-tournament.cc}}
+}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include \char`\"{}../base/types.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../base/intmath.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}tournament.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{harness__tournament_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{harness__tournament_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{
+\index{harness\_\-tournament.cc@{harness\_\-tournament.cc}!main@{main}}
+\index{main@{main}!harness_tournament.cc@{harness\_\-tournament.cc}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{harness__tournament_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\begin{DoxyCode}
+           {
+    TournamentBP *predictor;
+    predictor = new TournamentBP(2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+    for(int i = 0; i < 256; i++) {
+        void *bp_hist = NULL;
+        Addr addr = 0x21;
+        bool prediction = predictor->lookup(addr, bp_hist);
+        std::cout << hex << "0x" << addr << " " << prediction << endl;
+        if(!prediction)
+            predictor->update(addr, true, bp_hist, 1);
+        else
+            predictor->update(addr, true, bp_hist, 0);
+    }
+}
+\end{DoxyCode}

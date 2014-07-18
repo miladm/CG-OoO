@@ -1,0 +1,52 @@
+\hypertarget{port__test_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/testbench/port\_\-test.h File Reference}
+\label{port__test_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/testbench/port\_\-test.h@{/home/milad/esc\_\-project/svn/PARS/src/testbench/port\_\-test.h}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include \char`\"{}../backend/ino/port.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{port__test_8h_a8e6c482c88bae7197194af1013fc4a89}{port\_\-test} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{port__test_8h_a8e6c482c88bae7197194af1013fc4a89}{
+\index{port\_\-test.h@{port\_\-test.h}!port\_\-test@{port\_\-test}}
+\index{port\_\-test@{port\_\-test}!port_test.h@{port\_\-test.h}}
+\subsubsection[{port\_\-test}]{\setlength{\rightskip}{0pt plus 5cm}void port\_\-test (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{port__test_8h_a8e6c482c88bae7197194af1013fc4a89}
+
+\begin{DoxyCode}
+                 {
+    port<int> fromAtoB(10, 10);
+    for (int i = 1; i < 150; i++) {
+        int* ins = new int;
+        *ins = i;
+
+        if (i < 110) {
+            int *gotIns = fromAtoB.getFront(i);
+            if (gotIns == NULL)
+                cout << "GET: queue is empty" << endl;
+            else
+                cout << "GET: got a new instruction (" << *gotIns << ") @ cycle "
+       << i << endl;
+        }
+        
+        if (i < 40 || i > 60) {
+            if (fromAtoB.pushBack(ins, i) == FULL_BUFF)
+                cout << "PUSH: buffer is full @ cycle " << i << endl;
+            else
+                cout << "PUSH: stores an insi (" << i << ") in queue @ cycle " <<
+       i << endl;
+        }
+    }
+}
+\end{DoxyCode}

@@ -1,0 +1,104 @@
+\hypertarget{structexeUnitLat}{
+\section{exeUnitLat Struct Reference}
+\label{structexeUnitLat}\index{exeUnitLat@{exeUnitLat}}
+}
+
+
+{\ttfamily \#include $<$exeUnit.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structexeUnitLat_acd7bea2d80b4acddfd631aaca75fa8b5}{exeUnitLat} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a1c6fbd51db44097cab33015d4ee9dd81}{\_\-alu\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a3eaf6d977e10668f9f9641601c2e155d}{\_\-fpu\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a56f987ed90a23321279e330e068262f8}{\_\-bru\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a2e0a0b29c7d4cd40492fe25740302c72}{\_\-st\_\-buff\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a3c5ce17975afa47ae136e8355e328c3b}{\_\-l1\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a0a5e96d306ef23a2d69c8e97d62b27fd}{\_\-l2\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_ae34f390b9e9b8e9d792a6656b801eca4}{\_\-l3\_\-lat}
+\item 
+const \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{structexeUnitLat_a0478d29cba99e1c3849dceb6ecfca973}{\_\-mem\_\-lat}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structexeUnitLat_acd7bea2d80b4acddfd631aaca75fa8b5}{
+\index{exeUnitLat@{exeUnitLat}!exeUnitLat@{exeUnitLat}}
+\index{exeUnitLat@{exeUnitLat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{exeUnitLat}]{\setlength{\rightskip}{0pt plus 5cm}exeUnitLat::exeUnitLat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnitLat_acd7bea2d80b4acddfd631aaca75fa8b5}
+
+\begin{DoxyCode}
+        : _alu_lat (1),
+          _fpu_lat (5),
+          _bru_lat (1),
+          _st_buff_lat (1),
+          _l1_lat (3),
+          _l2_lat (12),
+          _l3_lat (20),
+          _mem_lat (100)
+    { }
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structexeUnitLat_a1c6fbd51db44097cab33015d4ee9dd81}{
+\index{exeUnitLat@{exeUnitLat}!\_\-alu\_\-lat@{\_\-alu\_\-lat}}
+\index{\_\-alu\_\-lat@{\_\-alu\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-alu\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-alu\_\-lat}}}
+\label{structexeUnitLat_a1c6fbd51db44097cab33015d4ee9dd81}
+\hypertarget{structexeUnitLat_a56f987ed90a23321279e330e068262f8}{
+\index{exeUnitLat@{exeUnitLat}!\_\-bru\_\-lat@{\_\-bru\_\-lat}}
+\index{\_\-bru\_\-lat@{\_\-bru\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-bru\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-bru\_\-lat}}}
+\label{structexeUnitLat_a56f987ed90a23321279e330e068262f8}
+\hypertarget{structexeUnitLat_a3eaf6d977e10668f9f9641601c2e155d}{
+\index{exeUnitLat@{exeUnitLat}!\_\-fpu\_\-lat@{\_\-fpu\_\-lat}}
+\index{\_\-fpu\_\-lat@{\_\-fpu\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-fpu\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-fpu\_\-lat}}}
+\label{structexeUnitLat_a3eaf6d977e10668f9f9641601c2e155d}
+\hypertarget{structexeUnitLat_a3c5ce17975afa47ae136e8355e328c3b}{
+\index{exeUnitLat@{exeUnitLat}!\_\-l1\_\-lat@{\_\-l1\_\-lat}}
+\index{\_\-l1\_\-lat@{\_\-l1\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-l1\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-l1\_\-lat}}}
+\label{structexeUnitLat_a3c5ce17975afa47ae136e8355e328c3b}
+\hypertarget{structexeUnitLat_a0a5e96d306ef23a2d69c8e97d62b27fd}{
+\index{exeUnitLat@{exeUnitLat}!\_\-l2\_\-lat@{\_\-l2\_\-lat}}
+\index{\_\-l2\_\-lat@{\_\-l2\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-l2\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-l2\_\-lat}}}
+\label{structexeUnitLat_a0a5e96d306ef23a2d69c8e97d62b27fd}
+\hypertarget{structexeUnitLat_ae34f390b9e9b8e9d792a6656b801eca4}{
+\index{exeUnitLat@{exeUnitLat}!\_\-l3\_\-lat@{\_\-l3\_\-lat}}
+\index{\_\-l3\_\-lat@{\_\-l3\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-l3\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-l3\_\-lat}}}
+\label{structexeUnitLat_ae34f390b9e9b8e9d792a6656b801eca4}
+\hypertarget{structexeUnitLat_a0478d29cba99e1c3849dceb6ecfca973}{
+\index{exeUnitLat@{exeUnitLat}!\_\-mem\_\-lat@{\_\-mem\_\-lat}}
+\index{\_\-mem\_\-lat@{\_\-mem\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-mem\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-mem\_\-lat}}}
+\label{structexeUnitLat_a0478d29cba99e1c3849dceb6ecfca973}
+\hypertarget{structexeUnitLat_a2e0a0b29c7d4cd40492fe25740302c72}{
+\index{exeUnitLat@{exeUnitLat}!\_\-st\_\-buff\_\-lat@{\_\-st\_\-buff\_\-lat}}
+\index{\_\-st\_\-buff\_\-lat@{\_\-st\_\-buff\_\-lat}!exeUnitLat@{exeUnitLat}}
+\subsubsection[{\_\-st\_\-buff\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf CYCLE} {\bf exeUnitLat::\_\-st\_\-buff\_\-lat}}}
+\label{structexeUnitLat_a2e0a0b29c7d4cd40492fe25740302c72}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{exeUnit_8h}{exeUnit.h}\end{DoxyCompactItemize}

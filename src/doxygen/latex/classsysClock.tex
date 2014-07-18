@@ -1,0 +1,126 @@
+\hypertarget{classsysClock}{
+\section{sysClock Class Reference}
+\label{classsysClock}\index{sysClock@{sysClock}}
+}
+
+
+{\ttfamily \#include $<$sysClock.h$>$}
+
+Inheritance diagram for sysClock:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsysClock}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsysClock_a03e1b7e12614ce9fba007f0a76849664}{sysClock} ()
+\item 
+\hyperlink{classsysClock_aa1cf0d6b04c1f7cd46cc1763cdaa6825}{sysClock} (\hyperlink{global_2global_8h_a32516e1b668a88eb546e9b6ee2e3345d}{GHz} \_\-frequency)
+\item 
+\hyperlink{classsysClock_a47d002f5ab53ea1cbe8f74f1569363ac}{$\sim$sysClock} ()
+\item 
+void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
+\item 
+\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{classsysClock_af027a57c8bc3d0dab4fe5a0f870b7d20}{now} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsysClock_a03e1b7e12614ce9fba007f0a76849664}{
+\index{sysClock@{sysClock}!sysClock@{sysClock}}
+\index{sysClock@{sysClock}!sysClock@{sysClock}}
+\subsubsection[{sysClock}]{\setlength{\rightskip}{0pt plus 5cm}sysClock::sysClock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_a03e1b7e12614ce9fba007f0a76849664}
+
+\begin{DoxyCode}
+        : unit ("sysClock"),
+      _frequency(1),
+      _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execut
+      ion cycles", START_CYCLE, PRINT_ZERO))
+{
+        _clk = START_CYCLE;
+}
+\end{DoxyCode}
+\hypertarget{classsysClock_aa1cf0d6b04c1f7cd46cc1763cdaa6825}{
+\index{sysClock@{sysClock}!sysClock@{sysClock}}
+\index{sysClock@{sysClock}!sysClock@{sysClock}}
+\subsubsection[{sysClock}]{\setlength{\rightskip}{0pt plus 5cm}sysClock::sysClock (
+\begin{DoxyParamCaption}
+\item[{{\bf GHz}}]{\_\-frequency}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_aa1cf0d6b04c1f7cd46cc1763cdaa6825}
+
+\begin{DoxyCode}
+        : unit ("sysClock"),
+      _frequency(frequency),
+      _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execut
+      ion cycles", START_CYCLE, PRINT_ZERO))
+{
+        _clk = START_CYCLE;
+}
+\end{DoxyCode}
+\hypertarget{classsysClock_a47d002f5ab53ea1cbe8f74f1569363ac}{
+\index{sysClock@{sysClock}!$\sim$sysClock@{$\sim$sysClock}}
+\index{$\sim$sysClock@{$\sim$sysClock}!sysClock@{sysClock}}
+\subsubsection[{$\sim$sysClock}]{\setlength{\rightskip}{0pt plus 5cm}sysClock::$\sim$sysClock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_a47d002f5ab53ea1cbe8f74f1569363ac}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsysClock_af027a57c8bc3d0dab4fe5a0f870b7d20}{
+\index{sysClock@{sysClock}!now@{now}}
+\index{now@{now}!sysClock@{sysClock}}
+\subsubsection[{now}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CYCLE} sysClock::now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_af027a57c8bc3d0dab4fe5a0f870b7d20}
+
+\begin{DoxyCode}
+                     {
+        return _clk;
+}
+\end{DoxyCode}
+\hypertarget{classsysClock_a1b83f5cc141338e61f66028ef040c242}{
+\index{sysClock@{sysClock}!tick@{tick}}
+\index{tick@{tick}!sysClock@{sysClock}}
+\subsubsection[{tick}]{\setlength{\rightskip}{0pt plus 5cm}void sysClock::tick (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_a1b83f5cc141338e61f66028ef040c242}
+
+\begin{DoxyCode}
+                     {
+        _clk++;
+    _clk_cycles++;
+#ifdef ASSERTION
+        Assert( _clk < std::numeric_limits<CYCLE>::max() &&
+                        _clk > std::numeric_limits<CYCLE>::min() &&
+                        "The program sysClock reached the max vlue for CYCLE" );
+#endif
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2sysClock_8h}{sysClock.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2sysClock_8cpp}{sysClock.cpp}\end{DoxyCompactItemize}

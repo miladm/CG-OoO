@@ -1,0 +1,373 @@
+\hypertarget{classo3__memory}{
+\section{o3\_\-memory Class Reference}
+\label{classo3__memory}\index{o3\_\-memory@{o3\_\-memory}}
+}
+
+
+{\ttfamily \#include $<$memory.h$>$}
+
+Inheritance diagram for o3\_\-memory:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__memory}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__memory_aa34c08bd63c8de093d6df7e9022045fe}{o3\_\-memory} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-memory\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} memory\_\-width, string stage\_\-name)
+\item 
+\hyperlink{classo3__memory_a084e09aa6674090d325f82ce9a184fa3}{$\sim$o3\_\-memory} ()
+\item 
+void \hyperlink{classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433}{doMEMORY} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classo3__memory_ad44b31e95afd6e63f85401be8e58318d}{memoryImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b}{completeIns} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4}{forward} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__memory_a806f0676eb61e344a0feb87fd823779a}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__memory_a91a7367c72346b355709afddef9296bf}{manageSTbuffer} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classo3__memory_a826fdfa882dd202970984027e32e2c33}{manageMEMbuffer} ()
+\item 
+void \hyperlink{classo3__memory_adcda5a9a18c362c89d469abd355ae1a1}{manageMSHR} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__memory_aa34c08bd63c8de093d6df7e9022045fe}{
+\index{o3\_\-memory@{o3\_\-memory}!o3\_\-memory@{o3\_\-memory}}
+\index{o3\_\-memory@{o3\_\-memory}!o3_memory@{o3\_\-memory}}
+\subsubsection[{o3\_\-memory}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-memory::o3\_\-memory (
+\begin{DoxyParamCaption}
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{execution\_\-to\_\-memory\_\-port, }
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{memory\_\-to\_\-scheduler\_\-port, }
+\item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
+\item[{{\bf WIDTH}}]{memory\_\-width, }
+\item[{string}]{stage\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_aa34c08bd63c8de093d6df7e9022045fe}
+
+\begin{DoxyCode}
+        : stage (memory_width, stage_name),
+      _mem_buff(20, 1, "mem_buff"),
+      _mshr(20, 4, 4, "MSHR"),
+      _st_buff(20, 4, 4, "stBuff"),
+      s_cache_miss_cnt (g_stats.newScalarStat (stage_name, "cache_miss_cnt", "Num
+      ber of cache misses", 0, PRINT_ZERO)),
+      s_cache_hit_cnt  (g_stats.newScalarStat (stage_name, "cache_hit_cnt", "Numb
+      er of cache hits", 0, PRINT_ZERO)),
+      s_ld_miss_cnt (g_stats.newScalarStat (stage_name, "ld_miss_cnt", "Number of
+       load misses", 0, PRINT_ZERO)),
+      s_ld_hit_cnt  (g_stats.newScalarStat (stage_name, "ld_hit_cnt", "Number of 
+      load hits", 0, PRINT_ZERO)),
+      s_st_miss_cnt (g_stats.newScalarStat (stage_name, "st_miss_cnt", "Number of
+       store misses", 0, PRINT_ZERO)),
+      s_st_hit_cnt  (g_stats.newScalarStat (stage_name, "st_hit_cnt", "Number of 
+      store hits", 0, PRINT_ZERO))
+{
+    _execution_to_memory_port = &execution_to_memory_port;
+    _memory_to_scheduler_port = &memory_to_scheduler_port;
+    _iROB = iROB;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a084e09aa6674090d325f82ce9a184fa3}{
+\index{o3\_\-memory@{o3\_\-memory}!$\sim$o3\_\-memory@{$\sim$o3\_\-memory}}
+\index{$\sim$o3\_\-memory@{$\sim$o3\_\-memory}!o3_memory@{o3\_\-memory}}
+\subsubsection[{$\sim$o3\_\-memory}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-memory::$\sim$o3\_\-memory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a084e09aa6674090d325f82ce9a184fa3}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b}{
+\index{o3\_\-memory@{o3\_\-memory}!completeIns@{completeIns}}
+\index{completeIns@{completeIns}!o3_memory@{o3\_\-memory}}
+\subsubsection[{completeIns}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::completeIns (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b}
+
+\begin{DoxyCode}
+                                          {
+
+    /* COMPLETE LD INS */
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        /* CHECKS */
+        if (g_LSQ_MGR.getTableState (LD_QU) == EMPTY_BUFF) break;
+        if (!g_LSQ_MGR.hasFreeRdPort (LD_QU, clk.now ())) break;
+        pair<bool, dynInstruction*> p = g_LSQ_MGR.hasFinishedIns (LD_QU, clk.now 
+      ());
+        if (!p.first) break;
+        dynInstruction* finished_ld_ins = p.second;
+        //if (_mem_buff.getBuffState (clk.now ()) == EMPTY_BUFF) break;
+        //if (!_mem_buff.isReady (clk.now ())) break;
+        if (!g_GRF_MGR.hasFreeWrPort (clk.now ())) break; //TODO too conservatice
+       - only for load ins (both ino and o3)
+
+        /* COMPLETE INS */
+        //dynInstruction* finished_ld_ins = _mem_buff.popFront (clk.now ());
+        Assert (finished_ld_ins != NULL);
+        finished_ld_ins->setPipeStage(COMPLETE);
+        g_LSQ_MGR.completeLd (finished_ld_ins);
+        g_GRF_MGR.completeRegs (finished_ld_ins);
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
+      Write Complete mem LD ins", finished_ld_ins->getInsID (), clk.now ());
+    }
+
+//  /* COMPLETE ST INS */
+//  /* LSQ MIS-SPECULATION DETECTION */
+//  for (WIDTH i = 0; i < _stage_width; i++) {
+//      /* CHECKS */
+//      if (g_LSQ_MGR.getTableState (ST_QU) == EMPTY_BUFF) break;
+//      if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;
+//      pair<bool, dynInstruction*> p = g_LSQ_MGR.hasFinishedIns (ST_QU, clk.now 
+      ());
+//      if (!p.first) break;
+//      delete p.second;
+//      dynInstruction* complete_st_ins = p.second;
+
+//      /* COMPLETE INS */
+//      //dynInstruction* complete_st_ins = _mem_buff.popFront (clk.now ());
+//      //TODO ST reaches here with one cycle delay!
+//      complete_st_ins->setPipeStage(COMPLETE); //TODO should it be here? if yes
+      , then SQ must also take note of complete state of its ST entry
+//      dynInstruction* violating_ld_ins = NULL;
+//      if (g_LSQ_MGR.isLQviolation (complete_st_ins, violating_ld_ins)) {
+//          cout << "SQUASH LSQ\n";
+//          //g_LSQ_MGR.squash (violating_ld_ins);
+//          //TODO flush the pipeline
+//      }
+//      dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
+      Write Complete mem LD ins", complete_st_ins->getInsID (), clk.now ());
+//  }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433}{
+\index{o3\_\-memory@{o3\_\-memory}!doMEMORY@{doMEMORY}}
+\index{doMEMORY@{doMEMORY}!o3_memory@{o3\_\-memory}}
+\subsubsection[{doMEMORY}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::doMEMORY (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433}
+
+\begin{DoxyCode}
+                                       {
+    dbg.print (DBG_MEMORY, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.now ()
+      );
+    /* STAT */
+    regStat (clk);
+    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
+
+    /* WRITEBACK RESULT */
+    completeIns (clk);
+
+    /* SQUASH HANDLING */
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+
+    pipe_stall = memoryImpl (clk);
+
+    /* STAT */
+    if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4}{
+\index{o3\_\-memory@{o3\_\-memory}!forward@{forward}}
+\index{forward@{forward}!o3_memory@{o3\_\-memory}}
+\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::forward (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins, }
+\item[{{\bf CYCLE}}]{mem\_\-latency, }
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4}
+
+\begin{DoxyCode}
+                                                                              {
+#ifdef ASSERTION
+    Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
+#endif
+    if (_memory_to_scheduler_port->getBuffState (clk.now ()) == FULL_BUFF) return
+      ;
+    CYCLE cdb_ready_latency = mem_latency - 1;
+    Assert (cdb_ready_latency >= 0);
+    _memory_to_scheduler_port->pushBack (ins, clk.now (), cdb_ready_latency);
+    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forw
+      ard wr ops of ins", ins->getInsID (), clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a826fdfa882dd202970984027e32e2c33}{
+\index{o3\_\-memory@{o3\_\-memory}!manageMEMbuffer@{manageMEMbuffer}}
+\index{manageMEMbuffer@{manageMEMbuffer}!o3_memory@{o3\_\-memory}}
+\subsubsection[{manageMEMbuffer}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::manageMEMbuffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a826fdfa882dd202970984027e32e2c33}
+\hypertarget{classo3__memory_adcda5a9a18c362c89d469abd355ae1a1}{
+\index{o3\_\-memory@{o3\_\-memory}!manageMSHR@{manageMSHR}}
+\index{manageMSHR@{manageMSHR}!o3_memory@{o3\_\-memory}}
+\subsubsection[{manageMSHR}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::manageMSHR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_adcda5a9a18c362c89d469abd355ae1a1}
+
+\begin{DoxyCode}
+                            {
+    /* TODO */
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a91a7367c72346b355709afddef9296bf}{
+\index{o3\_\-memory@{o3\_\-memory}!manageSTbuffer@{manageSTbuffer}}
+\index{manageSTbuffer@{manageSTbuffer}!o3_memory@{o3\_\-memory}}
+\subsubsection[{manageSTbuffer}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::manageSTbuffer (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a91a7367c72346b355709afddef9296bf}
+
+\begin{DoxyCode}
+                                             {
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        /* CHECKS */
+        if (g_LSQ_MGR.getTableState (ST_QU) == EMPTY_BUFF) break;
+        if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;
+        if (!g_LSQ_MGR.hasCommitSt ()) break;
+        //if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeRdPort 
+      (clk.now ())) break;
+        //if (_dcache.getNumAvialablePorts () == 0) break; //TODO put this back s
+      oon
+
+        /* MEM ACCESS FOR STORE */
+        if (!g_LSQ_MGR.issueToMem (ST_QU, clk.now ())) break; //TODO of not succe
+      ssful, don't waste port BW and break
+    }
+
+    //TODO will this loop ever get a chance to not break?
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        /* CHECKS */
+        if (g_LSQ_MGR.getTableState (ST_QU) == EMPTY_BUFF) break;
+        //if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;
+
+        /* DEALLOCATE SQ ENTRY */
+        g_LSQ_MGR.delAfinishedSt (clk.now ());
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_ad44b31e95afd6e63f85401be8e58318d}{
+\index{o3\_\-memory@{o3\_\-memory}!memoryImpl@{memoryImpl}}
+\index{memoryImpl@{memoryImpl}!o3_memory@{o3\_\-memory}}
+\subsubsection[{memoryImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} o3\_\-memory::memoryImpl (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_ad44b31e95afd6e63f85401be8e58318d}
+
+\begin{DoxyCode}
+                                                  {
+    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
+
+    /* ACCESS MEMORY HIERARCHY */
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        /* CHECKS */
+        //if (_execution_to_memory_port->getBuffState (clk.now ()) == EMPTY_BUFF)
+       break;
+        //if (!_execution_to_memory_port->isReady (clk.now ())) break;
+        if (g_LSQ_MGR.getTableState (LD_QU) == EMPTY_BUFF) break;
+        if (!g_LSQ_MGR.hasFreeRdPort (LD_QU, clk.now ())) break; //TODO it is wro
+      ng taht despite the results of future if statements, this state machine workd - f
+      ix it
+        //if (_dcache.getNumAvialablePorts () == 0) break; (TODO)
+        //if (_mem_buff.getBuffState (clk.now ()) == FULL_BUFF) break;
+        //dynInstruction* mem_ins = _execution_to_memory_port->getFront ();
+        //if (mem_ins->getMemType () == STORE && 
+        //   (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE
+      _FLUSH)) break;
+        //if (mem_ins->getMemType () == STORE && 
+        //   (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWrPort (
+      clk.now ()))) break;
+        if (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWrPort (clk.now 
+      ())) break; //TODO only on miss? here or in g_LSQ_MGR?
+
+        /* MEM ACCESS */
+        if (!g_LSQ_MGR.issueToMem (LD_QU, clk.now ())) break;
+        //dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_s
+      tr (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, clk.now
+       ());
+
+        /* STAT */
+        s_ins_cnt++;
+        pipe_stall = PIPE_BUSY;
+    }
+
+    manageSTbuffer (clk);
+
+    return pipe_stall;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_a806f0676eb61e344a0feb87fd823779a}{
+\index{o3\_\-memory@{o3\_\-memory}!regStat@{regStat}}
+\index{regStat@{regStat}!o3_memory@{o3\_\-memory}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::regStat (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_a806f0676eb61e344a0feb87fd823779a}
+
+\begin{DoxyCode}
+                                      {
+    _execution_to_memory_port->regStat (clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4}{
+\index{o3\_\-memory@{o3\_\-memory}!squash@{squash}}
+\index{squash@{squash}!o3_memory@{o3\_\-memory}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memory::squash (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4}
+
+\begin{DoxyCode}
+                                     {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Po
+      rts Flush", clk.now ());
+    Assert (g_var.g_pipe_state == PIPE_FLUSH);
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    _memory_to_scheduler_port->flushPort (squashSeqNum, clk.now ());
+    _mem_buff.flushPort (squashSeqNum, clk.now ());
+    g_LSQ_MGR.squash (squashSeqNum);
+    //_st_buff.flushTable ();
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2memory_8h}{memory.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2memory_8cpp}{memory.cpp}\end{DoxyCompactItemize}

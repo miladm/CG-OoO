@@ -1,0 +1,164 @@
+\hypertarget{misc_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/misc.cc File Reference}
+\label{misc_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/misc.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/misc.cc}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}base/cprintf.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/hostinfo.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/output.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/trace.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/types.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/varargs.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/core.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{misc_8cc_adf5299ed6527b5a117cd9780b5bd330b}{\_\-\_\-exit\_\-message} (const char $\ast$prefix, int code, const char $\ast$func, const char $\ast$file, int line, const char $\ast$fmt, CPRINTF\_\-DEFINITION)
+\item 
+void \hyperlink{misc_8cc_aa4255023ee22fd4c9e7c1d0a807e255f}{\_\-\_\-base\_\-message} (std::ostream \&stream, const char $\ast$prefix, bool verbose, const char $\ast$func, const char $\ast$file, int line, const char $\ast$fmt, CPRINTF\_\-DEFINITION)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{misc_8cc_a77f6725c0d2349664643937fe56cafc0}{want\_\-warn} = true
+\item 
+bool \hyperlink{misc_8cc_a3e07912efc18048822c757ea8a863933}{want\_\-info} = true
+\item 
+bool \hyperlink{misc_8cc_a09cfe40e5e0aa49eac5976147c13d7ee}{want\_\-hack} = true
+\item 
+bool \hyperlink{misc_8cc_a6f7c2d176c7f3c537e9df30c83001331}{warn\_\-verbose} = false
+\item 
+bool \hyperlink{misc_8cc_a48b5c3c232bf262ed496dd11b6a1a5bc}{info\_\-verbose} = false
+\item 
+bool \hyperlink{misc_8cc_a32fbfb9e755cc9af4492f027968de5a0}{hack\_\-verbose} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{misc_8cc_aa4255023ee22fd4c9e7c1d0a807e255f}{
+\index{misc.cc@{misc.cc}!\_\-\_\-base\_\-message@{\_\-\_\-base\_\-message}}
+\index{\_\-\_\-base\_\-message@{\_\-\_\-base\_\-message}!misc.cc@{misc.cc}}
+\subsubsection[{\_\-\_\-base\_\-message}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-base\_\-message (
+\begin{DoxyParamCaption}
+\item[{std::ostream \&}]{stream, }
+\item[{const char $\ast$}]{prefix, }
+\item[{bool}]{verbose, }
+\item[{const char $\ast$}]{func, }
+\item[{const char $\ast$}]{file, }
+\item[{int}]{line, }
+\item[{const char $\ast$}]{fmt, }
+\item[{CPRINTF\_\-DEFINITION}]{}
+\end{DoxyParamCaption}
+)}}
+\label{misc_8cc_aa4255023ee22fd4c9e7c1d0a807e255f}
+
+\begin{DoxyCode}
+{
+    CPrintfArgsList args(VARARGS_ALLARGS);
+
+    string format = prefix;
+    format += ": ";
+    format += fmt;
+    switch (format[format.size() - 1]) {
+      case '\n':
+      case '\r':
+        break;
+      default:
+        format += "\n";
+    }
+
+    if (verbose) {
+        format += " @ cycle %d\n[%s:%s, line %d]\n";
+        args.push_back(curTick());
+        args.push_back(func);
+        args.push_back(file);
+        args.push_back(line);
+    }
+
+    ccprintf(stream, format.c_str(), args);
+}
+\end{DoxyCode}
+\hypertarget{misc_8cc_adf5299ed6527b5a117cd9780b5bd330b}{
+\index{misc.cc@{misc.cc}!\_\-\_\-exit\_\-message@{\_\-\_\-exit\_\-message}}
+\index{\_\-\_\-exit\_\-message@{\_\-\_\-exit\_\-message}!misc.cc@{misc.cc}}
+\subsubsection[{\_\-\_\-exit\_\-message}]{\setlength{\rightskip}{0pt plus 5cm}void \_\-\_\-exit\_\-message (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{prefix, }
+\item[{int}]{code, }
+\item[{const char $\ast$}]{func, }
+\item[{const char $\ast$}]{file, }
+\item[{int}]{line, }
+\item[{const char $\ast$}]{fmt, }
+\item[{CPRINTF\_\-DEFINITION}]{}
+\end{DoxyParamCaption}
+)}}
+\label{misc_8cc_adf5299ed6527b5a117cd9780b5bd330b}
+
+\begin{DoxyCode}
+{
+    CPrintfArgsList args(VARARGS_ALLARGS);
+
+    string format = prefix;
+    format += ": ";
+    format += fmt;
+    switch (format[format.size() - 1]) {
+      case '\n':
+      case '\r':
+        break;
+      default:
+        format += "\n";
+    }
+
+    format += " @ cycle %d\n[%s:%s, line %d]\n";
+    format += "Memory Usage: %ld KBytes\n";
+
+    args.push_back(curTick());
+    args.push_back(func);
+    args.push_back(file);
+    args.push_back(line);
+    args.push_back(memUsage());
+
+    ccprintf(cerr, format.c_str(), args);
+
+    if (code < 0)
+        abort();
+    else
+        exit(code);
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{misc_8cc_a32fbfb9e755cc9af4492f027968de5a0}{
+\index{misc.cc@{misc.cc}!hack\_\-verbose@{hack\_\-verbose}}
+\index{hack\_\-verbose@{hack\_\-verbose}!misc.cc@{misc.cc}}
+\subsubsection[{hack\_\-verbose}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf hack\_\-verbose} = false}}
+\label{misc_8cc_a32fbfb9e755cc9af4492f027968de5a0}
+\hypertarget{misc_8cc_a48b5c3c232bf262ed496dd11b6a1a5bc}{
+\index{misc.cc@{misc.cc}!info\_\-verbose@{info\_\-verbose}}
+\index{info\_\-verbose@{info\_\-verbose}!misc.cc@{misc.cc}}
+\subsubsection[{info\_\-verbose}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf info\_\-verbose} = false}}
+\label{misc_8cc_a48b5c3c232bf262ed496dd11b6a1a5bc}
+\hypertarget{misc_8cc_a09cfe40e5e0aa49eac5976147c13d7ee}{
+\index{misc.cc@{misc.cc}!want\_\-hack@{want\_\-hack}}
+\index{want\_\-hack@{want\_\-hack}!misc.cc@{misc.cc}}
+\subsubsection[{want\_\-hack}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf want\_\-hack} = true}}
+\label{misc_8cc_a09cfe40e5e0aa49eac5976147c13d7ee}
+\hypertarget{misc_8cc_a3e07912efc18048822c757ea8a863933}{
+\index{misc.cc@{misc.cc}!want\_\-info@{want\_\-info}}
+\index{want\_\-info@{want\_\-info}!misc.cc@{misc.cc}}
+\subsubsection[{want\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf want\_\-info} = true}}
+\label{misc_8cc_a3e07912efc18048822c757ea8a863933}
+\hypertarget{misc_8cc_a77f6725c0d2349664643937fe56cafc0}{
+\index{misc.cc@{misc.cc}!want\_\-warn@{want\_\-warn}}
+\index{want\_\-warn@{want\_\-warn}!misc.cc@{misc.cc}}
+\subsubsection[{want\_\-warn}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf want\_\-warn} = true}}
+\label{misc_8cc_a77f6725c0d2349664643937fe56cafc0}
+\hypertarget{misc_8cc_a6f7c2d176c7f3c537e9df30c83001331}{
+\index{misc.cc@{misc.cc}!warn\_\-verbose@{warn\_\-verbose}}
+\index{warn\_\-verbose@{warn\_\-verbose}!misc.cc@{misc.cc}}
+\subsubsection[{warn\_\-verbose}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf warn\_\-verbose} = false}}
+\label{misc_8cc_a6f7c2d176c7f3c537e9df30c83001331}

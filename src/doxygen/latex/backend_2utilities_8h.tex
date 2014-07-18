@@ -1,0 +1,184 @@
+\hypertarget{backend_2utilities_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/utilities.h File Reference}
+\label{backend_2utilities_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/utilities.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/utilities.h}}
+}
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}portability.H\char`\"{}}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{backend_2utilities_8h_ac60c6e0ead43705e85120404e7a72296}{MAX\_\-ARGV}~256
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+VOID \hyperlink{backend_2utilities_8h_a7dc01010beaca1e6bed27bf3ae9556c9}{PrintHexWord} (ADDRINT addr, fstream \&outfile)
+\item 
+VOID \hyperlink{backend_2utilities_8h_a2c4578bd91a84b012dfe634926bdc0da}{GetArg} (UINT32 argc, char $\ast$$\ast$argv, const char $\ast$argname, UINT32 \&arg, UINT32 default\_\-val)
+\item 
+VOID \hyperlink{backend_2utilities_8h_a1d4fa3aebb181f696c1ba26e98a87cd6}{GetArg} (UINT32 argc, char $\ast$$\ast$argv, const char $\ast$argname, BOOL \&arg)
+\item 
+void \hyperlink{backend_2utilities_8h_aff9dd97a45af0384f0f22e2f2dcfb839}{RemoveToolArgs} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, int $\ast$myArgc, char $\ast$myArgv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{backend_2utilities_8h_ac60c6e0ead43705e85120404e7a72296}{
+\index{backend/utilities.h@{backend/utilities.h}!MAX\_\-ARGV@{MAX\_\-ARGV}}
+\index{MAX\_\-ARGV@{MAX\_\-ARGV}!backend/utilities.h@{backend/utilities.h}}
+\subsubsection[{MAX\_\-ARGV}]{\setlength{\rightskip}{0pt plus 5cm}\#define MAX\_\-ARGV~256}}
+\label{backend_2utilities_8h_ac60c6e0ead43705e85120404e7a72296}
+
+
+\subsection{Function Documentation}
+\hypertarget{backend_2utilities_8h_a2c4578bd91a84b012dfe634926bdc0da}{
+\index{backend/utilities.h@{backend/utilities.h}!GetArg@{GetArg}}
+\index{GetArg@{GetArg}!backend/utilities.h@{backend/utilities.h}}
+\subsubsection[{GetArg}]{\setlength{\rightskip}{0pt plus 5cm}VOID GetArg (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{argc, }
+\item[{char $\ast$$\ast$}]{argv, }
+\item[{const char $\ast$}]{argname, }
+\item[{UINT32 \&}]{arg, }
+\item[{UINT32}]{default\_\-val}
+\end{DoxyParamCaption}
+)}}
+\label{backend_2utilities_8h_a2c4578bd91a84b012dfe634926bdc0da}
+
+\begin{DoxyCode}
+{
+    BOOL found = false;
+    UINT32 i = 0;
+    do 
+    {
+        string* tmp = new string(argv[i]);
+        if (tmp->find(argname) != string::npos) 
+        {
+            ASSERTX((i + 1) < argc);
+            arg = atoi(argv[i + 1]);
+            found = true;
+        }
+        else 
+        {
+            i++;
+        }
+        delete tmp;
+    } while (!found && (i < argc));
+    if (!found) 
+    {
+        arg = default_val;
+    }
+}
+\end{DoxyCode}
+\hypertarget{backend_2utilities_8h_a1d4fa3aebb181f696c1ba26e98a87cd6}{
+\index{backend/utilities.h@{backend/utilities.h}!GetArg@{GetArg}}
+\index{GetArg@{GetArg}!backend/utilities.h@{backend/utilities.h}}
+\subsubsection[{GetArg}]{\setlength{\rightskip}{0pt plus 5cm}VOID GetArg (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{argc, }
+\item[{char $\ast$$\ast$}]{argv, }
+\item[{const char $\ast$}]{argname, }
+\item[{BOOL \&}]{arg}
+\end{DoxyParamCaption}
+)}}
+\label{backend_2utilities_8h_a1d4fa3aebb181f696c1ba26e98a87cd6}
+
+\begin{DoxyCode}
+{
+    BOOL found = false;
+    UINT32 i = 0;
+    do 
+    {
+        string* tmp = new string(argv[i]);
+        if (tmp->find(argname) != string::npos) 
+        {
+            ASSERTX((i + 1) < argc);
+            arg = true;
+            found = true;
+        }
+        else 
+        {
+            i++;
+        }
+        delete tmp;
+    } while (!found && (i < argc));
+    if (!found) 
+    {
+        arg = false;
+    }
+}
+\end{DoxyCode}
+\hypertarget{backend_2utilities_8h_a7dc01010beaca1e6bed27bf3ae9556c9}{
+\index{backend/utilities.h@{backend/utilities.h}!PrintHexWord@{PrintHexWord}}
+\index{PrintHexWord@{PrintHexWord}!backend/utilities.h@{backend/utilities.h}}
+\subsubsection[{PrintHexWord}]{\setlength{\rightskip}{0pt plus 5cm}VOID PrintHexWord (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{addr, }
+\item[{fstream \&}]{outfile}
+\end{DoxyParamCaption}
+)}}
+\label{backend_2utilities_8h_a7dc01010beaca1e6bed27bf3ae9556c9}
+
+\begin{DoxyCode}
+{
+    for (INT32 offset = sizeof(ADDRINT) - 1; offset >= 0; offset--) 
+    {
+        UINT32 val = (UINT32)*(UINT8*)(addr + offset);
+        if (val < 0xf)        // formatting: pad single digits
+        {
+            outfile << "0" << flush;
+        }
+        outfile << hex << val << flush;
+    }
+}
+\end{DoxyCode}
+\hypertarget{backend_2utilities_8h_aff9dd97a45af0384f0f22e2f2dcfb839}{
+\index{backend/utilities.h@{backend/utilities.h}!RemoveToolArgs@{RemoveToolArgs}}
+\index{RemoveToolArgs@{RemoveToolArgs}!backend/utilities.h@{backend/utilities.h}}
+\subsubsection[{RemoveToolArgs}]{\setlength{\rightskip}{0pt plus 5cm}void RemoveToolArgs (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}, }
+\item[{int $\ast$}]{myArgc, }
+\item[{char $\ast$}]{myArgv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{backend_2utilities_8h_aff9dd97a45af0384f0f22e2f2dcfb839}
+
+\begin{DoxyCode}
+{
+    int i;
+    for (i=0; i<argc; i++)
+    {
+        // copy this argv into myArgv
+        ASSERTX(i<MAX_ARGV);
+        myArgv[i] = argv[i];
+        if(strcmp("-t", argv[i])==0)
+        {
+            break;
+        }
+    }
+    // next one is tool name
+    i++;
+    myArgv[i] = argv[i];
+    *myArgc = i+1;
+    // now skip all until --
+    while (strcmp(argv[i],"--")!=0)
+    {
+        i++;
+        ASSERTX(i<MAX_ARGV);
+    }
+    // now copy the -- and the rest
+    while (i<argc)
+    {
+        ASSERTX(i<MAX_ARGV);
+        myArgv[*myArgc] = argv[i];
+        i++;
+        (*myArgc)++;
+    }
+}
+\end{DoxyCode}

@@ -1,0 +1,50 @@
+\hypertarget{bigint_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/bigint.cc File Reference}
+\label{bigint_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/bigint.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/bigint.cc}}
+}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include \char`\"{}base/bigint.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{bigint_8cc_a7f3d3fdb0a39aead1ffa9549f765aa6f}{operator$<$$<$} (ostream \&os, const Twin64\_\-t \&t)
+\item 
+ostream \& \hyperlink{bigint_8cc_a288677f6abc3b96a810a56f2a89c2a96}{operator$<$$<$} (ostream \&os, const Twin32\_\-t \&t)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{bigint_8cc_a7f3d3fdb0a39aead1ffa9549f765aa6f}{
+\index{bigint.cc@{bigint.cc}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!bigint.cc@{bigint.cc}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const Twin64\_\-t \&}]{t}
+\end{DoxyParamCaption}
+)}}
+\label{bigint_8cc_a7f3d3fdb0a39aead1ffa9549f765aa6f}
+
+\begin{DoxyCode}
+{
+    os << t.a << ", " << t.b;
+    return os;
+}
+\end{DoxyCode}
+\hypertarget{bigint_8cc_a288677f6abc3b96a810a56f2a89c2a96}{
+\index{bigint.cc@{bigint.cc}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!bigint.cc@{bigint.cc}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const Twin32\_\-t \&}]{t}
+\end{DoxyParamCaption}
+)}}
+\label{bigint_8cc_a288677f6abc3b96a810a56f2a89c2a96}
+
+\begin{DoxyCode}
+{
+    os << t.a << ", " << t.b;
+    return os;
+}
+\end{DoxyCode}

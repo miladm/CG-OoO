@@ -1,0 +1,110 @@
+\hypertarget{unit_2stage_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/stage.h File Reference}
+\label{unit_2stage_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/stage.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/unit/stage.h}}
+}
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include \char`\"{}../../lib/statistic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../lib/timer.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../lib/utility.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../lib/list.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../global/global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../global/g\_\-variable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../../lib/debug.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sysClock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}port.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dynInstruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}table.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}exeUnit.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstage}{stage}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \{ \hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61}{PIPE\_\-STALL}, 
+\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b}{PIPE\_\-BUSY}
+ \}
+\item 
+enum \hyperlink{unit_2stage_8h_a7de04de95175471455cf906d80af3968}{COMPLETE\_\-STATUS} \{ \hyperlink{unit_2stage_8h_a7de04de95175471455cf906d80af3968ada24278630414fa41dc2bc9f5e2bcff4}{COMPLETE\_\-NORMAL}, 
+\hyperlink{unit_2stage_8h_a7de04de95175471455cf906d80af3968a0952b5965b39f39704580b1882456f05}{COMPLETE\_\-SQUASH}
+ \}
+\item 
+enum \hyperlink{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5e}{SIM\_\-MODE} \{ \hyperlink{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea27243d6e9e7fcb64aabcb7b540edcf9d}{FRONT\_\-END}, 
+\hyperlink{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea6f52bab3ca5250db57817b0a7b27fa1c}{BACK\_\-END}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{unit_2stage_8h_a7de04de95175471455cf906d80af3968}{
+\index{unit/stage.h@{unit/stage.h}!COMPLETE\_\-STATUS@{COMPLETE\_\-STATUS}}
+\index{COMPLETE\_\-STATUS@{COMPLETE\_\-STATUS}!unit/stage.h@{unit/stage.h}}
+\subsubsection[{COMPLETE\_\-STATUS}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf COMPLETE\_\-STATUS}}}
+\label{unit_2stage_8h_a7de04de95175471455cf906d80af3968}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{COMPLETE\_\-NORMAL@{COMPLETE\_\-NORMAL}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!COMPLETE\_\-NORMAL@{COMPLETE\_\-NORMAL}}\item[{\em 
+\hypertarget{unit_2stage_8h_a7de04de95175471455cf906d80af3968ada24278630414fa41dc2bc9f5e2bcff4}{
+COMPLETE\_\-NORMAL}
+\label{unit_2stage_8h_a7de04de95175471455cf906d80af3968ada24278630414fa41dc2bc9f5e2bcff4}
+}]\index{COMPLETE\_\-SQUASH@{COMPLETE\_\-SQUASH}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!COMPLETE\_\-SQUASH@{COMPLETE\_\-SQUASH}}\item[{\em 
+\hypertarget{unit_2stage_8h_a7de04de95175471455cf906d80af3968a0952b5965b39f39704580b1882456f05}{
+COMPLETE\_\-SQUASH}
+\label{unit_2stage_8h_a7de04de95175471455cf906d80af3968a0952b5965b39f39704580b1882456f05}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{COMPLETE_NORMAL, COMPLETE_SQUASH} COMPLETE_STATUS;
+\end{DoxyCode}
+\hypertarget{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{
+\index{unit/stage.h@{unit/stage.h}!PIPE\_\-ACTIVITY@{PIPE\_\-ACTIVITY}}
+\index{PIPE\_\-ACTIVITY@{PIPE\_\-ACTIVITY}!unit/stage.h@{unit/stage.h}}
+\subsubsection[{PIPE\_\-ACTIVITY}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf PIPE\_\-ACTIVITY}}}
+\label{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{PIPE\_\-STALL@{PIPE\_\-STALL}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!PIPE\_\-STALL@{PIPE\_\-STALL}}\item[{\em 
+\hypertarget{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61}{
+PIPE\_\-STALL}
+\label{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61}
+}]\index{PIPE\_\-BUSY@{PIPE\_\-BUSY}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!PIPE\_\-BUSY@{PIPE\_\-BUSY}}\item[{\em 
+\hypertarget{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b}{
+PIPE\_\-BUSY}
+\label{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{PIPE_STALL, PIPE_BUSY} PIPE_ACTIVITY;
+\end{DoxyCode}
+\hypertarget{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5e}{
+\index{unit/stage.h@{unit/stage.h}!SIM\_\-MODE@{SIM\_\-MODE}}
+\index{SIM\_\-MODE@{SIM\_\-MODE}!unit/stage.h@{unit/stage.h}}
+\subsubsection[{SIM\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf SIM\_\-MODE}}}
+\label{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5e}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{FRONT\_\-END@{FRONT\_\-END}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!FRONT\_\-END@{FRONT\_\-END}}\item[{\em 
+\hypertarget{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea27243d6e9e7fcb64aabcb7b540edcf9d}{
+FRONT\_\-END}
+\label{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea27243d6e9e7fcb64aabcb7b540edcf9d}
+}]\index{BACK\_\-END@{BACK\_\-END}!unit/stage.h@{unit/stage.h}}\index{unit/stage.h@{unit/stage.h}!BACK\_\-END@{BACK\_\-END}}\item[{\em 
+\hypertarget{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea6f52bab3ca5250db57817b0a7b27fa1c}{
+BACK\_\-END}
+\label{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5ea6f52bab3ca5250db57817b0a7b27fa1c}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{FRONT_END, BACK_END} SIM_MODE;
+\end{DoxyCode}

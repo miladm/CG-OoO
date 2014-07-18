@@ -1,0 +1,158 @@
+\hypertarget{utility_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.cc File Reference}
+\label{utility_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.cc@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/utility.cc}}
+}
+{\ttfamily \#include \char`\"{}utility.h\char`\"{}}\par
+{\ttfamily \#include $<$stdarg.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{utility_8cc_af9857b7ce67739b0c36e49ad70c1befa}{Failure} (const char $\ast$format,...)
+\item 
+int \hyperlink{utility_8cc_a1c69ab96e321f1380c00507b146ddef5}{IndexOf} (const char $\ast$key)
+\item 
+bool \hyperlink{utility_8cc_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn} (const char $\ast$key)
+\item 
+void \hyperlink{utility_8cc_a34c8948d2a64f846bb064b02016ec243}{SetDebugForKey} (const char $\ast$key, bool value)
+\item 
+void \hyperlink{utility_8cc_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug} (const char $\ast$key, const char $\ast$format,...)
+\item 
+void \hyperlink{utility_8cc_afdda6d1c4184e16b014a78ae53ddf958}{ParseCommandLine} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{utility_8cc_af9857b7ce67739b0c36e49ad70c1befa}{
+\index{utility.cc@{utility.cc}!Failure@{Failure}}
+\index{Failure@{Failure}!utility.cc@{utility.cc}}
+\subsubsection[{Failure}]{\setlength{\rightskip}{0pt plus 5cm}void Failure (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{format, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_af9857b7ce67739b0c36e49ad70c1befa}
+Function: \hyperlink{backend_2utility_8cpp_af9857b7ce67739b0c36e49ad70c1befa}{Failure()} Usage: Failure(\char`\"{}Out of memory!\char`\"{}); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Reports an error and exits the program immediately. You should not need to call this since you should always try to continue parsing, even after an error is encountered. Some of the provided code calls this in unrecoverable error situations (cannot allocate memory, etc.) Failure accepts printf-\/style arguments in the message to be printed. 
+\begin{DoxyCode}
+                                      {
+  va_list args;
+  char errbuf[BufferSize];
+  
+  va_start(args, format);
+  vsprintf(errbuf, format, args);
+  va_end(args);
+  fflush(stdout);
+  fprintf(stderr,"\n*** Failure: %s\n\n", errbuf);
+  abort();
+}
+\end{DoxyCode}
+\hypertarget{utility_8cc_a1c69ab96e321f1380c00507b146ddef5}{
+\index{utility.cc@{utility.cc}!IndexOf@{IndexOf}}
+\index{IndexOf@{IndexOf}!utility.cc@{utility.cc}}
+\subsubsection[{IndexOf}]{\setlength{\rightskip}{0pt plus 5cm}int IndexOf (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_a1c69ab96e321f1380c00507b146ddef5}
+
+\begin{DoxyCode}
+                             {
+  for (unsigned int i = 0; i < debugKeys.size(); i++)
+    if (!strcmp(debugKeys[i], key)) 
+      return i;
+
+  return -1;
+}
+\end{DoxyCode}
+\hypertarget{utility_8cc_a07f87be0a7c65a41d29ddfca31d0cb89}{
+\index{utility.cc@{utility.cc}!IsDebugOn@{IsDebugOn}}
+\index{IsDebugOn@{IsDebugOn}!utility.cc@{utility.cc}}
+\subsubsection[{IsDebugOn}]{\setlength{\rightskip}{0pt plus 5cm}bool IsDebugOn (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_a07f87be0a7c65a41d29ddfca31d0cb89}
+Function: \hyperlink{backend_2utility_8cpp_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn()} Usage: if (IsDebugOn(\char`\"{}scope\char`\"{})) ... -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Return true/false based on whether this key is currently on for debug printing. 
+\begin{DoxyCode}
+                                {
+  return (IndexOf(key) != -1);
+}
+\end{DoxyCode}
+\hypertarget{utility_8cc_afdda6d1c4184e16b014a78ae53ddf958}{
+\index{utility.cc@{utility.cc}!ParseCommandLine@{ParseCommandLine}}
+\index{ParseCommandLine@{ParseCommandLine}!utility.cc@{utility.cc}}
+\subsubsection[{ParseCommandLine}]{\setlength{\rightskip}{0pt plus 5cm}void ParseCommandLine (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_afdda6d1c4184e16b014a78ae53ddf958}
+Function: ParseCommandLine -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on the debugging flags from the command line. Verifies that first argument is -\/d, and then interpret all the arguments that follow as being flags to turn on. 
+\begin{DoxyCode}
+                                              {
+  if (argc == 1)
+    return;
+  
+  if (strcmp(argv[1], "-d") != 0) { // first arg is not -d
+    printf("Incorrect Use:   ");
+    for (int i = 1; i < argc; i++) printf("%s ", argv[i]);
+    printf("\n");
+    printf("Correct Usage:   -d <debug-key-1> <debug-key-2> ... \n");
+    exit(2);
+  }
+
+  for (int i = 2; i < argc; i++)
+    SetDebugForKey(argv[i], true);
+}
+\end{DoxyCode}
+\hypertarget{utility_8cc_a792c588e9321d93476dec66f6cdd53a3}{
+\index{utility.cc@{utility.cc}!PrintDebug@{PrintDebug}}
+\index{PrintDebug@{PrintDebug}!utility.cc@{utility.cc}}
+\subsubsection[{PrintDebug}]{\setlength{\rightskip}{0pt plus 5cm}void PrintDebug (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key, }
+\item[{const char $\ast$}]{format, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_a792c588e9321d93476dec66f6cdd53a3}
+Function: \hyperlink{backend_2utility_8cpp_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug()} Usage: PrintDebug(\char`\"{}parser\char`\"{}, \char`\"{}found ident \%s$\backslash$n\char`\"{}, ident); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Print a message if we have turned debugging messages on for the given key. For example, the usage line shown above will only print a message if the call is preceded by a call to SetDebugForKey(\char`\"{}parser\char`\"{},true). The function accepts printf arguments. The provided main.cc parses the command line to turn on debug flags. 
+\begin{DoxyCode}
+                                                          {
+  va_list args;
+  char buf[BufferSize];
+
+  if (!IsDebugOn(key))
+     return;
+  
+  va_start(args, format);
+  vsprintf(buf, format, args);
+  va_end(args);
+  printf("+++ (%s): %s%s", key, buf, buf[strlen(buf)-1] != '\n'? "\n" : "");
+}
+\end{DoxyCode}
+\hypertarget{utility_8cc_a34c8948d2a64f846bb064b02016ec243}{
+\index{utility.cc@{utility.cc}!SetDebugForKey@{SetDebugForKey}}
+\index{SetDebugForKey@{SetDebugForKey}!utility.cc@{utility.cc}}
+\subsubsection[{SetDebugForKey}]{\setlength{\rightskip}{0pt plus 5cm}void SetDebugForKey (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{key, }
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{utility_8cc_a34c8948d2a64f846bb064b02016ec243}
+Function: \hyperlink{backend_2utility_8cpp_a34c8948d2a64f846bb064b02016ec243}{SetDebugForKey()} Usage: SetDebugForKey(\char`\"{}scope\char`\"{}, true); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on debugging messages for the given key. See PrintDebug for an example. Can be called manually when desired and will be called from the provided main for flags passed with -\/d. 
+\begin{DoxyCode}
+                                                 {
+  int k = IndexOf(key);
+  if (!value && k != -1)
+    debugKeys.erase(debugKeys.begin() + k);
+  else if (value && k == -1)
+    debugKeys.push_back(key);
+}
+\end{DoxyCode}

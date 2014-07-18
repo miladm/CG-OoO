@@ -1,0 +1,376 @@
+\hypertarget{namespaceparse__x86}{
+\section{parse\_\-x86 Namespace Reference}
+\label{namespaceparse__x86}\index{parse\_\-x86@{parse\_\-x86}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceparse__x86_a758dba9b6ef5bfb993964c7673c1a495}{init\_\-x86\_\-lib}
+\item 
+def \hyperlink{namespaceparse__x86_a2712bf248a09b7179fbbd2ab2eb11d79}{isAnOpCode}
+\item 
+def \hyperlink{namespaceparse__x86_af276c0d9a3df1331caeda2b0fdf5b688}{isAregister}
+\item 
+def \hyperlink{namespaceparse__x86_a4c9598d09cbc721244afd90ddb48350f}{findOp}
+\item 
+def \hyperlink{namespaceparse__x86_ad838e5ea14a7b662e716b079640434f0}{cfg}
+\item 
+def \hyperlink{namespaceparse__x86_a25693017cff430882e0561015d7cc616}{trace}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{namespaceparse__x86_ab11d9d1a0626bdc175b6c2ee03df263e}{ioPath} = 'input\_\-files/'
+\item 
+string \hyperlink{namespaceparse__x86_a955e505bf61e73978f2a0351a8481b65}{fileName} = 'bzip2.s'
+\item 
+list \hyperlink{namespaceparse__x86_a56713be80c3e4856d60fc33a697d065c}{OpCodeDic} = \mbox{[}$\,$\mbox{]}
+\item 
+list \hyperlink{namespaceparse__x86_a1f421232296d44b3b18cae411013e390}{regDic} = \mbox{[}$\,$\mbox{]}
+\item 
+dictionary \hyperlink{namespaceparse__x86_a0884442b075e5ca56c09a9ffc1a57f7c}{opCodeLib} = \{\}
+\item 
+list \hyperlink{namespaceparse__x86_aeca34d9cbbf4caa2875e549339985223}{inAddrLib} = \mbox{[}$\,$\mbox{]}
+\item 
+list \hyperlink{namespaceparse__x86_a02affd150cd87ae056585236c3217200}{jmpDstLib} = \mbox{[}$\,$\mbox{]}
+\item 
+list \hyperlink{namespaceparse__x86_a0fb61b722a1498e50bf52375a7fb2fa8}{jmpOpLib} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceparse__x86_ad838e5ea14a7b662e716b079640434f0}{
+\index{parse\_\-x86@{parse\_\-x86}!cfg@{cfg}}
+\index{cfg@{cfg}!parse_x86@{parse\_\-x86}}
+\subsubsection[{cfg}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::cfg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_ad838e5ea14a7b662e716b079640434f0}
+
+\begin{DoxyCode}
+125          :
+126   ## PASS 1
+127   assemblyInput = ioPath+fileName
+128   assemblyFile  = open(assemblyInput, 'r')        
+129   for line in assemblyFile:
+130     words = line.lstrip().rstrip().split()
+131     if len(words) > 0:
+132       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+133       if matchObj:
+134         # print words[0]
+135         insAddr = words[0]
+136         insAddr = insAddr[:-1]
+137         inAddrLib.append(insAddr)
+138         findOp(line, insAddr)
+139   assemblyFile.close()
+140   ## PASS 2
+141   #global jmpDstLib
+142   #global jmpOpLib
+143   #global opCodeLib
+144   #assemblyInput = ioPath+fileName
+145   #assemblyFile  = open(assemblyInput, 'r')        
+146   #for line in assemblyFile:
+147   #  words = line.lstrip().rstrip().split()
+148   #  if len(words) > 0:
+149   #    matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+150   #    if matchObj:
+151   #      #print words[0]
+152   #      insAddr = words[0]
+153   #      insAddr = insAddr[:-1]
+154   #      if insAddr in jmpOpLib:
+155   #        print line
+156   #        print '-end\n'
+157   #      elif insAddr in opCodeLib and opCodeLib[insAddr] == 'retq':
+158   #        print line
+159   #        print '----\n'
+160   #      elif insAddr in jmpDstLib:
+161   #        print '-start\n'
+162   #        print line
+163   #      else:
+164   #        print line
+
+\end{DoxyCode}
+\hypertarget{namespaceparse__x86_a4c9598d09cbc721244afd90ddb48350f}{
+\index{parse\_\-x86@{parse\_\-x86}!findOp@{findOp}}
+\index{findOp@{findOp}!parse_x86@{parse\_\-x86}}
+\subsubsection[{findOp}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::findOp (
+\begin{DoxyParamCaption}
+\item[{}]{line, }
+\item[{}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_a4c9598d09cbc721244afd90ddb48350f}
+
+\begin{DoxyCode}
+59                           :
+60   global jmpDstLib
+61   global jmpOpLib
+62   global opCodeLib
+63   words = line.lstrip().rstrip().split()
+64   # print '\n',words
+65   line = line.rstrip().lstrip()
+66   done = False
+67   for i in range(len(words)):
+68     words[i] = words[i].lstrip().rstrip()
+69     if len(words[i]) > 0:
+70       #matchObj = re.match(r'[\da-f]+.*', words[i], flags=0)
+71       matchObj = isAnOpCode(words[i])
+72       if matchObj:
+73         opCode = words[i].lstrip()
+74         opCodeLib[insAddr] = opCode
+75         if len(words) > i+1:
+76           matchObj1 = re.match(r'[\da-f]+', words[i+1], flags=0)
+77           matchObj2 = re.match(r'0x+', words[i+1], flags=0)
+78           matchObj3 = isAnOpCode(words[i+1])
+79           matchObj4 = isAregister(words[i+1])
+80           if matchObj1 and not matchObj2 and not matchObj3 and not matchObj4:
+81             brDst = words[i+1]
+82             if opCode == 'jmpq' or opCode == 'jmp':
+83                 # jump
+84               print 'j'
+85               print opCode
+86               print insAddr,',',brDst
+87               print line
+88             elif opCode == 'callq' or opCode == 'call':
+89                 # function call
+90               print 'c'
+91               print opCode
+92               print insAddr,',',brDst
+93               print line
+94             else:
+95                 # branch
+96               print 'b'
+97               print opCode
+98               print insAddr,',',brDst
+99               print line
+100             jmpDstLib.append((words[i],insAddr,words[i+1]))
+101             jmpDstLib.append(words[i+1])
+102             jmpOpLib.append(insAddr)
+103           else:
+104             print 'o'
+105             print opCode
+106             print insAddr
+107             print line
+108         elif opCode == 'ret' or opCode == 'retq' or opCode == 'iret' or opCode ==
+       'iretd' or opCode == 'iretw':
+109                   print 'r'
+110                   print opCode
+111                   print insAddr
+112                   print line
+113         else:
+114           print 'o'
+115           print opCode
+116           print insAddr
+117           print line
+118         break #Avoid replicating an instruction many times in case of no match
+119 
+120         # done = True
+121         # break
+122   #if done == False:
+123   #  print line
+
+\end{DoxyCode}
+\hypertarget{namespaceparse__x86_a758dba9b6ef5bfb993964c7673c1a495}{
+\index{parse\_\-x86@{parse\_\-x86}!init\_\-x86\_\-lib@{init\_\-x86\_\-lib}}
+\index{init\_\-x86\_\-lib@{init\_\-x86\_\-lib}!parse_x86@{parse\_\-x86}}
+\subsubsection[{init\_\-x86\_\-lib}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::init\_\-x86\_\-lib (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_a758dba9b6ef5bfb993964c7673c1a495}
+
+\begin{DoxyCode}
+27                   :
+28   global OpCodeDic
+29   global regDic
+30   global jmpOpCodeDic
+31   x86OpCodeInput = 'lib/x86_opcode.txt'
+32   x86OpCodeFile  = open(x86OpCodeInput, 'r')
+33   for line in x86OpCodeFile:
+34     line = line.lstrip().rstrip()
+35     OpCodeDic.append(line)
+36   x86RegInput = 'lib/x86_registers.txt'
+37   x86RegFile  = open(x86RegInput, 'r')
+38   for line in x86RegFile:
+39     line = line.lstrip().rstrip()
+40     regDic.append(line)
+
+\end{DoxyCode}
+\hypertarget{namespaceparse__x86_a2712bf248a09b7179fbbd2ab2eb11d79}{
+\index{parse\_\-x86@{parse\_\-x86}!isAnOpCode@{isAnOpCode}}
+\index{isAnOpCode@{isAnOpCode}!parse_x86@{parse\_\-x86}}
+\subsubsection[{isAnOpCode}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::isAnOpCode (
+\begin{DoxyParamCaption}
+\item[{}]{word}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_a2712bf248a09b7179fbbd2ab2eb11d79}
+
+\begin{DoxyCode}
+42                     :
+43   global OpCodeDic
+44   if word in OpCodeDic:
+45     return True
+46   else:
+47     return False
+
+\end{DoxyCode}
+\hypertarget{namespaceparse__x86_af276c0d9a3df1331caeda2b0fdf5b688}{
+\index{parse\_\-x86@{parse\_\-x86}!isAregister@{isAregister}}
+\index{isAregister@{isAregister}!parse_x86@{parse\_\-x86}}
+\subsubsection[{isAregister}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::isAregister (
+\begin{DoxyParamCaption}
+\item[{}]{word}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_af276c0d9a3df1331caeda2b0fdf5b688}
+
+\begin{DoxyCode}
+49                      :
+50   global regDic
+51   words = word.rstrip().lstrip().split(',')
+52   for i in range(0,len(words)):
+53     words[i] = words[i].rstrip().lstrip()
+54     if words[i] in regDic:
+55       return True
+56   else:
+57       return False
+
+\end{DoxyCode}
+\hypertarget{namespaceparse__x86_a25693017cff430882e0561015d7cc616}{
+\index{parse\_\-x86@{parse\_\-x86}!trace@{trace}}
+\index{trace@{trace}!parse_x86@{parse\_\-x86}}
+\subsubsection[{trace}]{\setlength{\rightskip}{0pt plus 5cm}def parse\_\-x86::trace (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceparse__x86_a25693017cff430882e0561015d7cc616}
+
+\begin{DoxyCode}
+166            :
+167   insAddrMap = []
+168   ## PHRASE 1
+169   print 'Phase 1'
+170   assemblyInput = ioPath+fileName
+171   assemblyFile  = open(assemblyInput, 'r')        
+172   for line in assemblyFile:
+173     words = line.lstrip().rstrip().split()
+174     if len(words) > 0:
+175       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+176       if matchObj:
+177         #print words[0]
+178         insAddr = words[0]
+179         insAddr = insAddr[:-1] #already a hex, without 0x
+180         print ''.join(('0x',insAddr))
+181         inAddrLib.append(''.join(('0x',insAddr)))
+182   assemblyFile.close()
+183   ## PHRASE 2
+184   print 'Phase 2'
+185   traceInput = '/scratch/tracesim/cs343_bzip_sb.out'
+186   # traceInput = '/Volumes/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblo
+      ck_frontend/pin/trace_static.out'
+187   traceFile  = open(traceInput, 'r')
+188   count = 0
+189   for line in traceFile:
+190     words = line.strip().split(',')
+191     if len(words) < 2:
+192       continue
+193     # if len(words) < 2:
+194     #   continue
+195     # if words[0] == 'P;':
+196     #   continue
+197     if words[0] == "R" or words[0] == "W":
+198       if hex(int(words[2])) not in insAddrMap:
+199         # print words[0],hex(int(words[2]))
+200         insAddrMap.append(hex(int(words[2]))) #conversion to hex adds 0x
+201     else:
+202       if hex(int(words[1])) not in insAddrMap:
+203         # print words[0],hex(int(words[1]))
+204         insAddrMap.append(hex(int(words[1]))) #conversion to hex adds 0x
+205     
+206   # for line in traceFile:
+207   #   count += 1
+208   #   if count == 100000:
+209   #     print 'beat',datetime.now()
+210   #     count = 0
+211   #   words = line.strip().split(',')
+212   #   if len(words) < 3:
+213   #     continue #avoid empty lines
+214   #   insType = words[0]
+215   #   insAddr = words[1]
+216   #   if insAddr not in insAddrMap:
+217   #     insAddrMap.append(insAddr)
+218   #   else:
+219   #     continue
+220   #   indx = 2
+221   #   memDestAddr = -1
+222   #   brDestAddr = -1
+223   #   taken_notTaken = -1
+224   #   # print insType
+225   #   if insType == 'R' or insType == 'W':
+226   #     memDestAddr = words[indx]
+227   #     indx = 3
+228   #   elif insType == 'B':
+229   #     taken_notTaken = words[indx]
+230   #     brDestAddr = words[indx+1]
+231   #     indx = 4
+232   #   for elem in words[indx:-1]:
+233   #     temp = elem.strip().split('#')
+234   #     register = temp[0]
+235   #     read_write = temp[1]
+236   #     # print 'registers: ',register,read_write
+237   # traceFile.close()
+238   print 'DIFF'
+239   for item in inAddrLib:
+240     if item not in insAddrMap:
+241       print item
+242     
+
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceparse__x86_a955e505bf61e73978f2a0351a8481b65}{
+\index{parse\_\-x86@{parse\_\-x86}!fileName@{fileName}}
+\index{fileName@{fileName}!parse_x86@{parse\_\-x86}}
+\subsubsection[{fileName}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::fileName} = 'bzip2.s'}}
+\label{namespaceparse__x86_a955e505bf61e73978f2a0351a8481b65}
+\hypertarget{namespaceparse__x86_aeca34d9cbbf4caa2875e549339985223}{
+\index{parse\_\-x86@{parse\_\-x86}!inAddrLib@{inAddrLib}}
+\index{inAddrLib@{inAddrLib}!parse_x86@{parse\_\-x86}}
+\subsubsection[{inAddrLib}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::inAddrLib} = \mbox{[}$\,$\mbox{]}}}
+\label{namespaceparse__x86_aeca34d9cbbf4caa2875e549339985223}
+\hypertarget{namespaceparse__x86_ab11d9d1a0626bdc175b6c2ee03df263e}{
+\index{parse\_\-x86@{parse\_\-x86}!ioPath@{ioPath}}
+\index{ioPath@{ioPath}!parse_x86@{parse\_\-x86}}
+\subsubsection[{ioPath}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::ioPath} = 'input\_\-files/'}}
+\label{namespaceparse__x86_ab11d9d1a0626bdc175b6c2ee03df263e}
+\hypertarget{namespaceparse__x86_a02affd150cd87ae056585236c3217200}{
+\index{parse\_\-x86@{parse\_\-x86}!jmpDstLib@{jmpDstLib}}
+\index{jmpDstLib@{jmpDstLib}!parse_x86@{parse\_\-x86}}
+\subsubsection[{jmpDstLib}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::jmpDstLib} = \mbox{[}$\,$\mbox{]}}}
+\label{namespaceparse__x86_a02affd150cd87ae056585236c3217200}
+\hypertarget{namespaceparse__x86_a0fb61b722a1498e50bf52375a7fb2fa8}{
+\index{parse\_\-x86@{parse\_\-x86}!jmpOpLib@{jmpOpLib}}
+\index{jmpOpLib@{jmpOpLib}!parse_x86@{parse\_\-x86}}
+\subsubsection[{jmpOpLib}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::jmpOpLib} = \mbox{[}$\,$\mbox{]}}}
+\label{namespaceparse__x86_a0fb61b722a1498e50bf52375a7fb2fa8}
+\hypertarget{namespaceparse__x86_a56713be80c3e4856d60fc33a697d065c}{
+\index{parse\_\-x86@{parse\_\-x86}!OpCodeDic@{OpCodeDic}}
+\index{OpCodeDic@{OpCodeDic}!parse_x86@{parse\_\-x86}}
+\subsubsection[{OpCodeDic}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::OpCodeDic} = \mbox{[}$\,$\mbox{]}}}
+\label{namespaceparse__x86_a56713be80c3e4856d60fc33a697d065c}
+\hypertarget{namespaceparse__x86_a0884442b075e5ca56c09a9ffc1a57f7c}{
+\index{parse\_\-x86@{parse\_\-x86}!opCodeLib@{opCodeLib}}
+\index{opCodeLib@{opCodeLib}!parse_x86@{parse\_\-x86}}
+\subsubsection[{opCodeLib}]{\setlength{\rightskip}{0pt plus 5cm}dictionary {\bf parse\_\-x86::opCodeLib} = \{\}}}
+\label{namespaceparse__x86_a0884442b075e5ca56c09a9ffc1a57f7c}
+\hypertarget{namespaceparse__x86_a1f421232296d44b3b18cae411013e390}{
+\index{parse\_\-x86@{parse\_\-x86}!regDic@{regDic}}
+\index{regDic@{regDic}!parse_x86@{parse\_\-x86}}
+\subsubsection[{regDic}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf parse\_\-x86::regDic} = \mbox{[}$\,$\mbox{]}}}
+\label{namespaceparse__x86_a1f421232296d44b3b18cae411013e390}

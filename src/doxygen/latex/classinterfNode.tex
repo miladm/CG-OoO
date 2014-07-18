@@ -1,0 +1,224 @@
+\hypertarget{classinterfNode}{
+\section{interfNode Class Reference}
+\label{classinterfNode}\index{interfNode@{interfNode}}
+}
+
+
+{\ttfamily \#include $<$interfNode.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classinterfNode_a4ae9c453615eb4c03da34ba30268af39}{interfNode} (long int psudoReg)
+\item 
+\hyperlink{classinterfNode_a430159d7a4bbd766eea82acc3841277c}{$\sim$interfNode} ()
+\item 
+void \hyperlink{classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d}{assignReg} (set$<$ long int $>$ \&GRFset)
+\item 
+void \hyperlink{classinterfNode_ad6ed82efebee0dd2b0334aec5a7c0059}{addEdge} (\hyperlink{classinterfNode}{interfNode} $\ast$node)
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classinterfNode}{interfNode} $\ast$ $>$ $\ast$ \hyperlink{classinterfNode_ae7958792c61a6edc8f6789812425ac73}{getEdgeList} ()
+\item 
+long int \hyperlink{classinterfNode_a139d1365e2b0eb15797c61f0f4d61464}{getPsudoReg} ()
+\item 
+int \hyperlink{classinterfNode_a849288bb063ab927d0938254066c5ce7}{getNeighborSize} ()
+\item 
+void \hyperlink{classinterfNode_a73af59beda246607573abffaf434c232}{removeFromGraph} ()
+\item 
+void \hyperlink{classinterfNode_a28de448897ec0c075e14f34c9aec4938}{removeAneighbor} (\hyperlink{classinterfNode}{interfNode} $\ast$node)
+\item 
+long int \hyperlink{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}{getReg} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classinterfNode_a4ae9c453615eb4c03da34ba30268af39}{
+\index{interfNode@{interfNode}!interfNode@{interfNode}}
+\index{interfNode@{interfNode}!interfNode@{interfNode}}
+\subsubsection[{interfNode}]{\setlength{\rightskip}{0pt plus 5cm}interfNode::interfNode (
+\begin{DoxyParamCaption}
+\item[{long int}]{psudoReg}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a4ae9c453615eb4c03da34ba30268af39}
+
+\begin{DoxyCode}
+                                        {
+        _reg = -1;
+        _psudoReg = psudoReg;
+        _edgeList_static  = new List<interfNode*>;
+        _edgeList_dynamic = new List<interfNode*>;
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_a430159d7a4bbd766eea82acc3841277c}{
+\index{interfNode@{interfNode}!$\sim$interfNode@{$\sim$interfNode}}
+\index{$\sim$interfNode@{$\sim$interfNode}!interfNode@{interfNode}}
+\subsubsection[{$\sim$interfNode}]{\setlength{\rightskip}{0pt plus 5cm}interfNode::$\sim$interfNode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a430159d7a4bbd766eea82acc3841277c}
+
+\begin{DoxyCode}
+                        {
+        delete _edgeList_static;
+        delete _edgeList_dynamic;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classinterfNode_ad6ed82efebee0dd2b0334aec5a7c0059}{
+\index{interfNode@{interfNode}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!interfNode@{interfNode}}
+\subsubsection[{addEdge}]{\setlength{\rightskip}{0pt plus 5cm}void interfNode::addEdge (
+\begin{DoxyParamCaption}
+\item[{{\bf interfNode} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_ad6ed82efebee0dd2b0334aec5a7c0059}
+
+\begin{DoxyCode}
+                                         {
+        if (_neighborSet.find(node->getPsudoReg()) == _neighborSet.end()) {
+                _neighborSet.insert(node->getPsudoReg());
+                _edgeList_static->Append(node);
+                _edgeList_dynamic->Append(node);
+                node->addEdge(this);
+        }
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d}{
+\index{interfNode@{interfNode}!assignReg@{assignReg}}
+\index{assignReg@{assignReg}!interfNode@{interfNode}}
+\subsubsection[{assignReg}]{\setlength{\rightskip}{0pt plus 5cm}void interfNode::assignReg (
+\begin{DoxyParamCaption}
+\item[{set$<$ long int $>$ \&}]{GRFset}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d}
+
+\begin{DoxyCode}
+                                               {
+        set<long int> usedRegSet, unusedRegSet;
+        for (int i = 0; i < _edgeList_static->NumElements(); i++) {
+                interfNode *node = _edgeList_static->Nth(i);
+                long int nodeReg = node->getReg();
+                if (nodeReg != -1) usedRegSet.insert(nodeReg);
+        }
+        std::set_difference(RFset.begin(), RFset.end(), usedRegSet.begin(), usedR
+      egSet.end(), std::inserter(unusedRegSet, unusedRegSet.begin()));
+        Assert(unusedRegSet.size() > 0 && "No register value found to assign.");
+        _reg = *(unusedRegSet.begin());
+        Assert(((_reg >= GRF_LO && _reg <= GRF_HI) || (_reg >= LRF_LO && _reg <= 
+      LRF_HI)) && "Invalid Register Value");
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_ae7958792c61a6edc8f6789812425ac73}{
+\index{interfNode@{interfNode}!getEdgeList@{getEdgeList}}
+\index{getEdgeList@{getEdgeList}!interfNode@{interfNode}}
+\subsubsection[{getEdgeList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf interfNode} $\ast$ $>$ $\ast$ interfNode::getEdgeList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_ae7958792c61a6edc8f6789812425ac73}
+
+\begin{DoxyCode}
+                                           {
+        return _edgeList_dynamic;
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_a849288bb063ab927d0938254066c5ce7}{
+\index{interfNode@{interfNode}!getNeighborSize@{getNeighborSize}}
+\index{getNeighborSize@{getNeighborSize}!interfNode@{interfNode}}
+\subsubsection[{getNeighborSize}]{\setlength{\rightskip}{0pt plus 5cm}int interfNode::getNeighborSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a849288bb063ab927d0938254066c5ce7}
+
+\begin{DoxyCode}
+                                {
+        return _neighborSet.size();
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_a139d1365e2b0eb15797c61f0f4d61464}{
+\index{interfNode@{interfNode}!getPsudoReg@{getPsudoReg}}
+\index{getPsudoReg@{getPsudoReg}!interfNode@{interfNode}}
+\subsubsection[{getPsudoReg}]{\setlength{\rightskip}{0pt plus 5cm}long int interfNode::getPsudoReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a139d1365e2b0eb15797c61f0f4d61464}
+
+\begin{DoxyCode}
+                                 {
+        return _psudoReg;
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}{
+\index{interfNode@{interfNode}!getReg@{getReg}}
+\index{getReg@{getReg}!interfNode@{interfNode}}
+\subsubsection[{getReg}]{\setlength{\rightskip}{0pt plus 5cm}long int interfNode::getReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}
+
+\begin{DoxyCode}
+                            {
+        return _reg;
+}\end{DoxyCode}
+\hypertarget{classinterfNode_a28de448897ec0c075e14f34c9aec4938}{
+\index{interfNode@{interfNode}!removeAneighbor@{removeAneighbor}}
+\index{removeAneighbor@{removeAneighbor}!interfNode@{interfNode}}
+\subsubsection[{removeAneighbor}]{\setlength{\rightskip}{0pt plus 5cm}void interfNode::removeAneighbor (
+\begin{DoxyParamCaption}
+\item[{{\bf interfNode} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a28de448897ec0c075e14f34c9aec4938}
+
+\begin{DoxyCode}
+                                                 {
+        long int nodePsudoReg = node->getPsudoReg();
+        for (int i = 0; i < _edgeList_dynamic->NumElements(); i++) {
+                if (nodePsudoReg == _edgeList_dynamic->Nth(i)->getPsudoReg()) {
+                        _neighborSet.erase(nodePsudoReg);
+                        _edgeList_dynamic->RemoveAt(i);
+                        break;
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{classinterfNode_a73af59beda246607573abffaf434c232}{
+\index{interfNode@{interfNode}!removeFromGraph@{removeFromGraph}}
+\index{removeFromGraph@{removeFromGraph}!interfNode@{interfNode}}
+\subsubsection[{removeFromGraph}]{\setlength{\rightskip}{0pt plus 5cm}void interfNode::removeFromGraph (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classinterfNode_a73af59beda246607573abffaf434c232}
+
+\begin{DoxyCode}
+                                 {
+        int neighborSize = _edgeList_dynamic->NumElements();
+        while (_edgeList_dynamic->NumElements() > 0) {
+                _edgeList_dynamic->Nth(0)->removeAneighbor(this);
+                _neighborSet.erase(_edgeList_dynamic->Nth(0)->getPsudoReg());
+                _edgeList_dynamic->RemoveAt(0);
+        }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{interfNode_8h}{interfNode.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{interfNode_8cpp}{interfNode.cpp}\end{DoxyCompactItemize}

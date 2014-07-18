@@ -1,0 +1,96 @@
+\hypertarget{binaryTranslator_2quickSort_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/quickSort.h File Reference}
+\label{binaryTranslator_2quickSort_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/quickSort.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/quickSort.h}}
+}
+{\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{binaryTranslator_2quickSort_8h_a48781b84ce14fccda05b3081e6d5a196}{quicksortLongestPath} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$list, int left, int right)
+\item 
+void \hyperlink{binaryTranslator_2quickSort_8h_a9b60d58c6031a4013f0a26bdd29d78ff}{swap} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$list, int x, int \hyperlink{ino_2_8AppleDouble_2sysClock_8cpp_afb62bada7d96f8541e9f40946e85b156}{y})
+\item 
+int \hyperlink{binaryTranslator_2quickSort_8h_ab89021bdedd9cf3069b0abdfa7e5e585}{partitionLongestPath} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$list, int left, int right)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{binaryTranslator_2quickSort_8h_ab89021bdedd9cf3069b0abdfa7e5e585}{
+\index{binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}!partitionLongestPath@{partitionLongestPath}}
+\index{partitionLongestPath@{partitionLongestPath}!binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}}
+\subsubsection[{partitionLongestPath}]{\setlength{\rightskip}{0pt plus 5cm}int partitionLongestPath (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{list, }
+\item[{int}]{left, }
+\item[{int}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2quickSort_8h_ab89021bdedd9cf3069b0abdfa7e5e585}
+
+\begin{DoxyCode}
+                                                                        {
+    int pivotValue = list->Nth(left)->getLongestPath();
+    Assert(pivotValue > -1);
+    int originalLeft = left;
+
+    do {
+        do {
+            left++;
+        } while (left < right && list->Nth(left)->getLongestPath() > pivotValue);
+      
+
+        while (list->Nth(right)->getLongestPath() < pivotValue)
+            right--;
+        if(left < right)
+            swap(list, left, right);
+    } while (left < right);
+
+    swap(list, originalLeft, right);
+
+    return right;
+}\end{DoxyCode}
+\hypertarget{binaryTranslator_2quickSort_8h_a48781b84ce14fccda05b3081e6d5a196}{
+\index{binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}!quicksortLongestPath@{quicksortLongestPath}}
+\index{quicksortLongestPath@{quicksortLongestPath}!binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}}
+\subsubsection[{quicksortLongestPath}]{\setlength{\rightskip}{0pt plus 5cm}void quicksortLongestPath (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{list, }
+\item[{int}]{left, }
+\item[{int}]{right}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2quickSort_8h_a48781b84ce14fccda05b3081e6d5a196}
+
+\begin{DoxyCode}
+{
+    if( left < right )
+    {
+        int pivotPosition = partitionLongestPath(list, left, right);
+        quicksortLongestPath(list, left, pivotPosition - 1);
+        quicksortLongestPath(list, pivotPosition + 1, right);
+    }
+}
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2quickSort_8h_a9b60d58c6031a4013f0a26bdd29d78ff}{
+\index{binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}!swap@{swap}}
+\index{swap@{swap}!binaryTranslator/quickSort.h@{binaryTranslator/quickSort.h}}
+\subsubsection[{swap}]{\setlength{\rightskip}{0pt plus 5cm}void swap (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{list, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}
+\label{binaryTranslator_2quickSort_8h_a9b60d58c6031a4013f0a26bdd29d78ff}
+
+\begin{DoxyCode}
+                                                  {
+   instruction* tempX = list->Nth(x); 
+   instruction* tempY = list->Nth(y);
+
+   list->RemoveAt(x);
+   list->InsertAt(tempY,x);
+   list->RemoveAt(y);
+   list->InsertAt(tempX,y);
+} 
+\end{DoxyCode}

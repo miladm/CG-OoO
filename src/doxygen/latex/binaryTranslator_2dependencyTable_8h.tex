@@ -1,0 +1,79 @@
+\hypertarget{binaryTranslator_2dependencyTable_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dependencyTable.h File Reference}
+\label{binaryTranslator_2dependencyTable_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dependencyTable.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dependencyTable.h}}
+}
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classdependencyTable}{dependencyTable}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \{ \par
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{MEM\_\-READ}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{MEM\_\-WRITE}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{REG\_\-WRITE}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{REG\_\-READ}, 
+\par
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{MEM\_\-READ}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{MEM\_\-WRITE}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{REG\_\-WRITE}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{REG\_\-READ}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{
+\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!tableType@{tableType}}
+\index{tableType@{tableType}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}
+\subsubsection[{tableType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tableType}}}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{MEM\_\-READ@{MEM\_\-READ}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!MEM\_\-READ@{MEM\_\-READ}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{
+MEM\_\-READ}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}
+}]\index{MEM\_\-WRITE@{MEM\_\-WRITE}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!MEM\_\-WRITE@{MEM\_\-WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{
+MEM\_\-WRITE}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}
+}]\index{REG\_\-WRITE@{REG\_\-WRITE}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!REG\_\-WRITE@{REG\_\-WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{
+REG\_\-WRITE}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}
+}]\index{REG\_\-READ@{REG\_\-READ}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!REG\_\-READ@{REG\_\-READ}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{
+REG\_\-READ}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}
+}]\index{MEM\_\-READ@{MEM\_\-READ}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!MEM\_\-READ@{MEM\_\-READ}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{
+MEM\_\-READ}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}
+}]\index{MEM\_\-WRITE@{MEM\_\-WRITE}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!MEM\_\-WRITE@{MEM\_\-WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{
+MEM\_\-WRITE}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}
+}]\index{REG\_\-WRITE@{REG\_\-WRITE}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!REG\_\-WRITE@{REG\_\-WRITE}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{
+REG\_\-WRITE}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}
+}]\index{REG\_\-READ@{REG\_\-READ}!binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}}\index{binaryTranslator/dependencyTable.h@{binaryTranslator/dependencyTable.h}!REG\_\-READ@{REG\_\-READ}}\item[{\em 
+\hypertarget{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{
+REG\_\-READ}
+\label{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;
+\end{DoxyCode}

@@ -1,0 +1,141 @@
+\hypertarget{namespaceDebug}{
+\section{Debug Namespace Reference}
+\label{namespaceDebug}\index{Debug@{Debug}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structDebug_1_1AllFlags}{AllFlags}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std::map$<$ string, Flag $\ast$ $>$ \hyperlink{namespaceDebug_ac1a92d7a229e02f4e3081653c52e821d}{FlagsMap}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceDebug_a3a24898e3ca48ef89e2029ab6e43665c}{breakpoint} ()
+\item 
+\hyperlink{namespaceDebug_ac1a92d7a229e02f4e3081653c52e821d}{FlagsMap} \& \hyperlink{namespaceDebug_a2e5d5eb12f0767ef733518a07a287e43}{allFlags} ()
+\item 
+Flag $\ast$ \hyperlink{namespaceDebug_a09cf38987e4932dd5e0bc71954f2b637}{findFlag} (const std::string \&name)
+\item 
+bool \hyperlink{namespaceDebug_ae27d4c45a021062ae81d1321c3490326}{changeFlag} (const char $\ast$s, bool value)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceDebug_a6eec1fa1c405c62968ca11295758d429}{allFlagsVersion} = 0
+\item 
+\hyperlink{structDebug_1_1AllFlags}{AllFlags} \hyperlink{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{theAllFlags}
+\item 
+Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{All} = \&\hyperlink{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{theAllFlags}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{namespaceDebug_ac1a92d7a229e02f4e3081653c52e821d}{
+\index{Debug@{Debug}!FlagsMap@{FlagsMap}}
+\index{FlagsMap@{FlagsMap}!Debug@{Debug}}
+\subsubsection[{FlagsMap}]{\setlength{\rightskip}{0pt plus 5cm}typedef std::map$<$string, Flag $\ast$$>$ {\bf Debug::FlagsMap}}}
+\label{namespaceDebug_ac1a92d7a229e02f4e3081653c52e821d}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceDebug_a2e5d5eb12f0767ef733518a07a287e43}{
+\index{Debug@{Debug}!allFlags@{allFlags}}
+\index{allFlags@{allFlags}!Debug@{Debug}}
+\subsubsection[{allFlags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf FlagsMap}\& Debug::allFlags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceDebug_a2e5d5eb12f0767ef733518a07a287e43}
+
+\begin{DoxyCode}
+{
+    static FlagsMap flags;
+    return flags;
+}
+\end{DoxyCode}
+\hypertarget{namespaceDebug_a3a24898e3ca48ef89e2029ab6e43665c}{
+\index{Debug@{Debug}!breakpoint@{breakpoint}}
+\index{breakpoint@{breakpoint}!Debug@{Debug}}
+\subsubsection[{breakpoint}]{\setlength{\rightskip}{0pt plus 5cm}void Debug::breakpoint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceDebug_a3a24898e3ca48ef89e2029ab6e43665c}
+
+\begin{DoxyCode}
+{
+#ifndef NDEBUG
+    kill(getpid(), SIGTRAP);
+#else
+    cprintf("Debug::breakpoint suppressed, compiled with NDEBUG\n");
+#endif
+}
+\end{DoxyCode}
+\hypertarget{namespaceDebug_ae27d4c45a021062ae81d1321c3490326}{
+\index{Debug@{Debug}!changeFlag@{changeFlag}}
+\index{changeFlag@{changeFlag}!Debug@{Debug}}
+\subsubsection[{changeFlag}]{\setlength{\rightskip}{0pt plus 5cm}bool Debug::changeFlag (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s, }
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceDebug_ae27d4c45a021062ae81d1321c3490326}
+
+\begin{DoxyCode}
+{
+    Flag *f = findFlag(s);
+    if (!f)
+        return false;
+
+    if (value)
+        f->enable();
+    else
+        f->disable();
+
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{namespaceDebug_a09cf38987e4932dd5e0bc71954f2b637}{
+\index{Debug@{Debug}!findFlag@{findFlag}}
+\index{findFlag@{findFlag}!Debug@{Debug}}
+\subsubsection[{findFlag}]{\setlength{\rightskip}{0pt plus 5cm}Flag$\ast$ Debug::findFlag (
+\begin{DoxyParamCaption}
+\item[{const std::string \&}]{name}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceDebug_a09cf38987e4932dd5e0bc71954f2b637}
+
+\begin{DoxyCode}
+{
+    FlagsMap::iterator i = allFlags().find(name);
+    if (i == allFlags().end())
+        return NULL;
+    return i->second;
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{
+\index{Debug@{Debug}!All@{All}}
+\index{All@{All}!Debug@{Debug}}
+\subsubsection[{All}]{\setlength{\rightskip}{0pt plus 5cm}Flag$\ast$ const {\bf Debug::All} = \&{\bf theAllFlags}}}
+\label{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}
+\hypertarget{namespaceDebug_a6eec1fa1c405c62968ca11295758d429}{
+\index{Debug@{Debug}!allFlagsVersion@{allFlagsVersion}}
+\index{allFlagsVersion@{allFlagsVersion}!Debug@{Debug}}
+\subsubsection[{allFlagsVersion}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Debug::allFlagsVersion} = 0}}
+\label{namespaceDebug_a6eec1fa1c405c62968ca11295758d429}
+\hypertarget{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{
+\index{Debug@{Debug}!theAllFlags@{theAllFlags}}
+\index{theAllFlags@{theAllFlags}!Debug@{Debug}}
+\subsubsection[{theAllFlags}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AllFlags} {\bf Debug::theAllFlags}}}
+\label{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}

@@ -1,0 +1,63 @@
+\hypertarget{classRAMtable}{
+\section{RAMtable$<$ tableType\_\-T $>$ Class Template Reference}
+\label{classRAMtable}\index{RAMtable@{RAMtable}}
+}
+
+
+{\ttfamily \#include $<$table.h$>$}
+
+Inheritance diagram for RAMtable$<$ tableType\_\-T $>$:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRAMtable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRAMtable_ac55186de99f6f9330182bb2c54327468}{RAMtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\item 
+\hyperlink{classRAMtable_af78b491a54d6846af06058d803beda1a}{$\sim$RAMtable} ()
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename tableType\_\-T$>$ class RAMtable$<$ tableType\_\-T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classRAMtable_ac55186de99f6f9330182bb2c54327468}{
+\index{RAMtable@{RAMtable}!RAMtable@{RAMtable}}
+\index{RAMtable@{RAMtable}!RAMtable@{RAMtable}}
+\subsubsection[{RAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf RAMtable}$<$ tableType\_\-T $>$::{\bf RAMtable} (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{string}]{table\_\-name = {\ttfamily \char`\"{}RAMtable$<$~tableType\_\-T~$>$\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classRAMtable_ac55186de99f6f9330182bb2c54327468}
+
+\begin{DoxyCode}
+    : table<tableType_T> (len, RAM_ARRAY,
+                          wr_port_cnt, rd_port_cnt, table_name)
+{}
+\end{DoxyCode}
+\hypertarget{classRAMtable_af78b491a54d6846af06058d803beda1a}{
+\index{RAMtable@{RAMtable}!$\sim$RAMtable@{$\sim$RAMtable}}
+\index{$\sim$RAMtable@{$\sim$RAMtable}!RAMtable@{RAMtable}}
+\subsubsection[{$\sim$RAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf RAMtable}$<$ tableType\_\-T $>$::$\sim${\bf RAMtable} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classRAMtable_af78b491a54d6846af06058d803beda1a}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8h}{table.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8cpp}{table.cpp}\end{DoxyCompactItemize}

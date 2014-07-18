@@ -1,0 +1,80 @@
+\hypertarget{statistics_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/statistics.cc File Reference}
+\label{statistics_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/statistics.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/statistics.cc}}
+}
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$iomanip$>$}\par
+{\ttfamily \#include $<$list$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}base/callback.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/cprintf.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/debug.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/hostinfo.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/statistics.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/str.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/time.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/trace.hh\char`\"{}}\par
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceStats}{Stats}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef map$<$ const void $\ast$, Info $\ast$ $>$ \hyperlink{namespaceStats_abf12e88b5899310c1adcf5be61d6bee3}{Stats::MapType}
+\item 
+typedef map$<$ std::string, Info $\ast$ $>$ \hyperlink{namespaceStats_aa5595c5604b2fec03e55b1f32b521595}{Stats::NameMapType}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+list$<$ Info $\ast$ $>$ \& \hyperlink{namespaceStats_a52f464eb02d70d04e60fd6c090366560}{Stats::statsList} ()
+\item 
+MapType \& \hyperlink{namespaceStats_a3eb4a123811e05e9b29748cf23cbdc31}{Stats::statsMap} ()
+\item 
+NameMapType \& \hyperlink{namespaceStats_aae51efeedd0840ece6e968c96df90038}{Stats::nameMap} ()
+\item 
+bool \hyperlink{namespaceStats_a6bae8e555771c8cb0819d78c60359656}{Stats::validateStatName} (const string \&name)
+\item 
+void \hyperlink{namespaceStats_a105c595669b79620fce95c825f745bce}{Stats::registerResetCallback} (Callback $\ast$cb)
+\item 
+bool \hyperlink{namespaceStats_ae5a14285f2510051bae7923aa2612d96}{Stats::enabled} ()
+\item 
+void \hyperlink{namespaceStats_a03d2f1935a0ef6250fa5df657a82310b}{Stats::enable} ()
+\item 
+void \hyperlink{namespaceStats_ace78801422912439fb2f81572cc9c373}{Stats::registerDumpCallback} (Callback $\ast$cb)
+\item 
+void \hyperlink{statistics_8cc_a20ffbd4f2cb43409f0395236df461288}{debugDumpStats} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceStats_abacf74f0010f42902b864f51751d05c9}{Stats::debug\_\-break\_\-id} = -\/1
+\item 
+CallbackQueue \hyperlink{namespaceStats_a84952ecad0a9644e0ea9526b3736c8b7}{Stats::dumpQueue}
+\item 
+CallbackQueue \hyperlink{namespaceStats_a052117624dd534c773035ba2e03f4474}{Stats::resetQueue}
+\item 
+bool \hyperlink{namespaceStats_ae793c31e3372c51a4996ce57cc219a54}{Stats::\_\-enabled} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{statistics_8cc_a20ffbd4f2cb43409f0395236df461288}{
+\index{statistics.cc@{statistics.cc}!debugDumpStats@{debugDumpStats}}
+\index{debugDumpStats@{debugDumpStats}!statistics.cc@{statistics.cc}}
+\subsubsection[{debugDumpStats}]{\setlength{\rightskip}{0pt plus 5cm}void debugDumpStats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{statistics_8cc_a20ffbd4f2cb43409f0395236df461288}
+
+\begin{DoxyCode}
+{
+    Stats::dump();
+}
+\end{DoxyCode}

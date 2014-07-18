@@ -1,0 +1,76 @@
+\hypertarget{structDebug_1_1AllFlags}{
+\section{Debug::AllFlags Struct Reference}
+\label{structDebug_1_1AllFlags}\index{Debug::AllFlags@{Debug::AllFlags}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structDebug_1_1AllFlags_a9d69a517288656933a894d658f50ac9e}{AllFlags} ()
+\item 
+void \hyperlink{structDebug_1_1AllFlags_a2a932c436b017c14d6c3c874fb13bd6b}{enable} ()
+\item 
+void \hyperlink{structDebug_1_1AllFlags_a7a8e72f1538934d8c9fa7fdac21b5615}{disable} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structDebug_1_1AllFlags_a9d69a517288656933a894d658f50ac9e}{
+\index{Debug::AllFlags@{Debug::AllFlags}!AllFlags@{AllFlags}}
+\index{AllFlags@{AllFlags}!Debug::AllFlags@{Debug::AllFlags}}
+\subsubsection[{AllFlags}]{\setlength{\rightskip}{0pt plus 5cm}Debug::AllFlags::AllFlags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structDebug_1_1AllFlags_a9d69a517288656933a894d658f50ac9e}
+
+\begin{DoxyCode}
+        : Flag("All", "All Flags")
+    {}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structDebug_1_1AllFlags_a7a8e72f1538934d8c9fa7fdac21b5615}{
+\index{Debug::AllFlags@{Debug::AllFlags}!disable@{disable}}
+\index{disable@{disable}!Debug::AllFlags@{Debug::AllFlags}}
+\subsubsection[{disable}]{\setlength{\rightskip}{0pt plus 5cm}void Debug::AllFlags::disable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structDebug_1_1AllFlags_a7a8e72f1538934d8c9fa7fdac21b5615}
+
+\begin{DoxyCode}
+    {
+        FlagsMap::iterator i = allFlags().begin();
+        FlagsMap::iterator end = allFlags().end();
+        for (; i != end; ++i)
+            if (i->second != this)
+                i->second->disable();
+    }
+\end{DoxyCode}
+\hypertarget{structDebug_1_1AllFlags_a2a932c436b017c14d6c3c874fb13bd6b}{
+\index{Debug::AllFlags@{Debug::AllFlags}!enable@{enable}}
+\index{enable@{enable}!Debug::AllFlags@{Debug::AllFlags}}
+\subsubsection[{enable}]{\setlength{\rightskip}{0pt plus 5cm}void Debug::AllFlags::enable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structDebug_1_1AllFlags_a2a932c436b017c14d6c3c874fb13bd6b}
+
+\begin{DoxyCode}
+    {
+        FlagsMap::iterator i = allFlags().begin();
+        FlagsMap::iterator end = allFlags().end();
+        for (; i != end; ++i)
+            if (i->second != this)
+                i->second->enable();
+    }
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/\hyperlink{debug_8cc}{debug.cc}\end{DoxyCompactItemize}

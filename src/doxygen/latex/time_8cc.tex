@@ -1,0 +1,70 @@
+\hypertarget{time_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/time.cc File Reference}
+\label{time_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/time.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/time.cc}}
+}
+{\ttfamily \#include $<$cstdlib$>$}\par
+{\ttfamily \#include $<$ctime$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$sstream$>$}\par
+{\ttfamily \#include \char`\"{}base/time.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}config/use\_\-posix\_\-clock.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/core.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/serialize.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{time_8cc_a70619da6bb4db996fece0c1fb1228e34}{sleep} (const Time \&time)
+\item 
+time\_\-t \hyperlink{time_8cc_a2c5d52bd64c50fccaf8e6bafde034236}{mkutctime} (struct tm $\ast$time)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{time_8cc_a2c5d52bd64c50fccaf8e6bafde034236}{
+\index{time.cc@{time.cc}!mkutctime@{mkutctime}}
+\index{mkutctime@{mkutctime}!time.cc@{time.cc}}
+\subsubsection[{mkutctime}]{\setlength{\rightskip}{0pt plus 5cm}time\_\-t mkutctime (
+\begin{DoxyParamCaption}
+\item[{struct tm $\ast$}]{time}
+\end{DoxyParamCaption}
+)}}
+\label{time_8cc_a2c5d52bd64c50fccaf8e6bafde034236}
+
+\begin{DoxyCode}
+{
+    time_t ret;
+    char *tz;
+
+    tz = getenv("TZ");
+    setenv("TZ", "", 1);
+    tzset();
+    ret = mktime(time);
+    if (tz)
+        setenv("TZ", tz, 1);
+    else
+        unsetenv("TZ");
+    tzset();
+    return ret;
+}
+\end{DoxyCode}
+\hypertarget{time_8cc_a70619da6bb4db996fece0c1fb1228e34}{
+\index{time.cc@{time.cc}!sleep@{sleep}}
+\index{sleep@{sleep}!time.cc@{time.cc}}
+\subsubsection[{sleep}]{\setlength{\rightskip}{0pt plus 5cm}void sleep (
+\begin{DoxyParamCaption}
+\item[{const Time \&}]{time}
+\end{DoxyParamCaption}
+)}}
+\label{time_8cc_a70619da6bb4db996fece0c1fb1228e34}
+
+\begin{DoxyCode}
+{
+    timespec ts = time;
+
+#if USE_POSIX_CLOCK
+    clock_nanosleep(CLOCK_MONOTONIC, 0, &ts, NULL);
+#else
+    nanosleep(&ts, NULL);
+#endif
+}
+\end{DoxyCode}

@@ -1,0 +1,67 @@
+\hypertarget{structo3__regElem}{
+\section{o3\_\-regElem Struct Reference}
+\label{structo3__regElem}\index{o3\_\-regElem@{o3\_\-regElem}}
+}
+
+
+{\ttfamily \#include $<$registerRename.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structo3__regElem_a8e080572074bc9c21f9afe688bc4ee41}{o3\_\-regElem} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg, \hyperlink{global_2global_8h_aa58e77d5a6caaeed4d4bd6f5b30f3ee7}{REG\_\-REN\_\-STATE} state)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{structo3__regElem_aeaba0b876f3f04eca64288cc229706a4}{\_\-reg}
+\item 
+\hyperlink{global_2global_8h_aa58e77d5a6caaeed4d4bd6f5b30f3ee7}{REG\_\-REN\_\-STATE} \hyperlink{structo3__regElem_af75174fd00fb8b24f4a47edf10b2e97a}{\_\-reg\_\-state}
+\item 
+\hyperlink{structo3__regElem}{o3\_\-regElem} $\ast$ \hyperlink{structo3__regElem_adf5c32b447e15a5df8b1f51fbc8921f4}{\_\-prev\_\-pr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structo3__regElem_a8e080572074bc9c21f9afe688bc4ee41}{
+\index{o3\_\-regElem@{o3\_\-regElem}!o3\_\-regElem@{o3\_\-regElem}}
+\index{o3\_\-regElem@{o3\_\-regElem}!o3_regElem@{o3\_\-regElem}}
+\subsubsection[{o3\_\-regElem}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-regElem::o3\_\-regElem (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{reg, }
+\item[{{\bf REG\_\-REN\_\-STATE}}]{state}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structo3__regElem_a8e080572074bc9c21f9afe688bc4ee41}
+
+\begin{DoxyCode}
+        : _reg (reg)
+    {
+        Assert (state == AVAILABLE || state == ARCH_REG);
+        _reg_state = state;
+        _prev_pr = NULL;
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structo3__regElem_adf5c32b447e15a5df8b1f51fbc8921f4}{
+\index{o3\_\-regElem@{o3\_\-regElem}!\_\-prev\_\-pr@{\_\-prev\_\-pr}}
+\index{\_\-prev\_\-pr@{\_\-prev\_\-pr}!o3_regElem@{o3\_\-regElem}}
+\subsubsection[{\_\-prev\_\-pr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf o3\_\-regElem}$\ast$ {\bf o3\_\-regElem::\_\-prev\_\-pr}}}
+\label{structo3__regElem_adf5c32b447e15a5df8b1f51fbc8921f4}
+\hypertarget{structo3__regElem_aeaba0b876f3f04eca64288cc229706a4}{
+\index{o3\_\-regElem@{o3\_\-regElem}!\_\-reg@{\_\-reg}}
+\index{\_\-reg@{\_\-reg}!o3_regElem@{o3\_\-regElem}}
+\subsubsection[{\_\-reg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf PR} {\bf o3\_\-regElem::\_\-reg}}}
+\label{structo3__regElem_aeaba0b876f3f04eca64288cc229706a4}
+\hypertarget{structo3__regElem_af75174fd00fb8b24f4a47edf10b2e97a}{
+\index{o3\_\-regElem@{o3\_\-regElem}!\_\-reg\_\-state@{\_\-reg\_\-state}}
+\index{\_\-reg\_\-state@{\_\-reg\_\-state}!o3_regElem@{o3\_\-regElem}}
+\subsubsection[{\_\-reg\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf REG\_\-REN\_\-STATE} {\bf o3\_\-regElem::\_\-reg\_\-state}}}
+\label{structo3__regElem_af75174fd00fb8b24f4a47edf10b2e97a}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{backend_2o3_2registerRename_8h}{registerRename.h}\end{DoxyCompactItemize}

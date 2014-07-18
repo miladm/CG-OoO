@@ -1,0 +1,253 @@
+\hypertarget{classo3__rfManager}{
+\section{o3\_\-rfManager Class Reference}
+\label{classo3__rfManager}\index{o3\_\-rfManager@{o3\_\-rfManager}}
+}
+
+
+{\ttfamily \#include $<$rfManager.h$>$}
+
+Inheritance diagram for o3\_\-rfManager:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__rfManager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}{o3\_\-rfManager} (string rf\_\-name=\char`\"{}o3\_\-rfManager\char`\"{})
+\item 
+\hyperlink{classo3__rfManager_a42a66fc34794ca6c7209f743557a2b3a}{$\sim$o3\_\-rfManager} ()
+\item 
+bool \hyperlink{classo3__rfManager_a95bfea851bf8107f208e550839749063}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+bool \hyperlink{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} numRegRdPorts)
+\item 
+bool \hyperlink{classo3__rfManager_a023f3671f90123fe8749ff13606f273c}{canRename} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+bool \hyperlink{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}{renameRegs} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+bool \hyperlink{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}{isReady} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+void \hyperlink{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}{completeRegs} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+void \hyperlink{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}{commitRegs} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRenameReg} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!o3\_\-rfManager@{o3\_\-rfManager}}
+\index{o3\_\-rfManager@{o3\_\-rfManager}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{o3\_\-rfManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-rfManager::o3\_\-rfManager (
+\begin{DoxyParamCaption}
+\item[{string}]{rf\_\-name = {\ttfamily \char`\"{}o3\_\-rfManager\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}
+
+\begin{DoxyCode}
+    : unit (rf_name),
+      _GRF ("registerRename")
+{ }
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a42a66fc34794ca6c7209f743557a2b3a}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!$\sim$o3\_\-rfManager@{$\sim$o3\_\-rfManager}}
+\index{$\sim$o3\_\-rfManager@{$\sim$o3\_\-rfManager}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{$\sim$o3\_\-rfManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-rfManager::$\sim$o3\_\-rfManager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a42a66fc34794ca6c7209f743557a2b3a}
+
+\begin{DoxyCode}
+{ }
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__rfManager_a023f3671f90123fe8749ff13606f273c}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!canRename@{canRename}}
+\index{canRename@{canRename}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{canRename}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::canRename (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a023f3671f90123fe8749ff13606f273c}
+
+\begin{DoxyCode}
+                                                 {
+    List<AR>* ar_wr = ins->getARwrList ();
+    if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
+        return false; /* STALL FETCH */
+    }
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!commitRegs@{commitRegs}}
+\index{commitRegs@{commitRegs}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{commitRegs}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-rfManager::commitRegs (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}
+
+\begin{DoxyCode}
+                                                  {
+    List<PR>* _pr = ins->getPRwrList ();
+    List<PR>* _ar = ins->getARwrList ();
+    Assert (_ar->NumElements () == _pr->NumElements ());
+    for (int i = 0; i < _pr->NumElements (); i++) {
+        PR p_reg = _pr->Nth (i);
+        AR a_reg = _ar->Nth (i);
+        PR prev_pr = _GRF.getPrevPR (p_reg);
+        _GRF.updatePRstate (p_reg,ARCH_REG);
+        _GRF.updatePRstate (prev_pr,AVAILABLE);
+        _GRF.update_cRAT (a_reg,p_reg);
+        _GRF.setAsAvailablePR (prev_pr);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!completeRegs@{completeRegs}}
+\index{completeRegs@{completeRegs}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{completeRegs}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-rfManager::completeRegs (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}
+
+\begin{DoxyCode}
+                                                    {
+    List<PR>* _pr = ins->getPRwrList ();
+    for (int i = 0; i < _pr->NumElements (); i++) {
+        PR p_reg = _pr->Nth (i);
+        _GRF.updatePRstate (p_reg,RENAMED_VALID);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeRdPort@{hasFreeRdPort}}
+\index{hasFreeRdPort@{hasFreeRdPort}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::hasFreeRdPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now, }
+\item[{{\bf WIDTH}}]{numRegRdPorts}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}
+
+\begin{DoxyCode}
+                                                                {
+    return _GRF.hasFreeRdPort (now, numRegRdPorts);
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a95bfea851bf8107f208e550839749063}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeWrPort@{hasFreeWrPort}}
+\index{hasFreeWrPort@{hasFreeWrPort}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::hasFreeWrPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a95bfea851bf8107f208e550839749063}
+
+\begin{DoxyCode}
+                                           {
+    return _GRF.hasFreeWrPort (now);
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!isReady@{isReady}}
+\index{isReady@{isReady}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{isReady}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::isReady (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}
+
+\begin{DoxyCode}
+                                               {
+    List<AR>* p_rdReg_list = ins->getPRrdList ();
+    for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = p_rdReg_list->Nth (i);
+        if (!_GRF.isPRvalid (reg)) {
+            return false; /* operand not available */
+        } else {
+            p_rdReg_list->RemoveAt (i); /*optimization */
+        }
+    }
+    if (p_rdReg_list->NumElements () == 0) {
+        return true; /* all operands available */
+    }
+    return false; /* not all operands available */
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!renameRegs@{renameRegs}}
+\index{renameRegs@{renameRegs}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{renameRegs}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::renameRegs (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}
+
+\begin{DoxyCode}
+                                                  {
+    List<AR>* ar_rd = ins->getARrdList ();
+    List<AR>* ar_wr = ins->getARwrList ();
+    Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
+
+    /* RENAME READ REFISTERS FIRST */
+    for (int i = 0; i < ar_rd->NumElements (); i++) {
+        AR a_reg = ar_rd->Nth (i);
+        PR p_reg = _GRF.renameReg (a_reg);
+        ins->setPR (p_reg, READ);
+    }
+
+    /* RENAME WRITE REFISTERS SECOND */
+    for (int i = 0; i < ar_wr->NumElements (); i++) {
+        Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have bee
+      n available.");
+        AR a_reg = ar_wr->Nth (i);
+        PR prev_pr = _GRF.renameReg (a_reg);
+        PR new_pr = _GRF.getAvailablePR ();
+        _GRF.update_fRAT (a_reg, new_pr);
+        _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
+        ins->setPR (new_pr, WRITE);
+    }
+    return false; /* DON'T STALL FETCH */
+}
+\end{DoxyCode}
+\hypertarget{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!squashRenameReg@{squashRenameReg}}
+\index{squashRenameReg@{squashRenameReg}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{squashRenameReg}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-rfManager::squashRenameReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}
+
+\begin{DoxyCode}
+                                    {
+    dbg.print (DBG_TEST, "** %s: %s (cyc:)\n", _c_name.c_str (), "in squash for R
+      R");
+    _GRF.squashRenameReg ();
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8h}{rfManager.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8cpp}{rfManager.cpp}\end{DoxyCompactItemize}

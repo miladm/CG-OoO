@@ -1,0 +1,561 @@
+\hypertarget{annotateTrace_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/annotateTrace.h File Reference}
+\label{annotateTrace_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/annotateTrace.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/annotateTrace.h}}
+}
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$list$>$}\par
+{\ttfamily \#include \char`\"{}basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{annotateTrace_8h_a1359aaee4cb6eba6fd6406cbc1f30773}{annotateTrace\_\-forBB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
+\item 
+void \hyperlink{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}{annotateTrace\_\-forPB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{annotateTrace_8h_a1359aaee4cb6eba6fd6406cbc1f30773}{
+\index{annotateTrace.h@{annotateTrace.h}!annotateTrace\_\-forBB@{annotateTrace\_\-forBB}}
+\index{annotateTrace\_\-forBB@{annotateTrace\_\-forBB}!annotateTrace.h@{annotateTrace.h}}
+\subsubsection[{annotateTrace\_\-forBB}]{\setlength{\rightskip}{0pt plus 5cm}void annotateTrace\_\-forBB (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{annotateTrace_8h_a1359aaee4cb6eba6fd6406cbc1f30773}
+
+\begin{DoxyCode}
+                                                                                 
+                                    {
+        for (int i = 0; i < bbList->NumElements(); i++) 
+                int size = bbList->Nth(i)->getBbSize();
+        FILE *traceFileInput, *traceFileOutput;
+        if ((traceFileInput  = fopen(("/scratch/tracesim/specint2006/"+(*program_
+      name)+".trace").c_str(), "r")) == NULL) //TODO PARAMETRIZE this line
+                Assert("Unable to open the input file.");
+        if ((traceFileOutput  = fopen(("/scratch/tracesim/specint2006/bb_trace_ar
+      chReg/"+(*program_name)+".trace").c_str(), "w")) == NULL) //TODO PARAMETRIZE this
+       line
+                Assert("Unable to open the output file.");
+        map<ADDR, basicblock*> bbHeaders;
+        map<int, int> bbSizeHist;
+
+        /* Create a list of program BB's for use later */
+        for (int i =  0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                bbHeaders.insert(pair<ADDR, basicblock*> (bb->getInsList()->Nth(0
+      )->getInsAddr(), bb));
+        }
+
+        /* Walk through the trace */
+        long long int insCounter = 0, insSkipCounter = 0, bbSize = 0, printedInsC
+      ounter = 0, printedPhiInsCounter = 0;
+        List<instruction*>* insList = new List<instruction*>;
+        ADDR insAddr, brAddr, junk_addr, brDstAddr;
+        bool new_bb = false, new_pb = false;
+        basicblock *currentBB = NULL, *prevBB = NULL;
+        char insType, junk_s[1000];
+        map<ADDR,string> dynBBMap;
+        int brTaken = -1;
+        //Get rid of first line (blank line perhaps?)
+        if (fgets (junk_s, 1000, traceFileInput) == NULL)
+                Assert("Trace file is empty!");
+        bool brFound = false;
+        fprintf(traceFileOutput, "{\n");
+        while((insType = fgetc (traceFileInput)) != EOF) {
+                insCounter++;
+                if (insType == 'R' || insType == 'W') {
+                        /* TODO put these two lines back */
+                        // insType = 'M';
+                        if (fscanf(traceFileInput, ",%llu,%llu", &junk_addr, &ins
+      Addr) == EOF) 
+                                Assert("Invalid end of line detected in trace fil
+      e.");
+                        if (fgets (junk_s, 1000, traceFileInput) == NULL) break; 
+      //grab the rest of line
+                        // Eliminate trace instructions that are not mapped in th
+      e CFG
+                        if (insAddrMap->find(insAddr) == insAddrMap->end()) {
+                                Assert(new_bb == false && "Illegal value for new_
+      bb flag.");
+                                insSkipCounter++;
+                                continue;
+                                // printf("skipping instruction %llx\n", insAddr)
+      ;
+                        }
+                        //Find out if this ins belongs to new BB
+                        if (bbHeaders.find(insAddr) != bbHeaders.end()) {
+                                new_bb = true;
+                                prevBB = currentBB;
+                                currentBB = bbHeaders[insAddr];
+                        } else if (currentBB->isInsAddrInBB(insAddr) == false) {
+                                new_bb = true;
+                                prevBB = currentBB;
+                                currentBB = bbHeaders[((*insAddrMap)[insAddr])->g
+      etMy_BB_id()];
+                        }
+                } else {
+                        /* TODO put these two lines back */
+                        // if (insType == 'B') insType = 'b';
+                        // else insType = 'o';
+                        if (insType == 'B') {
+                                if (fscanf(traceFileInput, ",%llu,%d,%llu", &insA
+      ddr, &brTaken, &brDstAddr) == EOF)
+                                        Assert("Invalid end of line detected in t
+      race file.");
+                        } else if (insType == 'A' || insType == 'F') {
+                                if (fscanf(traceFileInput, ",%llu", &insAddr) == 
+      EOF)
+                                        Assert("Invalid end of line detected in t
+      race file.");
+                        } else {
+                                Assert("Invalid Trace Instruction Type.");
+                        }
+                        if (fgets (junk_s, 1000, traceFileInput) == NULL) break; 
+      //grab the rest of line
+                        // Eliminate trace instructions that are not mapped in th
+      e CFG
+                        if (insAddrMap->find(insAddr) == insAddrMap->end()) {
+                                Assert(new_bb == false && "Illegal value for new_
+      bb flag.");
+                                insSkipCounter++;
+                                continue;
+                        }
+                        //Find out if this ins belongs to new BB
+                        if (bbHeaders.find(insAddr) != bbHeaders.end()) {
+                                new_bb = true;
+                                prevBB = currentBB;
+                                currentBB = bbHeaders[insAddr];
+                        } else if (currentBB->isInsAddrInBB(insAddr) == false) {
+                                new_bb = true;
+                                prevBB = currentBB;
+                                currentBB = bbHeaders[((*insAddrMap)[insAddr])->g
+      etMy_BB_id()];
+                        }
+                }
+                Assert(currentBB->isInsAddrInBB(insAddr) == true && "Trace instru
+      ction does not belong to current BB.");
+                if (new_bb) {
+                        map<ADDR,string>::iterator it;
+                        // Print BB/PB Header
+                        if (brFound == true) {
+                                fprintf(traceFileOutput, "H,%llu\n", brAddr);
+                        }
+                        // Store BB/PB Ins's
+                        if (prevBB == NULL) prevBB = currentBB; //for first BB
+                        // List<instruction*>* listSchBBList = prevBB->getInsList
+      _ListSchedule();
+                        List<instruction*>* listSchBBList = prevBB->getInsList();
+       //Replace this with above line for list-scheduling
+                        for (int i = 0; i < listSchBBList->NumElements(); i++) {
+                                // if (dynBBMap.find(listSchBBList->Nth(i)->getIn
+      sAddr()) == dynBBMap.end()) 
+                                        // printf("didn't find ins in map %d, %d,
+       %d\n", dynBBMap.size(), listSchBBList->NumElements(), dynBBMap.size() < listSchB
+      BList->NumElements());
+                                Assert (listSchBBList->Nth(i)->
+      isAlreadyAssignedArcRegs() == true);
+                                if (listSchBBList->Nth(i)->getInsAddr() == 
+      PHI_INS_ADDR) {
+                                        fprintf(traceFileOutput, "A,%d,%d#%d,%d#%
+      d,\n", PHI_INS_ADDR,listSchBBList->Nth(i)->getNthArchReg(0),listSchBBList->Nth(i)
+      ->getNthRegType(0),listSchBBList->Nth(i)->getNthArchReg(1),listSchBBList->Nth(i)-
+      >getNthRegType(1));
+                                        printedInsCounter++;
+                                        printedPhiInsCounter++;
+                                } else if (dynBBMap.find(listSchBBList->Nth(i)->
+      getInsAddr()) != dynBBMap.end()) {
+                                        fprintf(traceFileOutput, "%s", (dynBBMap[
+      listSchBBList->Nth(i)->getInsAddr()]).c_str());
+                                        printedInsCounter++;
+                                }
+                        }
+                        // for (it = dynBBMap.begin(); it != dynBBMap.end(); it++
+      ) {
+                        //      fprintf(traceFileOutput, "%s", (it->second).c_str
+      ());
+                        // } For storing exatly what comes out of trace (with no 
+      list scheduling)
+                        fprintf(traceFileOutput, "}\n{\n");
+                        new_bb = false;
+                        brFound = false;
+                        bbSizeHist[bbSize]++;
+                        bbSize = 0;
+                        dynBBMap.clear();
+                }
+                bbSize++;
+                // Construct ins string & store in ins-map
+                std::stringstream ss1, ss2;
+                string registers = ((*insAddrMap)[insAddr])->getArchRegisterStr()
+      ;
+                if (insType == 'R' || insType == 'W') {
+                        ss1 << insType << "," << junk_addr << "," << insAddr << "
+      ," << registers;
+                        // ss1 << insType << "," << junk_addr << "," << insAddr <
+      < junk_s; (original reg names)
+                } else if (insType == 'B') {
+                        ss1 << insType << "," << insAddr << "," << brTaken << ","
+       << brDstAddr << "," << registers;
+                        // ss1 << insType << "," << insAddr << "," << brTaken << 
+      "," << brDstAddr << junk_s; (original reg names)
+                } else { //A & F for insType
+                        ss1 << insType << "," << insAddr << "," << registers;
+                        // ss1 << insType << "," << insAddr << junk_s; (original 
+      reg names)
+                }
+                std::string s = ss1.str();
+                if (dynBBMap.find(insAddr) != dynBBMap.end()) {
+                        //Trace runs micro-ops, so it can have ins-addr replicas
+                        string t = dynBBMap[insAddr];
+                        ss2 << t << s;
+                        s = ss2.str();
+                        dynBBMap[insAddr] = s;
+                } else {
+                        dynBBMap.insert(pair<ADDR,string> (insAddr,s));
+                }
+                // Crearte basicblock headers
+                if (insType == 'B') {
+                        if (brFound != false) printf("%llu\n", brAddr);
+                        Assert(brFound == false && "Illegal value for brFound var
+      iable.");
+                        brFound = true;
+                        brAddr = insAddr;
+                }
+        }
+        if (brFound) {
+                fprintf(traceFileOutput, "H:%llu\n", brAddr);
+                brFound = false;
+        }
+        bbSizeHist[bbSize]++;
+        fprintf(traceFileOutput, "}\n");
+        printf("\tNumber of Trace Instructions Skipped: %lld (out of %lld)\n", in
+      sSkipCounter, insCounter);
+        printf("\tNumber of Trace Instructions Printed: %lld (out of %lld)\n", pr
+      intedInsCounter, insCounter-insSkipCounter);
+        printf("\tNumber of Trace Phi Instructions Printed: %lld (out of %lld)\n"
+      , printedPhiInsCounter, insCounter-printedPhiInsCounter);
+        DynBBSizeStat(bbSizeHist, program_name);
+}
+\end{DoxyCode}
+\hypertarget{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}{
+\index{annotateTrace.h@{annotateTrace.h}!annotateTrace\_\-forPB@{annotateTrace\_\-forPB}}
+\index{annotateTrace\_\-forPB@{annotateTrace\_\-forPB}!annotateTrace.h@{annotateTrace.h}}
+\subsubsection[{annotateTrace\_\-forPB}]{\setlength{\rightskip}{0pt plus 5cm}void annotateTrace\_\-forPB (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}
+
+\begin{DoxyCode}
+                                                                                 
+                                    {
+        for (int i = 0; i < pbList->NumElements(); i++) 
+                int size = pbList->Nth(i)->getBbSize();
+        FILE *traceFileInput, *traceFileOutput;
+        if ((traceFileInput  = fopen(("/scratch/tracesim/specint2006/"+(*program_
+      name)+".trace").c_str(), "r")) == NULL)
+                Assert("Unable to open the input file.");
+        if ((traceFileOutput  = fopen(("/scratch/tracesim/specint2006/bb_trace/"+
+      (*program_name)+"_pb.trace").c_str(), "w")) == NULL)
+                Assert("Unable to open the output file.");
+        map<ADDR, basicblock*> bbHeaders;
+        map<ADDR, list<basicblock*> > pbHeaders;
+        map<int, int> bbSizeHist;
+
+        /* Create a list of program BB's for use later */
+        for (int i =  0; i < pbList->NumElements(); i++) {
+                basicblock* bb = pbList->Nth(i);
+                if (bb->isAPhraseblock()) {
+                        printf("found Phraseblock\n");
+                        if (pbHeaders.find(bb->getInsList()->Nth(0)->getInsAddr()
+      ) != pbHeaders.end()) {
+                                (pbHeaders[bb->getInsList()->Nth(0)->getInsAddr()
+      ]).push_back(bb);
+                        } else {
+                                list<basicblock*> lst;
+                                lst.push_back(bb);
+                                pbHeaders.insert(pair<ADDR, list<basicblock*> > (
+      bb->getInsList()->Nth(0)->getInsAddr(), lst));
+                        }
+                } else {
+                        bbHeaders.insert(pair<ADDR, basicblock*> (bb->getInsList(
+      )->Nth(0)->getInsAddr(), bb));
+                }
+        }
+
+        /* Walk through the trace */
+        long long int insCounter = 0, insSkipCounter = 0, bbSize = 0, printedInsC
+      ounter = 0;
+        List<instruction*>* insList = new List<instruction*>;
+        ADDR insAddr, brAddr, junk_addr, brDstAddr, bbAddr, prevBbAddr;
+        bool new_bb = false, new_pb = false;
+        basicblock *currentBB = NULL, *prevBB = NULL;
+        // List<basicblock*> *bb_list = new List<basicblock*>;
+        // List<ADDR> br_addr_list    = new List<ADDR>;
+        // List<bool> br_found_list   = new List<bool>;
+        // List<int> bb_size_list     = new List<int>;
+        char insType, junk_s[1000];
+        map<ADDR,string> dynBBMap;
+        List<map<ADDR,string> >* dynBBList = new List<map<ADDR,string> >;
+        map<ADDR, basicblock*> statBBListMap;
+        list<ADDR> dynBBAddrList;
+        map<ADDR, bool> brFoundMap;
+        map<ADDR, ADDR> brAddrMap;
+        int brTaken = -1;
+        //Get rif of first line (blank line perhaps?)
+        if (fgets (junk_s, 1000, traceFileInput) == NULL)
+                Assert("Trace file is empty!");
+        bool brFound = false;
+        fprintf(traceFileOutput, "{\n");
+        while((insType = fgetc (traceFileInput)) != EOF) {
+                insCounter++;
+                if (insCounter % 10000 == 0) printf("ins count: %d\n", insCounter
+      );
+                if (insType == 'R' || insType == 'W') {
+                        /* TODO put these two lines back */
+                        // insType = 'M';
+                        if (fscanf(traceFileInput, ",%llu,%llu", &junk_addr, &ins
+      Addr) == EOF) 
+                                Assert("Invalid end of line detected in trace fil
+      e.");
+                } else {
+                        /* TODO put these two lines back */
+                        // if (insType == 'B') insType = 'b';
+                        // else insType = 'o';
+                        if (insType == 'B') {
+                                if (fscanf(traceFileInput, ",%llu,%d,%llu", &insA
+      ddr, &brTaken, &brDstAddr) == EOF)
+                                        Assert("Invalid end of line detected in t
+      race file.");
+                        } else if (insType == 'A' || insType == 'F') {
+                                if (fscanf(traceFileInput, ",%llu", &insAddr) == 
+      EOF)
+                                        Assert("Invalid end of line detected in t
+      race file.");
+                        } else {
+                                Assert("Invalid Trace Instruction Type.");
+                        }
+                }
+                if (fgets (junk_s, 1000, traceFileInput) == NULL) break; //grab t
+      he rest of line
+                // Eliminate trace instructions that are not mapped in the CFG
+                if (insAddrMap->find(insAddr) == insAddrMap->end()) {
+                        Assert(new_bb == false && "Illegal value for new_bb flag.
+      ");
+                        insSkipCounter++;
+                        continue;
+                        // printf("skipping instruction %llx\n", insAddr);
+                }
+                //Find out if this ins belongs to new BB
+                if (bbHeaders.find(insAddr) != bbHeaders.end()) {
+                        new_bb = true;
+                        prevBbAddr = bbAddr;
+                        bbAddr = insAddr;
+                        prevBB = currentBB;
+                        currentBB = bbHeaders[insAddr];
+                        if (pbHeaders.find(insAddr) != pbHeaders.end()) {
+                                // Assert(new_pb == false);
+                                // currentPB = pbHeaders[insAddr];
+                                new_pb = true;
+                        }
+                } else if (currentBB->isInsAddrInBB(insAddr) == false) {
+                        new_bb = true;
+                        prevBbAddr = bbAddr;
+                        bbAddr = ((*insAddrMap)[insAddr])->getMy_BB_id();
+                        prevBB = currentBB;
+                        currentBB = bbHeaders[((*insAddrMap)[insAddr])->getMy_BB_
+      id()];
+                        if (pbHeaders.find(insAddr) != pbHeaders.end()) {
+                        //      Assert(new_pb == false);
+                        //      // currentPB = pbHeaders[((*insAddrMap)[insAddr])
+      ->getMy_PB_id()];
+                        //      currentPB = ((*insAddrMap)[insAddr])->getMy_PB_id
+      ();
+                                new_pb = true; //TODO is this condution check val
+      id? take care of it when building phraeblocks
+                        }
+                }
+                
+                Assert(currentBB->isInsAddrInBB(insAddr) == true && "Trace instru
+      ction does not belong to current BB.");
+                
+                if (new_bb) {
+                        if (dynBBAddrList.size() >= 20) {
+                                if (pbHeaders.find(dynBBAddrList.front()) != pbHe
+      aders.end()) {//a phraseblock header?
+                                        // printf("found PB?\n");
+                                        list<basicblock*> candidatePBs = pbHeader
+      s.find(dynBBAddrList.front())->second;
+                                        bool pbDetected = false;
+                                        //Match a candidate PB to the list of tra
+      ce BB's in flight
+                                        for (list<basicblock*>::iterator it = can
+      didatePBs.begin(); it != candidatePBs.end(); it++) {
+                                                List<ADDR>* bbHeadList = (*it)->g
+      etBBListForPB();
+                                                pbDetected = true;
+                                                map<ADDR, map<ADDR,string> > list
+      OfBBforPBMap;
+                                                list<ADDR> listOfBBforPB;
+                                                //Cross-ref every BB with the tra
+      ce BB's in flight
+                                                for (int i = 0; i < bbHeadList->
+      NumElements(); i++) {
+                                                        long int bbIndx = findBB(
+      bbHeadList->Nth(i), dynBBList);
+                                                        if (bbIndx == -1) {
+                                                                pbDetected = fals
+      e;
+                                                                break;
+                                                        } else {
+                                                                listOfBBforPBMap.
+      insert(pair<ADDR, map<ADDR,string> > (bbHeadList->Nth(i), dynBBList->Nth(bbIndx))
+      );
+                                                                listOfBBforPB.pus
+      h_back(bbHeadList->Nth(i));
+                                                        }
+                                                }
+                                                if (pbDetected) {
+                                                        // printf("detected PB\n"
+      );
+                                                        basicblock* detectedPB = 
+      (*it);
+                                                        storeToFile(brFoundMap, b
+      rAddrMap, detectedPB, listOfBBforPBMap, traceFileOutput);
+                                                        // Clear processed BB's i
+      n map
+                                                        for (list<ADDR>::iterator
+       it2 = listOfBBforPB.begin(); it2 != listOfBBforPB.end(); it2++) {
+                                                                removeBB(*it2, dy
+      nBBList);
+                                                                for (list<ADDR>::
+      iterator it3 = dynBBAddrList.end(); it3 !=  dynBBAddrList.begin(); it3--)
+                                                                        if (*it3 
+      == *it2) {
+                                                                                d
+      ynBBAddrList.erase(it3);
+                                                                                b
+      reak;
+                                                                        }
+                                                        }
+                                                        break;
+                                                        //do we break here?
+                                                }
+                                        }
+                                        if (!pbDetected) {
+                                                // printf("didn't detect a phrase
+      block\n");
+                                                map<ADDR,string> bbMap = dynBBLis
+      t->Nth(0);
+                                                if (bbMap.size() == 0) {printf(" 
+      - size: %d\n", bbMap.size());}
+                                                printedInsCounter += storeToFile(
+      brFound, brAddr, (statBBListMap.find(dynBBAddrList.front()))->second, bbMap, trac
+      eFileOutput);
+                                                dynBBList->RemoveAt(0);// dump th
+      e BB in the first spot 
+                                                dynBBAddrList.pop_front();
+                                        }
+                                        //search through the rest of list for fin
+      ding a PB
+                                        // if found, dump the BB's into a PB and 
+      move on
+                                        // else dump the first BB
+                                } else {
+                                        map<ADDR,string> bbMap = dynBBList->Nth(0
+      );
+                                        if (bbMap.size() == 0) {printf(" - size: 
+      %d\n", bbMap.size());}
+                                        printedInsCounter += storeToFile(brFound,
+       brAddr, (statBBListMap.find(dynBBAddrList.front()))->second, bbMap, traceFileOut
+      put);
+                                        dynBBList->RemoveAt(0);// dump the BB in 
+      the first spot 
+                                        dynBBAddrList.pop_front();
+                                }
+                        }
+                        if (prevBB == NULL) { //for first BB
+                                prevBB = currentBB;
+                                prevBbAddr = bbAddr;
+                        }
+                        if (dynBBMap.size() > 0) {
+                                // printf("REAR: %llx, %d, %d\n", prevBbAddr,dynB
+      BAddrList.size(), dynBBMap.size());
+                                dynBBList->Append(dynBBMap); //map does not work 
+      here (addr replication :s)
+                                statBBListMap.insert(pair<ADDR,basicblock*> (prev
+      BbAddr, prevBB));
+                                dynBBAddrList.push_back(prevBbAddr);
+                                brFoundMap.insert(pair<ADDR,bool> (prevBbAddr,brF
+      ound));
+                                brAddrMap.insert(pair<ADDR,ADDR> (prevBbAddr,brAd
+      dr));
+                        } else {
+                                printf("empty BB\n");
+                        }
+                        brFound = false;
+                        bbSizeHist[bbSize]++;
+                        dynBBMap.clear();
+                        bbSize = 0; //We are not measuring PB size here! (we can 
+      add values though)
+                        new_bb = false;
+                }
+                bbSize++;
+                // Construct ins string & store in ins-map
+                std::stringstream ss1, ss2;
+                string registers = ((*insAddrMap)[insAddr])->getRegisterStr();
+                if (insType == 'R' || insType == 'W') {
+                        ss1 << insType << "," << junk_addr << "," << insAddr << "
+      ," << registers;
+                        // ss1 << insType << "," << junk_addr << "," << insAddr <
+      < junk_s; (original reg names)
+                } else if (insType == 'B') {
+                        ss1 << insType << "," << insAddr << "," << brTaken << ","
+       << brDstAddr << "," << registers;
+                        // ss1 << insType << "," << insAddr << "," << brTaken << 
+      "," << brDstAddr << junk_s; (original reg names)
+                } else { //A & F for insType
+                        ss1 << insType << "," << insAddr << "," << registers;
+                        // ss1 << insType << "," << insAddr << junk_s; (original 
+      reg names)
+                }
+                std::string s = ss1.str();
+                if (dynBBMap.find(insAddr) != dynBBMap.end()) {
+                        //Trace runs micro-ops, so it can have ins-addr replicas
+                        string t = dynBBMap[insAddr];
+                        ss2 << t << s;
+                        s = ss2.str();
+                        dynBBMap[insAddr] = s;
+                } else {
+                        dynBBMap.insert(pair<ADDR,string> (insAddr,s));
+                }
+                // Crearte basicblock headers
+                if (insType == 'B') {
+                        if (brFound != false) printf("%llu\n", brAddr);
+                        Assert(brFound == false && "Illegal value for brFound var
+      iable.");
+                        // insType = 'b';
+                        brFound = true;
+                        brAddr = insAddr;
+                }
+        }
+        if (brFound) {
+                fprintf(traceFileOutput, "H:%llu\n", brAddr);
+                brFound = false;
+        }
+        bbSizeHist[bbSize]++;
+        fprintf(traceFileOutput, "}\n");
+        printf("\tNumber of Trace Instructions Skipped: %lld (out of %lld)\n", in
+      sSkipCounter, insCounter);
+        printf("\tNumber of Trace Instructions Printed: %lld (out of %lld)\n", pr
+      intedInsCounter, insCounter-insSkipCounter);
+        DynBBSizeStat(bbSizeHist, program_name);
+}
+\end{DoxyCode}

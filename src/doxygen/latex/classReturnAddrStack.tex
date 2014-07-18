@@ -1,0 +1,216 @@
+\hypertarget{classReturnAddrStack}{
+\section{ReturnAddrStack Class Reference}
+\label{classReturnAddrStack}\index{ReturnAddrStack@{ReturnAddrStack}}
+}
+
+
+{\ttfamily \#include $<$ras.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classReturnAddrStack_aadf0d7414f08594475bee33d04b5307e}{ReturnAddrStack} ()
+\item 
+void \hyperlink{classReturnAddrStack_af430eea67a799a5519573f02a630a2e9}{init} (unsigned numEntries)
+\item 
+void \hyperlink{classReturnAddrStack_ac805f9293f48e2007ac7e8f4733ac1af}{reset} ()
+\item 
+TheISA::PCState \hyperlink{classReturnAddrStack_a4fe6450bdc0ff84a60a9331dd88d8507}{top} ()
+\item 
+unsigned \hyperlink{classReturnAddrStack_a95a293e5b01511ae5363fa9cf69d47f0}{topIdx} ()
+\item 
+void \hyperlink{classReturnAddrStack_ac41dc83da8d0960b57df3e9a97c792c0}{push} (const TheISA::PCState \&return\_\-addr)
+\item 
+void \hyperlink{classReturnAddrStack_a9d2396f6b3f90a54b178db4efc002a78}{pop} ()
+\item 
+void \hyperlink{classReturnAddrStack_a2ceaaf5c1223ef4a262ccf835dee7b08}{restore} (unsigned top\_\-entry\_\-idx, const TheISA::PCState \&restored)
+\item 
+bool \hyperlink{classReturnAddrStack_a415c6d2ab459fa9b199c6e5689310b83}{empty} ()
+\item 
+bool \hyperlink{classReturnAddrStack_a0972abaf39558fe4dcb855c4c45ada60}{full} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Return address stack class, implements a simple RAS. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classReturnAddrStack_aadf0d7414f08594475bee33d04b5307e}{
+\index{ReturnAddrStack@{ReturnAddrStack}!ReturnAddrStack@{ReturnAddrStack}}
+\index{ReturnAddrStack@{ReturnAddrStack}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{ReturnAddrStack}]{\setlength{\rightskip}{0pt plus 5cm}ReturnAddrStack::ReturnAddrStack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classReturnAddrStack_aadf0d7414f08594475bee33d04b5307e}
+Creates a return address stack, but \hyperlink{classReturnAddrStack_af430eea67a799a5519573f02a630a2e9}{init()} must be called prior to use. 
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classReturnAddrStack_a415c6d2ab459fa9b199c6e5689310b83}{
+\index{ReturnAddrStack@{ReturnAddrStack}!empty@{empty}}
+\index{empty@{empty}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}bool ReturnAddrStack::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classReturnAddrStack_a415c6d2ab459fa9b199c6e5689310b83}
+
+\begin{DoxyCode}
+{ return usedEntries == 0; }
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_a0972abaf39558fe4dcb855c4c45ada60}{
+\index{ReturnAddrStack@{ReturnAddrStack}!full@{full}}
+\index{full@{full}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{full}]{\setlength{\rightskip}{0pt plus 5cm}bool ReturnAddrStack::full (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classReturnAddrStack_a0972abaf39558fe4dcb855c4c45ada60}
+
+\begin{DoxyCode}
+{ return usedEntries == numEntries; }
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_af430eea67a799a5519573f02a630a2e9}{
+\index{ReturnAddrStack@{ReturnAddrStack}!init@{init}}
+\index{init@{init}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void ReturnAddrStack::init (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{numEntries}
+\end{DoxyParamCaption}
+)}}
+\label{classReturnAddrStack_af430eea67a799a5519573f02a630a2e9}
+Initializes RAS with a specified number of entries. 
+\begin{DoxyParams}{Parameters}
+{\em numEntries} & Number of entries in the RAS. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+     numEntries  = _numEntries;
+     addrStack.resize(numEntries);
+     reset();
+}
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_a9d2396f6b3f90a54b178db4efc002a78}{
+\index{ReturnAddrStack@{ReturnAddrStack}!pop@{pop}}
+\index{pop@{pop}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{pop}]{\setlength{\rightskip}{0pt plus 5cm}void ReturnAddrStack::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classReturnAddrStack_a9d2396f6b3f90a54b178db4efc002a78}
+Pops the top address from the RAS. 
+\begin{DoxyCode}
+{
+    if (usedEntries > 0) {
+        --usedEntries;
+    }
+
+    decrTos();
+}
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_ac41dc83da8d0960b57df3e9a97c792c0}{
+\index{ReturnAddrStack@{ReturnAddrStack}!push@{push}}
+\index{push@{push}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{push}]{\setlength{\rightskip}{0pt plus 5cm}void ReturnAddrStack::push (
+\begin{DoxyParamCaption}
+\item[{const TheISA::PCState \&}]{return\_\-addr}
+\end{DoxyParamCaption}
+)}}
+\label{classReturnAddrStack_ac41dc83da8d0960b57df3e9a97c792c0}
+Pushes an address onto the RAS. 
+\begin{DoxyCode}
+{
+    incrTos();
+
+    addrStack[tos] = return_addr;
+
+    if (usedEntries != numEntries) {
+        ++usedEntries;
+    }
+}
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_ac805f9293f48e2007ac7e8f4733ac1af}{
+\index{ReturnAddrStack@{ReturnAddrStack}!reset@{reset}}
+\index{reset@{reset}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void ReturnAddrStack::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classReturnAddrStack_ac805f9293f48e2007ac7e8f4733ac1af}
+
+\begin{DoxyCode}
+{
+    usedEntries = 0;
+    tos = 0;
+    for (unsigned i = 0; i < numEntries; ++i)
+        addrStack[i].set(0);
+}
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_a2ceaaf5c1223ef4a262ccf835dee7b08}{
+\index{ReturnAddrStack@{ReturnAddrStack}!restore@{restore}}
+\index{restore@{restore}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{restore}]{\setlength{\rightskip}{0pt plus 5cm}void ReturnAddrStack::restore (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{top\_\-entry\_\-idx, }
+\item[{const TheISA::PCState \&}]{restored}
+\end{DoxyParamCaption}
+)}}
+\label{classReturnAddrStack_a2ceaaf5c1223ef4a262ccf835dee7b08}
+Changes index to the top of the RAS, and replaces the top address with a new target. 
+\begin{DoxyParams}{Parameters}
+{\em top\_\-entry\_\-idx} & The index of the RAS that will now be the top. \\
+\hline
+{\em restored} & The new target address of the new top of the RAS. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    tos = top_entry_idx;
+
+    addrStack[tos] = restored;
+}
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_a4fe6450bdc0ff84a60a9331dd88d8507}{
+\index{ReturnAddrStack@{ReturnAddrStack}!top@{top}}
+\index{top@{top}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{top}]{\setlength{\rightskip}{0pt plus 5cm}TheISA::PCState ReturnAddrStack::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classReturnAddrStack_a4fe6450bdc0ff84a60a9331dd88d8507}
+Returns the top address on the RAS. 
+\begin{DoxyCode}
+    { return addrStack[tos]; }
+\end{DoxyCode}
+\hypertarget{classReturnAddrStack_a95a293e5b01511ae5363fa9cf69d47f0}{
+\index{ReturnAddrStack@{ReturnAddrStack}!topIdx@{topIdx}}
+\index{topIdx@{topIdx}!ReturnAddrStack@{ReturnAddrStack}}
+\subsubsection[{topIdx}]{\setlength{\rightskip}{0pt plus 5cm}unsigned ReturnAddrStack::topIdx (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classReturnAddrStack_a95a293e5b01511ae5363fa9cf69d47f0}
+Returns the index of the top of the RAS. 
+\begin{DoxyCode}
+    { return tos; }
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{ras_8h}{ras.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{ras_8cpp}{ras.cpp}\end{DoxyCompactItemize}

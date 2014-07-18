@@ -1,0 +1,276 @@
+\hypertarget{dominator_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.cpp File Reference}
+\label{dominator_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.cpp}}
+}
+{\ttfamily \#include \char`\"{}dominator.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dominator_8cpp_ad9854552aeba1a66453864500ed2dfc0}{build\_\-dominators} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{dominator_8cpp_afda2b0c0d9b8afc7938f90a15e8f912f}{build\_\-strict\_\-dominators} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{dominator_8cpp_a92cc71cb6989a6d59d713453b0504fa3}{build\_\-idom} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{dominator_8cpp_ae1e6243692da1cc811e3a6bf6e363cf8}{build\_\-dominator\_\-tree} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{dominator_8cpp_a5f2fc382f4be7bb1fa4377e3c0708a51}{findDomTreeBottomSet} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \&domTree\_\-Bottoms)
+\item 
+void \hyperlink{dominator_8cpp_ad80ee601bfd16b0c1cffd3501bf0c93f}{build\_\-dominance\_\-frontier} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{dominator_8cpp_af9f49ffe6819033df685a4eb97ef74be}{setup\_\-dominance\_\-frontier} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{dominator_8cpp_ad80ee601bfd16b0c1cffd3501bf0c93f}{
+\index{dominator.cpp@{dominator.cpp}!build\_\-dominance\_\-frontier@{build\_\-dominance\_\-frontier}}
+\index{build\_\-dominance\_\-frontier@{build\_\-dominance\_\-frontier}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{build\_\-dominance\_\-frontier}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-dominance\_\-frontier (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_ad80ee601bfd16b0c1cffd3501bf0c93f}
+
+\begin{DoxyCode}
+                                                          {
+        map<ADDR, basicblock*> domTree_Bottoms;
+        findDomTreeBottomSet(bbList, domTree_Bottoms);
+        for (map<ADDR, basicblock*>::iterator it = domTree_Bottoms.begin(); it !=
+       domTree_Bottoms.end(); it++) {
+                basicblock *bb = it->second;
+                 /* local DF Detection */
+                for (int i = 0; i < bb->getNumDescendents(); i++) {
+                        basicblock* descendent = bb->getNthDescendent(i);
+                        if (descendent->isInIDom(bb->getID()) == false)
+                                bb->addToDFset(descendent);
+                }
+                 /* up DF Detection */
+                map<ADDR,basicblock*> children = bb->getChildren();
+                for (map<ADDR,basicblock*>::iterator it1 = children.begin(); it1 
+      != children.end(); it1++) {
+                        basicblock *child = it1->second;
+                        map<ADDR,basicblock*> childDF = child->getDF();
+                        for (map<ADDR,basicblock*>::iterator it2 = childDF.begin(
+      ); it2 != childDF.end(); it2++) {
+                                basicblock* y = it2->second;
+                                if (y->isInIDom(bb->getID()) == false)
+                                        bb->addToDFset(y);
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_ae1e6243692da1cc811e3a6bf6e363cf8}{
+\index{dominator.cpp@{dominator.cpp}!build\_\-dominator\_\-tree@{build\_\-dominator\_\-tree}}
+\index{build\_\-dominator\_\-tree@{build\_\-dominator\_\-tree}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{build\_\-dominator\_\-tree}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-dominator\_\-tree (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_ae1e6243692da1cc811e3a6bf6e363cf8}
+
+\begin{DoxyCode}
+                                                     {
+        for (int i = 0; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->buildDomTree();
+        #ifdef DEBUG_DOM
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                map<ADDR,basicblock*> dom = bbList->Nth(i)->getDominators();
+                printf("idom of %llx: ",bbList->Nth(i)->getID());
+                for (map<ADDR,basicblock*>::iterator it = dom.begin(); it != dom.
+      end(); it++) {
+                        if (bbList->Nth(i)->isInIDom(it->first)) printf("%llx, ",
+      it->first);
+                }
+                printf("\n");
+        }
+        #endif
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_ad9854552aeba1a66453864500ed2dfc0}{
+\index{dominator.cpp@{dominator.cpp}!build\_\-dominators@{build\_\-dominators}}
+\index{build\_\-dominators@{build\_\-dominators}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{build\_\-dominators}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-dominators (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_ad9854552aeba1a66453864500ed2dfc0}
+
+\begin{DoxyCode}
+                                                 {
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* n = bbList->Nth(i);
+                if (n->getNumAncestors() == 0 || n->numNonBackEdgeAncestors() == 
+      0) {
+                        bool change = n->setDominators();
+                        n->markAsEntryPoint();
+                        n->setAllasDominators(false);
+                } else {
+                        // bool change = n->setDominators(bbList); this approach 
+      is too mem expensive
+                        n->setAllasDominators(true);
+                        bool change = true;
+                }
+        }
+        bool change = true;
+        while(change == true) {
+                change = false;
+                for (int i = 0; i < bbList->NumElements(); i++) {
+                        basicblock* n = bbList->Nth(i);
+                        if (n->isEntryPoint()) continue;
+                        int indx;
+                        bool foundFirstAncestor = false;
+                        map<ADDR,basicblock*> intersection;
+                        for (indx = 0; indx < n->getNumAncestors(); indx++) {
+                                if (n->getNthAncestor(indx)->getAllasDominators()
+       == true) continue;
+                                intersection = n->getNthAncestor(indx)->
+      getDominators();
+                                if (intersection.find(n->getID()) != intersection
+      .end()) {
+                                        intersection.clear();
+                                        continue;
+                                }
+                                foundFirstAncestor = true;
+                                break;
+                        }
+                        if (foundFirstAncestor == true) {
+                                for (int j = indx+1; j < n->getNumAncestors(); j+
+      +) {
+                                        if (n->getNthAncestor(j)->
+      getAllasDominators() == true) continue;
+                                        map<ADDR,basicblock*> out, nthAncestorDom
+      ;
+                                        nthAncestorDom = n->getNthAncestor(j)->
+      getDominators();
+                                        if (nthAncestorDom.find(n->getID()) != nt
+      hAncestorDom.end()) {
+                                                nthAncestorDom.clear();
+                                                continue;
+                                        }
+                                        set_intersection(intersection.begin(),int
+      ersection.end(),nthAncestorDom.begin(),nthAncestorDom.end(),std::inserter(out, ou
+      t.begin()));
+                                        intersection = out;
+                                }
+                                if (change == false) change = n->setDominators(in
+      tersection);
+                                else                      bool temp = n->
+      setDominators(intersection);
+                        } else {
+                                if (change == false) change = n->setDominators();
+      
+                                else                  bool temp = n->
+      setDominators();
+                        }
+                        n->setAllasDominators(false);
+                }
+        } //TODO: I must have a start node (the start node at the moment may alwa
+      ys have an ancestor - due to loops)
+        #ifdef DEBUG_DOM
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                map<ADDR,basicblock*> dom = bbList->Nth(i)->getDominators();
+                printf("dom of %llx: ",bbList->Nth(i)->getID());
+                for (map<ADDR,basicblock*>::iterator it = dom.begin(); it != dom.
+      end(); it++) {
+                        printf("%llx, ",it->first);
+                }
+                printf("\n");
+        }
+        #endif
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_a92cc71cb6989a6d59d713453b0504fa3}{
+\index{dominator.cpp@{dominator.cpp}!build\_\-idom@{build\_\-idom}}
+\index{build\_\-idom@{build\_\-idom}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{build\_\-idom}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-idom (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_a92cc71cb6989a6d59d713453b0504fa3}
+
+\begin{DoxyCode}
+                                           {
+        for (int i = 0; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->buildImmediateDominators();
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_afda2b0c0d9b8afc7938f90a15e8f912f}{
+\index{dominator.cpp@{dominator.cpp}!build\_\-strict\_\-dominators@{build\_\-strict\_\-dominators}}
+\index{build\_\-strict\_\-dominators@{build\_\-strict\_\-dominators}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{build\_\-strict\_\-dominators}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-strict\_\-dominators (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_afda2b0c0d9b8afc7938f90a15e8f912f}
+
+\begin{DoxyCode}
+                                                        {
+        for (int i = 0; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->buildSDominators();
+        #ifdef DEBUG_DOM
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                map<ADDR,basicblock*> dom = bbList->Nth(i)->getDominators();
+                printf("strict dom of %llx: ",bbList->Nth(i)->getID());
+                for (map<ADDR,basicblock*>::iterator it = dom.begin(); it != dom.
+      end(); it++) {
+                        if (bbList->Nth(i)->isASDominator(it->first)) printf("%ll
+      x, ",it->first);
+                }
+                printf("\n");
+        }
+        #endif
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_a5f2fc382f4be7bb1fa4377e3c0708a51}{
+\index{dominator.cpp@{dominator.cpp}!findDomTreeBottomSet@{findDomTreeBottomSet}}
+\index{findDomTreeBottomSet@{findDomTreeBottomSet}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{findDomTreeBottomSet}]{\setlength{\rightskip}{0pt plus 5cm}void findDomTreeBottomSet (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ {\bf ADDR}, {\bf basicblock} $\ast$ $>$ \&}]{domTree\_\-Bottoms}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_a5f2fc382f4be7bb1fa4377e3c0708a51}
+
+\begin{DoxyCode}
+                                                                                 
+                    {
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock *bb = bbList->Nth(i);
+                if (bb->getChildrenSize() == 0)
+                        domTree_Bottoms.insert(pair<ADDR,basicblock*>(bb->getID()
+      , bb));
+        }
+}
+\end{DoxyCode}
+\hypertarget{dominator_8cpp_af9f49ffe6819033df685a4eb97ef74be}{
+\index{dominator.cpp@{dominator.cpp}!setup\_\-dominance\_\-frontier@{setup\_\-dominance\_\-frontier}}
+\index{setup\_\-dominance\_\-frontier@{setup\_\-dominance\_\-frontier}!dominator.cpp@{dominator.cpp}}
+\subsubsection[{setup\_\-dominance\_\-frontier}]{\setlength{\rightskip}{0pt plus 5cm}void setup\_\-dominance\_\-frontier (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8cpp_af9f49ffe6819033df685a4eb97ef74be}
+
+\begin{DoxyCode}
+                                                         {
+        printf("\tBuild Dominators\n");
+        build_dominators(bbList);
+        printf("\tBuild Strict Dominators\n");
+        build_strict_dominators(bbList);
+        printf("\tBuild Immediate Dominators\n");
+        build_idom(bbList);
+        printf("\tBuild Dominance Tree\n");
+        build_dominator_tree(bbList);
+        printf("\tBuild Dominance Frontier\n");
+        build_dominance_frontier(bbList);
+}
+\end{DoxyCode}

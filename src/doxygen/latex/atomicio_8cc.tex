@@ -1,0 +1,97 @@
+\hypertarget{atomicio_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/atomicio.cc File Reference}
+\label{atomicio_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/atomicio.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/atomicio.cc}}
+}
+{\ttfamily \#include $<$cerrno$>$}\par
+{\ttfamily \#include $<$cstdio$>$}\par
+{\ttfamily \#include \char`\"{}base/atomicio.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ssize\_\-t \hyperlink{atomicio_8cc_a09f17b802426457c2389d892357e50f7}{atomic\_\-read} (int fd, void $\ast$s, size\_\-t n)
+\item 
+ssize\_\-t \hyperlink{atomicio_8cc_a301f476c6c8d75d54f43aea6ad1ff740}{atomic\_\-write} (int fd, const void $\ast$s, size\_\-t n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{atomicio_8cc_a09f17b802426457c2389d892357e50f7}{
+\index{atomicio.cc@{atomicio.cc}!atomic\_\-read@{atomic\_\-read}}
+\index{atomic\_\-read@{atomic\_\-read}!atomicio.cc@{atomicio.cc}}
+\subsubsection[{atomic\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}ssize\_\-t atomic\_\-read (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{void $\ast$}]{s, }
+\item[{size\_\-t}]{n}
+\end{DoxyParamCaption}
+)}}
+\label{atomicio_8cc_a09f17b802426457c2389d892357e50f7}
+
+\begin{DoxyCode}
+{
+    char *p = reinterpret_cast<char *>(s);
+    size_t pos = 0;
+
+    // Keep reading until we've gotten all of the data.
+    while (n > pos) {
+        ssize_t result = read(fd, p + pos, n - pos);
+
+        // We didn't get any more data, so we should probably punt,
+        // otherwise we'd just keep spinning
+        if (result == 0)
+            break;
+
+        // If there was an error, try again on EINTR/EAGAIN, pass the
+        // error up otherwise.
+        if (result == -1) {
+            if (errno == EINTR || errno == EAGAIN)
+                continue;
+            return result;
+        }
+
+        pos += result;
+    }
+
+    return pos;
+}
+\end{DoxyCode}
+\hypertarget{atomicio_8cc_a301f476c6c8d75d54f43aea6ad1ff740}{
+\index{atomicio.cc@{atomicio.cc}!atomic\_\-write@{atomic\_\-write}}
+\index{atomic\_\-write@{atomic\_\-write}!atomicio.cc@{atomicio.cc}}
+\subsubsection[{atomic\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}ssize\_\-t atomic\_\-write (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{const void $\ast$}]{s, }
+\item[{size\_\-t}]{n}
+\end{DoxyParamCaption}
+)}}
+\label{atomicio_8cc_a301f476c6c8d75d54f43aea6ad1ff740}
+
+\begin{DoxyCode}
+{
+    const char *p = reinterpret_cast<const char *>(s);
+    size_t pos = 0;
+
+    // Keep writing until we've written all of the data
+    while (n > pos) {
+        ssize_t result = write(fd, p + pos, n - pos);
+
+        // We didn't manage to write anything this time, so we should
+        // probably punt, otherwise we'd just keep spinning
+        if (result == 0)
+            break;
+
+        // If there was an error, try again on EINTR/EAGAIN, pass the
+        // error up otherwise.
+        if (result == -1) {
+            if (errno == EINTR || errno == EAGAIN)
+                continue;
+            return result;
+        }
+
+        pos += result;
+    }
+
+    return pos;
+}
+\end{DoxyCode}

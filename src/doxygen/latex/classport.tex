@@ -1,0 +1,484 @@
+\hypertarget{classport}{
+\section{port$<$ queType\_\-T $>$ Class Template Reference}
+\label{classport}\index{port@{port}}
+}
+
+
+{\ttfamily \#include $<$port.h$>$}
+
+Inheritance diagram for port$<$ queType\_\-T $>$:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classport}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classport_aa397f17dedc41b12c65d9cfce47d5f5c}{port} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, string port\_\-name=\char`\"{}port\char`\"{})
+\item 
+\hyperlink{classport_a51a6e901a1eac3a1c3fd35a140fecbfb}{$\sim$port} ()
+\item 
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a52ad1c5223f028930491b024f26467fa}{pushBack} (queType\_\-T ins, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a7c709a92ed8525cf8a310b294e606267}{pushBack} (queType\_\-T ins, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} lat)
+\item 
+queType\_\-T \hyperlink{classport_a95bf81afb2a6c03ac2272b3708322b74}{popFront} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+queType\_\-T \hyperlink{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}{popNextReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+queType\_\-T \hyperlink{classport_ac1c1b53525c4c69eba7c28e59275e45f}{popNextReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+void \hyperlink{classport_aec1749eb1d434806670ba00b669bad78}{delOldReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+queType\_\-T \hyperlink{classport_afe64047b4e7df87d4a031097ea159852}{getFront} ()
+\item 
+queType\_\-T \hyperlink{classport_a53d30f96ac41c4f3a60174cd66b1656e}{getBack} ()
+\item 
+queType\_\-T \hyperlink{classport_aa102d5f7c3e925382f62a37d220888ff}{popBack} ()
+\item 
+\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} \hyperlink{classport_a7276424a4d3b305c198159f2ed6b7dab}{getBuffSize} ()
+\item 
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_abf9be02812c2503eee69704a01b14145}{getBuffState} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+bool \hyperlink{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}{isReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+bool \hyperlink{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}{isReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+bool \hyperlink{classport_a8930ed8cec58814709f4515a33d62141}{hasReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+bool \hyperlink{classport_af03e53249eff9bb17c76531d3a72880f}{hasReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\item 
+void \hyperlink{classport_a58991733cd9bb95beb7303826b9b3d3f}{flushPort} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename queType\_\-T$>$ class port$<$ queType\_\-T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classport_aa397f17dedc41b12c65d9cfce47d5f5c}{
+\index{port@{port}!port@{port}}
+\index{port@{port}!port@{port}}
+\subsubsection[{port}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf port}$<$ queType\_\-T $>$::{\bf port} (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
+\item[{{\bf CYCLE}}]{wire\_\-delay = {\ttfamily 1}, }
+\item[{string}]{port\_\-name = {\ttfamily \char`\"{}port$<$~queType\_\-T~$>$\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classport_aa397f17dedc41b12c65d9cfce47d5f5c}
+
+\begin{DoxyCode}
+        : unit (port_name),
+      _buff_len (len),
+          _wire_delay (wire_delay),
+      s_port_empty_cyc (g_stats.newScalarStat (port_name, "port_empty_cyc", "Numb
+      er of cycles with port empty", 0, NO_PRINT_ZERO)),
+      s_port_full_cyc  (g_stats.newScalarStat (port_name, "port_full_cyc", "Numbe
+      r of cycles with port full", 0, NO_PRINT_ZERO))
+{
+        Assert (_buff_len > 0 && _wire_delay > 0);
+}
+\end{DoxyCode}
+\hypertarget{classport_a51a6e901a1eac3a1c3fd35a140fecbfb}{
+\index{port@{port}!$\sim$port@{$\sim$port}}
+\index{$\sim$port@{$\sim$port}!port@{port}}
+\subsubsection[{$\sim$port}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf port}$<$ queType\_\-T $>$::$\sim${\bf port} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a51a6e901a1eac3a1c3fd35a140fecbfb}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classport_aec1749eb1d434806670ba00b669bad78}{
+\index{port@{port}!delOldReady@{delOldReady}}
+\index{delOldReady@{delOldReady}!port@{port}}
+\subsubsection[{delOldReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::delOldReady (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_aec1749eb1d434806670ba00b669bad78}
+
+\begin{DoxyCode}
+                                            {
+    if (getBuffSize () > 0) return;
+    typename list<BuffElement<queType_T> >::iterator it;
+    for (it = _buff.begin (); it != _buff.end (); it++) {
+        if ((*it)._delay.getStopTime () < now) {
+            _buff.erase(it);
+        }
+    }
+}
+\end{DoxyCode}
+\hypertarget{classport_a58991733cd9bb95beb7303826b9b3d3f}{
+\index{port@{port}!flushPort@{flushPort}}
+\index{flushPort@{flushPort}!port@{port}}
+\subsubsection[{flushPort}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::flushPort (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{elemSeqNum, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a58991733cd9bb95beb7303826b9b3d3f}
+
+\begin{DoxyCode}
+                                                             {
+    if (getBuffSize() == 0) return;
+    queType_T elem = getBack();
+    while (elem->getInsID () >= elemSeqNum) {
+        dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str (),
+       
+                                                                "POP ins", elem->
+      getInsID (), 
+                                                                "FOR", elemSeqNum
+      , now);
+        popBack();
+        if (getBuffSize() == 0) break;
+        elem = getBack();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classport_a53d30f96ac41c4f3a60174cd66b1656e}{
+\index{port@{port}!getBack@{getBack}}
+\index{getBack@{getBack}!port@{port}}
+\subsubsection[{getBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::getBack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a53d30f96ac41c4f3a60174cd66b1656e}
+
+\begin{DoxyCode}
+                                    {
+    Assert(getBuffSize () > 0);
+        return (_buff.back ())._dynIns;
+}
+\end{DoxyCode}
+\hypertarget{classport_a7276424a4d3b305c198159f2ed6b7dab}{
+\index{port@{port}!getBuffSize@{getBuffSize}}
+\index{getBuffSize@{getBuffSize}!port@{port}}
+\subsubsection[{getBuffSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf LENGTH} {\bf port}$<$ queType\_\-T $>$::getBuffSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a7276424a4d3b305c198159f2ed6b7dab}
+
+\begin{DoxyCode}
+                                     {
+        return (LENGTH) _buff.size ();
+}
+\end{DoxyCode}
+\hypertarget{classport_abf9be02812c2503eee69704a01b14145}{
+\index{port@{port}!getBuffState@{getBuffState}}
+\index{getBuffState@{getBuffState}!port@{port}}
+\subsubsection[{getBuffState}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::getBuffState (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_abf9be02812c2503eee69704a01b14145}
+
+\begin{DoxyCode}
+                                                   {
+        if (getBuffSize () >= _buff_len) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
+      ow);
+        return FULL_BUFF;
+    }
+        else if (getBuffSize () == 0) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
+      now);
+        return EMPTY_BUFF;
+    }
+        else {return AVAILABLE_BUFF;}
+}
+\end{DoxyCode}
+\hypertarget{classport_afe64047b4e7df87d4a031097ea159852}{
+\index{port@{port}!getFront@{getFront}}
+\index{getFront@{getFront}!port@{port}}
+\subsubsection[{getFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::getFront (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classport_afe64047b4e7df87d4a031097ea159852}
+
+\begin{DoxyCode}
+                                     {
+    Assert(getBuffSize () > 0);
+        return (_buff.front ())._dynIns;
+}
+\end{DoxyCode}
+\hypertarget{classport_a8930ed8cec58814709f4515a33d62141}{
+\index{port@{port}!hasReady@{hasReady}}
+\index{hasReady@{hasReady}!port@{port}}
+\subsubsection[{hasReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::hasReady (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a8930ed8cec58814709f4515a33d62141}
+
+\begin{DoxyCode}
+                                         {
+    if (getBuffState (now) == EMPTY_BUFF) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
+      now);
+        return false;
+    }
+    typename list<BuffElement<queType_T> >::iterator it;
+    for (it = _buff.begin (); it != _buff.end (); it++) {
+        if ((*it)._delay.getStopTime () <= now)
+            return true;
+    }
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classport_af03e53249eff9bb17c76531d3a72880f}{
+\index{port@{port}!hasReadyNow@{hasReadyNow}}
+\index{hasReadyNow@{hasReadyNow}!port@{port}}
+\subsubsection[{hasReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::hasReadyNow (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_af03e53249eff9bb17c76531d3a72880f}
+
+\begin{DoxyCode}
+                                            {
+    if (getBuffState (now) == EMPTY_BUFF) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
+      now);
+        return false;
+    }
+    typename list<BuffElement<queType_T> >::iterator it;
+    for (it = _buff.begin (); it != _buff.end (); it++) {
+        if ((*it)._delay.getStopTime () == now)
+            return true;
+    }
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}{
+\index{port@{port}!isReady@{isReady}}
+\index{isReady@{isReady}!port@{port}}
+\subsubsection[{isReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::isReady (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}
+
+\begin{DoxyCode}
+                                        {
+    if (getBuffState (now) == EMPTY_BUFF) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
+      now);
+        return false;
+    }
+        BuffElement<queType_T> frontBuff = _buff.front ();
+        if (frontBuff._delay.getStopTime () <= now)
+        return true;
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}{
+\index{port@{port}!isReadyNow@{isReadyNow}}
+\index{isReadyNow@{isReadyNow}!port@{port}}
+\subsubsection[{isReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::isReadyNow (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}
+
+\begin{DoxyCode}
+                                           {
+    if (getBuffState (now) == EMPTY_BUFF) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
+      now);
+        return false;
+    }
+        BuffElement<queType_T> frontBuff = _buff.front ();
+        if (frontBuff._delay.getStopTime () == now)
+        return true;
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classport_aa102d5f7c3e925382f62a37d220888ff}{
+\index{port@{port}!popBack@{popBack}}
+\index{popBack@{popBack}!port@{port}}
+\subsubsection[{popBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popBack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classport_aa102d5f7c3e925382f62a37d220888ff}
+
+\begin{DoxyCode}
+                                    {
+    Assert (getBuffSize () > 0 && "popFront () must not be used without isReady (
+      )");
+        queType_T dynIns = (_buff.back ())._dynIns;
+        _buff.pop_back ();
+    return dynIns;
+}
+\end{DoxyCode}
+\hypertarget{classport_a95bf81afb2a6c03ac2272b3708322b74}{
+\index{port@{port}!popFront@{popFront}}
+\index{popFront@{popFront}!port@{port}}
+\subsubsection[{popFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popFront (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a95bf81afb2a6c03ac2272b3708322b74}
+
+\begin{DoxyCode}
+                                              {
+    Assert (getBuffSize () > 0 && "popFront () must not be used without isReady (
+      )");
+        BuffElement<queType_T> frontBuff = _buff.front ();
+        if (frontBuff._delay.getStopTime () <= now)
+                return popFront ();
+    Assert (true == false  && "popFront () must not be used without isReady ()");
+      
+        return popFront (); //place holder
+}
+\end{DoxyCode}
+\hypertarget{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}{
+\index{port@{port}!popNextReady@{popNextReady}}
+\index{popNextReady@{popNextReady}!port@{port}}
+\subsubsection[{popNextReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popNextReady (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}
+
+\begin{DoxyCode}
+                                                  {
+    Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasRe
+      ady ()");
+    typename list<BuffElement<queType_T> >::iterator it;
+    for (it = _buff.begin (); it != _buff.end (); it++) {
+        if ((*it)._delay.getStopTime () <= now) {
+            queType_T dynIns = (*it)._dynIns;
+            _buff.erase(it);
+            return dynIns;
+        }
+    }
+    Assert (true == false  && "popNextReady () must not be used without hasReady 
+      ()");
+        return popFront (); //place holder
+}
+\end{DoxyCode}
+\hypertarget{classport_ac1c1b53525c4c69eba7c28e59275e45f}{
+\index{port@{port}!popNextReadyNow@{popNextReadyNow}}
+\index{popNextReadyNow@{popNextReadyNow}!port@{port}}
+\subsubsection[{popNextReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popNextReadyNow (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_ac1c1b53525c4c69eba7c28e59275e45f}
+
+\begin{DoxyCode}
+                                                     {
+    Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasRe
+      ady ()");
+    typename list<BuffElement<queType_T> >::iterator it;
+    for (it = _buff.begin (); it != _buff.end (); it++) {
+        if ((*it)._delay.getStopTime () == now) {
+            queType_T dynIns = (*it)._dynIns;
+            _buff.erase(it);
+            return dynIns;
+        }
+    }
+    Assert (true == false  && "popNextReady () must not be used without hasReady 
+      ()");
+        return popFront (); //place holder
+}
+\end{DoxyCode}
+\hypertarget{classport_a52ad1c5223f028930491b024f26467fa}{
+\index{port@{port}!pushBack@{pushBack}}
+\index{pushBack@{pushBack}!port@{port}}
+\subsubsection[{pushBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T$>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::pushBack (
+\begin{DoxyParamCaption}
+\item[{queType\_\-T}]{ins, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a52ad1c5223f028930491b024f26467fa}
+
+\begin{DoxyCode}
+                                                              {
+        if (getBuffSize () >= _buff_len) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
+      ow);
+        return FULL_BUFF;
+    }
+        BuffElement<queType_T> newBuff (_wire_delay, now, ins);
+        _buff.push_back (newBuff);
+        return AVAILABLE_BUFF;
+}
+\end{DoxyCode}
+\hypertarget{classport_a7c709a92ed8525cf8a310b294e606267}{
+\index{port@{port}!pushBack@{pushBack}}
+\index{pushBack@{pushBack}!port@{port}}
+\subsubsection[{pushBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T$>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::pushBack (
+\begin{DoxyParamCaption}
+\item[{queType\_\-T}]{ins, }
+\item[{{\bf CYCLE}}]{now, }
+\item[{{\bf CYCLE}}]{lat}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a7c709a92ed8525cf8a310b294e606267}
+
+\begin{DoxyCode}
+                                                                         {
+        if (getBuffSize () >= _buff_len) {
+        dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
+      ow);
+        return FULL_BUFF;
+    }
+        BuffElement<queType_T> newBuff (lat, now, ins);
+        _buff.push_back (newBuff);
+        return AVAILABLE_BUFF;
+}
+\end{DoxyCode}
+\hypertarget{classport_a966cfeb3b369ec22e8081275481abe32}{
+\index{port@{port}!regStat@{regStat}}
+\index{regStat@{regStat}!port@{port}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::regStat (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a966cfeb3b369ec22e8081275481abe32}
+
+\begin{DoxyCode}
+                                        {
+    if (getBuffState (now) == EMPTY_BUFF) {
+        s_port_empty_cyc++;
+    } else if (getBuffState (now) == FULL_BUFF) {
+        s_port_full_cyc++;
+    }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2port_8h}{port.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2port_8cpp}{port.cpp}\end{DoxyCompactItemize}

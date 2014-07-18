@@ -1,0 +1,33 @@
+\hypertarget{userinfo_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/userinfo.cc File Reference}
+\label{userinfo_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/userinfo.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/userinfo.cc}}
+}
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$pwd.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std::string \hyperlink{userinfo_8cc_a1e69448f1c7834990332af7c577dd388}{username} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{userinfo_8cc_a1e69448f1c7834990332af7c577dd388}{
+\index{userinfo.cc@{userinfo.cc}!username@{username}}
+\index{username@{username}!userinfo.cc@{userinfo.cc}}
+\subsubsection[{username}]{\setlength{\rightskip}{0pt plus 5cm}std::string username (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{userinfo_8cc_a1e69448f1c7834990332af7c577dd388}
+
+\begin{DoxyCode}
+{
+    struct passwd *pwd = getpwuid(getuid());
+
+    return pwd->pw_name;
+}
+\end{DoxyCode}

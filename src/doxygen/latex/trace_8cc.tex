@@ -1,0 +1,40 @@
+\hypertarget{trace_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/trace.cc File Reference}
+\label{trace_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/trace.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/trace.cc}}
+}
+{\ttfamily \#include $<$cctype$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/output.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/str.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/trace.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/varargs.hh\char`\"{}}\par
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceTrace}{Trace}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const string \hyperlink{namespaceTrace_a8606dda8a833927860293af0c77f06a4}{Trace::DefaultName} (\char`\"{}global\char`\"{})
+\item 
+ostream \& \hyperlink{namespaceTrace_a478c683cf31381c187f84631beef9e0a}{Trace::output} ()
+\item 
+void \hyperlink{namespaceTrace_ae05e11a017b6a616b42b8466c09a5dd1}{Trace::setOutput} (const string \&filename)
+\item 
+void \hyperlink{namespaceTrace_a06c3e4f91b64a7d89d659141b272bccc}{Trace::dprintf} (Tick when, const std::string \&name, const char $\ast$format, CPRINTF\_\-DEFINITION)
+\item 
+void \hyperlink{namespaceTrace_a820d9033b0366d37ca820c184de3fa86}{Trace::dump} (Tick when, const std::string \&name, const void $\ast$d, int len)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceTrace_a7eceed02e84cba66f80ba6e5fc184ebc}{Trace::enabled} = false
+\item 
+ostream $\ast$ \hyperlink{namespaceTrace_a58559cb033c06f1aa031c3c3da03c324}{Trace::dprintf\_\-stream} = \&cerr
+\item 
+ObjectMatch \hyperlink{namespaceTrace_a58099233c1194638eed4e30f4adfed73}{Trace::ignore}
+\end{DoxyCompactItemize}

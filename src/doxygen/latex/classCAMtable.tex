@@ -1,0 +1,179 @@
+\hypertarget{classCAMtable}{
+\section{CAMtable$<$ tableType\_\-T $>$ Class Template Reference}
+\label{classCAMtable}\index{CAMtable@{CAMtable}}
+}
+
+
+{\ttfamily \#include $<$table.h$>$}
+
+Inheritance diagram for CAMtable$<$ tableType\_\-T $>$:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classCAMtable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}{CAMtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\item 
+\hyperlink{classCAMtable_a5d8003f0fb86c270c65674efa53b1172}{$\sim$CAMtable} ()
+\item 
+tableType\_\-T \hyperlink{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}{pullNextReady} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH})
+\item 
+tableType\_\-T \hyperlink{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{getNth} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} indx)
+\item 
+tableType\_\-T \hyperlink{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{pullNth} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} indx)
+\item 
+tableType\_\-T \hyperlink{classCAMtable_a1111b552094db836302ac5ce0671794a}{getFront} ()
+\item 
+tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFront} ()
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename tableType\_\-T$>$ class CAMtable$<$ tableType\_\-T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}{
+\index{CAMtable@{CAMtable}!CAMtable@{CAMtable}}
+\index{CAMtable@{CAMtable}!CAMtable@{CAMtable}}
+\subsubsection[{CAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf CAMtable}$<$ tableType\_\-T $>$::{\bf CAMtable} (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{string}]{table\_\-name = {\ttfamily \char`\"{}CAMtable$<$~tableType\_\-T~$>$\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}
+
+\begin{DoxyCode}
+    : table<tableType_T> (len, CAM_ARRAY,
+                          wr_port_cnt, rd_port_cnt, table_name)
+{}
+\end{DoxyCode}
+\hypertarget{classCAMtable_a5d8003f0fb86c270c65674efa53b1172}{
+\index{CAMtable@{CAMtable}!$\sim$CAMtable@{$\sim$CAMtable}}
+\index{$\sim$CAMtable@{$\sim$CAMtable}!CAMtable@{CAMtable}}
+\subsubsection[{$\sim$CAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf CAMtable}$<$ tableType\_\-T $>$::$\sim${\bf CAMtable} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCAMtable_a5d8003f0fb86c270c65674efa53b1172}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCAMtable_a1111b552094db836302ac5ce0671794a}{
+\index{CAMtable@{CAMtable}!getFront@{getFront}}
+\index{getFront@{getFront}!CAMtable@{CAMtable}}
+\subsubsection[{getFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::getFront (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a1111b552094db836302ac5ce0671794a}
+
+\begin{DoxyCode}
+                                             {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
+      available ports count first");
+#endif
+     return table<tableType_T>::_table.Nth (0)->_element;
+}
+\end{DoxyCode}
+\hypertarget{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{
+\index{CAMtable@{CAMtable}!getNth@{getNth}}
+\index{getNth@{getNth}!CAMtable@{CAMtable}}
+\subsubsection[{getNth}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::getNth (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{indx}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_abef54f1e30ed42845d48c98917de32e1}
+
+\begin{DoxyCode}
+                                                      {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert (table<tableType_T>::_num_free_rd_port > 0 && "must have checked the a
+      vailable ports count first");
+#endif
+     return table<tableType_T>::_table.Nth (indx)->_element;
+}
+\end{DoxyCode}
+\hypertarget{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{
+\index{CAMtable@{CAMtable}!popFront@{popFront}}
+\index{popFront@{popFront}!CAMtable@{CAMtable}}
+\subsubsection[{popFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::popFront (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}
+
+\begin{DoxyCode}
+                                             {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
+      available ports count first");
+#endif
+    tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
+    delete table<tableType_T>::_table.Nth (0);
+    table<tableType_T>::_table.RemoveAt (0);
+    return dyIns;
+}
+\end{DoxyCode}
+\hypertarget{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}{
+\index{CAMtable@{CAMtable}!pullNextReady@{pullNextReady}}
+\index{pullNextReady@{pullNextReady}!CAMtable@{CAMtable}}
+\subsubsection[{pullNextReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::pullNextReady (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{next\_\-ins\_\-indx}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}
+
+\begin{DoxyCode}
+                                                                      {
+    tableType_T obj = table<tableType_T>::_table.Nth (next_ins_indx)->_element;
+    delete table<tableType_T>::_table.Nth (next_ins_indx);
+    table<tableType_T>::_table.RemoveAt (next_ins_indx);
+    return obj;
+}
+\end{DoxyCode}
+\hypertarget{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{
+\index{CAMtable@{CAMtable}!pullNth@{pullNth}}
+\index{pullNth@{pullNth}!CAMtable@{CAMtable}}
+\subsubsection[{pullNth}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::pullNth (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{indx}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}
+
+\begin{DoxyCode}
+                                                       {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
+      available ports count first");
+#endif
+     tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
+     table<tableType_T>::_table.RemoveAt (indx);
+     return elem;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8h}{table.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8cpp}{table.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,98 @@
+\hypertarget{registerAllocate_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerAllocate.h File Reference}
+\label{registerAllocate_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerAllocate.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/registerAllocate.h}}
+}
+{\ttfamily \#include $<$list$>$}\par
+{\ttfamily \#include $<$set$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}interfNode.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{registerAllocate_8h_ab17f7974a10ba13bb9b6fe833492f957}{findInteriorPoints} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$interiorBB)
+\item 
+void \hyperlink{registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662}{allocate\_\-register} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662}{
+\index{registerAllocate.h@{registerAllocate.h}!allocate\_\-register@{allocate\_\-register}}
+\index{allocate\_\-register@{allocate\_\-register}!registerAllocate.h@{registerAllocate.h}}
+\subsubsection[{allocate\_\-register}]{\setlength{\rightskip}{0pt plus 5cm}void allocate\_\-register (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{insList}
+\end{DoxyParamCaption}
+)}}
+\label{registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662}
+
+\begin{DoxyCode}
+                                                                               {
+        List<basicblock*> *interiorBB = new List<basicblock*>;
+        map<long int,interfNode*> locallIntfNodeMap, globalIntfNodeMap, allIntfNo
+      deMap;
+        printf("\tPhi-Function Elimination\n");
+        int numInsInsertion = eliminatePhiFuncs(bbList);
+        printf("\tSSA Rename & Build Def/Use Set\n");
+        renameAndbuildDefUseSets(bbList); //TODO: make sure this step does not im
+      pact next step
+        printf("\tLiveness Analysis\n");
+        livenessAnalysis(bbList);
+        printf("\tFind Graph Entry Points\n");
+        findEntryPoints(bbList, interiorBB);
+        //TODO is the block below okay? needed?
+        for (int i = 0; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->setAsUnvisited();
+        printf("\tBuild Interference Graph & Run Register Assignment\n");
+        for (int i = 0; i < interiorBB->NumElements(); i++) {
+                basicblock* bbHead = interiorBB->Nth(i);
+                locallIntfNodeMap.clear();
+                globalIntfNodeMap.clear();
+                allIntfNodeMap.clear();
+                make_interference_nodes_network(bbHead, globalIntfNodeMap, locall
+      IntfNodeMap,allIntfNodeMap);
+                for (map<long int,interfNode*>::iterator it = locallIntfNodeMap.b
+      egin(); it != locallIntfNodeMap.end(); it++) {
+                        if (globalIntfNodeMap.find(it->first) != globalIntfNodeMa
+      p.end()) printf("*SHIIIIIIIIT+++++++\n");
+                }
+                for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.b
+      egin(); it != globalIntfNodeMap.end(); it++) {
+                        if (locallIntfNodeMap.find(it->first) != locallIntfNodeMa
+      p.end()) printf("SHIIIIIIIIT+++++++\n");
+                }
+                // printf("sizes: %d,%d,%d\n",allIntfNodeMap.size(),globalIntfNod
+      eMap.size(),locallIntfNodeMap.size());
+                assign_global_registers(locallIntfNodeMap, globalIntfNodeMap, all
+      IntfNodeMap);
+                // printf("sizes: %d,%d,%d\n",allIntfNodeMap.size(),globalIntfNod
+      eMap.size(),locallIntfNodeMap.size());
+                set_arch_reg_for_all_ins(bbHead, allIntfNodeMap);
+        }
+        for (int i = 0; i < bbList->NumElements(); i++) {       
+                basicblock* bb = bbList->Nth(i);
+                // Assert(bb->isVisited()); //all BB must be visited by now //TOD
+      O put this back ASAP
+                bb->setAsUnvisited();
+                // printf("%llx, %d\n", bb->getID(),    bb->getLiveVarSize());
+                // bb->getLiveVarSize();
+        }
+        printf("\tNumber of Phi MOV instructions: %d added to the %d static progr
+      am instructions\n",numInsInsertion,insList->NumElements());
+        delete interiorBB;
+}
+\end{DoxyCode}
+\hypertarget{registerAllocate_8h_ab17f7974a10ba13bb9b6fe833492f957}{
+\index{registerAllocate.h@{registerAllocate.h}!findInteriorPoints@{findInteriorPoints}}
+\index{findInteriorPoints@{findInteriorPoints}!registerAllocate.h@{registerAllocate.h}}
+\subsubsection[{findInteriorPoints}]{\setlength{\rightskip}{0pt plus 5cm}void findInteriorPoints (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{interiorBB}
+\end{DoxyParamCaption}
+)}}
+\label{registerAllocate_8h_ab17f7974a10ba13bb9b6fe833492f957}

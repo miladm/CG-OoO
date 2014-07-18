@@ -1,0 +1,61 @@
+\hypertarget{main__pars_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/main\_\-pars.cpp File Reference}
+\label{main__pars_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/main\_\-pars.cpp@{/home/milad/esc\_\-project/svn/PARS/src/main\_\-pars.cpp}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instlib.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}xed-\/interface.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}frontend/pars.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+INT32 \hyperlink{main__pars_8cpp_a9c89b15666dec97b4af91ba247b6a230}{Usage} ()
+\item 
+int \hyperlink{main__pars_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{main__pars_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+\index{main\_\-pars.cpp@{main\_\-pars.cpp}!main@{main}}
+\index{main@{main}!main_pars.cpp@{main\_\-pars.cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{main__pars_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+                                  {
+    PIN_InitSymbols();
+    if(PIN_Init(argc, argv)) return Usage();
+
+        char cfgFile[] = "config/defaul.cfg";
+    runPARS(cfgFile);
+    
+    PIN_StartProgram();
+    return 0;
+}
+\end{DoxyCode}
+\hypertarget{main__pars_8cpp_a9c89b15666dec97b4af91ba247b6a230}{
+\index{main\_\-pars.cpp@{main\_\-pars.cpp}!Usage@{Usage}}
+\index{Usage@{Usage}!main_pars.cpp@{main\_\-pars.cpp}}
+\subsubsection[{Usage}]{\setlength{\rightskip}{0pt plus 5cm}INT32 Usage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{main__pars_8cpp_a9c89b15666dec97b4af91ba247b6a230}
+
+\begin{DoxyCode}
+              {
+    PIN_ERROR( "PhArS: Phrase Architecture Simulator\n"
+               + KNOB_BASE::StringKnobSummary() + "\n");
+    return -1;
+}
+\end{DoxyCode}

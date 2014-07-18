@@ -1,0 +1,76 @@
+\hypertarget{backend_2dependencyTable_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/dependencyTable.h File Reference}
+\label{backend_2dependencyTable_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/dependencyTable.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/dependencyTable.h}}
+}
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classdependencyTable}{dependencyTable}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \{ \par
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{MEM\_\-READ}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{MEM\_\-WRITE}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{REG\_\-WRITE}, 
+\hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{REG\_\-READ}, 
+\par
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{MEM\_\-READ}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{MEM\_\-WRITE}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{REG\_\-WRITE}, 
+\hyperlink{binaryTranslator_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{REG\_\-READ}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{
+\index{backend/dependencyTable.h@{backend/dependencyTable.h}!tableType@{tableType}}
+\index{tableType@{tableType}!backend/dependencyTable.h@{backend/dependencyTable.h}}
+\subsubsection[{tableType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tableType}}}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{MEM\_\-READ@{MEM\_\-READ}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!MEM\_\-READ@{MEM\_\-READ}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{
+MEM\_\-READ}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}
+}]\index{MEM\_\-WRITE@{MEM\_\-WRITE}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!MEM\_\-WRITE@{MEM\_\-WRITE}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{
+MEM\_\-WRITE}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}
+}]\index{REG\_\-WRITE@{REG\_\-WRITE}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!REG\_\-WRITE@{REG\_\-WRITE}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{
+REG\_\-WRITE}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}
+}]\index{REG\_\-READ@{REG\_\-READ}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!REG\_\-READ@{REG\_\-READ}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{
+REG\_\-READ}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}
+}]\index{MEM\_\-READ@{MEM\_\-READ}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!MEM\_\-READ@{MEM\_\-READ}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}{
+MEM\_\-READ}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88c410bf4973204b59fa76b4b04562f8}
+}]\index{MEM\_\-WRITE@{MEM\_\-WRITE}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!MEM\_\-WRITE@{MEM\_\-WRITE}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}{
+MEM\_\-WRITE}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1bae9f32e8918777b70ac461ff4a5a1fdf5}
+}]\index{REG\_\-WRITE@{REG\_\-WRITE}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!REG\_\-WRITE@{REG\_\-WRITE}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}{
+REG\_\-WRITE}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3}
+}]\index{REG\_\-READ@{REG\_\-READ}!backend/dependencyTable.h@{backend/dependencyTable.h}}\index{backend/dependencyTable.h@{backend/dependencyTable.h}!REG\_\-READ@{REG\_\-READ}}\item[{\em 
+\hypertarget{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}{
+REG\_\-READ}
+\label{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;
+\end{DoxyCode}

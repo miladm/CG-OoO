@@ -1,0 +1,736 @@
+\hypertarget{classdynInstruction}{
+\section{dynInstruction Class Reference}
+\label{classdynInstruction}\index{dynInstruction@{dynInstruction}}
+}
+
+
+{\ttfamily \#include $<$dynInstruction.h$>$}
+
+Inheritance diagram for dynInstruction:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdynInstruction}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}{dynInstruction} ()
+\item 
+\hyperlink{classdynInstruction_a133d35bbe8cd2afdf8f7c9618beb3759}{$\sim$dynInstruction} ()
+\item 
+void \hyperlink{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}{setInsAddr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} insAddr)
+\item 
+void \hyperlink{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}{setInsID} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} seqNum)
+\item 
+void \hyperlink{classdynInstruction_ae7c165e2f688432713ea575b2a5477fe}{setInsType} (\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{INS\_\-TYPE} insType)
+\item 
+void \hyperlink{classdynInstruction_a27b7ba0720a85d516c3885bddf154765}{setAR} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} ar, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type})
+\item 
+void \hyperlink{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}{setPR} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} pr, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type})
+\item 
+void \hyperlink{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}{setMemAtr} (\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType}, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} memAddr, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize, bool stackRd, bool stackWr)
+\item 
+void \hyperlink{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}{setMemAtr} (\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType}, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize)
+\item 
+void \hyperlink{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}{setBrAtr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brFalThru, bool hasFalThru, bool brTaken, bool isCall, bool isRet, bool isJump, bool isDirBrOrCallOrJmp)
+\item 
+void \hyperlink{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{setBrAtr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, bool isCall, bool isRet, bool isJump)
+\item 
+void \hyperlink{classdynInstruction_a0cb15d906e84b2efc8986b74edaf5adf}{setPipeStage} (\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{PIPE\_\-STAGE} insStage)
+\item 
+void \hyperlink{classdynInstruction_a7fc66de5e3f826f515e41029619e2088}{setSQstate} (\hyperlink{global_2global_8h_af9e953470c71a91625fe1fc66f2dc49b}{SQ\_\-STATE} state)
+\item 
+void \hyperlink{classdynInstruction_a83a5077984f29a340de7bebc7e0b679c}{setLQstate} (\hyperlink{global_2global_8h_a49734aedeaf1d3f1c93c4778b3b62205}{LQ\_\-STATE} state)
+\item 
+void \hyperlink{classdynInstruction_a794898f3f2f9a99de5f8ca4b8f8999c4}{setWrongPath} (bool is\_\-on\_\-wrong\_\-path)
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a464da2601438384a3c00e85a814c3964}{getInsAddr} ()
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}{getInsID} ()
+\item 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{INS\_\-TYPE} \hyperlink{classdynInstruction_a3a7025de98c539d8eaa06b40ac2e8cc8}{getInsType} ()
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a611e3f3619160361cf317e05d2034288}{getMemAddr} ()
+\item 
+\hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} \hyperlink{classdynInstruction_aee508d76a2e13461fce2299234894688}{getMemAxesSize} ()
+\item 
+\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{classdynInstruction_a9f8a63685d0b28009957e60b7596b502}{getMemType} ()
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a50af30c57eb9ad1c546c4105db30fae4}{getBrTarget} ()
+\item 
+\hyperlink{global_2global_8h_a6e7345a10544e77c7dfe6c4e5cb3ec97}{BR\_\-TYPE} \hyperlink{classdynInstruction_a3918eb83344b5343d06e0925cccd96a6}{getBrType} ()
+\item 
+bool \hyperlink{classdynInstruction_a81de1dc10cdabcb8683a0b586b36144b}{isBrTaken} ()
+\item 
+\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{PIPE\_\-STAGE} \hyperlink{classdynInstruction_aeb07269dfde7d142e72e13cda8060c29}{getPipeStage} ()
+\item 
+\hyperlink{global_2global_8h_af9e953470c71a91625fe1fc66f2dc49b}{SQ\_\-STATE} \hyperlink{classdynInstruction_a6160b96ca670a4c15a3fa81b0d54dcd4}{getSQstate} ()
+\item 
+\hyperlink{global_2global_8h_a49734aedeaf1d3f1c93c4778b3b62205}{LQ\_\-STATE} \hyperlink{classdynInstruction_a500260c0b3b35828bd0c678c4d5eb16a}{getLQstate} ()
+\item 
+bool \hyperlink{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}{isOnWrongPath} ()
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_a73d8b75f5c68a4cb2a7f434d4b8d4143}{getNumRdAR} ()
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_ad7fa2d930aa5ad7836d2c50c1ada3faa}{getNumRdPR} ()
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} $>$ $\ast$ \hyperlink{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}{getARrdList} ()
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} $>$ $\ast$ \hyperlink{classdynInstruction_aeba50fabf115b7f60ce7201df044201c}{getARwrList} ()
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} $>$ $\ast$ \hyperlink{classdynInstruction_a82afd5173ddfd7a7654f28565263f1a2}{getPRrdList} ()
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} $>$ $\ast$ \hyperlink{classdynInstruction_a40d9f8a39500558a4dea5d41ce5d6442}{getPRwrList} ()
+\item 
+void \hyperlink{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}{copyRegsTo} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+void \hyperlink{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}{resetStates} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}{
+\index{dynInstruction@{dynInstruction}!dynInstruction@{dynInstruction}}
+\index{dynInstruction@{dynInstruction}!dynInstruction@{dynInstruction}}
+\subsubsection[{dynInstruction}]{\setlength{\rightskip}{0pt plus 5cm}dynInstruction::dynInstruction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}
+
+\begin{DoxyCode}
+    : unit ("dynInstruction")
+{
+    _insStage = NO_STAGE;
+    _lq_state = LQ_NO_STATE;
+    _sq_state = SQ_NO_STATE;
+    _is_on_wrong_path = false;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a133d35bbe8cd2afdf8f7c9618beb3759}{
+\index{dynInstruction@{dynInstruction}!$\sim$dynInstruction@{$\sim$dynInstruction}}
+\index{$\sim$dynInstruction@{$\sim$dynInstruction}!dynInstruction@{dynInstruction}}
+\subsubsection[{$\sim$dynInstruction}]{\setlength{\rightskip}{0pt plus 5cm}dynInstruction::$\sim$dynInstruction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a133d35bbe8cd2afdf8f7c9618beb3759}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}{
+\index{dynInstruction@{dynInstruction}!copyRegsTo@{copyRegsTo}}
+\index{copyRegsTo@{copyRegsTo}!dynInstruction@{dynInstruction}}
+\subsubsection[{copyRegsTo}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::copyRegsTo (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}
+
+\begin{DoxyCode}
+                                                    {
+    for (int i = 0; i < _p_rdReg.NumElements (); i++) {
+        PR reg = _p_rdReg.Nth (i);
+        ins->setPR (reg, READ);
+    }
+    for (int i = 0; i < _p_wrReg.NumElements (); i++) {
+        PR reg = _p_wrReg.Nth (i);
+        ins->setPR (reg, WRITE);
+    }
+    for (int i = 0; i < _a_rdReg.NumElements (); i++) {
+        AR reg = _a_rdReg.Nth (i);
+        ins->setAR (reg, READ);
+    }
+    for (int i = 0; i < _a_wrReg.NumElements (); i++) {
+        AR reg = _a_wrReg.Nth (i);
+        ins->setAR (reg, WRITE);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}{
+\index{dynInstruction@{dynInstruction}!getARrdList@{getARrdList}}
+\index{getARrdList@{getARrdList}!dynInstruction@{dynInstruction}}
+\subsubsection[{getARrdList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf AR} $>$ $\ast$ dynInstruction::getARrdList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}
+
+\begin{DoxyCode}
+{return &_a_rdReg_waitList;}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_aeba50fabf115b7f60ce7201df044201c}{
+\index{dynInstruction@{dynInstruction}!getARwrList@{getARwrList}}
+\index{getARwrList@{getARwrList}!dynInstruction@{dynInstruction}}
+\subsubsection[{getARwrList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf AR} $>$ $\ast$ dynInstruction::getARwrList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_aeba50fabf115b7f60ce7201df044201c}
+
+\begin{DoxyCode}
+{return &_a_wrReg;}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a50af30c57eb9ad1c546c4105db30fae4}{
+\index{dynInstruction@{dynInstruction}!getBrTarget@{getBrTarget}}
+\index{getBrTarget@{getBrTarget}!dynInstruction@{dynInstruction}}
+\subsubsection[{getBrTarget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} dynInstruction::getBrTarget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a50af30c57eb9ad1c546c4105db30fae4}
+
+\begin{DoxyCode}
+{ return _brTarget; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a3918eb83344b5343d06e0925cccd96a6}{
+\index{dynInstruction@{dynInstruction}!getBrType@{getBrType}}
+\index{getBrType@{getBrType}!dynInstruction@{dynInstruction}}
+\subsubsection[{getBrType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BR\_\-TYPE} dynInstruction::getBrType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a3918eb83344b5343d06e0925cccd96a6}
+
+\begin{DoxyCode}
+{ return _brType; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a464da2601438384a3c00e85a814c3964}{
+\index{dynInstruction@{dynInstruction}!getInsAddr@{getInsAddr}}
+\index{getInsAddr@{getInsAddr}!dynInstruction@{dynInstruction}}
+\subsubsection[{getInsAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} dynInstruction::getInsAddr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a464da2601438384a3c00e85a814c3964}
+
+\begin{DoxyCode}
+{ return _insAddr; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}{
+\index{dynInstruction@{dynInstruction}!getInsID@{getInsID}}
+\index{getInsID@{getInsID}!dynInstruction@{dynInstruction}}
+\subsubsection[{getInsID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} dynInstruction::getInsID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}
+
+\begin{DoxyCode}
+{ return _seqNum; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a3a7025de98c539d8eaa06b40ac2e8cc8}{
+\index{dynInstruction@{dynInstruction}!getInsType@{getInsType}}
+\index{getInsType@{getInsType}!dynInstruction@{dynInstruction}}
+\subsubsection[{getInsType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-TYPE} dynInstruction::getInsType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a3a7025de98c539d8eaa06b40ac2e8cc8}
+
+\begin{DoxyCode}
+{ return _insType; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a500260c0b3b35828bd0c678c4d5eb16a}{
+\index{dynInstruction@{dynInstruction}!getLQstate@{getLQstate}}
+\index{getLQstate@{getLQstate}!dynInstruction@{dynInstruction}}
+\subsubsection[{getLQstate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf LQ\_\-STATE} dynInstruction::getLQstate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a500260c0b3b35828bd0c678c4d5eb16a}
+
+\begin{DoxyCode}
+{Assert (getMemType () == LOAD); return _lq_state; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a611e3f3619160361cf317e05d2034288}{
+\index{dynInstruction@{dynInstruction}!getMemAddr@{getMemAddr}}
+\index{getMemAddr@{getMemAddr}!dynInstruction@{dynInstruction}}
+\subsubsection[{getMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} dynInstruction::getMemAddr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a611e3f3619160361cf317e05d2034288}
+
+\begin{DoxyCode}
+{ return _memAddr; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_aee508d76a2e13461fce2299234894688}{
+\index{dynInstruction@{dynInstruction}!getMemAxesSize@{getMemAxesSize}}
+\index{getMemAxesSize@{getMemAxesSize}!dynInstruction@{dynInstruction}}
+\subsubsection[{getMemAxesSize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BYTES} dynInstruction::getMemAxesSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_aee508d76a2e13461fce2299234894688}
+
+\begin{DoxyCode}
+{ return _memAxesSize; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a9f8a63685d0b28009957e60b7596b502}{
+\index{dynInstruction@{dynInstruction}!getMemType@{getMemType}}
+\index{getMemType@{getMemType}!dynInstruction@{dynInstruction}}
+\subsubsection[{getMemType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MEM\_\-TYPE} dynInstruction::getMemType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a9f8a63685d0b28009957e60b7596b502}
+
+\begin{DoxyCode}
+{ return _memType; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a73d8b75f5c68a4cb2a7f434d4b8d4143}{
+\index{dynInstruction@{dynInstruction}!getNumRdAR@{getNumRdAR}}
+\index{getNumRdAR@{getNumRdAR}!dynInstruction@{dynInstruction}}
+\subsubsection[{getNumRdAR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} dynInstruction::getNumRdAR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a73d8b75f5c68a4cb2a7f434d4b8d4143}
+
+\begin{DoxyCode}
+{ return _a_rdReg_waitList.NumElements(); }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ad7fa2d930aa5ad7836d2c50c1ada3faa}{
+\index{dynInstruction@{dynInstruction}!getNumRdPR@{getNumRdPR}}
+\index{getNumRdPR@{getNumRdPR}!dynInstruction@{dynInstruction}}
+\subsubsection[{getNumRdPR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} dynInstruction::getNumRdPR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ad7fa2d930aa5ad7836d2c50c1ada3faa}
+
+\begin{DoxyCode}
+{ return _p_rdReg_waitList.NumElements(); }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_aeb07269dfde7d142e72e13cda8060c29}{
+\index{dynInstruction@{dynInstruction}!getPipeStage@{getPipeStage}}
+\index{getPipeStage@{getPipeStage}!dynInstruction@{dynInstruction}}
+\subsubsection[{getPipeStage}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-STAGE} dynInstruction::getPipeStage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_aeb07269dfde7d142e72e13cda8060c29}
+
+\begin{DoxyCode}
+{ return _insStage; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a82afd5173ddfd7a7654f28565263f1a2}{
+\index{dynInstruction@{dynInstruction}!getPRrdList@{getPRrdList}}
+\index{getPRrdList@{getPRrdList}!dynInstruction@{dynInstruction}}
+\subsubsection[{getPRrdList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf PR} $>$ $\ast$ dynInstruction::getPRrdList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a82afd5173ddfd7a7654f28565263f1a2}
+
+\begin{DoxyCode}
+{return &_p_rdReg_waitList;}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a40d9f8a39500558a4dea5d41ce5d6442}{
+\index{dynInstruction@{dynInstruction}!getPRwrList@{getPRwrList}}
+\index{getPRwrList@{getPRwrList}!dynInstruction@{dynInstruction}}
+\subsubsection[{getPRwrList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<$ {\bf PR} $>$ $\ast$ dynInstruction::getPRwrList (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a40d9f8a39500558a4dea5d41ce5d6442}
+
+\begin{DoxyCode}
+{return &_p_wrReg;}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a6160b96ca670a4c15a3fa81b0d54dcd4}{
+\index{dynInstruction@{dynInstruction}!getSQstate@{getSQstate}}
+\index{getSQstate@{getSQstate}!dynInstruction@{dynInstruction}}
+\subsubsection[{getSQstate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SQ\_\-STATE} dynInstruction::getSQstate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a6160b96ca670a4c15a3fa81b0d54dcd4}
+
+\begin{DoxyCode}
+{Assert (getMemType () == STORE); return _sq_state; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a81de1dc10cdabcb8683a0b586b36144b}{
+\index{dynInstruction@{dynInstruction}!isBrTaken@{isBrTaken}}
+\index{isBrTaken@{isBrTaken}!dynInstruction@{dynInstruction}}
+\subsubsection[{isBrTaken}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isBrTaken (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a81de1dc10cdabcb8683a0b586b36144b}
+
+\begin{DoxyCode}
+{ return _brTaken; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}{
+\index{dynInstruction@{dynInstruction}!isOnWrongPath@{isOnWrongPath}}
+\index{isOnWrongPath@{isOnWrongPath}!dynInstruction@{dynInstruction}}
+\subsubsection[{isOnWrongPath}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isOnWrongPath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}
+
+\begin{DoxyCode}
+{return _is_on_wrong_path;}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}{
+\index{dynInstruction@{dynInstruction}!resetStates@{resetStates}}
+\index{resetStates@{resetStates}!dynInstruction@{dynInstruction}}
+\subsubsection[{resetStates}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::resetStates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}
+
+\begin{DoxyCode}
+                                  {
+    while (_p_rdReg_waitList.NumElements () > 0) {
+        _p_rdReg_waitList.RemoveAt(0);
+    }
+    while (_p_rdReg.NumElements () > 0) {
+        _p_rdReg.RemoveAt(0);
+    }
+    while (_p_wrReg.NumElements () > 0) {
+        _p_wrReg.RemoveAt(0);
+    }
+  //for (int i = 0; i < _p_rdReg.NumElements(); i++) {
+  //    _p_rdReg_waitList.Append (_p_rdReg.Nth(i));
+  //}
+
+    while (_a_rdReg_waitList.NumElements () > 0) {
+        _a_rdReg_waitList.RemoveAt(0);
+    }
+    for (int i = 0; i < _a_rdReg.NumElements(); i++) {
+        _a_rdReg_waitList.Append (_a_rdReg.Nth(i));
+    }
+
+    _insStage = NO_STAGE;
+    _lq_state = LQ_NO_STATE;
+    _sq_state = SQ_NO_STATE;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a27b7ba0720a85d516c3885bddf154765}{
+\index{dynInstruction@{dynInstruction}!setAR@{setAR}}
+\index{setAR@{setAR}!dynInstruction@{dynInstruction}}
+\subsubsection[{setAR}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setAR (
+\begin{DoxyParamCaption}
+\item[{{\bf AR}}]{ar, }
+\item[{{\bf AXES\_\-TYPE}}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a27b7ba0720a85d516c3885bddf154765}
+
+\begin{DoxyCode}
+                                                 {
+    if  (type == READ) {
+        _a_rdReg.Append (ar);
+        _a_rdReg_waitList.Append (ar);
+    } else if  (type == WRITE) {
+        _a_wrReg.Append (ar);
+    } else {
+        Assert (true == false && "wrong instruction type");
+    }
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{
+\index{dynInstruction@{dynInstruction}!setBrAtr@{setBrAtr}}
+\index{setBrAtr@{setBrAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setBrAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setBrAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{brTarget, }
+\item[{bool}]{isCall, }
+\item[{bool}]{isRet, }
+\item[{bool}]{isJump}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}
+
+\begin{DoxyCode}
+                                                                                 
+        {
+    _brTarget = brTarget;
+    if (isJump) _brType = JMP;
+    else if (isCall) _brType = CALL;
+    else if (isRet) _brType = RET;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}{
+\index{dynInstruction@{dynInstruction}!setBrAtr@{setBrAtr}}
+\index{setBrAtr@{setBrAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setBrAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setBrAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{brTarget, }
+\item[{{\bf ADDRS}}]{brFalThru, }
+\item[{bool}]{hasFalThru, }
+\item[{bool}]{brTaken, }
+\item[{bool}]{isCall, }
+\item[{bool}]{isRet, }
+\item[{bool}]{isJump, }
+\item[{bool}]{isDirBrOrCallOrJmp}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                 {
+    _brTarget = brTarget;
+    _brTaken = brTaken;
+    if (isJump) _brType = JMP;
+    else if (isCall) _brType = CALL;
+    else if (isRet) _brType = RET;
+    else if (isDirBrOrCallOrJmp) _brType = DIR_BR;
+    else  _brType = INDIR_BR;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}{
+\index{dynInstruction@{dynInstruction}!setInsAddr@{setInsAddr}}
+\index{setInsAddr@{setInsAddr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setInsAddr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setInsAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}
+
+\begin{DoxyCode}
+                                              {
+        _insAddr = insAddr;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}{
+\index{dynInstruction@{dynInstruction}!setInsID@{setInsID}}
+\index{setInsID@{setInsID}!dynInstruction@{dynInstruction}}
+\subsubsection[{setInsID}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setInsID (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{seqNum}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}
+
+\begin{DoxyCode}
+                                            {
+#ifdef ASSERTION
+    Assert (seqNum > 0);
+#endif
+        _seqNum = seqNum;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ae7c165e2f688432713ea575b2a5477fe}{
+\index{dynInstruction@{dynInstruction}!setInsType@{setInsType}}
+\index{setInsType@{setInsType}!dynInstruction@{dynInstruction}}
+\subsubsection[{setInsType}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setInsType (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-TYPE}}]{insType}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ae7c165e2f688432713ea575b2a5477fe}
+
+\begin{DoxyCode}
+                                                 {
+        _insType = insType;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a83a5077984f29a340de7bebc7e0b679c}{
+\index{dynInstruction@{dynInstruction}!setLQstate@{setLQstate}}
+\index{setLQstate@{setLQstate}!dynInstruction@{dynInstruction}}
+\subsubsection[{setLQstate}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setLQstate (
+\begin{DoxyParamCaption}
+\item[{{\bf LQ\_\-STATE}}]{state}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a83a5077984f29a340de7bebc7e0b679c}
+
+\begin{DoxyCode}
+                                               {
+#ifdef ASSERTION
+    Assert (getMemType () == LOAD);
+    dbg.print (DBG_TEST, "%s: %d %d (cyc:)\n", _c_name.c_str (), state, _lq_state
+      );
+    switch (state) {
+        case LQ_ADDR_WAIT: Assert (_lq_state == LQ_NO_STATE); break;
+        case LQ_PENDING_CACHE_DISPATCH: Assert (_lq_state == LQ_ADDR_WAIT); break
+      ;
+        case LQ_FWD_FROM_SQ: Assert (_lq_state == LQ_PENDING_CACHE_DISPATCH); bre
+      ak;
+        case LQ_MSHR_WAIT: Assert (_lq_state == LQ_PENDING_CACHE_DISPATCH); break
+      ;
+        case LQ_CACHE_WAIT: Assert (_lq_state == LQ_PENDING_CACHE_DISPATCH); brea
+      k;
+        case LQ_COMPLETE: Assert (_lq_state == LQ_FWD_FROM_SQ || 
+                                  _lq_state == LQ_MSHR_WAIT || 
+                                  _lq_state == LQ_CACHE_WAIT); break;
+        default: Assert (true == false && "Invalid Pipeine stage"); break;
+    }
+#endif
+    _lq_state = state;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}{
+\index{dynInstruction@{dynInstruction}!setMemAtr@{setMemAtr}}
+\index{setMemAtr@{setMemAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setMemAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setMemAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf MEM\_\-TYPE}}]{memType, }
+\item[{{\bf BYTES}}]{memAxesSize}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}
+
+\begin{DoxyCode}
+                                                                   {
+    _memType = memType;
+    _memAxesSize = memAxesSize;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}{
+\index{dynInstruction@{dynInstruction}!setMemAtr@{setMemAtr}}
+\index{setMemAtr@{setMemAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setMemAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setMemAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf MEM\_\-TYPE}}]{memType, }
+\item[{{\bf ADDRS}}]{memAddr, }
+\item[{{\bf BYTES}}]{memAxesSize, }
+\item[{bool}]{stackRd, }
+\item[{bool}]{stackWr}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}
+
+\begin{DoxyCode}
+                                                            {
+    _memType = memType;
+    _memAddr = memAddr;
+    _memAxesSize = memAxesSize;
+    _stackRd = stackRd;
+    _stackWr = stackWr;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a0cb15d906e84b2efc8986b74edaf5adf}{
+\index{dynInstruction@{dynInstruction}!setPipeStage@{setPipeStage}}
+\index{setPipeStage@{setPipeStage}!dynInstruction@{dynInstruction}}
+\subsubsection[{setPipeStage}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setPipeStage (
+\begin{DoxyParamCaption}
+\item[{{\bf PIPE\_\-STAGE}}]{insStage}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a0cb15d906e84b2efc8986b74edaf5adf}
+
+\begin{DoxyCode}
+                                                      {
+#ifdef ASSERTION
+    switch (insStage) {
+        case FETCH: Assert (_insStage == NO_STAGE); break;
+        case DECODE: Assert (_insStage == FETCH); break;
+        case DISPATCH: Assert (_insStage == DECODE); break;
+        case ISSUE: Assert (_insStage == DISPATCH); break;
+        case EXECUTE: Assert (_insStage == ISSUE); break;
+        case MEM_ACCESS: Assert (_insStage == EXECUTE); break;
+        case COMPLETE: Assert (_insStage == MEM_ACCESS || _insStage == EXECUTE); 
+      break;
+        case COMMIT: Assert (_insStage == COMPLETE); break;
+        default: Assert (true == false && "Invalid Pipeine stage"); break;
+    }
+#endif
+    _insStage = insStage;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}{
+\index{dynInstruction@{dynInstruction}!setPR@{setPR}}
+\index{setPR@{setPR}!dynInstruction@{dynInstruction}}
+\subsubsection[{setPR}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setPR (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{pr, }
+\item[{{\bf AXES\_\-TYPE}}]{type}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}
+
+\begin{DoxyCode}
+                                                 {
+    if  (type == READ) {
+        _p_rdReg.Append (pr);
+        _p_rdReg_waitList.Append (pr);
+    } else if  (type == WRITE) {
+        _p_wrReg.Append (pr);
+    } else {
+        Assert (true == false && "wrong instruction type");
+    }
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a7fc66de5e3f826f515e41029619e2088}{
+\index{dynInstruction@{dynInstruction}!setSQstate@{setSQstate}}
+\index{setSQstate@{setSQstate}!dynInstruction@{dynInstruction}}
+\subsubsection[{setSQstate}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setSQstate (
+\begin{DoxyParamCaption}
+\item[{{\bf SQ\_\-STATE}}]{state}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a7fc66de5e3f826f515e41029619e2088}
+
+\begin{DoxyCode}
+                                               {
+#ifdef ASSERTION
+    Assert (getMemType () == STORE);
+    switch (state) {
+        case SQ_ADDR_WAIT: Assert (_sq_state == SQ_NO_STATE); break;
+        case SQ_COMPLETE: Assert (_sq_state == SQ_ADDR_WAIT); break;
+        case SQ_COMMIT: Assert (_sq_state == SQ_COMPLETE); break;
+        case SQ_CACHE_DISPATCH: Assert (_sq_state == SQ_COMMIT); break;
+        default: Assert (true == false && "Invalid Pipeine stage"); break;
+    }
+#endif
+    _sq_state = state;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a794898f3f2f9a99de5f8ca4b8f8999c4}{
+\index{dynInstruction@{dynInstruction}!setWrongPath@{setWrongPath}}
+\index{setWrongPath@{setWrongPath}!dynInstruction@{dynInstruction}}
+\subsubsection[{setWrongPath}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setWrongPath (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\_\-on\_\-wrong\_\-path}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a794898f3f2f9a99de5f8ca4b8f8999c4}
+
+\begin{DoxyCode}
+                                                        {
+    _is_on_wrong_path = is_on_wrong_path;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{dynInstruction_8h}{dynInstruction.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{dynInstruction_8cpp}{dynInstruction.cpp}\end{DoxyCompactItemize}

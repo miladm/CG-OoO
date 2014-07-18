@@ -1,0 +1,86 @@
+\hypertarget{text_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/text.cc File Reference}
+\label{text_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/text.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/text.cc}}
+}
+{\ttfamily \#include $<$cassert$>$}\par
+{\ttfamily \#include $<$cmath$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$sstream$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}base/stats/info.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/stats/text.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/cast.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/str.hh\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structStats_1_1ScalarPrint}{Stats::ScalarPrint}
+\item 
+struct \hyperlink{structStats_1_1VectorPrint}{Stats::VectorPrint}
+\item 
+struct \hyperlink{structStats_1_1DistPrint}{Stats::DistPrint}
+\item 
+struct \hyperlink{structStats_1_1SparseHistPrint}{Stats::SparseHistPrint}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceStats}{Stats}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{text_8cc_a8abfcc76130f3f991d124dd22d7e69bc}{NAN}~(\_\-\_\-nan())
+\item 
+\#define \hyperlink{text_8cc_a8b1480758dac0e02fd9c9bbb17e3ec94}{\_\-\_\-M5\_\-NAN}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{text_8cc_aeb572545e923f5a96e5f3f8033af4001}{\_\-\_\-nan} ()
+\item 
+list$<$ Info $\ast$ $>$ \& \hyperlink{namespaceStats_a52f464eb02d70d04e60fd6c090366560}{Stats::statsList} ()
+\item 
+string \hyperlink{namespaceStats_abf675b5476be37bbbe5d1abacbe4071e}{Stats::ValueToString} (Result value, int precision)
+\item 
+Output $\ast$ \hyperlink{namespaceStats_aff4528f6c0e99aac2ae6bfbba25349aa}{Stats::initText} (const string \&filename, bool desc)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{text_8cc_a8b1480758dac0e02fd9c9bbb17e3ec94}{
+\index{text.cc@{text.cc}!\_\-\_\-M5\_\-NAN@{\_\-\_\-M5\_\-NAN}}
+\index{\_\-\_\-M5\_\-NAN@{\_\-\_\-M5\_\-NAN}!text.cc@{text.cc}}
+\subsubsection[{\_\-\_\-M5\_\-NAN}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-M5\_\-NAN}}
+\label{text_8cc_a8b1480758dac0e02fd9c9bbb17e3ec94}
+Need to define \hyperlink{text_8cc_aeb572545e923f5a96e5f3f8033af4001}{\_\-\_\-nan()} \hypertarget{text_8cc_a8abfcc76130f3f991d124dd22d7e69bc}{
+\index{text.cc@{text.cc}!NAN@{NAN}}
+\index{NAN@{NAN}!text.cc@{text.cc}}
+\subsubsection[{NAN}]{\setlength{\rightskip}{0pt plus 5cm}\#define NAN~(\_\-\_\-nan())}}
+\label{text_8cc_a8abfcc76130f3f991d124dd22d7e69bc}
+Define Not a number. 
+
+\subsection{Function Documentation}
+\hypertarget{text_8cc_aeb572545e923f5a96e5f3f8033af4001}{
+\index{text.cc@{text.cc}!\_\-\_\-nan@{\_\-\_\-nan}}
+\index{\_\-\_\-nan@{\_\-\_\-nan}!text.cc@{text.cc}}
+\subsubsection[{\_\-\_\-nan}]{\setlength{\rightskip}{0pt plus 5cm}float \_\-\_\-nan (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{text_8cc_aeb572545e923f5a96e5f3f8033af4001}
+
+\begin{DoxyCode}
+{
+    union {
+        uint32_t ui;
+        float f;
+    } nan;
+
+    nan.ui = 0x7fc00000;
+    return nan.f;
+}
+\end{DoxyCode}

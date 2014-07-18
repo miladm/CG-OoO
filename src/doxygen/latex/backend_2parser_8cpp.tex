@@ -1,0 +1,204 @@
+\hypertarget{backend_2parser_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/parser.cpp File Reference}
+\label{backend_2parser_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/parser.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/parser.cpp}}
+}
+{\ttfamily \#include \char`\"{}bkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}parser.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../frontend/tournament.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dependencyTable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{backend_2parser_8cpp_a398527b3e9e358c345c5047b16871957}{debug}
+\item 
+\hyperlink{global_2global_8h_a01e05efee3068c759b10b6181a6065e1}{brMode} \hyperlink{backend_2parser_8cpp_ac7bd9648b0cf77fbafdeb4490e46e7de}{branchMode}
+\item 
+int \hyperlink{backend_2parser_8cpp_ab3cf199a4c75c2388b7c3877024f16a9}{corruptInsCount}
+\item 
+bool \hyperlink{backend_2parser_8cpp_a11a86001d145184dffcc82c55772537c}{makePhrase}
+\item 
+int \hyperlink{backend_2parser_8cpp_ab89bce3b6c39af4337cdc6d48e717238}{parseHitMiss}
+\item 
+long int \hyperlink{backend_2parser_8cpp_a99e158204dabc119d57a8ddf66d413c9}{numALUOps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_ac8d2ba075f1720da64e00e03081ce681}{numMemOps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_a00f80363001f9affede7c0feb25eac16}{numFPUOps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_a60d14c1c616033f85bff10082d441222}{numBROps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_ac01b32c964c6071fd4f45869b33b9284}{missPredBROps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_a749b154cd6624c9481b25d12c7f267f1}{numAssignOps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_ac95e4e39b07dbbbd1026abd949169dba}{numReadOps}
+\item 
+long int \hyperlink{backend_2parser_8cpp_afb39d8142b31567500131a68f648a699}{numWriteOps}
+\item 
+int \hyperlink{backend_2parser_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}
+\item 
+bool \hyperlink{backend_2parser_8cpp_a6c052602d1d43227768ad3807f7b7268}{eof}
+\item 
+int \hyperlink{backend_2parser_8cpp_a1c9e72bbfe446ae69bd2ec84c6220841}{insID}
+\item 
+\hyperlink{global_2global_8h_ab65a1cfe05166d06195718a9587d7b86}{core} \hyperlink{backend_2parser_8cpp_a617ce1763c0446f48a6d3a158d507f46}{coreType}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{backend_2parser_8cpp_a901b5b3874c558101a1c250f2f2d0662}{iWindow}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}
+\item 
+bool \hyperlink{backend_2parser_8cpp_a880392d0383fea210f5ae5b88cc5eeba}{reschedule}
+\item 
+int \hyperlink{backend_2parser_8cpp_a33b052a847ffe72153acdfeaa15c48da}{numSideBuffs}
+\item 
+\hyperlink{classdependencyTable}{dependencyTable} $\ast$ \hyperlink{backend_2parser_8cpp_ab1dae06b10269a1b683512c8ecb25def}{depTables}
+\item 
+int \hyperlink{backend_2parser_8cpp_ae4b4f1112b73e33fd5c3ec3d5409eab3}{cacheLat} \mbox{[}$\,$\mbox{]}
+\item 
+\hyperlink{classregFile}{regFile} $\ast$ \hyperlink{backend_2parser_8cpp_a2d3dfa31b077f1d81553e749601f1c58}{RF}
+\item 
+FILE $\ast$ \hyperlink{backend_2parser_8cpp_ac4589ec3ae9811cdbbcaa0388bd1a557}{pinFile}
+\item 
+long int \hyperlink{backend_2parser_8cpp_ac00b6eff67b68a541747526ab37ce1f3}{insParseCap}
+\item 
+\hyperlink{classTournamentBP}{TournamentBP} $\ast$ \hyperlink{backend_2parser_8cpp_a00d2c11cba3a3f23cf4967a1e481ff7c}{predictor}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{backend_2parser_8cpp_ac7bd9648b0cf77fbafdeb4490e46e7de}{
+\index{backend/parser.cpp@{backend/parser.cpp}!branchMode@{branchMode}}
+\index{branchMode@{branchMode}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{branchMode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf brMode} {\bf branchMode}}}
+\label{backend_2parser_8cpp_ac7bd9648b0cf77fbafdeb4490e46e7de}
+\hypertarget{backend_2parser_8cpp_ae4b4f1112b73e33fd5c3ec3d5409eab3}{
+\index{backend/parser.cpp@{backend/parser.cpp}!cacheLat@{cacheLat}}
+\index{cacheLat@{cacheLat}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{cacheLat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf cacheLat}\mbox{[}$\,$\mbox{]}}}
+\label{backend_2parser_8cpp_ae4b4f1112b73e33fd5c3ec3d5409eab3}
+\hypertarget{backend_2parser_8cpp_a617ce1763c0446f48a6d3a158d507f46}{
+\index{backend/parser.cpp@{backend/parser.cpp}!coreType@{coreType}}
+\index{coreType@{coreType}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{coreType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf core} {\bf coreType}}}
+\label{backend_2parser_8cpp_a617ce1763c0446f48a6d3a158d507f46}
+\hypertarget{backend_2parser_8cpp_ab3cf199a4c75c2388b7c3877024f16a9}{
+\index{backend/parser.cpp@{backend/parser.cpp}!corruptInsCount@{corruptInsCount}}
+\index{corruptInsCount@{corruptInsCount}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{corruptInsCount}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf corruptInsCount}}}
+\label{backend_2parser_8cpp_ab3cf199a4c75c2388b7c3877024f16a9}
+\hypertarget{backend_2parser_8cpp_a1f4871d45089b039d95d3832dd123827}{
+\index{backend/parser.cpp@{backend/parser.cpp}!cycle@{cycle}}
+\index{cycle@{cycle}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{cycle}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf cycle}}}
+\label{backend_2parser_8cpp_a1f4871d45089b039d95d3832dd123827}
+\hypertarget{backend_2parser_8cpp_a398527b3e9e358c345c5047b16871957}{
+\index{backend/parser.cpp@{backend/parser.cpp}!debug@{debug}}
+\index{debug@{debug}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{debug}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf debug}}}
+\label{backend_2parser_8cpp_a398527b3e9e358c345c5047b16871957}
+\hypertarget{backend_2parser_8cpp_ab1dae06b10269a1b683512c8ecb25def}{
+\index{backend/parser.cpp@{backend/parser.cpp}!depTables@{depTables}}
+\index{depTables@{depTables}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{depTables}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dependencyTable}$\ast$ {\bf depTables}}}
+\label{backend_2parser_8cpp_ab1dae06b10269a1b683512c8ecb25def}
+\hypertarget{backend_2parser_8cpp_a6c052602d1d43227768ad3807f7b7268}{
+\index{backend/parser.cpp@{backend/parser.cpp}!eof@{eof}}
+\index{eof@{eof}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{eof}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf eof}}}
+\label{backend_2parser_8cpp_a6c052602d1d43227768ad3807f7b7268}
+\hypertarget{backend_2parser_8cpp_a1c9e72bbfe446ae69bd2ec84c6220841}{
+\index{backend/parser.cpp@{backend/parser.cpp}!insID@{insID}}
+\index{insID@{insID}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{insID}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf insID}}}
+\label{backend_2parser_8cpp_a1c9e72bbfe446ae69bd2ec84c6220841}
+\hypertarget{backend_2parser_8cpp_ac00b6eff67b68a541747526ab37ce1f3}{
+\index{backend/parser.cpp@{backend/parser.cpp}!insParseCap@{insParseCap}}
+\index{insParseCap@{insParseCap}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{insParseCap}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf insParseCap}}}
+\label{backend_2parser_8cpp_ac00b6eff67b68a541747526ab37ce1f3}
+\hypertarget{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{
+\index{backend/parser.cpp@{backend/parser.cpp}!iROB@{iROB}}
+\index{iROB@{iROB}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{iROB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf instruction}$\ast$$>$$\ast$ {\bf iROB}}}
+\label{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}
+\hypertarget{backend_2parser_8cpp_a901b5b3874c558101a1c250f2f2d0662}{
+\index{backend/parser.cpp@{backend/parser.cpp}!iWindow@{iWindow}}
+\index{iWindow@{iWindow}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{iWindow}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf instruction}$\ast$$>$$\ast$ {\bf iWindow}}}
+\label{backend_2parser_8cpp_a901b5b3874c558101a1c250f2f2d0662}
+\hypertarget{backend_2parser_8cpp_a11a86001d145184dffcc82c55772537c}{
+\index{backend/parser.cpp@{backend/parser.cpp}!makePhrase@{makePhrase}}
+\index{makePhrase@{makePhrase}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{makePhrase}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf makePhrase}}}
+\label{backend_2parser_8cpp_a11a86001d145184dffcc82c55772537c}
+\hypertarget{backend_2parser_8cpp_ac01b32c964c6071fd4f45869b33b9284}{
+\index{backend/parser.cpp@{backend/parser.cpp}!missPredBROps@{missPredBROps}}
+\index{missPredBROps@{missPredBROps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{missPredBROps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf missPredBROps}}}
+\label{backend_2parser_8cpp_ac01b32c964c6071fd4f45869b33b9284}
+\hypertarget{backend_2parser_8cpp_a99e158204dabc119d57a8ddf66d413c9}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numALUOps@{numALUOps}}
+\index{numALUOps@{numALUOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numALUOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numALUOps}}}
+\label{backend_2parser_8cpp_a99e158204dabc119d57a8ddf66d413c9}
+\hypertarget{backend_2parser_8cpp_a749b154cd6624c9481b25d12c7f267f1}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numAssignOps@{numAssignOps}}
+\index{numAssignOps@{numAssignOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numAssignOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numAssignOps}}}
+\label{backend_2parser_8cpp_a749b154cd6624c9481b25d12c7f267f1}
+\hypertarget{backend_2parser_8cpp_a60d14c1c616033f85bff10082d441222}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numBROps@{numBROps}}
+\index{numBROps@{numBROps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numBROps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numBROps}}}
+\label{backend_2parser_8cpp_a60d14c1c616033f85bff10082d441222}
+\hypertarget{backend_2parser_8cpp_a00f80363001f9affede7c0feb25eac16}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numFPUOps@{numFPUOps}}
+\index{numFPUOps@{numFPUOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numFPUOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numFPUOps}}}
+\label{backend_2parser_8cpp_a00f80363001f9affede7c0feb25eac16}
+\hypertarget{backend_2parser_8cpp_ac8d2ba075f1720da64e00e03081ce681}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numMemOps@{numMemOps}}
+\index{numMemOps@{numMemOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numMemOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numMemOps}}}
+\label{backend_2parser_8cpp_ac8d2ba075f1720da64e00e03081ce681}
+\hypertarget{backend_2parser_8cpp_ac95e4e39b07dbbbd1026abd949169dba}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numReadOps@{numReadOps}}
+\index{numReadOps@{numReadOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numReadOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numReadOps}}}
+\label{backend_2parser_8cpp_ac95e4e39b07dbbbd1026abd949169dba}
+\hypertarget{backend_2parser_8cpp_a33b052a847ffe72153acdfeaa15c48da}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numSideBuffs@{numSideBuffs}}
+\index{numSideBuffs@{numSideBuffs}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numSideBuffs}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf numSideBuffs}}}
+\label{backend_2parser_8cpp_a33b052a847ffe72153acdfeaa15c48da}
+\hypertarget{backend_2parser_8cpp_afb39d8142b31567500131a68f648a699}{
+\index{backend/parser.cpp@{backend/parser.cpp}!numWriteOps@{numWriteOps}}
+\index{numWriteOps@{numWriteOps}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{numWriteOps}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf numWriteOps}}}
+\label{backend_2parser_8cpp_afb39d8142b31567500131a68f648a699}
+\hypertarget{backend_2parser_8cpp_ab89bce3b6c39af4337cdc6d48e717238}{
+\index{backend/parser.cpp@{backend/parser.cpp}!parseHitMiss@{parseHitMiss}}
+\index{parseHitMiss@{parseHitMiss}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{parseHitMiss}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf parseHitMiss}}}
+\label{backend_2parser_8cpp_ab89bce3b6c39af4337cdc6d48e717238}
+\hypertarget{backend_2parser_8cpp_ac4589ec3ae9811cdbbcaa0388bd1a557}{
+\index{backend/parser.cpp@{backend/parser.cpp}!pinFile@{pinFile}}
+\index{pinFile@{pinFile}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{pinFile}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf pinFile}}}
+\label{backend_2parser_8cpp_ac4589ec3ae9811cdbbcaa0388bd1a557}
+\hypertarget{backend_2parser_8cpp_a00d2c11cba3a3f23cf4967a1e481ff7c}{
+\index{backend/parser.cpp@{backend/parser.cpp}!predictor@{predictor}}
+\index{predictor@{predictor}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{predictor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf TournamentBP}$\ast$ {\bf predictor}}}
+\label{backend_2parser_8cpp_a00d2c11cba3a3f23cf4967a1e481ff7c}
+\hypertarget{backend_2parser_8cpp_a880392d0383fea210f5ae5b88cc5eeba}{
+\index{backend/parser.cpp@{backend/parser.cpp}!reschedule@{reschedule}}
+\index{reschedule@{reschedule}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{reschedule}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf reschedule}}}
+\label{backend_2parser_8cpp_a880392d0383fea210f5ae5b88cc5eeba}
+\hypertarget{backend_2parser_8cpp_a2d3dfa31b077f1d81553e749601f1c58}{
+\index{backend/parser.cpp@{backend/parser.cpp}!RF@{RF}}
+\index{RF@{RF}!backend/parser.cpp@{backend/parser.cpp}}
+\subsubsection[{RF}]{\setlength{\rightskip}{0pt plus 5cm}{\bf regFile}$\ast$ {\bf RF}}}
+\label{backend_2parser_8cpp_a2d3dfa31b077f1d81553e749601f1c58}

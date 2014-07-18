@@ -1,0 +1,288 @@
+\hypertarget{classCHeapTree}{
+\section{CHeapTree$<$ TID, TDATA $>$ Class Template Reference}
+\label{classCHeapTree}\index{CHeapTree@{CHeapTree}}
+}
+
+
+{\ttfamily \#include $<$heapTree.h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries \_\-NODE}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCHeapTree_a69014f29dff41b8a994e9e22e155ff10}{CHeapTree} (int nInitMax=100)
+\item 
+\hyperlink{classCHeapTree_a376e2b94d5a1333a721eb6940f113202}{$\sim$CHeapTree} ()
+\item 
+bool \hyperlink{classCHeapTree_a832c197b6babfe4b094e4dd56959d3d5}{IsEmpty} () const 
+\item 
+int \hyperlink{classCHeapTree_a2fd838d2387b6ab096e0d24e311389f6}{GetSize} () const 
+\item 
+void \hyperlink{classCHeapTree_ab46d24bd33f9d97d120e62f2bf05be20}{Insert} (const TID \&id, const TDATA \&data)
+\item 
+bool \hyperlink{classCHeapTree_a7a6e130f6fb97782d01892f881efd901}{RemoveTop} ()
+\item 
+bool \hyperlink{classCHeapTree_a3c835d17270d03dc933faa4fb94c02fb}{RemoveAll} ()
+\item 
+bool \hyperlink{classCHeapTree_a6adf63dfbfeab2129421792963a798f7}{GetTopID} (TID $\ast$pid) const 
+\item 
+bool \hyperlink{classCHeapTree_ad2216b6199569bb3872b8881dbbd287c}{GetTopData} (TDATA $\ast$pdata) const 
+\item 
+bool \hyperlink{classCHeapTree_a93f174c44507c428d491eac76f9be18f}{GetData} (const TID \&id, TDATA $\ast$pdata) const 
+\item 
+bool \hyperlink{classCHeapTree_a4fed05db5fa97df8816bbebd1b73ed3b}{ResetData} (const TID \&id, const TDATA \&data)
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$class TID, class TDATA$>$ class CHeapTree$<$ TID, TDATA $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCHeapTree_a69014f29dff41b8a994e9e22e155ff10}{
+\index{CHeapTree@{CHeapTree}!CHeapTree@{CHeapTree}}
+\index{CHeapTree@{CHeapTree}!CHeapTree@{CHeapTree}}
+\subsubsection[{CHeapTree}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ {\bf CHeapTree}$<$ TID, TDATA $>$::{\bf CHeapTree} (
+\begin{DoxyParamCaption}
+\item[{int}]{nInitMax = {\ttfamily 100}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a69014f29dff41b8a994e9e22e155ff10}
+
+\begin{DoxyCode}
+                                                    : m_nInitMax(nInitMax)
+{
+        m_nMAX = m_nInitMax;
+        m_data = new _NODE[m_nMAX];
+        m_nSize = 0;
+}
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a376e2b94d5a1333a721eb6940f113202}{
+\index{CHeapTree@{CHeapTree}!$\sim$CHeapTree@{$\sim$CHeapTree}}
+\index{$\sim$CHeapTree@{$\sim$CHeapTree}!CHeapTree@{CHeapTree}}
+\subsubsection[{$\sim$CHeapTree}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ {\bf CHeapTree}$<$ TID, TDATA $>$::$\sim${\bf CHeapTree} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a376e2b94d5a1333a721eb6940f113202}
+
+\begin{DoxyCode}
+{
+        delete [] m_data;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCHeapTree_a93f174c44507c428d491eac76f9be18f}{
+\index{CHeapTree@{CHeapTree}!GetData@{GetData}}
+\index{GetData@{GetData}!CHeapTree@{CHeapTree}}
+\subsubsection[{GetData}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::GetData (
+\begin{DoxyParamCaption}
+\item[{const TID \&}]{id, }
+\item[{TDATA $\ast$}]{pdata}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a93f174c44507c428d491eac76f9be18f}
+
+\begin{DoxyCode}
+{
+        for (int j = 0; j < m_nSize; j ++)
+                if (m_data[j].id == id) {
+                        *pdata = m_data[j].data;
+                        return true;
+                }
+        return false; // not found
+}
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a2fd838d2387b6ab096e0d24e311389f6}{
+\index{CHeapTree@{CHeapTree}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!CHeapTree@{CHeapTree}}
+\subsubsection[{GetSize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ int {\bf CHeapTree}$<$ TID, TDATA $>$::GetSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a2fd838d2387b6ab096e0d24e311389f6}
+
+\begin{DoxyCode}
+{ return m_nSize; }
+\end{DoxyCode}
+\hypertarget{classCHeapTree_ad2216b6199569bb3872b8881dbbd287c}{
+\index{CHeapTree@{CHeapTree}!GetTopData@{GetTopData}}
+\index{GetTopData@{GetTopData}!CHeapTree@{CHeapTree}}
+\subsubsection[{GetTopData}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::GetTopData (
+\begin{DoxyParamCaption}
+\item[{TDATA $\ast$}]{pdata}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_ad2216b6199569bb3872b8881dbbd287c}
+
+\begin{DoxyCode}
+                                            {
+                if (IsEmpty()) return false;
+                *pdata = m_data[0].data;
+                return true;
+        }
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a6adf63dfbfeab2129421792963a798f7}{
+\index{CHeapTree@{CHeapTree}!GetTopID@{GetTopID}}
+\index{GetTopID@{GetTopID}!CHeapTree@{CHeapTree}}
+\subsubsection[{GetTopID}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::GetTopID (
+\begin{DoxyParamCaption}
+\item[{TID $\ast$}]{pid}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a6adf63dfbfeab2129421792963a798f7}
+
+\begin{DoxyCode}
+                                      {
+                if (IsEmpty()) return false;
+                *pid = m_data[0].id; 
+                return true;
+        }
+\end{DoxyCode}
+\hypertarget{classCHeapTree_ab46d24bd33f9d97d120e62f2bf05be20}{
+\index{CHeapTree@{CHeapTree}!Insert@{Insert}}
+\index{Insert@{Insert}!CHeapTree@{CHeapTree}}
+\subsubsection[{Insert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ void {\bf CHeapTree}$<$ TID, TDATA $>$::Insert (
+\begin{DoxyParamCaption}
+\item[{const TID \&}]{id, }
+\item[{const TDATA \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_ab46d24bd33f9d97d120e62f2bf05be20}
+
+\begin{DoxyCode}
+{
+        if (m_nSize == m_nMAX - 1)
+        { // Resize the m_data array by doubling its size.
+                m_nMAX += m_nMAX;
+                _NODE *pTemp = m_data;
+                m_data = new _NODE[m_nMAX];
+                for (int j = 0; j < m_nSize; j ++)
+                        m_data[j] = pTemp[j];
+                delete [] pTemp;
+        }
+
+        _NODE node = { id, data };
+        m_data[m_nSize] = node;
+        int iCur = m_nSize ++;
+        int iParent = (iCur - 1) / 2;
+        while (iParent >= 0 && m_data[iParent].data > m_data[iCur].data) {
+                _NODE t = m_data[iCur];
+                m_data[iCur] = m_data[iParent];
+                m_data[iParent] = t;
+                iCur = iParent;
+                iParent = (iCur - 1) / 2;
+        }
+}
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a832c197b6babfe4b094e4dd56959d3d5}{
+\index{CHeapTree@{CHeapTree}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!CHeapTree@{CHeapTree}}
+\subsubsection[{IsEmpty}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::IsEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a832c197b6babfe4b094e4dd56959d3d5}
+
+\begin{DoxyCode}
+{ return m_nSize == 0; }
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a3c835d17270d03dc933faa4fb94c02fb}{
+\index{CHeapTree@{CHeapTree}!RemoveAll@{RemoveAll}}
+\index{RemoveAll@{RemoveAll}!CHeapTree@{CHeapTree}}
+\subsubsection[{RemoveAll}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::RemoveAll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a3c835d17270d03dc933faa4fb94c02fb}
+
+\begin{DoxyCode}
+{
+        if (IsEmpty()) return false;
+        delete [] m_data;
+        m_nMAX = m_nInitMax;
+        m_data = new _NODE[m_nMAX];
+        m_nSize = 0;
+        return true;
+}
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a7a6e130f6fb97782d01892f881efd901}{
+\index{CHeapTree@{CHeapTree}!RemoveTop@{RemoveTop}}
+\index{RemoveTop@{RemoveTop}!CHeapTree@{CHeapTree}}
+\subsubsection[{RemoveTop}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::RemoveTop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a7a6e130f6fb97782d01892f881efd901}
+
+\begin{DoxyCode}
+{
+        if (IsEmpty()) return false;
+
+        if (m_nSize == m_nMAX / 2)
+        { // Resize the m_data array by shrinking its size twice.
+                m_nMAX /= 2;
+                _NODE *pTemp = m_data;
+                m_data = new _NODE[m_nMAX];
+                for (int j = 0; j < m_nSize; j ++)
+                        m_data[j] = pTemp[j];
+                delete [] pTemp;
+        }
+        m_data[0] = m_data[-- m_nSize]; // move the last elem to the first place
+        _ReformatHeap(0);
+        return true;
+}
+\end{DoxyCode}
+\hypertarget{classCHeapTree_a4fed05db5fa97df8816bbebd1b73ed3b}{
+\index{CHeapTree@{CHeapTree}!ResetData@{ResetData}}
+\index{ResetData@{ResetData}!CHeapTree@{CHeapTree}}
+\subsubsection[{ResetData}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class TID , class TDATA $>$ bool {\bf CHeapTree}$<$ TID, TDATA $>$::ResetData (
+\begin{DoxyParamCaption}
+\item[{const TID \&}]{id, }
+\item[{const TDATA \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classCHeapTree_a4fed05db5fa97df8816bbebd1b73ed3b}
+
+\begin{DoxyCode}
+{
+        for (int j = 0; j < m_nSize; j ++)
+                if (m_data[j].id == id) {
+                        if (m_data[j].data < dataNew) {
+                                m_data[j].data = dataNew;
+                                _ReformatHeap(0);
+                        }
+                        else {
+                                m_data[j].data = dataNew;
+                                _NODE node = m_data[j];
+                                int iCur = j;
+                                int iParent = (iCur - 1) / 2;
+                                while (iParent >= 0 && m_data[iParent].data > m_d
+      ata[iCur].data) {
+                                        _NODE t = m_data[iCur];
+                                        m_data[iCur] = m_data[iParent];
+                                        m_data[iParent] = t;
+                                        iCur = iParent;
+                                        iParent = (iCur - 1) / 2;
+                                }
+                        }
+                        return true;
+                }
+                return false; // id not found
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{heapTree_8h}{heapTree.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{heapTree_8cpp}{heapTree.cpp}\end{DoxyCompactItemize}

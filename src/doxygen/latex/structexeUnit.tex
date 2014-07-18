@@ -1,0 +1,153 @@
+\hypertarget{structexeUnit}{
+\section{exeUnit Struct Reference}
+\label{structexeUnit}\index{exeUnit@{exeUnit}}
+}
+
+
+{\ttfamily \#include $<$exeUnit.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structexeUnit_af9048405bad98db15cdefb05bf7b842c}{exeUnit} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{bkEnd_8cpp_ada310e7f72b38fadd4b24d80ed3438ee}{start}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} latency, \hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}{EU\_\-TYPE} eu\_\-type)
+\item 
+\hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8}{EU\_\-STATE} \hyperlink{structexeUnit_a739cfd78a98068a64fb2e807f49c4312}{getEUstate} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, bool limit\_\-eu\_\-state\_\-access)
+\item 
+void \hyperlink{structexeUnit_a69498b2ca8353a14447a5596e768fc55}{runEU} ()
+\item 
+void \hyperlink{structexeUnit_ad9a4840a6956e01419327ba3123683dd}{setEUins} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{structexeUnit_a5414837e2e071fc0180c0326cc33370f}{getEUins} ()
+\item 
+void \hyperlink{structexeUnit_a31fd51a344347d96c9be688de8e0f97a}{resetEU} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structtimer}{timer} \hyperlink{structexeUnit_a5dc187ea49bad94bbea24f18232500dd}{\_\-eu\_\-timer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structexeUnit_af9048405bad98db15cdefb05bf7b842c}{
+\index{exeUnit@{exeUnit}!exeUnit@{exeUnit}}
+\index{exeUnit@{exeUnit}!exeUnit@{exeUnit}}
+\subsubsection[{exeUnit}]{\setlength{\rightskip}{0pt plus 5cm}exeUnit::exeUnit (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{start, }
+\item[{{\bf CYCLE}}]{latency, }
+\item[{{\bf EU\_\-TYPE}}]{eu\_\-type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_af9048405bad98db15cdefb05bf7b842c}
+
+\begin{DoxyCode}
+        : _eu_timer (start, latency),
+          _eu_type (eu_type)
+    {
+        _eu_ins = NULL;
+        _eu_state = AVAILABLE_EU;
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structexeUnit_a5414837e2e071fc0180c0326cc33370f}{
+\index{exeUnit@{exeUnit}!getEUins@{getEUins}}
+\index{getEUins@{getEUins}!exeUnit@{exeUnit}}
+\subsubsection[{getEUins}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction}$\ast$ exeUnit::getEUins (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_a5414837e2e071fc0180c0326cc33370f}
+
+\begin{DoxyCode}
+{return _eu_ins;}
+\end{DoxyCode}
+\hypertarget{structexeUnit_a739cfd78a98068a64fb2e807f49c4312}{
+\index{exeUnit@{exeUnit}!getEUstate@{getEUstate}}
+\index{getEUstate@{getEUstate}!exeUnit@{exeUnit}}
+\subsubsection[{getEUstate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EU\_\-STATE} exeUnit::getEUstate (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now, }
+\item[{bool}]{limit\_\-eu\_\-state\_\-access}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_a739cfd78a98068a64fb2e807f49c4312}
+
+\begin{DoxyCode}
+                                                                {
+        if (!limit_eu_state_access) {
+            return _eu_state;
+        } else {
+            if (_eu_state == RUNNING_EU && now >= _eu_timer.getStopTime ()) {
+                _eu_state = COMPLETE_EU;
+            } else if (_eu_state == RUNNING_EU) {
+                _eu_state = RUNNING_EU;
+            } else if (_eu_state == COMPLETE_EU) {
+                _eu_state = AVAILABLE_EU;
+            } else if (_eu_state == AVAILABLE_EU) {
+                _eu_state = AVAILABLE_EU;
+            } else {
+                Assert (true == false && "invalid EU state");
+            }
+            return _eu_state;
+        }
+    }
+\end{DoxyCode}
+\hypertarget{structexeUnit_a31fd51a344347d96c9be688de8e0f97a}{
+\index{exeUnit@{exeUnit}!resetEU@{resetEU}}
+\index{resetEU@{resetEU}!exeUnit@{exeUnit}}
+\subsubsection[{resetEU}]{\setlength{\rightskip}{0pt plus 5cm}void exeUnit::resetEU (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_a31fd51a344347d96c9be688de8e0f97a}
+
+\begin{DoxyCode}
+{_eu_ins = NULL; _eu_state = AVAILABLE_EU;}
+\end{DoxyCode}
+\hypertarget{structexeUnit_a69498b2ca8353a14447a5596e768fc55}{
+\index{exeUnit@{exeUnit}!runEU@{runEU}}
+\index{runEU@{runEU}!exeUnit@{exeUnit}}
+\subsubsection[{runEU}]{\setlength{\rightskip}{0pt plus 5cm}void exeUnit::runEU (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_a69498b2ca8353a14447a5596e768fc55}
+
+\begin{DoxyCode}
+                  {
+        Assert (_eu_state == AVAILABLE_EU);
+        _eu_state = RUNNING_EU;
+    }
+\end{DoxyCode}
+\hypertarget{structexeUnit_ad9a4840a6956e01419327ba3123683dd}{
+\index{exeUnit@{exeUnit}!setEUins@{setEUins}}
+\index{setEUins@{setEUins}!exeUnit@{exeUnit}}
+\subsubsection[{setEUins}]{\setlength{\rightskip}{0pt plus 5cm}void exeUnit::setEUins (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structexeUnit_ad9a4840a6956e01419327ba3123683dd}
+
+\begin{DoxyCode}
+{ Assert (_eu_ins == NULL); _eu_ins = ins;}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structexeUnit_a5dc187ea49bad94bbea24f18232500dd}{
+\index{exeUnit@{exeUnit}!\_\-eu\_\-timer@{\_\-eu\_\-timer}}
+\index{\_\-eu\_\-timer@{\_\-eu\_\-timer}!exeUnit@{exeUnit}}
+\subsubsection[{\_\-eu\_\-timer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf timer} {\bf exeUnit::\_\-eu\_\-timer}}}
+\label{structexeUnit_a5dc187ea49bad94bbea24f18232500dd}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{exeUnit_8h}{exeUnit.h}\end{DoxyCompactItemize}

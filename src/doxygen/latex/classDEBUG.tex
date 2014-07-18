@@ -1,0 +1,81 @@
+\hypertarget{classDEBUG}{
+\section{DEBUG Class Reference}
+\label{classDEBUG}\index{DEBUG@{DEBUG}}
+}
+
+
+{\ttfamily \#include $<$debug.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDEBUG_a6a330c7128eccdb1e808639bab79991d}{DEBUG} (\hyperlink{global_2global_8h_a55beda23bcb31f80f05f5d3bf2864c5e}{DBG\_\-LEVEL} \hyperlink{debug_8h_a858b524eb3f29bb84c0e2041d471d74f}{dbg})
+\item 
+\hyperlink{classDEBUG_aa0e3e5311f5dd0fc8c02604ca4b5bf68}{$\sim$DEBUG} ()
+\item 
+void \hyperlink{classDEBUG_ab38f086785f7239084b735007297078a}{print} (\hyperlink{global_2global_8h_a55beda23bcb31f80f05f5d3bf2864c5e}{DBG\_\-LEVEL} \hyperlink{debug_8h_a858b524eb3f29bb84c0e2041d471d74f}{dbg}, const char $\ast$fmt,...)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDEBUG_a6a330c7128eccdb1e808639bab79991d}{
+\index{DEBUG@{DEBUG}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!DEBUG@{DEBUG}}
+\subsubsection[{DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}DEBUG::DEBUG (
+\begin{DoxyParamCaption}
+\item[{{\bf DBG\_\-LEVEL}}]{dbg}
+\end{DoxyParamCaption}
+)}}
+\label{classDEBUG_a6a330c7128eccdb1e808639bab79991d}
+
+\begin{DoxyCode}
+                           {
+    _dbg = dbg;
+}
+\end{DoxyCode}
+\hypertarget{classDEBUG_aa0e3e5311f5dd0fc8c02604ca4b5bf68}{
+\index{DEBUG@{DEBUG}!$\sim$DEBUG@{$\sim$DEBUG}}
+\index{$\sim$DEBUG@{$\sim$DEBUG}!DEBUG@{DEBUG}}
+\subsubsection[{$\sim$DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}DEBUG::$\sim$DEBUG (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDEBUG_aa0e3e5311f5dd0fc8c02604ca4b5bf68}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDEBUG_ab38f086785f7239084b735007297078a}{
+\index{DEBUG@{DEBUG}!print@{print}}
+\index{print@{print}!DEBUG@{DEBUG}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void DEBUG::print (
+\begin{DoxyParamCaption}
+\item[{{\bf DBG\_\-LEVEL}}]{dbg, }
+\item[{const char $\ast$}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{classDEBUG_ab38f086785f7239084b735007297078a}
+
+\begin{DoxyCode}
+                                                      {
+#ifdef __do_debug
+    if (_dbg & dbg) {
+        va_list args;
+        va_start (args,fmt);
+        vprintf (fmt,args);
+        va_end (args);
+    }
+#endif
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{debug_8h}{debug.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{debug_8cpp}{debug.cpp}\end{DoxyCompactItemize}

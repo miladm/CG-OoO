@@ -1,0 +1,113 @@
+\hypertarget{classFIFOtable}{
+\section{FIFOtable$<$ tableType\_\-T $>$ Class Template Reference}
+\label{classFIFOtable}\index{FIFOtable@{FIFOtable}}
+}
+
+
+{\ttfamily \#include $<$table.h$>$}
+
+Inheritance diagram for FIFOtable$<$ tableType\_\-T $>$:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classFIFOtable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}{FIFOtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\item 
+\hyperlink{classFIFOtable_aed7aeb790ce1f0fbb429d645597554b5}{$\sim$FIFOtable} ()
+\item 
+tableType\_\-T \hyperlink{classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb}{getFront} ()
+\item 
+tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popFront} ()
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename tableType\_\-T$>$ class FIFOtable$<$ tableType\_\-T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}{
+\index{FIFOtable@{FIFOtable}!FIFOtable@{FIFOtable}}
+\index{FIFOtable@{FIFOtable}!FIFOtable@{FIFOtable}}
+\subsubsection[{FIFOtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf FIFOtable}$<$ tableType\_\-T $>$::{\bf FIFOtable} (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{string}]{table\_\-name = {\ttfamily \char`\"{}FIFOtable$<$~tableType\_\-T~$>$\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}
+
+\begin{DoxyCode}
+    : table<tableType_T> (len, FIFO_ARRAY,
+                          wr_port_cnt, rd_port_cnt, table_name)
+{}
+\end{DoxyCode}
+\hypertarget{classFIFOtable_aed7aeb790ce1f0fbb429d645597554b5}{
+\index{FIFOtable@{FIFOtable}!$\sim$FIFOtable@{$\sim$FIFOtable}}
+\index{$\sim$FIFOtable@{$\sim$FIFOtable}!FIFOtable@{FIFOtable}}
+\subsubsection[{$\sim$FIFOtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf FIFOtable}$<$ tableType\_\-T $>$::$\sim${\bf FIFOtable} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classFIFOtable_aed7aeb790ce1f0fbb429d645597554b5}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb}{
+\index{FIFOtable@{FIFOtable}!getFront@{getFront}}
+\index{getFront@{getFront}!FIFOtable@{FIFOtable}}
+\subsubsection[{getFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf FIFOtable}$<$ tableType\_\-T $>$::getFront (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb}
+
+\begin{DoxyCode}
+                                              {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
+      available ports count first");
+#endif
+    return table<tableType_T>::_table.Nth (0)->_element;
+}
+\end{DoxyCode}
+\hypertarget{classFIFOtable_ace3286538766dfa4499d149767ac153f}{
+\index{FIFOtable@{FIFOtable}!popFront@{popFront}}
+\index{popFront@{popFront}!FIFOtable@{FIFOtable}}
+\subsubsection[{popFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf FIFOtable}$<$ tableType\_\-T $>$::popFront (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classFIFOtable_ace3286538766dfa4499d149767ac153f}
+
+\begin{DoxyCode}
+                                              {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the 
+      available ports count first");
+#endif
+    tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
+    delete table<tableType_T>::_table.Nth (0);
+    table<tableType_T>::_table.RemoveAt (0);
+    return dyIns;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8h}{table.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8cpp}{table.cpp}\end{DoxyCompactItemize}

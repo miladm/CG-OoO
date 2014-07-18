@@ -1,0 +1,381 @@
+\hypertarget{classo3__memManager}{
+\section{o3\_\-memManager Class Reference}
+\label{classo3__memManager}\index{o3\_\-memManager@{o3\_\-memManager}}
+}
+
+
+{\ttfamily \#include $<$memManager.h$>$}
+
+Inheritance diagram for o3\_\-memManager:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__memManager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}{o3\_\-memManager} ()
+\item 
+\hyperlink{classo3__memManager_a2e67f82384e5ee8a753332a347eac62f}{$\sim$o3\_\-memManager} ()
+\item 
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}{getTableState} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
+\item 
+bool \hyperlink{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}{hasFreeWrPort} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+bool \hyperlink{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}{hasFreeRdPort} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+void \hyperlink{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}{pushBack} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+\item 
+void \hyperlink{classo3__memManager_a401c114902989a9296444795c28cd5fb}{memAddrReady} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+\item 
+bool \hyperlink{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}{issueToMem} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+bool \hyperlink{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}{commit} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{classsysClock}{sysClock} \&)
+\item 
+void \hyperlink{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}{squash} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
+\item 
+pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}{hasFinishedIns} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+bool \hyperlink{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}{hasCommitSt} ()
+\item 
+void \hyperlink{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}{delAfinishedSt} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+bool \hyperlink{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}{isLQviolation} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+\item 
+void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeLd} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}{
+\index{o3\_\-memManager@{o3\_\-memManager}!o3\_\-memManager@{o3\_\-memManager}}
+\index{o3\_\-memManager@{o3\_\-memManager}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{o3\_\-memManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-memManager::o3\_\-memManager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}
+
+\begin{DoxyCode}
+    : unit ("lsqManager"),
+      _L1 (1, 64, 32768),
+      _L2 (1, 64, 2097152),
+      _L3 (1, 64, 8388608),
+      _LQ (LQ_SIZE, 8, 4, "LQtable"),
+      _SQ (SQ_SIZE, 8, 4, "SQtable")
+{ }
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a2e67f82384e5ee8a753332a347eac62f}{
+\index{o3\_\-memManager@{o3\_\-memManager}!$\sim$o3\_\-memManager@{$\sim$o3\_\-memManager}}
+\index{$\sim$o3\_\-memManager@{$\sim$o3\_\-memManager}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{$\sim$o3\_\-memManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-memManager::$\sim$o3\_\-memManager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a2e67f82384e5ee8a753332a347eac62f}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}{
+\index{o3\_\-memManager@{o3\_\-memManager}!commit@{commit}}
+\index{commit@{commit}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{commit}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::commit (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins, }
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}
+
+\begin{DoxyCode}
+                                                              {
+    Assert (ins->getInsType () == MEM);
+    if (ins->getMemType () == LOAD) {
+        if (_LQ.getTableState () == EMPTY_BUFF) return false;
+        if (!_LQ.hasFreeRdPort (clk.now ())) return false;
+        Assert (ins->getLQstate () == LQ_COMPLETE);
+        //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:"
+      , ins->getInsID ());
+        dynInstruction* ld_ins = _LQ.popFront ();
+        Assert (ld_ins->getInsID () == ins->getInsID ());
+    } else {
+        //TODO apply hardware costraints here
+        Assert (ins->getSQstate () == SQ_COMPLETE);
+        ins->setSQstate (SQ_COMMIT);
+        //Assert (ins->getInsID () == _SQ.getFront()->getInsID ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:"
+      , ins->getInsID ());
+        //dynInstruction* st_ins = _SQ.popFront (); //TODO should it be in order?
+       don't think so
+        //Assert (st_ins->getInsID () == ins->getInsID ());
+    }
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{
+\index{o3\_\-memManager@{o3\_\-memManager}!completeLd@{completeLd}}
+\index{completeLd@{completeLd}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{completeLd}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::completeLd (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}
+
+\begin{DoxyCode}
+                                                   {
+    ins->setLQstate (LQ_COMPLETE);
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}{
+\index{o3\_\-memManager@{o3\_\-memManager}!delAfinishedSt@{delAfinishedSt}}
+\index{delAfinishedSt@{delAfinishedSt}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{delAfinishedSt}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::delAfinishedSt (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}
+
+\begin{DoxyCode}
+                                             {
+    _SQ.delFinishedMemAxes (now);
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}{
+\index{o3\_\-memManager@{o3\_\-memManager}!getTableState@{getTableState}}
+\index{getTableState@{getTableState}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{getTableState}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BUFF\_\-STATE} o3\_\-memManager::getTableState (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}
+
+\begin{DoxyCode}
+                                                      {
+    if (lsq_id == LD_QU) {
+        return _LQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+    } else {
+        return _SQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasCommitSt@{hasCommitSt}}
+\index{hasCommitSt@{hasCommitSt}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasCommitSt}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasCommitSt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}
+
+\begin{DoxyCode}
+                                 {
+    return _SQ.hasCommit ();
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasFinishedIns@{hasFinishedIns}}
+\index{hasFinishedIns@{hasFinishedIns}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasFinishedIns}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ bool, {\bf dynInstruction} $\ast$ $>$ o3\_\-memManager::hasFinishedIns (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}
+
+\begin{DoxyCode}
+                                                                                 
+        {
+    if (lsq_id == LD_QU) {
+        return _LQ.hasFinishedIns (lsq_id, now);
+    } else {
+        return _SQ.hasFinishedIns (lsq_id, now);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasFreeRdPort@{hasFreeRdPort}}
+\index{hasFreeRdPort@{hasFreeRdPort}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeRdPort (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}
+
+\begin{DoxyCode}
+                                                           {
+    if (lsq_id == LD_QU) {
+        return _LQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
+    } else {
+        return _SQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasFreeWrPort@{hasFreeWrPort}}
+\index{hasFreeWrPort@{hasFreeWrPort}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeWrPort (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}
+
+\begin{DoxyCode}
+                                                           {
+    if (lsq_id == LD_QU) {
+        return _LQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
+    } else {
+        return _SQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}{
+\index{o3\_\-memManager@{o3\_\-memManager}!isLQviolation@{isLQviolation}}
+\index{isLQviolation@{isLQviolation}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{isLQviolation}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::isLQviolation (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{st\_\-ins, }
+\item[{{\bf dynInstruction} $\ast$}]{ld\_\-ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}
+
+\begin{DoxyCode}
+                                                                                 
+      {
+    Assert (st_ins->getMemType () == STORE);
+    Assert (st_ins->getSQstate () == SQ_COMPLETE);
+    bool violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), ld_ins)
+      ;
+    if (violation) Assert (ld_ins != NULL);
+    else Assert (ld_ins == NULL);
+    return violation;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}{
+\index{o3\_\-memManager@{o3\_\-memManager}!issueToMem@{issueToMem}}
+\index{issueToMem@{issueToMem}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{issueToMem}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::issueToMem (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}
+
+\begin{DoxyCode}
+                                                        {
+    //TODO take all this block to lsqManager.cpp
+    CYCLE axes_lat;
+    dynInstruction* mem_ins;
+    if (lsq_id == LD_QU) {
+        mem_ins = _LQ.findPendingMemIns (LD_QU);
+        if (mem_ins == NULL) return false; /* NOTHING ISSUED */
+        mem_ins->setLQstate (LQ_CACHE_WAIT);
+        axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix thi
+      s line
+                mem_ins->getMemAddr (),
+                mem_ins->getMemAxesSize(),
+                &_L1, &_L2, &_L3);
+        _LQ.setTimer (mem_ins, axes_lat, now); //TODO good API?
+    } else {
+        mem_ins = _SQ.findPendingMemIns (ST_QU);
+        if (mem_ins == NULL) return false; /* NOTHING ISSUED */
+        mem_ins->setSQstate (SQ_CACHE_DISPATCH);
+        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix th
+      is line
+                mem_ins->getMemAddr (),
+                mem_ins->getMemAxesSize(),
+                &_L1, &_L2, &_L3);
+        _SQ.setTimer (mem_ins, axes_lat, now);
+    }
+#ifdef ASSERTION
+    Assert(axes_lat > 0);
+#endif
+    //(axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++; TODO put them b
+      ack
+    //(axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a401c114902989a9296444795c28cd5fb}{
+\index{o3\_\-memManager@{o3\_\-memManager}!memAddrReady@{memAddrReady}}
+\index{memAddrReady@{memAddrReady}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{memAddrReady}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::memAddrReady (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a401c114902989a9296444795c28cd5fb}
+
+\begin{DoxyCode}
+                                                     {
+    if (ins->getMemType () == LOAD) {
+        ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
+    } else {
+        ins->setSQstate (SQ_COMPLETE);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}{
+\index{o3\_\-memManager@{o3\_\-memManager}!pushBack@{pushBack}}
+\index{pushBack@{pushBack}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{pushBack}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::pushBack (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}
+
+\begin{DoxyCode}
+                                                 {
+    Assert (ins->getInsType () == MEM);
+    if (ins->getMemType () == LOAD) {
+        Assert (_LQ.getTableState () != FULL_BUFF);
+        _LQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        ins->setLQstate (LQ_ADDR_WAIT);
+    } else {
+        Assert (_SQ.getTableState () != FULL_BUFF);
+        _SQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        ins->setSQstate (SQ_ADDR_WAIT);
+    }
+}
+\end{DoxyCode}
+\hypertarget{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}{
+\index{o3\_\-memManager@{o3\_\-memManager}!squash@{squash}}
+\index{squash@{squash}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::squash (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{squash\_\-seq\_\-num}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}
+
+\begin{DoxyCode}
+                                                 {
+    _LQ.squash (squash_seq_num);
+    _SQ.squash (squash_seq_num);
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8h}{memManager.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8cpp}{memManager.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,829 @@
+\hypertarget{classlsq}{
+\section{lsq Class Reference}
+\label{classlsq}\index{lsq@{lsq}}
+}
+
+
+{\ttfamily \#include $<$lsq.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlsq_a7404da6835aa5321a2a5a074b314e944}{lsq} ()
+\item 
+\hyperlink{classlsq_a430a385f670bea75213f5be7ea0891e4}{$\sim$lsq} ()
+\item 
+bool \hyperlink{classlsq_afc76def93e0f2ac0c56a92e1dc8d7efd}{isSQfull} ()
+\item 
+bool \hyperlink{classlsq_a9f240390c165b00ead843f037ab28262}{isSQempty} ()
+\item 
+void \hyperlink{classlsq_a9a3ea7ed05bbcf12b332a18fc84a317a}{pushBackSQ} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classlsq_aca2f5a9e6e6c483b11eec879cda2100e}{popFrontSQ} ()
+\item 
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classlsq_ac9a2a8f09749bd97d5ae525cffbdbda9}{getSQhead} ()
+\item 
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classlsq_a286e28a30ce1b7752d5ce9eb0f77d6ae}{getSQtail} ()
+\item 
+void \hyperlink{classlsq_a9a1d52c28adf6f9b59a82b876a29af53}{insertSQ\_\-addrNdata} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{classlsq_ab0f9350bede75f5dd0f46abd71a3fc20}{lookupSQ} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classlsq_aa78ff1e0d38eabd68022968e8cd31c5d}{updateSQcommitSet} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+bool \hyperlink{classlsq_a4eddb5e00ca783798e83971c467e6017}{isFrontSQdoneWritingCache} (int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle})
+\item 
+bool \hyperlink{classlsq_a93b8919385546da53590c68cb739838e}{hasCommittedUncachedSQentry} ()
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classlsq_ad7a4b49b4bd82e13bc8b7ab99e94ac93}{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} id)
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classlsq_a20508e015abc2e6d9d9cc5a7aa71e66d}{get\_\-OldestCommittedUncachedSQentry\_\-ID} ()
+\item 
+void \hyperlink{classlsq_a330107fe2884a0e3f0b7d5bdfb457a14}{set\_\-OldestCommittedUncachedSQentry\_\-setLatency} (int latency, int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} id)
+\item 
+bool \hyperlink{classlsq_a6cef821f12c3616018959338e23a8578}{SQhasIncompleteIns} ()
+\item 
+int \hyperlink{classlsq_ac4c427683d9be2a048a1d843a6f5b3a2}{squashSQ} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} insId)
+\item 
+int \hyperlink{classlsq_a6ead3324d0ec847b50ad6bf8a460aa83}{getSQsize} ()
+\item 
+bool \hyperlink{classlsq_af9716eece00fa2c3782af7eac2584f56}{isLQfull} ()
+\item 
+bool \hyperlink{classlsq_a4f8f0a8bc6315319a749384b78ccdfe7}{isLQempty} ()
+\item 
+void \hyperlink{classlsq_afd8f458e37a4132439d67b346950e7b8}{pushBackLQ} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classlsq_a07cc87b52ca829c2c3cd3fe89eadec14}{popFrontLQ} ()
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classlsq_a7ce41db29b4e1dedeb1ed4342f4cd8f8}{getLQheadId} ()
+\item 
+void \hyperlink{classlsq_a34c826839b11b966e3f0c27f43168f99}{insertLQ\_\-addr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classlsq_adcfc80bd04c62a423991ac914d5d2454}{lookupLQ} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classlsq_ae1c6ebc9bb617e8076b1f53feaa734ff}{setForwardData} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+int \hyperlink{classlsq_af5c64a015fd83b47c632f67358b10cf6}{squashLQ} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} insId)
+\item 
+int \hyperlink{classlsq_a1df6ccddeb9b7461b87af3629294f179}{getLQsize} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classlsq_a7404da6835aa5321a2a5a074b314e944}{
+\index{lsq@{lsq}!lsq@{lsq}}
+\index{lsq@{lsq}!lsq@{lsq}}
+\subsubsection[{lsq}]{\setlength{\rightskip}{0pt plus 5cm}lsq::lsq (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a7404da6835aa5321a2a5a074b314e944}
+
+\begin{DoxyCode}
+         {
+        _sqSize = 0;
+        _sqTail = -1;
+        _lqSize = 0;
+        _lqTail = -1;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a430a385f670bea75213f5be7ea0891e4}{
+\index{lsq@{lsq}!$\sim$lsq@{$\sim$lsq}}
+\index{$\sim$lsq@{$\sim$lsq}!lsq@{lsq}}
+\subsubsection[{$\sim$lsq}]{\setlength{\rightskip}{0pt plus 5cm}lsq::$\sim$lsq (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a430a385f670bea75213f5be7ea0891e4}
+
+\begin{DoxyCode}
+          {
+        //empty for now
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classlsq_a20508e015abc2e6d9d9cc5a7aa71e66d}{
+\index{lsq@{lsq}!get\_\-OldestCommittedUncachedSQentry\_\-ID@{get\_\-OldestCommittedUncachedSQentry\_\-ID}}
+\index{get\_\-OldestCommittedUncachedSQentry\_\-ID@{get\_\-OldestCommittedUncachedSQentry\_\-ID}!lsq@{lsq}}
+\subsubsection[{get\_\-OldestCommittedUncachedSQentry\_\-ID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} lsq::get\_\-OldestCommittedUncachedSQentry\_\-ID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a20508e015abc2e6d9d9cc5a7aa71e66d}
+
+\begin{DoxyCode}
+                                                  {
+        Assert(_sqSize > 0 && "Expected to find a committed, uncached ST op");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (_sq[i]->_validEntries && _sq[i]->_committed && !_sq[i]->_sent
+      ToCache) {
+                        return _sq[i]->_id;
+                } else {
+                        Assert(_sq[i]->_sentToCache == true);
+                }
+                counter++;
+        }
+        Assert(true == false && "Expected to find a committed, uncached ST op");
+        return 0; //does nothing - for compiler
+}
+\end{DoxyCode}
+\hypertarget{classlsq_ad7a4b49b4bd82e13bc8b7ab99e94ac93}{
+\index{lsq@{lsq}!get\_\-oldestCommittedUncachedSQentry\_\-MemAddr@{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr}}
+\index{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr@{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr}!lsq@{lsq}}
+\subsubsection[{get\_\-oldestCommittedUncachedSQentry\_\-MemAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} lsq::get\_\-oldestCommittedUncachedSQentry\_\-MemAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_ad7a4b49b4bd82e13bc8b7ab99e94ac93}
+
+\begin{DoxyCode}
+                                                               {
+        Assert(_sqSize > 0 && "Expected to find a committed, uncached ST op");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (_sq[i]->_validEntries && _sq[i]->_committed && !_sq[i]->_sent
+      ToCache) {
+                        Assert(id == _sq[i]->_id);
+                        return _sq[i]->_memAddr;
+                } else {
+                        Assert(_sq[i]->_validEntries && _sq[i]->_committed && _sq
+      [i]->_sentToCache);
+                }
+                counter++;
+        }
+        Assert(true == false && "Expected to find a committed, uncached ST op");
+        return 0; //does nothing - for compiler
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a7ce41db29b4e1dedeb1ed4342f4cd8f8}{
+\index{lsq@{lsq}!getLQheadId@{getLQheadId}}
+\index{getLQheadId@{getLQheadId}!lsq@{lsq}}
+\subsubsection[{getLQheadId}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} lsq::getLQheadId (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a7ce41db29b4e1dedeb1ed4342f4cd8f8}
+
+\begin{DoxyCode}
+                        {
+        Assert(_lqSize > 0 && "Load Queue is Empty.");
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        return _lq[lqHead]->_id;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a1df6ccddeb9b7461b87af3629294f179}{
+\index{lsq@{lsq}!getLQsize@{getLQsize}}
+\index{getLQsize@{getLQsize}!lsq@{lsq}}
+\subsubsection[{getLQsize}]{\setlength{\rightskip}{0pt plus 5cm}int lsq::getLQsize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a1df6ccddeb9b7461b87af3629294f179}
+
+\begin{DoxyCode}
+                   {
+        return _lqSize;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_ac9a2a8f09749bd97d5ae525cffbdbda9}{
+\index{lsq@{lsq}!getSQhead@{getSQhead}}
+\index{getSQhead@{getSQhead}!lsq@{lsq}}
+\subsubsection[{getSQhead}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction} $\ast$ lsq::getSQhead (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_ac9a2a8f09749bd97d5ae525cffbdbda9}
+
+\begin{DoxyCode}
+                            {
+        Assert(_sqSize > 0 && "Store Queue is Empty.");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        return _sq[sqHead]->_ins;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a6ead3324d0ec847b50ad6bf8a460aa83}{
+\index{lsq@{lsq}!getSQsize@{getSQsize}}
+\index{getSQsize@{getSQsize}!lsq@{lsq}}
+\subsubsection[{getSQsize}]{\setlength{\rightskip}{0pt plus 5cm}int lsq::getSQsize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a6ead3324d0ec847b50ad6bf8a460aa83}
+
+\begin{DoxyCode}
+                   {
+        return _sqSize;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a286e28a30ce1b7752d5ce9eb0f77d6ae}{
+\index{lsq@{lsq}!getSQtail@{getSQtail}}
+\index{getSQtail@{getSQtail}!lsq@{lsq}}
+\subsubsection[{getSQtail}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction} $\ast$ lsq::getSQtail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a286e28a30ce1b7752d5ce9eb0f77d6ae}
+
+\begin{DoxyCode}
+                            {
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        return _sq[_sqTail]->_ins;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a93b8919385546da53590c68cb739838e}{
+\index{lsq@{lsq}!hasCommittedUncachedSQentry@{hasCommittedUncachedSQentry}}
+\index{hasCommittedUncachedSQentry@{hasCommittedUncachedSQentry}!lsq@{lsq}}
+\subsubsection[{hasCommittedUncachedSQentry}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::hasCommittedUncachedSQentry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a93b8919385546da53590c68cb739838e}
+
+\begin{DoxyCode}
+                                      {
+        if (_sqSize == 0) return false;
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (_sq[i]->_validEntries && _sq[i]->_committed) {
+                        if (!_sq[i]->_sentToCache) {
+                                return true; //found an uncached committed ST op
+                        }
+                } else {
+                        return false;
+                }
+                counter++;
+        }
+        return false; //Didn't find an uncached committed ST op
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a34c826839b11b966e3f0c27f43168f99}{
+\index{lsq@{lsq}!insertLQ\_\-addr@{insertLQ\_\-addr}}
+\index{insertLQ\_\-addr@{insertLQ\_\-addr}!lsq@{lsq}}
+\subsubsection[{insertLQ\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::insertLQ\_\-addr (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a34c826839b11b966e3f0c27f43168f99}
+
+\begin{DoxyCode}
+                                        {
+        //printf("insert addr: %lu\n", ins->getInsID());
+        Assert(_lqSize > 0 && "Load Queue is Empty.");
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        INS_ID insId = ins->getInsID();
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        int counter = 0;
+        while (counter < _lqSize) {
+                unsigned int i = (lqHead+counter)%LQ_SIZE;
+                if (insId == _lq[i]->_id) {
+                        Assert(_lq[i]->_validMemAddrEntry == false);
+                        _lq[i]->_memAddr = ins->getMemAddr();
+                        _lq[i]->_validMemAddrEntry = true;
+                        return;
+                }
+                counter++;
+        }
+        Assert(false == true && "Operation Entry not Found in LQ");
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a9a1d52c28adf6f9b59a82b876a29af53}{
+\index{lsq@{lsq}!insertSQ\_\-addrNdata@{insertSQ\_\-addrNdata}}
+\index{insertSQ\_\-addrNdata@{insertSQ\_\-addrNdata}!lsq@{lsq}}
+\subsubsection[{insertSQ\_\-addrNdata}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::insertSQ\_\-addrNdata (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a9a1d52c28adf6f9b59a82b876a29af53}
+
+\begin{DoxyCode}
+                                             {
+        Assert(_sqSize > 0 && "Store Queue is Empty.");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        INS_ID insId = ins->getInsID();
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        //printf("Size: %d %d %d\n",_sqSize, _sqTail,sqHead);
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                //printf("%d,%d: %llx, %llx\n",counter, i, insId,_sq[i]->_id);
+                if (insId == _sq[i]->_id) {
+                        Assert(_sq[i]->_validEntries == false);
+                        _sq[i]->_memAddr = ins->getMemAddr();
+                        _sq[i]->_validEntries = true;
+                        //printf("\n");
+                        return;
+                }
+                counter++;
+        }
+        Assert(false == true && "Operation Entry not Found in SQ");
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a4eddb5e00ca783798e83971c467e6017}{
+\index{lsq@{lsq}!isFrontSQdoneWritingCache@{isFrontSQdoneWritingCache}}
+\index{isFrontSQdoneWritingCache@{isFrontSQdoneWritingCache}!lsq@{lsq}}
+\subsubsection[{isFrontSQdoneWritingCache}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::isFrontSQdoneWritingCache (
+\begin{DoxyParamCaption}
+\item[{int}]{cycle}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a4eddb5e00ca783798e83971c467e6017}
+
+\begin{DoxyCode}
+                                             {
+        Assert(_sqSize > 0 && "Store Queue is Empty.");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        //NOTE: can add this line to avoid bug - seems to be unnecessary for now
+        //if (_sq[sqHead]->_committed == false || _sq[sqHead]->_sentToCache == fa
+      lse) return false;
+        return (_sq[sqHead]->_storeToCacheEndCycle == cycle);
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a4f8f0a8bc6315319a749384b78ccdfe7}{
+\index{lsq@{lsq}!isLQempty@{isLQempty}}
+\index{isLQempty@{isLQempty}!lsq@{lsq}}
+\subsubsection[{isLQempty}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::isLQempty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a4f8f0a8bc6315319a749384b78ccdfe7}
+
+\begin{DoxyCode}
+                    {
+        Assert(_lqSize <= LQ_SIZE && "ERROR: Invalid Load Queue Size");
+        Assert(_lqSize >= 0       && "ERROR: Invalid Load Queue Size");
+        if (_lqSize == 0) return true;
+        else return false;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_af9716eece00fa2c3782af7eac2584f56}{
+\index{lsq@{lsq}!isLQfull@{isLQfull}}
+\index{isLQfull@{isLQfull}!lsq@{lsq}}
+\subsubsection[{isLQfull}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::isLQfull (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_af9716eece00fa2c3782af7eac2584f56}
+
+\begin{DoxyCode}
+                   {
+        Assert(_lqSize <= LQ_SIZE && "ERROR: Invalid Load Queue Size");
+        Assert(_lqSize >= 0       && "ERROR: Invalid Load Queue Size");
+        if (_lqSize == LQ_SIZE) return true;
+        else return false;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a9f240390c165b00ead843f037ab28262}{
+\index{lsq@{lsq}!isSQempty@{isSQempty}}
+\index{isSQempty@{isSQempty}!lsq@{lsq}}
+\subsubsection[{isSQempty}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::isSQempty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a9f240390c165b00ead843f037ab28262}
+
+\begin{DoxyCode}
+                    {
+        Assert(_sqSize <= SQ_SIZE && "ERROR: Invalid Store Queue Size");
+        Assert(_sqSize >= 0       && "ERROR: Invalid Store Queue Size");
+        if (_sqSize == 0) return true;
+        else return false;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_afc76def93e0f2ac0c56a92e1dc8d7efd}{
+\index{lsq@{lsq}!isSQfull@{isSQfull}}
+\index{isSQfull@{isSQfull}!lsq@{lsq}}
+\subsubsection[{isSQfull}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::isSQfull (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_afc76def93e0f2ac0c56a92e1dc8d7efd}
+
+\begin{DoxyCode}
+                   {
+        Assert(_sqSize <= SQ_SIZE && "ERROR: Invalid Store Queue Size");
+        Assert(_sqSize >= 0       && "ERROR: Invalid Store Queue Size");
+        if (_sqSize == SQ_SIZE) return true;
+        else return false;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_adcfc80bd04c62a423991ac914d5d2454}{
+\index{lsq@{lsq}!lookupLQ@{lookupLQ}}
+\index{lookupLQ@{lookupLQ}!lsq@{lsq}}
+\subsubsection[{lookupLQ}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} lsq::lookupLQ (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_adcfc80bd04c62a423991ac914d5d2454}
+
+\begin{DoxyCode}
+                                     {
+        if (_lqSize == 0) return false;
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        Assert(ins->getMemType() == WRITE);
+        ADDRS memAddr = ins->getMemAddr();
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        int counter = 0;
+        while (counter < _lqSize) {
+                unsigned int i = (lqHead+counter)%LQ_SIZE;
+                if (_lq[i]->_validMemAddrEntry == true && _lq[i]->_sqDataFwd == f
+      alse && memAddr == _lq[i]->_memAddr) {
+                        Assert(_lq[i]->_id > 0);
+                        return _lq[i]->_id; //oops, need to squash
+                }
+                counter++;
+        }
+        return 0; //all speculations are find wrt this ST op
+}
+\end{DoxyCode}
+\hypertarget{classlsq_ab0f9350bede75f5dd0f46abd71a3fc20}{
+\index{lsq@{lsq}!lookupSQ@{lookupSQ}}
+\index{lookupSQ@{lookupSQ}!lsq@{lsq}}
+\subsubsection[{lookupSQ}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::lookupSQ (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_ab0f9350bede75f5dd0f46abd71a3fc20}
+
+\begin{DoxyCode}
+                                   {
+        if (_sqSize == 0) return false;
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        Assert(ins->getMemType() == READ);
+        ADDRS memAddr = ins->getMemAddr();
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (_sq[i]->_validEntries == true && memAddr == _sq[i]->_memAddr)
+       {
+                        return true;
+                }
+                counter++;
+        }
+        return false; //Didn't find LD mem addr in SQ
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a07cc87b52ca829c2c3cd3fe89eadec14}{
+\index{lsq@{lsq}!popFrontLQ@{popFrontLQ}}
+\index{popFrontLQ@{popFrontLQ}!lsq@{lsq}}
+\subsubsection[{popFrontLQ}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::popFrontLQ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a07cc87b52ca829c2c3cd3fe89eadec14}
+
+\begin{DoxyCode}
+                     {
+        Assert(_lqSize > 0 && "Load Queue is Empty.");
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        //printf("popping: %lu\n", _lq[lqHead]->_id);
+        delete _lq[lqHead];
+        _lqSize--;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_aca2f5a9e6e6c483b11eec879cda2100e}{
+\index{lsq@{lsq}!popFrontSQ@{popFrontSQ}}
+\index{popFrontSQ@{popFrontSQ}!lsq@{lsq}}
+\subsubsection[{popFrontSQ}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::popFrontSQ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_aca2f5a9e6e6c483b11eec879cda2100e}
+
+\begin{DoxyCode}
+                     {
+        Assert(_sqSize > 0 && "Store Queue is Empty.");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        delete _sq[sqHead];
+        _sqSize--;
+        //printf("REMOVE %d\n",_sqSize);
+}
+\end{DoxyCode}
+\hypertarget{classlsq_afd8f458e37a4132439d67b346950e7b8}{
+\index{lsq@{lsq}!pushBackLQ@{pushBackLQ}}
+\index{pushBackLQ@{pushBackLQ}!lsq@{lsq}}
+\subsubsection[{pushBackLQ}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::pushBackLQ (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_afd8f458e37a4132439d67b346950e7b8}
+
+\begin{DoxyCode}
+                                     {
+        Assert(_lqSize < LQ_SIZE && "ERROR: Load Queue is Full");
+
+        //printf("insert: %lu\n", ins->getInsID());
+        // Contruct Load Object
+        loadObj* lObj = new loadObj;
+        lObj->_ins = ins;
+        lObj->_id = ins->getInsID();
+        lObj->_validMemAddrEntry = false; //functino called @fetch/decode
+        lObj->_validDataEntry = false; //functino called @fetch/decode
+        lObj->_sqDataFwd = false;
+
+        // Update Load Queue
+        _lqTail = (_lqTail+1) % LQ_SIZE;
+        _lq[_lqTail] = lObj;
+        _lqSize++;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a9a3ea7ed05bbcf12b332a18fc84a317a}{
+\index{lsq@{lsq}!pushBackSQ@{pushBackSQ}}
+\index{pushBackSQ@{pushBackSQ}!lsq@{lsq}}
+\subsubsection[{pushBackSQ}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::pushBackSQ (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a9a3ea7ed05bbcf12b332a18fc84a317a}
+
+\begin{DoxyCode}
+                                     {
+        Assert(_sqSize < SQ_SIZE && "ERROR: Store Queue is Full");
+
+        // Contruct Store Object
+        storeObj* sObj = new storeObj;
+        sObj->_ins = ins;
+        sObj->_id = ins->getInsID();
+        sObj->_committed = false;
+        sObj->_sentToCache = false;
+        sObj->_validEntries = false; //functino called @fetch/decode
+        sObj->_cacheAccessLatency = 0;
+        sObj->_storeToCacheBeginCycle = 0;
+        sObj->_storeToCacheEndCycle = 0;
+
+        // Update Store Queue
+        _sqTail = (_sqTail+1) % SQ_SIZE;
+        _sq[_sqTail] = sObj;
+        _sqSize++;
+        //printf("INSERT %d\n", _sqSize);
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a330107fe2884a0e3f0b7d5bdfb457a14}{
+\index{lsq@{lsq}!set\_\-OldestCommittedUncachedSQentry\_\-setLatency@{set\_\-OldestCommittedUncachedSQentry\_\-setLatency}}
+\index{set\_\-OldestCommittedUncachedSQentry\_\-setLatency@{set\_\-OldestCommittedUncachedSQentry\_\-setLatency}!lsq@{lsq}}
+\subsubsection[{set\_\-OldestCommittedUncachedSQentry\_\-setLatency}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::set\_\-OldestCommittedUncachedSQentry\_\-setLatency (
+\begin{DoxyParamCaption}
+\item[{int}]{latency, }
+\item[{int}]{cycle, }
+\item[{{\bf INS\_\-ID}}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a330107fe2884a0e3f0b7d5bdfb457a14}
+
+\begin{DoxyCode}
+                                                                                 
+              {
+        Assert(_sqSize > 0 && "Expected to find a committed, uncached ST op");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (_sq[i]->_validEntries && _sq[i]->_committed && !_sq[i]->_sent
+      ToCache) {
+                        Assert(id == _sq[i]->_id);
+                        _sq[i]->_cacheAccessLatency = latency;
+                        _sq[i]->_storeToCacheBeginCycle = cycle;
+                        _sq[i]->_storeToCacheEndCycle = cycle+latency;
+                        _sq[i]->_sentToCache = true;
+                        return;
+                } else {
+                        Assert(_sq[i]->_sentToCache == true);
+                }
+                counter++;
+        }
+        Assert(true == false && "Expected to find a committed, uncached ST op");
+}
+\end{DoxyCode}
+\hypertarget{classlsq_ae1c6ebc9bb617e8076b1f53feaa734ff}{
+\index{lsq@{lsq}!setForwardData@{setForwardData}}
+\index{setForwardData@{setForwardData}!lsq@{lsq}}
+\subsubsection[{setForwardData}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::setForwardData (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_ae1c6ebc9bb617e8076b1f53feaa734ff}
+
+\begin{DoxyCode}
+                                         {
+        Assert(_lqSize > 0 && "Load Queue is Empty.");
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        Assert(ins->getMemType() == READ);
+        INS_ID insId = ins->getInsID();
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        int counter = 0;
+        while (counter < _lqSize) {
+                unsigned int i = (lqHead+counter)%LQ_SIZE;
+                if (insId == _lq[i]->_id) {
+                        Assert(_lq[i]->_validMemAddrEntry == true && _lq[i]->_sqD
+      ataFwd == false);
+                        _lq[i]->_sqDataFwd = true; //Store Forwarding
+                        return;
+                }
+                counter++;
+        }
+        Assert(false == true && "Operation Entry not Found in LQ");
+}
+\end{DoxyCode}
+\hypertarget{classlsq_a6cef821f12c3616018959338e23a8578}{
+\index{lsq@{lsq}!SQhasIncompleteIns@{SQhasIncompleteIns}}
+\index{SQhasIncompleteIns@{SQhasIncompleteIns}!lsq@{lsq}}
+\subsubsection[{SQhasIncompleteIns}]{\setlength{\rightskip}{0pt plus 5cm}bool lsq::SQhasIncompleteIns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_a6cef821f12c3616018959338e23a8578}
+
+\begin{DoxyCode}
+                             {
+        if (_sqSize == 0) return false;
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (!_sq[i]->_validEntries || !_sq[i]->_committed) {
+                        return true;
+                }
+                counter++;
+        }
+        return false;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_af5c64a015fd83b47c632f67358b10cf6}{
+\index{lsq@{lsq}!squashLQ@{squashLQ}}
+\index{squashLQ@{squashLQ}!lsq@{lsq}}
+\subsubsection[{squashLQ}]{\setlength{\rightskip}{0pt plus 5cm}int lsq::squashLQ (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{insId}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_af5c64a015fd83b47c632f67358b10cf6}
+
+\begin{DoxyCode}
+                                {
+        Assert(_lqSize > 0);
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        unsigned int lqHead = (_lqTail - (_lqSize - 1)) % (-1*LQ_SIZE);
+        int counter = 0;
+        bool startSquash = false, oneElementLeft = false;
+        int beforeSquashSize = (int) _lqSize;
+        //printf("%d,%d,%d,%lu\n",_lqTail,_lqSize,lqHead,insId);
+        while (counter < _lqSize) {
+                unsigned int i = (lqHead+counter)%LQ_SIZE;
+                //printf("%d\n",i);
+                if (_lq[i]->_id == insId) {
+                        //printf("found: %d\n",i);
+                        Assert(startSquash == false);
+                        startSquash = true;
+                        if (lqHead == i) {
+                                _lqTail = i;
+                        } else {
+                                _lqTail = (i - 1) % (-1*LQ_SIZE);
+                                if (_lqTail == lqHead) oneElementLeft = true;
+                        }
+                }
+                if (startSquash) {
+                        Assert(_lq[i]->_id >= insId);
+                        delete _lq[i];
+                }
+                counter++;
+        }
+        if (lqHead == _lqTail && !oneElementLeft) _lqSize = 0;
+        else if (lqHead == _lqTail && oneElementLeft) _lqSize = 1;
+        else                   _lqSize = (_lqTail - lqHead + 1) % (-1*LQ_SIZE);
+        //printf("%d,%d,%d\n",_lqTail,_lqSize,lqHead);
+        int afterSquashSize = (int)_lqSize;
+        Assert(_lqSize >= 0);
+        Assert(startSquash == true && "We must have squashed at least one LD op")
+      ;
+        Assert(_lqTail >= 0 && _lqTail < LQ_SIZE);
+        int squashInsCount = beforeSquashSize - afterSquashSize;
+        Assert(squashInsCount >= 0);
+        return squashInsCount;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_ac4c427683d9be2a048a1d843a6f5b3a2}{
+\index{lsq@{lsq}!squashSQ@{squashSQ}}
+\index{squashSQ@{squashSQ}!lsq@{lsq}}
+\subsubsection[{squashSQ}]{\setlength{\rightskip}{0pt plus 5cm}int lsq::squashSQ (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{insId}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_ac4c427683d9be2a048a1d843a6f5b3a2}
+
+\begin{DoxyCode}
+                                {
+        Assert(_sqSize > 0);
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        unsigned int counter = 0;
+        //printf("%d,%d,%d,%lu\n",_sqTail,_sqSize,sqHead,insId);
+        unsigned int oldSqTail = _sqTail;
+        int beforeSquashSize = (int) _sqSize;
+        while (counter < (unsigned int)_sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                //if (i == sqHead) printf("%d and %d\n",_sq[i]->_id, insId);
+                if (_sq[i]->_id < insId) {
+                        _sqTail = i;
+                } else {
+                        Assert(i != sqHead); //impossible case
+                        delete _sq[i];
+                }
+                counter++;
+        }
+        if (oldSqTail != _sqTail) {
+                if (sqHead == _sqTail) _sqSize = 1;
+                else                   _sqSize = (_sqTail - sqHead + 1) % (-1*
+      SQ_SIZE);
+        }
+        //printf("%d,%d,%d\n",_sqTail,_sqSize,sqHead);
+        int afterSquashSize = (int)_sqSize;
+        Assert(_sqSize > 0);
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        int squashInsCount = beforeSquashSize - afterSquashSize;
+        Assert(squashInsCount >= 0);
+        return squashInsCount;
+}
+\end{DoxyCode}
+\hypertarget{classlsq_aa78ff1e0d38eabd68022968e8cd31c5d}{
+\index{lsq@{lsq}!updateSQcommitSet@{updateSQcommitSet}}
+\index{updateSQcommitSet@{updateSQcommitSet}!lsq@{lsq}}
+\subsubsection[{updateSQcommitSet}]{\setlength{\rightskip}{0pt plus 5cm}void lsq::updateSQcommitSet (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classlsq_aa78ff1e0d38eabd68022968e8cd31c5d}
+
+\begin{DoxyCode}
+                                            {
+        Assert(_sqSize > 0 && "Store Queue is Empty.");
+        Assert(_sqTail >= 0 && _sqTail < SQ_SIZE);
+        INS_ID insId = ins->getInsID();
+        unsigned int sqHead = (_sqTail - (_sqSize - 1)) % (-1*SQ_SIZE);
+        int counter = 0;
+        while (counter < _sqSize) {
+                unsigned int i = (sqHead+counter)%SQ_SIZE;
+                if (insId == _sq[i]->_id) {
+                        Assert(_sq[i]->_validEntries == true && _sq[i]->_committe
+      d == false);
+                        _sq[i]->_committed = true;
+                        return;
+                } else {
+                        //All older store ops must be committed
+                        Assert(_sq[i]->_committed == true);
+                }
+                counter++;
+        }
+        Assert(false == true && "Operation Entry not Found in SQ");
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{lsq_8h}{lsq.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{lsq_8cpp}{lsq.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+\hypertarget{inoBkEnd_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.cpp File Reference}
+\label{inoBkEnd_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.cpp}}
+}
+{\ttfamily \#include \char`\"{}inoBkEnd.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d}{inoBkEndRun} ()
+\item 
+void \hyperlink{inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9}{inoBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsysCore}{sysCore} $\ast$ \hyperlink{inoBkEnd_8cpp_af13d4a634c35e1786a57cbc6027cbebc}{\_\-core}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9}{
+\index{inoBkEnd.cpp@{inoBkEnd.cpp}!inoBkEnd\_\-init@{inoBkEnd\_\-init}}
+\index{inoBkEnd\_\-init@{inoBkEnd\_\-init}!inoBkEnd.cpp@{inoBkEnd.cpp}}
+\subsubsection[{inoBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEnd\_\-init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9}
+
+\begin{DoxyCode}
+                                                   {
+    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+    _core = new sysCore (1, 4, 4, 4, 4, 4, 4, 4,
+                         2, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10);
+}
+\end{DoxyCode}
+\hypertarget{inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d}{
+\index{inoBkEnd.cpp@{inoBkEnd.cpp}!inoBkEndRun@{inoBkEndRun}}
+\index{inoBkEndRun@{inoBkEndRun}!inoBkEnd.cpp@{inoBkEnd.cpp}}
+\subsubsection[{inoBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEndRun (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d}
+
+\begin{DoxyCode}
+                   {
+    _core->runCore();
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{inoBkEnd_8cpp_af13d4a634c35e1786a57cbc6027cbebc}{
+\index{inoBkEnd.cpp@{inoBkEnd.cpp}!\_\-core@{\_\-core}}
+\index{\_\-core@{\_\-core}!inoBkEnd.cpp@{inoBkEnd.cpp}}
+\subsubsection[{\_\-core}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sysCore}$\ast$ {\bf \_\-core}}}
+\label{inoBkEnd_8cpp_af13d4a634c35e1786a57cbc6027cbebc}

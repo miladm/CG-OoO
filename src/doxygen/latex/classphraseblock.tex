@@ -1,0 +1,291 @@
+\hypertarget{classphraseblock}{
+\section{phraseblock Class Reference}
+\label{classphraseblock}\index{phraseblock@{phraseblock}}
+}
+
+
+{\ttfamily \#include $<$phraseblock.h$>$}
+
+Inheritance diagram for phraseblock:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classphraseblock}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classphraseblock_a5767e2bc45b4ab68c49be40c7522ecb7}{phraseblock} ()
+\item 
+\hyperlink{classphraseblock_a4e6f347afd3bb1bb51a373cb15b40dc9}{$\sim$phraseblock} ()
+\item 
+void \hyperlink{classphraseblock_ab7605258ce67522bb3b894b4b7686271}{loopToPhraseblock} (\hyperlink{classloop}{loop} $\ast$lp)
+\item 
+void \hyperlink{classphraseblock_a23c7b3a1f2accfea9aeb1df6e983f7d5}{PhraseblockToBB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList\_\-new, \hyperlink{classloop}{loop} $\ast$lp, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $\ast$phID)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classphraseblock_a5767e2bc45b4ab68c49be40c7522ecb7}{
+\index{phraseblock@{phraseblock}!phraseblock@{phraseblock}}
+\index{phraseblock@{phraseblock}!phraseblock@{phraseblock}}
+\subsubsection[{phraseblock}]{\setlength{\rightskip}{0pt plus 5cm}phraseblock::phraseblock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseblock_a5767e2bc45b4ab68c49be40c7522ecb7}
+
+\begin{DoxyCode}
+                         : basicblock() {
+        _numPhraseblocks = 0;
+        _phraseBBLists = new List<basicblock*>;
+        _ancestorPbList = new List<phraseblock*>;
+        _descendantPbList = new List<phraseblock*>;
+}
+\end{DoxyCode}
+\hypertarget{classphraseblock_a4e6f347afd3bb1bb51a373cb15b40dc9}{
+\index{phraseblock@{phraseblock}!$\sim$phraseblock@{$\sim$phraseblock}}
+\index{$\sim$phraseblock@{$\sim$phraseblock}!phraseblock@{phraseblock}}
+\subsubsection[{$\sim$phraseblock}]{\setlength{\rightskip}{0pt plus 5cm}phraseblock::$\sim$phraseblock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseblock_a4e6f347afd3bb1bb51a373cb15b40dc9}
+
+\begin{DoxyCode}
+                          {
+        delete _bBLists;
+        delete _phraseBBLists;
+        delete _ancestorPbList;
+        delete _descendantPbList;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classphraseblock_ab7605258ce67522bb3b894b4b7686271}{
+\index{phraseblock@{phraseblock}!loopToPhraseblock@{loopToPhraseblock}}
+\index{loopToPhraseblock@{loopToPhraseblock}!phraseblock@{phraseblock}}
+\subsubsection[{loopToPhraseblock}]{\setlength{\rightskip}{0pt plus 5cm}void phraseblock::loopToPhraseblock (
+\begin{DoxyParamCaption}
+\item[{{\bf loop} $\ast$}]{lp}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseblock_ab7605258ce67522bb3b894b4b7686271}
+
+\begin{DoxyCode}
+                                            {
+        //Count the number of WBB's in loop
+        int wbbCount = 0;
+        List<ADDR> wbbSet;
+        printf("\n");
+        for (int i = 0; i < lp->getNumBB(); i++) {
+                basicblock* bb = lp->getNthBB(i);
+                printf("%f, ", bb->getTakenBias());
+                if (bb->getNumDescendents() >= 2 && //sometimes not all descenden
+      ts are captured
+                        bb->getTakenBias() > WBB_LOWER_BOUND && 
+                    bb->getTakenBias() < WBB_UPPER_BOUND &&
+                    lp->isBbInLoop(bb->getFallThrough()->getID()) &&
+                        lp->isBbInLoop(bb->getTakenTarget()->getID())) { //TODO c
+      reate macros for this boundires
+                        Assert(bb->getNumDescendents() == 2 && "Invalid number of
+       basicblock descendents\n");
+                        wbbSet.Append(bb->getID());
+                        wbbCount++;
+                }
+        }
+        int numPhraseBlks = pow(2,wbbCount); //TODO this is very bad model, must 
+      be changed
+        printf("\nnumber of WBBs in loop %llx: %d, %d\n", lp->getLoopEntryID(), n
+      umPhraseBlks, lp->getNumBB());
+        // lp->setNumWbb(wbbCount);
+        if (numPhraseBlks <= 4) {
+                _bBLists = new List<basicblock*>* [numPhraseBlks];
+                for (int i = 0; i < numPhraseBlks; i++) {
+                        _bBLists[i] = new List<basicblock*>;
+                }
+                for (int i = 0; i < numPhraseBlks; i++) {
+                        List<basicblock*>* bbList = _bBLists[i];
+                        basicblock* bbHead = lp->getLoopEntry();
+                        lp->resetVisitBits();
+                        basicblock* bb = bbHead;
+                        bool break_loop = false;
+
+                        while(1) {
+                                bbList->Append(bb);
+                                bb->setAsVisited();
+                                int elemIndx = wbbSet.findElement(bb->getID());
+                                //printf("indx = %llx\n", bb->getID());
+                                if (elemIndx > -1) {
+                                        switch(elemIndx) {
+                                                case 0:
+                                                        if (i%2 == 0 && 
+                                                            lp->isBbInLoop(bb->
+      getNthDescendent(0)->getID()) == true &&
+                                                                bb->
+      getNthDescendent(0)->isVisited() == false && 
+                                                                bb->
+      getNthDescendent(0)->getID() != bb->getID())
+                                                                bb = bb->
+      getNthDescendent(0);
+                                                        else if (lp->isBbInLoop(b
+      b->getNthDescendent(1)->getID()) == true && 
+                                                                 bb->
+      getNthDescendent(1)->isVisited() == false && 
+                                                                         bb->
+      getNthDescendent(1)->getID() != bb->getID())
+                                                                bb = bb->
+      getNthDescendent(1);
+                                                        else
+                                                                break_loop = true
+      ;
+                                                                //TODO: what do w
+      e do here?
+                                                        break;
+                                                case 1: 
+                                                        if (i < 2 && 
+                                                            lp->isBbInLoop(bb->
+      getNthDescendent(0)->getID()) == true && 
+                                                            bb->getNthDescendent(
+      0)->isVisited() == false && 
+                                                            bb->getNthDescendent(
+      0)->getID() != bb->getID())
+                                                                bb = bb->
+      getNthDescendent(0); 
+                                                        else if (lp->isBbInLoop(b
+      b->getNthDescendent(1)->getID()) == true && 
+                                                                 bb->
+      getNthDescendent(1)->isVisited() == false && 
+                                                                 bb->
+      getNthDescendent(1)->getID() != bb->getID())
+                                                                bb = bb->
+      getNthDescendent(1);
+                                                        else
+                                                                break_loop = true
+      ;
+                                                                //TODO: what do w
+      e do here?
+                                                        break;
+                                                default:
+                                                        Assert("Invalid number of
+       WBB's. Aborting execution.");
+                                        }
+                                } else if (bb->getNumDescendents() >= 2 && (lp->
+      isBbFallThrough(bb->getFallThrough()->getID()) || lp->isBbFallThrough(bb->
+      getTakenTarget()->getID()))) {
+                                        if (lp->isBbFallThrough(bb->
+      getFallThrough()->getID()) &&
+                                                           bb->getTakenTarget()->
+      isVisited() == false &&
+                                                           bb->getTakenTarget()->
+      getID() != bb->getID()) {
+                                                bb = bb->getTakenTarget();
+                                        } else if (lp->isBbFallThrough(bb->
+      getTakenTarget()->getID()) &&
+                                                           bb->getFallThrough()->
+      isVisited() == false &&
+                                                           bb->getFallThrough()->
+      getID() != bb->getID()) {
+                                                bb = bb->getFallThrough();
+                                        } else {
+                                                break; //TODO validate that this 
+      is correct functionality
+                                        }
+                                } else if (bb->getNumDescendents() > 0 &&
+                                                   bb->getNxtBB() != NULL &&
+                                           bb->getNxtBB()->isVisited() == false &
+      & 
+                                                   lp->isBbInLoop(bb->getNxtBB()-
+      >getID()) == true &&
+                                           bb->getNxtBB()->getID() != bb->getID()
+      ) {
+                                        bb = bb->getNxtBB();
+                                } else {
+                                        printf("case 4\n");
+                                        break; //graph is completed
+                                }
+                                if (break_loop == true) break;
+                        }
+                        printf("\nPHRASE (%d): ", i);
+                        for (int i = 0; i < bbList->NumElements(); i++) {
+                                printf("%llx, ", bbList->Nth(i)->getID());
+                        }
+                        printf("\n");
+                }
+        } else {
+                printf("DEBUG: too many WBB's in the loop. Skipping the loop for 
+      now.\n");
+        }
+        _numPhraseblocks = numPhraseBlks;
+}
+\end{DoxyCode}
+\hypertarget{classphraseblock_a23c7b3a1f2accfea9aeb1df6e983f7d5}{
+\index{phraseblock@{phraseblock}!PhraseblockToBB@{PhraseblockToBB}}
+\index{PhraseblockToBB@{PhraseblockToBB}!phraseblock@{phraseblock}}
+\subsubsection[{PhraseblockToBB}]{\setlength{\rightskip}{0pt plus 5cm}void phraseblock::PhraseblockToBB (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList\_\-new, }
+\item[{{\bf loop} $\ast$}]{lp, }
+\item[{{\bf ADDR} $\ast$}]{phID}
+\end{DoxyParamCaption}
+)}}
+\label{classphraseblock_a23c7b3a1f2accfea9aeb1df6e983f7d5}
+
+\begin{DoxyCode}
+                                                                                 
+           {
+        if (_numPhraseblocks <= 4) {
+                for (int i = 0; i < _numPhraseblocks; i++) {
+                        List<basicblock*>* bbList = _bBLists[i];
+                        basicblock* bb = new basicblock;
+                        _phraseBBLists->Append(bb);
+                        //Contruct the phraseblock BB
+                        //TODO add the position index to the BB
+                        (*phID)++;
+                        for (int j = 0; j < bbList->NumElements(); j++) {
+                                basicblock* nthBB = bbList->Nth(j);
+                                bb->addBBtoPBList(nthBB->getID());
+                                for (int k = 0; k < nthBB->getInsList()->
+      NumElements(); k++) {
+                                        bb->addIns(nthBB->getInsList()->Nth(k), *
+      phID);
+                                }
+                        }
+                        bb->setListIndx(bbList_new->NumElements());
+                        bbList_new->Append(bb);
+                        //Contruct input/loop/output edges
+                        List<basicblock*>* lpHeadAncestors = lp->getLoopEntry()->
+      getAncestorList();
+                        for (int j = 0; j < lpHeadAncestors->NumElements(); j++) 
+      {
+                                //lpHeadAncestors->Nth(j)->setDescendent(bb); //T
+      ODO this part is missing - must be completed
+                        }
+                        /* link fall through paths HERE */
+                        for (int j = 0; j < lp->getFallThroughBBs()->NumElements(
+      ); j++) {
+                                bb->setDescendent(lp->getFallThroughBBs()->Nth(j)
+      );
+                        }
+                }
+                //Link phraseblocks together
+                Assert(_phraseBBLists->NumElements() == _numPhraseblocks && "Phra
+      se-basic blocks are not made correctly");
+                _numPhraseblocks = _phraseBBLists->NumElements();
+                for (int i = 0; i < _numPhraseblocks; i++) {
+                        for (int j = 0; j < _numPhraseblocks; j++) {
+                                _phraseBBLists->Nth(i)->setDescendent(_phraseBBLi
+      sts->Nth(j));
+                        }
+                }
+        }
+}\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{phraseblock_8h}{phraseblock.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{phraseblock_8cpp}{phraseblock.cpp}\end{DoxyCompactItemize}

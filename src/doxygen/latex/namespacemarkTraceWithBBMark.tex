@@ -1,0 +1,83 @@
+\hypertarget{namespacemarkTraceWithBBMark}{
+\section{markTraceWithBBMark Namespace Reference}
+\label{namespacemarkTraceWithBBMark}\index{markTraceWithBBMark@{markTraceWithBBMark}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacemarkTraceWithBBMark_a0e6d395586c1787d9aabfd6f184d9d42}{editTrace}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \hyperlink{namespacemarkTraceWithBBMark_a25f290e5d3e7b1f7c4c6a3e8547e4844}{inTraceFileName} = sys.argv\mbox{[}1\mbox{]}
+\item 
+list \hyperlink{namespacemarkTraceWithBBMark_a0653f77d65ac1723a500267da9bf570f}{sFileName} = sys.argv\mbox{[}2\mbox{]}
+\item 
+string \hyperlink{namespacemarkTraceWithBBMark_a0ff4b56f2ddec7d909dbf80996f0592a}{outTraceFileName} = 'phrase\_\-'
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespacemarkTraceWithBBMark_a0e6d395586c1787d9aabfd6f184d9d42}{
+\index{markTraceWithBBMark@{markTraceWithBBMark}!editTrace@{editTrace}}
+\index{editTrace@{editTrace}!markTraceWithBBMark@{markTraceWithBBMark}}
+\subsubsection[{editTrace}]{\setlength{\rightskip}{0pt plus 5cm}def markTraceWithBBMark::editTrace (
+\begin{DoxyParamCaption}
+\item[{}]{inTraceFileName, }
+\item[{}]{sFileName, }
+\item[{}]{outTraceFileName}
+\end{DoxyParamCaption}
+)}}
+\label{namespacemarkTraceWithBBMark_a0e6d395586c1787d9aabfd6f184d9d42}
+
+\begin{DoxyCode}
+17                                                             :
+18   inTraceFile = open(inTraceFileName, 'r')
+19   sFile = open(sFileName, 'r')
+20   # outTraceFile = open (outTraceFileName, 'w')
+21   bbHeaders = []
+22   
+23   for line in sFile:
+24     line = line.split(',')
+25     if line[0] == '{':
+26       # print line[1],"\n"
+27       bbID = line[1].rstrip().lstrip()
+28       bbHeaders.append(bbID)
+29   print bbHeaders
+30   print_out = False
+31   for line in inTraceFile:
+32     insAddr = -1
+33     line = line.split(',')
+34     if len(line) == 1: continue
+35     if line[0] == 'W' or line[0] == 'R':
+36       insAddr = line[2]
+37     else:
+38       insAddr = line[1]
+39     if insAddr in bbHeaders:
+40         print "Header: ", insAddr,"\n"
+41         print_out = True
+42     else:
+43       if print_out == True:
+44         print insAddr,"\n"
+45 
+
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespacemarkTraceWithBBMark_a25f290e5d3e7b1f7c4c6a3e8547e4844}{
+\index{markTraceWithBBMark@{markTraceWithBBMark}!inTraceFileName@{inTraceFileName}}
+\index{inTraceFileName@{inTraceFileName}!markTraceWithBBMark@{markTraceWithBBMark}}
+\subsubsection[{inTraceFileName}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf markTraceWithBBMark::inTraceFileName} = sys.argv\mbox{[}1\mbox{]}}}
+\label{namespacemarkTraceWithBBMark_a25f290e5d3e7b1f7c4c6a3e8547e4844}
+\hypertarget{namespacemarkTraceWithBBMark_a0ff4b56f2ddec7d909dbf80996f0592a}{
+\index{markTraceWithBBMark@{markTraceWithBBMark}!outTraceFileName@{outTraceFileName}}
+\index{outTraceFileName@{outTraceFileName}!markTraceWithBBMark@{markTraceWithBBMark}}
+\subsubsection[{outTraceFileName}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf markTraceWithBBMark::outTraceFileName} = 'phrase\_\-'}}
+\label{namespacemarkTraceWithBBMark_a0ff4b56f2ddec7d909dbf80996f0592a}
+\hypertarget{namespacemarkTraceWithBBMark_a0653f77d65ac1723a500267da9bf570f}{
+\index{markTraceWithBBMark@{markTraceWithBBMark}!sFileName@{sFileName}}
+\index{sFileName@{sFileName}!markTraceWithBBMark@{markTraceWithBBMark}}
+\subsubsection[{sFileName}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf markTraceWithBBMark::sFileName} = sys.argv\mbox{[}2\mbox{]}}}
+\label{namespacemarkTraceWithBBMark_a0653f77d65ac1723a500267da9bf570f}

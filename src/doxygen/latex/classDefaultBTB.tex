@@ -1,0 +1,232 @@
+\hypertarget{classDefaultBTB}{
+\section{DefaultBTB Class Reference}
+\label{classDefaultBTB}\index{DefaultBTB@{DefaultBTB}}
+}
+
+
+{\ttfamily \#include $<$btb.h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries BTBEntry}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60}{DefaultBTB} (unsigned numEntries, unsigned tagBits, unsigned instShiftAmt)
+\item 
+void \hyperlink{classDefaultBTB_a079bd92b539fb38fb658665a08b65974}{reset} ()
+\item 
+TheISA::PCState \hyperlink{classDefaultBTB_ad21521b111945ccf058a3687ef720339}{lookup} (Addr instPC, ThreadID tid)
+\item 
+bool \hyperlink{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{valid} (Addr instPC, ThreadID tid)
+\item 
+void \hyperlink{classDefaultBTB_a554c0af23b92df168310e4edaf627c51}{update} (Addr instPC, const TheISA::PCState \&targetPC, ThreadID tid)
+\item 
+void \hyperlink{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}{invalidate} (Addr instPC)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60}{
+\index{DefaultBTB@{DefaultBTB}!DefaultBTB@{DefaultBTB}}
+\index{DefaultBTB@{DefaultBTB}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{DefaultBTB}]{\setlength{\rightskip}{0pt plus 5cm}DefaultBTB::DefaultBTB (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{numEntries, }
+\item[{unsigned}]{tagBits, }
+\item[{unsigned}]{instShiftAmt}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60}
+Creates a BTB with the given number of entries, number of bits per tag, and instruction offset amount. 
+\begin{DoxyParams}{Parameters}
+{\em numEntries} & Number of entries for the BTB. \\
+\hline
+{\em tagBits} & Number of bits for each tag in the BTB. \\
+\hline
+{\em instShiftAmt} & Offset amount for instructions to ignore alignment. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+    : numEntries(_numEntries),
+      tagBits(_tagBits),
+      instShiftAmt(_instShiftAmt)
+{
+    DPRINTF(Fetch, "BTB: Creating BTB object.\n");
+
+    if (!isPowerOf2(numEntries)) {
+        fatal("BTB entries is not a power of 2!");
+    }
+
+    btb.resize(numEntries);
+
+    for (unsigned i = 0; i < numEntries; ++i) {
+        btb[i].valid = false;
+    }
+
+    idxMask = numEntries - 1;
+
+    tagMask = (1 << tagBits) - 1;
+
+    tagShiftAmt = instShiftAmt + floorLog2(numEntries);
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}{
+\index{DefaultBTB@{DefaultBTB}!invalidate@{invalidate}}
+\index{invalidate@{invalidate}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{invalidate}]{\setlength{\rightskip}{0pt plus 5cm}void DefaultBTB::invalidate (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}
+Invalidate a BTB entry 
+\begin{DoxyCode}
+{
+    unsigned btb_idx = getIndex(instPC);
+
+    assert(btb_idx < numEntries);
+
+    btb[btb_idx].valid = false;
+}
+\end{DoxyCode}
+\hypertarget{classDefaultBTB_ad21521b111945ccf058a3687ef720339}{
+\index{DefaultBTB@{DefaultBTB}!lookup@{lookup}}
+\index{lookup@{lookup}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{lookup}]{\setlength{\rightskip}{0pt plus 5cm}TheISA::PCState DefaultBTB::lookup (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC, }
+\item[{ThreadID}]{tid}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_ad21521b111945ccf058a3687ef720339}
+Looks up an address in the BTB. Must call \hyperlink{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{valid()} first on the address. 
+\begin{DoxyParams}{Parameters}
+{\em inst\_\-PC} & The address of the branch to look up. \\
+\hline
+{\em tid} & The thread id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the target of the branch. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    unsigned btb_idx = getIndex(instPC);
+
+    Addr inst_tag = getTag(instPC);
+
+    assert(btb_idx < numEntries);
+
+    if (btb[btb_idx].valid
+        && inst_tag == btb[btb_idx].tag
+        && btb[btb_idx].tid == tid) {
+        return btb[btb_idx].target;
+    } else {
+        return 0;
+    }
+}
+\end{DoxyCode}
+\hypertarget{classDefaultBTB_a079bd92b539fb38fb658665a08b65974}{
+\index{DefaultBTB@{DefaultBTB}!reset@{reset}}
+\index{reset@{reset}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void DefaultBTB::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_a079bd92b539fb38fb658665a08b65974}
+
+\begin{DoxyCode}
+{
+    for (unsigned i = 0; i < numEntries; ++i) {
+        btb[i].valid = false;
+    }
+}
+\end{DoxyCode}
+\hypertarget{classDefaultBTB_a554c0af23b92df168310e4edaf627c51}{
+\index{DefaultBTB@{DefaultBTB}!update@{update}}
+\index{update@{update}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void DefaultBTB::update (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC, }
+\item[{const TheISA::PCState \&}]{targetPC, }
+\item[{ThreadID}]{tid}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_a554c0af23b92df168310e4edaf627c51}
+Updates the BTB with the target of a branch. 
+\begin{DoxyParams}{Parameters}
+{\em inst\_\-PC} & The address of the branch being updated. \\
+\hline
+{\em target\_\-PC} & The target address of the branch. \\
+\hline
+{\em tid} & The thread id. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    unsigned btb_idx = getIndex(instPC);
+
+    assert(btb_idx < numEntries);
+
+    btb[btb_idx].tid = tid;
+    btb[btb_idx].valid = true;
+    btb[btb_idx].target = target;
+    btb[btb_idx].tag = getTag(instPC);
+}
+\end{DoxyCode}
+\hypertarget{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{
+\index{DefaultBTB@{DefaultBTB}!valid@{valid}}
+\index{valid@{valid}!DefaultBTB@{DefaultBTB}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool DefaultBTB::valid (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC, }
+\item[{ThreadID}]{tid}
+\end{DoxyParamCaption}
+)}}
+\label{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}
+Checks if a branch is in the BTB. 
+\begin{DoxyParams}{Parameters}
+{\em inst\_\-PC} & The address of the branch to look up. \\
+\hline
+{\em tid} & The thread id. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the branch exists in the BTB. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    unsigned btb_idx = getIndex(instPC);
+
+    Addr inst_tag = getTag(instPC);
+
+    assert(btb_idx < numEntries);
+
+    if (btb[btb_idx].valid
+        && inst_tag == btb[btb_idx].tag
+        && btb[btb_idx].tid == tid) {
+        return true;
+    } else {
+        return false;
+    }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{btb_8h}{btb.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__halfSA_8cpp}{cache\_\-halfSA.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__singleWord_8cpp}{cache\_\-singleWord.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{btb_8cpp}{btb.cpp}\end{DoxyCompactItemize}

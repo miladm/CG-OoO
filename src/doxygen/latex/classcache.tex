@@ -1,0 +1,386 @@
+\hypertarget{classcache}{
+\section{cache Class Reference}
+\label{classcache}\index{cache@{cache}}
+}
+
+
+{\ttfamily \#include $<$cache.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classcache_a93fb585ef6a736b9831dc21bb193d96f}{findWord} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+\hyperlink{classcache_a13bdadd498ed51df4b1a8431ddf700bd}{cache} ()
+\item 
+\hyperlink{classcache_a44b0c0aa85b39105f5c360ebcf3a4495}{cache} (int sa, int lineSize, int cacheSize)
+\item 
+\hyperlink{classcache_a4a4f36a52e9ad046af986ce9095616a5}{$\sim$cache} ()
+\item 
+bool \hyperlink{classcache_ab524f6f2badf04b54b438d95f154fadf}{findAddr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+void \hyperlink{classcache_ab3b31a1d08bf67d960705e8b7e631546}{writeCache} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int8\_\-t $\ast$data)
+\item 
+void \hyperlink{classcache_a8543792b7d9060b3701cb1b67d417b44}{readCache} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, int8\_\-t $\ast$\&outData)
+\item 
+bool \hyperlink{classcache_a2c8e87daacbe31a4780e06db9d571742}{isValid} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+bool \hyperlink{classcache_af39bc5f11fbca905873c840a8dcfb9b9}{isHit} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+bool \hyperlink{classcache_ab1edc7f06068472ac043cbd293ae83ea}{isDirty} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+void \hyperlink{classcache_a88790ea3a4e3583eaae71a365e9568e7}{setClean} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classcache_a5b239f74c2467fdf30f0cf2fceebf820}{getWBAddr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classcache_a92b70abaf05ef86b5ee4e70b087f30a2}{getTag} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+bool \hyperlink{classcache_a04b8a50e7f520e77898970f769481062}{getExpectData} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr)
+\item 
+void \hyperlink{classcache_aa78f9197a0412b6e53bf6463869e16e0}{setExpectData} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} addr, bool expct)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classcache_aab0a951069d47e9af2d349fb9eb92888}{\_\-lineSize}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classcache_a13bdadd498ed51df4b1a8431ddf700bd}{
+\index{cache@{cache}!cache@{cache}}
+\index{cache@{cache}!cache@{cache}}
+\subsubsection[{cache}]{\setlength{\rightskip}{0pt plus 5cm}cache::cache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a13bdadd498ed51df4b1a8431ddf700bd}
+
+\begin{DoxyCode}
+{
+    _sa = 1; //Direct Mapped Cache is the default
+    _cacheSize = 33554432; //[Bytes]
+    _lineSize = 64; //[Bytes]
+
+    int numCacheLines = (int) _cacheSize/_lineSize;
+    numRows = (int) numCacheLines/_sa;
+
+    //Instantiate the cache
+    _cacheLines = new CacheLine* [_sa];
+    for(int i=0; i < _sa; i++) {
+        _cacheLines[i] = new CacheLine [numRows];
+    }
+    cacheSpec(numCacheLines);
+    debug = false;
+}
+\end{DoxyCode}
+\hypertarget{classcache_a44b0c0aa85b39105f5c360ebcf3a4495}{
+\index{cache@{cache}!cache@{cache}}
+\index{cache@{cache}!cache@{cache}}
+\subsubsection[{cache}]{\setlength{\rightskip}{0pt plus 5cm}cache::cache (
+\begin{DoxyParamCaption}
+\item[{int}]{sa, }
+\item[{int}]{lineSize, }
+\item[{int}]{cacheSize}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a44b0c0aa85b39105f5c360ebcf3a4495}
+
+\begin{DoxyCode}
+{
+    _sa = sa; //Direct Mapped Cache is the default
+    _cacheSize = cacheSize; //[Bytes]
+    _lineSize = lineSize; //[Bytes]
+
+    int numCacheLines = (int) _cacheSize/_lineSize;
+    numRows = (int) numCacheLines/_sa;
+
+    //Instantiate the cache
+    _cacheLines = new CacheLine* [_sa];
+    for(int i=0; i < _sa; i++) {
+        _cacheLines[i] = new CacheLine [numRows];
+    }
+    cacheSpec(numCacheLines);
+    debug = false;
+}
+\end{DoxyCode}
+\hypertarget{classcache_a4a4f36a52e9ad046af986ce9095616a5}{
+\index{cache@{cache}!$\sim$cache@{$\sim$cache}}
+\index{$\sim$cache@{$\sim$cache}!cache@{cache}}
+\subsubsection[{$\sim$cache}]{\setlength{\rightskip}{0pt plus 5cm}cache::$\sim$cache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a4a4f36a52e9ad046af986ce9095616a5}
+
+\begin{DoxyCode}
+               {
+    //for (int i = 0; i < numRows; i++)
+    //    delete [] _cacheLines[i];
+    delete [] _cacheLines;
+    printf("Destroying Cache objexts...\n");
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcache_ab524f6f2badf04b54b438d95f154fadf}{
+\index{cache@{cache}!findAddr@{findAddr}}
+\index{findAddr@{findAddr}!cache@{cache}}
+\subsubsection[{findAddr}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::findAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_ab524f6f2badf04b54b438d95f154fadf}
+
+\begin{DoxyCode}
+{
+    ADDRS indx = getIndex(addr);
+    ADDRS tag = getTag(addr);
+    printf("TAG = %llx, INDX = %llx\n", tag, indx);
+    for (int i = 0; i < _sa; i++) {
+        if (tag == _cacheLines[i][indx].getTag()) {
+            printf("I FOUNT IT!!!!\n");
+            return true;
+        }
+    }
+    printf("I DIDN'T FIND IT!!!!\n");
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classcache_a93fb585ef6a736b9831dc21bb193d96f}{
+\index{cache@{cache}!findWord@{findWord}}
+\index{findWord@{findWord}!cache@{cache}}
+\subsubsection[{findWord}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::findWord (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a93fb585ef6a736b9831dc21bb193d96f}
+\hypertarget{classcache_a04b8a50e7f520e77898970f769481062}{
+\index{cache@{cache}!getExpectData@{getExpectData}}
+\index{getExpectData@{getExpectData}!cache@{cache}}
+\subsubsection[{getExpectData}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::getExpectData (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a04b8a50e7f520e77898970f769481062}
+
+\begin{DoxyCode}
+                                    {
+    ADDRS indx = getIndex(addr);
+    return _cacheLines[0][indx].getExpectData();
+}
+\end{DoxyCode}
+\hypertarget{classcache_a92b70abaf05ef86b5ee4e70b087f30a2}{
+\index{cache@{cache}!getTag@{getTag}}
+\index{getTag@{getTag}!cache@{cache}}
+\subsubsection[{getTag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} cache::getTag (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a92b70abaf05ef86b5ee4e70b087f30a2}
+
+\begin{DoxyCode}
+{
+    ADDRS tempAddr = addr >> (BLOCK_OFFSET+WORD_OFFSET); //3b for each of word-of
+      fset, block-offset
+    ADDRS tempIndex = getIndex(addr);
+    ADDRS tempTag = tempAddr - tempIndex;
+    Assert (tempAddr >= tempIndex);
+    return tempTag;
+}
+\end{DoxyCode}
+\hypertarget{classcache_a5b239f74c2467fdf30f0cf2fceebf820}{
+\index{cache@{cache}!getWBAddr@{getWBAddr}}
+\index{getWBAddr@{getWBAddr}!cache@{cache}}
+\subsubsection[{getWBAddr}]{\setlength{\rightskip}{0pt plus 5cm}uint64\_\-t cache::getWBAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a5b239f74c2467fdf30f0cf2fceebf820}
+
+\begin{DoxyCode}
+{
+    //TODO this function assumes _sa = 1 (fix it)
+    ADDRS indx = getIndex(addr);
+    ADDRS tag = _cacheLines[0][indx].getTag();
+    Assert (tag != 0);
+    return ((tag+indx) << (BLOCK_OFFSET+WORD_OFFSET)); //Construct ~full addr
+}
+\end{DoxyCode}
+\hypertarget{classcache_ab1edc7f06068472ac043cbd293ae83ea}{
+\index{cache@{cache}!isDirty@{isDirty}}
+\index{isDirty@{isDirty}!cache@{cache}}
+\subsubsection[{isDirty}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::isDirty (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_ab1edc7f06068472ac043cbd293ae83ea}
+
+\begin{DoxyCode}
+{
+    ADDRS indx = getIndex(addr);
+    return _cacheLines[0][indx].isDirty();
+}
+\end{DoxyCode}
+\hypertarget{classcache_af39bc5f11fbca905873c840a8dcfb9b9}{
+\index{cache@{cache}!isHit@{isHit}}
+\index{isHit@{isHit}!cache@{cache}}
+\subsubsection[{isHit}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::isHit (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_af39bc5f11fbca905873c840a8dcfb9b9}
+
+\begin{DoxyCode}
+{
+    ADDRS indx = getIndex(addr);
+    //Assert (_cacheLines[0][indx].getTag() != 0); //TODO valid test. bring it ba
+      ck through initializing the cache differently.
+    ADDRS tag = getTag(addr);
+    ADDRS tempTag = _cacheLines[0][indx].getTag();
+    if (tag != tempTag) {
+    //printf("TAG=%lu, TEMP TAG=%lu, INDX=%u\n",tag, tempTag, indx);
+        //printf("cache line valid: %x",_cacheLines[0][indx].isValid()); 
+        return false;
+    } else {
+        return true;
+    }
+}
+\end{DoxyCode}
+\hypertarget{classcache_a2c8e87daacbe31a4780e06db9d571742}{
+\index{cache@{cache}!isValid@{isValid}}
+\index{isValid@{isValid}!cache@{cache}}
+\subsubsection[{isValid}]{\setlength{\rightskip}{0pt plus 5cm}bool cache::isValid (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a2c8e87daacbe31a4780e06db9d571742}
+
+\begin{DoxyCode}
+{
+    ADDRS indx = getIndex(addr);
+    return _cacheLines[0][indx].isValid();
+}
+\end{DoxyCode}
+\hypertarget{classcache_a8543792b7d9060b3701cb1b67d417b44}{
+\index{cache@{cache}!readCache@{readCache}}
+\index{readCache@{readCache}!cache@{cache}}
+\subsubsection[{readCache}]{\setlength{\rightskip}{0pt plus 5cm}void cache::readCache (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int8\_\-t $\ast$\&}]{outData}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a8543792b7d9060b3701cb1b67d417b44}
+
+\begin{DoxyCode}
+{
+    //ADDRS indx = getIndex(addr);
+    //ADDRS tag = getTag(addr);
+    //if(debug) printf("   R-Address = %x, Index = %x, tag = %x\n", addr, indx, t
+      ag);
+
+//  if (_sa > 1) {
+//      if (!findAddr(addr))
+//          printf("SHIT, the address is not in the cache!\n");
+//      else
+//          _cacheLines[0][indx].readLine(outData); //TODO this line has a bug - 
+      fix the index
+//  } else {
+//      if (tag != _cacheLines[0][indx].getTag())
+//          printf("SHIT, the address is not in the cache!\n");
+//      else
+            //_cacheLines[0][indx].readLine(outData);
+//  }
+}
+\end{DoxyCode}
+\hypertarget{classcache_a88790ea3a4e3583eaae71a365e9568e7}{
+\index{cache@{cache}!setClean@{setClean}}
+\index{setClean@{setClean}!cache@{cache}}
+\subsubsection[{setClean}]{\setlength{\rightskip}{0pt plus 5cm}void cache::setClean (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_a88790ea3a4e3583eaae71a365e9568e7}
+
+\begin{DoxyCode}
+{
+    ADDRS indx = getIndex(addr);
+    _cacheLines[0][indx].setClean();
+}
+\end{DoxyCode}
+\hypertarget{classcache_aa78f9197a0412b6e53bf6463869e16e0}{
+\index{cache@{cache}!setExpectData@{setExpectData}}
+\index{setExpectData@{setExpectData}!cache@{cache}}
+\subsubsection[{setExpectData}]{\setlength{\rightskip}{0pt plus 5cm}void cache::setExpectData (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr, }
+\item[{bool}]{expct}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_aa78f9197a0412b6e53bf6463869e16e0}
+
+\begin{DoxyCode}
+                                                {
+    ADDRS indx = getIndex(addr);
+    _cacheLines[0][indx].setExpectData(expct);
+}
+\end{DoxyCode}
+\hypertarget{classcache_ab3b31a1d08bf67d960705e8b7e631546}{
+\index{cache@{cache}!writeCache@{writeCache}}
+\index{writeCache@{writeCache}!cache@{cache}}
+\subsubsection[{writeCache}]{\setlength{\rightskip}{0pt plus 5cm}void cache::writeCache (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{addr, }
+\item[{int8\_\-t $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}
+\label{classcache_ab3b31a1d08bf67d960705e8b7e631546}
+
+\begin{DoxyCode}
+{
+    //int selSetIndex;
+    ADDRS indx = getIndex(addr);
+    ADDRS tag = getTag(addr);
+    if(debug) printf("   W-Address = %llx, Index = %llx, tag = %llx\n", addr, ind
+      x, tag);
+
+//  if (_sa > 1) {
+//      //TODO you may have to chack the validity & dirtiness here too.
+//      selSetIndex = LRUCacheLine(indx);
+//      _cacheLines[selSetIndex][indx].writeLine(tag, data);
+//  } else {
+        //Direct Map cache
+        //printf("print addr = %lu, %lu, %lu\n", addr, tag, indx);
+        _cacheLines[0][indx].writeLine(tag, data);
+//  }
+}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classcache_aab0a951069d47e9af2d349fb9eb92888}{
+\index{cache@{cache}!\_\-lineSize@{\_\-lineSize}}
+\index{\_\-lineSize@{\_\-lineSize}!cache@{cache}}
+\subsubsection[{\_\-lineSize}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf cache::\_\-lineSize}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classcache_aab0a951069d47e9af2d349fb9eb92888}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache_8h}{cache.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache_8cpp}{cache.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__halfSA_8cpp}{cache\_\-halfSA.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__singleWord_8cpp}{cache\_\-singleWord.cpp}\end{DoxyCompactItemize}

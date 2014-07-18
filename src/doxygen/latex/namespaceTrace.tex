@@ -1,0 +1,190 @@
+\hypertarget{namespaceTrace}{
+\section{Trace Namespace Reference}
+\label{namespaceTrace}\index{Trace@{Trace}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const string \hyperlink{namespaceTrace_a8606dda8a833927860293af0c77f06a4}{DefaultName} (\char`\"{}global\char`\"{})
+\item 
+ostream \& \hyperlink{namespaceTrace_a478c683cf31381c187f84631beef9e0a}{output} ()
+\item 
+void \hyperlink{namespaceTrace_ae05e11a017b6a616b42b8466c09a5dd1}{setOutput} (const string \&filename)
+\item 
+void \hyperlink{namespaceTrace_a06c3e4f91b64a7d89d659141b272bccc}{dprintf} (Tick when, const std::string \&name, const char $\ast$format, CPRINTF\_\-DEFINITION)
+\item 
+void \hyperlink{namespaceTrace_a820d9033b0366d37ca820c184de3fa86}{dump} (Tick when, const std::string \&name, const void $\ast$d, int len)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespaceTrace_a7eceed02e84cba66f80ba6e5fc184ebc}{enabled} = false
+\item 
+ostream $\ast$ \hyperlink{namespaceTrace_a58559cb033c06f1aa031c3c3da03c324}{dprintf\_\-stream} = \&cerr
+\item 
+ObjectMatch \hyperlink{namespaceTrace_a58099233c1194638eed4e30f4adfed73}{ignore}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceTrace_a8606dda8a833927860293af0c77f06a4}{
+\index{Trace@{Trace}!DefaultName@{DefaultName}}
+\index{DefaultName@{DefaultName}!Trace@{Trace}}
+\subsubsection[{DefaultName}]{\setlength{\rightskip}{0pt plus 5cm}const string Trace::DefaultName (
+\begin{DoxyParamCaption}
+\item[{\char`\"{}global\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceTrace_a8606dda8a833927860293af0c77f06a4}
+\hypertarget{namespaceTrace_a06c3e4f91b64a7d89d659141b272bccc}{
+\index{Trace@{Trace}!dprintf@{dprintf}}
+\index{dprintf@{dprintf}!Trace@{Trace}}
+\subsubsection[{dprintf}]{\setlength{\rightskip}{0pt plus 5cm}void Trace::dprintf (
+\begin{DoxyParamCaption}
+\item[{Tick}]{when, }
+\item[{const std::string \&}]{name, }
+\item[{const char $\ast$}]{format, }
+\item[{CPRINTF\_\-DEFINITION}]{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceTrace_a06c3e4f91b64a7d89d659141b272bccc}
+
+\begin{DoxyCode}
+{
+    if (!name.empty() && ignore.match(name))
+        return;
+
+    std::ostream &os = *dprintf_stream;
+
+    string fmt = "";
+    CPrintfArgsList args(VARARGS_ALLARGS);
+
+    if (!name.empty()) {
+        fmt = "%s: " + fmt;
+        args.push_front(name);
+    }
+
+    if (when != (Tick)-1) {
+        fmt = "%7d: " + fmt;
+        args.push_front(when);
+    }
+
+    fmt += format;
+
+    ccprintf(os, fmt.c_str(), args);
+    os.flush();
+}
+\end{DoxyCode}
+\hypertarget{namespaceTrace_a820d9033b0366d37ca820c184de3fa86}{
+\index{Trace@{Trace}!dump@{dump}}
+\index{dump@{dump}!Trace@{Trace}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Trace::dump (
+\begin{DoxyParamCaption}
+\item[{Tick}]{when, }
+\item[{const std::string \&}]{name, }
+\item[{const void $\ast$}]{d, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceTrace_a820d9033b0366d37ca820c184de3fa86}
+
+\begin{DoxyCode}
+{
+    if (!name.empty() && ignore.match(name))
+        return;
+
+    std::ostream &os = *dprintf_stream;
+
+    string fmt = "";
+    CPrintfArgsList args;
+
+    if (!name.empty()) {
+        fmt = "%s: " + fmt;
+        args.push_front(name);
+    }
+
+    if (when != (Tick)-1) {
+        fmt = "%7d: " + fmt;
+        args.push_front(when);
+    }
+
+    const char *data = static_cast<const char *>(d);
+    int c, i, j;
+    for (i = 0; i < len; i += 16) {
+        ccprintf(os, fmt, args);
+        ccprintf(os, "%08x  ", i);
+        c = len - i;
+        if (c > 16) c = 16;
+
+        for (j = 0; j < c; j++) {
+            ccprintf(os, "%02x ", data[i + j] & 0xff);
+            if ((j & 0xf) == 7 && j > 0)
+                ccprintf(os, " ");
+        }
+
+        for (; j < 16; j++)
+            ccprintf(os, "   ");
+        ccprintf(os, "  ");
+
+        for (j = 0; j < c; j++) {
+            int ch = data[i + j] & 0x7f;
+            ccprintf(os, "%c", (char)(isprint(ch) ? ch : ' '));
+        }
+
+        ccprintf(os, "\n");
+
+        if (c < 16)
+            break;
+    }
+}
+\end{DoxyCode}
+\hypertarget{namespaceTrace_a478c683cf31381c187f84631beef9e0a}{
+\index{Trace@{Trace}!output@{output}}
+\index{output@{output}!Trace@{Trace}}
+\subsubsection[{output}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& Trace::output (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceTrace_a478c683cf31381c187f84631beef9e0a}
+
+\begin{DoxyCode}
+{
+    return *dprintf_stream;
+}
+\end{DoxyCode}
+\hypertarget{namespaceTrace_ae05e11a017b6a616b42b8466c09a5dd1}{
+\index{Trace@{Trace}!setOutput@{setOutput}}
+\index{setOutput@{setOutput}!Trace@{Trace}}
+\subsubsection[{setOutput}]{\setlength{\rightskip}{0pt plus 5cm}void Trace::setOutput (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{filename}
+\end{DoxyParamCaption}
+)}}
+\label{namespaceTrace_ae05e11a017b6a616b42b8466c09a5dd1}
+
+\begin{DoxyCode}
+{
+    dprintf_stream = simout.find(filename);
+    if (!dprintf_stream)
+        dprintf_stream = simout.create(filename);
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceTrace_a58559cb033c06f1aa031c3c3da03c324}{
+\index{Trace@{Trace}!dprintf\_\-stream@{dprintf\_\-stream}}
+\index{dprintf\_\-stream@{dprintf\_\-stream}!Trace@{Trace}}
+\subsubsection[{dprintf\_\-stream}]{\setlength{\rightskip}{0pt plus 5cm}ostream$\ast$ {\bf Trace::dprintf\_\-stream} = \&cerr}}
+\label{namespaceTrace_a58559cb033c06f1aa031c3c3da03c324}
+\hypertarget{namespaceTrace_a7eceed02e84cba66f80ba6e5fc184ebc}{
+\index{Trace@{Trace}!enabled@{enabled}}
+\index{enabled@{enabled}!Trace@{Trace}}
+\subsubsection[{enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Trace::enabled} = false}}
+\label{namespaceTrace_a7eceed02e84cba66f80ba6e5fc184ebc}
+\hypertarget{namespaceTrace_a58099233c1194638eed4e30f4adfed73}{
+\index{Trace@{Trace}!ignore@{ignore}}
+\index{ignore@{ignore}!Trace@{Trace}}
+\subsubsection[{ignore}]{\setlength{\rightskip}{0pt plus 5cm}ObjectMatch {\bf Trace::ignore}}}
+\label{namespaceTrace_a58099233c1194638eed4e30f4adfed73}

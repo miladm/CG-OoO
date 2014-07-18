@@ -1,0 +1,60 @@
+\hypertarget{classstat__frontEnd}{
+\section{stat\_\-frontEnd Class Reference}
+\label{classstat__frontEnd}\index{stat\_\-frontEnd@{stat\_\-frontEnd}}
+}
+
+
+{\ttfamily \#include $<$frontEndStat.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstat__frontEnd_aa4a972e77f673d7da734ee0d023c7df5}{stat\_\-frontEnd} ()
+\item 
+\hyperlink{classstat__frontEnd_aa4c13adf86a020c7cb25665ac9807d10}{doImpMemCount\_\-} (UINT32 isMem)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstat__frontEnd_aa4a972e77f673d7da734ee0d023c7df5}{
+\index{stat\_\-frontEnd@{stat\_\-frontEnd}!stat\_\-frontEnd@{stat\_\-frontEnd}}
+\index{stat\_\-frontEnd@{stat\_\-frontEnd}!stat_frontEnd@{stat\_\-frontEnd}}
+\subsubsection[{stat\_\-frontEnd}]{\setlength{\rightskip}{0pt plus 5cm}stat\_\-frontEnd::stat\_\-frontEnd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstat__frontEnd_aa4a972e77f673d7da734ee0d023c7df5}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classstat__frontEnd_aa4c13adf86a020c7cb25665ac9807d10}{
+\index{stat\_\-frontEnd@{stat\_\-frontEnd}!doImpMemCount\_\-@{doImpMemCount\_\-}}
+\index{doImpMemCount\_\-@{doImpMemCount\_\-}!stat_frontEnd@{stat\_\-frontEnd}}
+\subsubsection[{doImpMemCount\_\-}]{\setlength{\rightskip}{0pt plus 5cm}VOID stat\_\-frontEnd::doImpMemCount\_\- (
+\begin{DoxyParamCaption}
+\item[{UINT32}]{isMem}
+\end{DoxyParamCaption}
+)}}
+\label{classstat__frontEnd_aa4c13adf86a020c7cb25665ac9807d10}
+
+\begin{DoxyCode}
+{
+        if (isMem > 0)
+                imgInsMemCount_++;
+        unsigned long countRem = insCount%BILLION;
+        if (countRem == 0) {
+                cout << "(MEM_) :" << imgInsMemCount_ << "\n";
+        }
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/junk/\hyperlink{frontEndStat_8h}{frontEndStat.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/junk/\hyperlink{frontEndStat_8cpp}{frontEndStat.cpp}\end{DoxyCompactItemize}

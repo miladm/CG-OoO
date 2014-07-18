@@ -1,0 +1,58 @@
+\hypertarget{oooBkEnd_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.h File Reference}
+\label{oooBkEnd_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/o3/oooBkEnd.h}}
+}
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include \char`\"{}sysCore.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}{oooBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}{oooBkEndRun} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}{
+\index{oooBkEnd.h@{oooBkEnd.h}!oooBkEnd\_\-init@{oooBkEnd\_\-init}}
+\index{oooBkEnd\_\-init@{oooBkEnd\_\-init}!oooBkEnd.h@{oooBkEnd.h}}
+\subsubsection[{oooBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEnd\_\-init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}
+
+\begin{DoxyCode}
+                                                   {
+    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+    _ooo_core = new o3_sysCore (1, 4, 32, 32, 32, 4, 4, 4,
+                            2, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10, 
+                            1, 10);
+}
+\end{DoxyCode}
+\hypertarget{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}{
+\index{oooBkEnd.h@{oooBkEnd.h}!oooBkEndRun@{oooBkEndRun}}
+\index{oooBkEndRun@{oooBkEndRun}!oooBkEnd.h@{oooBkEnd.h}}
+\subsubsection[{oooBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEndRun (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}
+
+\begin{DoxyCode}
+                   {
+    _ooo_core->runCore();
+}
+\end{DoxyCode}

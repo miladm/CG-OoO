@@ -1,0 +1,61 @@
+\hypertarget{structBuffElement}{
+\section{BuffElement$<$ queType\_\-T $>$ Struct Template Reference}
+\label{structBuffElement}\index{BuffElement@{BuffElement}}
+}
+
+
+{\ttfamily \#include $<$port.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structBuffElement_a69788db742784c5a833f179407a53f27}{BuffElement} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} delay, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{bkEnd_8cpp_ada310e7f72b38fadd4b24d80ed3438ee}{start}, queType\_\-T dynIns=NULL)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structtimer}{timer} \hyperlink{structBuffElement_ada387ae6cbadda86ba737303ee0efb65}{\_\-delay}
+\item 
+queType\_\-T \hyperlink{structBuffElement_aa61484d95939f5b8f0bdc06321b0fbcf}{\_\-dynIns}
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename queType\_\-T$>$ struct BuffElement$<$ queType\_\-T $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structBuffElement_a69788db742784c5a833f179407a53f27}{
+\index{BuffElement@{BuffElement}!BuffElement@{BuffElement}}
+\index{BuffElement@{BuffElement}!BuffElement@{BuffElement}}
+\subsubsection[{BuffElement}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf BuffElement}$<$ queType\_\-T $>$::{\bf BuffElement} (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{delay, }
+\item[{{\bf CYCLE}}]{start, }
+\item[{queType\_\-T}]{dynIns = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structBuffElement_a69788db742784c5a833f179407a53f27}
+
+\begin{DoxyCode}
+                : _delay (start, delay) 
+        {
+                _dynIns = dynIns;
+        }
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structBuffElement_ada387ae6cbadda86ba737303ee0efb65}{
+\index{BuffElement@{BuffElement}!\_\-delay@{\_\-delay}}
+\index{\_\-delay@{\_\-delay}!BuffElement@{BuffElement}}
+\subsubsection[{\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf timer} {\bf BuffElement}$<$ queType\_\-T $>$::{\bf \_\-delay}}}
+\label{structBuffElement_ada387ae6cbadda86ba737303ee0efb65}
+\hypertarget{structBuffElement_aa61484d95939f5b8f0bdc06321b0fbcf}{
+\index{BuffElement@{BuffElement}!\_\-dynIns@{\_\-dynIns}}
+\index{\_\-dynIns@{\_\-dynIns}!BuffElement@{BuffElement}}
+\subsubsection[{\_\-dynIns}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf BuffElement}$<$ queType\_\-T $>$::{\bf \_\-dynIns}}}
+\label{structBuffElement_aa61484d95939f5b8f0bdc06321b0fbcf}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2port_8h}{port.h}\end{DoxyCompactItemize}

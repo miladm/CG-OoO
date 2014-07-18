@@ -1,0 +1,420 @@
+\hypertarget{str_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc File Reference}
+\label{str_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc}}
+}
+{\ttfamily \#include $<$cctype$>$}\par
+{\ttfamily \#include $<$cstring$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$limits$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+{\ttfamily \#include \char`\"{}base/intmath.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/str.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{str_8cc_abce3120d0ba6106a7282b890eba03877}{STN}(\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type})
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}{split\_\-first} (const string \&s, string \&lhs, string \&rhs, char \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+\item 
+bool \hyperlink{str_8cc_a7456fc7734d6a6c388b66793e1aa9a09}{split\_\-last} (const string \&s, string \&lhs, string \&rhs, char \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+\item 
+void \hyperlink{str_8cc_a4920c263841e88b19b75e6de265d79a8}{tokenize} (vector$<$ string $>$ \&v, const string \&s, char token, bool ignore)
+\item 
+{\footnotesize template$<$class T $>$ }\\bool \hyperlink{str_8cc_a62ee5dab740541c091921011e05068c7}{\_\-\_\-to\_\-number} (string value, T \&retval)
+\item 
+{\footnotesize template$<$$>$ }\\bool \hyperlink{str_8cc_acfd388d2d09c9e36ee3b6fcd01830fb4}{to\_\-number$<$ bool $>$} (const string \&value, bool \&retval)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{str_8cc_abce3120d0ba6106a7282b890eba03877}{
+\index{str.cc@{str.cc}!STN@{STN}}
+\index{STN@{STN}!str.cc@{str.cc}}
+\subsubsection[{STN}]{\setlength{\rightskip}{0pt plus 5cm}\#define STN(
+\begin{DoxyParamCaption}
+\item[{}]{{\bf type}}
+\end{DoxyParamCaption}
+)}}
+\label{str_8cc_abce3120d0ba6106a7282b890eba03877}
+{\bfseries Value:}
+\begin{DoxyCode}
+template<> \
+bool to_number<type>(const string &value, type &retval) \
+{ return __to_number(value, retval); }
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\hypertarget{str_8cc_a62ee5dab740541c091921011e05068c7}{
+\index{str.cc@{str.cc}!\_\-\_\-to\_\-number@{\_\-\_\-to\_\-number}}
+\index{\_\-\_\-to\_\-number@{\_\-\_\-to\_\-number}!str.cc@{str.cc}}
+\subsubsection[{\_\-\_\-to\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool \_\-\_\-to\_\-number (
+\begin{DoxyParamCaption}
+\item[{string}]{value, }
+\item[{T \&}]{retval}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{str_8cc_a62ee5dab740541c091921011e05068c7}
+\begin{Desc}
+\item[\hyperlink{todo__todo000005}{Todo}]This function will not handle the smallest negative decimal value for a signed type \end{Desc}
+
+\begin{DoxyCode}
+{
+    static const T maxnum = ((T)-1);
+    static const bool sign = numeric_limits<T>::is_signed;
+    static const int bits = numeric_limits<T>::digits;
+    static const T hexmax = maxnum & (((T)1 << (bits - 4)) - 1);
+    static const T octmax = maxnum & (((T)1 << (bits - 3)) - 1);
+    static const T signmax = numeric_limits<T>::max();
+    static const T decmax = signmax / 10;
+
+#if 0
+    cout << "maxnum =  0x" << hex << (unsigned long long)maxnum << "\n"
+         << "sign =    0x" << hex << (unsigned long long)sign << "\n"
+         << "hexmax =  0x" << hex << (unsigned long long)hexmax << "\n"
+         << "octmax =  0x" << hex << (unsigned long long)octmax << "\n"
+         << "signmax = 0x" << hex << (unsigned long long)signmax << "\n"
+         << "decmax =  0x" << hex << (unsigned long long)decmax << "\n";
+#endif
+
+    eat_white(value);
+
+    bool negative = false;
+    bool hex = false;
+    bool oct = false;
+    int last = value.size() - 1;
+    retval = 0;
+    int i = 0;
+
+    char c = value[i];
+    if (!isDec(c)) {
+        if (c == '-' && sign)
+            negative = true;
+        else
+            return false;
+    }
+    else {
+        retval += c - '0';
+        if (last == 0) return true;
+    }
+
+    if (c == '0')
+        oct = true;
+
+    c = value[++i];
+    if (oct) {
+        if (sign && negative)
+            return false;
+
+        if (!isOct(c)) {
+            if (c == 'X' || c == 'x') {
+                hex = true;
+                oct = false;
+            } else
+                return false;
+        }
+        else
+            retval += c - '0';
+    } else if (!isDec(c))
+        goto multiply;
+    else {
+        if (sign && negative && c == '0')
+            return false;
+
+        retval *= 10;
+        retval += c - '0';
+        if (last == 1) {
+            if (sign && negative) retval = -retval;
+            return true;
+        }
+    }
+
+    if (hex) {
+        if (last == 1)
+            return false;
+
+        for (i = 2; i <= last ; i++) {
+            c = value[i];
+            if (!isHex(c))
+                return false;
+
+            if (retval > hexmax) return false;
+            retval *= 16;
+            retval += hex2Int(c);
+        }
+        return true;
+    } else if (oct) {
+        for (i = 2; i <= last ; i++) {
+            c = value[i];
+            if (!isOct(c))
+                return false;
+
+            if (retval > octmax) return false;
+            retval *= 8;
+            retval += (c - '0');
+        }
+        return true;
+    }
+
+    for (i = 2; i < last ; i++) {
+        c = value[i];
+        if (!isDec(c))
+            goto multiply;
+
+        if (retval > decmax) return false;
+        bool atmax = retval == decmax;
+        retval *= 10;
+        retval += c - '0';
+        if (atmax && retval < decmax) return false;
+        if (sign && (retval & ((T)1 << (sizeof(T) * 8 - 1))))
+            return false;
+    }
+
+    c = value[last];
+    if (isDec(c)) {
+
+        if (retval > decmax) return false;
+        bool atmax = retval == decmax;
+        retval *= 10;
+        retval += c - '0';
+        if (atmax && retval < decmax) return false;
+        if (sign && negative) {
+            if ((retval & ((T)1 << (sizeof(T) * 8 - 1))) &&
+                retval >= (T)-signmax)
+                return false;
+            retval = -retval;
+        }
+        else
+            if (sign && (retval & ((T)1 << ((sizeof(T) * 8) - 1))))
+                return false;
+        return true;
+    }
+
+  multiply:
+    signed long long mult = 1;
+    T val;
+    switch (c) {
+      case 'k':
+      case 'K':
+        if (i != last) return false;
+        mult = 1024;
+        val = signmax / mult;
+        break;
+      case 'm':
+      case 'M':
+        if (i != last) return false;
+        mult = 1024 * 1024;
+        val = signmax / mult;
+        break;
+      case 'g':
+      case 'G':
+        if (i != last) return false;
+        mult = 1024 * 1024 * 1024;
+        val = signmax / mult;
+        break;
+      case 'e':
+      case 'E':
+        if (i >= last) return false;
+
+        mult = 0;
+        for (i++; i <= last; i++) {
+            c = value[i];
+            if (!isDec(c))
+                return false;
+
+            mult *= 10;
+            mult += c - '0';
+        }
+
+        for (i = 0; i < mult; i++) {
+            if (retval > signmax / 10)
+                return false;
+            retval *= 10;
+            if (sign && (retval & ((T)1 << (sizeof(T) * 8 - 1))))
+                return false;
+        }
+        if (sign && negative) {
+            if ((retval & ((T)1 << (sizeof(T) * 8 - 1))) &&
+                retval >= (T)-signmax)
+                return false;
+            retval = -retval;
+        }
+        else
+            if (sign && (retval & ((T)1 << ((sizeof(T) * 8) - 1))))
+                return false;
+
+        return true;
+
+      default:
+        return false;
+    }
+
+    if (sign && negative)
+        return false;
+
+    if (mult > (unsigned long long)signmax)
+        return false;
+
+    if (retval > val)
+        return false;
+
+    retval *= mult;
+
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}{
+\index{str.cc@{str.cc}!split\_\-first@{split\_\-first}}
+\index{split\_\-first@{split\_\-first}!str.cc@{str.cc}}
+\subsubsection[{split\_\-first}]{\setlength{\rightskip}{0pt plus 5cm}bool split\_\-first (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{s, }
+\item[{string \&}]{lhs, }
+\item[{string \&}]{rhs, }
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}
+
+\begin{DoxyCode}
+{
+    string::size_type offset = s.find(c);
+    if (offset == string::npos) {
+        lhs = s;
+        rhs = "";
+        return false;
+    }
+
+    lhs = s.substr(0, offset);
+    rhs = s.substr(offset + 1);
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{str_8cc_a7456fc7734d6a6c388b66793e1aa9a09}{
+\index{str.cc@{str.cc}!split\_\-last@{split\_\-last}}
+\index{split\_\-last@{split\_\-last}!str.cc@{str.cc}}
+\subsubsection[{split\_\-last}]{\setlength{\rightskip}{0pt plus 5cm}bool split\_\-last (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{s, }
+\item[{string \&}]{lhs, }
+\item[{string \&}]{rhs, }
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}}
+\label{str_8cc_a7456fc7734d6a6c388b66793e1aa9a09}
+
+\begin{DoxyCode}
+{
+    string::size_type offset = s.rfind(c);
+    if (offset == string::npos) {
+        lhs = s;
+        rhs = "";
+        return false;
+    }
+
+    lhs = s.substr(0, offset);
+    rhs = s.substr(offset + 1);
+    return true;
+}
+\end{DoxyCode}
+\hypertarget{str_8cc_acfd388d2d09c9e36ee3b6fcd01830fb4}{
+\index{str.cc@{str.cc}!to\_\-number$<$ bool $>$@{to\_\-number$<$ bool $>$}}
+\index{to\_\-number$<$ bool $>$@{to\_\-number$<$ bool $>$}!str.cc@{str.cc}}
+\subsubsection[{to\_\-number$<$ bool $>$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$$>$ bool to\_\-number$<$ bool $>$ (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{value, }
+\item[{bool \&}]{retval}
+\end{DoxyParamCaption}
+)}}
+\label{str_8cc_acfd388d2d09c9e36ee3b6fcd01830fb4}
+
+\begin{DoxyCode}
+{
+    string lowered = to_lower(value);
+
+    if (value == "0") {
+        retval = false;
+        return true;
+    }
+
+    if (value == "1"){
+        retval = true;
+        return true;
+    }
+
+    if (lowered == "false") {
+        retval = false;
+        return true;
+    }
+
+    if (lowered == "true"){
+        retval = true;
+        return true;
+    }
+
+    if (lowered == "no") {
+        retval = false;
+        return true;
+    }
+
+    if (lowered == "yes"){
+        retval = true;
+        return true;
+    }
+
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{str_8cc_a4920c263841e88b19b75e6de265d79a8}{
+\index{str.cc@{str.cc}!tokenize@{tokenize}}
+\index{tokenize@{tokenize}!str.cc@{str.cc}}
+\subsubsection[{tokenize}]{\setlength{\rightskip}{0pt plus 5cm}void tokenize (
+\begin{DoxyParamCaption}
+\item[{vector$<$ string $>$ \&}]{v, }
+\item[{const string \&}]{s, }
+\item[{char}]{token, }
+\item[{bool}]{ignore}
+\end{DoxyParamCaption}
+)}}
+\label{str_8cc_a4920c263841e88b19b75e6de265d79a8}
+
+\begin{DoxyCode}
+{
+    string::size_type first = 0;
+    string::size_type last = s.find_first_of(token);
+
+    if (s.empty())
+        return;
+
+    if (ignore && last == first) {
+        while (last == first)
+            last = s.find_first_of(token, ++first);
+
+        if (last == string::npos) {
+            if (first != s.size())
+                v.push_back(s.substr(first));
+            return;
+        }
+    }
+
+    while (last != string::npos) {
+        v.push_back(s.substr(first, last - first));
+
+        if (ignore) {
+            first = s.find_first_not_of(token, last + 1);
+
+            if (first == string::npos)
+                return;
+        } else
+            first = last + 1;
+
+        last = s.find_first_of(token, first);
+    }
+
+    v.push_back(s.substr(first));
+}
+\end{DoxyCode}

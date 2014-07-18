@@ -1,0 +1,320 @@
+\hypertarget{pars_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h File Reference}
+\label{pars_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h@{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h}}
+}
+{\ttfamily \#include \char`\"{}../global/g\_\-variable.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+VOID \hyperlink{pars_8h_ad31ce66601d158b499245c36353b1aef}{runPARS} (char $\ast$)
+\item 
+VOID \hyperlink{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}{Init} (char $\ast$)
+\item 
+VOID \hyperlink{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}{Fini} (INT32, VOID $\ast$)
+\item 
+VOID \hyperlink{pars_8h_a4254ddc7317164f6cb03afabf4b11770}{Instruction} (TRACE trace, VOID $\ast$val)
+\item 
+ADDRINT \hyperlink{pars_8h_a6c563e02c0b7b634beaaf53ada126817}{PredictAndUpdate} (ADDRINT \_\-\_\-pc, INT32 \_\-\_\-taken, ADDRINT tgt, ADDRINT fthru)
+\item 
+VOID \hyperlink{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}{parseConfig} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}{
+\index{pars.h@{pars.h}!Fini@{Fini}}
+\index{Fini@{Fini}!pars.h@{pars.h}}
+\subsubsection[{Fini}]{\setlength{\rightskip}{0pt plus 5cm}VOID Fini (
+\begin{DoxyParamCaption}
+\item[{INT32}]{, }
+\item[{VOID $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}
+
+\begin{DoxyCode}
+{
+    fclose(trace_static);
+}
+\end{DoxyCode}
+\hypertarget{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}{
+\index{pars.h@{pars.h}!Init@{Init}}
+\index{Init@{Init}!pars.h@{pars.h}}
+\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}VOID Init (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}
+
+\begin{DoxyCode}
+{
+        parseConfig (cfgFile);
+        g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
+        PIN_SemaphoreInit (&semaphore0);
+        PIN_SemaphoreInit (&semaphore1);
+        PIN_SemaphoreClear (&semaphore0);
+        PIN_SemaphoreClear (&semaphore1);
+    g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+      
+        g_var.msg.simStep ("PARS COMPILED CODE");
+        g_staticCode = new staticCodeParser (&g_var, g_cfg);
+
+        g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
+        char const * dummy_argv[] = {"TraceSim", 
+                                 "-o", "/scratch/tracesim/specint2006/results/ooo
+      _listSch_dynBP_manyCache/401.bzip2.txt", 
+                                 "-i", "/scratch/tracesim/specint2006/bb_trace_ar
+      chReg/401.bzip2.trace", 
+                                 "-c", "1", "-n", "4", "-s", "1", "-y", "1", "-j"
+      , "1", "-w", "160", 
+                                 "-x", "/home/milad/esc_project/svn/memTraceMilad
+      /TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv", 
+                                 "-e", "num_wbb_bypassed_in_scheduling_each_ins",
+       
+                                 "-z", "/home/milad/esc_project/svn/memTraceMilad
+      /TraceSim/results/bzip2/branch_exe_count_map.csv", 
+                                 NULL};
+        int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
+        g_var.g_insList = new List<string*>;
+        g_var.g_codeCache = new List<dynInstruction*>;
+        g_var.g_BBlist = new List<basicblock*>;
+        bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
+        bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
+        //inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+        oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+        g_var.msg.simStep ("START OF SIMULATION");
+}
+\end{DoxyCode}
+\hypertarget{pars_8h_a4254ddc7317164f6cb03afabf4b11770}{
+\index{pars.h@{pars.h}!Instruction@{Instruction}}
+\index{Instruction@{Instruction}!pars.h@{pars.h}}
+\subsubsection[{Instruction}]{\setlength{\rightskip}{0pt plus 5cm}VOID Instruction (
+\begin{DoxyParamCaption}
+\item[{TRACE}]{trace, }
+\item[{VOID $\ast$}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_a4254ddc7317164f6cb03afabf4b11770}
+
+\begin{DoxyCode}
+{
+        if (!filter.SelectTrace (trace)) {
+                printf ("NOTE: SKIPPING TRACE\n");
+                return;
+        }
+
+        for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bb
+      l))
+        {
+                for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next
+       (ins))
+        {
+            ADDRINT pc = INS_Address (ins);
+            string diss =  INS_Disassemble (ins);
+            static unsigned long uid=0;
+            ++uid;
+#ifdef G_I_INFO_EN
+            OPCODE opcode = INS_Opcode (ins);
+            bool is_call = INS_IsCall (ins);
+            bool is_ret = INS_IsRet (ins);
+            bool has_ft = INS_HasFallThrough (ins);
+            g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+            if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,has_f
+      t);
+#endif
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount,
+                    IARG_END);
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpMemCount_,
+                    IARG_UINT32, INS_MemoryOperandCount (ins),
+                    IARG_END);
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpCallCount_,
+                    IARG_BOOL, INS_IsCall (ins),
+                    IARG_END);
+
+            if (g_var.g_enable_instrumentation) {
+                //cout << g_var.g_insCountRightPath << " instrumentation enabled\
+      n";
+                get_uop (ins);
+                //if (g_cfg->coreType == PHRASEBLOCK)
+                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuf
+      f,
+                //              IARG_ADDRINT, INS_Address (ins),
+                //              IARG_END);
+                //else {
+                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageInsBu
+      ff,
+                //              IARG_ADDRINT, INS_Address (ins),
+                //              IARG_END);
+                //}
+                if (INS_IsMemoryWrite (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
+      x << pc << " " << diss << " [mem write]\n";
+                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) 
+      GetMemWriteOrigValue,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_MEMORYWRITE_EA,
+                            IARG_MEMORYWRITE_SIZE,
+                            IARG_END);
+                    /*
+                       if (INS_IsCall (ins) || INS_IsProcedureCall (ins)) {
+                       INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) GetMem
+      WriteNewValue,
+                       IARG_UINT32, uid,
+                       IARG_CONTEXT,
+                       IARG_END);
+                       } else {
+                       INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) GetMemWriteNe
+      wValue,
+                       IARG_UINT32, uid,
+                       IARG_CONTEXT,
+                       IARG_END);
+                       }
+                       */
+                }
+                /*
+                   if (INS_IsMemoryRead (ins)) {
+                   if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex
+       << pc << " " << diss << " [mem read]\n";
+                   INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemReadBypass
+      ,
+                   IARG_UINT32, uid,
+                   IARG_CONTEXT,
+                   IARG_MEMORYREAD_EA,
+                   IARG_MEMORYREAD_SIZE,
+                   IARG_END);
+                   }
+                   */
+
+                if (INS_IsBranchOrCall (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
+      x << pc << " " << diss << " [branch]\n";
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) 
+      HandleBranch,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_BRANCH_TAKEN,
+                            IARG_BRANCH_TARGET_ADDR, 
+                            IARG_FALLTHROUGH_ADDR,
+                            IARG_ADDRINT, INS_Address (ins),
+                            IARG_BOOL, INS_HasFallThrough (ins),
+                            IARG_END);
+                }
+
+                if (INS_IsSyscall (ins)) {
+                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleSyscall,
+                            IARG_UINT32, uid,
+                            IARG_CONTEXT,
+                            IARG_END);
+                }
+
+                INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleInst,
+                        IARG_UINT32, uid,
+                        IARG_BOOL, INS_IsCall (ins),
+                        IARG_BOOL, INS_IsRet (ins),
+                        IARG_BOOL, INS_IsFarRet (ins),
+                        IARG_END);
+            }
+        }
+        }
+}
+\end{DoxyCode}
+\hypertarget{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}{
+\index{pars.h@{pars.h}!parseConfig@{parseConfig}}
+\index{parseConfig@{parseConfig}!pars.h@{pars.h}}
+\subsubsection[{parseConfig}]{\setlength{\rightskip}{0pt plus 5cm}VOID parseConfig (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}
+\hypertarget{pars_8h_a6c563e02c0b7b634beaaf53ada126817}{
+\index{pars.h@{pars.h}!PredictAndUpdate@{PredictAndUpdate}}
+\index{PredictAndUpdate@{PredictAndUpdate}!pars.h@{pars.h}}
+\subsubsection[{PredictAndUpdate}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT PredictAndUpdate (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{\_\-\_\-pc, }
+\item[{INT32}]{\_\-\_\-taken, }
+\item[{ADDRINT}]{tgt, }
+\item[{ADDRINT}]{fthru}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_a6c563e02c0b7b634beaaf53ada126817}
+
+\begin{DoxyCode}
+{
+    bool taken = __taken;
+    ADDRINT pc = __pc;
+    void *bp_hist = NULL;
+    bool pred = g_predictor->lookup (pc, bp_hist);
+    if (g_var.g_debug_level & DBG_BP) std::cout << "  prediction = " << (pred?"T"
+      :"N");
+        if (!g_var.g_wrong_path) {
+                if (g_var.g_debug_level & DBG_BP) std::cout << ", actual = " << (
+      taken?"T":"N") << " : "; 
+                if (pred != taken) {
+                    if (g_var.g_debug_level & DBG_BP) std::cout << "mispredicted!
+      \n";
+                        g_var.g_wrong_path = true;
+                        //printf ("\nSTART OF WRONG PATH\n");
+                        //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
+                } else {
+                    if (g_var.g_debug_level & DBG_BP) std::cout << "correct predi
+      ction\n";
+                }
+                g_predictor->update (pc, taken, bp_hist, false);
+        } else {
+                if (g_var.g_debug_level & DBG_BP) std::cout << " on wrong path\n"
+      ;
+        }
+    return  pred ? tgt : fthru;
+}
+\end{DoxyCode}
+\hypertarget{pars_8h_ad31ce66601d158b499245c36353b1aef}{
+\index{pars.h@{pars.h}!runPARS@{runPARS}}
+\index{runPARS@{runPARS}!pars.h@{pars.h}}
+\subsubsection[{runPARS}]{\setlength{\rightskip}{0pt plus 5cm}VOID runPARS (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_ad31ce66601d158b499245c36353b1aef}
+
+\begin{DoxyCode}
+{
+    Init (cfgFile);
+
+        // Register a routine that gets called every time the trace is inserted
+    CODECACHE_AddTraceInsertedFunction (countTrace, 0);
+        // Register a routine that gets called every time the cache is full
+        CODECACHE_AddFullCacheFunction (FlushOnFull, 0); 
+
+        //Handle pin-generated exceptions
+        PIN_AddInternalExceptionHandler (handlePinException,NULL);
+        //Handle application-generated exceptions
+        PIN_InterceptSignal (SIGTRAP,signal_handler,NULL);
+        PIN_UnblockSignal (SIGTRAP,TRUE);
+        PIN_InterceptSignal (SIGILL,signal_handler,NULL);
+        PIN_UnblockSignal (SIGILL,TRUE);
+        PIN_InterceptSignal (SIGSEGV,signal_handler,NULL);
+        PIN_UnblockSignal (SIGSEGV,TRUE);
+        PIN_InterceptSignal (SIGFPE,signal_handler,NULL);
+        PIN_UnblockSignal (SIGFPE,TRUE);
+        PIN_InterceptSignal (SIGBUS,signal_handler,NULL);
+        PIN_UnblockSignal (SIGBUS,TRUE);
+        PIN_InterceptSignal (SIGABRT,signal_handler,NULL);
+        PIN_UnblockSignal (SIGABRT,TRUE);
+
+        __outFile = fopen ("junky", "w");
+        uop_gen (__outFile, *g_staticCode);
+    TRACE_AddInstrumentFunction (Instruction, 0);
+    PIN_AddFiniFunction (Fini, 0);
+
+    PIN_SpawnInternalThread (backEnd, rootThreadArg, 0, &rootThreadUid);
+
+        filter.Activate ();
+
+        start_pars = clock ();
+}
+\end{DoxyCode}

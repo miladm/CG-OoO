@@ -1,0 +1,55 @@
+\hypertarget{backend_2instruction_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/instruction.cpp File Reference}
+\label{backend_2instruction_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/instruction.cpp@{/home/milad/esc\_\-project/svn/PARS/src/backend/instruction.cpp}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/utility.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dependencyTable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}registerRename.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}regFile.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}phrase.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}lsq.h\char`\"{}}\par
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+long int \hyperlink{backend_2instruction_8cpp_a480aae9e5345069158f49509a4e385da}{nextRenReg} = INIT\_\-RENAME\_\-REG\_\-NUM
+\item 
+\hyperlink{classregFile}{regFile} $\ast$ \hyperlink{backend_2instruction_8cpp_a2d3dfa31b077f1d81553e749601f1c58}{RF}
+\item 
+float \hyperlink{backend_2instruction_8cpp_a88cfebd9f1e296c291bf05c5a78a6177}{unpredMemOpThreshold}
+\item 
+int \hyperlink{backend_2instruction_8cpp_abca2f358bc2b145a7d9fbb9395ad9c89}{cacheLat} \mbox{[}MEM\_\-HIGHERARCHY\mbox{]}
+\item 
+int \hyperlink{backend_2instruction_8cpp_a2e417281295ec1ce0e132e2a37ad227d}{phraseSizeBound}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{backend_2instruction_8cpp_abca2f358bc2b145a7d9fbb9395ad9c89}{
+\index{backend/instruction.cpp@{backend/instruction.cpp}!cacheLat@{cacheLat}}
+\index{cacheLat@{cacheLat}!backend/instruction.cpp@{backend/instruction.cpp}}
+\subsubsection[{cacheLat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf cacheLat}\mbox{[}MEM\_\-HIGHERARCHY\mbox{]}}}
+\label{backend_2instruction_8cpp_abca2f358bc2b145a7d9fbb9395ad9c89}
+\hypertarget{backend_2instruction_8cpp_a480aae9e5345069158f49509a4e385da}{
+\index{backend/instruction.cpp@{backend/instruction.cpp}!nextRenReg@{nextRenReg}}
+\index{nextRenReg@{nextRenReg}!backend/instruction.cpp@{backend/instruction.cpp}}
+\subsubsection[{nextRenReg}]{\setlength{\rightskip}{0pt plus 5cm}long int {\bf nextRenReg} = INIT\_\-RENAME\_\-REG\_\-NUM}}
+\label{backend_2instruction_8cpp_a480aae9e5345069158f49509a4e385da}
+\hypertarget{backend_2instruction_8cpp_a2e417281295ec1ce0e132e2a37ad227d}{
+\index{backend/instruction.cpp@{backend/instruction.cpp}!phraseSizeBound@{phraseSizeBound}}
+\index{phraseSizeBound@{phraseSizeBound}!backend/instruction.cpp@{backend/instruction.cpp}}
+\subsubsection[{phraseSizeBound}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf phraseSizeBound}}}
+\label{backend_2instruction_8cpp_a2e417281295ec1ce0e132e2a37ad227d}
+\hypertarget{backend_2instruction_8cpp_a2d3dfa31b077f1d81553e749601f1c58}{
+\index{backend/instruction.cpp@{backend/instruction.cpp}!RF@{RF}}
+\index{RF@{RF}!backend/instruction.cpp@{backend/instruction.cpp}}
+\subsubsection[{RF}]{\setlength{\rightskip}{0pt plus 5cm}{\bf regFile}$\ast$ {\bf RF}}}
+\label{backend_2instruction_8cpp_a2d3dfa31b077f1d81553e749601f1c58}
+\hypertarget{backend_2instruction_8cpp_a88cfebd9f1e296c291bf05c5a78a6177}{
+\index{backend/instruction.cpp@{backend/instruction.cpp}!unpredMemOpThreshold@{unpredMemOpThreshold}}
+\index{unpredMemOpThreshold@{unpredMemOpThreshold}!backend/instruction.cpp@{backend/instruction.cpp}}
+\subsubsection[{unpredMemOpThreshold}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf unpredMemOpThreshold}}}
+\label{backend_2instruction_8cpp_a88cfebd9f1e296c291bf05c5a78a6177}

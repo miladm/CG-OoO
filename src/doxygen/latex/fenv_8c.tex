@@ -1,0 +1,54 @@
+\hypertarget{fenv_8c}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/fenv.c File Reference}
+\label{fenv_8c}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/fenv.c@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/fenv.c}}
+}
+{\ttfamily \#include $<$assert.h$>$}\par
+{\ttfamily \#include $<$fenv.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{fenv_8c_a60d890aa65281f81b2b9e7c7583dde08}{m5\_\-fesetround} (int rm)
+\item 
+int \hyperlink{fenv_8c_adfea66c9f7f222a8602303b7380bf8c2}{m5\_\-fegetround} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{fenv_8c_adfea66c9f7f222a8602303b7380bf8c2}{
+\index{fenv.c@{fenv.c}!m5\_\-fegetround@{m5\_\-fegetround}}
+\index{m5\_\-fegetround@{m5\_\-fegetround}!fenv.c@{fenv.c}}
+\subsubsection[{m5\_\-fegetround}]{\setlength{\rightskip}{0pt plus 5cm}int m5\_\-fegetround (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{fenv_8c_adfea66c9f7f222a8602303b7380bf8c2}
+
+\begin{DoxyCode}
+{
+    int x;
+    int rm = fegetround();
+    for(x = 0; x < 4; x++)
+        if (m5_round_ops[x] == rm)
+            return x;
+    abort();
+    return 0;
+}
+\end{DoxyCode}
+\hypertarget{fenv_8c_a60d890aa65281f81b2b9e7c7583dde08}{
+\index{fenv.c@{fenv.c}!m5\_\-fesetround@{m5\_\-fesetround}}
+\index{m5\_\-fesetround@{m5\_\-fesetround}!fenv.c@{fenv.c}}
+\subsubsection[{m5\_\-fesetround}]{\setlength{\rightskip}{0pt plus 5cm}void m5\_\-fesetround (
+\begin{DoxyParamCaption}
+\item[{int}]{rm}
+\end{DoxyParamCaption}
+)}}
+\label{fenv_8c_a60d890aa65281f81b2b9e7c7583dde08}
+
+\begin{DoxyCode}
+{
+    assert(rm >= 0 && rm < 4);
+    fesetround(m5_round_ops[rm]);
+}
+\end{DoxyCode}

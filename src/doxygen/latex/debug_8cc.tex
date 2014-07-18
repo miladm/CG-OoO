@@ -1,0 +1,109 @@
+\hypertarget{debug_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/debug.cc File Reference}
+\label{debug_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/debug.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/debug.cc}}
+}
+{\ttfamily \#include $<$sys/types.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$algorithm$>$}\par
+{\ttfamily \#include $<$csignal$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+{\ttfamily \#include \char`\"{}base/cprintf.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/debug.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/misc.hh\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structDebug_1_1AllFlags}{Debug::AllFlags}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceDebug}{Debug}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std::map$<$ string, Flag $\ast$ $>$ \hyperlink{namespaceDebug_ac1a92d7a229e02f4e3081653c52e821d}{Debug::FlagsMap}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceDebug_a3a24898e3ca48ef89e2029ab6e43665c}{Debug::breakpoint} ()
+\item 
+FlagsMap \& \hyperlink{namespaceDebug_a2e5d5eb12f0767ef733518a07a287e43}{Debug::allFlags} ()
+\item 
+Flag $\ast$ \hyperlink{namespaceDebug_a09cf38987e4932dd5e0bc71954f2b637}{Debug::findFlag} (const std::string \&name)
+\item 
+bool \hyperlink{namespaceDebug_ae27d4c45a021062ae81d1321c3490326}{Debug::changeFlag} (const char $\ast$s, bool value)
+\item 
+void \hyperlink{debug_8cc_aeb703e006fe182d90424fcd595b68570}{setDebugFlag} (const char $\ast$string)
+\item 
+void \hyperlink{debug_8cc_aecb36a775ee01ef097d7e23111a27852}{clearDebugFlag} (const char $\ast$string)
+\item 
+void \hyperlink{debug_8cc_a7ff54327ec09fb36dac3f025eb37af0a}{dumpDebugFlags} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespaceDebug_a6eec1fa1c405c62968ca11295758d429}{Debug::allFlagsVersion} = 0
+\item 
+AllFlags \hyperlink{namespaceDebug_ac230a2b949dcfde863ac34d10d5b92ea}{Debug::theAllFlags}
+\item 
+Flag $\ast$const \hyperlink{namespaceDebug_abe73cacba918a5c088ae708162e0cfe2}{Debug::All} = \&theAllFlags
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{debug_8cc_aecb36a775ee01ef097d7e23111a27852}{
+\index{debug.cc@{debug.cc}!clearDebugFlag@{clearDebugFlag}}
+\index{clearDebugFlag@{clearDebugFlag}!debug.cc@{debug.cc}}
+\subsubsection[{clearDebugFlag}]{\setlength{\rightskip}{0pt plus 5cm}void clearDebugFlag (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}}
+\label{debug_8cc_aecb36a775ee01ef097d7e23111a27852}
+
+\begin{DoxyCode}
+{
+    Debug::changeFlag(string, false);
+}
+\end{DoxyCode}
+\hypertarget{debug_8cc_a7ff54327ec09fb36dac3f025eb37af0a}{
+\index{debug.cc@{debug.cc}!dumpDebugFlags@{dumpDebugFlags}}
+\index{dumpDebugFlags@{dumpDebugFlags}!debug.cc@{debug.cc}}
+\subsubsection[{dumpDebugFlags}]{\setlength{\rightskip}{0pt plus 5cm}void dumpDebugFlags (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{debug_8cc_a7ff54327ec09fb36dac3f025eb37af0a}
+
+\begin{DoxyCode}
+{
+    using namespace Debug;
+    FlagsMap::iterator i = allFlags().begin();
+    FlagsMap::iterator end = allFlags().end();
+    for (; i != end; ++i) {
+        SimpleFlag *f = dynamic_cast<SimpleFlag *>(i->second);
+        if (f && f->status())
+            cprintf("%s\n", f->name());
+    }
+}
+\end{DoxyCode}
+\hypertarget{debug_8cc_aeb703e006fe182d90424fcd595b68570}{
+\index{debug.cc@{debug.cc}!setDebugFlag@{setDebugFlag}}
+\index{setDebugFlag@{setDebugFlag}!debug.cc@{debug.cc}}
+\subsubsection[{setDebugFlag}]{\setlength{\rightskip}{0pt plus 5cm}void setDebugFlag (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}}
+\label{debug_8cc_aeb703e006fe182d90424fcd595b68570}
+
+\begin{DoxyCode}
+{
+    Debug::changeFlag(string, true);
+}
+\end{DoxyCode}

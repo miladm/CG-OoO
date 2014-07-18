@@ -1,0 +1,557 @@
+\hypertarget{classo3__registerRename}{
+\section{o3\_\-registerRename Class Reference}
+\label{classo3__registerRename}\index{o3\_\-registerRename@{o3\_\-registerRename}}
+}
+
+
+{\ttfamily \#include $<$registerRename.h$>$}
+
+Inheritance diagram for o3\_\-registerRename:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classo3__registerRename}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}{o3\_\-registerRename} (string rf\_\-name)
+\item 
+\hyperlink{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}{o3\_\-registerRename} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-rf\_\-lo, \hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-rf\_\-hi, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} rd\_\-port\_\-cnt, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} wr\_\-port\_\-cnt, string rf\_\-name)
+\item 
+\hyperlink{classo3__registerRename_ad8e4b3165b84c89ba73d622c58f8b65f}{$\sim$o3\_\-registerRename} ()
+\item 
+\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{classo3__registerRename_a1e65eca8eb066cf294a056d015469992}{renameReg} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-reg)
+\item 
+void \hyperlink{classo3__registerRename_a72f6bb205743c3bbbe41c47584208c90}{squashRenameReg} ()
+\item 
+bool \hyperlink{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
+\item 
+bool \hyperlink{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\item 
+void \hyperlink{classo3__registerRename_ac29d3ca88b64d065d8f52b4384895c4b}{update\_\-fRAT} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-reg, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+void \hyperlink{classo3__registerRename_af8f4e3c178f20fbee9a17d5781cd8f84}{update\_\-cRAT} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-reg, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+bool \hyperlink{classo3__registerRename_a500dec17b068c33a1813786cb6727273}{isAnyPRavailable} ()
+\item 
+\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{classo3__registerRename_a314a54fa930b7fa3de55c8b66e46061b}{getAvailablePR} ()
+\item 
+void \hyperlink{classo3__registerRename_aae9d93d826236d42ba090d1d53ba62af}{setAsAvailablePR} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+int \hyperlink{classo3__registerRename_af3dacac6db9095e6aa73da550e2c71bc}{getNumAvailablePR} ()
+\item 
+\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{classo3__registerRename_ab76f162d8e2a6228404670bda2bad322}{getPrevPR} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+void \hyperlink{classo3__registerRename_a6e6d2444676ba95b85d0a84908f6e5fe}{updatePR} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} new\_\-pr, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} prev\_\-pr, \hyperlink{global_2global_8h_aa58e77d5a6caaeed4d4bd6f5b30f3ee7}{REG\_\-REN\_\-STATE} state)
+\item 
+void \hyperlink{classo3__registerRename_a6e6c35b5b477597e3eafed6def8c574b}{updatePRstate} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} new\_\-pr, \hyperlink{global_2global_8h_aa58e77d5a6caaeed4d4bd6f5b30f3ee7}{REG\_\-REN\_\-STATE} state)
+\item 
+\hyperlink{global_2global_8h_aa58e77d5a6caaeed4d4bd6f5b30f3ee7}{REG\_\-REN\_\-STATE} \hyperlink{classo3__registerRename_a62accbd82ef62f8c411975e824d644af}{getPRstate} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+void \hyperlink{classo3__registerRename_aebbf6e056ef5e4c50081db9dc1817a2b}{squashPRstate} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} new\_\-pr)
+\item 
+bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRvalid} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!o3\_\-registerRename@{o3\_\-registerRename}}
+\index{o3\_\-registerRename@{o3\_\-registerRename}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{o3\_\-registerRename}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-registerRename::o3\_\-registerRename (
+\begin{DoxyParamCaption}
+\item[{string}]{rf\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}
+
+\begin{DoxyCode}
+    : unit (rf_name), 
+      _a_rf_size (GARF_HI - GARF_LO + 1), 
+      _a_rf_hi (GARF_HI), 
+      _a_rf_lo (GARF_LO), 
+      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
+      _p_rf_hi (GPRF_HI), 
+      _p_rf_lo (GPRF_LO), 
+      _wr_port_cnt (4), 
+      _rd_port_cnt (8)
+{
+    _cycle = START_CYCLE;
+    _num_free_wr_port = _wr_port_cnt;
+    _num_free_rd_port = _rd_port_cnt;
+
+    /* INITIALIZE ALL TABLES */
+    PR PR_counter = _p_rf_lo;
+
+    /* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
+    for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
+        o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
+        _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
+        _cRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
+        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
+        PR_counter++;
+    }
+
+    /* INITIALIZE RENAME REGISTER DOMAIN */
+    while (PR_counter <= _p_rf_hi) {
+        o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
+        _availablePRset.push_back (p_reg);
+        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
+        PR_counter++;
+    }
+
+    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read por
+      ts than write ports.");
+    Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structu
+      re initialization.");
+    Assert (_RF.size () == GPRF_SIZE && "Invalid Rename table structure initializ
+      ation.");
+    Assert (_fRAT.size () == GARF_SIZE && "Invalid Rename table structure initial
+      ization.");
+    Assert (_cRAT.size () == GARF_SIZE && "Invalid Rename table structure initial
+      ization.");
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!o3\_\-registerRename@{o3\_\-registerRename}}
+\index{o3\_\-registerRename@{o3\_\-registerRename}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{o3\_\-registerRename}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-registerRename::o3\_\-registerRename (
+\begin{DoxyParamCaption}
+\item[{{\bf AR}}]{a\_\-rf\_\-lo, }
+\item[{{\bf AR}}]{a\_\-rf\_\-hi, }
+\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt, }
+\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt, }
+\item[{string}]{rf\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}
+
+\begin{DoxyCode}
+    : unit (rf_name), 
+      _a_rf_size (a_rf_hi - a_rf_lo + 1), 
+      _a_rf_hi (a_rf_hi), 
+      _a_rf_lo (a_rf_lo), 
+      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
+      _p_rf_hi (GPRF_HI), 
+      _p_rf_lo (GPRF_LO), 
+      _wr_port_cnt (wr_port_cnt), 
+      _rd_port_cnt (rd_port_cnt)
+{
+    _cycle = START_CYCLE;
+    _num_free_wr_port = _wr_port_cnt;
+    _num_free_rd_port = _rd_port_cnt;
+
+        /* INITIALIZE ALL TABLES */
+        PR PR_counter = _p_rf_lo;
+
+        /* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
+        for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
+        o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
+                _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
+                _cRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
+        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
+                PR_counter++;
+        }
+
+        /* INITIALIZE RENAME REGISTER DOMAIN */
+        while (PR_counter <= _p_rf_hi) {
+        o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
+                _availablePRset.push_back (p_reg);
+        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
+                PR_counter++;
+        }
+
+    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read por
+      ts than write ports.");
+        Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table str
+      ucture initialization.");
+        Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure init
+      ialization.");
+        Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure in
+      itialization.");
+        Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure in
+      itialization.");
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_ad8e4b3165b84c89ba73d622c58f8b65f}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!$\sim$o3\_\-registerRename@{$\sim$o3\_\-registerRename}}
+\index{$\sim$o3\_\-registerRename@{$\sim$o3\_\-registerRename}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{$\sim$o3\_\-registerRename}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-registerRename::$\sim$o3\_\-registerRename (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_ad8e4b3165b84c89ba73d622c58f8b65f}
+
+\begin{DoxyCode}
+                                       {
+    map <PR, o3_regElem*>::iterator it;
+    for (it = _RF.begin (); it != _RF.end (); it++) {
+        delete it->second;
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classo3__registerRename_a314a54fa930b7fa3de55c8b66e46061b}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getAvailablePR@{getAvailablePR}}
+\index{getAvailablePR@{getAvailablePR}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getAvailablePR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PR} o3\_\-registerRename::getAvailablePR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a314a54fa930b7fa3de55c8b66e46061b}
+
+\begin{DoxyCode}
+                                      {
+        Assert (_availablePRset.size () > 0 && "Invalid use-set size.");
+        o3_regElem* p_reg = _availablePRset.back ();
+        Assert (p_reg->_reg_state == AVAILABLE && "Register State is Invalid - Re
+      gister must be in Available State");
+        _availablePRset.pop_back ();
+        return p_reg->_reg;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_af3dacac6db9095e6aa73da550e2c71bc}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getNumAvailablePR@{getNumAvailablePR}}
+\index{getNumAvailablePR@{getNumAvailablePR}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getNumAvailablePR}]{\setlength{\rightskip}{0pt plus 5cm}int o3\_\-registerRename::getNumAvailablePR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_af3dacac6db9095e6aa73da550e2c71bc}
+
+\begin{DoxyCode}
+                                          {
+        return _availablePRset.size ();
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_ab76f162d8e2a6228404670bda2bad322}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getPrevPR@{getPrevPR}}
+\index{getPrevPR@{getPrevPR}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getPrevPR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PR} o3\_\-registerRename::getPrevPR (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_ab76f162d8e2a6228404670bda2bad322}
+
+\begin{DoxyCode}
+                                         {
+        Assert (_RF.find (p_reg) != _RF.end () && "Reg not found in ARST!");
+        Assert (_RF[p_reg]->_prev_pr != NULL && "The previous PR not found.");
+        return _RF[p_reg]->_prev_pr->_reg;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a62accbd82ef62f8c411975e824d644af}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getPRstate@{getPRstate}}
+\index{getPRstate@{getPRstate}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getPRstate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf REG\_\-REN\_\-STATE} o3\_\-registerRename::getPRstate (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a62accbd82ef62f8c411975e824d644af}
+
+\begin{DoxyCode}
+                                                     {
+        Assert (_RF.find (p_reg) != _RF.end () && "Physical register was not foun
+      d!");
+        return _RF[p_reg]->_reg_state;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeRdPort@{hasFreeRdPort}}
+\index{hasFreeRdPort@{hasFreeRdPort}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::hasFreeRdPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now, }
+\item[{{\bf WIDTH}}]{numRegRdPorts}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}
+
+\begin{DoxyCode}
+                                                                     {
+    Assert (_rd_port_cnt >= numRegRdPorts);
+    if (_cycle < now) {
+        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
+        _num_free_wr_port = _wr_port_cnt;
+        _cycle = now;
+        return true;
+    } else if (_cycle == now) {
+        _num_free_rd_port -= numRegRdPorts;
+        if (_num_free_rd_port >= 0) return true;
+        else return false;
+    }
+    Assert (true == false && "should not have gotten here");
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeWrPort@{hasFreeWrPort}}
+\index{hasFreeWrPort@{hasFreeWrPort}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::hasFreeWrPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}
+
+\begin{DoxyCode}
+                                                {
+    if (_cycle < now) {
+        _num_free_rd_port = _rd_port_cnt;
+        _num_free_wr_port = _wr_port_cnt;
+        _cycle = now;
+        return true;
+    } else if (_cycle == now) {
+        _num_free_wr_port--;
+        if (_num_free_wr_port > 0) {
+            return true;
+        } else {
+            //Assert (true == false && "this feature may not work -look into it")
+      ; (TODO)
+            return false;
+        }
+    }
+    Assert (true == false && "should not have gotten here");
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a500dec17b068c33a1813786cb6727273}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!isAnyPRavailable@{isAnyPRavailable}}
+\index{isAnyPRavailable@{isAnyPRavailable}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{isAnyPRavailable}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::isAnyPRavailable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a500dec17b068c33a1813786cb6727273}
+
+\begin{DoxyCode}
+                                          {
+    return (_availablePRset.size () == 0) ? false : true;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!isPRvalid@{isPRvalid}}
+\index{isPRvalid@{isPRvalid}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{isPRvalid}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::isPRvalid (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}
+
+\begin{DoxyCode}
+                                           {
+#ifdef ASSERTION
+    Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);
+    Assert (_RF[p_reg]->_reg_state != AVAILABLE && 
+            "Register must hold data to read from - call updateReg () first");
+#endif
+    REG_REN_STATE state = _RF[p_reg]->_reg_state;
+    return (state == ARCH_REG || state == RENAMED_VALID) ? true : false;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a1e65eca8eb066cf294a056d015469992}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!renameReg@{renameReg}}
+\index{renameReg@{renameReg}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{renameReg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PR} o3\_\-registerRename::renameReg (
+\begin{DoxyParamCaption}
+\item[{{\bf AR}}]{a\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a1e65eca8eb066cf294a056d015469992}
+
+\begin{DoxyCode}
+                                         {
+        Assert (_fRAT.find (a_reg) != _fRAT.end () && "The arch. reg was not foun
+      d in Fetch-RAT!");
+        return _fRAT[a_reg]->_reg;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_aae9d93d826236d42ba090d1d53ba62af}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!setAsAvailablePR@{setAsAvailablePR}}
+\index{setAsAvailablePR@{setAsAvailablePR}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{setAsAvailablePR}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::setAsAvailablePR (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_aae9d93d826236d42ba090d1d53ba62af}
+
+\begin{DoxyCode}
+                                                  {
+        Assert (_RF.find (p_reg) != _RF.end () && "Physical reg not found!");
+        _availablePRset.push_back (_RF[p_reg]);
+        _RF[p_reg]->_prev_pr = NULL;
+        Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown t
+      oo large (size violation).");
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_aebbf6e056ef5e4c50081db9dc1817a2b}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!squashPRstate@{squashPRstate}}
+\index{squashPRstate@{squashPRstate}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{squashPRstate}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::squashPRstate (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{new\_\-pr}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_aebbf6e056ef5e4c50081db9dc1817a2b}
+
+\begin{DoxyCode}
+                                               {
+        Assert (_RF.find (p_reg) != _RF.end () && "Physical register was not foun
+      d!");
+        Assert (_RF[p_reg]->_reg_state == RENAMED_INVALID || _RF[p_reg]->_reg_sta
+      te == RENAMED_VALID);
+        _RF[p_reg]->_reg_state = AVAILABLE;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a72f6bb205743c3bbbe41c47584208c90}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!squashRenameReg@{squashRenameReg}}
+\index{squashRenameReg@{squashRenameReg}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{squashRenameReg}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::squashRenameReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a72f6bb205743c3bbbe41c47584208c90}
+
+\begin{DoxyCode}
+                                         {
+        _fRAT.clear ();
+        _availablePRset.clear ();
+        map<PR, o3_regElem*> rf = _RF;
+
+    map<AR, o3_regElem*>::iterator it;
+    for (it = _cRAT.begin (); it != _cRAT.end (); it++) {
+        AR a_reg = it->first;
+        PR p_reg = it->second->_reg;
+        o3_regElem* p_obj = it->second;
+        p_obj->_reg_state = ARCH_REG;
+        p_obj->_prev_pr = NULL;
+        _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_obj));
+        rf.erase (p_reg);
+    }
+
+        Assert (_fRAT.size () == _cRAT.size ());
+    Assert (rf.size () == _RF.size () - _cRAT.size ());
+
+    map<PR, o3_regElem*>::iterator it_pr;
+    for (it_pr = rf.begin (); it_pr != rf.end (); it_pr++) {
+        o3_regElem* p_obj = it_pr->second;
+        PR p_reg = p_obj->_reg;
+        p_obj->_reg_state = AVAILABLE;
+        p_obj->_prev_pr = NULL;
+        _availablePRset.push_back (_RF[p_reg]);
+    }
+    Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown too l
+      arge (size violation).");
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_af8f4e3c178f20fbee9a17d5781cd8f84}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!update\_\-cRAT@{update\_\-cRAT}}
+\index{update\_\-cRAT@{update\_\-cRAT}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{update\_\-cRAT}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::update\_\-cRAT (
+\begin{DoxyParamCaption}
+\item[{{\bf AR}}]{a\_\-reg, }
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_af8f4e3c178f20fbee9a17d5781cd8f84}
+
+\begin{DoxyCode}
+                                                       {
+        Assert (_cRAT.find (a_reg) != _cRAT.end ());
+        Assert (_cRAT[a_reg]->_reg_state == AVAILABLE);
+        Assert (_RF.find (p_reg) != _RF.end ());
+        Assert (_RF[p_reg]->_reg_state == ARCH_REG);
+
+        _cRAT.erase (a_reg);
+        _cRAT.insert (pair<AR, o3_regElem*> (a_reg, _RF[p_reg]));
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_ac29d3ca88b64d065d8f52b4384895c4b}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!update\_\-fRAT@{update\_\-fRAT}}
+\index{update\_\-fRAT@{update\_\-fRAT}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{update\_\-fRAT}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::update\_\-fRAT (
+\begin{DoxyParamCaption}
+\item[{{\bf AR}}]{a\_\-reg, }
+\item[{{\bf PR}}]{p\_\-reg}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_ac29d3ca88b64d065d8f52b4384895c4b}
+
+\begin{DoxyCode}
+                                                       {
+        Assert (_RF.find (p_reg) != _RF.end ());
+        Assert (_RF[p_reg]->_reg_state == AVAILABLE);
+        if (_fRAT.find (a_reg) != _fRAT.end ()) {
+                _fRAT.erase (a_reg);
+        }
+        _fRAT.insert (pair<AR, o3_regElem*> (a_reg, _RF[p_reg]));
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a6e6d2444676ba95b85d0a84908f6e5fe}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!updatePR@{updatePR}}
+\index{updatePR@{updatePR}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{updatePR}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::updatePR (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{new\_\-pr, }
+\item[{{\bf PR}}]{prev\_\-pr, }
+\item[{{\bf REG\_\-REN\_\-STATE}}]{state}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a6e6d2444676ba95b85d0a84908f6e5fe}
+
+\begin{DoxyCode}
+                                                                            {
+        Assert (_RF.find (new_pr) != _RF.end () && "Physical reg not found!");
+        Assert (_RF.find (prev_pr) != _RF.end () && "Physical reg not found!");
+        Assert ((_RF[new_pr]->_reg_state == AVAILABLE && state == 
+      RENAMED_INVALID) &&
+                     "Phys Reg. State Transition Violation.");
+    _RF[new_pr]->_prev_pr = _RF[prev_pr];
+        _RF[new_pr]->_reg_state = state;
+}
+\end{DoxyCode}
+\hypertarget{classo3__registerRename_a6e6c35b5b477597e3eafed6def8c574b}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!updatePRstate@{updatePRstate}}
+\index{updatePRstate@{updatePRstate}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{updatePRstate}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::updatePRstate (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{new\_\-pr, }
+\item[{{\bf REG\_\-REN\_\-STATE}}]{state}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a6e6c35b5b477597e3eafed6def8c574b}
+
+\begin{DoxyCode}
+                                                                    {
+        Assert (_RF.find (p_reg) != _RF.end () && "Physical register value was no
+      t found!");
+        Assert (((_RF[p_reg]->_reg_state == AVAILABLE && state == 
+      RENAMED_INVALID) ||
+             (_RF[p_reg]->_reg_state == RENAMED_INVALID && state == 
+      RENAMED_VALID) ||
+                     (_RF[p_reg]->_reg_state == RENAMED_VALID && state == 
+      ARCH_REG) ||
+                     (_RF[p_reg]->_reg_state == ARCH_REG && state == AVAILABLE)) 
+      &&
+                     "Phys Reg. State Transition Violation.");
+        _RF[p_reg]->_reg_state = state;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{backend_2o3_2registerRename_8h}{registerRename.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{backend_2o3_2registerRename_8cpp}{registerRename.cpp}\end{DoxyCompactItemize}

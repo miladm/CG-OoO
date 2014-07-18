@@ -1,0 +1,51 @@
+\hypertarget{intmath_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/intmath.cc File Reference}
+\label{intmath_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/intmath.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/intmath.cc}}
+}
+{\ttfamily \#include \char`\"{}base/intmath.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{intmath_8cc_a10cb95b0267273bc74bad625fd898a7a}{prevPrime} (int n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{intmath_8cc_a10cb95b0267273bc74bad625fd898a7a}{
+\index{intmath.cc@{intmath.cc}!prevPrime@{prevPrime}}
+\index{prevPrime@{prevPrime}!intmath.cc@{intmath.cc}}
+\subsubsection[{prevPrime}]{\setlength{\rightskip}{0pt plus 5cm}int prevPrime (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}
+\label{intmath_8cc_a10cb95b0267273bc74bad625fd898a7a}
+
+\begin{DoxyCode}
+{
+    int decr;
+
+    // If the number is even, let's start with the previous odd number.
+    if (!(n & 1))
+        --n;
+
+    // Lets test for divisibility by 3.  Then we will be able to easily
+    // avoid numbers that are divisible by 3 in the future.
+    decr = n % 3;
+    if (decr == 0) {
+        n -= 2;
+        decr = 2;
+    }
+    else if (decr == 1)
+        decr = 4;
+
+    for (;;) {
+        if (isPrime(n))
+            return n;
+        n -= decr;
+        // Toggle between 2 and 4 to prevent trying numbers that are known
+        // to be divisible by 3.
+        decr = 6 - decr;
+    }
+}
+\end{DoxyCode}

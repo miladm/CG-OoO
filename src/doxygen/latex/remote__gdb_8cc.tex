@@ -1,0 +1,65 @@
+\hypertarget{remote__gdb_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/remote\_\-gdb.cc File Reference}
+\label{remote__gdb_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/remote\_\-gdb.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/remote\_\-gdb.cc}}
+}
+{\ttfamily \#include $<$sys/signal.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$cstdio$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include \char`\"{}arch/vtophys.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/intmath.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/remote\_\-gdb.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/socket.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/trace.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}config/the\_\-isa.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}cpu/static\_\-inst.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}cpu/thread\_\-context.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}debug/GDBAll.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}mem/port.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}mem/fs\_\-translating\_\-port\_\-proxy.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}mem/se\_\-translating\_\-port\_\-proxy.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/full\_\-system.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/system.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{remote__gdb_8cc_a19c86e0d31779f284e91d4d016448264}{debugger} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ BaseRemoteGDB $\ast$ $>$ \hyperlink{remote__gdb_8cc_a440297d7c52371260909155863c42e8a}{debuggers}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{remote__gdb_8cc_a19c86e0d31779f284e91d4d016448264}{
+\index{remote\_\-gdb.cc@{remote\_\-gdb.cc}!debugger@{debugger}}
+\index{debugger@{debugger}!remote_gdb.cc@{remote\_\-gdb.cc}}
+\subsubsection[{debugger}]{\setlength{\rightskip}{0pt plus 5cm}void debugger (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{remote__gdb_8cc_a19c86e0d31779f284e91d4d016448264}
+
+\begin{DoxyCode}
+{
+    static int current_debugger = -1;
+    if (current_debugger >= 0 && current_debugger < (int)debuggers.size()) {
+        BaseRemoteGDB *gdb = debuggers[current_debugger];
+        if (!gdb->isattached())
+            gdb->listener->accept();
+        if (gdb->isattached())
+            gdb->trap(SIGILL);
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{remote__gdb_8cc_a440297d7c52371260909155863c42e8a}{
+\index{remote\_\-gdb.cc@{remote\_\-gdb.cc}!debuggers@{debuggers}}
+\index{debuggers@{debuggers}!remote_gdb.cc@{remote\_\-gdb.cc}}
+\subsubsection[{debuggers}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$BaseRemoteGDB $\ast$$>$ {\bf debuggers}}}
+\label{remote__gdb_8cc_a440297d7c52371260909155863c42e8a}

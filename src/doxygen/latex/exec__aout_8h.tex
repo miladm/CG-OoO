@@ -1,0 +1,76 @@
+\hypertarget{exec__aout_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-aout.h File Reference}
+\label{exec__aout_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-aout.h@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/loader/exec\_\-aout.h}}
+}
+{\ttfamily \#include \char`\"{}arch/alpha/aout\_\-machdep.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{exec__aout_8h_aedd4f33df93c0b82533a9cbd11e18ee2}{N\_\-PAGSIZ}(ex)~(AOUT\_\-LDPGSZ)
+\item 
+\#define \hyperlink{exec__aout_8h_a97312400ae67a4aaf0322e0f08ce6bc1}{OMAGIC}~0407
+\item 
+\#define \hyperlink{exec__aout_8h_aa56ddd2588ce1eb6ad0e32b933b366ad}{NMAGIC}~0410
+\item 
+\#define \hyperlink{exec__aout_8h_a24e8c34b011dfc678d4745d8b0a43c7b}{ZMAGIC}~0413
+\item 
+\#define \hyperlink{exec__aout_8h_af7984ea8b73a999e1ca37cb73734380c}{N\_\-ALIGN}(ex, x)
+\item 
+\#define \hyperlink{exec__aout_8h_af54d44e881a9b7b5132d61b5b7d93870}{N\_\-BADMAG}(ex)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{exec__aout_8h_af7984ea8b73a999e1ca37cb73734380c}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!N\_\-ALIGN@{N\_\-ALIGN}}
+\index{N\_\-ALIGN@{N\_\-ALIGN}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{N\_\-ALIGN}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\_\-ALIGN(
+\begin{DoxyParamCaption}
+\item[{}]{ex, }
+\item[{}]{x}
+\end{DoxyParamCaption}
+)}}
+\label{exec__aout_8h_af7984ea8b73a999e1ca37cb73734380c}
+{\bfseries Value:}
+\begin{DoxyCode}
+(N_GETMAGIC(ex) == ZMAGIC ? \
+        ((x) + AOUT_LDPGSZ - 1) & ~(AOUT_LDPGSZ - 1) : (x))
+\end{DoxyCode}
+\hypertarget{exec__aout_8h_af54d44e881a9b7b5132d61b5b7d93870}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!N\_\-BADMAG@{N\_\-BADMAG}}
+\index{N\_\-BADMAG@{N\_\-BADMAG}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{N\_\-BADMAG}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\_\-BADMAG(
+\begin{DoxyParamCaption}
+\item[{}]{ex}
+\end{DoxyParamCaption}
+)}}
+\label{exec__aout_8h_af54d44e881a9b7b5132d61b5b7d93870}
+{\bfseries Value:}
+\begin{DoxyCode}
+(N_GETMAGIC(ex) != NMAGIC && N_GETMAGIC(ex) != OMAGIC && \
+        N_GETMAGIC(ex) != ZMAGIC)
+\end{DoxyCode}
+\hypertarget{exec__aout_8h_aedd4f33df93c0b82533a9cbd11e18ee2}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!N\_\-PAGSIZ@{N\_\-PAGSIZ}}
+\index{N\_\-PAGSIZ@{N\_\-PAGSIZ}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{N\_\-PAGSIZ}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\_\-PAGSIZ(
+\begin{DoxyParamCaption}
+\item[{}]{ex}
+\end{DoxyParamCaption}
+)~(AOUT\_\-LDPGSZ)}}
+\label{exec__aout_8h_aedd4f33df93c0b82533a9cbd11e18ee2}
+\hypertarget{exec__aout_8h_aa56ddd2588ce1eb6ad0e32b933b366ad}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!NMAGIC@{NMAGIC}}
+\index{NMAGIC@{NMAGIC}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{NMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define NMAGIC~0410}}
+\label{exec__aout_8h_aa56ddd2588ce1eb6ad0e32b933b366ad}
+\hypertarget{exec__aout_8h_a97312400ae67a4aaf0322e0f08ce6bc1}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!OMAGIC@{OMAGIC}}
+\index{OMAGIC@{OMAGIC}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{OMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define OMAGIC~0407}}
+\label{exec__aout_8h_a97312400ae67a4aaf0322e0f08ce6bc1}
+\hypertarget{exec__aout_8h_a24e8c34b011dfc678d4745d8b0a43c7b}{
+\index{exec\_\-aout.h@{exec\_\-aout.h}!ZMAGIC@{ZMAGIC}}
+\index{ZMAGIC@{ZMAGIC}!exec_aout.h@{exec\_\-aout.h}}
+\subsubsection[{ZMAGIC}]{\setlength{\rightskip}{0pt plus 5cm}\#define ZMAGIC~0413}}
+\label{exec__aout_8h_a24e8c34b011dfc678d4745d8b0a43c7b}

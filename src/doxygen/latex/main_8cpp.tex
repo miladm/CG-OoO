@@ -1,0 +1,152 @@
+\hypertarget{main_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/main.cpp File Reference}
+\label{main_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/main.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/main.cpp}}
+}
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$signal.h$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$algorithm$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$list$>$}\par
+{\ttfamily \#include \char`\"{}registerAllocate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}make\_\-instruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}make\_\-basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}make\_\-phraseblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}annotateTrace.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dominator.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}config.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}logGen.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}stat.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ssa.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dot.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{main_8cpp_aa19325f885e34f56a1301ced479f8576}{finish} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$phBBList, std::string $\ast$program\_\-name)
+\item 
+int \hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{main_8cpp_aa19325f885e34f56a1301ced479f8576}{
+\index{main.cpp@{main.cpp}!finish@{finish}}
+\index{finish@{finish}!main.cpp@{main.cpp}}
+\subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void finish (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{phBBList, }
+\item[{std::string $\ast$}]{program\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{main_8cpp_aa19325f885e34f56a1301ced479f8576}
+
+\begin{DoxyCode}
+                                                                                 
+                   {
+        /* STAT Generation Functions */
+        // printf("FILE NAME: %s\n", (*program_name).c_str());
+        StatBBSizeStat(bbList, program_name);
+        StatNum_interBB_and_intra_BB_regs(bbList, program_name);
+        /* ------------------------- */
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                // printf("BB Size: %d\n", bbList->Nth(i)->getBbSize());
+                //bbList->Nth(i)->printBb();
+        }
+        dot cfg(0, program_name);
+        cfg.runDot(bbList);
+        dot cfg_phrase(1, program_name);
+        cfg_phrase.runDot(phBBList);
+        writeToFile(bbList, program_name);
+        // writeToFile(pbList, program_name);
+
+}
+\end{DoxyCode}
+\hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+\begin{DoxyCode}
+{
+        Assert(argc == 2 && "USAGE: ./PhraseFormer <program_name>");
+        unsigned t0=clock(),t1;
+        //SETUP VARIABLES
+        List<instruction*>* insList = new List<instruction*>;
+        List<basicblock*>* bbList   = new List<basicblock*>;
+        List<basicblock*>* phBBList = new List<basicblock*>;
+        //Linst<phraseblock*> *phList = new List<phraseblock*>;
+        map<int,variable*> varList;
+        map<ADDR, basicblock*> bbMap;
+        map<ADDR, double> brBiasMap;
+        map<ADDR, double> bpAccuracyMap;
+        map<ADDR, double> upldMap;
+        map<ADDR,set<ADDR> > memRdAddrMap;
+        map<ADDR,set<ADDR> > memWrAddrMap;
+        map<ADDR,instruction*> insAddrMap;
+        set<ADDR> brDstSet;
+        std::string program_name = argv[1];
+
+        printf("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name
+      .c_str());
+        //init(argc, argv);
+        printf("- Configure Program -\n");
+        parse_config_file();
+        printf("- Parse Instructions -\n");
+        parse_instruction(insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccurac
+      yMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name);
+        printf("- Make Basic Blocks -\n");
+        make_basicblock(insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap)
+      ;
+        printf("- Build Dominance Frontier -\n");
+        setup_dominance_frontier(bbList);
+        printf("- Build SSA -\n");
+        build_ssa_form(bbList, varList);
+        printf("- Register Allocation -\n");
+        allocate_register(bbList,insList);
+        // printf("- Make Phraesblocks -\n");
+        // phBBList = make_phraseblock(bbList, &brBiasMap, &bpAccuracyMap);
+        printf("- Annotate Trace -\n");
+        //annotateTrace_forBB(bbList, &insAddrMap, &program_name);
+        // annotateTrace_forPB(phBBList, &insAddrMap, &program_name);
+        /* remove the code below */
+        // printf("num BB's: %d\n", bbList->NumElements());
+        // for (int i =0 ; i < insList->NumElements(); i++) {
+        // //   if (insList->Nth(i)->isAlreadyAssignedArcRegs())
+        // //           ;// printf("GOOD\n");
+        // //   else    
+        // //           printf("SHIT\n");
+        //      instruction* ins = insList->Nth(i);
+        //      printf("%llx: ",ins->getInsAddr());
+        //      for (int i = 0; i < ins->getNumReadReg(); i++) {
+        //              printf("(%d->%d),",ins->getNthReadReg(i),ins->getReadRegS
+      ubscript(ins->getNthReadReg(i)));
+        //      }
+        //      for (int i = 0; i < ins->getNumWriteReg(); i++) {
+        //              printf("(%d->%d),",ins->getNthWriteReg(i),ins->getWriteRe
+      gSubscript(ins->getNthWriteReg(i)));
+        //      }
+        //      printf("\n");
+        // }
+        /* ---------------------*/
+        printf("- Make Dot Files & Stat Data -\n");
+        finish(bbList, phBBList, &program_name);
+        t1=clock()-t0;
+        printf("\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minu
+      tes)\n-------------\n", ((float)t1)/CLOCKS_PER_SEC/60.0);
+        return 0;
+}
+\end{DoxyCode}

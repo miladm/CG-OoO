@@ -1,0 +1,85 @@
+\hypertarget{classbbROB}{
+\section{bbROB Class Reference}
+\label{classbbROB}\index{bbROB@{bbROB}}
+}
+
+
+{\ttfamily \#include $<$bbROB.h$>$}
+
+Inheritance diagram for bbROB:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbbROB}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbbROB_a76ac4539a3c9831412c228d7983547a8}{bbROB} ()
+\item 
+\hyperlink{classbbROB_aacfe02dd4954453834bce4612c233952}{$\sim$bbROB} ()
+\item 
+void \hyperlink{classbbROB_a429d00755302da6c15acd707d93647d5}{insert} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+\item 
+bool \hyperlink{classbbROB_a3ab745ba2eac9a90c9dc580cb5724dee}{commitBB} (int num)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbbROB_a76ac4539a3c9831412c228d7983547a8}{
+\index{bbROB@{bbROB}!bbROB@{bbROB}}
+\index{bbROB@{bbROB}!bbROB@{bbROB}}
+\subsubsection[{bbROB}]{\setlength{\rightskip}{0pt plus 5cm}bbROB::bbROB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbbROB_a76ac4539a3c9831412c228d7983547a8}
+\hypertarget{classbbROB_aacfe02dd4954453834bce4612c233952}{
+\index{bbROB@{bbROB}!$\sim$bbROB@{$\sim$bbROB}}
+\index{$\sim$bbROB@{$\sim$bbROB}!bbROB@{bbROB}}
+\subsubsection[{$\sim$bbROB}]{\setlength{\rightskip}{0pt plus 5cm}bbROB::$\sim$bbROB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbbROB_aacfe02dd4954453834bce4612c233952}
+
+\begin{DoxyCode}
+              {
+        delete bbROB;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbbROB_a3ab745ba2eac9a90c9dc580cb5724dee}{
+\index{bbROB@{bbROB}!commitBB@{commitBB}}
+\index{commitBB@{commitBB}!bbROB@{bbROB}}
+\subsubsection[{commitBB}]{\setlength{\rightskip}{0pt plus 5cm}bool bbROB::commitBB (
+\begin{DoxyParamCaption}
+\item[{int}]{num}
+\end{DoxyParamCaption}
+)}}
+\label{classbbROB_a3ab745ba2eac9a90c9dc580cb5724dee}
+\hypertarget{classbbROB_a429d00755302da6c15acd707d93647d5}{
+\index{bbROB@{bbROB}!insert@{insert}}
+\index{insert@{insert}!bbROB@{bbROB}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void bbROB::insert (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb}
+\end{DoxyParamCaption}
+)}}
+\label{classbbROB_a429d00755302da6c15acd707d93647d5}
+
+\begin{DoxyCode}
+                                 {
+        bbROB->Append(bb);
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{bbROB_8h}{bbROB.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{bbROB_8cpp}{bbROB.cpp}\end{DoxyCompactItemize}

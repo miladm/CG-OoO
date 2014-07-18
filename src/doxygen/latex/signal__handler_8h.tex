@@ -1,0 +1,122 @@
+\hypertarget{signal__handler_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/signal\_\-handler.h File Reference}
+\label{signal__handler_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/signal\_\-handler.h@{/home/milad/esc\_\-project/svn/PARS/src/frontend/signal\_\-handler.h}}
+}
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pin\_\-isa.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}g\_\-variable.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{signal__handler_8h_a505f360905b4ad0fa6e18f19405539ea}{recover} ()
+\item 
+EXCEPT\_\-HANDLING\_\-RESULT \hyperlink{signal__handler_8h_a14053986557d22a3e7d5d06d3f3b5bee}{handlePinException} (THREADID tid, EXCEPTION\_\-INFO $\ast$pExceptInfo, PHYSICAL\_\-CONTEXT $\ast$pPhysCtxt, VOID $\ast$v)
+\item 
+BOOL \hyperlink{signal__handler_8h_a5f145c9581fdc13b0459253871f0338a}{signal\_\-handler} (THREADID tid, INT32 sig, CONTEXT $\ast$ctxt, BOOL hasHandler, const EXCEPTION\_\-INFO $\ast$pExceptInfo, VOID $\ast$v)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{signal__handler_8h_a14053986557d22a3e7d5d06d3f3b5bee}{
+\index{signal\_\-handler.h@{signal\_\-handler.h}!handlePinException@{handlePinException}}
+\index{handlePinException@{handlePinException}!signal_handler.h@{signal\_\-handler.h}}
+\subsubsection[{handlePinException}]{\setlength{\rightskip}{0pt plus 5cm}EXCEPT\_\-HANDLING\_\-RESULT handlePinException (
+\begin{DoxyParamCaption}
+\item[{THREADID}]{tid, }
+\item[{EXCEPTION\_\-INFO $\ast$}]{pExceptInfo, }
+\item[{PHYSICAL\_\-CONTEXT $\ast$}]{pPhysCtxt, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{signal__handler_8h_a14053986557d22a3e7d5d06d3f3b5bee}
+
+\begin{DoxyCode}
+{
+        g_var.g_pin_signal_count++;
+    if (g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
+       << PIN_GetExceptionCode (pExceptInfo) << " on wrong path " << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " execption Info: " << P
+      IN_ExceptionToString (pExceptInfo) << endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " pin signal count = " <
+      < dec << g_var.g_pin_signal_count << std::endl;
+        recover ();
+        PIN_ExecuteAt (&g_var.g_context);
+    } else {
+        std::cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionC
+      ode (pExceptInfo) << " on correct path " << std::endl;
+        std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) <
+      < endl;
+        std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count <<
+       std::endl;
+    }
+        return EHR_UNHANDLED;
+}
+\end{DoxyCode}
+\hypertarget{signal__handler_8h_a505f360905b4ad0fa6e18f19405539ea}{
+\index{signal\_\-handler.h@{signal\_\-handler.h}!recover@{recover}}
+\index{recover@{recover}!signal_handler.h@{signal\_\-handler.h}}
+\subsubsection[{recover}]{\setlength{\rightskip}{0pt plus 5cm}void recover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{signal__handler_8h_a505f360905b4ad0fa6e18f19405539ea}
+
+\begin{DoxyCode}
+{
+        g_wrong_path = false;
+        g_total_wrong_path_count += g_wrong_path_count;
+        g_wrong_path_count = 0;
+        g_spec_syscall = false;
+        g_context_call_depth=0;
+        g_recovery_count++;
+        //g_log.recover();
+
+        if( g_debug_level & DBG_SPEC ) std::cout << " *** recovering to correct p
+      ath ***\n";
+        if( g_debug_level & DBG_SPEC ) std::cout << " recovery count = " << dec <
+      < g_recovery_count << std::endl;
+}
+\end{DoxyCode}
+\hypertarget{signal__handler_8h_a5f145c9581fdc13b0459253871f0338a}{
+\index{signal\_\-handler.h@{signal\_\-handler.h}!signal\_\-handler@{signal\_\-handler}}
+\index{signal\_\-handler@{signal\_\-handler}!signal_handler.h@{signal\_\-handler.h}}
+\subsubsection[{signal\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}BOOL signal\_\-handler (
+\begin{DoxyParamCaption}
+\item[{THREADID}]{tid, }
+\item[{INT32}]{sig, }
+\item[{CONTEXT $\ast$}]{ctxt, }
+\item[{BOOL}]{hasHandler, }
+\item[{const EXCEPTION\_\-INFO $\ast$}]{pExceptInfo, }
+\item[{VOID $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}
+\label{signal__handler_8h_a5f145c9581fdc13b0459253871f0338a}
+
+\begin{DoxyCode}
+{
+    if (sig != 11 && sig != 4 && sig != 7) cout << sig << ',' << g_var.
+      g_wrong_path << endl;
+    g_var.g_app_signal_count++;
+    if (g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
+       << sig << " on wrong path " << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << " application signal cou
+      nt = " << dec << g_var.g_app_signal_count << std::endl;
+        recover ();
+        PIN_SaveContext (&g_var.g_context,ctxt);
+        return FALSE;
+    } else {
+        std::cout << "ERROR for REAL: caught signal " << dec << sig << " on corre
+      ct path " << std::endl;
+        std::cout << " application signal count = " << dec << g_var.
+      g_app_signal_count << std::endl;
+        return TRUE; // pass exception 
+    }
+}
+\end{DoxyCode}

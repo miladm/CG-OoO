@@ -1,0 +1,365 @@
+\hypertarget{ssa_8cpp}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.cpp File Reference}
+\label{ssa_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/ssa.cpp}}
+}
+{\ttfamily \#include \char`\"{}ssa.h\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ssa_8cpp_a27946f3e650b0cd16c36dd3ce519fc1d}{ZERO\_\-ITER}~0
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}{findDomEntryPoints} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$interiorBB)
+\item 
+void \hyperlink{ssa_8cpp_a2407eaf38be9d17167c4361072082608}{buildDefUseSets} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\item 
+void \hyperlink{ssa_8cpp_adb27c228bf508415dafc026ebbc822d3}{buildVarList} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\item 
+void \hyperlink{ssa_8cpp_a64b325828ea51414e2809f54af3302a2}{phi\_\-func\_\-placement} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\item 
+int \hyperlink{ssa_8cpp_ad51f0106de926496f1a6b24bfd21bc32}{whichPred} (\hyperlink{classbasicblock}{basicblock} $\ast$Y, \hyperlink{classbasicblock}{basicblock} $\ast$X)
+\item 
+void \hyperlink{ssa_8cpp_af9593c92c3c4713e11388054c46aa5e9}{search} (\hyperlink{classbasicblock}{basicblock} $\ast$bb, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\item 
+void \hyperlink{ssa_8cpp_a804de8f00b7ea9e5487315dc9ff01d77}{ssa\_\-renaming} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\item 
+void \hyperlink{ssa_8cpp_a99d7839751286ac78c627aabd383cb51}{build\_\-ssa\_\-form} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}{counter} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{ssa_8cpp_a27946f3e650b0cd16c36dd3ce519fc1d}{
+\index{ssa.cpp@{ssa.cpp}!ZERO\_\-ITER@{ZERO\_\-ITER}}
+\index{ZERO\_\-ITER@{ZERO\_\-ITER}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{ZERO\_\-ITER}]{\setlength{\rightskip}{0pt plus 5cm}\#define ZERO\_\-ITER~0}}
+\label{ssa_8cpp_a27946f3e650b0cd16c36dd3ce519fc1d}
+
+
+\subsection{Function Documentation}
+\hypertarget{ssa_8cpp_a99d7839751286ac78c627aabd383cb51}{
+\index{ssa.cpp@{ssa.cpp}!build\_\-ssa\_\-form@{build\_\-ssa\_\-form}}
+\index{build\_\-ssa\_\-form@{build\_\-ssa\_\-form}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{build\_\-ssa\_\-form}]{\setlength{\rightskip}{0pt plus 5cm}void build\_\-ssa\_\-form (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_a99d7839751286ac78c627aabd383cb51}
+
+\begin{DoxyCode}
+                                                                            {
+        printf("\tBuild Def-Use Sets\n");
+        buildDefUseSets(bbList);
+        printf("\tBuild Variable Def Lists From DefSets\n");
+        buildVarList(bbList,varList);
+        printf("\tBuild Phi-Funcations\n");
+        phi_func_placement(bbList, varList);
+        printf("\tRun SSA Renaming\n");
+        ssa_renaming(bbList, varList);
+        printf("\tDistroy VarList\n");
+        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
+      (); it++) {
+                delete it->second;
+        }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_a2407eaf38be9d17167c4361072082608}{
+\index{ssa.cpp@{ssa.cpp}!buildDefUseSets@{buildDefUseSets}}
+\index{buildDefUseSets@{buildDefUseSets}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{buildDefUseSets}]{\setlength{\rightskip}{0pt plus 5cm}void buildDefUseSets (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_a2407eaf38be9d17167c4361072082608}
+
+\begin{DoxyCode}
+                                                {
+        for (int i =0 ; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->setupDefUseSets();
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_adb27c228bf508415dafc026ebbc822d3}{
+\index{ssa.cpp@{ssa.cpp}!buildVarList@{buildVarList}}
+\index{buildVarList@{buildVarList}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{buildVarList}]{\setlength{\rightskip}{0pt plus 5cm}void buildVarList (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_adb27c228bf508415dafc026ebbc822d3}
+
+\begin{DoxyCode}
+                                                                           {
+        // Build the variables list
+        for (long int i = X86_REG_LO; i <= X86_REG_HI; i++) {
+                variable *var = new variable(i);
+                varList.insert(pair<int,variable*>(i,var));
+        }
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock* bb = bbList->Nth(i);
+                set<long int> defSet = bb->getDefSet(); //NOTE: some variables ar
+      e "somehow" never defined in x86!
+                for (set<long int>::iterator it = defSet.begin(); it != defSet.en
+      d(); it++) {
+                        if (!((*it) >= X86_REG_LO && (*it) <= X86_REG_HI))
+                                printf("ERROR: %d\n",*it);
+                        Assert((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "inv
+      alid x86 variable.");
+                        int varIndx = *it;
+                        varList[varIndx]->addBB(bb);
+                }
+                #ifdef DEBUG_SSA
+                printf("def set: %d\n",defSet.size());
+                #endif
+        }
+        // Stat on x86 reg definitions in a program.
+        // for (map<int,variable*>::iterator it = varList.begin(); it != varList.
+      end(); it++) {
+                // printf("%d\n", it->second->getNumAssignedBB());
+        // }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}{
+\index{ssa.cpp@{ssa.cpp}!findDomEntryPoints@{findDomEntryPoints}}
+\index{findDomEntryPoints@{findDomEntryPoints}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{findDomEntryPoints}]{\setlength{\rightskip}{0pt plus 5cm}void findDomEntryPoints (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{interiorBB}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}
+
+\begin{DoxyCode}
+                                                                                 
+       {
+        for (int i = 0; i < bbList->NumElements(); i++) {       
+                basicblock* bb = bbList->Nth(i);
+                if (bb->getSDominatorSize() == 0) {
+                        interiorBB->Append(bb);
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_a64b325828ea51414e2809f54af3302a2}{
+\index{ssa.cpp@{ssa.cpp}!phi\_\-func\_\-placement@{phi\_\-func\_\-placement}}
+\index{phi\_\-func\_\-placement@{phi\_\-func\_\-placement}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{phi\_\-func\_\-placement}]{\setlength{\rightskip}{0pt plus 5cm}void phi\_\-func\_\-placement (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_a64b325828ea51414e2809f54af3302a2}
+
+\begin{DoxyCode}
+                                                                                {
+      
+        map<ADDR,int> hasAlready, work;
+        map<ADDR,basicblock*> W;
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                basicblock *bb = bbList->Nth(i);
+                hasAlready.insert(pair<ADDR,int>(bb->getID(),ZERO_ITER));
+                work.insert(pair<ADDR,int>(bb->getID(),ZERO_ITER));
+        }
+        int iterCount = 0;
+        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
+      (); it++) {
+                iterCount++;
+                variable *var = it->second;
+                for (int j = 0; j < var->getNumAssignedBB(); j++) {
+                        basicblock *bb = var->getNthAssignedBB(j);
+                        work[bb->getID()] = iterCount;
+                        W.insert(pair<ADDR,basicblock*>(bb->getID(),bb));
+                }
+                while (W.size() != 0) {
+                        basicblock* X = (W.begin())->second;
+                        W.erase(W.begin());
+                        map<ADDR,basicblock*> xDF = X->getDF();
+                        for (map<ADDR,basicblock*>::iterator Y = xDF.begin(); Y !
+      = xDF.end(); Y++) {
+                                if (hasAlready[Y->first] < iterCount) {
+                                        (Y->second)->insertPhiFunc(var->getID());
+      
+                                        hasAlready[Y->first] = iterCount;
+                                        if (work[Y->first] < iterCount) {
+                                                work[Y->first] = iterCount;
+                                                W.insert(pair<ADDR,basicblock*>((
+      Y->second)->getID(),Y->second));
+                                        }
+                                }
+                        }
+                }
+        }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_af9593c92c3c4713e11388054c46aa5e9}{
+\index{ssa.cpp@{ssa.cpp}!search@{search}}
+\index{search@{search}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{search}]{\setlength{\rightskip}{0pt plus 5cm}void search (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_af9593c92c3c4713e11388054c46aa5e9}
+
+\begin{DoxyCode}
+                                                         {
+        // if (!bb->isVisited()) {
+                bb->setAsVisited();
+                // printf("================================%d\n", counter++);
+                List<instruction*> *insList = bb->getInsList();
+                //TODO: check if the block is visited
+                //Process assignment operations
+                //Process phi operations
+                map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs();
+                for (map<long int, vector<long int> >::iterator it = phiFuncs.beg
+      in(); it != phiFuncs.end(); it++) {
+                        int var = it->first;
+                        Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid
+       register value");
+                        int k = varList[var]->getC();
+                        bb->setPhiWriteVar(var, k);
+                        varList[var]->pushToStack(k);
+                        varList[var]->setC(k+1);
+                }
+                for (int i = 0; i < insList->NumElements(); i++) {
+                        instruction *ins = insList->Nth(i);
+                        for (int j = 0; j < ins->getNumReadReg(); j++) {
+                                int var = ins->getNthReadReg(j);
+                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
+      "Invalid register value");
+                                ins->setReadVar(var, varList[var]->getTopStack())
+      ;
+                        }
+                        for (int j = 0; j < ins->getNumWriteReg(); j++) {
+                                int var = ins->getNthWriteReg(j);
+                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
+      "Invalid register value");
+                                int k = varList[var]->getC();
+                                ins->setWriteVar(var, k);
+                                varList[var]->pushToStack(k);
+                                varList[var]->setC(k+1);
+                        }
+                }
+                for (int i = 0; i < bb->getNumDescendents(); i++) {
+                        basicblock* Y = bb->getNthDescendent(i);
+                        int j = whichPred(Y, bb);
+                        map<long int, vector<long int> > phiFuncs = Y->
+      getPhiFuncs();
+                        for (map<long int, vector<long int> >::iterator it = phiF
+      uncs.begin(); it != phiFuncs.end(); it++) {
+                                int var = it->first;
+                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
+      "Invalid register value");
+                                //TODO see if j ever larger than 0
+                                //we want to have as many elemenet in teh phi-vec
+      tor as the number of ancestors of the BB. Then every ancestor must come and fill 
+      in the hole
+                                Y->replaceNthPhiOperand(var,j,varList[var]->getTo
+      pStack()); //TODO correct?
+                        }
+                }
+                map<ADDR,basicblock*> children = bb->getChildren();
+                for (map<ADDR,basicblock*>::iterator it = children.begin(); it !=
+       children.end(); it++) {
+                // for (int i = 0; i < bb->getNumChildren(); i++) {
+                        // printf("children\n");
+                        basicblock* Y = it->second;// bb->getNthChild(i);
+                        search(Y,varList);
+                }
+                for (int i = 0; i < insList->NumElements(); i++) {
+                        instruction *ins = insList->Nth(i);
+                        for (int j = 0; j < ins->getNumWriteReg(); j++) {
+                                int var = ins->getNthOldWriteReg(j);
+                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
+      "Invalid register value");
+                                varList[var]->popFromStack();
+                        }
+                        // This is another part of the stack hack
+                        for (int j = 0; j < ins->getNumReadReg(); j++) {
+                                int var = ins->getNthReadReg(j);
+                                Assert(varList.find(var) != varList.end());
+                                varList[var]->popHackPushes();
+                        }
+                }
+                for (map<long int, vector<long int> >::iterator it = phiFuncs.beg
+      in(); it != phiFuncs.end(); it++) {
+                        int var = it->first;
+                        Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid
+       register value");
+                        varList[var]->popFromStack();
+                }
+        // }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_a804de8f00b7ea9e5487315dc9ff01d77}{
+\index{ssa.cpp@{ssa.cpp}!ssa\_\-renaming@{ssa\_\-renaming}}
+\index{ssa\_\-renaming@{ssa\_\-renaming}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{ssa\_\-renaming}]{\setlength{\rightskip}{0pt plus 5cm}void ssa\_\-renaming (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
+\item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_a804de8f00b7ea9e5487315dc9ff01d77}
+
+\begin{DoxyCode}
+                                                                          {
+        List<basicblock*> *interiorBB = new List<basicblock*>;
+        findDomEntryPoints(bbList, interiorBB); //TODO: this is done twice (anoth
+      er time in reg-allocation - fix it)
+        for (int i = 0; i < bbList->NumElements(); i++)
+                bbList->Nth(i)->setAsUnvisited();
+        for (int i = 0; i < interiorBB->NumElements(); i++) {
+                basicblock* bbHead = interiorBB->Nth(i);
+                search (bbHead, varList);
+        }
+        for (int i = 0; i < bbList->NumElements(); i++) {
+                if (bbList->Nth(i)->isVisited() == false) printf("unvisited BB ID
+      : %llx,%d,%d\n", bbList->Nth(i)->getID(), bbList->Nth(i)->getNumAncestors(), bbLi
+      st->Nth(i)->numNonBackEdgeAncestors());
+                bbList->Nth(i)->setAsUnvisited();
+        }
+}
+\end{DoxyCode}
+\hypertarget{ssa_8cpp_ad51f0106de926496f1a6b24bfd21bc32}{
+\index{ssa.cpp@{ssa.cpp}!whichPred@{whichPred}}
+\index{whichPred@{whichPred}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{whichPred}]{\setlength{\rightskip}{0pt plus 5cm}int whichPred (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{Y, }
+\item[{{\bf basicblock} $\ast$}]{X}
+\end{DoxyParamCaption}
+)}}
+\label{ssa_8cpp_ad51f0106de926496f1a6b24bfd21bc32}
+
+\begin{DoxyCode}
+                                            {
+        ADDR bbID = X->getID();
+        for (int i = 0; i < Y->getNumAncestors(); i++) {
+                if (Y->getNthAncestor(i)->getID() == bbID)
+                        return i;
+        }
+        Assert(true == false && "CFG Fault. The BB ancesor was not found.");
+}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}{
+\index{ssa.cpp@{ssa.cpp}!counter@{counter}}
+\index{counter@{counter}!ssa.cpp@{ssa.cpp}}
+\subsubsection[{counter}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf counter} = 0}}
+\label{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}

@@ -1,0 +1,209 @@
+\hypertarget{classhist}{
+\section{hist Class Reference}
+\label{classhist}\index{hist@{hist}}
+}
+
+
+{\ttfamily \#include $<$hist.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhist_a02b10ba49a1a15793bc110fd7a807f76}{hist} (long int numBucket, long int lowerBound, long int upperBound)
+\item 
+\hyperlink{classhist_a521b0dbcf69573310c5f08327886ef27}{hist} (long int numBucket\_\-x, long int lowerBound\_\-x, long int upperBound\_\-x, long int numBucket\_\-y, long int lowerBound\_\-y, long int upperBound\_\-y)
+\item 
+\hyperlink{classhist_a0d23232f5889acd035009754e8f374d2}{$\sim$hist} ()
+\item 
+void \hyperlink{classhist_a96c35d4ac2a2b1e3d2a5421788a38967}{addElem} (long int elem)
+\item 
+long int \hyperlink{classhist_a800c9a2059ab0a238f309e452d1ebdfd}{findIndx} (long int elem)
+\item 
+void \hyperlink{classhist_a3db06ab39b05f5b95d49f3e3ef9bda74}{report} ()
+\item 
+void \hyperlink{classhist_a8c822aafaacb6c80cd46580de5512cba}{report} (FILE $\ast$file, string histName)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classhist_a02b10ba49a1a15793bc110fd7a807f76}{
+\index{hist@{hist}!hist@{hist}}
+\index{hist@{hist}!hist@{hist}}
+\subsubsection[{hist}]{\setlength{\rightskip}{0pt plus 5cm}hist::hist (
+\begin{DoxyParamCaption}
+\item[{long int}]{numBucket, }
+\item[{long int}]{lowerBound, }
+\item[{long int}]{upperBound}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a02b10ba49a1a15793bc110fd7a807f76}
+
+\begin{DoxyCode}
+                                                                       {
+        _numBucket_x = numBucket;
+        _numBucket_y = 1;
+        _lowerBound_x = lowerBound;
+        _upperBound_x = upperBound;
+        _lowerBound_y = -1;
+        _upperBound_y = -1;
+        _histMat = new long int* [_numBucket_y];
+        for (int i = 0; i < _numBucket_y; i++) {
+                _histMat[i] = new long int [_numBucket_x];
+                //Initialize
+                for (int j = 0; j < _numBucket_x; j++) {
+                        _histMat[i][j] = 0;
+                }
+        }
+
+        _step_x = floor((double)(_upperBound_x-_lowerBound_x)/(double)_numBucket_
+      x);
+        _step_y = -1;
+}
+\end{DoxyCode}
+\hypertarget{classhist_a521b0dbcf69573310c5f08327886ef27}{
+\index{hist@{hist}!hist@{hist}}
+\index{hist@{hist}!hist@{hist}}
+\subsubsection[{hist}]{\setlength{\rightskip}{0pt plus 5cm}hist::hist (
+\begin{DoxyParamCaption}
+\item[{long int}]{numBucket\_\-x, }
+\item[{long int}]{lowerBound\_\-x, }
+\item[{long int}]{upperBound\_\-x, }
+\item[{long int}]{numBucket\_\-y, }
+\item[{long int}]{lowerBound\_\-y, }
+\item[{long int}]{upperBound\_\-y}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a521b0dbcf69573310c5f08327886ef27}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                      {
+        _numBucket_x = numBucket_x;
+        _numBucket_y = numBucket_y;
+        _lowerBound_x = lowerBound_x;
+        _upperBound_x = upperBound_x;
+        _lowerBound_y = lowerBound_y;
+        _upperBound_y = upperBound_y;
+        _histMat = new long int* [_numBucket_y];
+        for (int i = 0; i < _numBucket_y; i++) {
+                _histMat[i] = new long int [_numBucket_x];
+                //Initialize
+                for (int j = 0; j < _numBucket_x; j++) {
+                        _histMat[i][j] = 0;
+                }
+        }
+        _step_x = floor((double)(_upperBound_x-_lowerBound_x)/(double)_numBucket_
+      x);
+        _step_y = floor((double)(_upperBound_y-_lowerBound_y)/(double)_numBucket_
+      y);
+}
+\end{DoxyCode}
+\hypertarget{classhist_a0d23232f5889acd035009754e8f374d2}{
+\index{hist@{hist}!$\sim$hist@{$\sim$hist}}
+\index{$\sim$hist@{$\sim$hist}!hist@{hist}}
+\subsubsection[{$\sim$hist}]{\setlength{\rightskip}{0pt plus 5cm}hist::$\sim$hist (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a0d23232f5889acd035009754e8f374d2}
+
+\begin{DoxyCode}
+            {
+        delete [] _histMat;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classhist_a96c35d4ac2a2b1e3d2a5421788a38967}{
+\index{hist@{hist}!addElem@{addElem}}
+\index{addElem@{addElem}!hist@{hist}}
+\subsubsection[{addElem}]{\setlength{\rightskip}{0pt plus 5cm}void hist::addElem (
+\begin{DoxyParamCaption}
+\item[{long int}]{elem}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a96c35d4ac2a2b1e3d2a5421788a38967}
+
+\begin{DoxyCode}
+                                {
+        long int indx = findIndx(elem);
+        if (!(indx < _numBucket_x && indx > -1)) printf("index = %ld,%ld,%ld\n",i
+      ndx,_step_x,elem);
+        Assert(indx < _numBucket_x && indx > -1);
+        _histMat[0][indx]++;
+}
+\end{DoxyCode}
+\hypertarget{classhist_a800c9a2059ab0a238f309e452d1ebdfd}{
+\index{hist@{hist}!findIndx@{findIndx}}
+\index{findIndx@{findIndx}!hist@{hist}}
+\subsubsection[{findIndx}]{\setlength{\rightskip}{0pt plus 5cm}long int hist::findIndx (
+\begin{DoxyParamCaption}
+\item[{long int}]{elem}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a800c9a2059ab0a238f309e452d1ebdfd}
+
+\begin{DoxyCode}
+                                     {
+        return floor((long double)elem/(long double)_step_x);
+}
+\end{DoxyCode}
+\hypertarget{classhist_a3db06ab39b05f5b95d49f3e3ef9bda74}{
+\index{hist@{hist}!report@{report}}
+\index{report@{report}!hist@{hist}}
+\subsubsection[{report}]{\setlength{\rightskip}{0pt plus 5cm}void hist::report (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a3db06ab39b05f5b95d49f3e3ef9bda74}
+
+\begin{DoxyCode}
+                  {
+        long int total = 0;
+        for (int j = 0; j < _numBucket_y; j++) {
+                for (int i = 0; i < _numBucket_x; i++) {
+                        printf("%ld, ", _histMat[j][i]);
+                        total += _histMat[j][i];
+                }
+                printf("\t");
+        }
+        printf("\n");
+}
+\end{DoxyCode}
+\hypertarget{classhist_a8c822aafaacb6c80cd46580de5512cba}{
+\index{hist@{hist}!report@{report}}
+\index{report@{report}!hist@{hist}}
+\subsubsection[{report}]{\setlength{\rightskip}{0pt plus 5cm}void hist::report (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{file, }
+\item[{string}]{histName}
+\end{DoxyParamCaption}
+)}}
+\label{classhist_a8c822aafaacb6c80cd46580de5512cba}
+
+\begin{DoxyCode}
+                                             {
+        long int total = 0;
+        fprintf(file, "----------------%s\n", histName.c_str());
+        printf("----------------%s\n", histName.c_str());
+        for (int j = 0; j < _numBucket_y; j++) {
+                for (int i = 0; i < _numBucket_x; i++) {
+                        fprintf(file, "%ld, ", _histMat[j][i]);
+                        printf("%ld, ", _histMat[j][i]);
+                        total += _histMat[j][i];
+                }
+                printf("\t");
+        }
+        printf("\n");
+        fprintf(file, "\n");
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{hist_8h}{hist.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{hist_8cpp}{hist.cpp}\end{DoxyCompactItemize}

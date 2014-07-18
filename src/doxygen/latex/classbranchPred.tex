@@ -1,0 +1,117 @@
+\hypertarget{classbranchPred}{
+\section{branchPred Class Reference}
+\label{classbranchPred}\index{branchPred@{branchPred}}
+}
+
+
+{\ttfamily \#include $<$branchPred.h$>$}
+
+Inheritance diagram for branchPred:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbranchPred}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbranchPred_ae1c2492d8d28125206920943433f1ae2}{branchPred} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} bp\_\-width, string stage\_\-name)
+\item 
+\hyperlink{classbranchPred_abe302db16b3d409ae8cab412ddc72feb}{$\sim$branchPred} ()
+\item 
+void \hyperlink{classbranchPred_a1f0824ac19dd44bb72c2f3d08069f231}{doBP} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classbranchPred_adf9e3624f322acf4d015628eed0786c2}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
+\item 
+void \hyperlink{classbranchPred_a1bb57a2887df1dfcc967fb26c369e8e1}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbranchPred_ae1c2492d8d28125206920943433f1ae2}{
+\index{branchPred@{branchPred}!branchPred@{branchPred}}
+\index{branchPred@{branchPred}!branchPred@{branchPred}}
+\subsubsection[{branchPred}]{\setlength{\rightskip}{0pt plus 5cm}branchPred::branchPred (
+\begin{DoxyParamCaption}
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-bp\_\-port, }
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{bp\_\-to\_\-fetch\_\-port, }
+\item[{{\bf WIDTH}}]{bp\_\-width, }
+\item[{string}]{stage\_\-name}
+\end{DoxyParamCaption}
+)}}
+\label{classbranchPred_ae1c2492d8d28125206920943433f1ae2}
+
+\begin{DoxyCode}
+        : stage (bp_width, stage_name)
+{ 
+    _fetch_to_bp_port = &fetch_to_bp_port;
+    _bp_to_fetch_port = &bp_to_fetch_port;
+}
+\end{DoxyCode}
+\hypertarget{classbranchPred_abe302db16b3d409ae8cab412ddc72feb}{
+\index{branchPred@{branchPred}!$\sim$branchPred@{$\sim$branchPred}}
+\index{$\sim$branchPred@{$\sim$branchPred}!branchPred@{branchPred}}
+\subsubsection[{$\sim$branchPred}]{\setlength{\rightskip}{0pt plus 5cm}branchPred::$\sim$branchPred (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbranchPred_abe302db16b3d409ae8cab412ddc72feb}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbranchPred_a1f0824ac19dd44bb72c2f3d08069f231}{
+\index{branchPred@{branchPred}!doBP@{doBP}}
+\index{doBP@{doBP}!branchPred@{branchPred}}
+\subsubsection[{doBP}]{\setlength{\rightskip}{0pt plus 5cm}void branchPred::doBP (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classbranchPred_a1f0824ac19dd44bb72c2f3d08069f231}
+
+\begin{DoxyCode}
+                                    {
+    /* STAT */
+    regStat (clk);
+}
+\end{DoxyCode}
+\hypertarget{classbranchPred_a1bb57a2887df1dfcc967fb26c369e8e1}{
+\index{branchPred@{branchPred}!regStat@{regStat}}
+\index{regStat@{regStat}!branchPred@{branchPred}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void branchPred::regStat (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classbranchPred_a1bb57a2887df1dfcc967fb26c369e8e1}
+
+\begin{DoxyCode}
+                                       {
+    _fetch_to_bp_port->regStat (clk.now ());
+}
+\end{DoxyCode}
+\hypertarget{classbranchPred_adf9e3624f322acf4d015628eed0786c2}{
+\index{branchPred@{branchPred}!squash@{squash}}
+\index{squash@{squash}!branchPred@{branchPred}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void branchPred::squash (
+\begin{DoxyParamCaption}
+\item[{{\bf sysClock} \&}]{clk}
+\end{DoxyParamCaption}
+)}}
+\label{classbranchPred_adf9e3624f322acf4d015628eed0786c2}
+
+\begin{DoxyCode}
+                                      {
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2branchPred_8h}{branchPred.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2branchPred_8cpp}{branchPred.cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,236 @@
+\hypertarget{classstat}{
+\section{stat Class Reference}
+\label{classstat}\index{stat@{stat}}
+}
+
+
+{\ttfamily \#include $<$stat.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstat_ab89727a4198ffd032e194917596e156b}{stat} ()
+\item 
+\hyperlink{classstat_adb268824871b2f69d7b11003abf2fe6b}{$\sim$stat} ()
+\item 
+void \hyperlink{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}{setMemAddr} (uint64\_\-t memAddr)
+\item 
+void \hyperlink{classstat_a534c0aacb73143316373470a70aece20}{setRegister} (int $\ast$r, int $\ast$rt)
+\item 
+void \hyperlink{classstat_aac993b5bfa99506a46b3bd02382613ed}{setType} (\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type} insType)
+\item 
+void \hyperlink{classstat_ac78f327016771d7189a0dd9e7709d7ce}{setStatus} (\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{status} insStatus, int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}, int latency)
+\item 
+void \hyperlink{classstat_ae3663029f693d0bd7279007a96b61fd1}{setMemType} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} readORwrite)
+\item 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type} \hyperlink{classstat_ad6c243f8915182cc7f3af301714cf6b2}{getType} ()
+\item 
+\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{status} \hyperlink{classstat_af85423f8423fc110dc995e0da6d56f58}{getStatus} ()
+\item 
+int \hyperlink{classstat_a404f63a716c9853ebe824b2103ac6dbb}{getLatency} ()
+\item 
+int \hyperlink{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}{getCompleteCycle} ()
+\item 
+int \hyperlink{classstat_aca46365b8adad2b91b5626f51e85e22a}{getIssueCycle} ()
+\item 
+int \hyperlink{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}{getMyReg} (int i)
+\item 
+int \hyperlink{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}{getNumReg} ()
+\item 
+uint64\_\-t \hyperlink{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}{getMemAddr} ()
+\item 
+int \hyperlink{classstat_a2060522133fb74689cb730a13d83efb2}{getMyRegType} (int i)
+\item 
+\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} \hyperlink{classstat_a471c26c51591a16712ce553b56047484}{getMemType} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstat_ab89727a4198ffd032e194917596e156b}{
+\index{stat@{stat}!stat@{stat}}
+\index{stat@{stat}!stat@{stat}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}stat::stat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ab89727a4198ffd032e194917596e156b}
+\hypertarget{classstat_adb268824871b2f69d7b11003abf2fe6b}{
+\index{stat@{stat}!$\sim$stat@{$\sim$stat}}
+\index{$\sim$stat@{$\sim$stat}!stat@{stat}}
+\subsubsection[{$\sim$stat}]{\setlength{\rightskip}{0pt plus 5cm}stat::$\sim$stat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classstat_adb268824871b2f69d7b11003abf2fe6b}
+
+\begin{DoxyCode}
+{/*nothing for now*/}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}{
+\index{stat@{stat}!getCompleteCycle@{getCompleteCycle}}
+\index{getCompleteCycle@{getCompleteCycle}!stat@{stat}}
+\subsubsection[{getCompleteCycle}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getCompleteCycle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}
+\hypertarget{classstat_aca46365b8adad2b91b5626f51e85e22a}{
+\index{stat@{stat}!getIssueCycle@{getIssueCycle}}
+\index{getIssueCycle@{getIssueCycle}!stat@{stat}}
+\subsubsection[{getIssueCycle}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getIssueCycle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_aca46365b8adad2b91b5626f51e85e22a}
+\hypertarget{classstat_a404f63a716c9853ebe824b2103ac6dbb}{
+\index{stat@{stat}!getLatency@{getLatency}}
+\index{getLatency@{getLatency}!stat@{stat}}
+\subsubsection[{getLatency}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getLatency (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a404f63a716c9853ebe824b2103ac6dbb}
+\hypertarget{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}{
+\index{stat@{stat}!getMemAddr@{getMemAddr}}
+\index{getMemAddr@{getMemAddr}!stat@{stat}}
+\subsubsection[{getMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}uint64\_\-t stat::getMemAddr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}
+\hypertarget{classstat_a471c26c51591a16712ce553b56047484}{
+\index{stat@{stat}!getMemType@{getMemType}}
+\index{getMemType@{getMemType}!stat@{stat}}
+\subsubsection[{getMemType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf memType} stat::getMemType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a471c26c51591a16712ce553b56047484}
+\hypertarget{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}{
+\index{stat@{stat}!getMyReg@{getMyReg}}
+\index{getMyReg@{getMyReg}!stat@{stat}}
+\subsubsection[{getMyReg}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getMyReg (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}
+\hypertarget{classstat_a2060522133fb74689cb730a13d83efb2}{
+\index{stat@{stat}!getMyRegType@{getMyRegType}}
+\index{getMyRegType@{getMyRegType}!stat@{stat}}
+\subsubsection[{getMyRegType}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getMyRegType (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a2060522133fb74689cb730a13d83efb2}
+\hypertarget{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}{
+\index{stat@{stat}!getNumReg@{getNumReg}}
+\index{getNumReg@{getNumReg}!stat@{stat}}
+\subsubsection[{getNumReg}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getNumReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}
+\hypertarget{classstat_af85423f8423fc110dc995e0da6d56f58}{
+\index{stat@{stat}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!stat@{stat}}
+\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf status} stat::getStatus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_af85423f8423fc110dc995e0da6d56f58}
+\hypertarget{classstat_ad6c243f8915182cc7f3af301714cf6b2}{
+\index{stat@{stat}!getType@{getType}}
+\index{getType@{getType}!stat@{stat}}
+\subsubsection[{getType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf type} stat::getType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ad6c243f8915182cc7f3af301714cf6b2}
+\hypertarget{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}{
+\index{stat@{stat}!setMemAddr@{setMemAddr}}
+\index{setMemAddr@{setMemAddr}!stat@{stat}}
+\subsubsection[{setMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}void instruction::setMemAddr (
+\begin{DoxyParamCaption}
+\item[{uint64\_\-t}]{memAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}
+
+\begin{DoxyCode}
+                                             {
+        _memAddr = memAddr;
+        //if (debug) printf("addr = %lx\n", _memAddr);
+}
+\end{DoxyCode}
+\hypertarget{classstat_ae3663029f693d0bd7279007a96b61fd1}{
+\index{stat@{stat}!setMemType@{setMemType}}
+\index{setMemType@{setMemType}!stat@{stat}}
+\subsubsection[{setMemType}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setMemType (
+\begin{DoxyParamCaption}
+\item[{{\bf memType}}]{readORwrite}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ae3663029f693d0bd7279007a96b61fd1}
+\hypertarget{classstat_a534c0aacb73143316373470a70aece20}{
+\index{stat@{stat}!setRegister@{setRegister}}
+\index{setRegister@{setRegister}!stat@{stat}}
+\subsubsection[{setRegister}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setRegister (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{r, }
+\item[{int $\ast$}]{rt}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a534c0aacb73143316373470a70aece20}
+\hypertarget{classstat_ac78f327016771d7189a0dd9e7709d7ce}{
+\index{stat@{stat}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!stat@{stat}}
+\subsubsection[{setStatus}]{\setlength{\rightskip}{0pt plus 5cm}void instruction::setStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf status}}]{insStatus, }
+\item[{int}]{cycle, }
+\item[{int}]{latency}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ac78f327016771d7189a0dd9e7709d7ce}
+
+\begin{DoxyCode}
+                                         {
+        //Assert(insStatus != NULL);
+        _insStatus = insStatus;
+        if (_insStatus == issue) {
+                _issueCycle  = cycle;
+                _latency     = latency;
+                _completeCycle = cycle + latency;
+        }
+}
+\end{DoxyCode}
+\hypertarget{classstat_aac993b5bfa99506a46b3bd02382613ed}{
+\index{stat@{stat}!setType@{setType}}
+\index{setType@{setType}!stat@{stat}}
+\subsubsection[{setType}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setType (
+\begin{DoxyParamCaption}
+\item[{{\bf type}}]{insType}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_aac993b5bfa99506a46b3bd02382613ed}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2stat_8h}{stat.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2stat_8cpp}{stat.cpp}\end{DoxyCompactItemize}

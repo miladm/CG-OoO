@@ -1,0 +1,295 @@
+\hypertarget{classCacheLine}{
+\section{CacheLine Class Reference}
+\label{classCacheLine}\index{CacheLine@{CacheLine}}
+}
+
+
+{\ttfamily \#include $<$cacheLine.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCacheLine_a7fcd0784f096f49c5f0305c00e2469fa}{CacheLine} ()
+\item 
+\hyperlink{classCacheLine_ac0800bc7e0bae2ef5625630c10a4a394}{$\sim$CacheLine} ()
+\item 
+void \hyperlink{classCacheLine_ad59b5f7ffc859f0030f89e3bb5780b63}{writeLine} (long int inTag, int8\_\-t $\ast$inData)
+\item 
+void \hyperlink{classCacheLine_a3e210e3e77ff0f32f2abbdaa89d5fb34}{readLine} (int8\_\-t $\ast$\&inData)
+\item 
+bool \hyperlink{classCacheLine_a1a40d37c4061fb781a4d10961bed69f1}{isValid} ()
+\item 
+bool \hyperlink{classCacheLine_afed987cce2570b44fd809fde13730cd8}{isDirty} ()
+\item 
+void \hyperlink{classCacheLine_a13c9c3c7fd7fe534ef02b57cbc33011b}{setClean} ()
+\item 
+int \hyperlink{classCacheLine_af26e8419cd2046f87cd41bc6e3db5599}{getLineSize} ()
+\item 
+\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classCacheLine_a5411336f888d3095ba6d54cf2359baec}{getTag} ()
+\item 
+void \hyperlink{classCacheLine_a3a34685f69adcc6de9fcb01d36b9ef7e}{setTag} (long int tag)
+\item 
+long int \hyperlink{classCacheLine_a05fbf7e132ca588cf98228a2e0daf915}{getCycle} ()
+\item 
+void \hyperlink{classCacheLine_a0aee67a4391b8531292f629f0b47ff5c}{setCycle} (long int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle})
+\item 
+bool \hyperlink{classCacheLine_a3fe73f9f8e02abf4acc935a3d7849efa}{getExpectData} ()
+\item 
+void \hyperlink{classCacheLine_a7ad6add47edafaaf8f8b12a7f54e0b6d}{setExpectData} (bool expct)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCacheLine_a7fcd0784f096f49c5f0305c00e2469fa}{
+\index{CacheLine@{CacheLine}!CacheLine@{CacheLine}}
+\index{CacheLine@{CacheLine}!CacheLine@{CacheLine}}
+\subsubsection[{CacheLine}]{\setlength{\rightskip}{0pt plus 5cm}CacheLine::CacheLine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a7fcd0784f096f49c5f0305c00e2469fa}
+
+\begin{DoxyCode}
+{
+    _valid = false;
+    _dirty = false;
+    _tag = -1;
+    _lineSize = 8; //[Bytes] 64b cache line to support double
+    _data = new int8_t[_lineSize];
+    for (int i = 0; i < _lineSize; i++) {_data[i] = 0;}
+    if(!_data){
+        //throw Fwk::MemoryException("Alloc failed in CacheLine::CacheLine"); //T
+      ODO fix this
+    }
+    debug = false;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_ac0800bc7e0bae2ef5625630c10a4a394}{
+\index{CacheLine@{CacheLine}!$\sim$CacheLine@{$\sim$CacheLine}}
+\index{$\sim$CacheLine@{$\sim$CacheLine}!CacheLine@{CacheLine}}
+\subsubsection[{$\sim$CacheLine}]{\setlength{\rightskip}{0pt plus 5cm}CacheLine::$\sim$CacheLine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_ac0800bc7e0bae2ef5625630c10a4a394}
+
+\begin{DoxyCode}
+                       {
+    delete [] _data;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classCacheLine_a05fbf7e132ca588cf98228a2e0daf915}{
+\index{CacheLine@{CacheLine}!getCycle@{getCycle}}
+\index{getCycle@{getCycle}!CacheLine@{CacheLine}}
+\subsubsection[{getCycle}]{\setlength{\rightskip}{0pt plus 5cm}long int CacheLine::getCycle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a05fbf7e132ca588cf98228a2e0daf915}
+
+\begin{DoxyCode}
+                             {
+        return _cycle;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a3fe73f9f8e02abf4acc935a3d7849efa}{
+\index{CacheLine@{CacheLine}!getExpectData@{getExpectData}}
+\index{getExpectData@{getExpectData}!CacheLine@{CacheLine}}
+\subsubsection[{getExpectData}]{\setlength{\rightskip}{0pt plus 5cm}bool CacheLine::getExpectData (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a3fe73f9f8e02abf4acc935a3d7849efa}
+
+\begin{DoxyCode}
+                              {
+        return _expectData;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_af26e8419cd2046f87cd41bc6e3db5599}{
+\index{CacheLine@{CacheLine}!getLineSize@{getLineSize}}
+\index{getLineSize@{getLineSize}!CacheLine@{CacheLine}}
+\subsubsection[{getLineSize}]{\setlength{\rightskip}{0pt plus 5cm}int CacheLine::getLineSize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_af26e8419cd2046f87cd41bc6e3db5599}
+
+\begin{DoxyCode}
+{return _lineSize;}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a5411336f888d3095ba6d54cf2359baec}{
+\index{CacheLine@{CacheLine}!getTag@{getTag}}
+\index{getTag@{getTag}!CacheLine@{CacheLine}}
+\subsubsection[{getTag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} CacheLine::getTag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a5411336f888d3095ba6d54cf2359baec}
+
+\begin{DoxyCode}
+                         {
+        //printf("TAG OUT = %lu\n", _tag);
+        return _tag;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_afed987cce2570b44fd809fde13730cd8}{
+\index{CacheLine@{CacheLine}!isDirty@{isDirty}}
+\index{isDirty@{isDirty}!CacheLine@{CacheLine}}
+\subsubsection[{isDirty}]{\setlength{\rightskip}{0pt plus 5cm}bool CacheLine::isDirty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_afed987cce2570b44fd809fde13730cd8}
+
+\begin{DoxyCode}
+{
+    uint64_t indx = getIndex(addr);
+    uint64_t tag = getTag(addr);
+    for (int i = 0; i < _sa; i++) {
+        if (tag == _cacheLines[i][indx].getTag())
+                return _cacheLines[i][indx].isDirty();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a1a40d37c4061fb781a4d10961bed69f1}{
+\index{CacheLine@{CacheLine}!isValid@{isValid}}
+\index{isValid@{isValid}!CacheLine@{CacheLine}}
+\subsubsection[{isValid}]{\setlength{\rightskip}{0pt plus 5cm}bool CacheLine::isValid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a1a40d37c4061fb781a4d10961bed69f1}
+
+\begin{DoxyCode}
+{
+    uint64_t indx = getIndex(addr);
+    for (int i = 0; i < _sa; i++) {
+        if (_cacheLines[i][indx].isValid() == true);
+                return true;
+    }
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a3e210e3e77ff0f32f2abbdaa89d5fb34}{
+\index{CacheLine@{CacheLine}!readLine@{readLine}}
+\index{readLine@{readLine}!CacheLine@{CacheLine}}
+\subsubsection[{readLine}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::readLine (
+\begin{DoxyParamCaption}
+\item[{int8\_\-t $\ast$\&}]{inData}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a3e210e3e77ff0f32f2abbdaa89d5fb34}
+
+\begin{DoxyCode}
+{
+        if(debug) printf("   Cache Content: ");
+        if(debug) printf("\n");
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a13c9c3c7fd7fe534ef02b57cbc33011b}{
+\index{CacheLine@{CacheLine}!setClean@{setClean}}
+\index{setClean@{setClean}!CacheLine@{CacheLine}}
+\subsubsection[{setClean}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::setClean (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a13c9c3c7fd7fe534ef02b57cbc33011b}
+
+\begin{DoxyCode}
+{
+    uint64_t indx = getIndex(addr);
+    _cacheLines[0][indx].setClean();
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a0aee67a4391b8531292f629f0b47ff5c}{
+\index{CacheLine@{CacheLine}!setCycle@{setCycle}}
+\index{setCycle@{setCycle}!CacheLine@{CacheLine}}
+\subsubsection[{setCycle}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::setCycle (
+\begin{DoxyParamCaption}
+\item[{long int}]{cycle}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a0aee67a4391b8531292f629f0b47ff5c}
+
+\begin{DoxyCode}
+                                       {
+        _cycle = cycle;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a7ad6add47edafaaf8f8b12a7f54e0b6d}{
+\index{CacheLine@{CacheLine}!setExpectData@{setExpectData}}
+\index{setExpectData@{setExpectData}!CacheLine@{CacheLine}}
+\subsubsection[{setExpectData}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::setExpectData (
+\begin{DoxyParamCaption}
+\item[{bool}]{expct}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a7ad6add47edafaaf8f8b12a7f54e0b6d}
+
+\begin{DoxyCode}
+                                        {
+        _expectData = expct;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_a3a34685f69adcc6de9fcb01d36b9ef7e}{
+\index{CacheLine@{CacheLine}!setTag@{setTag}}
+\index{setTag@{setTag}!CacheLine@{CacheLine}}
+\subsubsection[{setTag}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::setTag (
+\begin{DoxyParamCaption}
+\item[{long int}]{tag}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_a3a34685f69adcc6de9fcb01d36b9ef7e}
+
+\begin{DoxyCode}
+                                    {
+        _tag = tag;
+}
+\end{DoxyCode}
+\hypertarget{classCacheLine_ad59b5f7ffc859f0030f89e3bb5780b63}{
+\index{CacheLine@{CacheLine}!writeLine@{writeLine}}
+\index{writeLine@{writeLine}!CacheLine@{CacheLine}}
+\subsubsection[{writeLine}]{\setlength{\rightskip}{0pt plus 5cm}void CacheLine::writeLine (
+\begin{DoxyParamCaption}
+\item[{long int}]{inTag, }
+\item[{int8\_\-t $\ast$}]{inData}
+\end{DoxyParamCaption}
+)}}
+\label{classCacheLine_ad59b5f7ffc859f0030f89e3bb5780b63}
+
+\begin{DoxyCode}
+{
+    //printf("TAG IN  = %lu\n", _tag);
+    _tag = inTag;
+    //printf("TAG IN  = %lu\n", _tag);
+    _valid = true;
+    _dirty = true;
+    if(debug) printf("   Cache Content: ");
+//  for (int i = 0; i < _lineSize; i++) {
+//      _data[i] = inData[i];
+//      if(debug) printf("%d ", _data[i]);
+//  }
+    if(debug) printf("\n");
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cacheLine_8h}{cacheLine.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__halfSA_8cpp}{cache\_\-halfSA.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__singleWord_8cpp}{cache\_\-singleWord.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cacheLine_8cpp}{cacheLine.cpp}\end{DoxyCompactItemize}

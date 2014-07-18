@@ -1,0 +1,58 @@
+\hypertarget{inoBkEnd_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.h File Reference}
+\label{inoBkEnd_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/ino/inoBkEnd.h}}
+}
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include \char`\"{}sysCore.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}{inoBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}{inoBkEndRun} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}{
+\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEnd\_\-init@{inoBkEnd\_\-init}}
+\index{inoBkEnd\_\-init@{inoBkEnd\_\-init}!inoBkEnd.h@{inoBkEnd.h}}
+\subsubsection[{inoBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEnd\_\-init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}
+
+\begin{DoxyCode}
+                                                   {
+    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+    _core = new sysCore (1, 4, 4, 4, 4, 4, 4, 4,
+                         2, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10, 
+                         1, 10);
+}
+\end{DoxyCode}
+\hypertarget{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}{
+\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEndRun@{inoBkEndRun}}
+\index{inoBkEndRun@{inoBkEndRun}!inoBkEnd.h@{inoBkEnd.h}}
+\subsubsection[{inoBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEndRun (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}
+
+\begin{DoxyCode}
+                   {
+    _core->runCore();
+}
+\end{DoxyCode}

@@ -1,0 +1,263 @@
+\hypertarget{classregisterFile}{
+\section{registerFile Class Reference}
+\label{classregisterFile}\index{registerFile@{registerFile}}
+}
+
+
+{\ttfamily \#include $<$registerFile.h$>$}
+
+Inheritance diagram for registerFile:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classregisterFile}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}{registerFile} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} rf\_\-begin\_\-num=1, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} rf\_\-size=LARF\_\-SIZE+GARF\_\-SIZE, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} rd\_\-port\_\-cnt=8, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} wr\_\-port\_\-cnt=4, string rf\_\-name=\char`\"{}registerFile\char`\"{})
+\item 
+\hyperlink{classregisterFile_a51d44388ce9baf55f5d0fc108198d915}{$\sim$registerFile} ()
+\item 
+void \hyperlink{classregisterFile_a57aa14508810da286ee60ef6cd033d6b}{updateReg} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+\item 
+void \hyperlink{classregisterFile_a2731695462957c3ac0a8888e7fce3bd3}{reserveReg} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+\item 
+bool \hyperlink{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}{isRegValid} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+\item 
+bool \hyperlink{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}{isRegBusy} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} regNum)
+\item 
+void \hyperlink{classregisterFile_a9e487acbcecb5a905a4ee1c80adf48e4}{resetRF} ()
+\item 
+bool \hyperlink{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
+\item 
+bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}{
+\index{registerFile@{registerFile}!registerFile@{registerFile}}
+\index{registerFile@{registerFile}!registerFile@{registerFile}}
+\subsubsection[{registerFile}]{\setlength{\rightskip}{0pt plus 5cm}registerFile::registerFile (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{rf\_\-begin\_\-num = {\ttfamily 1}, }
+\item[{{\bf PR}}]{rf\_\-size = {\ttfamily LARF\_\-SIZE+GARF\_\-SIZE}, }
+\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 8}, }
+\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 4}, }
+\item[{string}]{rf\_\-name = {\ttfamily \char`\"{}registerFile\char`\"{}}}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}
+
+\begin{DoxyCode}
+    : unit (rf_name),
+      _rf_size (rf_size),
+      _rf_begin_num (rf_begin_num),
+      _rf_end_num (rf_begin_num+rf_size-1),
+      _wr_port_cnt (wr_port_cnt),
+      _rd_port_cnt (rd_port_cnt)
+{
+    Assert (_rf_size > 0);
+    for (PR i = _rf_begin_num; i < _rf_end_num; i++) {
+        registerElement* reg = new registerElement (i);
+        _RF.insert (pair<PR, registerElement*> (i, reg));
+    }
+    _cycle = START_CYCLE;
+    _num_free_wr_port = _wr_port_cnt;
+    _num_free_rd_port = _rd_port_cnt;
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a51d44388ce9baf55f5d0fc108198d915}{
+\index{registerFile@{registerFile}!$\sim$registerFile@{$\sim$registerFile}}
+\index{$\sim$registerFile@{$\sim$registerFile}!registerFile@{registerFile}}
+\subsubsection[{$\sim$registerFile}]{\setlength{\rightskip}{0pt plus 5cm}registerFile::$\sim$registerFile (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a51d44388ce9baf55f5d0fc108198d915}
+
+\begin{DoxyCode}
+                             {
+    map <PR, registerElement*>::iterator it;
+    for (it = _RF.begin (); it != _RF.end (); it++) {
+        delete it->second;
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}{
+\index{registerFile@{registerFile}!hasFreeRdPort@{hasFreeRdPort}}
+\index{hasFreeRdPort@{hasFreeRdPort}!registerFile@{registerFile}}
+\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::hasFreeRdPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now, }
+\item[{{\bf WIDTH}}]{numRegRdPorts}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}
+
+\begin{DoxyCode}
+                                                                {
+    Assert (_rd_port_cnt >= numRegRdPorts);
+    if (_cycle < now) {
+        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
+        _cycle = now;
+        return true;
+    } else if (_cycle == now) {
+        _num_free_rd_port -= numRegRdPorts;
+        if (_num_free_rd_port >= 0) return true;
+        else return false;
+    }
+    Assert (true == false && "should not have gotten here");
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{
+\index{registerFile@{registerFile}!hasFreeWrPort@{hasFreeWrPort}}
+\index{hasFreeWrPort@{hasFreeWrPort}!registerFile@{registerFile}}
+\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::hasFreeWrPort (
+\begin{DoxyParamCaption}
+\item[{{\bf CYCLE}}]{now}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}
+
+\begin{DoxyCode}
+                                           {
+    if (_cycle < now) {
+        _num_free_wr_port = _wr_port_cnt;
+        _cycle = now;
+        return true;
+    } else if (_cycle == now) {
+        _num_free_wr_port--;
+        if (_num_free_wr_port > 0) {
+            return true;
+        } else {
+            //Assert (true == false && "this feature may not work -look into it")
+      ;
+            return false;
+        }
+    }
+    Assert (true == false && "should not have gotten here");
+    return false;
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}{
+\index{registerFile@{registerFile}!isRegBusy@{isRegBusy}}
+\index{isRegBusy@{isRegBusy}!registerFile@{registerFile}}
+\subsubsection[{isRegBusy}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::isRegBusy (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{regNum}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}
+
+\begin{DoxyCode}
+                                    {
+#ifdef ASSERTION
+        Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+#endif
+
+    return (_RF[reg]->_reg_state == WAIT_ON_WRITE_REG ? true : false);
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}{
+\index{registerFile@{registerFile}!isRegValid@{isRegValid}}
+\index{isRegValid@{isRegValid}!registerFile@{registerFile}}
+\subsubsection[{isRegValid}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::isRegValid (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{reg}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}
+
+
+NOTE: only works for INO 
+
+
+\begin{DoxyCode}
+                                     {
+#ifdef ASSERTION
+    Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+#endif
+    if (_RF[reg]->_axesedBefore == true) {
+#ifdef ASSERTION
+        Assert (_RF[reg]->_reg_state != NO_VAL_REG && 
+                "Register must hold data to read from - call updateReg () first")
+      ;
+#endif
+    } else {
+        _RF[reg]->_axesedBefore = true;
+        if (_RF[reg]->_reg_state == NO_VAL_REG)
+            _RF[reg]->_reg_state = DONE_WRITE_REG; 
+    }
+    return _RF[reg]->_reg_state == DONE_WRITE_REG ? true : false;
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a2731695462957c3ac0a8888e7fce3bd3}{
+\index{registerFile@{registerFile}!reserveReg@{reserveReg}}
+\index{reserveReg@{reserveReg}!registerFile@{registerFile}}
+\subsubsection[{reserveReg}]{\setlength{\rightskip}{0pt plus 5cm}void registerFile::reserveReg (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{reg}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a2731695462957c3ac0a8888e7fce3bd3}
+
+\begin{DoxyCode}
+                                     {
+#ifdef ASSERTION
+    Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+    Assert (_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == 
+      NO_VAL_REG);
+#endif
+    _RF[reg]->_reg_state = WAIT_ON_WRITE_REG;
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a9e487acbcecb5a905a4ee1c80adf48e4}{
+\index{registerFile@{registerFile}!resetRF@{resetRF}}
+\index{resetRF@{resetRF}!registerFile@{registerFile}}
+\subsubsection[{resetRF}]{\setlength{\rightskip}{0pt plus 5cm}void registerFile::resetRF (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a9e487acbcecb5a905a4ee1c80adf48e4}
+
+\begin{DoxyCode}
+                            {
+    map<PR, registerElement*>::iterator it;
+    for (it = _RF.begin(); it != _RF.end(); it++) {
+        (*it).second->resetReg ();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classregisterFile_a57aa14508810da286ee60ef6cd033d6b}{
+\index{registerFile@{registerFile}!updateReg@{updateReg}}
+\index{updateReg@{updateReg}!registerFile@{registerFile}}
+\subsubsection[{updateReg}]{\setlength{\rightskip}{0pt plus 5cm}void registerFile::updateReg (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{reg}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a57aa14508810da286ee60ef6cd033d6b}
+
+\begin{DoxyCode}
+                                    {
+#ifdef ASSERTION
+    Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+    Assert (_RF[reg]->_reg_state == WAIT_ON_WRITE_REG);
+#endif
+    _RF[reg]->_reg_state = DONE_WRITE_REG;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{registerFile_8h}{registerFile.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{registerFile_8cpp}{registerFile.cpp}\end{DoxyCompactItemize}

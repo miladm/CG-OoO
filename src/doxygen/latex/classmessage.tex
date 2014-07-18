@@ -1,0 +1,75 @@
+\hypertarget{classmessage}{
+\section{message Class Reference}
+\label{classmessage}\index{message@{message}}
+}
+
+
+{\ttfamily \#include $<$message.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmessage_a6aefe31fa8ce580fdf7d6c8224a5e445}{message} ()
+\item 
+\hyperlink{classmessage_a3e20db9559213f6eb3dd15cd83af62be}{$\sim$message} ()
+\item 
+void \hyperlink{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}{simStep} (const char $\ast$msg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmessage_a6aefe31fa8ce580fdf7d6c8224a5e445}{
+\index{message@{message}!message@{message}}
+\index{message@{message}!message@{message}}
+\subsubsection[{message}]{\setlength{\rightskip}{0pt plus 5cm}message::message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classmessage_a6aefe31fa8ce580fdf7d6c8224a5e445}
+
+\begin{DoxyCode}
+                 {
+        _simStepCnt = 0;
+}
+\end{DoxyCode}
+\hypertarget{classmessage_a3e20db9559213f6eb3dd15cd83af62be}{
+\index{message@{message}!$\sim$message@{$\sim$message}}
+\index{$\sim$message@{$\sim$message}!message@{message}}
+\subsubsection[{$\sim$message}]{\setlength{\rightskip}{0pt plus 5cm}message::$\sim$message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classmessage_a3e20db9559213f6eb3dd15cd83af62be}
+
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}{
+\index{message@{message}!simStep@{simStep}}
+\index{simStep@{simStep}!message@{message}}
+\subsubsection[{simStep}]{\setlength{\rightskip}{0pt plus 5cm}void message::simStep (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}}
+\label{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}
+
+\begin{DoxyCode}
+                                     {
+        heading();
+        cout << ">> SIM STEP " << _simStepCnt << ": " << msg << endl;
+        heading();
+        _simStepCnt++;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{message_8h}{message.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{message_8cpp}{message.cpp}\end{DoxyCompactItemize}

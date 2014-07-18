@@ -1,0 +1,131 @@
+\hypertarget{classstatistic}{
+\section{statistic Class Reference}
+\label{classstatistic}\index{statistic@{statistic}}
+}
+
+
+{\ttfamily \#include $<$statistic.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstatistic_a3f28cad0a4699e3f2db3892b5556f4e7}{statistic} ()
+\item 
+\hyperlink{classstatistic_a9edcb4dd9cdc09bdfe9a61d2f95654ca}{$\sim$statistic} ()
+\item 
+void \hyperlink{classstatistic_a75175df2e04fd107046dd6a9aa5356dd}{dump} ()
+\item 
+\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}{newScalarStat} (string, string, string, \hyperlink{global_2global_8h_add170db579327962a9c5e88de7751ca2}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classstatistic_a5454149fac41c264c14ed73694a7c4e4}{matchIns}
+\item 
+int \hyperlink{classstatistic_ab87dfd0301135bd8385c390e21fd1034}{noMatchIns}
+\item 
+set$<$ ADDRINT $>$ \hyperlink{classstatistic_aed69957ac20a00f832a0b01f37029faa}{missingInsList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classstatistic_a3f28cad0a4699e3f2db3892b5556f4e7}{
+\index{statistic@{statistic}!statistic@{statistic}}
+\index{statistic@{statistic}!statistic@{statistic}}
+\subsubsection[{statistic}]{\setlength{\rightskip}{0pt plus 5cm}statistic::statistic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_a3f28cad0a4699e3f2db3892b5556f4e7}
+
+\begin{DoxyCode}
+                     {
+}
+\end{DoxyCode}
+\hypertarget{classstatistic_a9edcb4dd9cdc09bdfe9a61d2f95654ca}{
+\index{statistic@{statistic}!$\sim$statistic@{$\sim$statistic}}
+\index{$\sim$statistic@{$\sim$statistic}!statistic@{statistic}}
+\subsubsection[{$\sim$statistic}]{\setlength{\rightskip}{0pt plus 5cm}statistic::$\sim$statistic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_a9edcb4dd9cdc09bdfe9a61d2f95654ca}
+
+\begin{DoxyCode}
+                      {
+    set<ScalarStat*>::iterator it;
+    for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
+        delete (*it);
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classstatistic_a75175df2e04fd107046dd6a9aa5356dd}{
+\index{statistic@{statistic}!dump@{dump}}
+\index{dump@{dump}!statistic@{statistic}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void statistic::dump (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_a75175df2e04fd107046dd6a9aa5356dd}
+
+\begin{DoxyCode}
+                      {
+    set<ScalarStat*>::iterator it;
+    for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
+        (*it)->print ();
+    }
+}
+\end{DoxyCode}
+\hypertarget{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}{
+\index{statistic@{statistic}!newScalarStat@{newScalarStat}}
+\index{newScalarStat@{newScalarStat}!statistic@{statistic}}
+\subsubsection[{newScalarStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} \& statistic::newScalarStat (
+\begin{DoxyParamCaption}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                  {
+    ScalarStat* cnt = new ScalarStat (class_name, param_name, _description, init_
+      val, print_if_zero);
+    _ScalarStats.insert (cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classstatistic_a5454149fac41c264c14ed73694a7c4e4}{
+\index{statistic@{statistic}!matchIns@{matchIns}}
+\index{matchIns@{matchIns}!statistic@{statistic}}
+\subsubsection[{matchIns}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf statistic::matchIns}}}
+\label{classstatistic_a5454149fac41c264c14ed73694a7c4e4}
+\hypertarget{classstatistic_aed69957ac20a00f832a0b01f37029faa}{
+\index{statistic@{statistic}!missingInsList@{missingInsList}}
+\index{missingInsList@{missingInsList}!statistic@{statistic}}
+\subsubsection[{missingInsList}]{\setlength{\rightskip}{0pt plus 5cm}set$<$ADDRINT$>$ {\bf statistic::missingInsList}}}
+\label{classstatistic_aed69957ac20a00f832a0b01f37029faa}
+\hypertarget{classstatistic_ab87dfd0301135bd8385c390e21fd1034}{
+\index{statistic@{statistic}!noMatchIns@{noMatchIns}}
+\index{noMatchIns@{noMatchIns}!statistic@{statistic}}
+\subsubsection[{noMatchIns}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf statistic::noMatchIns}}}
+\label{classstatistic_ab87dfd0301135bd8385c390e21fd1034}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{statistic_8h}{statistic.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{statistic_8cpp}{statistic.cpp}\end{DoxyCompactItemize}

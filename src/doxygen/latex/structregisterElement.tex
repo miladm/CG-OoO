@@ -1,0 +1,86 @@
+\hypertarget{structregisterElement}{
+\section{registerElement Struct Reference}
+\label{structregisterElement}\index{registerElement@{registerElement}}
+}
+
+
+{\ttfamily \#include $<$registerFile.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structregisterElement_a1246da827cec9a45751b171c4002a500}{registerElement} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+\item 
+void \hyperlink{structregisterElement_a53d14efb73b0cb41643fd5f58e4c1d71}{resetReg} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{structregisterElement_a4693e64de38fe55ae199c92f246ac518}{\_\-reg}
+\item 
+\hyperlink{global_2global_8h_a5af3088253955183e5b855e244a48367}{REG\_\-STATE} \hyperlink{structregisterElement_ac9fe8172b609245e132ba12a0ea815ba}{\_\-reg\_\-state}
+\item 
+bool \hyperlink{structregisterElement_a62ca0df1f9f090ad0077ecd55d736009}{\_\-axesedBefore}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structregisterElement_a1246da827cec9a45751b171c4002a500}{
+\index{registerElement@{registerElement}!registerElement@{registerElement}}
+\index{registerElement@{registerElement}!registerElement@{registerElement}}
+\subsubsection[{registerElement}]{\setlength{\rightskip}{0pt plus 5cm}registerElement::registerElement (
+\begin{DoxyParamCaption}
+\item[{{\bf PR}}]{reg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structregisterElement_a1246da827cec9a45751b171c4002a500}
+
+\begin{DoxyCode}
+        : _reg (reg)
+    {
+        _reg_state = NO_VAL_REG;
+        _axesedBefore = false;
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structregisterElement_a53d14efb73b0cb41643fd5f58e4c1d71}{
+\index{registerElement@{registerElement}!resetReg@{resetReg}}
+\index{resetReg@{resetReg}!registerElement@{registerElement}}
+\subsubsection[{resetReg}]{\setlength{\rightskip}{0pt plus 5cm}void registerElement::resetReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structregisterElement_a53d14efb73b0cb41643fd5f58e4c1d71}
+
+\begin{DoxyCode}
+                     {
+        if (_reg_state == WAIT_ON_WRITE_REG) _reg_state = NO_VAL_REG;
+        _axesedBefore = false;
+    }
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structregisterElement_a62ca0df1f9f090ad0077ecd55d736009}{
+\index{registerElement@{registerElement}!\_\-axesedBefore@{\_\-axesedBefore}}
+\index{\_\-axesedBefore@{\_\-axesedBefore}!registerElement@{registerElement}}
+\subsubsection[{\_\-axesedBefore}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf registerElement::\_\-axesedBefore}}}
+\label{structregisterElement_a62ca0df1f9f090ad0077ecd55d736009}
+\hypertarget{structregisterElement_a4693e64de38fe55ae199c92f246ac518}{
+\index{registerElement@{registerElement}!\_\-reg@{\_\-reg}}
+\index{\_\-reg@{\_\-reg}!registerElement@{registerElement}}
+\subsubsection[{\_\-reg}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf PR} {\bf registerElement::\_\-reg}}}
+\label{structregisterElement_a4693e64de38fe55ae199c92f246ac518}
+\hypertarget{structregisterElement_ac9fe8172b609245e132ba12a0ea815ba}{
+\index{registerElement@{registerElement}!\_\-reg\_\-state@{\_\-reg\_\-state}}
+\index{\_\-reg\_\-state@{\_\-reg\_\-state}!registerElement@{registerElement}}
+\subsubsection[{\_\-reg\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf REG\_\-STATE} {\bf registerElement::\_\-reg\_\-state}}}
+\label{structregisterElement_ac9fe8172b609245e132ba12a0ea815ba}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{registerFile_8h}{registerFile.h}\end{DoxyCompactItemize}

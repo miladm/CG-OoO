@@ -1,0 +1,79 @@
+\hypertarget{cp__annotate_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/cp\_\-annotate.cc File Reference}
+\label{cp__annotate_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/cp\_\-annotate.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/cp\_\-annotate.cc}}
+}
+{\ttfamily \#include \char`\"{}arch/alpha/linux/threadinfo.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}arch/utility.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/loader/object\_\-file.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/callback.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/cp\_\-annotate.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/output.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/trace.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}config/the\_\-isa.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}cpu/thread\_\-context.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/arguments.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/core.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/sim\_\-exit.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}sim/system.hh\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structCPAIgnoreSymbol}{CPAIgnoreSymbol}
+\item 
+class \hyperlink{classAnnotateDumpCallback}{AnnotateDumpCallback}
+\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{cp__annotate_8cc_a75faa6fcfe3ca9479c931f7e3aa56071}{CPA\_\-IGNORE\_\-SYMBOL}(sym)~\{ \#sym, sizeof(\#sym) \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structCPAIgnoreSymbol}{CPAIgnoreSymbol} \hyperlink{cp__annotate_8cc_a5aa6845e93702c767bef21761c924009}{ignoreSymbols} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{cp__annotate_8cc_a75faa6fcfe3ca9479c931f7e3aa56071}{
+\index{cp\_\-annotate.cc@{cp\_\-annotate.cc}!CPA\_\-IGNORE\_\-SYMBOL@{CPA\_\-IGNORE\_\-SYMBOL}}
+\index{CPA\_\-IGNORE\_\-SYMBOL@{CPA\_\-IGNORE\_\-SYMBOL}!cp_annotate.cc@{cp\_\-annotate.cc}}
+\subsubsection[{CPA\_\-IGNORE\_\-SYMBOL}]{\setlength{\rightskip}{0pt plus 5cm}\#define CPA\_\-IGNORE\_\-SYMBOL(
+\begin{DoxyParamCaption}
+\item[{}]{sym}
+\end{DoxyParamCaption}
+)~\{ \#sym, sizeof(\#sym) \}}}
+\label{cp__annotate_8cc_a75faa6fcfe3ca9479c931f7e3aa56071}
+
+
+\subsection{Variable Documentation}
+\hypertarget{cp__annotate_8cc_a5aa6845e93702c767bef21761c924009}{
+\index{cp\_\-annotate.cc@{cp\_\-annotate.cc}!ignoreSymbols@{ignoreSymbols}}
+\index{ignoreSymbols@{ignoreSymbols}!cp_annotate.cc@{cp\_\-annotate.cc}}
+\subsubsection[{ignoreSymbols}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CPAIgnoreSymbol} {\bf ignoreSymbols}\mbox{[}$\,$\mbox{]}}}
+\label{cp__annotate_8cc_a5aa6845e93702c767bef21761c924009}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+ {
+    CPA_IGNORE_SYMBOL("m5a_"),
+    CPA_IGNORE_SYMBOL("ret_from_sys_call"),
+    CPA_IGNORE_SYMBOL("ret_from_reschedule"),
+    CPA_IGNORE_SYMBOL("_spin_"),
+    CPA_IGNORE_SYMBOL("local_bh_"),
+    CPA_IGNORE_SYMBOL("restore_all"),
+    CPA_IGNORE_SYMBOL("Call_Pal_"),
+    CPA_IGNORE_SYMBOL("pal_post_interrupt"),
+    CPA_IGNORE_SYMBOL("rti_to_"),
+    CPA_IGNORE_SYMBOL("sys_int_2"),
+    CPA_IGNORE_SYMBOL("sys_interrupt"),
+    CPA_IGNORE_SYMBOL("normal_int"),
+    CPA_IGNORE_SYMBOL("TRAP_INTERRUPT_10_"),
+    CPA_IGNORE_SYMBOL("Trap_Interrupt"),
+    CPA_IGNORE_SYMBOL("do_entInt"),
+    CPA_IGNORE_SYMBOL("__do_softirq"),
+    CPA_IGNORE_SYMBOL("_end"),
+    CPA_IGNORE_SYMBOL("entInt"),
+    CPA_IGNORE_SYMBOL("entSys"),
+    {0,0}
+}
+\end{DoxyCode}

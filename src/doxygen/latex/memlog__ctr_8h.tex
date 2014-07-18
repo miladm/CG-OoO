@@ -1,0 +1,44 @@
+\hypertarget{memlog__ctr_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/forLater/junk/memlog\_\-ctr.h File Reference}
+\label{memlog__ctr_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/forLater/junk/memlog\_\-ctr.h@{/home/milad/esc\_\-project/svn/PARS/src/forLater/junk/memlog\_\-ctr.h}}
+}
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pin\_\-isa.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global\_\-variable.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{memlog__ctr_8h_a505f360905b4ad0fa6e18f19405539ea}{recover} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{memlog__ctr_8h_a505f360905b4ad0fa6e18f19405539ea}{
+\index{memlog\_\-ctr.h@{memlog\_\-ctr.h}!recover@{recover}}
+\index{recover@{recover}!memlog_ctr.h@{memlog\_\-ctr.h}}
+\subsubsection[{recover}]{\setlength{\rightskip}{0pt plus 5cm}void recover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{memlog__ctr_8h_a505f360905b4ad0fa6e18f19405539ea}
+
+\begin{DoxyCode}
+{
+        g_wrong_path = false;
+        g_total_wrong_path_count += g_wrong_path_count;
+        g_wrong_path_count = 0;
+        g_spec_syscall = false;
+        g_context_call_depth=0;
+        g_recovery_count++;
+        //g_log.recover();
+
+        if( g_debug_level & DBG_SPEC ) std::cout << " *** recovering to correct p
+      ath ***\n";
+        if( g_debug_level & DBG_SPEC ) std::cout << " recovery count = " << dec <
+      < g_recovery_count << std::endl;
+}
+\end{DoxyCode}

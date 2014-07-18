@@ -1,0 +1,82 @@
+\hypertarget{range_8cc}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/range.cc File Reference}
+\label{range_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/range.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/range.cc}}
+}
+{\ttfamily \#include \char`\"{}base/intmath.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/range.hh\char`\"{}}\par
+{\ttfamily \#include \char`\"{}base/str.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{range_8cc_a2d05d3f3c8f9ebe8d8ff8b86a8478daa}{RANGE\_\-PARSE}(\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type})
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\bool \hyperlink{range_8cc_a83e60e316abe00bbad2239cd3003b911}{\_\-\_\-x\_\-parse\_\-range} (const std::string \&str, T \&first, T \&last)
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{range_8cc_a2d05d3f3c8f9ebe8d8ff8b86a8478daa}{
+\index{range.cc@{range.cc}!RANGE\_\-PARSE@{RANGE\_\-PARSE}}
+\index{RANGE\_\-PARSE@{RANGE\_\-PARSE}!range.cc@{range.cc}}
+\subsubsection[{RANGE\_\-PARSE}]{\setlength{\rightskip}{0pt plus 5cm}\#define RANGE\_\-PARSE(
+\begin{DoxyParamCaption}
+\item[{}]{{\bf type}}
+\end{DoxyParamCaption}
+)}}
+\label{range_8cc_a2d05d3f3c8f9ebe8d8ff8b86a8478daa}
+{\bfseries Value:}
+\begin{DoxyCode}
+template<> bool \
+__parse_range(const std::string &s, type &first, type &last) \
+{ return __x_parse_range(s, first, last); }
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\hypertarget{range_8cc_a83e60e316abe00bbad2239cd3003b911}{
+\index{range.cc@{range.cc}!\_\-\_\-x\_\-parse\_\-range@{\_\-\_\-x\_\-parse\_\-range}}
+\index{\_\-\_\-x\_\-parse\_\-range@{\_\-\_\-x\_\-parse\_\-range}!range.cc@{range.cc}}
+\subsubsection[{\_\-\_\-x\_\-parse\_\-range}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ bool \_\-\_\-x\_\-parse\_\-range (
+\begin{DoxyParamCaption}
+\item[{const std::string \&}]{str, }
+\item[{T \&}]{first, }
+\item[{T \&}]{last}
+\end{DoxyParamCaption}
+)}}
+\label{range_8cc_a83e60e316abe00bbad2239cd3003b911}
+
+\begin{DoxyCode}
+{
+    std::vector<std::string> values;
+    tokenize(values, str, ':');
+
+    T thefirst, thelast;
+
+    if (values.size() != 2)
+        return false;
+
+    std::string s = values[0];
+    std::string e = values[1];
+
+    if (!to_number(s, thefirst))
+        return false;
+
+    bool increment = (e[0] == '+');
+    if (increment)
+        e = e.substr(1);
+
+    if (!to_number(e, thelast))
+        return false;
+
+    if (increment)
+        thelast += thefirst - 1;
+
+    first = thefirst;
+    last = thelast;
+
+    return true;
+}
+\end{DoxyCode}

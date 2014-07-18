@@ -1,0 +1,237 @@
+\hypertarget{classsideBuff}{
+\section{sideBuff Class Reference}
+\label{classsideBuff}\index{sideBuff@{sideBuff}}
+}
+
+
+{\ttfamily \#include $<$sideBuff.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsideBuff_aad66f4b4e9a70e84ba0bbfa936ac2ac6}{sideBuff} ()
+\item 
+\hyperlink{classsideBuff_aefd273cb0ba4f1af30831a0753707b7d}{$\sim$sideBuff} ()
+\item 
+int \hyperlink{classsideBuff_a3205423759a907b93718eecad26e9a56}{NumElements} ()
+\item 
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classsideBuff_a99e13bc46d8355a39a7043a88bc48c37}{Nth} (int i)
+\item 
+void \hyperlink{classsideBuff_a60fbdbcec76a2156a72836738a74ce1d}{setBusy} ()
+\item 
+bool \hyperlink{classsideBuff_ae525517befdbe3999c4564f2fbe79b8a}{isFree} ()
+\item 
+void \hyperlink{classsideBuff_ac6da2edaaf7677094f8afbb813413ce7}{setFree} ()
+\item 
+void \hyperlink{classsideBuff_ac857d71bc433b326af497e81c9d51a85}{Append} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+\item 
+void \hyperlink{classsideBuff_ad0240b05b2b12b967fbc3adda749d193}{InsertAt} (\hyperlink{classinstruction}{instruction} $\ast$ins, int index)
+\item 
+void \hyperlink{classsideBuff_a149f3aab599e8e0bd9371c7ff293d28c}{setExpiration} (int expCycle)
+\item 
+int \hyperlink{classsideBuff_a9dcb78ccefb8b0989988ba1e57f1a66c}{getExpiration} ()
+\item 
+void \hyperlink{classsideBuff_afa37ed375211a7982f1b6ce8f2a3cd4f}{RemoveAt} (int i)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsideBuff_aad66f4b4e9a70e84ba0bbfa936ac2ac6}{
+\index{sideBuff@{sideBuff}!sideBuff@{sideBuff}}
+\index{sideBuff@{sideBuff}!sideBuff@{sideBuff}}
+\subsubsection[{sideBuff}]{\setlength{\rightskip}{0pt plus 5cm}sideBuff::sideBuff (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_aad66f4b4e9a70e84ba0bbfa936ac2ac6}
+
+\begin{DoxyCode}
+{
+        _sideBuff = new List<instruction*>;
+        _free = true; //it is free
+        _expCycle = -1;
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_aefd273cb0ba4f1af30831a0753707b7d}{
+\index{sideBuff@{sideBuff}!$\sim$sideBuff@{$\sim$sideBuff}}
+\index{$\sim$sideBuff@{$\sim$sideBuff}!sideBuff@{sideBuff}}
+\subsubsection[{$\sim$sideBuff}]{\setlength{\rightskip}{0pt plus 5cm}sideBuff::$\sim$sideBuff (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_aefd273cb0ba4f1af30831a0753707b7d}
+
+\begin{DoxyCode}
+                    {
+        delete _sideBuff;
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsideBuff_ac857d71bc433b326af497e81c9d51a85}{
+\index{sideBuff@{sideBuff}!Append@{Append}}
+\index{Append@{Append}!sideBuff@{sideBuff}}
+\subsubsection[{Append}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::Append (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_ac857d71bc433b326af497e81c9d51a85}
+
+\begin{DoxyCode}
+                                       {
+        Assert(ins != NULL);
+        _sideBuff->Append(ins);
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_a9dcb78ccefb8b0989988ba1e57f1a66c}{
+\index{sideBuff@{sideBuff}!getExpiration@{getExpiration}}
+\index{getExpiration@{getExpiration}!sideBuff@{sideBuff}}
+\subsubsection[{getExpiration}]{\setlength{\rightskip}{0pt plus 5cm}int sideBuff::getExpiration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_a9dcb78ccefb8b0989988ba1e57f1a66c}
+
+\begin{DoxyCode}
+                            {
+        Assert(_expCycle > 0);
+        return _expCycle;
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_ad0240b05b2b12b967fbc3adda749d193}{
+\index{sideBuff@{sideBuff}!InsertAt@{InsertAt}}
+\index{InsertAt@{InsertAt}!sideBuff@{sideBuff}}
+\subsubsection[{InsertAt}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::InsertAt (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_ad0240b05b2b12b967fbc3adda749d193}
+
+\begin{DoxyCode}
+                                                    {
+        Assert(ins != NULL && index >= 0);
+        _sideBuff->InsertAt(ins,index);
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_ae525517befdbe3999c4564f2fbe79b8a}{
+\index{sideBuff@{sideBuff}!isFree@{isFree}}
+\index{isFree@{isFree}!sideBuff@{sideBuff}}
+\subsubsection[{isFree}]{\setlength{\rightskip}{0pt plus 5cm}bool sideBuff::isFree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_ae525517befdbe3999c4564f2fbe79b8a}
+
+\begin{DoxyCode}
+                      {
+        return _free;
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_a99e13bc46d8355a39a7043a88bc48c37}{
+\index{sideBuff@{sideBuff}!Nth@{Nth}}
+\index{Nth@{Nth}!sideBuff@{sideBuff}}
+\subsubsection[{Nth}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction} $\ast$ sideBuff::Nth (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_a99e13bc46d8355a39a7043a88bc48c37}
+
+\begin{DoxyCode}
+                                   {
+        //printf("indx = %d,%d\n",indx,NumElements());
+        Assert (indx >= 0 && indx < NumElements());
+        return _sideBuff->Nth(indx);
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_a3205423759a907b93718eecad26e9a56}{
+\index{sideBuff@{sideBuff}!NumElements@{NumElements}}
+\index{NumElements@{NumElements}!sideBuff@{sideBuff}}
+\subsubsection[{NumElements}]{\setlength{\rightskip}{0pt plus 5cm}int sideBuff::NumElements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_a3205423759a907b93718eecad26e9a56}
+
+\begin{DoxyCode}
+                          {
+        Assert (_sideBuff->NumElements() >= 0);
+        return _sideBuff->NumElements();
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_afa37ed375211a7982f1b6ce8f2a3cd4f}{
+\index{sideBuff@{sideBuff}!RemoveAt@{RemoveAt}}
+\index{RemoveAt@{RemoveAt}!sideBuff@{sideBuff}}
+\subsubsection[{RemoveAt}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::RemoveAt (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_afa37ed375211a7982f1b6ce8f2a3cd4f}
+
+\begin{DoxyCode}
+                                {
+        Assert (indx >= 0 && indx < NumElements());
+        _sideBuff->RemoveAt(indx);
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_a60fbdbcec76a2156a72836738a74ce1d}{
+\index{sideBuff@{sideBuff}!setBusy@{setBusy}}
+\index{setBusy@{setBusy}!sideBuff@{sideBuff}}
+\subsubsection[{setBusy}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::setBusy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_a60fbdbcec76a2156a72836738a74ce1d}
+
+\begin{DoxyCode}
+                       {
+        _free = false;
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_a149f3aab599e8e0bd9371c7ff293d28c}{
+\index{sideBuff@{sideBuff}!setExpiration@{setExpiration}}
+\index{setExpiration@{setExpiration}!sideBuff@{sideBuff}}
+\subsubsection[{setExpiration}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::setExpiration (
+\begin{DoxyParamCaption}
+\item[{int}]{expCycle}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_a149f3aab599e8e0bd9371c7ff293d28c}
+
+\begin{DoxyCode}
+                                         {
+        _expCycle = expCycle;
+}
+\end{DoxyCode}
+\hypertarget{classsideBuff_ac6da2edaaf7677094f8afbb813413ce7}{
+\index{sideBuff@{sideBuff}!setFree@{setFree}}
+\index{setFree@{setFree}!sideBuff@{sideBuff}}
+\subsubsection[{setFree}]{\setlength{\rightskip}{0pt plus 5cm}void sideBuff::setFree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsideBuff_ac6da2edaaf7677094f8afbb813413ce7}
+
+\begin{DoxyCode}
+                       {
+        _free = true;
+}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{sideBuff_8h}{sideBuff.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{sideBuff_8cpp}{sideBuff.cpp}\end{DoxyCompactItemize}

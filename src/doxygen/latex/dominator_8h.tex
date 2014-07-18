@@ -1,0 +1,42 @@
+\hypertarget{dominator_8h}{
+\section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.h File Reference}
+\label{dominator_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/dominator.h}}
+}
+{\ttfamily \#include $<$set$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include \char`\"{}basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}utility.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dominator_8h_af9f49ffe6819033df685a4eb97ef74be}{setup\_\-dominance\_\-frontier} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{dominator_8h_af9f49ffe6819033df685a4eb97ef74be}{
+\index{dominator.h@{dominator.h}!setup\_\-dominance\_\-frontier@{setup\_\-dominance\_\-frontier}}
+\index{setup\_\-dominance\_\-frontier@{setup\_\-dominance\_\-frontier}!dominator.h@{dominator.h}}
+\subsubsection[{setup\_\-dominance\_\-frontier}]{\setlength{\rightskip}{0pt plus 5cm}void setup\_\-dominance\_\-frontier (
+\begin{DoxyParamCaption}
+\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList}
+\end{DoxyParamCaption}
+)}}
+\label{dominator_8h_af9f49ffe6819033df685a4eb97ef74be}
+
+\begin{DoxyCode}
+                                                         {
+        printf("\tBuild Dominators\n");
+        build_dominators(bbList);
+        printf("\tBuild Strict Dominators\n");
+        build_strict_dominators(bbList);
+        printf("\tBuild Immediate Dominators\n");
+        build_idom(bbList);
+        printf("\tBuild Dominance Tree\n");
+        build_dominator_tree(bbList);
+        printf("\tBuild Dominance Frontier\n");
+        build_dominance_frontier(bbList);
+}
+\end{DoxyCode}

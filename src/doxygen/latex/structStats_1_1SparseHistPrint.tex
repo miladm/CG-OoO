@@ -1,0 +1,178 @@
+\hypertarget{structStats_1_1SparseHistPrint}{
+\section{Stats::SparseHistPrint Struct Reference}
+\label{structStats_1_1SparseHistPrint}\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structStats_1_1SparseHistPrint_a30fe39f80fc136f7e618b89f8fdc3e35}{SparseHistPrint} (const Text $\ast$text, const SparseHistInfo \&info)
+\item 
+void \hyperlink{structStats_1_1SparseHistPrint_acba0fb74d0a4c488381ade783de1720d}{init} (const Text $\ast$text, const Info \&info)
+\item 
+void \hyperlink{structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef}{operator()} (ostream \&stream) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{structStats_1_1SparseHistPrint_ab767d5886007c432b86a42171f7e1206}{name}
+\item 
+string \hyperlink{structStats_1_1SparseHistPrint_a72260b9f02d5395232d733329fc6c427}{separatorString}
+\item 
+string \hyperlink{structStats_1_1SparseHistPrint_a8760dfb52afeeef275a09d0cce044a47}{desc}
+\item 
+Flags \hyperlink{structStats_1_1SparseHistPrint_a7d6cd92b10d6e566b1cb5602179ae7be}{flags}
+\item 
+bool \hyperlink{structStats_1_1SparseHistPrint_ab0ff8d6cc914db901ad23dc01738b772}{descriptions}
+\item 
+int \hyperlink{structStats_1_1SparseHistPrint_a3d11c791cb60284686ed2458773cc52f}{precision}
+\item 
+const SparseHistData \& \hyperlink{structStats_1_1SparseHistPrint_acc3e076566384cb5a9532b679cfe8a6c}{data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structStats_1_1SparseHistPrint_a30fe39f80fc136f7e618b89f8fdc3e35}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!SparseHistPrint@{SparseHistPrint}}
+\index{SparseHistPrint@{SparseHistPrint}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{SparseHistPrint}]{\setlength{\rightskip}{0pt plus 5cm}Stats::SparseHistPrint::SparseHistPrint (
+\begin{DoxyParamCaption}
+\item[{const Text $\ast$}]{text, }
+\item[{const SparseHistInfo \&}]{info}
+\end{DoxyParamCaption}
+)}}
+\label{structStats_1_1SparseHistPrint_a30fe39f80fc136f7e618b89f8fdc3e35}
+
+\begin{DoxyCode}
+    : data(info.data)
+{
+    init(text, info);
+}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structStats_1_1SparseHistPrint_acba0fb74d0a4c488381ade783de1720d}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!init@{init}}
+\index{init@{init}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::SparseHistPrint::init (
+\begin{DoxyParamCaption}
+\item[{const Text $\ast$}]{text, }
+\item[{const Info \&}]{info}
+\end{DoxyParamCaption}
+)}}
+\label{structStats_1_1SparseHistPrint_acba0fb74d0a4c488381ade783de1720d}
+
+\begin{DoxyCode}
+{
+    name = info.name;
+    separatorString = info.separatorString;
+    desc = info.desc;
+    flags = info.flags;
+    precision = info.precision;
+    descriptions = text->descriptions;
+}
+\end{DoxyCode}
+\hypertarget{structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!operator()@{operator()}}
+\index{operator()@{operator()}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void Stats::SparseHistPrint::operator() (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{stream}
+\end{DoxyParamCaption}
+) const}}
+\label{structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef}
+
+\begin{DoxyCode}
+{
+    size_type _size = vec.size();
+    Result _total = 0.0;
+
+    if (flags.isSet(pdf | cdf)) {
+        for (off_type i = 0; i < _size; ++i) {
+            _total += vec[i];
+        }
+    }
+
+    string base = name + separatorString;
+
+    ScalarPrint print;
+    print.name = name;
+    print.desc = desc;
+    print.precision = precision;
+    print.descriptions = descriptions;
+    print.flags = flags;
+    print.pdf = _total ? 0.0 : NAN;
+    print.cdf = _total ? 0.0 : NAN;
+
+    bool havesub = !subnames.empty();
+
+    if (_size == 1) {
+        print.value = vec[0];
+        print(stream);
+        return;
+    }
+
+    for (off_type i = 0; i < _size; ++i) {
+        if (havesub && (i >= subnames.size() || subnames[i].empty()))
+            continue;
+
+        print.name = base + (havesub ? subnames[i] : to_string(i));
+        print.desc = subdescs.empty() ? desc : subdescs[i];
+
+        print.update(vec[i], _total);
+        print(stream);
+    }
+
+    if (flags.isSet(::Stats::total)) {
+        print.pdf = NAN;
+        print.cdf = NAN;
+        print.name = base + "total";
+        print.desc = desc;
+        print.value = total;
+        print(stream);
+    }
+}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structStats_1_1SparseHistPrint_acc3e076566384cb5a9532b679cfe8a6c}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!data@{data}}
+\index{data@{data}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}const SparseHistData\& {\bf Stats::SparseHistPrint::data}}}
+\label{structStats_1_1SparseHistPrint_acc3e076566384cb5a9532b679cfe8a6c}
+\hypertarget{structStats_1_1SparseHistPrint_a8760dfb52afeeef275a09d0cce044a47}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!desc@{desc}}
+\index{desc@{desc}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{desc}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::SparseHistPrint::desc}}}
+\label{structStats_1_1SparseHistPrint_a8760dfb52afeeef275a09d0cce044a47}
+\hypertarget{structStats_1_1SparseHistPrint_ab0ff8d6cc914db901ad23dc01738b772}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!descriptions@{descriptions}}
+\index{descriptions@{descriptions}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{descriptions}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Stats::SparseHistPrint::descriptions}}}
+\label{structStats_1_1SparseHistPrint_ab0ff8d6cc914db901ad23dc01738b772}
+\hypertarget{structStats_1_1SparseHistPrint_a7d6cd92b10d6e566b1cb5602179ae7be}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!flags@{flags}}
+\index{flags@{flags}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{flags}]{\setlength{\rightskip}{0pt plus 5cm}Flags {\bf Stats::SparseHistPrint::flags}}}
+\label{structStats_1_1SparseHistPrint_a7d6cd92b10d6e566b1cb5602179ae7be}
+\hypertarget{structStats_1_1SparseHistPrint_ab767d5886007c432b86a42171f7e1206}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!name@{name}}
+\index{name@{name}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::SparseHistPrint::name}}}
+\label{structStats_1_1SparseHistPrint_ab767d5886007c432b86a42171f7e1206}
+\hypertarget{structStats_1_1SparseHistPrint_a3d11c791cb60284686ed2458773cc52f}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!precision@{precision}}
+\index{precision@{precision}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{precision}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Stats::SparseHistPrint::precision}}}
+\label{structStats_1_1SparseHistPrint_a3d11c791cb60284686ed2458773cc52f}
+\hypertarget{structStats_1_1SparseHistPrint_a72260b9f02d5395232d733329fc6c427}{
+\index{Stats::SparseHistPrint@{Stats::SparseHistPrint}!separatorString@{separatorString}}
+\index{separatorString@{separatorString}!Stats::SparseHistPrint@{Stats::SparseHistPrint}}
+\subsubsection[{separatorString}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf Stats::SparseHistPrint::separatorString}}}
+\label{structStats_1_1SparseHistPrint_a72260b9f02d5395232d733329fc6c427}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/\hyperlink{text_8cc}{text.cc}\end{DoxyCompactItemize}
