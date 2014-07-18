@@ -1,0 +1,1177 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADDRESS_SIZE	cache.cpp	11;"	d	file:
+ADDRESS_SIZE	cache_halfSA.cpp	10;"	d	file:
+ADDRESS_SIZE	cache_singleWord.cpp	10;"	d	file:
+Append	sideBuff.cpp	/^void sideBuff::Append(instruction * ins) {$/;"	f	class:sideBuff
+Assert	utility.h	39;"	d
+BP	bkEnd.h	19;"	d
+BPBTBUpdate	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPBTBUpdate(Addr instPC, void * &bp_history)$/;"	f	class:BPredUnit
+BPHistGarbageCollect	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPHistGarbageCollect(void *bp_history)$/;"	f	class:BPredUnit
+BPHistUpdate	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPHistUpdate(Addr instPC, bool taken, void *bp_history,$/;"	f	class:BPredUnit
+BPLookup	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPLookup(Addr instPC, void * &bp_history, int positionInLine, bool onDemand, bool &choicePred)$/;"	f	class:BPredUnit
+BPSquash	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPSquash(void *bp_history)$/;"	f	class:BPredUnit
+BPUncond	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPUncond(void * &bp_history)$/;"	f	class:BPredUnit
+BPUpdate	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPUpdate(Addr instPC, bool taken, void *bp_history,$/;"	f	class:BPredUnit
+BPredUnit	bpred_unit.h	/^class BPredUnit$/;"	c
+BPredUnit	bpred_unit_ctr.h	/^BPredUnit<Impl>::BPredUnit(DerivO3CPUParams *params)$/;"	f	class:BPredUnit
+BTB	bpred_unit.h	/^    DefaultBTB BTB;$/;"	m	class:BPredUnit
+BTBCorrect	bpred_unit.h	/^    Stats::Scalar BTBCorrect;$/;"	m	class:BPredUnit
+BTBHits	bpred_unit.h	/^    Stats::Scalar BTBHits;$/;"	m	class:BPredUnit
+BTBLookup	bpred_unit.h	/^    TheISA::PCState BTBLookup(Addr instPC)$/;"	f	class:BPredUnit
+BTBLookups	bpred_unit.h	/^    Stats::Scalar BTBLookups;$/;"	m	class:BPredUnit
+BTBUpdate	bpred_unit.h	/^    void BTBUpdate(Addr instPC, const TheISA::PCState &target)$/;"	f	class:BPredUnit
+BTBValid	bpred_unit.h	/^    bool BTBValid(Addr instPC)$/;"	f	class:BPredUnit
+BufferSize	utility.cpp	/^static const int BufferSize = 2048;$/;"	v	file:
+CHeapTree	heapTree.cpp	/^inline CHeapTree<TID, TDATA>::CHeapTree(int nInitMax) : m_nInitMax(nInitMax)$/;"	f	class:CHeapTree
+CHeapTree	heapTree.h	/^class CHeapTree$/;"	c
+CRIT_PATH_LEN_LIMIT	phrase.h	16;"	d
+CacheLine	cacheLine.cpp	/^CacheLine::CacheLine ()$/;"	f	class:CacheLine
+CacheLine	cacheLine.h	/^class CacheLine{$/;"	c
+DY_ST_treated_SN	bpred_unit.h	/^    Stats::Formula DY_ST_treated_SN;$/;"	m	class:BPredUnit
+DY_treated_SN	bpred_unit.h	/^    Stats::Scalar DY_treated_SN;$/;"	m	class:BPredUnit
+DynInstPtr	bpred_unit.h	/^    typedef typename Impl::DynInstPtr DynInstPtr;$/;"	t	class:BPredUnit
+FIRST_PHRASE	phraseGen.cpp	8;"	d	file:
+Failure	utility.cpp	/^void Failure(const char *format, ...) {$/;"	f
+FrListSize	bkEnd.cpp	/^int FrListSize = 200; \/\/TODO put it in the right place$/;"	v
+FragID	bkEnd.cpp	/^int FragID = 0;$/;"	v
+FragNum	bkEnd.cpp	/^int FragNum = 0;$/;"	v
+GRF	bkEnd.cpp	/^registerRename *GRF;$/;"	v
+GetArg	utilities.h	/^VOID GetArg(UINT32 argc, char** argv, const char* argname, BOOL& arg) $/;"	f
+GetArg	utilities.h	/^VOID GetArg(UINT32 argc, char** argv, const char* argname, UINT32& arg, UINT32 default_val) $/;"	f
+GetData	heapTree.cpp	/^inline bool CHeapTree<TID, TDATA>::GetData(const TID &id, TDATA *pdata) const$/;"	f	class:CHeapTree
+GetSize	heapTree.h	/^	int GetSize() const { return m_nSize; }$/;"	f	class:CHeapTree
+GetTopData	heapTree.h	/^	bool GetTopData(TDATA *pdata) const {$/;"	f	class:CHeapTree
+GetTopID	heapTree.h	/^	bool GetTopID(TID *pid) const {$/;"	f	class:CHeapTree
+History	bpred_unit.h	/^    typedef std::list<PredictorHistory> History;$/;"	t	class:BPredUnit
+HistoryIt	bpred_unit.h	/^    typedef typename History::iterator HistoryIt;$/;"	t	class:BPredUnit
+Hybrid	bpred_unit.h	/^		Hybrid,$/;"	e	enum:BPredUnit::PredType
+HybridSkew	bpred_unit.h	/^		HybridSkew$/;"	e	enum:BPredUnit::PredType
+ICQ	bkEnd.cpp	/^List<char*> *ICQ;$/;"	v
+IndexOf	utility.cpp	/^int IndexOf(const char *key) {$/;"	f
+InsCountWhenSBon	bkEnd.cpp	/^long int *InsCountWhenSBon= new long int [numSideBuffs];$/;"	v
+Insert	heapTree.cpp	/^inline void CHeapTree<TID, TDATA>::Insert(const TID &id, const TDATA &data)$/;"	f	class:CHeapTree
+InsertAt	sideBuff.cpp	/^void sideBuff::InsertAt(instruction * ins, int index) {$/;"	f	class:sideBuff
+IsDebugOn	utility.cpp	/^bool IsDebugOn(const char *key) {$/;"	f
+IsEmpty	heapTree.h	/^	bool IsEmpty() const { return m_nSize == 0; }$/;"	f	class:CHeapTree
+L1	cacheCtrl.cpp	/^cache *L1;$/;"	v
+L1hitCount	latency.cpp	/^int L1hitCount() {$/;"	f
+L2	cacheCtrl.cpp	/^cache *L2;$/;"	v
+L2hitCount	latency.cpp	/^int L2hitCount() {$/;"	f
+L3	cacheCtrl.cpp	/^cache *L3;$/;"	v
+L3hitCount	latency.cpp	/^int L3hitCount() {$/;"	f
+LQ_SIZE	lsq.h	14;"	d
+LRFTables	bkEnd.cpp	/^dependencyTable *LRFTables[NUM_PHRASEBLKS];$/;"	v
+LRUCacheLine	cache.cpp	/^int cache::LRUCacheLine(ADDRS addr) \/\/TODO$/;"	f	class:cache
+LRUCacheLine	cache_halfSA.cpp	/^int cache::LRUCacheLine(uint64_t addr) \/\/TODO$/;"	f	class:cache
+LRUCacheLine	cache_singleWord.cpp	/^int cache::LRUCacheLine(uint64_t addr) \/\/TODO$/;"	f	class:cache
+Local	bpred_unit.h	/^        Local,$/;"	e	enum:BPredUnit::PredType
+MAX_ARGV	utilities.h	128;"	d
+MAX_NUM_INS_VISITORS	phrase.h	15;"	d
+MEM_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon1
+MEM_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon1
+MEMhitCount	latency.cpp	/^int MEMhitCount() {$/;"	f
+NEXT_PHRASE	phraseGen.cpp	7;"	d	file:
+NUM_REG	instruction.h	16;"	d
+Nth	sideBuff.cpp	/^instruction* sideBuff::Nth(int indx) {$/;"	f	class:sideBuff
+NumElements	sideBuff.cpp	/^int sideBuff::NumElements() {$/;"	f	class:sideBuff
+PINTOOL_UTILITIES_H	utilities.h	36;"	d
+ParseCommandLine	utility.cpp	/^void ParseCommandLine(int argc, char *argv[]) {$/;"	f
+PhListSize	bkEnd.cpp	/^int PhListSize = 100; \/\/TODO put it in the right place$/;"	v
+PrePredict	bkEnd.cpp	/^bool PrePredict(uint64_t __pc, void* &bp_hist) {$/;"	f
+PredType	bpred_unit.h	/^    enum PredType {$/;"	g	class:BPredUnit
+Predict	bkEnd.cpp	/^bool Predict(uint64_t __pc, void* &bp_hist) {$/;"	f
+PredictAndUpdate	bkEnd.cpp	/^bool PredictAndUpdate(uint64_t __pc, int __taken) {$/;"	f
+PredictorHistory	bpred_unit.h	/^        PredictorHistory(const InstSeqNum &seq_num, Addr instPC,$/;"	f	struct:BPredUnit::PredictorHistory
+PredictorHistory	bpred_unit.h	/^    struct PredictorHistory {$/;"	s	class:BPredUnit
+PrintDebug	utility.cpp	/^void PrintDebug(const char *key, const char *format, ...) {$/;"	f
+PrintHexWord	utilities.h	/^VOID PrintHexWord(ADDRINT addr, fstream& outfile) $/;"	f
+RAS	bpred_unit.h	/^    ReturnAddrStack RAS[Impl::MaxThreads];$/;"	m	class:BPredUnit
+RASIncorrect	bpred_unit.h	/^    Stats::Scalar RASIncorrect;$/;"	m	class:BPredUnit
+RASIndex	bpred_unit.h	/^        unsigned RASIndex;$/;"	m	struct:BPredUnit::PredictorHistory
+RASTarget	bpred_unit.h	/^        TheISA::PCState RASTarget;$/;"	m	struct:BPredUnit::PredictorHistory
+REG_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon1
+REG_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon1
+RF	bkEnd.cpp	/^regFile *RF;$/;"	v
+RF	regFile.h	/^		map<string,long int> RF;$/;"	m	class:regFile
+RFstatus	regFile.h	/^		int RFstatus[NUM_REGISTERS];$/;"	m	class:regFile
+ROBsize	bkEnd.cpp	/^int ROBsize;$/;"	v
+RemoveAll	heapTree.cpp	/^inline bool CHeapTree<TID, TDATA>::RemoveAll()$/;"	f	class:CHeapTree
+RemoveAt	sideBuff.cpp	/^void sideBuff::RemoveAt(int indx) {$/;"	f	class:sideBuff
+RemoveToolArgs	utilities.h	/^void RemoveToolArgs (int argc, char *argv[], int *myArgc, char *myArgv[])$/;"	f
+RemoveTop	heapTree.cpp	/^inline bool CHeapTree<TID, TDATA>::RemoveTop()$/;"	f	class:CHeapTree
+ResetData	heapTree.cpp	/^inline bool CHeapTree<TID, TDATA>::ResetData(const TID &id, const TDATA &dataNew)$/;"	f	class:CHeapTree
+SBactiveCycles	bkEnd.cpp	/^long int *SBactiveCycles= new long int [numSideBuffs];$/;"	v
+SBlength	bkEnd.cpp	/^long int SBlength = SB_SIZE_LIMIT;$/;"	v
+SBlist	bkEnd.cpp	/^List<int> *SBlist = new List<int>;$/;"	v
+SBoffCycles	bkEnd.cpp	/^long int *SBoffCycles= new long int [numSideBuffs];$/;"	v
+SBpriorityList	bkEnd.cpp	/^List<int> *SBpriorityList;$/;"	v
+SBsize	bkEnd.cpp	/^long unsigned *SBsize= new long unsigned [numSideBuffs];$/;"	v
+SBsizeList	bkEnd.cpp	/^List<int> *SBsizeList = new List<int>;$/;"	v
+SQ_SIZE	lsq.h	13;"	d
+SQhasIncompleteIns	lsq.cpp	/^bool lsq::SQhasIncompleteIns() {$/;"	f	class:lsq
+ST_treated_SN	bpred_unit.h	/^    Stats::Scalar ST_treated_SN;$/;"	m	class:BPredUnit
+SetDebugForKey	utility.cpp	/^void SetDebugForKey(const char *key, bool value) {$/;"	f
+Tournament	bpred_unit.h	/^        Tournament,$/;"	e	enum:BPredUnit::PredType
+UPLDhoist	bkEnd.cpp	/^bool UPLDhoist = false;$/;"	v
+Update	bkEnd.cpp	/^void Update(uint64_t __pc, bool __taken, instruction* ins) {$/;"	f
+VLIWfrag	fragment.cpp	/^void fragment::VLIWfrag(int cycle, int numFU) {$/;"	f	class:fragment
+VLIWphrase	phrase.cpp	/^void phrase::VLIWphrase(int cycle, int numFU) {$/;"	f	class:phrase
+_ARST	registerRename.h	/^		map<PR,PR> _ARST;$/;"	m	class:registerRename
+_BIN_SEARCH_H	binarySearch.h	6;"	d
+_BPRED_UNIT_CTR_H	bpred_unit_ctr.h	6;"	d
+_BPRED_UNIT_H	bpred_unit.h	6;"	d
+_CACHECTRL_H	cacheCtrl.h	5;"	d
+_CACHELINE_H	cacheLine.h	10;"	d
+_CACHE_H	cache.h	6;"	d
+_DEP_TABLE_H_	dependencyTable.h	2;"	d
+_FRAGMENT_H_	fragment.h	6;"	d
+_G_BACKEND	bkEnd.h	6;"	d
+_H_utility	utility.h	8;"	d
+_INSTRUCTION_H	instruction.h	8;"	d
+_L1	bkEnd.cpp	/^cache *_L1;$/;"	v
+_L2	bkEnd.cpp	/^cache *_L2;$/;"	v
+_L3	bkEnd.cpp	/^cache *_L3;$/;"	v
+_LATENCY_H	latency.h	5;"	d
+_LSQ_H	lsq.h	7;"	d
+_NODE	heapTree.h	/^	struct _NODE {$/;"	s	class:CHeapTree
+_OOOLD_LSQ_CTRL_H	oooLD_lsq_ctrl.h	11;"	d
+_PARSER_H	parser.h	7;"	d
+_PHRASE_GEN_H	phraseGen.h	6;"	d
+_PHRASE_H	phrase.h	6;"	d
+_PR	registerRename.h	/^		map<PR,int> _PR; \/\/we don't use this map in simulation. just a place holder$/;"	m	class:registerRename
+_PRFSM	registerRename.h	/^		map<PR,PRFSM2b> _PRFSM;$/;"	m	class:registerRename
+_PRvalid	registerRename.h	/^		map<PR,VALID> _PRvalid;  \/\/TODO think about using this for making sure the initial state of register is valid. do I need it?$/;"	m	class:registerRename
+_Q_SORT_	quickSort.h	2;"	d
+_REGISTER_RENAME_H	registerRename.h	6;"	d
+_RF_H	regFile.h	2;"	d
+_RUN_PHRASEBLOCK_H	run_phraseblock.h	6;"	d
+_ReformatHeap	heapTree.cpp	/^inline void CHeapTree<TID, TDATA>::_ReformatHeap(int iRoot)$/;"	f	class:CHeapTree
+_SIDE_BUFF_H	sideBuff.h	2;"	d
+_STAT_H	stat.h	5;"	d
+_VLIWSCHEDULER_H_	vliwScheduler.h	7;"	d
+__g_var	bkEnd.cpp	/^g_variable *__g_var;$/;"	v
+_addFlag	instruction.h	/^	INS_ID _delFlag, _addFlag, _findLPflag, _phraseAddFlag;$/;"	m	class:instruction
+_allAncestors	fragment.h	/^		List<instruction*>* _allAncestors; \/\/All ancestors$/;"	m	class:fragment
+_allAncestors	phrase.h	/^		List<instruction*>* _allAncestors; \/\/All ancestors$/;"	m	class:phrase
+_ancestors	instruction.h	/^	List<instruction*>* _ancestors; \/\/Those ancestors on this$/;"	m	class:instruction
+_availablePRset	registerRename.h	/^		vector<PR> _availablePRset; \/\/This is a FILO (stack)$/;"	m	class:registerRename
+_bbHead	instruction.h	/^	bool _bbHead;$/;"	m	class:instruction
+_bbTail	instruction.h	/^	bool _bbTail;$/;"	m	class:instruction
+_bp_hist	instruction.h	/^	void* _bp_hist;$/;"	m	class:instruction
+_brAccuracy	instruction.h	/^	float _brAccuracy;$/;"	m	class:instruction
+_brAncestors	instruction.h	/^	List<instruction*>* _brAncestors;$/;"	m	class:instruction
+_brBias	instruction.h	/^	float _brBias;$/;"	m	class:instruction
+_brDependents	instruction.h	/^	List<instruction*>* _brDependents;$/;"	m	class:instruction
+_brForward	instruction.h	/^	bool _brForward;$/;"	m	class:instruction
+_brHeaderAddr	instruction.h	/^	INS_ADDR _brHeaderAddr;$/;"	m	class:instruction
+_brPred	instruction.h	/^	bool _brPred;$/;"	m	class:instruction
+_brTaken	instruction.h	/^	bool _brTaken;$/;"	m	class:instruction
+_brTarget	instruction.h	/^	long int _brTarget;$/;"	m	class:instruction
+_branchMode	instruction.h	/^	brMode _branchMode;$/;"	m	class:instruction
+_cRAT	registerRename.h	/^		map<AR,PR> _fRAT, _cRAT;$/;"	m	class:registerRename
+_cacheAccessLatency	lsq.h	/^	int _cacheAccessLatency;$/;"	m	struct:storeObj
+_cacheLines	cache.h	/^	CacheLine **_cacheLines;$/;"	m	class:cache
+_cacheSize	cache.h	/^	unsigned _cacheSize; \/\/In Bytes$/;"	m	class:cache
+_causeOfFragInsID	instruction.h	/^	INS_ID _causeOfFragInsID;$/;"	m	class:instruction
+_causeOfSBinsID	instruction.h	/^	List<INS_ID> *_causeOfSBinsID;$/;"	m	class:instruction
+_command	instruction.h	/^	char _command[INS_STRING_SIZE];$/;"	m	class:instruction
+_committed	lsq.h	/^	bool _committed;$/;"	m	struct:storeObj
+_completeCycle	instruction.h	/^	long int _completeCycle;$/;"	m	class:instruction
+_completeCycle	stat.h	/^	int _completeCycle;$/;"	m	class:stat
+_critPathLen	instruction.h	/^	int _critPathLen;$/;"	m	class:instruction
+_currentCauseOfSBinsID	instruction.h	/^	INS_ID _currentCauseOfSBinsID;$/;"	m	class:instruction
+_currentMySBnum	instruction.h	/^	int _currentMySBnum;$/;"	m	class:instruction
+_cycle	cacheLine.h	/^	long int _cycle;$/;"	m	class:CacheLine
+_data	cacheLine.h	/^	int8_t *_data;$/;"	m	class:CacheLine
+_delFlag	instruction.h	/^	INS_ID _delFlag, _addFlag, _findLPflag, _phraseAddFlag;$/;"	m	class:instruction
+_depFrags	instruction.h	/^	List<fragment*> *_depFrags;$/;"	m	class:instruction
+_depPhrases	instruction.h	/^	List<phrase*> *_depPhrases;$/;"	m	class:instruction
+_dependents	instruction.h	/^	List<instruction*>* _dependents; \/\/Those dependent on this$/;"	m	class:instruction
+_dirty	cacheLine.h	/^	bool _dirty;$/;"	m	class:CacheLine
+_endCycle	fragment.h	/^		long int _endCycle;$/;"	m	class:fragment
+_executeCycle	instruction.h	/^	long int _executeCycle;$/;"	m	class:instruction
+_expCycle	sideBuff.h	/^		int _expCycle;$/;"	m	class:sideBuff
+_expectData	cacheLine.h	/^	bool _expectData;$/;"	m	class:CacheLine
+_fRAT	registerRename.h	/^		map<AR,PR> _fRAT, _cRAT;$/;"	m	class:registerRename
+_fetchEndCycle	instruction.h	/^	long int _fetchEndCycle;$/;"	m	class:instruction
+_fillColor	dot.h	/^		char* _fillColor;$/;"	m	class:dot
+_findLPflag	instruction.h	/^	INS_ID _delFlag, _addFlag, _findLPflag, _phraseAddFlag;$/;"	m	class:instruction
+_fontColor	dot.h	/^		char* _fontColor;$/;"	m	class:dot
+_frNum	fragment.h	/^		long int _frNum;$/;"	m	class:fragment
+_frScore	fragment.h	/^		double _frScore;$/;"	m	class:fragment
+_fragmentInsList	fragment.h	/^		List<instruction*>* _fragmentInsList;$/;"	m	class:fragment
+_fragmentInsList_sort	fragment.h	/^		List<instruction*>* _fragmentInsList_sort;$/;"	m	class:fragment
+_fragmentInsList_vliw	fragment.h	/^		List<instruction*>* _fragmentInsList_vliw;$/;"	m	class:fragment
+_frags	phrase.h	/^		List<fragment*>*    _frags;$/;"	m	class:phrase
+_free	sideBuff.h	/^		bool _free;$/;"	m	class:sideBuff
+_guardian	instruction.h	/^	int _guardian;   \/\/Those on which this depends on$/;"	m	class:instruction
+_hasUPLDancestor	instruction.h	/^	bool _hasUPLDancestor;$/;"	m	class:instruction
+_histArr	hist.h	/^		long int* _histArr;$/;"	m	class:hist
+_histMat	hist.h	/^		long int** _histMat;$/;"	m	class:hist
+_hitLevel	instruction.h	/^	int _hitLevel;$/;"	m	class:instruction
+_id	fragment.h	/^		INS_ID _id;$/;"	m	class:fragment
+_id	instruction.h	/^	INS_ID _id;$/;"	m	class:instruction
+_id	lsq.h	/^	INS_ID _id;$/;"	m	struct:loadObj
+_id	lsq.h	/^	INS_ID _id;$/;"	m	struct:storeObj
+_id	phrase.h	/^		int _id;$/;"	m	class:phrase
+_idealLat	fragment.h	/^		int _idealLat;$/;"	m	class:fragment
+_idealLat	phrase.h	/^		long int _idealLat;$/;"	m	class:phrase
+_inSideBuff	instruction.h	/^	bool _inSideBuff;$/;"	m	class:instruction
+_ins	lsq.h	/^	instruction* _ins; \/\/TODO how to eliminate this?$/;"	m	struct:loadObj
+_ins	lsq.h	/^	instruction* _ins; \/\/TODO how to eliminate this?$/;"	m	struct:storeObj
+_insAddr	instruction.h	/^	ADDRS _insAddr;$/;"	m	class:instruction
+_insStatus	instruction.h	/^	status _insStatus;$/;"	m	class:instruction
+_insStatus	stat.h	/^	status _insStatus;$/;"	m	class:stat
+_insType	instruction.h	/^	type _insType;$/;"	m	class:instruction
+_insType	stat.h	/^	type _insType;$/;"	m	class:stat
+_issueCycle	stat.h	/^	int _issueCycle;$/;"	m	class:stat
+_label	dot.h	/^		char* _label;$/;"	m	class:dot
+_latency	fragment.h	/^		long int _latency;$/;"	m	class:fragment
+_latency	instruction.h	/^	int _latency;$/;"	m	class:instruction
+_latency	stat.h	/^	int _latency;$/;"	m	class:stat
+_lineSize	cache.h	/^	int _lineSize; \/\/In Bytes$/;"	m	class:cache
+_lineSize	cacheLine.h	/^	int _lineSize; \/\/In Bytes$/;"	m	class:CacheLine
+_list	dot.h	/^		List<instruction*>* _list;$/;"	m	class:dot
+_lowerBound_x	hist.h	/^		long int _lowerBound_x;$/;"	m	class:hist
+_lowerBound_y	hist.h	/^		long int _lowerBound_y;$/;"	m	class:hist
+_lq	lsq.h	/^		loadObj* _lq[LQ_SIZE];$/;"	m	class:lsq
+_lqSize	lsq.h	/^		int _lqSize;$/;"	m	class:lsq
+_lqTail	lsq.h	/^		unsigned int _lqTail;$/;"	m	class:lsq
+_memAccessSize	instruction.h	/^	long int _memAccessSize;$/;"	m	class:instruction
+_memAddr	instruction.h	/^	ADDRS _memAddr;$/;"	m	class:instruction
+_memAddr	lsq.h	/^	ADDRS _memAddr;$/;"	m	struct:loadObj
+_memAddr	lsq.h	/^	ADDRS _memAddr;$/;"	m	struct:storeObj
+_memAddr	stat.h	/^	uint64_t _memAddr;$/;"	m	class:stat
+_memAddrCompCompleteCycle	instruction.h	/^	long int _memAddrCompCompleteCycle;$/;"	m	class:instruction
+_memReadAncestors	phrase.h	/^		List<instruction*>* _memReadAncestors; \/\/Only Unpredictab LD op ancestors$/;"	m	class:phrase
+_memReadAncestorsID	fragment.h	/^		List<int>*	    _memReadAncestorsID;$/;"	m	class:fragment
+_memReadAncestorsID	phrase.h	/^		List<int>*	    _memReadAncestorsID; \/\/Only Unpredictab LD op ancestors$/;"	m	class:phrase
+_missPred	instruction.h	/^	bool _missPred;$/;"	m	class:instruction
+_missRate	instruction.h	/^	double _missRate;$/;"	m	class:instruction
+_muPhID	fragment.h	/^		long int _muPhID;$/;"	m	class:fragment
+_myFrag	instruction.h	/^	fragment* _myFrag;$/;"	m	class:instruction
+_myFragID	instruction.h	/^	int _myFragID;$/;"	m	class:instruction
+_myPhrase	instruction.h	/^	phrase* _myPhrase;$/;"	m	class:instruction
+_myPhraseID	instruction.h	/^	int _myPhraseID;$/;"	m	class:instruction
+_mySBnum	instruction.h	/^	List<int> *_mySBnum;$/;"	m	class:instruction
+_name	bpred_unit.h	/^    const std::string _name;$/;"	m	class:BPredUnit
+_nodeCode	dot.h	/^		char* _nodeCode;$/;"	m	class:dot
+_nodeName	dot.h	/^		char* _nodeName;$/;"	m	class:dot
+_numBits	fragment.h	/^		int _numBits;$/;"	m	class:fragment
+_numBucket_x	hist.h	/^		long int _numBucket_x;$/;"	m	class:hist
+_numBucket_y	hist.h	/^		long int _numBucket_y;$/;"	m	class:hist
+_numOfFragments	phrase.h	/^		long int _numOfFragments;$/;"	m	class:phrase
+_numPhraseAncestors	phrase.h	/^		int	 _numPhraseAncestors;$/;"	m	class:phrase
+_numRootIns	phrase.h	/^		int	 _numRootIns;$/;"	m	class:phrase
+_numUPMEMops	fragment.h	/^		long int _numUPMEMops;$/;"	m	class:fragment
+_numUPMEMops	phrase.h	/^		long int _numUPMEMops;$/;"	m	class:phrase
+_numWriteReg	instruction.h	/^	int _numWriteReg;$/;"	m	class:instruction
+_outFile	dot.h	/^		FILE* _outFile;$/;"	m	class:dot
+_pTOaRegMap	instruction.h	/^	map<PR,AR> _pTOaRegMap;$/;"	m	class:instruction
+_pathLen	instruction.h	/^	int _pathLen;$/;"	m	class:instruction
+_pbLists	bkEnd.cpp	/^List<instruction*>** _pbLists;$/;"	v
+_phAge	phrase.h	/^		int _phAge;$/;"	m	class:phrase
+_phAvgAge	fragment.h	/^		long double _phAvgAge;$/;"	m	class:fragment
+_phAvgAge	phrase.h	/^		long double _phAvgAge;$/;"	m	class:phrase
+_phNumDepLinksToNxtPh	fragment.h	/^		double _phNumDepLinksToNxtPh;$/;"	m	class:fragment
+_phNumUPLDops	fragment.h	/^		double _phNumUPLDops;$/;"	m	class:fragment
+_phSize	fragment.h	/^		double _phSize;$/;"	m	class:fragment
+_phraseAddFlag	instruction.h	/^	INS_ID _delFlag, _addFlag, _findLPflag, _phraseAddFlag;$/;"	m	class:instruction
+_phraseAncestors	instruction.h	/^	List<instruction*>* _phraseAncestors; \/\/Those ancestors on this$/;"	m	class:instruction
+_phraseAncestorsID	instruction.h	/^	List<int>* _phraseAncestorsID;$/;"	m	class:instruction
+_phraseInsList	phrase.h	/^		List<instruction*>* _phraseInsList;$/;"	m	class:phrase
+_phraseInsList_sort	phrase.h	/^		List<instruction*>* _phraseInsList_sort;$/;"	m	class:phrase
+_phraseInsList_vliw	phrase.h	/^		List<instruction*>* _phraseInsList_vliw;$/;"	m	class:phrase
+_pipeLineLat	instruction.h	/^	int _pipeLineLat;$/;"	m	class:instruction
+_pr	instruction.h	/^	List<long int> *_r, *_pr;  \/\/Register List & physical write-register list$/;"	m	class:instruction
+_r	instruction.h	/^	List<long int> *_r, *_pr;  \/\/Register List & physical write-register list$/;"	m	class:instruction
+_r	stat.h	/^	List<int*> *_r;  \/\/Register List$/;"	m	class:stat
+_readORwrite	instruction.h	/^	memType _readORwrite;$/;"	m	class:instruction
+_readORwrite	stat.h	/^	memType _readORwrite;$/;"	m	class:stat
+_rootList	instruction.h	/^	List<instruction*>* _rootList;$/;"	m	class:instruction
+_rt	instruction.h	/^	List<int> *_rt; \/\/Register Type List$/;"	m	class:instruction
+_rt	stat.h	/^	List<int*> *_rt; \/\/Register Type List$/;"	m	class:stat
+_sa	cache.h	/^	int _sa;$/;"	m	class:cache
+_scheduler	instruction.h	/^	vliwScheduler* _scheduler;$/;"	m	class:instruction
+_sentToCache	lsq.h	/^	bool _sentToCache;$/;"	m	struct:storeObj
+_sideBuff	sideBuff.h	/^		List<instruction*> *_sideBuff;$/;"	m	class:sideBuff
+_sq	lsq.h	/^		storeObj* _sq[SQ_SIZE];$/;"	m	class:lsq
+_sqDataFwd	lsq.h	/^	bool _sqDataFwd; \/\/has SQ forwarded data already?$/;"	m	struct:loadObj
+_sqSize	lsq.h	/^		int _sqSize;$/;"	m	class:lsq
+_sqTail	lsq.h	/^		unsigned int _sqTail;$/;"	m	class:lsq
+_startCycle	fragment.h	/^		long int _startCycle;$/;"	m	class:fragment
+_state	phrase.h	/^		phraseState _state;$/;"	m	class:phrase
+_step_x	hist.h	/^		long int _step_x;$/;"	m	class:hist
+_step_y	hist.h	/^		long int _step_y;$/;"	m	class:hist
+_storeToCacheBeginCycle	lsq.h	/^	int _storeToCacheBeginCycle;$/;"	m	struct:storeObj
+_storeToCacheEndCycle	lsq.h	/^	int _storeToCacheEndCycle;$/;"	m	struct:storeObj
+_style	dot.h	/^		char* _style;$/;"	m	class:dot
+_tag	cacheLine.h	/^	ADDRS _tag;$/;"	m	class:CacheLine
+_upperBound_x	hist.h	/^		long int _upperBound_x;$/;"	m	class:hist
+_upperBound_y	hist.h	/^		long int _upperBound_y;$/;"	m	class:hist
+_valid	cacheLine.h	/^	bool _valid;$/;"	m	class:CacheLine
+_validDataEntry	lsq.h	/^	bool _validDataEntry;$/;"	m	struct:loadObj
+_validEntries	lsq.h	/^	bool _validEntries;$/;"	m	struct:storeObj
+_validMemAddrEntry	lsq.h	/^	bool _validMemAddrEntry;$/;"	m	struct:loadObj
+_writeInstructions	registerRename.h	/^		map<PR,instruction*> _writeInstructions;$/;"	m	class:registerRename
+activeBuffCnt	bkEnd.cpp	/^long int activeBuffCnt = 0;$/;"	v
+addAddr	dependencyTable.cpp	/^void dependencyTable::addAddr (long int addr, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
+addAsMySB	instruction.cpp	/^void instruction::addAsMySB(int sb, INS_ID causeOfSBinsID, int numSideBuffs) {$/;"	f	class:instruction
+addAsPhraseAncestor	instruction.cpp	/^void instruction::addAsPhraseAncestor(instruction* ins) {$/;"	f	class:instruction
+addBr	dependencyTable.cpp	/^void dependencyTable::addBr  (instruction* ins) {$/;"	f	class:dependencyTable
+addDep	instruction.cpp	/^void instruction::addDep() {$/;"	f	class:instruction
+addDepFrag	instruction.cpp	/^void instruction::addDepFrag(fragment* fr) {$/;"	f	class:instruction
+addDepPhrase	instruction.cpp	/^void instruction::addDepPhrase(phrase* ph) {$/;"	f	class:instruction
+addElem	hist.cpp	/^void hist::addElem(long int elem) {$/;"	f	class:hist
+addFrag	bkEnd.cpp	/^void addFrag (List<fragment*> *iFr, int cycle) {$/;"	f
+addIns	bkEnd.cpp	/^int addIns (int cycle) {$/;"	f
+addLastBracket	bkEnd.cpp	/^void addLastBracket() {$/;"	f
+addPhrase	bkEnd.cpp	/^void addPhrase (List<phrase*> *iPh, int cycle, dot* d) {$/;"	f
+addPhraseblock	bkEnd.cpp	/^void addPhraseblock (List<instruction*>** pbLists, int cycle) {$/;"	f
+addReg	dependencyTable.cpp	/^void dependencyTable::addReg  (long int reg, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
+addToFrag	fragment.cpp	/^void fragment::addToFrag(instruction* ins) {$/;"	f	class:fragment
+addToInsCache	bkEnd.cpp	/^void addToInsCache(int cycle) {$/;"	f
+addToPhrase	phrase.cpp	/^void phrase::addToPhrase(instruction* ins) {$/;"	f	class:phrase
+addToPhrase_Light	phrase.cpp	/^void phrase::addToPhrase_Light(instruction* ins) {$/;"	f	class:phrase
+addrLookup	dependencyTable.cpp	/^instruction* dependencyTable::addrLookup (long int addr, tableType table) {$/;"	f	class:dependencyTable
+aluAvail	bkEnd.cpp	/^bool aluAvail	[NUM_FUNC_UNIT];$/;"	v
+aluFreeTime	bkEnd.cpp	/^int  aluFreeTime[NUM_FUNC_UNIT];$/;"	v
+aluKind	bkEnd.cpp	/^type aluKind[NUM_FUNC_UNIT];$/;"	v
+aluStat	bkEnd.cpp	/^long int  aluStat    [NUM_FUNC_UNIT];$/;"	v
+bbCount	bkEnd.cpp	/^long int bbCount = 0;$/;"	v
+bbPrediction	bkEnd.cpp	/^bool bbPrediction;$/;"	v
+binarySearch	binarySearch.cpp	/^int binarySearch(List<instruction*> *list, INS_ID id, int low, int high) {$/;"	f
+binarySearch	binarySearch.cpp	/^int binarySearch(List<int> *list, int id, int low, int high) {$/;"	f
+bkEnd_finish	bkEnd.cpp	/^void bkEnd_finish () {$/;"	f
+bkEnd_heading	bkEnd.cpp	/^void bkEnd_heading(int argc, char const * argv[]) {$/;"	f
+bkEnd_init	bkEnd.cpp	/^void bkEnd_init (int argc, char const * argv[], g_variable &g_var) {$/;"	f
+bkEnd_run	bkEnd.cpp	/^void bkEnd_run () {$/;"	f
+bpHistory	bpred_unit.h	/^        void *bpHistory;$/;"	m	struct:BPredUnit::PredictorHistory
+bp_hist_list	bkEnd.cpp	/^List<void*>* bp_hist_list = new List<void*>;$/;"	v
+brInsCount	bkEnd.cpp	/^long int brInsCount = 0;$/;"	v
+brLookup	dependencyTable.cpp	/^List<instruction*>* dependencyTable::brLookup () {$/;"	f	class:dependencyTable
+brSkipAccuracyFile	bkEnd.cpp	/^FILE* brSkipAccuracyFile;$/;"	v
+br_dependencyTable	instruction.cpp	/^void instruction::br_dependencyTable (dependencyTable *depTables) {$/;"	f	class:instruction
+br_pred_update_dist	bkEnd.cpp	/^long long int br_pred_update_dist = 0;$/;"	v
+br_pred_update_distance	bkEnd.cpp	/^map<ADDRS,int> br_pred_update_distance;$/;"	v
+branchAccuracy	bkEnd.cpp	/^FILE* branchAccuracy;$/;"	v
+branchAccuracyMap	bkEnd.cpp	/^map<long int,float> branchAccuracyMap;$/;"	v
+branchBiasProfileMap	bkEnd.cpp	/^map<long int,float> branchBiasProfileMap;$/;"	v
+branchList	dependencyTable.h	/^	List<instruction*>* branchList;$/;"	m	class:dependencyTable
+branchMode	bkEnd.cpp	/^brMode branchMode = noBrMode; \/\/1: No Br Run, 2: Run Br, 3: Stat Br Pred, 4: Scheduling (code inject) 5: no scheduling accross low bias branches$/;"	v
+branchProfile	bkEnd.cpp	/^FILE* branchProfile;$/;"	v
+branchProfileFlag	bkEnd.cpp	/^bool branchProfileFlag = false;$/;"	v
+breakFragmentInHalf	phrase.cpp	/^void phrase::breakFragmentInHalf() {$/;"	f	class:phrase
+cache	cache.cpp	/^cache::cache()$/;"	f	class:cache
+cache	cache.cpp	/^cache::cache(int sa, int lineSize, int cacheSize)$/;"	f	class:cache
+cache	cache.h	/^class cache{$/;"	c
+cache	cache_halfSA.cpp	/^cache::cache()$/;"	f	class:cache
+cache	cache_halfSA.cpp	/^cache::cache(int sa, int lineSize, int cacheSize)$/;"	f	class:cache
+cache	cache_singleWord.cpp	/^cache::cache()$/;"	f	class:cache
+cache	cache_singleWord.cpp	/^cache::cache(int sa, int lineSize, int cacheSize)$/;"	f	class:cache
+cacheAccessMemOp	bkEnd.cpp	/^long int cacheAccessMemOp = 0;$/;"	v
+cacheCtrl	cacheCtrl.cpp	/^int cacheCtrl (ADDRS addr, memType rORw, int*& latency, FILE * outFile, cache *_L1, cache *_L2, cache *_L3) \/\/TODO is data declared correctly?$/;"	f
+cacheLat	bkEnd.cpp	/^int cacheLat[MEM_HIGHERARCHY];$/;"	v
+cacheSpec	cache.cpp	/^void cache::cacheSpec (int numCacheLines)$/;"	f	class:cache
+cacheSpec	cache_halfSA.cpp	/^void cache::cacheSpec (int numCacheLines)$/;"	f	class:cache
+cacheSpec	cache_singleWord.cpp	/^void cache::cacheSpec (int numCacheLines)$/;"	f	class:cache
+checkAncestor	bkEnd.cpp	/^bool checkAncestor(instruction* ins, int bottom, int top, List<instruction*> *iWindow) {$/;"	f
+checkMemDependency	bkEnd.cpp	/^bool checkMemDependency (int indx) {$/;"	f
+checkRegDependency	bkEnd.cpp	/^bool checkRegDependency (int indx) {$/;"	f
+chkMemRdAncestors	phrase.cpp	/^bool phrase::chkMemRdAncestors(instruction* ins) {$/;"	f	class:phrase
+chkMemRdAncestorsV1	phrase.cpp	/^bool phrase::chkMemRdAncestorsV1(instruction* ins) {$/;"	f	class:phrase
+closeBlock	dot.cpp	/^void dot::closeBlock() {$/;"	f	class:dot
+closeOldPhrase	phraseGen.cpp	/^void phraseGen::closeOldPhrase(int phIndx) {$/;"	f	class:phraseGen
+closePh	phraseGen.h	/^		List<phrase*> *closePh;$/;"	m	class:phraseGen
+closedPhIDs	phraseGen.h	/^		List<int>     *closedPhIDs;$/;"	m	class:phraseGen
+collect_stat	bkEnd.cpp	/^bool collect_stat = false;$/;"	v
+comment	bkEnd.cpp	/^char* comment;$/;"	v
+commitIns	bkEnd.cpp	/^int commitIns (int cycle, List<instruction*> *iROB) {$/;"	f
+commitIns	phraseGen.cpp	/^int phraseGen::commitIns (int cycle, List<instruction*> *iROB) {$/;"	f	class:phraseGen
+commitRegs	instruction.cpp	/^void instruction::commitRegs(registerRename *GRF) {$/;"	f	class:instruction
+completeIns	bkEnd.cpp	/^void completeIns (int cycle,List<instruction*>* iROB) {$/;"	f
+completeIns	vliwScheduler.cpp	/^void vliwScheduler::completeIns (int cycle,List<instruction*>* list, bool del) {$/;"	f	class:vliwScheduler
+completeInsCount	bkEnd.cpp	/^long int completeInsCount;$/;"	v
+completeRegs	instruction.cpp	/^void instruction::completeRegs(registerRename *GRF) {$/;"	f	class:instruction
+computeFrIdealLat	fragment.cpp	/^void fragment::computeFrIdealLat(instruction* ins) {$/;"	f	class:fragment
+computeFrScore	fragment.cpp	/^void fragment::computeFrScore() {$/;"	f	class:fragment
+computeMissRates	bkEnd.cpp	/^void computeMissRates() {$/;"	f
+computePhAvgAge	phrase.cpp	/^void phrase::computePhAvgAge() {$/;"	f	class:phrase
+computePhIdealLat	phrase.cpp	/^void phrase::computePhIdealLat(instruction* ins) {$/;"	f	class:phrase
+condIncorrect	bpred_unit.h	/^    Stats::Scalar condIncorrect;$/;"	m	class:BPredUnit
+condPredicted	bpred_unit.h	/^    Stats::Scalar condPredicted;$/;"	m	class:BPredUnit
+coreType	bkEnd.cpp	/^core coreType;$/;"	v
+correlationHist	bkEnd.cpp	/^hist* correlationHist;$/;"	v
+correlationMap	bkEnd.cpp	/^map<long int,float> correlationMap;$/;"	v
+corruptInsCount	bkEnd.cpp	/^long int corruptInsCount;$/;"	v
+crCount	bkEnd.cpp	/^int64_t crCount = 0;$/;"	v
+createGraph	dot.cpp	/^void dot::createGraph() {$/;"	f	class:dot
+createStrand	bkEnd.cpp	/^void createStrand(instruction *ins, int indx, int iWinIndx, List<instruction*> *iWindow) {$/;"	f
+createSubGraph	dot.cpp	/^void dot::createSubGraph(int subGraphID) {$/;"	f	class:dot
+createTraceAndHitMiss	bkEnd.cpp	/^void createTraceAndHitMiss (int i) {$/;"	f
+cycle	bkEnd.cpp	/^long int cycle;$/;"	v
+data	heapTree.h	/^		TDATA data;$/;"	m	struct:CHeapTree::_NODE
+debug	cache.h	/^	bool debug;$/;"	m	class:cache
+debug	cacheCtrl.cpp	/^bool debug = true;$/;"	v
+debug	cacheLine.h	/^	bool debug;$/;"	m	class:CacheLine
+debug1	cacheCtrl.cpp	/^bool debug1 = false;$/;"	v
+debugKeys	utility.cpp	/^static vector<const char*> debugKeys;$/;"	v	file:
+defn	dot.cpp	/^void dot::defn() {$/;"	f	class:dot
+delAddr	dependencyTable.cpp	/^void dependencyTable::delAddr (long int addr, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
+delBr	dependencyTable.cpp	/^void dependencyTable::delBr  (instruction* ins){$/;"	f	class:dependencyTable
+delBrDependent	instruction.cpp	/^void instruction::delBrDependent(instruction* ins) {$/;"	f	class:instruction
+delDepTableEntris	instruction.cpp	/^void instruction::delDepTableEntris(dependencyTable *depTables, int coreType, bool perfectRegRen) {$/;"	f	class:instruction
+delDepTableEntris_LRF	instruction.cpp	/^void instruction::delDepTableEntris_LRF(dependencyTable *depTables, int coreType, bool perfectRegRen) {$/;"	f	class:instruction
+delFromInsMap	vliwScheduler.cpp	/^void vliwScheduler::delFromInsMap(instruction* ins) {$/;"	f	class:vliwScheduler
+delList	bkEnd.cpp	/^List<int> *delList = new List<int>;$/;"	v
+delMySB	instruction.cpp	/^void instruction::delMySB(int sb, INS_ID causeOfSBinsID, int numSideBuffs) {$/;"	f	class:instruction
+delNthBrAncestor	instruction.cpp	/^void instruction::delNthBrAncestor(int i) {$/;"	f	class:instruction
+delReg	dependencyTable.cpp	/^void dependencyTable::delReg  (long int reg, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
+depTables	bkEnd.cpp	/^dependencyTable *depTables;$/;"	v
+dependencyTable	dependencyTable.cpp	/^dependencyTable::dependencyTable() {$/;"	f	class:dependencyTable
+dependencyTable	dependencyTable.h	/^class dependencyTable {$/;"	c
+doRead	cacheCtrl.cpp	/^int doRead(cache *L, ADDRS addr, int8_t*& data, int*& latency, int memCode, char type, memType rORw)$/;"	f
+doWrite	cacheCtrl.cpp	/^int doWrite(cache *L, ADDRS addr, int8_t*& data, int*& latency, int memCode, memType rORw)$/;"	f
+dot	dot.cpp	/^dot::dot(int fileCode) {$/;"	f	class:dot
+dot	dot.h	/^class dot {$/;"	c
+drainedSBcount	bkEnd.cpp	/^int drainedSBcount = 0;$/;"	v
+dyn_num_strands	bkEnd.cpp	/^long long int dyn_num_strands = 0;$/;"	v
+emptyResStation	bkEnd.cpp	/^long int emptyResStation = 0;$/;"	v
+encodeAndReset	phrase.cpp	/^long int phrase::encodeAndReset(bool* fragID, int size) {$/;"	f	class:phrase
+eoc	bkEnd.cpp	/^bool eoc, eof;$/;"	v
+eof	bkEnd.cpp	/^bool eoc, eof;$/;"	v
+eraseARST	registerRename.cpp	/^void registerRename::eraseARST(PR p_reg) {$/;"	f	class:registerRename
+evaltMissRtCorrel	bkEnd.cpp	/^long int evaltMissRtCorrel = 0;$/;"	v
+exeMemPipeStage	bkEnd.cpp	/^void exeMemPipeStage(List<instruction*> *iROB, int cycle, lsq *loadStoreQue) {$/;"	f
+executeIns	bkEnd.cpp	/^void executeIns (instruction *_ins, int _cycle, int _latency) {$/;"	f
+executeInsCount	bkEnd.cpp	/^long int executeInsCount;$/;"	v
+fetchIns	parser.cpp	/^int parser::fetchIns (instruction* ins) {$/;"	f	class:parser
+fetchStallCycle	bkEnd.cpp	/^long int fetchStallCycle = 0;$/;"	v
+fetchWidth	bpred_unit.h	/^	bool fetchWidth;$/;"	m	class:BPredUnit
+fileName	dot.h	/^		string fileName;$/;"	m	class:dot
+findAddr	cache.cpp	/^bool cache::findAddr(ADDRS addr)$/;"	f	class:cache
+findAddr	cache_halfSA.cpp	/^bool cache::findAddr(uint64_t addr)$/;"	f	class:cache
+findAddr	cache_singleWord.cpp	/^bool cache::findAddr(uint64_t addr)$/;"	f	class:cache
+findBestResStation	bkEnd.cpp	/^int findBestResStation() {$/;"	f
+findCriticalPath	phrase.cpp	/^int phrase::findCriticalPath() {$/;"	f	class:phrase
+findFragID	phrase.cpp	/^int phrase::findFragID(instruction* ins, bool* fragID, instruction* root) {$/;"	f	class:phrase
+findIndx	hist.cpp	/^long int hist::findIndx(long int elem) {$/;"	f	class:hist
+findLatency	bkEnd.cpp	/^int findLatency (instruction *_ins) {$/;"	f
+findLongestPath	instruction.cpp	/^int instruction::findLongestPath(long int cycle, bool UPLDhoisting, long int myPhraseID) {$/;"	f	class:instruction
+findLongestPathDynamicly	instruction.cpp	/^int instruction::findLongestPathDynamicly(long int cycle, bool UPLDhoisting) {$/;"	f	class:instruction
+findMissPrediction	instruction.cpp	/^void instruction::findMissPrediction(bool missPred) {$/;"	f	class:instruction
+findMostCritIns	vliwScheduler.cpp	/^void vliwScheduler::findMostCritIns(List<instruction*> *list, int cycle, bool UPLDhoisting) {$/;"	f	class:vliwScheduler
+findMyPhrase	phraseGen.cpp	/^int phraseGen::findMyPhrase(instruction* ins) {$/;"	f	class:phraseGen
+findPhraseAncestors	instruction.cpp	/^void instruction::findPhraseAncestors() {$/;"	f	class:instruction
+findReadyFrag	bkEnd.cpp	/^void findReadyFrag(List<fragment*>* iFr_ready, List<fragment*>* iFr_wait) {$/;"	f
+findReadyPhrases	phraseGen.cpp	/^void phraseGen::findReadyPhrases(FILE* phraseFile, dependencyTable *depTables, List<instruction*> *iROB) {$/;"	f	class:phraseGen
+finish	dot.cpp	/^void dot::finish() {$/;"	f	class:dot
+flush_depTables	dependencyTable.cpp	/^void dependencyTable::flush_depTables() {$/;"	f	class:dependencyTable
+flush_fRAT	registerRename.cpp	/^void registerRename::flush_fRAT() {$/;"	f	class:registerRename
+frCycle	bkEnd.cpp	/^int frCycle = 0;$/;"	v
+frLatHist	bkEnd.cpp	/^hist* frLatHist;$/;"	v
+frSizeHist	bkEnd.cpp	/^hist* frSizeHist;$/;"	v
+fragment	fragment.cpp	/^fragment::fragment() {$/;"	f	class:fragment
+fragment	fragment.h	/^class fragment {$/;"	c
+freeALUs	bkEnd.cpp	/^void freeALUs (int cycle) {$/;"	f
+genAllPhraseAncestorsList	instruction.cpp	/^void instruction::genAllPhraseAncestorsList(INS_ID causeOfPhraseinsID, instruction* ins) {$/;"	f	class:instruction
+genPhraseAncestorsList	instruction.cpp	/^void instruction::genPhraseAncestorsList(int causeOfPhraseinsID, instruction* ins) {$/;"	f	class:instruction
+genPhraseStat	phraseGen.cpp	/^void phraseGen::genPhraseStat(int indx) {$/;"	f	class:phraseGen
+getANumber	bkEnd.cpp	/^long int getANumber(char *c) {$/;"	f
+getANumber	parser.cpp	/^long int parser::getANumber(char *c) {$/;"	f	class:parser
+getARST	registerRename.cpp	/^PR registerRename::getARST(PR p_reg) {$/;"	f	class:registerRename
+getAddr	bkEnd.cpp	/^ADDRS getAddr(char *c) {$/;"	f
+getAddr	parser.cpp	/^long int parser::getAddr(char *c) {$/;"	f	class:parser
+getAvailablePR	registerRename.cpp	/^PR registerRename::getAvailablePR() {$/;"	f	class:registerRename
+getBrAccuracy	instruction.cpp	/^float instruction::getBrAccuracy () {$/;"	f	class:instruction
+getBrBias	instruction.cpp	/^float instruction::getBrBias () {$/;"	f	class:instruction
+getBrHeaderAddr	instruction.cpp	/^INS_ADDR instruction::getBrHeaderAddr() {$/;"	f	class:instruction
+getBrMode	instruction.cpp	/^brMode instruction::getBrMode() {$/;"	f	class:instruction
+getBrSide	instruction.cpp	/^bool instruction::getBrSide() {$/;"	f	class:instruction
+getCacheHitLevel	instruction.cpp	/^int instruction::getCacheHitLevel() {$/;"	f	class:instruction
+getCauseOfFragInsID	instruction.cpp	/^INS_ID instruction::getCauseOfFragInsID() {$/;"	f	class:instruction
+getCauseOfSBinsID	instruction.cpp	/^INS_ID instruction::getCauseOfSBinsID() {$/;"	f	class:instruction
+getCmdStr	instruction.cpp	/^char* instruction::getCmdStr() {$/;"	f	class:instruction
+getCompleteCycle	instruction.cpp	/^long int instruction::getCompleteCycle() {$/;"	f	class:instruction
+getCompleteCycle	stat.cpp	/^int instruction::getCompleteCycle() {$/;"	f	class:instruction
+getCycle	cacheLine.cpp	/^long int CacheLine::getCycle() {$/;"	f	class:CacheLine
+getDepOnUPLD	instruction.cpp	/^bool instruction::getDepOnUPLD() {$/;"	f	class:instruction
+getDependents	instruction.cpp	/^List<instruction*>* instruction::getDependents() {$/;"	f	class:instruction
+getExecuteCycle	instruction.cpp	/^long int instruction::getExecuteCycle() {$/;"	f	class:instruction
+getExpectData	cache.cpp	/^bool cache::getExpectData(ADDRS addr) {$/;"	f	class:cache
+getExpectData	cacheLine.cpp	/^bool CacheLine::getExpectData() {$/;"	f	class:CacheLine
+getExpiration	sideBuff.cpp	/^int sideBuff::getExpiration() {$/;"	f	class:sideBuff
+getFrIdealLat	fragment.cpp	/^long int fragment::getFrIdealLat() {$/;"	f	class:fragment
+getFrRelAvgAge	fragment.cpp	/^long double fragment::getFrRelAvgAge() {$/;"	f	class:fragment
+getFrRelNumDepLinksToNxtPh	fragment.cpp	/^double fragment::getFrRelNumDepLinksToNxtPh() {$/;"	f	class:fragment
+getFrRelNumUPLDops	fragment.cpp	/^double fragment::getFrRelNumUPLDops() {$/;"	f	class:fragment
+getFrRelSize	fragment.cpp	/^double fragment::getFrRelSize() {$/;"	f	class:fragment
+getFrScore	fragment.cpp	/^double fragment::getFrScore() {$/;"	f	class:fragment
+getFragID	fragment.cpp	/^INS_ID fragment::getFragID() {$/;"	f	class:fragment
+getFragNum	fragment.cpp	/^long int fragment::getFragNum() {$/;"	f	class:fragment
+getFragSize	fragment.cpp	/^int fragment::getFragSize() {$/;"	f	class:fragment
+getIndex	cache.cpp	/^ADDRS cache::getIndex(ADDRS addr)$/;"	f	class:cache
+getIndex	cache_halfSA.cpp	/^uint64_t cache::getIndex(uint64_t addr)$/;"	f	class:cache
+getIndex	cache_singleWord.cpp	/^uint64_t cache::getIndex(uint64_t addr)$/;"	f	class:cache
+getInsAddr	instruction.cpp	/^ADDRS instruction::getInsAddr() {$/;"	f	class:instruction
+getInsID	instruction.cpp	/^INS_ID instruction::getInsID() {$/;"	f	class:instruction
+getInsList	fragment.cpp	/^List<instruction*>* fragment::getInsList() {$/;"	f	class:fragment
+getInsList_unsort	phrase.cpp	/^List<instruction*>* phrase::getInsList_unsort() {$/;"	f	class:phrase
+getIssueCycle	stat.cpp	/^int instruction::getIssueCycle() {$/;"	f	class:instruction
+getLQheadId	lsq.cpp	/^INS_ID lsq::getLQheadId() {$/;"	f	class:lsq
+getLQsize	lsq.cpp	/^int lsq::getLQsize() {$/;"	f	class:lsq
+getLSQsize	bkEnd.cpp	/^void getLSQsize(lsq *loadStoreQue) {$/;"	f
+getLat	fragment.cpp	/^long int fragment::getLat() {$/;"	f	class:fragment
+getLatency	instruction.cpp	/^int instruction::getLatency() {$/;"	f	class:instruction
+getLatency	latency.cpp	/^int getLatency(int hitLevel, int nonStdLat)$/;"	f
+getLatency	stat.cpp	/^int instruction::getLatency() {$/;"	f	class:instruction
+getLineSize	cacheLine.cpp	/^int  CacheLine::getLineSize() {return _lineSize;}$/;"	f	class:CacheLine
+getLongestPath	instruction.cpp	/^int instruction::getLongestPath() {$/;"	f	class:instruction
+getMemAccessSize	instruction.cpp	/^long int instruction::getMemAccessSize() {$/;"	f	class:instruction
+getMemAddr	instruction.cpp	/^ADDRS instruction::getMemAddr() {$/;"	f	class:instruction
+getMemAddr	stat.cpp	/^uint64_t instruction::getMemAddr() {$/;"	f	class:instruction
+getMemAddrCompCompleteCycle	instruction.cpp	/^long int instruction::getMemAddrCompCompleteCycle() {$/;"	f	class:instruction
+getMemType	instruction.cpp	/^memType instruction::getMemType() {$/;"	f	class:instruction
+getMemType	stat.cpp	/^memType instruction::getMemType() {$/;"	f	class:instruction
+getMissPrediction	instruction.cpp	/^bool instruction::getMissPrediction() {$/;"	f	class:instruction
+getMissrate	instruction.cpp	/^double instruction::getMissrate() {$/;"	f	class:instruction
+getMyFrag	instruction.cpp	/^fragment* instruction::getMyFrag() {$/;"	f	class:instruction
+getMyFragID	instruction.cpp	/^int instruction::getMyFragID() {$/;"	f	class:instruction
+getMyPathLen	instruction.cpp	/^int instruction::getMyPathLen() {$/;"	f	class:instruction
+getMyPhrase	instruction.cpp	/^phrase* instruction::getMyPhrase() {$/;"	f	class:instruction
+getMyPhraseID	instruction.cpp	/^int instruction::getMyPhraseID() {$/;"	f	class:instruction
+getMyReg	instruction.cpp	/^long int instruction::getMyReg (int i) { \/\/TODO this func may return wrong data (register renaming)$/;"	f	class:instruction
+getMyReg	stat.cpp	/^int instruction::getMyReg (int i) {$/;"	f	class:instruction
+getMyRegType	instruction.cpp	/^int instruction::getMyRegType(int i) {$/;"	f	class:instruction
+getMyRegType	stat.cpp	/^int instruction::getMyRegType(int i) {$/;"	f	class:instruction
+getNthAncestor	instruction.cpp	/^instruction* instruction::getNthAncestor(int i) {$/;"	f	class:instruction
+getNthBrAncestor	instruction.cpp	/^instruction* instruction::getNthBrAncestor(int i) {$/;"	f	class:instruction
+getNthIns	fragment.cpp	/^instruction* fragment::getNthIns(int i) {$/;"	f	class:fragment
+getNthIns	phrase.cpp	/^instruction* phrase::getNthIns(int i) {$/;"	f	class:phrase
+getNthIns_unsort	phrase.cpp	/^instruction* phrase::getNthIns_unsort(int i) {$/;"	f	class:phrase
+getNthMemRdAncestor	instruction.cpp	/^instruction* instruction::getNthMemRdAncestor(int i) {$/;"	f	class:instruction
+getNthMemRdAncestorID	instruction.cpp	/^int instruction::getNthMemRdAncestorID(int i) {$/;"	f	class:instruction
+getNthPhraseAncestor	phrase.cpp	/^instruction* phrase::getNthPhraseAncestor(int i) {$/;"	f	class:phrase
+getNthReg	instruction.cpp	/^long int instruction::getNthReg(int i) {$/;"	f	class:instruction
+getNthRegType	instruction.cpp	/^int instruction::getNthRegType(int i) {$/;"	f	class:instruction
+getNumAllPhraseAncestors	phrase.cpp	/^int phrase::getNumAllPhraseAncestors() {$/;"	f	class:phrase
+getNumAncestors	instruction.cpp	/^int instruction::getNumAncestors() {$/;"	f	class:instruction
+getNumAvailablePR	registerRename.cpp	/^int registerRename::getNumAvailablePR() {$/;"	f	class:registerRename
+getNumBits	fragment.cpp	/^int fragment::getNumBits() {$/;"	f	class:fragment
+getNumBrAncestors	instruction.cpp	/^int instruction::getNumBrAncestors() {$/;"	f	class:instruction
+getNumFrags	phrase.cpp	/^long int phrase::getNumFrags() {$/;"	f	class:phrase
+getNumLRFreg	instruction.cpp	/^int instruction::getNumLRFreg() {$/;"	f	class:instruction
+getNumMemRdAncestors	instruction.cpp	/^int instruction::getNumMemRdAncestors() {$/;"	f	class:instruction
+getNumPhGenReset	phraseGen.cpp	/^long int phraseGen::getNumPhGenReset() {$/;"	f	class:phraseGen
+getNumPhraseAncestors	phrase.cpp	/^int phrase::getNumPhraseAncestors() {$/;"	f	class:phrase
+getNumReg	instruction.cpp	/^int instruction::getNumReg() {$/;"	f	class:instruction
+getNumReg	stat.cpp	/^int instruction::getNumReg() {$/;"	f	class:instruction
+getNumRootIns	phrase.cpp	/^int phrase::getNumRootIns() {$/;"	f	class:phrase
+getNumSoftBounds	phrase.cpp	/^long int phrase::getNumSoftBounds () {$/;"	f	class:phrase
+getNumUPLDancestors	phrase.cpp	/^long int phrase::getNumUPLDancestors() {$/;"	f	class:phrase
+getNumUPLDops	phrase.cpp	/^long int phrase::getNumUPLDops() {$/;"	f	class:phrase
+getNumWrReg	instruction.cpp	/^int instruction::getNumWrReg() {$/;"	f	class:instruction
+getNumberOfRegs	regFile.cpp	/^long int regFile::getNumberOfRegs() {$/;"	f	class:regFile
+getOutSideBuff	instruction.cpp	/^void instruction::getOutSideBuff() {$/;"	f	class:instruction
+getPRFSM	registerRename.cpp	/^PRFSM2b registerRename::getPRFSM(PR p_reg) {$/;"	f	class:registerRename
+getPathLen	instruction.cpp	/^int instruction::getPathLen() {$/;"	f	class:instruction
+getPhAvgAge	phrase.cpp	/^long double phrase::getPhAvgAge() {$/;"	f	class:phrase
+getPhIdealLat	phrase.cpp	/^long int phrase::getPhIdealLat() {$/;"	f	class:phrase
+getPhraseAge	phrase.cpp	/^int phrase::getPhraseAge() {$/;"	f	class:phrase
+getPhraseID	phrase.cpp	/^int phrase::getPhraseID() {$/;"	f	class:phrase
+getPhraseSize	phrase.cpp	/^int phrase::getPhraseSize() {$/;"	f	class:phrase
+getPhraseSize_unsort	phrase.cpp	/^int phrase::getPhraseSize_unsort() {$/;"	f	class:phrase
+getPipelineLat	instruction.cpp	/^int instruction::getPipelineLat () {$/;"	f	class:instruction
+getPredHistObj	instruction.cpp	/^void* instruction::getPredHistObj() {$/;"	f	class:instruction
+getPrediction	instruction.cpp	/^bool instruction::getPrediction() {$/;"	f	class:instruction
+getRFstat	bkEnd.cpp	/^void getRFstat(instruction* ins) {$/;"	f
+getRRsize	bkEnd.cpp	/^void getRRsize(registerRename *GRF) {$/;"	f
+getReg	bkEnd.cpp	/^long int getReg(char *c) {$/;"	f
+getReg	parser.cpp	/^long int parser::getReg(char *c) {$/;"	f	class:parser
+getRegNum	regFile.cpp	/^long int regFile::getRegNum(const char* regName) {$/;"	f	class:regFile
+getRegType	bkEnd.cpp	/^int getRegType(char *c) {$/;"	f
+getRegType	parser.cpp	/^int parser::getRegType(char *c) {$/;"	f	class:parser
+getRenamedReg	instruction.cpp	/^long int instruction::getRenamedReg(long int reg) {$/;"	f	class:instruction
+getRenamedReg	registerRename.cpp	/^PR registerRename::getRenamedReg(AR a_reg) {$/;"	f	class:registerRename
+getSQhead	lsq.cpp	/^instruction* lsq::getSQhead() {$/;"	f	class:lsq
+getSQsize	lsq.cpp	/^int lsq::getSQsize() {$/;"	f	class:lsq
+getSQtail	lsq.cpp	/^instruction* lsq::getSQtail() {$/;"	f	class:lsq
+getSet_LRU	cache_halfSA.cpp	/^int cache::getSet_LRU(int cycle, uint64_t indx) {$/;"	f	class:cache
+getSideBuffNum	instruction.cpp	/^int instruction::getSideBuffNum() {$/;"	f	class:instruction
+getSizeOfInsMap	vliwScheduler.cpp	/^int vliwScheduler::getSizeOfInsMap() {$/;"	f	class:vliwScheduler
+getSquashRFstat	bkEnd.cpp	/^void getSquashRFstat(instruction* ins) {$/;"	f
+getSquashRFstatForStatus	bkEnd.cpp	/^void getSquashRFstatForStatus(instruction *ins, status st) {$/;"	f
+getState	phrase.cpp	/^phraseState phrase::getState() {$/;"	f	class:phrase
+getStatus	instruction.cpp	/^status instruction::getStatus () {$/;"	f	class:instruction
+getStatus	stat.cpp	/^status instruction::getStatus () {$/;"	f	class:instruction
+getTag	cache.cpp	/^ADDRS cache::getTag(ADDRS addr)$/;"	f	class:cache
+getTag	cacheLine.cpp	/^ADDRS CacheLine::getTag () {$/;"	f	class:CacheLine
+getTag	cache_halfSA.cpp	/^uint64_t cache::getTag(uint64_t addr)$/;"	f	class:cache
+getTag	cache_singleWord.cpp	/^uint64_t cache::getTag(uint64_t addr)$/;"	f	class:cache
+getTotNumCritPathViolations	phraseGen.cpp	/^long int phraseGen::getTotNumCritPathViolations() {$/;"	f	class:phraseGen
+getTotNumFrags	phraseGen.cpp	/^long int phraseGen::getTotNumFrags () {$/;"	f	class:phraseGen
+getTotNumIns	phraseGen.cpp	/^long int phraseGen::getTotNumIns() {$/;"	f	class:phraseGen
+getTotNumPhraseAncestors	phraseGen.cpp	/^long int phraseGen::getTotNumPhraseAncestors() {$/;"	f	class:phraseGen
+getTotNumPhraseUPLD	phraseGen.cpp	/^long int phraseGen::getTotNumPhraseUPLD() {$/;"	f	class:phraseGen
+getTotNumPhrases	phraseGen.cpp	/^long int phraseGen::getTotNumPhrases() {$/;"	f	class:phraseGen
+getTotNumRootIns	phraseGen.cpp	/^long int phraseGen::getTotNumRootIns() {$/;"	f	class:phraseGen
+getTotNumRootPh	phraseGen.cpp	/^long int phraseGen::getTotNumRootPh () {$/;"	f	class:phraseGen
+getTotNumSoftBound	phraseGen.cpp	/^long int phraseGen::getTotNumSoftBound() {$/;"	f	class:phraseGen
+getType	instruction.cpp	/^type instruction::getType () {$/;"	f	class:instruction
+getType	stat.cpp	/^type instruction::getType () {$/;"	f	class:instruction
+getWBAddr	cache.cpp	/^ADDRS cache::getWBAddr(ADDRS addr)$/;"	f	class:cache
+getWBAddr	cache_halfSA.cpp	/^uint64_t cache::getWBAddr(uint64_t addr)$/;"	f	class:cache
+getWBAddr	cache_singleWord.cpp	/^uint64_t cache::getWBAddr(uint64_t addr)$/;"	f	class:cache
+getWriterIns	registerRename.cpp	/^instruction* registerRename::getWriterIns(PR p_reg) {$/;"	f	class:registerRename
+get_OldestCommittedUncachedSQentry_ID	lsq.cpp	/^INS_ID lsq::get_OldestCommittedUncachedSQentry_ID() {$/;"	f	class:lsq
+get_oldestCommittedUncachedSQentry_MemAddr	lsq.cpp	/^ADDRS lsq::get_oldestCommittedUncachedSQentry_MemAddr(INS_ID id) {$/;"	f	class:lsq
+goToReadyList	instruction.cpp	/^void instruction::goToReadyList() {$/;"	f	class:instruction
+goToSideBuff	instruction.cpp	/^void instruction::goToSideBuff() {$/;"	f	class:instruction
+grfCount	bkEnd.cpp	/^long long int grfCount = 0;$/;"	v
+grfRdCountPerIns	bkEnd.cpp	/^long long int lrfRdCountPerIns=0, grfRdCountPerIns=0;$/;"	v
+grfWrCountPerIns	bkEnd.cpp	/^long long int lrfWrCountPerIns=0, grfWrCountPerIns=0;$/;"	v
+hasCommittedUncachedSQentry	lsq.cpp	/^bool lsq::hasCommittedUncachedSQentry() {$/;"	f	class:lsq
+hist	hist.cpp	/^hist::hist(long int numBucket, long int lowerBound, long int upperBound) {$/;"	f	class:hist
+hist	hist.cpp	/^hist::hist(long int numBucket_x, long int lowerBound_x, long int upperBound_x, long int numBucket_y, long int lowerBound_y, long int upperBound_y) {$/;"	f	class:hist
+hist	hist.h	/^class hist {$/;"	c
+hitCount	latency.cpp	/^long int hitCount (int lat) {$/;"	f
+hitLatency	latency.cpp	/^long int hitLatency (int lat) {$/;"	f
+hitLevel	cacheCtrl.cpp	/^int hitLevel;$/;"	v
+hybridSkewbp	bpred_unit.h	/^    HybridBPskew *hybridSkewbp;$/;"	m	class:BPredUnit
+hybridbp	bpred_unit.h	/^    HybridBP *hybridbp;$/;"	m	class:BPredUnit
+iMemBuf	bkEnd.cpp	/^List<instruction*> *iMemBuf;$/;"	v
+iMemBuffSize	bkEnd.cpp	/^long int iMemBuffSize = 0;$/;"	v
+iROB	bkEnd.cpp	/^List<instruction*> *iROB;$/;"	v
+iROBSize	bkEnd.cpp	/^long int iROBSize = 0;$/;"	v
+iResStation	bkEnd.cpp	/^List<instruction*> *iResStation;$/;"	v
+iResStations	bkEnd.cpp	/^List<instruction*> *iResStations[NUM_FUNC_UNIT];$/;"	v
+iResStnSize	bkEnd.cpp	/^long int iResStnSize = 0;$/;"	v
+iResStnsSize	bkEnd.cpp	/^long int iResStnsSize[NUM_FUNC_UNIT];$/;"	v
+iSideBufSize	bkEnd.cpp	/^long int iSideBufSize = 0;$/;"	v
+iSideBuff	bkEnd.cpp	/^sideBuff **iSideBuff;$/;"	v
+iWinSize	bkEnd.cpp	/^long int iWinSize = 0;$/;"	v
+iWindow	bkEnd.cpp	/^List<instruction*> *iWindow;$/;"	v
+id	heapTree.h	/^		TID id;$/;"	m	struct:CHeapTree::_NODE
+idleCount	bkEnd.cpp	/^int64_t idleCount = 0;$/;"	v
+importCacheHitLevel	instruction.cpp	/^void instruction::importCacheHitLevel(int hitLevel) {$/;"	f	class:instruction
+inCompleteBBbuffIndx	bkEnd.cpp	/^int inCompleteBBbuffIndx = -1;$/;"	v
+inFlightLDops	bkEnd.cpp	/^map<long int,int> inFlightLDops;$/;"	v
+inFlightLDopsSize	bkEnd.cpp	/^long int inFlightLDopsSize = 0;$/;"	v
+incPhraseAge	phrase.cpp	/^void phrase::incPhraseAge() {$/;"	f	class:phrase
+increase_BP_lookup	bpred_unit_ctr.h	/^BPredUnit<Impl>::increase_BP_lookup(int lookupCnt)$/;"	f	class:BPredUnit
+increase_BP_lookup_and_update	bpred_unit_ctr.h	/^BPredUnit<Impl>::increase_BP_lookup_and_update(int lookupCnt)$/;"	f	class:BPredUnit
+increase_BTB_lookup	bpred_unit_ctr.h	/^BPredUnit<Impl>::increase_BTB_lookup()$/;"	f	class:BPredUnit
+infRegdependencyTable	instruction.cpp	/^void instruction::infRegdependencyTable (dependencyTable *depTables, int coreType) {$/;"	f	class:instruction
+init	dot.cpp	/^void dot::init() {$/;"	f	class:dot
+injectIns	vliwScheduler.cpp	/^void vliwScheduler::injectIns(instruction* ins) {$/;"	f	class:vliwScheduler
+insCount	bkEnd.cpp	/^long int insCount;$/;"	v
+insCount	phraseGen.h	/^		long int insCount;$/;"	m	class:phraseGen
+insID	bkEnd.cpp	/^INS_ID insID;$/;"	v
+insMap	vliwScheduler.h	/^	map<long int,instruction*> insMap;$/;"	m	class:vliwScheduler
+insParseCap	bkEnd.cpp	/^long int insParseCap = -1;$/;"	v
+insTypeCountStat	bkEnd.cpp	/^void insTypeCountStat(instruction* ins) {$/;"	f
+insVisitingSBcount	bkEnd.cpp	/^long int *insVisitingSBcount= new long int [numSideBuffs];$/;"	v
+ins_exe_hoist_accuracy	bkEnd.cpp	/^map<long int, float> ins_exe_hoist_accuracy;$/;"	v
+insertLQ_addr	lsq.cpp	/^void lsq::insertLQ_addr(instruction* ins) {$/;"	f	class:lsq
+insertSQ_addrNdata	lsq.cpp	/^void lsq::insertSQ_addrNdata(instruction* ins) {$/;"	f	class:lsq
+insertToInsMap	instruction.cpp	/^void instruction::insertToInsMap() {$/;"	f	class:instruction
+insertToInsMap	vliwScheduler.cpp	/^void vliwScheduler::insertToInsMap(instruction* newIns) {$/;"	f	class:vliwScheduler
+instShiftAmt	bpred_unit.h	/^    unsigned instShiftAmt;$/;"	m	class:BPredUnit
+instruction	instruction.cpp	/^instruction::instruction() {$/;"	f	class:instruction
+instruction	instruction.h	/^class instruction {$/;"	c
+instruction	stat.cpp	/^instruction::instruction() {$/;"	f	class:instruction
+interFragStallCycle	bkEnd.cpp	/^long int interFragStallCycle = 0;$/;"	v
+invalidInsCount	bkEnd.cpp	/^int invalidInsCount;$/;"	v
+ipc	bkEnd.cpp	/^float ipc;$/;"	v
+isALUfree	bkEnd.cpp	/^bool isALUfree () {$/;"	f
+isAnyPRavailable	registerRename.cpp	/^bool registerRename::isAnyPRavailable() {$/;"	f	class:registerRename
+isBBhead	instruction.cpp	/^bool instruction::isBBhead() {$/;"	f	class:instruction
+isBBtail	instruction.cpp	/^bool instruction::isBBtail() {$/;"	f	class:instruction
+isCacheBusFree	bkEnd.cpp	/^bool isCacheBusFree = true;$/;"	v
+isDirty	cache.cpp	/^bool cache::isDirty(ADDRS addr)$/;"	f	class:cache
+isDirty	cacheLine.cpp	/^bool CacheLine::isDirty() {return _dirty;}$/;"	f	class:CacheLine
+isDirty	cache_halfSA.cpp	/^bool cache::isDirty(uint64_t addr)$/;"	f	class:cache
+isDirty	cache_singleWord.cpp	/^bool cache::isDirty(uint64_t addr)$/;"	f	class:cache
+isFree	sideBuff.cpp	/^bool sideBuff::isFree() {$/;"	f	class:sideBuff
+isFrontSQdoneWritingCache	lsq.cpp	/^bool lsq::isFrontSQdoneWritingCache(int cycle) {$/;"	f	class:lsq
+isGotoSideBuff	instruction.cpp	/^bool instruction::isGotoSideBuff() {$/;"	f	class:instruction
+isHit	cache.cpp	/^bool cache::isHit(ADDRS addr)$/;"	f	class:cache
+isHit	cache_halfSA.cpp	/^bool cache::isHit(uint64_t addr)$/;"	f	class:cache
+isHit	cache_singleWord.cpp	/^bool cache::isHit(uint64_t addr)$/;"	f	class:cache
+isLQempty	lsq.cpp	/^bool lsq::isLQempty() {$/;"	f	class:lsq
+isLQfull	lsq.cpp	/^bool lsq::isLQfull() {$/;"	f	class:lsq
+isMisPrePredicted	bkEnd.cpp	/^bool isMisPrePredicted(bool bbPrediction, bool taken) {$/;"	f
+isOnCritiPath	instruction.cpp	/^bool instruction::isOnCritiPath(int candidatePhID) {$/;"	f	class:instruction
+isPhraseComplete	phrase.cpp	/^bool phrase::isPhraseComplete() {$/;"	f	class:phrase
+isPhraseOld	phraseGen.cpp	/^bool phraseGen::isPhraseOld(int phIndx) {$/;"	f	class:phraseGen
+isPhraseReady	phraseGen.cpp	/^bool phraseGen::isPhraseReady(int phIndx) {$/;"	f	class:phraseGen
+isReady	fragment.cpp	/^bool fragment::isReady() {$/;"	f	class:fragment
+isReady	instruction.cpp	/^bool instruction::isReady(long int cycle) {$/;"	f	class:instruction
+isRepeated	instruction.cpp	/^bool instruction::isRepeated(instruction* temp, List<instruction*>*_ancestors) {$/;"	f	class:instruction
+isSQempty	lsq.cpp	/^bool lsq::isSQempty() {$/;"	f	class:lsq
+isSQfull	lsq.cpp	/^bool lsq::isSQfull() {$/;"	f	class:lsq
+isSquashed	bkEnd.cpp	/^int isSquashed = false;$/;"	v
+isValid	cache.cpp	/^bool cache::isValid(ADDRS addr)$/;"	f	class:cache
+isValid	cacheLine.cpp	/^bool CacheLine::isValid() {return _valid;}$/;"	f	class:CacheLine
+isValid	cache_halfSA.cpp	/^bool cache::isValid(uint64_t addr)$/;"	f	class:cache
+isValid	cache_singleWord.cpp	/^bool cache::isValid(uint64_t addr)$/;"	f	class:cache
+isWinNotEmpty	bkEnd.cpp	/^bool isWinNotEmpty () {$/;"	f
+junk	bkEnd.cpp	/^FILE *junk;$/;"	v
+laten	bkEnd.cpp	/^int print_count = 0, laten = -1;$/;"	v
+loadObj	lsq.h	/^struct loadObj {$/;"	s
+loadStoreQue	bkEnd.cpp	/^lsq *loadStoreQue;$/;"	v
+localBP	bpred_unit.h	/^    LocalBP *localBP;$/;"	m	class:BPredUnit
+longLatOpWhenSPisDraining	bkEnd.cpp	/^long int longLatOpWhenSPisDraining = 0;$/;"	v
+longLatOpWhenSPisON	bkEnd.cpp	/^long int longLatOpWhenSPisON = 0;$/;"	v
+longLatOpWhenSPisWaiting	bkEnd.cpp	/^long int longLatOpWhenSPisWaiting = 0;$/;"	v
+lookUpANDsetPathLen	instruction.cpp	/^void instruction::lookUpANDsetPathLen() {$/;"	f	class:instruction
+lookupLQ	lsq.cpp	/^INS_ID lsq::lookupLQ(instruction* ins) {$/;"	f	class:lsq
+lookupSQ	lsq.cpp	/^bool lsq::lookupSQ(instruction* ins) {$/;"	f	class:lsq
+lookup_and_updates	bpred_unit.h	/^    Stats::Scalar lookup_and_updates;$/;"	m	class:BPredUnit
+lookups	bpred_unit.h	/^    Stats::Scalar lookups;$/;"	m	class:BPredUnit
+lqSize	bkEnd.cpp	/^long long int lqSize = 0;$/;"	v
+lrfCount	bkEnd.cpp	/^long long int lrfCount = 0;$/;"	v
+lrfRdCountPerIns	bkEnd.cpp	/^long long int lrfRdCountPerIns=0, grfRdCountPerIns=0;$/;"	v
+lrfWrCountPerIns	bkEnd.cpp	/^long long int lrfWrCountPerIns=0, grfWrCountPerIns=0;$/;"	v
+lsq	lsq.cpp	/^lsq::lsq() {$/;"	f	class:lsq
+lsq	lsq.h	/^class lsq {$/;"	c
+m_data	heapTree.h	/^	_NODE *m_data;$/;"	m	class:CHeapTree
+m_nInitMax	heapTree.h	/^	const int m_nInitMax;$/;"	m	class:CHeapTree
+m_nMAX	heapTree.h	/^	int m_nMAX;$/;"	m	class:CHeapTree
+m_nSize	heapTree.h	/^	int m_nSize;$/;"	m	class:CHeapTree
+mainStreamBound	bkEnd.cpp	/^int mainStreamBound = -1;$/;"	v
+mainStreamInsCount	bkEnd.cpp	/^int mainStreamInsCount = 0;$/;"	v
+makeFragment	phrase.cpp	/^void phrase::makeFragment() {$/;"	f	class:phrase
+makePhrase	bkEnd.cpp	/^bool makePhrase = false;$/;"	v
+maxSBsize	bkEnd.cpp	/^long int maxSBsize = -1;$/;"	v
+memRdMissCountTable	bkEnd.cpp	/^map<long int,int> memRdMissCountTable;$/;"	v
+memRdMissRateTable	bkEnd.cpp	/^map<long int,float> memRdMissRateTable;$/;"	v
+memRdTotCountTable	bkEnd.cpp	/^map<long int,int> memRdTotCountTable;$/;"	v
+memReadList	dependencyTable.h	/^	map<long int,instruction*> memReadList;$/;"	m	class:dependencyTable
+memWriteList	dependencyTable.h	/^	map<long int,instruction*> memWriteList;$/;"	m	class:dependencyTable
+memoryModel	bkEnd.cpp	/^memModel memoryModel = TOTAL_ORDER; \/\/NAIVE_SPECUL; \/\/PERFECT; \/\/TOTAL_ORDER;$/;"	v
+minSBsize	bkEnd.cpp	/^long int minSBsize = 100000000000; \/\/A very large num$/;"	v
+missCount	latency.cpp	/^long int missCount (int lat) {$/;"	f
+missLatency	latency.cpp	/^long int missLatency (int lat) {$/;"	f
+missPredBROps	bkEnd.cpp	/^long int missPredBROps = 0;$/;"	v
+missPredBROps_NT	bkEnd.cpp	/^long int missPredBROps_NT = 0; \/\/NT: predicted not taken$/;"	v
+missPredBROps_NT_fetch	bkEnd.cpp	/^long int missPredBROps_NT_fetch = 0; \/\/NT: predicted not taken$/;"	v
+missPredBROps_fetch	bkEnd.cpp	/^long int missPredBROps_fetch = 0;$/;"	v
+missingAccuracyBranches	bkEnd.cpp	/^set<long int> missingAccuracyBranches;$/;"	v
+name	bpred_unit.h	/^    const std::string &name() const { return _name; }$/;"	f	class:BPredUnit
+nextRenReg	instruction.cpp	/^long int nextRenReg = INIT_RENAME_REG_NUM;$/;"	v
+noBPLookup	bpred_unit_ctr.h	/^BPredUnit<Impl>::noBPLookup(Addr instPC, void * &bp_history, int positionInLine)$/;"	f	class:BPredUnit
+noPhStatus	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+noRRdependencyTable	instruction.cpp	/^void instruction::noRRdependencyTable (dependencyTable *depTables, int coreType) {$/;"	f	class:instruction
+nonBlockingMemOp	bkEnd.cpp	/^long int nonBlockingMemOp = 0;$/;"	v
+notifyAllAncISquashed	instruction.cpp	/^void instruction::notifyAllAncISquashed() {$/;"	f	class:instruction
+notifyAllBrAncestorsICompleted	instruction.cpp	/^void instruction::notifyAllBrAncestorsICompleted() {$/;"	f	class:instruction
+notifyAllDepGetOutSideBuff	instruction.cpp	/^long int instruction::notifyAllDepGetOutSideBuff(int sb, INS_ID causeOfSBinsID, int numSideBuffs) {$/;"	f	class:instruction
+notifyAllDepGoToSideBuff	instruction.cpp	/^void instruction::notifyAllDepGoToSideBuff(int sb, INS_ID causeOfSBinsID, int numSideBuffs) {$/;"	f	class:instruction
+notifyAllDepICompleted	instruction.cpp	/^void instruction::notifyAllDepICompleted() {$/;"	f	class:instruction
+notifyAllDepICompleted_light	instruction.cpp	/^void instruction::notifyAllDepICompleted_light() {$/;"	f	class:instruction
+notifyDepICommited	instruction.cpp	/^void instruction::notifyDepICommited() {$/;"	f	class:instruction
+notifyMyDepFragsICompleted	instruction.cpp	/^void instruction::notifyMyDepFragsICompleted() {$/;"	f	class:instruction
+notifyMyDepPhrasesICompleted	instruction.cpp	/^void instruction::notifyMyDepPhrasesICompleted() {$/;"	f	class:instruction
+numALUOps	bkEnd.cpp	/^long int numALUOps = 0;$/;"	v
+numActiveSideBuffs	bkEnd.cpp	/^int numActiveSideBuffs = 1;$/;"	v
+numAssignOps	bkEnd.cpp	/^long int numAssignOps = 0;$/;"	v
+numBROps	bkEnd.cpp	/^long int numBROps = 0;$/;"	v
+numBrOps_predT	bkEnd.cpp	/^long int numBrOps_predT = 0; \/\/predicted taken$/;"	v
+numBrOps_predT_fetch	bkEnd.cpp	/^long int numBrOps_predT_fetch = 0; \/\/predicted taken$/;"	v
+numChildrenHist	bkEnd.cpp	/^hist* numChildrenHist;$/;"	v
+numCritPathViolations	phraseGen.h	/^		long int numCritPathViolations;$/;"	m	class:phraseGen
+numDepInOtherSBs	bkEnd.cpp	/^long int numDepInOtherSBs = 0;$/;"	v
+numFPUOps	bkEnd.cpp	/^long int numFPUOps = 0;$/;"	v
+numFU	bkEnd.cpp	/^int numFU = NUM_FUNC_UNIT;$/;"	v
+numMemOps	bkEnd.cpp	/^long int numMemOps = 0;$/;"	v
+numOnSideBuffs	bkEnd.cpp	/^long int numOnSideBuffs = 0;$/;"	v
+numParentsHist	bkEnd.cpp	/^hist* numParentsHist;$/;"	v
+numReadOps	bkEnd.cpp	/^long int numReadOps = 0;$/;"	v
+numReadyFrags	bkEnd.cpp	/^long int numReadyFrags = 0;$/;"	v
+numRegs	regFile.h	/^		long int numRegs;$/;"	m	class:regFile
+numRows	cache.h	/^	int numRows;$/;"	m	class:cache
+numSBactivations	bkEnd.cpp	/^long int *numSBactivations= new long int [numSideBuffs];$/;"	v
+numSBreactivations	bkEnd.cpp	/^long int *numSBreactivations= new long int [numSideBuffs];$/;"	v
+numSideBuffs	bkEnd.cpp	/^long int numSideBuffs = NUM_SIDE_BUFFERS;$/;"	v
+numWriteOps	bkEnd.cpp	/^long int numWriteOps = 0;$/;"	v
+num_bypassed_wbb	bkEnd.cpp	/^map<long int, int> num_bypassed_wbb;$/;"	v
+num_ins_exe_cnt	bkEnd.cpp	/^map<long int, int> num_ins_exe_cnt;$/;"	v
+num_squashed_grf_rd_complete_reg	bkEnd.cpp	/^long long int num_squashed_grf_rd_complete_reg=0;$/;"	v
+num_squashed_grf_rd_execute_reg	bkEnd.cpp	/^long long int num_squashed_grf_rd_execute_reg=0;$/;"	v
+num_squashed_grf_rd_fetch_reg	bkEnd.cpp	/^long long int num_squashed_grf_rd_fetch_reg=0;$/;"	v
+num_squashed_grf_rd_ready_reg	bkEnd.cpp	/^long long int num_squashed_grf_rd_ready_reg=0;$/;"	v
+num_squashed_grf_rd_reg	bkEnd.cpp	/^long long int num_squashed_grf_rd_reg = 0;$/;"	v
+num_squashed_grf_wr_complete_reg	bkEnd.cpp	/^long long int num_squashed_grf_wr_complete_reg=0;$/;"	v
+num_squashed_grf_wr_execute_reg	bkEnd.cpp	/^long long int num_squashed_grf_wr_execute_reg=0;$/;"	v
+num_squashed_grf_wr_fetch_reg	bkEnd.cpp	/^long long int num_squashed_grf_wr_fetch_reg=0;$/;"	v
+num_squashed_grf_wr_ready_reg	bkEnd.cpp	/^long long int num_squashed_grf_wr_ready_reg=0;$/;"	v
+num_squashed_grf_wr_reg	bkEnd.cpp	/^long long int num_squashed_grf_wr_reg = 0;$/;"	v
+num_squashed_lrf_rd_complete_reg	bkEnd.cpp	/^long long int num_squashed_lrf_rd_complete_reg=0;$/;"	v
+num_squashed_lrf_rd_execute_reg	bkEnd.cpp	/^long long int num_squashed_lrf_rd_execute_reg=0;$/;"	v
+num_squashed_lrf_rd_fetch_reg	bkEnd.cpp	/^long long int num_squashed_lrf_rd_fetch_reg=0;$/;"	v
+num_squashed_lrf_rd_ready_reg	bkEnd.cpp	/^long long int num_squashed_lrf_rd_ready_reg=0;$/;"	v
+num_squashed_lrf_rd_reg	bkEnd.cpp	/^long long int num_squashed_lrf_rd_reg = 0;$/;"	v
+num_squashed_lrf_wr_complete_reg	bkEnd.cpp	/^long long int num_squashed_lrf_wr_complete_reg=0;$/;"	v
+num_squashed_lrf_wr_execute_reg	bkEnd.cpp	/^long long int num_squashed_lrf_wr_execute_reg=0;$/;"	v
+num_squashed_lrf_wr_fetch_reg	bkEnd.cpp	/^long long int num_squashed_lrf_wr_fetch_reg=0;$/;"	v
+num_squashed_lrf_wr_ready_reg	bkEnd.cpp	/^long long int num_squashed_lrf_wr_ready_reg=0;$/;"	v
+num_squashed_lrf_wr_reg	bkEnd.cpp	/^long long int num_squashed_lrf_wr_reg = 0;$/;"	v
+onDemand	bpred_unit.h	/^	bool onDemand;$/;"	m	class:BPredUnit
+oneLevDeepLatLevel	bkEnd.cpp	/^long int oneLevDeepLatLevel;$/;"	v
+oooLD_MemForwarding	oooLD_lsq_ctrl.cpp	/^bool oooLD_MemForwarding (lsq* oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_findLQviolation	oooLD_lsq_ctrl.cpp	/^INS_ID oooLD_findLQviolation(lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_insertLQ_addr	oooLD_lsq_ctrl.cpp	/^bool oooLD_insertLQ_addr(lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_insertLQ_data	oooLD_lsq_ctrl.cpp	/^void oooLD_insertLQ_data(lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_insertSQ_addrNdata	oooLD_lsq_ctrl.cpp	/^void oooLD_insertSQ_addrNdata(lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_lqDequ	oooLD_lsq_ctrl.cpp	/^void oooLD_lqDequ (lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_lsqEnque	oooLD_lsq_ctrl.cpp	/^void oooLD_lsqEnque (lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_lsqHazard	oooLD_lsq_ctrl.cpp	/^bool oooLD_lsqHazard (lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+oooLD_sqDequ	oooLD_lsq_ctrl.cpp	/^void oooLD_sqDequ (lsq *oooLd_inoSt_LSQ, int cycle) {$/;"	f
+oooLD_squashLQ	oooLD_lsq_ctrl.cpp	/^int oooLD_squashLQ (lsq *oooLd_inoSt_LSQ, INS_ADDR insId) {$/;"	f
+oooLD_squashSQ	oooLD_lsq_ctrl.cpp	/^int oooLD_squashSQ (lsq *oooLd_inoSt_LSQ, INS_ADDR insId) {$/;"	f
+oooLD_updateSQcommitSet	oooLD_lsq_ctrl.cpp	/^void oooLD_updateSQcommitSet(lsq *oooLd_inoSt_LSQ, instruction *ins) {$/;"	f
+openPh	phraseGen.h	/^		List<phrase*> *openPh;$/;"	m	class:phraseGen
+operator ==	bpred_unit.h	/^        bool operator==(const PredictorHistory &entry) const {$/;"	f	struct:BPredUnit::PredictorHistory
+outFile	bkEnd.cpp	/^FILE* outFile;$/;"	v
+outFile1	bkEnd.cpp	/^FILE* outFile1;$/;"	v
+outFile2	bkEnd.cpp	/^FILE* outFile2;$/;"	v
+outFileName2	bkEnd.cpp	/^char outFileName2[400];$/;"	v
+outListTemp	vliwScheduler.h	/^	List<instruction*> *outListTemp;$/;"	m	class:vliwScheduler
+parse	bkEnd.cpp	/^parser* parse;$/;"	v
+parseHitMiss	bkEnd.cpp	/^int parseHitMiss = 0;$/;"	v
+parseIns	parser.cpp	/^bool parser::parseIns(instruction* newIns) {$/;"	f	class:parser
+parseIns	vliwScheduler.cpp	/^void vliwScheduler::parseIns (int ROBsize, parser* parse, int cycle) {$/;"	f	class:vliwScheduler
+parser	parser.h	/^	parser(){}$/;"	f	class:parser
+parser	parser.h	/^class parser {$/;"	c
+partition	quickSort.cpp	/^int partition(List<fragment*> *list, int left, int right, int cycle) {$/;"	f
+partition	quickSort.cpp	/^int partition(List<int> *list, int left, int right, int cycle) {$/;"	f
+partitionFragScore	quickSort.cpp	/^int partitionFragScore(List<fragment*> *list, int left, int right, int cycle) {$/;"	f
+partitionInsList	quickSort.cpp	/^int partitionInsList(List<instruction*> *list, int left, int right) {$/;"	f
+partitionLongestPath	quickSort.cpp	/^int partitionLongestPath(List<instruction*> *list, int left, int right, int cycle, bool UPLDhoisting) {$/;"	f
+partitionLongestPathDynamic	quickSort.cpp	/^int partitionLongestPathDynamic(List<instruction*> *list, int left, int right, int cycle, bool UPLDhoisting) {$/;"	f
+pbListsSize	bkEnd.cpp	/^long int pbListsSize[NUM_PHRASEBLKS];$/;"	v
+pc	bpred_unit.h	/^        Addr pc;$/;"	m	struct:BPredUnit::PredictorHistory
+perfectRegRen	bkEnd.cpp	/^bool perfectRegRen = false;$/;"	v
+perfect_MemDependencyTable	instruction.cpp	/^void instruction::perfect_MemDependencyTable (dependencyTable *depTables, int coreType, int numSideBuffs) {$/;"	f	class:instruction
+phClosed	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+phCritPathHist	bkEnd.cpp	/^hist* phCritPathHist;$/;"	v
+phCycle	bkEnd.cpp	/^int phCycle = 0;$/;"	v
+phDone	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+phID	vliwScheduler.h	/^	long int phID;$/;"	m	class:vliwScheduler
+phOpen	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+phReady	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+phSizeHist	bkEnd.cpp	/^hist* phSizeHist;$/;"	v
+phWaitList	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	e	enum:__anon2
+phrase	phrase.cpp	/^ phrase::phrase() {$/;"	f	class:phrase
+phrase	phrase.cpp	/^ phrase::phrase(int id) {$/;"	f	class:phrase
+phrase	phrase.h	/^class phrase {$/;"	c
+phraseFile	bkEnd.cpp	/^FILE* phraseFile;$/;"	v
+phraseGen	phraseGen.cpp	/^phraseGen::phraseGen() {$/;"	f	class:phraseGen
+phraseGen	phraseGen.h	/^class phraseGen {$/;"	c
+phraseID	bkEnd.cpp	/^int phraseID = 0;$/;"	v
+phraseSizeBound	bkEnd.cpp	/^int phraseSizeBound = MAX_NUM_INS_VISITORS;$/;"	v
+phraseState	phrase.h	/^typedef enum {noPhStatus, phOpen, phClosed, phWaitList, phReady, phDone} phraseState;$/;"	t	typeref:enum:__anon2
+pinFile	bkEnd.cpp	/^FILE* pinFile;$/;"	v
+popFromInsCache	bkEnd.cpp	/^bool popFromInsCache() {$/;"	f
+popFrontLQ	lsq.cpp	/^void lsq::popFrontLQ() {$/;"	f	class:lsq
+popFrontSQ	lsq.cpp	/^void lsq::popFrontSQ() {$/;"	f	class:lsq
+predHist	bpred_unit.h	/^    History predHist[Impl::MaxThreads];$/;"	m	class:BPredUnit
+predTaken	bpred_unit.h	/^        bool predTaken;$/;"	m	struct:BPredUnit::PredictorHistory
+predict	bpred_unit_ctr.h	/^BPredUnit<Impl>::predict(DynInstPtr &inst, TheISA::PCState &pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &allPredStatic, int oracleBP)$/;"	f	class:BPredUnit
+predictor	bkEnd.cpp	/^TournamentBP *predictor = NULL;$/;"	v
+predictor	bpred_unit.h	/^    PredType predictor;$/;"	m	class:BPredUnit
+printMissRatetoFile	bkEnd.cpp	/^void printMissRatetoFile () {$/;"	f
+printSTALL	bkEnd.cpp	/^void printSTALL (int cycle) {$/;"	f
+printToFile	instruction.cpp	/^void instruction::printToFile(FILE *reScheduleFile, bool recordHitMiss) {$/;"	f	class:instruction
+printToFileFragment	phrase.cpp	/^void phrase::printToFileFragment(FILE* phraseFile) {$/;"	f	class:phrase
+printToFilePhrase	phrase.cpp	/^void phrase::printToFilePhrase(FILE* phraseFile) {$/;"	f	class:phrase
+print_count	bkEnd.cpp	/^int print_count = 0, laten = -1;$/;"	v
+pushBackLQ	lsq.cpp	/^void lsq::pushBackLQ(instruction* ins) {$/;"	f	class:lsq
+pushBackSQ	lsq.cpp	/^void lsq::pushBackSQ(instruction* ins) {$/;"	f	class:lsq
+quicksort	quickSort.cpp	/^void quicksort(List<fragment*> *list, int left, int right, int cycle)$/;"	f
+quicksort	quickSort.cpp	/^void quicksort(List<int> *list, int left, int right, int cycle)$/;"	f
+quicksortFragScore	quickSort.cpp	/^void quicksortFragScore(List<fragment*> *list, int left, int right, int cycle)$/;"	f
+quicksortInsList	quickSort.cpp	/^void quicksortInsList(List<instruction*> *list, int left, int right)$/;"	f
+quicksortLongestPath	quickSort.cpp	/^void quicksortLongestPath(List<instruction*> *list, int left, int right, int cycle, bool UPLDhoisting)$/;"	f
+quicksortLongestPathDyanmic	quickSort.cpp	/^void quicksortLongestPathDyanmic(List<instruction*> *list, int left, int right, int cycle, bool UPLDhoisting)$/;"	f
+reScheduleFile	bkEnd.cpp	/^FILE* reScheduleFile;$/;"	v
+readCache	cache.cpp	/^void cache::readCache(ADDRS addr, int8_t*& outData)$/;"	f	class:cache
+readCache	cache_halfSA.cpp	/^void cache::readCache(uint64_t addr, int8_t*& outData)$/;"	f	class:cache
+readCache	cache_singleWord.cpp	/^void cache::readCache(uint64_t addr, int8_t*& outData)$/;"	f	class:cache
+readLine	cacheLine.cpp	/^void CacheLine::readLine(int8_t*& inData)$/;"	f	class:CacheLine
+readRegRenMap	instruction.h	/^	map<long int,long int> readRegRenMap;$/;"	m	class:instruction
+recordMemAccess	bkEnd.cpp	/^void recordMemAccess(instruction *_ins, int lat) {$/;"	f
+regFile	regFile.cpp	/^regFile::regFile()$/;"	f	class:regFile
+regFile	regFile.h	/^class regFile {$/;"	c
+regLookup	dependencyTable.cpp	/^instruction* dependencyTable::regLookup (long int reg, tableType table) {$/;"	f	class:dependencyTable
+regReadList	dependencyTable.h	/^	map<long int,instruction*> regReadList;$/;"	m	class:dependencyTable
+regWriteList	dependencyTable.h	/^	map<long int,instruction*> regWriteList;$/;"	m	class:dependencyTable
+registerRename	registerRename.cpp	/^registerRename::registerRename() {$/;"	f	class:registerRename
+registerRename	registerRename.cpp	/^registerRename::registerRename(int arf_lo, int arf_hi) {$/;"	f	class:registerRename
+registerRename	registerRename.h	/^class registerRename {$/;"	c
+releaseBrAncestors	instruction.cpp	/^void instruction::releaseBrAncestors(instruction* ins) {$/;"	f	class:instruction
+releaseBrDep	instruction.cpp	/^void instruction::releaseBrDep(instruction* ins) {$/;"	f	class:instruction
+releaseDep	instruction.cpp	/^void instruction::releaseDep(instruction* ins) {$/;"	f	class:instruction
+releaseDepFromUPLD	instruction.cpp	/^void instruction::releaseDepFromUPLD(instruction* ins) {$/;"	f	class:instruction
+releaseDep_light	instruction.cpp	/^void instruction::releaseDep_light(instruction* ins) {$/;"	f	class:instruction
+removeAncestorIns	fragment.cpp	/^void fragment::removeAncestorIns(instruction* ins) {$/;"	f	class:fragment
+removeAncestorIns	phrase.cpp	/^void phrase::removeAncestorIns(instruction* ins) {$/;"	f	class:phrase
+removeFrag	bkEnd.cpp	/^void removeFrag(List<fragment*>* iFr, int frIndx) {$/;"	f
+removeFromInsMap	instruction.cpp	/^void instruction::removeFromInsMap() {$/;"	f	class:instruction
+removeFromPhrase	phrase.cpp	/^void phrase::removeFromPhrase(int indx) {$/;"	f	class:phrase
+removeFromROB	bkEnd.cpp	/^void removeFromROB (List<instruction*> *iROB, INS_ID insId) {$/;"	f
+removeFromiResStn	bkEnd.cpp	/^void removeFromiResStn (INS_ID insID) {$/;"	f
+removeFromiWindow	bkEnd.cpp	/^void removeFromiWindow (INS_ID insID) {$/;"	f
+removeNthRegister	instruction.cpp	/^void instruction::removeNthRegister(int i) {$/;"	f	class:instruction
+removePhrase	bkEnd.cpp	/^void removePhrase(List<phrase*>* iPh, int phIndx) {$/;"	f
+renameReadReg	instruction.cpp	/^void instruction::renameReadReg(int indx, long int renReg) {$/;"	f	class:instruction
+renameRegs	instruction.cpp	/^bool instruction::renameRegs(registerRename *GRF, int coreType) {$/;"	f	class:instruction
+renameWriteReg	instruction.cpp	/^void instruction::renameWriteReg(long int reg) {$/;"	f	class:instruction
+report	cacheCtrl.cpp	/^void report (ADDRS addr, int8_t*& data, int*& latency, memType rORw) {}$/;"	f
+report	hist.cpp	/^void hist::report() {$/;"	f	class:hist
+report	hist.cpp	/^void hist::report(FILE* file, string histName) {$/;"	f	class:hist
+reportInsTiming	bkEnd.cpp	/^void reportInsTiming (instruction* ins) {$/;"	f
+reportTrace	bkEnd.cpp	/^bool reportTrace = false;$/;"	v
+reportTraceAndHitMiss	bkEnd.cpp	/^bool reportTraceAndHitMiss = false; $/;"	v
+reschedule	bkEnd.cpp	/^bool reschedule = false;$/;"	v
+resetCount	phraseGen.h	/^		long int resetCount;$/;"	m	class:phraseGen
+resetInput	bkEnd.cpp	/^void resetInput (char *c, int i) {$/;"	f
+resetInput	parser.cpp	/^void parser::resetInput (char *c, int i) {$/;"	f	class:parser
+rootALUins	vliwScheduler.h	/^	List<instruction*> *rootALUins;$/;"	m	class:vliwScheduler
+rootInsIndx	vliwScheduler.h	/^	List<int> *rootInsIndx;$/;"	m	class:vliwScheduler
+rootMEMins	vliwScheduler.h	/^	List<instruction*> *rootMEMins;$/;"	m	class:vliwScheduler
+rootSize	vliwScheduler.h	/^	long int rootSize;$/;"	m	class:vliwScheduler
+rrSize	bkEnd.cpp	/^long long int rrSize = 0;$/;"	v
+run1LD_STAT	bkEnd.cpp	/^void run1LD_STAT(int cycle) {$/;"	f
+runDot	dot.cpp	/^void dot::runDot(List<instruction*>* list, int subGraphID) {$/;"	f	class:dot
+runDueLaneInOcore	bkEnd.cpp	/^void runDueLaneInOcore(int cycle, List<instruction*> *iWindow1, List<instruction*> *iWindow2, List<instruction*> *iWindow3, List<instruction*> *iWindow4, int arbitrate) {$/;"	f
+runInOcore	bkEnd.cpp	/^void runInOcore(int cycle, List<instruction*> *iWindow) {$/;"	f
+runInOcore2	bkEnd.cpp	/^void runInOcore2(int cycle) {$/;"	f
+runOOOcore	bkEnd.cpp	/^void runOOOcore(int cycle) {$/;"	f
+runOOOcore2	bkEnd.cpp	/^void runOOOcore2(int cycle) {$/;"	f
+runOOOcoreSingleIssue	bkEnd.cpp	/^void runOOOcoreSingleIssue(int cycle) {$/;"	f
+runPhraseGen	phraseGen.cpp	/^int phraseGen::runPhraseGen(List<instruction*> *iROB, List<instruction*> *iWindow, FILE* phraseFile, dependencyTable *depTables, bool eof, int ROBsize) {$/;"	f	class:phraseGen
+runPhraseblockCore	bkEnd.cpp	/^void runPhraseblockCore(int cycle, List<instruction*>** pbLists) {$/;"	f
+runStoreQueue	bkEnd.cpp	/^void runStoreQueue(lsq *loadStoreQue, int cycle) {$/;"	f
+runStrandcore	bkEnd.cpp	/^void runStrandcore(int cycle) {$/;"	f
+runningFragNumber	bkEnd.cpp	/^long int runningFragNumber;$/;"	v
+runxLD_STAT	bkEnd.cpp	/^void runxLD_STAT(int cycle) {$/;"	f
+runxLDcore_DYN	bkEnd.cpp	/^void runxLDcore_DYN(int cycle) {$/;"	f
+scheduleIns	vliwScheduler.cpp	/^bool vliwScheduler::scheduleIns(List<instruction*>* inList, List<instruction*>* outList, int cycle, bool UPLDhoisting, long int phraseID) {$/;"	f	class:vliwScheduler
+scheduleInsInFlight	bkEnd.cpp	/^void scheduleInsInFlight(List<int> *SBlist, List<int> *delList, List<instruction*> *iWindow, int top, int cycle) {$/;"	f
+scheduleInsStream	vliwScheduler.cpp	/^bool vliwScheduler::scheduleInsStream(List<instruction*>* inList, int cycle, bool UPLDhoisting, FILE* reScheduleFile, float unpredMemOpThreshold) {$/;"	f	class:vliwScheduler
+scheduleInsStream_1FU	vliwScheduler.cpp	/^bool vliwScheduler::scheduleInsStream_1FU(List<instruction*>* inList, int cycle, bool UPLDhoisting, FILE* reScheduleFile) {$/;"	f	class:vliwScheduler
+scheduleIns_1FU	vliwScheduler.cpp	/^bool vliwScheduler::scheduleIns_1FU(List<instruction*>* inList, List<instruction*>* outList, int cycle, bool UPLDhoisting, long int phraseID) {$/;"	f	class:vliwScheduler
+schedulePhraseinsStream	vliwScheduler.cpp	/^bool vliwScheduler::schedulePhraseinsStream(List<instruction*>* inList, int cycle, bool UPLDhoisting, FILE* reScheduleFile, float unpredMemOpThreshold, List<phrase*>* phList) {$/;"	f	class:vliwScheduler
+seqNum	bpred_unit.h	/^        InstSeqNum seqNum;$/;"	m	struct:BPredUnit::PredictorHistory
+setARST	registerRename.cpp	/^void registerRename::setARST(PR new_pr,PR old_pr) {$/;"	f	class:registerRename
+setAllFrAncestors	fragment.cpp	/^void fragment::setAllFrAncestors(instruction* ins) {$/;"	f	class:fragment
+setAllPhAncestors	phrase.cpp	/^void phrase::setAllPhAncestors(instruction* ins) {$/;"	f	class:phrase
+setAsAncestor	instruction.cpp	/^void instruction::setAsAncestor(instruction* ins) {$/;"	f	class:instruction
+setAsAvailablePR	registerRename.cpp	/^void registerRename::setAsAvailablePR(PR p_reg) {$/;"	f	class:registerRename
+setAsBrAncestor	instruction.cpp	/^void instruction::setAsBrAncestor(instruction* ins) {$/;"	f	class:instruction
+setAsBrDependent	instruction.cpp	/^void instruction::setAsBrDependent(instruction* ins) {$/;"	f	class:instruction
+setAsDependent	instruction.cpp	/^void instruction::setAsDependent(instruction* ins) {$/;"	f	class:instruction
+setBBhead	instruction.cpp	/^void instruction::setBBhead() {$/;"	f	class:instruction
+setBBtail	instruction.cpp	/^void instruction::setBBtail() {$/;"	f	class:instruction
+setBrAccuracy	instruction.cpp	/^void instruction::setBrAccuracy (float brAccuracy) {$/;"	f	class:instruction
+setBrBias	instruction.cpp	/^void instruction::setBrBias (float brBias) {$/;"	f	class:instruction
+setBrForward	instruction.cpp	/^void instruction::setBrForward() {$/;"	f	class:instruction
+setBrHeaderAddr	instruction.cpp	/^void instruction::setBrHeaderAddr(INS_ADDR brAddr) {$/;"	f	class:instruction
+setBrMode	instruction.cpp	/^void instruction::setBrMode(brMode branchMode) {$/;"	f	class:instruction
+setBrSide	instruction.cpp	/^void instruction::setBrSide(long int brTaken) {$/;"	f	class:instruction
+setBrTarget	instruction.cpp	/^void instruction::setBrTarget(long int brTarget) {$/;"	f	class:instruction
+setBusy	sideBuff.cpp	/^void sideBuff::setBusy() {$/;"	f	class:sideBuff
+setCacheHitLevel	instruction.cpp	/^void instruction::setCacheHitLevel(int hitLat) {$/;"	f	class:instruction
+setCauseOfFragInsID	instruction.cpp	/^void instruction::setCauseOfFragInsID(INS_ID causeOfFragInsID) {$/;"	f	class:instruction
+setClean	cache.cpp	/^void cache::setClean(ADDRS addr) \/\/TODO _Sa is not incorporated here$/;"	f	class:cache
+setClean	cacheLine.cpp	/^void CacheLine::setClean() {_dirty = false;}$/;"	f	class:CacheLine
+setClean	cache_halfSA.cpp	/^void cache::setClean(uint64_t addr) \/\/TODO _Sa is not incorporated here$/;"	f	class:cache
+setClean	cache_singleWord.cpp	/^void cache::setClean(uint64_t addr) \/\/TODO _Sa is not incorporated here$/;"	f	class:cache
+setCmdStr	instruction.cpp	/^void instruction::setCmdStr(const char * cmd) {$/;"	f	class:instruction
+setCycle	cacheLine.cpp	/^void CacheLine::setCycle(long int cycle) {$/;"	f	class:CacheLine
+setDepOnUPLD	instruction.cpp	/^void instruction::setDepOnUPLD() {$/;"	f	class:instruction
+setEnd	fragment.cpp	/^void fragment::setEnd(long int end) {$/;"	f	class:fragment
+setExpectData	cache.cpp	/^void cache::setExpectData(ADDRS addr, bool expct) {$/;"	f	class:cache
+setExpectData	cacheLine.cpp	/^void CacheLine::setExpectData(bool expct) {$/;"	f	class:CacheLine
+setExpiration	sideBuff.cpp	/^void sideBuff::setExpiration(int expCycle) {$/;"	f	class:sideBuff
+setForwardData	lsq.cpp	/^void lsq::setForwardData(instruction* ins) {$/;"	f	class:lsq
+setFragID	fragment.cpp	/^void fragment::setFragID(long int id) {$/;"	f	class:fragment
+setFragNum	fragment.cpp	/^void fragment::setFragNum(long int num) {$/;"	f	class:fragment
+setFree	sideBuff.cpp	/^void sideBuff::setFree() {$/;"	f	class:sideBuff
+setInsAddr	instruction.cpp	/^void instruction::setInsAddr(ADDRS insAddr) {$/;"	f	class:instruction
+setInsID	instruction.cpp	/^void instruction::setInsID(INS_ID id) {$/;"	f	class:instruction
+setMemAccessSize	instruction.cpp	/^void instruction::setMemAccessSize(long int memAccessSize) {$/;"	f	class:instruction
+setMemAddr	instruction.cpp	/^void instruction::setMemAddr(ADDRS memAddr) {$/;"	f	class:instruction
+setMemAddr	stat.cpp	/^void instruction::setMemAddr(uint64_t memAddr) {$/;"	f	class:instruction
+setMemReadAncestors	phrase.cpp	/^void phrase::setMemReadAncestors(instruction* ins) {$/;"	f	class:phrase
+setMemType	instruction.cpp	/^void instruction::setMemType (memType readORwrite) {$/;"	f	class:instruction
+setMemType	stat.cpp	/^void instruction::setMemType (memType readORwrite) {$/;"	f	class:instruction
+setMissRate	instruction.cpp	/^void instruction::setMissRate(double missRate) {$/;"	f	class:instruction
+setMyFrag	instruction.cpp	/^void instruction::setMyFrag(fragment* fr) {$/;"	f	class:instruction
+setMyPhID	fragment.cpp	/^void fragment::setMyPhID(long int id) {$/;"	f	class:fragment
+setMyPhrase	instruction.cpp	/^void instruction::setMyPhrase(phrase* ph) {$/;"	f	class:instruction
+setMyPhraseID	instruction.cpp	/^void instruction::setMyPhraseID(int id) {$/;"	f	class:instruction
+setNumBits	fragment.cpp	/^void fragment::setNumBits(int numBits) {$/;"	f	class:fragment
+setPhAvgAge	fragment.cpp	/^void fragment::setPhAvgAge(long double phAvgAge) {$/;"	f	class:fragment
+setPhNumDepLinksToNxtPh	fragment.cpp	/^void fragment::setPhNumDepLinksToNxtPh(int phNumDepLinksToNxtPh) {$/;"	f	class:fragment
+setPhNumUPLDops	fragment.cpp	/^void fragment::setPhNumUPLDops(int phNumUPLDops) {$/;"	f	class:fragment
+setPhSize	fragment.cpp	/^void fragment::setPhSize(int phSize) {$/;"	f	class:fragment
+setPiepelineLat	instruction.cpp	/^void instruction::setPiepelineLat (int pipeLineLat) {$/;"	f	class:instruction
+setPredHistObj	instruction.cpp	/^void instruction::setPredHistObj(void* bp_hist) {$/;"	f	class:instruction
+setPrediction	instruction.cpp	/^void instruction::setPrediction(bool brPred) {$/;"	f	class:instruction
+setReadyLists	instruction.cpp	/^void instruction::setReadyLists(List<instruction*>* rootALUins, List<instruction*>* rootMEMins) {$/;"	f	class:instruction
+setRegister	instruction.cpp	/^void instruction::setRegister (long int *r, int *rt) {$/;"	f	class:instruction
+setRegister	stat.cpp	/^void instruction::setRegister ( int *r, int *rt) {$/;"	f	class:instruction
+setScore	fragment.cpp	/^void fragment::setScore(double frScore) {$/;"	f	class:fragment
+setStart	fragment.cpp	/^void fragment::setStart(long int start) {$/;"	f	class:fragment
+setState	phrase.cpp	/^void phrase::setState(phraseState state) {$/;"	f	class:phrase
+setStatus	instruction.cpp	/^void instruction::setStatus (status insStatus, $/;"	f	class:instruction
+setStatus	stat.cpp	/^void instruction::setStatus (status insStatus, $/;"	f	class:instruction
+setTag	cacheLine.cpp	/^void CacheLine::setTag (long int tag) {$/;"	f	class:CacheLine
+setType	instruction.cpp	/^void instruction::setType (type insType) {$/;"	f	class:instruction
+setType	stat.cpp	/^void instruction::setType (type insType) {$/;"	f	class:instruction
+setVliwScheduler	instruction.cpp	/^void instruction::setVliwScheduler(vliwScheduler *scheduler) {$/;"	f	class:instruction
+set_OldestCommittedUncachedSQentry_setLatency	lsq.cpp	/^void lsq::set_OldestCommittedUncachedSQentry_setLatency(int latency, int cycle, INS_ID id) {$/;"	f	class:lsq
+setupNewIns	bkEnd.cpp	/^int setupNewIns (instruction* ins) {$/;"	f
+setupNewIns	vliwScheduler.cpp	/^instruction* vliwScheduler::setupNewIns(instruction* ins, int cycle) {$/;"	f	class:vliwScheduler
+setupNewInsV2	bkEnd.cpp	/^int setupNewInsV2 (instruction* ins, char *c) {$/;"	f
+setupRegFile	regFile.cpp	/^void regFile::setupRegFile () {$/;"	f	class:regFile
+sideBuff	sideBuff.cpp	/^sideBuff::sideBuff()$/;"	f	class:sideBuff
+sideBuff	sideBuff.h	/^class sideBuff {$/;"	c
+sortLists	vliwScheduler.cpp	/^void vliwScheduler::sortLists(List<instruction*> *rootALUins, List<instruction*> *rootMEMins, int cycle, bool UPLDhoisting, long int phraseID) {$/;"	f	class:vliwScheduler
+sqSize	bkEnd.cpp	/^long long int sqSize = 0;$/;"	v
+squash	bkEnd.cpp	/^void squash (List<instruction*> *iROB, INS_ID insID, lsq *oooLd_inoSt_LSQ) {$/;"	f
+squash	bpred_unit_ctr.h	/^BPredUnit<Impl>::squash(const InstSeqNum &squashed_sn, ThreadID tid)$/;"	f	class:BPredUnit
+squash	bpred_unit_ctr.h	/^BPredUnit<Impl>::squash(const InstSeqNum &squashed_sn,$/;"	f	class:BPredUnit
+squashARST	registerRename.cpp	/^void registerRename::squashARST(PR p_reg) {$/;"	f	class:registerRename
+squashBRinsCount	bkEnd.cpp	/^long long int squashBRinsCount=0;$/;"	v
+squashBrDep	instruction.cpp	/^void instruction::squashBrDep(instruction* ins) {$/;"	f	class:instruction
+squashCount	bkEnd.cpp	/^int squashCount=0;$/;"	v
+squashDep	instruction.cpp	/^void instruction::squashDep(instruction* ins) {$/;"	f	class:instruction
+squashInsCount	bkEnd.cpp	/^long long int squashInsCount=0;$/;"	v
+squashLQ	lsq.cpp	/^int lsq::squashLQ(INS_ADDR insId) {$/;"	f	class:lsq
+squashLQinsCount	bkEnd.cpp	/^long long int squashLQinsCount=0;$/;"	v
+squashLRFcount	bkEnd.cpp	/^long long int squashLRFcount=0;$/;"	v
+squashPRFSM	registerRename.cpp	/^void registerRename::squashPRFSM(PR p_reg) {$/;"	f	class:registerRename
+squashPhrInsCount	bkEnd.cpp	/^long long int squashPhrInsCount=0;$/;"	v
+squashRAT	registerRename.cpp	/^void registerRename::squashRAT(AR a_reg) {$/;"	f	class:registerRename
+squashRSinsCount	bkEnd.cpp	/^long long int squashRSinsCount=0;$/;"	v
+squashRegRenCount	bkEnd.cpp	/^long long int squashRegRenCount=0;$/;"	v
+squashRenameReg	instruction.cpp	/^void instruction::squashRenameReg(registerRename *GRF) {$/;"	f	class:instruction
+squashSQ	lsq.cpp	/^int lsq::squashSQ(INS_ADDR insId) {$/;"	f	class:lsq
+squashSQinsCount	bkEnd.cpp	/^long long int squashSQinsCount=0;$/;"	v
+squashWinInsCount	bkEnd.cpp	/^long long int squashWinInsCount=0;$/;"	v
+stFwdMemOp	bkEnd.cpp	/^long int stFwdMemOp = 0;$/;"	v
+start	bkEnd.cpp	/^time_t start; $/;"	v
+start_print	bkEnd.cpp	/^bool start_print = false;$/;"	v
+stat	stat.h	/^class stat {$/;"	c
+storeObj	lsq.h	/^struct storeObj {$/;"	s
+storeOrder_MemDependencyTable	instruction.cpp	/^void instruction::storeOrder_MemDependencyTable (instruction* ancestor) {$/;"	f	class:instruction
+storeToFile	phraseGen.cpp	/^void phraseGen::storeToFile(int indx, FILE* phraseFile, dependencyTable *depTables) {$/;"	f	class:phraseGen
+swap	quickSort.cpp	/^void swap(List<fragment*> *list, int x, int y) { $/;"	f
+swap	quickSort.cpp	/^void swap(List<instruction*> *list, int x, int y) {$/;"	f
+swap	quickSort.cpp	/^void swap(List<int> *list, int x, int y) {$/;"	f
+tableType	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	t	typeref:enum:__anon1
+takeMax	phraseGen.cpp	/^int phraseGen::takeMax(int a, int b) {$/;"	f	class:phraseGen
+tempReg	vliwScheduler.h	/^	long int tempReg;$/;"	m	class:vliwScheduler
+tid	bpred_unit.h	/^        ThreadID tid;$/;"	m	struct:BPredUnit::PredictorHistory
+topPhraseID	phraseGen.h	/^		long int topPhraseID;$/;"	m	class:phraseGen
+totFrStall	bkEnd.cpp	/^long int totFrStall = 0;$/;"	v
+totFrameSize	bkEnd.cpp	/^long int totFrameSize = 0;$/;"	v
+totInsCountWhenSBon	bkEnd.cpp	/^long int totInsCountWhenSBon = 0;$/;"	v
+totInsVisitingSBcount	bkEnd.cpp	/^long int totInsVisitingSBcount = 0;$/;"	v
+totMainStreamBound	bkEnd.cpp	/^long int totMainStreamBound = 0; \/\/only used for static conting. scheduling$/;"	v
+totNumCritPathViol	bkEnd.cpp	/^long int totNumCritPathViol = 0;$/;"	v
+totNumFrag	bkEnd.cpp	/^long int totNumFrag   = 0;$/;"	v
+totNumFragments	phraseGen.h	/^		long int totNumFragments;$/;"	m	class:phraseGen
+totNumOfSigleFragPhrases	bkEnd.cpp	/^long int totNumOfSigleFragPhrases = 0;$/;"	v
+totNumPhGenResets	bkEnd.cpp	/^long int totNumPhGenResets = 0;$/;"	v
+totNumPhUnpredMemOp	bkEnd.cpp	/^long int totNumPhUnpredMemOp = 0;$/;"	v
+totNumPhUnpredMemOp	phraseGen.h	/^		long int totNumPhUnpredMemOp;$/;"	m	class:phraseGen
+totNumPhrase	bkEnd.cpp	/^long int totNumPhrase = 0;$/;"	v
+totNumPhraseAncestors	bkEnd.cpp	/^long int totNumPhraseAncestors = 0;$/;"	v
+totNumPhraseAncestors	phraseGen.h	/^		long int totNumPhraseAncestors;$/;"	m	class:phraseGen
+totNumRealFrag	bkEnd.cpp	/^long int totNumRealFrag = 0;$/;"	v
+totNumRootIns	bkEnd.cpp	/^long int totNumRootIns = 0;$/;"	v
+totNumRootIns	phraseGen.h	/^		long int totNumRootIns;$/;"	m	class:phraseGen
+totNumRootPh	bkEnd.cpp	/^long int totNumRootPh = 0;$/;"	v
+totNumSBactivations	bkEnd.cpp	/^long int totNumSBactivations = 0;$/;"	v
+totNumSBreactivations	bkEnd.cpp	/^long int totNumSBreactivations = 0;$/;"	v
+totNumSoftBound	bkEnd.cpp	/^long int totNumSoftBound = 0;$/;"	v
+totNumSoftBounds	phraseGen.h	/^		long int totNumSoftBounds;$/;"	m	class:phraseGen
+totPhStall	bkEnd.cpp	/^long int totPhStall = 0;$/;"	v
+totRootPhrases	phraseGen.h	/^		long int totRootPhrases;$/;"	m	class:phraseGen
+totSBactiveCycles	bkEnd.cpp	/^long int totSBactiveCycles = 0;$/;"	v
+totSBoffCycles	bkEnd.cpp	/^long int totSBoffCycles = 0;$/;"	v
+totSizRealFrag	bkEnd.cpp	/^long int totSizRealFrag = 0;$/;"	v
+totalInstShiftAmt	bpred_unit.h	/^    unsigned totalInstShiftAmt;$/;"	m	class:BPredUnit
+totalLatency	latency.cpp	/^long int totalLatency (int lat) {$/;"	f
+totalOrder_MemDependencyTable	instruction.cpp	/^void instruction::totalOrder_MemDependencyTable (lsq* totalOrderLSQ) {$/;"	f	class:instruction
+totalSBsize	bkEnd.cpp	/^long unsigned totalSBsize = 0;$/;"	v
+total_num_strand_ins	bkEnd.cpp	/^long long int total_num_strand_ins = 0;$/;"	v
+unexpectedMiss	bkEnd.cpp	/^long int unexpectedMiss = 0;$/;"	v
+unexpecteedLat	bkEnd.cpp	/^long int unexpecteedLat = 0;$/;"	v
+unique	unique.cpp	/^void  unique (List<int>* list) {$/;"	f
+unpredMemInsCnt	bkEnd.cpp	/^long int unpredMemInsCnt = 0;$/;"	v
+unpredMemOpCnt	bkEnd.cpp	/^long int unpredMemOpCnt = 0;$/;"	v
+unpredMemOpThreshold	bkEnd.cpp	/^float unpredMemOpThreshold = UNPRED_MEM_THRESHOLD;$/;"	v
+update	bpred_unit_ctr.h	/^BPredUnit<Impl>::update(const InstSeqNum &done_sn, ThreadID tid)$/;"	f	class:BPredUnit
+updateBBboundaries	bkEnd.cpp	/^void updateBBboundaries(instruction *ins) {$/;"	f
+updateDepTableEntris	instruction.cpp	/^void instruction::updateDepTableEntris(dependencyTable *depTables, int coreType, instruction* replaceIns) {$/;"	f	class:instruction
+updateInsLatency	bkEnd.cpp	/^void updateInsLatency (instruction *_ins, int _cycle, int _latency) {$/;"	f
+updateLatency	instruction.cpp	/^void instruction::updateLatency(long int cycle, int latency) {$/;"	f	class:instruction
+updatePRFSM	registerRename.cpp	/^void registerRename::updatePRFSM(PR p_reg, PRFSM2b state) {$/;"	f	class:registerRename
+updatePRFSM	registerRename.cpp	/^void registerRename::updatePRFSM(PR p_reg, PRFSM2b state, instruction* writerIns) {$/;"	f	class:registerRename
+updateResStn	bkEnd.cpp	/^void updateResStn(List<instruction*>* iResStation, List<instruction*>* iWindow) {$/;"	f
+updateSQcommitSet	lsq.cpp	/^void lsq::updateSQcommitSet(instruction* ins) {$/;"	f	class:lsq
+update_cRAT	registerRename.cpp	/^void registerRename::update_cRAT(AR a_reg, PR p_reg) {$/;"	f	class:registerRename
+update_fRAT	registerRename.cpp	/^void registerRename::update_fRAT(AR a_reg, PR p_reg) {$/;"	f	class:registerRename
+upldMissRateProfileMap	bkEnd.cpp	/^map<long int,float> upldMissRateProfileMap;$/;"	v
+upldProfile	bkEnd.cpp	/^FILE* upldProfile;$/;"	v
+upldProfileFlag	bkEnd.cpp	/^bool upldProfileFlag = true;$/;"	v
+usedRAS	bpred_unit.h	/^        bool usedRAS;$/;"	m	struct:BPredUnit::PredictorHistory
+usedRAS	bpred_unit.h	/^    Stats::Scalar usedRAS;$/;"	m	class:BPredUnit
+validBTB	bpred_unit.h	/^        bool validBTB;$/;"	m	struct:BPredUnit::PredictorHistory
+vliwScheduler	vliwScheduler.cpp	/^vliwScheduler::vliwScheduler() {$/;"	f	class:vliwScheduler
+vliwScheduler	vliwScheduler.h	/^class vliwScheduler {$/;"	c
+wasCall	bpred_unit.h	/^        bool wasCall;$/;"	m	struct:BPredUnit::PredictorHistory
+wasControl	bpred_unit.h	/^		bool wasControl;$/;"	m	struct:BPredUnit::PredictorHistory
+wasReturn	bpred_unit.h	/^        bool wasReturn;$/;"	m	struct:BPredUnit::PredictorHistory
+wasST	bpred_unit.h	/^		bool wasST;$/;"	m	struct:BPredUnit::PredictorHistory
+wasStatic	bpred_unit.h	/^		bool wasStatic;$/;"	m	struct:BPredUnit::PredictorHistory
+wavefrontID	bkEnd.cpp	/^int wavefrontID = 0;$/;"	v
+wbbSkipCountFile	bkEnd.cpp	/^FILE* wbbSkipCountFile;$/;"	v
+windowSatration	bkEnd.cpp	/^long int windowSatration = 0;$/;"	v
+writeBack	cacheCtrl.cpp	/^void writeBack(int memCode1, int memCode2, ADDRS addr, int*& latency, memType rORw) {$/;"	f
+writeCache	cache.cpp	/^void cache::writeCache(ADDRS addr, int8_t *data)$/;"	f	class:cache
+writeCache	cache_halfSA.cpp	/^void cache::writeCache(uint64_t addr, int8_t *data)$/;"	f	class:cache
+writeCache	cache_singleWord.cpp	/^void cache::writeCache(uint64_t addr, int8_t *data)$/;"	f	class:cache
+writeLine	cacheLine.cpp	/^void CacheLine::writeLine(long int inTag, int8_t *inData)$/;"	f	class:CacheLine
+writeRegRenMap	instruction.h	/^	map<long int,long int> writeRegRenMap;$/;"	m	class:instruction
+writeUp	cacheCtrl.cpp	/^void writeUp(int memCode1, int memCode2, ADDRS addr, int*& latency, int8_t*& data, memType rORw)$/;"	f
+xLevDeepLatLevel	bkEnd.cpp	/^int xLevDeepLatLevel;$/;"	v
+xLevelDeepEnable	bkEnd.cpp	/^bool xLevelDeepEnable = false;$/;"	v
+~CHeapTree	heapTree.cpp	/^inline CHeapTree<TID, TDATA>::~CHeapTree()$/;"	f	class:CHeapTree
+~CacheLine	cacheLine.cpp	/^CacheLine::~CacheLine () {$/;"	f	class:CacheLine
+~cache	cache.cpp	/^cache::~cache () {$/;"	f	class:cache
+~dependencyTable	dependencyTable.cpp	/^dependencyTable::~dependencyTable() {$/;"	f	class:dependencyTable
+~dot	dot.cpp	/^dot::~dot() {$/;"	f	class:dot
+~fragment	fragment.cpp	/^fragment::~fragment() {$/;"	f	class:fragment
+~hist	hist.cpp	/^hist::~hist() {$/;"	f	class:hist
+~instruction	instruction.cpp	/^instruction::~instruction() {$/;"	f	class:instruction
+~lsq	lsq.cpp	/^lsq::~lsq() {$/;"	f	class:lsq
+~parser	parser.h	/^	~parser() {}$/;"	f	class:parser
+~phrase	phrase.cpp	/^ phrase::~phrase() {$/;"	f	class:phrase
+~phraseGen	phraseGen.cpp	/^phraseGen::~phraseGen() {$/;"	f	class:phraseGen
+~regFile	regFile.h	/^		~regFile(){}$/;"	f	class:regFile
+~registerRename	registerRename.cpp	/^registerRename::~registerRename() {$/;"	f	class:registerRename
+~sideBuff	sideBuff.cpp	/^sideBuff::~sideBuff() {$/;"	f	class:sideBuff
+~stat	stat.h	/^	~stat(){\/*nothing for now*\/}$/;"	f	class:stat
+~vliwScheduler	vliwScheduler.cpp	/^vliwScheduler::~vliwScheduler() {$/;"	f	class:vliwScheduler
