@@ -1,0 +1,14 @@
+Here we describe naming conventions:
+	g_ : global variable
+	l_ : local variable
+	c_ : class/struct object
+	s_ : statstic object
+	t_ : temp variable/object
+	f_ : file object variable
+	_file: file name
+	_<name> : class/struct variable
+	name_T: template
+
+	Typdef: Capitalized words
+	Variables: accept udnerscore
+	Class, Struct, Functions: do not hold underscore, start with lowercase, and have uppercase words.

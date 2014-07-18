@@ -1,0 +1,9 @@
+Here we describe naming conventions:
+	g_ : global variable
+	l_ : local variable
+	c_ : class object
+	s_ : struct object
+	t_ : temp variable/object
+	f_ : file object variable
+	_file: file name
+	_<name> : class/struct variable
