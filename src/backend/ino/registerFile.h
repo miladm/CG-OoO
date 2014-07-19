@@ -6,6 +6,7 @@
 #define _REGISTER_FILE_H
 
 #include "../unit/unit.h"
+#include "../unit/wires.h"
 
 struct registerElement {
     registerElement (PR reg) 
@@ -34,8 +35,11 @@ class registerFile : public unit {
 		bool isRegValid (PR reg);
 		bool isRegBusy (PR regNum);
         void resetRF ();
-        bool hasFreeRdPort (CYCLE, WIDTH);
-        bool hasFreeWrPort (CYCLE);
+
+        /* WIRE CTRL */
+        void updateWireState (AXES_TYPE);
+        bool hasFreeWire (AXES_TYPE);
+        WIDTH getNumFreeWires (AXES_TYPE);
 
 	private:
 		map<PR, registerElement*> _RF;
@@ -43,10 +47,8 @@ class registerFile : public unit {
         const PR _rf_size;
         const PR _rf_begin_num;
         const PR _rf_end_num;
-        const WIDTH _wr_port_cnt;
-        const WIDTH _rd_port_cnt;
-        WIDTH _num_free_wr_port;
-        WIDTH _num_free_rd_port;
+        wires _wr_port;
+        wires _rd_port;
 };
 
 #endif

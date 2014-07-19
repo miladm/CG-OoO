@@ -171,6 +171,8 @@ bool dynInstruction::isOnWrongPath () {return _is_on_wrong_path;}
 
 WIDTH dynInstruction::getNumRdAR () { return _a_rdReg_waitList.NumElements(); }
 
+WIDTH dynInstruction::getTotNumRdAR () { return _a_rdReg.NumElements(); }
+
 WIDTH dynInstruction::getNumRdPR () { return _p_rdReg_waitList.NumElements(); }
 
 List<AR>* dynInstruction::getARrdList () {return &_a_rdReg_waitList;}

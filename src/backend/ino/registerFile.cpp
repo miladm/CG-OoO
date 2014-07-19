@@ -14,8 +14,8 @@ registerFile::registerFile (PR rf_begin_num,
       _rf_size (rf_size),
       _rf_begin_num (rf_begin_num),
       _rf_end_num (rf_begin_num+rf_size-1),
-      _wr_port_cnt (wr_port_cnt),
-      _rd_port_cnt (rd_port_cnt)
+      _wr_port (wr_port_cnt, WRITE, clk, rf_name + ".wr_wire"),
+      _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
 {
     Assert (_rf_size > 0);
     for (PR i = _rf_begin_num; i < _rf_end_num; i++) {
@@ -23,8 +23,6 @@ registerFile::registerFile (PR rf_begin_num,
         _RF.insert (pair<PR, registerElement*> (i, reg));
     }
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 }
 
 registerFile::~registerFile () {
@@ -86,35 +84,30 @@ void registerFile::resetRF () {
     }
 }
 
-bool registerFile::hasFreeRdPort (CYCLE now, WIDTH numRegRdPorts) {
-    Assert (_rd_port_cnt >= numRegRdPorts);
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_rd_port -= numRegRdPorts;
-        if (_num_free_rd_port >= 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+bool registerFile::hasFreeWire (AXES_TYPE axes_type) {
+    if (axes_type == READ)
+        return _rd_port.hasFreeWire ();
+    else
+        return _wr_port.hasFreeWire ();
 }
 
-bool registerFile::hasFreeWrPort (CYCLE now) {
+void registerFile::updateWireState (AXES_TYPE axes_type) {
+    CYCLE now = _clk->now ();
     if (_cycle < now) {
-        _num_free_wr_port = _wr_port_cnt;
+        _wr_port.updateWireState ();
+        _rd_port.updateWireState ();
         _cycle = now;
-        return true;
     } else if (_cycle == now) {
-        _num_free_wr_port--;
-        if (_num_free_wr_port > 0) {
-            return true;
-        } else {
-            //Assert (true == false && "this feature may not work -look into it");
-            return false;
-        }
+        if (axes_type == READ)
+            _rd_port.updateWireState ();
+        else
+            _wr_port.updateWireState ();
     }
-    Assert (true == false && "should not have gotten here");
-    return false;
+}
+
+WIDTH registerFile::getNumFreeWires (AXES_TYPE axes_type) {
+    if (axes_type == READ)
+        return _rd_port.getNumFreeWires ();
+    else
+        return _wr_port.getNumFreeWires ();
 }

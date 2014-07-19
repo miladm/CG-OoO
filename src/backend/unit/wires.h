@@ -14,7 +14,7 @@ class wires : public unit
  		~wires ();
         bool hasFreeWire ();
         void updateWireState ();
-        WIDTH getNumFreeWire ();
+        WIDTH getNumFreeWires ();
 
  	private: //variables
         CYCLE _cycle;

@@ -53,7 +53,8 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!_iWindow.hasFreeWire (READ)) break;
         if (_scheduler_to_execution_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
-        if (!g_RF_MGR->hasFreeRdPort (_clk->now (), ins->getNumRdAR ())) break;
+        WIDTH num_ar = ins->getTotNumRdAR ();
+        if (!g_RF_MGR->hasFreeWire (READ, num_ar)) break;
         forwardFromCDB (ins);
         if (!g_RF_MGR->isReady (ins)) break;
 
@@ -61,6 +62,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         ins = _iWindow.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins, _clk->now ());
+        g_RF_MGR->updateWireState (READ, num_ar);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */

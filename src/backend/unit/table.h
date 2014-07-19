@@ -52,15 +52,14 @@ class table : public unit {
     public:
 		List<TableElement<tableType_T>* > _table;
         CYCLE _cycle;
-
-        /* STAT OBJS */
-//      ScalarStat& s_table_empty_cyc;
-//      ScalarStat& s_table_full_cyc;
-
         wires _wr_port;
         wires _rd_port;
 		const LENGTH _table_size;
         const TABLE_TYPE _table_type;
+
+        /* STAT OBJS */
+//      ScalarStat& s_table_empty_cyc;
+//      ScalarStat& s_table_full_cyc;
 };
 
 template <typename tableType_T>

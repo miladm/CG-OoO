@@ -68,9 +68,10 @@ COMPLETE_STATUS execution::completeIns () {
             _execution_to_memory_port->pushBack (ins, _clk->now ());
             ins->setPipeStage (MEM_ACCESS);
         } else {
-            //if (!g_RF_MGR->hasFreeWrPort (_clk->now ())) break; //TODO this line is buggy
+            //if (!g_RF_MGR->hasFreeWire (WRITE)) break; //TODO this line is buggy for the EU state
             ins->setPipeStage (COMPLETE);
             g_RF_MGR->writeToRF (ins);
+            //g_RF_MGR->updateWireState (WRITE); //TODO put back
         }
         EU->resetEU ();
 

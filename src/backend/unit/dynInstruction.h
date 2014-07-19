@@ -43,6 +43,7 @@ class dynInstruction : public unit {
         LQ_STATE getLQstate ();
         bool isOnWrongPath ();
         WIDTH getNumRdAR ();
+        WIDTH getTotNumRdAR ();
         WIDTH getNumRdPR ();
         List<AR>* getARrdList ();
         List<AR>* getARwrList ();

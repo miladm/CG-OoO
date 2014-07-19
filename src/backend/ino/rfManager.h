@@ -18,9 +18,13 @@ class rfManager : public unit {
         void reserveRF (dynInstruction* ins);
         bool canReserveRF (dynInstruction* ins);
         void writeToRF (dynInstruction* ins);
-        bool hasFreeWrPort (CYCLE now);
-        bool hasFreeRdPort (CYCLE now, WIDTH numRegRdPorts);
         void updateReg (PR reg);
+
+        /* WIRES CTRL */
+        bool hasFreeWire (AXES_TYPE);
+        bool hasFreeWire (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE);
+        void updateWireState (AXES_TYPE, WIDTH);
 
 	private:
         registerFile _RF;

@@ -36,7 +36,7 @@ void wires::updateWireState () {
     }
 }
 
-WIDTH wires::getNumFreeWire () {
+WIDTH wires::getNumFreeWires () {
     CYCLE now = _clk->now ();
     if (_cycle < now) {
         return _wire_cnt;
