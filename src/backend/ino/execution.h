@@ -15,16 +15,19 @@ class execution : protected stage {
                    port<dynInstruction*>& execution_to_memory_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH execution_width,
+                   sysClock* clk,
 			       string stage_name);
 		~execution ();
 
-		void doEXECUTION (sysClock&);
-        void squashCtrl (sysClock&);
-        void squash (sysClock&);
-        void regStat (sysClock& clk);
-        PIPE_ACTIVITY executionImpl (sysClock&);
-        COMPLETE_STATUS completeIns (sysClock&);
-        void forward (dynInstruction*, CYCLE, sysClock&);
+		void doEXECUTION ();
+
+    private:
+        void squashCtrl ();
+        void squash ();
+        void regStat ();
+        PIPE_ACTIVITY executionImpl ();
+        COMPLETE_STATUS completeIns ();
+        void forward (dynInstruction*, CYCLE);
 
 	private:
 		port<dynInstruction*>* _scheduler_to_execution_port;

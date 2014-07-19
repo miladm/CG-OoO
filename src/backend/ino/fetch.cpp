@@ -8,9 +8,10 @@ fetch::fetch (port<dynInstruction*>& bp_to_fetch_port,
 	          port<dynInstruction*>& fetch_to_decode_port,
 			  port<dynInstruction*>& fetch_to_bp_port,
 			  WIDTH fetch_width,
+              sysClock* clk,
 			  string stage_name
 			 )
-	: stage(fetch_width, stage_name)
+	: stage(fetch_width, stage_name, clk)
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
@@ -21,16 +22,16 @@ fetch::fetch (port<dynInstruction*>& bp_to_fetch_port,
 
 fetch::~fetch () {}
 
-SIM_MODE fetch::doFETCH (sysClock& clk) {
-    dbg.print (DBG_FETCH, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
+SIM_MODE fetch::doFETCH () {
+    dbg.print (DBG_FETCH, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (g_var.g_pipe_state == PIPE_NORMAL) {
-        pipe_stall = fetchImpl (clk);
+        pipe_stall = fetchImpl ();
     }
 
     /* STAT */
@@ -44,19 +45,19 @@ SIM_MODE fetch::doFETCH (sysClock& clk) {
 }
 
 /* READ FW INSTRUCTIONS FORM THE PIN INPUT QUE */
-PIPE_ACTIVITY fetch::fetchImpl (sysClock& clk) {
+PIPE_ACTIVITY fetch::fetchImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 	for (WIDTH i = 0; i < _stage_width; i++) {
 		/* CHECKS */
         if (g_var.isCodeCacheEmpty()) { _switch_to_frontend = true; break; }
-		if (_fetch_to_decode_port->getBuffState (clk.now ()) == FULL_BUFF) break;
+		if (_fetch_to_decode_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
 
         /* FETCH INS */
         dynInstruction* ins = g_var.popCodeCache();
         ins->setPipeStage(FETCH);
         g_var.remFromCodeCache ();
-		_fetch_to_decode_port->pushBack(ins, clk.now());
-        dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), clk.now ());
+		_fetch_to_decode_port->pushBack(ins, _clk->now());
+        dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), _clk->now ());
 
         /* STAT */
         s_ins_cnt++;
@@ -65,14 +66,14 @@ PIPE_ACTIVITY fetch::fetchImpl (sysClock& clk) {
     return pipe_stall;
 }
 
-void fetch::squash (sysClock& clk) {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", clk.now ());
+void fetch::squash () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
-    _fetch_to_decode_port->flushPort (squashSeqNum, clk.now ());
-    _fetch_to_bp_port->flushPort (squashSeqNum, clk.now ());
+    _fetch_to_decode_port->flushPort (squashSeqNum, _clk->now ());
+    _fetch_to_bp_port->flushPort (squashSeqNum, _clk->now ());
 }
 
-void fetch::regStat (sysClock& clk) {
-    _bp_to_fetch_port->regStat (clk.now ());
+void fetch::regStat () {
+    _bp_to_fetch_port->regStat (_clk->now ());
 }

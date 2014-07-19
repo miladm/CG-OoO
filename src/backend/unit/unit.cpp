@@ -4,9 +4,10 @@
 
 #include "unit.h"
 
-unit::unit(string class_name) {
-    _c_name = class_name;
-}
+unit::unit(string class_name, sysClock* clk) 
+    : _c_name (class_name),
+      _clk (clk)
+{ }
 
 unit::~unit () {}
 

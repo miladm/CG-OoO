@@ -1,2 +1,6 @@
 *.AppleDouble*
 *.svn*
+.nfs*
+*.o
+.*.swp
+*junk*

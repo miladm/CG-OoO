@@ -5,8 +5,8 @@
 #include "port.h"
 
 template <typename queType_T>
-port<queType_T>::port (LENGTH len = 1, CYCLE wire_delay = 1, string port_name) 
-	: unit (port_name),
+port<queType_T>::port (LENGTH len, CYCLE wire_delay, sysClock* clk, string port_name) 
+	: unit (port_name, clk),
       _buff_len (len),
 	  _wire_delay (wire_delay),
       s_port_empty_cyc (g_stats.newScalarStat (port_name, "port_empty_cyc", "Number of cycles with port empty", 0, NO_PRINT_ZERO)),

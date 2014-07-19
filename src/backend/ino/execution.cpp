@@ -9,8 +9,9 @@ execution::execution (port<dynInstruction*>& scheduler_to_execution_port,
                       port<dynInstruction*>& execution_to_memory_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH execution_width,
+                      sysClock* clk,
 	    	          string stage_name) 
-	: stage (execution_width, stage_name)
+	: stage (execution_width, stage_name, clk)
 {
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -25,24 +26,24 @@ execution::execution (port<dynInstruction*>& scheduler_to_execution_port,
 
 execution::~execution () {}
 
-void execution::doEXECUTION (sysClock& clk) {
-    dbg.print (DBG_EXECUTION, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
+void execution::doEXECUTION () {
+    dbg.print (DBG_EXECUTION, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* WRITEBACK RESULT */
     COMPLETE_STATUS cmpl_status;
-    cmpl_status = completeIns (clk);
+    cmpl_status = completeIns ();
 
     /* EXECUTE INS */
     if (cmpl_status == COMPLETE_NORMAL) {
-        pipe_stall = executionImpl (clk);
+        pipe_stall = executionImpl ();
     }
 
     /* SQUASH CONTROL */
-    squashCtrl (clk);
-    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, clk.now ());
+    squashCtrl ();
+    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /* STAT */
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
@@ -50,7 +51,7 @@ void execution::doEXECUTION (sysClock& clk) {
 }
 
 /* WRITE COMPLETE INS - WRITEBACK */
-COMPLETE_STATUS execution::completeIns (sysClock& clk) {
+COMPLETE_STATUS execution::completeIns () {
     g_var.setOldSquashSN ();
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
@@ -59,17 +60,17 @@ COMPLETE_STATUS execution::completeIns (sysClock& clk) {
         /* CHECKS */
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
         if (ins != NULL && ins->getInsType () == MEM && 
-            _execution_to_memory_port->getBuffState (clk.now ()) == FULL_BUFF) break;
-        if (EU->getEUstate (clk.now (), true) != COMPLETE_EU) continue;
+            _execution_to_memory_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
+        if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
         /* COMPLETE INS */
         if (ins->getInsType () == MEM) {
-            _execution_to_memory_port->pushBack (ins, clk.now ());
+            _execution_to_memory_port->pushBack (ins, _clk->now ());
             ins->setPipeStage (MEM_ACCESS);
         } else {
-            if (!g_RF_MGR.hasFreeWrPort (clk.now ())) break;
+            //if (!g_RF_MGR->hasFreeWrPort (_clk->now ())) break; //TODO this line is buggy
             ins->setPipeStage (COMPLETE);
-            g_RF_MGR.writeToRF (ins);
+            g_RF_MGR->writeToRF (ins);
         }
         EU->resetEU ();
 
@@ -77,40 +78,40 @@ COMPLETE_STATUS execution::completeIns (sysClock& clk) {
         if (ins->isOnWrongPath ()) {
             g_var.setSquashSN (ins->getInsID ());
         }
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), clk.now ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }
 
     if (g_var.isOnWrongPath()) {
-        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", clk.now ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
         return COMPLETE_SQUASH;
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Right Path", clk.now ());
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Right Path", _clk->now ());
     return COMPLETE_NORMAL;
 }
 
 /* EXECUTE INS */
-PIPE_ACTIVITY execution::executionImpl (sysClock& clk) {
+PIPE_ACTIVITY execution::executionImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
-        if (_scheduler_to_execution_port->getBuffState (clk.now ()) == EMPTY_BUFF) break;
-        if (!_scheduler_to_execution_port->isReady (clk.now ())) break;
+        if (_scheduler_to_execution_port->getBuffState (_clk->now ()) == EMPTY_BUFF) break;
+        if (!_scheduler_to_execution_port->isReady (_clk->now ())) break;
         dynInstruction* ins = _scheduler_to_execution_port->getFront ();
-        if (!g_RF_MGR.isReady (ins) || !g_RF_MGR.canReserveRF (ins)) break; // INO EXE
+        if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break; // INO EXE
         exeUnit* EU = _aluExeUnits->Nth (i);
-        if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) continue;
+        if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
         /* EXE INS */
-        ins = _scheduler_to_execution_port->popFront (clk.now ());
-        g_RF_MGR.reserveRF (ins);
-        EU->_eu_timer.setNewTime (clk.now ());
+        ins = _scheduler_to_execution_port->popFront (_clk->now ());
+        g_RF_MGR->reserveRF (ins);
+        EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins (ins);
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
-        forward (ins, EU->_eu_timer.getLatency (), clk);
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), clk.now ());
+        forward (ins, EU->_eu_timer.getLatency ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /* STAT */
         s_ins_cnt++;
@@ -119,17 +120,17 @@ PIPE_ACTIVITY execution::executionImpl (sysClock& clk) {
     return pipe_stall;
 }
 
-void execution::forward (dynInstruction* ins, CYCLE eu_latency, sysClock& clk) {
-    if (_execution_to_scheduler_port->getBuffState (clk.now ()) == FULL_BUFF) return;
+void execution::forward (dynInstruction* ins, CYCLE eu_latency) {
+    if (_execution_to_scheduler_port->getBuffState (_clk->now ()) == FULL_BUFF) return;
     if (ins->getInsType () != MEM) {
         CYCLE cdb_ready_latency = eu_latency - 1;
         Assert (cdb_ready_latency >= 0);
-        _execution_to_scheduler_port->pushBack (ins, clk.now (), cdb_ready_latency);
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), clk.now ());
+        _execution_to_scheduler_port->pushBack (ins, _clk->now (), cdb_ready_latency);
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
     }
 }
 
-void execution::squashCtrl (sysClock& clk) {
+void execution::squashCtrl () {
     string state_switch;
     if ((g_var.g_pipe_state == PIPE_NORMAL || g_var.g_pipe_state == PIPE_SQUASH_ROB) && 
         g_var.g_squash_seq_num != g_var.g_old_squash_seq_num) {
@@ -141,7 +142,7 @@ void execution::squashCtrl (sysClock& clk) {
     } else if (g_var.g_pipe_state == PIPE_WAIT_FLUSH) {
         for (WIDTH i = 0; i < _stage_width; i++) {
             exeUnit* EU = _aluExeUnits->Nth (i);
-            if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) return;
+            if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) return;
         }
         g_var.g_pipe_state = PIPE_FLUSH;
         state_switch =  "PIPE_WAIT_FLUSH -> PIPE_FLUSH";
@@ -149,33 +150,34 @@ void execution::squashCtrl (sysClock& clk) {
             exeUnit* EU = _aluExeUnits->Nth (i);
             EU->resetEU ();
         }
-        squash (clk);
+        squash ();
     } else if (g_var.g_pipe_state == PIPE_FLUSH) {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
-    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeRdPort (clk.now ()) && 
+    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeWire (READ) && 
                _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
+        _iROB->updateWireState (READ);
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
     } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 0) {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
-        g_RF_MGR.resetRF ();
+        g_RF_MGR->resetRF ();
     } else {
         return; /* No state change */
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str(), clk.now ());
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str(), _clk->now ());
 }
 
-void execution::squash (sysClock& clk) {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Execution Ports Flush", clk.now ());
+void execution::squash () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _execution_to_scheduler_port->flushPort (squashSeqNum, clk.now ());
-    _execution_to_memory_port->flushPort (squashSeqNum, clk.now ());
+    _execution_to_scheduler_port->flushPort (squashSeqNum, _clk->now ());
+    _execution_to_memory_port->flushPort (squashSeqNum, _clk->now ());
 }
 
-void execution::regStat (sysClock& clk) {
-    _scheduler_to_execution_port->regStat (clk.now ());
+void execution::regStat () {
+    _scheduler_to_execution_port->regStat (_clk->now ());
 }

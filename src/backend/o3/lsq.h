@@ -25,7 +25,7 @@ class o3_lsqCAM : public CAMtable<dynInstruction*> {
         dynInstruction* findPendingMemIns (LSQ_ID);
         void setTimer (dynInstruction*, CYCLE, CYCLE);
         void squash (INS_ID);
-        void delFinishedMemAxes (CYCLE);
+        void delFinishedMemAxes (sysClock&);
         bool hasCommit ();
         bool hasAnyCompleteLdFromAddr (INS_ID, dynInstruction*);
         pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID, CYCLE);

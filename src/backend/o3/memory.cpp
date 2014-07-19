@@ -52,7 +52,7 @@ void o3_memory::completeIns (sysClock& clk) {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (g_LSQ_MGR.getTableState (LD_QU) == EMPTY_BUFF) break;
-        if (!g_LSQ_MGR.hasFreeRdPort (LD_QU, clk.now ())) break;
+        if (!g_LSQ_MGR.hasFreeWire (LD_QU, clk, READ)) break;
         pair<bool, dynInstruction*> p = g_LSQ_MGR.hasFinishedIns (LD_QU, clk.now ());
         if (!p.first) break;
         dynInstruction* finished_ld_ins = p.second;
@@ -67,6 +67,9 @@ void o3_memory::completeIns (sysClock& clk) {
         g_LSQ_MGR.completeLd (finished_ld_ins);
         g_GRF_MGR.completeRegs (finished_ld_ins);
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write Complete mem LD ins", finished_ld_ins->getInsID (), clk.now ());
+
+        /* UPDATE WIRES */
+        g_LSQ_MGR.updateWireState (LD_QU, clk, READ);
     }
 
 //  /* COMPLETE ST INS */
@@ -103,7 +106,7 @@ PIPE_ACTIVITY o3_memory::memoryImpl (sysClock& clk) {
         //if (_execution_to_memory_port->getBuffState (clk.now ()) == EMPTY_BUFF) break;
         //if (!_execution_to_memory_port->isReady (clk.now ())) break;
         if (g_LSQ_MGR.getTableState (LD_QU) == EMPTY_BUFF) break;
-        if (!g_LSQ_MGR.hasFreeRdPort (LD_QU, clk.now ())) break; //TODO it is wrong taht despite the results of future if statements, this state machine workd - fix it
+        if (!g_LSQ_MGR.hasFreeWire (LD_QU, clk, READ)) break; //TODO it is wrong taht despite the results of future if statements, this state machine workd - fix it
         //if (_dcache.getNumAvialablePorts () == 0) break; (TODO)
         //if (_mem_buff.getBuffState (clk.now ()) == FULL_BUFF) break;
         //dynInstruction* mem_ins = _execution_to_memory_port->getFront ();
@@ -111,11 +114,15 @@ PIPE_ACTIVITY o3_memory::memoryImpl (sysClock& clk) {
         //   (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) break;
         //if (mem_ins->getMemType () == STORE && 
         //   (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWrPort (clk.now ()))) break;
-        if (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWrPort (clk.now ())) break; //TODO only on miss? here or in g_LSQ_MGR?
+        if (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWire (clk, WRITE)) break; //TODO only on miss? here or in g_LSQ_MGR? = should it be WROTE?
 
         /* MEM ACCESS */
         if (!g_LSQ_MGR.issueToMem (LD_QU, clk.now ())) break;
         //dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_str (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, clk.now ());
+
+        /* UPDATE WIRES */
+        g_LSQ_MGR.updateWireState (LD_QU, clk, READ);
+        _mshr.updateWireState (clk, WRITE);
 
         /* STAT */
         s_ins_cnt++;
@@ -148,13 +155,16 @@ void o3_memory::manageSTbuffer (sysClock& clk) {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (g_LSQ_MGR.getTableState (ST_QU) == EMPTY_BUFF) break;
-        if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;
+        if (!g_LSQ_MGR.hasFreeWire (ST_QU, clk, READ)) break;
         if (!g_LSQ_MGR.hasCommitSt ()) break;
         //if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeRdPort (clk.now ())) break;
         //if (_dcache.getNumAvialablePorts () == 0) break; //TODO put this back soon
 
         /* MEM ACCESS FOR STORE */
         if (!g_LSQ_MGR.issueToMem (ST_QU, clk.now ())) break; //TODO of not successful, don't waste port BW and break
+
+        /* UPDATE WIRES */
+        g_LSQ_MGR.updateWireState (ST_QU, clk, READ);
     }
 
     //TODO will this loop ever get a chance to not break?

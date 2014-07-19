@@ -40,8 +40,8 @@ PIPE_ACTIVITY o3_commit::commitImpl (sysClock& clk) {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (_iROB->getTableState () == EMPTY_BUFF) break;
-        if (!_iROB->hasFreeRdPort (clk.now ())) break;
-        dynInstruction* ins = _iROB->getFront ();
+        if (!_iROB->hasFreeWire (clk, READ)) break;
+        dynInstruction* ins = _iROB->getFront (clk);
         //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!"); (TODO - put it back)
         if (ins->isOnWrongPath ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
@@ -60,6 +60,9 @@ PIPE_ACTIVITY o3_commit::commitImpl (sysClock& clk) {
             g_GRF_MGR.commitRegs (ins);
             delete ins;
         }
+
+        /* UPDATE WIRES */
+        _iROB->updateWireState (clk, READ);
 
         /* STAT */
         s_ins_cnt++;

@@ -8,8 +8,9 @@ commit::commit (port<dynInstruction*>& commit_to_bp_port,
 			    port<dynInstruction*>& commit_to_scheduler_port, 
                 CAMtable<dynInstruction*>* iROB,
 	    	    WIDTH commit_width,
+                sysClock* clk,
 	    	    string stage_name)
-	: stage (commit_width, stage_name),
+	: stage (commit_width, stage_name, clk),
       s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
@@ -19,14 +20,14 @@ commit::commit (port<dynInstruction*>& commit_to_bp_port,
 
 commit::~commit () {}
 
-void commit::doCOMMIT (sysClock& clk) {
+void commit::doCOMMIT () {
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
-        pipe_stall = commitImpl (clk);
+        pipe_stall = commitImpl ();
     }
 
     /* STAT */
@@ -34,13 +35,13 @@ void commit::doCOMMIT (sysClock& clk) {
 }
 
 /* COMMIT COMPLETE INS AT THE HEAD OF QUEUE */
-PIPE_ACTIVITY commit::commitImpl (sysClock& clk) {
-    dbg.print (DBG_COMMIT, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
+PIPE_ACTIVITY commit::commitImpl () {
+    dbg.print (DBG_COMMIT, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (_iROB->getTableState () == EMPTY_BUFF) break;
-        if (!_iROB->hasFreeRdPort (clk.now ())) break;
+        if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
         //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!");
         if (ins->isOnWrongPath ()) break;
@@ -48,7 +49,7 @@ PIPE_ACTIVITY commit::commitImpl (sysClock& clk) {
 
         /* COMMIT INS */
         ins = _iROB->popFront();
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Commit ins", ins->getInsID (), clk.now ());
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Commit ins", ins->getInsID (), _clk->now ());
         delete ins;
 
         /* STAT */
@@ -58,8 +59,8 @@ PIPE_ACTIVITY commit::commitImpl (sysClock& clk) {
     return pipe_stall;
 }
 
-void commit::squash (sysClock& clk) {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", clk.now ());
+void commit::squash () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
     if (_iROB->getTableSize() == 0) return;
     INS_ID squashSeqNum = g_var.getSquashSN ();
@@ -100,6 +101,6 @@ void commit::squash (sysClock& clk) {
     }
 }
 
-void commit::regStat (sysClock& clk) {
+void commit::regStat () {
     //_iROB->regStat (); TODO - fix this
 }

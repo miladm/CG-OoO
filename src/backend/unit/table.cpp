@@ -8,30 +8,29 @@
 /******************* TABLE *********************/
 /***********************************************/
 template <typename tableType_T>
-table<tableType_T>::table (LENGTH len = 1, 
-                           TABLE_TYPE table_type = RAM_ARRAY, 
-                           WIDTH rd_port_cnt = 1, 
-                           WIDTH wr_port_cnt = 1,
+table<tableType_T>::table (LENGTH len, 
+                           TABLE_TYPE table_type, 
+                           WIDTH rd_port_cnt, 
+                           WIDTH wr_port_cnt,
+                           sysClock* clk,
                            string table_name = "table") 
-    : unit (table_name),
+    : unit (table_name, clk),
       //s_table_empty_cyc (g_stats.newScalarStat (table_name, "table_empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
       //s_table_full_cyc  (g_stats.newScalarStat (table_name, "table_full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
+      _wr_port (wr_port_cnt, WRITE, clk, table_name + ".wr_wire"),
+      _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
       _table_size (len),
-      _table_type (table_type),
-      _wr_port_cnt (wr_port_cnt),
-      _rd_port_cnt (rd_port_cnt)
+      _table_type (table_type)
 {
 	Assert (_table_size > 0 && 
-            _rd_port_cnt > 0 && _rd_port_cnt <= _table_size &&
-            _wr_port_cnt > 0 && _wr_port_cnt <= _table_size);
+            rd_port_cnt > 0 && rd_port_cnt <= _table_size &&
+            wr_port_cnt > 0 && wr_port_cnt <= _table_size);
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 }
 
 template <typename tableType_T>
 BUFF_STATE table<tableType_T>::pushBack (tableType_T obj) {
-    Assert ( _num_free_wr_port > 0 && "must have checked the available ports count first");
+    Assert (_wr_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 	if (getTableSize () >= _table_size) {
         dbg.print (DBG_PORT, "%s: %s (cyc: )\n", _c_name.c_str (), "is FULL");
         return FULL_BUFF;
@@ -43,7 +42,7 @@ BUFF_STATE table<tableType_T>::pushBack (tableType_T obj) {
 
 template <typename tableType_T>
 tableType_T table<tableType_T>::popBack () {
-    Assert (_num_free_wr_port > 0 && "must have checked the available ports count first");
+    Assert (_wr_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
     Assert (getTableSize () > 0);
 	tableType_T elem = table<tableType_T>::_table.Last ()->_element;
 	delete table<tableType_T>::_table.Nth (getTableSize () - 1);
@@ -53,41 +52,9 @@ tableType_T table<tableType_T>::popBack () {
 
 template <typename tableType_T>
 tableType_T table<tableType_T>::getBack () {
-    Assert (_num_free_wr_port > 0 && "must have checked the available ports count first");
+    Assert (_wr_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
     Assert (getTableSize () > 0);
 	return table<tableType_T>::_table.Last ()->_element;
-}
-
-template <typename tableType_T>
-bool table<tableType_T>::hasFreeRdPort (CYCLE now) {
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt;
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        table<tableType_T>::_num_free_rd_port--;
-        if (table<tableType_T>::_num_free_rd_port > 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
-}
-
-template <typename tableType_T>
-bool table<tableType_T>::hasFreeWrPort (CYCLE now) {
-    if (_cycle < now) {
-        _num_free_wr_port = _wr_port_cnt;
-        _num_free_rd_port = _rd_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_wr_port--;
-        if (_num_free_wr_port > 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
 }
 
 template<typename tableType_T>
@@ -132,16 +99,41 @@ void table<tableType_T>::regStat () {
     }
 }
 
+template <typename tableType_T>
+bool table<tableType_T>::hasFreeWire (AXES_TYPE axes_type) {
+    if (axes_type == READ)
+        return _rd_port.hasFreeWire ();
+    else
+        return _wr_port.hasFreeWire ();
+}
+
+template <typename tableType_T>
+void table<tableType_T>::updateWireState (AXES_TYPE axes_type) {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        _wr_port.updateWireState ();
+        _rd_port.updateWireState ();
+        _cycle = now;
+    } else if (_cycle == now) {
+        if (axes_type == READ)
+            _rd_port.updateWireState ();
+        else
+            _wr_port.updateWireState ();
+    }
+}
+
 /***********************************************/
 /***************** CAM TABLE *******************/
 /***********************************************/
 template <typename tableType_T>
-CAMtable<tableType_T>::CAMtable (LENGTH len = 1, 
-                              WIDTH rd_port_cnt = 1, 
-                              WIDTH wr_port_cnt = 1,
+CAMtable<tableType_T>::CAMtable (LENGTH len, 
+                              WIDTH rd_port_cnt, 
+                              WIDTH wr_port_cnt,
+                              sysClock* clk,
                               string table_name = "CAMtable") 
     : table<tableType_T> (len, CAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+                          wr_port_cnt, rd_port_cnt, 
+                          clk, table_name)
 {}
 
 template <typename tableType_T>
@@ -156,7 +148,7 @@ tableType_T CAMtable<tableType_T>::pullNextReady (LENGTH next_ins_indx) {
 template <typename tableType_T>
 LENGTH CAMtable<tableType_T>::getNextReadyIndx () {
 #ifdef ASSRTION
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert (_table_type == CAM_ARRAY);
 #endif
@@ -174,7 +166,7 @@ template <typename tableType_T>
 tableType_T CAMtable<tableType_T>::popFront () {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
@@ -186,7 +178,7 @@ template <typename tableType_T>
 tableType_T CAMtable<tableType_T>::getFront () {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
      return table<tableType_T>::_table.Nth (0)->_element;
 }
@@ -195,7 +187,7 @@ template <typename tableType_T>
 tableType_T CAMtable<tableType_T>::getNth (LENGTH indx) {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert (table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert (table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
      return table<tableType_T>::_table.Nth (indx)->_element;
 }
@@ -204,7 +196,7 @@ template <typename tableType_T>
 tableType_T CAMtable<tableType_T>::pullNth (LENGTH indx) {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
      tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
      table<tableType_T>::_table.RemoveAt (indx);
@@ -215,24 +207,28 @@ tableType_T CAMtable<tableType_T>::pullNth (LENGTH indx) {
 /***************** RAM TABLE *******************/
 /***********************************************/
 template <typename tableType_T>
-RAMtable<tableType_T>::RAMtable (LENGTH len = 1, 
-                              WIDTH rd_port_cnt = 1, 
-                              WIDTH wr_port_cnt = 1,
+RAMtable<tableType_T>::RAMtable (LENGTH len, 
+                              WIDTH rd_port_cnt, 
+                              WIDTH wr_port_cnt,
+                              sysClock* clk,
                               string table_name = "RAMtable") 
     : table<tableType_T> (len, RAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+                          wr_port_cnt, rd_port_cnt, 
+                          clk, table_name)
 {}
 
 /***********************************************/
 /***************** FIFO TABLE ******************/
 /***********************************************/
 template <typename tableType_T>
-FIFOtable<tableType_T>::FIFOtable (LENGTH len = 1, 
-                              WIDTH rd_port_cnt = 1, 
-                              WIDTH wr_port_cnt = 1,
+FIFOtable<tableType_T>::FIFOtable (LENGTH len, 
+                              WIDTH rd_port_cnt, 
+                              WIDTH wr_port_cnt,
+                              sysClock* clk,
                               string table_name = "FIFOtable") 
     : table<tableType_T> (len, FIFO_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+                          wr_port_cnt, rd_port_cnt, 
+                          clk, table_name)
 {}
 /*
 template <typename tableType_T>
@@ -245,7 +241,7 @@ template <typename tableType_T>
 tableType_T FIFOtable<tableType_T>::getFront () {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
     return table<tableType_T>::_table.Nth (0)->_element;
 }
@@ -254,7 +250,7 @@ template <typename tableType_T>
 tableType_T FIFOtable<tableType_T>::popFront () {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_num_free_rd_port > 0 && "must have checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWire () > 0 && "must have checked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);

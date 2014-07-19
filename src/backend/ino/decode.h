@@ -12,13 +12,16 @@ class decode : protected stage {
 		decode (port<dynInstruction*>& fetch_to_decode_port, 
 			    port<dynInstruction*>& decode_to_schedule_port, 
 			    WIDTH decode_width,
+                sysClock* clk,
 			    string stage_name);
 		~decode ();
 
-		void doDECODE (sysClock& clk);
-		PIPE_ACTIVITY decodeImpl (sysClock& clk);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
+		void doDECODE ();
+
+    private:
+		PIPE_ACTIVITY decodeImpl ();
+        void squash ();
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _fetch_to_decode_port;

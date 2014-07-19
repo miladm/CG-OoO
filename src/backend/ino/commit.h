@@ -13,13 +13,15 @@ class commit : protected stage {
 			    port<dynInstruction*>& commit_to_scheduler_port, 
                 CAMtable<dynInstruction*>* iROB,
 			    WIDTH commit_width,
+                sysClock* clk,
 			    string stage_name);
 		~commit ();
+		void doCOMMIT ();
+        void squash ();
 
-		void doCOMMIT (sysClock&);
-		PIPE_ACTIVITY commitImpl (sysClock&);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
+    private:
+		PIPE_ACTIVITY commitImpl ();
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
@@ -31,4 +33,3 @@ class commit : protected stage {
 };
 
 #endif
-

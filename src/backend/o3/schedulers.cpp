@@ -34,8 +34,8 @@ o3_scheduler::~o3_scheduler () {
 }
 
 void o3_scheduler::doSCHEDULER (sysClock& clk) {
+    /* STAT + DEBUG */
     dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
-    /* STAT */
     regStat (clk);
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
@@ -60,7 +60,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl (sysClock& clk) {
             /* CHECKS */
             if (_scheduler_to_execution_port->getBuffState (clk.now ()) == FULL_BUFF) break;
             if (_ResStns.Nth(j)->getTableState () == EMPTY_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeRdPort (clk.now ())) continue;
+            if (!_ResStns.Nth(j)->hasFreeWire (clk, READ)) continue;
             LENGTH readyInsIndx;
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
@@ -72,6 +72,9 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl (sysClock& clk) {
             ins->setPipeStage (ISSUE);
             _scheduler_to_execution_port->pushBack (ins, clk.now ());
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), clk.now ());
+
+            /* UPDATE WIRES */
+            _ResStns.Nth(j)->updateWireState (clk, READ);
 
             /* STAT */
             s_ins_cnt++;
@@ -100,19 +103,19 @@ void o3_scheduler::updateResStns (sysClock& clk) {
         for (WIDTH i = 0; i < _stage_width; i++) {
             /* CHECKS */
             if (_iROB->getTableState () == FULL_BUFF) break;
-            if (!_iROB->hasFreeWrPort (clk.now ())) break;
+            if (!_iROB->hasFreeWire (clk, WRITE)) break;
             if (_ResStns.Nth(j)->getTableState () == FULL_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeWrPort (clk.now ())) continue;
+            if (!_ResStns.Nth(j)->hasFreeWire (clk, WRITE)) continue;
             if (_decode_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) break;
             if (!_decode_to_scheduler_port->isReady (clk.now ())) break;
             dynInstruction* ins = _decode_to_scheduler_port->getFront ();
             if (!g_GRF_MGR.canRename (ins)) break;
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
                 if (g_LSQ_MGR.getTableState (LD_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWrPort (LD_QU, clk.now ())) break;
+                if (!g_LSQ_MGR.hasFreeWire (LD_QU, clk, WRITE)) break;
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
                 if (g_LSQ_MGR.getTableState (ST_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWrPort (ST_QU, clk.now ())) break;
+                if (!g_LSQ_MGR.hasFreeWire (ST_QU, clk, WRITE)) break;
             }
 
             /* WRITE INTO RES STN */
@@ -120,10 +123,19 @@ void o3_scheduler::updateResStns (sysClock& clk) {
             ins = _decode_to_scheduler_port->popFront (clk.now ());
             g_GRF_MGR.renameRegs (ins);
             ins->setPipeStage (DISPATCH);
-            if (ins->getInsType () == MEM) g_LSQ_MGR.pushBack (ins);
-            _ResStns.Nth(j)->pushBack (ins);
-            _iROB->pushBack (ins);
+            if (ins->getInsType () == MEM) g_LSQ_MGR.pushBack (ins, clk);
+            _ResStns.Nth(j)->pushBack (ins, clk);
+            _iROB->pushBack (ins, clk);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), clk.now ());
+
+            /* UPDATE WIRES */
+            _iROB->updateWireState (clk, WRITE);
+            _ResStns.Nth(j)->updateWireState (clk, WRITE);
+            if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
+                g_LSQ_MGR.updateWireState (LD_QU, clk, WRITE);
+            } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
+                g_LSQ_MGR.updateWireState (ST_QU, clk, WRITE);
+            }
         }
     }
 }

@@ -16,17 +16,19 @@ class memory : protected stage {
                 port<dynInstruction*>& memory_to_scheduler_port, 
                 CAMtable<dynInstruction*>* iROB,
 			    WIDTH memory_width,
+                sysClock* clk,
 			    string stage_name);
 		~memory ();
 
-		void doMEMORY (sysClock& clk);
-        PIPE_ACTIVITY memoryImpl (sysClock& clk);
-        void completeIns (sysClock& clk);
-        void forward (dynInstruction*, CYCLE, sysClock&);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
-        void manageSTbuffer (sysClock& clk);
-        void manageMEMbuffer ();
+		void doMEMORY ();
+
+    private:
+        PIPE_ACTIVITY memoryImpl ();
+        void completeIns ();
+        void forward (dynInstruction*, CYCLE);
+        void squash ();
+        void regStat ();
+        void manageSTbuffer ();
         void manageMSHR ();
 
 	private:

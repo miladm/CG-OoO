@@ -22,7 +22,7 @@ template <typename queType_T>
 class port : public unit
 {
  	public:
- 		port (LENGTH, CYCLE, string port_name = "port");
+ 		port (LENGTH, CYCLE, sysClock*, string port_name = "port");
  		~port ();
  		BUFF_STATE pushBack (queType_T ins, CYCLE now);
  		BUFF_STATE pushBack (queType_T ins, CYCLE now, CYCLE lat);

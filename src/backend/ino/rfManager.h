@@ -11,7 +11,7 @@
 
 class rfManager : public unit {
 	public:
-		rfManager (string rf_name = "rfManager");
+		rfManager (sysClock* clk, string rf_name = "rfManager");
 		~rfManager ();
         void resetRF ();
         bool isReady (dynInstruction* ins);
@@ -26,6 +26,6 @@ class rfManager : public unit {
         registerFile _RF;
 };
 
-extern rfManager g_RF_MGR;
+extern rfManager* g_RF_MGR;
 
 #endif

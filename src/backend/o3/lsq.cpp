@@ -67,13 +67,14 @@ void o3_lsqCAM::squash (INS_ID ins_seq_num) {
     }
 }
 
-void o3_lsqCAM::delFinishedMemAxes (CYCLE now) {
+void o3_lsqCAM::delFinishedMemAxes (sysClock& clk) {
+    CYCLE now = clk.now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         if (_table.Nth(i)->_delay.isValidStopTime () &&
             _table.Nth(i)->_delay.getStopTime () <= now) {
             Assert (getNth_unsafe (i)->getSQstate () == SQ_CACHE_DISPATCH);
-            dynInstruction* ins = pullNth (i);
+            dynInstruction* ins = pullNth (i, clk);
             dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Found a finished ST ins: ", ins->getInsID ());
             delete ins;
             break; /* REMOVE ONE ELEM PER INVOCATION */

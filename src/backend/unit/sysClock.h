@@ -4,13 +4,14 @@
  * the class to track the simulation cycles
  ******************************************************************************/
 
-#ifndef _SYSClock_H
-#define _SYSClock_H
+#ifndef _SYSCLOCK_H
+#define _SYSCLOCK_H
 
 #include <limits>
-#include "unit.h"
+#include "../../global/global.h"
+#include "../../lib/statistic.h"
 
-class sysClock : public unit {
+class sysClock {
 	public:
 		sysClock ();
 		sysClock (GHz _frequency);
@@ -22,6 +23,7 @@ class sysClock : public unit {
 	private:
 		CYCLE _clk;
 		const GHz _frequency;
+        const string _c_name;
 
         /* STAT VARS */
         ScalarStat& _clk_cycles;

@@ -4,8 +4,9 @@
 
 #include "rfManager.h"
 
-rfManager::rfManager (string rf_name)
-    : unit (rf_name)
+rfManager::rfManager (sysClock* clk, string rf_name)
+    : unit (rf_name, clk),
+      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "registerFile")
 { }
 
 rfManager::~rfManager () { }
@@ -73,4 +74,4 @@ void rfManager::updateReg (PR reg) {
     _RF.updateReg(reg);
 }
 
-rfManager g_RF_MGR;
+rfManager* g_RF_MGR;

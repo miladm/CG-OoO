@@ -26,31 +26,31 @@ BUFF_STATE o3_memManager::getTableState (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::hasFreeWrPort (LSQ_ID lsq_id, CYCLE now) {
+bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, sysClock& clk, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
+        return _LQ.hasFreeWire (clk, axes_type); //TODO set state to LQ_ADDR_WAIT
     } else {
-        return _SQ.hasFreeWrPort (now); //TODO set state to LQ_ADDR_WAIT
+        return _SQ.hasFreeWire (clk, axes_type); //TODO set state to LQ_ADDR_WAIT
     }
 }
 
-bool o3_memManager::hasFreeRdPort (LSQ_ID lsq_id, CYCLE now) {
+void o3_memManager::updateWireState (LSQ_ID lsq_id, sysClock& clk, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
+        _LQ.updateWireState (clk, axes_type);
     } else {
-        return _SQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
+        _SQ.updateWireState (clk, axes_type);
     }
 }
 
-void o3_memManager::pushBack (dynInstruction *ins) {
+void o3_memManager::pushBack (dynInstruction *ins, sysClock& clk) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
-        _LQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _LQ.pushBack (ins, clk); //TODO set state to LQ_ADDR_WAIT
         ins->setLQstate (LQ_ADDR_WAIT);
     } else {
         Assert (_SQ.getTableState () != FULL_BUFF);
-        _SQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _SQ.pushBack (ins, clk); //TODO set state to LQ_ADDR_WAIT
         ins->setSQstate (SQ_ADDR_WAIT);
     }
 }
@@ -98,12 +98,13 @@ bool o3_memManager::commit (dynInstruction* ins, sysClock& clk) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
-        if (!_LQ.hasFreeRdPort (clk.now ())) return false;
+        if (!_LQ.hasFreeWire (clk, READ)) return false;
         Assert (ins->getLQstate () == LQ_COMPLETE);
         //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
-        dynInstruction* ld_ins = _LQ.popFront ();
+        dynInstruction* ld_ins = _LQ.popFront (clk);
         Assert (ld_ins->getInsID () == ins->getInsID ());
+        _LQ.updateWireState (clk, READ);
     } else {
         //TODO apply hardware costraints here
         Assert (ins->getSQstate () == SQ_COMPLETE);

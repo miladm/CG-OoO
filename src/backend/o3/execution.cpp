@@ -159,10 +159,11 @@ void o3_execution::squashCtrl (sysClock& clk) {
     } else if (g_var.g_pipe_state == PIPE_FLUSH) {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
-    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeRdPort (clk.now ()) && 
-               _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
+    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeWire (clk, READ) && 
+               _iROB->getFront(clk)->getInsID () >= g_var.g_squash_seq_num) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
+        _iROB->updateWireState (clk, READ);
     } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 0) {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;

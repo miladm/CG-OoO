@@ -13,7 +13,9 @@
 #include <utility>
 #include <iostream>
 #include <sstream>
+#include "sysClock.h"
 #include "../../global/global.h"
+#include "../../global/g_objs.h"
 #include "../../lib/timer.h"
 #include "../../lib/utility.h"
 #include "../../lib/list.h"
@@ -23,9 +25,11 @@
 
 class unit {
     public:
-        unit(string class_name);
-        ~unit();
-        string _c_name;
+        unit (string class_name, sysClock* clk = NULL);
+        ~unit ();
+
+        const string _c_name;
+        sysClock* _clk; /* PROGRAM CLOCK */
 };
 
 #endif

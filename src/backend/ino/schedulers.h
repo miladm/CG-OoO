@@ -16,15 +16,18 @@ class scheduler : protected stage {
 			       port<dynInstruction*>& scheduler_to_execution_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH scheduler_width,
+                   sysClock* clk,
 			       string stage_name);
 		~scheduler ();
-		void doSCHEDULER (sysClock& clk);
-        void squash (sysClock& clk);
-        PIPE_ACTIVITY schedulerImpl (sysClock& clk);
-        void updateInsWin (sysClock& clk);
-        void manageCDB (sysClock& clk);
-        void forwardFromCDB (dynInstruction* ins, sysClock& clk);
-        void regStat (sysClock& clk);
+		void doSCHEDULER ();
+
+    private:
+        void squash ();
+        PIPE_ACTIVITY schedulerImpl ();
+        void updateInsWin ();
+        void manageCDB ();
+        void forwardFromCDB (dynInstruction* ins);
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _decode_to_scheduler_port;

@@ -24,9 +24,9 @@ class o3_memManager : public unit {
 
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);
-        bool hasFreeWrPort (LSQ_ID, CYCLE);
-        bool hasFreeRdPort (LSQ_ID, CYCLE);
-        void pushBack (dynInstruction*);
+        bool hasFreeWire (LSQ_ID, sysClock&, AXES_TYPE);
+        void updateWireState (LSQ_ID, sysClock&, AXES_TYPE);
+        void pushBack (dynInstruction*, sysClock&);
         void memAddrReady (dynInstruction*);
         bool issueToMem (LSQ_ID, CYCLE);
         bool commit (dynInstruction*, sysClock&);

@@ -5,16 +5,16 @@
 #include "sysClock.h"
 
 sysClock::sysClock () 
-	: unit ("sysClock"),
-      _frequency(1),
+    : _frequency (1),
+      _c_name ("sysClock"),
       _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execution cycles", START_CYCLE, PRINT_ZERO))
 {
 	_clk = START_CYCLE;
 }
 
 sysClock::sysClock (GHz frequency) 
-	: unit ("sysClock"),
-      _frequency(frequency),
+    : _frequency(frequency),
+      _c_name ("sysClock"),
       _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execution cycles", START_CYCLE, PRINT_ZERO))
 {
 	_clk = START_CYCLE;

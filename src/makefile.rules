@@ -175,19 +175,6 @@ $(OBJDIR)backend/ino/commit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/fetch$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/sysCore$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/inoBkEnd$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/memManager$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/lsq$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/registerRename$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/rfManager$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/memory$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/branchPred$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/decode$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/schedulers$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/execution$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/commit$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/fetch$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/sysCore$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/oooBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/unit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
@@ -195,6 +182,7 @@ $(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/wires$(OBJ_SUFFIX) \
 $(SUPPORTS_AVX_OBJ) 
 	$(LINKER) $(TOOL_LDFLAGS) $(LINK_EXE)$@ $^ $(TOOL_LPATHS) $(TOOL_LIBS)
 

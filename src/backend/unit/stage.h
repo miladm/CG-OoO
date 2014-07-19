@@ -12,6 +12,7 @@
 #include "../../lib/list.h"
 #include "../../global/global.h"
 #include "../../global/g_variable.h"
+#include "../../global/g_objs.h"
 #include "../../lib/debug.h"
 #include "sysClock.h"
 #include "port.h"
@@ -27,12 +28,13 @@ typedef enum {FRONT_END, BACK_END} SIM_MODE;
 
 class stage {
 	public:
-		stage(WIDTH stage_width, string _stage_name);
+		stage(WIDTH, string, sysClock*);
 		~stage();
 
 	protected:
 		const string _stage_name;
 		const WIDTH _stage_width;
+        sysClock* _clk;
 
         /* STAT OBJS */
         ScalarStat& s_ins_cnt;

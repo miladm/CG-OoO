@@ -7,8 +7,10 @@
 
 #include <stdint.h>
 #include "sysCore.h"
+#include "../unit/sysClock.h"
 
 void inoBkEnd_init (int argc, char const * argv[]);
-void inoBkEndRun();
+void inoBkEndRun ();
+void inoBkEndFini (); //TODO make use of it
 
 #endif
