@@ -60,12 +60,12 @@ COMPLETE_STATUS execution::completeIns () {
         /* CHECKS */
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
         if (ins != NULL && ins->getInsType () == MEM && 
-            _execution_to_memory_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
+            _execution_to_memory_port->getBuffState () == FULL_BUFF) break;
         if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
         /* COMPLETE INS */
         if (ins->getInsType () == MEM) {
-            _execution_to_memory_port->pushBack (ins, _clk->now ());
+            _execution_to_memory_port->pushBack (ins);
             ins->setPipeStage (MEM_ACCESS);
         } else {
             //if (!g_RF_MGR->hasFreeWire (WRITE)) break; //TODO this line is buggy for the EU state
@@ -97,15 +97,15 @@ PIPE_ACTIVITY execution::executionImpl () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
         if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
-        if (_scheduler_to_execution_port->getBuffState (_clk->now ()) == EMPTY_BUFF) break;
-        if (!_scheduler_to_execution_port->isReady (_clk->now ())) break;
+        if (_scheduler_to_execution_port->getBuffState () == EMPTY_BUFF) break;
+        if (!_scheduler_to_execution_port->isReady ()) break;
         dynInstruction* ins = _scheduler_to_execution_port->getFront ();
         if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break; // INO EXE
         exeUnit* EU = _aluExeUnits->Nth (i);
         if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
         /* EXE INS */
-        ins = _scheduler_to_execution_port->popFront (_clk->now ());
+        ins = _scheduler_to_execution_port->popFront ();
         g_RF_MGR->reserveRF (ins);
         EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins (ins);
@@ -122,11 +122,11 @@ PIPE_ACTIVITY execution::executionImpl () {
 }
 
 void execution::forward (dynInstruction* ins, CYCLE eu_latency) {
-    if (_execution_to_scheduler_port->getBuffState (_clk->now ()) == FULL_BUFF) return;
+    if (_execution_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     if (ins->getInsType () != MEM) {
         CYCLE cdb_ready_latency = eu_latency - 1;
         Assert (cdb_ready_latency >= 0);
-        _execution_to_scheduler_port->pushBack (ins, _clk->now (), cdb_ready_latency);
+        _execution_to_scheduler_port->pushBack (ins, cdb_ready_latency);
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
     }
 }
@@ -175,10 +175,10 @@ void execution::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _execution_to_scheduler_port->flushPort (squashSeqNum, _clk->now ());
-    _execution_to_memory_port->flushPort (squashSeqNum, _clk->now ());
+    _execution_to_scheduler_port->flushPort (squashSeqNum);
+    _execution_to_memory_port->flushPort (squashSeqNum);
 }
 
 void execution::regStat () {
-    _scheduler_to_execution_port->regStat (_clk->now ());
+    _scheduler_to_execution_port->regStat ();
 }

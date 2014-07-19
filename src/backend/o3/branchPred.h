@@ -12,11 +12,12 @@ class o3_branchPred : protected stage {
 		o3_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
 			    	port<dynInstruction*>& bp_to_fetch_port, 
 			    	WIDTH bp_width,
+                    sysClock* clk,
 			    	string stage_name);
 		~o3_branchPred ();
-		void doBP (sysClock& clk);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
+		void doBP ();
+        void squash ();
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _fetch_to_bp_port;

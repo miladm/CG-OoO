@@ -50,7 +50,7 @@ PIPE_ACTIVITY fetch::fetchImpl () {
 	for (WIDTH i = 0; i < _stage_width; i++) {
 		/* CHECKS */
         if (g_var.isCodeCacheEmpty()) { _switch_to_frontend = true; break; }
-		if (_fetch_to_decode_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
+		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
 
         /* FETCH INS */
         dynInstruction* ins = g_var.popCodeCache();
@@ -70,10 +70,10 @@ void fetch::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
-    _fetch_to_decode_port->flushPort (squashSeqNum, _clk->now ());
-    _fetch_to_bp_port->flushPort (squashSeqNum, _clk->now ());
+    _fetch_to_decode_port->flushPort (squashSeqNum);
+    _fetch_to_bp_port->flushPort (squashSeqNum);
 }
 
 void fetch::regStat () {
-    _bp_to_fetch_port->regStat (_clk->now ());
+    _bp_to_fetch_port->regStat ();
 }

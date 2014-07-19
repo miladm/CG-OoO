@@ -24,26 +24,23 @@ class port : public unit
  	public:
  		port (LENGTH, CYCLE, sysClock*, string port_name = "port");
  		~port ();
- 		BUFF_STATE pushBack (queType_T ins, CYCLE now);
- 		BUFF_STATE pushBack (queType_T ins, CYCLE now, CYCLE lat);
-		queType_T popFront (CYCLE now);
-		queType_T popNextReady (CYCLE now);
-		queType_T popNextReadyNow (CYCLE now);
-        void delOldReady (CYCLE now);
+ 		BUFF_STATE pushBack (queType_T ins);
+ 		BUFF_STATE pushBack (queType_T ins, CYCLE lat);
+		queType_T popFront ();
+		queType_T popNextReady ();
+		queType_T popNextReadyNow ();
+        void delOldReady ();
 		queType_T getFront ();
 		queType_T getBack ();
 		queType_T popBack ();
 		LENGTH getBuffSize ();
-		BUFF_STATE getBuffState (CYCLE now);
-        bool isReady (CYCLE now);
-        bool isReadyNow (CYCLE now);
-        bool hasReady (CYCLE now);
-        bool hasReadyNow (CYCLE now);
-        void flushPort (INS_ID, CYCLE);
-        void regStat (CYCLE);
-
-	private: //functions
- 		queType_T popFront ();
+		BUFF_STATE getBuffState ();
+        bool isReady ();
+        bool isReadyNow ();
+        bool hasReady ();
+        bool hasReadyNow ();
+        void flushPort (INS_ID);
+        void regStat ();
 
  	private: //variables
 		list<BuffElement<queType_T> > _buff;

@@ -53,12 +53,12 @@ void memory::doMEMORY () {
 void memory::completeIns () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
-        if (_mem_buff.getBuffState (_clk->now ()) == EMPTY_BUFF) break;
-        if (!_mem_buff.isReady (_clk->now ())) break;
+        if (_mem_buff.getBuffState () == EMPTY_BUFF) break;
+        if (!_mem_buff.isReady ()) break;
         if (!g_RF_MGR->hasFreeWire (WRITE)) break; //TODO too conservatice - only for load ins
 
         /* COMPLETE INS */
-        dynInstruction* mem_ins = _mem_buff.popFront (_clk->now ());
+        dynInstruction* mem_ins = _mem_buff.popFront ();
         mem_ins->setPipeStage(COMPLETE);
         // FORWARD DATA //_memory_to_schedule_port->pushBack(mem_ins, _clk->now ());
         g_RF_MGR->writeToRF (mem_ins);
@@ -73,10 +73,10 @@ PIPE_ACTIVITY memory::memoryImpl () {
     /* ACCESS MEMORY HIERARCHY */
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
-        if (_execution_to_memory_port->getBuffState (_clk->now ()) == EMPTY_BUFF) break;
-        if (!_execution_to_memory_port->isReady (_clk->now ())) break;
+        if (_execution_to_memory_port->getBuffState () == EMPTY_BUFF) break;
+        if (!_execution_to_memory_port->isReady ()) break;
         //if (_dcache.getNumAvialablePorts () == 0) break; (TODO)
-        if (_mem_buff.getBuffState (_clk->now ()) == FULL_BUFF) break;
+        if (_mem_buff.getBuffState () == FULL_BUFF) break;
         dynInstruction* mem_ins = _execution_to_memory_port->getFront ();
         if (mem_ins->getMemType () == STORE && 
            (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) break;
@@ -86,7 +86,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
            (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWire (WRITE))) break; //TODO only on miss?
 
         /* MEM ACCESS */
-        mem_ins = _execution_to_memory_port->popFront (_clk->now ());
+        mem_ins = _execution_to_memory_port->popFront ();
         CYCLE axes_lat;
         if (mem_ins->getMemType () == STORE) {
             Assert (mem_ins->isOnWrongPath () == false);
@@ -105,7 +105,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
             (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
             (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
         }
-        _mem_buff.pushBack(mem_ins, _clk->now (), axes_lat); //CAM array - check for size limits (TODO)
+        _mem_buff.pushBack(mem_ins, axes_lat); //CAM array - check for size limits (TODO)
         //mem_ins->setPipeStage(MEM_ACCESS); happens in execute.cpp - remove from here? (TODO)
         dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_str (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, _clk->now ());
 
@@ -132,10 +132,10 @@ void memory::forward (dynInstruction* ins, CYCLE mem_latency) {
 #ifdef ASSERTION
     Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
 #endif
-    if (_memory_to_scheduler_port->getBuffState (_clk->now ()) == FULL_BUFF) return;
+    if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     CYCLE cdb_ready_latency = mem_latency - 1;
     Assert (cdb_ready_latency >= 0);
-    _memory_to_scheduler_port->pushBack (ins, _clk->now (), cdb_ready_latency);
+    _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
     dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
 
@@ -166,13 +166,13 @@ void memory::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _memory_to_scheduler_port->flushPort (squashSeqNum, _clk->now ());
-    _mem_buff.flushPort (squashSeqNum, _clk->now ());
+    _memory_to_scheduler_port->flushPort (squashSeqNum);
+    _mem_buff.flushPort (squashSeqNum);
     //_st_buff.flushTable ();
 }
 
 void memory::regStat () {
-    _execution_to_memory_port->regStat (_clk->now ());
+    _execution_to_memory_port->regStat ();
 }
 
 void memory::manageMSHR () {

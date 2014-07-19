@@ -37,14 +37,14 @@ PIPE_ACTIVITY decode::decodeImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /* CHECKS */
-        if (_fetch_to_decode_port->getBuffState (_clk->now ()) == EMPTY_BUFF) break;
-        if (!_fetch_to_decode_port->isReady (_clk->now ())) break;
-        if (_decode_to_schedule_port->getBuffState (_clk->now ()) == FULL_BUFF) break;
+        if (_fetch_to_decode_port->getBuffState () == EMPTY_BUFF) break;
+        if (!_fetch_to_decode_port->isReady ()) break;
+        if (_decode_to_schedule_port->getBuffState () == FULL_BUFF) break;
 
         /* DECODE INS */
-        dynInstruction* ins = _fetch_to_decode_port->popFront (_clk->now ());
+        dynInstruction* ins = _fetch_to_decode_port->popFront ();
         ins->setPipeStage (DECODE);
-        _decode_to_schedule_port->pushBack (ins, _clk->now ());
+        _decode_to_schedule_port->pushBack (ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
 
         /* STAT */
@@ -58,9 +58,9 @@ void decode::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Decode Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
-    _decode_to_schedule_port->flushPort (squashSeqNum, _clk->now ());
+    _decode_to_schedule_port->flushPort (squashSeqNum);
 }
 
 void decode::regStat () {
-    _fetch_to_decode_port->regStat (_clk->now ());
+    _fetch_to_decode_port->regStat ();
 }

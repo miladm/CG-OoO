@@ -26,7 +26,7 @@ void branchPred::squash () {
 }
 
 void branchPred::regStat () {
-    _fetch_to_bp_port->regStat (_clk->now ());
+    _fetch_to_bp_port->regStat ();
 }
 
 

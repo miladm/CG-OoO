@@ -19,7 +19,8 @@ template <typename queType_T>
 port<queType_T>::~port () {}
 
 template <typename queType_T>
-BUFF_STATE port<queType_T>::pushBack (queType_T ins, CYCLE now) {
+BUFF_STATE port<queType_T>::pushBack (queType_T ins) {
+    CYCLE now = _clk->now ();
 	if (getBuffSize () >= _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", now);
         return FULL_BUFF;
@@ -30,7 +31,8 @@ BUFF_STATE port<queType_T>::pushBack (queType_T ins, CYCLE now) {
 }
 
 template <typename queType_T>
-BUFF_STATE port<queType_T>::pushBack (queType_T ins, CYCLE now, CYCLE lat) {
+BUFF_STATE port<queType_T>::pushBack (queType_T ins, CYCLE lat) {
+    CYCLE now = _clk->now ();
 	if (getBuffSize () >= _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", now);
         return FULL_BUFF;
@@ -61,24 +63,22 @@ queType_T port<queType_T>::popBack () {
 }
 
 template <typename queType_T>
-queType_T port<queType_T>::popFront (CYCLE now) {
+queType_T port<queType_T>::popFront () {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popFront () must not be used without isReady ()");
 	BuffElement<queType_T> frontBuff = _buff.front ();
-	if (frontBuff._delay.getStopTime () <= now)
-		return popFront ();
+    if (frontBuff._delay.getStopTime () <= now) {
+        queType_T dynIns = (_buff.front ())._dynIns;
+        _buff.pop_front ();
+        return dynIns;
+    }
     Assert (true == false  && "popFront () must not be used without isReady ()");
 	return popFront (); //place holder
 }
 
 template <typename queType_T>
-queType_T port<queType_T>::popFront () {
-	queType_T dynIns = (_buff.front ())._dynIns;
-	_buff.pop_front ();
-	return dynIns;
-}
-
-template <typename queType_T>
-void port<queType_T>::delOldReady (CYCLE now) {
+void port<queType_T>::delOldReady () {
+    CYCLE now = _clk->now ();
     if (getBuffSize () > 0) return;
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
@@ -89,7 +89,8 @@ void port<queType_T>::delOldReady (CYCLE now) {
 }
 
 template <typename queType_T>
-queType_T port<queType_T>::popNextReadyNow (CYCLE now) {
+queType_T port<queType_T>::popNextReadyNow () {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasReady ()");
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
@@ -104,7 +105,8 @@ queType_T port<queType_T>::popNextReadyNow (CYCLE now) {
 }
 
 template <typename queType_T>
-queType_T port<queType_T>::popNextReady (CYCLE now) {
+queType_T port<queType_T>::popNextReady () {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasReady ()");
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
@@ -124,7 +126,8 @@ LENGTH port<queType_T>::getBuffSize () {
 }
 
 template<typename queType_T>
-BUFF_STATE port<queType_T>::getBuffState (CYCLE now) {
+BUFF_STATE port<queType_T>::getBuffState () {
+    CYCLE now = _clk->now ();
 	if (getBuffSize () >= _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", now);
         return FULL_BUFF;
@@ -137,8 +140,9 @@ BUFF_STATE port<queType_T>::getBuffState (CYCLE now) {
 }
 
 template <typename queType_T>
-bool port<queType_T>::isReadyNow (CYCLE now) {
-    if (getBuffState (now) == EMPTY_BUFF) {
+bool port<queType_T>::isReadyNow () {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
@@ -149,8 +153,9 @@ bool port<queType_T>::isReadyNow (CYCLE now) {
 }
 
 template <typename queType_T>
-bool port<queType_T>::isReady (CYCLE now) {
-    if (getBuffState (now) == EMPTY_BUFF) {
+bool port<queType_T>::isReady () {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
@@ -161,8 +166,9 @@ bool port<queType_T>::isReady (CYCLE now) {
 }
 
 template <typename queType_T>
-bool port<queType_T>::hasReadyNow (CYCLE now) {
-    if (getBuffState (now) == EMPTY_BUFF) {
+bool port<queType_T>::hasReadyNow () {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
@@ -175,8 +181,9 @@ bool port<queType_T>::hasReadyNow (CYCLE now) {
 }
 
 template <typename queType_T>
-bool port<queType_T>::hasReady (CYCLE now) {
-    if (getBuffState (now) == EMPTY_BUFF) {
+bool port<queType_T>::hasReady () {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
@@ -189,7 +196,8 @@ bool port<queType_T>::hasReady (CYCLE now) {
 }
 
 template <typename queType_T>
-void port<queType_T>::flushPort (INS_ID elemSeqNum, CYCLE now) {
+void port<queType_T>::flushPort (INS_ID elemSeqNum) {
+    CYCLE now = _clk->now ();
     if (getBuffSize() == 0) return;
     queType_T elem = getBack();
     while (elem->getInsID () >= elemSeqNum) {
@@ -203,10 +211,10 @@ void port<queType_T>::flushPort (INS_ID elemSeqNum, CYCLE now) {
 }
 
 template <typename queType_T>
-void port<queType_T>::regStat (CYCLE now) {
-    if (getBuffState (now) == EMPTY_BUFF) {
+void port<queType_T>::regStat () {
+    if (getBuffState () == EMPTY_BUFF) {
         s_port_empty_cyc++;
-    } else if (getBuffState (now) == FULL_BUFF) {
+    } else if (getBuffState () == FULL_BUFF) {
         s_port_full_cyc++;
     }
 }
