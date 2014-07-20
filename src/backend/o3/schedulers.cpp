@@ -67,7 +67,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
             WIDTH num_ar = ins->getTotNumRdAR ();
             if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break;
-            //forwardFromCDB (ins, clk); TODO - made execution worse - WHY?!
+            //forwardFromCDB (ins); TODO - made execution worse - WHY?!
 
             /* READ INS WIN */
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
