@@ -4,20 +4,18 @@
 
 #include "registerRename.h"
 
-o3_registerRename::o3_registerRename (string rf_name)
-    : unit (rf_name), 
+o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
+    : unit (rf_name, clk), 
       _a_rf_size (GARF_HI - GARF_LO + 1), 
       _a_rf_hi (GARF_HI), 
       _a_rf_lo (GARF_LO), 
       _p_rf_size (GPRF_HI - GPRF_LO + 1), 
       _p_rf_hi (GPRF_HI), 
       _p_rf_lo (GPRF_LO), 
-      _wr_port_cnt (4), 
-      _rd_port_cnt (8)
+      _wr_port (4, WRITE, clk, rf_name + ".wr_wire"),
+      _rd_port (8, READ,  clk, rf_name + ".rd_wire")
 {
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 
     /* INITIALIZE ALL TABLES */
     PR PR_counter = _p_rf_lo;
@@ -39,7 +37,6 @@ o3_registerRename::o3_registerRename (string rf_name)
         PR_counter++;
     }
 
-    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read ports than write ports.");
     Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structure initialization.");
     Assert (_RF.size () == GPRF_SIZE && "Invalid Rename table structure initialization.");
     Assert (_fRAT.size () == GARF_SIZE && "Invalid Rename table structure initialization.");
@@ -50,20 +47,19 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
                                      AR a_rf_hi, 
                                      WIDTH rd_port_cnt, 
                                      WIDTH wr_port_cnt, 
+                                     sysClock* clk,
                                      string rf_name) 
-    : unit (rf_name), 
+    : unit (rf_name, clk),
       _a_rf_size (a_rf_hi - a_rf_lo + 1), 
       _a_rf_hi (a_rf_hi), 
       _a_rf_lo (a_rf_lo), 
       _p_rf_size (GPRF_HI - GPRF_LO + 1), 
       _p_rf_hi (GPRF_HI), 
       _p_rf_lo (GPRF_LO), 
-      _wr_port_cnt (wr_port_cnt), 
-      _rd_port_cnt (rd_port_cnt)
+      _wr_port (wr_port_cnt, WRITE, clk, rf_name + ".wr_wire"),
+      _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
 {
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 
 	/* INITIALIZE ALL TABLES */
 	PR PR_counter = _p_rf_lo;
@@ -85,7 +81,7 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
 		PR_counter++;
 	}
 
-    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read ports than write ports.");
+    Assert (rd_port_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_port_cnt && "Must have twice as many read ports than write ports.");
 	Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structure initialization.");
 	Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initialization.");
 	Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
@@ -223,37 +219,30 @@ bool o3_registerRename::isPRvalid (PR p_reg) {
     return (state == ARCH_REG || state == RENAMED_VALID) ? true : false;
 }
 
-bool o3_registerRename::hasFreeRdPort (CYCLE now, WIDTH numRegRdPorts) {
-    Assert (_rd_port_cnt >= numRegRdPorts);
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_rd_port -= numRegRdPorts;
-        if (_num_free_rd_port >= 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+bool o3_registerRename::hasFreeWire (AXES_TYPE axes_type) {
+    if (axes_type == READ)
+        return _rd_port.hasFreeWire ();
+    else
+        return _wr_port.hasFreeWire ();
 }
 
-bool o3_registerRename::hasFreeWrPort (CYCLE now) {
+void o3_registerRename::updateWireState (AXES_TYPE axes_type) {
+    CYCLE now = _clk->now ();
     if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt;
-        _num_free_wr_port = _wr_port_cnt;
+        _wr_port.updateWireState ();
+        _rd_port.updateWireState ();
         _cycle = now;
-        return true;
     } else if (_cycle == now) {
-        _num_free_wr_port--;
-        if (_num_free_wr_port > 0) {
-            return true;
-        } else {
-            //Assert (true == false && "this feature may not work -look into it"); (TODO)
-            return false;
-        }
+        if (axes_type == READ)
+            _rd_port.updateWireState ();
+        else
+            _wr_port.updateWireState ();
     }
-    Assert (true == false && "should not have gotten here");
-    return false;
+}
+
+WIDTH o3_registerRename::getNumFreeWires (AXES_TYPE axes_type) {
+    if (axes_type == READ)
+        return _rd_port.getNumFreeWires ();
+    else
+        return _wr_port.getNumFreeWires ();
 }

@@ -7,6 +7,9 @@
 
 #include "../unit/dynInstruction.h"
 #include "../unit/unit.h"
+#include "../unit/wires.h"
+
+#define RD_TO_WR_WIRE_CNT_RATIO 2
 
 struct o3_regElem {
     o3_regElem (PR reg, REG_REN_STATE state) 
@@ -23,16 +26,14 @@ struct o3_regElem {
 
 class o3_registerRename : public unit {
 	public:
-		o3_registerRename (string rf_name);
+		o3_registerRename (sysClock* clk, string rf_name);
 		o3_registerRename (AR a_rf_lo, AR a_rf_hi, 
                            WIDTH rd_port_cnt, WIDTH wr_port_cnt, 
-                           string rf_name);
+                           sysClock* clk, string rf_name);
 		~o3_registerRename ();
 
 		PR renameReg (AR a_reg);
         void squashRenameReg ();
-        bool hasFreeRdPort (CYCLE, WIDTH);
-        bool hasFreeWrPort (CYCLE);
 
         /* RAT's */
 		void update_fRAT (AR a_reg, PR p_reg);
@@ -52,6 +53,11 @@ class o3_registerRename : public unit {
 		void squashPRstate (PR new_pr);
         bool isPRvalid (PR p_reg);
 
+        /* WIRE CTRL */
+        void updateWireState (AXES_TYPE);
+        bool hasFreeWire (AXES_TYPE);
+        WIDTH getNumFreeWires (AXES_TYPE);
+
 	private:
         CYCLE _cycle;
 
@@ -63,10 +69,8 @@ class o3_registerRename : public unit {
         const AR _p_rf_hi;
         const AR _p_rf_lo;
 
-        const WIDTH _wr_port_cnt;
-        const WIDTH _rd_port_cnt;
-        WIDTH _num_free_wr_port;
-        WIDTH _num_free_rd_port;
+        wires _wr_port;
+        wires _rd_port;
 
 		map<AR, o3_regElem*> _fRAT;
 		map<AR, o3_regElem*> _cRAT;

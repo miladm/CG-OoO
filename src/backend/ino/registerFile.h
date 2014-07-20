@@ -8,6 +8,8 @@
 #include "../unit/unit.h"
 #include "../unit/wires.h"
 
+#define RD_TO_WR_WIRE_CNT_RATIO 2
+
 struct registerElement {
     registerElement (PR reg) 
         : _reg (reg)

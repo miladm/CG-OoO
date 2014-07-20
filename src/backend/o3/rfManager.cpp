@@ -4,9 +4,9 @@
 
 #include "rfManager.h"
 
-o3_rfManager::o3_rfManager (string rf_name)
-    : unit (rf_name),
-      _GRF ("registerRename")
+o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
+    : unit (rf_name, clk),
+      _GRF (clk, "registerRename")
 { }
 
 o3_rfManager::~o3_rfManager () { }
@@ -35,14 +35,6 @@ bool o3_rfManager::canRename (dynInstruction* ins) {
         return false; /* STALL FETCH */
     }
     return true;
-}
-
-bool o3_rfManager::hasFreeRdPort (CYCLE now, WIDTH numRegRdPorts) {
-    return _GRF.hasFreeRdPort (now, numRegRdPorts);
-}
-
-bool o3_rfManager::hasFreeWrPort (CYCLE now) {
-    return _GRF.hasFreeWrPort (now);
 }
 
 bool o3_rfManager::renameRegs (dynInstruction* ins) {
@@ -75,7 +67,7 @@ void o3_rfManager::completeRegs (dynInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
-        _GRF.updatePRstate (p_reg,RENAMED_VALID);
+        _GRF.updatePRstate (p_reg, RENAMED_VALID);
     }
 }
 
@@ -95,10 +87,30 @@ void o3_rfManager::commitRegs (dynInstruction* ins) {
     }
 }
 
-
 void o3_rfManager::squashRenameReg () {
     dbg.print (DBG_TEST, "** %s: %s (cyc:)\n", _c_name.c_str (), "in squash for RR");
     _GRF.squashRenameReg ();
 }
 
-o3_rfManager g_GRF_MGR;
+bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type) {
+    return _GRF.hasFreeWire (axes_type);
+}
+
+bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
+    if (_GRF.getNumFreeWires (axes_type) >= numRegWires)
+        return true;
+    else
+        return false;
+}
+
+void o3_rfManager::updateWireState (AXES_TYPE axes_type) {
+    _GRF.updateWireState (axes_type);
+}
+
+void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+    for (WIDTH i = 0; i < numRegWires; i++) {
+        _GRF.updateWireState (axes_type);
+    }
+}
+
+o3_rfManager* g_GRF_MGR;

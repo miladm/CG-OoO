@@ -15,27 +15,26 @@
 #include "../cacheCtrl.h"
 #include "../cache.h"
 #include "lsq.h"
-#include "../unit/sysClock.h"
 
 class o3_memManager : public unit {
     public:
-        o3_memManager ();
+        o3_memManager (sysClock* clk, string rf_name);
         ~o3_memManager ();
 
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);
-        bool hasFreeWire (LSQ_ID, sysClock&, AXES_TYPE);
-        void updateWireState (LSQ_ID, sysClock&, AXES_TYPE);
-        void pushBack (dynInstruction*, sysClock&);
+        bool hasFreeWire (LSQ_ID, AXES_TYPE);
+        void updateWireState (LSQ_ID, AXES_TYPE);
+        void pushBack (dynInstruction*);
         void memAddrReady (dynInstruction*);
-        bool issueToMem (LSQ_ID, CYCLE);
-        bool commit (dynInstruction*, sysClock&);
+        bool issueToMem (LSQ_ID);
+        bool commit (dynInstruction*);
         void squash (INS_ID);
-        pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID, CYCLE);
+        pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
 
         /* SQ CONTROL */
         bool hasCommitSt ();
-        void delAfinishedSt (CYCLE);
+        void delAfinishedSt ();
         bool isLQviolation (dynInstruction*, dynInstruction*);
 
         /* LQ CONTROL */
@@ -50,6 +49,6 @@ class o3_memManager : public unit {
         o3_lsqCAM _SQ;
 };
 
-extern o3_memManager g_LSQ_MGR;
+extern o3_memManager* g_LSQ_MGR;
 
 #endif

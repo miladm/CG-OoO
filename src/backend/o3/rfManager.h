@@ -11,11 +11,9 @@
 
 class o3_rfManager : public unit {
 	public:
-		o3_rfManager (string rf_name = "o3_rfManager");
+		o3_rfManager (sysClock* clk, string rf_name = "o3_rfManager");
 		~o3_rfManager ();
 
-        bool hasFreeWrPort (CYCLE now);
-        bool hasFreeRdPort (CYCLE now, WIDTH numRegRdPorts);
         bool canRename (dynInstruction* ins);
         bool renameRegs (dynInstruction* ins);
         bool isReady (dynInstruction* ins);
@@ -23,10 +21,16 @@ class o3_rfManager : public unit {
         void commitRegs (dynInstruction* ins);
         void squashRenameReg ();
 
+        /* WIRES CTRL */
+        bool hasFreeWire (AXES_TYPE);
+        bool hasFreeWire (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE);
+        void updateWireState (AXES_TYPE, WIDTH);
+
 	private:
         o3_registerRename _GRF;
 };
 
-extern o3_rfManager g_GRF_MGR;
+extern o3_rfManager* g_GRF_MGR;
 
 #endif

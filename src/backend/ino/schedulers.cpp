@@ -62,11 +62,11 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         ins = _iWindow.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
-        g_RF_MGR->updateWireState (READ, num_ar);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */
         _iWindow.updateWireState (READ);
+        g_RF_MGR->updateWireState (READ, num_ar);
 
         /* STAT */
         s_ins_cnt++;

@@ -19,14 +19,14 @@ o3_branchPred::~o3_branchPred () {}
 
 void o3_branchPred::doBP () {
     /* STAT */
-    regStat (clk);
+    regStat ();
 }
 
 void o3_branchPred::squash () {
 }
 
 void o3_branchPred::regStat () {
-    _fetch_to_bp_port->regStat (_clk->now ());
+    _fetch_to_bp_port->regStat ();
 }
 
 

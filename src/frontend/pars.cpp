@@ -288,8 +288,8 @@ static VOID backEnd (void *ptr) {
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
 				//bkEnd_run ();
-                inoBkEndRun ();
-                //oooBkEndRun ();
+                //inoBkEndRun ();
+                oooBkEndRun ();
 				//cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
 			}
 		}
@@ -368,8 +368,8 @@ VOID Init (char* cfgFile)
 	g_var.g_BBlist = new List<basicblock*>;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
-	inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-	//oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+	//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+	oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
 	g_var.msg.simStep ("START OF SIMULATION");
 }
 

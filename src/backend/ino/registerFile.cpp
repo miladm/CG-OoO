@@ -18,6 +18,8 @@ registerFile::registerFile (PR rf_begin_num,
       _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
 {
     Assert (_rf_size > 0);
+    Assert (rd_port_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_port_cnt && 
+            "Must have twice as many read ports than write ports.");
     for (PR i = _rf_begin_num; i < _rf_end_num; i++) {
         registerElement* reg = new registerElement (i);
         _RF.insert (pair<PR, registerElement*> (i, reg));

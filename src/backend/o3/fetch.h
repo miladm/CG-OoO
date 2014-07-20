@@ -14,14 +14,17 @@ class o3_fetch : protected stage {
 			   port<dynInstruction*>& fetch_to_decode_port,
 			   port<dynInstruction*>& fetch_to_bp_port,
 			   WIDTH fetch_width,
+               sysClock* clk,
 			   string stage_name
               );
 		~o3_fetch ();
 
-		SIM_MODE doFETCH (sysClock& clk);
-        PIPE_ACTIVITY fetchImpl (sysClock& clk);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
+		SIM_MODE doFETCH ();
+
+    private:
+        PIPE_ACTIVITY fetchImpl ();
+        void squash ();
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _bp_to_fetch_port;

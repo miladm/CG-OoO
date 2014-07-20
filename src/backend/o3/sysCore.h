@@ -18,13 +18,15 @@
 #include "commit.h"
 
 #include "../unit/sysClock.h"
+#include "memManager.h"
+#include "rfManager.h"
 #include "../unit/unit.h"
 #include "../unit/table.h"
 #include "../unit/port.h"
 
 class o3_sysCore : public unit {
 	public:
-		o3_sysCore (GHz clk_frequency,
+		o3_sysCore (sysClock* clk,
 			  WIDTH bp_width, 
 			  WIDTH fetch_width, 
 			  WIDTH decode_width,
@@ -89,9 +91,6 @@ class o3_sysCore : public unit {
 		o3_execution* _execution;
 		o3_memory* _memory;
 		o3_commit* _commit;
-
-		// PROGRAM CLOCK
-		sysClock _clk;
 
         // MISC
         CAMtable<dynInstruction*>* _iROB;

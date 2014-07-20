@@ -14,21 +14,23 @@
 class o3_execution : protected stage {
 	public:
 		o3_execution (port<dynInstruction*>& scheduler_to_execution_port, 
-                   port<dynInstruction*>& execution_to_scheduler_port, 
-                   port<dynInstruction*>& execution_to_memory_port, 
-                   CAMtable<dynInstruction*>* iROB,
-			       WIDTH execution_width,
-			       string stage_name);
+                      port<dynInstruction*>& execution_to_scheduler_port, 
+                      port<dynInstruction*>& execution_to_memory_port, 
+                      CAMtable<dynInstruction*>* iROB,
+			          WIDTH execution_width,
+                      sysClock* clk,
+			          string stage_name);
 		~o3_execution ();
+		void doEXECUTION ();
 
-		void doEXECUTION (sysClock&);
-        void squashCtrl (sysClock&);
-        void squash (sysClock&);
-        void regStat (sysClock& clk);
-        PIPE_ACTIVITY executionImpl (sysClock&);
-        COMPLETE_STATUS completeIns (sysClock&);
+    private:
+        void squashCtrl ();
+        void squash ();
+        void regStat ();
+        PIPE_ACTIVITY executionImpl ();
+        COMPLETE_STATUS completeIns ();
         void resetRF ();
-        void forward (dynInstruction*, CYCLE, sysClock&);
+        void forward (dynInstruction*, CYCLE);
 
 	private:
 		port<dynInstruction*>* _scheduler_to_execution_port;

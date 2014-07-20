@@ -56,9 +56,11 @@ sysCore::sysCore (sysClock* clk,
       _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, clk, "commit_to_bp_port"),
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, clk, "commit_to_scheduler_port")
 {
+    /* INIT UNITS */
     g_RF_MGR = new rfManager (clk, "rfManager");
     _iROB = new CAMtable<dynInstruction*>(50, 4, 4, _clk, "iROB");
-    // INIT STAGES
+
+    /* INIT STAGES */
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
     _fetch = new fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
@@ -94,6 +96,6 @@ void sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        //if (_clk->now () == 10030) exit (-1);
+        //if (_clk->now () == 10030) exit (-1); /* for debug */
 	}
 }

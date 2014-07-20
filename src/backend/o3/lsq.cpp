@@ -7,8 +7,9 @@
 o3_lsqCAM::o3_lsqCAM (LENGTH len, 
                 WIDTH rd_port_cnt, 
                 WIDTH wr_port_cnt,
+                sysClock* clk,
                 string table_name)
-    : CAMtable<dynInstruction*> (len, rd_port_cnt, wr_port_cnt, table_name)
+    : CAMtable<dynInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, table_name)
 {}
 
 o3_lsqCAM::~o3_lsqCAM () {}
@@ -41,7 +42,8 @@ dynInstruction* o3_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
     }
 }
 
-void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat, CYCLE now) {
+void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         dynInstruction* ins = getNth_unsafe (i);
@@ -67,14 +69,14 @@ void o3_lsqCAM::squash (INS_ID ins_seq_num) {
     }
 }
 
-void o3_lsqCAM::delFinishedMemAxes (sysClock& clk) {
-    CYCLE now = clk.now ();
+void o3_lsqCAM::delFinishedMemAxes () {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         if (_table.Nth(i)->_delay.isValidStopTime () &&
             _table.Nth(i)->_delay.getStopTime () <= now) {
             Assert (getNth_unsafe (i)->getSQstate () == SQ_CACHE_DISPATCH);
-            dynInstruction* ins = pullNth (i, clk);
+            dynInstruction* ins = pullNth (i);
             dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Found a finished ST ins: ", ins->getInsID ());
             delete ins;
             break; /* REMOVE ONE ELEM PER INVOCATION */
@@ -115,7 +117,8 @@ bool o3_lsqCAM::hasAnyCompleteLdFromAddr (INS_ID completed_st_mem_addr, dynInstr
     return false;
 }
 
-pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id, CYCLE now) {
+pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     if (lsq_id == LD_QU) {
         for (LENGTH i = 0; i < table_size; i++) {

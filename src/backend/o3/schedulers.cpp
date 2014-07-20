@@ -10,8 +10,9 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 			          port<dynInstruction*>& scheduler_to_execution_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH issue_width,
+                      sysClock* clk,
 	    	          string stage_name) 
-	: stage (issue_width, stage_name)
+	: stage (issue_width, stage_name, clk)
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -22,7 +23,7 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
-        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(8, 8, 8, "ResStn_"+rs_num.str ());
+        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(8, 8, 8, _clk, "ResStn_"+rs_num.str ());
         _ResStns.Append(resStn);
     }
 }
@@ -33,48 +34,50 @@ o3_scheduler::~o3_scheduler () {
     }
 }
 
-void o3_scheduler::doSCHEDULER (sysClock& clk) {
+void o3_scheduler::doSCHEDULER () {
     /* STAT + DEBUG */
-    dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
-    regStat (clk);
+    dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
-        pipe_stall = schedulerImpl (clk);
+        pipe_stall = schedulerImpl ();
     }
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 
-PIPE_ACTIVITY o3_scheduler::schedulerImpl (sysClock& clk) {
+PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    updateResStns (clk);
+    updateResStns ();
 
     /* READ FROM INS WINDOW */
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (WIDTH i = 0; i < _stage_width; i++) {
             /* CHECKS */
-            if (_scheduler_to_execution_port->getBuffState (clk.now ()) == FULL_BUFF) break;
+            if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
             if (_ResStns.Nth(j)->getTableState () == EMPTY_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeWire (clk, READ)) continue;
+            if (!_ResStns.Nth(j)->hasFreeWire (READ)) continue;
             LENGTH readyInsIndx;
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
-            if (!g_GRF_MGR.hasFreeRdPort (clk.now (), ins->getNumRdPR ())) break;
+            WIDTH num_ar = ins->getTotNumRdAR ();
+            if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break;
             //forwardFromCDB (ins, clk); TODO - made execution worse - WHY?!
 
             /* READ INS WIN */
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
             ins->setPipeStage (ISSUE);
-            _scheduler_to_execution_port->pushBack (ins, clk.now ());
-            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), clk.now ());
+            _scheduler_to_execution_port->pushBack (ins);
+            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
             /* UPDATE WIRES */
-            _ResStns.Nth(j)->updateWireState (clk, READ);
+            _ResStns.Nth(j)->updateWireState (READ);
+            g_GRF_MGR->updateWireState (READ, num_ar);
 
             /* STAT */
             s_ins_cnt++;
@@ -82,7 +85,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl (sysClock& clk) {
         }
     }
 
-    manageCDB (clk);
+    manageCDB ();
 
     return pipe_stall;
 }
@@ -91,50 +94,50 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
-        if (!g_GRF_MGR.isReady (ins)) continue;
+        if (!g_GRF_MGR->isReady (ins)) continue;
         else return true;
     }
     return false;
 }
 
 /* WRITE INTO INS WINDOW */
-void o3_scheduler::updateResStns (sysClock& clk) {
+void o3_scheduler::updateResStns () {
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (WIDTH i = 0; i < _stage_width; i++) {
             /* CHECKS */
             if (_iROB->getTableState () == FULL_BUFF) break;
-            if (!_iROB->hasFreeWire (clk, WRITE)) break;
+            if (!_iROB->hasFreeWire (WRITE)) break;
             if (_ResStns.Nth(j)->getTableState () == FULL_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeWire (clk, WRITE)) continue;
-            if (_decode_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) break;
-            if (!_decode_to_scheduler_port->isReady (clk.now ())) break;
+            if (!_ResStns.Nth(j)->hasFreeWire (WRITE)) continue;
+            if (_decode_to_scheduler_port->getBuffState () == EMPTY_BUFF) break;
+            if (!_decode_to_scheduler_port->isReady ()) break;
             dynInstruction* ins = _decode_to_scheduler_port->getFront ();
-            if (!g_GRF_MGR.canRename (ins)) break;
+            if (!g_GRF_MGR->canRename (ins)) break;
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                if (g_LSQ_MGR.getTableState (LD_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWire (LD_QU, clk, WRITE)) break;
+                if (g_LSQ_MGR->getTableState (LD_QU) == FULL_BUFF) break;
+                if (!g_LSQ_MGR->hasFreeWire (LD_QU, WRITE)) break;
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-                if (g_LSQ_MGR.getTableState (ST_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWire (ST_QU, clk, WRITE)) break;
+                if (g_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
+                if (!g_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
             }
 
             /* WRITE INTO RES STN */
-            dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", clk.now ());
-            ins = _decode_to_scheduler_port->popFront (clk.now ());
-            g_GRF_MGR.renameRegs (ins);
+            dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", _clk->now ());
+            ins = _decode_to_scheduler_port->popFront ();
+            g_GRF_MGR->renameRegs (ins);
             ins->setPipeStage (DISPATCH);
-            if (ins->getInsType () == MEM) g_LSQ_MGR.pushBack (ins, clk);
-            _ResStns.Nth(j)->pushBack (ins, clk);
-            _iROB->pushBack (ins, clk);
-            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), clk.now ());
+            if (ins->getInsType () == MEM) g_LSQ_MGR->pushBack (ins);
+            _ResStns.Nth(j)->pushBack (ins);
+            _iROB->pushBack (ins);
+            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
             /* UPDATE WIRES */
-            _iROB->updateWireState (clk, WRITE);
-            _ResStns.Nth(j)->updateWireState (clk, WRITE);
+            _iROB->updateWireState (WRITE);
+            _ResStns.Nth(j)->updateWireState (WRITE);
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                g_LSQ_MGR.updateWireState (LD_QU, clk, WRITE);
+                g_LSQ_MGR->updateWireState (LD_QU, WRITE);
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-                g_LSQ_MGR.updateWireState (ST_QU, clk, WRITE);
+                g_LSQ_MGR->updateWireState (ST_QU, WRITE);
             }
         }
     }
@@ -149,14 +152,14 @@ void o3_scheduler::updateResStns (sysClock& clk) {
  * model is correct (i.e. maybe more RF accesses happen than what we see in
  * this design).
  */
-void o3_scheduler::forwardFromCDB (dynInstruction* ins, sysClock& clk) {
+void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
     { /* FWD FROM EXE STAGE */
-        if (_execution_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) return;
+        if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<dynInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (!_execution_to_scheduler_port->isReadyNow (clk.now ())) break;
-            dynInstruction* fwd_ins = _execution_to_scheduler_port->popFront (clk.now ());
+            if (!_execution_to_scheduler_port->isReadyNow ()) break;
+            dynInstruction* fwd_ins = _execution_to_scheduler_port->popFront ();
             fwd_list.Append (fwd_ins);
         }
         for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
@@ -172,16 +175,16 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins, sysClock& clk) {
                 }
             }
         }
-        _execution_to_scheduler_port->delOldReady (clk.now ()); /* Only FWD what is on CDB now */
+        _execution_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
     }
 
     { /* FWD FROM MEM STAGE */
-        if (_memory_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) return;
+        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<dynInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (!_memory_to_scheduler_port->hasReadyNow (clk.now ())) break;
-            dynInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow (clk.now ());
+            if (!_memory_to_scheduler_port->hasReadyNow ()) break;
+            dynInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow ();
             fwd_list.Append (fwd_ins);
         }
         for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
@@ -197,24 +200,24 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins, sysClock& clk) {
                 }
             }
         }
-        _memory_to_scheduler_port->delOldReady (clk.now ()); /* Only FWD what is on CDB now */
+        _memory_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
     }
 }
 
 /* MANAGE COMMON DATA BUS (CDB) */
-void o3_scheduler::manageCDB (sysClock& clk) {
-    if (_execution_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) return;
+void o3_scheduler::manageCDB () {
+    if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
     for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-        if (_execution_to_scheduler_port->isReady (clk.now ()))
-            _execution_to_scheduler_port->popFront (clk.now ());
+        if (_execution_to_scheduler_port->isReady ())
+            _execution_to_scheduler_port->popFront ();
     }
 }
 
-void o3_scheduler::squash (sysClock& clk) {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", clk.now ());
+void o3_scheduler::squash () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum, clk.now ());
+    _scheduler_to_execution_port->flushPort (squashSeqNum);
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (int i = (int)_ResStns.Nth(j)->getTableSize() - 1; i >= 0; i--) {
             if (_ResStns.Nth(j)->getTableSize() == 0) break;
@@ -226,10 +229,10 @@ void o3_scheduler::squash (sysClock& clk) {
     }
 }
 
-void o3_scheduler::regStat (sysClock& clk) {
-    _decode_to_scheduler_port->regStat (clk.now ());
-    _execution_to_scheduler_port->regStat (clk.now ());
-    _memory_to_scheduler_port->regStat (clk.now ());
+void o3_scheduler::regStat () {
+    _decode_to_scheduler_port->regStat ();
+    _execution_to_scheduler_port->regStat ();
+    _memory_to_scheduler_port->regStat ();
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         _ResStns.Nth(j)->regStat ();
     }

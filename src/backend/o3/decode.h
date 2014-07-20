@@ -10,15 +10,17 @@
 class o3_decode : protected stage {
 	public:
 		o3_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			    port<dynInstruction*>& decode_to_schedule_port, 
-			    WIDTH decode_width,
-			    string stage_name);
+			       port<dynInstruction*>& decode_to_schedule_port, 
+			       WIDTH decode_width,
+                   sysClock* clk,
+			       string stage_name);
 		~o3_decode ();
+		void doDECODE ();
 
-		void doDECODE (sysClock& clk);
-		PIPE_ACTIVITY decodeImpl (sysClock& clk);
-        void squash (sysClock& clk);
-        void regStat (sysClock& clk);
+    private:
+		PIPE_ACTIVITY decodeImpl ();
+        void squash ();
+        void regStat ();
 
 	private:
 		port<dynInstruction*>* _fetch_to_decode_port;

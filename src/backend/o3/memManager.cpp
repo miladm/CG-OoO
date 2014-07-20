@@ -4,13 +4,13 @@
 
 #include "memManager.h"
 
-o3_memManager::o3_memManager () 
-    : unit ("lsqManager"),
+o3_memManager::o3_memManager (sysClock* clk, string rf_name = "o3_memManager") 
+    : unit (rf_name, clk),
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
-      _LQ (LQ_SIZE, 8, 4, "LQtable"),
-      _SQ (SQ_SIZE, 8, 4, "SQtable")
+      _LQ (LQ_SIZE, 8, 4, clk, "LQtable"),
+      _SQ (SQ_SIZE, 8, 4, clk, "SQtable")
 { }
 
 o3_memManager::~o3_memManager () {}
@@ -26,31 +26,31 @@ BUFF_STATE o3_memManager::getTableState (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, sysClock& clk, AXES_TYPE axes_type) {
+bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFreeWire (clk, axes_type); //TODO set state to LQ_ADDR_WAIT
+        return _LQ.hasFreeWire (axes_type); //TODO set state to LQ_ADDR_WAIT
     } else {
-        return _SQ.hasFreeWire (clk, axes_type); //TODO set state to LQ_ADDR_WAIT
+        return _SQ.hasFreeWire (axes_type); //TODO set state to LQ_ADDR_WAIT
     }
 }
 
-void o3_memManager::updateWireState (LSQ_ID lsq_id, sysClock& clk, AXES_TYPE axes_type) {
+void o3_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
-        _LQ.updateWireState (clk, axes_type);
+        _LQ.updateWireState (axes_type);
     } else {
-        _SQ.updateWireState (clk, axes_type);
+        _SQ.updateWireState (axes_type);
     }
 }
 
-void o3_memManager::pushBack (dynInstruction *ins, sysClock& clk) {
+void o3_memManager::pushBack (dynInstruction *ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
-        _LQ.pushBack (ins, clk); //TODO set state to LQ_ADDR_WAIT
+        _LQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
         ins->setLQstate (LQ_ADDR_WAIT);
     } else {
         Assert (_SQ.getTableState () != FULL_BUFF);
-        _SQ.pushBack (ins, clk); //TODO set state to LQ_ADDR_WAIT
+        _SQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
         ins->setSQstate (SQ_ADDR_WAIT);
     }
 }
@@ -63,7 +63,7 @@ void o3_memManager::memAddrReady (dynInstruction* ins) {
     }
 }
 
-bool o3_memManager::issueToMem (LSQ_ID lsq_id, CYCLE now) {
+bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
     //TODO take all this block to lsqManager.cpp
     CYCLE axes_lat;
     dynInstruction* mem_ins;
@@ -75,7 +75,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id, CYCLE now) {
                 mem_ins->getMemAddr (),
                 mem_ins->getMemAxesSize(),
                 &_L1, &_L2, &_L3);
-        _LQ.setTimer (mem_ins, axes_lat, now); //TODO good API?
+        _LQ.setTimer (mem_ins, axes_lat); //TODO good API?
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
@@ -84,7 +84,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id, CYCLE now) {
                 mem_ins->getMemAddr (),
                 mem_ins->getMemAxesSize(),
                 &_L1, &_L2, &_L3);
-        _SQ.setTimer (mem_ins, axes_lat, now);
+        _SQ.setTimer (mem_ins, axes_lat);
     }
 #ifdef ASSERTION
     Assert(axes_lat > 0);
@@ -94,17 +94,17 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id, CYCLE now) {
     return true;
 }
 
-bool o3_memManager::commit (dynInstruction* ins, sysClock& clk) {
+bool o3_memManager::commit (dynInstruction* ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
-        if (!_LQ.hasFreeWire (clk, READ)) return false;
+        if (!_LQ.hasFreeWire (READ)) return false;
         Assert (ins->getLQstate () == LQ_COMPLETE);
         //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
-        dynInstruction* ld_ins = _LQ.popFront (clk);
+        dynInstruction* ld_ins = _LQ.popFront ();
         Assert (ld_ins->getInsID () == ins->getInsID ());
-        _LQ.updateWireState (clk, READ);
+        _LQ.updateWireState (READ);
     } else {
         //TODO apply hardware costraints here
         Assert (ins->getSQstate () == SQ_COMPLETE);
@@ -130,15 +130,15 @@ bool o3_memManager::hasCommitSt () {
 }
 
 /* DELETE ONE INS WITH FINISHED MEM STORE */
-void o3_memManager::delAfinishedSt (CYCLE now) {
-    _SQ.delFinishedMemAxes (now);
+void o3_memManager::delAfinishedSt () {
+    _SQ.delFinishedMemAxes ();
 }
 
-pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id, CYCLE now) {
+pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFinishedIns (lsq_id, now);
+        return _LQ.hasFinishedIns (lsq_id);
     } else {
-        return _SQ.hasFinishedIns (lsq_id, now);
+        return _SQ.hasFinishedIns (lsq_id);
     }
 }
 
@@ -158,4 +158,4 @@ void o3_memManager::completeLd (dynInstruction* ins) {
     ins->setLQstate (LQ_COMPLETE);
 }
 
-o3_memManager g_LSQ_MGR;
+o3_memManager* g_LSQ_MGR;
