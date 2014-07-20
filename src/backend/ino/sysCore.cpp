@@ -94,5 +94,6 @@ void sysCore::runCore () {
             break;
         }
         _bp->doBP ();
+        //if (_clk->now () == 10030) exit (-1);
 	}
 }

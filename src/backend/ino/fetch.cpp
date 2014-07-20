@@ -56,7 +56,7 @@ PIPE_ACTIVITY fetch::fetchImpl () {
         dynInstruction* ins = g_var.popCodeCache();
         ins->setPipeStage(FETCH);
         g_var.remFromCodeCache ();
-		_fetch_to_decode_port->pushBack(ins, _clk->now());
+		_fetch_to_decode_port->pushBack(ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), _clk->now ());
 
         /* STAT */

@@ -159,6 +159,7 @@ bool port<queType_T>::isReady () {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
+    dbg.print (DBG_PORT, "%s: %s %d %d (cyc: %d)\n", _c_name.c_str (), "isReady -", _buff.front()._delay.getStopTime (), getBuffState (), now);
 	BuffElement<queType_T> frontBuff = _buff.front ();
 	if (frontBuff._delay.getStopTime () <= now)
         return true;
