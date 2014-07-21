@@ -97,14 +97,15 @@ bool o3_lsqCAM::hasCommit () {
     return false;
 }
 
-bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr) {
+bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     LENGTH table_size = _table.NumElements ();
-    for (LENGTH i = 0; i < table_size; i++) {
+    for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
         PIPE_STAGE stage = ins->getPipeStage ();
+        if (seq_num <= ins->getInsID ()) continue;
         if (! (stage == COMPLETE || stage == COMMIT)) continue;
         if (ins->getMemAddr () == mem_addr) {
-            //cout << "FWD from SQ" << endl;
+            cout << "FWD from SQ" << endl;
             return true;
         }
     }

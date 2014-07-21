@@ -37,7 +37,7 @@ class o3_memManager : public unit {
         /* SQ CONTROL */
         bool hasCommitSt ();
         void delAfinishedSt ();
-        bool hasStToAddr (ADDRS);
+        bool hasStToAddr (ADDRS, INS_ID);
         pair<bool, dynInstruction*> isLQviolation (dynInstruction*);
 
         /* LQ CONTROL */

@@ -92,7 +92,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
 }
 
 CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
-    if (hasStToAddr (mem_ins->getMemAddr ())) {
+    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
         return g_eu_lat._st_buff_lat;
     //} else if () { /*TODO for MSHR */
     } else {
@@ -153,8 +153,8 @@ pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::hasStToAddr (ADDRS mem_addr) {
-    return _SQ.hasMemAddr (mem_addr);
+bool o3_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
+    return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 
 pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins) {
