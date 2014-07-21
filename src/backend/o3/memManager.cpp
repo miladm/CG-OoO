@@ -70,11 +70,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
-        mem_ins->setLQstate (LQ_CACHE_WAIT);
-        axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
-                mem_ins->getMemAddr (),
-                mem_ins->getMemAxesSize(),
-                &_L1, &_L2, &_L3);
+        axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat); //TODO good API?
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
@@ -95,22 +91,31 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
     return true;
 }
 
+CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
+    if (hasStToAddr (mem_ins->getMemAddr ())) {
+        return g_eu_lat._st_buff_lat;
+    //} else if () { /*TODO for MSHR */
+    } else {
+        mem_ins->setLQstate (LQ_CACHE_WAIT);
+        return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
+                mem_ins->getMemAddr (),
+                mem_ins->getMemAxesSize(),
+                &_L1, &_L2, &_L3);
+    }
+}
+
 bool o3_memManager::commit (dynInstruction* ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
         if (!_LQ.hasFreeWire (READ)) return false;
-        //cout << "it is a load?" << endl;
-        Assert (ins->getLQstate () == LQ_COMPLETE);
-        //cout << "yet it is." << endl;
-        //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
-        dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
         dynInstruction* ld_ins = _LQ.popFront ();
-      //if (ld_ins->getInsID () != ins->getInsID ()) {
-      //    cout << "ins conflict: " << ld_ins->getInsID () << " " << ins->getInsID () << endl;
-      //}
+#ifdef ASSERTION
+        Assert (ins->getLQstate () == LQ_COMPLETE);
         Assert (ld_ins->getInsID () == ins->getInsID ());
+#endif
         _LQ.updateWireState (READ);
+        dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
     } else {
         //TODO apply hardware costraints here
         Assert (ins->getSQstate () == SQ_COMPLETE);
@@ -146,6 +151,10 @@ pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     } else {
         return _SQ.hasFinishedIns (lsq_id);
     }
+}
+
+bool o3_memManager::hasStToAddr (ADDRS mem_addr) {
+    return _SQ.hasMemAddr (mem_addr);
 }
 
 pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins) {

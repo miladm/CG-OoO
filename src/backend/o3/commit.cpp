@@ -65,7 +65,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
             g_GRF_MGR->commitRegs (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
-            delete ins;
+            delIns (ins);
         }
 
         /* UPDATE WIRES */
@@ -125,7 +125,7 @@ void o3_commit::bpMispredSquash () {
         Assert (ins->getInsID () >= squashSeqNum);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
-        delete ins;
+        delIns (ins);
     }
 }
 
@@ -141,6 +141,11 @@ void o3_commit::memMispredSquash () {
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
     }
+}
+
+/* DELETE INSTRUCTION OBJ */
+void o3_commit::delIns (dynInstruction* ins) {
+    delete ins;
 }
 
 void o3_commit::regStat () {

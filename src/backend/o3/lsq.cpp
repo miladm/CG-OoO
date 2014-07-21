@@ -97,6 +97,20 @@ bool o3_lsqCAM::hasCommit () {
     return false;
 }
 
+bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr) {
+    LENGTH table_size = _table.NumElements ();
+    for (LENGTH i = 0; i < table_size; i++) {
+        dynInstruction* ins = getNth_unsafe (i);
+        PIPE_STAGE stage = ins->getPipeStage ();
+        if (! (stage == COMPLETE || stage == COMMIT)) continue;
+        if (ins->getMemAddr () == mem_addr) {
+            //cout << "FWD from SQ" << endl;
+            return true;
+        }
+    }
+    return false;
+}
+
 pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (INS_ID completed_st_mem_addr) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {

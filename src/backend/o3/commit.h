@@ -26,6 +26,7 @@ class o3_commit : protected stage {
         void regStat ();
         void bpMispredSquash ();
         void memMispredSquash ();
+        void delIns (dynInstruction* ins);
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;

@@ -11,6 +11,7 @@
 #define _O3_MEM_MANAGER_H
 
 #include "../unit/dynInstruction.h"
+#include "../unit/exeUnit.h"
 #include "../unit/unit.h"
 #include "../cacheCtrl.h"
 #include "../cache.h"
@@ -31,10 +32,12 @@ class o3_memManager : public unit {
         bool commit (dynInstruction*);
         void squash (INS_ID);
         pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
+        CYCLE getAxesLatency (dynInstruction*);
 
         /* SQ CONTROL */
         bool hasCommitSt ();
         void delAfinishedSt ();
+        bool hasStToAddr (ADDRS);
         pair<bool, dynInstruction*> isLQviolation (dynInstruction*);
 
         /* LQ CONTROL */
