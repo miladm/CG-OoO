@@ -94,9 +94,11 @@ COMPLETE_STATUS o3_execution::completeIns () {
         if (ins->isMemOrBrViolation ()) {
             //cout << "milad: " << endl;
             g_var.setSquashSN (ins->getInsID ());
+            g_var.setSquashType (BP_MISPRED);
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
             //cout << "milad: " << endl;
             g_var.setSquashSN (violating_ld_ins->getInsID ());
+            g_var.setSquashType (MEM_MISPRED);
         }
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }

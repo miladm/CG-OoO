@@ -142,7 +142,7 @@ void dynInstruction::setWrongPath (bool is_on_wrong_path) {
 }
 
 void dynInstruction::setMemViolation () {
-    //cout << "mem violation: " << getInsID () << endl;
+    Assert (_is_mem_violation == false);
     _is_mem_violation = true;
 }
 

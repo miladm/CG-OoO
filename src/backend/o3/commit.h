@@ -24,6 +24,8 @@ class o3_commit : protected stage {
     private:
 		PIPE_ACTIVITY commitImpl ();
         void regStat ();
+        void bpMispredSquash ();
+        void memMispredSquash ();
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
@@ -35,4 +37,3 @@ class o3_commit : protected stage {
 };
 
 #endif
-

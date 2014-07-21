@@ -82,16 +82,25 @@ void o3_commit::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
     if (_iROB->getTableSize () == 0) return;
+
+    PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
+    if (squash_type == BP_MISPRED) bpMispredSquash ();
+    else if (squash_type == MEM_MISPRED) memMispredSquash ();
+    else Assert (true == false && "Invalid squash type.");
+    g_var.resetSquashType ();
+}
+
+void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iROB->getTableSize () - 1;
     for (LENGTH i = 0; i < _iROB->getTableSize (); i++) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
-        Assert (ins->getPipeStage () != EXECUTE);// && ins->getPipeStage () != MEM_ACCESS);
+        Assert (ins->getPipeStage () != EXECUTE);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
-            Assert (ins->isMemOrBrViolation () == true);
+            Assert (ins->isOnWrongPath () == true);
         } else if (ins->getInsID () > squashSeqNum) {
             if (!ins->isMemOrBrViolation ()) {
                 stop_indx = i - 1;
@@ -105,10 +114,9 @@ void o3_commit::squash () {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         ins->resetStates ();
-        //g_var.insertFrontCodeCache (ins);
+        g_var.insertFrontCodeCache (ins);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
-        delete ins; //TODO temperary - fix it
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_iROB->getTableSize () == 0) break;
@@ -118,6 +126,20 @@ void o3_commit::squash () {
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         delete ins;
+    }
+}
+
+void o3_commit::memMispredSquash () {
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    dynInstruction* ins = NULL;
+    for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
+        if (_iROB->getTableSize () == 0) break;
+        ins = _iROB->getNth_unsafe (i);
+        if (ins->getInsID () < squashSeqNum) break;
+        ins->resetStates ();
+        g_var.insertFrontCodeCache (ins);
+        _iROB->removeNth_unsafe (i);
+        s_squash_ins_cnt++;
     }
 }
 
