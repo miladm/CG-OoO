@@ -78,6 +78,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         _LQ.setTimer (mem_ins, axes_lat); //TODO good API?
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
+        Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
@@ -99,10 +100,15 @@ bool o3_memManager::commit (dynInstruction* ins) {
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
         if (!_LQ.hasFreeWire (READ)) return false;
+        //cout << "it is a load?" << endl;
         Assert (ins->getLQstate () == LQ_COMPLETE);
+        //cout << "yet it is." << endl;
         //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
         dynInstruction* ld_ins = _LQ.popFront ();
+      //if (ld_ins->getInsID () != ins->getInsID ()) {
+      //    cout << "ins conflict: " << ld_ins->getInsID () << " " << ins->getInsID () << endl;
+      //}
         Assert (ld_ins->getInsID () == ins->getInsID ());
         _LQ.updateWireState (READ);
     } else {
@@ -142,12 +148,16 @@ pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::isLQviolation (dynInstruction* st_ins, dynInstruction* ld_ins) {
+pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins) {
+#ifdef ASSERTION
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
-    bool violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), ld_ins);
-    if (violation) Assert (ld_ins != NULL);
-    else Assert (ld_ins == NULL);
+#endif
+    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr ());
+#ifdef ASSERTION
+    if (violation.first) Assert (violation.second != NULL);
+    else Assert (violation.second == NULL);
+#endif
     return violation;
 }
 

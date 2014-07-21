@@ -15,7 +15,6 @@ class o3_execution : protected stage {
 	public:
 		o3_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                       port<dynInstruction*>& execution_to_scheduler_port, 
-                      port<dynInstruction*>& execution_to_memory_port, 
                       CAMtable<dynInstruction*>* iROB,
 			          WIDTH execution_width,
                       sysClock* clk,
@@ -35,7 +34,6 @@ class o3_execution : protected stage {
 	private:
 		port<dynInstruction*>* _scheduler_to_execution_port;
         port<dynInstruction*>* _execution_to_scheduler_port;
-        port<dynInstruction*>* _execution_to_memory_port;
         CAMtable<dynInstruction*>* _iROB;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;

@@ -60,9 +60,11 @@ void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
 void o3_lsqCAM::squash (INS_ID ins_seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
-        if (getNth_unsafe (i)->getInsID () >= ins_seq_num) {
+        dynInstruction* ins = getNth_unsafe (i);
+        if (ins->getInsID () >= ins_seq_num) {
             delete _table.Nth (i);
             _table.RemoveAt (i);
+            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), "Removing ins:", ins->getInsID (), "due to", ins_seq_num);
         } else {
             break;
         }
@@ -95,26 +97,24 @@ bool o3_lsqCAM::hasCommit () {
     return false;
 }
 
-bool o3_lsqCAM::hasAnyCompleteLdFromAddr (INS_ID completed_st_mem_addr, dynInstruction* violating_ld) {
-    violating_ld = NULL;
+pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (INS_ID completed_st_mem_addr) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
         if (ins->getMemAddr () == completed_st_mem_addr) {
             if (ins->getLQstate () == LQ_COMPLETE) {
-                violating_ld = ins;
-                return true; //TODO double cehck that this means a register write has happened in the stage
+                return pair<bool, dynInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage
             } else if (ins->getLQstate () == LQ_FWD_FROM_SQ ||
                        ins->getLQstate () == LQ_MSHR_WAIT ||
                        ins->getLQstate () == LQ_CACHE_WAIT) {
                 //TODO implement this block - FWD from SQ - return false 
-                //TODO check that at ADD_WAIT state, later on the value in SQ
+                //TODO check that at ADDR_WAIT state, later on the value in SQ
                 //will be picked up and so we don't have to worry about that
                 //here
             }
         }
     }
-    return false;
+    return pair<bool, dynInstruction*> (false, NULL);
 }
 
 pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {

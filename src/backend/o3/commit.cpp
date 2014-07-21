@@ -44,21 +44,27 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
         //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!"); (TODO - put it back)
-        if (ins->isOnWrongPath ()) break;
+        //cout << "out1 " << ins->isOnWrongPath () << " " << ins->isMemViolation () << " " << ins->getInsID () << " " << _clk->now () << endl;
+        if (ins->isMemOrBrViolation ()) break;
+        //cout << "out2 " << ins->getInsType () << " " << ins->getMemType() << " " << ins->getInsID () << endl;
         if (ins->getPipeStage () != COMPLETE) break;
+        //cout << "out3" << endl;
 
         /* COMMIT INS */
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Commit ins", ins->getInsID (), _clk->now ());
         if (ins->getInsType () == MEM) {
             ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
             if (g_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
                 g_GRF_MGR->commitRegs (ins);
                 ins = _iROB->popFront ();
+                dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                           "Commit ins", ins->getInsID (), _clk->now ());
             }
         } else {
             ins = _iROB->popFront ();
             g_GRF_MGR->commitRegs (ins);
+            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                       "Commit ins", ins->getInsID (), _clk->now ());
             delete ins;
         }
 
@@ -66,7 +72,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         _iROB->updateWireState (READ);
 
         /* STAT */
-        s_ins_cnt++;
+        s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
         pipe_stall = PIPE_BUSY;
     }
     return pipe_stall;
@@ -85,9 +91,9 @@ void o3_commit::squash () {
         Assert (ins->getPipeStage () != EXECUTE);// && ins->getPipeStage () != MEM_ACCESS);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
-            Assert (ins->isOnWrongPath () == true);
+            Assert (ins->isMemOrBrViolation () == true);
         } else if (ins->getInsID () > squashSeqNum) {
-            if (!ins->isOnWrongPath ()) {
+            if (!ins->isMemOrBrViolation ()) {
                 stop_indx = i - 1;
                 Assert (i > start_indx);
                 break;
@@ -99,14 +105,15 @@ void o3_commit::squash () {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         ins->resetStates ();
-        g_var.insertFrontCodeCache (ins);
+        //g_var.insertFrontCodeCache (ins);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        delete ins; //TODO temperary - fix it
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
-        Assert (ins->isOnWrongPath () == true);
+        Assert (ins->isMemOrBrViolation () == true);
         Assert (ins->getInsID () >= squashSeqNum);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;

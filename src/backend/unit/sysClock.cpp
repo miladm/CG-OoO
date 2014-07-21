@@ -25,6 +25,7 @@ sysClock::~sysClock () {}
 void sysClock::tick () {
 	_clk++;
     _clk_cycles++;
+    if (_clk % RUNTIME_REPORT_INTERVAL == 0) _clk_cycles.print ();
 #ifdef ASSERTION
 	Assert(	_clk < std::numeric_limits<CYCLE>::max() &&
 		   	_clk > std::numeric_limits<CYCLE>::min() &&

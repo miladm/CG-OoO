@@ -11,6 +11,8 @@
 #include "../../global/global.h"
 #include "../../lib/statistic.h"
 
+#define RUNTIME_REPORT_INTERVAL 200000
+
 class sysClock {
 	public:
 		sysClock ();

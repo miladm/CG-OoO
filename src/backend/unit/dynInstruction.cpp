@@ -11,6 +11,7 @@ dynInstruction::dynInstruction ()
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
     _is_on_wrong_path = false;
+    _is_mem_violation = false;
 }
 
 dynInstruction::~dynInstruction () {}
@@ -140,6 +141,11 @@ void dynInstruction::setWrongPath (bool is_on_wrong_path) {
     _is_on_wrong_path = is_on_wrong_path;
 }
 
+void dynInstruction::setMemViolation () {
+    //cout << "mem violation: " << getInsID () << endl;
+    _is_mem_violation = true;
+}
+
 // ***********************
 // ** GET INS ATRIBUTES **
 // ***********************
@@ -168,6 +174,10 @@ SQ_STATE dynInstruction::getSQstate () {Assert (getMemType () == STORE); return 
 LQ_STATE dynInstruction::getLQstate () {Assert (getMemType () == LOAD); return _lq_state; }
 
 bool dynInstruction::isOnWrongPath () {return _is_on_wrong_path;}
+
+bool dynInstruction::isMemViolation () {return _is_mem_violation;}
+
+bool dynInstruction::isMemOrBrViolation () {return (_is_mem_violation || _is_on_wrong_path);}
 
 WIDTH dynInstruction::getNumRdAR () { return _a_rdReg_waitList.NumElements(); }
 
@@ -232,4 +242,5 @@ void dynInstruction::resetStates () {
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
+    _is_mem_violation = false;
 }

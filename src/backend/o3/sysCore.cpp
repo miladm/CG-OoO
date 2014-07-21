@@ -67,7 +67,7 @@ o3_sysCore::o3_sysCore (sysClock* clk,
     _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
     _decode = new o3_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
     _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _clk, "schedule");
-    _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _execution_to_memory_port, _iROB, execution_width, _clk, "execution");
+    _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _clk, "execution");
     _memory = new o3_memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _clk, "memory");
     _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _clk, "commit");
 }
@@ -98,6 +98,6 @@ void o3_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        //if (_clk->now () == 1000) exit (-1); /* for debug */
+        //if (_clk->now () == 200000) exit (-1); /* for debug */
 	}
 }

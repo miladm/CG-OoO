@@ -27,6 +27,7 @@ class dynInstruction : public unit {
         void setSQstate (SQ_STATE state);
         void setLQstate (LQ_STATE state);
         void setWrongPath (bool is_on_wrong_path);
+        void setMemViolation ();
 
         // GET INS ATRIBUTES
         ADDRS getInsAddr ();
@@ -42,6 +43,8 @@ class dynInstruction : public unit {
         SQ_STATE getSQstate ();
         LQ_STATE getLQstate ();
         bool isOnWrongPath ();
+        bool isMemViolation ();
+        bool isMemOrBrViolation ();
         WIDTH getNumRdAR ();
         WIDTH getTotNumRdAR ();
         WIDTH getNumRdPR ();
@@ -87,6 +90,7 @@ class dynInstruction : public unit {
         char _command[INS_STRING_SIZE];
         int _hitLevel;
         bool _is_on_wrong_path;
+        bool _is_mem_violation;
 };
 
 #endif

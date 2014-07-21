@@ -35,7 +35,7 @@ class o3_memManager : public unit {
         /* SQ CONTROL */
         bool hasCommitSt ();
         void delAfinishedSt ();
-        bool isLQviolation (dynInstruction*, dynInstruction*);
+        pair<bool, dynInstruction*> isLQviolation (dynInstruction*);
 
         /* LQ CONTROL */
         void completeLd (dynInstruction*);

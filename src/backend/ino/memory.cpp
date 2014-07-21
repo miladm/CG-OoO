@@ -32,8 +32,8 @@ memory::memory (port<dynInstruction*>& execution_to_memory_port,
 memory::~memory () {}
 
 void memory::doMEMORY () {
+    /* STAT + DEBUG */
     dbg.print (DBG_MEMORY, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
-    /* STAT */
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
@@ -63,7 +63,8 @@ void memory::completeIns () {
         // FORWARD DATA //_memory_to_schedule_port->pushBack(mem_ins, _clk->now ());
         g_RF_MGR->writeToRF (mem_ins);
         g_RF_MGR->updateWireState (WRITE);
-        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write Complete mem ins", mem_ins->getInsID (), _clk->now ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "Write Complete mem ins", mem_ins->getInsID (), _clk->now ());
     }
 }
 
@@ -92,7 +93,8 @@ PIPE_ACTIVITY memory::memoryImpl () {
             Assert (mem_ins->isOnWrongPath () == false);
             _st_buff.pushBack (mem_ins);
             axes_lat = g_eu_lat._st_buff_lat;
-            dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Add to st_buff ins", mem_ins->getInsID (), _clk->now ());
+            dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                       "Add to st_buff ins", mem_ins->getInsID (), _clk->now ());
         } else {
             axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                                            mem_ins->getMemAddr (),
@@ -107,7 +109,8 @@ PIPE_ACTIVITY memory::memoryImpl () {
         }
         _mem_buff.pushBack(mem_ins, axes_lat); //CAM array - check for size limits (TODO)
         //mem_ins->setPipeStage(MEM_ACCESS); happens in execute.cpp - remove from here? (TODO)
-        dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_str (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, _clk->now ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_str (), 
+                   "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, _clk->now ());
 
         /* UPDATE WIRES */
         _st_buff.updateWireState (WRITE);
@@ -136,7 +139,8 @@ void memory::forward (dynInstruction* ins, CYCLE mem_latency) {
     CYCLE cdb_ready_latency = mem_latency - 1;
     Assert (cdb_ready_latency >= 0);
     _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
-    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
+    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+               "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
 
 /* HANDLE STORE BUFF to CACHE */
@@ -155,7 +159,8 @@ void memory::manageSTbuffer () {
                                        &_L1, &_L2, &_L3);
         (lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
         (lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
-        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Store to cach ins", st_ins->getInsID (), _clk->now ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "Store to cach ins", st_ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */
         _st_buff.updateWireState (READ);

@@ -75,14 +75,14 @@ COMPLETE_STATUS execution::completeIns () {
         }
         EU->resetEU ();
 
-        /* SQUASH DETECT */
+        /* SQUASH DETECTION */
         if (ins->isOnWrongPath ()) {
             g_var.setSquashSN (ins->getInsID ());
         }
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }
 
-    if (g_var.isOnWrongPath()) {
+    if (g_var.isSpeculationViolation ()) {
         dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
         return COMPLETE_SQUASH;
     }

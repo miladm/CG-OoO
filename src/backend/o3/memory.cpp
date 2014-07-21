@@ -57,17 +57,15 @@ void o3_memory::completeIns () {
         pair<bool, dynInstruction*> p = g_LSQ_MGR->hasFinishedIns (LD_QU);
         if (!p.first) break;
         dynInstruction* finished_ld_ins = p.second;
-        //if (_mem_buff.getBuffState () == EMPTY_BUFF) break;
-        //if (!_mem_buff.isReady ()) break;
-        if (!g_GRF_MGR->hasFreeWire (WRITE)) break; //TODO too conservatice - only for load ins (both ino and o3)
+        if (!g_GRF_MGR->hasFreeWire (WRITE)) break;
 
         /* COMPLETE INS */
-        //dynInstruction* finished_ld_ins = _mem_buff.popFront ();
         Assert (finished_ld_ins != NULL);
         finished_ld_ins->setPipeStage(COMPLETE);
         g_LSQ_MGR->completeLd (finished_ld_ins);
         g_GRF_MGR->completeRegs (finished_ld_ins);
-        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write Complete mem LD ins", finished_ld_ins->getInsID (), _clk->now ());
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "Write Complete mem LD ins", finished_ld_ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */
         g_LSQ_MGR->updateWireState (LD_QU, READ);
@@ -149,7 +147,8 @@ void o3_memory::forward (dynInstruction* ins, CYCLE mem_latency) {
     CYCLE cdb_ready_latency = mem_latency - 1;
     Assert (cdb_ready_latency >= 0);
     _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
-    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
+    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+               "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
 
 /* HANDLE STORE BUFF to CACHE */
