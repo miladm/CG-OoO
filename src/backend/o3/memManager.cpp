@@ -162,7 +162,7 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
-    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr ());
+    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);

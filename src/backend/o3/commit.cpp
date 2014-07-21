@@ -44,11 +44,8 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
         //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!"); (TODO - put it back)
-        //cout << "out1 " << ins->isOnWrongPath () << " " << ins->isMemViolation () << " " << ins->getInsID () << " " << _clk->now () << endl;
         if (ins->isMemOrBrViolation ()) break;
-        //cout << "out2 " << ins->getInsType () << " " << ins->getMemType() << " " << ins->getInsID () << endl;
         if (ins->getPipeStage () != COMPLETE) break;
-        //cout << "out3" << endl;
 
         /* COMMIT INS */
         if (ins->getInsType () == MEM) {
@@ -149,5 +146,5 @@ void o3_commit::delIns (dynInstruction* ins) {
 }
 
 void o3_commit::regStat () {
-    //_iROB->regStat ();
+    _iROB->regStat ();
 }

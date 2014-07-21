@@ -29,7 +29,7 @@ class o3_lsqCAM : public CAMtable<dynInstruction*> {
         void delFinishedMemAxes ();
         bool hasCommit ();
         bool hasMemAddr (ADDRS, INS_ID);
-        pair<bool, dynInstruction*> hasAnyCompleteLdFromAddr (INS_ID);
+        pair<bool, dynInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID);
         pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
 };
 

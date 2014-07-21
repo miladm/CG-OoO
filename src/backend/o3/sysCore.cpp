@@ -98,6 +98,6 @@ void o3_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        //if (_clk->now () == 200000) exit (-1); /* for debug */
+        //if (_clk->now () == 1000) exit (-1); /* for debug */
 	}
 }

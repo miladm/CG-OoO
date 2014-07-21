@@ -92,11 +92,9 @@ COMPLETE_STATUS o3_execution::completeIns () {
 
         /*-- SQUASH DETECTION --*/
         if (ins->isMemOrBrViolation ()) {
-            //cout << "milad: " << endl;
             g_var.setSquashSN (ins->getInsID ());
             g_var.setSquashType (BP_MISPRED);
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
-            //cout << "milad: " << endl;
             g_var.setSquashSN (violating_ld_ins->getInsID ());
             g_var.setSquashType (MEM_MISPRED);
         }
@@ -104,7 +102,6 @@ COMPLETE_STATUS o3_execution::completeIns () {
     }
 
     if (g_var.isSpeculationViolation ()) {
-        //cout << "milad2: " << endl;
         dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
         return COMPLETE_SQUASH;
     }

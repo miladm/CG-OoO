@@ -48,7 +48,8 @@ void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
     for (LENGTH i = 0; i < table_size; i++) {
         dynInstruction* ins = getNth_unsafe (i);
         if (ins->getInsID () == elem->getInsID ()) {
-            dbg.print (DBG_MEMORY, "%s: %s %llu (lat: %d)\n", _c_name.c_str (), "Set mem access lat. for ins:", ins->getInsID (), axes_lat);
+            dbg.print (DBG_MEMORY, "%s: %s %llu (lat: %d)\n", _c_name.c_str (), 
+                       "Set mem access lat. for ins:", ins->getInsID (), axes_lat);
             _table.Nth(i)->_delay.setNewTime (now, axes_lat);
             Assert (_table.Nth(i)->_delay.isValidStopTime () == true);
             return;
@@ -105,17 +106,17 @@ bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
         if (seq_num <= ins->getInsID ()) continue;
         if (! (stage == COMPLETE || stage == COMMIT)) continue;
         if (ins->getMemAddr () == mem_addr) {
-            cout << "FWD from SQ" << endl;
             return true;
         }
     }
     return false;
 }
 
-pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (INS_ID completed_st_mem_addr) {
+pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID st_seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
+        if (ins->getInsID () < st_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
             if (ins->getLQstate () == LQ_COMPLETE) {
                 return pair<bool, dynInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage
