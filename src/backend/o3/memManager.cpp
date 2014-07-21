@@ -4,14 +4,18 @@
 
 #include "memManager.h"
 
-o3_memManager::o3_memManager (sysClock* clk, string rf_name = "o3_memManager") 
-    : unit (rf_name, clk),
+o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+                              sysClock* clk, 
+                              string lsq_name = "o3_memManager") 
+    : unit (lsq_name, clk),
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
       _LQ (LQ_SIZE, 8, 4, clk, "LQtable"),
       _SQ (SQ_SIZE, 8, 4, clk, "SQtable")
-{ }
+{ 
+    _memory_to_scheduler_port = &memory_to_scheduler_port;
+}
 
 o3_memManager::~o3_memManager () {}
 
@@ -72,6 +76,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat); //TODO good API?
+        forward (mem_ins, axes_lat);
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
         Assert (mem_ins->isMemOrBrViolation() == false);
@@ -175,6 +180,25 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
  * ***************** */
 void o3_memManager::completeLd (dynInstruction* ins) {
     ins->setLQstate (LQ_COMPLETE);
+}
+
+/* FORWARD DATA 
+ * NOTE: this function is not sorted based on the order in which LOAD ops
+ * return data. The port must be searched for finding the data that is being
+ * forwarded every cycle (in the scheduler)
+ */
+void o3_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
+#ifdef ASSERTION
+    Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
+#endif
+    cout << "truing to FWD\n";
+    if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
+    cout << "forwarding to schedule \n";
+    CYCLE cdb_ready_latency = mem_latency - 1;
+    Assert (cdb_ready_latency >= 0);
+    _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
+    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+               "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
 
 o3_memManager* g_LSQ_MGR;

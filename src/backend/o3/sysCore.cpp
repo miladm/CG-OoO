@@ -58,7 +58,7 @@ o3_sysCore::o3_sysCore (sysClock* clk,
 {
     /* INIT UNITS */
     g_GRF_MGR = new o3_rfManager (_clk, "rfManager");
-    g_LSQ_MGR = new o3_memManager (_clk, "lsqManager");
+    g_LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
     _iROB = new CAMtable<dynInstruction*>(100, 32, 32, _clk, "iROB");
 
     /* INIT STAGES */

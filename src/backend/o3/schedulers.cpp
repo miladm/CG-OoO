@@ -66,8 +66,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
             WIDTH num_ar = ins->getTotNumRdAR ();
-            if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break;
-            //forwardFromCDB (ins); TODO - made execution worse - WHY?!
+            if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
 
             /* READ INS WIN */
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
@@ -94,6 +93,7 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
+        forwardFromCDB (ins);
         if (!g_GRF_MGR->isReady (ins)) continue;
         else return true;
     }
@@ -196,6 +196,7 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
+                        cout <<  "mem FWD" << endl;
                     }
                 }
             }

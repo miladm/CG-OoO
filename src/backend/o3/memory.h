@@ -23,7 +23,6 @@ class o3_memory : protected stage {
     private:
         PIPE_ACTIVITY memoryImpl ();
         void completeIns ();
-        void forward (dynInstruction*, CYCLE);
         void squash ();
         void regStat ();
         void manageSTbuffer ();

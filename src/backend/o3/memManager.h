@@ -15,11 +15,14 @@
 #include "../unit/unit.h"
 #include "../cacheCtrl.h"
 #include "../cache.h"
+#include "../unit/port.h"
 #include "lsq.h"
 
 class o3_memManager : public unit {
     public:
-        o3_memManager (sysClock* clk, string rf_name);
+        o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+                       sysClock* clk, 
+                       string lsq_name);
         ~o3_memManager ();
 
         /* LSQ CONTROL */
@@ -42,8 +45,11 @@ class o3_memManager : public unit {
 
         /* LQ CONTROL */
         void completeLd (dynInstruction*);
+        void forward (dynInstruction*, CYCLE);
 
     private:
+        port<dynInstruction*>* _memory_to_scheduler_port;
+
         cache _L1;
         cache _L2;
         cache _L3;

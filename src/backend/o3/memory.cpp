@@ -134,23 +134,6 @@ PIPE_ACTIVITY o3_memory::memoryImpl () {
     return pipe_stall;
 }
 
-/* FORWARD DATA 
- * NOTE: this function is not sorted based on the order in which LOAD ops
- * return data. The port must be searched for finding the data that is being
- * forwarded every cycle (in the scheduler)
- */
-void o3_memory::forward (dynInstruction* ins, CYCLE mem_latency) {
-#ifdef ASSERTION
-    Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
-#endif
-    if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
-    CYCLE cdb_ready_latency = mem_latency - 1;
-    Assert (cdb_ready_latency >= 0);
-    _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
-    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-               "Forward wr ops of ins", ins->getInsID (), _clk->now ());
-}
-
 /* HANDLE STORE BUFF to CACHE */
 void o3_memory::manageSTbuffer () {
     for (WIDTH i = 0; i < _stage_width; i++) {
