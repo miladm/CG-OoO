@@ -8,6 +8,8 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
 			          port<dynInstruction*>& commit_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH commit_width,
+                      bb_memManager* LSQ_MGR,
+                      bb_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
@@ -50,16 +52,16 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         /*-- COMMIT INS --*/
         if (ins->getInsType () == MEM) {
             ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
-            if (g_LSQ_MGR->commit (ins)) {
+            if (_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
-                g_GRF_MGR->commitRegs (ins);
+                _RF_MGR->commitRegs (ins);
                 ins = _iROB->popFront ();
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
             }
         } else {
             ins = _iROB->popFront ();
-            g_GRF_MGR->commitRegs (ins);
+            _RF_MGR->commitRegs (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
             delIns (ins);

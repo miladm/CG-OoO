@@ -5,8 +5,8 @@
  * the backend of the simulator
  ******************************************************************************/
 
-#ifndef _O3_SYSCORE_H
-#define _O3_SYSCORE_H
+#ifndef _BB_SYSCORE_H
+#define _BB_SYSCORE_H
 
 #include "registerRename.h"
 #include "branchPred.h"
@@ -18,15 +18,15 @@
 #include "commit.h"
 
 #include "../unit/sysClock.h"
-#include "memManager.h"
-#include "rfManager.h"
 #include "../unit/unit.h"
 #include "../unit/table.h"
 #include "../unit/port.h"
+#include "memManager.h"
+#include "rfManager.h"
 
-class o3_sysCore : public unit {
+class bb_sysCore : public unit {
 	public:
-		o3_sysCore (sysClock* clk,
+		bb_sysCore (sysClock* clk,
 			  WIDTH bp_width, 
 			  WIDTH fetch_width, 
 			  WIDTH decode_width,
@@ -45,7 +45,7 @@ class o3_sysCore : public unit {
 		      CYCLE commit_to_bp_delay, LENGTH commit_to_bp_buff_len,
 		      CYCLE commit_to_scheduler_delay, LENGTH commit_to_scheduler_buff_len
              );
-        ~o3_sysCore();
+        ~bb_sysCore();
 		void runCore ();
 
 	private:
@@ -84,13 +84,18 @@ class o3_sysCore : public unit {
         port<dynInstruction*> _commit_to_scheduler_port;
 
 		// STAGES
-		o3_branchPred* _bp;
-		o3_fetch* _fetch;
-		o3_decode* _decode;
-		o3_scheduler* _scheduler;
-		o3_execution* _execution;
-		o3_memory* _memory;
-		o3_commit* _commit;
+		bb_branchPred* _bp;
+		bb_fetch* _fetch;
+		bb_decode* _decode;
+		bb_scheduler* _scheduler;
+		bb_execution* _execution;
+		bb_memory* _memory;
+		bb_commit* _commit;
+
+        // RF and LSQ
+        bb_memManager* _LSQ_MGR;
+        bb_rfManager* _RF_MGR;
+
 
         // MISC
         CAMtable<dynInstruction*>* _iROB;

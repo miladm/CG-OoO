@@ -4,7 +4,7 @@
 
 #include "fetch.h"
 
-o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port, 
+bb_fetch::bb_fetch (port<dynInstruction*>& bp_to_fetch_port, 
 	          port<dynInstruction*>& fetch_to_decode_port,
 			  port<dynInstruction*>& fetch_to_bp_port,
 			  WIDTH fetch_width,
@@ -20,9 +20,9 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
     _switch_to_frontend = false;
 }
 
-o3_fetch::~o3_fetch () {}
+bb_fetch::~bb_fetch () {}
 
-SIM_MODE o3_fetch::doFETCH () {
+SIM_MODE bb_fetch::doFETCH () {
     /*-- STAT + DEBUG --*/
     dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
@@ -45,7 +45,7 @@ SIM_MODE o3_fetch::doFETCH () {
 }
 
 /*-- READ FW INSTRUCTIONS FORM THE PIN INPUT QUE --*/
-PIPE_ACTIVITY o3_fetch::fetchImpl () {
+PIPE_ACTIVITY bb_fetch::fetchImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 	for (WIDTH i = 0; i < _stage_width; i++) {
 		/*-- CHECKS --*/
@@ -66,7 +66,7 @@ PIPE_ACTIVITY o3_fetch::fetchImpl () {
     return pipe_stall;
 }
 
-void o3_fetch::squash () {
+void bb_fetch::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
@@ -74,6 +74,6 @@ void o3_fetch::squash () {
     _fetch_to_bp_port->flushPort (squashSeqNum);
 }
 
-void o3_fetch::regStat () {
+void bb_fetch::regStat () {
     _bp_to_fetch_port->regStat ();
 }

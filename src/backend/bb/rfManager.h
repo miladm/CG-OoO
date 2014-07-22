@@ -2,17 +2,17 @@
  * rfManager.h
  ******************************************************************************/
 
-#ifndef _O3_RF_MANAGER_H
-#define _O3_RF_MANAGER_H
+#ifndef _BB_RF_MANAGER_H
+#define _BB_RF_MANAGER_H
 
 #include "../unit/unit.h"
 #include "../unit/dynInstruction.h"
 #include "registerRename.h"
 
-class o3_rfManager : public unit {
+class bb_rfManager : public unit {
 	public:
-		o3_rfManager (sysClock* clk, string rf_name = "o3_rfManager");
-		~o3_rfManager ();
+		bb_rfManager (sysClock* clk, string rf_name = "bb_rfManager");
+		~bb_rfManager ();
 
         bool canRename (dynInstruction* ins);
         bool renameRegs (dynInstruction* ins);
@@ -28,9 +28,7 @@ class o3_rfManager : public unit {
         void updateWireState (AXES_TYPE, WIDTH);
 
 	private:
-        o3_registerRename _GRF;
+        bb_registerRename _GRF;
 };
-
-extern o3_rfManager* g_GRF_MGR;
 
 #endif

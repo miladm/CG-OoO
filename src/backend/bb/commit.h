@@ -2,8 +2,8 @@
  * commit.h
  ******************************************************************************/
 
-#ifndef _bb_COMMIT_H
-#define _bb_COMMIT_H
+#ifndef _BB_COMMIT_H
+#define _BB_COMMIT_H
 
 #include "../unit/stage.h"
 #include "rfManager.h"
@@ -15,6 +15,8 @@ class bb_commit : protected stage {
 			       port<dynInstruction*>& commit_to_scheduler_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH commit_width,
+                   bb_memManager* LSQ_MGR,
+                   bb_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~bb_commit ();
@@ -32,6 +34,8 @@ class bb_commit : protected stage {
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        bb_memManager* _LSQ_MGR;
+        bb_rfManager* _RF_MGR;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;

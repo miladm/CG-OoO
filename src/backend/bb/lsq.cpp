@@ -4,7 +4,7 @@
 
 #include "lsq.h"
 
-o3_lsqCAM::o3_lsqCAM (LENGTH len, 
+bb_lsqCAM::bb_lsqCAM (LENGTH len, 
                 WIDTH rd_port_cnt, 
                 WIDTH wr_port_cnt,
                 sysClock* clk,
@@ -12,9 +12,9 @@ o3_lsqCAM::o3_lsqCAM (LENGTH len,
     : CAMtable<dynInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, table_name)
 {}
 
-o3_lsqCAM::~o3_lsqCAM () {}
+bb_lsqCAM::~bb_lsqCAM () {}
 
-dynInstruction* o3_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
+dynInstruction* bb_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
     if (lsq_id == ST_QU) {
         LENGTH table_size = _table.NumElements ();
         for (LENGTH i = 0; i < table_size; i++) {
@@ -42,7 +42,7 @@ dynInstruction* o3_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
     }
 }
 
-void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
+void bb_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
     CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
@@ -58,7 +58,7 @@ void o3_lsqCAM::setTimer (dynInstruction* elem, CYCLE axes_lat) {
     Assert (true == false && "The LSQ enetry not found.");
 }
 
-void o3_lsqCAM::squash (INS_ID ins_seq_num) {
+void bb_lsqCAM::squash (INS_ID ins_seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
@@ -73,7 +73,7 @@ void o3_lsqCAM::squash (INS_ID ins_seq_num) {
     }
 }
 
-void o3_lsqCAM::delFinishedMemAxes () {
+void bb_lsqCAM::delFinishedMemAxes () {
     CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
@@ -91,7 +91,7 @@ void o3_lsqCAM::delFinishedMemAxes () {
     }
 }
 
-bool o3_lsqCAM::hasCommit () {
+bool bb_lsqCAM::hasCommit () {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         if (getNth_unsafe (i)->getSQstate () == SQ_COMMIT) {
@@ -101,7 +101,7 @@ bool o3_lsqCAM::hasCommit () {
     return false;
 }
 
-bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
+bool bb_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
@@ -115,7 +115,7 @@ bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     return false;
 }
 
-pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID st_seq_num) {
+pair<bool, dynInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID st_seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
@@ -136,7 +136,7 @@ pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed
     return pair<bool, dynInstruction*> (false, NULL);
 }
 
-pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
+pair<bool, dynInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
     CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     if (lsq_id == LD_QU) {

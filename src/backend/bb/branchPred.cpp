@@ -4,7 +4,7 @@
 
 #include "branchPred.h"
 
-o3_branchPred::o3_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
+bb_branchPred::bb_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
 			    		port<dynInstruction*>& bp_to_fetch_port, 
 	    				WIDTH bp_width,
                         sysClock* clk,
@@ -15,17 +15,17 @@ o3_branchPred::o3_branchPred (port<dynInstruction*>& fetch_to_bp_port,
     _bp_to_fetch_port = &bp_to_fetch_port;
 }
 
-o3_branchPred::~o3_branchPred () {}
+bb_branchPred::~bb_branchPred () {}
 
-void o3_branchPred::doBP () {
+void bb_branchPred::doBP () {
     /*-- STAT --*/
     regStat ();
 }
 
-void o3_branchPred::squash () {
+void bb_branchPred::squash () {
 }
 
-void o3_branchPred::regStat () {
+void bb_branchPred::regStat () {
     _fetch_to_bp_port->regStat ();
 }
 

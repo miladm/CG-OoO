@@ -2,8 +2,8 @@
  * registerRename.h
  ******************************************************************************/
 
-#ifndef _O3_REGISTER_RENAME_H
-#define _O3_REGISTER_RENAME_H
+#ifndef _BB_REGISTER_RENAME_H
+#define _BB_REGISTER_RENAME_H
 
 #include "../unit/dynInstruction.h"
 #include "../unit/unit.h"
@@ -11,8 +11,8 @@
 
 #define RD_TO_WR_WIRE_CNT_RATIO 2
 
-struct o3_regElem {
-    o3_regElem (PR reg, REG_REN_STATE state) 
+struct bb_regElem {
+    bb_regElem (PR reg, REG_REN_STATE state) 
         : _reg (reg)
     {
         Assert (state == AVAILABLE || state == ARCH_REG);
@@ -21,16 +21,16 @@ struct o3_regElem {
     }
     const PR _reg;
     REG_REN_STATE _reg_state;
-    o3_regElem* _prev_pr;
+    bb_regElem* _prev_pr;
 };
 
-class o3_registerRename : public unit {
+class bb_registerRename : public unit {
 	public:
-		o3_registerRename (sysClock* clk, string rf_name);
-		o3_registerRename (AR a_rf_lo, AR a_rf_hi, 
+		bb_registerRename (sysClock* clk, string rf_name);
+		bb_registerRename (AR a_rf_lo, AR a_rf_hi, 
                            WIDTH rd_port_cnt, WIDTH wr_port_cnt, 
                            sysClock* clk, string rf_name);
-		~o3_registerRename ();
+		~bb_registerRename ();
 
 		PR renameReg (AR a_reg);
         void squashRenameReg ();
@@ -72,10 +72,10 @@ class o3_registerRename : public unit {
         wires _wr_port;
         wires _rd_port;
 
-		map<AR, o3_regElem*> _fRAT;
-		map<AR, o3_regElem*> _cRAT;
-		map<PR, o3_regElem*> _RF;
-		vector<o3_regElem*> _availablePRset; /* FILO */
+		map<AR, bb_regElem*> _fRAT;
+		map<AR, bb_regElem*> _cRAT;
+		map<PR, bb_regElem*> _RF;
+		vector<bb_regElem*> _availablePRset; /* FILO */
 };
 
 #endif

@@ -4,15 +4,15 @@
 
 #include "rfManager.h"
 
-o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
+bb_rfManager::bb_rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _GRF (clk, "registerRename")
 { }
 
-o3_rfManager::~o3_rfManager () { }
+bb_rfManager::~bb_rfManager () { }
 
 /*-- ARE ALL READ OPERANDS READY? --*/
-bool o3_rfManager::isReady (dynInstruction* ins) {
+bool bb_rfManager::isReady (dynInstruction* ins) {
     List<AR>* p_rdReg_list = ins->getPRrdList ();
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
@@ -29,7 +29,7 @@ bool o3_rfManager::isReady (dynInstruction* ins) {
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
-bool o3_rfManager::canRename (dynInstruction* ins) {
+bool bb_rfManager::canRename (dynInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
         return false; /*-- STALL FETCH --*/
@@ -37,7 +37,7 @@ bool o3_rfManager::canRename (dynInstruction* ins) {
     return true;
 }
 
-bool o3_rfManager::renameRegs (dynInstruction* ins) {
+bool bb_rfManager::renameRegs (dynInstruction* ins) {
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
     Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
@@ -63,7 +63,7 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
 }
 
 /*-- PROCESS WRITE REGISTERS @COMPLETE --*/
-void o3_rfManager::completeRegs (dynInstruction* ins) {
+void bb_rfManager::completeRegs (dynInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
@@ -72,7 +72,7 @@ void o3_rfManager::completeRegs (dynInstruction* ins) {
 }
 
 /*-- PROCESS WRITE REFISTERS @COMMIT --*/
-void o3_rfManager::commitRegs (dynInstruction* ins) {
+void bb_rfManager::commitRegs (dynInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();
     Assert (_ar->NumElements () == _pr->NumElements ());
@@ -87,30 +87,28 @@ void o3_rfManager::commitRegs (dynInstruction* ins) {
     }
 }
 
-void o3_rfManager::squashRenameReg () {
+void bb_rfManager::squashRenameReg () {
     dbg.print (DBG_TEST, "** %s: %s (cyc:)\n", _c_name.c_str (), "in squash for RR");
     _GRF.squashRenameReg ();
 }
 
-bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type) {
+bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type) {
     return _GRF.hasFreeWire (axes_type);
 }
 
-bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
+bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     if (_GRF.getNumFreeWires (axes_type) >= numRegWires)
         return true;
     else
         return false;
 }
 
-void o3_rfManager::updateWireState (AXES_TYPE axes_type) {
+void bb_rfManager::updateWireState (AXES_TYPE axes_type) {
     _GRF.updateWireState (axes_type);
 }
 
-void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+void bb_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
     for (WIDTH i = 0; i < numRegWires; i++) {
         _GRF.updateWireState (axes_type);
     }
 }
-
-o3_rfManager* g_GRF_MGR;

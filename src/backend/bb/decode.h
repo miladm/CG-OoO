@@ -2,19 +2,19 @@
  * decode.h
  ******************************************************************************/
 
-#ifndef _O3_DECODE_H
-#define _O3_DECODE_H
+#ifndef _BB_DECODE_H
+#define _BB_DECODE_H
 
 #include "../unit/stage.h"
 
-class o3_decode : protected stage {
+class bb_decode : protected stage {
 	public:
-		o3_decode (port<dynInstruction*>& fetch_to_decode_port, 
+		bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
 			       port<dynInstruction*>& decode_to_schedule_port, 
 			       WIDTH decode_width,
                    sysClock* clk,
 			       string stage_name);
-		~o3_decode ();
+		~bb_decode ();
 		void doDECODE ();
 
     private:

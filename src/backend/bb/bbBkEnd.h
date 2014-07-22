@@ -1,14 +1,14 @@
 /*******************************************************************************
- * oooBkEnd.h
+ * bbBkEnd.h
  *******************************************************************************/
 
-#ifndef _G_OOO_BACKEND
-#define _G_OOO_BACKEND
+#ifndef _G_BB_BACKEND
+#define _G_BB_BACKEND
 
 #include <stdint.h>
 #include "sysCore.h"
 
-void oooBkEnd_init (int argc, char const * argv[]);
-void oooBkEndRun();
+void bbBkEnd_init (int argc, char const * argv[]);
+void bbBkEndRun();
 
 #endif

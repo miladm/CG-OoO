@@ -2,19 +2,19 @@
  * branchPred.h
  ******************************************************************************/
 
-#ifndef _O3_BRANCHP_PRED_H
-#define _O3_BRANCHP_PRED_H
+#ifndef _BB_BRANCHP_PRED_H
+#define _BB_BRANCHP_PRED_H
 
 #include "../unit/stage.h"
 
-class o3_branchPred : protected stage {
+class bb_branchPred : protected stage {
 	public:
-		o3_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
+		bb_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
 			    	port<dynInstruction*>& bp_to_fetch_port, 
 			    	WIDTH bp_width,
                     sysClock* clk,
 			    	string stage_name);
-		~o3_branchPred ();
+		~bb_branchPred ();
 		void doBP ();
         void squash ();
         void regStat ();

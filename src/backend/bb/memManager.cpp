@@ -4,9 +4,9 @@
 
 #include "memManager.h"
 
-o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+bb_memManager::bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
                               sysClock* clk, 
-                              string lsq_name = "o3_memManager") 
+                              string lsq_name = "bb_memManager") 
     : unit (lsq_name, clk),
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
@@ -17,12 +17,12 @@ o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
 
-o3_memManager::~o3_memManager () {}
+bb_memManager::~bb_memManager () {}
 
 /* ***************** *
  *      LSQ FUNC     *
  * ***************** */
-BUFF_STATE o3_memManager::getTableState (LSQ_ID lsq_id) {
+BUFF_STATE bb_memManager::getTableState (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
         return _LQ.getTableState ();
     } else {
@@ -30,7 +30,7 @@ BUFF_STATE o3_memManager::getTableState (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
+bool bb_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
         return _LQ.hasFreeWire (axes_type);
     } else {
@@ -38,7 +38,7 @@ bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     }
 }
 
-void o3_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
+void bb_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
         _LQ.updateWireState (axes_type);
     } else {
@@ -46,7 +46,7 @@ void o3_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     }
 }
 
-void o3_memManager::pushBack (dynInstruction *ins) {
+void bb_memManager::pushBack (dynInstruction *ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
@@ -59,7 +59,7 @@ void o3_memManager::pushBack (dynInstruction *ins) {
     }
 }
 
-void o3_memManager::memAddrReady (dynInstruction* ins) {
+void bb_memManager::memAddrReady (dynInstruction* ins) {
     if (ins->getMemType () == LOAD) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
     } else {
@@ -67,7 +67,7 @@ void o3_memManager::memAddrReady (dynInstruction* ins) {
     }
 }
 
-bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
+bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
     //TODO take all this block to lsqManager.cpp
     CYCLE axes_lat;
     dynInstruction* mem_ins;
@@ -96,7 +96,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
     return true;
 }
 
-CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
+CYCLE bb_memManager::getAxesLatency (dynInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
         //mem_ins->setLQstate (LQ_CACHE_WAIT); TODO put back and fix
         return g_eu_lat._st_buff_lat;
@@ -110,7 +110,7 @@ CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     }
 }
 
-bool o3_memManager::commit (dynInstruction* ins) {
+bool bb_memManager::commit (dynInstruction* ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
@@ -130,7 +130,7 @@ bool o3_memManager::commit (dynInstruction* ins) {
     return true;
 }
 
-void o3_memManager::squash (INS_ID squash_seq_num) {
+void bb_memManager::squash (INS_ID squash_seq_num) {
     _LQ.squash (squash_seq_num);
     _SQ.squash (squash_seq_num);
 }
@@ -138,16 +138,16 @@ void o3_memManager::squash (INS_ID squash_seq_num) {
 /* ***************** *
  * STORE QUEUE FUNC  *
  * ***************** */
-bool o3_memManager::hasCommitSt () {
+bool bb_memManager::hasCommitSt () {
     return _SQ.hasCommit ();
 }
 
 /*-- DELETE ONE INS WITH FINISHED MEM STORE --*/
-void o3_memManager::delAfinishedSt () {
+void bb_memManager::delAfinishedSt () {
     _SQ.delFinishedMemAxes ();
 }
 
-pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
+pair<bool, dynInstruction*> bb_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
         return _LQ.hasFinishedIns (lsq_id);
     } else {
@@ -155,11 +155,11 @@ pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     }
 }
 
-bool o3_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
+bool bb_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
     return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 
-pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins) {
+pair<bool, dynInstruction*> bb_memManager::isLQviolation (dynInstruction* st_ins) {
 #ifdef ASSERTION
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
@@ -175,7 +175,7 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
 /* ***************** *
  *  LOAD QUEUE FUNC  *
  * ***************** */
-void o3_memManager::completeLd (dynInstruction* ins) {
+void bb_memManager::completeLd (dynInstruction* ins) {
     ins->setLQstate (LQ_COMPLETE);
 }
 
@@ -184,7 +184,7 @@ void o3_memManager::completeLd (dynInstruction* ins) {
  * return data. The port must be searched for finding the data that is being
  * forwarded every cycle (in the scheduler)
  */
-void o3_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
+void bb_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
 #ifdef ASSERTION
     Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
 #endif
@@ -195,5 +195,3 @@ void o3_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
     dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
                "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
-
-o3_memManager* g_LSQ_MGR;

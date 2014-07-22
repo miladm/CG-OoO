@@ -2,8 +2,8 @@
  * execution.h
  ******************************************************************************/
 
-#ifndef _O3_EXECUTION_H
-#define _O3_EXECUTION_H
+#ifndef _BB_EXECUTION_H
+#define _BB_EXECUTION_H
 
 #include "../unit/stage.h"
 #include "rfManager.h"
@@ -11,15 +11,17 @@
 
 //typedef enum {COMPLETE_NORMAL, COMPLETE_SQUASH} COMPLETE_STATUS;
 
-class o3_execution : protected stage {
+class bb_execution : protected stage {
 	public:
-		o3_execution (port<dynInstruction*>& scheduler_to_execution_port, 
+		bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                       port<dynInstruction*>& execution_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
 			          WIDTH execution_width,
+                      bb_memManager* LSQ_MGR,
+                      bb_rfManager* RF_MGR,
                       sysClock* clk,
 			          string stage_name);
-		~o3_execution ();
+		~bb_execution ();
 		void doEXECUTION ();
 
     private:
@@ -35,6 +37,8 @@ class o3_execution : protected stage {
 		port<dynInstruction*>* _scheduler_to_execution_port;
         port<dynInstruction*>* _execution_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        bb_memManager* _LSQ_MGR;
+        bb_rfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
 };

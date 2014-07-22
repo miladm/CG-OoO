@@ -7,8 +7,8 @@
  * (i.e. no store set speculation)
  ******************************************************************************/
 
-#ifndef _O3_MEM_MANAGER_H
-#define _O3_MEM_MANAGER_H
+#ifndef _BB_MEM_MANAGER_H
+#define _BB_MEM_MANAGER_H
 
 #include "../unit/dynInstruction.h"
 #include "../unit/exeUnit.h"
@@ -18,12 +18,12 @@
 #include "../unit/port.h"
 #include "lsq.h"
 
-class o3_memManager : public unit {
+class bb_memManager : public unit {
     public:
-        o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+        bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
                        sysClock* clk, 
                        string lsq_name);
-        ~o3_memManager ();
+        ~bb_memManager ();
 
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);
@@ -54,10 +54,8 @@ class o3_memManager : public unit {
         cache _L2;
         cache _L3;
 
-        o3_lsqCAM _LQ;
-        o3_lsqCAM _SQ;
+        bb_lsqCAM _LQ;
+        bb_lsqCAM _SQ;
 };
-
-extern o3_memManager* g_LSQ_MGR;
 
 #endif

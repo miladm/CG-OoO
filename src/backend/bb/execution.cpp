@@ -4,10 +4,12 @@
 
 #include "execution.h"
 
-o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port, 
+bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                             port<dynInstruction*>& execution_to_scheduler_port, 
                             CAMtable<dynInstruction*>* iROB,
 	    	                WIDTH execution_width,
+                            bb_memManager* LSQ_MGR,
+                            bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (execution_width, stage_name, clk)
@@ -15,6 +17,8 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _iROB = iROB;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
     _aluExeUnits = new List<exeUnit*>;
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU); //TODO make this config better with more EU types
@@ -22,9 +26,9 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
     }
 }
 
-o3_execution::~o3_execution () {}
+bb_execution::~bb_execution () {}
 
-void o3_execution::doEXECUTION () {
+void bb_execution::doEXECUTION () {
     /*-- STAT + DEBUG --*/
     dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
@@ -50,7 +54,7 @@ void o3_execution::doEXECUTION () {
 }
 
 /*-- WRITE COMPLETE INS - WRITEBACK --*/
-COMPLETE_STATUS o3_execution::completeIns () {
+COMPLETE_STATUS bb_execution::completeIns () {
     g_var.setOldSquashSN ();
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
@@ -64,14 +68,14 @@ COMPLETE_STATUS o3_execution::completeIns () {
         /*-- COMPLETE INS --*/
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             ins->setPipeStage (MEM_ACCESS);
-            g_LSQ_MGR->memAddrReady (ins);
+            _LSQ_MGR->memAddrReady (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                       "Complete load - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
-            g_LSQ_MGR->memAddrReady (ins);
-            g_GRF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
-            pair<bool, dynInstruction*> p = g_LSQ_MGR->isLQviolation (ins);
+            _LSQ_MGR->memAddrReady (ins);
+            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
+            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
             bool is_violation = p.first;
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
@@ -79,10 +83,10 @@ COMPLETE_STATUS o3_execution::completeIns () {
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete store - ins addr", ins->getInsID (), _clk->now ());
         } else {
-            //if (!g_GRF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
+            //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
-            g_GRF_MGR->completeRegs (ins);
-            //g_GRF_MGR->updateWireState (WRITE); //TODO put back
+            _RF_MGR->completeRegs (ins);
+            //_RF_MGR->updateWireState (WRITE); //TODO put back
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete ins", ins->getInsID (), _clk->now ());
         }
@@ -108,7 +112,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
 }
 
 /*-- EXECUTE INS --*/
-PIPE_ACTIVITY o3_execution::executionImpl () {
+PIPE_ACTIVITY bb_execution::executionImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     for (WIDTH i = 0; i < _stage_width; i++) {
@@ -135,7 +139,7 @@ PIPE_ACTIVITY o3_execution::executionImpl () {
     return pipe_stall;
 }
 
-void o3_execution::forward (dynInstruction* ins, CYCLE eu_latency) {
+void bb_execution::forward (dynInstruction* ins, CYCLE eu_latency) {
     if (_execution_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     if (ins->getInsType () != MEM) {
         CYCLE cdb_ready_latency = eu_latency - 1;
@@ -145,7 +149,7 @@ void o3_execution::forward (dynInstruction* ins, CYCLE eu_latency) {
     }
 }
 
-void o3_execution::squashCtrl () {
+void bb_execution::squashCtrl () {
     string state_switch;
     if ((g_var.g_pipe_state == PIPE_NORMAL || 
          g_var.g_pipe_state == PIPE_WAIT_FLUSH || 
@@ -182,20 +186,20 @@ void o3_execution::squashCtrl () {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
-        g_GRF_MGR->squashRenameReg ();
+        _RF_MGR->squashRenameReg ();
     } else {
         return; /*-- No state change --*/
     }
     dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str(), _clk->now ());
 }
 
-void o3_execution::squash () {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "o3_execution Ports Flush", _clk->now ());
+void bb_execution::squash () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "bb_execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _execution_to_scheduler_port->flushPort (squashSeqNum);
 }
 
-void o3_execution::regStat () {
+void bb_execution::regStat () {
     _scheduler_to_execution_port->regStat ();
 }

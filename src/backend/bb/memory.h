@@ -2,22 +2,24 @@
  * memory.h
  ******************************************************************************/
 
-#ifndef _O3_MEMORY_H
-#define _O3_MEMORY_H
+#ifndef _BB_MEMORY_H
+#define _BB_MEMORY_H
 
 #include "../unit/stage.h"
 #include "rfManager.h"
 #include "memManager.h"
 
-class o3_memory : protected stage {
+class bb_memory : protected stage {
 	public:
-		o3_memory (port<dynInstruction*>& execution_to_memory_port, 
+		bb_memory (port<dynInstruction*>& execution_to_memory_port, 
                    port<dynInstruction*>& memory_to_scheduler_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH memory_width,
+                   bb_memManager* LSQ_MGR,
+                   bb_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
-		~o3_memory ();
+		~bb_memory ();
 		void doMEMORY ();
 
     private:
@@ -33,6 +35,8 @@ class o3_memory : protected stage {
 		port<dynInstruction*>* _execution_to_memory_port;
         port<dynInstruction*>* _memory_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        bb_memManager* _LSQ_MGR;
+        bb_rfManager* _RF_MGR;
         port<dynInstruction*> _mem_buff;
         RAMtable<dynInstruction*> _mshr;
         FIFOtable<dynInstruction*> _st_buff;

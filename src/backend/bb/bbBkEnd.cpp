@@ -1,20 +1,20 @@
 /*******************************************************************************
- * oooBkEnd.cpp
+ * bbBkEnd.cpp
  *******************************************************************************/
 
-#include "oooBkEnd.h"
+#include "bbBkEnd.h"
 
-o3_sysCore* _ooo_core;
-sysClock* g_ooo_clk;
+bb_sysCore* _bb_core;
+sysClock* g_bb_clk;
 
-void oooBkEndRun() {
-    _ooo_core->runCore();
+void bbBkEndRun() {
+    _bb_core->runCore();
 }
 
-void oooBkEnd_init (int argc, char const * argv[]) {
+void bbBkEnd_init (int argc, char const * argv[]) {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
-	g_ooo_clk = new sysClock (1);
-    _ooo_core = new o3_sysCore (g_ooo_clk, 
+	g_bb_clk = new sysClock (1);
+    _bb_core = new bb_sysCore (g_bb_clk, 
                                 4, 32, 32, 32, 4, 4, 4,
                                 2, 10, 
                                 1, 10, 
@@ -28,7 +28,7 @@ void oooBkEnd_init (int argc, char const * argv[]) {
                                 1, 10);
 }
 
-void oooBkEnd_fini () {
-    delete _ooo_core;
-    delete g_ooo_clk;
+void bbBkEnd_fini () {
+    delete _bb_core;
+    delete g_bb_clk;
 }
