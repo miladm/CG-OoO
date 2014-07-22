@@ -4,7 +4,7 @@
 
 #include "commit.h"
 
-o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port, 
+bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port, 
 			          port<dynInstruction*>& commit_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH commit_width,
@@ -18,9 +18,9 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
     _iROB = iROB;
 }
 
-o3_commit::~o3_commit () {}
+bb_commit::~bb_commit () {}
 
-void o3_commit::doCOMMIT () {
+void bb_commit::doCOMMIT () {
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     /*-- STAT --*/
     regStat ();
@@ -36,7 +36,7 @@ void o3_commit::doCOMMIT () {
 }
 
 /*-- COMMIT COMPLETE INS AT THE HEAD OF QUEUE --*/
-PIPE_ACTIVITY o3_commit::commitImpl () {
+PIPE_ACTIVITY bb_commit::commitImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
@@ -75,7 +75,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
     return pipe_stall;
 }
 
-void o3_commit::squash () {
+void bb_commit::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
     if (_iROB->getTableSize () == 0) return;
@@ -87,7 +87,7 @@ void o3_commit::squash () {
     g_var.resetSquashType ();
 }
 
-void o3_commit::bpMispredSquash () {
+void bb_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iROB->getTableSize () - 1;
@@ -126,7 +126,7 @@ void o3_commit::bpMispredSquash () {
     }
 }
 
-void o3_commit::memMispredSquash () {
+void bb_commit::memMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
@@ -141,10 +141,10 @@ void o3_commit::memMispredSquash () {
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
-void o3_commit::delIns (dynInstruction* ins) {
+void bb_commit::delIns (dynInstruction* ins) {
     delete ins;
 }
 
-void o3_commit::regStat () {
+void bb_commit::regStat () {
     _iROB->regStat ();
 }
