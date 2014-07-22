@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*--******************************************************************************
  * rfManager.cpp
- ******************************************************************************/
+ *****************************************************************************--*/
 
 #include "rfManager.h"
 
@@ -11,28 +11,28 @@ o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
 
 o3_rfManager::~o3_rfManager () { }
 
-/* ARE ALL READ OPERANDS READY? */
+/*-- ARE ALL READ OPERANDS READY? --*/
 bool o3_rfManager::isReady (dynInstruction* ins) {
     List<AR>* p_rdReg_list = ins->getPRrdList ();
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
         if (!_GRF.isPRvalid (reg)) {
-            return false; /* operand not available */
+            return false; /*-- operand not available --*/
         } else {
-            p_rdReg_list->RemoveAt (i); /*optimization */
+            p_rdReg_list->RemoveAt (i); /*--optimization --*/
         }
     }
     if (p_rdReg_list->NumElements () == 0) {
-        return true; /* all operands available */
+        return true; /*-- all operands available --*/
     }
-    return false; /* not all operands available */
+    return false; /*-- not all operands available --*/
 }
 
-/* CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS */
+/*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
 bool o3_rfManager::canRename (dynInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
-        return false; /* STALL FETCH */
+        return false; /*-- STALL FETCH --*/
     }
     return true;
 }
@@ -42,14 +42,14 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
 
-    /* RENAME READ REFISTERS FIRST */
+    /*-- RENAME READ REFISTERS FIRST --*/
     for (int i = 0; i < ar_rd->NumElements (); i++) {
         AR a_reg = ar_rd->Nth (i);
         PR p_reg = _GRF.renameReg (a_reg);
         ins->setPR (p_reg, READ);
     }
 
-    /* RENAME WRITE REFISTERS SECOND */
+    /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
         Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have been available.");
         AR a_reg = ar_wr->Nth (i);
@@ -59,10 +59,10 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
         _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
         ins->setPR (new_pr, WRITE);
     }
-    return false; /* DON'T STALL FETCH */
+    return false; /*-- DON'T STALL FETCH --*/
 }
 
-/* PROCESS WRITE REGISTERS @COMPLETE */
+/*-- PROCESS WRITE REGISTERS @COMPLETE --*/
 void o3_rfManager::completeRegs (dynInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
@@ -71,7 +71,7 @@ void o3_rfManager::completeRegs (dynInstruction* ins) {
     }
 }
 
-/* PROCESS WRITE REFISTERS @COMMIT */
+/*-- PROCESS WRITE REFISTERS @COMMIT --*/
 void o3_rfManager::commitRegs (dynInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();

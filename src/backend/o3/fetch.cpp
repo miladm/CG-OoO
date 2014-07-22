@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  * fetch.cpp
- ******************************************************************************/
+ ********************************************************************************/
 
 #include "fetch.h"
 
@@ -23,18 +23,18 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
 o3_fetch::~o3_fetch () {}
 
 SIM_MODE o3_fetch::doFETCH () {
-    /* STAT + DEBUG */
+    /*-- STAT + DEBUG --*/
     dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    /* SQUASH HANDLING */
+    /*-- SQUASH HANDLING --*/
     if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (g_var.g_pipe_state == PIPE_NORMAL) {
         pipe_stall = fetchImpl ();
     }
 
-    /* STAT */
+    /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 
     if (_switch_to_frontend) {
@@ -44,22 +44,22 @@ SIM_MODE o3_fetch::doFETCH () {
 	return BACK_END;
 }
 
-/* READ FW INSTRUCTIONS FORM THE PIN INPUT QUE */
+/*-- READ FW INSTRUCTIONS FORM THE PIN INPUT QUE --*/
 PIPE_ACTIVITY o3_fetch::fetchImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 	for (WIDTH i = 0; i < _stage_width; i++) {
-		/* CHECKS */
+		/*-- CHECKS --*/
         if (g_var.isCodeCacheEmpty()) { _switch_to_frontend = true; break; }
 		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
 
-        /* FETCH INS */
+        /*-- FETCH INS --*/
         dynInstruction* ins = g_var.popCodeCache();
         ins->setPipeStage(FETCH);
         g_var.remFromCodeCache ();
 		_fetch_to_decode_port->pushBack(ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), _clk->now ());
 
-        /* STAT */
+        /*-- STAT --*/
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
 	}

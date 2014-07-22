@@ -59,15 +59,14 @@ COMPLETE_STATUS o3_execution::completeIns () {
 
         /*-- CHECKS --*/
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
-      //if (ins != NULL && ins->getInsType () == MEM && 
-      //    _execution_to_memory_port->getBuffState () == FULL_BUFF) break; //TODO uselss now?
         if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
         /*-- COMPLETE INS --*/
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             ins->setPipeStage (MEM_ACCESS);
-            g_LSQ_MGR->memAddrReady (ins); //TODO what should exactly happen here for LD's?
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete mem ins addr", ins->getInsID (), _clk->now ());
+            g_LSQ_MGR->memAddrReady (ins);
+            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                      "Complete load - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
             g_LSQ_MGR->memAddrReady (ins);
@@ -76,17 +75,16 @@ COMPLETE_STATUS o3_execution::completeIns () {
             bool is_violation = p.first;
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
-            if (is_violation) {
-                //g_LSQ_MGR->squash (violating_ld_ins->getInsID ());
-                violating_ld_ins->setMemViolation ();
-            }
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete mem ins addr", ins->getInsID (), _clk->now ());
+            if (is_violation) { violating_ld_ins->setMemViolation (); }
+            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                       "Complete store - ins addr", ins->getInsID (), _clk->now ());
         } else {
             //if (!g_GRF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
             g_GRF_MGR->completeRegs (ins);
             //g_GRF_MGR->updateWireState (WRITE); //TODO put back
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
+            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                       "Complete ins", ins->getInsID (), _clk->now ());
         }
         EU->resetEU ();
 
@@ -98,11 +96,11 @@ COMPLETE_STATUS o3_execution::completeIns () {
             g_var.setSquashSN (violating_ld_ins->getInsID ());
             g_var.setSquashType (MEM_MISPRED);
         }
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }
 
     if (g_var.isSpeculationViolation ()) {
-        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str (), 
+                  "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
         return COMPLETE_SQUASH;
     }
     dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Right Path", _clk->now ());

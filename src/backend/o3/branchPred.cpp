@@ -18,7 +18,7 @@ o3_branchPred::o3_branchPred (port<dynInstruction*>& fetch_to_bp_port,
 o3_branchPred::~o3_branchPred () {}
 
 void o3_branchPred::doBP () {
-    /* STAT */
+    /*-- STAT --*/
     regStat ();
 }
 

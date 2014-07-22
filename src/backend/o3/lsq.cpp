@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  * lsq.cpp
- ******************************************************************************/
+ ********************************************************************************/
 
 #include "lsq.h"
 
@@ -26,7 +26,7 @@ dynInstruction* o3_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
             }
         }
         dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No ST ins issued.");
-        return NULL; /* NOTHING ISSUED */
+        return NULL; /*-- NOTHING ISSUED --*/
     } else {
         LENGTH table_size = _table.NumElements ();
         for (LENGTH i = 0; i < table_size; i++) {
@@ -38,7 +38,7 @@ dynInstruction* o3_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
             }
         }
         dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No LD ins issued.");
-        return NULL; /* NOTHING ISSUED */
+        return NULL; /*-- NOTHING ISSUED --*/
     }
 }
 
@@ -65,7 +65,8 @@ void o3_lsqCAM::squash (INS_ID ins_seq_num) {
         if (ins->getInsID () >= ins_seq_num) {
             delete _table.Nth (i);
             _table.RemoveAt (i);
-            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), "Removing ins:", ins->getInsID (), "due to", ins_seq_num);
+            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
+                       "Removing ins:", ins->getInsID (), "due to", ins_seq_num);
         } else {
             break;
         }
@@ -80,11 +81,13 @@ void o3_lsqCAM::delFinishedMemAxes () {
             _table.Nth(i)->_delay.getStopTime () <= now) {
             Assert (getNth_unsafe (i)->getSQstate () == SQ_CACHE_DISPATCH);
             dynInstruction* ins = pullNth (i);
-            dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Found a finished ST ins: ", ins->getInsID ());
+            dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), 
+                       "Found a finished ST ins: ", ins->getInsID ());
             delete ins;
-            break; /* REMOVE ONE ELEM PER INVOCATION */
+            break; /*-- REMOVE ONE ELEM PER INVOCATION --*/
         }
-        dbg.print (DBG_MEMORY, "%s: %s %ld %ld\n", _c_name.c_str (), "No finished ST ins.", _table.Nth(0)->_delay.isValidStopTime (), now);
+        dbg.print (DBG_MEMORY, "%s: %s %ld %ld\n", _c_name.c_str (), 
+                   "No finished ST ins.", _table.Nth(0)->_delay.isValidStopTime (), now);
     }
 }
 
@@ -145,7 +148,8 @@ pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                  _table.Nth(i)->_delay.isValidStopTime () &&
                  _table.Nth(i)->_delay.getStopTime () <= now) {
                 CYCLE stop_time = _table.Nth(i)->_delay.getStopTime ();
-                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
+                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), 
+                           "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, dynInstruction*> (true, ins);
             }
         }
@@ -158,7 +162,8 @@ pair<bool, dynInstruction*> o3_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                 _table.Nth(i)->_delay.isValidStopTime () &&
                 _table.Nth(i)->_delay.getStopTime () <= now) {
                 CYCLE stop_time = _table.Nth(i)->_delay.getStopTime ();
-                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), "Found a finished ST ins: ", ins->getInsID (), stop_time, now);
+                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), 
+                           "Found a finished ST ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, dynInstruction*> (true, ins);
             }
         }

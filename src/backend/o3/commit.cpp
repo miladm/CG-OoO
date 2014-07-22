@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  * commit.cpp
- *******************************************************************************/
+ *********************************************************************************/
 
 #include "commit.h"
 
@@ -22,32 +22,32 @@ o3_commit::~o3_commit () {}
 
 void o3_commit::doCOMMIT () {
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
-    /* STAT */
+    /*-- STAT --*/
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    /* SQUASH HANDLING */
+    /*-- SQUASH HANDLING --*/
     if (! (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = commitImpl ();
     }
 
-    /* STAT */
+    /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 
-/* COMMIT COMPLETE INS AT THE HEAD OF QUEUE */
+/*-- COMMIT COMPLETE INS AT THE HEAD OF QUEUE --*/
 PIPE_ACTIVITY o3_commit::commitImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
+        /*-- CHECKS --*/
         if (_iROB->getTableState () == EMPTY_BUFF) break;
         if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
-        //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!"); (TODO - put it back)
         if (ins->isMemOrBrViolation ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
+        Assert (ins->getNumRdPR () == 0 && "instruction must have been ready long ago!");
 
-        /* COMMIT INS */
+        /*-- COMMIT INS --*/
         if (ins->getInsType () == MEM) {
             ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
             if (g_LSQ_MGR->commit (ins)) {
@@ -65,10 +65,10 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
             delIns (ins);
         }
 
-        /* UPDATE WIRES */
+        /*-- UPDATE WIRES --*/
         _iROB->updateWireState (READ);
 
-        /* STAT */
+        /*-- STAT --*/
         s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
         pipe_stall = PIPE_BUSY;
     }
@@ -140,7 +140,7 @@ void o3_commit::memMispredSquash () {
     }
 }
 
-/* DELETE INSTRUCTION OBJ */
+/*-- DELETE INSTRUCTION OBJ --*/
 void o3_commit::delIns (dynInstruction* ins) {
     delete ins;
 }

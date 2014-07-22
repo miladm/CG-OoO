@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  * sysCore.cpp
- *******************************************************************************/
+ *********************************************************************************/
 
 #include "sysCore.h"
 
@@ -56,12 +56,12 @@ o3_sysCore::o3_sysCore (sysClock* clk,
       _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, _clk, "commit_to_bp_port"),
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
-    /* INIT UNITS */
+    /*-- INIT UNITS --*/
     g_GRF_MGR = new o3_rfManager (_clk, "rfManager");
     g_LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
     _iROB = new CAMtable<dynInstruction*>(100, 32, 32, _clk, "iROB");
 
-    /* INIT STAGES */
+    /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new o3_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
     _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
@@ -98,6 +98,6 @@ void o3_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        //if (_clk->now () == 1000) exit (-1); /* for debug */
+        //if (_clk->now () == 1000) exit (-1); /*-- for debug --*/
 	}
 }

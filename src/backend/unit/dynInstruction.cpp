@@ -228,9 +228,6 @@ void dynInstruction::resetStates () {
     while (_p_wrReg.NumElements () > 0) {
         _p_wrReg.RemoveAt(0);
     }
-  //for (int i = 0; i < _p_rdReg.NumElements(); i++) {
-  //    _p_rdReg_waitList.Append (_p_rdReg.Nth(i));
-  //}
 
     while (_a_rdReg_waitList.NumElements () > 0) {
         _a_rdReg_waitList.RemoveAt(0);

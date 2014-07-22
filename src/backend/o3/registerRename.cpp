@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  *  registerRename.cpp
- ******************************************************************************/
+ ********************************************************************************/
 
 #include "registerRename.h"
 
@@ -17,10 +17,10 @@ o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
 {
     _cycle = START_CYCLE;
 
-    /* INITIALIZE ALL TABLES */
+    /*-- INITIALIZE ALL TABLES --*/
     PR PR_counter = _p_rf_lo;
 
-    /* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
+    /*-- INITIALIZE ARCHITECTURAL REGISTER DOMAIN --*/
     for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
         _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
@@ -29,7 +29,7 @@ o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
         PR_counter++;
     }
 
-    /* INITIALIZE RENAME REGISTER DOMAIN */
+    /*-- INITIALIZE RENAME REGISTER DOMAIN --*/
     while (PR_counter <= _p_rf_hi) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
         _availablePRset.push_back (p_reg);
@@ -61,10 +61,10 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
 {
     _cycle = START_CYCLE;
 
-	/* INITIALIZE ALL TABLES */
+	/*-- INITIALIZE ALL TABLES --*/
 	PR PR_counter = _p_rf_lo;
 
-	/* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
+	/*-- INITIALIZE ARCHITECTURAL REGISTER DOMAIN --*/
 	for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
 		_fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
@@ -73,7 +73,7 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
 		PR_counter++;
 	}
 
-	/* INITIALIZE RENAME REGISTER DOMAIN */
+	/*-- INITIALIZE RENAME REGISTER DOMAIN --*/
 	while (PR_counter <= _p_rf_hi) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
 		_availablePRset.push_back (p_reg);
@@ -208,7 +208,7 @@ REG_REN_STATE o3_registerRename::getPRstate (PR p_reg) {
 	return _RF[p_reg]->_reg_state;
 }
 
-/* FIND IF REG DATA IS AVAILABLE FOR READ */
+/*-- FIND IF REG DATA IS AVAILABLE FOR READ --*/
 bool o3_registerRename::isPRvalid (PR p_reg) {
 #ifdef ASSERTION
     Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);

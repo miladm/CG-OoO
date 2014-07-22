@@ -24,17 +24,17 @@ o3_memManager::~o3_memManager () {}
  * ***************** */
 BUFF_STATE o3_memManager::getTableState (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
-        return _LQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+        return _LQ.getTableState ();
     } else {
-        return _SQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+        return _SQ.getTableState ();
     }
 }
 
 bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFreeWire (axes_type); //TODO set state to LQ_ADDR_WAIT
+        return _LQ.hasFreeWire (axes_type);
     } else {
-        return _SQ.hasFreeWire (axes_type); //TODO set state to LQ_ADDR_WAIT
+        return _SQ.hasFreeWire (axes_type);
     }
 }
 
@@ -50,11 +50,11 @@ void o3_memManager::pushBack (dynInstruction *ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
-        _LQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _LQ.pushBack (ins);
         ins->setLQstate (LQ_ADDR_WAIT);
     } else {
         Assert (_SQ.getTableState () != FULL_BUFF);
-        _SQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _SQ.pushBack (ins);
         ins->setSQstate (SQ_ADDR_WAIT);
     }
 }
@@ -75,7 +75,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
-        _LQ.setTimer (mem_ins, axes_lat); //TODO good API?
+        _LQ.setTimer (mem_ins, axes_lat);
         forward (mem_ins, axes_lat);
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
@@ -98,6 +98,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
 
 CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
+        //mem_ins->setLQstate (LQ_CACHE_WAIT); TODO put back and fix
         return g_eu_lat._st_buff_lat;
     //} else if () { /*TODO for MSHR */
     } else {
@@ -122,13 +123,9 @@ bool o3_memManager::commit (dynInstruction* ins) {
         _LQ.updateWireState (READ);
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
     } else {
-        //TODO apply hardware costraints here
         Assert (ins->getSQstate () == SQ_COMPLETE);
         ins->setSQstate (SQ_COMMIT);
-        //Assert (ins->getInsID () == _SQ.getFront()->getInsID ());
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:", ins->getInsID ());
-        //dynInstruction* st_ins = _SQ.popFront (); //TODO should it be in order? don't think so
-        //Assert (st_ins->getInsID () == ins->getInsID ());
     }
     return true;
 }
@@ -145,7 +142,7 @@ bool o3_memManager::hasCommitSt () {
     return _SQ.hasCommit ();
 }
 
-/* DELETE ONE INS WITH FINISHED MEM STORE */
+/*-- DELETE ONE INS WITH FINISHED MEM STORE --*/
 void o3_memManager::delAfinishedSt () {
     _SQ.delFinishedMemAxes ();
 }
@@ -191,9 +188,7 @@ void o3_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
 #ifdef ASSERTION
     Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
 #endif
-    cout << "truing to FWD\n";
     if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
-    cout << "forwarding to schedule \n";
     CYCLE cdb_ready_latency = mem_latency - 1;
     Assert (cdb_ready_latency >= 0);
     _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);

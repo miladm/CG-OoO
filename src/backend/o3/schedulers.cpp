@@ -1,6 +1,6 @@
-/*******************************************************************************
+/*********************************************************************************
  * scheduler.cpp
- *******************************************************************************/
+ *********************************************************************************/
 
 #include "schedulers.h"
 
@@ -35,18 +35,18 @@ o3_scheduler::~o3_scheduler () {
 }
 
 void o3_scheduler::doSCHEDULER () {
-    /* STAT + DEBUG */
+    /*-- STAT + DEBUG --*/
     dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    /* SQUASH HANDLING */
+    /*-- SQUASH HANDLING --*/
     if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
 
-    /* STAT */
+    /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
 
@@ -55,10 +55,10 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 
     updateResStns ();
 
-    /* READ FROM INS WINDOW */
+    /*-- READ FROM INS WINDOW --*/
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (WIDTH i = 0; i < _stage_width; i++) {
-            /* CHECKS */
+            /*-- CHECKS --*/
             if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
             if (_ResStns.Nth(j)->getTableState () == EMPTY_BUFF) continue;
             if (!_ResStns.Nth(j)->hasFreeWire (READ)) continue;
@@ -68,17 +68,17 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             WIDTH num_ar = ins->getTotNumRdAR ();
             if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
 
-            /* READ INS WIN */
+            /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
             ins->setPipeStage (ISSUE);
             _scheduler_to_execution_port->pushBack (ins);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
-            /* UPDATE WIRES */
+            /*-- UPDATE WIRES --*/
             _ResStns.Nth(j)->updateWireState (READ);
             g_GRF_MGR->updateWireState (READ, num_ar);
 
-            /* STAT */
+            /*-- STAT --*/
             s_ins_cnt++;
             pipe_stall = PIPE_BUSY;
         }
@@ -100,11 +100,11 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     return false;
 }
 
-/* WRITE INTO INS WINDOW */
+/*-- WRITE INTO INS WINDOW --*/
 void o3_scheduler::updateResStns () {
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (WIDTH i = 0; i < _stage_width; i++) {
-            /* CHECKS */
+            /*-- CHECKS --*/
             if (_iROB->getTableState () == FULL_BUFF) break;
             if (!_iROB->hasFreeWire (WRITE)) break;
             if (_ResStns.Nth(j)->getTableState () == FULL_BUFF) continue;
@@ -121,7 +121,7 @@ void o3_scheduler::updateResStns () {
                 if (!g_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
             }
 
-            /* WRITE INTO RES STN */
+            /*-- WRITE INTO RES STN --*/
             dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", _clk->now ());
             ins = _decode_to_scheduler_port->popFront ();
             g_GRF_MGR->renameRegs (ins);
@@ -131,7 +131,7 @@ void o3_scheduler::updateResStns () {
             _iROB->pushBack (ins);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
-            /* UPDATE WIRES */
+            /*-- UPDATE WIRES --*/
             _iROB->updateWireState (WRITE);
             _ResStns.Nth(j)->updateWireState (WRITE);
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
@@ -143,7 +143,7 @@ void o3_scheduler::updateResStns () {
     }
 }
 
-/* FORWARD OPERANDS 
+/*-- FORWARD OPERANDS 
  * NOTE: this function forwards even if the ins would not execute at the same
  * cycle because of waiting for another operand that is still in flight (see
  * the calling function(s)). This is okay because at a later cycle the ins will
@@ -151,9 +151,9 @@ void o3_scheduler::updateResStns () {
  * the number of accesses to RF is scewed by this function even though the time
  * model is correct (i.e. maybe more RF accesses happen than what we see in
  * this design).
- */
+ --*/
 void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
-    { /* FWD FROM EXE STAGE */
+    { /*-- FWD FROM EXE STAGE --*/
         if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<dynInstruction*> fwd_list;
@@ -175,10 +175,10 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _execution_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
+        _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 
-    { /* FWD FROM MEM STAGE */
+    { /*-- FWD FROM MEM STAGE --*/
         if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<dynInstruction*> fwd_list;
@@ -201,11 +201,11 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _memory_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
+        _memory_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 }
 
-/* MANAGE COMMON DATA BUS (CDB) */
+/*-- MANAGE COMMON DATA BUS (CDB) --*/
 void o3_scheduler::manageCDB () {
     if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
     for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
