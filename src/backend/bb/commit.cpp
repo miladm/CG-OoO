@@ -18,6 +18,8 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
 }
 
 bb_commit::~bb_commit () {}

@@ -57,8 +57,8 @@ o3_sysCore::o3_sysCore (sysClock* clk,
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
     /*-- INIT UNITS --*/
-    g_GRF_MGR = new o3_rfManager (_clk, "rfManager");
-    g_LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
+    _RF_MGR = new o3_rfManager (_clk, "rfManager");
+    _LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
     _iROB = new CAMtable<dynInstruction*>(100, 32, 32, _clk, "iROB");
 
     /*-- INIT STAGES --*/
@@ -66,15 +66,15 @@ o3_sysCore::o3_sysCore (sysClock* clk,
     _bp = new o3_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
     _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
     _decode = new o3_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
-    _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _clk, "schedule");
-    _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _clk, "execution");
-    _memory = new o3_memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _clk, "memory");
-    _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _clk, "commit");
+    _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
+    _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
+    _memory = new o3_memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
+    _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
 }
 
 o3_sysCore::~o3_sysCore () {
-    delete g_GRF_MGR;
-    delete g_LSQ_MGR;
+    delete _RF_MGR;
+    delete _LSQ_MGR;
     delete _iROB;
     delete _bp;
     delete _fetch;

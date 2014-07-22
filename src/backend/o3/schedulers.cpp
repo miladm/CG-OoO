@@ -10,6 +10,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 			          port<dynInstruction*>& scheduler_to_execution_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH issue_width,
+                      o3_memManager* LSQ_MGR,
+                      o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (issue_width, stage_name, clk)
@@ -20,6 +22,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _iROB = iROB;
     _num_res_stns = 4;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
@@ -66,7 +70,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
             WIDTH num_ar = ins->getTotNumRdAR ();
-            if (!g_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
+            if (!_RF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
 
             /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
@@ -76,7 +80,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 
             /*-- UPDATE WIRES --*/
             _ResStns.Nth(j)->updateWireState (READ);
-            g_GRF_MGR->updateWireState (READ, num_ar);
+            _RF_MGR->updateWireState (READ, num_ar);
 
             /*-- STAT --*/
             s_ins_cnt++;
@@ -94,7 +98,7 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
         forwardFromCDB (ins);
-        if (!g_GRF_MGR->isReady (ins)) continue;
+        if (!_RF_MGR->isReady (ins)) continue;
         else return true;
     }
     return false;
@@ -112,21 +116,21 @@ void o3_scheduler::updateResStns () {
             if (_decode_to_scheduler_port->getBuffState () == EMPTY_BUFF) break;
             if (!_decode_to_scheduler_port->isReady ()) break;
             dynInstruction* ins = _decode_to_scheduler_port->getFront ();
-            if (!g_GRF_MGR->canRename (ins)) break;
+            if (!_RF_MGR->canRename (ins)) break;
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                if (g_LSQ_MGR->getTableState (LD_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR->hasFreeWire (LD_QU, WRITE)) break;
+                if (_LSQ_MGR->getTableState (LD_QU) == FULL_BUFF) break;
+                if (!_LSQ_MGR->hasFreeWire (LD_QU, WRITE)) break;
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-                if (g_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
+                if (_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
+                if (!_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
             }
 
             /*-- WRITE INTO RES STN --*/
             dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", _clk->now ());
             ins = _decode_to_scheduler_port->popFront ();
-            g_GRF_MGR->renameRegs (ins);
+            _RF_MGR->renameRegs (ins);
             ins->setPipeStage (DISPATCH);
-            if (ins->getInsType () == MEM) g_LSQ_MGR->pushBack (ins);
+            if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
             _ResStns.Nth(j)->pushBack (ins);
             _iROB->pushBack (ins);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
@@ -135,9 +139,9 @@ void o3_scheduler::updateResStns () {
             _iROB->updateWireState (WRITE);
             _ResStns.Nth(j)->updateWireState (WRITE);
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                g_LSQ_MGR->updateWireState (LD_QU, WRITE);
+                _LSQ_MGR->updateWireState (LD_QU, WRITE);
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-                g_LSQ_MGR->updateWireState (ST_QU, WRITE);
+                _LSQ_MGR->updateWireState (ST_QU, WRITE);
             }
         }
     }

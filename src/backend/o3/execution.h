@@ -17,6 +17,8 @@ class o3_execution : protected stage {
                       port<dynInstruction*>& execution_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
 			          WIDTH execution_width,
+                      o3_memManager* LSQ_MGR,
+                      o3_rfManager* RF_MGR,
                       sysClock* clk,
 			          string stage_name);
 		~o3_execution ();
@@ -35,6 +37,8 @@ class o3_execution : protected stage {
 		port<dynInstruction*>* _scheduler_to_execution_port;
         port<dynInstruction*>* _execution_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        o3_memManager* _LSQ_MGR;
+        o3_rfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
 };

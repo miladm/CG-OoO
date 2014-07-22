@@ -8,6 +8,8 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
 			          port<dynInstruction*>& commit_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
 	    	          WIDTH commit_width,
+                      o3_memManager* LSQ_MGR,
+                      o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
@@ -16,6 +18,8 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
 }
 
 o3_commit::~o3_commit () {}
@@ -50,16 +54,16 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         /*-- COMMIT INS --*/
         if (ins->getInsType () == MEM) {
             ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
-            if (g_LSQ_MGR->commit (ins)) {
+            if (_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
-                g_GRF_MGR->commitRegs (ins);
+                _RF_MGR->commitRegs (ins);
                 ins = _iROB->popFront ();
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
             }
         } else {
             ins = _iROB->popFront ();
-            g_GRF_MGR->commitRegs (ins);
+            _RF_MGR->commitRegs (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
             delIns (ins);

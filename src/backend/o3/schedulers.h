@@ -17,6 +17,8 @@ class o3_scheduler : protected stage {
 			       port<dynInstruction*>& scheduler_to_execution_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH scheduler_width,
+                   o3_memManager* LSQ_MGR,
+                   o3_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~o3_scheduler ();
@@ -37,6 +39,8 @@ class o3_scheduler : protected stage {
 		port<dynInstruction*>* _memory_to_scheduler_port;
 		port<dynInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynInstruction*>* _iROB;
+        o3_memManager* _LSQ_MGR;
+        o3_rfManager* _RF_MGR;
         List<CAMtable<dynInstruction*>* > _ResStns;
         WIDTH _num_res_stns;
 };

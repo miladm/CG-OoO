@@ -15,6 +15,8 @@ class o3_memory : protected stage {
                    port<dynInstruction*>& memory_to_scheduler_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH memory_width,
+                   o3_memManager* LSQ_MGR,
+                   o3_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~o3_memory ();
@@ -33,6 +35,8 @@ class o3_memory : protected stage {
 		port<dynInstruction*>* _execution_to_memory_port;
         port<dynInstruction*>* _memory_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        o3_memManager* _LSQ_MGR;
+        o3_rfManager* _RF_MGR;
         port<dynInstruction*> _mem_buff;
         RAMtable<dynInstruction*> _mshr;
         FIFOtable<dynInstruction*> _st_buff;

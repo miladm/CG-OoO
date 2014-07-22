@@ -18,11 +18,11 @@
 #include "commit.h"
 
 #include "../unit/sysClock.h"
-#include "memManager.h"
-#include "rfManager.h"
 #include "../unit/unit.h"
 #include "../unit/table.h"
 #include "../unit/port.h"
+#include "memManager.h"
+#include "rfManager.h"
 
 class o3_sysCore : public unit {
 	public:
@@ -91,6 +91,11 @@ class o3_sysCore : public unit {
 		o3_execution* _execution;
 		o3_memory* _memory;
 		o3_commit* _commit;
+
+        // RF and LSQ
+        o3_memManager* _LSQ_MGR;
+        o3_rfManager* _RF_MGR;
+
 
         // MISC
         CAMtable<dynInstruction*>* _iROB;

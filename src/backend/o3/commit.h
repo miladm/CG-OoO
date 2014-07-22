@@ -2,24 +2,24 @@
  * commit.h
  ******************************************************************************/
 
-#ifndef _BB_COMMIT_H
-#define _BB_COMMIT_H
+#ifndef _O3_COMMIT_H
+#define _O3_COMMIT_H
 
 #include "../unit/stage.h"
 #include "rfManager.h"
 #include "memManager.h"
 
-class bb_commit : protected stage {
+class o3_commit : protected stage {
 	public:
-		bb_commit (port<dynInstruction*>& commit_to_bp_port, 
+		o3_commit (port<dynInstruction*>& commit_to_bp_port, 
 			       port<dynInstruction*>& commit_to_scheduler_port, 
                    CAMtable<dynInstruction*>* iROB,
 			       WIDTH commit_width,
-                   bb_memManager* LSQ_MGR,
-                   bb_rfManager* RF_MGR,
+                   o3_memManager* LSQ_MGR,
+                   o3_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
-		~bb_commit ();
+		~o3_commit ();
 		void doCOMMIT ();
         void squash ();
 
@@ -34,8 +34,8 @@ class bb_commit : protected stage {
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
-        bb_memManager* _LSQ_MGR;
-        bb_rfManager* _RF_MGR;
+        o3_memManager* _LSQ_MGR;
+        o3_rfManager* _RF_MGR;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;
