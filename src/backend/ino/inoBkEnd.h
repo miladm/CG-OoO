@@ -11,6 +11,6 @@
 
 void inoBkEnd_init (int argc, char const * argv[]);
 void inoBkEndRun ();
-void inoBkEndFini (); //TODO make use of it
+void inoBkEnd_fini ();
 
 #endif

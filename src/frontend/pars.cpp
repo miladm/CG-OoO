@@ -44,6 +44,7 @@
 #include "../backend/basicblock.h"
 #include "../backend/ino/inoBkEnd.h"
 #include "../backend/o3/oooBkEnd.h"
+#include "../backend/bb/bbBkEnd.h"
 #include "../backend/unit/dynInstruction.h"
 
 using namespace INSTLIB;
@@ -289,7 +290,8 @@ static VOID backEnd (void *ptr) {
 				g_var.stat.matchIns=0;
 				//bkEnd_run ();
                 //inoBkEndRun ();
-                oooBkEndRun ();
+                //oooBkEndRun ();
+                bbBkEndRun ();
 				//cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
 			}
 		}
@@ -369,7 +371,8 @@ VOID Init (char* cfgFile)
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
 	//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-	oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+	//oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+	bbBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
 	g_var.msg.simStep ("START OF SIMULATION");
 }
 
@@ -396,8 +399,10 @@ VOID Fini (INT32 code, VOID* v)
 	PIN_SemaphoreFini (&semaphore1);
 	g_var.msg.simStep ("BACKEND TERMINATED");
 
-	//finish backend
-	//bkEnd_finish (); TODO REMOVE THIS
+	// finish backend
+	//inoBkEnd_fini ();
+	//oooBkEnd_fini ();
+	bbBkEnd_fini ();
     g_stats.dump ();
 	g_var.msg.simStep ("END OF SIMULATION");
 }

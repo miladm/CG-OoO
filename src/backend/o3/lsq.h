@@ -12,8 +12,6 @@
 #define SQ_SIZE 36
 #define LQ_SIZE 64
 
-typedef enum {LD_QU, ST_QU} LSQ_ID;
-
 class o3_lsqCAM : public CAMtable<dynInstruction*> {
 	public:
 		o3_lsqCAM (LENGTH len, 

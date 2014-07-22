@@ -10,5 +10,6 @@
 
 void oooBkEnd_init (int argc, char const * argv[]);
 void oooBkEndRun();
+void oooBkEnd_fini ();
 
 #endif
