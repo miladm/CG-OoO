@@ -1297,7 +1297,35 @@ VOID getNopIns (ADDRINT insAddr) {
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
 }
-
+/*
+void get_bb_header (INS bb_tail_ins) {
+    if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+        INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,
+                IARG_ADDRINT, INS_Address (ins),
+                IARG_BOOL, INS_HasFallThrough (ins),
+                IARG_BRANCH_TARGET_ADDR,
+                IARG_FALLTHROUGH_ADDR,
+                IARG_BRANCH_TAKEN,
+                IARG_BOOL, INS_IsCall (ins) || INS_IsFarCall (ins),
+                IARG_BOOL, INS_IsRet (ins) || INS_IsFarRet (ins),
+                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins)),
+                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins),
+                IARG_END);
+    } else {
+        INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,
+                IARG_ADDRINT, INS_Address (ins),
+                IARG_BOOL, INS_HasFallThrough (ins),
+                IARG_BRANCH_TARGET_ADDR,
+                IARG_FALLTHROUGH_ADDR,
+                IARG_BRANCH_TAKEN,
+                IARG_BOOL, INS_IsCall (ins) || INS_IsFarCall (ins),
+                IARG_BOOL, INS_IsRet (ins) || INS_IsFarRet (ins),
+                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins)),
+                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins),
+                IARG_END);
+    }
+}
+*/
 void get_uop (INS ins) {
     if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
         INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,

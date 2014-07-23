@@ -22,5 +22,6 @@
 
 void uop_gen(FILE* _outFile, staticCodeParser &g_staticCode);
 void get_uop(INS ins);
+void get_bb_header (INS bb_tail_ins);
 
 #endif

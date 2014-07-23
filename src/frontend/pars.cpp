@@ -148,8 +148,8 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
         g_var.g_wrong_path_count++;
         if (__is_call) g_var.g_context_call_depth++;
         if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
-        if ((g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
-                ((g_var.g_context_call_depth==0) && __is_ret) ||
+        if ( (g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
+           ( (g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
             if (g_var.g_enable_wp) {
@@ -368,6 +368,7 @@ VOID Init (char* cfgFile)
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_BBlist = new List<basicblock*>;
+    g_var.coreType = BASICBLOCK;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
 	//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
@@ -447,7 +448,7 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 
 	for (int i=len-1; i >= 0; i--) {
 		PIN_SafeCopy (&g_store_buffer[i], (ADDRINT*) (eaddr+i), sizeof (unsigned char));
-		//g_store_buffer[i] = * (((unsigned char*)eaddr)+i);
+		//g_store_buffer[i] = * ( ( (unsigned char*)eaddr)+i);
 		if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
@@ -467,7 +468,7 @@ void read_mem_new ()
 	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "  mem[" << hex << g_var.g_last_eaddr << " ] = ";
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
-		g_specmem[g_var.g_last_eaddr+i] = * (((unsigned char*)g_last_eaddr)+i);
+		g_specmem[g_var.g_last_eaddr+i] = * ( ( (unsigned char*)g_last_eaddr)+i);
 		if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << hex << (unsigned) g_specmem[g_var.g_last_eaddr+i] << " ";
 	}
 
@@ -495,7 +496,7 @@ void restore_mem_orig ()
 	}
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
-		* (((unsigned char*)g_var.g_last_eaddr)+i) = g_store_buffer[i];
+		* ( ( (unsigned char*)g_var.g_last_eaddr)+i) = g_store_buffer[i];
 		if (g_var.g_debug_level & DBG_RESTORE_MEM) std::cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
@@ -694,14 +695,19 @@ VOID doImpMemCount_ (UINT32 isMem)
 
 VOID Instruction (TRACE trace, VOID * val) 
 {
-	if (!filter.SelectTrace (trace)) {
-		printf ("NOTE: SKIPPING TRACE\n");
-		return;
-	}
+    if (!filter.SelectTrace (trace)) {
+        printf ("NOTE: SKIPPING TRACE\n");
+        return;
+    }
 
-	for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
-	{
-		for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
+    for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
+    {
+        INS tail = BBL_InsTail (bbl);
+        //if (g_var.coreType == BASICBLOCK) {
+        //    get_bb_header (tail);
+        //}
+
+        for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {
             ADDRINT pc = INS_Address (ins);
             string diss =  INS_Disassemble (ins);
@@ -770,8 +776,19 @@ VOID Instruction (TRACE trace, VOID * val)
                    }
                    */
 
-                if (INS_IsBranchOrCall (ins)) {
+                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
                     if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
+                    if (INS_HasFallThrough (ins)) {
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
+                                IARG_UINT32, uid,
+                                IARG_CONTEXT,
+                                IARG_BRANCH_TAKEN,
+                                IARG_BRANCH_TARGET_ADDR, 
+                                IARG_FALLTHROUGH_ADDR,
+                                IARG_ADDRINT, INS_Address (ins),
+                                IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_END);
+                    }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
                             IARG_CONTEXT,
@@ -798,7 +815,7 @@ VOID Instruction (TRACE trace, VOID * val)
                         IARG_END);
             }
         }
-	}
+    }
 }
 
 /* ------------------------------------------------------------------ */
