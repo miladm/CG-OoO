@@ -37,9 +37,7 @@ class o3_memory : protected stage {
         CAMtable<dynInstruction*>* _iROB;
         o3_memManager* _LSQ_MGR;
         o3_rfManager* _RF_MGR;
-        port<dynInstruction*> _mem_buff;
         RAMtable<dynInstruction*> _mshr;
-        FIFOtable<dynInstruction*> _st_buff;
 
         cache _L1;
         cache _L2;

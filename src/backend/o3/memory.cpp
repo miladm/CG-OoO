@@ -13,9 +13,7 @@ o3_memory::o3_memory (port<dynInstruction*>& execution_to_memory_port,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (memory_width, stage_name, clk),
-      _mem_buff(20, 1, clk, "mem_buff"),
       _mshr(20, 4, 4, clk, "MSHR"),
-      _st_buff(20, 4, 4, clk, "stBuff"),
       s_cache_miss_cnt (g_stats.newScalarStat (stage_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (stage_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_ld_miss_cnt (g_stats.newScalarStat (stage_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
@@ -138,7 +136,6 @@ void o3_memory::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _memory_to_scheduler_port->flushPort (squashSeqNum);
-    _mem_buff.flushPort (squashSeqNum);
     _LSQ_MGR->squash (squashSeqNum);
 }
 
