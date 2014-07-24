@@ -274,14 +274,23 @@ static VOID backEnd (void *ptr) {
 		ADDRINT tgt = g_var.g_tgt;
 		ADDRINT fthru = g_var.g_fthru;
 		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
-		if (g_cfg->coreType == PHRASEBLOCK) {
-			//cout << "FRONTEND->BACKEND " << g_var.g_BBlist->NumElements ()<< "\n";
-			//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
-			g_var.stat.noMatchIns=0;
-			g_var.stat.matchIns=0;
-			bkEnd_run ();
-			//if (g_var.g_insList->NumElements () <= 35000) lastBB = false;
-			//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+        //if (g_cfg->coreType == PHRASEBLOCK) {
+        //	//cout << "FRONTEND->BACKEND " << g_var.g_BBlist->NumElements ()<< "\n";
+        //	//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
+        //	g_var.stat.noMatchIns=0;
+        //	g_var.stat.matchIns=0;
+        //	bkEnd_run ();
+        //	//if (g_var.g_insList->NumElements () <= 35000) lastBB = false;
+        //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+		if (g_var.g_core_type == BASICBLOCK) {
+			if (g_var.g_bbCache->NumElements () >= 100) {
+				//cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
+				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
+				g_var.stat.noMatchIns=0;
+				g_var.stat.matchIns=0;
+                bbBkEndRun ();
+				//cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
+			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
 				//cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";

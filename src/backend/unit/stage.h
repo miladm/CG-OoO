@@ -17,6 +17,7 @@
 #include "sysClock.h"
 #include "port.h"
 #include "dynInstruction.h"
+#include "dynBasicblock.h"
 #include "table.h"
 #include "exeUnit.h"
 //#include "../ino/registerFile.h"
