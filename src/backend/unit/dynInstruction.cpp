@@ -4,8 +4,8 @@
 
 #include "dynInstruction.h"
 
-dynInstruction::dynInstruction ()
-    : unit ("dynInstruction")
+dynInstruction::dynInstruction (string class_name)
+    : unit (class_name)
 {
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;
@@ -19,19 +19,19 @@ dynInstruction::~dynInstruction () {}
 // ***********************
 // ** SET INS ATRIBUTES **
 // ***********************
-void dynInstruction::setInsAddr (ADDRS insAddr) {
-	_insAddr = insAddr;
+void dynInstruction::setInsAddr (ADDRS ins_addr) {
+	_ins_addr = ins_addr;
 }
 
-void dynInstruction::setInsID (INS_ID seqNum) {
+void dynInstruction::setInsID (INS_ID seq_num) {
 #ifdef ASSERTION
-    Assert (seqNum > 0);
+    Assert (seq_num > 0);
 #endif
-	_seqNum = seqNum;
+	_seq_num = seq_num;
 }
 
-void dynInstruction::setInsType (INS_TYPE insType) {
-	_insType = insType;
+void dynInstruction::setInsType (INS_TYPE ins_type) {
+	_ins_type = ins_type;
 }
 
 void dynInstruction::setPR (PR pr, AXES_TYPE type) {
@@ -149,11 +149,11 @@ void dynInstruction::setMemViolation () {
 // ***********************
 // ** GET INS ATRIBUTES **
 // ***********************
-ADDRS dynInstruction::getInsAddr () { return _insAddr; }
+ADDRS dynInstruction::getInsAddr () { return _ins_addr; }
 
-INS_ID dynInstruction::getInsID () { return _seqNum; }
+INS_ID dynInstruction::getInsID () { return _seq_num; }
 
-INS_TYPE dynInstruction::getInsType () { return _insType; }
+INS_TYPE dynInstruction::getInsType () { return _ins_type; }
 
 ADDRS dynInstruction::getMemAddr () { return _memAddr; }
 

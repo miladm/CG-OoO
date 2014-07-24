@@ -368,7 +368,7 @@ VOID Init (char* cfgFile)
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.coreType = BASICBLOCK;
+    g_var.g_core_type = BASICBLOCK;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
 	//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
@@ -703,9 +703,9 @@ VOID Instruction (TRACE trace, VOID * val)
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
         INS tail = BBL_InsTail (bbl);
-        //if (g_var.coreType == BASICBLOCK) {
-        //    get_bb_header (tail);
-        //}
+        if (g_var.g_core_type == BASICBLOCK) {
+            get_bb_header (tail);
+        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {

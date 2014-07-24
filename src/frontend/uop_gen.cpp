@@ -1207,15 +1207,29 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
         //if (!firstBB)
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
         if (s != "MILAD") {
-            g_var.g_ins = s;
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
-            g_insObj->setInsType (BR);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            if (g_var.g_core_type == BASICBLOCK) {
+                dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+                dynInstruction* g_insObj = g_var.getNewIns ();
+                g_var.g_ins = s;
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+                g_insObj->setInsType (BR);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+            } else {
+                g_var.g_ins = s;
+                dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+                g_insObj->setInsType (BR);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+            }
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1233,16 +1247,31 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
         //if (!firstBB)
         s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
         if (s != "MILAD") {
-            g_var.g_ins = s;
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-            g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
-            g_insObj->setInsType (MEM);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            if (g_var.g_core_type == BASICBLOCK) {
+                dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+                dynInstruction* g_insObj = g_var.getNewIns ();
+                g_var.g_ins = s;
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
+                g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+                g_insObj->setInsType (MEM);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+            } else {
+                g_var.g_ins = s;
+                dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
+                g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+                g_insObj->setInsType (MEM);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+            }
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1260,14 +1289,27 @@ VOID getIns (ADDRINT insAddr) {
         //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (ALU);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
-            g_var.g_ins = s;
+            if (g_var.g_core_type == BASICBLOCK) {
+                dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+                dynInstruction* g_insObj = g_var.getNewIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setInsType (ALU);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                g_var.g_ins = s;
+                if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+            } else {
+                dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setInsType (ALU);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                g_var.g_ins = s;
+            }
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1285,49 +1327,73 @@ VOID getNopIns (ADDRINT insAddr) {
         //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (NOP);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
-            g_var.g_ins = s;
+            if (g_var.g_core_type == BASICBLOCK) {
+                dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+                dynInstruction* g_insObj = g_var.getNewIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setInsType (NOP);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                g_var.g_ins = s;
+                if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+            } else {
+                dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
+                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                staticIns->copyRegsTo (g_insObj);
+                g_insObj->setInsType (NOP);
+                g_insObj->setInsAddr (insAddr);
+                g_insObj->setInsID (g_var.g_seq_num++);
+                g_insObj->setWrongPath (g_var.g_wrong_path);
+                g_var.g_ins = s;
+            }
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
 }
-/*
+
+void getBBhead (ADDRINT bb_tail_ins_addr, BOOL is_tail_br) {
+    dynBasicblock* g_bbObj = g_var.getNewCacheBB ();
+    g_bbObj->setBBID (g_var.g_bb_seq_num++);
+    g_bbObj->setBBbrAddr (is_tail_br, bb_tail_ins_addr);
+}
+
 void get_bb_header (INS bb_tail_ins) {
-    if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
-        INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,
-                IARG_ADDRINT, INS_Address (ins),
-                IARG_BOOL, INS_HasFallThrough (ins),
-                IARG_BRANCH_TARGET_ADDR,
-                IARG_FALLTHROUGH_ADDR,
-                IARG_BRANCH_TAKEN,
-                IARG_BOOL, INS_IsCall (ins) || INS_IsFarCall (ins),
-                IARG_BOOL, INS_IsRet (ins) || INS_IsFarRet (ins),
-                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins)),
-                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins),
+    if (INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins)) {
+        if (INS_HasFallThrough (bb_tail_ins)) {
+            INS_InsertCall (bb_tail_ins, IPOINT_AFTER, (AFUNPTR) getBBhead,
+                    IARG_ADDRINT, INS_Address (bb_tail_ins),
+                    IARG_BOOL, INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins),
+                    IARG_END);
+        }
+        INS_InsertCall (bb_tail_ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBBhead,
+                IARG_ADDRINT, INS_Address (bb_tail_ins),
+                IARG_BOOL, INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins),
                 IARG_END);
     } else {
-        INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,
-                IARG_ADDRINT, INS_Address (ins),
-                IARG_BOOL, INS_HasFallThrough (ins),
-                IARG_BRANCH_TARGET_ADDR,
-                IARG_FALLTHROUGH_ADDR,
-                IARG_BRANCH_TAKEN,
-                IARG_BOOL, INS_IsCall (ins) || INS_IsFarCall (ins),
-                IARG_BOOL, INS_IsRet (ins) || INS_IsFarRet (ins),
-                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins)),
-                IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins),
+        INS_InsertCall (bb_tail_ins, IPOINT_BEFORE, (AFUNPTR) getBBhead,
+                IARG_ADDRINT, INS_Address (bb_tail_ins),
+                IARG_BOOL, INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins),
                 IARG_END);
     }
 }
-*/
+
 void get_uop (INS ins) {
     if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+        if (INS_HasFallThrough (ins)) {
+            INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) getBrIns,
+                    IARG_ADDRINT, INS_Address (ins),
+                    IARG_BOOL, INS_HasFallThrough (ins),
+                    IARG_BRANCH_TARGET_ADDR, 
+                    IARG_FALLTHROUGH_ADDR,
+                    IARG_BRANCH_TAKEN,
+                    IARG_BOOL, INS_IsCall (ins) || INS_IsFarCall (ins),
+                    IARG_BOOL, INS_IsRet (ins) || INS_IsFarRet (ins),
+                    IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins)),
+                    IARG_BOOL, INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins),
+                    IARG_END);
+        }
         INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) getBrIns,
                 IARG_ADDRINT, INS_Address (ins),
                 IARG_BOOL, INS_HasFallThrough (ins),

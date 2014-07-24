@@ -5,17 +5,15 @@
 #define _DYNINSTRUCTION_H
 
 #include "unit.h"
-//#include "../ino/registerFile.h"
-//#include "../o3/registerFile.h"
 
 class dynInstruction : public unit {
     public:
-        dynInstruction ();
+        dynInstruction (string class_name = "dynInstruction");
         ~dynInstruction ();
 
         // SET INS ATRIBUTES
-        void setInsAddr (ADDRS insAddr);
-        void setInsID (INS_ID seqNum);
+        void setInsAddr (ADDRS ins_addr);
+        void setInsID (INS_ID seq_num);
         void setInsType (INS_TYPE insType);
         void setAR (AR ar, AXES_TYPE type);
         void setPR (PR pr, AXES_TYPE type);
@@ -57,11 +55,11 @@ class dynInstruction : public unit {
         void copyRegsTo (dynInstruction* ins);
         void resetStates ();
 
-    private:
+    protected:
         //INS
-        ADDRS _insAddr;
-        INS_ID _seqNum;
-        INS_TYPE _insType;
+        ADDRS _ins_addr;
+        INS_ID _seq_num;
+        INS_TYPE _ins_type;
 
         //REGS
         List<AR> _a_rdReg;
@@ -71,6 +69,7 @@ class dynInstruction : public unit {
         List<AR> _p_wrReg;
         List<AR> _p_rdReg_waitList;
 
+    private:
         //BR
         ADDRS _brTarget;
         bool _brTaken;

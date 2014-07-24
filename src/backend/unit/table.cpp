@@ -59,7 +59,8 @@ tableType_T table<tableType_T>::getBack () {
 
 template<typename tableType_T>
 BUFF_STATE table<tableType_T>::getTableState () {
-	if (getTableSize () >= _table_size) {
+    Assert (getTableSize () <= _table_size);
+	if (getTableSize () == _table_size) {
         dbg.print (DBG_PORT, "%s: %s (cyc: )\n", _c_name.c_str (), "is FULL");
         return FULL_BUFF;
     } else if (getTableSize () == 0) {

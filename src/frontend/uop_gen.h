@@ -19,6 +19,7 @@
 #include "../global/global.h"
 #include "staticCodeParser.h"
 #include "../backend/unit/dynInstruction.h"
+#include "../backend/unit/dynBasicblock.h"
 
 void uop_gen(FILE* _outFile, staticCodeParser &g_staticCode);
 void get_uop(INS ins);

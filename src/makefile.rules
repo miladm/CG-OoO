@@ -206,6 +206,7 @@ $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynInstruction$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/dynBasicblock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/wires$(OBJ_SUFFIX) \

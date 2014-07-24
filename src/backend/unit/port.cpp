@@ -128,15 +128,14 @@ LENGTH port<queType_T>::getBuffSize () {
 template<typename queType_T>
 BUFF_STATE port<queType_T>::getBuffState () {
     CYCLE now = _clk->now ();
-	if (getBuffSize () >= _buff_len) {
+    Assert (getBuffSize () <= _buff_len);
+	if (getBuffSize () == _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", now);
         return FULL_BUFF;
-    }
-	else if (getBuffSize () == 0) {
+    } else if (getBuffSize () == 0) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return EMPTY_BUFF;
-    }
-	else {return AVAILABLE_BUFF;}
+    } else {return AVAILABLE_BUFF;}
 }
 
 template <typename queType_T>
