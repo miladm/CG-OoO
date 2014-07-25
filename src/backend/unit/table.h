@@ -74,6 +74,7 @@ class CAMtable : public table<tableType_T> {
         tableType_T pullNth (LENGTH indx);
         tableType_T getFront ();
         tableType_T popFront ();
+        tableType_T getLast ();
 };
 
 template <typename tableType_T>

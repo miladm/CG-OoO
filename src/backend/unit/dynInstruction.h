@@ -5,6 +5,9 @@
 #define _DYNINSTRUCTION_H
 
 #include "unit.h"
+#include "dynBasicblock.h"
+
+class dynBasicblock;
 
 class dynInstruction : public unit {
     public:
@@ -14,6 +17,7 @@ class dynInstruction : public unit {
         // SET INS ATRIBUTES
         void setInsAddr (ADDRS ins_addr);
         void setInsID (INS_ID seq_num);
+        void setBB (dynBasicblock* bb);
         void setInsType (INS_TYPE insType);
         void setAR (AR ar, AXES_TYPE type);
         void setPR (PR pr, AXES_TYPE type);
@@ -30,6 +34,7 @@ class dynInstruction : public unit {
         // GET INS ATRIBUTES
         ADDRS getInsAddr ();
         INS_ID getInsID ();
+        dynBasicblock* getBB ();
         INS_TYPE getInsType ();
         ADDRS getMemAddr ();
         BYTES getMemAxesSize ();
@@ -55,11 +60,14 @@ class dynInstruction : public unit {
         void copyRegsTo (dynInstruction* ins);
         void resetStates ();
 
-    protected:
+    private:
         //INS
         ADDRS _ins_addr;
         INS_ID _seq_num;
         INS_TYPE _ins_type;
+
+        //BB
+        dynBasicblock* _bb;
 
         //REGS
         List<AR> _a_rdReg;
@@ -69,7 +77,6 @@ class dynInstruction : public unit {
         List<AR> _p_wrReg;
         List<AR> _p_rdReg_waitList;
 
-    private:
         //BR
         ADDRS _brTarget;
         bool _brTaken;

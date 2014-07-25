@@ -98,7 +98,7 @@ class bb_sysCore : public unit {
 
 
         // MISC
-        CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynBasicblock*>* _bbROB;
 };
 
 #endif

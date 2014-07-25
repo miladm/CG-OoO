@@ -13,7 +13,7 @@ class bb_commit : protected stage {
 	public:
 		bb_commit (port<dynInstruction*>& commit_to_bp_port, 
 			       port<dynInstruction*>& commit_to_scheduler_port, 
-                   CAMtable<dynInstruction*>* iROB,
+                   CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH commit_width,
                    bb_memManager* LSQ_MGR,
                    bb_rfManager* RF_MGR,
@@ -33,7 +33,7 @@ class bb_commit : protected stage {
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
-        CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
 

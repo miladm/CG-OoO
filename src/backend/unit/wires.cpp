@@ -7,7 +7,8 @@
 wires::wires (WIDTH wire_cnt, AXES_TYPE axes_type, sysClock* clk, string wire_name) 
 	: unit (wire_name, clk),
       _axes_type (axes_type),
-      _wire_cnt (wire_cnt)
+      _wire_cnt (wire_cnt),
+      _wore_len (10)
 {
     _cycle = _clk->now ();
 	Assert (_wire_cnt > 0);

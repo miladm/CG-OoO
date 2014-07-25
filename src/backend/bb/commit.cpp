@@ -6,7 +6,7 @@
 
 bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port, 
 			          port<dynInstruction*>& commit_to_scheduler_port, 
-                      CAMtable<dynInstruction*>* iROB,
+                      CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH commit_width,
                       bb_memManager* LSQ_MGR,
                       bb_rfManager* RF_MGR,
@@ -17,7 +17,7 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
-    _iROB = iROB;
+    _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
 }
@@ -44,25 +44,25 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
-        if (_iROB->getTableState () == EMPTY_BUFF) break;
-        if (!_iROB->hasFreeWire (READ)) break;
-        dynInstruction* ins = _iROB->getFront ();
+        if (_bbROB->getTableState () == EMPTY_BUFF) break;
+        if (!_bbROB->hasFreeWire (READ)) break;
+        dynInstruction* ins = _bbROB->getFront ();
         if (ins->isMemOrBrViolation ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
         Assert (ins->getNumRdPR () == 0 && "instruction must have been ready long ago!");
 
         /*-- COMMIT INS --*/
         if (ins->getInsType () == MEM) {
-            ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
+            ins = _bbROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
             if (_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
                 _RF_MGR->commitRegs (ins);
-                ins = _iROB->popFront ();
+                ins = _bbROB->popFront ();
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
             }
         } else {
-            ins = _iROB->popFront ();
+            ins = _bbROB->popFront ();
             _RF_MGR->commitRegs (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
@@ -70,7 +70,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         }
 
         /*-- UPDATE WIRES --*/
-        _iROB->updateWireState (READ);
+        _bbROB->updateWireState (READ);
 
         /*-- STAT --*/
         s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
@@ -82,7 +82,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
 void bb_commit::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
-    if (_iROB->getTableSize () == 0) return;
+    if (_bbROB->getTableSize () == 0) return;
 
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
     if (squash_type == BP_MISPRED) bpMispredSquash ();
@@ -94,10 +94,10 @@ void bb_commit::squash () {
 void bb_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
-    LENGTH start_indx = 0, stop_indx = _iROB->getTableSize () - 1;
-    for (LENGTH i = 0; i < _iROB->getTableSize (); i++) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    LENGTH start_indx = 0, stop_indx = _bbROB->getTableSize () - 1;
+    for (LENGTH i = 0; i < _bbROB->getTableSize (); i++) {
+        if (_bbROB->getTableSize () == 0) break;
+        ins = _bbROB->getNth_unsafe (i);
         Assert (ins->getPipeStage () != EXECUTE);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
@@ -110,21 +110,21 @@ void bb_commit::bpMispredSquash () {
             }
         }
     }
-    Assert (_iROB->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
-    for (LENGTH i = _iROB->getTableSize () - 1; i > stop_indx; i--) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    Assert (_bbROB->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    for (LENGTH i = _bbROB->getTableSize () - 1; i > stop_indx; i--) {
+        if (_bbROB->getTableSize () == 0) break;
+        ins = _bbROB->getNth_unsafe (i);
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
-        _iROB->removeNth_unsafe (i);
+        _bbROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+        if (_bbROB->getTableSize () == 0) break;
+        ins = _bbROB->getNth_unsafe (i);
         Assert (ins->isMemOrBrViolation () == true);
         Assert (ins->getInsID () >= squashSeqNum);
-        _iROB->removeNth_unsafe (i);
+        _bbROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         delIns (ins);
     }
@@ -133,13 +133,13 @@ void bb_commit::bpMispredSquash () {
 void bb_commit::memMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
-    for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
+        if (_bbROB->getTableSize () == 0) break;
+        ins = _bbROB->getNth_unsafe (i);
         if (ins->getInsID () < squashSeqNum) break;
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
-        _iROB->removeNth_unsafe (i);
+        _bbROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
     }
 }
@@ -150,5 +150,5 @@ void bb_commit::delIns (dynInstruction* ins) {
 }
 
 void bb_commit::regStat () {
-    _iROB->regStat ();
+    _bbROB->regStat ();
 }

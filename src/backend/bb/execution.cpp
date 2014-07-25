@@ -6,7 +6,7 @@
 
 bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                             port<dynInstruction*>& execution_to_scheduler_port, 
-                            CAMtable<dynInstruction*>* iROB,
+                            CAMtable<dynBasicblock*>* bbROB,
 	    	                WIDTH execution_width,
                             bb_memManager* LSQ_MGR,
                             bb_rfManager* RF_MGR,
@@ -16,7 +16,7 @@ bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port,
 {
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
-    _iROB = iROB;
+    _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     _aluExeUnits = new List<exeUnit*>;
@@ -177,12 +177,12 @@ void bb_execution::squashCtrl () {
     } else if (g_var.g_pipe_state == PIPE_FLUSH) {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
-    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeWire (READ) && 
-               _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
+    } else if (g_var.g_pipe_state == PIPE_DRAIN && _bbROB->hasFreeWire (READ) && 
+               _bbROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
-        _iROB->updateWireState (READ);
-    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 0) {
+        _bbROB->updateWireState (READ);
+    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _bbROB->getTableSize() == 0) {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";

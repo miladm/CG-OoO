@@ -15,7 +15,7 @@ class bb_execution : protected stage {
 	public:
 		bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                       port<dynInstruction*>& execution_to_scheduler_port, 
-                      CAMtable<dynInstruction*>* iROB,
+                      CAMtable<dynBasicblock*>* bbROB,
 			          WIDTH execution_width,
                       bb_memManager* LSQ_MGR,
                       bb_rfManager* RF_MGR,
@@ -36,7 +36,7 @@ class bb_execution : protected stage {
 	private:
 		port<dynInstruction*>* _scheduler_to_execution_port;
         port<dynInstruction*>* _execution_to_scheduler_port;
-        CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;

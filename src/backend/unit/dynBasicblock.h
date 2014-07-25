@@ -8,6 +8,8 @@
 #include "unit.h"
 #include "dynInstruction.h"
 
+class dynInstruction;
+
 struct bbHead {
     bbHead (LENGTH max_ins_cnt)
         : _max_rd_g_reg_cnt (2 * max_ins_cnt),

@@ -204,6 +204,15 @@ tableType_T CAMtable<tableType_T>::pullNth (LENGTH indx) {
      return elem;
 }
 
+template <typename tableType_T>
+tableType_T CAMtable<tableType_T>::getLast () {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first"); //TODO - don't think this is needed, is it?
+#endif
+     return table<tableType_T>::_table.Last()->_element;
+}
+
 /***********************************************/
 /***************** RAM TABLE *******************/
 /***********************************************/

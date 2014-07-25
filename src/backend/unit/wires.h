@@ -21,6 +21,7 @@ class wires : public unit
         WIDTH _num_free_wire;
         const AXES_TYPE _axes_type;
         const WIDTH _wire_cnt;
+        const nMETER _wire_len;
 };
 
 #endif

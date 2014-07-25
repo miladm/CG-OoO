@@ -13,7 +13,7 @@ class bb_memory : protected stage {
 	public:
 		bb_memory (port<dynInstruction*>& execution_to_memory_port, 
                    port<dynInstruction*>& memory_to_scheduler_port, 
-                   CAMtable<dynInstruction*>* iROB,
+                   CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH memory_width,
                    bb_memManager* LSQ_MGR,
                    bb_rfManager* RF_MGR,
@@ -34,12 +34,10 @@ class bb_memory : protected stage {
 	private:
 		port<dynInstruction*>* _execution_to_memory_port;
         port<dynInstruction*>* _memory_to_scheduler_port;
-        CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
-        port<dynInstruction*> _mem_buff;
         RAMtable<dynInstruction*> _mshr;
-        FIFOtable<dynInstruction*> _st_buff;
 
         cache _L1;
         cache _L2;

@@ -59,23 +59,23 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_rfManager (_clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
-    _iROB = new CAMtable<dynInstruction*>(100, 32, 32, _clk, "iROB");
+    _bbROB = new CAMtable<dynBasicblock*>(100, 32, 32, _clk, "bbROB");
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new bb_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
     _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
     _decode = new bb_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
-    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
-    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
-    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
-    _commit = new bb_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
+    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _bbROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
+    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _bbROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
+    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, _bbROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
+    _commit = new bb_commit (_commit_to_bp_port, _commit_to_scheduler_port, _bbROB, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
 }
 
 bb_sysCore::~bb_sysCore () {
     delete _RF_MGR;
     delete _LSQ_MGR;
-    delete _iROB;
+    delete _bbROB;
     delete _bp;
     delete _fetch;
     delete _decode;
