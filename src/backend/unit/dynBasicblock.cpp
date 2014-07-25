@@ -98,6 +98,10 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
     }
 }
 
+bool dynInstruction::isMemViolation () {return _is_mem_violation;}
+
+bool dynBasicblock::isMemOrBrViolation () {return (_is_mem_violation || _is_on_wrong_path);}
+
 // ***********************
 // ** INS CONTROL       **
 // ***********************

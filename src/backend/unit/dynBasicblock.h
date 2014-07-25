@@ -74,6 +74,7 @@ class dynBasicblock : public unit {
         BUFF_STATE getBBstate ();
         bool isOnWrongPath ();
         PR getGPR (AR, AXES_TYPE);
+        bool isMemOrBrViolation ();
 
         void squash ();
         void reset ();

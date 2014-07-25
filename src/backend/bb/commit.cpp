@@ -46,7 +46,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         /*-- CHECKS --*/
         if (_bbROB->getTableState () == EMPTY_BUFF) break;
         if (!_bbROB->hasFreeWire (READ)) break;
-        dynInstruction* ins = _bbROB->getFront ();
+        dynBasicblock* bb = _bbROB->getFront ();
         if (ins->isMemOrBrViolation ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
         Assert (ins->getNumRdPR () == 0 && "instruction must have been ready long ago!");
