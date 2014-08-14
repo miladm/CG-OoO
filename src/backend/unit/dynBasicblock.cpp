@@ -24,7 +24,7 @@ void dynBasicblock::setBBID (BB_ID bb_seq_num) { _head._bb_seq_num = bb_seq_num;
 
 bool dynBasicblock::insertIns (dynInstruction* ins) {
     ADDRS ins_addr = ins->getInsAddr ();
-    Assert (_bbInsMap.find (ins_addr) == _bbInsMap.end());
+    Assert (_bbInsMap.find (ins_addr) == _bbInsMap.end ());
     //_bbInsMap.insert (pair<ADDRS, dynInstruction*> (ins_addr, ins)); // TODO - remove the hack lines below nad put this line back
     _schedInsList.Append (ins);
     _schedInsList_waitList.Append (ins);
@@ -77,8 +77,8 @@ ADDRS dynBasicblock::getBBbrAddr () {
 }
 
 dynInstruction* dynBasicblock::popFront () {
-    dynInstruction* ins = _schedInsList.Nth (0);
-    _schedInsList.RemoveAt (0);
+    dynInstruction* ins = _schedInsList_waitList.Nth (0);
+    _schedInsList_waitList.RemoveAt (0);
     return ins;
 }
 
@@ -101,6 +101,8 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
 bool dynInstruction::isMemViolation () {return _is_mem_violation;}
 
 bool dynBasicblock::isMemOrBrViolation () {return (_is_mem_violation || _is_on_wrong_path);}
+
+List<dynInstruction*>* dynBasicblock::getBBinsList () {return _schedInsList;}
 
 // ***********************
 // ** INS CONTROL       **

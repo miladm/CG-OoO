@@ -73,6 +73,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
                       "Complete load - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
+            ins->getBB()->popFront ();
             _LSQ_MGR->memAddrReady (ins);
             _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
             pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
@@ -85,6 +86,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
         } else {
             //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
+            ins->getBB()->popFront ();
             _RF_MGR->completeRegs (ins);
             //_RF_MGR->updateWireState (WRITE); //TODO put back
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 

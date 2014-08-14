@@ -60,6 +60,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
                 ins = _iROB->popFront ();
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
+                if (ins->getMemType () == LOAD) delIns (ins); //TODO test this code
             }
         } else {
             ins = _iROB->popFront ();

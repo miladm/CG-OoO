@@ -47,27 +47,14 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         if (_bbROB->getTableState () == EMPTY_BUFF) break;
         if (!_bbROB->hasFreeWire (READ)) break;
         dynBasicblock* bb = _bbROB->getFront ();
-        if (ins->isMemOrBrViolation ()) break;
-        if (ins->getPipeStage () != COMPLETE) break;
-        Assert (ins->getNumRdPR () == 0 && "instruction must have been ready long ago!");
+        if (bb->isMemOrBrViolation ()) break;
+        if (bb->getBBstate () != EMPTY_BUFF) break; //TODO what is a BB is still getting filled up?
 
-        /*-- COMMIT INS --*/
-        if (ins->getInsType () == MEM) {
-            ins = _bbROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
-            if (_LSQ_MGR->commit (ins)) {
-                ins->setPipeStage (COMMIT);
-                _RF_MGR->commitRegs (ins);
-                ins = _bbROB->popFront ();
-                dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                           "Commit ins", ins->getInsID (), _clk->now ());
-            }
-        } else {
-            ins = _bbROB->popFront ();
-            _RF_MGR->commitRegs (ins);
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                       "Commit ins", ins->getInsID (), _clk->now ());
-            delIns (ins);
-        }
+        /*-- COMMIT BB --*/
+        bb = _bbROB->popFront ();
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                               "Commit bb", bb->getBBID (), _clk->now ());
+        commitBB (bb);
 
         /*-- UPDATE WIRES --*/
         _bbROB->updateWireState (READ);
@@ -147,6 +134,34 @@ void bb_commit::memMispredSquash () {
 /*-- DELETE INSTRUCTION OBJ --*/
 void bb_commit::delIns (dynInstruction* ins) {
     delete ins;
+}
+
+/*-- DELETE INSTRUCTION OBJ --*/
+void bb_commit::commitBB (dynBasicblock* bb) {
+    List<dynInstruction*>* insList = bb->getBBinsList ();
+    while (insList->NumElements () > 0) {
+        dynInstruction* ins = insList->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
+        Assert (ins->getPipeStage () == COMPLETE);
+        if (ins->getInsType () == MEM) {
+            if (_LSQ_MGR->commit (ins)) {
+                ins->setPipeStage (COMMIT);
+                _RF_MGR->commitRegs (ins);
+                ins = insList->popFront ();
+                if (ins->getMemType () == LOAD) delIns (ins);
+            } else {
+                Assert (true == false && "implement this condition"); //TODO finish this
+            }
+        } else {
+            ins = insList->popFront ();
+            delIns (ins);
+            insList->RemoveAt (0);
+        }
+    }
+    delBB (bb);
+}
+
+void bb_commit::delBB (dynBasicblock* bb) {
+    delete bb;
 }
 
 void bb_commit::regStat () {

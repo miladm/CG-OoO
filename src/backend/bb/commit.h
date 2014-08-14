@@ -28,7 +28,9 @@ class bb_commit : protected stage {
         void regStat ();
         void bpMispredSquash ();
         void memMispredSquash ();
-        void delIns (dynInstruction* ins);
+        void commitBB (dynBasicblock*);
+        void delBB (dynBasicblock*);
+        void delIns (dynInstruction*);
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
