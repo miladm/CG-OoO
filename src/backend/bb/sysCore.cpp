@@ -57,7 +57,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
     /*-- INIT UNITS --*/
-    _RF_MGR = new bb_rfManager (_clk, "rfManager");
+    _RF_MGR = new bb_grfManager (_clk, "grfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
     _bbROB = new CAMtable<dynBasicblock*>(10, 32, 32, _clk, "bbROB");
 

@@ -190,8 +190,7 @@ $(OBJDIR)backend/o3/sysCore$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/oooBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/memManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/lsq$(OBJ_SUFFIX) \
-$(OBJDIR)backend/bb/registerRename$(OBJ_SUFFIX) \
-$(OBJDIR)backend/bb/rfManager$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bb/grfManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/memory$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/branchPred$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/decode$(OBJ_SUFFIX) \

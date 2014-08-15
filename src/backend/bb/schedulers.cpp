@@ -11,7 +11,7 @@ bb_scheduler::bb_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH issue_width,
                       bb_memManager* LSQ_MGR,
-                      bb_rfManager* RF_MGR,
+                      bb_grfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (issue_width, stage_name, clk)
@@ -23,13 +23,14 @@ bb_scheduler::bb_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     _bbROB = bbROB;
     _num_bbWin = 4;
     _LSQ_MGR = LSQ_MGR;
-    _RF_MGR = RF_MGR;
+    _GRF_MGR = RF_MGR;
     _bbWin_on_fetch = NULL;
     for (WIDTH i = 0; i < _num_bbWin; i++) {
         ostringstream bbWin_num;
         bbWin_num << i;
-        bbWindow* bbWin = new bbWindow (bbWin_num, _clk);
-        _avail_bbWin.Append(bbWin);
+        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
+        _avail_bbWin.Append (bbWin);
+        _bbWindows.Append (bbWin);
     }
 }
 
@@ -66,21 +67,21 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         LENGTH readyInsInBBWinIndx;
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx)) break;
-        dynInstruction* ins = _bbWindows[readyInsInBBWinIndx]->getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
+        dynInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
         WIDTH num_ar = ins->getTotNumRdAR ();
-        if (!_RF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
+        if (!_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
 
         /*-- READ INS WIN --*/
-        ins = _bbWindows[readyInsInBBWinIndx]->pullNextReady (0);
+        ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront (); //TODO implement multi reads from a bbWin
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE RESOURCES --*/
-        if (_bbWindows[readyInsInBBWinIndx]->getTableState () == EMPTY_BUFF) 
+        if (_busy_bbWin[readyInsInBBWinIndx]->_win.getTableState () == EMPTY_BUFF) 
             setBBWisAvail (readyInsInBBWinIndx);
-        _RF_MGR->updateWireState (READ, num_ar);
-        _bbWindows[readyInsInBBWinIndx]->updateWireState (READ);
+        _GRF_MGR->updateWireState (READ, num_ar);
+        _busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
 
         /*-- STAT --*/
         s_ins_cnt++;
@@ -93,15 +94,17 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
 }
 
 bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
-    for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
-        WIDTH bbwin_id = bbWinEntry.first;
-        bbWindow* bbWin = bbWinEntry.second->_win;
-        if (bbWin->getTableState () == EMPTY_BUFF) continue;
-        if (!bbWin->hasFreeWire (READ)) continue;
-        dynInstruction* ins = _bbWin->getNth_unsafe (0);
+    map<WIDTH, bbWindow*>::iterator bbWinEntry;
+    for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
+    //for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
+        WIDTH bbWin_id = bbWinEntry->first;
+        bbWindow* bbWin = bbWinEntry->second;
+        if (bbWin->_win.getTableState () == EMPTY_BUFF) continue;
+        if (!bbWin->_win.hasFreeWire (READ)) continue;
+        dynInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        if (!_RF_MGR->isReady (ins)) continue;
+        if (!_GRF_MGR->isReady (ins)) continue;
         else return true;
     }
     return false;
@@ -121,7 +124,7 @@ void bb_scheduler::updatebbWindows () {
             if (_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
             if (!_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
         }
-        if (!_RF_MGR->canRename (ins)) break;
+        if (!_GRF_MGR->canRename (ins)) break;
 
         /*-- CHECK & UPDATE --*/
         if (detectNewBB (ins)) {
@@ -136,19 +139,19 @@ void bb_scheduler::updatebbWindows () {
             }
         }
         Assert (_bbWin_on_fetch != NULL);
-        if (!_bbWin_on_fetch->hasFreeWire (WRITE)) break;
-        Assert (_bbWin_on_fetch->getTableState () == FULL_BUFF);
+        if (!_bbWin_on_fetch->_win.hasFreeWire (WRITE)) break;
+        Assert (_bbWin_on_fetch->_win.getTableState () == FULL_BUFF);
 
         /*-- WRITE INTO RES STN --*/
         ins = _decode_to_scheduler_port->popFront ();
-        _RF_MGR->renameRegs (ins);
+        _GRF_MGR->renameRegs (ins);
         ins->setPipeStage (DISPATCH);
         if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
-        _bbWin_on_fetch->pushBack (ins);
+        _bbWin_on_fetch->_win.pushBack (ins);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write bbWin ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE WIRES --*/
-        _bbWin_on_fetch->updateWireState (WRITE);
+        _bbWin_on_fetch->_win.updateWireState (WRITE);
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             _LSQ_MGR->updateWireState (LD_QU, WRITE);
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
@@ -157,8 +160,7 @@ void bb_scheduler::updatebbWindows () {
     }
 }
 
-void bb_scheduler::updateBBROB (dynInstruction* ins) {
-    dynBasicblock* bb = ins->getBB ();
+void bb_scheduler::updateBBROB (dynBasicblock* bb) {
     if (_bbROB->getTableState () == EMPTY_BUFF) {
         _bbROB->pushBack (bb);
     } else {
@@ -170,28 +172,28 @@ void bb_scheduler::updateBBROB (dynInstruction* ins) {
     }
 }
 
-void bb_scherduler::setBBWisAvail (WIDTH bbWin_id) {
-    Assert (_busy_bbWin.NumElements () > 0);
+void bb_scheduler::setBBWisAvail (WIDTH bbWin_id) {
+    Assert (_busy_bbWin.size () > 0);
     bbWindow* bbWin = _busy_bbWin[bbWin_id];
     _avail_bbWin.Append (bbWin);
     _busy_bbWin.erase (bbWin_id);
 }
 
-bool bb_scherduler::hasAnAvailBBWin () {
+bool bb_scheduler::hasAnAvailBBWin () {
     return (_avail_bbWin.NumElements () == 0) ? false : true;
 }
 
-bbWindow* bb_scherduler::getAnAvailBBWin () {
+bbWindow* bb_scheduler::getAnAvailBBWin () {
     Assert (_avail_bbWin.NumElements () == 0);
     bbWindow* bbWin = _avail_bbWin.Nth (0);
     _avail_bbWin.RemoveAt (0);
-    _busy_bbWin.insert (pair<WIDTH, bbWindow*> (bbWin->_bbWin_id, bbWin));
+    _busy_bbWin.insert (pair<WIDTH, bbWindow*> (bbWin->_id, bbWin));
     return bbWin;
 }
 
 bool bb_scheduler::detectNewBB (dynInstruction* ins) {
-    Assert (ins->getBBID () < _bbROB->getBack()->getBBID ());
-    return (ins->getBBID () > _bbROB->getBack()->getBBID ()) ? true : false;
+    Assert (ins->getBB()->getBBID () < _bbROB->getLast()->getBBID ());
+    return (ins->getBB()->getBBID () > _bbROB->getLast()->getBBID ()) ? true : false;
 }
 
 /*-- FORWARD OPERANDS 
@@ -271,11 +273,11 @@ void bb_scheduler::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
     for (WIDTH j = 0; j < _num_bbWin; j++) {
-        for (int i = (int)_bbWindows.Nth(j)->getTableSize() - 1; i >= 0; i--) {
-            if (_bbWindows.Nth(j)->getTableSize() == 0) break;
-            dynInstruction* ins = _bbWindows.Nth(j)->getNth_unsafe (i);
+        for (int i = (int)_bbWindows.Nth(j)->_win.getTableSize() - 1; i >= 0; i--) {
+            if (_bbWindows.Nth(j)->_win.getTableSize() == 0) break;
+            dynInstruction* ins = _bbWindows.Nth(j)->_win.getNth_unsafe (i);
             if (ins->getInsID () >= squashSeqNum) {
-                _bbWindows.Nth(j)->removeNth_unsafe (i);
+                _bbWindows.Nth(j)->_win.removeNth_unsafe (i);
             }
         }
     }
@@ -285,7 +287,7 @@ void bb_scheduler::regStat () {
     _decode_to_scheduler_port->regStat ();
     _execution_to_scheduler_port->regStat ();
     _memory_to_scheduler_port->regStat ();
-    for (WIDTH j = 0; j < _num_bbWin; j++) {
-        _bbWindows.Nth(j)->regStat ();
-    }
+  //for (WIDTH j = 0; j < _num_bbWin; j++) { TODO put this back
+  //    _bbWindows.Nth(j)->regStat ();
+  //}
 }

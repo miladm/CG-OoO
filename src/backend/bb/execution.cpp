@@ -9,7 +9,7 @@ bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port,
                             CAMtable<dynBasicblock*>* bbROB,
 	    	                WIDTH execution_width,
                             bb_memManager* LSQ_MGR,
-                            bb_rfManager* RF_MGR,
+                            bb_grfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (execution_width, stage_name, clk)
@@ -180,11 +180,11 @@ void bb_execution::squashCtrl () {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
     } else if (g_var.g_pipe_state == PIPE_DRAIN && _bbROB->hasFreeWire (READ) && 
-               _bbROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
+               _bbROB->getFront()->getBBID () >= g_var.g_squash_seq_num) { //TODO this needs a fix
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
         _bbROB->updateWireState (READ);
-    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _bbROB->getTableSize() == 0) {
+    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _bbROB->getTableSize () == 0) {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
@@ -192,7 +192,7 @@ void bb_execution::squashCtrl () {
     } else {
         return; /*-- No state change --*/
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str(), _clk->now ());
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str (), _clk->now ());
 }
 
 void bb_execution::squash () {

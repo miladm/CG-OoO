@@ -6,20 +6,19 @@
 #define _BB_SCHEDULER_H
 
 #include "../unit/stage.h"
-#include "../ino/rfManager.h"
-#include "../o3/rfManager.h"
+#include "grfManager.h"
 #include "memManager.h"
 
 struct bbWindow {
     bbWindow (string bbWin_id, sysClock* clk)
-        : _win (8, 8, 8, clk, "bbWindow_"+bbWin_id.str ()),
-          _LRF_MGR (clk, "lrfManager_"+bbWin_id.str ()),
-          _id (atoi (bbWin_id.str ()))
+        : _win (8, 8, 8, clk, "bbWindow_" + bbWin_id),
+          _LRF_MGR (clk, "grfManager_" + bbWin_id),
+          _id (atoi (bbWin_id.c_str ()))
     { }
     FIFOtable<dynInstruction*> _win;
-    rfManager _LRF_MGR;
+    bb_grfManager _LRF_MGR;
     const WIDTH _id;
-}
+};
 
 class bb_scheduler : protected stage {
 	public:
@@ -30,7 +29,7 @@ class bb_scheduler : protected stage {
                    CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH scheduler_width,
                    bb_memManager* LSQ_MGR,
-                   bb_rfManager* RF_MGR,
+                   bb_grfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~bb_scheduler ();
@@ -44,7 +43,7 @@ class bb_scheduler : protected stage {
         void forwardFromCDB (dynInstruction* ins);
         void regStat ();
         bool hasReadyInsInBBWins (LENGTH &readyInsIndx);
-        void updateBBROB (dynInstruction* ins);
+        void updateBBROB (dynBasicblock* ins);
         void setBBWisAvail (WIDTH bbWin_id);
         bbWindow* getAnAvailBBWin ();
         bool hasAnAvailBBWin ();
@@ -57,10 +56,11 @@ class bb_scheduler : protected stage {
 		port<dynInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
-        o3_rfManager* _GRF_MGR;
+        bb_grfManager* _GRF_MGR;
         bbWindow* _bbWin_on_fetch;
         map<WIDTH, bbWindow*> _busy_bbWin;
         List<bbWindow*> _avail_bbWin;
+        List<bbWindow*> _bbWindows;
         WIDTH _num_bbWin;
 };
 

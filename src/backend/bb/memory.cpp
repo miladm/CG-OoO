@@ -9,7 +9,7 @@ bb_memory::bb_memory (port<dynInstruction*>& execution_to_memory_port,
                       CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH memory_width,
                       bb_memManager* LSQ_MGR,
-                      bb_rfManager* RF_MGR,
+                      bb_grfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (memory_width, stage_name, clk),

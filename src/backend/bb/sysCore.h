@@ -8,7 +8,6 @@
 #ifndef _BB_SYSCORE_H
 #define _BB_SYSCORE_H
 
-#include "registerRename.h"
 #include "branchPred.h"
 #include "fetch.h"
 #include "decode.h"
@@ -22,7 +21,7 @@
 #include "../unit/table.h"
 #include "../unit/port.h"
 #include "memManager.h"
-#include "rfManager.h"
+#include "grfManager.h"
 
 class bb_sysCore : public unit {
 	public:
@@ -94,7 +93,7 @@ class bb_sysCore : public unit {
 
         // RF and LSQ
         bb_memManager* _LSQ_MGR;
-        bb_rfManager* _RF_MGR;
+        bb_grfManager* _RF_MGR;
 
 
         // MISC

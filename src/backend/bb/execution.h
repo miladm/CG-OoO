@@ -6,7 +6,7 @@
 #define _BB_EXECUTION_H
 
 #include "../unit/stage.h"
-#include "rfManager.h"
+#include "grfManager.h"
 #include "memManager.h"
 
 //typedef enum {COMPLETE_NORMAL, COMPLETE_SQUASH} COMPLETE_STATUS;
@@ -18,7 +18,7 @@ class bb_execution : protected stage {
                       CAMtable<dynBasicblock*>* bbROB,
 			          WIDTH execution_width,
                       bb_memManager* LSQ_MGR,
-                      bb_rfManager* RF_MGR,
+                      bb_grfManager* RF_MGR,
                       sysClock* clk,
 			          string stage_name);
 		~bb_execution ();
@@ -38,7 +38,7 @@ class bb_execution : protected stage {
         port<dynInstruction*>* _execution_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
-        bb_rfManager* _RF_MGR;
+        bb_grfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
 };

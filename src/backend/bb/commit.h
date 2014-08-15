@@ -6,7 +6,7 @@
 #define _BB_COMMIT_H
 
 #include "../unit/stage.h"
-#include "rfManager.h"
+#include "grfManager.h"
 #include "memManager.h"
 
 class bb_commit : protected stage {
@@ -16,7 +16,7 @@ class bb_commit : protected stage {
                    CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH commit_width,
                    bb_memManager* LSQ_MGR,
-                   bb_rfManager* RF_MGR,
+                   bb_grfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~bb_commit ();
@@ -37,7 +37,7 @@ class bb_commit : protected stage {
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
-        bb_rfManager* _RF_MGR;
+        bb_grfManager* _RF_MGR;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;
