@@ -59,7 +59,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_grfManager (_clk, "grfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
-    _bbROB = new CAMtable<dynBasicblock*>(10, 32, 32, _clk, "bbROB");
+    _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());

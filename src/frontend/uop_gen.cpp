@@ -1207,6 +1207,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
         //if (!firstBB)
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
         if (s != "MILAD") {
+            cout << "br" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1247,6 +1248,7 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
         //if (!firstBB)
         s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
         if (s != "MILAD") {
+            cout << "mem" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1289,8 +1291,10 @@ VOID getIns (ADDRINT insAddr) {
         //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
+            cout << "ins" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+                if (g_bbObj == NULL) return;
                 dynInstruction* g_insObj = g_var.getNewIns ();
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
@@ -1327,6 +1331,7 @@ VOID getNopIns (ADDRINT insAddr) {
         //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
+            cout << "nop" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();

@@ -270,8 +270,15 @@ tableType_T FIFOtable<tableType_T>::popFront () {
 
 
 /** TEMPLATES **/
+
+/* DYN INS */
 template struct TableElement<dynInstruction*>;
 template class table<dynInstruction*>;
 template class CAMtable<dynInstruction*>;
 template class RAMtable<dynInstruction*>;
 template class FIFOtable<dynInstruction*>;
+
+/* DYN BB */
+template struct TableElement<dynBasicblock*>;
+template class table<dynBasicblock*>;
+template class CAMtable<dynBasicblock*>;

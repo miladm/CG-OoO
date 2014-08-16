@@ -12,11 +12,11 @@
 struct bbWindow {
     bbWindow (string bbWin_id, sysClock* clk)
         : _win (8, 8, 8, clk, "bbWindow_" + bbWin_id),
-          _LRF_MGR (clk, "grfManager_" + bbWin_id),
+          _LRF_MGR (clk, "lrfManager_" + bbWin_id),
           _id (atoi (bbWin_id.c_str ()))
     { }
     FIFOtable<dynInstruction*> _win;
-    bb_grfManager _LRF_MGR;
+    bb_grfManager _LRF_MGR; //TODO turn it into a real LRF
     const WIDTH _id;
 };
 
@@ -43,7 +43,7 @@ class bb_scheduler : protected stage {
         void forwardFromCDB (dynInstruction* ins);
         void regStat ();
         bool hasReadyInsInBBWins (LENGTH &readyInsIndx);
-        void updateBBROB (dynBasicblock* ins);
+        void updateBBROB (dynBasicblock*);
         void setBBWisAvail (WIDTH bbWin_id);
         bbWindow* getAnAvailBBWin ();
         bool hasAnAvailBBWin ();

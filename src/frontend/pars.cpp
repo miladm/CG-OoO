@@ -376,6 +376,7 @@ VOID Init (char* cfgFile)
 	int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
+	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = BASICBLOCK;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
@@ -702,6 +703,7 @@ VOID doImpMemCount_ (UINT32 isMem)
 	}
 }
 
+bool first_bb = true;
 VOID Instruction (TRACE trace, VOID * val) 
 {
     if (!filter.SelectTrace (trace)) {
@@ -711,8 +713,13 @@ VOID Instruction (TRACE trace, VOID * val)
 
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-        INS tail = BBL_InsTail (bbl);
         if (g_var.g_core_type == BASICBLOCK) {
+            if (first_bb) {
+                first_bb = false;
+                INS head = BBL_InsHead (bbl);
+                get_bb_header (head);
+            }
+            INS tail = BBL_InsTail (bbl);
             get_bb_header (tail);
         }
 
