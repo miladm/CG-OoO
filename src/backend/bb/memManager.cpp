@@ -11,8 +11,8 @@ bb_memManager::bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
-      _LQ (LQ_SIZE, 8, 4, clk, "LQtable"),
-      _SQ (SQ_SIZE, 8, 4, clk, "SQtable")
+      _LQ (LQ_SIZE, 18, 14, clk, "LQtable"),
+      _SQ (SQ_SIZE, 18, 14, clk, "SQtable")
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
@@ -79,7 +79,7 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         forward (mem_ins, axes_lat);
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
-        Assert (mem_ins->isMemOrBrViolation() == false);
+        //Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line

@@ -78,14 +78,16 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE RESOURCES --*/
-        if (_busy_bbWin[readyInsInBBWinIndx]->_win.getTableState () == EMPTY_BUFF) 
+        if (_busy_bbWin[readyInsInBBWinIndx]->_win.getTableState () == EMPTY_BUFF) {
             setBBWisAvail (readyInsInBBWinIndx);
+        }
         _GRF_MGR->updateWireState (READ, num_ar);
-        _busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
+        //_busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
 
         /*-- STAT --*/
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
     }
 
     manageCDB ();
@@ -140,9 +142,9 @@ void bb_scheduler::updatebbWindows () {
         }
         Assert (_bbWin_on_fetch != NULL);
         if (!_bbWin_on_fetch->_win.hasFreeWire (WRITE)) break;
-        Assert (_bbWin_on_fetch->_win.getTableState () == FULL_BUFF);
+        Assert (_bbWin_on_fetch->_win.getTableState () != FULL_BUFF);
 
-        /*-- WRITE INTO RES STN --*/
+        /*-- WRITE INTO BB WIN --*/
         ins = _decode_to_scheduler_port->popFront ();
         _GRF_MGR->renameRegs (ins);
         ins->setPipeStage (DISPATCH);
@@ -184,7 +186,7 @@ bool bb_scheduler::hasAnAvailBBWin () {
 }
 
 bbWindow* bb_scheduler::getAnAvailBBWin () {
-    Assert (_avail_bbWin.NumElements () == 0);
+    Assert (_avail_bbWin.NumElements () > 0);
     bbWindow* bbWin = _avail_bbWin.Nth (0);
     _avail_bbWin.RemoveAt (0);
     _busy_bbWin.insert (pair<WIDTH, bbWindow*> (bbWin->_id, bbWin));
@@ -192,7 +194,8 @@ bbWindow* bb_scheduler::getAnAvailBBWin () {
 }
 
 bool bb_scheduler::detectNewBB (dynInstruction* ins) {
-    Assert (ins->getBB()->getBBID () < _bbROB->getLast()->getBBID ());
+    if (_bbROB->getTableState () == EMPTY_BUFF) return true;
+    Assert (ins->getBB()->getBBID () >= _bbROB->getLast()->getBBID ());
     return (ins->getBB()->getBBID () > _bbROB->getLast()->getBBID ()) ? true : false;
 }
 

@@ -49,6 +49,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         dynBasicblock* bb = _bbROB->getFront ();
         if (bb->isMemOrBrViolation ()) break;
         if (bb->getBBstate () != EMPTY_BUFF) break; //TODO what is a BB is still getting filled up?
+        if (!bb->isBBcomplete ()) break;
 
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
@@ -141,6 +142,8 @@ void bb_commit::commitBB (dynBasicblock* bb) {
     List<dynInstruction*>* insList = bb->getBBinsList ();
     while (insList->NumElements () > 0) {
         dynInstruction* ins = insList->Nth (0); //TODO this is consuming a port count regardless of outcome of next step - fix
+        cout << ins->getPipeStage () << endl;
+        cout << ins->getInsID () << endl;
         Assert (ins->getPipeStage () == COMPLETE);
         if (ins->getInsType () == MEM) {
             if (_LSQ_MGR->commit (ins)) {

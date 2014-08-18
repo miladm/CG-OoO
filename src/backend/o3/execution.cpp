@@ -69,7 +69,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             ins->setPipeStage (MEM_ACCESS);
             _LSQ_MGR->memAddrReady (ins);
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                       "Complete load - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
@@ -80,14 +80,14 @@ COMPLETE_STATUS o3_execution::completeIns () {
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
             if (is_violation) { violating_ld_ins->setMemViolation (); }
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete store - ins addr", ins->getInsID (), _clk->now ());
         } else {
             //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
             _RF_MGR->completeRegs (ins);
             //_RF_MGR->updateWireState (WRITE); //TODO put back
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete ins", ins->getInsID (), _clk->now ());
         }
         EU->resetEU ();

@@ -63,7 +63,7 @@ void bb_memory::completeIns () {
         dynInstruction* finished_ld_ins = p.second;
         Assert (finished_ld_ins != NULL);
         finished_ld_ins->setPipeStage(COMPLETE);
-        finished_ld_ins->getBB()->popFront ();
+        finished_ld_ins->getBB()->incCompletedInsCntr ();
         _LSQ_MGR->completeLd (finished_ld_ins);
         _RF_MGR->completeRegs (finished_ld_ins);
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 

@@ -7,8 +7,10 @@
 dynBasicblock::dynBasicblock (string class_name)
     : unit (class_name),
       _head (10),
-      _max_bb_size (10) //TODO configurable
-{ }
+      _max_bb_size (100) //TODO configurable and small
+{ 
+    _num_completed_ins = 0;
+}
 
 dynBasicblock::~dynBasicblock () {}
 
@@ -46,6 +48,11 @@ void dynBasicblock::buildInsSchedule () {
     //TODO add code here and update insertIns function
 }
 
+void dynBasicblock::incCompletedInsCntr () {
+    _num_completed_ins++;
+    Assert (_schedInsList.NumElements () >= _num_completed_ins);
+}
+
 bool dynBasicblock::setupAR (dynInstruction* ins) {
     List<AR>* rd_list = ins->getARrdList ();
     List<AR>* wr_list = ins->getARwrList ();
@@ -77,6 +84,9 @@ ADDRS dynBasicblock::getBBbrAddr () {
 }
 
 dynInstruction* dynBasicblock::popFront () {
+#ifdef ASSERTION
+    Assert (_schedInsList_waitList.NumElements () > 0);
+#endif
     dynInstruction* ins = _schedInsList_waitList.Nth (0);
     _schedInsList_waitList.RemoveAt (0);
     return ins;
@@ -103,6 +113,8 @@ bool dynBasicblock::isMemViolation () {return _is_mem_violation;}
 bool dynBasicblock::isMemOrBrViolation () {return (_is_mem_violation || _is_on_wrong_path);}
 
 List<dynInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
+
+bool dynBasicblock::isBBcomplete () {return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
 
 // ***********************
 // ** INS CONTROL       **

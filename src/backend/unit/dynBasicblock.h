@@ -63,6 +63,7 @@ class dynBasicblock : public unit {
         bool insertIns (dynInstruction*);
         bool setupAR (dynInstruction*);
         void buildInsSchedule ();
+        void incCompletedInsCntr ();
 
         bool bbHasBr ();
         ADDRS getBBbrAddr ();
@@ -77,6 +78,7 @@ class dynBasicblock : public unit {
         bool isMemOrBrViolation ();
         bool isMemViolation ();
         List<dynInstruction*>* getBBinsList ();
+        bool isBBcomplete ();
 
         void squash ();
         void reset ();
@@ -89,6 +91,7 @@ class dynBasicblock : public unit {
         List<dynInstruction*> _schedInsList_waitList;
 
         const LENGTH _max_bb_size;
+        LENGTH _num_completed_ins;
 
         bool _is_on_wrong_path;
         bool _is_mem_violation;

@@ -46,6 +46,7 @@
 #include "../backend/o3/oooBkEnd.h"
 #include "../backend/bb/bbBkEnd.h"
 #include "../backend/unit/dynInstruction.h"
+#include "../backend/unit/dynBasicblock.h"
 
 using namespace INSTLIB;
 
@@ -284,12 +285,12 @@ static VOID backEnd (void *ptr) {
         //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 		if (g_var.g_core_type == BASICBLOCK) {
 			if (g_var.g_bbCache->NumElements () >= 100) {
-				//cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
+				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
 				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
                 bbBkEndRun ();
-				//cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
+				cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
 			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
@@ -394,6 +395,7 @@ VOID Fini (INT32 code, VOID* v)
 	g_var.g_appEnd = true;
 	delete g_var.g_insList;
 	delete g_var.g_codeCache;
+	delete g_var.g_bbCache;
 	delete g_var.g_BBlist;
 	cout << "finishing" << endl;
 	PIN_SemaphoreSet (&semaphore0);
@@ -703,7 +705,6 @@ VOID doImpMemCount_ (UINT32 isMem)
 	}
 }
 
-bool first_bb = true;
 VOID Instruction (TRACE trace, VOID * val) 
 {
     if (!filter.SelectTrace (trace)) {
@@ -711,6 +712,7 @@ VOID Instruction (TRACE trace, VOID * val)
         return;
     }
 
+    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
         if (g_var.g_core_type == BASICBLOCK) {

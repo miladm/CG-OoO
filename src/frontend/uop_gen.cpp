@@ -1204,7 +1204,6 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
     } else {
         g_var.stat.matchIns++;
         string s;
-        //if (!firstBB)
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
         if (s != "MILAD") {
             cout << "br" << endl;
@@ -1220,6 +1219,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+                g_insObj->setBB (g_bbObj);
             } else {
                 g_var.g_ins = s;
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
@@ -1245,7 +1245,6 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
     } else {
         g_var.stat.matchIns++;
         string s;
-        //if (!firstBB)
         s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
         if (s != "MILAD") {
             cout << "mem" << endl;
@@ -1262,6 +1261,7 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+                g_insObj->setBB (g_bbObj);
             } else {
                 g_var.g_ins = s;
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
@@ -1288,7 +1288,6 @@ VOID getIns (ADDRINT insAddr) {
     } else {
         g_var.stat.matchIns++;
         string s;
-        //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
             cout << "ins" << endl;
@@ -1304,6 +1303,7 @@ VOID getIns (ADDRINT insAddr) {
                 g_insObj->setWrongPath (g_var.g_wrong_path);
                 g_var.g_ins = s;
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+                g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
@@ -1328,7 +1328,6 @@ VOID getNopIns (ADDRINT insAddr) {
     } else {
         g_var.stat.matchIns++;
         string s;
-        //if (!firstBB)
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
             cout << "nop" << endl;
@@ -1343,6 +1342,7 @@ VOID getNopIns (ADDRINT insAddr) {
                 g_insObj->setWrongPath (g_var.g_wrong_path);
                 g_var.g_ins = s;
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
+                g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);

@@ -48,9 +48,11 @@ SIM_MODE bb_fetch::doFETCH () {
 
 /*-- READ FW INSTRUCTIONS FORM THE PIN INPUT QUE --*/
 PIPE_ACTIVITY bb_fetch::fetchImpl () {
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch", _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     if (_fetch_state == FETCH_COMPLETE) {
-        if (g_var.isBBcacheEmpty ()) { _switch_to_frontend = true; return pipe_stall; }
+        if (g_var.isBBcacheEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
+        
         else { getNewBB (); }
     }
 
@@ -75,7 +77,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
 }
 
 void bb_fetch::getNewBB () {
-    Assert (_current_bb->getBBstate () == EMPTY_BUFF);
+    //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
     _current_bb = g_var.popBBcache ();
 }
 
