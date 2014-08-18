@@ -155,6 +155,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
                 Assert (true == false && "implement this condition"); //TODO finish this
             }
         } else {
+            _RF_MGR->commitRegs (ins);
             delIns (ins);
             insList->RemoveAt (0);
         }
