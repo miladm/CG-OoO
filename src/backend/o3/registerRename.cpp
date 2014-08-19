@@ -217,6 +217,7 @@ bool o3_registerRename::isPRvalid (PR p_reg) {
             "Register must hold data to read from - call updateReg () first");
 #endif
     REG_REN_STATE state = _RF[p_reg]->_reg_state;
+    cout << "Stat of RR: " << state << endl;
     return (state == ARCH_REG || state == RENAMED_VALID) ? true : false;
 }
 

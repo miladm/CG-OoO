@@ -76,11 +76,11 @@ COMPLETE_STATUS bb_execution::completeIns () {
             ins->getBB()->incCompletedInsCntr ();
             _LSQ_MGR->memAddrReady (ins);
             _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
-            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
-            bool is_violation = p.first;
-            violating_ld_ins = p.second;
+//            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
+//            bool is_violation = p.first;
+//            violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
-            if (is_violation) { violating_ld_ins->setMemViolation (); }
+//            if (is_violation) { violating_ld_ins->setMemViolation (); }
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (),
                        "Complete store - ins addr", ins->getInsID (), _clk->now ());
         } else {

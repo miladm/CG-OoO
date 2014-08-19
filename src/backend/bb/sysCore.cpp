@@ -98,6 +98,6 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        if (_clk->now () == 400000) exit (-1); /*-- for debug --*/
+        if (_clk->now () == 15000) exit (-1); /*-- for debug --*/
 	}
 }

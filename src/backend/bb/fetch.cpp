@@ -51,7 +51,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch", _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     if (_fetch_state == FETCH_COMPLETE) {
-        if (g_var.isBBcacheEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
+        if (g_var.isBBcacheNearEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
         
         else { getNewBB (); }
     }

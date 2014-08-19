@@ -94,9 +94,9 @@ void table<tableType_T>::removeNth_unsafe (LENGTH indx) {
 template <typename tableType_T>
 void table<tableType_T>::regStat () {
     if (getTableState () == EMPTY_BUFF) {
-        //s_table_empty_cyc++;
+//        s_table_empty_cyc++;
     } else if (getTableState () == FULL_BUFF) {
-        //s_table_full_cyc++;
+//        s_table_full_cyc++;
     }
 }
 

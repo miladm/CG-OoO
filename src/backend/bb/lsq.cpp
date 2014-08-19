@@ -151,9 +151,11 @@ pair<bool, dynInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                 dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), 
                            "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, dynInstruction*> (true, ins);
+            } else if (_table.Nth(i)->_delay.isValidStopTime ()) {
+                cout << i << "th LQ elem stop: " << _table.Nth(i)->_delay.getStopTime () << endl;
             }
         }
-        dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No finished LD ins.");
+        dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished LD ins.", "LQ Size:", table_size);
         return pair<bool, dynInstruction*> (false, NULL);
     } else {
         for (LENGTH i = 0; i < table_size; i++) {
@@ -165,9 +167,11 @@ pair<bool, dynInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                 dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (), 
                            "Found a finished ST ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, dynInstruction*> (true, ins);
+            } else if (_table.Nth(i)->_delay.isValidStopTime ()) {
+                cout << i << "th SQ elem stop: " << _table.Nth(i)->_delay.getStopTime () << endl;
             }
         }
-        dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No finished ST ins.");
+        dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished ST ins.", "SQ Size:", table_size);
         return pair<bool, dynInstruction*> (false, NULL);
     }
 }

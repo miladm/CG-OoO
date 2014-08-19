@@ -65,11 +65,15 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         LENGTH readyInsInBBWinIndx;
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx)) break;
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         dynInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         WIDTH num_ar = ins->getTotNumRdAR ();
         if (!_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
 
         /*-- READ INS WIN --*/
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront (); //TODO implement multi reads from a bbWin
@@ -106,13 +110,14 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         dynInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        if (!_GRF_MGR->isReady (ins)) continue;
+        if (!_GRF_MGR->isReady (ins)) { cout << "issue = milad\n"; continue;}
         else return true;
     }
+    dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Found NO ready ins.", _clk->now ());
     return false;
 }
 
-/*-- WRITE INTO INS WINDOW --*/
+/*-- WRITE INTO BB WINDOW --*/
 void bb_scheduler::updatebbWindows () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/

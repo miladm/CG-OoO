@@ -11,8 +11,8 @@ bb_memManager::bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
-      _LQ (LQ_SIZE, 18, 14, clk, "LQtable"),
-      _SQ (SQ_SIZE, 18, 14, clk, "SQtable")
+      _LQ (LQ_SIZE, 28, 24, clk, "LQtable"),
+      _SQ (SQ_SIZE, 28, 24, clk, "SQtable")
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
@@ -97,17 +97,17 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
 }
 
 CYCLE bb_memManager::getAxesLatency (dynInstruction* mem_ins) {
-    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
-        //mem_ins->setLQstate (LQ_CACHE_WAIT); TODO put back and fix
-        return g_eu_lat._st_buff_lat;
-    //} else if () { /*TODO for MSHR */
-    } else {
+//    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
+//        mem_ins->setLQstate (LQ_FWD_FROM_SQ);
+//        return g_eu_lat._st_buff_lat;
+//    //} else if () { /*TODO for MSHR */
+//    } else {
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                 mem_ins->getMemAddr (),
                 mem_ins->getMemAxesSize(),
                 &_L1, &_L2, &_L3);
-    }
+//    }
 }
 
 bool bb_memManager::commit (dynInstruction* ins) {
