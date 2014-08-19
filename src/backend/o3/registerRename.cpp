@@ -189,7 +189,6 @@ void o3_registerRename::updatePR (PR new_pr, PR prev_pr, REG_REN_STATE state) {
 
 void o3_registerRename::updatePRstate (PR p_reg, REG_REN_STATE state) {
 	Assert (_RF.find (p_reg) != _RF.end () && "Physical register value was not found!");
-    cout << "shit " << _RF[p_reg]->_reg_state << " " << state << endl;
 	Assert (((_RF[p_reg]->_reg_state == AVAILABLE && state == RENAMED_INVALID) ||
              (_RF[p_reg]->_reg_state == RENAMED_INVALID && state == RENAMED_VALID) ||
 		     (_RF[p_reg]->_reg_state == RENAMED_VALID && state == ARCH_REG) ||
@@ -217,7 +216,6 @@ bool o3_registerRename::isPRvalid (PR p_reg) {
             "Register must hold data to read from - call updateReg () first");
 #endif
     REG_REN_STATE state = _RF[p_reg]->_reg_state;
-    cout << "Stat of RR: " << state << endl;
     return (state == ARCH_REG || state == RENAMED_VALID) ? true : false;
 }
 

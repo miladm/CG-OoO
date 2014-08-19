@@ -97,17 +97,17 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
 }
 
 CYCLE bb_memManager::getAxesLatency (dynInstruction* mem_ins) {
-//    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
-//        mem_ins->setLQstate (LQ_FWD_FROM_SQ);
-//        return g_eu_lat._st_buff_lat;
-//    //} else if () { /*TODO for MSHR */
-//    } else {
+    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
+        mem_ins->setLQstate (LQ_FWD_FROM_SQ);
+        return g_eu_lat._st_buff_lat;
+    //} else if () { /*TODO for MSHR */
+    } else {
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                 mem_ins->getMemAddr (),
                 mem_ins->getMemAxesSize(),
                 &_L1, &_L2, &_L3);
-//    }
+    }
 }
 
 bool bb_memManager::commit (dynInstruction* ins) {

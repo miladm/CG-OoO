@@ -1206,7 +1206,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
         string s;
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
         if (s != "MILAD") {
-            cout << "br" << endl;
+//            cout << "br" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1246,15 +1246,13 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
         g_var.stat.matchIns++;
         string s;
         s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
-        if (s != "MILAD") {
-            cout << "mem" << endl;
+        if (s != "MILAD\n") {
+//            cout << "mem" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
-                cout << "hey" << endl;
                 g_var.g_ins = s;
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
-                cout << "hey" << endl;
                 staticIns->copyRegsTo (g_insObj);
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
                 g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
@@ -1262,11 +1260,8 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
-                cout << "hey" << endl;
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
-                cout << "hey" << endl;
                 g_insObj->setBB (g_bbObj);
-                cout << "hey" << endl;
             } else {
                 g_var.g_ins = s;
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
@@ -1279,6 +1274,8 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
             }
+        } else {
+            cout << "no ins created\n";
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1295,7 +1292,7 @@ VOID getIns (ADDRINT insAddr) {
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
-            cout << "ins" << endl;
+//            cout << "ins" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 if (g_bbObj == NULL) return;
@@ -1335,7 +1332,7 @@ VOID getNopIns (ADDRINT insAddr) {
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD") {
-            cout << "nop" << endl;
+//            cout << "nop" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1364,7 +1361,7 @@ VOID getNopIns (ADDRINT insAddr) {
 }
 
 void getBBhead (ADDRINT bb_tail_ins_addr, BOOL is_tail_br) {
-    cout << "new BB" << endl;
+//    cout << "new BB" << endl;
     dynBasicblock* g_bbObj = g_var.getNewCacheBB ();
     g_bbObj->setBBID (g_var.g_bb_seq_num++);
     g_bbObj->setBBbrAddr (is_tail_br, bb_tail_ins_addr);

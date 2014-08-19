@@ -142,11 +142,8 @@ void bb_commit::commitBB (dynBasicblock* bb) {
     static int commited_bb = 0;
     List<dynInstruction*>* insList = bb->getBBinsList ();
     commited_bb++;
-    cout << "commited BB: " << commited_bb << endl;
     while (insList->NumElements () > 0) {
         dynInstruction* ins = insList->Nth (0); //TODO this is consuming a port count regardless of outcome of next step - fix
-        cout << ins->getPipeStage () << endl;
-        cout << ins->getInsID () << endl;
         Assert (ins->getPipeStage () == COMPLETE);
         if (ins->getInsType () == MEM) {
             if (_LSQ_MGR->commit (ins)) {

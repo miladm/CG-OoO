@@ -191,13 +191,13 @@ std::string staticCodeParser::getMemIns (ADDRINT insAddr, ADDRINT memAccessSize,
 	if (_insMap.find (insAddr) != _insMap.end ()) {
 		char insType = _insMap[insAddr]->insType[0];
 		//if (insType == 'W' || insType == 'R') {
-            if (memAddr == 0) cout << "warning - zero memAddr" << endl;
+            if (memAddr == 0) {cout << "warning - zero memAddr" << endl;ss << "MILAD";}
 			//Assert (memAddr != 0 && "invalid memory address value.");
 			//Assert (_insMap[insAddr]->memAccessSize == memAccessSize && "Unexpected memory access size");
-			ss << insType << "," << memAddr << "," << insAddr << "," << memAccessSize << "," << _insMap[insAddr]->registers;
+            else {ss << insType << "," << memAddr << "," << insAddr << "," << memAccessSize << "," << _insMap[insAddr]->registers;}
 		//} else {
 			//Assert (true == false && "Unrecognized instruction type - expecting a memory instruction");
-			ss << "MILAD";
+			//ss << "MILAD";
 		//}
 	} else {
 		Assert (true == false && "Didn't find the instruction stream");

@@ -110,7 +110,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         dynInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        if (!_GRF_MGR->isReady (ins)) { cout << "issue = milad\n"; continue;}
+        if (!_GRF_MGR->isReady (ins)) {continue;}
         else return true;
     }
     dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Found NO ready ins.", _clk->now ());
