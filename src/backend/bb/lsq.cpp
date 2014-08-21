@@ -94,7 +94,7 @@ void bb_lsqCAM::delFinishedMemAxes () {
 bool bb_lsqCAM::hasCommit () {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
-        if (getNth_unsafe (i)->getSQstate () == SQ_COMMIT) {
+        if (getNth_unsafe(i)->getSQstate () == SQ_COMMIT) {
             return true;
         }
     }

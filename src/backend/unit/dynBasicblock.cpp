@@ -114,7 +114,8 @@ bool dynBasicblock::isMemOrBrViolation () {return (_is_mem_violation || _is_on_w
 
 List<dynInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
-bool dynBasicblock::isBBcomplete () {return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
+bool dynBasicblock::isBBcomplete () {
+    return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
 
 // ***********************
 // ** INS CONTROL       **

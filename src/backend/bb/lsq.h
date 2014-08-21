@@ -9,8 +9,8 @@
 
 #include "../unit/table.h"
 
-#define SQ_SIZE 36
-#define LQ_SIZE 64
+#define BB_SQ_SIZE 96
+#define BB_LQ_SIZE 94
 
 class bb_lsqCAM : public CAMtable<dynInstruction*> {
 	public:

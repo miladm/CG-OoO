@@ -171,7 +171,7 @@ std::string staticCodeParser::getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgA
 	if (_insMap.find (insAddr) != _insMap.end ()) {
 		char insType = _insMap[insAddr]->insType[0];
 		if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-            if (tgAddr == 0) cout << "warning - zero tgAddr" << endl;
+//            if (tgAddr == 0) cout << "warning - zero tgAddr" << endl;
 			//Assert (tgAddr != 0 && "invalid branch dst address value.");
 			ss << "B" << "," << insAddr << "," << isTaken  << "," << tgAddr << "," << _insMap[insAddr]->registers;
 		} else {
@@ -191,10 +191,10 @@ std::string staticCodeParser::getMemIns (ADDRINT insAddr, ADDRINT memAccessSize,
 	if (_insMap.find (insAddr) != _insMap.end ()) {
 		char insType = _insMap[insAddr]->insType[0];
 		//if (insType == 'W' || insType == 'R') {
-            if (memAddr == 0) {cout << "warning - zero memAddr" << endl;ss << "MILAD";}
+//            if (memAddr == 0) cout << "warning - zero memAddr" << endl;
 			//Assert (memAddr != 0 && "invalid memory address value.");
 			//Assert (_insMap[insAddr]->memAccessSize == memAccessSize && "Unexpected memory access size");
-            else {ss << insType << "," << memAddr << "," << insAddr << "," << memAccessSize << "," << _insMap[insAddr]->registers;}
+			ss << insType << "," << memAddr << "," << insAddr << "," << memAccessSize << "," << _insMap[insAddr]->registers;
 		//} else {
 			//Assert (true == false && "Unrecognized instruction type - expecting a memory instruction");
 			//ss << "MILAD";

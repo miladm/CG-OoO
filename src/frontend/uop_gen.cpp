@@ -1205,7 +1205,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
         g_var.stat.matchIns++;
         string s;
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
-        if (s != "MILAD") {
+        if (s != "MILAD\n") {
 //            cout << "br" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
@@ -1291,7 +1291,7 @@ VOID getIns (ADDRINT insAddr) {
         g_var.stat.matchIns++;
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
-        if (s != "MILAD") {
+        if (s != "MILAD\n") {
 //            cout << "ins" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
@@ -1331,7 +1331,7 @@ VOID getNopIns (ADDRINT insAddr) {
         g_var.stat.matchIns++;
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
-        if (s != "MILAD") {
+        if (s != "MILAD\n") {
 //            cout << "nop" << endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();

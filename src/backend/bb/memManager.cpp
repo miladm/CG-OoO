@@ -11,8 +11,8 @@ bb_memManager::bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
-      _LQ (LQ_SIZE, 28, 24, clk, "LQtable"),
-      _SQ (SQ_SIZE, 28, 24, clk, "SQtable")
+      _LQ (BB_LQ_SIZE, 28, 24, clk, "LQtable"),
+      _SQ (BB_SQ_SIZE, 28, 24, clk, "SQtable")
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }

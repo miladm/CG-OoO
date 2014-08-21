@@ -180,7 +180,7 @@ ADDRS cache::getWBAddr(ADDRS addr)
     //TODO this function assumes _sa = 1 (fix it)
     ADDRS indx = getIndex(addr);
     ADDRS tag = _cacheLines[0][indx].getTag();
-    Assert (tag != 0);
+//    Assert (tag != 0);
     return ((tag+indx) << (BLOCK_OFFSET+WORD_OFFSET)); //Construct ~full addr
 }
 
