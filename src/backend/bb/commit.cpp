@@ -13,7 +13,7 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
-      s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO))
+      s_squash_bb_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
@@ -25,8 +25,8 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
 bb_commit::~bb_commit () {}
 
 void bb_commit::doCOMMIT () {
+    /*-- STAT & DEBUG --*/
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
-    /*-- STAT --*/
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
@@ -80,61 +80,61 @@ void bb_commit::squash () {
 }
 
 void bb_commit::bpMispredSquash () {
-//    INS_ID squashSeqNum = g_var.getSquashSN ();
-//    dynInstruction* ins = NULL;
-//    LENGTH start_indx = 0, stop_indx = _bbROB->getTableSize () - 1;
-//    for (LENGTH i = 0; i < _bbROB->getTableSize (); i++) {
-//        if (_bbROB->getTableSize () == 0) break;
-//        ins = _bbROB->getNth_unsafe (i);
-//        Assert (ins->getPipeStage () != EXECUTE);
-//        if (ins->getInsID () == squashSeqNum) {
-//            start_indx = i;
-//            Assert (ins->isOnWrongPath () == true);
-//        } else if (ins->getInsID () > squashSeqNum) {
-//            if (!ins->isMemOrBrViolation ()) {
-//                stop_indx = i - 1;
-//                Assert (i > start_indx);
-//                break;
-//            }
-//        }
-//    }
-//    Assert (_bbROB->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
-//    for (LENGTH i = _bbROB->getTableSize () - 1; i > stop_indx; i--) {
-//        if (_bbROB->getTableSize () == 0) break;
-//        ins = _bbROB->getNth_unsafe (i);
-//        ins->resetStates ();
-//        g_var.insertFrontCodeCache (ins);
-//        _bbROB->removeNth_unsafe (i);
-//        s_squash_ins_cnt++;
-//    }
-//    for (LENGTH i = stop_indx; i >= start_indx; i--) {
-//        if (_bbROB->getTableSize () == 0) break;
-//        ins = _bbROB->getNth_unsafe (i);
-//        Assert (ins->isMemOrBrViolation () == true);
-//        Assert (ins->getInsID () >= squashSeqNum);
-//        _bbROB->removeNth_unsafe (i);
-//        s_squash_ins_cnt++;
-//        delIns (ins);
-//    }
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    dynBasicblock* bb = NULL;
+    LENGTH start_indx = 0, stop_indx = _bbROB->getTableSize () - 1;
+    for (LENGTH i = 0; i < _bbROB->getTableSize (); i++) {
+        if (_bbROB->getTableSize () == 0) break;
+        bb = _bbROB->getNth_unsafe (i);
+        if (bb->getBBheadID () == squashSeqNum) {
+            start_indx = i;
+            Assert (bb->isOnWrongPath () == true);
+        } else if (bb->getBBheadID () > squashSeqNum) {
+            if (!bb->isMemOrBrViolation ()) {
+                stop_indx = i - 1;
+                Assert (i > start_indx);
+                break;
+            }
+        }
+    }
+    Assert (_bbROB->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    for (LENGTH i = _bbROB->getTableSize () - 1; i > stop_indx; i--) {
+        if (_bbROB->getTableSize () == 0) break;
+        bb = _bbROB->getNth_unsafe (i);
+//        bb->resetStates ();
+//        g_var.insertFrontBBcache (bb);
+        _bbROB->removeNth_unsafe (i);
+        s_squash_bb_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                               "Squash bb", bb->getBBID (), _clk->now ());
+        delBB (bb); //TODO temp - pull it out.
+    }
+    for (LENGTH i = stop_indx; i >= start_indx; i--) {
+        if (_bbROB->getTableSize () == 0) break;
+        bb = _bbROB->getNth_unsafe (i);
+        Assert (bb->isMemOrBrViolation () == true);
+        Assert (bb->getBBheadID () >= squashSeqNum);
+        _bbROB->removeNth_unsafe (i);
+        s_squash_bb_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                               "Squash bb", bb->getBBID (), _clk->now ());
+        delBB (bb);
+    }
 }
 
 void bb_commit::memMispredSquash () {
-//    INS_ID squashSeqNum = g_var.getSquashSN ();
-//    dynInstruction* ins = NULL;
-//    for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
-//        if (_bbROB->getTableSize () == 0) break;
-//        ins = _bbROB->getNth_unsafe (i);
-//        if (ins->getInsID () < squashSeqNum) break;
-//        ins->resetStates ();
-//        g_var.insertFrontCodeCache (ins);
-//        _bbROB->removeNth_unsafe (i);
-//        s_squash_ins_cnt++;
-//    }
-}
-
-/*-- DELETE INSTRUCTION OBJ --*/
-void bb_commit::delIns (dynInstruction* ins) {
-    delete ins;
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    dynBasicblock* bb = NULL;
+    for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
+        if (_bbROB->getTableSize () == 0) break;
+        bb = _bbROB->getNth_unsafe (i);
+        if (bb->getBBheadID () < squashSeqNum) break;
+//        bb->resetStates ();
+//        g_var.insertFrontBBcache (bb);
+        _bbROB->removeNth_unsafe (i);
+        s_squash_bb_cnt++;
+        delBB (bb); //TODO temp - pull it out
+    }
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
@@ -164,7 +164,18 @@ void bb_commit::commitBB (dynBasicblock* bb) {
 }
 
 void bb_commit::delBB (dynBasicblock* bb) {
+    List<dynInstruction*>* insList = bb->getBBinsList ();
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        dynInstruction* ins = insList->Nth (i);
+        delIns (ins);
+        insList->RemoveAt (i);
+    }
     delete bb;
+}
+
+/*-- DELETE INSTRUCTION OBJ --*/
+void bb_commit::delIns (dynInstruction* ins) {
+    delete ins;
 }
 
 void bb_commit::regStat () {

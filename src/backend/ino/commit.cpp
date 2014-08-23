@@ -49,7 +49,8 @@ PIPE_ACTIVITY commit::commitImpl () {
 
         /* COMMIT INS */
         ins = _iROB->popFront();
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Commit ins", ins->getInsID (), _clk->now ());
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Commit ins", ins->getInsID (), _clk->now ());
         delete ins;
 
         /* STAT */
@@ -89,6 +90,8 @@ void commit::squash () {
         g_var.insertFrontCodeCache(ins);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Squash ins", ins->getInsID (), _clk->now ());
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_iROB->getTableSize() == 0) break;
@@ -97,6 +100,8 @@ void commit::squash () {
         Assert (ins->getInsID () >= squashSeqNum);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Squash ins", ins->getInsID (), _clk->now ());
         delete ins;
     }
 }

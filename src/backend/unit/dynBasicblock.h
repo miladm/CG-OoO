@@ -58,16 +58,19 @@ class dynBasicblock : public unit {
 
         void setBBbrAddr (bool, ADDRS);
         void setBBID (BB_ID);
-        void setWrongPath ();
+        void setBBheadID ();
         void setGPR (AR, PR, AXES_TYPE);
         bool insertIns (dynInstruction*);
         bool setupAR (dynInstruction*);
         void buildInsSchedule ();
         void incCompletedInsCntr ();
+        void setWrongPath ();
+        void setMemViolation ();
 
         bool bbHasBr ();
         ADDRS getBBbrAddr ();
         BB_ID getBBID ();
+        INS_ID getBBheadID ();
         set<AR>* getGARrdList ();
         set<AR>* getGARwrList ();
         dynInstruction* popFront ();
@@ -76,13 +79,15 @@ class dynBasicblock : public unit {
         bool isOnWrongPath ();
         PR getGPR (AR, AXES_TYPE);
         bool isMemOrBrViolation ();
-        bool isMemViolation ();
         List<dynInstruction*>* getBBinsList ();
         bool isBBcomplete ();
 
         void squash ();
         void reset ();
         void commit ();
+
+        //BB CONTROL
+        void resetStates ();
 
     private:
         bbHead _head;
@@ -93,8 +98,10 @@ class dynBasicblock : public unit {
         const LENGTH _max_bb_size;
         LENGTH _num_completed_ins;
 
-        bool _is_on_wrong_path;
-        bool _is_mem_violation;
+        bool _bb_on_wrong_path;
+        bool _bb_has_mem_violation;
+
+        INS_ID _head_ins_seq_num;
 };
 
 #endif

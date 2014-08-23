@@ -119,6 +119,8 @@ void o3_commit::bpMispredSquash () {
         g_var.insertFrontCodeCache (ins);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "Squash ins", ins->getInsID (), _clk->now ());
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_iROB->getTableSize () == 0) break;
@@ -127,6 +129,8 @@ void o3_commit::bpMispredSquash () {
         Assert (ins->getInsID () >= squashSeqNum);
         _iROB->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "Squash ins", ins->getInsID (), _clk->now ());
         delIns (ins);
     }
 }

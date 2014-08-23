@@ -44,9 +44,9 @@ void bb_execution::doEXECUTION () {
     }
 
     /*-- SQUASH CONTROL --*/
-//    squashCtrl ();
-    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-               "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
+    squashCtrl ();
+    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+            _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /*-- STAT --*/
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
@@ -69,37 +69,40 @@ COMPLETE_STATUS bb_execution::completeIns () {
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             ins->setPipeStage (MEM_ACCESS);
             _LSQ_MGR->memAddrReady (ins);
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                      "Complete load - ins addr", ins->getInsID (), _clk->now ());
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                    _stage_name.c_str (), "Complete load - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
             ins->getBB()->incCompletedInsCntr ();
             _LSQ_MGR->memAddrReady (ins);
             _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
-//            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
-//            bool is_violation = p.first;
-//            violating_ld_ins = p.second;
+            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
+            bool is_violation = p.first;
+            violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
-//            if (is_violation) { violating_ld_ins->setMemViolation (); }
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (),
-                       "Complete store - ins addr", ins->getInsID (), _clk->now ());
+            if (is_violation) { 
+                violating_ld_ins->setMemViolation ();
+                violating_ld_ins->getBB()->setMemViolation ();
+            }
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                    _stage_name.c_str (), "Complete store - ins addr", ins->getInsID (), _clk->now ());
         } else {
             //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
             ins->getBB()->incCompletedInsCntr ();
             _RF_MGR->completeRegs (ins);
             //_RF_MGR->updateWireState (WRITE); //TODO put back
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (),
-                       "Complete ins", ins->getInsID (), _clk->now ());
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                    _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
         }
         EU->resetEU ();
 
         /*-- SQUASH DETECTION --*/
         if (ins->isMemOrBrViolation ()) {
-            g_var.setSquashSN (ins->getInsID ());
+            g_var.setSquashSN (ins->getBB()->getBBheadID ());
             g_var.setSquashType (BP_MISPRED);
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
-            g_var.setSquashSN (violating_ld_ins->getInsID ());
+            g_var.setSquashSN (violating_ld_ins->getBB()->getBBheadID ());
             g_var.setSquashType (MEM_MISPRED);
         }
     }
@@ -109,7 +112,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
                   "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", _clk->now ());
         return COMPLETE_SQUASH;
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on Right Path", _clk->now ());
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+            _stage_name.c_str (), "Ins on Right Path", _clk->now ());
     return COMPLETE_NORMAL;
 }
 
@@ -132,7 +136,8 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
         forward (ins, EU->_eu_timer.getLatency ());
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
         s_ins_cnt++;
@@ -147,7 +152,8 @@ void bb_execution::forward (dynInstruction* ins, CYCLE eu_latency) {
         CYCLE cdb_ready_latency = eu_latency - 1;
         Assert (cdb_ready_latency >= 0);
         _execution_to_scheduler_port->pushBack (ins, cdb_ready_latency);
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
     }
 }
 
@@ -158,7 +164,7 @@ void bb_execution::squashCtrl () {
          g_var.g_pipe_state == PIPE_FLUSH || 
          g_var.g_pipe_state == PIPE_DRAIN || 
          g_var.g_pipe_state == PIPE_SQUASH_ROB) && 
-        g_var.g_squash_seq_num != g_var.g_old_squash_seq_num) {
+         g_var.getSquashSN () != g_var.getOldSquashSN ()) {
         g_var.g_pipe_state = PIPE_WAIT_FLUSH;
         state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
     } else if (g_var.g_pipe_state == PIPE_NORMAL) {
@@ -180,7 +186,7 @@ void bb_execution::squashCtrl () {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
     } else if (g_var.g_pipe_state == PIPE_DRAIN && _bbROB->hasFreeWire (READ) && 
-               _bbROB->getFront()->getBBID () >= g_var.g_squash_seq_num) { //TODO this needs a fix
+               _bbROB->getFront()->getBBheadID () >= g_var.getSquashSN ()) { //TODO this needs a fix
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
         _bbROB->updateWireState (READ);
@@ -192,11 +198,13 @@ void bb_execution::squashCtrl () {
     } else {
         return; /*-- No state change --*/
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str (), _clk->now ());
+    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+            _stage_name.c_str (), state_switch.c_str (), _clk->now ());
 }
 
 void bb_execution::squash () {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "bb_execution Ports Flush", _clk->now ());
+    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", 
+            _stage_name.c_str (), "bb_execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _execution_to_scheduler_port->flushPort (squashSeqNum);

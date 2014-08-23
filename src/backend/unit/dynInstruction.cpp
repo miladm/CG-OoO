@@ -250,3 +250,8 @@ void dynInstruction::resetStates () {
     _sq_state = SQ_NO_STATE;
     _is_mem_violation = false;
 }
+
+/* Usage: for coarse grain executio - eg. BB */
+void dynInstruction::resetWrongPath () {
+    _is_on_wrong_path = false;
+}

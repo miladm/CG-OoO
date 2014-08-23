@@ -1210,7 +1210,6 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
-                g_var.g_ins = s;
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
@@ -1218,10 +1217,10 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
+                if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
                 g_insObj->setBB (g_bbObj);
             } else {
-                g_var.g_ins = s;
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
@@ -1231,6 +1230,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
             }
+            g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1251,7 +1251,6 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
-                g_var.g_ins = s;
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
@@ -1260,10 +1259,10 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
+                if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
                 g_insObj->setBB (g_bbObj);
             } else {
-                g_var.g_ins = s;
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
                 dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
@@ -1274,6 +1273,7 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
             }
+            g_var.g_ins = s;
         } else {
             cout << "no ins created\n";
         }
@@ -1303,7 +1303,7 @@ VOID getIns (ADDRINT insAddr) {
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
-                g_var.g_ins = s;
+                if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
                 g_insObj->setBB (g_bbObj);
             } else {
@@ -1314,8 +1314,8 @@ VOID getIns (ADDRINT insAddr) {
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
-                g_var.g_ins = s;
             }
+            g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }
@@ -1342,7 +1342,7 @@ VOID getNopIns (ADDRINT insAddr) {
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
-                g_var.g_ins = s;
+                if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
                 if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
                 g_insObj->setBB (g_bbObj);
             } else {
@@ -1353,8 +1353,8 @@ VOID getNopIns (ADDRINT insAddr) {
                 g_insObj->setInsAddr (insAddr);
                 g_insObj->setInsID (g_var.g_seq_num++);
                 g_insObj->setWrongPath (g_var.g_wrong_path);
-                g_var.g_ins = s;
             }
+            g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
     }

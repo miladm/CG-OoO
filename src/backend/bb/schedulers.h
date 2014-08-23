@@ -7,6 +7,7 @@
 
 #include "../unit/stage.h"
 #include "grfManager.h"
+//#include "lrfManager.h"
 #include "memManager.h"
 
 struct bbWindow {

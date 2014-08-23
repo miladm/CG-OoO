@@ -40,7 +40,7 @@ class bb_commit : protected stage {
         bb_grfManager* _RF_MGR;
 
         /* STAT VARS */
-        ScalarStat& s_squash_ins_cnt;
+        ScalarStat& s_squash_bb_cnt;
 };
 
 #endif

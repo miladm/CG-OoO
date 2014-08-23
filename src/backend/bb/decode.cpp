@@ -5,14 +5,13 @@
 #include "decode.h"
 
 bb_decode::bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			    port<dynInstruction*>& decode_to_schedule_port, 
-	    		WIDTH decode_width,
-                sysClock* clk,
-	    		string stage_name) 
+			          port<dynInstruction*>& decode_to_schedule_port, 
+	    	          WIDTH decode_width,
+                      sysClock* clk,
+	    	          string stage_name) 
 	: stage (decode_width, stage_name, clk)
-	  
 {
-    _fetch_to_decode_port = &fetch_to_decode_port;
+    _fetch_to_decode_port     = &fetch_to_decode_port;
 	_decode_to_schedule_port  = &decode_to_schedule_port;
 }
 

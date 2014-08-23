@@ -59,6 +59,7 @@ class dynInstruction : public unit {
         // INS CONTROL
         void copyRegsTo (dynInstruction* ins);
         void resetStates ();
+        void resetWrongPath ();
 
     private:
         //INS

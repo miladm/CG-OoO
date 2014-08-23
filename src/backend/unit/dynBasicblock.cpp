@@ -10,6 +10,9 @@ dynBasicblock::dynBasicblock (string class_name)
       _max_bb_size (100) //TODO configurable and small
 { 
     _num_completed_ins = 0;
+    _bb_on_wrong_path = false;
+    _bb_has_mem_violation = false;
+    _head_ins_seq_num = 0;
 }
 
 dynBasicblock::~dynBasicblock () {}
@@ -23,6 +26,13 @@ void dynBasicblock::setBBbrAddr (bool is_tail_br, ADDRS bb_br_ins_addr) {
 }
 
 void dynBasicblock::setBBID (BB_ID bb_seq_num) { _head._bb_seq_num = bb_seq_num; }
+
+void dynBasicblock::setBBheadID () {
+    if (_schedInsList_waitList.NumElements () == 1) {
+        Assert (_head_ins_seq_num == 0);
+        _head_ins_seq_num = _schedInsList_waitList.Nth(0)->getInsID ();
+    }
+}
 
 bool dynBasicblock::insertIns (dynInstruction* ins) {
     ADDRS ins_addr = ins->getInsAddr ();
@@ -73,6 +83,14 @@ bool dynBasicblock::setupAR (dynInstruction* ins) {
     //insertIns must check to see if it can accpet the instruction. if it can't it must start a new basicblock (future work)
 }
 
+void dynBasicblock::setWrongPath () {
+    _bb_on_wrong_path = true;
+}
+
+void dynBasicblock::setMemViolation () {
+    _bb_has_mem_violation = true;
+}
+
 // ***********************
 // ** GET INS ATRIBUTES **
 // ***********************
@@ -94,6 +112,11 @@ dynInstruction* dynBasicblock::popFront () {
 
 BB_ID dynBasicblock::getBBID () {return _head._bb_seq_num;}
 
+INS_ID dynBasicblock::getBBheadID () {
+    Assert (_head_ins_seq_num > 0);
+    return _head_ins_seq_num;
+}
+
 set<AR>* dynBasicblock::getGARrdList () {return &_head._a_rd_g_reg;} //TODO does this fail?
 
 set<AR>* dynBasicblock::getGARwrList () {return &_head._a_wr_g_reg;}
@@ -108,9 +131,7 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
     }
 }
 
-bool dynBasicblock::isMemViolation () {return _is_mem_violation;}
-
-bool dynBasicblock::isMemOrBrViolation () {return (_is_mem_violation || _is_on_wrong_path);}
+bool dynBasicblock::isMemOrBrViolation () {return (_bb_has_mem_violation || _bb_on_wrong_path);}
 
 List<dynInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
@@ -123,6 +144,8 @@ bool dynBasicblock::isBBcomplete () {
 LENGTH dynBasicblock::getBBsize () {
     return _schedInsList_waitList.NumElements ();
 }
+
+bool dynBasicblock::isOnWrongPath () {return _bb_on_wrong_path;}
 
 BUFF_STATE dynBasicblock::getBBstate () {
     LENGTH bb_size = getBBsize ();
@@ -143,4 +166,14 @@ void dynBasicblock::reset () {
 void dynBasicblock::commit () {
     //delete all instructions in this basicblock.
     //what happens to un-done store instructions? special handling for them
+}
+
+void dynBasicblock::resetStates () {
+    for (int i = _schedInsList.NumElements () - 1; i >= 0; i--) {
+        dynInstruction* ins = _schedInsList.Nth (i);
+        ins->resetStates ();
+        ins->resetWrongPath ();
+    }
+    _bb_has_mem_violation = false;
+    _bb_on_wrong_path = false;
 }
