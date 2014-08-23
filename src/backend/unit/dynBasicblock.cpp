@@ -28,9 +28,9 @@ void dynBasicblock::setBBbrAddr (bool is_tail_br, ADDRS bb_br_ins_addr) {
 void dynBasicblock::setBBID (BB_ID bb_seq_num) { _head._bb_seq_num = bb_seq_num; }
 
 void dynBasicblock::setBBheadID () {
-    if (_schedInsList_waitList.NumElements () == 1) {
+    if (_schedInsList.NumElements () == 1) {
         Assert (_head_ins_seq_num == 0);
-        _head_ins_seq_num = _schedInsList_waitList.Nth(0)->getInsID ();
+        _head_ins_seq_num = _schedInsList.Nth(0)->getInsID ();
     }
 }
 
@@ -40,6 +40,7 @@ bool dynBasicblock::insertIns (dynInstruction* ins) {
     //_bbInsMap.insert (pair<ADDRS, dynInstruction*> (ins_addr, ins)); // TODO - remove the hack lines below nad put this line back
     _schedInsList.Append (ins);
     _schedInsList_waitList.Append (ins);
+    setBBheadID ();
     if (setupAR (ins)) return true;
     else return false;
 }
