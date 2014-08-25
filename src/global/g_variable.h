@@ -149,7 +149,7 @@ struct g_variable {
             g_old_squash_seq_num = g_squash_seq_num;
     }
     bool isSpeculationViolation () {
-        return (g_squash_seq_num != g_old_squash_seq_num) ? true : false;
+        return (getSquashSN () != getOldSquashSN ()) ? true : false;
     }
     void setSquashType (PIPE_SQUASH_TYPE squash_type) {
         g_squash_type = squash_type;

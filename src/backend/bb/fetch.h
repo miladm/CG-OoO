@@ -19,6 +19,7 @@ class bb_fetch : protected stage {
 			   string stage_name
               );
 		~bb_fetch ();
+        void squashCurrentBB ();
 
 		SIM_MODE doFETCH ();
 
@@ -28,6 +29,8 @@ class bb_fetch : protected stage {
         void regStat ();
         void getNewBB ();
         void updateBBfetchState ();
+        void delBB (dynBasicblock*);
+        void delIns (dynInstruction*);
 
 	private:
 		port<dynInstruction*>* _bp_to_fetch_port;

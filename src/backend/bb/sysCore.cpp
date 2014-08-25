@@ -22,7 +22,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
 		          CYCLE memory_to_scheduler_delay, LENGTH memory_to_scheduler_buff_len,
 		          CYCLE commit_to_bp_delay, LENGTH commit_to_bp_buff_len,
 		          CYCLE commit_to_scheduler_delay, LENGTH commit_to_scheduler_buff_len
-		         ) 
+		         )
 	: unit("SysCore", clk),
       _fetch_to_decode_delay (fetch_to_decode_delay),
 	  _fetch_to_decode_buff_len (fetch_to_decode_buff_len),
@@ -58,7 +58,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
 {
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_grfManager (_clk, "grfManager");
-    _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
+    _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "memManager");
     _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
 
     /*-- INIT STAGES --*/
@@ -90,7 +90,10 @@ void bb_sysCore::runCore () {
 	    _commit->doCOMMIT ();
 	    _memory->doMEMORY ();
 	    _execution->doEXECUTION ();
-        if (g_var.g_pipe_state == PIPE_SQUASH_ROB) _commit->squash ();
+        if (g_var.g_pipe_state == PIPE_SQUASH_ROB) {
+            _commit->squash ();
+            _fetch->squashCurrentBB ();
+        }
 	    _scheduler->doSCHEDULER ();
 	    _decode->doDECODE ();
 	    if (_fetch->doFETCH () == FRONT_END && g_var.g_pipe_state == PIPE_NORMAL) {
@@ -98,6 +101,6 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 50000) exit (-1); /*-- for debug --*/
+        if (_clk->now () == 50000) exit (-1); /*-- for debug --*/
 	}
 }

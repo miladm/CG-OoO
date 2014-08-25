@@ -134,12 +134,15 @@ void bb_scheduler::updatebbWindows () {
         if (!_GRF_MGR->canRename (ins)) break;
 
         /*-- CHECK & UPDATE --*/
+        cout << "new bb?" << endl;
         if (detectNewBB (ins)) {
             if (!hasAnAvailBBWin ()) {
+                cout << "no avail bb" << endl;
                 break;
             } else {
                 if (_bbROB->getTableState () == FULL_BUFF) break;
                 if (!_bbROB->hasFreeWire (WRITE)) break;
+                cout << "detected new bb: " << ins->getBB()->getBBID () << endl;
                 updateBBROB (ins->getBB ());
                 _bbWin_on_fetch = getAnAvailBBWin ();
                 _bbROB->updateWireState (WRITE);
@@ -169,11 +172,15 @@ void bb_scheduler::updatebbWindows () {
 
 void bb_scheduler::updateBBROB (dynBasicblock* bb) {
     if (_bbROB->getTableState () == EMPTY_BUFF) {
+        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
+                "Adding new BB to BBROB", _clk->now ());
         _bbROB->pushBack (bb);
     } else {
         dynBasicblock* rob_tail_bb = _bbROB->getLast ();
         Assert (bb->getBBID () >= rob_tail_bb->getBBID ());
         if (bb->getBBID () > rob_tail_bb->getBBID ()) {
+            dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
+                    "Adding new BB to BBROB", _clk->now ());
             _bbROB->pushBack (bb);
         }
     }
@@ -201,6 +208,7 @@ bbWindow* bb_scheduler::getAnAvailBBWin () {
 bool bb_scheduler::detectNewBB (dynInstruction* ins) {
     if (_bbROB->getTableState () == EMPTY_BUFF) return true;
     Assert (ins->getBB()->getBBID () >= _bbROB->getLast()->getBBID ());
+    cout << "is new BB? " << ins->getBB()->getBBID () << _bbROB->getLast()->getBBID () << endl;
     return (ins->getBB()->getBBID () > _bbROB->getLast()->getBBID ()) ? true : false;
 }
 
@@ -289,6 +297,13 @@ void bb_scheduler::squash () {
             }
         }
     }
+    _bbWin_on_fetch = NULL;
+    map<WIDTH, bbWindow*>::iterator bbWinEntry;
+    for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
+        bbWindow* bbWin = bbWinEntry->second;
+        _avail_bbWin.Append (bbWin);
+    }
+    _busy_bbWin.clear ();
 }
 
 void bb_scheduler::regStat () {

@@ -52,7 +52,6 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     if (_fetch_state == FETCH_COMPLETE) {
         if (g_var.isBBcacheNearEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
-        
         else { getNewBB (); }
     }
 
@@ -93,6 +92,26 @@ void bb_fetch::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _fetch_to_decode_port->flushPort (squashSeqNum);
     _fetch_to_bp_port->flushPort (squashSeqNum);
+}
+
+void bb_fetch::squashCurrentBB () {
+    _fetch_state = FETCH_COMPLETE;
+    delBB (_current_bb);
+}
+
+void bb_fetch::delBB (dynBasicblock* bb) {
+    List<dynInstruction*>* insList = bb->getBBinsList ();
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        dynInstruction* ins = insList->Nth (i);
+        delIns (ins);
+        insList->RemoveAt (i);
+    }
+    delete bb;
+}
+
+/*-- DELETE INSTRUCTION OBJ --*/
+void bb_fetch::delIns (dynInstruction* ins) {
+    delete ins;
 }
 
 void bb_fetch::regStat () {

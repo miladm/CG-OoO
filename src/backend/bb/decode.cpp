@@ -5,14 +5,14 @@
 #include "decode.h"
 
 bb_decode::bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			          port<dynInstruction*>& decode_to_schedule_port, 
+			          port<dynInstruction*>& decode_to_scheduler_port, 
 	    	          WIDTH decode_width,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (decode_width, stage_name, clk)
 {
     _fetch_to_decode_port     = &fetch_to_decode_port;
-	_decode_to_schedule_port  = &decode_to_schedule_port;
+	_decode_to_scheduler_port  = &decode_to_scheduler_port;
 }
 
 bb_decode::~bb_decode () {}
@@ -39,12 +39,12 @@ PIPE_ACTIVITY bb_decode::decodeImpl () {
         /*-- CHECKS --*/
         if (_fetch_to_decode_port->getBuffState () == EMPTY_BUFF) break;
         if (!_fetch_to_decode_port->isReady ()) break;
-        if (_decode_to_schedule_port->getBuffState () == FULL_BUFF) break;
+        if (_decode_to_scheduler_port->getBuffState () == FULL_BUFF) break;
 
         /*-- DECODE INS --*/
         dynInstruction* ins = _fetch_to_decode_port->popFront ();
         ins->setPipeStage (DECODE);
-        _decode_to_schedule_port->pushBack (ins);
+        _decode_to_scheduler_port->pushBack (ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
@@ -58,7 +58,7 @@ void bb_decode::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Decode Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _decode_to_schedule_port->flushPort (squashSeqNum);
+    _decode_to_scheduler_port->flushPort (squashSeqNum);
 }
 
 void bb_decode::regStat () {

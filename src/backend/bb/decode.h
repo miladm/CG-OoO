@@ -10,7 +10,7 @@
 class bb_decode : protected stage {
 	public:
 		bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			       port<dynInstruction*>& decode_to_schedule_port, 
+			       port<dynInstruction*>& decode_to_scheduler_port, 
 			       WIDTH decode_width,
                    sysClock* clk,
 			       string stage_name);
@@ -24,7 +24,7 @@ class bb_decode : protected stage {
 
 	private:
 		port<dynInstruction*>* _fetch_to_decode_port;
-		port<dynInstruction*>* _decode_to_schedule_port;
+		port<dynInstruction*>* _decode_to_scheduler_port;
 };
 
 #endif

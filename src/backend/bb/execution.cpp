@@ -101,9 +101,13 @@ COMPLETE_STATUS bb_execution::completeIns () {
         if (ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (ins->getBB()->getBBheadID ());
             g_var.setSquashType (BP_MISPRED);
+            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                    _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (violating_ld_ins->getBB()->getBBheadID ());
             g_var.setSquashType (MEM_MISPRED);
+            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                    _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
         }
     }
 
@@ -164,7 +168,7 @@ void bb_execution::squashCtrl () {
          g_var.g_pipe_state == PIPE_FLUSH || 
          g_var.g_pipe_state == PIPE_DRAIN || 
          g_var.g_pipe_state == PIPE_SQUASH_ROB) && 
-         g_var.getSquashSN () != g_var.getOldSquashSN ()) {
+         g_var.isSpeculationViolation ()) {
         g_var.g_pipe_state = PIPE_WAIT_FLUSH;
         state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
     } else if (g_var.g_pipe_state == PIPE_NORMAL) {
