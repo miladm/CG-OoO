@@ -41,6 +41,7 @@ class bb_scheduler : protected stage {
         PIPE_ACTIVITY schedulerImpl ();
         void updatebbWindows ();
         void manageCDB ();
+        void manageBusyBBWin (bbWindow*);
         void forwardFromCDB (dynInstruction* ins);
         void regStat ();
         bool hasReadyInsInBBWins (LENGTH &readyInsIndx);
