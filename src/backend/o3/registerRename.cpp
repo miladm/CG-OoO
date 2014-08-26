@@ -97,7 +97,9 @@ o3_registerRename::~o3_registerRename () {
 
 PR o3_registerRename::renameReg (AR a_reg) {
 	Assert (_fRAT.find (a_reg) != _fRAT.end () && "The arch. reg was not found in Fetch-RAT!");
-	return _fRAT[a_reg]->_reg;
+    PR p_reg = _fRAT[a_reg]->_reg;
+    Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);
+	return p_reg;
 }
 
 void o3_registerRename::update_fRAT (AR a_reg, PR p_reg) {
@@ -128,7 +130,9 @@ PR o3_registerRename::getAvailablePR () {
 	o3_regElem* p_reg = _availablePRset.back ();
 	Assert (p_reg->_reg_state == AVAILABLE && "Register State is Invalid - Register must be in Available State");
 	_availablePRset.pop_back ();
-	return p_reg->_reg;
+    PR pr = p_reg->_reg;
+    Assert (pr >= _p_rf_lo && pr <= _p_rf_hi);
+	return pr;
 }
 
 void o3_registerRename::setAsAvailablePR (PR p_reg) {

@@ -48,7 +48,8 @@ class bb_scheduler : protected stage {
         void setBBWisAvail (WIDTH bbWin_id);
         bbWindow* getAnAvailBBWin ();
         bool hasAnAvailBBWin ();
-        bool detectNewBB (dynInstruction* ins);
+        bool detectNewBB (dynInstruction*);
+        void flushBBWindow (bbWindow*);
 
 	private:
 		port<dynInstruction*>* _decode_to_scheduler_port;
