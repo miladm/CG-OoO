@@ -105,11 +105,16 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
     //for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
         WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
+        cout << "yo1" << endl;
         if (bbWin->_win.getTableState () == EMPTY_BUFF) continue;
+        cout << "yo2" << endl;
         if (!bbWin->_win.hasFreeWire (READ)) continue;
+        cout << "yo3" << endl;
         dynInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
+        cout << "yo4" << endl;
+        cout << "ins id: " << ins->getInsID () << endl;
         if (!_GRF_MGR->isReady (ins)) {continue;}
         else return true;
     }
@@ -288,16 +293,6 @@ void bb_scheduler::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
-    cout << "yp" << endl;
-    for (WIDTH j = 0; j < _num_bbWin; j++) {
-        for (int i = (int)_bbWindows.Nth(j)->_win.getTableSize() - 1; i >= 0; i--) {
-            if (_bbWindows.Nth(j)->_win.getTableSize() == 0) break;
-            dynInstruction* ins = _bbWindows.Nth(j)->_win.getNth_unsafe (i);
-            if (ins->getInsID () >= squashSeqNum) {
-                _bbWindows.Nth(j)->_win.removeNth_unsafe (i);
-            }
-        }
-    }
     _bbWin_on_fetch = NULL;
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
     cout << "hi" << endl;
@@ -310,7 +305,9 @@ void bb_scheduler::squash () {
             _busy_bbWin.erase (bbWin_id);
             continue;
         }
-        while (bbWin->_win.getFront()->getInsID () >= squashSeqNum) {bbWin->_win.popFront();}
+        while (bbWin->_win.getTableState () != EMPTY_BUFF &&
+               bbWin->_win.getFront()->getInsID () >= squashSeqNum) 
+        {cout << "bbWin squash ins: " << bbWin->_win.getFront()->getInsID () << " for " << squashSeqNum << endl; bbWin->_win.popFront();}
         cout << "miladi\n";
         if (bbWin->_win.getTableState () == EMPTY_BUFF) {
             _avail_bbWin.Append (bbWin);

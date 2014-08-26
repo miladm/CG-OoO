@@ -211,6 +211,7 @@ REG_REN_STATE o3_registerRename::getPRstate (PR p_reg) {
 /*-- FIND IF REG DATA IS AVAILABLE FOR READ --*/
 bool o3_registerRename::isPRvalid (PR p_reg) {
 #ifdef ASSERTION
+    if (!(p_reg >= _p_rf_lo && p_reg <= _p_rf_hi)) {cout << "shitty reg valu: " << p_reg << endl;}
     Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);
     Assert (_RF[p_reg]->_reg_state != AVAILABLE && 
             "Register must hold data to read from - call updateReg () first");
