@@ -46,6 +46,7 @@ PIPE_ACTIVITY bb_decode::decodeImpl () {
         ins->setPipeStage (DECODE);
         _decode_to_scheduler_port->pushBack (ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
+        cout << "_decode_to_scheduler_port size: " << _decode_to_scheduler_port->getBuffState () << endl;
 
         /*-- STAT --*/
         s_ins_cnt++;

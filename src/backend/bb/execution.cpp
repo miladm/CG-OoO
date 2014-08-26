@@ -200,6 +200,7 @@ void bb_execution::squashCtrl () {
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
         _RF_MGR->squashRenameReg ();
     } else {
+        if (g_var.g_pipe_state == PIPE_DRAIN) cout << _bbROB->getFront()->getBBheadID () << " " << g_var.getSquashSN () << endl;
         return; /*-- No state change --*/
     }
     dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 

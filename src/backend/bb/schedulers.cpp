@@ -288,6 +288,7 @@ void bb_scheduler::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
+    cout << "yp" << endl;
     for (WIDTH j = 0; j < _num_bbWin; j++) {
         for (int i = (int)_bbWindows.Nth(j)->_win.getTableSize() - 1; i >= 0; i--) {
             if (_bbWindows.Nth(j)->_win.getTableSize() == 0) break;
@@ -299,11 +300,24 @@ void bb_scheduler::squash () {
     }
     _bbWin_on_fetch = NULL;
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
+    cout << "hi" << endl;
     for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
+        WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
-        _avail_bbWin.Append (bbWin);
+        cout << "milad\n";
+        if (bbWin->_win.getTableState () == EMPTY_BUFF) {
+            _avail_bbWin.Append (bbWin);
+            _busy_bbWin.erase (bbWin_id);
+            continue;
+        }
+        while (bbWin->_win.getFront()->getInsID () >= squashSeqNum) {bbWin->_win.popFront();}
+        cout << "miladi\n";
+        if (bbWin->_win.getTableState () == EMPTY_BUFF) {
+            _avail_bbWin.Append (bbWin);
+            _busy_bbWin.erase (bbWin_id);
+        }
     }
-    _busy_bbWin.clear ();
+    cout << "hi1" << endl;
 }
 
 void bb_scheduler::regStat () {

@@ -101,6 +101,19 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        if (_clk->now () == 50000) exit (-1); /*-- for debug --*/
+        if (_clk->now () == 50000) {
+            for (int i = 0; i < _bbROB->getTableSize (); i++) {
+                dynBasicblock* bb = _bbROB->getNth(i);
+                cout << "bb: " << bb->getBBID () << endl;
+                List<dynInstruction*>* insList = bb->getBBinsList ();
+                for (int i = insList->NumElements () - 1; i >= 0; i--) {
+                    dynInstruction* ins = insList->Nth (i);
+                    cout << "stage: " << ins->getPipeStage () << 
+                        " id: " << ins->getInsID () <<
+                        " type: " << ins->getInsType () << endl;
+                }
+            }
+            exit (-1); /*-- for debug --*/
+        }
 	}
 }

@@ -95,8 +95,9 @@ void bb_fetch::squash () {
 }
 
 void bb_fetch::squashCurrentBB () {
-    _fetch_state = FETCH_COMPLETE;
     delBB (_current_bb);
+    _current_bb = NULL;
+    _fetch_state = FETCH_COMPLETE;
 }
 
 void bb_fetch::delBB (dynBasicblock* bb) {
