@@ -75,7 +75,7 @@ void bb_commit::squash () {
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
     if (squash_type == BP_MISPRED) bpMispredSquash ();
     else if (squash_type == MEM_MISPRED) memMispredSquash ();
-    else {cout << squash_type << endl; Assert (true == false && "Invalid squash type.");}
+    else {Assert (true == false && "Invalid squash type.");}
     g_var.resetSquashType ();
 }
 

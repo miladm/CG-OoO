@@ -288,12 +288,12 @@ static VOID backEnd (void *ptr) {
         //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 		if (g_var.g_core_type == BASICBLOCK) {
 			if (g_var.g_bbCache->NumElements () >= 100) {
-				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
+//				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
 				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
                 bbBkEndRun ();
-				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+//				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
@@ -797,19 +797,20 @@ VOID Instruction (TRACE trace, VOID * val)
                    }
                    */
 
-                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+//                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) { //TODO put it back
+                if (INS_IsBranchOrCall (ins)) {
                     if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
-                    if (INS_HasFallThrough (ins)) {
-                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
-                                IARG_UINT32, uid,
-                                IARG_CONTEXT,
-                                IARG_BRANCH_TAKEN,
-                                IARG_BRANCH_TARGET_ADDR, 
-                                IARG_FALLTHROUGH_ADDR,
-                                IARG_ADDRINT, INS_Address (ins),
-                                IARG_BOOL, INS_HasFallThrough (ins),
-                                IARG_END);
-                    }
+//                    if (INS_HasFallThrough (ins)) { //TODO put it back
+//                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
+//                                IARG_UINT32, uid,
+//                                IARG_CONTEXT,
+//                                IARG_BRANCH_TAKEN,
+//                                IARG_BRANCH_TARGET_ADDR, 
+//                                IARG_FALLTHROUGH_ADDR,
+//                                IARG_ADDRINT, INS_Address (ins),
+//                                IARG_BOOL, INS_HasFallThrough (ins),
+//                                IARG_END);
+//                    }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
                             IARG_CONTEXT,

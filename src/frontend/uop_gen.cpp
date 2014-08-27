@@ -1389,7 +1389,8 @@ void get_bb_header (INS bb_tail_ins) {
 }
 
 void get_uop (INS ins) {
-    if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+//    if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) { //TODO put is back
+    if (INS_IsBranchOrCall (ins)) {
         if (INS_HasFallThrough (ins)) {
             INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) getBrIns,
                     IARG_ADDRINT, INS_Address (ins),

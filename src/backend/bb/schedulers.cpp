@@ -112,16 +112,11 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
     //for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
         WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
-        cout << "yo1" << endl;
         if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
-        cout << "yo2" << endl;
         if (!bbWin->_win.hasFreeWire (READ)) continue;
-        cout << "yo3" << endl;
         dynInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        cout << "yo4" << endl;
-        cout << "ins id: " << ins->getInsID () << " " << ins->getInsAddr () << endl;
         if (!_GRF_MGR->isReady (ins)) {continue;}
         else {
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
@@ -151,15 +146,12 @@ void bb_scheduler::updatebbWindows () {
         if (!_GRF_MGR->canRename (ins)) break;
 
         /*-- CHECK & UPDATE --*/
-        cout << "new bb?" << endl;
         if (detectNewBB (ins)) {
             if (!hasAnAvailBBWin ()) {
-                cout << "no avail bb" << endl;
                 break;
             } else {
                 if (_bbROB->getTableState () == FULL_BUFF) break;
                 if (!_bbROB->hasFreeWire (WRITE)) break;
-                cout << "detected new bb: " << ins->getBB()->getBBID () << " for ins: " << ins->getInsID () << endl;
                 updateBBROB (ins->getBB ());
                 _bbWin_on_fetch = getAnAvailBBWin ();
                 _bbROB->updateWireState (WRITE);
@@ -226,7 +218,6 @@ bbWindow* bb_scheduler::getAnAvailBBWin () {
 bool bb_scheduler::detectNewBB (dynInstruction* ins) {
     if (_bbROB->getTableState () == EMPTY_BUFF) return true;
     Assert (ins->getBB()->getBBID () >= _bbROB->getLast()->getBBID ());
-    cout << "is new BB? " << ins->getBB()->getBBID () << _bbROB->getLast()->getBBID () << endl;
     return (ins->getBB()->getBBID () > _bbROB->getLast()->getBBID ()) ? true : false;
 }
 
@@ -307,40 +298,32 @@ void bb_scheduler::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
     if (_bbWin_on_fetch->_win.getTableState () != EMPTY_BUFF) {
-        cout << "marjan0" << endl;
         flushBBWindow (_bbWin_on_fetch);
-        cout << "marjan1" << endl;
         if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) {
             setBBWisAvail (_bbWin_on_fetch->_id);
             _bbWin_on_fetch = NULL;
         }
-        cout << "marjan2" << endl;
     }
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
-    cout << "hi " << _busy_bbWin.size() << endl;
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Busy BBWindows Flush", _clk->now ());
     for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
         WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
-        cout << "milad\n";
         if (bbWin->_win.getTableState () == EMPTY_BUFF) {
             setBBWisAvail (bbWin_id);
             continue;
         }
         flushBBWindow (bbWin);
-        cout << "miladi\n";
         if (bbWin->_win.getTableState () == EMPTY_BUFF) {
             setBBWisAvail (bbWin_id);
         }
     }
-    cout << "hi1" << endl;
 }
 
 void bb_scheduler::flushBBWindow (bbWindow* bbWin) {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     while (bbWin->_win.getTableState () != EMPTY_BUFF &&
            bbWin->_win.getFront()->getInsID () >= squashSeqNum) {
-        cout << "bbWin squash ins: " << bbWin->_win.getFront()->getInsID () << " - SquashSN: " << squashSeqNum << endl; 
         bbWin->_win.popFront();
     }
 }
