@@ -5,7 +5,7 @@
 #ifndef _G_VARIABLE_EN
 #define _G_VARIABLE_EN
 
-#define BB_NEAR_EMPTY_SIZE 10
+#define BB_NEAR_EMPTY_SIZE 30
 
 #include <setjmp.h>
 #include <set>
@@ -27,7 +27,7 @@ struct g_variable {
         g_seqnum = 1;
         g_icount = 0;
         insCount = 0;
-        g_debug_level = 0; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF;
+        g_debug_level = DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
         g_branch_mispredict_delay = 20;
         g_wrong_path_count = 0;
@@ -192,7 +192,7 @@ struct g_variable {
             return bb;
     }
     bool isCodeCacheEmpty () { return (g_codeCache->NumElements () == 0) ? true : false; }
-    bool isBBcacheNearEmpty () { return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
+    bool isBBcacheNearEmpty () { cout << "bbCache size: " << g_bbCache->NumElements () << endl; return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
 };
 
 extern g_variable g_var;

@@ -105,6 +105,7 @@ EXCEPT_HANDLING_RESULT handlePinException (THREADID tid, EXCEPTION_INFO * pExcep
         if (g_var.g_debug_level & DBG_SPEC) std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count << std::endl;
         recover ();
         PIN_ExecuteAt (&g_var.g_context);
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
     } else {
         std::cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionCode (pExceptInfo) << " on correct path " << std::endl;
         std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << endl;
@@ -122,6 +123,7 @@ BOOL signal_handler (THREADID tid, INT32 sig, CONTEXT *ctxt, BOOL hasHandler, co
         if (g_var.g_debug_level & DBG_SPEC) std::cout << " application signal count = " << dec << g_var.g_app_signal_count << std::endl;
         recover ();
         PIN_SaveContext (&g_var.g_context,ctxt);
+        if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
         return FALSE;
     } else {
         std::cout << "ERROR for REAL: caught signal " << dec << sig << " on correct path " << std::endl;
@@ -134,15 +136,15 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
 {
     if (!g_var.g_enable_wp) return;
 #ifdef G_I_INFO_EN
-    assert (g_i_info.find (uid)!=g_i_info.end ());
+    Assert (g_i_info.find (uid)!=g_i_info.end ());
     const i_info &i = g_i_info[uid];
 #endif
 
-    g_var.g_seqnum++;
+//    g_var.g_seq_num++;
     if (!g_var.g_wrong_path) g_var.g_icount++;
 
 #ifdef G_I_INFO_EN
-    if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC i  " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << " " << i.diss << " : ";
+    if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC i  " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
     if (g_var.g_wrong_path) {
@@ -153,6 +155,7 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
            ( (g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
+            if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
             if (g_var.g_enable_wp) {
                 PIN_ExecuteAt (&g_var.g_context);
             }
@@ -290,7 +293,7 @@ static VOID backEnd (void *ptr) {
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
                 bbBkEndRun ();
-				cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
+				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
@@ -432,7 +435,7 @@ EXCEPT_HANDLING_RESULT handle (THREADID tid, EXCEPTION_INFO *pExceptInfo, PHYSIC
 void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 {
 	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "  mem[" << hex << eaddr << " ] = ";
-	//assert (len <= MAX_MEM_WRITE_LEN);
+	//Assert (len <= MAX_MEM_WRITE_LEN);
 	g_var.g_invalid_size = false;
 	if (len > MAX_MEM_WRITE_LEN) {
 		if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memory access size - read_mem_orig ()) - " << (int)len << "Bytes\n";
@@ -524,9 +527,9 @@ VOID GetMemWriteOrigValue (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
     if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
 
 #ifdef G_I_INFO_EN
-	assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 	read_mem_orig (eaddr, len);
 	return;
@@ -538,9 +541,9 @@ VOID GetMemWriteNewValue (UINT32 uid, CONTEXT *c)
     if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
 
 #ifdef G_I_INFO_EN
-	assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wa " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wa " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
 	// TODO: bypass real memory?
@@ -555,9 +558,9 @@ VOID GetMemReadBypass (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
     if (g_var.g_enable_wp && !g_var.g_wrong_path) return;
 
 #ifdef G_I_INFO_EN
-	assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_READ_MEM) std::cout << "EXEC rb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_READ_MEM) std::cout << "EXEC rb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
 	// TODO: bypass real memory?
@@ -574,7 +577,7 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
 	}
     if (g_var.g_enable_wp && g_var.g_wrong_path) return;
 #ifdef G_I_INFO_EN
-	assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	//const i_info &i = g_i_info[uid];
 #endif
 	bool was_wp = g_var.g_wrong_path;
@@ -599,7 +602,7 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
 
 	ADDRINT eip = taken?tgt:fthru;
 	if (eip != pred_eip) {
-		assert (g_var.g_wrong_path);
+		Assert (g_var.g_wrong_path);
 		if (g_var.g_debug_level & DBG_SPEC) std::cout << "  *** forcing PIN to change control flow ***\n";
 		if (g_var.g_debug_level & DBG_SPEC) std::cout << "      predicted EIP = " << hex << pred_eip << "\n";
 		if (g_var.g_enable_wp) {
@@ -615,9 +618,9 @@ VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 {
     if (!g_var.g_enable_wp) return;
 #ifdef G_I_INFO_EN
-	assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seqnum << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 	if (g_var.g_wrong_path) {
 	    if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** detected system call on wrong path ***\n";

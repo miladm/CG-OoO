@@ -78,6 +78,10 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
 void bb_fetch::getNewBB () {
     //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
     _current_bb = g_var.popBBcache ();
+    if (_current_bb->getBBsize () == 0) {
+        delete _current_bb;
+        getNewBB ();
+    }
 }
 
 void bb_fetch::updateBBfetchState () {

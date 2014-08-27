@@ -1206,7 +1206,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
         string s;
         s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
         if (s != "MILAD\n") {
-//            cout << "br" << endl;
+            if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1247,7 +1247,7 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
         string s;
         s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
         if (s != "MILAD\n") {
-//            cout << "mem" << endl;
+            if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1292,7 +1292,7 @@ VOID getIns (ADDRINT insAddr) {
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD\n") {
-//            cout << "ins" << endl;
+            if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 if (g_bbObj == NULL) return;
@@ -1332,7 +1332,7 @@ VOID getNopIns (ADDRINT insAddr) {
         string s;
         s = g_var.g_ins = _g_staticCode->getIns (insAddr);
         if (s != "MILAD\n") {
-//            cout << "nop" << endl;
+            if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 dynInstruction* g_insObj = g_var.getNewIns ();
@@ -1362,6 +1362,7 @@ VOID getNopIns (ADDRINT insAddr) {
 
 void getBBhead (ADDRINT bb_tail_ins_addr, BOOL is_tail_br) {
 //    cout << "new BB" << endl;
+    if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_bb_seq_num << std::endl;
     dynBasicblock* g_bbObj = g_var.getNewCacheBB ();
     g_bbObj->setBBID (g_var.g_bb_seq_num++);
     g_bbObj->setBBbrAddr (is_tail_br, bb_tail_ins_addr);

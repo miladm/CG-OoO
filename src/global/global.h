@@ -155,6 +155,7 @@ typedef enum {
 #define DBG_BP 0x40
 #define DBG_CC 0x80
 #define DBG_INSBUF 0x100
+#define DBG_UOP 0x200
 
 #define MAX_MEM_WRITE_LEN 32
 
