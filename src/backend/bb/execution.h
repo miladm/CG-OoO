@@ -8,6 +8,7 @@
 #include "../unit/stage.h"
 #include "grfManager.h"
 #include "memManager.h"
+#include "bbWindow.h"
 
 //typedef enum {COMPLETE_NORMAL, COMPLETE_SQUASH} COMPLETE_STATUS;
 
@@ -15,6 +16,8 @@ class bb_execution : protected stage {
 	public:
 		bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                       port<dynInstruction*>& execution_to_scheduler_port, 
+                      List<bbWindow*>* bbWindows,
+                      WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
 			          WIDTH execution_width,
                       bb_memManager* LSQ_MGR,
@@ -41,6 +44,10 @@ class bb_execution : protected stage {
         bb_grfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
+
+        // BB WIN STRUCTURES
+        WIDTH _num_bbWin;
+        List<bbWindow*>* _bbWindows;
 };
 
 #endif

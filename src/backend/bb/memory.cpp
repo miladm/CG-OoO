@@ -6,6 +6,8 @@
 
 bb_memory::bb_memory (port<dynInstruction*>& execution_to_memory_port, 
                       port<dynInstruction*>& memory_to_scheduler_port, 
+                      List<bbWindow*>* bbWindows,
+                      WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH memory_width,
                       bb_memManager* LSQ_MGR,
@@ -26,6 +28,8 @@ bb_memory::bb_memory (port<dynInstruction*>& execution_to_memory_port,
     _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+    _num_bbWin = num_bbWin;
+    _bbWindows = bbWindows;
 }
 
 bb_memory::~bb_memory () {}

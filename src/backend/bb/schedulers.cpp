@@ -5,38 +5,38 @@
 #include "schedulers.h"
 
 bb_scheduler::bb_scheduler (port<dynInstruction*>& decode_to_scheduler_port, 
-                      port<dynInstruction*>& execution_to_scheduler_port, 
-                      port<dynInstruction*>& memory_to_scheduler_port, 
-			          port<dynInstruction*>& scheduler_to_execution_port, 
-                      CAMtable<dynBasicblock*>* bbROB,
-	    	          WIDTH issue_width,
-                      bb_memManager* LSQ_MGR,
-                      bb_grfManager* RF_MGR,
-                      sysClock* clk,
-	    	          string stage_name) 
-	: stage (issue_width, stage_name, clk)
+                            port<dynInstruction*>& execution_to_scheduler_port, 
+                            port<dynInstruction*>& memory_to_scheduler_port, 
+			                port<dynInstruction*>& scheduler_to_execution_port, 
+                            List<bbWindow*>* bbWindows,
+                            WIDTH num_bbWin,
+                            CAMtable<dynBasicblock*>* bbROB,
+	    	                WIDTH scheduler_width,
+                            bb_memManager* LSQ_MGR,
+                            bb_grfManager* RF_MGR,
+                            sysClock* clk,
+	    	                string stage_name) 
+	: stage (scheduler_width, stage_name, clk)
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _bbROB = bbROB;
-    _num_bbWin = 4;
     _LSQ_MGR = LSQ_MGR;
     _GRF_MGR = RF_MGR;
     _bbWin_on_fetch = NULL;
+    _num_bbWin = num_bbWin;
+    _bbWindows = bbWindows;
     for (WIDTH i = 0; i < _num_bbWin; i++) {
-        ostringstream bbWin_num;
-        bbWin_num << i;
-        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
+        bbWindow* bbWin = _bbWindows->Nth (i);
         _avail_bbWin.Append (bbWin);
-        _bbWindows.Append (bbWin);
     }
 }
 
 bb_scheduler::~bb_scheduler () {
     for (WIDTH i = 0; i < _num_bbWin; i++) {
-        delete _bbWindows.Nth(i);
+        delete _bbWindows->Nth(i);
     }
 }
 
@@ -65,15 +65,11 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
-        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         LENGTH readyInsInBBWinIndx;
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx)) break;
-        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         dynInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
-        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
         WIDTH num_ar = ins->getTotNumRdAR ();
         if (!_GRF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
-        dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
 
         /*-- READ INS WIN --*/
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront (); //TODO implement multi reads from a bbWin
@@ -333,6 +329,6 @@ void bb_scheduler::regStat () {
     _execution_to_scheduler_port->regStat ();
     _memory_to_scheduler_port->regStat ();
   //for (WIDTH j = 0; j < _num_bbWin; j++) { TODO put this back
-  //    _bbWindows.Nth(j)->regStat ();
+  //    _bbWindows->Nth(j)->regStat ();
   //}
 }

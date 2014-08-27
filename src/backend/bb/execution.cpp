@@ -6,6 +6,8 @@
 
 bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
                             port<dynInstruction*>& execution_to_scheduler_port, 
+                            List<bbWindow*>* bbWindows,
+                            WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
 	    	                WIDTH execution_width,
                             bb_memManager* LSQ_MGR,
@@ -24,6 +26,8 @@ bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port,
         exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU); //TODO make this config better with more EU types
         _aluExeUnits->Append (newEU);
     }
+    _num_bbWin = num_bbWin;
+    _bbWindows = bbWindows;
 }
 
 bb_execution::~bb_execution () {}

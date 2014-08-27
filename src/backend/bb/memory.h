@@ -8,11 +8,14 @@
 #include "../unit/stage.h"
 #include "grfManager.h"
 #include "memManager.h"
+#include "bbWindow.h"
 
 class bb_memory : protected stage {
 	public:
 		bb_memory (port<dynInstruction*>& execution_to_memory_port, 
                    port<dynInstruction*>& memory_to_scheduler_port, 
+                   List<bbWindow*>* bbWindows,
+                   WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH memory_width,
                    bb_memManager* LSQ_MGR,
@@ -51,6 +54,9 @@ class bb_memory : protected stage {
         ScalarStat& s_st_miss_cnt;
         ScalarStat& s_st_hit_cnt;
 
+        // BB WIN STRUCTURES
+        WIDTH _num_bbWin;
+        List<bbWindow*>* _bbWindows;
 };
 
 #endif

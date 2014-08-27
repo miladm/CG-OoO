@@ -15,7 +15,7 @@ void bbBkEnd_init (int argc, char const * argv[]) {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
-                                4, 32, 32, 32, 4, 4, 4,
+                                4, 32, 32, 32, 4, 4, 4, 4,
                                 2, 10, 
                                 1, 10, 
                                 1, 10, 

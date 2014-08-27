@@ -22,6 +22,7 @@
 #include "../unit/port.h"
 #include "memManager.h"
 #include "grfManager.h"
+#include "bbWindow.h"
 
 class bb_sysCore : public unit {
 	public:
@@ -33,6 +34,7 @@ class bb_sysCore : public unit {
 			  WIDTH execution_width,
 			  WIDTH memory_width,
 			  WIDTH commit_width,
+			  WIDTH num_bbWin,
 			  CYCLE fetch_to_decode_delay, LENGTH fetch_to_decode_buff_len,
 			  CYCLE fetch_to_bp_delay, LENGTH fetch_to_bp_buff_len,
 			  CYCLE bp_to_fetch_delay, LENGTH bp_to_fetch_buff_len,
@@ -91,9 +93,12 @@ class bb_sysCore : public unit {
 		bb_memory* _memory;
 		bb_commit* _commit;
 
-        // RF and LSQ
+        // RF & LSQ
         bb_memManager* _LSQ_MGR;
         bb_grfManager* _RF_MGR;
+
+        // BB Windows
+        List<bbWindow*> _bbWindows;
 
 
         // MISC

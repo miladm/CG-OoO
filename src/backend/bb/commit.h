@@ -8,11 +8,14 @@
 #include "../unit/stage.h"
 #include "grfManager.h"
 #include "memManager.h"
+#include "bbWindow.h"
 
 class bb_commit : protected stage {
 	public:
 		bb_commit (port<dynInstruction*>& commit_to_bp_port, 
 			       port<dynInstruction*>& commit_to_scheduler_port, 
+                   List<bbWindow*>* bbWindows,
+                   WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH commit_width,
                    bb_memManager* LSQ_MGR,
@@ -41,6 +44,10 @@ class bb_commit : protected stage {
 
         /* STAT VARS */
         ScalarStat& s_squash_bb_cnt;
+
+        // BB WIN STRUCTURES
+        WIDTH _num_bbWin;
+        List<bbWindow*>* _bbWindows;
 };
 
 #endif

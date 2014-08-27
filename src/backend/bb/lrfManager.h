@@ -7,7 +7,7 @@
 
 #include "../unit/unit.h"
 #include "../unit/dynInstruction.h"
-#include "registerFile.h"
+#include "../ino/registerFile.h"
 
 class bb_lrfManager : public unit {
 	public:
@@ -29,7 +29,5 @@ class bb_lrfManager : public unit {
 	private:
         registerFile _RF;
 };
-
-extern bb_lrfManager* g_RF_MGR;
 
 #endif

@@ -191,6 +191,7 @@ $(OBJDIR)backend/o3/oooBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/memManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/lsq$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/grfManager$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bb/lrfManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/memory$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/branchPred$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/decode$(OBJ_SUFFIX) \
@@ -199,6 +200,7 @@ $(OBJDIR)backend/bb/execution$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/commit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/fetch$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/sysCore$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bb/bbWindow$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/bbBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/unit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \

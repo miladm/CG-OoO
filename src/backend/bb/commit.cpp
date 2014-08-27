@@ -6,6 +6,8 @@
 
 bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port, 
 			          port<dynInstruction*>& commit_to_scheduler_port, 
+                      List<bbWindow*>* bbWindows,
+                      WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH commit_width,
                       bb_memManager* LSQ_MGR,
@@ -20,6 +22,8 @@ bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port,
     _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+    _num_bbWin = num_bbWin;
+    _bbWindows = bbWindows;
 }
 
 bb_commit::~bb_commit () {}

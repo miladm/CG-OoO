@@ -9,12 +9,12 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       port<dynInstruction*>& memory_to_scheduler_port, 
 			          port<dynInstruction*>& scheduler_to_execution_port, 
                       CAMtable<dynInstruction*>* iROB,
-	    	          WIDTH issue_width,
+	    	          WIDTH scheduler_width,
                       o3_memManager* LSQ_MGR,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (issue_width, stage_name, clk)
+	: stage (scheduler_width, stage_name, clk)
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
