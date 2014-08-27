@@ -101,13 +101,12 @@ void bb_commit::bpMispredSquash () {
     for (LENGTH i = _bbROB->getTableSize () - 1; i > stop_indx; i--) {
         if (_bbROB->getTableSize () == 0) break;
         bb = _bbROB->getNth_unsafe (i);
-//        bb->resetStates ();
-//        g_var.insertFrontBBcache (bb);
+        bb->resetStates ();
+        g_var.insertFrontBBcache (bb);
         _bbROB->removeNth_unsafe (i);
         s_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Squash bb", bb->getBBID (), _clk->now ());
-        delBB (bb); //TODO temp - pull it out.
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_bbROB->getTableSize () == 0) break;
@@ -129,13 +128,12 @@ void bb_commit::memMispredSquash () {
         if (_bbROB->getTableSize () == 0) break;
         bb = _bbROB->getNth_unsafe (i);
         if (bb->getBBheadID () < squashSeqNum) break;
-//        bb->resetStates ();
-//        g_var.insertFrontBBcache (bb);
+        bb->resetStates ();
+        g_var.insertFrontBBcache (bb);
         _bbROB->removeNth_unsafe (i);
         s_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Squash bb", bb->getBBID (), _clk->now ());
-        delBB (bb); //TODO temp - pull it out
     }
 }
 

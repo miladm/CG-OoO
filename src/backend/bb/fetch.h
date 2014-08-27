@@ -14,6 +14,7 @@ class bb_fetch : protected stage {
 		bb_fetch (port<dynInstruction*>& bp_to_fetch_port,
 			   port<dynInstruction*>& fetch_to_decode_port,
 			   port<dynInstruction*>& fetch_to_bp_port,
+               CAMtable<dynBasicblock*>* bbROB,
 			   WIDTH fetch_width,
                sysClock* clk,
 			   string stage_name
@@ -36,6 +37,7 @@ class bb_fetch : protected stage {
 		port<dynInstruction*>* _bp_to_fetch_port;
 		port<dynInstruction*>* _fetch_to_decode_port;
 		port<dynInstruction*>* _fetch_to_bp_port;
+        CAMtable<dynBasicblock*>* _bbROB;
         int _insListIndx;
         bool _switch_to_frontend;
         BB_FETCH_STATE _fetch_state;

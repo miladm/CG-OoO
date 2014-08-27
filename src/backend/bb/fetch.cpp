@@ -7,6 +7,7 @@
 bb_fetch::bb_fetch (port<dynInstruction*>& bp_to_fetch_port, 
 	          port<dynInstruction*>& fetch_to_decode_port,
 			  port<dynInstruction*>& fetch_to_bp_port,
+              CAMtable<dynBasicblock*>* bbROB,
 			  WIDTH fetch_width,
               sysClock* clk,
 			  string stage_name
@@ -16,6 +17,7 @@ bb_fetch::bb_fetch (port<dynInstruction*>& bp_to_fetch_port,
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
     _fetch_to_decode_port = &fetch_to_decode_port;
+    _bbROB = bbROB;
     _insListIndx = 0;
     _switch_to_frontend = false;
     _fetch_state = FETCH_COMPLETE;
@@ -79,6 +81,8 @@ void bb_fetch::getNewBB () {
     //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
     _current_bb = g_var.popBBcache ();
     if (_current_bb->getBBsize () == 0) {
+        dbg.print (DBG_FETCH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
+                "Dumping an empty BB", _clk->now ());
         delete _current_bb;
         getNewBB ();
     }
@@ -105,13 +109,18 @@ void bb_fetch::squashCurrentBB () {
 }
 
 void bb_fetch::delBB (dynBasicblock* bb) {
-    List<dynInstruction*>* insList = bb->getBBinsList ();
-    for (int i = insList->NumElements () - 1; i >= 0; i--) {
-        dynInstruction* ins = insList->Nth (i);
-        delIns (ins);
-        insList->RemoveAt (i);
-    }
-    delete bb;
+//    if (bb->getBBID () > _bbROB->getNth_unsafe(_bbROB->getTableSize()-1)->getBBID ()) {
+//        bb->esetStates ();
+//        g_var.insertFrontBBcache (bb);
+//    } TODO this code must be made to work
+
+//    List<dynInstruction*>* insList = bb->getBBinsList ();
+//    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+//        dynInstruction* ins = insList->Nth (i);
+//        delIns (ins);
+//        insList->RemoveAt (i);
+//    }
+//    delete bb;
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/

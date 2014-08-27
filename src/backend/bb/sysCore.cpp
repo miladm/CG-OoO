@@ -64,7 +64,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new bb_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
-    _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
+    _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _bbROB, fetch_width, _clk, "fetch");
     _decode = new bb_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
     _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _bbROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
     _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _bbROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
@@ -91,8 +91,8 @@ void bb_sysCore::runCore () {
 	    _memory->doMEMORY ();
 	    _execution->doEXECUTION ();
         if (g_var.g_pipe_state == PIPE_SQUASH_ROB) {
-            _commit->squash ();
             _fetch->squashCurrentBB ();
+            _commit->squash ();
         }
 	    _scheduler->doSCHEDULER ();
 	    _decode->doDECODE ();
