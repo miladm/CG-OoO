@@ -9,8 +9,8 @@
 
 class bb_decode : protected stage {
 	public:
-		bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			       port<dynInstruction*>& decode_to_scheduler_port, 
+		bb_decode (port<bbInstruction*>& fetch_to_decode_port, 
+			       port<bbInstruction*>& decode_to_scheduler_port, 
 			       WIDTH decode_width,
                    sysClock* clk,
 			       string stage_name);
@@ -23,8 +23,8 @@ class bb_decode : protected stage {
         void regStat ();
 
 	private:
-		port<dynInstruction*>* _fetch_to_decode_port;
-		port<dynInstruction*>* _decode_to_scheduler_port;
+		port<bbInstruction*>* _fetch_to_decode_port;
+		port<bbInstruction*>* _decode_to_scheduler_port;
 };
 
 #endif

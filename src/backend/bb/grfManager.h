@@ -6,7 +6,7 @@
 #define _BB_GRF_MANAGER_H
 
 #include "../unit/unit.h"
-#include "../unit/dynInstruction.h"
+#include "../unit/bbInstruction.h"
 #include "../o3/registerRename.h"
 
 class bb_grfManager : public unit {
@@ -14,11 +14,11 @@ class bb_grfManager : public unit {
 		bb_grfManager (sysClock* clk, string rf_name = "bb_grfManager");
 		~bb_grfManager ();
 
-        bool canRename (dynInstruction* ins);
-        bool renameRegs (dynInstruction* ins);
-        bool isReady (dynInstruction* ins);
-        void completeRegs (dynInstruction* ins);
-        void commitRegs (dynInstruction* ins);
+        bool canRename (bbInstruction* ins);
+        bool renameRegs (bbInstruction* ins);
+        bool isReady (bbInstruction* ins);
+        void completeRegs (bbInstruction* ins);
+        void commitRegs (bbInstruction* ins);
         void squashRenameReg ();
 
         /* WIRES CTRL */

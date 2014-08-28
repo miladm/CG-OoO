@@ -4,8 +4,8 @@
 
 #include "memory.h"
 
-bb_memory::bb_memory (port<dynInstruction*>& execution_to_memory_port, 
-                      port<dynInstruction*>& memory_to_scheduler_port, 
+bb_memory::bb_memory (port<bbInstruction*>& execution_to_memory_port, 
+                      port<bbInstruction*>& memory_to_scheduler_port, 
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
@@ -59,12 +59,12 @@ void bb_memory::completeIns () {
         /*-- CHECKS --*/
         if (_LSQ_MGR->getTableState (LD_QU) == EMPTY_BUFF) break;
         if (!_LSQ_MGR->hasFreeWire (LD_QU, READ)) break;
-        pair<bool, dynInstruction*> p = _LSQ_MGR->hasFinishedIns (LD_QU);
+        pair<bool, bbInstruction*> p = _LSQ_MGR->hasFinishedIns (LD_QU);
         if (!p.first) break;
         if (!_RF_MGR->hasFreeWire (WRITE)) break;
 
         /*-- COMPLETE INS --*/
-        dynInstruction* finished_ld_ins = p.second;
+        bbInstruction* finished_ld_ins = p.second;
         Assert (finished_ld_ins != NULL);
         finished_ld_ins->setPipeStage(COMPLETE);
         finished_ld_ins->getBB()->incCompletedInsCntr ();

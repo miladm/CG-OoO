@@ -12,7 +12,7 @@
 #define BB_SQ_SIZE 96
 #define BB_LQ_SIZE 94
 
-class bb_lsqCAM : public CAMtable<dynInstruction*> {
+class bb_lsqCAM : public CAMtable<bbInstruction*> {
 	public:
 		bb_lsqCAM (LENGTH len, 
                    WIDTH rd_port_cnt, 
@@ -21,14 +21,14 @@ class bb_lsqCAM : public CAMtable<dynInstruction*> {
                    string table_name);
 		~bb_lsqCAM ();
 
-        dynInstruction* findPendingMemIns (LSQ_ID);
-        void setTimer (dynInstruction*, CYCLE);
+        bbInstruction* findPendingMemIns (LSQ_ID);
+        void setTimer (bbInstruction*, CYCLE);
         void squash (INS_ID);
         void delFinishedMemAxes ();
         bool hasCommit ();
         bool hasMemAddr (ADDRS, INS_ID);
-        pair<bool, dynInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID);
-        pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
+        pair<bool, bbInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID);
+        pair<bool, bbInstruction*> hasFinishedIns (LSQ_ID);
 };
 
 #endif

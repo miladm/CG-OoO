@@ -6,9 +6,9 @@
 #define _DYNBASICBLOCK_H
 
 #include "unit.h"
-#include "dynInstruction.h"
+#include "bbInstruction.h"
 
-class dynInstruction;
+class bbInstruction;
 
 struct bbHead {
     bbHead (LENGTH max_ins_cnt)
@@ -60,8 +60,8 @@ class dynBasicblock : public unit {
         void setBBID (BB_ID);
         void setBBheadID ();
         void setGPR (AR, PR, AXES_TYPE);
-        bool insertIns (dynInstruction*);
-        bool setupAR (dynInstruction*);
+        bool insertIns (bbInstruction*);
+        bool setupAR (bbInstruction*);
         void buildInsSchedule ();
         void incCompletedInsCntr ();
         void setWrongPath ();
@@ -73,13 +73,13 @@ class dynBasicblock : public unit {
         INS_ID getBBheadID ();
         set<AR>* getGARrdList ();
         set<AR>* getGARwrList ();
-        dynInstruction* popFront ();
+        bbInstruction* popFront ();
         LENGTH getBBsize ();
         BUFF_STATE getBBstate ();
         bool isOnWrongPath ();
         PR getGPR (AR, AXES_TYPE);
         bool isMemOrBrViolation ();
-        List<dynInstruction*>* getBBinsList ();
+        List<bbInstruction*>* getBBinsList ();
         bool isBBcomplete ();
 
         void squash ();
@@ -91,9 +91,9 @@ class dynBasicblock : public unit {
 
     private:
         bbHead _head;
-        map <ADDRS, dynInstruction*> _bbInsMap;
-        List<dynInstruction*> _schedInsList;
-        List<dynInstruction*> _schedInsList_waitList;
+        map <ADDRS, bbInstruction*> _bbInsMap;
+        List<bbInstruction*> _schedInsList;
+        List<bbInstruction*> _schedInsList_waitList;
 
         const LENGTH _max_bb_size;
         LENGTH _num_completed_ins;

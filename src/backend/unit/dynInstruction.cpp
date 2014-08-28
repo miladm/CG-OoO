@@ -30,13 +30,6 @@ void dynInstruction::setInsID (INS_ID seq_num) {
 	_seq_num = seq_num;
 }
 
-void dynInstruction::setBB (dynBasicblock* bb) {
-#ifdef ASSERTION
-    Assert (bb != NULL);
-#endif
-	_bb = bb;
-}
-
 void dynInstruction::setInsType (INS_TYPE ins_type) {
 	_ins_type = ins_type;
 }
@@ -160,8 +153,6 @@ ADDRS dynInstruction::getInsAddr () { return _ins_addr; }
 
 INS_ID dynInstruction::getInsID () { return _seq_num; }
 
-dynBasicblock* dynInstruction::getBB () { return _bb; }
-
 INS_TYPE dynInstruction::getInsType () { return _ins_type; }
 
 ADDRS dynInstruction::getMemAddr () { return _memAddr; }
@@ -249,9 +240,4 @@ void dynInstruction::resetStates () {
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
     _is_mem_violation = false;
-}
-
-/* Usage: for coarse grain executio - eg. BB */
-void dynInstruction::resetWrongPath () {
-    _is_on_wrong_path = false;
 }

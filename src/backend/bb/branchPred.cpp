@@ -4,8 +4,8 @@
 
 #include "branchPred.h"
 
-bb_branchPred::bb_branchPred (port<dynInstruction*>& fetch_to_bp_port, 
-			    		port<dynInstruction*>& bp_to_fetch_port, 
+bb_branchPred::bb_branchPred (port<bbInstruction*>& fetch_to_bp_port, 
+			    		port<bbInstruction*>& bp_to_fetch_port, 
 	    				WIDTH bp_width,
                         sysClock* clk,
 	    				string stage_name) 

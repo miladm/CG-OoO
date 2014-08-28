@@ -12,8 +12,8 @@
 
 class bb_memory : protected stage {
 	public:
-		bb_memory (port<dynInstruction*>& execution_to_memory_port, 
-                   port<dynInstruction*>& memory_to_scheduler_port, 
+		bb_memory (port<bbInstruction*>& execution_to_memory_port, 
+                   port<bbInstruction*>& memory_to_scheduler_port, 
                    List<bbWindow*>* bbWindows,
                    WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
@@ -35,12 +35,12 @@ class bb_memory : protected stage {
         void manageMSHR ();
 
 	private:
-		port<dynInstruction*>* _execution_to_memory_port;
-        port<dynInstruction*>* _memory_to_scheduler_port;
+		port<bbInstruction*>* _execution_to_memory_port;
+        port<bbInstruction*>* _memory_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
         bb_grfManager* _RF_MGR;
-        RAMtable<dynInstruction*> _mshr;
+        RAMtable<bbInstruction*> _mshr;
 
         cache _L1;
         cache _L2;

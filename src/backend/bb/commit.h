@@ -12,8 +12,8 @@
 
 class bb_commit : protected stage {
 	public:
-		bb_commit (port<dynInstruction*>& commit_to_bp_port, 
-			       port<dynInstruction*>& commit_to_scheduler_port, 
+		bb_commit (port<bbInstruction*>& commit_to_bp_port, 
+			       port<bbInstruction*>& commit_to_scheduler_port, 
                    List<bbWindow*>* bbWindows,
                    WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
@@ -33,11 +33,11 @@ class bb_commit : protected stage {
         void memMispredSquash ();
         void commitBB (dynBasicblock*);
         void delBB (dynBasicblock*);
-        void delIns (dynInstruction*);
+        void delIns (bbInstruction*);
 
 	private:
-		port<dynInstruction*>* _commit_to_bp_port;
-		port<dynInstruction*>* _commit_to_scheduler_port;
+		port<bbInstruction*>* _commit_to_bp_port;
+		port<bbInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
         bb_grfManager* _RF_MGR;

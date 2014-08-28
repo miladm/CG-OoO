@@ -4,8 +4,8 @@
 
 #include "decode.h"
 
-bb_decode::bb_decode (port<dynInstruction*>& fetch_to_decode_port, 
-			          port<dynInstruction*>& decode_to_scheduler_port, 
+bb_decode::bb_decode (port<bbInstruction*>& fetch_to_decode_port, 
+			          port<bbInstruction*>& decode_to_scheduler_port, 
 	    	          WIDTH decode_width,
                       sysClock* clk,
 	    	          string stage_name) 
@@ -42,7 +42,7 @@ PIPE_ACTIVITY bb_decode::decodeImpl () {
         if (_decode_to_scheduler_port->getBuffState () == FULL_BUFF) break;
 
         /*-- DECODE INS --*/
-        dynInstruction* ins = _fetch_to_decode_port->popFront ();
+        bbInstruction* ins = _fetch_to_decode_port->popFront ();
         ins->setPipeStage (DECODE);
         _decode_to_scheduler_port->pushBack (ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());

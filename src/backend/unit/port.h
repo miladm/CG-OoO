@@ -6,6 +6,7 @@
 
 #include "unit.h"
 #include "dynInstruction.h"
+#include "bbInstruction.h"
 
 template <typename queType_T>
 struct BuffElement {

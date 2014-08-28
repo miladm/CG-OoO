@@ -4,8 +4,8 @@
 
 #include "commit.h"
 
-bb_commit::bb_commit (port<dynInstruction*>& commit_to_bp_port, 
-			          port<dynInstruction*>& commit_to_scheduler_port, 
+bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port, 
+			          port<bbInstruction*>& commit_to_scheduler_port, 
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
@@ -144,10 +144,10 @@ void bb_commit::memMispredSquash () {
 /*-- DELETE INSTRUCTION OBJ --*/
 void bb_commit::commitBB (dynBasicblock* bb) {
     static int commited_bb = 0;
-    List<dynInstruction*>* insList = bb->getBBinsList ();
+    List<bbInstruction*>* insList = bb->getBBinsList ();
     commited_bb++;
     while (insList->NumElements () > 0) {
-        dynInstruction* ins = insList->Nth (0); //TODO this is consuming a port count regardless of outcome of next step - fix
+        bbInstruction* ins = insList->Nth (0); //TODO this is consuming a port count regardless of outcome of next step - fix
         Assert (ins->getPipeStage () == COMPLETE);
         if (ins->getInsType () == MEM) {
             if (_LSQ_MGR->commit (ins)) {
@@ -168,9 +168,9 @@ void bb_commit::commitBB (dynBasicblock* bb) {
 }
 
 void bb_commit::delBB (dynBasicblock* bb) {
-    List<dynInstruction*>* insList = bb->getBBinsList ();
+    List<bbInstruction*>* insList = bb->getBBinsList ();
     for (int i = insList->NumElements () - 1; i >= 0; i--) {
-        dynInstruction* ins = insList->Nth (i);
+        bbInstruction* ins = insList->Nth (i);
         delIns (ins);
         insList->RemoveAt (i);
     }
@@ -178,7 +178,7 @@ void bb_commit::delBB (dynBasicblock* bb) {
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
-void bb_commit::delIns (dynInstruction* ins) {
+void bb_commit::delIns (bbInstruction* ins) {
     delete ins;
 }
 

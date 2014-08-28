@@ -12,7 +12,7 @@ bb_grfManager::bb_grfManager (sysClock* clk, string rf_name)
 bb_grfManager::~bb_grfManager () { }
 
 /*-- ARE ALL READ OPERANDS READY? --*/
-bool bb_grfManager::isReady (dynInstruction* ins) {
+bool bb_grfManager::isReady (bbInstruction* ins) {
     List<AR>* p_rdReg_list = ins->getPRrdList ();
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
@@ -29,7 +29,7 @@ bool bb_grfManager::isReady (dynInstruction* ins) {
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
-bool bb_grfManager::canRename (dynInstruction* ins) {
+bool bb_grfManager::canRename (bbInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
         return false; /*-- STALL FETCH --*/
@@ -37,7 +37,7 @@ bool bb_grfManager::canRename (dynInstruction* ins) {
     return true;
 }
 
-bool bb_grfManager::renameRegs (dynInstruction* ins) {
+bool bb_grfManager::renameRegs (bbInstruction* ins) {
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
     Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
@@ -63,7 +63,7 @@ bool bb_grfManager::renameRegs (dynInstruction* ins) {
 }
 
 /*-- PROCESS WRITE REGISTERS @COMPLETE --*/
-void bb_grfManager::completeRegs (dynInstruction* ins) {
+void bb_grfManager::completeRegs (bbInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
@@ -72,7 +72,7 @@ void bb_grfManager::completeRegs (dynInstruction* ins) {
 }
 
 /*-- PROCESS WRITE REFISTERS @COMMIT --*/
-void bb_grfManager::commitRegs (dynInstruction* ins) {
+void bb_grfManager::commitRegs (bbInstruction* ins) {
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();
     Assert (_ar->NumElements () == _pr->NumElements ());

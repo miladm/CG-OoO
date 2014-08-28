@@ -34,10 +34,10 @@ void dynBasicblock::setBBheadID () {
     }
 }
 
-bool dynBasicblock::insertIns (dynInstruction* ins) {
+bool dynBasicblock::insertIns (bbInstruction* ins) {
     ADDRS ins_addr = ins->getInsAddr ();
     Assert (_bbInsMap.find (ins_addr) == _bbInsMap.end ());
-    //_bbInsMap.insert (pair<ADDRS, dynInstruction*> (ins_addr, ins)); // TODO - remove the hack lines below nad put this line back
+    //_bbInsMap.insert (pair<ADDRS, bbInstruction*> (ins_addr, ins)); // TODO - remove the hack lines below nad put this line back
     _schedInsList.Append (ins);
     _schedInsList_waitList.Append (ins);
     setBBheadID ();
@@ -64,7 +64,7 @@ void dynBasicblock::incCompletedInsCntr () {
     Assert (_schedInsList.NumElements () >= _num_completed_ins);
 }
 
-bool dynBasicblock::setupAR (dynInstruction* ins) {
+bool dynBasicblock::setupAR (bbInstruction* ins) {
     List<AR>* rd_list = ins->getARrdList ();
     List<AR>* wr_list = ins->getARwrList ();
     if (_head.hasAvailReg (wr_list->NumElements(), rd_list->NumElements())) return false;
@@ -102,11 +102,11 @@ ADDRS dynBasicblock::getBBbrAddr () {
     return _head._bb_br_ins_addr;
 }
 
-dynInstruction* dynBasicblock::popFront () {
+bbInstruction* dynBasicblock::popFront () {
 #ifdef ASSERTION
     Assert (_schedInsList_waitList.NumElements () > 0);
 #endif
-    dynInstruction* ins = _schedInsList_waitList.Nth (0);
+    bbInstruction* ins = _schedInsList_waitList.Nth (0);
     _schedInsList_waitList.RemoveAt (0);
     return ins;
 }
@@ -134,7 +134,7 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
 
 bool dynBasicblock::isMemOrBrViolation () {return (_bb_has_mem_violation || _bb_on_wrong_path);}
 
-List<dynInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
+List<bbInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
 bool dynBasicblock::isBBcomplete () {
     return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
@@ -171,7 +171,7 @@ void dynBasicblock::commit () {
 
 void dynBasicblock::resetStates () {
     for (int i = _schedInsList.NumElements () - 1; i >= 0; i--) {
-        dynInstruction* ins = _schedInsList.Nth (i);
+        bbInstruction* ins = _schedInsList.Nth (i);
         ins->resetStates ();
         ins->resetWrongPath ();
     }

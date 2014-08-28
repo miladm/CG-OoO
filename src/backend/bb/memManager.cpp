@@ -4,7 +4,7 @@
 
 #include "memManager.h"
 
-bb_memManager::bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
                               sysClock* clk, 
                               string lsq_name = "bb_memManager") 
     : unit (lsq_name, clk),
@@ -46,7 +46,7 @@ void bb_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     }
 }
 
-void bb_memManager::pushBack (dynInstruction *ins) {
+void bb_memManager::pushBack (bbInstruction *ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
@@ -59,7 +59,7 @@ void bb_memManager::pushBack (dynInstruction *ins) {
     }
 }
 
-void bb_memManager::memAddrReady (dynInstruction* ins) {
+void bb_memManager::memAddrReady (bbInstruction* ins) {
     if (ins->getMemType () == LOAD) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
     } else {
@@ -70,7 +70,7 @@ void bb_memManager::memAddrReady (dynInstruction* ins) {
 bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
     //TODO take all this block to lsqManager.cpp
     CYCLE axes_lat;
-    dynInstruction* mem_ins;
+    bbInstruction* mem_ins;
     if (lsq_id == LD_QU) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
@@ -96,7 +96,7 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
     return true;
 }
 
-CYCLE bb_memManager::getAxesLatency (dynInstruction* mem_ins) {
+CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
         mem_ins->setLQstate (LQ_FWD_FROM_SQ);
         return g_eu_lat._st_buff_lat;
@@ -110,12 +110,12 @@ CYCLE bb_memManager::getAxesLatency (dynInstruction* mem_ins) {
     }
 }
 
-bool bb_memManager::commit (dynInstruction* ins) {
+bool bb_memManager::commit (bbInstruction* ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
         if (!_LQ.hasFreeWire (READ)) return false;
-        dynInstruction* ld_ins = _LQ.popFront ();
+        bbInstruction* ld_ins = _LQ.popFront ();
 #ifdef ASSERTION
         Assert (ins->getLQstate () == LQ_COMPLETE);
         Assert (ld_ins->getInsID () == ins->getInsID ());
@@ -147,7 +147,7 @@ void bb_memManager::delAfinishedSt () {
     _SQ.delFinishedMemAxes ();
 }
 
-pair<bool, dynInstruction*> bb_memManager::hasFinishedIns (LSQ_ID lsq_id) {
+pair<bool, bbInstruction*> bb_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
         return _LQ.hasFinishedIns (lsq_id);
     } else {
@@ -159,12 +159,12 @@ bool bb_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
     return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 
-pair<bool, dynInstruction*> bb_memManager::isLQviolation (dynInstruction* st_ins) {
+pair<bool, bbInstruction*> bb_memManager::isLQviolation (bbInstruction* st_ins) {
 #ifdef ASSERTION
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
-    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    pair<bool, bbInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);
@@ -175,7 +175,7 @@ pair<bool, dynInstruction*> bb_memManager::isLQviolation (dynInstruction* st_ins
 /* ***************** *
  *  LOAD QUEUE FUNC  *
  * ***************** */
-void bb_memManager::completeLd (dynInstruction* ins) {
+void bb_memManager::completeLd (bbInstruction* ins) {
     ins->setLQstate (LQ_COMPLETE);
 }
 
@@ -184,7 +184,7 @@ void bb_memManager::completeLd (dynInstruction* ins) {
  * return data. The port must be searched for finding the data that is being
  * forwarded every cycle (in the scheduler)
  */
-void bb_memManager::forward (dynInstruction* ins, CYCLE mem_latency) {
+void bb_memManager::forward (bbInstruction* ins, CYCLE mem_latency) {
 #ifdef ASSERTION
     Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
 #endif

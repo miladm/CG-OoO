@@ -1209,8 +1209,8 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-                dynInstruction* g_insObj = g_var.getNewIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                bbInstruction* g_insObj = g_var.getNewIns ();
+                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
                 g_insObj->setInsType (BR);
@@ -1250,8 +1250,8 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-                dynInstruction* g_insObj = g_var.getNewIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                bbInstruction* g_insObj = g_var.getNewIns ();
+                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
                 g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
@@ -1296,8 +1296,8 @@ VOID getIns (ADDRINT insAddr) {
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 if (g_bbObj == NULL) return;
-                dynInstruction* g_insObj = g_var.getNewIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                bbInstruction* g_insObj = g_var.getNewIns ();
+                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (ALU);
                 g_insObj->setInsAddr (insAddr);
@@ -1335,8 +1335,8 @@ VOID getNopIns (ADDRINT insAddr) {
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-                dynInstruction* g_insObj = g_var.getNewIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                bbInstruction* g_insObj = g_var.getNewIns ();
+                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (NOP);
                 g_insObj->setInsAddr (insAddr);

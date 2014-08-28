@@ -73,16 +73,16 @@ class bb_sysCore : public unit {
 		const LENGTH _commit_to_scheduler_buff_len;
 
 		// PORTS OBJS
-		port<dynInstruction*> _bp_to_fetch_port;
-		port<dynInstruction*> _fetch_to_bp_port;
-		port<dynInstruction*> _fetch_to_decode_port;
-		port<dynInstruction*> _decode_to_scheduler_port;
-		port<dynInstruction*> _scheduler_to_execution_port;
-        port<dynInstruction*> _execution_to_scheduler_port;
-		port<dynInstruction*> _execution_to_memory_port;
-        port<dynInstruction*> _memory_to_scheduler_port;
-        port<dynInstruction*> _commit_to_bp_port;
-        port<dynInstruction*> _commit_to_scheduler_port;
+		port<bbInstruction*> _bp_to_fetch_port;
+		port<bbInstruction*> _fetch_to_bp_port;
+		port<bbInstruction*> _fetch_to_decode_port;
+		port<bbInstruction*> _decode_to_scheduler_port;
+		port<bbInstruction*> _scheduler_to_execution_port;
+        port<bbInstruction*> _execution_to_scheduler_port;
+		port<bbInstruction*> _execution_to_memory_port;
+        port<bbInstruction*> _memory_to_scheduler_port;
+        port<bbInstruction*> _commit_to_bp_port;
+        port<bbInstruction*> _commit_to_scheduler_port;
 
 		// STAGES
 		bb_branchPred* _bp;

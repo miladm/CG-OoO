@@ -16,6 +16,7 @@
 #include "../../lib/debug.h"
 #include "sysClock.h"
 #include "port.h"
+#include "bbInstruction.h"
 #include "dynInstruction.h"
 #include "dynBasicblock.h"
 #include "table.h"

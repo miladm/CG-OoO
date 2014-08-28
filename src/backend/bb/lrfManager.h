@@ -6,7 +6,7 @@
 #define _BB_LRF_MANAGER_H
 
 #include "../unit/unit.h"
-#include "../unit/dynInstruction.h"
+#include "../unit/bbInstruction.h"
 #include "../ino/registerFile.h"
 
 class bb_lrfManager : public unit {
@@ -14,10 +14,10 @@ class bb_lrfManager : public unit {
 		bb_lrfManager (sysClock* clk, string rf_name = "bb_lrfManager");
 		~bb_lrfManager ();
         void resetRF ();
-        bool isReady (dynInstruction* ins);
-        void reserveRF (dynInstruction* ins);
-        bool canReserveRF (dynInstruction* ins);
-        void writeToRF (dynInstruction* ins);
+        bool isReady (bbInstruction* ins);
+        void reserveRF (bbInstruction* ins);
+        bool canReserveRF (bbInstruction* ins);
+        void writeToRF (bbInstruction* ins);
         void updateReg (PR reg);
 
         /* WIRES CTRL */

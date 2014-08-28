@@ -12,10 +12,10 @@
 
 class bb_scheduler : protected stage {
 	public:
-		bb_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
-                      port<dynInstruction*>& execution_to_scheduler_port,
-                      port<dynInstruction*>& memory_to_scheduler_port,
-			          port<dynInstruction*>& scheduler_to_execution_port,
+		bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
+                      port<bbInstruction*>& execution_to_scheduler_port,
+                      port<bbInstruction*>& memory_to_scheduler_port,
+			          port<bbInstruction*>& scheduler_to_execution_port,
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
@@ -33,21 +33,21 @@ class bb_scheduler : protected stage {
         void updatebbWindows ();
         void manageCDB ();
         void manageBusyBBWin (bbWindow*);
-        void forwardFromCDB (dynInstruction* ins);
+        void forwardFromCDB (bbInstruction* ins);
         void regStat ();
         bool hasReadyInsInBBWins (LENGTH &readyInsIndx);
         void updateBBROB (dynBasicblock*);
         void setBBWisAvail (WIDTH bbWin_id);
         bbWindow* getAnAvailBBWin ();
         bool hasAnAvailBBWin ();
-        bool detectNewBB (dynInstruction*);
+        bool detectNewBB (bbInstruction*);
         void flushBBWindow (bbWindow*);
 
 	private:
-		port<dynInstruction*>* _decode_to_scheduler_port;
-		port<dynInstruction*>* _execution_to_scheduler_port;
-		port<dynInstruction*>* _memory_to_scheduler_port;
-		port<dynInstruction*>* _scheduler_to_execution_port;
+		port<bbInstruction*>* _decode_to_scheduler_port;
+		port<bbInstruction*>* _execution_to_scheduler_port;
+		port<bbInstruction*>* _memory_to_scheduler_port;
+		port<bbInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynBasicblock*>* _bbROB;
 
         // RF REGISTERS

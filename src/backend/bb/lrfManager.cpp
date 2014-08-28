@@ -16,7 +16,7 @@ void bb_lrfManager::resetRF () {
 }
 
 /* ARE ALL READ OPERANDS READY? */
-bool bb_lrfManager::isReady (dynInstruction* ins) {
+bool bb_lrfManager::isReady (bbInstruction* ins) {
     List<AR>* a_rdReg_list = ins->getARrdList ();
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
@@ -33,7 +33,7 @@ bool bb_lrfManager::isReady (dynInstruction* ins) {
 }
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */
-void bb_lrfManager::reserveRF (dynInstruction* ins) {
+void bb_lrfManager::reserveRF (bbInstruction* ins) {
     List<AR>* a_wrReg_list = ins->getARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
@@ -42,7 +42,7 @@ void bb_lrfManager::reserveRF (dynInstruction* ins) {
 }
 
 /* CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS */
-bool bb_lrfManager::canReserveRF (dynInstruction* ins) {
+bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
     List<AR>* a_wrReg_list = ins->getARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
@@ -53,7 +53,7 @@ bool bb_lrfManager::canReserveRF (dynInstruction* ins) {
     return true;
 }
 
-void bb_lrfManager::writeToRF (dynInstruction* ins) {
+void bb_lrfManager::writeToRF (bbInstruction* ins) {
     List<AR>* a_wrReg_list = ins->getARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);

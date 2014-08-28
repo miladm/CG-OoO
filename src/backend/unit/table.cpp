@@ -278,6 +278,13 @@ template class CAMtable<dynInstruction*>;
 template class RAMtable<dynInstruction*>;
 template class FIFOtable<dynInstruction*>;
 
+/* BB INS */
+template struct TableElement<bbInstruction*>;
+template class table<bbInstruction*>;
+template class CAMtable<bbInstruction*>;
+template class RAMtable<bbInstruction*>;
+template class FIFOtable<bbInstruction*>;
+
 /* DYN BB */
 template struct TableElement<dynBasicblock*>;
 template class table<dynBasicblock*>;

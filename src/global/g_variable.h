@@ -18,6 +18,7 @@
 #include "../lib/statistic.h"
 #include "../backend/basicblock.h"
 #include "../backend/unit/dynInstruction.h"
+#include "../backend/unit/bbInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
 
 struct g_variable {
@@ -170,8 +171,8 @@ struct g_variable {
         if (g_bbCache->NumElements () == 0) { return NULL;}
         else {return g_bbCache->Last ();}
     }
-    dynInstruction* getNewIns () {
-        dynInstruction* newIns = new dynInstruction;
+    bbInstruction* getNewIns () {
+        bbInstruction* newIns = new bbInstruction;
         return newIns;
     }
     dynInstruction* getNewCodeCacheIns () {

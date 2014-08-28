@@ -4,9 +4,9 @@
 
 #include "fetch.h"
 
-bb_fetch::bb_fetch (port<dynInstruction*>& bp_to_fetch_port, 
-	          port<dynInstruction*>& fetch_to_decode_port,
-			  port<dynInstruction*>& fetch_to_bp_port,
+bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port, 
+	          port<bbInstruction*>& fetch_to_decode_port,
+			  port<bbInstruction*>& fetch_to_bp_port,
               CAMtable<dynBasicblock*>* bbROB,
 			  WIDTH fetch_width,
               sysClock* clk,
@@ -64,7 +64,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
 		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
 
         /*-- FETCH INS --*/
-        dynInstruction* ins = _current_bb->popFront ();
+        bbInstruction* ins = _current_bb->popFront ();
         ins->setPipeStage (FETCH);
 		_fetch_to_decode_port->pushBack (ins);
         updateBBfetchState ();
@@ -114,9 +114,9 @@ void bb_fetch::delBB (dynBasicblock* bb) {
 //        g_var.insertFrontBBcache (bb);
 //    } TODO this code must be made to work
 
-//    List<dynInstruction*>* insList = bb->getBBinsList ();
+//    List<bbInstruction*>* insList = bb->getBBinsList ();
 //    for (int i = insList->NumElements () - 1; i >= 0; i--) {
-//        dynInstruction* ins = insList->Nth (i);
+//        bbInstruction* ins = insList->Nth (i);
 //        delIns (ins);
 //        insList->RemoveAt (i);
 //    }
@@ -124,7 +124,7 @@ void bb_fetch::delBB (dynBasicblock* bb) {
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
-void bb_fetch::delIns (dynInstruction* ins) {
+void bb_fetch::delIns (bbInstruction* ins) {
     delete ins;
 }
 

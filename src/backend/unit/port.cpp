@@ -222,3 +222,5 @@ void port<queType_T>::regStat () {
 /** TEMPLATES **/
 template struct BuffElement<dynInstruction*>;
 template class port<dynInstruction*>;
+template struct BuffElement<bbInstruction*>;
+template class port<bbInstruction*>;

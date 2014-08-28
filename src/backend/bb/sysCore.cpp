@@ -58,15 +58,16 @@ bb_sysCore::bb_sysCore (sysClock* clk,
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
     /*-- INIT UNITS --*/
-    _RF_MGR = new bb_grfManager (_clk, "grfManager");
+    _RF_MGR = new bb_rfManager (num_bbWin, _clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "memManager");
     _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
-    for (WIDTH i = 0; i < num_bbWin; i++) {
-        ostringstream bbWin_num;
-        bbWin_num << i;
-        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
-        _bbWindows.Append (bbWin);
-    }
+//    _RF_MGR = new bb_grfManager (_clk, "grfManager"); //TODO remove it
+//    for (WIDTH i = 0; i < num_bbWin; i++) {
+//        ostringstream bbWin_num;
+//        bbWin_num << i;
+//        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
+//        _bbWindows.Append (bbWin);
+//    }//TODO remove it
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
@@ -111,9 +112,9 @@ void bb_sysCore::runCore () {
         if (_clk->now () == 50000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
-//                List<dynInstruction*>* insList = bb->getBBinsList ();
+//                List<bbInstruction*>* insList = bb->getBBinsList ();
 //                for (int i = insList->NumElements () - 1; i >= 0; i--) {
-//                    dynInstruction* ins = insList->Nth (i);
+//                    bbInstruction* ins = insList->Nth (i);
 //                    cout << "stage: " << ins->getPipeStage () << 
 //                        " id: " << ins->getInsID () <<
 //                        " type: " << ins->getInsType () << endl;

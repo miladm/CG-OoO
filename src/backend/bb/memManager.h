@@ -10,7 +10,7 @@
 #ifndef _BB_MEM_MANAGER_H
 #define _BB_MEM_MANAGER_H
 
-#include "../unit/dynInstruction.h"
+#include "../unit/bbInstruction.h"
 #include "../unit/exeUnit.h"
 #include "../unit/unit.h"
 #include "../cacheCtrl.h"
@@ -20,7 +20,7 @@
 
 class bb_memManager : public unit {
     public:
-        bb_memManager (port<dynInstruction*>& memory_to_scheduler_port,
+        bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
                        sysClock* clk, 
                        string lsq_name);
         ~bb_memManager ();
@@ -29,26 +29,26 @@ class bb_memManager : public unit {
         BUFF_STATE getTableState (LSQ_ID);
         bool hasFreeWire (LSQ_ID, AXES_TYPE);
         void updateWireState (LSQ_ID, AXES_TYPE);
-        void pushBack (dynInstruction*);
-        void memAddrReady (dynInstruction*);
+        void pushBack (bbInstruction*);
+        void memAddrReady (bbInstruction*);
         bool issueToMem (LSQ_ID);
-        bool commit (dynInstruction*);
+        bool commit (bbInstruction*);
         void squash (INS_ID);
-        pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
-        CYCLE getAxesLatency (dynInstruction*);
+        pair<bool, bbInstruction*> hasFinishedIns (LSQ_ID);
+        CYCLE getAxesLatency (bbInstruction*);
 
         /* SQ CONTROL */
         bool hasCommitSt ();
         void delAfinishedSt ();
         bool hasStToAddr (ADDRS, INS_ID);
-        pair<bool, dynInstruction*> isLQviolation (dynInstruction*);
+        pair<bool, bbInstruction*> isLQviolation (bbInstruction*);
 
         /* LQ CONTROL */
-        void completeLd (dynInstruction*);
-        void forward (dynInstruction*, CYCLE);
+        void completeLd (bbInstruction*);
+        void forward (bbInstruction*, CYCLE);
 
     private:
-        port<dynInstruction*>* _memory_to_scheduler_port;
+        port<bbInstruction*>* _memory_to_scheduler_port;
 
         cache _L1;
         cache _L2;

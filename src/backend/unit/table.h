@@ -8,6 +8,7 @@
 #include "unit.h"
 #include "wires.h"
 #include "dynInstruction.h"
+#include "bbInstruction.h"
 #include "sysClock.h"
 
 template <typename tableType_T>

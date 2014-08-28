@@ -4,8 +4,8 @@
 
 #include "execution.h"
 
-bb_execution::bb_execution (port<dynInstruction*>& scheduler_to_execution_port, 
-                            port<dynInstruction*>& execution_to_scheduler_port, 
+bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port, 
+                            port<bbInstruction*>& execution_to_scheduler_port, 
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
@@ -62,8 +62,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
     g_var.setOldSquashSN ();
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
-        dynInstruction* ins = EU->getEUins ();
-        dynInstruction* violating_ld_ins = NULL;
+        bbInstruction* ins = EU->getEUins ();
+        bbInstruction* violating_ld_ins = NULL;
 
         /*-- CHECKS --*/
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
@@ -80,7 +80,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             ins->getBB()->incCompletedInsCntr ();
             _LSQ_MGR->memAddrReady (ins);
             _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
-            pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
+            pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
             bool is_violation = p.first;
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
@@ -138,7 +138,7 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
         if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
         /*-- EXE INS --*/
-        dynInstruction* ins = _scheduler_to_execution_port->popFront ();
+        bbInstruction* ins = _scheduler_to_execution_port->popFront ();
         EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins (ins);
         EU->runEU ();
@@ -154,7 +154,7 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
     return pipe_stall;
 }
 
-void bb_execution::forward (dynInstruction* ins, CYCLE eu_latency) {
+void bb_execution::forward (bbInstruction* ins, CYCLE eu_latency) {
     if (_execution_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     if (ins->getInsType () != MEM) {
         CYCLE cdb_ready_latency = eu_latency - 1;

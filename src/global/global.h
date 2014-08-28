@@ -72,7 +72,8 @@ typedef enum {
     DBG_SQUASH = 0x10000, 
     DBG_PORT = 0x20000, 
     DBG_TEST = 0x40000,
-    DBG_INIT = 0x80000
+    DBG_INIT = 0x80000,
+    DBG_REG_FILES = 0x100000
 } DBG_LEVEL;
 
 #define INS_STRING_SIZE 1000
