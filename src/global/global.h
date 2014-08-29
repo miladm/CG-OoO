@@ -120,6 +120,8 @@ typedef enum {
 #define MEM_HIGHERARCHY 4
 
 // Regsiter Renaming
+#define USE_LRF true
+
 #define LARF_SIZE 2000
 #define GARF_SIZE 6000
 #define GRRF_SIZE 8000

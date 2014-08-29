@@ -7,6 +7,8 @@
 #include "dynBasicblock.h"
 #include "dynInstruction.h"
 
+typedef enum {LOCAL_REG, GLOBAL_REG} REG_TYPE;
+
 class dynBasicblock;
 
 class bbInstruction : public dynInstruction {
@@ -24,35 +26,42 @@ class bbInstruction : public dynInstruction {
         dynBasicblock* getBB ();
         WIDTH getBBWinID ();
         WIDTH getNumRdAR ();
+        WIDTH getNumRdLAR ();
         WIDTH getTotNumRdAR ();
+        WIDTH getTotNumRdLAR ();
         WIDTH getNumRdPR ();
         List<AR>* getARrdList ();
         List<AR>* getARwrList ();
         List<PR>* getPRrdList ();
         List<PR>* getPRwrList ();
+        List<AR>* getLARrdList ();
+        List<AR>* getLARwrList ();
 
         // INS CONTROL
+        void copyRegsTo (bbInstruction*);
         void resetWrongPath ();
         void resetStates ();
+
+    private:
+        REG_TYPE getARtype (AR);
 
     private:
         //BB
         dynBasicblock* _bb;
         WIDTH _bbWin_id;
 
-//        TODO finish this
-//        //LOCAL REGS
-//        List<AR> _l_rdReg;
-//        List<AR> _l_wrReg;
-//        List<AR> _l_rdReg_waitList;
-//
-//        //GLOBAL REGS
-//        List<AR> _a_rdReg;
-//        List<AR> _a_wrReg;
-//        List<AR> _a_rdReg_waitList;
-//        List<AR> _p_rdReg;
-//        List<AR> _p_wrReg;
-//        List<AR> _p_rdReg_waitList;
+        //LOCAL REGS
+        List<AR> _l_rdReg;
+        List<AR> _l_wrReg;
+        List<AR> _l_rdReg_waitList;
+
+        //GLOBAL REGS
+        List<AR> _a_rdReg;
+        List<AR> _a_wrReg;
+        List<AR> _a_rdReg_waitList;
+        List<AR> _p_rdReg;
+        List<AR> _p_wrReg;
+        List<AR> _p_rdReg_waitList;
 };
 
 #endif

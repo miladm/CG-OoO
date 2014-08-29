@@ -76,7 +76,7 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
-        forward (mem_ins, axes_lat);
+//        forward (mem_ins, axes_lat);
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
         //Assert (mem_ins->isMemOrBrViolation() == false);
