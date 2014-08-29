@@ -75,23 +75,23 @@ List<PR>* bbInstruction::getPRwrList () {return &_p_wrReg;}
 // ***********************
 
 /* Used to re-run ins after squash recovery */
-void dynInstruction::resetStates () {
-    while (_p_rdReg_waitList.NumElements () > 0) {
-        _p_rdReg_waitList.RemoveAt(0);
-    }
-    while (_p_rdReg.NumElements () > 0) {
-        _p_rdReg.RemoveAt(0);
-    }
-    while (_p_wrReg.NumElements () > 0) {
-        _p_wrReg.RemoveAt(0);
-    }
+void bbInstruction::resetStates () {
+  while (_p_rdReg_waitList.NumElements () > 0) {
+      _p_rdReg_waitList.RemoveAt(0);
+  }
+  while (_p_rdReg.NumElements () > 0) {
+      _p_rdReg.RemoveAt(0);
+  }
+  while (_p_wrReg.NumElements () > 0) {
+      _p_wrReg.RemoveAt(0);
+  }
 
-    while (_a_rdReg_waitList.NumElements () > 0) {
-        _a_rdReg_waitList.RemoveAt(0);
-    }
-    for (int i = 0; i < _a_rdReg.NumElements(); i++) {
-        _a_rdReg_waitList.Append (_a_rdReg.Nth(i));
-    }
+  while (_a_rdReg_waitList.NumElements () > 0) {
+      _a_rdReg_waitList.RemoveAt(0);
+  }
+  for (int i = 0; i < _a_rdReg.NumElements(); i++) {
+      _a_rdReg_waitList.Append (_a_rdReg.Nth(i));
+  }
 
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;

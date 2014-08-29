@@ -11,7 +11,7 @@ bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port,
                             CAMtable<dynBasicblock*>* bbROB,
 	    	                WIDTH execution_width,
                             bb_memManager* LSQ_MGR,
-                            bb_grfManager* RF_MGR,
+                            bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (execution_width, stage_name, clk)
@@ -62,7 +62,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
     g_var.setOldSquashSN ();
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
-        bbInstruction* ins = EU->getEUins ();
+        bbInstruction* ins = (bbInstruction*) EU->getEUins ();
         bbInstruction* violating_ld_ins = NULL;
 
         /*-- CHECKS --*/
@@ -140,7 +140,7 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
         /*-- EXE INS --*/
         bbInstruction* ins = _scheduler_to_execution_port->popFront ();
         EU->_eu_timer.setNewTime (_clk->now ());
-        EU->setEUins (ins);
+        EU->setEUins ((dynInstruction*) ins);
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
         forward (ins, EU->_eu_timer.getLatency ());
@@ -202,7 +202,7 @@ void bb_execution::squashCtrl () {
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
-        _RF_MGR->squashRenameReg ();
+        _RF_MGR->squashRegs ();
     } else {
         return; /*-- No state change --*/
     }

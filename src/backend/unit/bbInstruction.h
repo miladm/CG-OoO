@@ -15,14 +15,14 @@ class bbInstruction : public dynInstruction {
         ~bbInstruction ();
 
         // SET INS ATRIBUTES
-        void setbbWinID (WIDTH);
+        void setBBWinID (WIDTH);
         void setBB (dynBasicblock* bb);
         void setAR (AR ar, AXES_TYPE type);
         void setPR (PR pr, AXES_TYPE type);
 
         // GET INS ATRIBUTES
         dynBasicblock* getBB ();
-        WIDTH getbbWinID ();
+        WIDTH getBBWinID ();
         WIDTH getNumRdAR ();
         WIDTH getTotNumRdAR ();
         WIDTH getNumRdPR ();
@@ -40,13 +40,19 @@ class bbInstruction : public dynInstruction {
         dynBasicblock* _bb;
         WIDTH _bbWin_id;
 
-        //REGS
-        List<AR> _a_rdReg;
-        List<AR> _a_wrReg;
-        List<AR> _a_rdReg_waitList;
-        List<AR> _p_rdReg;
-        List<AR> _p_wrReg;
-        List<AR> _p_rdReg_waitList;
+//        TODO finish this
+//        //LOCAL REGS
+//        List<AR> _l_rdReg;
+//        List<AR> _l_wrReg;
+//        List<AR> _l_rdReg_waitList;
+//
+//        //GLOBAL REGS
+//        List<AR> _a_rdReg;
+//        List<AR> _a_wrReg;
+//        List<AR> _a_rdReg_waitList;
+//        List<AR> _p_rdReg;
+//        List<AR> _p_wrReg;
+//        List<AR> _p_rdReg_waitList;
 };
 
 #endif

@@ -55,19 +55,11 @@ class dynInstruction : public unit {
         void copyRegsTo (dynInstruction* ins);
         void resetStates ();
 
-    private:
+    protected:
         //INS
         ADDRS _ins_addr;
         INS_ID _seq_num;
         INS_TYPE _ins_type;
-
-        //REGS
-        List<AR> _a_rdReg;
-        List<AR> _a_wrReg;
-        List<AR> _a_rdReg_waitList;
-        List<AR> _p_rdReg;
-        List<AR> _p_wrReg;
-        List<AR> _p_rdReg_waitList;
 
         //BR
         ADDRS _brTarget;
@@ -89,6 +81,16 @@ class dynInstruction : public unit {
         int _hitLevel;
         bool _is_on_wrong_path;
         bool _is_mem_violation;
+
+    protected:
+        //REGS
+        List<AR> _a_rdReg;
+        List<AR> _a_wrReg;
+        List<AR> _a_rdReg_waitList;
+        List<AR> _p_rdReg;
+        List<AR> _p_wrReg;
+        List<AR> _p_rdReg_waitList;
+
 };
 
 #endif

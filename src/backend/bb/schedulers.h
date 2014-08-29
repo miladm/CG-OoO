@@ -6,7 +6,7 @@
 #define _BB_SCHEDULER_H
 
 #include "../unit/stage.h"
-#include "grfManager.h"
+#include "rfManager.h"
 #include "memManager.h"
 #include "bbWindow.h"
 
@@ -21,7 +21,7 @@ class bb_scheduler : protected stage {
                       CAMtable<dynBasicblock*>* bbROB,
 			          WIDTH scheduler_width,
                       bb_memManager* LSQ_MGR,
-                      bb_grfManager* RF_MGR,
+                      bb_rfManager* RF_MGR,
                       sysClock* clk,
 			          string stage_name);
 		~bb_scheduler ();
@@ -52,7 +52,7 @@ class bb_scheduler : protected stage {
 
         // RF REGISTERS
         bb_memManager* _LSQ_MGR;
-        bb_grfManager* _GRF_MGR;
+        bb_rfManager* _RF_MGR;
 
         // BB WIN STRUCTURES
         WIDTH _num_bbWin;

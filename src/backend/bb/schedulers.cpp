@@ -13,7 +13,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             CAMtable<dynBasicblock*>* bbROB,
 	    	                WIDTH scheduler_width,
                             bb_memManager* LSQ_MGR,
-                            bb_grfManager* RF_MGR,
+                            bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (scheduler_width, stage_name, clk)
@@ -34,11 +34,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     }
 }
 
-bb_scheduler::~bb_scheduler () {
-    for (WIDTH i = 0; i < _num_bbWin; i++) {
-        delete _bbWindows->Nth(i);
-    }
-}
+bb_scheduler::~bb_scheduler () { }
 
 void bb_scheduler::doSCHEDULER () {
     /*-- STAT + DEBUG --*/

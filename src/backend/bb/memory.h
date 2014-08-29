@@ -6,7 +6,7 @@
 #define _BB_MEMORY_H
 
 #include "../unit/stage.h"
-#include "grfManager.h"
+#include "rfManager.h"
 #include "memManager.h"
 #include "bbWindow.h"
 
@@ -19,7 +19,7 @@ class bb_memory : protected stage {
                    CAMtable<dynBasicblock*>* bbROB,
 			       WIDTH memory_width,
                    bb_memManager* LSQ_MGR,
-                   bb_grfManager* RF_MGR,
+                   bb_rfManager* RF_MGR,
                    sysClock* clk,
 			       string stage_name);
 		~bb_memory ();
@@ -39,7 +39,7 @@ class bb_memory : protected stage {
         port<bbInstruction*>* _memory_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
-        bb_grfManager* _RF_MGR;
+        bb_rfManager* _RF_MGR;
         RAMtable<bbInstruction*> _mshr;
 
         cache _L1;

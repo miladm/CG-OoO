@@ -21,7 +21,7 @@
 #include "../unit/table.h"
 #include "../unit/port.h"
 #include "memManager.h"
-#include "grfManager.h"
+#include "rfManager.h"
 #include "bbWindow.h"
 
 class bb_sysCore : public unit {
@@ -95,7 +95,7 @@ class bb_sysCore : public unit {
 
         // RF & LSQ
         bb_memManager* _LSQ_MGR;
-        bb_grfManager* _RF_MGR;
+        bb_rfManager* _RF_MGR;
 
         // BB Windows
         List<bbWindow*> _bbWindows;

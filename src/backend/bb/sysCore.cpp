@@ -62,12 +62,12 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "memManager");
     _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
 //    _RF_MGR = new bb_grfManager (_clk, "grfManager"); //TODO remove it
-//    for (WIDTH i = 0; i < num_bbWin; i++) {
-//        ostringstream bbWin_num;
-//        bbWin_num << i;
-//        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
-//        _bbWindows.Append (bbWin);
-//    }//TODO remove it
+    for (WIDTH i = 0; i < num_bbWin; i++) {
+        ostringstream bbWin_num;
+        bbWin_num << i;
+        bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
+        _bbWindows.Append (bbWin);
+    }//TODO remove it - put back in scheduler.cpp
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
@@ -89,6 +89,10 @@ bb_sysCore::~bb_sysCore () {
     delete _decode;
     delete _scheduler;
     delete _execution;
+    while (_bbWindows.NumElements () > 0) {
+        delete _bbWindows.Nth (0);
+        _bbWindows.RemoveAt (0);
+    }
 }
 
 void bb_sysCore::runCore () {
@@ -109,7 +113,7 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-        if (_clk->now () == 50000) {
+//        if (_clk->now () == 200000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
 //                List<bbInstruction*>* insList = bb->getBBinsList ();
@@ -121,6 +125,6 @@ void bb_sysCore::runCore () {
 //                }
 //            }
 //            exit (-1); /*-- for debug --*/
-        }
+//        }
 	}
 }

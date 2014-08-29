@@ -11,7 +11,7 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
                       CAMtable<dynBasicblock*>* bbROB,
 	    	          WIDTH commit_width,
                       bb_memManager* LSQ_MGR,
-                      bb_grfManager* RF_MGR,
+                      bb_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),

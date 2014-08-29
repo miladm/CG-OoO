@@ -27,7 +27,6 @@ class bb_rfManager : public unit {
 //        void writeToRF (bbInstruction* ins);
         void reserveRF (bbInstruction* ins);
         bool canReserveRF (bbInstruction* ins);
-        void updateReg (PR reg);
 
         //LRF & GRF
         bool isReady (bbInstruction* ins);
