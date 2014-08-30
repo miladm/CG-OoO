@@ -159,6 +159,7 @@ void bb_scheduler::updatebbWindows () {
         ins->setPipeStage (DISPATCH);
         if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
         _bbWin_on_fetch->_win.pushBack (ins);
+        ins->setBBWinID (_bbWin_on_fetch->_id);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write bbWin ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE WIRES --*/

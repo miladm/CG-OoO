@@ -21,7 +21,7 @@ staticCodeParser::~staticCodeParser () {
 
 void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-    dynInstruction* ins = _insObjMap[insAddr];
+    bbInstruction* ins = _insObjMap[insAddr];
     int scanStatus;
     while (true) {
         AR reg;
@@ -135,7 +135,7 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
 	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
 	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
 
-    dynInstruction* newInsObj = new dynInstruction;
+    bbInstruction* newInsObj = new bbInstruction;
     newInsObj->setInsAddr (insAddr);
     if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
         newInsObj->setInsType (BR);
@@ -152,7 +152,7 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
     } else {
         newInsObj->setInsType (ALU);
     }
-	_insObjMap.insert (pair<ADDRS,dynInstruction*> (insAddr, newInsObj));
+	_insObjMap.insert (pair<ADDRS,bbInstruction*> (insAddr, newInsObj));
 }
 
 bool staticCodeParser::isInsIn_insMap (ADDRINT insAddr) {
@@ -224,7 +224,7 @@ std::string staticCodeParser::getIns (ADDRINT insAddr) {
 	return ins_str;
 }
 
-dynInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
+bbInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
 	return _insObjMap[insAddr];
 }

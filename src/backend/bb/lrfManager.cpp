@@ -17,7 +17,7 @@ void bb_lrfManager::resetRF () {
 
 /* ARE ALL READ OPERANDS READY? */
 bool bb_lrfManager::isReady (bbInstruction* ins) {
-    List<AR>* a_rdReg_list = ins->getARrdList ();
+    List<AR>* a_rdReg_list = ins->getLARrdList ();
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
         if (!_RF.isRegValid (reg)) {
@@ -34,7 +34,7 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */
 void bb_lrfManager::reserveRF (bbInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.reserveReg (reg);
@@ -43,7 +43,7 @@ void bb_lrfManager::reserveRF (bbInstruction* ins) {
 
 /* CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS */
 bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
@@ -54,7 +54,7 @@ bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
 }
 
 void bb_lrfManager::writeToRF (bbInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);

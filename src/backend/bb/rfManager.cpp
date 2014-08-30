@@ -46,17 +46,17 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
 }
 
 bool bb_rfManager::isReady (bbInstruction* ins) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
+    WIDTH bbWin_id = ins->getBBWinID ();
     bool grf_ready = _GRF_MGR.isReady (ins);
-//    bool lrf_ready = _LRF_MGRS[bbWin_id]->isReady (ins);
-//    return (grf_ready && lrf_ready);
+    bool lrf_ready = _LRF_MGRS[bbWin_id]->isReady (ins);
+    return (grf_ready && lrf_ready);
     return grf_ready;
 }
 
 void bb_rfManager::completeRegs (bbInstruction* ins) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
+    WIDTH bbWin_id = ins->getBBWinID ();
     _GRF_MGR.completeRegs (ins);
-//    _LRF_MGRS[bbWin_id]->writeToRF (ins);
+    _LRF_MGRS[bbWin_id]->writeToRF (ins);
     dbg.print (DBG_REG_FILES, "%s: %s (cyc: %d)\n", _c_name.c_str (), 
             "Done updating RF's", _clk->now ());
 }
@@ -66,11 +66,11 @@ void bb_rfManager::squashRegs () {
     dbg.print (DBG_REG_FILES, "%s: %s (cyc: %d)\n", _c_name.c_str (), 
             "Squashed GRF", _clk->now ());
 
-//    for (int i = 0; i < (int)_LRF_MGRS.size (); i++) {
-//        _LRF_MGRS[i]->resetRF ();
-//        dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
-//                "Squashed LRF", i, _clk->now ());
-//    }
+    for (int i = 0; i < (int)_LRF_MGRS.size (); i++) {
+        _LRF_MGRS[i]->resetRF ();
+        dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                "Squashed LRF", i, _clk->now ());
+    }
 }
 
 bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type) {

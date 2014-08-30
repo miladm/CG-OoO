@@ -82,7 +82,7 @@ class dynInstruction : public unit {
         bool _is_on_wrong_path;
         bool _is_mem_violation;
 
-    protected:
+    private:
         //REGS
         List<AR> _a_rdReg;
         List<AR> _a_wrReg;
