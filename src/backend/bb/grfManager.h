@@ -15,7 +15,7 @@ class bb_grfManager : public unit {
 		~bb_grfManager ();
 
         bool canRename (bbInstruction* ins);
-        bool renameRegs (bbInstruction* ins);
+        void renameRegs (bbInstruction* ins);
         bool isReady (bbInstruction* ins);
         void completeRegs (bbInstruction* ins);
         void commitRegs (bbInstruction* ins);

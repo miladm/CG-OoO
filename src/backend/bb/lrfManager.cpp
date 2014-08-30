@@ -25,17 +25,19 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
         AR reg = a_rdReg_list->Nth (i);
         if (!_RF.isRegValid (reg)) {
             dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
-                    "reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
+                    "Reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
             return false; /* operand not available */
         } else {
             a_rdReg_list->RemoveAt (i); /*optimization */
         }
     }
+
     if (a_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_L_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /* all operands available */
     }
+
     dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
     return false; /* not all operands available */

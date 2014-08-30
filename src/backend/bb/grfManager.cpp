@@ -17,14 +17,22 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
         if (!_GRF.isPRvalid (reg)) {
+            dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid", _clk->now ());
             return false; /*-- operand not available --*/
         } else {
             p_rdReg_list->RemoveAt (i); /*--optimization --*/
         }
     }
+
     if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /*-- all operands available --*/
     }
+
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
     return false; /*-- not all operands available --*/
 }
 
@@ -32,12 +40,18 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
 bool bb_grfManager::canRename (bbInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
+        dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                "Can NOT rename regisers for ins", ins->getInsID (), _clk->now ());
         return false; /*-- STALL FETCH --*/
     }
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Can rename regisers for ins", ins->getInsID (), _clk->now ());
     return true;
 }
 
-bool bb_grfManager::renameRegs (bbInstruction* ins) {
+void bb_grfManager::renameRegs (bbInstruction* ins) {
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Rename regisers for ins", ins->getInsID (), _clk->now ());
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
     Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
@@ -59,11 +73,12 @@ bool bb_grfManager::renameRegs (bbInstruction* ins) {
         _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
         ins->setPR (new_pr, WRITE);
     }
-    return false; /*-- DON'T STALL FETCH --*/
 }
 
 /*-- PROCESS WRITE REGISTERS @COMPLETE --*/
 void bb_grfManager::completeRegs (bbInstruction* ins) {
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Write regisers for ins", ins->getInsID (), _clk->now ());
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
@@ -73,6 +88,8 @@ void bb_grfManager::completeRegs (bbInstruction* ins) {
 
 /*-- PROCESS WRITE REFISTERS @COMMIT --*/
 void bb_grfManager::commitRegs (bbInstruction* ins) {
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Commit regisers for ins", ins->getInsID (), _clk->now ());
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();
     Assert (_ar->NumElements () == _pr->NumElements ());

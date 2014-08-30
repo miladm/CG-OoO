@@ -19,7 +19,7 @@ class bb_rfManager : public unit {
 //        void completeRegs (bbInstruction* ins);
 //        void squashRenameReg ();
         bool canRename (bbInstruction* ins);
-        bool renameRegs (bbInstruction* ins);
+        void renameRegs (bbInstruction* ins);
         void commitRegs (bbInstruction* ins);
 
         //LRF ONLY

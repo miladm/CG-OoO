@@ -28,8 +28,8 @@ bool bb_rfManager::canRename (bbInstruction* ins) {
     return _GRF_MGR.canRename (ins);
 }
 
-bool bb_rfManager::renameRegs (bbInstruction* ins) {
-    return _GRF_MGR.renameRegs (ins);
+void bb_rfManager::renameRegs (bbInstruction* ins) {
+    _GRF_MGR.renameRegs (ins);
 }
 void bb_rfManager::commitRegs (bbInstruction* ins) {
     return _GRF_MGR.commitRegs (ins);
