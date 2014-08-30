@@ -4,14 +4,17 @@
 
 #include "lrfManager.h"
 
-bb_lrfManager::bb_lrfManager (sysClock* clk, string rf_name)
+bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name)
     : unit (rf_name, clk),
-      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "LocalRegisterFile")
+      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
+      _lrf_id (lrf_id)
 { }
 
 bb_lrfManager::~bb_lrfManager () { }
 
 void bb_lrfManager::resetRF () {
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Reset LRF", _lrf_id, _clk->now ());
     _RF.resetRF ();
 }
 
@@ -21,19 +24,27 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
         if (!_RF.isRegValid (reg)) {
+            dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
             return false; /* operand not available */
         } else {
             a_rdReg_list->RemoveAt (i); /*optimization */
         }
     }
     if (a_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_L_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /* all operands available */
     }
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
     return false; /* not all operands available */
 }
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */
 void bb_lrfManager::reserveRF (bbInstruction* ins) {
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Reserving regisers for ins", ins->getInsID (), _clk->now ());
     List<AR>* a_wrReg_list = ins->getLARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
@@ -47,13 +58,19 @@ bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
+            dbg.print (DBG_L_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "Can NOT Reserve regisers for ins", ins->getInsID (), _clk->now ());
             return false; /* operand not available for write */
         }
     }
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Can Reserve regisers for ins", ins->getInsID (), _clk->now ());
     return true;
 }
 
 void bb_lrfManager::writeToRF (bbInstruction* ins) {
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Write to LRF ", _lrf_id, "for ins", ins->getInsID (), _clk->now ());
     List<AR>* a_wrReg_list = ins->getLARrdList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);

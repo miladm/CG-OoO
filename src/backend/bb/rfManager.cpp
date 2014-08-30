@@ -11,7 +11,7 @@ bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rfm_name)
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
         bbWin_id << i;
-        bb_lrfManager* LRF_MGR = new bb_lrfManager (_clk, "lrfManager_" + bbWin_id.str ());
+        bb_lrfManager* LRF_MGR = new bb_lrfManager (i, _clk, "lrfManager_" + bbWin_id.str ());
         _LRF_MGRS.insert (pair<WIDTH, bb_lrfManager*>(i, LRF_MGR));
     }
 }

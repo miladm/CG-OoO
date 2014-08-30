@@ -21,4 +21,4 @@ void DEBUG::print (DBG_LEVEL dbg, const char* fmt, ...) {
 #endif
 }
 
-DEBUG dbg((DBG_LEVEL)0); //TODO fix this
+DEBUG dbg((DBG_LEVEL)DBG_L_REG_FILES); //TODO fix this

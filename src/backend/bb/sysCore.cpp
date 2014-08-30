@@ -67,7 +67,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
         bbWin_num << i;
         bbWindow* bbWin = new bbWindow (bbWin_num.str (), _clk);
         _bbWindows.Append (bbWin);
-    }//TODO remove it - put back in scheduler.cpp
+    } //TODO remove it - put back in scheduler.cpp
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
