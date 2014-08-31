@@ -338,7 +338,7 @@ VOID runPARS (char* cfgFile)
 	PIN_UnblockSignal (SIGABRT,TRUE);
 
 	__outFile = fopen ("junky", "w");
-	uop_gen (__outFile, *g_staticCode);
+//	uop_gen (__outFile, *g_staticCode);
     TRACE_AddInstrumentFunction (Instruction, 0);
     PIN_AddFiniFunction (Fini, 0);
 
@@ -691,7 +691,7 @@ VOID doImpCallCount_ (BOOL isCall)
 {
 	if (isCall)
 		imgInsCallCount_++;
-	unsigned long countRem = g_var.insCount%BILLION;
+	unsigned long countRem = g_var.insCount % BILLION;
 	if (countRem == 0) {
 		cout << " (CALL_) :" << imgInsCallCount_ << "\n";
 	}
@@ -702,7 +702,7 @@ VOID doImpMemCount_ (UINT32 isMem)
 {
 	if (isMem > 0)
 		imgInsMemCount_++;
-	unsigned long countRem = g_var.insCount%BILLION;
+	unsigned long countRem = g_var.insCount % BILLION;
 	if (countRem == 0) {
 		cout << " (MEM_) :" << imgInsMemCount_ << "\n";
 	}
@@ -715,18 +715,18 @@ VOID Instruction (TRACE trace, VOID * val)
         return;
     }
 
-    bool first_bb = true;
+//    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-        if (g_var.g_core_type == BASICBLOCK) {
-            if (first_bb) {
-                first_bb = false;
-                INS head = BBL_InsHead (bbl);
-                get_bb_header (head);
-            }
-            INS tail = BBL_InsTail (bbl);
-            get_bb_header (tail);
-        }
+//        if (g_var.g_core_type == BASICBLOCK) {
+//            if (first_bb) {
+//                first_bb = false;
+//                INS head = BBL_InsHead (bbl);
+//                get_bb_header (head);
+//            }
+//            INS tail = BBL_InsTail (bbl);
+//            get_bb_header (tail);
+//        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {
@@ -753,7 +753,7 @@ VOID Instruction (TRACE trace, VOID * val)
 
             if (g_var.g_enable_instrumentation) {
                 //cout << g_var.g_insCountRightPath << " instrumentation enabled\n";
-                get_uop (ins);
+//                get_uop (ins);
                 //if (g_cfg->coreType == PHRASEBLOCK)
                 //	INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuff,
                 //		IARG_ADDRINT, INS_Address (ins),
