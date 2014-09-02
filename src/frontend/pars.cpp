@@ -288,12 +288,12 @@ static VOID backEnd (void *ptr) {
         //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 		if (g_var.g_core_type == BASICBLOCK) {
 			if (g_var.g_bbCache->NumElements () >= 100) {
-				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
+//				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
 				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
                 bbBkEndRun ();
-				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+//				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
@@ -369,7 +369,6 @@ VOID Init (char* cfgFile)
 	g_staticCode = new staticCodeParser (&g_var, g_cfg);
 //    g_staticCode->populateDB (); //TODO organize this - creates DB
 //    g_staticCode->testDB(); //TODO organize this - creates DB
-    g_staticCode->openDB ();
 
 	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
 	char const * dummy_argv[] = {"TraceSim", 
