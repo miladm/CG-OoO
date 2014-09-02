@@ -16,10 +16,12 @@
 #include "../lib/list.h"
 #include "../lib/message.h"
 #include "../lib/statistic.h"
+#include "../lib/sqlite/sqlite3.h"
 #include "../backend/basicblock.h"
 #include "../backend/unit/dynInstruction.h"
-#include "../backend/unit/bbInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
+#include "../backend/unit/bbInstruction.h"
+#include "../backend/unit/stInstruction.h"
 
 struct g_variable {
     g_variable() {
@@ -49,8 +51,8 @@ struct g_variable {
         g_codeCacheSize = 0;
         g_flushes = 0;
         g_enable_simpoint = true;
-        g_enable_wp = false;
-        g_enable_instrumentation = false;
+        g_enable_wp = true;
+        g_enable_instrumentation = true;
 
         g_pipe_state = PIPE_NORMAL;
         g_squash_seq_num = 0;
@@ -127,6 +129,9 @@ struct g_variable {
 
     //CPU Core
     CORE_TYPE g_core_type;
+
+    //DB
+    sqlite3* g_db;
 
     /*****************************/
     /* PIPELINE SQUASH           */

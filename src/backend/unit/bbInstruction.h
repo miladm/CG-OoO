@@ -6,6 +6,7 @@
 
 #include "dynBasicblock.h"
 #include "dynInstruction.h"
+#include "../../lib/sqlite/sqlite3.h"
 
 typedef enum {LOCAL_REG, GLOBAL_REG} REG_TYPE;
 
@@ -38,9 +39,10 @@ class bbInstruction : public dynInstruction {
         List<AR>* getLARwrList ();
 
         // INS CONTROL
-        void copyRegsTo (bbInstruction*);
+        void copyRegsTo (sqlite3* db);
         void resetWrongPath ();
         void resetStates ();
+        string iTos (ADDRS);
 
     private:
         REG_TYPE getARtype (AR);

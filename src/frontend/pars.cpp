@@ -288,12 +288,12 @@ static VOID backEnd (void *ptr) {
         //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 		if (g_var.g_core_type == BASICBLOCK) {
 			if (g_var.g_bbCache->NumElements () >= 100) {
-//				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
+				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
 				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
 				g_var.stat.noMatchIns=0;
 				g_var.stat.matchIns=0;
                 bbBkEndRun ();
-//				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 			}
 		} else {
 			if (g_var.g_codeCache->NumElements () >= 1000) {
@@ -338,7 +338,7 @@ VOID runPARS (char* cfgFile)
 	PIN_UnblockSignal (SIGABRT,TRUE);
 
 	__outFile = fopen ("junky", "w");
-//	uop_gen (__outFile, *g_staticCode);
+	uop_gen (__outFile, *g_staticCode);
     TRACE_AddInstrumentFunction (Instruction, 0);
     PIN_AddFiniFunction (Fini, 0);
 
@@ -367,6 +367,9 @@ VOID Init (char* cfgFile)
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
 	g_var.msg.simStep ("PARS COMPILED CODE");
 	g_staticCode = new staticCodeParser (&g_var, g_cfg);
+//    g_staticCode->populateDB (); //TODO organize this - creates DB
+//    g_staticCode->testDB(); //TODO organize this - creates DB
+    g_staticCode->openDB ();
 
 	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
 	char const * dummy_argv[] = {"TraceSim", 
@@ -715,18 +718,18 @@ VOID Instruction (TRACE trace, VOID * val)
         return;
     }
 
-//    bool first_bb = true;
+    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-//        if (g_var.g_core_type == BASICBLOCK) {
-//            if (first_bb) {
-//                first_bb = false;
-//                INS head = BBL_InsHead (bbl);
-//                get_bb_header (head);
-//            }
-//            INS tail = BBL_InsTail (bbl);
-//            get_bb_header (tail);
-//        }
+        if (g_var.g_core_type == BASICBLOCK) {
+            if (first_bb) {
+                first_bb = false;
+                INS head = BBL_InsHead (bbl);
+                get_bb_header (head);
+            }
+            INS tail = BBL_InsTail (bbl);
+            get_bb_header (tail);
+        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {
@@ -753,7 +756,7 @@ VOID Instruction (TRACE trace, VOID * val)
 
             if (g_var.g_enable_instrumentation) {
                 //cout << g_var.g_insCountRightPath << " instrumentation enabled\n";
-//                get_uop (ins);
+                get_uop (ins);
                 //if (g_cfg->coreType == PHRASEBLOCK)
                 //	INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuff,
                 //		IARG_ADDRINT, INS_Address (ins),

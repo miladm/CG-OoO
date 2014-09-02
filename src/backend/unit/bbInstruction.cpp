@@ -105,33 +105,85 @@ List<AR>* bbInstruction::getLARwrList () {return &_l_wrReg;}
 // ***********************
 
 /* COPY REGISTERS FROM ONE OBJ TO ANOTHER */
-void bbInstruction::copyRegsTo (bbInstruction* ins) {
-    for (int i = 0; i < _p_rdReg.NumElements (); i++) {
-        PR reg = _p_rdReg.Nth (i);
-        ins->setPR (reg, READ);
-    }
-    for (int i = 0; i < _p_wrReg.NumElements (); i++) {
-        PR reg = _p_wrReg.Nth (i);
-        ins->setPR (reg, WRITE);
-    }
-    for (int i = 0; i < _a_rdReg.NumElements (); i++) {
-        AR reg = _a_rdReg.Nth (i);
-        ins->setAR (reg, READ);
-    }
-    for (int i = 0; i < _a_wrReg.NumElements (); i++) {
-        AR reg = _a_wrReg.Nth (i);
-        ins->setAR (reg, WRITE);
-    }
-    if (USE_LRF) {
-        for (int i = 0; i < _l_rdReg.NumElements (); i++) {
-            AR reg = _l_rdReg.Nth (i);
-            ins->setAR (reg, READ);
+void bbInstruction::copyRegsTo (sqlite3* db) {
+//    for (int i = 0; i < _p_rdReg.NumElements (); i++) {
+//        PR reg = _p_rdReg.Nth (i);
+//        ins->setPR (reg, READ);
+//    }
+//    for (int i = 0; i < _p_wrReg.NumElements (); i++) {
+//        PR reg = _p_wrReg.Nth (i);
+//        ins->setPR (reg, WRITE);
+//    }
+//    string db_name = "benchDB.db";
+//    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = "+ iTos (getInsAddr ()) + ";";
+////    sql_db (db_name.c_str (), cmd.c_str ());
+//    sqlite3* db = NULL; 
+//    sqlite3_open("benchDB.db", &db); 
+//    sqlite3_stmt* stmt = NULL;
+//    sqlite3_prepare_v2(db, "SELECT COUNT(1) FROM TABLE " + bench_name + " WHERE ins_addr = " + iTos (ins_addr) + ";", &stmt, NULL); 
+//    sqlite3_bind_int(stmt, 1, 42);
+//    while (sqlite3_step(stmt) == SQLITE_ROW) { 
+//        int row;
+//        row = sqlite3_column_int(stmt, 0);
+//    }
+//    sqlite3_finalize(stmt); 
+//    sqlite3_close(db);
+
+//    string db_name = "benchDB.db";
+    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = "+ iTos (_ins_addr) + ";";
+//    sqlite3* db = NULL; 
+//    sqlite3_open ("benchDB.db", &db); 
+    sqlite3_stmt* stmt = NULL;
+    sqlite3_prepare_v2 (db, cmd.c_str (), -1, &stmt, NULL); 
+    sqlite3_bind_int (stmt, 1, 42);
+    if (sqlite3_step (stmt) == SQLITE_ROW) { 
+        for (int i = 1; i < 5; i++) {
+            int reg = sqlite3_column_int (stmt, i);
+            if (reg == 0) break;
+            setAR (reg, READ);
+//            cout << "rd reg: " << reg << endl;
         }
-        for (int i = 0; i < _l_wrReg.NumElements (); i++) {
-            AR reg = _l_wrReg.Nth (i);
-            ins->setAR (reg, WRITE);
+        for (int i = 5; i < 9; i++) {
+            int reg = sqlite3_column_int (stmt, i);
+            if (reg == 0) break;
+            setAR (reg, WRITE);
+//            cout << "wr reg: " << reg << endl;
         }
     }
+    sqlite3_finalize (stmt); 
+//    sqlite3_close (db);
+
+//    for (int i = 0; i < _a_rdReg.NumElements (); i++) {
+//        AR reg = _a_rdReg.Nth (i);
+//        ins->setAR (reg, READ);
+//    }
+//    for (int i = 0; i < _a_wrReg.NumElements (); i++) {
+//        AR reg = _a_wrReg.Nth (i);
+//        ins->setAR (reg, WRITE);
+//    }
+//    if (USE_LRF) {
+//        for (int i = 0; i < _l_rdReg.NumElements (); i++) {
+//            AR reg = _l_rdReg.Nth (i);
+//            ins->setAR (reg, READ);
+//        }
+//        for (int i = 0; i < _l_wrReg.NumElements (); i++) {
+//            AR reg = _l_wrReg.Nth (i);
+//            ins->setAR (reg, WRITE);
+//        }
+//    }
+}
+
+//bool bbInstruction::exists () {
+//    string db_name = "benchDB.db";
+//    string bench_name = "perlbench_400";
+//    string cmd = "SELECT COUNT(1) FROM TABLE " + bench_name + " WHERE ins_addr = " + iTos (ins_addr) + ";";
+//    return sql_exists (db_name.c_str (), cmd.c_str ());
+//}
+//
+string bbInstruction::iTos (ADDRS value) {
+    ostringstream ss;
+    ss << value;
+    return ss.str ();
 }
 
 /* Used to re-run ins after squash recovery */

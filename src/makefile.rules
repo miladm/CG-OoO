@@ -140,6 +140,8 @@ $(OBJDIR)lib/message$(OBJ_SUFFIX) \
 $(OBJDIR)lib/statistic$(OBJ_SUFFIX) \
 $(OBJDIR)lib/timer$(OBJ_SUFFIX) \
 $(OBJDIR)lib/debug$(OBJ_SUFFIX) \
+$(OBJDIR)lib/sqlite/sqlite3$(OBJ_SUFFIX) \
+$(OBJDIR)lib/sqlite/test/test$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/instruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/cache$(OBJ_SUFFIX) \
@@ -208,6 +210,7 @@ $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/bbInstruction$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/stInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynBasicblock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \

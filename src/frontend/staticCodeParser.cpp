@@ -12,7 +12,7 @@ staticCodeParser::staticCodeParser (g_variable *g_var, config *g_cfg) {
 	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var->g_verbose_level & V_FRONTEND) std::cout << "STATIC CODE FILE: " << file.c_str () << std::endl;
-	parse ();
+//	parse ();
 }
 
 staticCodeParser::~staticCodeParser () {
@@ -21,7 +21,7 @@ staticCodeParser::~staticCodeParser () {
 
 void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-    bbInstruction* ins = _insObjMap[insAddr];
+    stInstruction* ins = _insObjMap[insAddr];
     int scanStatus;
     while (true) {
         AR reg;
@@ -52,7 +52,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &bbAddr);
 			Assert (scanStatus != EOF);
-			makeNewBB (bbAddr);
+//			makeNewBB (bbAddr);
 		} else if (insType == '}') {
 			if (scanStatus == EOF) break;
 			scanStatus = fscanf (_inFile, "\n");
@@ -60,7 +60,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &insAddr);
 			Assert (scanStatus != EOF);
-			addBBheader (insAddr, bbAddr);
+//			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld,%s\n", &insAddr, &brDest, regs_dummy);
@@ -68,7 +68,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d,%s\n", &insAddr, &memAccessSize, regs_dummy);
@@ -76,7 +76,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else if (insType == 'o') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld,%s\n", &insAddr, regs_dummy);
@@ -84,7 +84,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else {
 			printf ("Parsed Value: %c", insType);
 			Assert (true == false && "Unrecognized character parsed");
@@ -126,33 +126,34 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
 	Assert (insType != 'z' && insAddr != 0);
 	//Assert (_insMap.find (insAddr) == _insMap.end () && "Instruction address already present in insMap");
 	//printf ("Instruction address already present in insMap\n");
-	insObj * newIns = new insObj; //last elem uninitialized
-	newIns->ins_str = "\0"; //Allocate later when brTaken and/or memAddr are known
-	newIns->registers = registers;
-	newIns->insType[0] = insType; //TODO expand this for several u-ops - this changes memAddr and brDst allocations below too
-	newIns->insAddr = insAddr;
-	newIns->brDest = ( (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') ?  brDest : 0);
-	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
-	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
+//	insObj * newIns = new insObj; //last elem uninitialized
+//	newIns->ins_str = "\0"; //Allocate later when brTaken and/or memAddr are known
+//	newIns->registers = registers;
+//	newIns->insType[0] = insType; //TODO expand this for several u-ops - this changes memAddr and brDst allocations below too
+//	newIns->insAddr = insAddr;
+//	newIns->brDest = ( (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') ?  brDest : 0);
+//	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
+//	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
 
-    bbInstruction* newInsObj = new bbInstruction;
+    stInstruction* newInsObj = new stInstruction;
     newInsObj->setInsAddr (insAddr);
-    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-        newInsObj->setInsType (BR);
-        bool isJump = (insType == 'j' ? true : false);
-        bool isCall = (insType == 'c' ? true : false);
-        bool isRet  = (insType == 'r' ? true : false);
-        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
-    } else if (insType == 'R') {
-        newInsObj->setInsType (MEM);
-        newInsObj->setMemAtr (LOAD, memAccessSize);
-    } else if (insType == 'W') {
-        newInsObj->setInsType (MEM);
-        newInsObj->setMemAtr (STORE, memAccessSize);
-    } else {
-        newInsObj->setInsType (ALU);
-    }
-	_insObjMap.insert (pair<ADDRS,bbInstruction*> (insAddr, newInsObj));
+// TODO this code is removed for memory efficiency - put it back?
+//    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
+//        newInsObj->setInsType (BR);
+//        bool isJump = (insType == 'j' ? true : false);
+//        bool isCall = (insType == 'c' ? true : false);
+//        bool isRet  = (insType == 'r' ? true : false);
+//        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
+//    } else if (insType == 'R') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (LOAD, memAccessSize);
+//    } else if (insType == 'W') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (STORE, memAccessSize);
+//    } else {
+//        newInsObj->setInsType (ALU);
+//    }
+	_insObjMap.insert (pair<ADDRS,stInstruction*> (insAddr, newInsObj));
 }
 
 bool staticCodeParser::isInsIn_insMap (ADDRINT insAddr) {
@@ -224,7 +225,7 @@ std::string staticCodeParser::getIns (ADDRINT insAddr) {
 	return ins_str;
 }
 
-bbInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
+stInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
 	return _insObjMap[insAddr];
 }
@@ -262,4 +263,94 @@ std::string staticCodeParser::getBBheader (ADDRINT bbAddr) {
 	ss << _bbMap[bbAddr]->bbHeader;
 	string strg = (string ("H,") + ss.str () + string (",\n"));
 	return strg;
+}
+
+void staticCodeParser::createDB () {
+}
+
+string staticCodeParser::iTos (ADDRS value) {
+    ostringstream ss;
+    ss << value;
+    return ss.str ();
+}
+
+void staticCodeParser::populateDB () {
+    string db_name = "benchDB.db";
+    string cmd = "DROP TABLE perlbench_400;";
+    sql_db (db_name.c_str (), cmd.c_str ());
+    cmd = "CREATE TABLE perlbench_400 (ins_addr INT PRIMARY KEY, a_rd_reg_0 INT, a_rd_reg_1 INT, a_rd_reg_2 INT, a_rd_reg3 INT, a_wr_reg_0 INT, a_wr_reg_1 INT, a_wr_reg_2 INT, a_wr_reg_3 INT);";
+    sql_db (db_name.c_str (), cmd.c_str ());
+    map<ADDRINT,stInstruction*>::iterator it;
+    for (it = _insObjMap.begin (); it != _insObjMap.end (); it++) {
+        stInstruction* ins = it->second;
+        string insAdr = iTos (ins->_ins_addr);
+        string r_reg[4], w_reg[4];
+        for (int i = 0; i < 4; i++) {
+            r_reg[i] = (i < ins->_a_rdReg.NumElements ()) ? iTos ((ADDRS) ins->_a_rdReg.Nth (i)) : "null";
+        }
+        for (int i = 0; i < 4; i++) {
+            w_reg[i] = (i < ins->_a_wrReg.NumElements ()) ? iTos ((ADDRS) ins->_a_wrReg.Nth (i)) : "null";
+        }
+        cmd = "INSERT INTO perlbench_400 VALUES (" + insAdr + ","
+            + r_reg[0] + "," 
+            + r_reg[1] + ","
+            + r_reg[2] + "," 
+            + r_reg[3] + ","
+            + w_reg[0] + "," 
+            + w_reg[1] + ","
+            + w_reg[2] + "," 
+            + w_reg[3] + ")";
+        sql_db (db_name.c_str (), cmd.c_str ());
+    }
+}
+
+void staticCodeParser::openDB () {
+    string db_name = "benchDB.db";
+    sqlite3* db = NULL; 
+    sqlite3_open ("benchDB.db", &db); 
+    _g_var->g_db = db;
+}
+
+void staticCodeParser::closeDB () {
+    sqlite3_close (_g_var->g_db);
+}
+
+bool staticCodeParser::exists (ADDRS ins_addr) {
+    //    string db_name = "benchDB.db";
+    //    string bench_name = "perlbench_400";
+    //    string cmd = "SELECT COUNT(1) FROM TABLE " + bench_name + " WHERE ins_addr = " + iTos (ins_addr) + ";";
+    //    sql_db (db_name.c_str (), cmd.c_str ());
+
+    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = " + iTos (ins_addr) + ";";
+    sqlite3_stmt* stmt = NULL;
+    sqlite3_prepare_v2 (_g_var->g_db, cmd.c_str (), -1, &stmt, NULL); 
+    sqlite3_bind_int (stmt, 1, 42);
+    int column_count = (sqlite3_step (stmt) == SQLITE_ROW) ? true : false;
+    sqlite3_finalize (stmt); 
+//    sqlite3_close (db);
+    return column_count;
+}
+
+void staticCodeParser::testDB () {
+//    string db_name = "benchDB.db";
+    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = "+ iTos (4195300) + ";";
+//    sqlite3* db = NULL; 
+//    sqlite3_open ("benchDB.db", &db); 
+    sqlite3_stmt* stmt = NULL;
+    sqlite3_prepare_v2 (_g_var->g_db, cmd.c_str (), -1, &stmt, NULL); 
+    sqlite3_bind_int (stmt, 1, 42);
+    if (sqlite3_step (stmt) == SQLITE_ROW) { 
+        for (int i = 1; i < 5; i++) {
+            int reg = sqlite3_column_int (stmt, i);
+            if (reg == 0) break;
+            cout << "rd reg: " << reg << endl;
+        }
+        for (int i = 5; i < 9; i++) {
+            int reg = sqlite3_column_int (stmt, i);
+            if (reg == 0) break;
+            cout << "wr reg: " << reg << endl;
+        }
+    }
+    sqlite3_finalize (stmt); 
+//    sqlite3_close (db);
 }
