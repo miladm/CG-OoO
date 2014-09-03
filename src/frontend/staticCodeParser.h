@@ -20,59 +20,44 @@
 #define MAX_NUM_uOP_PER_INS 3
 
 class staticCodeParser {
-public:
-	staticCodeParser(g_variable *g_var, config *g_cfg); //TODO add: benchmark name, path, core type
-	~staticCodeParser();
-	bool isNewBB(ADDRINT insAddr);
-	std::string getBrIns(ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken);
-	std::string getMemIns(ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr);
-	std::string getIns(ADDRINT insAddr);
-	bool hasIns(ADDRINT insAddr);
-	std::string getBBheader(ADDRINT bbAddr);
-	BOOL BBhasHeader(ADDRINT bbAddr);
-	std::string getBB_top(ADDRINT bbAddr); //TODO eliminate this function
-	std::string getBB_bottom(); //TODO eliminate this function
-	bool isInsIn_insMap(ADDRINT insAddr);
+    public:
+        staticCodeParser (config*); //TODO add: benchmark name, path, core type
+        ~staticCodeParser ();
 
-	stInstruction* getInsObj(ADDRINT insAddr);
-    void getRegisters(ADDRS insAddr, string registers);
+        /*-- INS FUNCTIONS --*/
+        BOOL hasIns (ADDRINT);
+        stInstruction* getInsObj (ADDRINT);
 
-    // SQL interface
-    void createDB ();
-    void populateDB ();
-    void testDB ();
-    string iTos (ADDRS);
-    bool exists (ADDRS ins_addr);
-    void openDB ();
-    void closeDB ();
+        /*-- BB FUNCTIONS --*/
+        BOOL isNewBB (ADDRINT);
+        BOOL BBhasHeader (ADDRINT);
+        string getBB_top (ADDRINT); //TODO eliminate this function
+        string getBBheader (ADDRINT);
+        string getBB_bottom (); //TODO eliminate this function
 
-private:
-	void parse();
-	void makeNewIns(char insType, ADDRINT insAddr, ADDRINT brDest, string registers, ADDRINT memAccessSize);
-	void makeNewBB(ADDRINT bbAddr);
-	void addToBB(ADDRINT insAddr, ADDRINT bbAddr);
-	void addBBheader(ADDRINT insAddr, ADDRINT bbAddr);
+    private:
+        void parse ();
+        void getRegisters (ADDRS, string);
 
-	struct insObj{
-		string ins_str;
-		string registers;
-		ADDRINT memAccessSize;
-		ADDRINT insAddr;
-		ADDRINT brDest;
-		char insType[MAX_NUM_uOP_PER_INS];
-	};
-	struct bbObj{
-		std::list<ADDRINT> bbInsSet;
-		ADDRINT bbAddr;
-		ADDRINT bbHeader;
-		BOOL bbHasHeader;
-	};
-	map<ADDRINT,insObj*> _insMap;
-	map<ADDRINT,stInstruction*> _insObjMap;
-	map<ADDRINT,bbObj*> _bbMap;
-	FILE* _inFile;
-	g_variable * _g_var;
-	config * _g_cfg;
+        /*-- INS FUNCTIONS --*/
+        void makeNewIns (char, ADDRINT, ADDRINT, string, ADDRINT);
+
+        /*-- BB FUNCTIONS --*/
+        void makeNewBB (ADDRINT);
+        void addToBB (ADDRINT, ADDRINT);
+        void addBBheader (ADDRINT, ADDRINT);
+
+    private:
+        struct bbObj{
+            list<ADDRINT> bbInsSet;
+            ADDRINT bbAddr;
+            ADDRINT bbHeader;
+            BOOL bbHasHeader;
+        };
+        map<ADDRINT, stInstruction*> _insObjMap;
+        map<ADDRINT, bbObj*> _bbMap;
+        FILE* _inFile;
+        config * _g_cfg;
 };
 
 #endif

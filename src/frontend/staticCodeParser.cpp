@@ -4,19 +4,23 @@
 
 #include "staticCodeParser.h"
 
-staticCodeParser::staticCodeParser (g_variable *g_var, config *g_cfg) {
-	_g_var = g_var;
+staticCodeParser::staticCodeParser (config *g_cfg) {
 	_g_cfg = g_cfg;
 	char *program_name = _g_cfg->getProgName ();
 	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s";
 	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
-	if (g_var->g_verbose_level & V_FRONTEND) std::cout << "STATIC CODE FILE: " << file.c_str () << std::endl;
+	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << file.c_str () << endl;
 	parse ();
 }
 
 staticCodeParser::~staticCodeParser () {
-	;//TODO iterate through the maps and delete objects
+    map<ADDRINT, stInstruction*>::iterator st_ins_it;
+    map<ADDRINT, bbObj*>::iterator bb_it;
+    for (st_ins_it = _insObjMap.begin (); st_ins_it != _insObjMap.end (); st_ins_it++)
+        delete st_ins_it->second;
+    for (bb_it = _bbMap.begin (); bb_it != _bbMap.end (); bb_it++)
+        delete bb_it->second;
 }
 
 void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
@@ -27,7 +31,7 @@ void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
         AR reg;
         int typeTemp;
         char s[100];
-        scanStatus = sscanf (registers.c_str (), "%u#%d,%s", &reg, &typeTemp, s);
+        scanStatus = sscanf (registers.c_str (), "%u#%d%s", &reg, &typeTemp, s);
         if (scanStatus != 3) break;
         Assert (typeTemp == 1 || typeTemp == 2);
         registers = string (s);
@@ -36,9 +40,11 @@ void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
     }
 }
 
-//PRE:
-//	.s files must be avilaable from the compilation stage
-//Parse .s File
+/* ***************************************************** *
+ * PRE:
+ * 	.s files must be avilaable from the compilation stage
+ * Parse .s File
+ * ***************************************************** */
 void staticCodeParser::parse () {
 	ADDRINT bbAddr = 0, insAddr = 0, brDest = 0;
 	int memAccessSize = 0;
@@ -93,6 +99,48 @@ void staticCodeParser::parse () {
 	printf ("Static code fetch DONE\n");
 }
 
+/* ***************************** *
+ * INS FUNCTIONS
+ * ***************************** */
+
+/*-- Make a new static instruction and add it to instruction list --*/
+void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest, string registers, ADDRINT memAccessSize) {
+	Assert (insType != 'z' && insAddr != 0);
+
+    stInstruction* newInsObj = new stInstruction;
+    newInsObj->setInsAddr (insAddr);
+// TODO this code is removed for memory efficiency - put it back?
+//    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
+//        newInsObj->setInsType (BR);
+//        bool isJump = (insType == 'j' ? true : false);
+//        bool isCall = (insType == 'c' ? true : false);
+//        bool isRet  = (insType == 'r' ? true : false);
+//        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
+//    } else if (insType == 'R') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (LOAD, memAccessSize);
+//    } else if (insType == 'W') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (STORE, memAccessSize);
+//    } else {
+//        newInsObj->setInsType (ALU);
+//    }
+	_insObjMap.insert (pair<ADDRS,stInstruction*> (insAddr, newInsObj));
+}
+
+BOOL staticCodeParser::hasIns (ADDRINT insAddr) {
+	Assert (insAddr != 0);
+	return (_insObjMap.find (insAddr) != _insObjMap.end ()) ? true : false;
+}
+
+stInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
+    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
+	return _insObjMap[insAddr];
+}
+
+/* ***************************** *
+ * BB FUNCTIONS
+ * ***************************** */
 void staticCodeParser::makeNewBB (ADDRINT bbAddr) {
 	#ifdef ASSERTION
 	//Assert (bbAddr != 0);
@@ -121,150 +169,36 @@ void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr) {
 	_bbMap[bbAddr]->bbInsSet.push_back (insAddr);
 }
 
-//Make a new static instruction and add it to instruction list
-void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest, string registers, ADDRINT memAccessSize) {
-	Assert (insType != 'z' && insAddr != 0);
-	//Assert (_insMap.find (insAddr) == _insMap.end () && "Instruction address already present in insMap");
-	//printf ("Instruction address already present in insMap\n");
-//	insObj * newIns = new insObj; //last elem uninitialized
-//	newIns->ins_str = "\0"; //Allocate later when brTaken and/or memAddr are known
-//	newIns->registers = registers;
-//	newIns->insType[0] = insType; //TODO expand this for several u-ops - this changes memAddr and brDst allocations below too
-//	newIns->insAddr = insAddr;
-//	newIns->brDest = ( (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') ?  brDest : 0);
-//	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
-//	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
-
-    stInstruction* newInsObj = new stInstruction;
-    newInsObj->setInsAddr (insAddr);
-// TODO this code is removed for memory efficiency - put it back?
-//    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-//        newInsObj->setInsType (BR);
-//        bool isJump = (insType == 'j' ? true : false);
-//        bool isCall = (insType == 'c' ? true : false);
-//        bool isRet  = (insType == 'r' ? true : false);
-//        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
-//    } else if (insType == 'R') {
-//        newInsObj->setInsType (MEM);
-//        newInsObj->setMemAtr (LOAD, memAccessSize);
-//    } else if (insType == 'W') {
-//        newInsObj->setInsType (MEM);
-//        newInsObj->setMemAtr (STORE, memAccessSize);
-//    } else {
-//        newInsObj->setInsType (ALU);
-//    }
-	_insObjMap.insert (pair<ADDRS,stInstruction*> (insAddr, newInsObj));
-}
-
-bool staticCodeParser::isInsIn_insMap (ADDRINT insAddr) {
-	Assert (insAddr != 0);
-	std::stringstream ss;
-	if (_insMap.find (insAddr) != _insMap.end ()) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-std::string staticCodeParser::getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken) {
-	Assert (insAddr != 0);
-	std::stringstream ss;
-	if (_insMap.find (insAddr) != _insMap.end ()) {
-		char insType = _insMap[insAddr]->insType[0];
-		if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-//            if (tgAddr == 0) cout << "warning - zero tgAddr" << endl;
-			//Assert (tgAddr != 0 && "invalid branch dst address value.");
-			ss << "B" << "," << insAddr << "," << isTaken  << "," << tgAddr << "," << _insMap[insAddr]->registers;
-		} else {
-			//Assert (true == false && "Unrecognized instruction type - expecting a branch instruction");
-			ss << "MILAD";
-		}
-	} else {
-		Assert (true == false && "Didn't find the instruction stream");
-	}
-	string ins_str = (ss.str () + string ("\n"));
-	return ins_str;
-}
-
-std::string staticCodeParser::getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr) {
-	Assert (insAddr != 0);
-	std::stringstream ss;
-	if (_insMap.find (insAddr) != _insMap.end ()) {
-		char insType = _insMap[insAddr]->insType[0];
-		//if (insType == 'W' || insType == 'R') {
-            //if (memAddr == 0) cout << "warning - zero memAddr" << endl;
-			//Assert (memAddr != 0 && "invalid memory address value.");
-			//Assert (_insMap[insAddr]->memAccessSize == memAccessSize && "Unexpected memory access size");
-			ss << insType << "," << memAddr << "," << insAddr << "," << memAccessSize << "," << _insMap[insAddr]->registers;
-		//} else {
-			//Assert (true == false && "Unrecognized instruction type - expecting a memory instruction");
-			//ss << "MILAD";
-		//}
-	} else {
-		Assert (true == false && "Didn't find the instruction stream");
-	}
-	string ins_str = (ss.str () + string ("\n"));
-	return ins_str;
-}
-
-bool staticCodeParser::hasIns (ADDRINT insAddr) {
-	Assert (insAddr != 0);
-	return (_insObjMap.find (insAddr) != _insObjMap.end ()) ? true : false;
-}
-
-std::string staticCodeParser::getIns (ADDRINT insAddr) {
-	Assert (insAddr != 0);
-	std::stringstream ss;
-	if (_insMap.find (insAddr) != _insMap.end ()) {
-		char insType = _insMap[insAddr]->insType[0];
-		if (insType == 'o') { //A, D, F for ins->getType ()
-			ss << "A" << "," << insAddr << "," << _insMap[insAddr]->registers;
-		} else {
-			//Assert (true == false && "Unrecognized instruction type - expecting a ALU instruction");
-			ss << "MILAD";
-		}
-	} else {
-		Assert (true == false && "Didn't find the instruction stream");
-	}
-	string ins_str = (ss.str () + string ("\n"));
-	return ins_str;
-}
-
-stInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
-    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-	return _insObjMap[insAddr];
-}
-
-bool staticCodeParser::isNewBB (ADDRINT insAddr) {
+BOOL staticCodeParser::isNewBB (ADDRINT insAddr) {
 	bool newBB = (_bbMap.find (insAddr) != _bbMap.end () ? true : false);
 	return newBB;
 }
 
-// Create BB top
-std::string staticCodeParser::getBB_top (ADDRINT bbAddr) {
+/*-- Create BB top --*/
+string staticCodeParser::getBB_top (ADDRINT bbAddr) {
 	Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first instruction in BB");
-	std::stringstream ss;
+	stringstream ss;
 	ss << bbAddr;
 	string strg = (string ("{,") + ss.str () + string (",\n")); //TODO add a comma at the end of line
 	return strg;
 }
 
-// Create BB bottom
-std::string staticCodeParser::getBB_bottom () {
+/*-- Create BB bottom --*/
+string staticCodeParser::getBB_bottom () {
 	string strg = (string ("}\n"));
 	return strg;
 }
 
-// Does BB have a header?
+/*-- Does BB have a header? --*/
 BOOL staticCodeParser::BBhasHeader (ADDRINT bbAddr) {
 	Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first instruction in BB");
 	return _bbMap[bbAddr]->bbHasHeader;
 }
 
-// Get the header string for the BB
-std::string staticCodeParser::getBBheader (ADDRINT bbAddr) {
+/*-- Get the header string for the BB --*/
+string staticCodeParser::getBBheader (ADDRINT bbAddr) {
 	Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first instruction in BB");
-	std::stringstream ss;
+	stringstream ss;
 	ss << _bbMap[bbAddr]->bbHeader;
 	string strg = (string ("H,") + ss.str () + string (",\n"));
 	return strg;

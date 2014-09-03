@@ -231,7 +231,7 @@ VOID Init (char* cfgFile)
 	PIN_SemaphoreClear (&semaphore1);
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
 	g_var.msg.simStep ("PARS COMPILED CODE");
-	g_staticCode = new staticCodeParser (&g_var, g_cfg);
+	g_staticCode = new staticCodeParser (g_cfg);
 	pin__uOpGenInit (*g_staticCode);
 
 	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
