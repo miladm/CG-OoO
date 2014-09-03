@@ -202,61 +202,61 @@ void getNewBB (ADDRINT insAddr) {
 
 // Add and remove instruction to the instruction buffer
 VOID manageBBbuff (ADDRINT insAddr) {
-    if (g_var.g_debug_level & DBG_INSBUF) {
-        std::cout << "In manageBBbuff:" << std::endl;
-        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
-        std::cout << "\tNum BB to Del: " << g_var.g_BBlist_indx << std::endl;
-    }
-    if (g_staticCode->isNewBB (insAddr)) {
-        if (g_var.g_BBlist->NumElements () >= 20) {
-            PIN_SemaphoreSet (&semaphore0);
-            PIN_SemaphoreWait (&semaphore1); 
-            PIN_SemaphoreClear (&semaphore1);
-        }
-        getNewBB (insAddr);
-    }
-    if (g_var.g_BBlist->NumElements () > 0 && g_var.g_ins != "\0") {
-        string* elem = new string;
-        *elem = g_var.g_ins;
-        g_var.g_BBlist->Last ()->addToBB (elem,insAddr);
-        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
-    } else {
-        ;//cout << "shit" << endl;
-        //TODO add stat to keep track of ignored instructions - should be very negligible.
-    }
-    if (g_var.g_BBlist_indx == -1) return;
-    //Flush BB's used already
-    Assert (g_var.g_BBlist_indx <= g_var.g_BBlist->NumElements ());
-    for (int indx = 0; indx <= g_var.g_BBlist_indx; indx++) {
-        //delete g_var.g_BBlist->Nth (0);
-        g_var.g_BBlist->RemoveAt (0);
-    }
-    g_var.g_BBlist_indx = -1;
+//    if (g_var.g_debug_level & DBG_INSBUF) {
+//        std::cout << "In manageBBbuff:" << std::endl;
+//        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
+//        std::cout << "\tNum BB to Del: " << g_var.g_BBlist_indx << std::endl;
+//    }
+//    if (g_staticCode->isNewBB (insAddr)) {
+//        if (g_var.g_BBlist->NumElements () >= 20) {
+//            PIN_SemaphoreSet (&semaphore0);
+//            PIN_SemaphoreWait (&semaphore1); 
+//            PIN_SemaphoreClear (&semaphore1);
+//        }
+//        getNewBB (insAddr);
+//    }
+//    if (g_var.g_BBlist->NumElements () > 0 && g_var.g_ins != "\0") {
+//        string* elem = new string;
+//        *elem = g_var.g_ins;
+//        g_var.g_BBlist->Last ()->addToBB (elem,insAddr);
+//        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
+//    } else {
+//        ;//cout << "shit" << endl;
+//        //TODO add stat to keep track of ignored instructions - should be very negligible.
+//    }
+//    if (g_var.g_BBlist_indx == -1) return;
+//    //Flush BB's used already
+//    Assert (g_var.g_BBlist_indx <= g_var.g_BBlist->NumElements ());
+//    for (int indx = 0; indx <= g_var.g_BBlist_indx; indx++) {
+//        //delete g_var.g_BBlist->Nth (0);
+//        g_var.g_BBlist->RemoveAt (0);
+//    }
+//    g_var.g_BBlist_indx = -1;
 }
 
 // Add and remove instruction to the instruction buffer
 VOID manageInsBuff (ADDRINT insAddr) {
-    if (g_var.g_debug_level & DBG_INSBUF) {
-        std::cout << "In manageInsBuff:" << std::endl;
-        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
-        std::cout << "\tNum Ins. to Del: " << g_var.g_insList_indx << std::endl;
-    }
-    if (g_var.g_ins != "\0") {
-        string* elem = new string;
-        *elem = g_var.g_ins;
-        g_var.g_insList->Append (elem);
-        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
-        //cout << "put in queue x: " << (*g_var.g_insList->Nth (g_var.g_insList->NumElements ()-1)).c_str ()  << endl;
-    }
-    Assert (g_var.g_insList_indx <= g_var.g_insList->NumElements ());
-    int indx = 0;
-    for (indx = 0; indx < g_var.g_insList_indx; indx++) {
-        //delete g_var.g_codeCache->Nth (0);
-        delete g_var.g_insList->Nth (0);
-        //g_var.g_codeCache->RemoveAt (0);
-        g_var.g_insList->RemoveAt (0);
-    }
-    g_var.g_insList_indx = 0;
+//    if (g_var.g_debug_level & DBG_INSBUF) {
+//        std::cout << "In manageInsBuff:" << std::endl;
+//        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
+//        std::cout << "\tNum Ins. to Del: " << g_var.g_insList_indx << std::endl;
+//    }
+//    if (g_var.g_ins != "\0") {
+//        string* elem = new string;
+//        *elem = g_var.g_ins;
+//        g_var.g_insList->Append (elem);
+//        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
+//        //cout << "put in queue x: " << (*g_var.g_insList->Nth (g_var.g_insList->NumElements ()-1)).c_str ()  << endl;
+//    }
+//    Assert (g_var.g_insList_indx <= g_var.g_insList->NumElements ());
+//    int indx = 0;
+//    for (indx = 0; indx < g_var.g_insList_indx; indx++) {
+//        //delete g_var.g_codeCache->Nth (0);
+//        delete g_var.g_insList->Nth (0);
+//        //g_var.g_codeCache->RemoveAt (0);
+//        g_var.g_insList->RemoveAt (0);
+//    }
+//    g_var.g_insList_indx = 0;
 }
 
 // This is where the code backend will be called a shared buffer between the
