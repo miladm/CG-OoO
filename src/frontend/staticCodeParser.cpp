@@ -23,23 +23,6 @@ staticCodeParser::~staticCodeParser () {
         delete bb_it->second;
 }
 
-void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
-    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-    stInstruction* ins = _insObjMap[insAddr];
-    int scanStatus;
-    while (true) {
-        AR reg;
-        int typeTemp;
-        char s[100];
-        scanStatus = sscanf (registers.c_str (), "%u#%d%s", &reg, &typeTemp, s);
-        if (scanStatus != 3) break;
-        Assert (typeTemp == 1 || typeTemp == 2);
-        registers = string (s);
-        AXES_TYPE reg_axes_type = (typeTemp == 1 ? READ : WRITE);
-        ins->setAR (reg, reg_axes_type);
-    }
-}
-
 /* ***************************************************** *
  * PRE:
  * 	.s files must be avilaable from the compilation stage
@@ -69,7 +52,7 @@ void staticCodeParser::parse () {
 //			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld,%s\n", &insAddr, &brDest, regs_dummy);
+			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld%s\n", &insAddr, &brDest, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
@@ -77,7 +60,7 @@ void staticCodeParser::parse () {
 //			addToBB (insAddr, bbAddr);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d,%s\n", &insAddr, &memAccessSize, regs_dummy);
+			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
@@ -85,7 +68,7 @@ void staticCodeParser::parse () {
 //			addToBB (insAddr, bbAddr);
 		} else if (insType == 'o') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld,%s\n", &insAddr, regs_dummy);
+			scanStatus = fscanf (_inFile, ",%ld%s\n", &insAddr, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
@@ -97,6 +80,23 @@ void staticCodeParser::parse () {
 		}
 	}
 	printf ("Static code fetch DONE\n");
+}
+
+void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
+    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
+    stInstruction* ins = _insObjMap[insAddr];
+    int scanStatus;
+    while (true) {
+        AR reg;
+        int typeTemp;
+        char s[100];
+        scanStatus = sscanf (registers.c_str (), ",%u#%d%s", &reg, &typeTemp, s);
+        if (scanStatus != 3) break;
+        Assert (typeTemp == 1 || typeTemp == 2);
+        registers = string (s);
+        AXES_TYPE reg_axes_type = (typeTemp == 1 ? READ : WRITE);
+        ins->setAR (reg, reg_axes_type);
+    }
 }
 
 /* ***************************** *
