@@ -16,13 +16,13 @@ class bbInstruction : public dynInstruction {
         bbInstruction (string class_name = "bbInstruction");
         ~bbInstruction ();
 
-        // SET INS ATRIBUTES
+        /*-- SET INS ATRIBUTES --*/
         void setBBWinID (WIDTH);
         void setBB (dynBasicblock* bb);
         void setAR (AR ar, AXES_TYPE type);
         void setPR (PR pr, AXES_TYPE type);
 
-        // GET INS ATRIBUTES
+        /*-- GET INS ATRIBUTES --*/
         dynBasicblock* getBB ();
         WIDTH getBBWinID ();
         WIDTH getNumRdAR ();
@@ -37,7 +37,7 @@ class bbInstruction : public dynInstruction {
         List<AR>* getLARrdList ();
         List<AR>* getLARwrList ();
 
-        // INS CONTROL
+        /*-- INS CONTROL --*/
         void resetWrongPath ();
         void resetStates ();
 
@@ -45,16 +45,16 @@ class bbInstruction : public dynInstruction {
         REG_TYPE getARtype (AR);
 
     private:
-        //BB
+        /*-- BB --*/
         dynBasicblock* _bb;
         WIDTH _bbWin_id;
 
-        //LOCAL REGS
+        /*-- LOCAL REGS --*/
         List<AR> _l_rdReg;
         List<AR> _l_wrReg;
         List<AR> _l_rdReg_waitList;
 
-        //GLOBAL REGS
+        /*-- GLOBAL REGS --*/
         List<AR> _a_rdReg;
         List<AR> _a_wrReg;
         List<AR> _a_rdReg_waitList;

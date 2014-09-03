@@ -23,11 +23,11 @@ staticCodeParser::~staticCodeParser () {
         delete bb_it->second;
 }
 
-/* ***************************************************** *
+/*--
  * PRE:
  * 	.s files must be avilaable from the compilation stage
  * Parse .s File
- * ***************************************************** */
+ --*/
 void staticCodeParser::parse () {
 	ADDRINT bbAddr = 0, insAddr = 0, brDest = 0;
 	int memAccessSize = 0;
@@ -109,22 +109,21 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
 
     stInstruction* newInsObj = new stInstruction;
     newInsObj->setInsAddr (insAddr);
-// TODO this code is removed for memory efficiency - put it back?
-//    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-//        newInsObj->setInsType (BR);
-//        bool isJump = (insType == 'j' ? true : false);
-//        bool isCall = (insType == 'c' ? true : false);
-//        bool isRet  = (insType == 'r' ? true : false);
-//        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
-//    } else if (insType == 'R') {
-//        newInsObj->setInsType (MEM);
-//        newInsObj->setMemAtr (LOAD, memAccessSize);
-//    } else if (insType == 'W') {
-//        newInsObj->setInsType (MEM);
-//        newInsObj->setMemAtr (STORE, memAccessSize);
-//    } else {
-//        newInsObj->setInsType (ALU);
-//    }
+    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
+        newInsObj->setInsType (BR);
+        bool isJump = (insType == 'j' ? true : false);
+        bool isCall = (insType == 'c' ? true : false);
+        bool isRet  = (insType == 'r' ? true : false);
+        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
+    } else if (insType == 'R') {
+        newInsObj->setInsType (MEM);
+        newInsObj->setMemAtr (LOAD, memAccessSize);
+    } else if (insType == 'W') {
+        newInsObj->setInsType (MEM);
+        newInsObj->setMemAtr (STORE, memAccessSize);
+    } else {
+        newInsObj->setInsType (ALU);
+    }
 	_insObjMap.insert (pair<ADDRS,stInstruction*> (insAddr, newInsObj));
 }
 

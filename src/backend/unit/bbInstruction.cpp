@@ -12,9 +12,9 @@ bbInstruction::bbInstruction (string class_name)
 
 bbInstruction::~bbInstruction () {}
 
-// ***********************
-// ** SET INS ATRIBUTES **
-// ***********************
+/* *********************** *
+ * SET INS ATRIBUTES
+ * *********************** */
 void bbInstruction::setBB (dynBasicblock* bb) {
 #ifdef ASSERTION
     Assert (bb != NULL);
@@ -71,9 +71,9 @@ REG_TYPE bbInstruction::getARtype (AR a_reg) {
     return LOCAL_REG; //Placeholder for compiler
 }
 
-// ***********************
-// ** GET INS ATRIBUTES **
-// ***********************
+/* *********************** *
+ * GET INS ATRIBUTES
+ * *********************** */
 dynBasicblock* bbInstruction::getBB () {return _bb;}
 
 WIDTH bbInstruction::getBBWinID () {Assert (_bbWin_id > -1); return _bbWin_id;}
@@ -100,11 +100,11 @@ List<AR>* bbInstruction::getLARrdList () {return &_l_rdReg_waitList;}
 
 List<AR>* bbInstruction::getLARwrList () {return &_l_wrReg;}
 
-// ***********************
-// ** INS CONTROL       **
-// ***********************
+/* *********************** *
+ * INS CONTROL
+ * *********************** */
 
-/* Used to re-run ins after squash recovery */
+/*-- USED TO RE-RUN INS AFTER SQUASH RECOVERY --*/
 void bbInstruction::resetStates () {
     while (_p_rdReg_waitList.NumElements () > 0) {
         _p_rdReg_waitList.RemoveAt(0);
@@ -139,7 +139,7 @@ void bbInstruction::resetStates () {
     _bbWin_id = -1;
 }
 
-/* Usage: for coarse grain execution - eg. BB */
+/*-- USAGE: FOR COARSE GRAIN EXECUTION - EG. BB --*/
 void bbInstruction::resetWrongPath () {
     _is_on_wrong_path = false;
 }

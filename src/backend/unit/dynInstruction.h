@@ -11,7 +11,7 @@ class dynInstruction : public unit {
         dynInstruction (string class_name = "dynInstruction");
         ~dynInstruction ();
 
-        // SET INS ATRIBUTES
+        /*-- SET INS ATRIBUTES --*/
         void setInsAddr (ADDRS ins_addr);
         void setInsID (INS_ID seq_num);
         void setInsType (INS_TYPE insType);
@@ -27,7 +27,7 @@ class dynInstruction : public unit {
         void setWrongPath (bool is_on_wrong_path);
         void setMemViolation ();
 
-        // GET INS ATRIBUTES
+        /*-- GET INS ATRIBUTES --*/
         ADDRS getInsAddr ();
         INS_ID getInsID ();
         INS_TYPE getInsType ();
@@ -51,28 +51,28 @@ class dynInstruction : public unit {
         List<PR>* getPRrdList ();
         List<PR>* getPRwrList ();
 
-        // INS CONTROL
+        /*-- INS CONTROL --*/
         void resetStates ();
 
     protected:
-        //INS
+        /*-- INS --*/
         ADDRS _ins_addr;
         INS_ID _seq_num;
         INS_TYPE _ins_type;
 
-        //BR
+        /*-- BR --*/
         ADDRS _brTarget;
         bool _brTaken;
         BR_TYPE _brType;
 
-        //MEM
+        /*-- MEM --*/
         BYTES _memAxesSize;
         ADDRS _memAddr;
         bool _stackRd;
         bool _stackWr;
         MEM_TYPE _memType;
 
-        //MISC
+        /*-- MISC --*/
         PIPE_STAGE _insStage;
         SQ_STATE _sq_state;
         LQ_STATE _lq_state;
@@ -82,14 +82,13 @@ class dynInstruction : public unit {
         bool _is_mem_violation;
 
     private:
-        //REGS
+        /*-- REGS --*/
         List<AR> _a_rdReg;
         List<AR> _a_wrReg;
         List<AR> _a_rdReg_waitList;
         List<AR> _p_rdReg;
         List<AR> _p_wrReg;
         List<AR> _p_rdReg_waitList;
-
 };
 
 #endif

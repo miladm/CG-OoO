@@ -16,9 +16,9 @@ dynInstruction::dynInstruction (string class_name)
 
 dynInstruction::~dynInstruction () {}
 
-// ***********************
-// ** SET INS ATRIBUTES **
-// ***********************
+/* *********************** *
+ * SET INS ATRIBUTES
+ * *********************** */
 void dynInstruction::setInsAddr (ADDRS ins_addr) {
 	_ins_addr = ins_addr;
 }
@@ -146,9 +146,9 @@ void dynInstruction::setMemViolation () {
     _is_mem_violation = true;
 }
 
-// ***********************
-// ** GET INS ATRIBUTES **
-// ***********************
+/* *********************** *
+ * GET INS ATRIBUTES
+ * *********************** */
 ADDRS dynInstruction::getInsAddr () { return _ins_addr; }
 
 INS_ID dynInstruction::getInsID () { return _seq_num; }
@@ -193,11 +193,11 @@ List<PR>* dynInstruction::getPRrdList () {return &_p_rdReg_waitList;}
 
 List<PR>* dynInstruction::getPRwrList () {return &_p_wrReg;}
 
-// ***********************
-// ** INS CONTROL       **
-// ***********************
+/* *********************** *
+ * INS CONTROL
+ * *********************** */
 
-/* Used to re-run ins after squash recovery */
+/*-- USED TO RE-RUN INS AFTER SQUASH RECOVERY --*/
 void dynInstruction::resetStates () {
     while (_p_rdReg_waitList.NumElements () > 0) {
         _p_rdReg_waitList.RemoveAt(0);
