@@ -1222,7 +1222,7 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
                 g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
                 g_insObj->setInsType (BR);
@@ -1264,7 +1264,7 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
                 g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
@@ -1308,7 +1308,7 @@ VOID getIns (ADDRINT insAddr) {
                 g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (ALU);
                 g_insObj->setInsAddr (insAddr);
@@ -1347,7 +1347,7 @@ VOID getNopIns (ADDRINT insAddr) {
                 g_insObj->setBB (g_bbObj);
             } else {
                 dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-                dynInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (NOP);
                 g_insObj->setInsAddr (insAddr);

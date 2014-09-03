@@ -20,6 +20,7 @@
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/bbInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
+#include "../backend/unit/stInstruction.h"
 
 struct g_variable {
     g_variable() {

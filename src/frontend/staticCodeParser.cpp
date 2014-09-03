@@ -21,7 +21,7 @@ staticCodeParser::~staticCodeParser () {
 
 void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-    bbInstruction* ins = _insObjMap[insAddr];
+    stInstruction* ins = _insObjMap[insAddr];
     int scanStatus;
     while (true) {
         AR reg;
@@ -52,7 +52,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &bbAddr);
 			Assert (scanStatus != EOF);
-			makeNewBB (bbAddr);
+//			makeNewBB (bbAddr);
 		} else if (insType == '}') {
 			if (scanStatus == EOF) break;
 			scanStatus = fscanf (_inFile, "\n");
@@ -60,7 +60,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &insAddr);
 			Assert (scanStatus != EOF);
-			addBBheader (insAddr, bbAddr);
+//			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld,%s\n", &insAddr, &brDest, regs_dummy);
@@ -68,7 +68,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d,%s\n", &insAddr, &memAccessSize, regs_dummy);
@@ -76,7 +76,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else if (insType == 'o') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld,%s\n", &insAddr, regs_dummy);
@@ -84,7 +84,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+//			addToBB (insAddr, bbAddr);
 		} else {
 			printf ("Parsed Value: %c", insType);
 			Assert (true == false && "Unrecognized character parsed");
@@ -126,33 +126,33 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
 	Assert (insType != 'z' && insAddr != 0);
 	//Assert (_insMap.find (insAddr) == _insMap.end () && "Instruction address already present in insMap");
 	//printf ("Instruction address already present in insMap\n");
-	insObj * newIns = new insObj; //last elem uninitialized
-	newIns->ins_str = "\0"; //Allocate later when brTaken and/or memAddr are known
-	newIns->registers = registers;
-	newIns->insType[0] = insType; //TODO expand this for several u-ops - this changes memAddr and brDst allocations below too
-	newIns->insAddr = insAddr;
-	newIns->brDest = ( (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') ?  brDest : 0);
-	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
-	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
+//	insObj * newIns = new insObj; //last elem uninitialized
+//	newIns->ins_str = "\0"; //Allocate later when brTaken and/or memAddr are known
+//	newIns->registers = registers;
+//	newIns->insType[0] = insType; //TODO expand this for several u-ops - this changes memAddr and brDst allocations below too
+//	newIns->insAddr = insAddr;
+//	newIns->brDest = ( (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') ?  brDest : 0);
+//	newIns->memAccessSize = ( (insType == 'R' || insType == 'W') ?  memAccessSize : 0);
+//	_insMap.insert (pair<ADDRINT,insObj*> (insAddr, newIns));
 
-    bbInstruction* newInsObj = new bbInstruction;
-    newInsObj->setInsAddr (insAddr);
-    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
-        newInsObj->setInsType (BR);
-        bool isJump = (insType == 'j' ? true : false);
-        bool isCall = (insType == 'c' ? true : false);
-        bool isRet  = (insType == 'r' ? true : false);
-        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
-    } else if (insType == 'R') {
-        newInsObj->setInsType (MEM);
-        newInsObj->setMemAtr (LOAD, memAccessSize);
-    } else if (insType == 'W') {
-        newInsObj->setInsType (MEM);
-        newInsObj->setMemAtr (STORE, memAccessSize);
-    } else {
-        newInsObj->setInsType (ALU);
-    }
-	_insObjMap.insert (pair<ADDRS,bbInstruction*> (insAddr, newInsObj));
+    stInstruction* newInsObj = new stInstruction;
+//    newInsObj->setInsAddr (insAddr);
+//    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
+//        newInsObj->setInsType (BR);
+//        bool isJump = (insType == 'j' ? true : false);
+//        bool isCall = (insType == 'c' ? true : false);
+//        bool isRet  = (insType == 'r' ? true : false);
+//        newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
+//    } else if (insType == 'R') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (LOAD, memAccessSize);
+//    } else if (insType == 'W') {
+//        newInsObj->setInsType (MEM);
+//        newInsObj->setMemAtr (STORE, memAccessSize);
+//    } else {
+//        newInsObj->setInsType (ALU);
+//    }
+	_insObjMap.insert (pair<ADDRS,stInstruction*> (insAddr, newInsObj));
 }
 
 bool staticCodeParser::isInsIn_insMap (ADDRINT insAddr) {
@@ -224,7 +224,7 @@ std::string staticCodeParser::getIns (ADDRINT insAddr) {
 	return ins_str;
 }
 
-bbInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
+stInstruction* staticCodeParser::getInsObj (ADDRINT insAddr) {
     Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
 	return _insObjMap[insAddr];
 }

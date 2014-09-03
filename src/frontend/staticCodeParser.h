@@ -32,7 +32,7 @@ public:
 	std::string getBB_bottom(); //TODO eliminate this function
 	bool isInsIn_insMap(ADDRINT insAddr);
 
-	bbInstruction* getInsObj(ADDRINT insAddr);
+	stInstruction* getInsObj(ADDRINT insAddr);
     void getRegisters(ADDRS insAddr, string registers);
 
 private:
@@ -57,7 +57,7 @@ private:
 		BOOL bbHasHeader;
 	};
 	map<ADDRINT,insObj*> _insMap;
-	map<ADDRINT,bbInstruction*> _insObjMap;
+	map<ADDRINT,stInstruction*> _insObjMap;
 	map<ADDRINT,bbObj*> _bbMap;
 	FILE* _inFile;
 	g_variable * _g_var;
