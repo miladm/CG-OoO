@@ -12,7 +12,6 @@ staticCodeParser::staticCodeParser (g_variable *g_var, config *g_cfg) {
 	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var->g_verbose_level & V_FRONTEND) std::cout << "STATIC CODE FILE: " << file.c_str () << std::endl;
-    createDB ();
 	parse ();
 }
 
@@ -21,15 +20,9 @@ staticCodeParser::~staticCodeParser () {
 }
 
 void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
-    //    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
-    //    stInstruction* ins = _insObjMap[insAddr];
-    int scanStatus, i = 0, j = 0;
-    string r_reg[4], w_reg[4];
-    for (int i = 0; i < 4; i++) {
-        r_reg[i] = "null";
-        w_reg[i] = "null";
-    }
-    string insAdr = iTos (insAddr);
+    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
+    stInstruction* ins = _insObjMap[insAddr];
+    int scanStatus;
     while (true) {
         AR reg;
         int typeTemp;
@@ -39,21 +32,8 @@ void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
         Assert (typeTemp == 1 || typeTemp == 2);
         registers = string (s);
         AXES_TYPE reg_axes_type = (typeTemp == 1 ? READ : WRITE);
-        //        ins->setAR (reg, reg_axes_type);
-        if (reg_axes_type == READ) {r_reg[i] = (i < 4) ? iTos ((ADDRS) reg) : "null"; i++;}
-        else if (reg_axes_type == WRITE) {w_reg[j] = (j < 4) ? iTos ((ADDRS) reg) : "null"; j++;}
-        else {Assert (true == false);}
+        ins->setAR (reg, reg_axes_type);
     }
-    string cmd = "INSERT INTO perlbench_400 VALUES (" + insAdr + ","
-        + r_reg[0] + "," 
-        + r_reg[1] + ","
-        + r_reg[2] + "," 
-        + r_reg[3] + ","
-        + w_reg[0] + "," 
-        + w_reg[1] + ","
-        + w_reg[2] + "," 
-        + w_reg[3] + ");";
-    sql_db (":memory:", cmd.c_str ());
 }
 
 //PRE:
@@ -86,7 +66,7 @@ void staticCodeParser::parse () {
 			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld,%s\n", &insAddr, &brDest, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
-//			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
 //			addToBB (insAddr, bbAddr);
 		} else if (insType == 'R' || insType == 'W') {
@@ -94,7 +74,7 @@ void staticCodeParser::parse () {
 			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d,%s\n", &insAddr, &memAccessSize, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
-//			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
 //			addToBB (insAddr, bbAddr);
 		} else if (insType == 'o') {
@@ -102,7 +82,7 @@ void staticCodeParser::parse () {
 			scanStatus = fscanf (_inFile, ",%ld,%s\n", &insAddr, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
-//			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
 //			addToBB (insAddr, bbAddr);
 		} else {
@@ -227,6 +207,11 @@ std::string staticCodeParser::getMemIns (ADDRINT insAddr, ADDRINT memAccessSize,
 	return ins_str;
 }
 
+bool staticCodeParser::hasIns (ADDRINT insAddr) {
+	Assert (insAddr != 0);
+	return (_insObjMap.find (insAddr) != _insObjMap.end ()) ? true : false;
+}
+
 std::string staticCodeParser::getIns (ADDRINT insAddr) {
 	Assert (insAddr != 0);
 	std::stringstream ss;
@@ -283,100 +268,4 @@ std::string staticCodeParser::getBBheader (ADDRINT bbAddr) {
 	ss << _bbMap[bbAddr]->bbHeader;
 	string strg = (string ("H,") + ss.str () + string (",\n"));
 	return strg;
-}
-
-void staticCodeParser::createDB () {
-    string db_name = ":memory:";
-    string cmd = "CREATE TABLE perlbench_400 (ins_addr INT PRIMARY KEY, a_rd_reg_0 INT, a_rd_reg_1 INT, a_rd_reg_2 INT, a_rd_reg3 INT, a_wr_reg_0 INT, a_wr_reg_1 INT, a_wr_reg_2 INT, a_wr_reg_3 INT);";
-    sql_db_open (db_name.c_str (), cmd.c_str ());
-}
-
-string staticCodeParser::iTos (ADDRS value) {
-    ostringstream ss;
-    ss << value;
-    return ss.str ();
-}
-
-void staticCodeParser::populateDB () {
-    string db_name = ":memory:";
-//    string cmd = "DROP TABLE perlbench_400;";
-//    sql_db (db_name.c_str (), cmd.c_str ());
-    string cmd = "CREATE TABLE perlbench_400 (ins_addr INT PRIMARY KEY, a_rd_reg_0 INT, a_rd_reg_1 INT, a_rd_reg_2 INT, a_rd_reg3 INT, a_wr_reg_0 INT, a_wr_reg_1 INT, a_wr_reg_2 INT, a_wr_reg_3 INT);";
-//    sql_db_open (db_name.c_str (), cmd.c_str ());
-    map<ADDRINT,stInstruction*>::iterator it;
-    for (it = _insObjMap.begin (); it != _insObjMap.end (); it++) {
-        stInstruction* ins = it->second;
-        string insAdr = iTos (ins->_ins_addr);
-        string r_reg[4], w_reg[4];
-        for (int i = 0; i < 4; i++) {
-            r_reg[i] = (i < ins->_a_rdReg.NumElements ()) ? iTos ((ADDRS) ins->_a_rdReg.Nth (i)) : "null";
-        }
-        for (int i = 0; i < 4; i++) {
-            w_reg[i] = (i < ins->_a_wrReg.NumElements ()) ? iTos ((ADDRS) ins->_a_wrReg.Nth (i)) : "null";
-        }
-        cmd = "INSERT INTO perlbench_400 VALUES (" + insAdr + ","
-            + r_reg[0] + "," 
-            + r_reg[1] + ","
-            + r_reg[2] + "," 
-            + r_reg[3] + ","
-            + w_reg[0] + "," 
-            + w_reg[1] + ","
-            + w_reg[2] + "," 
-            + w_reg[3] + ")";
-//        sql_db (db_name.c_str (), cmd.c_str ());
-        delete ins;
-    }
-    cout << "delete map?" << endl;
-    int x;
-    cin >> x;
-}
-
-void staticCodeParser::openDB () {
-    sqlite3* db = NULL; 
-    sqlite3_open (":memory:", &db); 
-    _g_var->g_db = db;
-}
-
-void staticCodeParser::closeDB () {
-    sqlite3_close (_g_var->g_db);
-}
-
-bool staticCodeParser::exists (ADDRS ins_addr) {
-    //    string db_name = "benchDB.db";
-    //    string bench_name = "perlbench_400";
-    //    string cmd = "SELECT COUNT(1) FROM TABLE " + bench_name + " WHERE ins_addr = " + iTos (ins_addr) + ";";
-    //    sql_db (db_name.c_str (), cmd.c_str ());
-
-    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = " + iTos (ins_addr) + ";";
-    sqlite3_stmt* stmt = NULL;
-    sqlite3_prepare_v2 (_g_var->g_db, cmd.c_str (), -1, &stmt, NULL); 
-    sqlite3_bind_int (stmt, 1, 42);
-    int column_count = (sqlite3_step (stmt) == SQLITE_ROW) ? true : false;
-    sqlite3_finalize (stmt); 
-//    sqlite3_close (db);
-    return column_count;
-}
-
-void staticCodeParser::testDB () {
-//    string db_name = "benchDB.db";
-    string cmd = "SELECT * FROM perlbench_400 WHERE ins_addr = "+ iTos (4195300) + ";";
-//    sqlite3* db = NULL; 
-//    sqlite3_open ("benchDB.db", &db); 
-    sqlite3_stmt* stmt = NULL;
-    sqlite3_prepare_v2 (_g_var->g_db, cmd.c_str (), -1, &stmt, NULL); 
-    sqlite3_bind_int (stmt, 1, 42);
-    if (sqlite3_step (stmt) == SQLITE_ROW) { 
-        for (int i = 1; i < 5; i++) {
-            int reg = sqlite3_column_int (stmt, i);
-            if (reg == 0) break;
-            cout << "rd reg: " << reg << endl;
-        }
-        for (int i = 5; i < 9; i++) {
-            int reg = sqlite3_column_int (stmt, i);
-            if (reg == 0) break;
-            cout << "wr reg: " << reg << endl;
-        }
-    }
-    sqlite3_finalize (stmt); 
-//    sqlite3_close (db);
 }

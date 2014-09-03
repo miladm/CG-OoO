@@ -140,8 +140,6 @@ $(OBJDIR)lib/message$(OBJ_SUFFIX) \
 $(OBJDIR)lib/statistic$(OBJ_SUFFIX) \
 $(OBJDIR)lib/timer$(OBJ_SUFFIX) \
 $(OBJDIR)lib/debug$(OBJ_SUFFIX) \
-$(OBJDIR)lib/sqlite/sqlite3$(OBJ_SUFFIX) \
-$(OBJDIR)lib/sqlite/test/test$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/instruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/cache$(OBJ_SUFFIX) \

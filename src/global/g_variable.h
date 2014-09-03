@@ -16,7 +16,6 @@
 #include "../lib/list.h"
 #include "../lib/message.h"
 #include "../lib/statistic.h"
-#include "../lib/sqlite/sqlite3.h"
 #include "../backend/basicblock.h"
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
@@ -129,9 +128,6 @@ struct g_variable {
 
     //CPU Core
     CORE_TYPE g_core_type;
-
-    //DB
-    sqlite3* g_db;
 
     /*****************************/
     /* PIPELINE SQUASH           */
