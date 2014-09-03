@@ -3,50 +3,7 @@
  *******************************************************************************/
 
 /*-- INCLUDE --*/
-#include <map>
-#include <set>
-#include <string>
-#include <time.h>
-#include <iostream>
-#include <signal.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <cassert>
-#include <string.h>
-#include <math.h>
-#include <signal.h>
-#include <setjmp.h>
-
-#include "pin.H"
-#include "pin_isa.H"
-#include "instlib.H"
-#include "lib/bp_lib/types.hh"
-
-#include "tournament.hh"
-#include "lib/bp_lib/types.hh"
-#include "lib/bp_lib/intmath.hh"
-#include "tournament.hh"
-#include "utilities.h"
-
 #include "pars.h"
-#include "../lib/utility.h"
-//#include "../lib/debug.h"
-#include "../config.h"
-#include "uop_gen.h"
-#include "../global/global.h"
-#include "memlog.h"
-#define G_I_INFO_EN 1
-#include "staticCodeParser.h"
-#include "../lib/statistic.h"
-#include "../global/g_info.h"
-#include "../global/g_variable.h"
-#include "../backend/bkEnd.h"
-#include "../backend/basicblock.h"
-#include "../backend/ino/inoBkEnd.h"
-#include "../backend/o3/oooBkEnd.h"
-#include "../backend/bb/bbBkEnd.h"
-#include "../backend/unit/dynInstruction.h"
-#include "../backend/unit/dynBasicblock.h"
 
 using namespace INSTLIB;
 
@@ -68,7 +25,6 @@ void * rootThreadArg = (void *)0xABBA;
 PIN_THREAD_UID rootThreadUid;
 config * g_cfg;
 staticCodeParser * g_staticCode;
-FILE* __outFile;
 
 /* ------------------------------------------------------------------ */
 /* Class Objects Interface Functions                                  */
@@ -91,8 +47,6 @@ void recover ()
 	g_var.g_spec_syscall = false;
 	g_var.g_context_call_depth=0;
 	g_log.recover ();
-	//printf ("\nEND OF WRONG PATH\n");
-	//fprintf (__outFile, "\nEND OF WRONG PATH\n");
 }
 
 
@@ -337,8 +291,6 @@ VOID runPARS (char* cfgFile)
 	PIN_InterceptSignal (SIGABRT,signal_handler,NULL);
 	PIN_UnblockSignal (SIGABRT,TRUE);
 
-	__outFile = fopen ("junky", "w");
-	uop_gen (__outFile, *g_staticCode);
     TRACE_AddInstrumentFunction (Instruction, 0);
     PIN_AddFiniFunction (Fini, 0);
 
@@ -367,8 +319,7 @@ VOID Init (char* cfgFile)
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
 	g_var.msg.simStep ("PARS COMPILED CODE");
 	g_staticCode = new staticCodeParser (&g_var, g_cfg);
-//    g_staticCode->populateDB (); //TODO organize this - creates DB
-//    g_staticCode->testDB(); //TODO organize this - creates DB
+	pin__uOpGenInit (*g_staticCode);
 
 	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
 	char const * dummy_argv[] = {"TraceSim", 
@@ -724,10 +675,10 @@ VOID Instruction (TRACE trace, VOID * val)
             if (first_bb) {
                 first_bb = false;
                 INS head = BBL_InsHead (bbl);
-                get_bb_header (head);
+                pin__get_bb_header (head);
             }
             INS tail = BBL_InsTail (bbl);
-            get_bb_header (tail);
+            pin__get_bb_header (tail);
         }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
@@ -755,7 +706,7 @@ VOID Instruction (TRACE trace, VOID * val)
 
             if (g_var.g_enable_instrumentation) {
                 //cout << g_var.g_insCountRightPath << " instrumentation enabled\n";
-                get_uop (ins);
+                pin__getOp (ins);
                 //if (g_cfg->coreType == PHRASEBLOCK)
                 //	INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuff,
                 //		IARG_ADDRINT, INS_Address (ins),

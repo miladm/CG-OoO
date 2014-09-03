@@ -11,8 +11,6 @@
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
-#include "../lib/sqlite/test/test.h"
-#include "../lib/sqlite/sqlite3.h"
 #include "pin.H"
 #include "pin_isa.H"
 #include "../global/g_variable.h"
