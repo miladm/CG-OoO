@@ -52,7 +52,6 @@ class dynInstruction : public unit {
         List<PR>* getPRwrList ();
 
         // INS CONTROL
-        void copyRegsTo (dynInstruction* ins);
         void resetStates ();
 
     protected:

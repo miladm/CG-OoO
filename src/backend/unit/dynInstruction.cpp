@@ -197,26 +197,6 @@ List<PR>* dynInstruction::getPRwrList () {return &_p_wrReg;}
 // ** INS CONTROL       **
 // ***********************
 
-/* COPY REGISTERS FROM ONE OBJ TO ANOTHER */
-void dynInstruction::copyRegsTo (dynInstruction* ins) {
-    for (int i = 0; i < _p_rdReg.NumElements (); i++) {
-        PR reg = _p_rdReg.Nth (i);
-        ins->setPR (reg, READ);
-    }
-    for (int i = 0; i < _p_wrReg.NumElements (); i++) {
-        PR reg = _p_wrReg.Nth (i);
-        ins->setPR (reg, WRITE);
-    }
-    for (int i = 0; i < _a_rdReg.NumElements (); i++) {
-        AR reg = _a_rdReg.Nth (i);
-        ins->setAR (reg, READ);
-    }
-    for (int i = 0; i < _a_wrReg.NumElements (); i++) {
-        AR reg = _a_wrReg.Nth (i);
-        ins->setAR (reg, WRITE);
-    }
-}
-
 /* Used to re-run ins after squash recovery */
 void dynInstruction::resetStates () {
     while (_p_rdReg_waitList.NumElements () > 0) {
