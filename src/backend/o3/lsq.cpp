@@ -131,7 +131,8 @@ INS_ID o3_lsqCAM::hasAnyCompleteStFromAddr (ADDRS completed_st_mem_addr, INS_ID 
 
 pair<bool, dynInstruction*> o3_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID lo_seq_num, INS_ID hi_seq_num) {
     LENGTH table_size = _table.NumElements ();
-    if (table_size > 0 && hi_seq_num == NO_WAW_ST_INS) hi_seq_num = getNth_unsafe(table_size - 1)->getInsID ();
+    if (table_size > 0 && hi_seq_num == NO_WAW_ST_INS) 
+        hi_seq_num = getNth_unsafe(table_size - 1)->getInsID ();
     for (LENGTH i = table_size - 1; i > 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
         if (ins->getInsID () > hi_seq_num) continue;

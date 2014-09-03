@@ -290,7 +290,8 @@ void bb_scheduler::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
-    if (_bbWin_on_fetch->_win.getTableState () != EMPTY_BUFF) {
+    if (_bbWin_on_fetch != NULL && 
+        _bbWin_on_fetch->_win.getTableState () != EMPTY_BUFF) {
         flushBBWindow (_bbWin_on_fetch);
         if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) {
             setBBWisAvail (_bbWin_on_fetch->_id);

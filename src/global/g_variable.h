@@ -164,6 +164,11 @@ struct g_variable {
     /* CODE CACHE MANAGER ROUTINS */
     /*****************************/
     dynBasicblock* getNewCacheBB () {
+        while (g_bbCache->NumElements () > 0 &&
+               g_bbCache->Last()->getBBsize () == 0) {
+            delete g_bbCache->Last();
+            g_bbCache->RemoveAt (g_bbCache->NumElements () - 1);
+        }
         dynBasicblock* newBB = new dynBasicblock;
         g_bbCache->Append (newBB);
         return newBB;
