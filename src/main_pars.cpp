@@ -1,11 +1,10 @@
-#include <stdio.h>
-#include <vector>
-#include <map>
+/*******************************************************************************
+ * main_pars.cpp
+ *******************************************************************************/
 
 #include "pin.H"
 #include "instlib.H"
 #include "xed-interface.h"
-
 #include "frontend/pars.h"
 
 using namespace INSTLIB;

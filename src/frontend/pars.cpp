@@ -2,19 +2,25 @@
  * pars.cpp
  *******************************************************************************/
 
-/*-- INCLUDE --*/
-#include "pars.h"
-
 #define INS_CNT_THR 1000
 #define BB_CNT_THR 100
+#define G_I_INFO_EN 1
+
+#include "pars.h"
+#include "../global/g_info.h"
+#include "tournament.hh"
+#include "lib/bp_lib/types.hh"
+#include "lib/bp_lib/intmath.hh"
+#include "tournament.hh"
+#include "utilities.h"
 
 using namespace INSTLIB;
 
-/* ------------------------------------------------------------------ */
-/* Global Variables                                                   */
-/* ------------------------------------------------------------------ */
+/* ******************************************************************* *
+ * GLOBAL VARIABLES
+ * ******************************************************************* */
 
-// Contains knobs to filter out things to instrument
+/*-- CONTAINS KNOBS TO FILTER OUT THINGS TO INSTRUMENT --*/
 FILTER filter;
 
 unsigned char g_store_buffer[MAX_MEM_WRITE_LEN];
@@ -29,9 +35,9 @@ PIN_THREAD_UID rootThreadUid;
 config * g_cfg;
 staticCodeParser * g_staticCode;
 
-/* ------------------------------------------------------------------ */
-/* Class Objects Interface Functions                                  */
-/* ------------------------------------------------------------------ */
+/* ****************************************************************** *
+ * CLASS OBJECTS INTERFACE FUNCTIONS
+ * ****************************************************************** */
 memory_buffer g_log;
 /* ================================================================== */
 
@@ -129,10 +135,10 @@ VOID countTrace (TRACE trace, VOID * v)
     if (g_var.g_debug_level & DBG_CC) cout << "Total code cache size: " << g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
 }
 
-/* ************************************************************************* *
- * When notified by Pin that the cache is full, perform a flush and
- * tell the user about it.
- * ************************************************************************* */
+/*--
+ * When notified by Pin that the cache is full, perform a flush and tell the
+ * user about it.
+ --*/
 VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
 {
 	g_var.g_flushes++;
@@ -142,12 +148,12 @@ VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
 	g_var.g_codeCacheSize=0;
 }
 
-/* ************************************************************************* *
+/*--
  * This is where the code backend will be called a shared buffer between the
  * instruction analysis and this weill be present.  the byffer will be accessed
  * using locks on both the analysis routin and this routin.  we use Pin locks
  * as shown below.
- * ************************************************************************* */
+ --*/
 static VOID backEnd (void *ptr) {
 	while (!g_var.g_appEnd) { //TODO fix this while loop
 		PIN_SemaphoreWait (&semaphore0);
@@ -214,9 +220,9 @@ VOID runPARS (char* cfgFile)
 	start_pars = clock ();
 }
 
-/* ------------------------------------------------------------------ */
-/* Initalization & Clean Up                                           */
-/* ------------------------------------------------------------------ */
+/* ****************************************************************** *
+ * INITALIZATION & CLEAN UP
+ * ****************************************************************** */
 VOID parseConfig (char* cfgFile) {
 	g_cfg = new config (cfgFile, &g_var);
 }
@@ -525,7 +531,7 @@ inline BOOL simpointMode () {
 	return g_var.g_inSimpoint;
 }
 
-// Counts the number of dynamic instructions (wrong-path instructions included)
+/*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
 VOID doCount ()
 {
 	g_var.insCount++; /*total ins count: wrong and right path*/
@@ -697,9 +703,9 @@ VOID Instruction (TRACE trace, VOID * val)
     }
 }
 
-/* ------------------------------------------------------------------ */
-/* Branch Predictor                                                   */
-/* ------------------------------------------------------------------ */
+/* ****************************************************************** *
+ * BRANCH PREDICTOR
+ * ****************************************************************** */
 ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru)
 {
     bool taken = __taken;

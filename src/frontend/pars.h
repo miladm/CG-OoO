@@ -6,7 +6,6 @@
 #define _PARS_H
 
 #include <map>
-#include <set>
 #include <string>
 #include <time.h>
 #include <iostream>
@@ -24,22 +23,14 @@
 #include "instlib.H"
 #include "lib/bp_lib/types.hh"
 
-#include "tournament.hh"
-#include "lib/bp_lib/types.hh"
-#include "lib/bp_lib/intmath.hh"
-#include "tournament.hh"
-#include "utilities.h"
-
 #include "../lib/utility.h"
 //#include "../lib/debug.h"
 #include "../config.h"
 #include "uOpGen.h"
 #include "../global/global.h"
 #include "memlog.h"
-#define G_I_INFO_EN 1
 #include "staticCodeParser.h"
 #include "../lib/statistic.h"
-#include "../global/g_info.h"
 #include "../global/g_variable.h"
 #include "../backend/bkEnd.h"
 #include "../backend/basicblock.h"
@@ -48,7 +39,6 @@
 #include "../backend/bb/bbBkEnd.h"
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
-
 
 /* ------------------------------------------------------------------ */
 /* Function Declarations                                              */
