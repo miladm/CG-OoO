@@ -5,6 +5,9 @@
 /*-- INCLUDE --*/
 #include "pars.h"
 
+#define INS_CNT_THR 1000
+#define BB_CNT_THR 100
+
 using namespace INSTLIB;
 
 /* ------------------------------------------------------------------ */
@@ -38,9 +41,9 @@ void recover ()
 	g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
 	g_var.g_recovery_count++;
 	if (g_var.g_debug_level & DBG_SPEC) {
-		std::cout << " *** recovering to correct path ***\n";
-		std::cout << " recovery count = " << dec << g_var.g_recovery_count << std::endl;
-		std::cout << " wrong path ins count = " << g_var.g_wrong_path_count << " instructions (avg: " 
+		cout << " *** recovering to correct path ***\n";
+		cout << " recovery count = " << dec << g_var.g_recovery_count << endl;
+		cout << " wrong path ins count = " << g_var.g_wrong_path_count << " instructions (avg: " 
 		          << (double)g_var.g_total_wrong_path_count/ (double)g_var.g_recovery_count << ")\n";
 	}
 	g_var.g_wrong_path_count = 0;
@@ -54,16 +57,16 @@ EXCEPT_HANDLING_RESULT handlePinException (THREADID tid, EXCEPTION_INFO * pExcep
 {
 	g_var.g_pin_signal_count++;
     if (g_var.g_wrong_path) {
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec << PIN_GetExceptionCode (pExceptInfo) << " on wrong path " << std::endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " caught signal " << dec << PIN_GetExceptionCode (pExceptInfo) << " on wrong path " << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " pin signal count = " << dec << g_var.g_pin_signal_count << endl;
         recover ();
         PIN_ExecuteAt (&g_var.g_context);
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
     } else {
-        std::cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionCode (pExceptInfo) << " on correct path " << std::endl;
-        std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << endl;
-        std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count << std::endl;
+        cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionCode (pExceptInfo) << " on correct path " << endl;
+        cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << endl;
+        cout << " pin signal count = " << dec << g_var.g_pin_signal_count << endl;
     }
 	return EHR_UNHANDLED;
 }
@@ -73,15 +76,15 @@ BOOL signal_handler (THREADID tid, INT32 sig, CONTEXT *ctxt, BOOL hasHandler, co
     if (sig != 11 && sig != 4 && sig != 7) cout << sig << ',' << g_var.g_wrong_path << endl;
     g_var.g_app_signal_count++;
     if (g_var.g_wrong_path) {
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec << sig << " on wrong path " << std::endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " application signal count = " << dec << g_var.g_app_signal_count << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " caught signal " << dec << sig << " on wrong path " << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " application signal count = " << dec << g_var.g_app_signal_count << endl;
         recover ();
         PIN_SaveContext (&g_var.g_context,ctxt);
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
         return FALSE;
     } else {
-        std::cout << "ERROR for REAL: caught signal " << dec << sig << " on correct path " << std::endl;
-        std::cout << " application signal count = " << dec << g_var.g_app_signal_count << std::endl;
+        cout << "ERROR for REAL: caught signal " << dec << sig << " on correct path " << endl;
+        cout << " application signal count = " << dec << g_var.g_app_signal_count << endl;
         return TRUE; // pass exception 
     }
 }
@@ -94,27 +97,26 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
     const i_info &i = g_i_info[uid];
 #endif
 
-//    g_var.g_seq_num++;
     if (!g_var.g_wrong_path) g_var.g_icount++;
 
 #ifdef G_I_INFO_EN
-    if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC i  " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+    if (g_var.g_debug_level & DBG_EXEC) cout << "EXEC i  " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
     if (g_var.g_wrong_path) {
         g_var.g_wrong_path_count++;
         if (__is_call) g_var.g_context_call_depth++;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
+        if (g_var.g_debug_level & DBG_SPEC) cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
         if ( (g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
            ( (g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
-            if (g_var.g_debug_level & DBG_SPEC) std::cout << "Recovered from signal." << std::endl;
+            if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
             if (g_var.g_enable_wp) {
                 PIN_ExecuteAt (&g_var.g_context);
             }
         }
-    } else if (g_var.g_debug_level & DBG_EXEC) std::cout << "\n";
+    } else if (g_var.g_debug_level & DBG_EXEC) cout << endl;
     return;
 }
 
@@ -122,144 +124,55 @@ VOID countTrace (TRACE trace, VOID * v)
 {
     g_var.g_traceCount++;
     g_var.g_codeCacheSize +=  TRACE_CodeCacheSize (trace);
-    if (g_var.g_debug_level & DBG_CC) std::cout << "--Code Cache Size Limit: " << CODECACHE_CacheSizeLimit ()/ (1024*1024) << "MB.\n";
-    if (g_var.g_debug_level & DBG_CC) std::cout << "Adding Trace #" << g_var.g_traceCount << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
-    if (g_var.g_debug_level & DBG_CC) std::cout << "Total code cache size: " << g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "--Code Cache Size Limit: " << CODECACHE_CacheSizeLimit ()/ (1024*1024) << "MB.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "Adding Trace #" << g_var.g_traceCount << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "Total code cache size: " << g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
 }
 
-// When notified by Pin that the cache is full, perform a flush and
-// tell the user about it.
+/* ************************************************************************* *
+ * When notified by Pin that the cache is full, perform a flush and
+ * tell the user about it.
+ * ************************************************************************* */
 VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
 {
 	g_var.g_flushes++;
-    if (g_var.g_debug_level & DBG_CC) std::cout << "Trying to insert trace size " << trace_size << " and exit stub size " << stub_size << ".\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "Trying to insert trace size " << trace_size << " and exit stub size " << stub_size << ".\n";
 	CODECACHE_FlushCache ();
-	if (g_var.g_debug_level & DBG_CC) std::cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << g_var.g_flushes << ")" << endl;
+	if (g_var.g_debug_level & DBG_CC) cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << g_var.g_flushes << ")" << endl;
 	g_var.g_codeCacheSize=0;
 }
 
-void getBBheader (ADDRINT bbAddr) {
-	if (g_staticCode->BBhasHeader (bbAddr) == true) {
-		string* elem = new string;
-		*elem = g_staticCode->getBBheader (bbAddr);
-		g_var.g_BBlist->Last ()->addBBheader (elem, bbAddr);
-	}
-}
-
-void getNewBB (ADDRINT insAddr) {
-	if (g_staticCode->isNewBB (insAddr)) {
-		basicblock * newBB = new basicblock;
-		g_var.g_BBlist->Append (newBB);
-		getBBheader (insAddr);
-	}
-}
-
-// Add and remove instruction to the instruction buffer
-VOID manageBBbuff (ADDRINT insAddr) {
-//    if (g_var.g_debug_level & DBG_INSBUF) {
-//        std::cout << "In manageBBbuff:" << std::endl;
-//        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
-//        std::cout << "\tNum BB to Del: " << g_var.g_BBlist_indx << std::endl;
-//    }
-//    if (g_staticCode->isNewBB (insAddr)) {
-//        if (g_var.g_BBlist->NumElements () >= 20) {
-//            PIN_SemaphoreSet (&semaphore0);
-//            PIN_SemaphoreWait (&semaphore1); 
-//            PIN_SemaphoreClear (&semaphore1);
-//        }
-//        getNewBB (insAddr);
-//    }
-//    if (g_var.g_BBlist->NumElements () > 0 && g_var.g_ins != "\0") {
-//        string* elem = new string;
-//        *elem = g_var.g_ins;
-//        g_var.g_BBlist->Last ()->addToBB (elem,insAddr);
-//        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
-//    } else {
-//        ;//cout << "shit" << endl;
-//        //TODO add stat to keep track of ignored instructions - should be very negligible.
-//    }
-//    if (g_var.g_BBlist_indx == -1) return;
-//    //Flush BB's used already
-//    Assert (g_var.g_BBlist_indx <= g_var.g_BBlist->NumElements ());
-//    for (int indx = 0; indx <= g_var.g_BBlist_indx; indx++) {
-//        //delete g_var.g_BBlist->Nth (0);
-//        g_var.g_BBlist->RemoveAt (0);
-//    }
-//    g_var.g_BBlist_indx = -1;
-}
-
-// Add and remove instruction to the instruction buffer
-VOID manageInsBuff (ADDRINT insAddr) {
-//    if (g_var.g_debug_level & DBG_INSBUF) {
-//        std::cout << "In manageInsBuff:" << std::endl;
-//        std::cout << "\tInstruction to Add: " << g_var.g_ins << std::endl;
-//        std::cout << "\tNum Ins. to Del: " << g_var.g_insList_indx << std::endl;
-//    }
-//    if (g_var.g_ins != "\0") {
-//        string* elem = new string;
-//        *elem = g_var.g_ins;
-//        g_var.g_insList->Append (elem);
-//        g_var.g_ins = "\0"; //TODO this is needed because some instructinos bever make it from uop_gen to here. this should eventually go away
-//        //cout << "put in queue x: " << (*g_var.g_insList->Nth (g_var.g_insList->NumElements ()-1)).c_str ()  << endl;
-//    }
-//    Assert (g_var.g_insList_indx <= g_var.g_insList->NumElements ());
-//    int indx = 0;
-//    for (indx = 0; indx < g_var.g_insList_indx; indx++) {
-//        //delete g_var.g_codeCache->Nth (0);
-//        delete g_var.g_insList->Nth (0);
-//        //g_var.g_codeCache->RemoveAt (0);
-//        g_var.g_insList->RemoveAt (0);
-//    }
-//    g_var.g_insList_indx = 0;
-}
-
-// This is where the code backend will be called a shared buffer between the
-// instruction analysis and this weill be present.  the byffer will be accessed
-// using locks on both the analysis routin and this routin.  we use Pin locks
-// as shown below.
+/* ************************************************************************* *
+ * This is where the code backend will be called a shared buffer between the
+ * instruction analysis and this weill be present.  the byffer will be accessed
+ * using locks on both the analysis routin and this routin.  we use Pin locks
+ * as shown below.
+ * ************************************************************************* */
 static VOID backEnd (void *ptr) {
 	while (!g_var.g_appEnd) { //TODO fix this while loop
 		PIN_SemaphoreWait (&semaphore0);
-		/*
-		if (!PIN_SemaphoreTimedWait (&semaphore0,1200000)) {
-			cout << "Semaphore timeout - backEnd ()\n";
-			break;
-		}
-		*/
 		PIN_SemaphoreClear (&semaphore0);
 		ADDRINT __pc = g_var.g_pc;
 		BOOL taken = g_var.g_taken;
 		ADDRINT tgt = g_var.g_tgt;
 		ADDRINT fthru = g_var.g_fthru;
 		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
-        //if (g_cfg->coreType == PHRASEBLOCK) {
-        //	//cout << "FRONTEND->BACKEND " << g_var.g_BBlist->NumElements ()<< "\n";
-        //	//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
-        //	g_var.stat.noMatchIns=0;
-        //	g_var.stat.matchIns=0;
-        //	bkEnd_run ();
-        //	//if (g_var.g_insList->NumElements () <= 35000) lastBB = false;
-        //	//cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
 		if (g_var.g_core_type == BASICBLOCK) {
-			if (g_var.g_bbCache->NumElements () >= 100) {
-//				cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
-				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
-				g_var.stat.noMatchIns=0;
-				g_var.stat.matchIns=0;
+			if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
+//				cout << "FRONTEND->BACKEND " << endl;
+				g_var.stat.noMatchIns = 0;
+				g_var.stat.matchIns = 0;
                 bbBkEndRun ();
-//				cout << "BACKEND->FRONTEND" << g_var.g_BBlist_indx << "\n";
+//				cout << "BACKEND->FRONTEND" << endl;
 			}
-		} else {
-			if (g_var.g_codeCache->NumElements () >= 1000) {
-				//cout << "FRONTEND->BACKEND " << g_var.g_insList->NumElements ()<< "\n";
-				//std::cout << g_var.stat.matchIns << " " << g_var.stat.noMatchIns << " " << g_var.stat.missingInsList.size () << std::endl;
-				g_var.stat.noMatchIns=0;
-				g_var.stat.matchIns=0;
-				//bkEnd_run ();
-                //inoBkEndRun ();
-                //oooBkEndRun ();
-                bbBkEndRun ();
-				//cout << "BACKEND->FRONTEND" << g_var.g_insList_indx << "\n";
+		} else { /* INO & O3 */
+			if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
+//				cout << "FRONTEND->BACKEND " << endl;
+				g_var.stat.noMatchIns = 0;
+				g_var.stat.matchIns = 0;
+                if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
+                else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
+//				cout << "BACKEND->FRONTEND" << endl;
 			}
 		}
 		PIN_SemaphoreSet (&semaphore1);
@@ -335,12 +248,12 @@ VOID Init (char* cfgFile)
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = BASICBLOCK;
+    g_var.g_core_type = IN_ORDER;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
-	//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-	//oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-	bbBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
+    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
+    else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init (dummy_argc, dummy_argv);
+    else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init (dummy_argc, dummy_argv);
 	g_var.msg.simStep ("START OF SIMULATION");
 }
 
@@ -369,9 +282,10 @@ VOID Fini (INT32 code, VOID* v)
 	g_var.msg.simStep ("BACKEND TERMINATED");
 
 	// finish backend
-	//inoBkEnd_fini ();
-	//oooBkEnd_fini ();
-	bbBkEnd_fini ();
+    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_fini ();
+    else if (g_var.g_core_type == IN_ORDER) inoBkEnd_fini ();
+    else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_fini ();
+	
     g_stats.dump ();
 	g_var.msg.simStep ("END OF SIMULATION");
 }
@@ -381,17 +295,17 @@ VOID Fini (INT32 code, VOID* v)
 EXCEPT_HANDLING_RESULT handle (THREADID tid, EXCEPTION_INFO *pExceptInfo, PHYSICAL_CONTEXT *pPhysCtxt, VOID *v)
 {
 	g_var.g_pintool_signal_count++;
-	if (g_var.g_debug_level & DBG_SPEC) std::cout << " pintool signal count = " << dec << g_var.g_pintool_signal_count << std::endl;
+	if (g_var.g_debug_level & DBG_SPEC) cout << " pintool signal count = " << dec << g_var.g_pintool_signal_count << endl;
 	longjmp (g_var.g_env,1);
 }
 
 void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 {
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "  mem[" << hex << eaddr << " ] = ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "  mem[" << hex << eaddr << " ] = ";
 	//Assert (len <= MAX_MEM_WRITE_LEN);
 	g_var.g_invalid_size = false;
 	if (len > MAX_MEM_WRITE_LEN) {
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memory access size - read_mem_orig ()) - " << (int)len << "Bytes\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << " (invalid memory access size - read_mem_orig ()) - " << (int)len << "Bytes\n";
 		g_var.g_invalid_size = true;
 		return;
 	}
@@ -401,14 +315,14 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 
 	THREADID tid=PIN_ThreadId ();
 	if (tid==INVALID_THREADID) {
-		std::cout << " could not get thread id\n";
+		cout << " could not get thread id\n";
 		exit (1);
 	}
 
 	PIN_TryStart (tid,handle,0);
 	int val = setjmp (g_var.g_env);
   	if (val) {
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memory location - read_mem_orig ())\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << " (invalid memory location - read_mem_orig ())\n";
 		g_var.g_invalid_addr = true;
 		PIN_TryEnd (tid);
 		return;
@@ -417,14 +331,14 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 	for (int i=len-1; i >= 0; i--) {
 		PIN_SafeCopy (&g_store_buffer[i], (ADDRINT*) (eaddr+i), sizeof (unsigned char));
 		//g_store_buffer[i] = * ( ( (unsigned char*)eaddr)+i);
-		if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << hex << (unsigned) g_store_buffer[i] << " ";
+		if (g_var.g_debug_level & DBG_WRITE_MEM) cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
 	PIN_TryEnd (tid);
 
 	g_log.save (eaddr, len, g_store_buffer);
 
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "\n";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "\n";
 }
 
 /*
@@ -433,31 +347,31 @@ map<ADDRINT,unsigned char> g_specmem;
 void read_mem_new ()
 {
 	if (g_var.g_invalid_addr) return;
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "  mem[" << hex << g_var.g_last_eaddr << " ] = ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "  mem[" << hex << g_var.g_last_eaddr << " ] = ";
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
 		g_specmem[g_var.g_last_eaddr+i] = * ( ( (unsigned char*)g_last_eaddr)+i);
-		if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << hex << (unsigned) g_specmem[g_var.g_last_eaddr+i] << " ";
+		if (g_var.g_debug_level & DBG_WRITE_MEM) cout << hex << (unsigned) g_specmem[g_var.g_last_eaddr+i] << " ";
 	}
 
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "\n";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "\n";
 }
 
 void restore_mem_orig ()
 {
 	if (g_var.g_invalid_addr) return;
-	if (g_var.g_debug_level & DBG_RESTORE_MEM) std::cout << "  restoring mem[" << hex << g_var.g_last_eaddr << " ] = ";
+	if (g_var.g_debug_level & DBG_RESTORE_MEM) cout << "  restoring mem[" << hex << g_var.g_last_eaddr << " ] = ";
 
 	THREADID tid=PIN_ThreadId ();
 	if (tid==INVALID_THREADID) {
-		std::cout << " could not get thread id\n";
+		cout << " could not get thread id\n";
 		exit (1);
 	}
 
 	PIN_TryStart (tid,handle,0);
 	int val = setjmp (g_var.g_env);
   	if (val) {
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << " (invalid memory location - restore_mem_orig ())\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << " (invalid memory location - restore_mem_orig ())\n";
 		g_var.g_invalid_addr=true;
 		PIN_TryEnd (tid);
 		return;
@@ -465,12 +379,12 @@ void restore_mem_orig ()
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
 		* ( ( (unsigned char*)g_var.g_last_eaddr)+i) = g_store_buffer[i];
-		if (g_var.g_debug_level & DBG_RESTORE_MEM) std::cout << hex << (unsigned) g_store_buffer[i] << " ";
+		if (g_var.g_debug_level & DBG_RESTORE_MEM) cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
 	PIN_TryEnd (tid);
 
-	if (g_var.g_debug_level & DBG_RESTORE_MEM) std::cout << "\n";
+	if (g_var.g_debug_level & DBG_RESTORE_MEM) cout << "\n";
 }
 */
 
@@ -482,7 +396,7 @@ VOID GetMemWriteOrigValue (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "EXEC wb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 	read_mem_orig (eaddr, len);
 	return;
@@ -496,7 +410,7 @@ VOID GetMemWriteNewValue (UINT32 uid, CONTEXT *c)
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_WRITE_MEM) std::cout << "EXEC wa " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "EXEC wa " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
 	// TODO: bypass real memory?
@@ -513,7 +427,7 @@ VOID GetMemReadBypass (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_READ_MEM) std::cout << "EXEC rb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_READ_MEM) cout << "EXEC rb " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 
 	// TODO: bypass real memory?
@@ -548,16 +462,16 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
     }
 	if (g_var.g_wrong_path && !was_wp) {
 		g_var.g_wrong_path_number++;
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << "  *** transitioning to wrong path ***\n";
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << "  wrong path number = " << dec << g_var.g_wrong_path_number << std::endl;
+		if (g_var.g_debug_level & DBG_SPEC) cout << "  *** transitioning to wrong path ***\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << "  wrong path number = " << dec << g_var.g_wrong_path_number << endl;
 		PIN_SaveContext (c,&g_var.g_context);
 	}
 
 	ADDRINT eip = taken?tgt:fthru;
 	if (eip != pred_eip) {
 		Assert (g_var.g_wrong_path);
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << "  *** forcing PIN to change control flow ***\n";
-		if (g_var.g_debug_level & DBG_SPEC) std::cout << "      predicted EIP = " << hex << pred_eip << "\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << "  *** forcing PIN to change control flow ***\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << "      predicted EIP = " << hex << pred_eip << "\n";
 		if (g_var.g_enable_wp) {
 			PIN_SetContextReg (c,REG_INST_PTR, pred_eip);
 			g_var.g_context_call_depth=0;
@@ -573,10 +487,10 @@ VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_EXEC) std::cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_EXEC) cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 	if (g_var.g_wrong_path) {
-	    if (g_var.g_debug_level & DBG_SPEC) std::cout << " *** detected system call on wrong path ***\n";
+	    if (g_var.g_debug_level & DBG_SPEC) cout << " *** detected system call on wrong path ***\n";
 		g_var.g_spec_syscall = true;	
 	}
 }
@@ -705,19 +619,9 @@ VOID Instruction (TRACE trace, VOID * val)
                     IARG_END);
 
             if (g_var.g_enable_instrumentation) {
-                //cout << g_var.g_insCountRightPath << " instrumentation enabled\n";
                 pin__getOp (ins);
-                //if (g_cfg->coreType == PHRASEBLOCK)
-                //	INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuff,
-                //		IARG_ADDRINT, INS_Address (ins),
-                //		IARG_END);
-                //else {
-                //	INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageInsBuff,
-                //		IARG_ADDRINT, INS_Address (ins),
-                //		IARG_END);
-                //}
                 if (INS_IsMemoryWrite (ins)) {
-                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemWriteOrigValue,
                             IARG_UINT32, uid,
                             IARG_CONTEXT,
@@ -740,7 +644,7 @@ VOID Instruction (TRACE trace, VOID * val)
                 }
                 /*
                    if (INS_IsMemoryRead (ins)) {
-                   if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex << pc << " " << diss << " [mem read]\n";
+                   if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem read]\n";
                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemReadBypass,
                    IARG_UINT32, uid,
                    IARG_CONTEXT,
@@ -752,7 +656,7 @@ VOID Instruction (TRACE trace, VOID * val)
 
 //                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) { //TODO put it back
                 if (INS_IsBranchOrCall (ins)) {
-                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
 //                    if (INS_HasFallThrough (ins)) { //TODO put it back
 //                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
 //                                IARG_UINT32, uid,
@@ -802,20 +706,20 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     ADDRINT pc = __pc;
     void *bp_hist = NULL;
     bool pred = g_predictor->lookup (pc, bp_hist);
-    if (g_var.g_debug_level & DBG_BP) std::cout << "  prediction = " << (pred?"T":"N");
+    if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
 	if (!g_var.g_wrong_path) {
-   		if (g_var.g_debug_level & DBG_BP) std::cout << ", actual = " << (taken?"T":"N") << " : "; 
+   		if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : "; 
 		if (pred != taken) {
-		    if (g_var.g_debug_level & DBG_BP) std::cout << "mispredicted!\n";
+		    if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
 			g_var.g_wrong_path = true;
 			//printf ("\nSTART OF WRONG PATH\n");
 			//fprintf (__outFile, "\nSTART OF WRONG PATH\n");
 		} else {
-		    if (g_var.g_debug_level & DBG_BP) std::cout << "correct prediction\n";
+		    if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
 		}
 		g_predictor->update (pc, taken, bp_hist, false);
 	} else {
-		if (g_var.g_debug_level & DBG_BP) std::cout << " on wrong path\n";
+		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
 	}
     return  pred ? tgt : fthru;
 }
