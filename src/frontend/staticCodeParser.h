@@ -26,6 +26,7 @@ public:
 	std::string getBrIns(ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken);
 	std::string getMemIns(ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr);
 	std::string getIns(ADDRINT insAddr);
+	bool hasIns(ADDRINT insAddr);
 	std::string getBBheader(ADDRINT bbAddr);
 	BOOL BBhasHeader(ADDRINT bbAddr);
 	std::string getBB_top(ADDRINT bbAddr); //TODO eliminate this function

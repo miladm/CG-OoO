@@ -1196,21 +1196,20 @@ void uop_gen (FILE* _outFile, staticCodeParser &g_staticCode)
 
 
 VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
-    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
-        g_var.stat.noMatchIns++;
-        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
-        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
-        g_var.stat.missingInsList.insert (insAddr);
-    } else {
+//    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
+//        g_var.stat.noMatchIns++;
+//        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
+//        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
+//        g_var.stat.missingInsList.insert (insAddr);
+//    } else {
         g_var.stat.matchIns++;
         string s;
-        s = _g_staticCode->getBrIns (insAddr, hasFT, tgAddr, ftAddr, isTaken);
-        if (s != "MILAD\n") {
+        if (_g_staticCode->hasIns (insAddr)) {
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 bbInstruction* g_insObj = g_var.getNewIns ();
-                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
                 g_insObj->setInsType (BR);
@@ -1233,25 +1232,24 @@ VOID getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL
             g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
-    }
+//    }
 }
 
 VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL isStackRd, BOOL isStackWr, BOOL isMemRead) {
-    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
-        g_var.stat.noMatchIns++;
-        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
-        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
-        g_var.stat.missingInsList.insert (insAddr);
-    } else {
+//    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
+//        g_var.stat.noMatchIns++;
+//        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
+//        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
+//        g_var.stat.missingInsList.insert (insAddr);
+//    } else {
         g_var.stat.matchIns++;
         string s;
-        s = _g_staticCode->getMemIns (insAddr, memAccessSize, memAddr);
-        if (s != "MILAD\n") {
+        if (_g_staticCode->hasIns (insAddr)) {
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 bbInstruction* g_insObj = g_var.getNewIns ();
-                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
                 g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
@@ -1274,30 +1272,27 @@ VOID getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, BOOL is
                 g_insObj->setWrongPath (g_var.g_wrong_path);
             }
             g_var.g_ins = s;
-        } else {
-            cout << "no ins created\n";
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
-    }
+//    }
 }
 
 VOID getIns (ADDRINT insAddr) {
-    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
-        g_var.stat.noMatchIns++;
-        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
-        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
-        g_var.stat.missingInsList.insert (insAddr);
-    } else {
+//    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
+//        g_var.stat.noMatchIns++;
+//        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
+//        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
+//        g_var.stat.missingInsList.insert (insAddr);
+//    } else {
         g_var.stat.matchIns++;
         string s;
-        s = g_var.g_ins = _g_staticCode->getIns (insAddr);
-        if (s != "MILAD\n") {
+        if (_g_staticCode->hasIns (insAddr)) {
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 if (g_bbObj == NULL) return;
                 bbInstruction* g_insObj = g_var.getNewIns ();
-                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (ALU);
                 g_insObj->setInsAddr (insAddr);
@@ -1318,25 +1313,24 @@ VOID getIns (ADDRINT insAddr) {
             g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
-    }
+//    }
 }
 
 VOID getNopIns (ADDRINT insAddr) {
-    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
-        g_var.stat.noMatchIns++;
-        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
-        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
-        g_var.stat.missingInsList.insert (insAddr);
-    } else {
+//    if (!_g_staticCode->isInsIn_insMap (insAddr)) {
+//        g_var.stat.noMatchIns++;
+//        //if (g_var.missingInsList.find (insAddr) == g_var.missingInsList.end ())
+//        //	printf ("-- INS: %ld %lx\n", insAddr, insAddr);
+//        g_var.stat.missingInsList.insert (insAddr);
+//    } else {
         g_var.stat.matchIns++;
         string s;
-        s = g_var.g_ins = _g_staticCode->getIns (insAddr);
-        if (s != "MILAD\n") {
+        if (_g_staticCode->hasIns (insAddr)) {
             if (g_var.g_debug_level & DBG_UOP) std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
             if (g_var.g_core_type == BASICBLOCK) {
                 dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
                 bbInstruction* g_insObj = g_var.getNewIns ();
-                bbInstruction* staticIns = (bbInstruction*)_g_staticCode->getInsObj (insAddr);
+                stInstruction* staticIns = _g_staticCode->getInsObj (insAddr);
                 staticIns->copyRegsTo (g_insObj);
                 g_insObj->setInsType (NOP);
                 g_insObj->setInsAddr (insAddr);
@@ -1357,7 +1351,7 @@ VOID getNopIns (ADDRINT insAddr) {
             g_var.g_ins = s;
         }
         //printf ("%s\n", _g_staticCode->getIns (insAddr, 1, 1, false).c_str ());
-    }
+//    }
 }
 
 void getBBhead (ADDRINT bb_tail_ins_addr, BOOL is_tail_br) {

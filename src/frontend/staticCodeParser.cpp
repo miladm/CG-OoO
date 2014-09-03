@@ -206,6 +206,11 @@ std::string staticCodeParser::getMemIns (ADDRINT insAddr, ADDRINT memAccessSize,
 	return ins_str;
 }
 
+bool staticCodeParser::hasIns (ADDRINT insAddr) {
+	Assert (insAddr != 0);
+	return (_insObjMap.find (insAddr) != _insObjMap.end ()) ? true : false;
+}
+
 std::string staticCodeParser::getIns (ADDRINT insAddr) {
 	Assert (insAddr != 0);
 	std::stringstream ss;

@@ -50,8 +50,8 @@ struct g_variable {
         g_codeCacheSize = 0;
         g_flushes = 0;
         g_enable_simpoint = true;
-        g_enable_wp = false;
-        g_enable_instrumentation = false;
+        g_enable_wp = true;
+        g_enable_instrumentation = true;
 
         g_pipe_state = PIPE_NORMAL;
         g_squash_seq_num = 0;
