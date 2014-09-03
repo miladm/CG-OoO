@@ -98,7 +98,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
 
 CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
-        //mem_ins->setLQstate (LQ_CACHE_WAIT); TODO put back and fix
+        mem_ins->setLQstate (LQ_FWD_FROM_SQ);
         return g_eu_lat._st_buff_lat;
     //} else if () { /*TODO for MSHR */
     } else {
@@ -164,7 +164,8 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
-    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    INS_ID WAW_st_ins_sn = _SQ.hasAnyCompleteStFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID (), WAW_st_ins_sn);
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);

@@ -11,6 +11,7 @@
 
 #define BB_SQ_SIZE 96
 #define BB_LQ_SIZE 94
+#define BB_NO_WAW_ST_INS 0
 
 class bb_lsqCAM : public CAMtable<bbInstruction*> {
 	public:

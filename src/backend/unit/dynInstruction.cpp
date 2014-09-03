@@ -142,7 +142,11 @@ void dynInstruction::setWrongPath (bool is_on_wrong_path) {
 }
 
 void dynInstruction::setMemViolation () {
-    Assert (_is_mem_violation == false);
+/*-- 
+ * assert removed to enable having multiple ST instructions issuing
+ * mis-speculation o on a LD in the same cycle - a real scenario to support
+ * --*/
+    //Assert (_is_mem_violation == false);
     _is_mem_violation = true;
 }
 

@@ -11,6 +11,7 @@
 
 #define SQ_SIZE 36
 #define LQ_SIZE 64
+#define NO_WAW_ST_INS 0
 
 class o3_lsqCAM : public CAMtable<dynInstruction*> {
 	public:
@@ -27,7 +28,8 @@ class o3_lsqCAM : public CAMtable<dynInstruction*> {
         void delFinishedMemAxes ();
         bool hasCommit ();
         bool hasMemAddr (ADDRS, INS_ID);
-        pair<bool, dynInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID);
+        INS_ID hasAnyCompleteStFromAddr (ADDRS, INS_ID);
+        pair<bool, dynInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID, INS_ID);
         pair<bool, dynInstruction*> hasFinishedIns (LSQ_ID);
 };
 

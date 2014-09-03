@@ -20,7 +20,7 @@ int main(int argc, char * argv[]) {
     if(PIN_Init(argc, argv)) return Usage();
 
 	char cfgFile[] = "config/defaul.cfg";
-    runPARS(cfgFile);
+    pin__runPARS(cfgFile);
     
     PIN_StartProgram();
     return 0;

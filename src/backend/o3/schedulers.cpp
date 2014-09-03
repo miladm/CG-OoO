@@ -200,7 +200,6 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
-                        cout <<  "mem FWD" << endl;
                     }
                 }
             }

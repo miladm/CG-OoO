@@ -79,9 +79,9 @@ COMPLETE_STATUS o3_execution::completeIns () {
             bool is_violation = p.first;
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
-            if (is_violation) { violating_ld_ins->setMemViolation (); }
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete store - ins addr", ins->getInsID (), _clk->now ());
+            if (is_violation) { violating_ld_ins->setMemViolation (); }
         } else {
             //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
@@ -96,9 +96,13 @@ COMPLETE_STATUS o3_execution::completeIns () {
         if (ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (ins->getInsID ());
             g_var.setSquashType (BP_MISPRED);
+            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                    _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (violating_ld_ins->getInsID ());
             g_var.setSquashType (MEM_MISPRED);
+            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                    _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
         }
     }
 
@@ -156,7 +160,7 @@ void o3_execution::squashCtrl () {
          g_var.g_pipe_state == PIPE_FLUSH || 
          g_var.g_pipe_state == PIPE_DRAIN || 
          g_var.g_pipe_state == PIPE_SQUASH_ROB) && 
-        g_var.g_squash_seq_num != g_var.g_old_squash_seq_num) {
+         g_var.isSpeculationViolation ()) {
         g_var.g_pipe_state = PIPE_WAIT_FLUSH;
         state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
     } else if (g_var.g_pipe_state == PIPE_NORMAL) {
@@ -178,7 +182,7 @@ void o3_execution::squashCtrl () {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
     } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeWire (READ) && 
-               _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
+               _iROB->getFront()->getInsID () >= g_var.getSquashSN ()) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
         _iROB->updateWireState (READ);
@@ -188,7 +192,7 @@ void o3_execution::squashCtrl () {
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
         _RF_MGR->squashRenameReg ();
     } else {
-        return; /*-- No state change --*/
+        return; /*-- NO STATE CHANGE --*/
     }
     dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_switch.c_str(), _clk->now ());
 }

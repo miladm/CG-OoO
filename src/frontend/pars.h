@@ -40,14 +40,15 @@
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
 
-/* ------------------------------------------------------------------ */
-/* Function Declarations                                              */
-/* ------------------------------------------------------------------ */
-VOID runPARS (char*);
-VOID Init (char*);
-VOID Fini (INT32, VOID*);
-VOID Instruction (TRACE, VOID*);
+/* ****************************************************************** *
+ * FUNCTION DECLARATIONS
+ * ****************************************************************** */
+VOID pin__parseConfig ();
+VOID pin__init (char*);
+VOID pin__runPARS (char*);
+VOID pin__fini (INT32, VOID*);
+VOID pin__instruction (TRACE, VOID*);
+
 ADDRINT PredictAndUpdate (ADDRINT, INT32, ADDRINT, ADDRINT);
-VOID parseConfig ();
 
 #endif

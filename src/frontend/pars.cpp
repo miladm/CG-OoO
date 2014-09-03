@@ -185,9 +185,9 @@ static VOID backEnd (void *ptr) {
 	}
 }
 
-VOID runPARS (char* cfgFile)
+VOID pin__runPARS (char* cfgFile)
 {
-    Init (cfgFile);
+    pin__init (cfgFile);
 
 	// Register a routine that gets called every time the trace is inserted
     CODECACHE_AddTraceInsertedFunction (countTrace, 0);
@@ -210,8 +210,8 @@ VOID runPARS (char* cfgFile)
 	PIN_InterceptSignal (SIGABRT,signal_handler,NULL);
 	PIN_UnblockSignal (SIGABRT,TRUE);
 
-    TRACE_AddInstrumentFunction (Instruction, 0);
-    PIN_AddFiniFunction (Fini, 0);
+    TRACE_AddInstrumentFunction (pin__instruction, 0);
+    PIN_AddFiniFunction (pin__fini, 0);
 
     PIN_SpawnInternalThread (backEnd, rootThreadArg, 0, &rootThreadUid);
 
@@ -223,13 +223,13 @@ VOID runPARS (char* cfgFile)
 /* ****************************************************************** *
  * INITALIZATION & CLEAN UP
  * ****************************************************************** */
-VOID parseConfig (char* cfgFile) {
+VOID pin__parseConfig (char* cfgFile) {
 	g_cfg = new config (cfgFile, &g_var);
 }
 
-VOID Init (char* cfgFile) 
+VOID pin__init (char* cfgFile) 
 {
-	parseConfig (cfgFile);
+	pin__parseConfig (cfgFile);
 	g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
 	PIN_SemaphoreInit (&semaphore0);
 	PIN_SemaphoreInit (&semaphore1);
@@ -254,7 +254,7 @@ VOID Init (char* cfgFile)
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = IN_ORDER;
+    g_var.g_core_type = OUT_OF_ORDER;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
@@ -263,7 +263,7 @@ VOID Init (char* cfgFile)
 	g_var.msg.simStep ("START OF SIMULATION");
 }
 
-VOID Fini (INT32 code, VOID* v) 
+VOID pin__fini (INT32 code, VOID* v) 
 {
 	g_var.msg.simStep ("FRONTEND TERMINATED");
 	stop_pars = clock ();
@@ -581,7 +581,7 @@ VOID doImpMemCount_ (UINT32 isMem)
 	}
 }
 
-VOID Instruction (TRACE trace, VOID * val) 
+VOID pin__instruction (TRACE trace, VOID * val) 
 {
     if (!filter.SelectTrace (trace)) {
         printf ("NOTE: SKIPPING TRACE\n");
