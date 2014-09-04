@@ -42,7 +42,7 @@ void execution::doEXECUTION () {
     }
 
     /* SQUASH CONTROL */
-    squashCtrl ();
+    if (ENABLE_SQUASH) squashCtrl ();
     dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /* STAT */

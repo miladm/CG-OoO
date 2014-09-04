@@ -79,7 +79,8 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         forward (mem_ins, axes_lat);
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
-        Assert (mem_ins->isMemOrBrViolation() == false);
+        if (ENABLE_SQUASH)
+            Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line

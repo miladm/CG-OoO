@@ -51,7 +51,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         if (_bbROB->getTableState () == EMPTY_BUFF) break;
         if (!_bbROB->hasFreeWire (READ)) break;
         dynBasicblock* bb = _bbROB->getFront ();
-        if (bb->isMemOrBrViolation ()) break;
+        if (ENABLE_SQUASH && bb->isMemOrBrViolation ()) break;
         if (bb->getBBstate () != EMPTY_BUFF) break; //TODO what is a BB is still getting filled up?
         if (!bb->isBBcomplete ()) break;
 
@@ -164,15 +164,16 @@ void bb_commit::commitBB (dynBasicblock* bb) {
             insList->RemoveAt (0);
         }
     }
-    delBB (bb);
+    delete bb;
 }
 
+/*-- DELETES ALL INSTRUCTIONS INCLUSING STORE OPS --*/
 void bb_commit::delBB (dynBasicblock* bb) {
     List<bbInstruction*>* insList = bb->getBBinsList ();
-    for (int i = insList->NumElements () - 1; i >= 0; i--) {
-        bbInstruction* ins = insList->Nth (i);
+    while (insList->NumElements () > 0) {
+        bbInstruction* ins = insList->Nth (0);
         delIns (ins);
-        insList->RemoveAt (i);
+        insList->RemoveAt (0);
     }
     delete bb;
 }
