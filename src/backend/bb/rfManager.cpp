@@ -6,7 +6,11 @@
 
 bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rfm_name)
     : unit (rfm_name, clk),
-      _GRF_MGR (_clk, "grfManager")
+      _GRF_MGR (_clk, "grfManager"),
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events"+rfm_name, 0, PRINT_ZERO)),
+      s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF operand-not-ready events"+rfm_name, 0, PRINT_ZERO)),
+      s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF operand-not-ready events"+rfm_name, 0, PRINT_ZERO))
+
 { 
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
@@ -36,11 +40,15 @@ void bb_rfManager::commitRegs (bbInstruction* ins) {
 }
 
 void bb_rfManager::reserveRF (bbInstruction* ins) {
+    dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Reserve LRF write regs for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
     return _LRF_MGRS[bbWin_id]->reserveRF (ins);
 }
 
 bool bb_rfManager::canReserveRF (bbInstruction* ins) {
+    dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Check if can reserve LRF write regs for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
     return _LRF_MGRS[bbWin_id]->canReserveRF (ins);
 }
@@ -49,11 +57,19 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     WIDTH bbWin_id = ins->getBBWinID ();
     bool grf_ready = _GRF_MGR.isReady (ins);
     bool lrf_ready = _LRF_MGRS[bbWin_id]->isReady (ins);
+    dbg.print (DBG_REG_FILES, "%s: %s %d - %s %d - %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "LRF read ops are ready: ", lrf_ready?"YES":"NO", 
+            "GRF read ops are ready: ", grf_ready?"YES":"NO", 
+            "for ins: ", ins->getInsID (), _clk->now ());
+    if (!lrf_ready) s_lrf_not_ready_cnt++;
+    if (!grf_ready) s_grf_not_ready_cnt++;
+    if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
     return (grf_ready && lrf_ready);
-    return grf_ready;
 }
 
 void bb_rfManager::completeRegs (bbInstruction* ins) {
+    dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "Complete LRF write operands for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
     _GRF_MGR.completeRegs (ins);
     _LRF_MGRS[bbWin_id]->writeToRF (ins);

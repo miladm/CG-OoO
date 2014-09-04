@@ -13,6 +13,7 @@ dynBasicblock::dynBasicblock (string class_name)
     _bb_on_wrong_path = false;
     _bb_has_mem_violation = false;
     _head_ins_seq_num = 0;
+    _wasted_ins_cnt = 0;
 }
 
 dynBasicblock::~dynBasicblock () {}
@@ -183,4 +184,19 @@ void dynBasicblock::resetStates () {
     _num_completed_ins = 0;
     _bb_has_mem_violation = false;
     _bb_on_wrong_path = false;
+    _wasted_ins_cnt = 0;
+}
+
+SCALAR dynBasicblock::getNumWasteIns () {
+    return _wasted_ins_cnt;
+}
+
+void dynBasicblock::setNumWasteIns (INS_ID faulty_ins_sn) {
+    for (int i = 0; i < _schedInsList.NumElements (); i++) {
+        if (_schedInsList.Nth(i)->getInsID () == faulty_ins_sn) {
+            _wasted_ins_cnt = i - 1;
+            break;
+        }
+    }
+    if (_wasted_ins_cnt < 0) _wasted_ins_cnt = 0;
 }

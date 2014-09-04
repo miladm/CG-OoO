@@ -24,6 +24,7 @@ class ScalarStat {
         ScalarStat  operator++ (int);
         ScalarStat& operator-- ();
         ScalarStat  operator-- (int);
+        ScalarStat operator+= (SCALAR);
 
     private:
         string _name;

@@ -29,6 +29,9 @@ class o3_rfManager : public unit {
 
 	private:
         o3_registerRename _GRF;
+
+        /*-- STAT --*/
+        ScalarStat& s_rf_not_ready_cnt;
 };
 
 extern o3_rfManager* g_GRF_MGR;

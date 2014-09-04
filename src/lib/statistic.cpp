@@ -62,6 +62,12 @@ ScalarStat ScalarStat::operator-- (int) {
     return *this;
 }
 
+/* += OPERATOR */
+ScalarStat ScalarStat::operator+= (SCALAR val) {
+    _ScalarStat += val;
+    return *this;
+}
+
 void ScalarStat::print () {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
         cout << _name << ": " << _ScalarStat << "\t\t\t - " << _description << endl;

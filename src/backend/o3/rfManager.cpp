@@ -1,12 +1,13 @@
-/*--******************************************************************************
+/*********************************************************************************
  * rfManager.cpp
- *****************************************************************************--*/
+ ********************************************************************************/
 
 #include "rfManager.h"
 
 o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, "registerRename")
+      _GRF (clk, "registerRename"),
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events"+rf_name, 0, PRINT_ZERO))
 { }
 
 o3_rfManager::~o3_rfManager () { }
@@ -17,14 +18,22 @@ bool o3_rfManager::isReady (dynInstruction* ins) {
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
         if (!_GRF.isPRvalid (reg)) {
+            s_rf_not_ready_cnt++;
+            dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->now ());
             return false; /*-- operand not available --*/
         } else {
             p_rdReg_list->RemoveAt (i); /*--optimization --*/
         }
     }
     if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                "RF read ops are ready: YES", "for ins: ", ins->getInsID (), _clk->now ());
         return true; /*-- all operands available --*/
     }
+    dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->now ());
+    s_rf_not_ready_cnt++;
     return false; /*-- not all operands available --*/
 }
 

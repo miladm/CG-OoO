@@ -42,6 +42,12 @@ class bb_rfManager : public unit {
 	private:
         bb_grfManager _GRF_MGR;
         map<WIDTH, bb_lrfManager*> _LRF_MGRS;
+
+        /*-- STAT --*/
+        ScalarStat& s_rf_not_ready_cnt;
+        ScalarStat& s_lrf_not_ready_cnt;
+        ScalarStat& s_grf_not_ready_cnt;
+
 };
 
 #endif

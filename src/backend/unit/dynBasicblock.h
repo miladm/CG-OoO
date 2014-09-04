@@ -89,6 +89,9 @@ class dynBasicblock : public unit {
         //BB CONTROL
         void resetStates ();
 
+        SCALAR getNumWasteIns ();
+        void setNumWasteIns (INS_ID);
+
     private:
         bbHead _head;
         map <ADDRS, bbInstruction*> _bbInsMap;
@@ -102,6 +105,8 @@ class dynBasicblock : public unit {
         bool _bb_has_mem_violation;
 
         INS_ID _head_ins_seq_num;
+
+        SCALAR _wasted_ins_cnt;
 };
 
 #endif

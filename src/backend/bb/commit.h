@@ -49,7 +49,10 @@ class bb_commit : protected stage {
         List<bbWindow*>* _bbWindows;
 
         /*-- STAT VARS --*/
-        ScalarStat& s_squash_bb_cnt;
+        ScalarStat& s_squash_ins_cnt;
+        ScalarStat& s_br_squash_bb_cnt;
+        ScalarStat& s_mem_squash_bb_cnt;
+        ScalarStat& s_num_waste_ins;
         ScalarStat& s_bb_cnt;
 };
 

@@ -16,7 +16,10 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
-      s_squash_bb_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
+      s_squash_ins_cnt (g_stats.newScalarStat (stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
+      s_br_squash_bb_cnt (g_stats.newScalarStat (stage_name, "br_squash_bb_cnt", "Number of squashed basicblocks due to br mis-pred", 0, PRINT_ZERO)),
+      s_mem_squash_bb_cnt (g_stats.newScalarStat (stage_name, "mem_squash_bb_cnt", "Number of squashed basicblocks due to mem mis-pred", 0, PRINT_ZERO)),
+      s_num_waste_ins (g_stats.newScalarStat (stage_name, "num_waste_ins", "Number of useful instructions squashed", 0, PRINT_ZERO)),
       s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of dynamic basiblocks in "+stage_name, 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
@@ -43,7 +46,10 @@ void bb_commit::doCOMMIT () {
     }
 
     /*-- STAT --*/
+    if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+    if (pipe_stall == PIPE_STALL && g_var.g_pipe_state != PIPE_NORMAL) 
+        s_squash_stall_cycles++;
 }
 
 /*-- COMMIT COMPLETE INS AT THE HEAD OF QUEUE --*/
@@ -121,7 +127,8 @@ void bb_commit::bpMispredSquash () {
         bb->resetStates ();
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
-        s_squash_bb_cnt++;
+        s_num_waste_ins += bb->getNumWasteIns ();
+        s_br_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
     }
@@ -130,11 +137,11 @@ void bb_commit::bpMispredSquash () {
         bb = _bbQUE->getNth_unsafe (i);
         Assert (bb->isMemOrBrViolation () == true);
         Assert (bb->getBBheadID () >= squashSeqNum);
+        s_num_waste_ins += bb->getNumWasteIns ();
         _bbQUE->removeNth_unsafe (i);
-        s_squash_bb_cnt++;
+        s_br_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
-        delBB (bb);
     }
 }
 
@@ -156,7 +163,8 @@ void bb_commit::memMispredSquash () {
         bb->resetStates ();
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
-        s_squash_bb_cnt++;
+        s_num_waste_ins += bb->getNumWasteIns ();
+        s_mem_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
     }

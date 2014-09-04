@@ -12,7 +12,13 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
       _LQ (BB_LQ_SIZE, 28, 24, clk, "LQtable"),
-      _SQ (BB_SQ_SIZE, 28, 24, clk, "SQtable")
+      _SQ (BB_SQ_SIZE, 28, 24, clk, "SQtable"),
+      s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
+      s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
+      s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
+      s_ld_miss_cnt (g_stats.newScalarStat (lsq_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
+      s_st_miss_cnt (g_stats.newScalarStat (lsq_name, "st_miss_cnt", "Number of store misses", 0, PRINT_ZERO)),
+      s_st_hit_cnt  (g_stats.newScalarStat (lsq_name, "st_hit_cnt", "Number of store hits", 0, PRINT_ZERO))
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
@@ -76,11 +82,12 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
-//        forward (mem_ins, axes_lat);
+        //        forward (mem_ins, axes_lat);
+        (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
-//        if (ENABLE_SQUASH)
-//            Assert (mem_ins->isMemOrBrViolation() == false);
+        //        if (ENABLE_SQUASH)
+        //            Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
@@ -88,12 +95,12 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
                 mem_ins->getMemAxesSize(),
                 &_L1, &_L2, &_L3);
         _SQ.setTimer (mem_ins, axes_lat);
+        (axes_lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
     }
+    (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
 #ifdef ASSERTION
     Assert(axes_lat > 0);
 #endif
-    //(axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++; TODO put them back
-    //(axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
     return true;
 }
 

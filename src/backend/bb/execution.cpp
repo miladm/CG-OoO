@@ -105,11 +105,13 @@ COMPLETE_STATUS bb_execution::completeIns () {
         if (ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (ins->getBB()->getBBheadID ());
             g_var.setSquashType (BP_MISPRED);
+            ins->getBB()->setNumWasteIns (ins->getInsID ());
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (violating_ld_ins->getBB()->getBBheadID ());
             g_var.setSquashType (MEM_MISPRED);
+            violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
         }
@@ -135,7 +137,7 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
         if (_scheduler_to_execution_port->getBuffState () == EMPTY_BUFF) break;
         if (!_scheduler_to_execution_port->isReady ()) break;
         bbInstruction* ins = _scheduler_to_execution_port->getFront ();
-        if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) break;
+        if (!(_RF_MGR->canReserveRF (ins))) break;
         exeUnit* EU = _aluExeUnits->Nth (i);
         if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
