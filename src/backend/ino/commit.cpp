@@ -7,6 +7,7 @@
 commit::commit (port<dynInstruction*>& commit_to_bp_port, 
 			    port<dynInstruction*>& commit_to_scheduler_port, 
                 CAMtable<dynInstruction*>* iROB,
+                CAMtable<dynInstruction*>* iQUE,
 	    	    WIDTH commit_width,
                 sysClock* clk,
 	    	    string stage_name)
@@ -16,6 +17,7 @@ commit::commit (port<dynInstruction*>& commit_to_bp_port,
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
+    _iQUE = iQUE;
 }
 
 commit::~commit () {}
@@ -49,6 +51,8 @@ PIPE_ACTIVITY commit::commitImpl () {
 
         /* COMMIT INS */
         ins = _iROB->popFront();
+        dynInstruction* ins_dual = _iQUE->popFront ();
+        Assert (ins->getInsID () == ins_dual->getInsID ());
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                 "Commit ins", ins->getInsID (), _clk->now ());
         delete ins;
@@ -67,9 +71,17 @@ void commit::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iROB->getTableSize() - 1;
-    for (LENGTH i = 0; i < _iROB->getTableSize(); i++) {
-        if (_iROB->getTableSize() == 0) break;
+    /*-- SQUASH iROB --*/
+    for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
+        if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
+        if (ins->getInsID () < squashSeqNum) break;
+        _iROB->removeNth_unsafe (i);
+    }
+    /*-- SQUASH iQUE --*/
+    for (LENGTH i = 0; i < _iQUE->getTableSize(); i++) {
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->getPipeStage () != EXECUTE);// && ins->getPipeStage () != MEM_ACCESS);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
@@ -82,23 +94,23 @@ void commit::squash () {
             }
         }
     }
-    Assert (_iROB->getTableSize() > stop_indx && stop_indx >= start_indx && start_indx >= 0);
-    for (LENGTH i = _iROB->getTableSize() - 1; i > stop_indx; i--) {
-        if (_iROB->getTableSize() == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    Assert (_iQUE->getTableSize() > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    for (LENGTH i = _iQUE->getTableSize() - 1; i > stop_indx; i--) {
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         ins->resetStates ();
         g_var.insertFrontCodeCache(ins);
-        _iROB->removeNth_unsafe (i);
+        _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                 "Squash ins", ins->getInsID (), _clk->now ());
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
-        if (_iROB->getTableSize() == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->isOnWrongPath () == true);
         Assert (ins->getInsID () >= squashSeqNum);
-        _iROB->removeNth_unsafe (i);
+        _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                 "Squash ins", ins->getInsID (), _clk->now ());

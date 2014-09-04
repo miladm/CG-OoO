@@ -7,6 +7,7 @@
 fetch::fetch (port<dynInstruction*>& bp_to_fetch_port, 
 	          port<dynInstruction*>& fetch_to_decode_port,
 			  port<dynInstruction*>& fetch_to_bp_port,
+              CAMtable<dynInstruction*>* iQUE,
 			  WIDTH fetch_width,
               sysClock* clk,
 			  string stage_name
@@ -16,6 +17,7 @@ fetch::fetch (port<dynInstruction*>& bp_to_fetch_port,
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
     _fetch_to_decode_port = &fetch_to_decode_port;
+    _iQUE = iQUE;
     _insListIndx = 0;
     _switch_to_frontend = false;
 }
@@ -56,6 +58,7 @@ PIPE_ACTIVITY fetch::fetchImpl () {
         dynInstruction* ins = g_var.popCodeCache();
         ins->setPipeStage(FETCH);
         g_var.remFromCodeCache ();
+        _iQUE->pushBack (ins);
 		_fetch_to_decode_port->pushBack(ins);
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), _clk->now ());
 
@@ -70,8 +73,8 @@ void fetch::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
-    _fetch_to_decode_port->flushPort (squashSeqNum, true);
-    _fetch_to_bp_port->flushPort (squashSeqNum, true);
+    _fetch_to_decode_port->flushPort (squashSeqNum, false);
+    _fetch_to_bp_port->flushPort (squashSeqNum, false);
 }
 
 void fetch::regStat () {

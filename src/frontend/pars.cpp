@@ -254,7 +254,7 @@ VOID pin__init (char* cfgFile)
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = OUT_OF_ORDER;
+    g_var.g_core_type = IN_ORDER;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);

@@ -91,6 +91,7 @@ class sysCore : public unit {
 
         // MISC
         CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynInstruction*>* _iQUE;
 };
 
 #endif

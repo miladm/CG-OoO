@@ -12,6 +12,7 @@ class commit : protected stage {
 		commit (port<dynInstruction*>& commit_to_bp_port, 
 			    port<dynInstruction*>& commit_to_scheduler_port, 
                 CAMtable<dynInstruction*>* iROB,
+                CAMtable<dynInstruction*>* iQUE,
 			    WIDTH commit_width,
                 sysClock* clk,
 			    string stage_name);
@@ -27,6 +28,7 @@ class commit : protected stage {
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynInstruction*>* _iQUE;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;

@@ -59,21 +59,23 @@ sysCore::sysCore (sysClock* clk,
     /* INIT UNITS */
     g_RF_MGR = new rfManager (clk, "rfManager");
     _iROB = new CAMtable<dynInstruction*>(50, 4, 4, _clk, "iROB");
+    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk, "iQUE");
 
     /* INIT STAGES */
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
-    _fetch = new fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
+    _fetch = new fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _iQUE, fetch_width, _clk, "fetch");
     _decode = new decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
     _scheduler = new scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _clk, "schedule");
     _execution = new execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _execution_to_memory_port, _iROB, execution_width, _clk, "execution");
     _memory = new memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _clk, "memory");
-    _commit = new commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _clk, "commit");
+    _commit = new commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, _iQUE, commit_width, _clk, "commit");
 }
 
 sysCore::~sysCore () {
     delete g_RF_MGR;
     delete _iROB;
+    delete _iQUE;
     delete _bp;
     delete _fetch;
     delete _decode;
