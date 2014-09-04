@@ -167,7 +167,8 @@ pair<bool, bbInstruction*> bb_memManager::isLQviolation (bbInstruction* st_ins) 
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
-    pair<bool, bbInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    INS_ID WAW_st_ins_sn = _SQ.hasAnyCompleteStFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    pair<bool, bbInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID (), WAW_st_ins_sn);
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);

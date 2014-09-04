@@ -44,12 +44,13 @@ class bb_commit : protected stage {
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
 
-        /* STAT VARS */
-        ScalarStat& s_squash_bb_cnt;
-
-        // BB WIN STRUCTURES
+        /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;
         List<bbWindow*>* _bbWindows;
+
+        /*-- STAT VARS --*/
+        ScalarStat& s_squash_bb_cnt;
+        ScalarStat& s_bb_cnt;
 };
 
 #endif

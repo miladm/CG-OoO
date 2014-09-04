@@ -115,11 +115,28 @@ bool bb_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     return false;
 }
 
-pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID st_seq_num) {
+/*-- PRE: INSTRUCTIONS WITH SEQUENCE NUMBER = 0 DO NOT EXIST --*/ 
+INS_ID bb_lsqCAM::hasAnyCompleteStFromAddr (ADDRS completed_st_mem_addr, INS_ID st_seq_num) {
     LENGTH table_size = _table.NumElements ();
-    for (LENGTH i = table_size - 1; i >= 0; i--) {
+    for (LENGTH i = 0; i < table_size; i++) {
+        bbInstruction* st_ins = getNth_unsafe (i);
+        if (st_ins->getInsID () <= st_seq_num) continue;
+        if (st_ins->getSQstate () != SQ_COMPLETE) continue;
+        if (st_ins->getMemAddr () == completed_st_mem_addr) 
+            return st_ins->getInsID ();
+    }
+    return BB_NO_WAW_ST_INS; /* NO MATCHING YOUNGER STORE WITH SAME MEM ADDR FOUND */
+}
+
+
+pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID lo_seq_num, INS_ID hi_seq_num) {
+    LENGTH table_size = _table.NumElements ();
+    if (table_size > 0 && hi_seq_num == BB_NO_WAW_ST_INS) 
+        hi_seq_num = getNth_unsafe(table_size - 1)->getInsID ();
+    for (LENGTH i = table_size - 1; i > 0; i--) {
         bbInstruction* ins = getNth_unsafe (i);
-        if (ins->getInsID () < st_seq_num) break;
+        if (ins->getInsID () > hi_seq_num) continue;
+        if (ins->getInsID () <= lo_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
             if (ins->getLQstate () == LQ_COMPLETE) {
                 return pair<bool, bbInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage

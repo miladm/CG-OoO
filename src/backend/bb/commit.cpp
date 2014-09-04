@@ -16,7 +16,8 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
-      s_squash_bb_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO))
+      s_squash_bb_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
+      s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of dynamic basiblocks in "+stage_name, 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
@@ -69,7 +70,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         _bbROB->updateWireState (READ);
 
         /*-- STAT --*/
-        s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
+        s_bb_cnt++;
         pipe_stall = PIPE_BUSY;
     }
     return pipe_stall;
@@ -183,6 +184,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
             delIns (ins);
             insList->RemoveAt (0);
         }
+        s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
     }
     delete bb;
 }
