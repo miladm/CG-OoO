@@ -14,6 +14,7 @@ class o3_commit : protected stage {
 		o3_commit (port<dynInstruction*>& commit_to_bp_port, 
 			       port<dynInstruction*>& commit_to_scheduler_port, 
                    CAMtable<dynInstruction*>* iROB,
+                   CAMtable<dynInstruction*>* iQUE,
 			       WIDTH commit_width,
                    o3_memManager* LSQ_MGR,
                    o3_rfManager* RF_MGR,
@@ -34,6 +35,7 @@ class o3_commit : protected stage {
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynInstruction*>* _iQUE;
         o3_memManager* _LSQ_MGR;
         o3_rfManager* _RF_MGR;
 

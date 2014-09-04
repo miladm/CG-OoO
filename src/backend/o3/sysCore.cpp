@@ -60,22 +60,24 @@ o3_sysCore::o3_sysCore (sysClock* clk,
     _RF_MGR = new o3_rfManager (_clk, "rfManager");
     _LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
     _iROB = new CAMtable<dynInstruction*>(100, 32, 32, _clk, "iROB");
+    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk, "iQUE");
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new o3_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
-    _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, fetch_width, _clk, "fetch");
+    _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _iQUE, fetch_width, _clk, "fetch");
     _decode = new o3_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
     _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
     _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
     _memory = new o3_memory (_execution_to_memory_port, _memory_to_scheduler_port, _iROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
-    _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
+    _commit = new o3_commit (_commit_to_bp_port, _commit_to_scheduler_port, _iROB, _iQUE, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
 }
 
 o3_sysCore::~o3_sysCore () {
     delete _RF_MGR;
     delete _LSQ_MGR;
     delete _iROB;
+    delete _iQUE;
     delete _bp;
     delete _fetch;
     delete _decode;

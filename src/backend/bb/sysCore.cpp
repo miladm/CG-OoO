@@ -75,9 +75,9 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     _bp = new bb_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
     _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _bbROB, _bbQUE, fetch_width, _clk, "fetch");
     _decode = new bb_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
-    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
-    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
-    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
+    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, &_bbWindows, num_bbWin, _bbROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
+    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
+    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
     _commit = new bb_commit (_commit_to_bp_port, _commit_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
 }
 

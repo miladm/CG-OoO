@@ -11,7 +11,6 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
-                            CAMtable<dynBasicblock*>* bbQUE,
 	    	                WIDTH scheduler_width,
                             bb_memManager* LSQ_MGR,
                             bb_rfManager* RF_MGR,
@@ -24,7 +23,6 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _bbROB = bbROB;
-    _bbQUE = bbQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     _bbWin_on_fetch = NULL;

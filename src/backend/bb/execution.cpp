@@ -9,7 +9,6 @@ bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port,
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
-                            CAMtable<dynBasicblock*>* bbQUE,
 	    	                WIDTH execution_width,
                             bb_memManager* LSQ_MGR,
                             bb_rfManager* RF_MGR,
@@ -20,7 +19,6 @@ bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port,
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _bbROB = bbROB;
-    _bbQUE = bbQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     _aluExeUnits = new List<exeUnit*>;

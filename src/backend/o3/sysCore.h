@@ -99,6 +99,7 @@ class o3_sysCore : public unit {
 
         // MISC
         CAMtable<dynInstruction*>* _iROB;
+        CAMtable<dynInstruction*>* _iQUE;
 };
 
 #endif

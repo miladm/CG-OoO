@@ -7,6 +7,7 @@
 o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port, 
 			          port<dynInstruction*>& commit_to_scheduler_port, 
                       CAMtable<dynInstruction*>* iROB,
+                      CAMtable<dynInstruction*>* iQUE,
 	    	          WIDTH commit_width,
                       o3_memManager* LSQ_MGR,
                       o3_rfManager* RF_MGR,
@@ -18,6 +19,7 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
+    _iQUE = iQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
 }
@@ -58,12 +60,16 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
                 ins->setPipeStage (COMMIT);
                 _RF_MGR->commitRegs (ins);
                 ins = _iROB->popFront ();
+                dynInstruction* ins_dual = _iQUE->popFront ();
+                Assert (ins->getInsID () == ins_dual->getInsID ());
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
-                if (ins->getMemType () == LOAD) delIns (ins); //TODO test this code
+                if (ins->getMemType () == LOAD) delIns (ins);
             }
         } else {
             ins = _iROB->popFront ();
+            dynInstruction* ins_dual = _iQUE->popFront ();
+            Assert (ins->getInsID () == ins_dual->getInsID ());
             _RF_MGR->commitRegs (ins);
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
@@ -96,9 +102,17 @@ void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iROB->getTableSize () - 1;
-    for (LENGTH i = 0; i < _iROB->getTableSize (); i++) {
+    /*-- SQUASH iROB --*/
+    for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
+        if (ins->getInsID () < squashSeqNum) break;
+        _iROB->removeNth_unsafe (i);
+    }
+    /*-- SQUASH iQUE --*/
+    for (LENGTH i = 0; i < _iQUE->getTableSize (); i++) {
+        if (_iQUE->getTableSize () == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->getPipeStage () != EXECUTE);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
@@ -111,26 +125,26 @@ void o3_commit::bpMispredSquash () {
             }
         }
     }
-    Assert (_iROB->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
-    for (LENGTH i = _iROB->getTableSize () - 1; i > stop_indx; i--) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    Assert (_iQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    for (LENGTH i = _iQUE->getTableSize () - 1; i > stop_indx; i--) {
+        if (_iQUE->getTableSize () == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
-        _iROB->removeNth_unsafe (i);
+        _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                   "Squash ins", ins->getInsID (), _clk->now ());
+                   "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
-        if (_iROB->getTableSize () == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+        if (_iQUE->getTableSize () == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->isMemOrBrViolation () == true);
         Assert (ins->getInsID () >= squashSeqNum);
-        _iROB->removeNth_unsafe (i);
+        _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                   "Squash ins", ins->getInsID (), _clk->now ());
+                   "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
         delIns (ins);
     }
 }
@@ -138,14 +152,24 @@ void o3_commit::bpMispredSquash () {
 void o3_commit::memMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
+    /*-- SQUASH iROB --*/
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         if (ins->getInsID () < squashSeqNum) break;
+        _iROB->removeNth_unsafe (i);
+    }
+    /*-- SQUASH iQUE --*/
+    for (LENGTH i = _iQUE->getTableSize () - 1; i >= 0; i--) {
+        if (_iQUE->getTableSize () == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
+        if (ins->getInsID () < squashSeqNum) break;
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
-        _iROB->removeNth_unsafe (i);
+        _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                   "(MEM_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }
 }
 
