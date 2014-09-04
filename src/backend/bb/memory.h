@@ -17,6 +17,7 @@ class bb_memory : protected stage {
                    List<bbWindow*>* bbWindows,
                    WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
+                   CAMtable<dynBasicblock*>* bbQUE,
 			       WIDTH memory_width,
                    bb_memManager* LSQ_MGR,
                    bb_rfManager* RF_MGR,
@@ -38,6 +39,7 @@ class bb_memory : protected stage {
 		port<bbInstruction*>* _execution_to_memory_port;
         port<bbInstruction*>* _memory_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
+        CAMtable<dynBasicblock*>* _bbQUE;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
         RAMtable<bbInstruction*> _mshr;

@@ -19,6 +19,7 @@ class bb_scheduler : protected stage {
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
+                      CAMtable<dynBasicblock*>* bbQUE,
 			          WIDTH scheduler_width,
                       bb_memManager* LSQ_MGR,
                       bb_rfManager* RF_MGR,
@@ -49,6 +50,7 @@ class bb_scheduler : protected stage {
 		port<bbInstruction*>* _memory_to_scheduler_port;
 		port<bbInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynBasicblock*>* _bbROB;
+        CAMtable<dynBasicblock*>* _bbQUE;
 
         // RF REGISTERS
         bb_memManager* _LSQ_MGR;

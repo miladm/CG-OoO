@@ -9,6 +9,7 @@ bb_memory::bb_memory (port<bbInstruction*>& execution_to_memory_port,
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
+                      CAMtable<dynBasicblock*>* bbQUE,
 	    	          WIDTH memory_width,
                       bb_memManager* LSQ_MGR,
                       bb_rfManager* RF_MGR,
@@ -26,6 +27,7 @@ bb_memory::bb_memory (port<bbInstruction*>& execution_to_memory_port,
     _execution_to_memory_port = &execution_to_memory_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _bbROB = bbROB;
+    _bbQUE = bbQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     _num_bbWin = num_bbWin;
@@ -140,7 +142,7 @@ void bb_memory::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _memory_to_scheduler_port->flushPort (squashSeqNum);
+    _memory_to_scheduler_port->flushPort (squashSeqNum, false);
     _LSQ_MGR->squash (squashSeqNum);
 }
 

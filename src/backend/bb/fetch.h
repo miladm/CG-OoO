@@ -12,13 +12,14 @@ typedef enum {FETCH_IN_PROGRESS, FETCH_COMPLETE} BB_FETCH_STATE;
 class bb_fetch : protected stage {
 	public:
 		bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
-			   port<bbInstruction*>& fetch_to_decode_port,
-			   port<bbInstruction*>& fetch_to_bp_port,
-               CAMtable<dynBasicblock*>* bbROB,
-			   WIDTH fetch_width,
-               sysClock* clk,
-			   string stage_name
-              );
+			      port<bbInstruction*>& fetch_to_decode_port,
+			      port<bbInstruction*>& fetch_to_bp_port,
+                  CAMtable<dynBasicblock*>* bbROB,
+                  CAMtable<dynBasicblock*>* bbQUE,
+			      WIDTH fetch_width,
+                  sysClock* clk,
+			      string stage_name
+                 );
 		~bb_fetch ();
         void squashCurrentBB ();
 
@@ -38,6 +39,7 @@ class bb_fetch : protected stage {
 		port<bbInstruction*>* _fetch_to_decode_port;
 		port<bbInstruction*>* _fetch_to_bp_port;
         CAMtable<dynBasicblock*>* _bbROB;
+        CAMtable<dynBasicblock*>* _bbQUE;
         int _insListIndx;
         bool _switch_to_frontend;
         BB_FETCH_STATE _fetch_state;

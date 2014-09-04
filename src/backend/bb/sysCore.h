@@ -103,6 +103,7 @@ class bb_sysCore : public unit {
 
         // MISC
         CAMtable<dynBasicblock*>* _bbROB;
+        CAMtable<dynBasicblock*>* _bbQUE;
 };
 
 #endif

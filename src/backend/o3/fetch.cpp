@@ -70,8 +70,8 @@ void o3_fetch::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
-    _fetch_to_decode_port->flushPort (squashSeqNum);
-    _fetch_to_bp_port->flushPort (squashSeqNum);
+    _fetch_to_decode_port->flushPort (squashSeqNum, true);
+    _fetch_to_bp_port->flushPort (squashSeqNum, true);
 }
 
 void o3_fetch::regStat () {

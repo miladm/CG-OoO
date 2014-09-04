@@ -17,6 +17,7 @@ class bb_commit : protected stage {
                    List<bbWindow*>* bbWindows,
                    WIDTH num_bbWin,
                    CAMtable<dynBasicblock*>* bbROB,
+                   CAMtable<dynBasicblock*>* bbQUE,
 			       WIDTH commit_width,
                    bb_memManager* LSQ_MGR,
                    bb_rfManager* RF_MGR,
@@ -39,6 +40,7 @@ class bb_commit : protected stage {
 		port<bbInstruction*>* _commit_to_bp_port;
 		port<bbInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
+        CAMtable<dynBasicblock*>* _bbQUE;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
 

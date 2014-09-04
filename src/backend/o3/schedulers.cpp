@@ -221,7 +221,7 @@ void o3_scheduler::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum);
+    _scheduler_to_execution_port->flushPort (squashSeqNum, false);
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (int i = (int)_ResStns.Nth(j)->getTableSize() - 1; i >= 0; i--) {
             if (_ResStns.Nth(j)->getTableSize() == 0) break;

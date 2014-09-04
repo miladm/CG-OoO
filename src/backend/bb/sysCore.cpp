@@ -61,6 +61,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     _RF_MGR = new bb_rfManager (num_bbWin, _clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "memManager");
     _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
+    _bbQUE = new CAMtable<dynBasicblock*>(1000, 1000, 1000, _clk, "bbQUE");
 //    _RF_MGR = new bb_grfManager (_clk, "grfManager"); //TODO remove it
     for (WIDTH i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_num;
@@ -72,18 +73,19 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new bb_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
-    _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _bbROB, fetch_width, _clk, "fetch");
+    _fetch = new bb_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _bbROB, _bbQUE, fetch_width, _clk, "fetch");
     _decode = new bb_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
-    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, &_bbWindows, num_bbWin, _bbROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
-    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
-    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
-    _commit = new bb_commit (_commit_to_bp_port, _commit_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
+    _scheduler = new bb_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
+    _execution = new bb_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
+    _memory = new bb_memory (_execution_to_memory_port, _memory_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, memory_width, _LSQ_MGR, _RF_MGR, _clk, "memory");
+    _commit = new bb_commit (_commit_to_bp_port, _commit_to_scheduler_port, &_bbWindows, num_bbWin, _bbROB, _bbQUE, commit_width, _LSQ_MGR, _RF_MGR, _clk, "commit");
 }
 
 bb_sysCore::~bb_sysCore () {
     delete _RF_MGR;
     delete _LSQ_MGR;
     delete _bbROB;
+    delete _bbQUE;
     delete _bp;
     delete _fetch;
     delete _decode;
@@ -113,7 +115,7 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 200000) {
+//        if (_clk->now () == 10000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
 //                List<bbInstruction*>* insList = bb->getBBinsList ();

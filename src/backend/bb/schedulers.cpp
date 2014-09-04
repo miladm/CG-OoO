@@ -11,6 +11,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
+                            CAMtable<dynBasicblock*>* bbQUE,
 	    	                WIDTH scheduler_width,
                             bb_memManager* LSQ_MGR,
                             bb_rfManager* RF_MGR,
@@ -23,6 +24,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _bbROB = bbROB;
+    _bbQUE = bbQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     _bbWin_on_fetch = NULL;
@@ -289,7 +291,7 @@ void bb_scheduler::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum);
+    _scheduler_to_execution_port->flushPort (squashSeqNum, false);
     if (_bbWin_on_fetch != NULL && 
         _bbWin_on_fetch->_win.getTableState () != EMPTY_BUFF) {
         flushBBWindow (_bbWin_on_fetch);
