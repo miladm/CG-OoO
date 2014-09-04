@@ -122,7 +122,7 @@ void bb_commit::bpMispredSquash () {
         _bbQUE->removeNth_unsafe (i);
         s_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "Squash bb", bb->getBBID (), _clk->now ());
+                               "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
     }
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_bbQUE->getTableSize () == 0) break;
@@ -132,7 +132,7 @@ void bb_commit::bpMispredSquash () {
         _bbQUE->removeNth_unsafe (i);
         s_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "Squash bb", bb->getBBID (), _clk->now ());
+                               "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
         delBB (bb);
     }
 }
@@ -157,7 +157,7 @@ void bb_commit::memMispredSquash () {
         _bbQUE->removeNth_unsafe (i);
         s_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "Squash bb", bb->getBBID (), _clk->now ());
+                               "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
     }
 }
 

@@ -123,7 +123,7 @@ typedef enum {
 
 // Regsiter Renaming
 #define USE_LRF true
-#define ENABLE_SQUASH false
+#define ENABLE_SQUASH true
 
 #define LARF_SIZE 2000
 #define GARF_SIZE 6000

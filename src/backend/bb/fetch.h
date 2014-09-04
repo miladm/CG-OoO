@@ -31,8 +31,6 @@ class bb_fetch : protected stage {
         void regStat ();
         void getNewBB ();
         void updateBBfetchState ();
-        void delBB (dynBasicblock*);
-        void delIns (bbInstruction*);
 
 	private:
 		port<bbInstruction*>* _bp_to_fetch_port;

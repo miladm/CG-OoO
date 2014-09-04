@@ -101,7 +101,7 @@ void bb_fetch::updateBBfetchState () {
     else if (_current_bb->getBBstate () == FULL_BUFF) _fetch_state = FETCH_IN_PROGRESS;
     else if (_current_bb->getBBstate () == AVAILABLE_BUFF) _fetch_state = FETCH_IN_PROGRESS;
     dbg.print (DBG_FETCH, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
-            "FETCH STATE UPDATED TO:", _fetch_state, _clk->now ());
+            "FETCH STATE:", _fetch_state, _clk->now ());
 }
 
 void bb_fetch::squash () {
@@ -113,29 +113,8 @@ void bb_fetch::squash () {
 }
 
 void bb_fetch::squashCurrentBB () {
-//    delBB (_current_bb);
     _current_bb = NULL;
     _fetch_state = FETCH_COMPLETE;
-}
-
-void bb_fetch::delBB (dynBasicblock* bb) {
-//    if (bb->getBBID () > _bbROB->getNth_unsafe(_bbROB->getTableSize()-1)->getBBID ()) {
-//        bb->esetStates ();
-//        g_var.insertFrontBBcache (bb);
-//    } TODO this code must be made to work
-
-//    List<bbInstruction*>* insList = bb->getBBinsList ();
-//    for (int i = insList->NumElements () - 1; i >= 0; i--) {
-//        bbInstruction* ins = insList->Nth (i);
-//        delIns (ins);
-//        insList->RemoveAt (i);
-//    }
-//    delete bb;
-}
-
-/*-- DELETE INSTRUCTION OBJ --*/
-void bb_fetch::delIns (bbInstruction* ins) {
-    delete ins;
 }
 
 void bb_fetch::regStat () {

@@ -134,6 +134,7 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
 
 bool dynBasicblock::isMemOrBrViolation () {return (_bb_has_mem_violation || _bb_on_wrong_path);}
 
+/*-- THIS FUNCTION ENABLES DISTROYING THE ONLY LASTING COPY OF INS-LIST - USE IT WITH CAUTION --*/
 List<bbInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
 bool dynBasicblock::isBBcomplete () {
@@ -170,11 +171,16 @@ void dynBasicblock::commit () {
 }
 
 void dynBasicblock::resetStates () {
-    for (int i = _schedInsList.NumElements () - 1; i >= 0; i--) {
+    while (_schedInsList_waitList.NumElements () > 0) {
+        _schedInsList_waitList.RemoveAt (0);
+    }
+    for (int i = 0; i < _schedInsList.NumElements (); i++) {
         bbInstruction* ins = _schedInsList.Nth (i);
+        _schedInsList_waitList.Append (ins);
         ins->resetStates ();
         ins->resetWrongPath ();
     }
+    _num_completed_ins = 0;
     _bb_has_mem_violation = false;
     _bb_on_wrong_path = false;
 }

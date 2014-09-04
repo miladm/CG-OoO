@@ -30,6 +30,7 @@ class bb_lsqCAM : public CAMtable<bbInstruction*> {
         bool hasMemAddr (ADDRS, INS_ID);
         pair<bool, bbInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID);
         pair<bool, bbInstruction*> hasFinishedIns (LSQ_ID);
+        void dump ();
 };
 
 #endif

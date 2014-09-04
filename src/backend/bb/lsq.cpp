@@ -63,10 +63,10 @@ void bb_lsqCAM::squash (INS_ID ins_seq_num) {
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         bbInstruction* ins = getNth_unsafe (i);
         if (ins->getInsID () >= ins_seq_num) {
-            delete _table.Nth (i);
+//            delete _table.Nth (i);
             _table.RemoveAt (i);
             dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
-                       "Removing ins:", ins->getInsID (), "due to BB", ins_seq_num);
+                       "Squashing mem ins:", ins->getInsID (), "due to BB", ins_seq_num);
         } else {
             break;
         }
@@ -169,5 +169,13 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
         }
         dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished ST ins.", "SQ Size:", table_size);
         return pair<bool, bbInstruction*> (false, NULL);
+    }
+}
+
+void bb_lsqCAM::dump () {
+    LENGTH table_size = _table.NumElements ();
+    for (LENGTH i = table_size - 1; i >= 0; i--) {
+        bbInstruction* ins = getNth_unsafe (i);
+        cout << "ins id: " << ins->getInsID () << endl;
     }
 }
