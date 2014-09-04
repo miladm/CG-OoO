@@ -56,6 +56,14 @@ class o3_memManager : public unit {
 
         o3_lsqCAM _LQ;
         o3_lsqCAM _SQ;
+ 
+        /*-- STAT OBJS --*/
+        ScalarStat& s_cache_hit_cnt;
+        ScalarStat& s_cache_miss_cnt;
+        ScalarStat& s_ld_hit_cnt;
+        ScalarStat& s_ld_miss_cnt;
+        ScalarStat& s_st_miss_cnt;
+        ScalarStat& s_st_hit_cnt;
 };
 
 extern o3_memManager* g_LSQ_MGR;

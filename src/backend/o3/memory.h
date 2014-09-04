@@ -42,15 +42,6 @@ class o3_memory : protected stage {
         cache _L1;
         cache _L2;
         cache _L3;
-
-        /* STAT OBJS */
-        ScalarStat& s_cache_miss_cnt;
-        ScalarStat& s_cache_hit_cnt;
-        ScalarStat& s_ld_miss_cnt;
-        ScalarStat& s_ld_hit_cnt;
-        ScalarStat& s_st_miss_cnt;
-        ScalarStat& s_st_hit_cnt;
-
 };
 
 #endif

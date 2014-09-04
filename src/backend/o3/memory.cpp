@@ -13,13 +13,7 @@ o3_memory::o3_memory (port<dynInstruction*>& execution_to_memory_port,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (memory_width, stage_name, clk),
-      _mshr(20, 4, 4, clk, "MSHR"),
-      s_cache_miss_cnt (g_stats.newScalarStat (stage_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
-      s_cache_hit_cnt  (g_stats.newScalarStat (stage_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
-      s_ld_miss_cnt (g_stats.newScalarStat (stage_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
-      s_ld_hit_cnt  (g_stats.newScalarStat (stage_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
-      s_st_miss_cnt (g_stats.newScalarStat (stage_name, "st_miss_cnt", "Number of store misses", 0, PRINT_ZERO)),
-      s_st_hit_cnt  (g_stats.newScalarStat (stage_name, "st_hit_cnt", "Number of store hits", 0, PRINT_ZERO))
+      _mshr(20, 4, 4, clk, "MSHR")
 {
     _execution_to_memory_port = &execution_to_memory_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
