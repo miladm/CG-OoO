@@ -142,6 +142,7 @@ void bb_commit::bpMispredSquash () {
         s_br_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
+        delBB (bb);
     }
 }
 
