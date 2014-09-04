@@ -178,7 +178,7 @@ void scheduler::squash () {
 #endif
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum, false);
+    _scheduler_to_execution_port->flushPort (squashSeqNum);
     for (int i = (int)_iWindow.getTableSize() - 1; i >= 0; i--) {
         if (_iWindow.getTableSize() == 0) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (i);

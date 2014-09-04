@@ -196,14 +196,13 @@ bool port<queType_T>::hasReady () {
 }
 
 template <typename queType_T>
-void port<queType_T>::flushPort (INS_ID elemSeqNum, bool delete_objs) {
+void port<queType_T>::flushPort (INS_ID elemSeqNum) {
     CYCLE now = _clk->now ();
     if (getBuffSize () == 0) return;
     queType_T elem = getBack ();
     while (elem->getInsID () >= elemSeqNum) {
         dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str (), 
                 "POP ins", elem->getInsID (), "FOR", elemSeqNum, now);
-        if (delete_objs) delete elem;
         popBack();
         if (getBuffSize() == 0) break;
         elem = getBack();

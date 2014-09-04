@@ -40,7 +40,7 @@ class port : public unit
         bool isReadyNow ();
         bool hasReady ();
         bool hasReadyNow ();
-        void flushPort (INS_ID, bool);
+        void flushPort (INS_ID);
         void regStat ();
 
  	private: //variables
