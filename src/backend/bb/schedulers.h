@@ -50,16 +50,20 @@ class bb_scheduler : protected stage {
 		port<bbInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynBasicblock*>* _bbROB;
 
-        // RF REGISTERS
+        /*-- RF REGISTERS --*/
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
 
-        // BB WIN STRUCTURES
+        /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;
         bbWindow* _bbWin_on_fetch;
         List<bbWindow*>* _bbWindows;
         List<bbWindow*> _avail_bbWin;
         map<WIDTH, bbWindow*> _busy_bbWin;
+
+        /*-- STAT --*/
+        ScalarStat& s_mem_fwd_cnt;
+        ScalarStat& s_alu_fwd_cnt;
 };
 
 #endif

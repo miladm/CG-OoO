@@ -219,8 +219,8 @@ void bb_execution::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", 
             _stage_name.c_str (), "bb_execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
-//    INS_ID squashSeqNum = g_var.getSquashSN ();
-//    _execution_to_scheduler_port->flushPort (squashSeqNum);
+    INS_ID squashSeqNum = g_var.getSquashSN ();
+    _execution_to_scheduler_port->flushPort (squashSeqNum);
 }
 
 void bb_execution::regStat () {
