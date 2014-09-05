@@ -44,13 +44,13 @@ BUFF_STATE port<queType_T>::pushBack (queType_T ins, CYCLE lat) {
 
 template <typename queType_T>
 queType_T port<queType_T>::getFront () {
-    Assert(getBuffSize () > 0);
+    Assert (getBuffSize () > 0);
 	return (_buff.front ())._dynIns;
 }
 
 template <typename queType_T>
 queType_T port<queType_T>::getBack () {
-    Assert(getBuffSize () > 0);
+    Assert (getBuffSize () > 0);
 	return (_buff.back ())._dynIns;
 }
 
@@ -80,11 +80,11 @@ template <typename queType_T>
 void port<queType_T>::delOldReady () {
     CYCLE now = _clk->now ();
     if (getBuffSize () > 0) return;
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () < now) {
-            _buff.erase(it);
-        }
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () < now) {
+            _buff.erase (it++);
+        } else { ++it; }
     }
 }
 
@@ -92,13 +92,13 @@ template <typename queType_T>
 queType_T port<queType_T>::popNextReadyNow () {
     CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasReady ()");
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () == now) {
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () == now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             return dynIns;
-        }
+        } else { ++it; }
     }
     Assert (true == false  && "popNextReady () must not be used without hasReady ()");
 	return popFront (); //place holder
@@ -108,13 +108,13 @@ template <typename queType_T>
 queType_T port<queType_T>::popNextReady () {
     CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasReady ()");
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () <= now) {
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () <= now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             return dynIns;
-        }
+        } else { ++it; }
     }
     Assert (true == false  && "popNextReady () must not be used without hasReady ()");
 	return popFront (); //place holder
@@ -158,7 +158,7 @@ bool port<queType_T>::isReady () {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", now);
         return false;
     }
-    dbg.print (DBG_PORT, "%s: %s %d %d (cyc: %d)\n", _c_name.c_str (), "isReady -", _buff.front()._delay.getStopTime (), getBuffState (), now);
+    dbg.print (DBG_PORT, "%s: %s %d %d (cyc: %d)\n", _c_name.c_str (), "isReady -", _buff.front ()._delay.getStopTime (), getBuffState (), now);
 	BuffElement<queType_T> frontBuff = _buff.front ();
 	if (frontBuff._delay.getStopTime () <= now)
         return true;
@@ -174,7 +174,7 @@ bool port<queType_T>::hasReadyNow () {
     }
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () == now)
+        if ( (*it)._delay.getStopTime () == now)
             return true;
     }
     return false;
@@ -189,8 +189,7 @@ bool port<queType_T>::hasReady () {
     }
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () <= now)
-            return true;
+        if ( (*it)._delay.getStopTime () <= now) { return true; }
     }
     return false;
 }
@@ -203,9 +202,9 @@ void port<queType_T>::flushPort (INS_ID elemSeqNum) {
     while (elem->getInsID () >= elemSeqNum) {
         dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str (), 
                 "POP ins", elem->getInsID (), "FOR", elemSeqNum, now);
-        popBack();
-        if (getBuffSize() == 0) break;
-        elem = getBack();
+        popBack ();
+        if (getBuffSize () == 0) break;
+        elem = getBack ();
     }
 }
 

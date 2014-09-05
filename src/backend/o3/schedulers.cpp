@@ -14,7 +14,9 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (scheduler_width, stage_name, clk)
+	: stage (scheduler_width, stage_name, clk),
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -175,6 +177,7 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
+                        s_alu_fwd_cnt++;
                     }
                 }
             }
@@ -200,6 +203,7 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
+                        s_mem_fwd_cnt++;
                     }
                 }
             }

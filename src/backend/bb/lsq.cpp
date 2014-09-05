@@ -67,9 +67,7 @@ void bb_lsqCAM::squash (INS_ID ins_seq_num) {
             _table.RemoveAt (i);
             dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
                        "Squashing mem ins:", ins->getInsID (), "due to BB", ins_seq_num);
-        } else {
-            break;
-        }
+        } else { break; }
     }
 }
 

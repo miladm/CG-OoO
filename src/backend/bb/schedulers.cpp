@@ -228,7 +228,7 @@ bool bb_scheduler::detectNewBB (bbInstruction* ins) {
  --*/
 void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     { /*-- FWD FROM EXE STAGE --*/
-        if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
+        if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<bbInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
@@ -253,6 +253,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
         _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 
+    mem_fwd:
     { /*-- FWD FROM MEM STAGE --*/
         if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
@@ -308,9 +309,7 @@ void bb_scheduler::squash () {
         if (bbWin->_win.getTableState () == EMPTY_BUFF) {
             _avail_bbWin.Append (bbWin);
             _busy_bbWin.erase (bbWinEntry++);
-        } else {
-            ++bbWinEntry;
-        }
+        } else { ++bbWinEntry; }
     }
 }
 

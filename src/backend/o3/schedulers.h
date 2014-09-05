@@ -43,6 +43,10 @@ class o3_scheduler : protected stage {
         o3_rfManager* _RF_MGR;
         List<CAMtable<dynInstruction*>* > _ResStns;
         WIDTH _num_res_stns;
+
+        /*-- STAT --*/
+        ScalarStat& s_mem_fwd_cnt;
+        ScalarStat& s_alu_fwd_cnt;
 };
 
 #endif
