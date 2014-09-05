@@ -5,7 +5,7 @@
 #ifndef _G_VARIABLE_EN
 #define _G_VARIABLE_EN
 
-#define BB_NEAR_EMPTY_SIZE 30
+#define BB_NEAR_EMPTY_SIZE 50
 
 #include <setjmp.h>
 #include <set>

@@ -100,7 +100,7 @@ void bb_scheduler::manageBusyBBWin (bbWindow* bbWin) {
 
 bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
-    for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
+    for (bbWinEntry = _busy_bbWin.begin (); bbWinEntry != _busy_bbWin.end (); bbWinEntry++) {
     //for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
         WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
@@ -109,7 +109,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        if (!_RF_MGR->isReady (ins)) {continue;}
+        if (!_RF_MGR->isReady (ins)) { continue;}
         else {
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                    "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
@@ -291,26 +291,22 @@ void bb_scheduler::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->flushPort (squashSeqNum);
-    if (_bbWin_on_fetch != NULL && 
-        _bbWin_on_fetch->_win.getTableState () != EMPTY_BUFF) {
+    if (_bbWin_on_fetch != NULL) {
         flushBBWindow (_bbWin_on_fetch);
-        if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) {
-            setBBWisAvail (_bbWin_on_fetch->_id);
+        if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) { 
+            setBBWisAvail (_bbWin_on_fetch->_id); 
             _bbWin_on_fetch = NULL;
         }
     }
-    map<WIDTH, bbWindow*>::iterator bbWinEntry;
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Busy BBWindows Flush", _clk->now ());
-    for (bbWinEntry = _busy_bbWin.begin(); bbWinEntry != _busy_bbWin.end(); bbWinEntry++) {
-        WIDTH bbWin_id = bbWinEntry->first;
+    map<WIDTH, bbWindow*>::iterator bbWinEntry = _busy_bbWin.begin ();
+    while (bbWinEntry != _busy_bbWin.end ()) {
         bbWindow* bbWin = bbWinEntry->second;
-        if (bbWin->_win.getTableState () == EMPTY_BUFF) {
-            setBBWisAvail (bbWin_id);
-            continue;
-        }
         flushBBWindow (bbWin);
         if (bbWin->_win.getTableState () == EMPTY_BUFF) {
-            setBBWisAvail (bbWin_id);
+            _avail_bbWin.Append (bbWin);
+            _busy_bbWin.erase (bbWinEntry++);
+        } else {
+            ++bbWinEntry;
         }
     }
 }
@@ -318,8 +314,8 @@ void bb_scheduler::squash () {
 void bb_scheduler::flushBBWindow (bbWindow* bbWin) {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     while (bbWin->_win.getTableState () != EMPTY_BUFF &&
-           bbWin->_win.getFront()->getInsID () >= squashSeqNum) {
-        bbWin->_win.popFront();
+           bbWin->_win.getBack()->getInsID () >= squashSeqNum) {
+        bbWin->_win.popBack ();
     }
 }
 

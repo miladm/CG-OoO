@@ -3,7 +3,7 @@
  *******************************************************************************/
 
 #define INS_CNT_THR 1000
-#define BB_CNT_THR 100
+#define BB_CNT_THR 100 + BASICBLOCK
 #define G_I_INFO_EN 1
 
 #include "pars.h"

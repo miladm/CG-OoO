@@ -37,7 +37,7 @@ class table : public unit {
         /* SET ROUTINS */
  		BUFF_STATE pushBack (tableType_T);
  		tableType_T popBack ();
-        tableType_T getBack();
+        tableType_T getBack ();
 
         /* CONTROL ROUTINS */
         BUFF_STATE getTableState ();
