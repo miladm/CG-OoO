@@ -29,6 +29,10 @@ class bb_grfManager : public unit {
 
 	private:
         o3_registerRename _GRF;
+
+        /*-- STAT OBJS --*/
+        ScalarStat& s_cant_rename_cnt;
+        ScalarStat& s_can_rename_cnt;
 };
 
 #endif

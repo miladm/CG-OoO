@@ -41,6 +41,9 @@ class o3_execution : protected stage {
         o3_rfManager* _RF_MGR;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
+
+        /*-- STATS --*/
+        ScalarArryStat& s_squash_state_cnt;
 };
 
 #endif

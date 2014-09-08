@@ -24,6 +24,7 @@ class bb_memManager : public unit {
                        sysClock* clk, 
                        string lsq_name);
         ~bb_memManager ();
+        void regStat ();
 
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);

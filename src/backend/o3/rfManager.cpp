@@ -7,7 +7,9 @@
 o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _GRF (clk, "registerRename"),
-      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events"+rf_name, 0, PRINT_ZERO))
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events"+rf_name, 0, PRINT_ZERO)),
+      s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
+      s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO))
 { }
 
 o3_rfManager::~o3_rfManager () { }
@@ -41,8 +43,10 @@ bool o3_rfManager::isReady (dynInstruction* ins) {
 bool o3_rfManager::canRename (dynInstruction* ins) {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
+        s_cant_rename_cnt++;
         return false; /*-- STALL FETCH --*/
     }
+    s_can_rename_cnt++;
     return true;
 }
 

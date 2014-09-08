@@ -6,7 +6,9 @@
 
 bb_grfManager::bb_grfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, "GlobalRegisterRename")
+      _GRF (clk, "GlobalRegisterRename"),
+      s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
+      s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO))
 { }
 
 bb_grfManager::~bb_grfManager () { }
@@ -42,10 +44,12 @@ bool bb_grfManager::canRename (bbInstruction* ins) {
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                 "Can NOT rename regisers for ins", ins->getInsID (), _clk->now ());
+        s_cant_rename_cnt++;
         return false; /*-- STALL FETCH --*/
     }
     dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Can rename regisers for ins", ins->getInsID (), _clk->now ());
+    s_can_rename_cnt++;
     return true;
 }
 

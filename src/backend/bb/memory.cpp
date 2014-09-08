@@ -140,6 +140,7 @@ void bb_memory::squash () {
 
 void bb_memory::regStat () {
     _execution_to_memory_port->regStat ();
+    _LSQ_MGR->regStat ();
 }
 
 void bb_memory::manageMSHR () {

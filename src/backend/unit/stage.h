@@ -38,7 +38,7 @@ class stage {
 		const WIDTH _stage_width;
         sysClock* _clk;
 
-        /* STAT OBJS */
+        /*-- STAT OBJS --*/
         ScalarStat& s_ins_cnt;
         ScalarStat& s_stall_cycles;
         ScalarStat& s_squash_cycles;

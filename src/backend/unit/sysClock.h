@@ -13,6 +13,11 @@
 
 #define RUNTIME_REPORT_INTERVAL 200000
 
+class statistic;
+class stat;
+class RatioStat;
+class ScalarStat;
+
 class sysClock {
 	public:
 		sysClock ();
@@ -21,6 +26,7 @@ class sysClock {
 
 		void tick ();
 		CYCLE now ();
+        CYCLE getValue ();
 
 	private:
 		CYCLE _clk;

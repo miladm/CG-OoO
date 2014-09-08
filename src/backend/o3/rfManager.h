@@ -21,7 +21,7 @@ class o3_rfManager : public unit {
         void commitRegs (dynInstruction* ins);
         void squashRenameReg ();
 
-        /* WIRES CTRL */
+        /*-- WIRES CTRL --*/
         bool hasFreeWire (AXES_TYPE);
         bool hasFreeWire (AXES_TYPE, WIDTH);
         void updateWireState (AXES_TYPE);
@@ -32,6 +32,8 @@ class o3_rfManager : public unit {
 
         /*-- STAT --*/
         ScalarStat& s_rf_not_ready_cnt;
+        ScalarStat& s_cant_rename_cnt;
+        ScalarStat& s_can_rename_cnt;
 };
 
 extern o3_rfManager* g_GRF_MGR;

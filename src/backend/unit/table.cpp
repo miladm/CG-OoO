@@ -15,12 +15,13 @@ table<tableType_T>::table (LENGTH len,
                            sysClock* clk,
                            string table_name = "table") 
     : unit (table_name, clk),
-      //s_table_empty_cyc (g_stats.newScalarStat (table_name, "table_empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
-      //s_table_full_cyc  (g_stats.newScalarStat (table_name, "table_full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
       _wr_port (wr_port_cnt, WRITE, clk, table_name + ".wr_wire"),
       _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
       _table_size (len),
-      _table_type (table_type)
+      _table_type (table_type),
+      s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
+      s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
+      s_table_size_rat  (g_stats.newRatioStat (clk, table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
 {
 	Assert (_table_size > 0 && 
             rd_port_cnt > 0 && rd_port_cnt <= _table_size &&
@@ -94,10 +95,11 @@ void table<tableType_T>::removeNth_unsafe (LENGTH indx) {
 template <typename tableType_T>
 void table<tableType_T>::regStat () {
     if (getTableState () == EMPTY_BUFF) {
-//        s_table_empty_cyc++;
+        s_table_empty_cyc++;
     } else if (getTableState () == FULL_BUFF) {
-//        s_table_full_cyc++;
+        s_table_full_cyc++;
     }
+    s_table_size_rat += getTableSize ();
 }
 
 template <typename tableType_T>

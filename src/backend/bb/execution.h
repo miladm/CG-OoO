@@ -45,9 +45,12 @@ class bb_execution : protected stage {
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
 
-        // BB WIN STRUCTURES
+        /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;
         List<bbWindow*>* _bbWindows;
+
+        /*-- STATS --*/
+        ScalarArryStat& s_squash_state_cnt;
 };
 
 #endif

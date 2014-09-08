@@ -31,12 +31,12 @@ typedef enum {RAM_ARRAY, CAM_ARRAY, FIFO_ARRAY} TABLE_TYPE;
 template <typename tableType_T>
 class table : public unit {
     public:
- 		table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, string);
+        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, string);
         ~table () {}
 
         /* SET ROUTINS */
- 		BUFF_STATE pushBack (tableType_T);
- 		tableType_T popBack ();
+        BUFF_STATE pushBack (tableType_T);
+        tableType_T popBack ();
         tableType_T getBack ();
 
         /* CONTROL ROUTINS */
@@ -51,16 +51,17 @@ class table : public unit {
         bool hasFreeWire (AXES_TYPE);
 
     public:
-		List<TableElement<tableType_T>* > _table;
+        List<TableElement<tableType_T>* > _table;
         CYCLE _cycle;
         wires _wr_port;
         wires _rd_port;
-		const LENGTH _table_size;
+        const LENGTH _table_size;
         const TABLE_TYPE _table_type;
 
         /* STAT OBJS */
-//      ScalarStat& s_table_empty_cyc;
-//      ScalarStat& s_table_full_cyc;
+        ScalarStat& s_table_empty_cyc;
+        ScalarStat& s_table_full_cyc;
+        RatioStat& s_table_size_rat;
 };
 
 template <typename tableType_T>

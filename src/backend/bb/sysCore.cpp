@@ -60,7 +60,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_rfManager (num_bbWin, _clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "memManager");
-    _bbROB = new CAMtable<dynBasicblock*>(50, 32, 32, _clk, "bbROB");
+    _bbROB = new CAMtable<dynBasicblock*>(100, 32, 32, _clk, "bbROB");
     _bbQUE = new CAMtable<dynBasicblock*>(1000, 1000, 1000, _clk, "bbQUE");
 //    _RF_MGR = new bb_grfManager (_clk, "grfManager"); //TODO remove it
     for (WIDTH i = 0; i < num_bbWin; i++) {
@@ -115,7 +115,7 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 20000) {
+//        if (_clk->now () == 100000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
 //                List<bbInstruction*>* insList = bb->getBBinsList ();

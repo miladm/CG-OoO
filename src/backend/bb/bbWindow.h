@@ -14,6 +14,7 @@
 class bbWindow : public unit {
     public:
         bbWindow (string bbWin_id, sysClock* clk);
+        void regStat ();
         FIFOtable<bbInstruction*> _win;
         const WIDTH _id;
 };

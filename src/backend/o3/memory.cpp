@@ -135,6 +135,7 @@ void o3_memory::squash () {
 
 void o3_memory::regStat () {
     _execution_to_memory_port->regStat ();
+    _LSQ_MGR->regStat ();
 }
 
 void o3_memory::manageMSHR () {

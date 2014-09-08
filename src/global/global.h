@@ -24,7 +24,7 @@ typedef unsigned BYTES;
 typedef int LENGTH;
 typedef int WIDTH;
 typedef int nMETER;
-typedef long int SCALAR;
+typedef long double SCALAR;
 
 typedef char INS_STR;
 //typedef dynInstruction INS_OBJ;
@@ -40,6 +40,7 @@ typedef enum {NO_CORE, IN_ORDER, OUT_OF_ORDER, ONE_LEVEL_DEEP_DYN, X_LEVEL_DEEP_
 typedef enum {PERFECT, TOTAL_ORDER, NAIVE_SPECUL, STORE_SET_SPECUL} memModel;
 typedef enum {RR_ACTIVE, RR_INACTIVE} rrMode;
 
+#define NUM_PIPE_STATES 5
 typedef enum {PIPE_NORMAL, PIPE_WAIT_FLUSH, PIPE_FLUSH, PIPE_DRAIN, PIPE_SQUASH_ROB} PIPE_STATE;
 typedef enum {SQ_NO_STATE, SQ_ADDR_WAIT, SQ_COMPLETE, SQ_COMMIT, SQ_CACHE_DISPATCH} SQ_STATE;
 typedef enum {LQ_NO_STATE, LQ_ADDR_WAIT, LQ_PENDING_CACHE_DISPATCH, LQ_FWD_FROM_SQ, LQ_MSHR_WAIT, LQ_CACHE_WAIT, LQ_COMPLETE} LQ_STATE;

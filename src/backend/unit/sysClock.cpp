@@ -36,3 +36,8 @@ void sysClock::tick () {
 CYCLE sysClock::now () {
 	return _clk;
 }
+
+/*-- ONLY USED FOR STAT --*/
+CYCLE sysClock::getValue () {
+	return now ();
+}

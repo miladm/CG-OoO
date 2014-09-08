@@ -17,8 +17,9 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
-      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
-      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO))
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events", 0, PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events", 0, PRINT_ZERO)),
+      s_bbWin_usage_rat (g_stats.newRatioStat (clk, stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -52,6 +53,13 @@ void bb_scheduler::doSCHEDULER () {
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+    s_bbWin_usage_rat += _busy_bbWin.size ();
+    map<WIDTH, bbWindow*>::iterator bbWinEntry;
+//    for (bbWinEntry = _busy_bbWin.begin (); bbWinEntry != _busy_bbWin.end (); bbWinEntry++) {
+//        WIDTH bbWin_id = bbWinEntry->first;
+//        //cout << bbWin_id << " ";
+//    }
+    //cout << "(" << g_var.g_pipe_state << ")" << endl;
 }
 
 PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
@@ -62,9 +70,9 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
     /*-- READ FROM INS WINDOW --*/
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
-        if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         LENGTH readyInsInBBWinIndx;
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx)) break;
+        if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         bbInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
         WIDTH num_ar = ins->getTotNumRdAR ();
         if (!_RF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
@@ -84,6 +92,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         pipe_stall = PIPE_BUSY;
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
     }
+        //cout << endl;
 
     manageCDB ();
 
@@ -111,8 +120,9 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         forwardFromCDB (ins);
-        if (!_RF_MGR->isReady (ins)) { continue;}
+        if (!_RF_MGR->isReady (ins)) { continue; }
         else {
+            //cout << bbWin_id << " ";
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                    "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
            return true;
@@ -127,8 +137,11 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
 void bb_scheduler::updatebbWindows () {
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
+        //cout << "1 ";
         if (_decode_to_scheduler_port->getBuffState () == EMPTY_BUFF) break;
+        //cout << "2 ";
         if (!_decode_to_scheduler_port->isReady ()) break;
+        //cout << "3 ";
         bbInstruction* ins = _decode_to_scheduler_port->getFront ();
         if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
             if (_LSQ_MGR->getTableState (LD_QU) == FULL_BUFF) break;
@@ -137,14 +150,20 @@ void bb_scheduler::updatebbWindows () {
             if (_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
             if (!_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
         }
+        //cout << "4 ";
         if (!_RF_MGR->canRename (ins)) break;
+        //cout << "5 ";
 
         /*-- CHECK & UPDATE --*/
         if (detectNewBB (ins)) {
+                //cout << "5.1 ";
             if (!hasAnAvailBBWin ()) {
+                //cout << "5.1.1 ";
                 break;
             } else {
+                //cout << "5.1.2 ";
                 if (_bbROB->getTableState () == FULL_BUFF) break;
+                //cout << "5.1.3 ";
                 if (!_bbROB->hasFreeWire (WRITE)) break;
                 updateBBROB (ins->getBB ());
                 _bbWin_on_fetch = getAnAvailBBWin ();
@@ -152,7 +171,9 @@ void bb_scheduler::updatebbWindows () {
             }
         }
         Assert (_bbWin_on_fetch != NULL);
+                //cout << "6 ";
         if (!_bbWin_on_fetch->_win.hasFreeWire (WRITE)) break;
+                //cout << "7 ";
         Assert (_bbWin_on_fetch->_win.getTableState () != FULL_BUFF);
 
         /*-- WRITE INTO BB WIN --*/
@@ -173,6 +194,7 @@ void bb_scheduler::updatebbWindows () {
             _LSQ_MGR->updateWireState (ST_QU, WRITE);
         }
     }
+    //cout << endl;
 }
 
 void bb_scheduler::updateBBROB (dynBasicblock* bb) {
@@ -325,7 +347,7 @@ void bb_scheduler::regStat () {
     _decode_to_scheduler_port->regStat ();
     _execution_to_scheduler_port->regStat ();
     _memory_to_scheduler_port->regStat ();
-  //for (WIDTH j = 0; j < _num_bbWin; j++) { TODO put this back
-  //    _bbWindows->Nth(j)->regStat ();
-  //}
+    for (WIDTH j = 0; j < _num_bbWin; j++) {
+        _bbWindows->Nth(j)->regStat ();
+    }
 }

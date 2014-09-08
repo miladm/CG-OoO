@@ -14,7 +14,8 @@ bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port,
                             bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
-	: stage (execution_width, stage_name, clk)
+	: stage (execution_width, stage_name, clk),
+      s_squash_state_cnt (g_stats.newScalarArryStat (NUM_PIPE_STATES, stage_name, "pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO))
 {
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -53,6 +54,7 @@ void bb_execution::doEXECUTION () {
             _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /*-- STAT --*/
+    s_squash_state_cnt[g_var.g_pipe_state]++;
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }

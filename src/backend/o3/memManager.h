@@ -24,6 +24,7 @@ class o3_memManager : public unit {
                        sysClock* clk, 
                        string lsq_name);
         ~o3_memManager ();
+        void regStat ();
 
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);
