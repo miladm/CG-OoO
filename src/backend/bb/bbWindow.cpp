@@ -6,7 +6,7 @@
 
 bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     : unit ("bbWindow_" + bbWin_id, clk),
-      _win (100, 32, 32, clk, "bbWindow_" + bbWin_id), //TODO configure and more real numbers
+      _win (100, 100, 100, clk, "bbWindow_" + bbWin_id), //TODO configure and more real numbers
       _id (atoi (bbWin_id.c_str ()))//,
 //      s_bbWin_size_rat (g_stats.newRatioStat (clk, stage_name, "bbWin_size_rat", "Average bbWindow size (/ cycle)", 0, PRINT_ZERO))
 { }

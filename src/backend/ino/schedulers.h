@@ -36,6 +36,10 @@ class scheduler : protected stage {
 		port<dynInstruction*>* _scheduler_to_execution_port;
         CAMtable<dynInstruction*>* _iROB;
         FIFOtable<dynInstruction*> _iWindow;
+
+        /*-- STAT --*/
+        ScalarStat& s_mem_fwd_cnt;
+        ScalarStat& s_alu_fwd_cnt;
 };
 
 #endif

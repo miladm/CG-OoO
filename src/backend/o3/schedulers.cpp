@@ -214,10 +214,17 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
 
 /*-- MANAGE COMMON DATA BUS (CDB) --*/
 void o3_scheduler::manageCDB () {
-    if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
-    for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-        if (_execution_to_scheduler_port->isReady ())
-            _execution_to_scheduler_port->popFront ();
+    if (_execution_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
+        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
+            if (_execution_to_scheduler_port->isReady ())
+                _execution_to_scheduler_port->popFront ();
+        }
+    }
+    if (_memory_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
+        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
+            if (_memory_to_scheduler_port->isReady ())
+                _memory_to_scheduler_port->popFront ();
+        }
     }
 }
 

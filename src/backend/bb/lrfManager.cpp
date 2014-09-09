@@ -23,7 +23,7 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
     List<AR>* a_rdReg_list = ins->getLARrdList ();
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
-        if (!_RF.isRegValid (reg)) {
+        if (!_RF.isRegValidAndReady (reg)) {
             dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
                     "Reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
             return false; /* operand not available */
@@ -47,7 +47,7 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
 void bb_lrfManager::reserveRF (bbInstruction* ins) {
     dbg.print (DBG_L_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Reserving regisers for ins", ins->getInsID (), _clk->now ());
-    List<AR>* a_wrReg_list = ins->getLARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.reserveReg (reg);
@@ -56,7 +56,7 @@ void bb_lrfManager::reserveRF (bbInstruction* ins) {
 
 /* CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS */
 bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getLARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
@@ -73,7 +73,7 @@ bool bb_lrfManager::canReserveRF (bbInstruction* ins) {
 void bb_lrfManager::writeToRF (bbInstruction* ins) {
     dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Write to LRF ", _lrf_id, "for ins", ins->getInsID (), _clk->now ());
-    List<AR>* a_wrReg_list = ins->getLARrdList ();
+    List<AR>* a_wrReg_list = ins->getLARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);

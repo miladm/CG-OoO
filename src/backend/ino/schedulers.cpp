@@ -14,7 +14,9 @@ scheduler::scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 	    	          string stage_name) 
 	: stage (issue_width, stage_name, clk),
       //_iWindow (iWin_length, CAM_ARRAY, iWin_rd_port, iWin_wr_port, "iWindow") - TODO fix this
-      _iWindow (120, 4, 4, clk, "iWindow")
+      _iWindow (120, 4, 4, clk, "iWindow"),
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -130,6 +132,7 @@ void scheduler::forwardFromCDB (dynInstruction* ins) {
                     AR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
+                        s_alu_fwd_cnt++;
                     }
                 }
             }
@@ -155,6 +158,7 @@ void scheduler::forwardFromCDB (dynInstruction* ins) {
                     AR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
+                        s_mem_fwd_cnt++;
                     }
                 }
             }

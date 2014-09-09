@@ -6,7 +6,9 @@
 
 rfManager::rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
-      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "registerFile")
+      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "registerFile"),
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
+      s_lrf_busy_cnt (g_stats.newScalarStat (rf_name, "rf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO))
 { }
 
 rfManager::~rfManager () { }
@@ -20,7 +22,8 @@ bool rfManager::isReady (dynInstruction* ins) {
     List<AR>* a_rdReg_list = ins->getARrdList ();
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
-        if (!_RF.isRegValid (reg)) {
+        if (!_RF.isRegValidAndReady (reg)) {
+            s_rf_not_ready_cnt++;
             return false; /* operand not available */
         } else {
             a_rdReg_list->RemoveAt (i); /*optimization */
@@ -29,12 +32,13 @@ bool rfManager::isReady (dynInstruction* ins) {
     if (a_rdReg_list->NumElements () == 0) {
         return true; /* all operands available */
     }
+    s_rf_not_ready_cnt++;
     return false; /* not all operands available */
 }
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */
 void rfManager::reserveRF (dynInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.reserveReg (reg);
@@ -43,10 +47,11 @@ void rfManager::reserveRF (dynInstruction* ins) {
 
 /* CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS */
 bool rfManager::canReserveRF (dynInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
+            s_lrf_busy_cnt++;
             return false; /* operand not available for write */
         }
     }
@@ -54,7 +59,7 @@ bool rfManager::canReserveRF (dynInstruction* ins) {
 }
 
 void rfManager::writeToRF (dynInstruction* ins) {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);

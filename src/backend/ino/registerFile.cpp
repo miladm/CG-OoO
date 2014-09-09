@@ -53,7 +53,7 @@ void registerFile::reserveReg (PR reg) {
 }
 
 /* FIND IF REG DATA IS AVAILABLE FOR READ */
-bool registerFile::isRegValid (PR reg) {
+bool registerFile::isRegValidAndReady (PR reg) {
 #ifdef ASSERTION
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
 #endif

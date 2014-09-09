@@ -51,6 +51,7 @@ class bb_execution : protected stage {
 
         /*-- STATS --*/
         ScalarHistStat& s_squash_state_hist;
+        ScalarHistStat& s_eu_busy_state_hist;
         ScalarStat& s_br_mispred_cnt;
         ScalarStat& s_mem_mispred_cnt;
 };

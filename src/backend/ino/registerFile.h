@@ -34,7 +34,7 @@ class registerFile : public unit {
 		~registerFile ();
 		void updateReg (PR reg);
 		void reserveReg (PR reg);
-		bool isRegValid (PR reg);
+		bool isRegValidAndReady (PR reg);
 		bool isRegBusy (PR regNum);
         void resetRF ();
 

@@ -28,6 +28,10 @@ class rfManager : public unit {
 
 	private:
         registerFile _RF;
+
+        /*-- STAT --*/
+        ScalarStat& s_rf_not_ready_cnt;
+        ScalarStat& s_lrf_busy_cnt;
 };
 
 extern rfManager* g_RF_MGR;
