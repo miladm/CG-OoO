@@ -31,17 +31,16 @@ typedef char INS_STR;
 
 typedef enum {EMPTY_BUFF, AVAILABLE_BUFF, FULL_BUFF} BUFF_STATE;
 typedef enum {NO_STAGE, FETCH, DECODE, DISPATCH, ISSUE, EXECUTE, MEM_ACCESS, COMPLETE, COMMIT, ready, chain, execute, complete, sideReady, sideBuffer} status; typedef status PIPE_STAGE; //TODO clean up
-typedef enum {noType, ALU, MEM, FPU, BR, ASSIGN, NOP, bbHEAD} type; typedef type INS_TYPE; //TODO clean this up
+typedef enum {noType, ALU, MEM, FPU, BR, ASSIGN, NOP, bbHEAD, NUM_INS_TYPE} type; typedef type INS_TYPE; //TODO clean this up
 typedef enum {CALL, RET, DIR_BR, INDIR_BR, JMP} brType; typedef brType BR_TYPE; //TODO clean this up
-typedef enum {LOAD, STORE} MEM_TYPE;
+typedef enum {LOAD, STORE, NUM_MEM_TYPE} MEM_TYPE;
 typedef enum {none, READ, WRITE} memType; typedef memType AXES_TYPE; //TODO clean this up
 typedef enum {noBrMode, noBr, allBr, statPredBr, scheduleBr, lowBiasBr, dynPredBr} brMode;
 typedef enum {NO_CORE, IN_ORDER, OUT_OF_ORDER, ONE_LEVEL_DEEP_DYN, X_LEVEL_DEEP_DYN, ONE_LEVE_DEEP_STAT, X_LEVE_DEEP_STAT, PHRASE, FRAGMENT, FRAGMENT2, DOT, STRAND, PHRASEBLOCK, BASICBLOCK} core; typedef core CORE_TYPE; //TODO clean this up
 typedef enum {PERFECT, TOTAL_ORDER, NAIVE_SPECUL, STORE_SET_SPECUL} memModel;
 typedef enum {RR_ACTIVE, RR_INACTIVE} rrMode;
 
-#define NUM_PIPE_STATES 5
-typedef enum {PIPE_NORMAL, PIPE_WAIT_FLUSH, PIPE_FLUSH, PIPE_DRAIN, PIPE_SQUASH_ROB} PIPE_STATE;
+typedef enum {PIPE_NORMAL, PIPE_WAIT_FLUSH, PIPE_FLUSH, PIPE_DRAIN, PIPE_SQUASH_ROB, NUM_PIPE_STATE} PIPE_STATE;
 typedef enum {SQ_NO_STATE, SQ_ADDR_WAIT, SQ_COMPLETE, SQ_COMMIT, SQ_CACHE_DISPATCH} SQ_STATE;
 typedef enum {LQ_NO_STATE, LQ_ADDR_WAIT, LQ_PENDING_CACHE_DISPATCH, LQ_FWD_FROM_SQ, LQ_MSHR_WAIT, LQ_CACHE_WAIT, LQ_COMPLETE} LQ_STATE;
 

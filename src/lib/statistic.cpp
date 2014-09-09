@@ -13,8 +13,8 @@ statistic::statistic() { }
 
 statistic::~statistic() {
     {
-        set<ScalarArryStat*>::iterator it;
-        for (it = _ScalarArryStats.begin(); it != _ScalarArryStats.end(); it++) {
+        set<ScalarHistStat*>::iterator it;
+        for (it = _ScalarHistStats.begin(); it != _ScalarHistStats.end(); it++) {
             delete (*it);
         }
     }
@@ -32,9 +32,9 @@ statistic::~statistic() {
     }
 }
 
-ScalarArryStat& statistic::newScalarArryStat (LENGTH array_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
-    ScalarArryStat* cnt = new ScalarArryStat (array_size, class_name, param_name, _description, init_val, print_if_zero);
-    _ScalarArryStats.insert (cnt);
+ScalarHistStat& statistic::newScalarHistStat (LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    ScalarHistStat* cnt = new ScalarHistStat (histogram_size, class_name, param_name, _description, init_val, print_if_zero);
+    _ScalarHistStats.insert (cnt);
     return *cnt;
 }
 
@@ -52,8 +52,8 @@ RatioStat& statistic::newRatioStat (sysClock* clk, string class_name, string par
 
 void statistic::dump () {
     {
-        set<ScalarArryStat*>::iterator it;
-        for (it = _ScalarArryStats.begin (); it != _ScalarArryStats.end (); it++) {
+        set<ScalarHistStat*>::iterator it;
+        for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++) {
             (*it)->print ();
         }
     }
@@ -126,6 +126,10 @@ SCALAR stat::getValue () {
     return _ScalarStat;
 }
 
+string stat::getName () {
+    return _name;
+}
+
 /* **************************** *
  * SCALAR STAT
  * **************************** */
@@ -135,36 +139,38 @@ ScalarStat::ScalarStat (string class_name, string param_name, string description
 
 void ScalarStat::print () {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
-        cout << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t - " << _description << endl;
+        cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
 }
 
 /* **************************** *
- * SCALAR ARRAY STAT
+ * SCALAR HIST STAT
  * **************************** */
-ScalarArryStat::ScalarArryStat (LENGTH array_size, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+ScalarHistStat::ScalarHistStat (LENGTH histogram_size, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
     : stat (class_name, param_name, description, init_val, print_if_zero)
 {
-    _array_size = array_size;
-    _scalar_arr_stat = new stat[_array_size] ();
-    for (int i = 0; i < _array_size; i++) {
+    _histogram_size = histogram_size;
+    _scalar_arr_stat = new stat[_histogram_size];
+    for (LENGTH i = 0; i < _histogram_size; i++) {
         ostringstream indx;
         indx << i;
-        _scalar_arr_stat[i].init (class_name, param_name + "_" + indx.str (), description, init_val, print_if_zero);
+        string param = param_name + "_" + indx.str ();
+        _scalar_arr_stat[i].init (class_name, param, description, init_val, print_if_zero);
     }
 }
 
-ScalarArryStat::~ScalarArryStat () {
+ScalarHistStat::~ScalarHistStat () {
     delete _scalar_arr_stat;
 }
 
-stat& ScalarArryStat::operator[] (LENGTH index) {
+stat& ScalarHistStat::operator[] (LENGTH index) {
     return _scalar_arr_stat[index];
 }
 
-void ScalarArryStat::print () {
-    for (LENGTH i = 0; i < _array_size; i++) {
+void ScalarHistStat::print () {
+    cout << "* " << _name  << ": " << "\t\t\t # " << _description << endl;
+    for (LENGTH i = 0; i < _histogram_size; i++) {
         if (!(_scalar_arr_stat[i].getValue () == 0 && _print_if_zero == NO_PRINT_ZERO))
-            cout << _name << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << "\t\t\t - " << _description << endl;
+            cout << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
     }
 }
 
@@ -177,7 +183,7 @@ RatioStat::RatioStat (sysClock* divisor, string class_name, string param_name, s
 
 void RatioStat::print () {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
-        cout << _name << ": " << (FRACTION) _ScalarStat / _divisor->getValue () << "\t\t\t - " << _description << endl;
+        cout << "* " << _name << ": " << (FRACTION) _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
 }
 
 statistic g_stats;

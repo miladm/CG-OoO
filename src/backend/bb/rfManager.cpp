@@ -7,10 +7,10 @@
 bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rfm_name)
     : unit (rfm_name, clk),
       _GRF_MGR (_clk, "grfManager"),
-      s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events"+rfm_name, 0, PRINT_ZERO)),
-      s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF operand-not-ready events"+rfm_name, 0, PRINT_ZERO)),
-      s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF operand-not-ready events"+rfm_name, 0, PRINT_ZERO))
-
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
+      s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF read operand-not-ready events", 0, PRINT_ZERO)),
+      s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF read operand-not-ready events", 0, PRINT_ZERO)),
+      s_lrf_busy_cnt (g_stats.newScalarStat (rfm_name, "lrf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO))
 { 
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
@@ -50,7 +50,9 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
     dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Check if can reserve LRF write regs for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
-    return _LRF_MGRS[bbWin_id]->canReserveRF (ins);
+    bool result = _LRF_MGRS[bbWin_id]->canReserveRF (ins);
+    if (!result) s_lrf_busy_cnt++;
+    return result;
 }
 
 bool bb_rfManager::isReady (bbInstruction* ins) {

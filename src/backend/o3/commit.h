@@ -41,6 +41,11 @@ class o3_commit : protected stage {
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;
+        ScalarStat& s_squash_br_cnt;
+        ScalarStat& s_squash_mem_cnt;
+        ScalarStat& s_wp_ins_cnt;
+        ScalarHistStat& s_ins_type_hist;
+        ScalarHistStat& s_mem_type_hist;
 };
 
 #endif

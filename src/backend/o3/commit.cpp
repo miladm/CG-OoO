@@ -14,7 +14,12 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
                       sysClock* clk,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
-      s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO))
+      s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
+      s_squash_br_cnt (g_stats.newScalarStat ( _stage_name, "squash_br_cnt", "Number of squashed branch instructions", 0, PRINT_ZERO)),
+      s_squash_mem_cnt (g_stats.newScalarStat ( _stage_name, "squash_mem_cnt", "Number of squashed memory instructions", 0, PRINT_ZERO)),
+      s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of wrong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
+      s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_name, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),
+      s_mem_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_MEM_TYPE, stage_name, "mem_type_cnt", "Committed memory instruction type distribution", 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
@@ -62,6 +67,8 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
                 ins = _iROB->popFront ();
                 dynInstruction* ins_dual = _iQUE->popFront ();
                 Assert (ins->getInsID () == ins_dual->getInsID ());
+                s_ins_type_hist[ins->getInsType ()]++;
+                s_mem_type_hist[ins->getMemType ()]++;
                 dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                            "Commit ins", ins->getInsID (), _clk->now ());
                 if (ins->getMemType () == LOAD) delIns (ins);
@@ -71,6 +78,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
             dynInstruction* ins_dual = _iQUE->popFront ();
             Assert (ins->getInsID () == ins_dual->getInsID ());
             _RF_MGR->commitRegs (ins);
+            s_ins_type_hist[ins->getInsType ()]++;
             dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Commit ins", ins->getInsID (), _clk->now ());
             delIns (ins);
@@ -133,6 +141,7 @@ void o3_commit::bpMispredSquash () {
         g_var.insertFrontCodeCache (ins);
         _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        s_squash_br_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }
@@ -143,6 +152,8 @@ void o3_commit::bpMispredSquash () {
         Assert (ins->getInsID () >= squashSeqNum);
         _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        s_squash_br_cnt++;
+        s_wp_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
         delIns (ins);
@@ -168,6 +179,7 @@ void o3_commit::memMispredSquash () {
         g_var.insertFrontCodeCache (ins);
         _iQUE->removeNth_unsafe (i);
         s_squash_ins_cnt++;
+        s_squash_mem_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(MEM_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }

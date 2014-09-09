@@ -47,7 +47,7 @@ class bb_rfManager : public unit {
         ScalarStat& s_rf_not_ready_cnt;
         ScalarStat& s_lrf_not_ready_cnt;
         ScalarStat& s_grf_not_ready_cnt;
-
+        ScalarStat& s_lrf_busy_cnt;
 };
 
 #endif

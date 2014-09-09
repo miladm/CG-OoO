@@ -30,7 +30,12 @@ class stat {
         stat (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         void init (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~stat () {}
+
+        /*-- GET FUNCS --*/
         SCALAR getValue ();
+        string getName ();
+
+        /*-- OPERATORS --*/
         stat& operator++ ();
         stat  operator++ (int);
         stat& operator-- ();
@@ -55,18 +60,18 @@ class ScalarStat : public stat {
 };
 
 /* **************************** *
- * SCALAR ARRAY STAT
+ * SCALAR HIST STAT
  * **************************** */
-class ScalarArryStat : public stat {
+class ScalarHistStat : public stat {
     public:
-        ScalarArryStat (LENGTH, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
-        ~ScalarArryStat ();
+        ScalarHistStat (LENGTH, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        ~ScalarHistStat ();
         stat& operator[] (LENGTH);
         void print ();
 
     private:
         stat* _scalar_arr_stat;
-        LENGTH _array_size;
+        LENGTH _histogram_size;
 };
 
 /* **************************** *
@@ -90,12 +95,12 @@ class statistic {
 		statistic ();
 		~statistic ();
         void dump ();
-        ScalarArryStat& newScalarArryStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
+        ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (sysClock*, string, string, string, SCALAR, PRINT_ON_ZERO);
 
     private:
-        set<ScalarArryStat*> _ScalarArryStats;
+        set<ScalarHistStat*> _ScalarHistStats;
         set<ScalarStat*> _ScalarStats;
         set<RatioStat*> _RatioStats;
 

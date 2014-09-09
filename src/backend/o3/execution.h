@@ -43,7 +43,9 @@ class o3_execution : protected stage {
         exeUnitLat _eu_lat;
 
         /*-- STATS --*/
-        ScalarArryStat& s_squash_state_cnt;
+        ScalarHistStat& s_squash_state_hist;
+        ScalarStat& s_br_mispred_cnt;
+        ScalarStat& s_mem_mispred_cnt;
 };
 
 #endif

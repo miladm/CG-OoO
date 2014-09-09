@@ -13,7 +13,9 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (execution_width, stage_name, clk),
-      s_squash_state_cnt (g_stats.newScalarArryStat (NUM_PIPE_STATES, stage_name, "squash_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO))
+      s_squash_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "squash_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
+      s_br_mispred_cnt (g_stats.newScalarStat (stage_name, "br_mispred_cnt", "Number of branch mis-predict events", 0, PRINT_ZERO)),
+      s_mem_mispred_cnt (g_stats.newScalarStat (stage_name, "mem_mispred_cnt", "Number of memory mis-predict events", 0, PRINT_ZERO))
 {
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -50,7 +52,7 @@ void o3_execution::doEXECUTION () {
                "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /*-- STAT --*/
-    s_squash_state_cnt[g_var.g_pipe_state]++;
+    s_squash_state_hist[g_var.g_pipe_state]++;
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
@@ -98,11 +100,13 @@ COMPLETE_STATUS o3_execution::completeIns () {
         if (ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (ins->getInsID ());
             g_var.setSquashType (BP_MISPRED);
+            s_br_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
             g_var.setSquashSN (violating_ld_ins->getInsID ());
             g_var.setSquashType (MEM_MISPRED);
+            s_mem_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
         }

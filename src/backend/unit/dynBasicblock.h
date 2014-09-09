@@ -75,6 +75,7 @@ class dynBasicblock : public unit {
         set<AR>* getGARwrList ();
         bbInstruction* popFront ();
         LENGTH getBBsize ();
+        LENGTH getBBorigSize ();
         BUFF_STATE getBBstate ();
         bool isOnWrongPath ();
         PR getGPR (AR, AXES_TYPE);

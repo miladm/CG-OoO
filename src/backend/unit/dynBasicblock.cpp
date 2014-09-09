@@ -144,9 +144,9 @@ bool dynBasicblock::isBBcomplete () {
 // ***********************
 // ** INS CONTROL       **
 // ***********************
-LENGTH dynBasicblock::getBBsize () {
-    return _schedInsList_waitList.NumElements ();
-}
+LENGTH dynBasicblock::getBBsize () { return _schedInsList_waitList.NumElements (); }
+
+LENGTH dynBasicblock::getBBorigSize () { return _schedInsList.NumElements (); }
 
 bool dynBasicblock::isOnWrongPath () {return _bb_on_wrong_path;}
 

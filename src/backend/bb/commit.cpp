@@ -17,10 +17,16 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
 	    	          string stage_name)
 	: stage (commit_width, stage_name, clk),
       s_squash_ins_cnt (g_stats.newScalarStat (stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
+      s_squash_br_cnt (g_stats.newScalarStat (stage_name, "squash_br_cnt", "Number of squashed branch instructions", 0, PRINT_ZERO)),
+      s_squash_mem_cnt (g_stats.newScalarStat (stage_name, "squash_mem_cnt", "Number of squashed memory instructions", 0, PRINT_ZERO)),
       s_br_squash_bb_cnt (g_stats.newScalarStat (stage_name, "br_squash_bb_cnt", "Number of squashed basicblocks due to br mis-pred", 0, PRINT_ZERO)),
       s_mem_squash_bb_cnt (g_stats.newScalarStat (stage_name, "mem_squash_bb_cnt", "Number of squashed basicblocks due to mem mis-pred", 0, PRINT_ZERO)),
       s_num_waste_ins (g_stats.newScalarStat (stage_name, "num_waste_ins", "Number of useful instructions squashed", 0, PRINT_ZERO)),
-      s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of dynamic basiblocks in "+stage_name, 0, PRINT_ZERO))
+      s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of dynamic basiblocks in "+stage_name, 0, PRINT_ZERO)),
+      s_wp_bb_cnt (g_stats.newScalarStat (stage_name, "wp_bb_cnt", "Number of wrong-path basiblocks in "+stage_name, 0, PRINT_ZERO)),
+      s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of wrong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
+      s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_name, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),
+      s_mem_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_MEM_TYPE, stage_name, "mem_type_cnt", "Committed memory instruction type distribution", 0, PRINT_ZERO))
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
@@ -128,6 +134,8 @@ void bb_commit::bpMispredSquash () {
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
         s_num_waste_ins += bb->getNumWasteIns ();
+        s_squash_ins_cnt += bb->getBBorigSize ();
+        s_squash_br_cnt += bb->getBBorigSize ();
         s_br_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
@@ -139,6 +147,10 @@ void bb_commit::bpMispredSquash () {
         Assert (bb->getBBheadID () >= squashSeqNum);
         s_num_waste_ins += bb->getNumWasteIns ();
         _bbQUE->removeNth_unsafe (i);
+        s_wp_bb_cnt++;
+        s_wp_ins_cnt += bb->getBBorigSize ();
+        s_squash_ins_cnt += bb->getBBorigSize ();
+        s_squash_br_cnt += bb->getBBorigSize ();
         s_br_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
@@ -164,8 +176,10 @@ void bb_commit::memMispredSquash () {
         bb->resetStates ();
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
-        s_num_waste_ins += bb->getNumWasteIns ();
         s_mem_squash_bb_cnt++;
+        s_squash_ins_cnt += bb->getBBorigSize ();
+        s_squash_mem_cnt += bb->getBBorigSize ();
+        s_num_waste_ins += bb->getNumWasteIns ();
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
     }
@@ -183,6 +197,8 @@ void bb_commit::commitBB (dynBasicblock* bb) {
             if (_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
                 _RF_MGR->commitRegs (ins);
+                s_ins_type_hist[ins->getInsType ()]++;
+                s_mem_type_hist[ins->getMemType ()]++;
                 if (ins->getMemType () == LOAD) delIns (ins);
                 insList->RemoveAt (0);
             } else {
@@ -190,6 +206,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
             }
         } else {
             _RF_MGR->commitRegs (ins);
+            s_ins_type_hist[ins->getInsType ()]++;
             delIns (ins);
             insList->RemoveAt (0);
         }
