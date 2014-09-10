@@ -237,6 +237,11 @@ VOID pin__init (char* cfgFile)
 	PIN_SemaphoreClear (&semaphore1);
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
 	g_var.msg.simStep ("PARS COMPILED CODE");
+	g_var.g_insList = new List<string*>;
+	g_var.g_codeCache = new List<dynInstruction*>;
+	g_var.g_bbCache = new List<dynBasicblock*>;
+	g_var.g_BBlist = new List<basicblock*>;
+    g_var.g_core_type = IN_ORDER; //BASICBLOCK;
 	g_staticCode = new staticCodeParser (g_cfg);
 	pin__uOpGenInit (*g_staticCode);
 
@@ -250,11 +255,6 @@ VOID pin__init (char* cfgFile)
                                  "-z", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/branch_exe_count_map.csv", 
                                  NULL};
 	int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
-	g_var.g_insList = new List<string*>;
-	g_var.g_codeCache = new List<dynInstruction*>;
-	g_var.g_bbCache = new List<dynBasicblock*>;
-	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = BASICBLOCK; //OUT_OF_ORDER; //BASICBLOCK;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
