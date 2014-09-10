@@ -115,7 +115,7 @@ void bb_sysCore::runCore () {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 50000) {
+//        if (_clk->now () == 10000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
 //                List<bbInstruction*>* insList = bb->getBBinsList ();

@@ -43,6 +43,7 @@ bb_commit::~bb_commit () {}
 void bb_commit::doCOMMIT () {
     /*-- STAT & DEBUG --*/
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
+    dbg.print (DBG_COMMIT, "** %s: bbROB: %d (cyc: %d)\n", _stage_name.c_str (), _bbROB->getTableSize(), _clk->now ()); //TODO remve it
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 

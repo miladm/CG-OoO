@@ -65,6 +65,8 @@ class bb_memManager : public unit {
         ScalarStat& s_ld_miss_cnt;
         ScalarStat& s_st_miss_cnt;
         ScalarStat& s_st_hit_cnt;
+        ScalarStat& s_cache_to_ld_fwd_cnt;
+        ScalarStat& s_st_to_ld_fwd_cnt;
 };
 
 #endif

@@ -65,8 +65,7 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
             "for ins: ", ins->getInsID (), _clk->now ());
     if (!lrf_ready) s_lrf_not_ready_cnt++;
     if (!grf_ready) s_grf_not_ready_cnt++;
-    if (!grf_ready || !lrf_ready) 
-        s_rf_not_ready_cnt++;
+    if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
     return (grf_ready && lrf_ready);
 }
 

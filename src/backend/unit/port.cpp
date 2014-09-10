@@ -69,8 +69,8 @@ queType_T port<queType_T>::popFront () {
     BuffElement<queType_T> frontBuff = _buff.front ();
     if (frontBuff._delay.getStopTime () <= now) {
         queType_T dynIns = (_buff.front ())._dynIns;
-        dbg.print (DBG_PORT, "%s: %s %llu %s (cyc: %d)\n", _c_name.c_str (), 
-                "POP ins", dynIns->getInsID (), "to EXECUTE", now);
+        dbg.print (DBG_PORT, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "POP ins", dynIns->getInsID (), now);
         _buff.pop_front ();
         return dynIns;
     }

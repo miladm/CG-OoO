@@ -329,7 +329,7 @@ void bb_scheduler::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum);
+    _scheduler_to_execution_port->searchNflushPort (squashSeqNum);
     if (_bbWin_on_fetch != NULL) {
         flushBBWindow (_bbWin_on_fetch);
         if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) { 

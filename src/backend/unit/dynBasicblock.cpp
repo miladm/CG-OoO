@@ -138,8 +138,7 @@ bool dynBasicblock::isMemOrBrViolation () {return (_bb_has_mem_violation || _bb_
 /*-- THIS FUNCTION ENABLES DISTROYING THE ONLY LASTING COPY OF INS-LIST - USE IT WITH CAUTION --*/
 List<bbInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
-bool dynBasicblock::isBBcomplete () {
-    return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
+bool dynBasicblock::isBBcomplete () {return (_schedInsList.NumElements () == _num_completed_ins) ? true : false;}
 
 // ***********************
 // ** INS CONTROL       **

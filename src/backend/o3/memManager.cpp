@@ -18,7 +18,9 @@ o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
       s_ld_miss_cnt (g_stats.newScalarStat (lsq_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
       s_st_miss_cnt (g_stats.newScalarStat (lsq_name, "st_miss_cnt", "Number of store misses", 0, PRINT_ZERO)),
-      s_st_hit_cnt  (g_stats.newScalarStat (lsq_name, "st_hit_cnt", "Number of store hits", 0, PRINT_ZERO))
+      s_st_hit_cnt  (g_stats.newScalarStat (lsq_name, "st_hit_cnt", "Number of store hits", 0, PRINT_ZERO)),
+      s_cache_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "cache_to_ld_fwd_cnt", "Number of cache accesses", 0, PRINT_ZERO)),
+      s_st_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "st_to_ld_fwd_cnt", "Number of SQ -> LQ forwarding events", 0, PRINT_ZERO))
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
@@ -111,10 +113,12 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
 
 CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
+        s_st_to_ld_fwd_cnt++;
         mem_ins->setLQstate (LQ_FWD_FROM_SQ);
         return g_eu_lat._st_buff_lat;
     //} else if () { /*TODO for MSHR */
     } else {
+        s_cache_to_ld_fwd_cnt++;
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                 mem_ins->getMemAddr (),
