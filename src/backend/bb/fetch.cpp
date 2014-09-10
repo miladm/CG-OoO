@@ -78,6 +78,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
                 "Fetch ins", ins->getInsID (), "from BB", ins->getBB()->getBBID (), _clk->now ());
 
         /*-- STAT --*/
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }

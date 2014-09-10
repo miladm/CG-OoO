@@ -21,8 +21,6 @@
 #include "dynBasicblock.h"
 #include "table.h"
 #include "exeUnit.h"
-//#include "../ino/registerFile.h"
-//#include "../o3/registerFile.h"
 
 typedef enum {PIPE_STALL, PIPE_BUSY} PIPE_ACTIVITY;
 typedef enum {COMPLETE_NORMAL, COMPLETE_SQUASH} COMPLETE_STATUS;
@@ -43,6 +41,7 @@ class stage {
         ScalarStat& s_stall_cycles;
         ScalarStat& s_squash_cycles;
         ScalarStat& s_squash_stall_cycles;
+        RatioStat& s_ipc;
 };
 
 #endif

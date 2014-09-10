@@ -88,6 +88,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         _iROB->updateWireState (READ);
 
         /*-- STAT --*/
+        s_ipc++;
         s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
         pipe_stall = PIPE_BUSY;
     }

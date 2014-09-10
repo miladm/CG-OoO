@@ -103,7 +103,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
 #ifdef ASSERTION
             Assert(axes_lat > 0);
 #endif
-            forward (mem_ins, axes_lat);
+            if (ENABLE_FWD) forward (mem_ins, axes_lat);
             (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
             (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
         }
@@ -171,7 +171,7 @@ void memory::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _memory_to_scheduler_port->flushPort (squashSeqNum);
+    _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _mem_buff.flushPort (squashSeqNum);
     //_st_buff.flushTable ();
 }

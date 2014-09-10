@@ -87,7 +87,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
-//        forward (mem_ins, axes_lat);
+        if (ENABLE_FWD) forward (mem_ins, axes_lat);
         (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);

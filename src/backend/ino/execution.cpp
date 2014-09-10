@@ -111,7 +111,7 @@ PIPE_ACTIVITY execution::executionImpl () {
         EU->setEUins (ins);
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
-        forward (ins, EU->_eu_timer.getLatency ());
+        if (ENABLE_FWD) forward (ins, EU->_eu_timer.getLatency ());
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /* STAT */
@@ -175,7 +175,7 @@ void execution::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Execution Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _execution_to_scheduler_port->flushPort (squashSeqNum);
+    _execution_to_scheduler_port->searchNflushPort (squashSeqNum);
     _execution_to_memory_port->flushPort (squashSeqNum);
 }
 

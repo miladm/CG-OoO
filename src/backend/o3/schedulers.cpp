@@ -51,6 +51,7 @@ void o3_scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
+    if (ENABLE_FWD) manageCDB ();
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -90,8 +91,6 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
         }
     }
 
-    manageCDB ();
-
     return pipe_stall;
 }
 
@@ -99,7 +98,7 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
-        forwardFromCDB (ins);
+        if (ENABLE_FWD) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins)) continue;
         else return true;
     }
@@ -182,7 +181,6 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 
     { /*-- FWD FROM MEM STAGE --*/
@@ -208,24 +206,13 @@ void o3_scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _memory_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 }
 
 /*-- MANAGE COMMON DATA BUS (CDB) --*/
 void o3_scheduler::manageCDB () {
-    if (_execution_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (_execution_to_scheduler_port->isReady ())
-                _execution_to_scheduler_port->popFront ();
-        }
-    }
-    if (_memory_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (_memory_to_scheduler_port->isReady ())
-                _memory_to_scheduler_port->popFront ();
-        }
-    }
+    _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
+    _memory_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
 }
 
 void o3_scheduler::squash () {

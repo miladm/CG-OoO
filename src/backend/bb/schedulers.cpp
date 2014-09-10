@@ -17,8 +17,10 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
-      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events", 0, PRINT_ZERO)),
-      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events", 0, PRINT_ZERO)),
+      s_mem_g_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_g_fwd_cnt", "Number of global memory forwarding events", 0, PRINT_ZERO)),
+      s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, PRINT_ZERO)),
+      s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, PRINT_ZERO)),
+      s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, PRINT_ZERO)),
       s_bbWin_usage_rat (g_stats.newRatioStat (clk, stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
@@ -50,6 +52,8 @@ void bb_scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
+    if (ENABLE_FWD) manageCDB ();
+
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -93,8 +97,6 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
     }
 
-    manageCDB ();
-
     return pipe_stall;
 }
 
@@ -118,7 +120,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         if (!bbWin->_win.hasFreeWire (READ)) continue;
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
-        forwardFromCDB (ins);
+        if (ENABLE_FWD) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins)) {continue; }
         else {
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
@@ -238,6 +240,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     { /*-- FWD FROM EXE STAGE --*/
         if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
         List<PR>* rd_reg_list = ins->getPRrdList ();
+        List<PR>* rd_lreg_list = ins->getLARrdList ();
         List<bbInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
             if (!_execution_to_scheduler_port->isReadyNow ()) break;
@@ -253,18 +256,31 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
-                        s_alu_fwd_cnt++;
+                        s_alu_g_fwd_cnt++;
+                    }
+                }
+            }
+            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+                List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_lreg_list->Nth (j);
+                    for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_lreg_list->Nth (k);
+                        if (rd_reg == wr_reg) {
+                            rd_lreg_list->RemoveAt(j);
+                            s_alu_l_fwd_cnt++;
+                        }
                     }
                 }
             }
         }
-        _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 
     mem_fwd:
     { /*-- FWD FROM MEM STAGE --*/
         if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
         List<PR>* rd_reg_list = ins->getPRrdList ();
+        List<PR>* rd_lreg_list = ins->getLARrdList ();
         List<bbInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
             if (!_memory_to_scheduler_port->hasReadyNow ()) break;
@@ -280,29 +296,33 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                     PR wr_reg = wr_reg_list->Nth (k);
                     if (rd_reg == wr_reg) {
                         rd_reg_list->RemoveAt(j);
-                        s_mem_fwd_cnt++;
+                        s_mem_g_fwd_cnt++;
+                    }
+                }
+            }
+            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+                List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_lreg_list->Nth (j);
+                    for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_lreg_list->Nth (k);
+                        if (rd_reg == wr_reg) {
+                            rd_lreg_list->RemoveAt(j);
+                            s_mem_l_fwd_cnt++;
+                        }
                     }
                 }
             }
         }
-        _memory_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
     }
 }
 
-/*-- MANAGE COMMON DATA BUS (CDB) --*/
+/*-- MANAGE COMMON DATA BUS (CDB) 
+ * TODO: this operation is also handled throuh delOldReady () function. Consolidate.
+ * --*/
 void bb_scheduler::manageCDB () {
-    if (_execution_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (_execution_to_scheduler_port->isReady ())
-                _execution_to_scheduler_port->popFront ();
-        }
-    }
-    if (_memory_to_scheduler_port->getBuffState () != EMPTY_BUFF) {
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (_memory_to_scheduler_port->isReady ())
-                _memory_to_scheduler_port->popFront ();
-        }
-    }
+    _execution_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
+    _memory_to_scheduler_port->delOldReady (); /*-- Only FWD what is on CDB now --*/
 }
 
 void bb_scheduler::squash () {

@@ -63,6 +63,7 @@ PIPE_ACTIVITY commit::commitImpl () {
         delete ins;
 
         /* STAT */
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }

@@ -8,6 +8,7 @@ staticCodeParser::staticCodeParser (config *g_cfg) {
 	_g_cfg = g_cfg;
 	char *program_name = _g_cfg->getProgName ();
 	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s";
+//	string file = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+string (program_name)+"_obj.s";
 	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << file.c_str () << endl;

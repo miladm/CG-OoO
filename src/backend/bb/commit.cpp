@@ -211,6 +211,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
             insList->RemoveAt (0);
         }
         s_ins_cnt++; //TODO this stat is not accurate if store commit returns false - fix
+        s_ipc++;
     }
     delete bb;
 }

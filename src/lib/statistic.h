@@ -17,7 +17,7 @@
 
 typedef enum {NO_PRINT_ZERO, PRINT_ZERO} PRINT_ON_ZERO;
 typedef long int DIGIT;
-typedef double FRACTION;
+typedef long double FRACTION;
 
 class sysClock;
 
@@ -50,7 +50,7 @@ class stat {
 };
 
 /* **************************** *
- * SCALARSTAT
+ * SCALAR STAT
  * **************************** */
 class ScalarStat : public stat {
     public:
@@ -75,7 +75,7 @@ class ScalarHistStat : public stat {
 };
 
 /* **************************** *
- * RATIOSTAT
+ * RATIO STAT
  * **************************** */
 class RatioStat : public ScalarStat {
     public:

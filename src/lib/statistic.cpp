@@ -183,7 +183,7 @@ RatioStat::RatioStat (sysClock* divisor, string class_name, string param_name, s
 
 void RatioStat::print () {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
-        cout << "* " << _name << ": " << (FRACTION) _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
+        cout << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
 }
 
 statistic g_stats;

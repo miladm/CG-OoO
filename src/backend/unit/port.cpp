@@ -56,9 +56,9 @@ queType_T port<queType_T>::getBack () {
 
 template <typename queType_T>
 queType_T port<queType_T>::popBack () {
-    Assert (getBuffSize () > 0 && "popFront () must not be used without isReady ()");
-	queType_T dynIns = (_buff.back ())._dynIns;
-	_buff.pop_back ();
+    Assert (getBuffSize () > 0 && "popBack () must not be used without isReady ()");
+    queType_T dynIns = (_buff.back ())._dynIns;
+    _buff.pop_back ();
     return dynIns;
 }
 
@@ -66,20 +66,22 @@ template <typename queType_T>
 queType_T port<queType_T>::popFront () {
     CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popFront () must not be used without isReady ()");
-	BuffElement<queType_T> frontBuff = _buff.front ();
+    BuffElement<queType_T> frontBuff = _buff.front ();
     if (frontBuff._delay.getStopTime () <= now) {
         queType_T dynIns = (_buff.front ())._dynIns;
+        dbg.print (DBG_PORT, "%s: %s %llu %s (cyc: %d)\n", _c_name.c_str (), 
+                "POP ins", dynIns->getInsID (), "to EXECUTE", now);
         _buff.pop_front ();
         return dynIns;
     }
     Assert (true == false  && "popFront () must not be used without isReady ()");
-	return popFront (); //place holder
+    return popFront (); //place holder
 }
 
 template <typename queType_T>
 void port<queType_T>::delOldReady () {
     CYCLE now = _clk->now ();
-    if (getBuffSize () > 0) return;
+//    if (getBuffSize () == 0) return;
     typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
     while (it != _buff.end ()) {
         if ( (*it)._delay.getStopTime () < now) {
@@ -205,6 +207,20 @@ void port<queType_T>::flushPort (INS_ID elemSeqNum) {
         popBack ();
         if (getBuffSize () == 0) break;
         elem = getBack ();
+    }
+}
+
+template <typename queType_T>
+void port<queType_T>::searchNflushPort (INS_ID elemSeqNum) {
+    CYCLE now = _clk->now ();
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        queType_T dynIns = (*it)._dynIns;
+        if (dynIns->getInsID () >= elemSeqNum) {
+            dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                    "POP ins", dynIns->getInsID (), "FOR", elemSeqNum, now);
+            _buff.erase (it++);
+        } else { ++it; }
     }
 }
 

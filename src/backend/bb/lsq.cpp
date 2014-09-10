@@ -155,6 +155,7 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
     CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     if (lsq_id == LD_QU) {
+//        cout << "LQ: ";
         for (LENGTH i = 0; i < table_size; i++) {
             bbInstruction* ins = getNth_unsafe (i);
             if ((ins->getLQstate () == LQ_FWD_FROM_SQ ||
@@ -167,7 +168,9 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                            "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, bbInstruction*> (true, ins);
             }
+//            cout << ins->getLQstate () << " (" << ins->getInsID () << ") ";
         }
+//        cout << endl;
         dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished LD ins.", "LQ Size:", table_size);
         return pair<bool, bbInstruction*> (false, NULL);
     } else {

@@ -38,6 +38,7 @@ void scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
+    if (ENABLE_FWD) manageCDB ();
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -57,7 +58,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
         WIDTH num_ar = ins->getTotNumRdAR ();
         if (!g_RF_MGR->hasFreeWire (READ, num_ar)) break;
-        forwardFromCDB (ins);
+        if (ENABLE_FWD) forwardFromCDB (ins);
         if (!g_RF_MGR->isReady (ins)) break;
 
         /* READ INS WIN */
@@ -74,8 +75,6 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }
-
-    manageCDB ();
 
     return pipe_stall;
 }
@@ -137,7 +136,6 @@ void scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _execution_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
     }
 
     { /* FWD FROM MEM STAGE */
@@ -163,17 +161,13 @@ void scheduler::forwardFromCDB (dynInstruction* ins) {
                 }
             }
         }
-        _memory_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
     }
 }
 
 /* MANAGE COMMON DATA BUS (CDB) */
 void scheduler::manageCDB () {
-    if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
-    for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-        if (_execution_to_scheduler_port->isReady ())
-            _execution_to_scheduler_port->popFront ();
-    }
+    _execution_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
+    _memory_to_scheduler_port->delOldReady (); /* Only FWD what is on CDB now */
 }
 
 void scheduler::squash () {
