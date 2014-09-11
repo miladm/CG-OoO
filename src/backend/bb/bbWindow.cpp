@@ -6,7 +6,7 @@
 
 bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     : unit ("bbWindow_" + bbWin_id, clk),
-      _win (100, 100, 100, clk, "bbWindow_" + bbWin_id), //TODO configure and more real numbers
+      _win (15, 4, 4, clk, "bbWindow_" + bbWin_id), //TODO configure and more real numbers
       _id (atoi (bbWin_id.c_str ()))
 { }
 

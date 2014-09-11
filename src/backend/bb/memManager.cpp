@@ -11,8 +11,8 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
-      _LQ (BB_LQ_SIZE, 48, 44, clk, "LQtable"),
-      _SQ (BB_SQ_SIZE, 48, 44, clk, "SQtable"),
+      _LQ (BB_LQ_SIZE, 8, 4, clk, "LQtable"),
+      _SQ (BB_SQ_SIZE, 8, 4, clk, "SQtable"),
       s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
       s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
@@ -129,13 +129,13 @@ bool bb_memManager::commit (bbInstruction* ins) {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
-        if (!_LQ.hasFreeWire (READ)) return false;
+//        if (!_LQ.hasFreeWire (READ)) return false; TODO put this back when multi-cycle BB commit is enabled - should it?
         bbInstruction* ld_ins = _LQ.popFront ();
 #ifdef ASSERTION
         Assert (ins->getLQstate () == LQ_COMPLETE);
         Assert (ld_ins->getInsID () == ins->getInsID ());
 #endif
-        _LQ.updateWireState (READ);
+//        _LQ.updateWireState (READ); TODO put it back too if you decided to go for this. same goes for SQ?
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
     } else {
         Assert (ins->getSQstate () == SQ_COMPLETE);

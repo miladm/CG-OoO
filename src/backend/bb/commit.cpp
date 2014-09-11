@@ -202,6 +202,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
                 if (ins->getMemType () == LOAD) delIns (ins);
                 insList->RemoveAt (0);
             } else {
+//                return; //TODO add stat on average number of cycles to commit a BB
                 Assert (true == false && "implement this condition"); //TODO finish this
             }
         } else {

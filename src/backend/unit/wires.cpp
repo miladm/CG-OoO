@@ -8,7 +8,8 @@ wires::wires (WIDTH wire_cnt, AXES_TYPE axes_type, sysClock* clk, string wire_na
 	: unit (wire_name, clk),
       _axes_type (axes_type),
       _wire_cnt (wire_cnt),
-      _wire_len (10)
+      _wire_len (10),
+      s_unavailable_cnt (g_stats.newScalarStat (wire_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 {
     _cycle = _clk->now ();
 	Assert (_wire_cnt > 0);
@@ -21,7 +22,9 @@ bool wires::hasFreeWire () {
     if (_cycle < now) {
         return true;
     } else if (_cycle == now) {
-        return (_num_free_wire > 0) ? true : false;
+        bool result = (_num_free_wire > 0) ? true : false;
+        if (!result) s_unavailable_cnt++;
+        return result;
     }
     Assert (true == false && "should not have gotten here");
     return false;

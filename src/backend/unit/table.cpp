@@ -104,10 +104,11 @@ void table<tableType_T>::regStat () {
 
 template <typename tableType_T>
 bool table<tableType_T>::hasFreeWire (AXES_TYPE axes_type) {
-    if (axes_type == READ)
+    if (axes_type == READ) {
         return _rd_port.hasFreeWire ();
-    else
+    } else {
         return _wr_port.hasFreeWire ();
+    }
 }
 
 template <typename tableType_T>

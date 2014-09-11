@@ -22,6 +22,9 @@ class wires : public unit
         const AXES_TYPE _axes_type;
         const WIDTH _wire_cnt;
         const nMETER _wire_len;
+
+        /* STAT OBJS */
+        ScalarStat& s_unavailable_cnt;
 };
 
 #endif
