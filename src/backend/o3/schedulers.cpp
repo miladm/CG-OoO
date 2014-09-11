@@ -16,7 +16,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 	    	          string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
-      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO))
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO)),
+      s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -73,7 +74,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
             WIDTH num_ar = ins->getTotNumRdAR ();
-            if (!_RF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
+            if (!_RF_MGR->hasFreeWire (READ, num_ar)) {s_rf_struct_hazrd_cnt++; break;} //TODO this is conservative when using forwarding - fix (for ino too)
 
             /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);

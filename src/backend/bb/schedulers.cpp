@@ -21,6 +21,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
       s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, PRINT_ZERO)),
       s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, PRINT_ZERO)),
       s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, PRINT_ZERO)),
+      s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),
       s_bbWin_usage_rat (g_stats.newRatioStat (clk, stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
@@ -79,7 +80,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         bbInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
         WIDTH num_ar = ins->getTotNumRdAR ();
-        if (!_RF_MGR->hasFreeWire (READ, num_ar)) break; //TODO this is conservative when using forwarding - fix (for ino too)
+        if (!_RF_MGR->hasFreeWire (READ, num_ar)) {s_rf_struct_hazrd_cnt++; break;} //TODO this is conservative when using forwarding - fix (for ino too)
 
         /*-- READ INS WIN --*/
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront (); //TODO implement multi reads from a bbWin

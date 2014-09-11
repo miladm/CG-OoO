@@ -47,6 +47,7 @@ class o3_scheduler : protected stage {
         /*-- STAT --*/
         ScalarStat& s_mem_fwd_cnt;
         ScalarStat& s_alu_fwd_cnt;
+        ScalarStat& s_rf_struct_hazrd_cnt;
 };
 
 #endif
