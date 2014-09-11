@@ -21,9 +21,7 @@ class rfManager : public unit {
         void updateReg (PR reg);
 
         /* WIRES CTRL */
-        bool hasFreeWire (AXES_TYPE);
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE);
         void updateWireState (AXES_TYPE, WIDTH);
 
 	private:

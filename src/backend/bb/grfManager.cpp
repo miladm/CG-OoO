@@ -113,19 +113,11 @@ void bb_grfManager::squashRenameReg () {
     _GRF.squashRenameReg ();
 }
 
-bool bb_grfManager::hasFreeWire (AXES_TYPE axes_type) {
-    return _GRF.hasFreeWire (axes_type);
-}
-
 bool bb_grfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     if (_GRF.getNumFreeWires (axes_type) >= numRegWires)
         return true;
     else
         return false;
-}
-
-void bb_grfManager::updateWireState (AXES_TYPE axes_type) {
-    _GRF.updateWireState (axes_type);
 }
 
 void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {

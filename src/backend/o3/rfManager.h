@@ -22,9 +22,7 @@ class o3_rfManager : public unit {
         void squashRenameReg ();
 
         /*-- WIRES CTRL --*/
-        bool hasFreeWire (AXES_TYPE);
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE);
         void updateWireState (AXES_TYPE, WIDTH);
 
 	private:

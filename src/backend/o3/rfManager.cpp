@@ -105,19 +105,11 @@ void o3_rfManager::squashRenameReg () {
     _GRF.squashRenameReg ();
 }
 
-bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type) {
-    return _GRF.hasFreeWire (axes_type);
-}
-
 bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     if (_GRF.getNumFreeWires (axes_type) >= numRegWires)
         return true;
     else
         return false;
-}
-
-void o3_rfManager::updateWireState (AXES_TYPE axes_type) {
-    _GRF.updateWireState (axes_type);
 }
 
 void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {

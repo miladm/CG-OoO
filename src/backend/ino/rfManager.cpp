@@ -70,19 +70,11 @@ void rfManager::updateReg (PR reg) {
     _RF.updateReg(reg);
 }
 
-bool rfManager::hasFreeWire (AXES_TYPE axes_type) {
-    return _RF.hasFreeWire (axes_type);
-}
-
 bool rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     if (_RF.getNumFreeWires (axes_type) >= numRegWires)
         return true;
     else
         return false;
-}
-
-void rfManager::updateWireState (AXES_TYPE axes_type) {
-    _RF.updateWireState (axes_type);
 }
 
 void rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
