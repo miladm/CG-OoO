@@ -60,11 +60,6 @@ void bb_scheduler::doSCHEDULER () {
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
     s_bbWin_usage_rat += _busy_bbWin.size ();
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
-//    for (bbWinEntry = _busy_bbWin.begin (); bbWinEntry != _busy_bbWin.end (); bbWinEntry++) {
-//        WIDTH bbWin_id = bbWinEntry->first;
-//        //cout << bbWin_id << " ";
-//    }
-    //cout << "(" << g_var.g_pipe_state << ")" << endl;
 }
 
 PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
@@ -79,18 +74,17 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx)) break;
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         bbInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (0); //TODO fix this with hasReadInsInBBWin
-        WIDTH num_ar = ins->getTotNumRdAR ();
-        if (!_RF_MGR->hasFreeWire (READ, num_ar)) {s_rf_struct_hazrd_cnt++; break;} //TODO this is conservative when using forwarding - fix (for ino too)
+        if (!_RF_MGR->hasFreeWire (READ, ins)) {s_rf_struct_hazrd_cnt++; break;}
 
         /*-- READ INS WIN --*/
-        ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront (); //TODO implement multi reads from a bbWin
+        ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE RESOURCES --*/
-        _RF_MGR->updateWireState (READ, num_ar);
-        //_busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
+        _busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
+        _RF_MGR->updateWireState (READ, ins);
 
         /*-- STAT --*/
         s_ins_cnt++;
@@ -114,7 +108,6 @@ void bb_scheduler::manageBusyBBWin (bbWindow* bbWin) {
 bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
     for (bbWinEntry = _busy_bbWin.begin (); bbWinEntry != _busy_bbWin.end (); bbWinEntry++) {
-    //for (auto& bbWinEntry : _busy_bbWin) { //TODO add code to get second/third/fourth entries too
         WIDTH bbWin_id = bbWinEntry->first;
         bbWindow* bbWin = bbWinEntry->second;
         if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }

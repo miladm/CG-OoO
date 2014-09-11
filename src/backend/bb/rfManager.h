@@ -34,10 +34,8 @@ class bb_rfManager : public unit {
         void squashRegs ();
 
         /* WIRES CTRL */
-        bool hasFreeWire (AXES_TYPE);
-        bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE);
-        void updateWireState (AXES_TYPE, WIDTH);
+        bool hasFreeWire (AXES_TYPE, bbInstruction*);
+        void updateWireState (AXES_TYPE, bbInstruction*);
 
 	private:
         bb_grfManager _GRF_MGR;

@@ -189,6 +189,10 @@ WIDTH dynInstruction::getTotNumRdAR () { return _a_rdReg.NumElements(); }
 
 WIDTH dynInstruction::getNumRdPR () { return _p_rdReg_waitList.NumElements(); }
 
+WIDTH dynInstruction::getNumWrPR () { return _p_wrReg.NumElements(); }
+
+WIDTH dynInstruction::getNumWrAR () { return _a_wrReg.NumElements(); }
+
 List<AR>* dynInstruction::getARrdList () {return &_a_rdReg_waitList;}
 
 List<AR>* dynInstruction::getARwrList () {return &_a_wrReg;}

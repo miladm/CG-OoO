@@ -91,30 +91,19 @@ void bb_rfManager::squashRegs () {
     }
 }
 
-bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
-    bool grf_has_free_wire = _GRF_MGR.hasFreeWire (axes_type);
-//    bool lrf_has_free_wire = _LRF_MGRS[bbWin_id]->hasFreeWire (axes_type);
-//    return (grf_has_free_wire && lrf_has_free_wire);
-    return grf_has_free_wire;
+bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, bbInstruction* ins) {
+    WIDTH num_g_reg = (axes_type == READ) ? ins->getNumRdPR () : ins->getNumWrPR ();
+    WIDTH num_l_reg = (axes_type == READ) ? ins->getNumRdLAR () : ins->getNumWrLAR ();
+    WIDTH bbWin_id = ins->getBBWinID ();
+    bool grf_has_free_wire = _GRF_MGR.hasFreeWire (axes_type, num_g_reg);
+    bool lrf_has_free_wire = _LRF_MGRS[bbWin_id]->hasFreeWire (axes_type, num_l_reg);
+    return (grf_has_free_wire && lrf_has_free_wire);
 }
 
-bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH width) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
-    bool grf_has_free_wire = _GRF_MGR.hasFreeWire (axes_type, width);
-//    bool lrf_has_free_wire = _LRF_MGRS[bbWin_id]->hasFreeWire (axes_type, width);
-//    return (grf_has_free_wire && lrf_has_free_wire);
-    return grf_has_free_wire;
-}
-
-void bb_rfManager::updateWireState (AXES_TYPE axes_type) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
-    _GRF_MGR.updateWireState (axes_type);
-//    _LRF_MGRS[bbWin_id]->updateWireState (axes_type);
-}
-
-void bb_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH width) {
-//    WIDTH bbWin_id = ins->getBBWinID ();
-    _GRF_MGR.updateWireState (axes_type, width);
-//    _LRF_MGRS[bbWin_id]->updateWireState (axes_type, width);
+void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
+    WIDTH num_g_reg = (axes_type == READ) ? ins->getNumRdPR () : ins->getNumWrPR ();
+    WIDTH num_l_reg = (axes_type == READ) ? ins->getNumRdLAR () : ins->getNumWrLAR ();
+    WIDTH bbWin_id = ins->getBBWinID ();
+    _GRF_MGR.updateWireState (axes_type, num_g_reg);
+    _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
 }

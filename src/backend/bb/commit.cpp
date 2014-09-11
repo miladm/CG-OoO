@@ -191,7 +191,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
     List<bbInstruction*>* insList = bb->getBBinsList ();
     commited_bb++;
     while (insList->NumElements () > 0) {
-        bbInstruction* ins = insList->Nth (0); //TODO this is consuming a port count regardless of outcome of next step - fix
+        bbInstruction* ins = insList->Nth (0);
         Assert (ins->getPipeStage () == COMPLETE);
         if (ins->getInsType () == MEM) {
             if (_LSQ_MGR->commit (ins)) {

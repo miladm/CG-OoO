@@ -56,9 +56,8 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!_iWindow.hasFreeWire (READ)) break;
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
-        WIDTH num_ar = ins->getTotNumRdAR ();
-        if (!g_RF_MGR->hasFreeWire (READ, num_ar)) break;
         if (ENABLE_FWD) forwardFromCDB (ins);
+        if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break;
         if (!g_RF_MGR->isReady (ins)) break;
 
         /* READ INS WIN */
@@ -69,7 +68,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
 
         /* UPDATE WIRES */
         _iWindow.updateWireState (READ);
-        g_RF_MGR->updateWireState (READ, num_ar);
+        g_RF_MGR->updateWireState (READ, ins->getNumRdAR ());
 
         /* STAT */
         s_ins_cnt++;

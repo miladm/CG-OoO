@@ -60,7 +60,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
 
         /*-- COMMIT INS --*/
         if (ins->getInsType () == MEM) {
-            ins = _iROB->getFront (); //TODO this is consuming a port count regardless of outcome of next step - fix
+            ins = _iROB->getFront ();
             if (_LSQ_MGR->commit (ins)) {
                 ins->setPipeStage (COMMIT);
                 _RF_MGR->commitRegs (ins);

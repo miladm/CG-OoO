@@ -51,11 +51,11 @@ void o3_memory::completeIns () {
         if (!_LSQ_MGR->hasFreeWire (LD_QU, READ)) break;
         pair<bool, dynInstruction*> p = _LSQ_MGR->hasFinishedIns (LD_QU);
         if (!p.first) break;
-        if (!_RF_MGR->hasFreeWire (WRITE)) break;
-
-        /*-- COMPLETE INS --*/
         dynInstruction* finished_ld_ins = p.second;
         Assert (finished_ld_ins != NULL);
+        if (!_RF_MGR->hasFreeWire (WRITE, finished_ld_ins->getNumWrPR ())) break;
+
+        /*-- COMPLETE INS --*/
         finished_ld_ins->setPipeStage(COMPLETE);
         _LSQ_MGR->completeLd (finished_ld_ins);
         _RF_MGR->completeRegs (finished_ld_ins);
@@ -64,7 +64,7 @@ void o3_memory::completeIns () {
 
         /*-- UPDATE WIRES --*/
         _LSQ_MGR->updateWireState (LD_QU, READ);
-        _RF_MGR->updateWireState (WRITE);
+        _RF_MGR->updateWireState (WRITE, finished_ld_ins->getNumWrPR ());
     }
 }
 

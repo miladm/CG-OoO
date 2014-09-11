@@ -55,11 +55,11 @@ void bb_memory::completeIns () {
         if (!_LSQ_MGR->hasFreeWire (LD_QU, READ)) break;
         pair<bool, bbInstruction*> p = _LSQ_MGR->hasFinishedIns (LD_QU);
         if (!p.first) break;
-        if (!_RF_MGR->hasFreeWire (WRITE)) break;
-
-        /*-- COMPLETE INS --*/
         bbInstruction* finished_ld_ins = p.second;
         Assert (finished_ld_ins != NULL);
+        if (!_RF_MGR->hasFreeWire (WRITE, finished_ld_ins)) break;
+
+        /*-- COMPLETE INS --*/
         finished_ld_ins->setPipeStage(COMPLETE);
         finished_ld_ins->getBB()->incCompletedInsCntr ();
         _LSQ_MGR->completeLd (finished_ld_ins);
@@ -69,7 +69,7 @@ void bb_memory::completeIns () {
 
         /*-- UPDATE WIRES --*/
         _LSQ_MGR->updateWireState (LD_QU, READ);
-        _RF_MGR->updateWireState (WRITE);
+        _RF_MGR->updateWireState (WRITE, finished_ld_ins);
     }
 }
 

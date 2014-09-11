@@ -59,19 +59,22 @@ COMPLETE_STATUS execution::completeIns () {
 
         /* CHECKS */
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
-        if (ins != NULL && ins->getInsType () == MEM && 
+        if (ins == NULL) continue;
+        if (ins->getInsType () == MEM && 
             _execution_to_memory_port->getBuffState () == FULL_BUFF) break;
+        if (!(ins->getInsType () == MEM) &&
+            !g_RF_MGR->hasFreeWire (WRITE, ins->getNumWrAR ())) continue;
         if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
         /* COMPLETE INS */
         if (ins->getInsType () == MEM) {
             _execution_to_memory_port->pushBack (ins);
             ins->setPipeStage (MEM_ACCESS);
+            //TODO handle writeRF for STORE ins here (like O3 & BB)
         } else {
-            //if (!g_RF_MGR->hasFreeWire (WRITE)) break; //TODO this line is buggy for the EU state
             ins->setPipeStage (COMPLETE);
             g_RF_MGR->writeToRF (ins);
-            //g_RF_MGR->updateWireState (WRITE); //TODO put back
+            g_RF_MGR->updateWireState (WRITE, ins->getNumWrAR ());
         }
         EU->resetEU ();
 

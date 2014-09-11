@@ -88,6 +88,10 @@ WIDTH bbInstruction::getTotNumRdLAR () {return _l_rdReg.NumElements();}
 
 WIDTH bbInstruction::getNumRdPR () {return _p_rdReg_waitList.NumElements();}
 
+WIDTH bbInstruction::getNumWrPR () {return _p_wrReg.NumElements();}
+
+WIDTH bbInstruction::getNumWrLAR () {return _l_wrReg.NumElements();}
+
 List<AR>* bbInstruction::getARrdList () {return &_a_rdReg_waitList;}
 
 List<AR>* bbInstruction::getARwrList () {return &_a_wrReg;}

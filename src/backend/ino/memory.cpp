@@ -55,14 +55,15 @@ void memory::completeIns () {
         /* CHECKS */
         if (_mem_buff.getBuffState () == EMPTY_BUFF) break;
         if (!_mem_buff.isReady ()) break;
-        if (!g_RF_MGR->hasFreeWire (WRITE)) break; //TODO too conservatice - only for load ins
+        dynInstruction* mem_ins = _mem_buff.getFront ();
+        if (!g_RF_MGR->hasFreeWire (WRITE, mem_ins->getNumWrAR ())) break; //TODO too conservatice - only for load ins
 
         /* COMPLETE INS */
-        dynInstruction* mem_ins = _mem_buff.popFront ();
+        mem_ins = _mem_buff.popFront ();
         mem_ins->setPipeStage(COMPLETE);
         // FORWARD DATA //_memory_to_schedule_port->pushBack(mem_ins, _clk->now ());
         g_RF_MGR->writeToRF (mem_ins);
-        g_RF_MGR->updateWireState (WRITE);
+        g_RF_MGR->updateWireState (WRITE, mem_ins->getNumWrAR ());
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "Write Complete mem ins", mem_ins->getInsID (), _clk->now ());
     }

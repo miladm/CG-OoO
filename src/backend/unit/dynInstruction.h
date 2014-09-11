@@ -46,6 +46,8 @@ class dynInstruction : public unit {
         WIDTH getNumRdAR ();
         WIDTH getTotNumRdAR ();
         WIDTH getNumRdPR ();
+        WIDTH getNumWrPR ();
+        WIDTH getNumWrAR ();
         List<AR>* getARrdList ();
         List<AR>* getARwrList ();
         List<PR>* getPRrdList ();

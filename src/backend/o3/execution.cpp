@@ -73,6 +73,10 @@ COMPLETE_STATUS o3_execution::completeIns () {
 
         /*-- CHECKS --*/
         if (g_var.g_pipe_state == PIPE_FLUSH) break;
+        if (ins == NULL) continue;
+        if (!(ins->getInsType () == MEM && 
+             ins->getMemType () == LOAD) &&
+            !_RF_MGR->hasFreeWire (WRITE, ins->getNumWrPR ())) continue;
         if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
         /*-- COMPLETE INS --*/
@@ -85,6 +89,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
             ins->setPipeStage (COMPLETE);
             _LSQ_MGR->memAddrReady (ins);
             _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
+            _RF_MGR->updateWireState (WRITE, ins->getNumWrPR ());
             pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
             bool is_violation = p.first;
             violating_ld_ins = p.second;
@@ -93,10 +98,9 @@ COMPLETE_STATUS o3_execution::completeIns () {
                        "Complete store - ins addr", ins->getInsID (), _clk->now ());
             if (is_violation) { violating_ld_ins->setMemViolation (); }
         } else {
-            //if (!_RF_MGR->hasFreeWrPort ()) break; //TODO put this back and clean up the assert for available EU
             ins->setPipeStage (COMPLETE);
             _RF_MGR->completeRegs (ins);
-            //_RF_MGR->updateWireState (WRITE); //TODO put back
+            _RF_MGR->updateWireState (WRITE, ins->getNumWrPR ());
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete ins", ins->getInsID (), _clk->now ());
         }

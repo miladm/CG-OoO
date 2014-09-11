@@ -73,8 +73,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             LENGTH readyInsIndx;
             if (!hasReadyInsInResStn (j, readyInsIndx)) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
-            WIDTH num_ar = ins->getTotNumRdAR ();
-            if (!_RF_MGR->hasFreeWire (READ, num_ar)) {s_rf_struct_hazrd_cnt++; break;} //TODO this is conservative when using forwarding - fix (for ino too)
+            if (!_RF_MGR->hasFreeWire (READ, ins->getNumRdPR ())) {s_rf_struct_hazrd_cnt++; break;} //TODO this is conservative when using forwarding - fix (for ino too)
 
             /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
@@ -84,7 +83,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 
             /*-- UPDATE WIRES --*/
             _ResStns.Nth(j)->updateWireState (READ);
-            _RF_MGR->updateWireState (READ, num_ar);
+            _RF_MGR->updateWireState (READ, ins->getNumRdPR ());
 
             /*-- STAT --*/
             s_ins_cnt++;

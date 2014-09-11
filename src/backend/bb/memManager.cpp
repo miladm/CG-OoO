@@ -81,7 +81,6 @@ void bb_memManager::memAddrReady (bbInstruction* ins) {
 }
 
 bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
-    //TODO take all this block to lsqManager.cpp
     CYCLE axes_lat;
     bbInstruction* mem_ins;
     if (lsq_id == LD_QU) {
@@ -93,8 +92,7 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
-        //        if (ENABLE_SQUASH)
-        //            Assert (mem_ins->isMemOrBrViolation() == false);
+        if (ENABLE_SQUASH) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
