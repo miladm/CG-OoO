@@ -27,7 +27,7 @@ bbInstruction* bb_lsqCAM::findPendingMemIns (LSQ_ID lsq_id) {
         }
         dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No ST ins issued.");
         return NULL; /*-- NOTHING ISSUED --*/
-    } else {
+    } else { /*-- LD_QU --*/
         LENGTH table_size = _table.NumElements ();
         for (LENGTH i = 0; i < table_size; i++) {
             bbInstruction* ins = getNth_unsafe (i);
@@ -103,9 +103,10 @@ bool bb_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         bbInstruction* ins = getNth_unsafe (i);
-        PIPE_STAGE stage = ins->getPipeStage ();
+//        PIPE_STAGE stage = ins->getPipeStage ();
         if (seq_num <= ins->getInsID ()) continue;
-        if (! (stage == COMPLETE || stage == COMMIT)) continue;
+//        if (g_var.g_mem_model == NAIVE_SPECUL &&
+//         ! (stage == COMPLETE || stage == COMMIT)) continue;
         if (ins->getMemAddr () == mem_addr) {
             return true;
         }
@@ -136,7 +137,7 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_
         if (ins->getInsID () > hi_seq_num) continue;
         if (ins->getInsID () <= lo_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
-            if (ins->getLQstate () == LQ_COMPLETE) {
+            if (ins->getLQstate () == LQ_COMPLETE && ins->isCacheAxes ()) {
                 return pair<bool, bbInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage
             } else if (ins->getLQstate () == LQ_FWD_FROM_SQ ||
                        ins->getLQstate () == LQ_MSHR_WAIT ||

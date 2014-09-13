@@ -26,6 +26,7 @@ class dynInstruction : public unit {
         void setLQstate (LQ_STATE state);
         void setWrongPath (bool is_on_wrong_path);
         void setMemViolation ();
+        void setCacheAxes ();
 
         /*-- GET INS ATRIBUTES --*/
         ADDRS getInsAddr ();
@@ -52,6 +53,7 @@ class dynInstruction : public unit {
         List<AR>* getARwrList ();
         List<PR>* getPRrdList ();
         List<PR>* getPRwrList ();
+        bool isCacheAxes ();
 
         /*-- INS CONTROL --*/
         void resetStates ();
@@ -79,6 +81,7 @@ class dynInstruction : public unit {
         SQ_STATE _sq_state;
         LQ_STATE _lq_state;
         char _command[INS_STRING_SIZE];
+        bool _cache_axes;
         int _hitLevel;
         bool _is_on_wrong_path;
         bool _is_mem_violation;

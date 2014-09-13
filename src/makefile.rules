@@ -13,7 +13,7 @@
 ##############################################################
 
 ###### Place all generic definitions here ######
-
+yaml-cpp = /home/milad/esc_project/svn/PARS/src/lib/yaml-cpp
 # This defines tests which run tools of the same name.  This is simply for convenience to avoid
 # defining the test name twice (once in TOOL_ROOTS and again in TEST_ROOTS).
 # Tests defined here should not be defined in TOOL_ROOTS and TEST_ROOTS.
@@ -42,7 +42,7 @@ OBJECT_ROOTS :=
 DLL_ROOTS :=
 
 # This defines any static libraries (archives), that need to be built.
-LIB_ROOTS :=
+LIB_ROOTS :=/home/milad/lib/libyaml-cpp
 
 ###### Place architecture-specific definitions here ######
 

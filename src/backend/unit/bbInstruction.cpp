@@ -140,6 +140,7 @@ void bbInstruction::resetStates () {
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
     _is_mem_violation = false;
+    _cache_axes = false;
     _bbWin_id = -1;
 }
 

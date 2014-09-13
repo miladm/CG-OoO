@@ -37,7 +37,7 @@ typedef enum {LOAD, STORE, NUM_MEM_TYPE} MEM_TYPE;
 typedef enum {none, READ, WRITE} memType; typedef memType AXES_TYPE; //TODO clean this up
 typedef enum {noBrMode, noBr, allBr, statPredBr, scheduleBr, lowBiasBr, dynPredBr} brMode;
 typedef enum {NO_CORE, IN_ORDER, OUT_OF_ORDER, ONE_LEVEL_DEEP_DYN, X_LEVEL_DEEP_DYN, ONE_LEVE_DEEP_STAT, X_LEVE_DEEP_STAT, PHRASE, FRAGMENT, FRAGMENT2, DOT, STRAND, PHRASEBLOCK, BASICBLOCK} core; typedef core CORE_TYPE; //TODO clean this up
-typedef enum {PERFECT, TOTAL_ORDER, NAIVE_SPECUL, STORE_SET_SPECUL} memModel;
+typedef enum {PERFECT, TOTAL_ORDER, NAIVE_SPECUL, STORE_SET_SPECUL} memModel; typedef memModel MEM_MODEL; //TODO clean this up
 typedef enum {RR_ACTIVE, RR_INACTIVE} rrMode;
 
 typedef enum {PIPE_NORMAL, PIPE_WAIT_FLUSH, PIPE_FLUSH, PIPE_DRAIN, PIPE_SQUASH_ROB, NUM_PIPE_STATE} PIPE_STATE;

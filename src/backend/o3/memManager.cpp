@@ -118,6 +118,7 @@ CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     } else {
         s_cache_to_ld_fwd_cnt++;
         mem_ins->setLQstate (LQ_CACHE_WAIT);
+        if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                 mem_ins->getMemAddr (),
                 mem_ins->getMemAxesSize(),

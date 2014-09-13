@@ -63,6 +63,7 @@ struct g_variable {
         numPBinList = 0;
 
         g_core_type = IN_ORDER;
+        g_mem_model = NAIVE_SPECUL;
     }
 
     INS_ID g_seq_num;
@@ -126,8 +127,9 @@ struct g_variable {
     // Pipeline state
     PIPE_STATE g_pipe_state;
 
-    //CPU Core
+    //CPU Core Details
     CORE_TYPE g_core_type;
+    MEM_MODEL g_mem_model;
 
     /*****************************/
     /* PIPELINE SQUASH           */

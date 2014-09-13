@@ -8,6 +8,7 @@
 #define _O3_LSQ_H 
 
 #include "../unit/table.h"
+#include "../../global/g_variable.h"
 
 #define SQ_SIZE 36
 #define LQ_SIZE 64

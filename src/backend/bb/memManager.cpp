@@ -117,6 +117,7 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
     //} else if () { /*TODO for MSHR */
     } else {
         s_cache_to_ld_fwd_cnt++;
+        if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         return (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
                 mem_ins->getMemAddr (),

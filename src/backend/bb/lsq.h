@@ -8,6 +8,7 @@
 #define _BB_LSQ_H 
 
 #include "../unit/table.h"
+#include "../../global/g_variable.h"
 
 #define BB_SQ_SIZE 36
 #define BB_LQ_SIZE 64

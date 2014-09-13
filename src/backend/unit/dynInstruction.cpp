@@ -12,6 +12,7 @@ dynInstruction::dynInstruction (string class_name)
     _sq_state = SQ_NO_STATE;
     _is_on_wrong_path = false;
     _is_mem_violation = false;
+    _cache_axes = false;
 }
 
 dynInstruction::~dynInstruction () {}
@@ -150,6 +151,11 @@ void dynInstruction::setMemViolation () {
     _is_mem_violation = true;
 }
 
+void dynInstruction::setCacheAxes () {
+    Assert (_cache_axes == false && getInsType () == MEM && getMemType () == LOAD);
+    _cache_axes = true;
+}
+
 /* *********************** *
  * GET INS ATRIBUTES
  * *********************** */
@@ -201,6 +207,8 @@ List<PR>* dynInstruction::getPRrdList () {return &_p_rdReg_waitList;}
 
 List<PR>* dynInstruction::getPRwrList () {return &_p_wrReg;}
 
+bool dynInstruction::isCacheAxes () { Assert (getInsType () == MEM && getMemType () == LOAD); return _cache_axes;}
+
 /* *********************** *
  * INS CONTROL
  * *********************** */
@@ -228,4 +236,5 @@ void dynInstruction::resetStates () {
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
     _is_mem_violation = false;
+    _cache_axes = false;
 }

@@ -6,6 +6,7 @@
 #include "instlib.H"
 #include "xed-interface.h"
 #include "frontend/pars.h"
+#include "lib/yaml-cpp/yaml.h"
 
 using namespace INSTLIB;
 
