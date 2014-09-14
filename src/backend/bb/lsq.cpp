@@ -103,10 +103,10 @@ bool bb_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         bbInstruction* ins = getNth_unsafe (i);
-//        PIPE_STAGE stage = ins->getPipeStage ();
+        PIPE_STAGE stage = ins->getPipeStage ();
         if (seq_num <= ins->getInsID ()) continue;
-//        if (g_var.g_mem_model == NAIVE_SPECUL &&
-//         ! (stage == COMPLETE || stage == COMMIT)) continue;
+        if (g_var.g_mem_model == NAIVE_SPECUL &&
+         ! (stage == COMPLETE || stage == COMMIT)) continue;
         if (ins->getMemAddr () == mem_addr) {
             return true;
         }
@@ -156,7 +156,6 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
     CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     if (lsq_id == LD_QU) {
-//        cout << "LQ: ";
         for (LENGTH i = 0; i < table_size; i++) {
             bbInstruction* ins = getNth_unsafe (i);
             if ((ins->getLQstate () == LQ_FWD_FROM_SQ ||
@@ -169,9 +168,7 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                            "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, bbInstruction*> (true, ins);
             }
-//            cout << ins->getLQstate () << " (" << ins->getInsID () << ") ";
         }
-//        cout << endl;
         dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished LD ins.", "LQ Size:", table_size);
         return pair<bool, bbInstruction*> (false, NULL);
     } else {

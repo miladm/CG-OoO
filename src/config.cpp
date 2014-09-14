@@ -2,10 +2,6 @@
  * config.cpp
  ******************************************************************************/
 
-#include <string.h>
-#include <stdio.h>
-#include <iostream>
-#include "lib/utility.h"
 #include "config.h"
 
 using namespace std;
@@ -22,6 +18,21 @@ config::config() {
 //		cfgFile to exist
 //		PinPointFile to exist
 config::config(char* cfg_file, g_variable * g_var) {
+//    YAML::Node config;
+//    config = YAML::LoadFile("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
+//    std::ifstream fin("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
+//    YAML::Parser parser(fin);
+//    YAML::Node doc;
+//    for(YAML::iterator it=doc.begin();it!=doc.end();++it) {
+//        std::string scalar;
+//        *it >> scalar;
+//        std::cout << "Found scalar: " << scalar << std::endl;
+//    }
+
+//    cout << conf["processor"] << endl;
+
+
+    /* =========== OLD CODE ============ */
 	_g_var = g_var;
 	_g_var->msg.simStep("PARSING SIMULATION CONFIGURATIONS");
 	f_config = fopen (cfg_file,"r");

@@ -105,10 +105,10 @@ bool o3_lsqCAM::hasMemAddr (ADDRS mem_addr, INS_ID seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
-//        PIPE_STAGE stage = ins->getPipeStage ();
+        PIPE_STAGE stage = ins->getPipeStage ();
         if (seq_num <= ins->getInsID ()) continue;
-//        if (g_var.g_mem_model == NAIVE_SPECUL &&
-//         ! (stage == COMPLETE || stage == COMMIT)) continue;
+        if (g_var.g_mem_model == NAIVE_SPECUL &&
+         ! (stage == COMPLETE || stage == COMMIT)) continue;
         if (ins->getMemAddr () == mem_addr) {
             return true;
         }

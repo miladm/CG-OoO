@@ -7,8 +7,14 @@
 
 #include <map>
 #include <string>
+#include <string.h>
+#include <stdio.h>
+#include <fstream>
+#include <iostream>
+#include "lib/utility.h"
 #include "global/global.h"
 #include "global/g_variable.h"
+#include "lib/yaml-cpp/yaml.h"
 
 using namespace std;
 
