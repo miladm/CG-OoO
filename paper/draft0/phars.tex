@@ -1,0 +1,54 @@
+\documentclass[9pt,journal,letterpaper,compsoc]{IEEEtran}
+
+\usepackage[normalem]{ulem}
+\usepackage[nocompress]{cite}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+%\usepackage{amssym}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{PhArS: Phrase Architecture System}
+
+
+\author{% <-this % stops a space
+%Milad~Mohammadi\textsuperscript{$\dagger$},
+%Tor~M.~Aamodt\textsuperscript{$\ddagger$},
+%William~J.~Dally\textsuperscript{$\dagger$}
+
+$\dagger$Stanford University, $\ddagger$University of British Columbia
+
+
+%%%%%%% ABSTRACT %%%%%%%
+{\justifying
+\begin{abstract} 
+\end{abstract}
+\par}
+
+\begin{keywords}
+Energy efficiency, static and dynamic scheduling, cpu architecture.
+\end{keywords}}
+\maketitle
+\IEEEdisplaynotcompsoctitleabstractindextext
+\IEEEpeerreviewmaketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%% BODY %%%%%%%
+\input{introduction}
+\input{phrase_arch}
+
+%%%%%%% CITATIONS %%%%%%%
+\vspace{-2mm}
+%\cite{ref:embnuca}
+\bstctlcite{IEEEexample:BSTcontrol}
+\nocite{ref:static}
+\bstctlcite{bstctl:etal, bstctl:nodash, bstctl:simpurl}
+\bibliographystyle{IEEEtranS}
+\bibliography{egbib}
+
+\end{document}
