@@ -28,7 +28,7 @@
 #ifndef _H_list
 #define _H_list
 
-#include <deque>
+#include <vector>
 #include "utility.h"  // for Assert()
 
 using namespace std;
@@ -38,7 +38,7 @@ class Node;
 template<class Element> class List {
 
  private:
-    deque<Element> elems;
+    vector<Element> elems;
 
  public:
            // Create a new empty list

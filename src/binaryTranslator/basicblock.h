@@ -34,6 +34,7 @@ class basicblock {
 		//BB INFO
 		void printBb();
 		int getBbSize();
+		int getBbSize_ListSch();
 		ADDR getID();
 		void setBBbrHeader(ADDR brAddr);
 		ADDR getBBbrHeader();

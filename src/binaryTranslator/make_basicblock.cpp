@@ -146,10 +146,11 @@ void make_basicblock (List<instruction*> *insList,
 		}
 	}	
 	// Perform List Scheduling on BB
-	/*for (int i = 0; i < bbList->NumElements(); i++) {
+	printf("\tRun List Scheduling\n");
+	for (int i = 0; i < bbList->NumElements(); i++) {
 		basicblock* bb = bbList->Nth(i);
 		listSchedule(bb); //why does this affect BB structure?
-	}*/
+	}
 	std::set_difference(use_set.begin(), use_set.end(), def_set.begin(), def_set.end(), std::inserter(diff_set, diff_set.begin()));
 	printf("\tDiff Set: %d %d %d\n", def_set.size(), use_set.size(), diff_set.size());
 }

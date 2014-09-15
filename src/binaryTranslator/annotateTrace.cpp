@@ -40,7 +40,7 @@ long int storeToFile(bool brFound, ADDR brAddr, basicblock* bb, map<ADDR, string
 	if (brFound == true) {
 		fprintf(traceFileOutput, "H,%llu\n", brAddr); // TOOD Update this for phraseblock
 	}
-	List<instruction*>* listSchBBList = bb->getInsList();
+	List<instruction*>* listSchBBList = bb->getInsList_ListSchedule();
 	for (int i = 0; i < listSchBBList->NumElements(); i++) {
 		if (dynBBMap.find(listSchBBList->Nth(i)->getInsAddr()) != dynBBMap.end()) {
 			insCounter++;
@@ -70,7 +70,7 @@ void storeToFile(map<ADDR,bool> &brFoundMap, map<ADDR,ADDR> &brAddrMap, basicblo
 			dynBBMap.insert(pair<ADDR,string> (it2->first,it2->second));
 		}
 	}
-	List<instruction*>* listSchBBList = bb->getInsList();
+	List<instruction*>* listSchBBList = bb->getInsList_ListSchedule();
 	fprintf(traceFileOutput, "hey1: %d - %d - %d\n",dynBBMap.size(), bb->getBbSize(), dynBBListMap.size());
 	for (int i = 0; i < listSchBBList->NumElements(); i++) {
 		fprintf(traceFileOutput, "%s", (dynBBMap[listSchBBList->Nth(i)->getInsAddr()]).c_str());
@@ -207,8 +207,8 @@ void annotateTrace_forBB (List<basicblock*>* bbList, map<ADDR,instruction*> *ins
 			}
 			// Store BB/PB Ins's
 			if (prevBB == NULL) prevBB = currentBB; //for first BB
-			// List<instruction*>* listSchBBList = prevBB->getInsList_ListSchedule();
-			List<instruction*>* listSchBBList = prevBB->getInsList(); //Replace this with above line for list-scheduling
+			List<instruction*>* listSchBBList = prevBB->getInsList_ListSchedule();
+//			List<instruction*>* listSchBBList = prevBB->getInsList(); //Replace this with above line for list-scheduling
 			for (int i = 0; i < listSchBBList->NumElements(); i++) {
 				// if (dynBBMap.find(listSchBBList->Nth(i)->getInsAddr()) == dynBBMap.end()) 
 					// printf("didn't find ins in map %d, %d, %d\n", dynBBMap.size(), listSchBBList->NumElements(), dynBBMap.size() < listSchBBList->NumElements());

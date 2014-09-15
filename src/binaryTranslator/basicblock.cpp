@@ -141,6 +141,10 @@ void basicblock::printBb() {
 	}
 }
 
+int basicblock::getBbSize_ListSch() {
+	return _insListSchList->NumElements();
+}
+
 int basicblock::getBbSize() {
 	return _insList->NumElements();
 }
@@ -596,7 +600,7 @@ void basicblock::addToBB_ListSchedule(instruction* ins) {
 }
 
 List<instruction*>* basicblock::getInsList_ListSchedule() {
-	Assert(_insListSchList->NumElements() == _insList->NumElements() && "List-scheduled list is incomplete"); //this can be a heavy check. Remove it? Useful?
+//	Assert(_insListSchList->NumElements() == _insList->NumElements() && "List-scheduled list is incomplete"); //this can be a heavy check. Remove it? Useful?
 	return _insListSchList;
 }
 

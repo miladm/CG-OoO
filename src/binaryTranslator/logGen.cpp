@@ -15,8 +15,8 @@ void writeToFile (List<basicblock*> *bbList, string *program_name) {
 		if (bb->hasHeader()) {
 			fprintf(outFile, "H,%ld\n", bb->getBBbrHeader());
 		}
-		for (int j = 0; j < bb->getBbSize(); j++) {
-			instruction* ins = bb->getInsList()->Nth(j);
+		for (int j = 0; j < bb->getBbSize_ListSch(); j++) {
+			instruction* ins = bb->getInsList_ListSchedule()->Nth(j);
 			if (ins->getType() == 'M') {
 				if (ins->isWrMemType()) {
 					fprintf(outFile, "W,-memAddr-,%ld,%d,%s", ins->getInsAddr(), ins->getMemAccessSize(), ins->getArchRegisterStr().c_str());
