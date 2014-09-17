@@ -214,6 +214,7 @@ $(OBJDIR)backend/unit/dynBasicblock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/wires$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/bbStat$(OBJ_SUFFIX) \
 $(SUPPORTS_AVX_OBJ) 
 	$(LINKER) $(TOOL_LDFLAGS) $(LINK_EXE)$@ $^ $(TOOL_LPATHS) $(TOOL_LIBS)
 

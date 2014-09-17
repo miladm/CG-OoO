@@ -258,6 +258,7 @@ VOID pin__init (char* cfgFile)
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
+    g_bbStat = new bbStat;
 	pin__uOpGenInit (*g_staticCode);
 
 	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
@@ -310,6 +311,8 @@ VOID pin__fini (INT32 code, VOID* v)
     else if (g_var.g_core_type == IN_ORDER) inoBkEnd_fini ();
     else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_fini ();
 	
+    delete g_bbStat;
+
 	g_var.msg.simStep ("END OF SIMULATION");
 }
 /* ================================================================== */

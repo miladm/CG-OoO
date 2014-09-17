@@ -7,6 +7,7 @@
 
 #include "unit.h"
 #include "bbInstruction.h"
+#include "bbStat.h"
 
 class bbInstruction;
 
@@ -117,5 +118,6 @@ class dynBasicblock : public unit {
         
         SCHED_MODE _scheduling_mode;
 };
+
 
 #endif

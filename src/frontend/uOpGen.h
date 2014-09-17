@@ -20,6 +20,7 @@
 #include "staticCodeParser.h"
 #include "../global/global.h"
 #include "../global/g_variable.h"
+#include "../backend/unit/bbStat.h"
 
 #define ENABLE_MICRO_OPS 0
 

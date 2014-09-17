@@ -64,7 +64,6 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
 //    if (_schedInsList.NumElements () == (int)_staticBBinsList.size ()) return;
     Assert (_schedInsList.NumElements () == 0);// return;
     if (_staticBBinsList.size () == 0) {
-//        Assert (_insList.NumElements () > 0);
         for (int i = 0; i < _insList.NumElements (); i++) {
             bbInstruction* ins = _insList.Nth(i);
             ins->setInsID ((*seq_num)++);
@@ -72,11 +71,14 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
             _schedInsList_waitList.Append (ins);
             setBBheadID ();
         }
+        if (_insList.NumElements () > 0)
+            g_bbStat->s_dynBB_without_stBB_cnt++;
     } else {
         list<ADDRS>::iterator it;
         for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
             ADDRS ins_addr = *it;
             if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) {
+                g_bbStat->s_missing_stIns_in_dynList_cnt++;
                 continue;
             }
             bbInstruction* ins = _bbInsMap[ins_addr];
@@ -90,6 +92,7 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
             if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) continue;
             _bbInsMap.erase (ins_addr);
         }
+        g_bbStat->s_missing_dynIns_in_stList_cnt += _bbInsMap.size ();
     }
 }
 
