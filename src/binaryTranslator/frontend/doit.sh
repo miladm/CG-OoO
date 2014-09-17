@@ -2,19 +2,21 @@
 
 #instructions: just uncomment the program for whiech you wish to create its static objdump from Pin (and the lines next to it)
 
- ####
-  ../../../../pin/pin -t ./obj-intel64/parser.so -- /home/milad/zsim-apps/build/speccpu2006/429.mcf/429.mcf ~/zsim-apps/inputs/429.mcf/test/input/inp.in
-  mv static_trace.s ../input_files/429.mcf.s
-  mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/429.mcf_mem_trace.csv
-  mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/429.mcf_ins_addrs.csv
+FRONTEND_PATH="/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend"
 
  ####
-# cd /home/milad/zsim-apps/build/speccpu2006/400.perlbench
-# /home/milad/esc_project/svn/pin/pin -t /home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend/obj-intel64/parser.so -- ./400.perlbench -I. -I /home/milad/zsim-apps/inputs/400.perlbench/all/input/lib /home/milad/zsim-apps/inputs/400.perlbench/test/input/attrs.pl
-# cd /home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend
-# mv static_trace.s ../input_files/400.perlbench.s
-# mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/400.perlbench_mem_trace.csv
-# mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/400.perlbench_ins_addrs.csv
+# ../../../../pin/pin -t ./obj-intel64/parser.so -- /home/milad/zsim-apps/build/speccpu2006/429.mcf/429.mcf ~/zsim-apps/inputs/429.mcf/test/input/inp.in
+# mv static_trace.s ../input_files/429.mcf.s
+# mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/429.mcf_mem_trace.csv
+# mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/429.mcf_ins_addrs.csv
+
+ ####
+  cd /home/milad/zsim-apps/build/speccpu2006/400.perlbench
+  /home/milad/esc_project/svn/pin/pin -t $FRONTEND_PATH/obj-intel64/parser.so -- ./400.perlbench -I. -I /home/milad/zsim-apps/inputs/400.perlbench/all/input/lib /home/milad/zsim-apps/inputs/400.perlbench/test/input/attrs.pl
+  cd $FRONTEND_PATH
+  mv static_trace.s ../input_files/400.perlbench.s
+  mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/400.perlbench_mem_trace.csv
+  mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/400.perlbench_ins_addrs.csv
 
 #####
 # ../../../../pin/pin -t ./obj-intel64/parser.so -- ~/zsim-apps/build/speccpu2006/403.gcc/403.gcc -C ~/zsim-apps/inputs/403.gcc/test/input/cccp.i  -o junk.o
@@ -54,8 +56,8 @@
 
 #####
 # cd /home/milad/zsim-apps/build/speccpu2006/471.omnetpp
-# /home/milad/esc_project/svn/pin/pin -t /home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend/obj-intel64/parser.so -- ./471.omnetpp /home/milad/zsim-apps/inputs/471.omnetpp/test/input/omnetpp.ini
-# cd /home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend
+# /home/milad/esc_project/svn/pin/pin -t $FRONTEND_PATH/obj-intel64/parser.so -- ./471.omnetpp /home/milad/zsim-apps/inputs/471.omnetpp/test/input/omnetpp.ini
+# cd $FRONTEND_PATH
 # mv static_trace.s ../input_files/471.omnetpp.s
 # mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/464.h264ref_mem_trace.csv
 # mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/464.h264ref_ins_addrs.csv

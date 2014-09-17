@@ -61,7 +61,7 @@ void instruction::setBrDst(ADDR brDst) {
 void instruction::setInsAsm(const char *command) {strcpy(_command, command);}
 
 void instruction::setType(const char insType) {
-	Assert((insType == 'j' || insType == 'o' || insType == 'c' || 
+	Assert((insType == 'j' || insType == 'o' || insType == 'n' || insType == 'c' || 
 	        insType == 'r' || insType == 'b' || insType == 'M') && "insType value is not recognized.");
 	if (_insType != 'x') return; //Do not set type more than once
 	Assert(_latency == -1 && "Invalid latency value detected.");
@@ -110,7 +110,7 @@ ADDR instruction::getBrDst() {
 const char *instruction::getInsAsm() {return _command;}
 
 const char instruction::getType() {
-	Assert((_insType == 'j' || _insType == 'o' || _insType == 'c' || 
+	Assert((_insType == 'j' || _insType == 'o' || _insType == 'n' || _insType == 'c' || 
 	        _insType == 'r' || _insType == 'b' || _insType == 'M') && "insType value is invalid.");
 	return _insType;
 }

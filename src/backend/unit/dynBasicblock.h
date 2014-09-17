@@ -53,19 +53,20 @@ struct bbHead {
 
 class dynBasicblock : public unit {
     public:
-        dynBasicblock (string class_name = "dynBasicblock");
+        dynBasicblock (SCHED_MODE, string class_name = "dynBasicblock");
         ~dynBasicblock ();
 
         void setBBbrAddr (bool, ADDRS);
         void setBBID (BB_ID);
-        void setBBheadID ();
         void setGPR (AR, PR, AXES_TYPE);
         bool insertIns (bbInstruction*);
+        void rescheduleInsList (INS_ID*);
         bool setupAR (bbInstruction*);
         void buildInsSchedule ();
         void incCompletedInsCntr ();
         void setWrongPath ();
         void setMemViolation ();
+        void setBBstaticInsList (list<ADDRS>&);
 
         bool bbHasBr ();
         ADDRS getBBbrAddr ();
@@ -94,8 +95,13 @@ class dynBasicblock : public unit {
         void setNumWasteIns (INS_ID);
 
     private:
+        void setBBheadID ();
+
+    private:
         bbHead _head;
         map <ADDRS, bbInstruction*> _bbInsMap;
+        list<ADDRS> _staticBBinsList;
+        List<bbInstruction*> _insList;
         List<bbInstruction*> _schedInsList;
         List<bbInstruction*> _schedInsList_waitList;
 
@@ -108,6 +114,8 @@ class dynBasicblock : public unit {
         INS_ID _head_ins_seq_num;
 
         SCALAR _wasted_ins_cnt;
+        
+        SCHED_MODE _scheduling_mode;
 };
 
 #endif

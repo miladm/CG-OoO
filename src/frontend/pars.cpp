@@ -3,7 +3,7 @@
  *******************************************************************************/
 
 #define INS_CNT_THR 1000
-#define BB_CNT_THR 100 + BASICBLOCK
+#define BB_CNT_THR 100 + BB_NEAR_EMPTY_SIZE
 #define G_I_INFO_EN 1
 
 #include "pars.h"
@@ -15,6 +15,17 @@
 #include "utilities.h"
 
 using namespace INSTLIB;
+
+/* ******************************************************************* *
+ * STAT GLOBAL VARIABLES
+ * ******************************************************************* */
+static ScalarStat& s_pin_fr_to_bk_cnt (g_stats.newScalarStat ("pars", "pin_fr_to_bk_cnt", "Number of FRONTEND->BACKEND switches", 0, PRINT_ZERO));
+static ScalarStat& s_pin_wp_cnt (g_stats.newScalarStat ("pars", "pin_wp_cnt", "Number of wrong-path events", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_ins_cnt (g_stats.newScalarStat ("pars", "pin_ins_cnt", "Number of instructions instrumented in frontend", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_sig_cnt (g_stats.newScalarStat ("pars", "pin_sig_cnt", "Number of SIGNAL events in frontend", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_sig_recover_cnt (g_stats.newScalarStat ("pars", "pin_sig_recover_cnt", "Number of SIGNAL recovery events in frontend", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_flush_cnt (g_stats.newScalarStat ("pars", "pin_flush_cnt", "Number of Pintool code cache flush events", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_trace_cnt (g_stats.newScalarStat ("pars", "pin_trace_cnt", "Number of Pintool code cache traces", 0, NO_PRINT_ZERO));
 
 /* ******************************************************************* *
  * GLOBAL VARIABLES
@@ -45,12 +56,12 @@ void recover ()
 {
 	g_var.g_wrong_path = false;
 	g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
-	g_var.g_recovery_count++;
+	s_pin_sig_recover_cnt++;
 	if (g_var.g_debug_level & DBG_SPEC) {
 		cout << " *** recovering to correct path ***\n";
-		cout << " recovery count = " << dec << g_var.g_recovery_count << endl;
+		cout << " recovery count = " << dec << s_pin_sig_recover_cnt.getValue () << endl;
 		cout << " wrong path ins count = " << g_var.g_wrong_path_count << " instructions (avg: " 
-		          << (double)g_var.g_total_wrong_path_count/ (double)g_var.g_recovery_count << ")\n";
+		          << (double) g_var.g_total_wrong_path_count/ s_pin_sig_recover_cnt.getValue () << ")\n";
 	}
 	g_var.g_wrong_path_count = 0;
 	g_var.g_spec_syscall = false;
@@ -128,31 +139,31 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
 
 VOID countTrace (TRACE trace, VOID * v)
 {
-    g_var.g_traceCount++;
+    s_pin_trace_cnt++;
     g_var.g_codeCacheSize +=  TRACE_CodeCacheSize (trace);
     if (g_var.g_debug_level & DBG_CC) cout << "--Code Cache Size Limit: " << CODECACHE_CacheSizeLimit ()/ (1024*1024) << "MB.\n";
-    if (g_var.g_debug_level & DBG_CC) cout << "Adding Trace #" << g_var.g_traceCount << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "Adding Trace #" << s_pin_trace_cnt.getValue () << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
     if (g_var.g_debug_level & DBG_CC) cout << "Total code cache size: " << g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
 }
 
 /*--
- * When notified by Pin that the cache is full, perform a flush and tell the
- * user about it.
+ * WHEN NOTIFIED BY PIN THAT THE CACHE IS FULL, PERFORM A FLUSH AND TELL THE
+ * USER ABOUT IT.
  --*/
 VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
 {
-	g_var.g_flushes++;
+	s_pin_flush_cnt++;
     if (g_var.g_debug_level & DBG_CC) cout << "Trying to insert trace size " << trace_size << " and exit stub size " << stub_size << ".\n";
 	CODECACHE_FlushCache ();
-	if (g_var.g_debug_level & DBG_CC) cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << g_var.g_flushes << ")" << endl;
+	if (g_var.g_debug_level & DBG_CC) cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << s_pin_flush_cnt.getValue () << ")" << endl;
 	g_var.g_codeCacheSize=0;
 }
 
 /*--
- * This is where the code backend will be called a shared buffer between the
- * instruction analysis and this weill be present.  the byffer will be accessed
- * using locks on both the analysis routin and this routin.  we use Pin locks
- * as shown below.
+ * THIS IS WHERE THE CODE BACKEND WILL BE CALLED A SHARED BUFFER BETWEEN THE
+ * INSTRUCTION ANALYSIS AND THIS WEILL BE PRESENT.  THE BYFFER WILL BE ACCESSED
+ * USING LOCKS ON BOTH THE ANALYSIS ROUTIN AND THIS ROUTIN.  WE USE PIN LOCKS
+ * AS SHOWN BELOW.
  --*/
 static VOID backEnd (void *ptr) {
 	while (!g_var.g_appEnd) { //TODO fix this while loop
@@ -169,6 +180,7 @@ static VOID backEnd (void *ptr) {
 				g_var.stat.noMatchIns = 0;
 				g_var.stat.matchIns = 0;
                 bbBkEndRun ();
+                s_pin_fr_to_bk_cnt++;
 //				cout << "BACKEND->FRONTEND" << endl;
 			}
 		} else { /* INO & O3 */
@@ -178,6 +190,7 @@ static VOID backEnd (void *ptr) {
 				g_var.stat.matchIns = 0;
                 if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
                 else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
+                s_pin_fr_to_bk_cnt++;
 //				cout << "BACKEND->FRONTEND" << endl;
 			}
 		}
@@ -242,7 +255,8 @@ VOID pin__init (char* cfgFile)
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = BASICBLOCK; //IN_ORDER;
-    g_var.g_mem_model = NAIVE_SPECUL;
+    g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
+    g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
 	pin__uOpGenInit (*g_staticCode);
 
@@ -278,10 +292,10 @@ VOID pin__fini (INT32 code, VOID* v)
 	PIN_SemaphoreSet (&semaphore1);
 	cout << "finished" << endl;
 	double exe_time = double (stop_pars-start_pars)/CLOCKS_PER_SEC;
-	double ins_per_sec = double (g_var.insCount)/exe_time;
-	cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed Ops: " << g_var.insCount << endl;
+	double ins_per_sec = double (s_pin_ins_cnt.getValue ()) / exe_time;
+	cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed Ops: " << s_pin_ins_cnt.getValue () << endl;
 	cout << "Instructions Executed Per Second Under Pin: " << ins_per_sec << endl;
-	cout << "Num traces generated: " << g_var.g_traceCount << "; Code cach used for traces: " << g_var.g_codeCacheSize/ (1024*1024) << " MB; Code cache flush count: " << g_var.g_flushes << endl;
+	cout << "Num traces generated: " << s_pin_trace_cnt.getValue () << "; Code cach used for traces: " << g_var.g_codeCacheSize/ (1024*1024) << " MB" << endl;
 	delete g_predictor;
 	delete g_staticCode;
 	PIN_SemaphoreFini (&semaphore0);
@@ -303,8 +317,8 @@ VOID pin__fini (INT32 code, VOID* v)
 
 EXCEPT_HANDLING_RESULT handle (THREADID tid, EXCEPTION_INFO *pExceptInfo, PHYSICAL_CONTEXT *pPhysCtxt, VOID *v)
 {
-	g_var.g_pintool_signal_count++;
-	if (g_var.g_debug_level & DBG_SPEC) cout << " pintool signal count = " << dec << g_var.g_pintool_signal_count << endl;
+	s_pin_sig_cnt++;
+	if (g_var.g_debug_level & DBG_SPEC) cout << " pintool signal count = " << dec << s_pin_sig_cnt.getValue () << endl;
 	longjmp (g_var.g_env,1);
 }
 
@@ -470,9 +484,9 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
 		pred_eip = g_var.g_pred_eip;
     }
 	if (g_var.g_wrong_path && !was_wp) {
-		g_var.g_wrong_path_number++;
+		s_pin_wp_cnt++;
 		if (g_var.g_debug_level & DBG_SPEC) cout << "  *** transitioning to wrong path ***\n";
-		if (g_var.g_debug_level & DBG_SPEC) cout << "  wrong path number = " << dec << g_var.g_wrong_path_number << endl;
+		if (g_var.g_debug_level & DBG_SPEC) cout << "  wrong path number = " << dec << s_pin_wp_cnt.getValue () << endl;
 		PIN_SaveContext (c,&g_var.g_context);
 	}
 
@@ -537,27 +551,27 @@ inline BOOL simpointMode () {
 /*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
 VOID doCount ()
 {
-	g_var.insCount++; /*total ins count: wrong and right path*/
+	s_pin_ins_cnt++; /*total ins count: wrong and right path*/
 	if (!g_var.g_wrong_path) g_var.g_insCountRightPath++;
-	unsigned long countRem = g_var.insCount%BILLION;
-	unsigned long countQ = g_var.insCount/MILLION;
+	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
+	unsigned long countQ = (unsigned long) s_pin_ins_cnt.getValue () / MILLION;
 	static clock_t past = 0.0;
 	static clock_t now = double (clock ())/CLOCKS_PER_SEC;
 	simpointMode ();
 	if (countRem == 0) {
 	    now = double (clock ())/CLOCKS_PER_SEC;
 		cout << countQ << " million passed at " << double (clock ())/CLOCKS_PER_SEC << " seconds. (Diff Time: " << now-past << ")\n";
-		cout << "  correct path ins count: " << g_var.g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath)/double (g_var.insCount) << ")\n";
+		cout << "  correct path ins count: " << g_var.g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath)/ s_pin_ins_cnt.getValue () << ")\n";
 		cout << "  wrong path ins count: " << g_var.g_total_wrong_path_count << "\n";
-		cout << "  wrong path count: " << g_var.g_wrong_path_number << "\n";
-		cout << "  trace count: " << g_var.g_traceCount << "\n";
-		cout << "  app signal count: " << g_var.g_app_signal_count << "\n";
-		cout << "  pin signal count: " << g_var.g_pin_signal_count << "\n";
-		cout << "  out of mem count: " << g_var.g_flushes << "\n";
-		cout << "  recovery count: " << g_var.g_recovery_count << "\n";
-		cout << "  code cache flush count: " << g_var.g_flushes << "\n";
-		cout << "  avg wrong-path length: " << double (g_var.g_total_wrong_path_count)/double (g_var.g_wrong_path_number) << "\n";
-		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize)/ (1024.0*1024.0) << "\n\n";
+		cout << "  wrong path count: " << s_pin_wp_cnt.getValue () << "\n";
+		cout << "  trace count: " << s_pin_trace_cnt.getValue () << "\n";
+		cout << "  app signal count: " << s_pin_sig_cnt.getValue () << "\n";
+		cout << "  pin signal count: " << s_pin_sig_cnt.getValue () << "\n";
+		cout << "  out of mem count: " << s_pin_flush_cnt.getValue () << "\n";
+		cout << "  recovery count: " << s_pin_sig_recover_cnt.getValue () << "\n";
+		cout << "  code cache flush count: " << s_pin_flush_cnt.getValue () << "\n";
+		cout << "  avg wrong-path length: " << double (s_pin_wp_cnt.getValue ()) / double (s_pin_wp_cnt.getValue ()) << "\n";
+		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
 }
@@ -567,7 +581,7 @@ VOID doImpCallCount_ (BOOL isCall)
 {
 	if (isCall)
 		imgInsCallCount_++;
-	unsigned long countRem = g_var.insCount % BILLION;
+	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
 	if (countRem == 0) {
 		cout << " (CALL_) :" << imgInsCallCount_ << "\n";
 	}
@@ -578,7 +592,7 @@ VOID doImpMemCount_ (UINT32 isMem)
 {
 	if (isMem > 0)
 		imgInsMemCount_++;
-	unsigned long countRem = g_var.insCount % BILLION;
+	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
 	if (countRem == 0) {
 		cout << " (MEM_) :" << imgInsMemCount_ << "\n";
 	}
@@ -594,14 +608,15 @@ VOID pin__instruction (TRACE trace, VOID * val)
     bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
+        ADDRINT bb_addr = BBL_Address (bbl);
         if (g_var.g_core_type == BASICBLOCK) {
             if (first_bb) {
                 first_bb = false;
-                INS head = BBL_InsHead (bbl);
-                pin__get_bb_header (head);
+                INS bb_head = BBL_InsHead (bbl);
+                pin__get_bb_header (bb_addr, bb_head);
             }
-            INS tail = BBL_InsTail (bbl);
-            pin__get_bb_header (tail);
+            INS bb_tail = BBL_InsTail (bbl);
+            pin__get_bb_header (bb_addr, bb_tail);
         }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))

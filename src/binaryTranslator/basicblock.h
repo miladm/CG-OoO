@@ -16,6 +16,8 @@
 #include "instruction.h"
 #include "phrase.h"
 
+typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;
+
 class basicblock {
 	public:
 		basicblock();
@@ -24,8 +26,8 @@ class basicblock {
 		void transferPointersToNewList(List<basicblock*>* bbList);
 		
 		//Instruction
-		void addIns(instruction * ins);
-		void addIns(instruction* ins, ADDR ID);
+		void addIns(instruction*, REACHING_TYPE);
+		void addIns(instruction*, ADDR);
 		ADDR getLastInsDst();
 		instruction* getLastIns();
 		List<instruction*>* getInsList();
@@ -39,6 +41,7 @@ class basicblock {
 		void setBBbrHeader(ADDR brAddr);
 		ADDR getBBbrHeader();
 		bool hasHeader();
+        ADDR getBBtail ();
 		
 		//Pointers to other BB
 		void setFallThrough(basicblock* bb);
@@ -148,6 +151,7 @@ class basicblock {
 		List<basicblock*>* _descendantBbList;
 		List<basicblock*>* _backEdgeSourceBbList;
 		List<instruction*>* _insListSchList;
+		List<instruction*>* _insList_orig;
 		List<instruction*>* _insList;
 		List<phrase*> *_phList;
 		List<ADDR>* _bbListForPhraseblock;

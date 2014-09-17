@@ -16,6 +16,7 @@
 #include "../global/g_variable.h"
 #include "../global/global.h"
 #include "../config.h"
+#include "../lib/statistic.h"
 
 #define MAX_NUM_uOP_PER_INS 3
 
@@ -34,6 +35,8 @@ class staticCodeParser {
         string getBB_top (ADDRINT); //TODO eliminate this function
         string getBBheader (ADDRINT);
         string getBB_bottom (); //TODO eliminate this function
+        list<ADDRS>& getBBinsList (ADDRINT);
+        bool hasStaticBB (ADDRINT);
 
     private:
         void parse ();
@@ -49,7 +52,7 @@ class staticCodeParser {
 
     private:
         struct bbObj{
-            list<ADDRINT> bbInsSet;
+            list<ADDRS> bbInsList;
             ADDRINT bbAddr;
             ADDRINT bbHeader;
             BOOL bbHasHeader;
@@ -58,6 +61,9 @@ class staticCodeParser {
         map<ADDRINT, bbObj*> _bbMap;
         FILE* _inFile;
         config * _g_cfg;
+
+        /*-- STAT --*/
+        ScalarStat& s_missing_static_bb_cnt;
 };
 
 #endif

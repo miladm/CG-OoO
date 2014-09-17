@@ -15,10 +15,10 @@
  *
  * Here is some sample code illustrating the usage of a List of integers
  *
- *   int Sum(List<int> *list) {
+ *   int Sum (List<int> *list) {
  *       int sum = 0;
- *       for (int i = 0; i < list->NumElements(); i++) {
- *          int val = list->Nth(i);
+ *       for  (int i = 0; i < list->NumElements (); i++) {
+ *          int val = list->Nth (i);
  *          sum += val;
  *       }
  *       return sum;
@@ -29,7 +29,7 @@
 #define _H_list
 
 #include <vector>
-#include "utility.h"  // for Assert()
+#include "utility.h"  // for Assert ()
 
 using namespace std;
 
@@ -42,38 +42,44 @@ template<class Element> class List {
 
  public:
            // Create a new empty list
-    List() {}
+    List () {}
 
            // Returns count of elements currently in list
-    int NumElements() const
-	{ return elems.size(); }
+    int NumElements () const
+	{ return elems.size (); }
 
           // Returns element at index in list. Indexing is 0-based.
           // Raises an assert if index is out of range.
-    Element Nth(int index) const
-	{ Assert(index >= 0 && index < NumElements());
+    Element Nth (int index) const
+	{ Assert (index >= 0 && index < NumElements ());
 	  return elems[index]; }
+
+    // Returns element at index in list. Indexing is 0-based.
+    // Raises an assert if index is out of range.
+    Element Last () const
+	{ Assert (NumElements () > 0);
+	  return elems[NumElements () - 1]; }
 
           // Inserts element at index, shuffling over others
           // Raises assert if index out of range
-    void InsertAt(const Element &elem, int index)
-	{ Assert(index >= 0 && index <= NumElements());
-	  elems.insert(elems.begin() + index, elem); }
+    void InsertAt (const Element &elem, int index)
+	{ Assert (index >= 0 && index <= NumElements ());
+	  elems.insert (elems.begin () + index, elem); }
 
           // Adds element to list end
-    void Append(const Element &elem)
-	{ elems.push_back(elem); }
+    void Append (const Element &elem)
+	{ elems.push_back (elem); }
 
          // Removes element at index, shuffling down others
          // Raises assert if index out of range
-    void RemoveAt(int index)
-	{ Assert(index >= 0 && index < NumElements()); //TODO fix this one
-	  elems.erase(elems.begin() + index); }
+    void RemoveAt (int index)
+	{ Assert (index >= 0 && index < NumElements ()); //TODO fix this one
+	  elems.erase (elems.begin () + index); }
 
 	      // Removes element at index, shuffling down others
 	      // Raises assert if index out of range
-	void RemoveAll()
-	{ elems.clear();}
+	void RemoveAll ()
+	{ elems.clear ();}
 
           
        // These are some specific methods useful for lists of ast nodes
@@ -81,14 +87,14 @@ template<class Element> class List {
        // messages, but since C++ only instantiates the template if you use
        // you can still have Lists of ints, chars*, as long as you 
        // don't try to SetParentAll on that list.
-    void SetParentAll(Node *p)
-        { for (int i = 0; i < NumElements(); i++)
-             Nth(i)->SetParent(p); }
+    void SetParentAll (Node *p)
+        { for  (int i = 0; i < NumElements (); i++)
+             Nth (i)->SetParent (p); }
 	
-	int findElement(const Element &elem) const
+	int findElement (const Element &elem) const
 		{ //Find the elements in the list
-		  for (int i = 0; i < NumElements(); i++) {
-			if (elem ==  Nth(i)) return i; }
+		  for  (int i = 0; i < NumElements (); i++) {
+			if  (elem ==  Nth (i)) return i; }
 		  return -1; }
 			
 

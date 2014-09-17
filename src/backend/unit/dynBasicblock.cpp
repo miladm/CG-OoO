@@ -4,7 +4,7 @@
 
 #include "dynBasicblock.h"
 
-dynBasicblock::dynBasicblock (string class_name)
+dynBasicblock::dynBasicblock (SCHED_MODE scheduling_mode, string class_name)
     : unit (class_name),
       _head (10),
       _max_bb_size (100) //TODO configurable and small
@@ -14,9 +14,16 @@ dynBasicblock::dynBasicblock (string class_name)
     _bb_has_mem_violation = false;
     _head_ins_seq_num = 0;
     _wasted_ins_cnt = 0;
+    _scheduling_mode = scheduling_mode;
 }
 
-dynBasicblock::~dynBasicblock () {}
+dynBasicblock::~dynBasicblock () {
+    map<ADDRS, bbInstruction*>::iterator it = _bbInsMap.begin ();
+    while (it != _bbInsMap.end ()) {
+        delete it->second;
+        _bbInsMap.erase (it++);
+    }
+}
 
 // ***********************
 // ** SET INS ATRIBUTES **
@@ -36,14 +43,59 @@ void dynBasicblock::setBBheadID () {
 }
 
 bool dynBasicblock::insertIns (bbInstruction* ins) {
-    ADDRS ins_addr = ins->getInsAddr ();
-    Assert (_bbInsMap.find (ins_addr) == _bbInsMap.end ());
-    //_bbInsMap.insert (pair<ADDRS, bbInstruction*> (ins_addr, ins)); // TODO - remove the hack lines below nad put this line back
-    _schedInsList.Append (ins);
-    _schedInsList_waitList.Append (ins);
-    setBBheadID ();
+    /* IF NO STATIC SCHEDULE EXISTS, ASSUME DYN SCHEDULING */
+    if (_scheduling_mode == DYNAMIC_SCH) {
+        _schedInsList.Append (ins);
+        _schedInsList_waitList.Append (ins);
+        setBBheadID ();
+    } else if (_scheduling_mode == STATIC_SCH && _staticBBinsList.size () == 0) {
+        _insList.Append (ins);
+    } else { /*-- STATIC_SCH --*/
+        ADDRS ins_addr = ins->getInsAddr ();
+        Assert (_bbInsMap.find (ins_addr) == _bbInsMap.end ());
+        _bbInsMap.insert (pair<ADDRS, bbInstruction*> (ins_addr, ins));
+    }
     if (setupAR (ins)) return true;
     else return false;
+}
+
+void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
+    Assert (_scheduling_mode == STATIC_SCH);
+//    if (_schedInsList.NumElements () == (int)_staticBBinsList.size ()) return;
+    Assert (_schedInsList.NumElements () == 0);// return;
+    if (_staticBBinsList.size () == 0) {
+//        Assert (_insList.NumElements () > 0);
+        for (int i = 0; i < _insList.NumElements (); i++) {
+            bbInstruction* ins = _insList.Nth(i);
+            ins->setInsID ((*seq_num)++);
+            _schedInsList.Append (ins);
+            _schedInsList_waitList.Append (ins);
+            setBBheadID ();
+        }
+    } else {
+        list<ADDRS>::iterator it;
+        for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
+            ADDRS ins_addr = *it;
+            if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) {
+                continue;
+            }
+            bbInstruction* ins = _bbInsMap[ins_addr];
+            ins->setInsID ((*seq_num)++);
+            _schedInsList.Append (ins);
+            _schedInsList_waitList.Append (ins);
+            setBBheadID ();
+        }
+        for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
+            ADDRS ins_addr = *it;
+            if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) continue;
+            _bbInsMap.erase (ins_addr);
+        }
+    }
+}
+
+void dynBasicblock::setBBstaticInsList (list<ADDRS>& staticBBinsList) {
+    Assert (_scheduling_mode == STATIC_SCH);
+    _staticBBinsList = staticBBinsList;
 }
 
 void dynBasicblock::setGPR (AR a_reg, PR p_reg, AXES_TYPE axes_type) {

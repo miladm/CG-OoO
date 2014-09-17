@@ -45,6 +45,9 @@ VOID setType (INS ins) {
 		fprintf(trace_static, "W\n");
 		fprintf(trace_static, "%d\n", INS_MemoryWriteSize(ins)); //size in bytes
 		noType = false;
+	} if (INS_IsNop(ins)) {
+		fprintf(trace_static, "n\n");
+		noType = false;
 	} if (noType == true) {
 		fprintf(trace_static, "o\n");
 	}
@@ -149,7 +152,7 @@ INT32 Usage()
 
 int main(int argc, char * argv[])
 {
-	const string ioPath = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend/"; //argv[argc-2];
+	const string ioPath = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend/"; //argv[argc-2];
 	trace_static = fopen((ioPath+"/static_trace.s").c_str(), "w");  
 	mem_trace    = fopen("/scratch/tracesim/specint2006/mem_trace.csv", "w");  
 	insAddrs     = fopen("/scratch/tracesim/specint2006/ins_addrs.csv", "w");  

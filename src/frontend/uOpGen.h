@@ -30,8 +30,8 @@ void pin__uOpGenInit (staticCodeParser &staticCode);
 void pin__getOp (INS);
 
 /*-- BB INSTRUMENTATIONS --*/
-void pin__get_bb_header (INS);
-void pin__getBBhead (ADDRINT, BOOL);
+void pin__get_bb_header (ADDRINT, INS);
+void pin__getBBhead (ADDRINT, ADDRINT, BOOL);
 
 /*-- INSTRUCTION INSTRUMENTATIONS --*/
 VOID pin__getBrIns (ADDRINT, BOOL, ADDRINT, ADDRINT, BOOL, BOOL, BOOL, BOOL, BOOL);

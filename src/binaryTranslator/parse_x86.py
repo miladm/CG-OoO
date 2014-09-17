@@ -109,6 +109,11 @@ def findOp (line, insAddr):
 		  print opCode
 		  print insAddr
 		  print line
+        elif opCode == 'nop':
+          print 'n'
+          print opCode
+          print insAddr
+          print line
         else:
           print 'o'
           print opCode

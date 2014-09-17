@@ -38,7 +38,7 @@ void parse_instruction(List<instruction*> *insList,
 	FILE * input_assembly;
 	// dependencyTable* depTables = new dependencyTable; /* DISABLED */
 	// if ((input_assembly = fopen(input_asm_file, "r")) == NULL) {
-	if ((input_assembly = fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/input_files/"+(*program_name)+".s").c_str(), "r")) == NULL) {
+	if ((input_assembly = fopen(("/home/milad/esc_project/svn/PARS/src/binaryTranslator/input_files/"+(*program_name)+".s").c_str(), "r")) == NULL) {
 		Assert("Cannot open assembly file.");
 	}
 	FILE * input_brBias;
@@ -104,7 +104,7 @@ void parse_instruction(List<instruction*> *insList,
 		while(1) {
 			if (fgets(c, OPCODE_STRING_SIZE, input_assembly) == NULL) break;
 			// printf("debug: insType: %s\n", c);
-			if (c[0] == 'j'  || c[0] == 'b'|| c[0] == 'c' || c[0] == 'r' || c[0] == 'o') {
+			if (c[0] == 'j'  || c[0] == 'b'|| c[0] == 'c' || c[0] == 'r'  || c[0] == 'o'|| c[0] == 'n') {
 				//Find instruction type
 				newIns->setType(c[0]);				
 			} else if (c[0] == 'R' || c[0] == 'W') {

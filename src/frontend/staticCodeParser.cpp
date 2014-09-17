@@ -4,11 +4,13 @@
 
 #include "staticCodeParser.h"
 
-staticCodeParser::staticCodeParser (config *g_cfg) {
+staticCodeParser::staticCodeParser (config *g_cfg) 
+    : s_missing_static_bb_cnt (g_stats.newScalarStat ("staticCodeParser", "s_missing_static_bb_cnt", "Number of times static version of a BB not existed.", 0, NO_PRINT_ZERO))
+{
 	_g_cfg = g_cfg;
 	char *program_name = _g_cfg->getProgName ();
-//	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s";
-	string file = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+string (program_name)+"_obj.s";
+	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s";
+//	string file = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+string (program_name)+"_obj.s";
 	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << file.c_str () << endl;
@@ -42,7 +44,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &bbAddr);
 			Assert (scanStatus != EOF);
-//			makeNewBB (bbAddr);
+			makeNewBB (bbAddr);
 		} else if (insType == '}') {
 			if (scanStatus == EOF) break;
 			scanStatus = fscanf (_inFile, "\n");
@@ -50,7 +52,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld\n", &insAddr);
 			Assert (scanStatus != EOF);
-//			addBBheader (insAddr, bbAddr);
+			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld%s\n", &insAddr, &brDest, regs_dummy);
@@ -58,7 +60,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-//			addToBB (insAddr, bbAddr);
+			addToBB (insAddr, bbAddr);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
@@ -66,15 +68,15 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-//			addToBB (insAddr, bbAddr);
-		} else if (insType == 'o') {
+			addToBB (insAddr, bbAddr);
+		} else if (insType == 'o' || insType == 'n') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld%s\n", &insAddr, regs_dummy);
 			string registers (regs_dummy,100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-//			addToBB (insAddr, bbAddr);
+			addToBB (insAddr, bbAddr);
 		} else {
 			printf ("Parsed Value: %c", insType);
 			Assert (true == false && "Unrecognized character parsed");
@@ -166,7 +168,7 @@ void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr) {
 	#ifdef ASSERTION
 	Assert (bbAddr != 0 && insAddr != 0);
 	#endif
-	_bbMap[bbAddr]->bbInsSet.push_back (insAddr);
+	_bbMap[bbAddr]->bbInsList.push_back (insAddr);
 }
 
 BOOL staticCodeParser::isNewBB (ADDRINT insAddr) {
@@ -187,6 +189,17 @@ string staticCodeParser::getBB_top (ADDRINT bbAddr) {
 string staticCodeParser::getBB_bottom () {
 	string strg = (string ("}\n"));
 	return strg;
+}
+
+bool staticCodeParser::hasStaticBB (ADDRINT bbID) {
+    return (_bbMap.find(bbID) != _bbMap.end());
+}
+
+list<ADDRS>& staticCodeParser::getBBinsList (ADDRINT bbID) {
+    if (_bbMap.find(bbID) == _bbMap.end()) {
+        s_missing_static_bb_cnt++;
+    }
+    return _bbMap[bbID]->bbInsList;
 }
 
 /*-- Does BB have a header? --*/

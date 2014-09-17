@@ -49,6 +49,7 @@ typedef enum {NO_VAL_REG, WAIT_ON_WRITE_REG, DONE_WRITE_REG} REG_STATE;
 typedef enum {NO_MISPRED, MEM_MISPRED, BP_MISPRED} PIPE_SQUASH_TYPE;
 typedef enum {LD_QU, ST_QU} LSQ_ID;
 
+typedef enum {STATIC_SCH, DYNAMIC_SCH} SCHED_MODE;
 
 typedef enum {
 //  DBG_ALL = 0x0, 

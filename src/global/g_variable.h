@@ -28,7 +28,6 @@ struct g_variable {
         g_bb_seq_num = 1;
         g_seqnum = 1;
         g_icount = 0;
-        insCount = 0;
         g_debug_level = 0; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
         g_branch_mispredict_delay = 20;
@@ -37,8 +36,7 @@ struct g_variable {
         g_app_signal_count = 0;
         g_pin_signal_count = 0;
         g_recovery_count = 0;
-        g_pintool_signal_count = 0;
-        g_wrong_path_number = 0;
+        g_pintool_signal_count = 0; //TODO delete this - not used - move other signal vars to stat first
         g_context_call_depth = 0;
         g_wrong_path = false;
         g_spec_syscall = false;
@@ -64,6 +62,7 @@ struct g_variable {
 
         g_core_type = IN_ORDER;
         g_mem_model = NAIVE_SPECUL;
+        scheduling_mode = STATIC_SCH;
     }
 
     INS_ID g_seq_num;
@@ -77,10 +76,8 @@ struct g_variable {
     unsigned g_total_wrong_path_count;
     unsigned g_app_signal_count;
     unsigned g_pin_signal_count;
-    unsigned long insCount;
     unsigned g_recovery_count;
     unsigned g_pintool_signal_count;
-    unsigned g_wrong_path_number;
     int g_context_call_depth;
     BOOL g_wrong_path;
     bool g_spec_syscall;
@@ -120,6 +117,9 @@ struct g_variable {
 
     //Message printing object
     message msg;
+
+    //Scheduling mode
+    SCHED_MODE scheduling_mode;
 
     //Statistics object
     statistic stat;
@@ -171,7 +171,7 @@ struct g_variable {
             delete g_bbCache->Last();
             g_bbCache->RemoveAt (g_bbCache->NumElements () - 1);
         }
-        dynBasicblock* newBB = new dynBasicblock;
+        dynBasicblock* newBB = new dynBasicblock (scheduling_mode, "dynBasicblock");
         g_bbCache->Append (newBB);
         return newBB;
     }
