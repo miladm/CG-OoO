@@ -35,6 +35,7 @@ void pin__detectBB (ADDRINT);
 void pin__get_bb_header (ADDRINT, INS);
 void pin__getBBhead (ADDRINT, ADDRINT, BOOL);
 dynInstruction* pin__makeNewIns (ADDRINT, INS_TYPE);
+bbInstruction* pin__makeNewBBIns (ADDRINT, INS_TYPE);
 
 /*-- INSTRUCTION INSTRUMENTATIONS --*/
 VOID pin__getBrIns (ADDRINT, BOOL, ADDRINT, ADDRINT, BOOL, BOOL, BOOL, BOOL, BOOL);

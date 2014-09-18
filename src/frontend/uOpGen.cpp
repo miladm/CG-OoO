@@ -25,21 +25,11 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
-            g_br_detected = true;
-            dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
-            bbInstruction* insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
-            staticIns->copyRegsTo (insObj);
-            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
-            insObj->setInsType (BR);
-            insObj->setInsAddr (ins_addr);
-            if (g_var.scheduling_mode == DYNAMIC_SCH)
-                insObj->setInsID (g_var.g_seq_num++);
-            insObj->setWrongPath (g_var.g_wrong_path);
-            if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
-            insObj->setBB (g_bbObj);
+            dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
+            if (insObj != NULL) {
+                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+                g_br_detected = true;
+            }
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
@@ -59,21 +49,11 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
-            dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
-            bbInstruction* insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
-            staticIns->copyRegsTo (insObj);
-            MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
-            insObj->setInsType (MEM);
-            insObj->setInsAddr (ins_addr);
-            if (g_var.scheduling_mode == DYNAMIC_SCH)
-                insObj->setInsID (g_var.g_seq_num++);
-            insObj->setWrongPath (g_var.g_wrong_path);
-            if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
-            insObj->setBB (g_bbObj);
+            dynInstruction* insObj = pin__makeNewBBIns (ins_addr, MEM);
+            if (insObj != NULL) {
+                MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
+                insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+            }
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, MEM);
             MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
@@ -93,20 +73,7 @@ VOID pin__getIns (ADDRINT ins_addr) {
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
-            dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
-            if (g_bbObj == NULL) return;
-            bbInstruction* insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
-            staticIns->copyRegsTo (insObj);
-            insObj->setInsType (ALU);
-            insObj->setInsAddr (ins_addr);
-            if (g_var.scheduling_mode == DYNAMIC_SCH)
-                insObj->setInsID (g_var.g_seq_num++);
-            insObj->setWrongPath (g_var.g_wrong_path);
-            if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
-            insObj->setBB (g_bbObj);
+            pin__makeNewBBIns (ins_addr, ALU);
         } else { /* INO & O3 */
             pin__makeNewIns (ins_addr, ALU);
         }
@@ -124,19 +91,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
-            dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
-            bbInstruction* insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
-            staticIns->copyRegsTo (insObj);
-            insObj->setInsType (NOP);
-            insObj->setInsAddr (ins_addr);
-            if (g_var.scheduling_mode == DYNAMIC_SCH)
-                insObj->setInsID (g_var.g_seq_num++);
-            insObj->setWrongPath (g_var.g_wrong_path);
-            if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
-            insObj->setBB (g_bbObj);
+            pin__makeNewBBIns (ins_addr, ALU);
         } else { /* INO & O3 */
             pin__makeNewIns (ins_addr, NOP);
         }
@@ -146,7 +101,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
     }
 }
 
-/*-- BASIC COMMANDS TO MAKE AN INSTRUCTION --*/
+/*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3--*/
 dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     dynInstruction* insObj = g_var.getNewCodeCacheIns ();
     stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
@@ -155,6 +110,25 @@ dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     insObj->setInsAddr (ins_addr);
     insObj->setInsID (g_var.g_seq_num++);
     insObj->setWrongPath (g_var.g_wrong_path);
+    return insObj;
+}
+
+/*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR BB --*/
+bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
+    dynBasicblock* bbObj = g_var.getLastCacheBB ();
+    if (bbObj == NULL) return NULL;
+    if (g_var.scheduling_mode == STATIC_SCH && bbObj->isInInsMap(ins_addr)) return NULL;
+    bbInstruction* insObj = g_var.getNewIns ();
+    stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+    staticIns->copyRegsTo (insObj);
+    insObj->setInsType (ins_type);
+    insObj->setInsAddr (ins_addr);
+    if (g_var.scheduling_mode == DYNAMIC_SCH)
+        insObj->setInsID (g_var.g_seq_num++);
+    insObj->setWrongPath (g_var.g_wrong_path);
+    if (g_var.g_wrong_path) bbObj->setWrongPath ();
+    if (bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+    insObj->setBB (bbObj);
     return insObj;
 }
 
@@ -179,12 +153,12 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
         dynBasicblock* lastBB = g_var.getLastCacheBB ();
         if (lastBB != NULL) lastBB->rescheduleInsList (&g_var.g_seq_num);
     }
-    dynBasicblock* g_bbObj = g_var.getNewCacheBB ();
-    g_bbObj->setBBID (g_var.g_bb_seq_num++);
-    g_bbObj->setBBbrAddr (is_tail_br, bb_br_addr);
+    dynBasicblock* bbObj = g_var.getNewCacheBB ();
+    bbObj->setBBID (g_var.g_bb_seq_num++);
+    bbObj->setBBbrAddr (is_tail_br, bb_br_addr);
     if (g_var.scheduling_mode == STATIC_SCH) {
         if (g__staticCode->hasStaticBB (bb_addr))
-            g_bbObj->setBBstaticInsList (g__staticCode->getBBinsList (bb_addr));
+            bbObj->setBBstaticInsList (g__staticCode->getBBinsList (bb_addr));
         else
             s_pin_missing_static_bb_cnt++;
     }
