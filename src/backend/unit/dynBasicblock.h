@@ -68,6 +68,7 @@ class dynBasicblock : public unit {
         void setWrongPath ();
         void setMemViolation ();
         void setBBstaticInsList (list<ADDRS>&);
+        bool isInInsMap (ADDRS);
 
         bool bbHasBr ();
         ADDRS getBBbrAddr ();

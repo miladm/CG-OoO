@@ -5,6 +5,7 @@
 #include "uOpGen.h"
 
 staticCodeParser* g__staticCode;
+static bool g_br_detected = false;
 
 /* ******************************************************************* *
  * STAT GLOBAL VARIABLES
@@ -15,154 +16,162 @@ static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("pars", "pin_bb_cnt", "N
 /* ************************************* *
  * INS INSTRUMENTATIONS
  * ************************************ */
-VOID pin__getBrIns (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, 
+VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, 
         BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
-    if (g__staticCode->hasIns (insAddr)) {
+    if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num 
-                << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
+            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            pin__detectBB (ins_addr);
+            g_br_detected = true;
             dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            bbInstruction* g_insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
-            g_insObj->setInsType (BR);
-            g_insObj->setInsAddr (insAddr);
+            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
+            bbInstruction* insObj = g_var.getNewIns ();
+            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+            staticIns->copyRegsTo (insObj);
+            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+            insObj->setInsType (BR);
+            insObj->setInsAddr (ins_addr);
             if (g_var.scheduling_mode == DYNAMIC_SCH)
-                g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+                insObj->setInsID (g_var.g_seq_num++);
+            insObj->setWrongPath (g_var.g_wrong_path);
             if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
-            g_insObj->setBB (g_bbObj);
+            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+            insObj->setBB (g_bbObj);
         } else { /* INO & O3 */
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
-            g_insObj->setInsType (BR);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
+            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
         }
     } else {
         g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (insAddr);
+        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
-VOID pin__getMemIns (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr, 
+VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr, 
         BOOL isStackRd, BOOL isStackWr, BOOL isMemRead) {
-    if (g__staticCode->hasIns (insAddr)) {
+    if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num 
-                << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
+            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            pin__detectBB (ins_addr);
             dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            bbInstruction* g_insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
+            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
+            bbInstruction* insObj = g_var.getNewIns ();
+            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+            staticIns->copyRegsTo (insObj);
             MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-            g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
-            g_insObj->setInsType (MEM);
-            g_insObj->setInsAddr (insAddr);
+            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+            insObj->setInsType (MEM);
+            insObj->setInsAddr (ins_addr);
             if (g_var.scheduling_mode == DYNAMIC_SCH)
-                g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+                insObj->setInsID (g_var.g_seq_num++);
+            insObj->setWrongPath (g_var.g_wrong_path);
             if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
-            g_insObj->setBB (g_bbObj);
+            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+            insObj->setBB (g_bbObj);
         } else { /* INO & O3 */
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
+            dynInstruction* insObj = pin__makeNewIns (ins_addr, MEM);
             MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-            g_insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
-            g_insObj->setInsType (MEM);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
         }
     } else {
         g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (insAddr);
+        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
-VOID pin__getIns (ADDRINT insAddr) {
-    if (g__staticCode->hasIns (insAddr)) {
+VOID pin__getIns (ADDRINT ins_addr) {
+    if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num 
-                << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
+            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            pin__detectBB (ins_addr);
             dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
+            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
             if (g_bbObj == NULL) return;
-            bbInstruction* g_insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (ALU);
-            g_insObj->setInsAddr (insAddr);
+            bbInstruction* insObj = g_var.getNewIns ();
+            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+            staticIns->copyRegsTo (insObj);
+            insObj->setInsType (ALU);
+            insObj->setInsAddr (ins_addr);
             if (g_var.scheduling_mode == DYNAMIC_SCH)
-                g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+                insObj->setInsID (g_var.g_seq_num++);
+            insObj->setWrongPath (g_var.g_wrong_path);
             if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
-            g_insObj->setBB (g_bbObj);
+            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+            insObj->setBB (g_bbObj);
         } else { /* INO & O3 */
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (ALU);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            pin__makeNewIns (ins_addr, ALU);
         }
     } else {
         g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (insAddr);
+        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
-VOID pin__getNopIns (ADDRINT insAddr) {
-    if (g__staticCode->hasIns (insAddr)) {
+VOID pin__getNopIns (ADDRINT ins_addr) {
+    if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_seq_num 
-                << " in BB " << g_var.g_bb_seq_num-1 << std::endl;
+            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            pin__detectBB (ins_addr);
             dynBasicblock* g_bbObj = g_var.getLastCacheBB ();
-            bbInstruction* g_insObj = g_var.getNewIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (NOP);
-            g_insObj->setInsAddr (insAddr);
+            if (g_var.scheduling_mode == STATIC_SCH && g_bbObj->isInInsMap(ins_addr)) return;
+            bbInstruction* insObj = g_var.getNewIns ();
+            stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+            staticIns->copyRegsTo (insObj);
+            insObj->setInsType (NOP);
+            insObj->setInsAddr (ins_addr);
             if (g_var.scheduling_mode == DYNAMIC_SCH)
-                g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+                insObj->setInsID (g_var.g_seq_num++);
+            insObj->setWrongPath (g_var.g_wrong_path);
             if (g_var.g_wrong_path) g_bbObj->setWrongPath ();
-            if (g_bbObj->insertIns (g_insObj)) Assert (true == false && "to be implemented");
-            g_insObj->setBB (g_bbObj);
+            if (g_bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+            insObj->setBB (g_bbObj);
         } else { /* INO & O3 */
-            dynInstruction* g_insObj = g_var.getNewCodeCacheIns ();
-            stInstruction* staticIns = g__staticCode->getInsObj (insAddr);
-            staticIns->copyRegsTo (g_insObj);
-            g_insObj->setInsType (NOP);
-            g_insObj->setInsAddr (insAddr);
-            g_insObj->setInsID (g_var.g_seq_num++);
-            g_insObj->setWrongPath (g_var.g_wrong_path);
+            pin__makeNewIns (ins_addr, NOP);
         }
     } else {
         g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (insAddr);
+        g_var.stat.missingInsList.insert (ins_addr);
     }
+}
+
+/*-- BASIC COMMANDS TO MAKE AN INSTRUCTION --*/
+dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
+    dynInstruction* insObj = g_var.getNewCodeCacheIns ();
+    stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+    staticIns->copyRegsTo (insObj);
+    insObj->setInsType (ins_type);
+    insObj->setInsAddr (ins_addr);
+    insObj->setInsID (g_var.g_seq_num++);
+    insObj->setWrongPath (g_var.g_wrong_path);
+    return insObj;
 }
 
 /* ************************************* *
  * BB INSTRUMENTATIONS
  * ************************************ */
+void pin__detectBB (ADDRINT ins_addr) {
+    if (g__staticCode->hasStaticBB (ins_addr)) {
+        BOOL is_tail_br = g__staticCode->bbHasBr (ins_addr);
+        ADDRINT bb_br_addr = g__staticCode->getBBbr (ins_addr);
+        pin__getBBhead (ins_addr, bb_br_addr, is_tail_br);
+    } else if (g_br_detected) {
+        pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
+    }
+    g_br_detected = false;
+}
+
 void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
         std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_bb_seq_num << std::endl;

@@ -61,9 +61,10 @@ bool dynBasicblock::insertIns (bbInstruction* ins) {
 
 void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
     Assert (_scheduling_mode == STATIC_SCH);
-//    if (_schedInsList.NumElements () == (int)_staticBBinsList.size ()) return;
+    //    if (_schedInsList.NumElements () == (int)_staticBBinsList.size ()) return;
     Assert (_schedInsList.NumElements () == 0);// return;
-    if (_staticBBinsList.size () == 0) {
+
+    if (_staticBBinsList.size () == 0) { /*-- MISSING STATIC INS SCHEDULE --*/
         for (int i = 0; i < _insList.NumElements (); i++) {
             bbInstruction* ins = _insList.Nth(i);
             ins->setInsID ((*seq_num)++);
@@ -93,12 +94,25 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
             _bbInsMap.erase (ins_addr);
         }
         g_bbStat->s_missing_dynIns_in_stList_cnt += _bbInsMap.size ();
+//        map<ADDRS, bbInstruction*>::iterator itt = _bbInsMap.begin ();
+//        while (itt != _bbInsMap.end ()) {
+//            ADDRS ins_addr = itt->first;
+//            cout << ins_addr << " in BB " <<  _head._bb_br_ins_addr<< endl;
+//            itt++;
+//        }
+//        cout << endl;
     }
 }
 
 void dynBasicblock::setBBstaticInsList (list<ADDRS>& staticBBinsList) {
     Assert (_scheduling_mode == STATIC_SCH);
     _staticBBinsList = staticBBinsList;
+}
+
+bool dynBasicblock::isInInsMap (ADDRS ins_addr) {
+    Assert (_scheduling_mode == STATIC_SCH);
+    return (_bbInsMap.find (ins_addr) != _bbInsMap.end ());
+    //TODO: repeated instructions can still happen to cases where _insList is used - fix
 }
 
 void dynBasicblock::setGPR (AR a_reg, PR p_reg, AXES_TYPE axes_type) {

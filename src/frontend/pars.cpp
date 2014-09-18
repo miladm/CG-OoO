@@ -141,9 +141,9 @@ VOID countTrace (TRACE trace, VOID * v)
 {
     s_pin_trace_cnt++;
     g_var.g_codeCacheSize +=  TRACE_CodeCacheSize (trace);
-    if (g_var.g_debug_level & DBG_CC) cout << "--Code Cache Size Limit: " << CODECACHE_CacheSizeLimit ()/ (1024*1024) << "MB.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "--Code Cache Size Limit: " << CODECACHE_CacheSizeLimit () / (1024 * 1024) << "MB.\n";
     if (g_var.g_debug_level & DBG_CC) cout << "Adding Trace #" << s_pin_trace_cnt.getValue () << " (Addr: " << TRACE_CodeCacheAddress (trace) << ") to code cache with size " << TRACE_CodeCacheSize (trace) << " Bytes.\n";
-    if (g_var.g_debug_level & DBG_CC) cout << "Total code cache size: " << g_var.g_codeCacheSize/ (1024*1024) << "MB.\n";
+    if (g_var.g_debug_level & DBG_CC) cout << "Total code cache size: " << g_var.g_codeCacheSize / (1024 * 1024) << "MB.\n";
 }
 
 /*--
@@ -155,7 +155,7 @@ VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
 	s_pin_flush_cnt++;
     if (g_var.g_debug_level & DBG_CC) cout << "Trying to insert trace size " << trace_size << " and exit stub size " << stub_size << ".\n";
 	CODECACHE_FlushCache ();
-	if (g_var.g_debug_level & DBG_CC) cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize/ (1024*1024) << "MB! (Flush count: " << s_pin_flush_cnt.getValue () << ")" << endl;
+	if (g_var.g_debug_level & DBG_CC) cout << "Code Cache Flushed at size " << g_var.g_codeCacheSize / (1024 * 1024) << "MB! (Flush count: " << s_pin_flush_cnt.getValue () << ")" << endl;
 	g_var.g_codeCacheSize=0;
 }
 
@@ -256,7 +256,7 @@ VOID pin__init (char* cfgFile)
 	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = BASICBLOCK; //IN_ORDER;
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
-    g_var.scheduling_mode = STATIC_SCH;
+    g_var.scheduling_mode = DYNAMIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;
 	pin__uOpGenInit (*g_staticCode);
@@ -296,7 +296,7 @@ VOID pin__fini (INT32 code, VOID* v)
 	double ins_per_sec = double (s_pin_ins_cnt.getValue ()) / exe_time;
 	cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed Ops: " << s_pin_ins_cnt.getValue () << endl;
 	cout << "Instructions Executed Per Second Under Pin: " << ins_per_sec << endl;
-	cout << "Num traces generated: " << s_pin_trace_cnt.getValue () << "; Code cach used for traces: " << g_var.g_codeCacheSize/ (1024*1024) << " MB" << endl;
+	cout << "Num traces generated: " << s_pin_trace_cnt.getValue () << "; Code cach used for traces: " << g_var.g_codeCacheSize / (1024 * 1024) << " MB" << endl;
 	delete g_predictor;
 	delete g_staticCode;
 	PIN_SemaphoreFini (&semaphore0);
@@ -331,7 +331,7 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 	//Assert (len <= MAX_MEM_WRITE_LEN);
 	g_var.g_invalid_size = false;
 	if (len > MAX_MEM_WRITE_LEN) {
-		if (g_var.g_debug_level & DBG_SPEC) cout << " (invalid memory access size - read_mem_orig ()) - " << (int)len << "Bytes\n";
+		if (g_var.g_debug_level & DBG_SPEC) cout << " (invalid memory access size - read_mem_orig ()) - " << (int) len << "Bytes\n";
 		g_var.g_invalid_size = true;
 		return;
 	}
@@ -608,19 +608,19 @@ VOID pin__instruction (TRACE trace, VOID * val)
         return;
     }
 
-    bool first_bb = true;
+//    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-        ADDRINT bb_addr = BBL_Address (bbl);
-        if (g_var.g_core_type == BASICBLOCK) {
-            if (first_bb) {
-                first_bb = false;
-                INS bb_head = BBL_InsHead (bbl);
-                pin__get_bb_header (bb_addr, bb_head);
-            }
-            INS bb_tail = BBL_InsTail (bbl);
-            pin__get_bb_header (bb_addr, bb_tail);
-        }
+//        ADDRINT bb_addr = BBL_Address (bbl);
+//        if (g_var.g_core_type == BASICBLOCK) {
+//            if (first_bb) {
+//                first_bb = false;
+//                INS bb_head = BBL_InsHead (bbl);
+//                pin__get_bb_header (bb_addr, bb_head);
+//            }
+//            INS bb_tail = BBL_InsTail (bbl);
+//            pin__get_bb_header (bb_addr, bb_tail);
+//        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {

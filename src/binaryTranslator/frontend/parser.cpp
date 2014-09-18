@@ -25,7 +25,7 @@ VOID setDestination (INS ins) {
 
 VOID setType (INS ins) {
 	bool noType = true;
-	if (INS_IsCall(ins) || INS_IsSyscall(ins)) {
+	if (INS_IsCall(ins) || INS_IsSyscall(ins) || INS_IsProcedureCall (ins)) {
 		fprintf(trace_static, "c\n");
 		noType = false;
 	} if (INS_IsRet(ins) || INS_IsSysret(ins)) {

@@ -60,7 +60,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+			addToBB (insAddr, bbAddr, insType);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
@@ -68,7 +68,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+			addToBB (insAddr, bbAddr, insType);
 		} else if (insType == 'o' || insType == 'n') {
 			Assert (scanStatus != EOF);
 			scanStatus = fscanf (_inFile, ",%ld%s\n", &insAddr, regs_dummy);
@@ -76,7 +76,7 @@ void staticCodeParser::parse () {
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
-			addToBB (insAddr, bbAddr);
+			addToBB (insAddr, bbAddr, insType);
 		} else {
 			printf ("Parsed Value: %c", insType);
 			Assert (true == false && "Unrecognized character parsed");
@@ -164,11 +164,19 @@ void staticCodeParser::addBBheader (ADDRINT insAddr, ADDRINT bbAddr) {
 	_bbMap[bbAddr]->bbHasHeader = true;
 }
 
-void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr) {
+void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr, char insType) {
 	#ifdef ASSERTION
 	Assert (bbAddr != 0 && insAddr != 0);
 	#endif
 	_bbMap[bbAddr]->bbInsList.push_back (insAddr);
+    if (!_bbMap[bbAddr]->hasBr &&
+        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r')) {
+        _bbMap[bbAddr]->hasBr = true;
+        _bbMap[bbAddr]->brAddr = insAddr;
+    } else if (_bbMap[bbAddr]->hasBr &&
+        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r')) {
+//        Assert (true == false && "A BB can only hold one branch / jump"); //TODO put this back when the reason is uncovered
+    }
 }
 
 BOOL staticCodeParser::isNewBB (ADDRINT insAddr) {
@@ -193,6 +201,14 @@ string staticCodeParser::getBB_bottom () {
 
 bool staticCodeParser::hasStaticBB (ADDRINT bbID) {
     return (_bbMap.find(bbID) != _bbMap.end());
+}
+
+BOOL staticCodeParser::bbHasBr (ADDRINT bbAddr) {
+    return _bbMap[bbAddr]->hasBr;
+}
+
+ADDRINT staticCodeParser::getBBbr (ADDRINT bbAddr) {
+    return _bbMap[bbAddr]->brAddr;
 }
 
 list<ADDRS>& staticCodeParser::getBBinsList (ADDRINT bbID) {

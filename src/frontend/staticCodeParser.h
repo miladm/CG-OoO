@@ -37,6 +37,8 @@ class staticCodeParser {
         string getBB_bottom (); //TODO eliminate this function
         list<ADDRS>& getBBinsList (ADDRINT);
         bool hasStaticBB (ADDRINT);
+        BOOL bbHasBr (ADDRINT);
+        ADDRINT getBBbr (ADDRINT);
 
     private:
         void parse ();
@@ -47,15 +49,21 @@ class staticCodeParser {
 
         /*-- BB FUNCTIONS --*/
         void makeNewBB (ADDRINT);
-        void addToBB (ADDRINT, ADDRINT);
+        void addToBB (ADDRINT, ADDRINT, char);
         void addBBheader (ADDRINT, ADDRINT);
 
     private:
         struct bbObj{
+            bbObj () {
+                hasBr = false;
+                brAddr = 0;
+            }
             list<ADDRS> bbInsList;
             ADDRINT bbAddr;
             ADDRINT bbHeader;
             BOOL bbHasHeader;
+            BOOL hasBr;
+            ADDRINT brAddr;
         };
         map<ADDRINT, stInstruction*> _insObjMap;
         map<ADDRINT, bbObj*> _bbMap;
