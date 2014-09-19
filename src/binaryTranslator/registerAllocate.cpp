@@ -185,39 +185,39 @@ void make_interference_nodes_network(basicblock* bb, map<long int,interfNode*> &
 				}
 			}
 		}
-    //	// For each local value, connect the node to all other local nodes at that BB
-    //	for (set<long int>::iterator it = localSet.begin(); it != localSet.end(); it++) {
-    //		if (locallIntfNodeMap.find(*it) != locallIntfNodeMap.end()) 
-    //			printf("OMG. This value already exists: %llx\n", *it);
-    //	}
-    //	for (set<long int>::iterator it = localSet.begin(); it != localSet.end(); it++) {
-    //		if (locallIntfNodeMap.find(*it) == locallIntfNodeMap.end()) {
-    //			interfNode *IntfNd = new interfNode(*it);
-    //			locallIntfNodeMap.insert(pair<long int,interfNode*> (*it,IntfNd));
-    //		}
-    //		interfNode *defNode = locallIntfNodeMap[*it];
-    //		for (set<long int>::iterator it_live = localSet.begin(); it_live != localSet.end(); it_live++) {
-    //			if (*it != *it_live) { //avoid edges to self
-    //				if (locallIntfNodeMap.find(*it_live) == locallIntfNodeMap.end()) {
-    //					interfNode *IntfNd = new interfNode(*it_live);
-    //					locallIntfNodeMap.insert(pair<long int,interfNode*> (*it_live,IntfNd));
-    //				}
-    //				interfNode *node = locallIntfNodeMap[*it_live];
-    //				defNode->addEdge(node);
-    //			}
-    //		}
-    //	}
-    //	//=======
-    //	//Do register allocation for local registerrs
-    //	//Problem to solve: it looks like for some strange reason
-    //	//local registers do conflict across BB's this solution, avoids that.
-    //	//(I don't yet know what the cause of the conflict is)
-    //	assign_local_registers(locallIntfNodeMap,allIntfNodeMap);
-    //	locallIntfNodeMap.clear();
-    //	//=======
-    //	for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.begin(); it != globalIntfNodeMap.end(); it++) {
-    //		if (locallIntfNodeMap.find(it->first) != locallIntfNodeMap.end()) printf("-SHIIIIIIIIT+++++++ %d\n", it->first);
-    //	}
+    	// For each local value, connect the node to all other local nodes at that BB
+    	for (set<long int>::iterator it = localSet.begin(); it != localSet.end(); it++) {
+    		if (locallIntfNodeMap.find(*it) != locallIntfNodeMap.end()) 
+    			printf("OMG. This value already exists: %llx\n", *it);
+    	}
+    	for (set<long int>::iterator it = localSet.begin(); it != localSet.end(); it++) {
+    		if (locallIntfNodeMap.find(*it) == locallIntfNodeMap.end()) {
+    			interfNode *IntfNd = new interfNode(*it);
+    			locallIntfNodeMap.insert(pair<long int,interfNode*> (*it,IntfNd));
+    		}
+    		interfNode *defNode = locallIntfNodeMap[*it];
+    		for (set<long int>::iterator it_live = localSet.begin(); it_live != localSet.end(); it_live++) {
+    			if (*it != *it_live) { //avoid edges to self
+    				if (locallIntfNodeMap.find(*it_live) == locallIntfNodeMap.end()) {
+    					interfNode *IntfNd = new interfNode(*it_live);
+    					locallIntfNodeMap.insert(pair<long int,interfNode*> (*it_live,IntfNd));
+    				}
+    				interfNode *node = locallIntfNodeMap[*it_live];
+    				defNode->addEdge(node);
+    			}
+    		}
+    	}
+    	//=======
+    	//Do register allocation for local registerrs
+    	//Problem to solve: it looks like for some strange reason
+    	//local registers do conflict across BB's this solution, avoids that.
+    	//(I don't yet know what the cause of the conflict is)
+    	assign_local_registers(locallIntfNodeMap,allIntfNodeMap);
+    	locallIntfNodeMap.clear();
+    	//=======
+    	for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.begin(); it != globalIntfNodeMap.end(); it++) {
+    		if (locallIntfNodeMap.find(it->first) != locallIntfNodeMap.end()) printf("-SHIIIIIIIIT+++++++ %d\n", it->first);
+    	}
 		// printf("CALLING DESCENDENTS\n");
 		for (int i = 0; i < bb->getNumDescendents(); i++)
 			make_interference_nodes_network(bb->getNthDescendent(i), globalIntfNodeMap, locallIntfNodeMap, allIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
