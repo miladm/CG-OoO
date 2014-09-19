@@ -254,7 +254,7 @@ VOID pin__init (char* cfgFile)
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = IN_ORDER;
+    g_var.g_core_type = BASICBLOCK; //IN_ORDER;
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
