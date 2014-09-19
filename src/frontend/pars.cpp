@@ -254,7 +254,7 @@ VOID pin__init (char* cfgFile)
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = BASICBLOCK; //IN_ORDER;
+    g_var.g_core_type = IN_ORDER;
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
@@ -608,19 +608,19 @@ VOID pin__instruction (TRACE trace, VOID * val)
         return;
     }
 
-    bool first_bb = true;
+//    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-        ADDRINT bb_addr = BBL_Address (bbl);
-        if (g_var.g_core_type == BASICBLOCK) {
-            if (first_bb) {
-                first_bb = false;
-                INS bb_head = BBL_InsHead (bbl);
-                pin__get_bb_header (bb_addr, bb_head);
-            }
-            INS bb_tail = BBL_InsTail (bbl);
-            pin__get_bb_header (bb_addr, bb_tail);
-        }
+//        ADDRINT bb_addr = BBL_Address (bbl);
+//        if (g_var.g_core_type == BASICBLOCK) {
+//            if (first_bb) {
+//                first_bb = false;
+//                INS bb_head = BBL_InsHead (bbl);
+//                pin__get_bb_header (bb_addr, bb_head);
+//            }
+//            INS bb_tail = BBL_InsTail (bbl);
+//            pin__get_bb_header (bb_addr, bb_tail);
+//        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {

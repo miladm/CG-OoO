@@ -88,7 +88,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             ins->setPipeStage (MEM_ACCESS);
             _LSQ_MGR->memAddrReady (ins);
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                    _stage_name.c_str (), "Complete load - ins addr", ins->getInsID (), _clk->now ());
+                    _stage_name.c_str (), "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
             ins->getBB()->incCompletedInsCntr ();
@@ -104,7 +104,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 violating_ld_ins->getBB()->setMemViolation ();
             }
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                    _stage_name.c_str (), "Complete store - ins addr", ins->getInsID (), _clk->now ());
+                    _stage_name.c_str (), "Complete store addr calc - ins addr", ins->getInsID (), _clk->now ());
         } else {
             ins->setPipeStage (COMPLETE);
             ins->getBB()->incCompletedInsCntr ();

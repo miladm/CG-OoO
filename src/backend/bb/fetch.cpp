@@ -88,6 +88,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
 
 void bb_fetch::getNewBB () {
     //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
+    if (_current_bb != NULL) _current_bb->setDoneFetch ();
     _current_bb = g_var.popBBcache ();
     if (_current_bb->getBBsize () == 0) {
         dbg.print (DBG_FETCH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 

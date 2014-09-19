@@ -84,7 +84,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
             ins->setPipeStage (MEM_ACCESS);
             _LSQ_MGR->memAddrReady (ins);
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                      "Complete load - ins addr", ins->getInsID (), _clk->now ());
+                      "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
             _LSQ_MGR->memAddrReady (ins);
@@ -95,7 +95,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
             violating_ld_ins = p.second;
             /*-- SQUASH DETECTION --*/
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                       "Complete store - ins addr", ins->getInsID (), _clk->now ());
+                       "Complete store addr calc - ins addr", ins->getInsID (), _clk->now ());
             if (is_violation) { violating_ld_ins->setMemViolation (); }
         } else {
             ins->setPipeStage (COMPLETE);

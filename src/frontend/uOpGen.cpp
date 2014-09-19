@@ -21,9 +21,6 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
         BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
     if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
-        if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
-                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
@@ -35,6 +32,9 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
         }
+        if (g_var.g_debug_level & DBG_UOP) 
+            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         g_var.stat.noMatchIns++;
         g_var.stat.missingInsList.insert (ins_addr);
@@ -45,9 +45,6 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
         BOOL isStackRd, BOOL isStackWr, BOOL isMemRead) {
     if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
-        if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
-                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -61,6 +58,9 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
             MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
             insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
         }
+        if (g_var.g_debug_level & DBG_UOP) 
+            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         g_var.stat.noMatchIns++;
         g_var.stat.missingInsList.insert (ins_addr);
@@ -70,9 +70,6 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
 VOID pin__getIns (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
-        if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
-                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -80,6 +77,9 @@ VOID pin__getIns (ADDRINT ins_addr) {
         } else { /* INO & O3 */
             pin__makeNewIns (ins_addr, ALU);
         }
+        if (g_var.g_debug_level & DBG_UOP) 
+            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         g_var.stat.noMatchIns++;
         g_var.stat.missingInsList.insert (ins_addr);
@@ -89,9 +89,6 @@ VOID pin__getIns (ADDRINT ins_addr) {
 VOID pin__getNopIns (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
         g_var.stat.matchIns++;
-        if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
-                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -99,6 +96,9 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
         } else { /* INO & O3 */
             pin__makeNewIns (ins_addr, NOP);
         }
+        if (g_var.g_debug_level & DBG_UOP) 
+            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+                " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         g_var.stat.noMatchIns++;
         g_var.stat.missingInsList.insert (ins_addr);

@@ -15,6 +15,7 @@ dynBasicblock::dynBasicblock (SCHED_MODE scheduling_mode, string class_name)
     _head_ins_seq_num = 0;
     _wasted_ins_cnt = 0;
     _scheduling_mode = scheduling_mode;
+    _done_fetch = false;
 }
 
 dynBasicblock::~dynBasicblock () {
@@ -253,6 +254,7 @@ void dynBasicblock::resetStates () {
     _bb_has_mem_violation = false;
     _bb_on_wrong_path = false;
     _wasted_ins_cnt = 0;
+    _done_fetch = false;
 }
 
 SCALAR dynBasicblock::getNumWasteIns () {
@@ -267,4 +269,13 @@ void dynBasicblock::setNumWasteIns (INS_ID faulty_ins_sn) {
         }
     }
     if (_wasted_ins_cnt < 0) _wasted_ins_cnt = 0;
+}
+
+void dynBasicblock::setDoneFetch () {
+    Assert (_done_fetch == false);
+    _done_fetch = true;
+}
+
+bool dynBasicblock::isDoneFetch () {
+    return _done_fetch;
 }

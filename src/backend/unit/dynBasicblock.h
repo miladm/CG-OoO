@@ -95,6 +95,8 @@ class dynBasicblock : public unit {
 
         SCALAR getNumWasteIns ();
         void setNumWasteIns (INS_ID);
+        void setDoneFetch ();
+        bool isDoneFetch ();
 
     private:
         void setBBheadID ();
@@ -112,6 +114,7 @@ class dynBasicblock : public unit {
 
         bool _bb_on_wrong_path;
         bool _bb_has_mem_violation;
+        bool _done_fetch;
 
         INS_ID _head_ins_seq_num;
 

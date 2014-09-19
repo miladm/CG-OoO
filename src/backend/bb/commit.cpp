@@ -83,6 +83,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
         dynBasicblock* bb_dual = _bbQUE->popFront ();
+        Assert (bb->isDoneFetch () == true);
         Assert (bb->getBBID () == bb_dual->getBBID ());
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Commit bb", bb->getBBID (), _clk->now ());
