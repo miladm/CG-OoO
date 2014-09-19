@@ -43,6 +43,16 @@ bb_commit::~bb_commit () {}
 void bb_commit::doCOMMIT () {
     /*-- STAT & DEBUG --*/
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
+    dbg.print (DBG_COMMIT, "bbROB size: %d (cyc: %d)\n", _bbROB->getTableSize (), _clk->now ());
+//    for (int i = 0; i < _bbROB->getTableSize (); i++) {
+//        cout << "BB ID: " << _bbROB->getNth_unsafe (i)->getBBID () << " " << _bbROB->getNth_unsafe(i)->getBBheadID () << " | ";
+//        List<bbInstruction*>* insList = _bbROB->getNth_unsafe (i)->getBBinsList ();
+//        for (int j = 0; j < insList->NumElements (); j++) {
+//            bbInstruction* ins = insList->Nth(j);
+//            cout << ins->getInsType () << " " << ins->getInsID () << " (" << ins->getPipeStage () << "), ";
+//        }
+//        cout << endl;
+//    }
     regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 

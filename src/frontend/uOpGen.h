@@ -11,6 +11,7 @@
 #include <string.h>
 #include <string>
 #include <map>
+#include <set>
 
 #include "pin.H"
 #include "pin_isa.H"

@@ -6,6 +6,7 @@
 
 staticCodeParser* g__staticCode;
 static bool g_br_detected = false;
+static set<ADDRINT> _bbHeadSet;
 
 /* ******************************************************************* *
  * STAT GLOBAL VARIABLES
@@ -28,8 +29,8 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
             if (insObj != NULL) {
                 insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
-                g_br_detected = true;
             }
+            g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
@@ -48,6 +49,7 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
             std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, MEM);
             if (insObj != NULL) {
@@ -72,6 +74,7 @@ VOID pin__getIns (ADDRINT ins_addr) {
             std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
             pin__makeNewBBIns (ins_addr, ALU);
         } else { /* INO & O3 */
@@ -90,6 +93,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
             std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
         if (g_var.g_core_type == BASICBLOCK) {
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
             pin__makeNewBBIns (ins_addr, ALU);
         } else { /* INO & O3 */
@@ -123,8 +127,7 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     staticIns->copyRegsTo (insObj);
     insObj->setInsType (ins_type);
     insObj->setInsAddr (ins_addr);
-    if (g_var.scheduling_mode == DYNAMIC_SCH)
-        insObj->setInsID (g_var.g_seq_num++);
+    if (g_var.scheduling_mode == DYNAMIC_SCH) insObj->setInsID (g_var.g_seq_num++);
     insObj->setWrongPath (g_var.g_wrong_path);
     if (g_var.g_wrong_path) bbObj->setWrongPath ();
     if (bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
@@ -142,6 +145,7 @@ void pin__detectBB (ADDRINT ins_addr) {
         pin__getBBhead (ins_addr, bb_br_addr, is_tail_br);
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
+        _bbHeadSet.insert (ins_addr);
     }
     g_br_detected = false;
 }
@@ -203,8 +207,11 @@ void pin__getOp (INS ins) {
     BOOL is_dir_br_jmp = INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins);
     BOOL is_br_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins));
 
-//    if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) { //TODO put is back
-    if (INS_IsBranchOrCall (ins)) {
+    if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret(ins) || 
+        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+        INS_IsCall(ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) { //TODO put is back
         if (INS_HasFallThrough (ins)) {
             INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) pin__getBrIns,
                     IARG_ADDRINT, INS_Address (ins),
@@ -239,6 +246,18 @@ void pin__getOp (INS ins) {
         IARG_END);
         }
         */
+    } else if (INS_IsSyscall(ins)) {
+        INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) pin__getBrIns,
+                IARG_ADDRINT, INS_Address (ins),
+                IARG_BOOL, INS_HasFallThrough (ins),
+                IARG_BRANCH_TARGET_ADDR, 
+                IARG_FALLTHROUGH_ADDR,
+                IARG_BRANCH_TAKEN,
+                IARG_BOOL, is_call,
+                IARG_BOOL, is_ret,
+                IARG_BOOL, is_br_jmp,
+                IARG_BOOL, is_dir_br_jmp,
+                IARG_END);
     } else if (INS_IsMemoryWrite (ins)) {
         BOOL isMemRead;
         isMemRead = false;

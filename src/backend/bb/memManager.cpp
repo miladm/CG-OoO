@@ -138,7 +138,7 @@ bool bb_memManager::commit (bbInstruction* ins) {
 #endif
 //        _LQ.updateWireState (READ); TODO put it back too if you decided to go for this. same goes for SQ?
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
-    } else {
+    } else { /*-- STORE --*/
         Assert (ins->getSQstate () == SQ_COMPLETE);
         ins->setSQstate (SQ_COMMIT);
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:", ins->getInsID ());
