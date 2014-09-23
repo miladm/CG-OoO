@@ -9,6 +9,12 @@
 
 using namespace INSTLIB;
 
+KNOB<string> KnobBenchInputFile(KNOB_MODE_WRITEONCE, "pintool",
+            "b", "bench.in", "specify input benchmark config file name");
+KNOB<string> KnobSimCfgInputFile(KNOB_MODE_WRITEONCE, "pintool",
+            "c", "default.cfg", "specify input simulator config file name");
+
+
 INT32 Usage() {
     PIN_ERROR( "PhArS: Phrase Architecture Simulator\n"
                + KNOB_BASE::StringKnobSummary() + "\n");
@@ -19,8 +25,10 @@ int main(int argc, char * argv[]) {
     PIN_InitSymbols();
     if(PIN_Init(argc, argv)) return Usage();
 
-	char cfgFile[] = "config/defaul.cfg";
-    pin__runPARS(cfgFile);
+    std::string benchmark = KnobBenchInputFile.Value().c_str();
+    std::string sim_cfg = KnobSimCfgInputFile.Value().c_str();
+    cout << sim_cfg << " " << benchmark << endl;
+    pin__runPARS (benchmark, sim_cfg);
     
     PIN_StartProgram();
     return 0;

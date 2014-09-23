@@ -9,11 +9,11 @@ BENCH_INPUT='/home/milad/zsim-apps/inputs'
 ##@ TERMINAL
 #../../../pin -t obj-intel64/wrong_path.so  -usectxt -- $BENCH_EXEC/403.gcc/403.gcc -C $BENCH_INPUT/403.gcc/test/input/cccp.i -o out.o
 
-#../../../pin -separate_memory -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/mcf-1.3_2/src/mcf /home/milad/esc_project/svn/benchmarks/spec2006/mcf-1.3_2/src/inp_small.in
+#../../../pin $PIN_PARAM -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/mcf-1.3_2/src/mcf /home/milad/esc_project/svn/benchmarks/spec2006/mcf-1.3_2/src/inp_small.in
 
-#../../../pin -pin_memory_range 0x80000000:0x90000000 -pause_tool 15 -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/bzip2  -kf /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/sample2.ref
+#../../../pin $PIN_PARAM -pin_memory_range 0x80000000:0x90000000 -pause_tool 15 -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/bzip2  -kf /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/sample2.ref
 
-#../../../pin -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/bzip2  -kf /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/sample2.ref
+#../../../pin $PIN_PARAM -t obj-intel64/wrong_path.so  -usectxt -- /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/bzip2  -kf /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/sample2.ref
 
 #../../../pin -t obj-intel64/wrong_path.so  -usectxt -- $BENCH_EXEC/456.hmmer/456.hmmer --fixed 0 --mean 325 --num 45000 --sd 200 --seed 0  $BENCH_INPUT/456.hmmer/test/input/bombesin.hmm
 

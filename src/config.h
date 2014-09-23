@@ -21,7 +21,7 @@ using namespace std;
 class config {
 	public:
 		config();
-		config(char*,g_variable*);
+		config(string, string, g_variable*);
 		~config();
 		bool parsePinPointFiles(char*, char*);
 		char* getProgName();
@@ -36,7 +36,8 @@ class config {
 
 		char param[PARSE_LEN]; 
 		char program_name[PARSE_LEN];
-		FILE* f_config;
+		FILE* f_bench_cfg;
+		FILE* f_sim_cfg;
 		g_variable * _g_var;
         SCH_MODE _sch_mode;
         REG_ALLOC_MODE _reg_alloc_mode;

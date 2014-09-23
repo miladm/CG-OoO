@@ -198,9 +198,9 @@ static VOID backEnd (void *ptr) {
 	}
 }
 
-VOID pin__runPARS (char* cfgFile)
+VOID pin__runPARS (string bench_path, string config_path)
 {
-    pin__init (cfgFile);
+    pin__init (bench_path, config_path);
 
 	// Register a routine that gets called every time the trace is inserted
     CODECACHE_AddTraceInsertedFunction (countTrace, 0);
@@ -236,13 +236,13 @@ VOID pin__runPARS (char* cfgFile)
 /* ****************************************************************** *
  * INITALIZATION & CLEAN UP
  * ****************************************************************** */
-VOID pin__parseConfig (char* cfgFile) {
-	g_cfg = new config (cfgFile, &g_var);
+VOID pin__parseConfig (string bench_path, string config_path) {
+	g_cfg = new config (bench_path, config_path, &g_var);
 }
 
-VOID pin__init (char* cfgFile) 
+VOID pin__init (string bench_path, string config_path) 
 {
-	pin__parseConfig (cfgFile);
+	pin__parseConfig (bench_path, config_path);
 	g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
 	PIN_SemaphoreInit (&semaphore0);
 	PIN_SemaphoreInit (&semaphore1);
