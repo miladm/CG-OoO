@@ -8,12 +8,26 @@ staticCodeParser::staticCodeParser (config *g_cfg)
     : s_missing_static_bb_cnt (g_stats.newScalarStat ("staticCodeParser", "s_missing_static_bb_cnt", "Number of times static version of a BB not existed.", 0, NO_PRINT_ZERO))
 {
 	_g_cfg = g_cfg;
+    string reg_alloc_mode_s, sch_mode_s;
 	char *program_name = _g_cfg->getProgName ();
-	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s";
+    SCH_MODE sch_mode = _g_cfg->getSchMode ();
+    REG_ALLOC_MODE reg_alloc_mode = _g_cfg->getRegAllocMode ();
+
+    if (sch_mode == NO_LIST_SCH) sch_mode_s = "no_list_sch";
+    else if (sch_mode == LIST_SCH) sch_mode_s = "list_sch";
+    else Assert ("invalid scheduling mode");
+
+    if (reg_alloc_mode == GLOBAL) reg_alloc_mode_s = "global_reg";
+    else if (reg_alloc_mode == LOCAL_GLOBAL) reg_alloc_mode_s = "local_global_reg";
+    else Assert ("invalid reg allocation mode");
+
+    string in_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/";
+    string in_file_path = in_dir + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (program_name) + "_obj.s";
+//	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (program_name)+"_obj.s";
 //	string file = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+string (program_name)+"_obj.s";
-	if ( (_inFile  = fopen (file.c_str (), "r")) == NULL) 
+	if ( (_inFile  = fopen (in_file_path.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
-	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << file.c_str () << endl;
+	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << in_file_path.c_str () << endl;
 	parse ();
 }
 

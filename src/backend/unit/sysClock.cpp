@@ -37,6 +37,10 @@ CYCLE sysClock::now () {
 	return _clk;
 }
 
+ScalarStat* sysClock::getStatObj () {
+    return &_clk_cycles;
+}
+
 /*-- ONLY USED FOR STAT --*/
 CYCLE sysClock::getValue () {
 	return now ();

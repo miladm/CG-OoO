@@ -26,7 +26,7 @@
 #include "ssa.h"
 #include "dot.h"
 
-void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name) {
+void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode) {
 	/* STAT Generation Functions */
 	// printf("FILE NAME: %s\n", (*program_name).c_str());
 	StatBBSizeStat(bbList, program_name);
@@ -40,14 +40,13 @@ void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string
 	cfg.runDot(bbList);
 	dot cfg_phrase(1, program_name);
 	cfg_phrase.runDot(phBBList);
-	writeToFile(bbList, program_name);
-	// writeToFile(pbList, program_name);
-
+	writeToFile(bbList, program_name, sch_mode, reg_alloc_mode);
+	// writeToFile(pbList, program_name, sch_mode, reg_alloc_mode);
 }
 
 int main(int argc, char* argv[])
 {
-	Assert(argc == 2 && "USAGE: ./PhraseFormer <program_name>");
+	Assert(argc == 4 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_method> <scheduling_method>");
 	unsigned t0=clock(),t1;
 	//SETUP VARIABLES
 	List<instruction*>* insList = new List<instruction*>;
@@ -65,6 +64,21 @@ int main(int argc, char* argv[])
 	set<ADDR> brDstSet;
 	std::string program_name = argv[1];
 
+    /*-- REGISTER ALLOCATION MODE --*/
+	REG_ALLOC_MODE reg_alloc_mode;
+    cout << argv[2] << " " << argv[3] << endl;
+    if (strcmp (argv[2], "global_reg") == 0) reg_alloc_mode = GLOBAL;
+    else if (strcmp (argv[2], "local_global_reg") == 0) reg_alloc_mode = LOCAL_GLOBAL;
+    else Assert (true == false && "Wrong register allocation mode specified");
+
+    /*-- STATIC CODE SCHEDULING MODE --*/
+    SCH_MODE sch_mode;
+    if (strcmp (argv[3], "list_sch") == 0) sch_mode = LIST_SCH;
+    else if (strcmp (argv[3], "no_list_sch") == 0) sch_mode = NO_LIST_SCH;
+    else Assert (true == false && "Wrong static code scheduling mode specified");
+
+    Assert (!(sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
+
 	printf("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name.c_str());
 	//init(argc, argv);
 	printf("- Configure Program -\n");
@@ -72,13 +86,13 @@ int main(int argc, char* argv[])
 	printf("- Parse Instructions -\n");
 	parse_instruction(insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccuracyMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name);
 	printf("- Make Basic Blocks -\n");
-	make_basicblock(insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap);
+	make_basicblock(insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, sch_mode);
 	printf("- Build Dominance Frontier -\n");
 	setup_dominance_frontier(bbList);
 	printf("- Build SSA -\n");
 	build_ssa_form(bbList, varList);
 	printf("- Register Allocation -\n");
-	allocate_register(bbList,insList);
+	allocate_register(bbList, insList, reg_alloc_mode);
 	// printf("- Make Phraesblocks -\n");
 	// phBBList = make_phraseblock(bbList, &brBiasMap, &bpAccuracyMap);
 	printf("- Annotate Trace -\n");
@@ -103,7 +117,7 @@ int main(int argc, char* argv[])
 	// }
 	/* ---------------------*/
 	printf("- Make Dot Files & Stat Data -\n");
-	finish(bbList, phBBList, &program_name);
+	finish(bbList, phBBList, &program_name, sch_mode, reg_alloc_mode);
 	t1=clock()-t0;
 	printf("\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minutes)\n-------------\n", ((float)t1)/CLOCKS_PER_SEC/60.0);
 	return 0;

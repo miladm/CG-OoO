@@ -9,6 +9,6 @@
 #include "basicblock.h"
 
 //Write basicbloc/phraseblock instructions in file
-void writeToFile (List<basicblock*>* bbList, string *program_name);
+void writeToFile (List<basicblock*>* bbList, string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode);
 
 #endif

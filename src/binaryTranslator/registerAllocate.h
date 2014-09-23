@@ -14,6 +14,6 @@
 #include "instruction.h"
 
 void findInteriorPoints(List<basicblock*> *bbList, List<basicblock*> *interiorBB);
-void allocate_register(List<basicblock*> *bbList,List<instruction*> *insList);
+void allocate_register(List<basicblock*> *bbList, List<instruction*> *insList, REG_ALLOC_MODE reg_alloc_mode);
 
 #endif

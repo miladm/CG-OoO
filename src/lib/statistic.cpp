@@ -44,8 +44,8 @@ ScalarStat& statistic::newScalarStat (string class_name, string param_name, stri
     return *cnt;
 }
 
-RatioStat& statistic::newRatioStat (sysClock* clk, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
-    RatioStat* cnt = new RatioStat (clk, class_name, param_name, _description, init_val, print_if_zero);
+RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    RatioStat* cnt = new RatioStat (divisor, class_name, param_name, _description, init_val, print_if_zero);
     _RatioStats.insert (cnt);
     return *cnt;
 }
@@ -177,7 +177,7 @@ void ScalarHistStat::print () {
 /* **************************** *
  * RATIO STAT
  * **************************** */
-RatioStat::RatioStat (sysClock* divisor, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+RatioStat::RatioStat (ScalarStat* divisor, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
     : ScalarStat (class_name, param_name, description, init_val, print_if_zero)
 { _divisor = divisor; }
 

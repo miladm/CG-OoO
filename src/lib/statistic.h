@@ -13,13 +13,10 @@
 #include "pin_isa.H"
 #include "list.h"
 #include "../global/global.h"
-#include "../backend/unit/sysClock.h"
 
 typedef enum {NO_PRINT_ZERO, PRINT_ZERO} PRINT_ON_ZERO;
 typedef long int DIGIT;
 typedef long double FRACTION;
-
-class sysClock;
 
 /* **************************** *
  * STAT
@@ -79,12 +76,12 @@ class ScalarHistStat : public stat {
  * **************************** */
 class RatioStat : public ScalarStat {
     public:
-        RatioStat (sysClock* divisor, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        RatioStat (ScalarStat* divisor, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~RatioStat () {}
         void print ();
 
     private:
-        sysClock* _divisor;
+        ScalarStat* _divisor;
 };
 
 /* **************************** *
@@ -97,7 +94,7 @@ class statistic {
         void dump ();
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
-        RatioStat& newRatioStat (sysClock*, string, string, string, SCALAR, PRINT_ON_ZERO);
+        RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
 
     private:
         set<ScalarHistStat*> _ScalarHistStats;

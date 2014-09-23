@@ -25,6 +25,8 @@ class config {
 		~config();
 		bool parsePinPointFiles(char*, char*);
 		char* getProgName();
+        SCH_MODE getSchMode ();
+        REG_ALLOC_MODE getRegAllocMode ();
 
 		std::map<SIMP,SIMW> _simpoint;
 		bool _use_simpoint;
@@ -36,6 +38,8 @@ class config {
 		char program_name[PARSE_LEN];
 		FILE* f_config;
 		g_variable * _g_var;
+        SCH_MODE _sch_mode;
+        REG_ALLOC_MODE _reg_alloc_mode;
 
 		//PinPoint Config
 		char pinPoint_s_file[PARSE_LEN];

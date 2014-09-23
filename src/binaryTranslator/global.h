@@ -4,10 +4,14 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 
+#include <map>
+
 typedef long unsigned ADDR;
 typedef enum {none, READ, WRITE} memType;
 typedef enum {noType, ALU, MEM, FPU, BR} type;
 typedef enum {LRF, GRF} regKind;
+typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
+typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 
 #define CFG_STRING_SIZE 400
 #define INS_STRING_SIZE 330

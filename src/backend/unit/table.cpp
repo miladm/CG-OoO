@@ -21,7 +21,7 @@ table<tableType_T>::table (LENGTH len,
       _table_type (table_type),
       s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
       s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
-      s_table_size_rat  (g_stats.newRatioStat (clk, table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
+      s_table_size_rat  (g_stats.newRatioStat (clk->getStatObj (), table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
 {
 	Assert (_table_size > 0 && 
             rd_port_cnt > 0 && rd_port_cnt <= _table_size &&

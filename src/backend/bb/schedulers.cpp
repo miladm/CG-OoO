@@ -21,7 +21,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
       s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, PRINT_ZERO)),
       s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, PRINT_ZERO)),
       s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, PRINT_ZERO)),
-      s_bbWin_usage_rat (g_stats.newRatioStat (clk, stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
+      s_bbWin_usage_rat (g_stats.newRatioStat (clk->getStatObj (), stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;

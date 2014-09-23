@@ -11,7 +11,8 @@ void make_basicblock  (List<instruction*> *insList,
 					  map<int,variable*> &varList, 
 		      		  set<ADDR> *brDstSet,
 		      		  map<ADDR, basicblock*> *bbMap,
-					  map<ADDR,instruction*> *insAddrMap) {
+					  map<ADDR,instruction*> *insAddrMap,
+                      SCH_MODE sch_mode) {
 	// Construct BB's
 	set<long int> use_set, def_set, diff_set;
 	for  (int i = 0; i < insList->NumElements (); i++) {
@@ -146,11 +147,13 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}	
 	// Perform List Scheduling on BB
-	printf ("\tRun List Scheduling\n");
-	for  (int i = 0; i < bbList->NumElements (); i++) {
-		basicblock* bb = bbList->Nth (i);
-		listSchedule (bb); //why does this affect BB structure?
-	}
+    if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
+        printf ("\tRun List Scheduling\n");
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+            basicblock* bb = bbList->Nth (i);
+            listSchedule (bb); //why does this affect BB structure?
+        }
+    }
 	std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), def_set.end (), std::inserter (diff_set, diff_set.begin ()));
 	printf ("\tDiff Set: %d %d %d\n", def_set.size (), use_set.size (), diff_set.size ());
 }

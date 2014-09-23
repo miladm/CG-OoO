@@ -13,7 +13,9 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-	: stage (fetch_width, stage_name, clk)
+	: stage (fetch_width, stage_name, clk),
+      s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of basicblocks in " + stage_name, 0, PRINT_ZERO)),
+      s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "average basicblock size in " + stage_name, 0, PRINT_ZERO))
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
@@ -58,6 +60,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
         if (g_var.isBBcacheNearEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
         else { 
             getNewBB (); 
+            s_bb_size_avg += _current_bb->getBBsize ();
             dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                     "NEW BB:", _current_bb->getBBID (), _clk->now ());
             _bbQUE->pushBack (_current_bb);

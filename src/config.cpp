@@ -57,6 +57,14 @@ config::config(char* cfg_file, g_variable * g_var) {
 	#ifdef ASSERTION
 	Assert(strcmp(param,"PINPOINT_WEIGHT_FILE")==0 && "Wrong Parameter parsed.");
 	#endif
+	fscanf(f_config, "%s = %d\n", param, (int*)&_sch_mode);
+	#ifdef ASSERTION
+	Assert(strcmp(param,"SCH_MODE")==0 && "Wrong Parameter parsed.");
+	#endif
+	fscanf(f_config, "%s = %d\n", param, (int*)&_reg_alloc_mode);
+	#ifdef ASSERTION
+	Assert(strcmp(param,"REG_ALLOC_MODE")==0 && "Wrong Parameter parsed.");
+	#endif
 
 	//U-ARCH PARAMS
 	fscanf(f_config, "%s = %d\n", param, (int*)&coreType);
@@ -278,4 +286,12 @@ bool config::parsePinPointFiles(char* pinPoint_s_file, char* pinPoint_w_file) {
 
 char* config::getProgName() {
 	return program_name;
+}
+
+SCH_MODE config::getSchMode () {
+    return _sch_mode;
+}
+
+REG_ALLOC_MODE config::getRegAllocMode () {
+    return _reg_alloc_mode;
 }

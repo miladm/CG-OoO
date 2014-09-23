@@ -249,12 +249,17 @@ VOID pin__init (char* cfgFile)
 	PIN_SemaphoreClear (&semaphore0);
 	PIN_SemaphoreClear (&semaphore1);
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+    /* TODO take care of these cout's*/
+    cout << "CORE: " << g_var.g_core_type << endl;
+    cout << "MEM MODEL: " << g_var.g_mem_model << endl;
+    cout << "SCHEDULING MODE: " << g_var.scheduling_mode << endl;
+    cout << "BENCH: " << g_cfg->getProgName () << endl;
 	g_var.msg.simStep ("PARS COMPILED CODE");
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = BASICBLOCK; //IN_ORDER;
+    g_var.g_core_type = OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
