@@ -174,26 +174,28 @@ static VOID backEnd (void *ptr) {
 		ADDRINT tgt = g_var.g_tgt;
 		ADDRINT fthru = g_var.g_fthru;
 		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
-		if (g_var.g_core_type == BASICBLOCK) {
-			if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
-//				cout << "FRONTEND->BACKEND " << endl;
-				g_var.stat.noMatchIns = 0;
-				g_var.stat.matchIns = 0;
-                bbBkEndRun ();
-                s_pin_fr_to_bk_cnt++;
-//				cout << "BACKEND->FRONTEND" << endl;
-			}
-		} else { /* INO & O3 */
-			if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
-//				cout << "FRONTEND->BACKEND " << endl;
-				g_var.stat.noMatchIns = 0;
-				g_var.stat.matchIns = 0;
-                if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
-                else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
-                s_pin_fr_to_bk_cnt++;
-//				cout << "BACKEND->FRONTEND" << endl;
-			}
-		}
+        if (g_var.g_enable_bkEnd) {
+            if (g_var.g_core_type == BASICBLOCK) {
+                if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
+                    //	cout << "FRONTEND->BACKEND " << endl;
+                    g_var.stat.noMatchIns = 0;
+                    g_var.stat.matchIns = 0;
+                    bbBkEndRun ();
+                    s_pin_fr_to_bk_cnt++;
+                    // cout << "BACKEND->FRONTEND" << endl;
+                }
+            } else { /* INO & O3 */
+                if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
+                    // cout << "FRONTEND->BACKEND " << endl;
+                    g_var.stat.noMatchIns = 0;
+                    g_var.stat.matchIns = 0;
+                    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
+                    else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
+                    s_pin_fr_to_bk_cnt++;
+                    // cout << "BACKEND->FRONTEND" << endl;
+                }
+            }
+        }
 		PIN_SemaphoreSet (&semaphore1);
 	}
 }
@@ -240,8 +242,7 @@ VOID pin__parseConfig (string bench_path, string config_path) {
 	g_cfg = new config (bench_path, config_path, &g_var);
 }
 
-VOID pin__init (string bench_path, string config_path) 
-{
+VOID pin__init (string bench_path, string config_path) {
 	pin__parseConfig (bench_path, config_path);
 	g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
 	PIN_SemaphoreInit (&semaphore0);
@@ -284,8 +285,7 @@ VOID pin__init (string bench_path, string config_path)
 	g_var.msg.simStep ("START OF SIMULATION");
 }
 
-VOID pin__fini (INT32 code, VOID* v) 
-{
+VOID pin__doFinish () {
 	g_var.msg.simStep ("FRONTEND TERMINATED");
 	stop_pars = clock ();
 	g_var.g_appEnd = true;
@@ -319,6 +319,11 @@ VOID pin__fini (INT32 code, VOID* v)
     delete g_bbStat;
 
 	g_var.msg.simStep ("END OF SIMULATION");
+}
+
+VOID pin__fini (INT32 code, VOID* v) 
+{
+    pin__doFinish ();
 }
 /* ================================================================== */
 
@@ -468,11 +473,13 @@ VOID GetMemReadBypass (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
 VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT __pc, BOOL __has_ft)
 {
     if (!g_var.g_enable_wp) {
-		//PIN_SemaphoreSet (&semaphore0);
-		//PIN_SemaphoreWait (&semaphore1); 
-		//PIN_SemaphoreClear (&semaphore1);
-		return;
-	}
+        if (g_var.g_enable_bkEnd) {
+            //PIN_SemaphoreSet (&semaphore0);
+            //PIN_SemaphoreWait (&semaphore1); 
+            //PIN_SemaphoreClear (&semaphore1);
+        }
+        return;
+    }
     if (g_var.g_enable_wp && g_var.g_wrong_path) return;
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
@@ -481,15 +488,15 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
 	bool was_wp = g_var.g_wrong_path;
 
 	ADDRINT pred_eip = tgt;
-	if (true) { // uasd to be if (__has_ft) { - clean up? (TODO)
-		g_var.g_pc = __pc;
-		g_var.g_taken = taken;
-		g_var.g_tgt = tgt;
-		g_var.g_fthru = fthru;
-		PIN_SemaphoreSet (&semaphore0);
-		PIN_SemaphoreWait (&semaphore1); 
-		PIN_SemaphoreClear (&semaphore1);
-		pred_eip = g_var.g_pred_eip;
+    if (true) { // uasd to be if (__has_ft) { - clean up? (TODO)
+        g_var.g_pc = __pc;
+        g_var.g_taken = taken;
+        g_var.g_tgt = tgt;
+        g_var.g_fthru = fthru;
+        PIN_SemaphoreSet (&semaphore0);
+        PIN_SemaphoreWait (&semaphore1); 
+        PIN_SemaphoreClear (&semaphore1);
+        pred_eip = g_var.g_pred_eip;
     }
 	if (g_var.g_wrong_path && !was_wp) {
 		s_pin_wp_cnt++;
@@ -528,7 +535,7 @@ VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 
 inline BOOL simpointMode () {
 	static int simpCount=0; 
-	unsigned long next_simp=g_cfg->_simpoint.begin ()->first; 
+	unsigned long next_simp = g_cfg->_simpoint.begin ()->first; 
 	if (g_var.g_enable_simpoint && !g_var.g_wrong_path) {
 		if (g_var.g_inSimpoint) {
 			g_var.g_simpInsCnt++;
@@ -539,6 +546,7 @@ inline BOOL simpointMode () {
 				g_var.g_simpInsCnt = 0;
 				PIN_RemoveInstrumentation ();
 				g_var.g_enable_instrumentation = false;
+                g_var.g_enable_bkEnd = false;
 			}
 		} else {
 			if (next_simp == g_var.g_insCountRightPath) {
@@ -546,11 +554,14 @@ inline BOOL simpointMode () {
 				g_var.g_enable_wp = true;
 				g_var.g_simpInsCnt = 0;
 				g_var.g_enable_instrumentation = true;
+                g_var.g_enable_bkEnd = true;
 				g_cfg->_simpoint.erase (next_simp);
 				next_simp = g_cfg->_simpoint.begin ()->first;
 				cout << "\n*** Simpoint #" << ++simpCount << ": " << g_var.g_insCountRightPath << "\n";
 				cout << "*** Next Simpoint is: #" << next_simp << "\n";
-			}
+			} else {
+                //TODO implement this condition once you are on serious simulating mode
+            }
 		}
 	}
 	return g_var.g_inSimpoint;
@@ -582,6 +593,10 @@ VOID doCount ()
 		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
+    if (s_pin_ins_cnt.getValue () == 10 * MILLION) {
+        pin__doFinish ();
+        exit (-1);
+    }
 }
 
 long unsigned imgInsCallCount_=0;
@@ -616,15 +631,17 @@ VOID pin__instruction (TRACE trace, VOID * val)
 //    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-//        ADDRINT bb_addr = BBL_Address (bbl);
-//        if (g_var.g_core_type == BASICBLOCK) {
-//            if (first_bb) {
-//                first_bb = false;
-//                INS bb_head = BBL_InsHead (bbl);
-//                pin__get_bb_header (bb_addr, bb_head);
-//            }
-//            INS bb_tail = BBL_InsTail (bbl);
-//            pin__get_bb_header (bb_addr, bb_tail);
+//        if (g_var.g_enable_bkEnd) {
+//            ADDRINT bb_addr = BBL_Address (bbl);
+//            if (g_var.g_core_type == BASICBLOCK) {
+//                if (first_bb) {
+//                    first_bb = false;
+//                    INS bb_head = BBL_InsHead (bbl);
+//                    pin__get_bb_header (bb_addr, bb_head);
+//                }
+//                INS bb_tail = BBL_InsTail (bbl);
+//                pin__get_bb_header (bb_addr, bb_tail);
+//            } //TODO simpoint commands do not apply here - fix if put back
 //        }
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
@@ -651,7 +668,7 @@ VOID pin__instruction (TRACE trace, VOID * val)
                     IARG_END);
 
             if (g_var.g_enable_instrumentation) {
-                pin__getOp (ins);
+                if (g_var.g_enable_bkEnd) pin__getOp (ins);
                 if (INS_IsMemoryWrite (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemWriteOrigValue,

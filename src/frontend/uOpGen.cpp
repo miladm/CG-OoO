@@ -170,6 +170,7 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
 }
 
 void pin__get_bb_header (ADDRINT bb_addr, INS bb_tail_ins) {
+    Assert (g_var.g_enable_bkEnd);
     BOOL is_br = INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins);
     ADDRINT bb_br_addr = INS_Address (bb_tail_ins);
     if (is_br) {
@@ -202,6 +203,7 @@ void pin__uOpGenInit (staticCodeParser &staticCode) {
 }
 
 void pin__getOp (INS ins) {
+    Assert (g_var.g_enable_bkEnd);
     BOOL is_ret = INS_IsRet (ins) || INS_IsFarRet (ins);
     BOOL is_call = INS_IsCall (ins) || INS_IsFarCall (ins);
     BOOL is_dir_br_jmp = INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins);

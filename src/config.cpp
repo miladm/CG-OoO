@@ -39,6 +39,8 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
     bench_path  = "config/" + bench_path + ".cfg";
 	f_sim_cfg   = fopen (config_path.c_str (),"r");
 	f_bench_cfg = fopen (bench_path.c_str (),"r");
+
+    /*-- BENCHMARK PARAMS --*/
 	#ifdef ASSERTION
 	Assert(f_bench_cfg != NULL);
 	Assert(f_sim_cfg != NULL);
@@ -55,6 +57,8 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 	#ifdef ASSERTION
 	Assert(strcmp(param,"PINPOINT_WEIGHT_FILE")==0 && "Wrong Parameter parsed.");
 	#endif
+
+    /*-- SIMULATION PARAMS --*/
 	int t_use_simpoint = -1;
 	fscanf(f_sim_cfg, "%s = %d\n", param, &t_use_simpoint);
 	_use_simpoint = (bool)t_use_simpoint;
@@ -70,7 +74,7 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 	Assert(strcmp(param,"REG_ALLOC_MODE")==0 && "Wrong Parameter parsed.");
 	#endif
 
-	//U-ARCH PARAMS
+	/*-- U-ARCH PARAMS --*/
 	fscanf(f_sim_cfg, "%s = %d\n", param, (int*)&coreType);
 	#ifdef ASSERTION
 	Assert(strcmp(param,"CORE_TYPE")==0 && "Wrong Parameter parsed.");
@@ -128,7 +132,7 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 	Assert(strcmp(param,"PB_WIN_SIZE")==0 && "Wrong Parameter parsed.");
 	#endif
 
-	//DELAYS
+	/*-- DELAYS --*/
 	fscanf(f_sim_cfg, "%s = %d\n", param, &fetch_delay);
 	#ifdef ASSERTION
 	Assert(strcmp(param,"FETCH_DELAY")==0 && "Wrong Parameter parsed.");
@@ -166,7 +170,7 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 	Assert(strcmp(param,"FORWARDING_DELAY")==0 && "Wrong Parameter parsed.");
 	#endif
 
-	//UNIT WIDTHS
+	/*-- UNIT WIDTHS --*/
 	fscanf(f_sim_cfg, "%s = %d\n", param, &bp_width);
 	#ifdef ASSERTION
 	Assert(strcmp(param,"BP_WIDTH")==0 && "Wrong Parameter parsed.");

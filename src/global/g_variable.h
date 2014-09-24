@@ -50,6 +50,7 @@ struct g_variable {
         g_enable_simpoint = true;
         g_enable_wp = true;
         g_enable_instrumentation = true;
+        g_enable_bkEnd = true;
 
         g_pipe_state = PIPE_NORMAL;
         g_squash_seq_num = 0;
@@ -86,6 +87,7 @@ struct g_variable {
     bool g_enable_simpoint;
     bool g_enable_wp;
     bool g_enable_instrumentation;
+    bool g_enable_bkEnd;
     long unsigned g_simpInsCnt;
     long int g_traceCount;
     long int g_codeCacheSize;
