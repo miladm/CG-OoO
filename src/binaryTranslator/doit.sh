@@ -3,7 +3,7 @@
 REG_ALLOC_MODE="global_reg"
 SCH_MODE="no_list_sch"
 
- ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE
  ./PhraseFormer 445.gobmk $REG_ALLOC_MODE $SCH_MODE
 # ./PhraseFormer 464.h264ref $REG_ALLOC_MODE $SCH_MODE
  ./PhraseFormer 473.astar $REG_ALLOC_MODE $SCH_MODE

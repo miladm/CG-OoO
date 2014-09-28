@@ -103,9 +103,9 @@ class dynBasicblock : public unit {
 
     private:
         bbHead _head;
-        map <ADDRS, bbInstruction*> _bbInsMap;
         list<ADDRS> _staticBBinsList;
     public: //TODO get rid of this
+        map <ADDRS, bbInstruction*> _bbInsMap;
         List<bbInstruction*> _insList;
     private:
         List<bbInstruction*> _schedInsList;

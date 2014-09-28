@@ -258,7 +258,7 @@ VOID pin__init (string bench_path, string config_path) {
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = g_cfg->coreType; //OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
-    g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
+    g_var.g_mem_model = NAIVE_SPECUL;
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;

@@ -79,6 +79,7 @@ void statistic::dump () {
         for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++) {
             (*it)->print (&_out_file);
         }
+        _out_file << endl;
         cout << endl;
     }
     {
@@ -86,6 +87,7 @@ void statistic::dump () {
         for (it = _ScalarStats.begin (); it != _ScalarStats.end (); it++) {
             (*it)->print (&_out_file);
         }
+        _out_file << endl;
         cout << endl;
     }
     {
@@ -93,6 +95,7 @@ void statistic::dump () {
         for (it = _RatioStats.begin (); it != _RatioStats.end (); it++) {
             (*it)->print (&_out_file);
         }
+        _out_file << endl;
         cout << endl;
     }
 }

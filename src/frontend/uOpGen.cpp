@@ -146,7 +146,7 @@ void pin__detectBB (ADDRINT ins_addr) {
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
         _bbHeadSet.insert (ins_addr);
-    } else if (g_var.getLastCacheBB ()->getBBsize () > 20 || g_var.getLastCacheBB ()->_insList.NumElements () > 20 ) { //TODO temp solution to break off large BB's
+    } else if (g_var.getLastCacheBB ()->getBBsize () > 20  || g_var.getLastCacheBB ()->_insList.NumElements () > 20|| g_var.getLastCacheBB ()->_bbInsMap.size () > 20 ) { //TODO temp solution to break off large BB's
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
     }
     g_br_detected = false;
