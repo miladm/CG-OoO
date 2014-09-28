@@ -111,6 +111,7 @@ stat::stat (string class_name, string param_name, string description, SCALAR ini
     _description = description;
     _ScalarStat = init_val;
     _print_if_zero = print_if_zero;
+    _enable_log_stat = true;
 }
 
 stat::~stat () { }
@@ -177,7 +178,7 @@ void ScalarStat::print () {
 void ScalarStat::print (ofstream* _out_file) {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
-        (*_out_file) << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
     }
 }
 
@@ -189,6 +190,7 @@ ScalarHistStat::ScalarHistStat (LENGTH histogram_size, string class_name, string
 {
     _histogram_size = histogram_size;
     _scalar_arr_stat = new stat[_histogram_size];
+    _enable_log_stat = g_cfg->_enable_log_stat;
     for (LENGTH i = 0; i < _histogram_size; i++) {
         ostringstream indx;
         indx << i;
@@ -210,7 +212,7 @@ void ScalarHistStat::print (ofstream* _out_file) {
     for (LENGTH i = 0; i < _histogram_size; i++) {
         if (!(_scalar_arr_stat[i].getValue () == 0 && _print_if_zero == NO_PRINT_ZERO)) {
             cout << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
-            (*_out_file) << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
+            if (_enable_log_stat) (*_out_file) << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
         }
     }
 }
@@ -225,7 +227,7 @@ RatioStat::RatioStat (ScalarStat* divisor, string class_name, string param_name,
 void RatioStat::print (ofstream* _out_file) {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
-        (*_out_file) << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
     }
 }
 

@@ -72,6 +72,10 @@ config::config(string bench_path, string config_path) {
 	#ifdef ASSERTION
 	Assert(strcmp(param,"REG_ALLOC_MODE")==0 && "Wrong Parameter parsed.");
 	#endif
+	fscanf(f_sim_cfg, "%s = %d\n", param, (int*)&_enable_log_stat);
+	#ifdef ASSERTION
+	Assert(strcmp(param,"ENABLE_LOG_STAT")==0 && "Wrong Parameter parsed.");
+	#endif
 
 	/*-- U-ARCH PARAMS --*/
 	fscanf(f_sim_cfg, "%s = %d\n", param, (int*)&coreType);

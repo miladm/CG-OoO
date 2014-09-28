@@ -48,6 +48,7 @@ class stat {
         string _description;
         SCALAR _ScalarStat;
         PRINT_ON_ZERO _print_if_zero;
+        bool _enable_log_stat;
 };
 
 /* **************************** *

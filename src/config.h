@@ -42,6 +42,7 @@ class config {
         REG_ALLOC_MODE _reg_alloc_mode;
         string _config_path;
         string _bench_path;
+        bool _enable_log_stat;
 
 		//PinPoint Config
 		char pinPoint_s_file[PARSE_LEN];
