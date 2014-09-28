@@ -11,4 +11,4 @@ echo Arg 2: $3
 
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
-$PIN_ROOT/pin -separate_memory -t $PARS_ROOT/obj-intel64/main_pars.so --  $@
+$PIN_ROOT/pin -separate_memory -t $PARS_ROOT/obj-intel64/main_pars.so $@

@@ -17,7 +17,7 @@ config::config() {
 // PRE:
 //		cfgFile to exist
 //		PinPointFile to exist
-config::config(string bench_path, string config_path, g_variable * g_var) {
+config::config(string bench_path, string config_path) {
 //    YAML::Node config;
 //    config = YAML::LoadFile("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
 //    std::ifstream fin("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
@@ -33,12 +33,11 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 
 
     /* =========== OLD CODE ============ */
-	_g_var = g_var;
-	_g_var->msg.simStep("PARSING SIMULATION CONFIGURATIONS");
-    config_path = "config/" + config_path;
-    bench_path  = "config/" + bench_path + ".cfg";
-	f_sim_cfg   = fopen (config_path.c_str (),"r");
-	f_bench_cfg = fopen (bench_path.c_str (),"r");
+	g_msg.simStep("PARSING SIMULATION CONFIGURATIONS");
+    _config_path = "config/" + config_path;
+    _bench_path  = "config/" + bench_path + ".cfg";
+	f_sim_cfg   = fopen (_config_path.c_str (), "r");
+	f_bench_cfg = fopen (_bench_path.c_str (), "r");
 
     /*-- BENCHMARK PARAMS --*/
 	#ifdef ASSERTION
@@ -227,7 +226,7 @@ config::config(string bench_path, string config_path, g_variable * g_var) {
 }
 
 void config::verifyConfig() {
-	_g_var->msg.simStep("VERIFYING CONFIGURATIONS");
+	g_msg.simStep("VERIFYING CONFIGURATIONS");
 	Assert(num_mem_levels == MEM_HIGHERARCHY);
 	for (int i = 0; i < MEM_HIGHERARCHY; i++) {
 		Assert(cache_lat[i] > 0);}
@@ -263,7 +262,7 @@ void config::verifyConfig() {
 // PRE:
 //		pinPoint_file to exist
 bool config::parsePinPointFiles(char* pinPoint_s_file, char* pinPoint_w_file) {
-	_g_var->msg.simStep("PARSING PINPOINTS CONFIGURATIONS");
+	g_msg.simStep("PARSING PINPOINTS CONFIGURATIONS");
 	//TODO check if the file exists - assert if not
 	FILE* f_s_pinPoint = fopen(pinPoint_s_file, "r");
 	FILE* f_w_pinPoint = fopen(pinPoint_w_file, "r");
@@ -303,3 +302,5 @@ SCH_MODE config::getSchMode () {
 REG_ALLOC_MODE config::getRegAllocMode () {
     return _reg_alloc_mode;
 }
+
+config* g_cfg;

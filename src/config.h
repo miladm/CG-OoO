@@ -13,34 +13,35 @@
 #include <iostream>
 #include "lib/utility.h"
 #include "global/global.h"
-#include "global/g_variable.h"
+#include "lib/message.h"
 #include "lib/yaml-cpp/yaml.h"
 
 using namespace std;
 
 class config {
 	public:
-		config();
-		config(string, string, g_variable*);
-		~config();
-		bool parsePinPointFiles(char*, char*);
-		char* getProgName();
-        SCH_MODE getSchMode ();
-        REG_ALLOC_MODE getRegAllocMode ();
+		config ();
+		config (string, string);
+		~config ();
+		bool parsePinPointFiles (char*, char*);
+		char* getProgName ();
+        SCH_MODE getSchMode  ();
+        REG_ALLOC_MODE getRegAllocMode  ();
 
 		std::map<SIMP,SIMW> _simpoint;
 		bool _use_simpoint;
 
 	public:
-		void verifyConfig();
+		void verifyConfig ();
 
 		char param[PARSE_LEN]; 
 		char program_name[PARSE_LEN];
 		FILE* f_bench_cfg;
 		FILE* f_sim_cfg;
-		g_variable * _g_var;
         SCH_MODE _sch_mode;
         REG_ALLOC_MODE _reg_alloc_mode;
+        string _config_path;
+        string _bench_path;
 
 		//PinPoint Config
 		char pinPoint_s_file[PARSE_LEN];
@@ -49,7 +50,7 @@ class config {
 		char obj_r_file[PARSE_LEN];
 
 		//CPU Config
-		core coreType;
+		CORE_TYPE coreType;
 		brMode branchMode;
 		memModel memoryModel;
 		rrMode regRenMode;
@@ -85,5 +86,7 @@ class config {
 		int regren_width;
 		int fetch_width;
 };
+
+extern config* g_cfg;
 
 #endif

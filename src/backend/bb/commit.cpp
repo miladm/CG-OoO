@@ -23,6 +23,7 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
       s_mem_squash_bb_cnt (g_stats.newScalarStat (stage_name, "mem_squash_bb_cnt", "Number of squashed basicblocks due to mem mis-pred", 0, PRINT_ZERO)),
       s_num_waste_ins (g_stats.newScalarStat (stage_name, "num_waste_ins", "Number of useful instructions squashed", 0, PRINT_ZERO)),
       s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of dynamic basiblocks in "+stage_name, 0, PRINT_ZERO)),
+      s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "Basicblock average size", 0, PRINT_ZERO)),
       s_wp_bb_cnt (g_stats.newScalarStat (stage_name, "wp_bb_cnt", "Number of wrong-path basiblocks in "+stage_name, 0, PRINT_ZERO)),
       s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of wrong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
       s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_name, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),
@@ -87,6 +88,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         Assert (bb->getBBID () == bb_dual->getBBID ());
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Commit bb", bb->getBBID (), _clk->now ());
+        s_bb_size_avg += bb->getBBorigSize ();
         commitBB (bb);
 
         /*-- UPDATE WIRES --*/

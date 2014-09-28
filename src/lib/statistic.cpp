@@ -13,61 +13,87 @@ statistic::statistic() { }
 
 statistic::~statistic() {
     {
-        set<ScalarHistStat*>::iterator it;
+        list<ScalarHistStat*>::iterator it;
         for (it = _ScalarHistStats.begin(); it != _ScalarHistStats.end(); it++) {
             delete (*it);
         }
     }
     {
-        set<ScalarStat*>::iterator it;
+        list<ScalarStat*>::iterator it;
         for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
             delete (*it);
         }
     }
     {
-        set<RatioStat*>::iterator it;
+        list<RatioStat*>::iterator it;
         for (it = _RatioStats.begin(); it != _RatioStats.end(); it++) {
             delete (*it);
         }
     }
+    _out_file.close ();
+}
+
+void statistic::setup () {
+    /*-- OUT FILE --*/
+    string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out1/";
+    string prog_name (g_cfg->program_name);
+    string core_type;
+    ostringstream core_t;
+    core_t << g_cfg->coreType;
+    string out_file_path = out_path + prog_name + "_" + core_t.str ();
+    _out_file.open (out_file_path.c_str ());
+    storeSimConfig ();
+    cout << "OUT FILE: " << out_file_path << endl;
+}
+
+void statistic::storeSimConfig () {
+        _out_file << "* =========== =========== ===========" << endl;
+        _out_file << "* CORE: " << g_cfg->coreType << endl;
+        _out_file << "* SCH_MODE: " << g_cfg->getSchMode () << endl;
+        _out_file << "* CORE: " << g_cfg->getRegAllocMode () << endl;
+        _out_file << "* =========== =========== ===========" << endl << endl;
+        //TODO add mroe config params
 }
 
 ScalarHistStat& statistic::newScalarHistStat (LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     ScalarHistStat* cnt = new ScalarHistStat (histogram_size, class_name, param_name, _description, init_val, print_if_zero);
-    _ScalarHistStats.insert (cnt);
+    _ScalarHistStats.push_back (cnt);
     return *cnt;
 }
 
 ScalarStat& statistic::newScalarStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     ScalarStat* cnt = new ScalarStat (class_name, param_name, _description, init_val, print_if_zero);
-    _ScalarStats.insert (cnt);
+    _ScalarStats.push_back (cnt);
     return *cnt;
 }
 
 RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     RatioStat* cnt = new RatioStat (divisor, class_name, param_name, _description, init_val, print_if_zero);
-    _RatioStats.insert (cnt);
+    _RatioStats.push_back (cnt);
     return *cnt;
 }
 
 void statistic::dump () {
     {
-        set<ScalarHistStat*>::iterator it;
+        list<ScalarHistStat*>::iterator it;
         for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++) {
-            (*it)->print ();
+            (*it)->print (&_out_file);
         }
+        cout << endl;
     }
     {
-        set<ScalarStat*>::iterator it;
+        list<ScalarStat*>::iterator it;
         for (it = _ScalarStats.begin (); it != _ScalarStats.end (); it++) {
-            (*it)->print ();
+            (*it)->print (&_out_file);
         }
+        cout << endl;
     }
     {
-        set<RatioStat*>::iterator it;
+        list<RatioStat*>::iterator it;
         for (it = _RatioStats.begin (); it != _RatioStats.end (); it++) {
-            (*it)->print ();
+            (*it)->print (&_out_file);
         }
+        cout << endl;
     }
 }
 
@@ -83,6 +109,8 @@ stat::stat (string class_name, string param_name, string description, SCALAR ini
     _ScalarStat = init_val;
     _print_if_zero = print_if_zero;
 }
+
+stat::~stat () { }
 
 void stat::init (string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
 {
@@ -138,8 +166,16 @@ ScalarStat::ScalarStat (string class_name, string param_name, string description
 { }
 
 void ScalarStat::print () {
-    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
+    }
+}
+
+void ScalarStat::print (ofstream* _out_file) {
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+        cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
+        (*_out_file) << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << _description << endl;
+    }
 }
 
 /* **************************** *
@@ -166,11 +202,13 @@ stat& ScalarHistStat::operator[] (LENGTH index) {
     return _scalar_arr_stat[index];
 }
 
-void ScalarHistStat::print () {
+void ScalarHistStat::print (ofstream* _out_file) {
     cout << "* " << _name  << ": " << "\t\t\t # " << _description << endl;
     for (LENGTH i = 0; i < _histogram_size; i++) {
-        if (!(_scalar_arr_stat[i].getValue () == 0 && _print_if_zero == NO_PRINT_ZERO))
+        if (!(_scalar_arr_stat[i].getValue () == 0 && _print_if_zero == NO_PRINT_ZERO)) {
             cout << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
+            (*_out_file) << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << (DIGIT) _scalar_arr_stat[i].getValue () << endl;
+        }
     }
 }
 
@@ -181,9 +219,11 @@ RatioStat::RatioStat (ScalarStat* divisor, string class_name, string param_name,
     : ScalarStat (class_name, param_name, description, init_val, print_if_zero)
 { _divisor = divisor; }
 
-void RatioStat::print () {
-    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
+void RatioStat::print (ofstream* _out_file) {
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
+        (*_out_file) << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
+    }
 }
 
 statistic g_stats;

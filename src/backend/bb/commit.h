@@ -56,6 +56,7 @@ class bb_commit : protected stage {
         ScalarStat& s_mem_squash_bb_cnt;
         ScalarStat& s_num_waste_ins;
         ScalarStat& s_bb_cnt;
+        RatioStat& s_bb_size_avg;
         ScalarStat& s_wp_bb_cnt;
         ScalarStat& s_wp_ins_cnt;
         ScalarHistStat& s_ins_type_hist;

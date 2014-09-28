@@ -1,17 +1,20 @@
 #!/bin/sh
 
-  ./PhraseFormer 400.perlbench
-  ./PhraseFormer 445.gobmk
-  ./PhraseFormer 464.h264ref
- #./PhraseFormer 473.astar
- #./PhraseFormer 471.omnetpp
- #./PhraseFormer 483.xalancbmk
- #./PhraseFormer 462.libquantum
- #./PhraseFormer 458.sjeng
- #./PhraseFormer 456.hmmer
- #./PhraseFormer 429.mcf
- #./PhraseFormer 403.gcc
- #./PhraseFormer 401.bzip2
+REG_ALLOC_MODE="local_global_reg"
+SCH_MODE="list_sch"
+
+ ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 445.gobmk $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 464.h264ref $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 473.astar $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 471.omnetpp $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 483.xalancbmk $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 462.libquantum  $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 458.sjeng $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 456.hmmer $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 429.mcf $REG_ALLOC_MODE $SCH_MODE
+ ./PhraseFormer 403.gcc $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 401.bzip2 $REG_ALLOC_MODE $SCH_MODE
 
 
 

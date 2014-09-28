@@ -21,3 +21,5 @@ void message::simStep(const char* msg) {
 	heading();
 	_simStepCnt++;
 }
+
+message g_msg;

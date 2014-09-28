@@ -20,7 +20,7 @@ static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("pars", "pin_bb_cnt", "N
 VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, 
         BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
     if (g__staticCode->hasIns (ins_addr)) {
-        g_var.stat.matchIns++;
+//        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
@@ -36,15 +36,15 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
-        g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (ins_addr);
+//        g_var.stat.noMatchIns++;
+//        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
 VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr, 
         BOOL isStackRd, BOOL isStackWr, BOOL isMemRead) {
     if (g__staticCode->hasIns (ins_addr)) {
-        g_var.stat.matchIns++;
+//        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -62,14 +62,14 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
             std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
-        g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (ins_addr);
+//        g_var.stat.noMatchIns++;
+//        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
 VOID pin__getIns (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
-        g_var.stat.matchIns++;
+//        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -81,14 +81,14 @@ VOID pin__getIns (ADDRINT ins_addr) {
             std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
-        g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (ins_addr);
+//        g_var.stat.noMatchIns++;
+//        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
 VOID pin__getNopIns (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
-        g_var.stat.matchIns++;
+//        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
@@ -100,8 +100,8 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
             std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
-        g_var.stat.noMatchIns++;
-        g_var.stat.missingInsList.insert (ins_addr);
+//        g_var.stat.noMatchIns++;
+//        g_var.stat.missingInsList.insert (ins_addr);
     }
 }
 
@@ -146,6 +146,8 @@ void pin__detectBB (ADDRINT ins_addr) {
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
         _bbHeadSet.insert (ins_addr);
+    } else if (g_var.getLastCacheBB ()->getBBsize () > 20 || g_var.getLastCacheBB ()->_insList.NumElements () > 20 ) { //TODO temp solution to break off large BB's
+        pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
     }
     g_br_detected = false;
 }

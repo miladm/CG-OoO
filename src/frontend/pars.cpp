@@ -13,6 +13,7 @@
 #include "lib/bp_lib/intmath.hh"
 #include "tournament.hh"
 #include "utilities.h"
+//#include "../config.h"
 
 using namespace INSTLIB;
 
@@ -43,7 +44,6 @@ TournamentBP *g_predictor = NULL;
 PIN_SEMAPHORE semaphore0, semaphore1; // semaphore that serializes access to global vars
 void * rootThreadArg = (void *)0xABBA;
 PIN_THREAD_UID rootThreadUid;
-config * g_cfg;
 staticCodeParser * g_staticCode;
 
 /* ****************************************************************** *
@@ -178,8 +178,8 @@ static VOID backEnd (void *ptr) {
             if (g_var.g_core_type == BASICBLOCK) {
                 if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
                     //	cout << "FRONTEND->BACKEND " << endl;
-                    g_var.stat.noMatchIns = 0;
-                    g_var.stat.matchIns = 0;
+//                    g_var.stat.noMatchIns = 0;
+//                    g_var.stat.matchIns = 0;
                     bbBkEndRun ();
                     s_pin_fr_to_bk_cnt++;
                     // cout << "BACKEND->FRONTEND" << endl;
@@ -187,8 +187,8 @@ static VOID backEnd (void *ptr) {
             } else { /* INO & O3 */
                 if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
                     // cout << "FRONTEND->BACKEND " << endl;
-                    g_var.stat.noMatchIns = 0;
-                    g_var.stat.matchIns = 0;
+//                    g_var.stat.noMatchIns = 0;
+//                    g_var.stat.matchIns = 0;
                     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
                     else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
                     s_pin_fr_to_bk_cnt++;
@@ -239,35 +239,36 @@ VOID pin__runPARS (string bench_path, string config_path)
  * INITALIZATION & CLEAN UP
  * ****************************************************************** */
 VOID pin__parseConfig (string bench_path, string config_path) {
-	g_cfg = new config (bench_path, config_path, &g_var);
+	g_cfg = new config (bench_path, config_path);
 }
 
 VOID pin__init (string bench_path, string config_path) {
 	pin__parseConfig (bench_path, config_path);
-	g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
+	g_msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
+    g_stats.setup ();
 	PIN_SemaphoreInit (&semaphore0);
 	PIN_SemaphoreInit (&semaphore1);
 	PIN_SemaphoreClear (&semaphore0);
 	PIN_SemaphoreClear (&semaphore1);
     g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     /* TODO take care of these cout's*/
-    cout << "CORE: " << g_var.g_core_type << endl;
-    cout << "MEM MODEL: " << g_var.g_mem_model << endl;
-    cout << "SCHEDULING MODE: " << g_var.scheduling_mode << endl;
-    cout << "BENCH: " << g_cfg->getProgName () << endl;
-	g_var.msg.simStep ("PARS COMPILED CODE");
+	g_msg.simStep ("PARS COMPILED CODE");
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
+    g_var.g_core_type = g_cfg->coreType; //OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
     g_var.g_mem_model = PERFECT; //NAIVE_SPECUL
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;
 	pin__uOpGenInit (*g_staticCode);
+    cout << "CORE: " << g_var.g_core_type << endl;
+    cout << "MEM MODEL: " << g_var.g_mem_model << endl;
+    cout << "SCHEDULING MODE: " << g_var.scheduling_mode << endl;
+    cout << "BENCH: " << g_cfg->getProgName () << endl;
 
-	g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
+	g_msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
 	char const * dummy_argv[] = {"TraceSim", 
                                  "-o", "/scratch/tracesim/specint2006/results/ooo_listSch_dynBP_manyCache/401.bzip2.txt", 
                                  "-i", "/scratch/tracesim/specint2006/bb_trace_archReg/401.bzip2.trace", 
@@ -282,11 +283,11 @@ VOID pin__init (string bench_path, string config_path) {
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
     else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init (dummy_argc, dummy_argv);
     else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init (dummy_argc, dummy_argv);
-	g_var.msg.simStep ("START OF SIMULATION");
+	g_msg.simStep ("START OF SIMULATION");
 }
 
 VOID pin__doFinish () {
-	g_var.msg.simStep ("FRONTEND TERMINATED");
+	g_msg.simStep ("FRONTEND TERMINATED");
 	stop_pars = clock ();
 	g_var.g_appEnd = true;
 	delete g_var.g_insList;
@@ -306,7 +307,7 @@ VOID pin__doFinish () {
 	delete g_staticCode;
 	PIN_SemaphoreFini (&semaphore0);
 	PIN_SemaphoreFini (&semaphore1);
-	g_var.msg.simStep ("BACKEND TERMINATED");
+	g_msg.simStep ("BACKEND TERMINATED");
 
     /*-- DUMP STAT --*/
     g_stats.dump ();
@@ -318,7 +319,7 @@ VOID pin__doFinish () {
 	
     delete g_bbStat;
 
-	g_var.msg.simStep ("END OF SIMULATION");
+	g_msg.simStep ("END OF SIMULATION");
 }
 
 VOID pin__fini (INT32 code, VOID* v) 
@@ -593,7 +594,7 @@ VOID doCount ()
 		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
-    if (s_pin_ins_cnt.getValue () == 10 * MILLION) {
+    if (s_pin_ins_cnt.getValue () == 5 * MILLION) {
         pin__doFinish ();
         exit (-1);
     }

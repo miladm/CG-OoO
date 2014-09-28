@@ -7,6 +7,6 @@
 
 #include "../backend/unit/sysClock.h"
 
-extern sysClock clk;
+extern sysClock* clk;
 
 #endif

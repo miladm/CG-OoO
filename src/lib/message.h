@@ -21,5 +21,6 @@ class message {
 		int _simStepCnt;
 };
 
+extern message g_msg;
 
 #endif /*_MESSAGE_H*/

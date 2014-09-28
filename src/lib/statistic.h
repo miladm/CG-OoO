@@ -6,13 +6,17 @@
 
 #include <map>
 #include <set>
+#include <list>
 #include <string.h>
 #include <string>
 #include <sstream>
+#include <iostream>
+#include <fstream>
 #include "pin.H"
 #include "pin_isa.H"
 #include "list.h"
 #include "../global/global.h"
+#include "../config.h"
 
 typedef enum {NO_PRINT_ZERO, PRINT_ZERO} PRINT_ON_ZERO;
 typedef long int DIGIT;
@@ -26,7 +30,7 @@ class stat {
         stat ();
         stat (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         void init (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
-        ~stat () {}
+        ~stat ();
 
         /*-- GET FUNCS --*/
         SCALAR getValue ();
@@ -54,6 +58,7 @@ class ScalarStat : public stat {
         ScalarStat (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~ScalarStat () {}
         void print ();
+        void print (ofstream*);
 };
 
 /* **************************** *
@@ -64,7 +69,7 @@ class ScalarHistStat : public stat {
         ScalarHistStat (LENGTH, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~ScalarHistStat ();
         stat& operator[] (LENGTH);
-        void print ();
+        void print (ofstream*);
 
     private:
         stat* _scalar_arr_stat;
@@ -78,7 +83,7 @@ class RatioStat : public ScalarStat {
     public:
         RatioStat (ScalarStat* divisor, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~RatioStat () {}
-        void print ();
+        void print (ofstream*);
 
     private:
         ScalarStat* _divisor;
@@ -91,22 +96,20 @@ class statistic {
 	public:
 		statistic ();
 		~statistic ();
+        void setup ();
         void dump ();
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
 
     private:
-        set<ScalarHistStat*> _ScalarHistStats;
-        set<ScalarStat*> _ScalarStats;
-        set<RatioStat*> _RatioStats;
+        void storeSimConfig ();
 
-    public:
-        //TODO DELETE THESE
-		int matchIns;
-		int noMatchIns;
-		set<ADDRINT> missingInsList;
-        // TODO delete above
+    private:
+        list<ScalarHistStat*> _ScalarHistStats;
+        list<ScalarStat*> _ScalarStats;
+        list<RatioStat*> _RatioStats;
+        ofstream _out_file;
 };
 
 extern statistic g_stats;

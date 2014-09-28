@@ -28,6 +28,7 @@
 #include "../config.h"
 #include "uOpGen.h"
 #include "../global/global.h"
+#include "../lib/message.h"
 #include "memlog.h"
 #include "staticCodeParser.h"
 #include "../lib/statistic.h"

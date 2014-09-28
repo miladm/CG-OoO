@@ -14,8 +14,6 @@
 
 #include "global.h"
 #include "../lib/list.h"
-#include "../lib/message.h"
-#include "../lib/statistic.h"
 #include "../backend/basicblock.h"
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
@@ -117,14 +115,8 @@ struct g_variable {
     int numPBinList;
     dynInstruction g_insObj;
 
-    //Message printing object
-    message msg;
-
     //Scheduling mode
     SCHED_MODE scheduling_mode;
-
-    //Statistics object
-    statistic stat;
 
     // Pipeline state
     PIPE_STATE g_pipe_state;

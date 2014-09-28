@@ -16,15 +16,15 @@ void bbBkEnd_init (int argc, char const * argv[]) {
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
                                 16, 16, 16, 16, 4, 4, 4, 16,
-                                2, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
-                                1, 50, 
+                                2, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
+                                1, 50,
                                 1, 50);
 }
 
