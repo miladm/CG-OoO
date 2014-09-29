@@ -92,11 +92,6 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
 }
 
 bool bb_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {
-    if (frontend_status == FRONTEND_DONE) {
-        cout << "bbQUE: " << _bbQUE->getTableSize () << endl;
-        cout << "bbROB: " << _bbROB->getTableSize () << endl;
-        cout << "g_bbCache: " << g_var.g_bbCache->NumElements () << endl;
-    }
     if (frontend_status == FRONTEND_RUNNING && 
             g_var.isBBcacheNearEmpty () == true) { 
         return true; 

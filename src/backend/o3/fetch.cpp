@@ -74,11 +74,6 @@ PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
 }
 
 bool o3_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {
-    if (frontend_status == FRONTEND_DONE) {
-        cout << "bbQUE: " << _iQUE->getTableSize () << endl;
-        cout << "bbROB: " << _iROB->getTableSize () << endl;
-        cout << "g_bbCache: " << g_var.g_codeCache->NumElements () << endl;
-    }
     if (frontend_status == FRONTEND_RUNNING && 
             g_var.isCodeCacheEmpty () == true) { 
         return true; 
