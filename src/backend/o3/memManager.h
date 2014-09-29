@@ -67,6 +67,8 @@ class o3_memManager : public unit {
         ScalarStat& s_st_hit_cnt;
         ScalarStat& s_cache_to_ld_fwd_cnt;
         ScalarStat& s_st_to_ld_fwd_cnt;
+        RatioStat& s_in_flight_ld_rat;
+        RatioStat& s_in_flight_cache_ld_rat;
 };
 
 extern o3_memManager* g_LSQ_MGR;
