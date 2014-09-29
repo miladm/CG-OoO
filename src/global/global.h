@@ -52,6 +52,7 @@ typedef enum {LD_QU, ST_QU} LSQ_ID;
 typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
 typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 typedef enum {STATIC_SCH, DYNAMIC_SCH} SCHED_MODE;
+typedef enum {FRONTEND_DONE, FRONTEND_RUNNING} FRONTEND_STATUS;
 
 typedef enum {
 //  DBG_ALL = 0x0, 
@@ -174,7 +175,7 @@ typedef enum {
 
 /*-- DEFINE --*/
 #ifndef DEFS
-#define PARSE_LEN 200
+#define PARSE_LEN 300
 #define SIMP_WINDOW_SIZE 3000000
 #define MILLION 1000000
 #define BILLION 1000000000

@@ -7,8 +7,8 @@
 o3_sysCore* _ooo_core;
 sysClock* g_ooo_clk;
 
-void oooBkEndRun() {
-    _ooo_core->runCore();
+void oooBkEndRun(FRONTEND_STATUS frontend_status) {
+    _ooo_core->runCore(frontend_status);
 }
 
 void oooBkEnd_init (int argc, char const * argv[]) {

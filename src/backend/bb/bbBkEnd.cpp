@@ -7,8 +7,8 @@
 bb_sysCore* _bb_core;
 sysClock* g_bb_clk;
 
-void bbBkEndRun() {
-    _bb_core->runCore();
+void bbBkEndRun (FRONTEND_STATUS frontend_status) {
+    _bb_core->runCore(frontend_status);
 }
 
 void bbBkEnd_init (int argc, char const * argv[]) {

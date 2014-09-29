@@ -7,8 +7,8 @@
 sysCore* _core;
 sysClock* g_ino_clk;
 
-void inoBkEndRun() {
-    _core->runCore();
+void inoBkEndRun(FRONTEND_STATUS frontend_status) {
+    _core->runCore(frontend_status);
 }
 
 void inoBkEnd_init (int argc, char const * argv[]) {

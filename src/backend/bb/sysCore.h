@@ -47,7 +47,7 @@ class bb_sysCore : public unit {
 		      CYCLE commit_to_scheduler_delay, LENGTH commit_to_scheduler_buff_len
              );
         ~bb_sysCore();
-		void runCore ();
+		void runCore (FRONTEND_STATUS);
 
 	private:
 		// PORT CONFIGS

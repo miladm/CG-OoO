@@ -65,7 +65,7 @@ o3_sysCore::o3_sysCore (sysClock* clk,
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());
     _bp = new o3_branchPred (_fetch_to_bp_port, _bp_to_fetch_port, bp_width, _clk, "branchPred");
-    _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _iQUE, fetch_width, _clk, "fetch");
+    _fetch = new o3_fetch (_bp_to_fetch_port, _fetch_to_decode_port, _fetch_to_bp_port, _iQUE, _iROB, fetch_width, _clk, "fetch");
     _decode = new o3_decode (_fetch_to_decode_port, _decode_to_scheduler_port, decode_width, _clk, "decode");
     _scheduler = new o3_scheduler (_decode_to_scheduler_port, _execution_to_scheduler_port, _memory_to_scheduler_port, _scheduler_to_execution_port, _iROB, scheduler_width, _LSQ_MGR, _RF_MGR, _clk, "schedule");
     _execution = new o3_execution (_scheduler_to_execution_port, _execution_to_scheduler_port, _iROB, execution_width, _LSQ_MGR, _RF_MGR, _clk, "execution");
@@ -85,7 +85,7 @@ o3_sysCore::~o3_sysCore () {
     delete _execution;
 }
 
-void o3_sysCore::runCore () {
+void o3_sysCore::runCore (FRONTEND_STATUS frontend_status) {
 	while (true) {
 		_clk->tick ();
         dbg.print (DBG_PORT, "\n** CYCLE %d **\n", _clk->now ());
@@ -95,7 +95,7 @@ void o3_sysCore::runCore () {
         if (g_var.g_pipe_state == PIPE_SQUASH_ROB) _commit->squash ();
 	    _scheduler->doSCHEDULER ();
 	    _decode->doDECODE ();
-	    if (_fetch->doFETCH () == FRONT_END && g_var.g_pipe_state == PIPE_NORMAL) {
+	    if (_fetch->doFETCH (frontend_status) == FRONT_END && g_var.g_pipe_state == PIPE_NORMAL) {
             dbg.print (DBG_CORE, "SWITCH TO FRONTEND\n");
             break;
         }

@@ -196,6 +196,7 @@ struct g_variable {
     }
     bool isCodeCacheEmpty () { return (g_codeCache->NumElements () == 0) ? true : false; }
     bool isBBcacheNearEmpty () { return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
+    bool isBBcacheEmpty () { return (g_bbCache->NumElements () == 0) ? true : false; }
 };
 
 extern g_variable g_var;

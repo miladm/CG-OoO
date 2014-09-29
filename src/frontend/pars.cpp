@@ -165,10 +165,11 @@ VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
  * USING LOCKS ON BOTH THE ANALYSIS ROUTIN AND THIS ROUTIN.  WE USE PIN LOCKS
  * AS SHOWN BELOW.
  --*/
-static VOID backEnd (void *ptr) {
+VOID backEnd (void *ptr) {
 	while (!g_var.g_appEnd) { //TODO fix this while loop
 		PIN_SemaphoreWait (&semaphore0);
 		PIN_SemaphoreClear (&semaphore0);
+        if (g_var.g_appEnd) break;
 		ADDRINT __pc = g_var.g_pc;
 		BOOL taken = g_var.g_taken;
 		ADDRINT tgt = g_var.g_tgt;
@@ -178,19 +179,17 @@ static VOID backEnd (void *ptr) {
             if (g_var.g_core_type == BASICBLOCK) {
                 if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
                     //	cout << "FRONTEND->BACKEND " << endl;
-//                    g_var.stat.noMatchIns = 0;
 //                    g_var.stat.matchIns = 0;
-                    bbBkEndRun ();
+                    bbBkEndRun (FRONTEND_RUNNING);
                     s_pin_fr_to_bk_cnt++;
                     // cout << "BACKEND->FRONTEND" << endl;
                 }
             } else { /* INO & O3 */
                 if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
                     // cout << "FRONTEND->BACKEND " << endl;
-//                    g_var.stat.noMatchIns = 0;
 //                    g_var.stat.matchIns = 0;
-                    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun ();
-                    else if (g_var.g_core_type == IN_ORDER) inoBkEndRun ();
+                    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_RUNNING);
+                    else if (g_var.g_core_type == IN_ORDER) inoBkEndRun (FRONTEND_RUNNING);
                     s_pin_fr_to_bk_cnt++;
                     // cout << "BACKEND->FRONTEND" << endl;
                 }
@@ -198,6 +197,29 @@ static VOID backEnd (void *ptr) {
         }
 		PIN_SemaphoreSet (&semaphore1);
 	}
+}
+
+static VOID endBackEnd () {
+    while (true) {
+        if (g_var.g_enable_bkEnd) {
+            if (g_var.g_core_type == BASICBLOCK) {
+                // cout << "FRONTEND->BACKEND " << endl;
+                // g_var.stat.matchIns = 0;
+                bbBkEndRun (FRONTEND_DONE);
+                s_pin_fr_to_bk_cnt++;
+                // cout << "BACKEND->FRONTEND" << endl;
+                if (g_var.g_bbCache->NumElements () == 0) {break;}
+            } else { /* INO & O3 */
+                // cout << "FRONTEND->BACKEND " << endl;
+                // g_var.stat.matchIns = 0;
+                if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_DONE);
+                else if (g_var.g_core_type == IN_ORDER) inoBkEndRun (FRONTEND_DONE);
+                s_pin_fr_to_bk_cnt++;
+                // cout << "BACKEND->FRONTEND" << endl;
+                if (g_var.g_codeCache->NumElements () == 0) {break;}
+            }
+        }
+    }
 }
 
 VOID pin__runPARS (string bench_path, string config_path)
@@ -290,10 +312,6 @@ VOID pin__doFinish () {
 	g_msg.simStep ("FRONTEND TERMINATED");
 	stop_pars = clock ();
 	g_var.g_appEnd = true;
-	delete g_var.g_insList;
-	delete g_var.g_codeCache;
-	delete g_var.g_bbCache;
-	delete g_var.g_BBlist;
 	cout << "finishing" << endl;
 	PIN_SemaphoreSet (&semaphore0);
 	PIN_SemaphoreSet (&semaphore1);
@@ -303,8 +321,7 @@ VOID pin__doFinish () {
 	cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed Ops: " << s_pin_ins_cnt.getValue () << endl;
 	cout << "Instructions Executed Per Second Under Pin: " << ins_per_sec << endl;
 	cout << "Num traces generated: " << s_pin_trace_cnt.getValue () << "; Code cach used for traces: " << g_var.g_codeCacheSize / (1024 * 1024) << " MB" << endl;
-	delete g_predictor;
-	delete g_staticCode;
+    endBackEnd ();
 	PIN_SemaphoreFini (&semaphore0);
 	PIN_SemaphoreFini (&semaphore1);
 	g_msg.simStep ("BACKEND TERMINATED");
@@ -316,7 +333,14 @@ VOID pin__doFinish () {
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_fini ();
     else if (g_var.g_core_type == IN_ORDER) inoBkEnd_fini ();
     else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_fini ();
-	
+
+    /*-- DEL OBJS --*/
+	delete g_var.g_insList;
+	delete g_var.g_codeCache;
+	delete g_var.g_bbCache;
+	delete g_var.g_BBlist;
+	delete g_predictor;
+	delete g_staticCode;
     delete g_bbStat;
 
 	g_msg.simStep ("END OF SIMULATION");

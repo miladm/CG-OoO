@@ -10,7 +10,7 @@
 #include "../unit/sysClock.h"
 
 void inoBkEnd_init (int argc, char const * argv[]);
-void inoBkEndRun ();
+void inoBkEndRun (FRONTEND_STATUS);
 void inoBkEnd_fini ();
 
 #endif

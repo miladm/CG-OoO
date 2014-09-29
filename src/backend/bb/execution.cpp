@@ -120,7 +120,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
             g_var.setSquashSN (ins->getBB()->getBBheadID ());
             g_var.setSquashType (BP_MISPRED);
             ins->getBB()->setNumWasteIns (ins->getInsID ());
-            s_br_mispred_cnt++;
+            if (ins->isMemViolation () || (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ())) s_mem_mispred_cnt++;
+            else s_br_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {

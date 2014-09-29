@@ -76,7 +76,7 @@ REG_TYPE bbInstruction::getARtype (AR a_reg) {
  * *********************** */
 dynBasicblock* bbInstruction::getBB () {return _bb;}
 
-WIDTH bbInstruction::getBBWinID () {Assert (_bbWin_id > -1); return _bbWin_id;}
+BB_ID bbInstruction::getBBWinID () {Assert (_bbWin_id > -1); return _bbWin_id;}
 
 WIDTH bbInstruction::getNumRdAR () {return _a_rdReg_waitList.NumElements();}
 

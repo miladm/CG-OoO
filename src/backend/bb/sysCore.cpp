@@ -97,7 +97,7 @@ bb_sysCore::~bb_sysCore () {
     }
 }
 
-void bb_sysCore::runCore () {
+void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
 	while (true) {
 		_clk->tick ();
         dbg.print (DBG_PORT, "\n** CYCLE %d **\n", _clk->now ());
@@ -110,7 +110,7 @@ void bb_sysCore::runCore () {
         }
 	    _scheduler->doSCHEDULER ();
 	    _decode->doDECODE ();
-	    if (_fetch->doFETCH () == FRONT_END && g_var.g_pipe_state == PIPE_NORMAL) {
+	    if (_fetch->doFETCH (frontend_status) == FRONT_END && g_var.g_pipe_state == PIPE_NORMAL) {
             dbg.print (DBG_CORE, "SWITCH TO FRONTEND\n");
             break;
         }

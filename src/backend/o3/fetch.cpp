@@ -8,6 +8,7 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
 	          port<dynInstruction*>& fetch_to_decode_port,
 			  port<dynInstruction*>& fetch_to_bp_port,
               CAMtable<dynInstruction*>* iQUE,
+              CAMtable<dynInstruction*>* iROB,
 			  WIDTH fetch_width,
               sysClock* clk,
 			  string stage_name
@@ -18,13 +19,14 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
     _fetch_to_bp_port = &fetch_to_bp_port;
     _fetch_to_decode_port = &fetch_to_decode_port;
     _iQUE = iQUE;
+    _iROB = iROB;
     _insListIndx = 0;
     _switch_to_frontend = false;
 }
 
 o3_fetch::~o3_fetch () {}
 
-SIM_MODE o3_fetch::doFETCH () {
+SIM_MODE o3_fetch::doFETCH (FRONTEND_STATUS frontend_status) {
     /*-- STAT + DEBUG --*/
     dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
@@ -33,7 +35,7 @@ SIM_MODE o3_fetch::doFETCH () {
     /*-- SQUASH HANDLING --*/
     if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (g_var.g_pipe_state == PIPE_NORMAL) {
-        pipe_stall = fetchImpl ();
+        pipe_stall = fetchImpl (frontend_status);
     }
 
     /*-- STAT --*/
@@ -47,11 +49,12 @@ SIM_MODE o3_fetch::doFETCH () {
 }
 
 /*-- READ FW INSTRUCTIONS FORM THE PIN INPUT QUE --*/
-PIPE_ACTIVITY o3_fetch::fetchImpl () {
+PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 	for (WIDTH i = 0; i < _stage_width; i++) {
 		/*-- CHECKS --*/
-        if (g_var.isCodeCacheEmpty()) { _switch_to_frontend = true; break; }
+        if (isGoToFrontend (frontend_status)) { _switch_to_frontend = true; break;}
+        if (g_var.isCodeCacheEmpty ()) {break;}
 		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
 
         /*-- FETCH INS --*/
@@ -68,6 +71,24 @@ PIPE_ACTIVITY o3_fetch::fetchImpl () {
         pipe_stall = PIPE_BUSY;
 	}
     return pipe_stall;
+}
+
+bool o3_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {
+    if (frontend_status == FRONTEND_DONE) {
+        cout << "bbQUE: " << _iQUE->getTableSize () << endl;
+        cout << "bbROB: " << _iROB->getTableSize () << endl;
+        cout << "g_bbCache: " << g_var.g_codeCache->NumElements () << endl;
+    }
+    if (frontend_status == FRONTEND_RUNNING && 
+            g_var.isCodeCacheEmpty () == true) { 
+        return true; 
+    } else if (frontend_status == FRONTEND_DONE && 
+            g_var.isCodeCacheEmpty () == true && 
+            _iQUE->getTableState () == EMPTY_BUFF && 
+            _iROB->getTableState () == EMPTY_BUFF) { 
+        return true; 
+    }
+    return false;
 }
 
 void o3_fetch::squash () {

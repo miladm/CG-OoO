@@ -23,7 +23,7 @@ class config {
 		config ();
 		config (string, string);
 		~config ();
-		bool parsePinPointFiles (char*, char*);
+		bool parsePinPointFiles ();
 		char* getProgName ();
         SCH_MODE getSchMode  ();
         REG_ALLOC_MODE getRegAllocMode  ();

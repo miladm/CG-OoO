@@ -24,7 +24,7 @@ class bbInstruction : public dynInstruction {
 
         /*-- GET INS ATRIBUTES --*/
         dynBasicblock* getBB ();
-        WIDTH getBBWinID ();
+        BB_ID getBBWinID ();
         WIDTH getNumRdAR ();
         WIDTH getNumRdLAR ();
         WIDTH getTotNumRdAR ();

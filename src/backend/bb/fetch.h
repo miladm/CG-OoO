@@ -23,14 +23,15 @@ class bb_fetch : protected stage {
 		~bb_fetch ();
         void squashCurrentBB ();
 
-		SIM_MODE doFETCH ();
+		SIM_MODE doFETCH (FRONTEND_STATUS);
 
     private:
-        PIPE_ACTIVITY fetchImpl ();
+        PIPE_ACTIVITY fetchImpl (FRONTEND_STATUS);
         void squash ();
         void regStat ();
-        void getNewBB ();
         void updateBBfetchState ();
+        bool isGoToFrontend (FRONTEND_STATUS);
+        BUFF_STATE getNewBB ();
 
 	private:
 		port<bbInstruction*>* _bp_to_fetch_port;

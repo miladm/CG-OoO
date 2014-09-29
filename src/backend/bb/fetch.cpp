@@ -30,7 +30,7 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
 
 bb_fetch::~bb_fetch () {}
 
-SIM_MODE bb_fetch::doFETCH () {
+SIM_MODE bb_fetch::doFETCH (FRONTEND_STATUS frontend_status) {
     /*-- STAT + DEBUG --*/
     dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
     regStat ();
@@ -39,7 +39,7 @@ SIM_MODE bb_fetch::doFETCH () {
     /*-- SQUASH HANDLING --*/
     if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (g_var.g_pipe_state == PIPE_NORMAL) {
-        pipe_stall = fetchImpl ();
+        pipe_stall = fetchImpl (frontend_status);
     }
 
     /*-- STAT --*/
@@ -53,13 +53,15 @@ SIM_MODE bb_fetch::doFETCH () {
 }
 
 /*-- READ FW INSTRUCTIONS FORM THE PIN INPUT QUE --*/
-PIPE_ACTIVITY bb_fetch::fetchImpl () {
+PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch", _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     if (_fetch_state == FETCH_COMPLETE) {
-        if (g_var.isBBcacheNearEmpty () == true) { _switch_to_frontend = true; return pipe_stall; }
-        else { 
-            getNewBB (); 
+        if (isGoToFrontend (frontend_status)) { 
+            _switch_to_frontend = true; 
+            return pipe_stall; 
+        } else {
+            if (getNewBB () == EMPTY_BUFF) return pipe_stall;
             s_bb_size_avg += _current_bb->getBBsize ();
             dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                     "NEW BB:", _current_bb->getBBID (), _clk->now ());
@@ -89,16 +91,37 @@ PIPE_ACTIVITY bb_fetch::fetchImpl () {
     return pipe_stall;
 }
 
-void bb_fetch::getNewBB () {
+bool bb_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {
+    if (frontend_status == FRONTEND_DONE) {
+        cout << "bbQUE: " << _bbQUE->getTableSize () << endl;
+        cout << "bbROB: " << _bbROB->getTableSize () << endl;
+        cout << "g_bbCache: " << g_var.g_bbCache->NumElements () << endl;
+    }
+    if (frontend_status == FRONTEND_RUNNING && 
+            g_var.isBBcacheNearEmpty () == true) { 
+        return true; 
+    } else if (frontend_status == FRONTEND_DONE && 
+            g_var.isBBcacheEmpty () == true && 
+            _bbQUE->getTableState () == EMPTY_BUFF && 
+            _bbROB->getTableState () == EMPTY_BUFF) { 
+        return true; 
+    }
+    return false;
+}
+
+BUFF_STATE bb_fetch::getNewBB () {
     //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
+    BUFF_STATE buff_state = AVAILABLE_BUFF;
+    if (g_var.isBBcacheEmpty ()) return EMPTY_BUFF;
     if (_current_bb != NULL) _current_bb->setDoneFetch ();
     _current_bb = g_var.popBBcache ();
     if (_current_bb->getBBsize () == 0) {
         dbg.print (DBG_FETCH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
                 "Dumping an empty BB", _clk->now ());
         delete _current_bb;
-        getNewBB ();
+        buff_state = getNewBB ();
     }
+    return buff_state;
 }
 
 void bb_fetch::updateBBfetchState () {

@@ -30,9 +30,14 @@ class bb_lsqCAM : public CAMtable<bbInstruction*> {
         bool hasCommit ();
         bool hasMemAddr (ADDRS, INS_ID);
         INS_ID hasAnyCompleteStFromAddr (ADDRS, INS_ID);
-        pair<bool, bbInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID, INS_ID);
+        pair<bool, bbInstruction*> hasAnyCompleteLdFromAddr (ADDRS, INS_ID, INS_ID, BB_ID);
         pair<bool, bbInstruction*> hasFinishedIns (LSQ_ID);
         void dump ();
+
+    private:
+        /*-- STAT --*/
+        ScalarStat& s_inter_bb_mem_mis_pred_cnt;
+        ScalarStat& s_intra_bb_mem_mis_pred_cnt;
 };
 
 #endif

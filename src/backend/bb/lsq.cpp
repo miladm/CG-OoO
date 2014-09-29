@@ -9,7 +9,9 @@ bb_lsqCAM::bb_lsqCAM (LENGTH len,
                 WIDTH wr_port_cnt,
                 sysClock* clk,
                 string table_name)
-    : CAMtable<bbInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, table_name)
+    : CAMtable<bbInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, table_name),
+      s_inter_bb_mem_mis_pred_cnt (g_stats.newScalarStat (table_name, "inter_bb_mem_mis_pred_cnt", "Number of mis-predictions of load-store in diff BB's", 0, NO_PRINT_ZERO)),
+      s_intra_bb_mem_mis_pred_cnt (g_stats.newScalarStat (table_name, "intra_bb_mem_mis_pred_cnt", "Number of mis-predictions of load-store in the same BB", 0, NO_PRINT_ZERO))
 {}
 
 bb_lsqCAM::~bb_lsqCAM () {}
@@ -128,7 +130,7 @@ INS_ID bb_lsqCAM::hasAnyCompleteStFromAddr (ADDRS completed_st_mem_addr, INS_ID 
 }
 
 
-pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID lo_seq_num, INS_ID hi_seq_num) {
+pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_st_mem_addr, INS_ID lo_seq_num, INS_ID hi_seq_num, BB_ID st_ins_bb_id) {
     LENGTH table_size = _table.NumElements ();
     if (table_size > 0 && hi_seq_num == BB_NO_WAW_ST_INS) 
         hi_seq_num = getNth_unsafe(table_size - 1)->getInsID ();
@@ -138,6 +140,8 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_
         if (ins->getInsID () <= lo_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
             if (ins->getLQstate () == LQ_COMPLETE && ins->isCacheAxes ()) {
+                if (ins->getBBWinID () == st_ins_bb_id) s_inter_bb_mem_mis_pred_cnt++;
+                else s_intra_bb_mem_mis_pred_cnt++;
                 return pair<bool, bbInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage
             } else if (ins->getLQstate () == LQ_FWD_FROM_SQ ||
                        ins->getLQstate () == LQ_MSHR_WAIT ||
