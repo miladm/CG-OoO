@@ -118,6 +118,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
         _mshr.updateWireState (WRITE);
 
         /* STAT */
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }

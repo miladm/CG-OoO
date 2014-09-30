@@ -86,6 +86,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             _RF_MGR->updateWireState (READ, ins->getNumRdPR ());
 
             /*-- STAT --*/
+            s_ipc++;
             s_ins_cnt++;
             pipe_stall = PIPE_BUSY;
         }

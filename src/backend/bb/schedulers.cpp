@@ -86,6 +86,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         _RF_MGR->updateWireState (READ, ins);
 
         /*-- STAT --*/
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());

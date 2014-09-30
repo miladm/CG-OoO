@@ -1,10 +1,10 @@
-INCDIR = ../global 
-BACKEND = ../backend/
-INO_DIR = ../backend/ino
-LIB_DIR = ../lib
-GLOB_DIR = ../global
-OBJDIR = ../obj-intel64/testbench
-BINDIR = ../obj-intel64/testbench
+INCDIR   = ../../src/global 
+BACKEND  = ../../src/backend/
+INO_DIR  = ../../src/backend/ino
+LIB_DIR  = ../../src/lib
+GLOB_DIR = ../../src/global
+OBJDIR   = ../../obj-intel64/testbench
+BINDIR   = ../../obj-intel64/testbench
 
 HEADERS = $(wildcard $(INCDIR)/*.h)
 HEADERS += $(wildcard *.h)

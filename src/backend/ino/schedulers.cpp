@@ -71,6 +71,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         g_RF_MGR->updateWireState (READ, ins->getNumRdAR ());
 
         /* STAT */
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }

@@ -49,6 +49,7 @@ PIPE_ACTIVITY o3_decode::decodeImpl () {
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }

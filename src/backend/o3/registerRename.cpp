@@ -12,8 +12,8 @@ o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
       _p_rf_size (GPRF_HI - GPRF_LO + 1), 
       _p_rf_hi (GPRF_HI), 
       _p_rf_lo (GPRF_LO), 
-      _wr_port (4, WRITE, clk, rf_name + ".wr_wire"),
-      _rd_port (8, READ,  clk, rf_name + ".rd_wire")
+      _wr_port (104, WRITE, clk, rf_name + ".wr_wire"),
+      _rd_port (108, READ,  clk, rf_name + ".rd_wire")
 {
     _cycle = START_CYCLE;
 

@@ -170,6 +170,7 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
                 _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
+        s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }
