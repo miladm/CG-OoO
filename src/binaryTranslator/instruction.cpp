@@ -28,9 +28,9 @@ instruction::instruction() {
 	_r_allocated = new List<long int>;
 	_rt = new List<int>;
 	_rk = new List<regKind>;
-	_ancestors   = new List<instruction*>;
-	_regAncestors   = new List<instruction*>;
-	_dependents  = new List<instruction*>;
+	_ancestors = new List<instruction*>;
+	_regAncestors = new List<instruction*>;
+	_dependents = new List<instruction*>;
 }
 
 instruction::~instruction() {

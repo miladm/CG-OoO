@@ -162,12 +162,12 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
 		set<long int> localSet = bb->getLocalRegSet ();
 		set<long int> liveSet, defSet_noLocal;
 		// printf ("%llx - inSet size: %d\n", bb->getID (), inSet.size ());
-//        if (reg_alloc_mode == LOCAL_GLOBAL) {
+        if (reg_alloc_mode == LOCAL_GLOBAL) {
 		    set_difference (defSet.begin (), defSet.end (), localSet.begin (), localSet.end (), std::inserter (defSet_noLocal, defSet_noLocal.begin ()));
-//		    set_union (defSet_noLocal.begin (), defSet.end (), inSet.begin (), inSet.end (), std::inserter (liveSet, liveSet.begin ()));
-//        } else {
+		    set_union (defSet_noLocal.begin (), defSet.end (), inSet.begin (), inSet.end (), std::inserter (liveSet, liveSet.begin ()));
+        } else {
 		    set_union (defSet.begin (), defSet.end (), inSet.begin (), inSet.end (), std::inserter (liveSet, liveSet.begin ()));
-//        }
+        }
 		//TODO - debug - to remove
 		// set<long int> test;
 		// set_intersection (liveSet.begin (), liveSet.end (), localSet.begin (), localSet.end (), std::inserter (test, test.begin ()));

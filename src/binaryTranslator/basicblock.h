@@ -166,7 +166,7 @@ class basicblock {
 		ADDR _backEdgeDest;
 		std::map<long int, vector<long int> > _phiFuncMap;
 		std::map<long int, long int> _phiDestMap;
-	public:
+
 		std::set<long int> _useSet;
 		std::set<long int> _defSet;
 		std::set<long int> _inSet;

@@ -20,8 +20,11 @@ void buildDefUseSets(List<basicblock*> *bbList) {
 		bbList->Nth(i)->setupDefUseSets();
 }
 
+/* Tracks the basicblocks that define different x86 vairables in them. Each x86
+ * variable is assigned the BB pointers that have it defined in them.
+ */
 void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {
-	// Build the variables list
+	// Build the variables list for x86 registers
 	for (long int i = X86_REG_LO; i <= X86_REG_HI; i++) {
 		variable *var = new variable(i);
 		varList.insert(pair<int,variable*>(i,var));
@@ -100,7 +103,8 @@ void search(basicblock* bb, map<int,variable*> &varList) {
 		//Process assignment operations
 		//Process phi operations
 		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs();
-		for (map<long int, vector<long int> >::iterator it = phiFuncs.begin(); it != phiFuncs.end(); it++) {
+        map<long int, vector<long int> >::iterator it;
+		for (it = phiFuncs.begin(); it != phiFuncs.end(); it++) {
 			int var = it->first;
 			Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 			int k = varList[var]->getC();

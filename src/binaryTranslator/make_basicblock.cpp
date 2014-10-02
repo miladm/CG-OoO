@@ -48,8 +48,12 @@ void make_basicblock  (List<instruction*> *insList,
 			}
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
 		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r') {
-			bbList->Last ()->setBBbrHeader (ins->getInsAddr ());
-			bbList->Last ()->addIns (ins, NO_BR_DST);
+			basicblock *bb = bbList->Last ();
+			bb->setBBbrHeader (ins->getInsAddr ());
+			bb->addIns (ins, NO_BR_DST);
+			if  (bb->getBbSize () == 1) {
+				bbMap->insert (pair <ADDR, basicblock*> (bb->getID (), bb));
+			}
 			basicblock* newBB = new basicblock;
 			newBB->setListIndx (bbList->NumElements ());
 			bbList->Append (newBB);

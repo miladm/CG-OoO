@@ -12,4 +12,4 @@ PhraseFormer: $(OBJ)
 	gcc $(LDFLAGS) -o $@ $^ $(CFLAGS)
 
 clean:
-	rm -f *.o *.out *.csv *~ core *~ Phraseformer
+	rm -f *.o *.out *.csv *~ core *~ PhraseFormer
