@@ -77,7 +77,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         if (_bbROB->getTableState () == EMPTY_BUFF) break;
         if (!_bbROB->hasFreeWire (READ)) break;
         dynBasicblock* bb = _bbROB->getFront ();
-        if (ENABLE_SQUASH && bb->isMemOrBrViolation ()) break;
+        if (g_cfg->isEnSquash () && bb->isMemOrBrViolation ()) break;
         if (bb->getBBstate () != EMPTY_BUFF) break; //TODO what is a BB is still getting filled up?
         if (!bb->isBBcomplete ()) break;
 

@@ -52,7 +52,7 @@ void bb_scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
-    if (ENABLE_FWD) manageCDB ();
+    if (g_cfg->isEnFwd ()) manageCDB ();
 
 
     /*-- STAT --*/
@@ -114,7 +114,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         if (!bbWin->_win.hasFreeWire (READ)) continue;
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
-        if (ENABLE_FWD) forwardFromCDB (ins);
+        if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins)) {continue; }
         else {
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 

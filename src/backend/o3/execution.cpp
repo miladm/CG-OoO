@@ -48,7 +48,7 @@ void o3_execution::doEXECUTION () {
     }
 
     /*-- SQUASH CONTROL --*/
-    if (ENABLE_SQUASH) squashCtrl ();
+    if (g_cfg->isEnSquash ()) squashCtrl ();
     dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
@@ -149,7 +149,7 @@ PIPE_ACTIVITY o3_execution::executionImpl () {
         EU->setEUins (ins);
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
-        if (ENABLE_FWD) forward (ins, EU->_eu_timer.getLatency ());
+        if (g_cfg->isEnEuFwd ()) forward (ins, EU->_eu_timer.getLatency ());
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/

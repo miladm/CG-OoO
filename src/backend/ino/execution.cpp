@@ -11,7 +11,10 @@ execution::execution (port<dynInstruction*>& scheduler_to_execution_port,
 	    	          WIDTH execution_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (execution_width, stage_name, clk)
+	: stage (execution_width, stage_name, clk),
+      s_pipe_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
+      s_eu_busy_state_hist (g_stats.newScalarHistStat ((LENGTH) execution_width, stage_name, "eu_busy_state_hist", "Number of cycles execution unit is busy", 0, PRINT_ZERO)),
+      s_br_mispred_cnt (g_stats.newScalarStat (stage_name, "br_mispred_cnt", "Number of branch mis-predict events", 0, PRINT_ZERO))
 {
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -42,12 +45,18 @@ void execution::doEXECUTION () {
     }
 
     /* SQUASH CONTROL */
-    if (ENABLE_SQUASH) squashCtrl ();
+    if (g_cfg->isEnSquash ()) squashCtrl ();
     dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
 
     /* STAT */
+    s_pipe_state_hist[g_var.g_pipe_state]++;
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        exeUnit* EU = _aluExeUnits->Nth (i);
+        if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) 
+            s_eu_busy_state_hist[i]++;
+    }
 }
 
 /* WRITE COMPLETE INS - WRITEBACK */
@@ -81,6 +90,7 @@ COMPLETE_STATUS execution::completeIns () {
         /* SQUASH DETECTION */
         if (ins->isOnWrongPath ()) {
             g_var.setSquashSN (ins->getInsID ());
+            s_br_mispred_cnt++;
         }
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }
@@ -114,7 +124,7 @@ PIPE_ACTIVITY execution::executionImpl () {
         EU->setEUins (ins);
         EU->runEU ();
         ins->setPipeStage (EXECUTE);
-        if (ENABLE_FWD) forward (ins, EU->_eu_timer.getLatency ());
+        if (g_cfg->isEnEuFwd ()) forward (ins, EU->_eu_timer.getLatency ());
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
         /* STAT */

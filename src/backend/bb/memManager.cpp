@@ -90,12 +90,12 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
-        if (ENABLE_FWD) forward (mem_ins, axes_lat);
+        if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
         (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
         s_in_flight_ld_rat += axes_lat;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
-        if (ENABLE_SQUASH) Assert (mem_ins->isMemOrBrViolation() == false);
+        if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line

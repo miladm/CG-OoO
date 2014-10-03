@@ -36,6 +36,11 @@ class execution : protected stage {
         CAMtable<dynInstruction*>* _iROB;
         List<exeUnit*>* _aluExeUnits;
         exeUnitLat _eu_lat;
+
+        /*-- STATS --*/
+        ScalarHistStat& s_pipe_state_hist;
+        ScalarHistStat& s_eu_busy_state_hist;
+        ScalarStat& s_br_mispred_cnt;
 };
 
 #endif

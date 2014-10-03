@@ -199,28 +199,28 @@ VOID backEnd (void *ptr) {
 	}
 }
 
-static VOID endBackEnd () {
-    while (true) {
-        if (g_var.g_enable_bkEnd) {
-            if (g_var.g_core_type == BASICBLOCK) {
-                // cout << "FRONTEND->BACKEND " << endl;
-                // g_var.stat.matchIns = 0;
-                bbBkEndRun (FRONTEND_DONE);
-                s_pin_fr_to_bk_cnt++;
-                // cout << "BACKEND->FRONTEND" << endl;
-                if (g_var.g_bbCache->NumElements () == 0) {break;}
-            } else { /* INO & O3 */
-                // cout << "FRONTEND->BACKEND " << endl;
-                // g_var.stat.matchIns = 0;
-                if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_DONE);
-                else if (g_var.g_core_type == IN_ORDER) inoBkEndRun (FRONTEND_DONE);
-                s_pin_fr_to_bk_cnt++;
-                // cout << "BACKEND->FRONTEND" << endl;
-                if (g_var.g_codeCache->NumElements () == 0) {break;}
-            }
-        }
-    }
-}
+//static VOID endBackEnd () {
+//    while (true) {
+//        if (g_var.g_enable_bkEnd) {
+//            if (g_var.g_core_type == BASICBLOCK) {
+//                // cout << "FRONTEND->BACKEND " << endl;
+//                // g_var.stat.matchIns = 0;
+//                bbBkEndRun (FRONTEND_DONE);
+//                s_pin_fr_to_bk_cnt++;
+//                // cout << "BACKEND->FRONTEND" << endl;
+//                if (g_var.g_bbCache->NumElements () == 0) {break;}
+//            } else { /* INO & O3 */
+//                // cout << "FRONTEND->BACKEND " << endl;
+//                // g_var.stat.matchIns = 0;
+//                if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_DONE);
+//                else if (g_var.g_core_type == IN_ORDER) inoBkEndRun (FRONTEND_DONE);
+//                s_pin_fr_to_bk_cnt++;
+//                // cout << "BACKEND->FRONTEND" << endl;
+//                if (g_var.g_codeCache->NumElements () == 0) {break;}
+//            }
+//        }
+//    }
+//}
 
 VOID pin__runPARS (string bench_path, string config_path)
 {
@@ -279,8 +279,8 @@ VOID pin__init (string bench_path, string config_path) {
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = g_cfg->coreType; //OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
-    g_var.g_mem_model = NAIVE_SPECUL;
+    g_var.g_core_type = g_cfg->getCoreType (); //OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
+    g_var.g_mem_model = g_cfg->getMemModel (); //NAIVE_SPECUL;
     g_var.scheduling_mode = STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;
@@ -321,7 +321,7 @@ VOID pin__doFinish () {
 	cout << "Execution Time Under Pin: " << exe_time << " sec , Num Executed Ops: " << s_pin_ins_cnt.getValue () << endl;
 	cout << "Instructions Executed Per Second Under Pin: " << ins_per_sec << endl;
 	cout << "Num traces generated: " << s_pin_trace_cnt.getValue () << "; Code cach used for traces: " << g_var.g_codeCacheSize / (1024 * 1024) << " MB" << endl;
-    endBackEnd ();
+//    endBackEnd ();
 	PIN_SemaphoreFini (&semaphore0);
 	PIN_SemaphoreFini (&semaphore1);
 	g_msg.simStep ("BACKEND TERMINATED");

@@ -54,7 +54,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
         if (_iROB->getTableState () == EMPTY_BUFF) break;
         if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
-        if (ENABLE_SQUASH && ins->isMemOrBrViolation ()) break;
+        if (g_cfg->isEnSquash () && ins->isMemOrBrViolation ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
         Assert (ins->getNumRdPR () == 0 && "instruction must have been ready long ago!");
 

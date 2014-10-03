@@ -275,10 +275,10 @@ void bkEnd_init (int argc, char const * argv[], g_variable &g_var) {
     predictor = new TournamentBP(2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
 
 	//Set cache level latencies
-	cacheLat[0] = L1_LATENCY;
-	cacheLat[1] = L2_LATENCY;
-	cacheLat[2] = L3_LATENCY;
-	cacheLat[3] = MEM_LATENCY;
+	cacheLat[0] = 1; //L1_LATENCY;
+	cacheLat[1] = 1; //L2_LATENCY;
+	cacheLat[2] = 1; //L3_LATENCY;
+	cacheLat[3] = 1; //MEM_LATENCY;
 
 	oneLevDeepLatLevel = cacheLat[0];
 	xLevDeepLatLevel   = cacheLat[0];

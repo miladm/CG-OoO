@@ -52,7 +52,7 @@ void o3_scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
-    if (ENABLE_FWD) manageCDB ();
+    if (g_cfg->isEnFwd ()) manageCDB ();
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -99,7 +99,7 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
-        if (ENABLE_FWD) forwardFromCDB (ins);
+        if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins)) continue;
         else return true;
     }

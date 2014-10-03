@@ -91,7 +91,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
         mem_ins = _execution_to_memory_port->popFront ();
         CYCLE axes_lat;
         if (mem_ins->getMemType () == STORE) {
-            if (ENABLE_SQUASH) Assert (mem_ins->isOnWrongPath () == false);
+            if (g_cfg->isEnSquash ()) Assert (mem_ins->isOnWrongPath () == false);
             _st_buff.pushBack (mem_ins);
             axes_lat = g_eu_lat._st_buff_lat;
             dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
@@ -104,7 +104,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
 #ifdef ASSERTION
             Assert(axes_lat > 0);
 #endif
-            if (ENABLE_FWD) forward (mem_ins, axes_lat);
+            if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
             (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
             (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
         }

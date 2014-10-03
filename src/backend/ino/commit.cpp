@@ -49,7 +49,7 @@ PIPE_ACTIVITY commit::commitImpl () {
         if (!_iROB->hasFreeWire (READ)) break;
         dynInstruction* ins = _iROB->getFront ();
         //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready long ago!");
-        if (ENABLE_SQUASH && ins->isOnWrongPath ()) break;
+        if (g_cfg->isEnSquash () && ins->isOnWrongPath ()) break;
         if (ins->getPipeStage () != COMPLETE) break;
 
         /* COMMIT INS */

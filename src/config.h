@@ -23,21 +23,33 @@ class config {
 		config ();
 		config (string, string);
 		~config ();
-		bool parsePinPointFiles ();
+        void storeSimConfig (ofstream*);
+
+        /*-- GET CONFIG ATTRIBUTES --*/
 		char* getProgName ();
         SCH_MODE getSchMode  ();
         REG_ALLOC_MODE getRegAllocMode  ();
+        CORE_TYPE getCoreType ();
+        MEM_MODEL getMemModel ();
+        bool isEnSquash ();
+        bool isEnEuFwd ();
+        bool isEnMemFwd ();
+        bool isEnFwd ();
+        bool isEnLogStat ();
 
+    private:
+		bool parsePinPointFiles ();
+		void verifyConfig ();
+
+    public:
 		std::map<SIMP,SIMW> _simpoint;
 		bool _use_simpoint;
 
-	public:
-		void verifyConfig ();
-
+	private:
 		char param[PARSE_LEN]; 
 		char program_name[PARSE_LEN];
-		FILE* f_bench_cfg;
-		FILE* f_sim_cfg;
+		FILE* _f_bench_cfg;
+		FILE* _f_sim_cfg;
         SCH_MODE _sch_mode;
         REG_ALLOC_MODE _reg_alloc_mode;
         string _config_path;
@@ -51,41 +63,44 @@ class config {
 		char obj_r_file[PARSE_LEN];
 
 		//CPU Config
-		CORE_TYPE coreType;
-		brMode branchMode;
-		memModel memoryModel;
-		rrMode regRenMode;
-		int num_mem_levels;
-		int cache_lat[MEM_HIGHERARCHY];
-		int st_lat;
-		int alu_count;
-		int rob_size;
-		int iwin_size;
-		int pb_win_count;
-		int pb_win_size;
+		CORE_TYPE _core_type;
+		brMode _branch_mode;
+		MEM_MODEL _mem_model;
+		rrMode _reg_ren_mode;
+		int _num_mem_levels;
+		int _cache_lat[MEM_HIGHERARCHY];
+		int _st_lat;
+		int _alu_cnt;
+		int _rob_size;
+		int _iwin_size;
+		int _pb_win_cnt;
+		int _pb_win_size;
+        bool _enable_squash;
+        bool _enable_eu_fwd;
+        bool _enable_mem_fwd;
 
 		//DELAYS
-		int fetch_delay;
-		int bp_delay;
-		int decode_delay;
-		int regren_delay;
-		int issue_delay;
-		int alu_delay;
-		int complete_delay;
-		int wb_delay;
-		int fwd_delay;
+		int _fetch_delay;
+		int _bp_delay;
+		int _decode_delay;
+		int _regren_delay;
+		int _issue_delay;
+		int _alu_delay;
+		int _complete_delay;
+		int _wb_delay;
+		int _fwd_delay;
 
 		//UNIT WIDTHS
-		int bp_width;
-		int decode_width;
-		int issue_width;
-		int dispatch_width;
-		int commit_width;
-		int squash_width;
-		int wb_width;
-		int pb_win_width;
-		int regren_width;
-		int fetch_width;
+		int _bp_width;
+		int _decode_width;
+		int _issue_width;
+		int _dispatch_width;
+		int _commit_width;
+		int _squash_width;
+		int _wb_width;
+		int _pb_win_width;
+		int _regren_width;
+		int _fetch_width;
 };
 
 extern config* g_cfg;

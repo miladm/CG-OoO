@@ -38,7 +38,7 @@ void scheduler::doSCHEDULER () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = schedulerImpl ();
     }
-    if (ENABLE_FWD) manageCDB ();
+    if (g_cfg->isEnFwd ()) manageCDB ();
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -56,7 +56,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!_iWindow.hasFreeWire (READ)) break;
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
-        if (ENABLE_FWD) forwardFromCDB (ins);
+        if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break;
         if (!g_RF_MGR->isReady (ins)) break;
 

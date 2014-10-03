@@ -36,23 +36,22 @@ statistic::~statistic() {
 void statistic::setup () {
     /*-- OUT FILE --*/
     string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out1/";
-    string prog_name (g_cfg->program_name);
+    string prog_name (g_cfg->getProgName ());
     string core_type;
-    ostringstream core_t;
-    core_t << g_cfg->coreType;
-    string out_file_path = out_path + prog_name + "_" + core_t.str ();
+    ostringstream core_t, stat_sched_mode, reg_alloc_mode, mem_model;
+    core_t << g_cfg->getCoreType ();
+    stat_sched_mode << g_cfg->getSchMode ();
+    reg_alloc_mode << g_cfg->getRegAllocMode ();
+    mem_model << g_cfg->getMemModel ();
+    string out_file_path = out_path + prog_name + 
+                           "_c" + core_t.str () + 
+                           "_s" + stat_sched_mode.str () +
+                           "_r" + reg_alloc_mode.str () +
+                           "_m" + mem_model.str ();
     _out_file.open (out_file_path.c_str ());
-    storeSimConfig ();
+    if(!_out_file) { cerr << "OUTPUT FILE OPEN NOT SUCCESSFUL" << endl; exit (-1); } 
+    g_cfg->storeSimConfig (&_out_file);
     cout << "OUT FILE: " << out_file_path << endl;
-}
-
-void statistic::storeSimConfig () {
-        _out_file << "* =========== =========== ===========" << endl;
-        _out_file << "* CORE: " << g_cfg->coreType << endl;
-        _out_file << "* SCH_MODE: " << g_cfg->getSchMode () << endl;
-        _out_file << "* CORE: " << g_cfg->getRegAllocMode () << endl;
-        _out_file << "* =========== =========== ===========" << endl << endl;
-        //TODO add mroe config params
 }
 
 ScalarHistStat& statistic::newScalarHistStat (LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
@@ -190,7 +189,7 @@ ScalarHistStat::ScalarHistStat (LENGTH histogram_size, string class_name, string
 {
     _histogram_size = histogram_size;
     _scalar_arr_stat = new stat[_histogram_size];
-    _enable_log_stat = g_cfg->_enable_log_stat;
+    _enable_log_stat = g_cfg->isEnLogStat ();
     for (LENGTH i = 0; i < _histogram_size; i++) {
         ostringstream indx;
         indx << i;

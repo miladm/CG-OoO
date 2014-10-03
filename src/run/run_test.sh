@@ -13,7 +13,7 @@ PIN_PARAM=-separate_memory  #-pin_memory_range 0x80000000:0x90000000 -pause_tool
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 401.bzip2 -- $BENCH_EXEC/401.bzip2/401.bzip2  $BENCH_INPUT/401.bzip2/test/input/dryer.jpg 2
 
-# $PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 456.hmmer -- $BENCH_EXEC/456.hmmer/456.hmmer --fixed 0 --mean 325 --num 45000 --sd 200 --seed 0  $BENCH_INPUT/456.hmmer/test/input/bombesin.hmm
+ $PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 456.hmmer -- $BENCH_EXEC/456.hmmer/456.hmmer --fixed 0 --mean 325 --num 45000 --sd 200 --seed 0  $BENCH_INPUT/456.hmmer/test/input/bombesin.hmm
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 458.sjeng -- $BENCH_EXEC/458.sjeng/458.sjeng $BENCH_INPUT/458.sjeng/test/input/test.txt
 
@@ -29,7 +29,7 @@ PIN_PARAM=-separate_memory  #-pin_memory_range 0x80000000:0x90000000 -pause_tool
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 483.xalancbmk -- $BENCH_EXEC/483.xalancbmk/483.xalancbmk -v $BENCH_INPUT/483.xalancbmk/test/input/test.xml $BENCH_INPUT/483.xalancbmk/test/input/xalanc.xsl
 
- $PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 400.perlbench -- $BENCH_EXEC/400.perlbench/400.perlbench -I $BENCH_INPUT/400.perlbench/ref/lib/test.xml $BENCH_INPUT/400.perlbench/test/input/attrs.pl
+# $PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 400.perlbench -- $BENCH_EXEC/400.perlbench/400.perlbench -I $BENCH_INPUT/400.perlbench/ref/lib/test.xml $BENCH_INPUT/400.perlbench/test/input/attrs.pl
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -- /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/bzip2  -kf /home/milad/esc_project/svn/benchmarks/spec2006/bzip2/sample2.ref
 #echo "$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 462.libquantum -- $BENCH_EXEC/462.libquantum/462.libquantum 33 5"

@@ -12,6 +12,7 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <time.h>
 #include "pin.H"
 #include "pin_isa.H"
 #include "list.h"
@@ -102,9 +103,6 @@ class statistic {
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
-
-    private:
-        void storeSimConfig ();
 
     private:
         list<ScalarHistStat*> _ScalarHistStats;

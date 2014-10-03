@@ -17,10 +17,10 @@ struct exeUnitLat {
           _fpu_lat (5),
           _bru_lat (1),
           _st_buff_lat (1),
-          _l1_lat (3),
-          _l2_lat (12),
-          _l3_lat (20),
-          _mem_lat (100)
+          _l1_lat (1),
+          _l2_lat (1),
+          _l3_lat (1),
+          _mem_lat (1)
     { }
 
     const CYCLE _alu_lat;

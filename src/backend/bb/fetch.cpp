@@ -107,8 +107,8 @@ bool bb_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {
 BUFF_STATE bb_fetch::getNewBB () {
     //Assert (_current_bb->getBBstate () == EMPTY_BUFF); //TODO put it back - detect very first BB
     BUFF_STATE buff_state = AVAILABLE_BUFF;
-    if (g_var.isBBcacheEmpty ()) return EMPTY_BUFF;
     if (_current_bb != NULL) _current_bb->setDoneFetch ();
+    if (g_var.isBBcacheEmpty ()) return EMPTY_BUFF;
     _current_bb = g_var.popBBcache ();
     if (_current_bb->getBBsize () == 0) {
         dbg.print (DBG_FETCH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
