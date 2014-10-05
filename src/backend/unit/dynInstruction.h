@@ -57,6 +57,19 @@ class dynInstruction : public unit {
 
         /*-- INS CONTROL --*/
         void resetStates ();
+        void printReg () {
+            cout << "REG:(r) ";
+            for (int i = 0; i < _a_rdReg.NumElements (); i++) {
+                cout << _a_rdReg.Nth (i) << " ";
+            }
+            cout << endl;
+            cout << "REG:(w) ";
+            for (int i = 0; i < _a_wrReg.NumElements (); i++) {
+                cout << _a_wrReg.Nth (i) << " ";
+            }
+            cout << endl;
+        }
+
 
     protected:
         /*-- INS --*/

@@ -27,10 +27,11 @@ class config {
 
         /*-- GET CONFIG ATTRIBUTES --*/
 		char* getProgName ();
-        SCH_MODE getSchMode  ();
-        REG_ALLOC_MODE getRegAllocMode  ();
+        SCH_MODE getSchMode ();
+        REG_ALLOC_MODE getRegAllocMode ();
         CORE_TYPE getCoreType ();
         MEM_MODEL getMemModel ();
+        int getNumEu ();
         bool isEnSquash ();
         bool isEnEuFwd ();
         bool isEnMemFwd ();
@@ -46,8 +47,8 @@ class config {
 		bool _use_simpoint;
 
 	private:
-		char param[PARSE_LEN]; 
-		char program_name[PARSE_LEN];
+		char _param[PARSE_LEN]; 
+		char _program_name[PARSE_LEN];
 		FILE* _f_bench_cfg;
 		FILE* _f_sim_cfg;
         SCH_MODE _sch_mode;
@@ -75,6 +76,7 @@ class config {
 		int _iwin_size;
 		int _pb_win_cnt;
 		int _pb_win_size;
+        int _num_eu;
         bool _enable_squash;
         bool _enable_eu_fwd;
         bool _enable_mem_fwd;

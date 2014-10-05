@@ -34,8 +34,9 @@ config::config (string bench_path, string config_path) {
 
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");
-    _config_path = "config/" + config_path;
-    _bench_path  = "config/" + bench_path + ".cfg";
+    string pars_cfg = "/home/milad/esc_project/svn/PARS/src/config/";
+    _config_path  = pars_cfg + config_path;
+    _bench_path   = pars_cfg + bench_path + ".cfg";
 	_f_sim_cfg    = fopen (_config_path.c_str (), "r");
 	_f_bench_cfg  = fopen (_bench_path.c_str (), "r");
 
@@ -44,198 +45,202 @@ config::config (string bench_path, string config_path) {
 	Assert (_f_bench_cfg != NULL);
 	Assert (_f_sim_cfg != NULL);
 	#endif
-	fscanf (_f_bench_cfg, "%s = \" %s \"\n", param, program_name);
+	fscanf (_f_bench_cfg, "%s = \" %s \"\n", _param, _program_name);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"APPLICATION") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"APPLICATION") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_bench_cfg, "%s = \" %s \"", param, pinPoint_s_file);
+	fscanf (_f_bench_cfg, "%s = \" %s \"", _param, pinPoint_s_file);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"PINPOINT_SIM_FILE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"PINPOINT_SIM_FILE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_bench_cfg, "%s = \" %s \"", param, pinPoint_w_file);
+	fscanf (_f_bench_cfg, "%s = \" %s \"", _param, pinPoint_w_file);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"PINPOINT_WEIGHT_FILE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"PINPOINT_WEIGHT_FILE") == 0 && "Wrong Parameter parsed.");
 	#endif
 	Assert (parsePinPointFiles () == true && "No simpoint data parsed.");
 
     /*-- SIMULATION PARAMS --*/
 	int t_use_simpoint = -1;
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &t_use_simpoint);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &t_use_simpoint);
 	_use_simpoint =  (bool)t_use_simpoint;
 	#ifdef ASSERTION
-	Assert (strcmp (param,"USE_SIMPOINT") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"USE_SIMPOINT") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_enable_log_stat);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_log_stat);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ENABLE_LOG_STAT") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ENABLE_LOG_STAT") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_sch_mode);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_sch_mode);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"SCH_MODE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"SCH_MODE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_reg_alloc_mode);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_reg_alloc_mode);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"REG_ALLOC_MODE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"REG_ALLOC_MODE") == 0 && "Wrong Parameter parsed.");
 	#endif
 
 	/*-- U-ARCH PARAMS --*/
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_core_type);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_core_type);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"CORE_TYPE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"CORE_TYPE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_branch_mode);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_branch_mode);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"BRANCH_PRED_MODE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"BRANCH_PRED_MODE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_mem_model);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_mem_model);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"MEM_MODEL") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"MEM_MODEL") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_enable_squash);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_squash);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ENABLE_SQUASH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ENABLE_SQUASH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_enable_eu_fwd);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_eu_fwd);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ENABLE_EU_FWD") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ENABLE_EU_FWD") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, (int*)&_enable_mem_fwd);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_mem_fwd);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ENABLE_MEM_FWD") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ENABLE_MEM_FWD") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_num_mem_levels);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_num_eu);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"NUM_MEM_LEVELS") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"NUM_EU") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_cache_lat[0]);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_num_mem_levels);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"L1_LATENCY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"NUM_MEM_LEVELS") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_cache_lat[1]);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[0]);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"L2_LATENCY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"L1_LATENCY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_cache_lat[2]);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[1]);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"L3_LATENCY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"L2_LATENCY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_cache_lat[3]);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[2]);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"DRAM_LATENCY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"L3_LATENCY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_st_lat);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[3]);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"STORE_LATENCY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"DRAM_LATENCY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_alu_cnt);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_st_lat);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ALU_COUNT") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"STORE_LATENCY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_rob_size);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_alu_cnt);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ROB_SIZE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ALU_COUNT") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_iwin_size);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_rob_size);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"iWIN_SIZE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ROB_SIZE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_pb_win_cnt);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_iwin_size);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"PB_WIN_COUNT") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"iWIN_SIZE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_pb_win_size);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_cnt);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"PB_WIN_SIZE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"PB_WIN_COUNT") == 0 && "Wrong Parameter parsed.");
+	#endif
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_size);
+	#ifdef ASSERTION
+	Assert (strcmp (_param,"PB_WIN_SIZE") == 0 && "Wrong Parameter parsed.");
 	#endif
 
 	/*-- DELAYS --*/
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_fetch_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fetch_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"FETCH_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"FETCH_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_bp_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_bp_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"BP_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"BP_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_decode_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_decode_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"DECODE_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"DECODE_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_regren_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_regren_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"REGREN_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"REGREN_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_issue_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_issue_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ISSUE_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ISSUE_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_alu_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_alu_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ALU_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ALU_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_complete_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_complete_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"COMPLETE_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"COMPLETE_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_wb_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_wb_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"WRITEBACK_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"WRITEBACK_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_fwd_delay);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fwd_delay);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"FORWARDING_DELAY") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"FORWARDING_DELAY") == 0 && "Wrong Parameter parsed.");
 	#endif
 
 	/*-- UNIT WIDTHS --*/
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_bp_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_bp_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"BP_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"BP_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_decode_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_decode_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"DECODE_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"DECODE_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_issue_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_issue_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"ISSUE_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"ISSUE_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_dispatch_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_dispatch_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"DISPATCH_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"DISPATCH_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_commit_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_commit_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"COMMIT_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"COMMIT_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_squash_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_squash_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"SQUASH_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"SQUASH_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_wb_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_wb_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"WB_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"WB_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_pb_win_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"PB_WIN_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"PB_WIN_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_regren_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_regren_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"REGREN_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"REGREN_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", param, &_fetch_width);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fetch_width);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"FETCH_WIDTH") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"FETCH_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
 
 
-	fscanf (_f_sim_cfg, "%s = \" %s \"", param, output_w_file);
+	fscanf (_f_sim_cfg, "%s = \" %s \"", _param, output_w_file);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"OUTPUT_FILE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"OUTPUT_FILE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = \" %s \"", param, obj_r_file);
+	fscanf (_f_sim_cfg, "%s = \" %s \"", _param, obj_r_file);
 	#ifdef ASSERTION
-	Assert (strcmp (param,"OBJ_FILE") == 0 && "Wrong Parameter parsed.");
+	Assert (strcmp (_param,"OBJ_FILE") == 0 && "Wrong Parameter parsed.");
 	#endif
 
 	verifyConfig ();
@@ -273,6 +278,8 @@ void config::verifyConfig () {
 	Assert (_pb_win_width > 0);
 	Assert (_regren_width > 0);
 	Assert (_fetch_width > 0);
+
+    Assert (_num_eu > 0);
 }
 
 // PRE:
@@ -325,6 +332,7 @@ void config::storeSimConfig (ofstream* _out_file) {
         (*_out_file) << "* ENABLE_SQUASH: " << _enable_squash << endl;
         (*_out_file) << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
         (*_out_file) << "* ENABLE_MEM_FWD: " << _enable_mem_fwd << endl;
+        (*_out_file) << "* NUM_EU: " << _num_eu << endl;
         (*_out_file) << "* =========== =========== ===========" << endl << endl;
         //TODO add mroe config params
 }
@@ -332,7 +340,7 @@ void config::storeSimConfig (ofstream* _out_file) {
 /* *********************** *
  * GET CONFIG ATTRIBUTES
  * *********************** */
-char* config::getProgName () { return program_name; }
+char* config::getProgName () { return _program_name; }
 
 SCH_MODE config::getSchMode  () { return _sch_mode; }
 
@@ -341,6 +349,8 @@ REG_ALLOC_MODE config::getRegAllocMode  () { return _reg_alloc_mode; }
 CORE_TYPE config::getCoreType () {return _core_type;}
 
 MEM_MODEL config::getMemModel () {return _mem_model;}
+
+int config::getNumEu () {return _num_eu;}
 
 bool config::isEnSquash () {return _enable_squash;}
 

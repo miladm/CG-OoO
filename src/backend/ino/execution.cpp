@@ -113,13 +113,11 @@ PIPE_ACTIVITY execution::executionImpl () {
         if (_scheduler_to_execution_port->getBuffState () == EMPTY_BUFF) break;
         if (!_scheduler_to_execution_port->isReady ()) break;
         dynInstruction* ins = _scheduler_to_execution_port->getFront ();
-        if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break; // INO EXE
         exeUnit* EU = _aluExeUnits->Nth (i);
         if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
         /* EXE INS */
         ins = _scheduler_to_execution_port->popFront ();
-        g_RF_MGR->reserveRF (ins);
         EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins (ins);
         EU->runEU ();

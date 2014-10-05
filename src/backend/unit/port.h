@@ -52,6 +52,7 @@ class port : public unit
         /* STAT OBJS */
         ScalarStat& s_port_empty_cyc;
         ScalarStat& s_port_full_cyc;
+        RatioStat& s_port_size_avg;
 };
 
 #endif

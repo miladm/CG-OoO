@@ -24,13 +24,13 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _iROB = iROB;
-    _num_res_stns = 16;
+    _num_res_stns = 1;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
-        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(15, 4, 4, _clk, "ResStn_"+rs_num.str ());
+        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(120, 4, 4, _clk, "ResStn_"+rs_num.str ());
         _ResStns.Append(resStn);
     }
 }

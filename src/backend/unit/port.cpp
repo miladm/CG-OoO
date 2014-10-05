@@ -10,7 +10,8 @@ port<queType_T>::port (LENGTH len, CYCLE wire_delay, sysClock* clk, string port_
       _buff_len (len),
 	  _wire_delay (wire_delay),
       s_port_empty_cyc (g_stats.newScalarStat (port_name, "port_empty_cyc", "Number of cycles with port empty", 0, NO_PRINT_ZERO)),
-      s_port_full_cyc  (g_stats.newScalarStat (port_name, "port_full_cyc", "Number of cycles with port full", 0, NO_PRINT_ZERO))
+      s_port_full_cyc (g_stats.newScalarStat (port_name, "port_full_cyc", "Number of cycles with port full", 0, NO_PRINT_ZERO)),
+      s_port_size_avg (g_stats.newRatioStat (clk->getStatObj (), port_name, "port_size_avg", "Average port size/length", 0, NO_PRINT_ZERO))
 {
 	Assert (_buff_len > 0 && _wire_delay > 0);
 }
@@ -231,6 +232,7 @@ void port<queType_T>::regStat () {
     } else if (getBuffState () == FULL_BUFF) {
         s_port_full_cyc++;
     }
+    s_port_size_avg += getBuffSize ();
 }
 
 /** TEMPLATES **/

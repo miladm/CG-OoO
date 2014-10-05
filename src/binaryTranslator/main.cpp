@@ -77,7 +77,7 @@ int main (int argc, char* argv[])
     else if (strcmp (argv[3], "no_list_sch") == 0) sch_mode = NO_LIST_SCH;
     else Assert (true == false && "Wrong static code scheduling mode specified");
 
-    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
+//    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
 
 	printf ("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name.c_str ());
 	//init (argc, argv);

@@ -671,10 +671,10 @@ bool basicblock::update_InOutSet () {
 		// printf ("%d,%d\n",succInSet.size (),_outSet.size ());
 	}
 	// Update _inSet
-	set<long int> result1; //,result2;
+	set<long int> result1,result2;
 	std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result1, result1.begin ()));
-//	std::set_difference (_useSet.begin (), _useSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result2, result2.begin ())); //TODO remove
-	std::set_union (result1.begin (), result1.end (), _useSet.begin (), _useSet.end (), std::inserter (_inSet, _inSet.begin ()));
+	std::set_difference (_useSet.begin (), _useSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result2, result2.begin ()));
+	std::set_union (result1.begin (), result1.end (), result2.begin (), result2.end (), std::inserter (_inSet, _inSet.begin ()));
 	// printf ("%d,%d,%d\n",_useSet.size (),_inSet.size (),_outSet.size ());
 
 	// Has there been a change in the BB sets?
@@ -691,13 +691,13 @@ void basicblock::setupDefUseSets () {
 	for  (int i =0 ; i < _insList->NumElements (); i++) {
 		instruction* ins = _insList->Nth (i);
 		for  (int j = 0; j < ins->getNumReg (); j++) {
-			if  (ins->getNthRegType (j) == READ && _defSet.find (ins->getNthReg (j)) == _defSet.end ()) {
+			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
 				//second condition avoids ud-chains within a BB from propagating
 				updateUseSet (ins->getNthReg (j));
 			} else if  (ins->getNthRegType (j) == WRITE) {
 	 			updateDefSet (ins->getNthReg (j));
 			} else {
-//				Assert (true == false && "Invalid register type"); //TODO remove
+				Assert (true == false && "Invalid register type");
 			}
 		}
 	}
@@ -714,13 +714,13 @@ void basicblock::renameAllInsRegs () {
 		for  (int j = 0; j < ins->getNumReg (); j++) {
 			long int reg = ins->getNthReg (j);
 			//printf ("reg: %ld\n",reg);
-			if  (ins->getNthRegType (j) == READ && _defSet.find (ins->getNthReg (j)) == _defSet.end ()) {
+			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
 				//second condition avoids ud-chains within a BB from propagating
 				updateUseSet (reg);
 			} else if  (ins->getNthRegType (j) == WRITE) {
 	 			updateDefSet (reg);
 			} else {
-//				Assert (true == false && "Invalid register type"); //TODO remove
+				Assert (true == false && "Invalid register type");
 			}
 		}
 	}

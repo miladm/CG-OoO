@@ -154,13 +154,11 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
         if (_scheduler_to_execution_port->getBuffState () == EMPTY_BUFF) break;
         if (!_scheduler_to_execution_port->isReady ()) break;
         bbInstruction* ins = _scheduler_to_execution_port->getFront ();
-        if (!(_RF_MGR->canReserveRF (ins))) break;
         exeUnit* EU = _aluExeUnits->Nth (i);
         if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
         /*-- EXE INS --*/
         ins = _scheduler_to_execution_port->popFront ();
-        _RF_MGR->reserveRF (ins);
         EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins ((dynInstruction*) ins);
         EU->runEU ();

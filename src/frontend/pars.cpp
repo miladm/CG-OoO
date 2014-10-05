@@ -267,7 +267,6 @@ VOID pin__parseConfig (string bench_path, string config_path) {
 VOID pin__init (string bench_path, string config_path) {
 	pin__parseConfig (bench_path, config_path);
 	g_msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
-    g_stats.setup ();
 	PIN_SemaphoreInit (&semaphore0);
 	PIN_SemaphoreInit (&semaphore1);
 	PIN_SemaphoreClear (&semaphore0);

@@ -115,7 +115,7 @@ void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 200000) {
+//        if (_clk->now () == 1000) {
 //            for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //                dynBasicblock* bb = _bbROB->getNth(i);
 //                List<bbInstruction*>* insList = bb->getBBinsList ();

@@ -33,7 +33,7 @@ statistic::~statistic() {
     _out_file.close ();
 }
 
-void statistic::setup () {
+void statistic::setupOutFile () {
     /*-- OUT FILE --*/
     string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out1/";
     string prog_name (g_cfg->getProgName ());
@@ -73,6 +73,7 @@ RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, stri
 }
 
 void statistic::dump () {
+    setupOutFile ();
     {
         list<ScalarHistStat*>::iterator it;
         for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++) {

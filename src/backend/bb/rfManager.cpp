@@ -40,6 +40,7 @@ void bb_rfManager::commitRegs (bbInstruction* ins) {
 }
 
 void bb_rfManager::reserveRF (bbInstruction* ins) {
+    if (g_cfg->getRegAllocMode () != LOCAL_GLOBAL) return; /*-- DO NOTHING --*/
     dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Reserve LRF write regs for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
@@ -47,6 +48,7 @@ void bb_rfManager::reserveRF (bbInstruction* ins) {
 }
 
 bool bb_rfManager::canReserveRF (bbInstruction* ins) {
+    if (g_cfg->getRegAllocMode () != LOCAL_GLOBAL) return true;
     dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "Check if can reserve LRF write regs for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
@@ -56,9 +58,12 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
 }
 
 bool bb_rfManager::isReady (bbInstruction* ins) {
-    WIDTH bbWin_id = ins->getBBWinID ();
+    bool lrf_ready = true;
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        WIDTH bbWin_id = ins->getBBWinID ();
+        lrf_ready = _LRF_MGRS[bbWin_id]->isReady (ins);
+    }
     bool grf_ready = _GRF_MGR.isReady (ins);
-    bool lrf_ready = _LRF_MGRS[bbWin_id]->isReady (ins);
     dbg.print (DBG_REG_FILES, "%s: %s %d - %s %d - %s %d (cyc: %d)\n", _c_name.c_str (), 
             "LRF read ops are ready: ", lrf_ready?"YES":"NO", 
             "GRF read ops are ready: ", grf_ready?"YES":"NO", 
@@ -66,7 +71,13 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     if (!lrf_ready) s_lrf_not_ready_cnt++;
     if (!grf_ready) s_grf_not_ready_cnt++;
     if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
-    return (grf_ready && lrf_ready);
+
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
+        return (grf_ready && lrf_ready);
+    else if (g_cfg->getRegAllocMode () == GLOBAL)
+        return (grf_ready);
+    Assert (true == false && "invalid register allocation model");
+    return grf_ready; /* PLEACE HOLDER */
 }
 
 void bb_rfManager::completeRegs (bbInstruction* ins) {
@@ -74,7 +85,8 @@ void bb_rfManager::completeRegs (bbInstruction* ins) {
             "Complete LRF write operands for ins", ins->getInsID (), _clk->now ());
     WIDTH bbWin_id = ins->getBBWinID ();
     _GRF_MGR.completeRegs (ins);
-    _LRF_MGRS[bbWin_id]->writeToRF (ins);
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
+        _LRF_MGRS[bbWin_id]->writeToRF (ins);
     dbg.print (DBG_REG_FILES, "%s: %s (cyc: %d)\n", _c_name.c_str (), 
             "Done updating RF's", _clk->now ());
 }
@@ -84,10 +96,12 @@ void bb_rfManager::squashRegs () {
     dbg.print (DBG_REG_FILES, "%s: %s (cyc: %d)\n", _c_name.c_str (), 
             "Squashed GRF", _clk->now ());
 
-    for (int i = 0; i < (int)_LRF_MGRS.size (); i++) {
-        _LRF_MGRS[i]->resetRF ();
-        dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
-                "Squashed LRF", i, _clk->now ());
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        for (int i = 0; i < (int)_LRF_MGRS.size (); i++) {
+            _LRF_MGRS[i]->resetRF ();
+            dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "Squashed LRF", i, _clk->now ());
+        }
     }
 }
 
@@ -96,8 +110,14 @@ bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, bbInstruction* ins) {
     WIDTH num_l_reg = (axes_type == READ) ? ins->getNumRdLAR () : ins->getNumWrLAR ();
     WIDTH bbWin_id = ins->getBBWinID ();
     bool grf_has_free_wire = _GRF_MGR.hasFreeWire (axes_type, num_g_reg);
-    bool lrf_has_free_wire = _LRF_MGRS[bbWin_id]->hasFreeWire (axes_type, num_l_reg);
-    return (grf_has_free_wire && lrf_has_free_wire);
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        bool lrf_has_free_wire = _LRF_MGRS[bbWin_id]->hasFreeWire (axes_type, num_l_reg);
+        return (grf_has_free_wire && lrf_has_free_wire);
+    } else if (g_cfg->getRegAllocMode () == GLOBAL) {
+        return (grf_has_free_wire);
+    }
+    Assert (true == false && "invalid register allocation model");
+    return (grf_has_free_wire); /* PLEACE HOLDER */
 }
 
 void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
@@ -105,5 +125,6 @@ void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
     WIDTH num_l_reg = (axes_type == READ) ? ins->getNumRdLAR () : ins->getNumWrLAR ();
     WIDTH bbWin_id = ins->getBBWinID ();
     _GRF_MGR.updateWireState (axes_type, num_g_reg);
-    _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
+        _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
 }

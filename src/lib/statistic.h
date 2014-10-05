@@ -98,11 +98,13 @@ class statistic {
 	public:
 		statistic ();
 		~statistic ();
-        void setup ();
         void dump ();
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
+
+    private:
+        void setupOutFile ();
 
     private:
         list<ScalarHistStat*> _ScalarHistStats;

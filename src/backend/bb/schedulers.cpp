@@ -21,7 +21,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
       s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, PRINT_ZERO)),
       s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, PRINT_ZERO)),
       s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, PRINT_ZERO)),
-      s_bbWin_usage_rat (g_stats.newRatioStat (clk->getStatObj (), stage_name, "bbWin_usage_rat", "Number of busy bbWindows / cycle ", 0, PRINT_ZERO))
+      s_bbWin_inflight_rat (g_stats.newRatioStat (clk->getStatObj (), stage_name, "bbWin_inflight_rat", "Number of in-flight bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -57,7 +57,6 @@ void bb_scheduler::doSCHEDULER () {
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-    s_bbWin_usage_rat += _busy_bbWin.size ();
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
 }
 
@@ -76,6 +75,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         if (!_RF_MGR->hasFreeWire (READ, ins)) {break;}
 
         /*-- READ INS WIN --*/
+        _RF_MGR->reserveRF (ins);
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
@@ -106,16 +106,26 @@ void bb_scheduler::manageBusyBBWin (bbWindow* bbWin) {
 }
 
 bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
-    map<WIDTH, bbWindow*>::iterator bbWinEntry;
-    for (bbWinEntry = _busy_bbWin.begin (); bbWinEntry != _busy_bbWin.end (); bbWinEntry++) {
-        WIDTH bbWin_id = bbWinEntry->first;
-        bbWindow* bbWin = bbWinEntry->second;
+    map<WIDTH, bbWindow*>::iterator it;
+    map<BB_ID,WIDTH> sorted_busy_bbWin;
+    /*-- SORT BASED ON BASICBLOCK AGE --*/
+    for (it= _busy_bbWin.begin (); it != _busy_bbWin.end (); it++) {
+        WIDTH bbWin_id = it->first;
+        bbWindow* bbWin = it->second;
         if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
+        BB_ID bb_id = bbWin->_win.getNth_unsafe (0)->getBB()->getBBID ();
+        sorted_busy_bbWin.insert (pair<BB_ID, WIDTH> (bb_id, bbWin_id));
+    }
+    map<BB_ID, WIDTH>::iterator bbWinEntry;
+    for (bbWinEntry = sorted_busy_bbWin.begin (); bbWinEntry != sorted_busy_bbWin.end (); bbWinEntry++) {
+        WIDTH bbWin_id = bbWinEntry->second;
+        bbWindow* bbWin = _busy_bbWin[bbWin_id];
+//        if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
         if (!bbWin->_win.hasFreeWire (READ)) continue;
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
         if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
-        if (!_RF_MGR->isReady (ins)) {continue; }
+        if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) {continue;}
         else {
            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                    "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
@@ -358,4 +368,5 @@ void bb_scheduler::regStat () {
     for (WIDTH j = 0; j < _num_bbWin; j++) {
         _bbWindows->Nth(j)->regStat ();
     }
+    s_bbWin_inflight_rat += _busy_bbWin.size ();
 }

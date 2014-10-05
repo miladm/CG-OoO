@@ -98,6 +98,6 @@ void sysCore::runCore (FRONTEND_STATUS frontend_status) {
             break;
         }
         _bp->doBP ();
-        //if (_clk->now () == 10030) exit (-1); /* for debug */
+//        if (_clk->now () == 1000) exit (-1); /* for debug */
 	}
 }

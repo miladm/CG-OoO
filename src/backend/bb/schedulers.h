@@ -66,7 +66,7 @@ class bb_scheduler : protected stage {
         ScalarStat& s_alu_g_fwd_cnt;
         ScalarStat& s_mem_l_fwd_cnt;
         ScalarStat& s_alu_l_fwd_cnt;
-        RatioStat& s_bbWin_usage_rat;
+        RatioStat& s_bbWin_inflight_rat;
 };
 
 #endif

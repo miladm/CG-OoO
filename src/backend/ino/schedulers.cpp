@@ -57,10 +57,11 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
         if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
-        if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break;
-        if (!g_RF_MGR->isReady (ins)) break;
+        if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break; /*-- INO SCHEDULING --*/
+        if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
 
         /* READ INS WIN */
+        g_RF_MGR->reserveRF (ins);
         ins = _iWindow.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
