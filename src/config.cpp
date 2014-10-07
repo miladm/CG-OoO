@@ -60,6 +60,11 @@ config::config (string bench_path, string config_path) {
 	Assert (parsePinPointFiles () == true && "No simpoint data parsed.");
 
     /*-- SIMULATION PARAMS --*/
+	fscanf (_f_sim_cfg, "%s = %f\n", _param, &_max_ins_cnt);
+    _max_ins_cnt *= (float) MILLION;
+	#ifdef ASSERTION
+	Assert (strcmp (_param,"MAX_INS_CNT") == 0 && "Wrong Parameter parsed.");
+	#endif
 	int t_use_simpoint = -1;
 	fscanf (_f_sim_cfg, "%s = %d\n", _param, &t_use_simpoint);
 	_use_simpoint =  (bool)t_use_simpoint;
@@ -333,8 +338,22 @@ void config::storeSimConfig (ofstream* _out_file) {
         (*_out_file) << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
         (*_out_file) << "* ENABLE_MEM_FWD: " << _enable_mem_fwd << endl;
         (*_out_file) << "* NUM_EU: " << _num_eu << endl;
+        (*_out_file) << "* MAX_INS_CNT: " << _max_ins_cnt << endl;
         (*_out_file) << "* =========== =========== ===========" << endl << endl;
         //TODO add mroe config params
+
+        cout << "* =========== =========== ===========" << endl;
+        cout << sim_time << endl << endl;
+        cout << "* CORE: " << _core_type << endl;
+        cout << "* STAT_SCH_MODE: " << _sch_mode << endl;
+        cout << "* REG_ALLOC_MODE: " << _reg_alloc_mode << endl;
+        cout << "* MEM_MODEL: " << _mem_model << endl;
+        cout << "* ENABLE_SQUASH: " << _enable_squash << endl;
+        cout << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
+        cout << "* ENABLE_MEM_FWD: " << _enable_mem_fwd << endl;
+        cout << "* NUM_EU: " << _num_eu << endl;
+        cout << "* MAX_INS_CNT: " << _max_ins_cnt << endl;
+        cout << "* =========== =========== ===========" << endl << endl;
 }
 
 /* *********************** *
@@ -349,6 +368,8 @@ REG_ALLOC_MODE config::getRegAllocMode  () { return _reg_alloc_mode; }
 CORE_TYPE config::getCoreType () {return _core_type;}
 
 MEM_MODEL config::getMemModel () {return _mem_model;}
+
+float config::getMaxInsCnt () {return _max_ins_cnt;}
 
 int config::getNumEu () {return _num_eu;}
 

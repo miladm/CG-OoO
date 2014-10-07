@@ -32,6 +32,7 @@ class config {
         CORE_TYPE getCoreType ();
         MEM_MODEL getMemModel ();
         int getNumEu ();
+        float getMaxInsCnt ();
         bool isEnSquash ();
         bool isEnEuFwd ();
         bool isEnMemFwd ();
@@ -56,6 +57,7 @@ class config {
         string _config_path;
         string _bench_path;
         bool _enable_log_stat;
+        float _max_ins_cnt;
 
 		//PinPoint Config
 		char pinPoint_s_file[PARSE_LEN];

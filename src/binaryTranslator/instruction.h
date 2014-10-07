@@ -137,6 +137,7 @@ class instruction {
 		double _brBias;
 		double _bpAccuracy;
 		double _missRate;
+        MEM_SCH_MODE _mem_sch_mode;
 };
 
 #endif

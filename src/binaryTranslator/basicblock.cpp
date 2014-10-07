@@ -686,6 +686,25 @@ bool basicblock::update_InOutSet () {
 	return change;
 }
 
+void basicblock::brDependencyTableCheck () {
+    List<instruction*>* brList = new List<instruction*>;
+    for (int i = _insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = _insList->Nth (i);
+	    if ((ins->getType () == 'j' || ins->getType () == 'c' || 
+	         ins->getType () == 'r' || ins->getType () == 'b'))
+            brList->Append (ins);
+        for (int j = 0; j < brList->NumElements (); j++) {
+            instruction* br = brList->Nth (j);
+            if (br->getInsAddr () == ins->getInsAddr ()) continue;
+            ins->setAsDependent (br);
+            br->setAsAncestor (ins);
+//            br->setAsBrAncestor (ins);
+//            ins->setAsBrDependent (br);
+        }
+    }
+    delete brList;
+}
+
 /* Construct def/use sets from x86 format of registers */
 void basicblock::setupDefUseSets () {
 	for  (int i =0 ; i < _insList->NumElements (); i++) {

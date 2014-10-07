@@ -13,18 +13,18 @@ void make_basicblock  (List<instruction*> *insList,
 		      		  map<ADDR, basicblock*> *bbMap,
 					  map<ADDR,instruction*> *insAddrMap,
                       SCH_MODE sch_mode) {
-	// Construct BB's
+	// CONSTRUCT BB'S
 	set<long int> use_set, def_set, diff_set;
 	for  (int i = 0; i < insList->NumElements (); i++) {
 		instruction* ins = insList->Nth (i);
-		//Construct the destination instruction address set  (stat info)
+		//CONSTRUCT THE DESTINATION INSTRUCTION ADDRESS SET  (STAT INFO)
 		for  (int j = 0; j < ins->getNumReg (); j++) {
 			if  (ins->getNthRegType (j) == READ)
 				use_set.insert (ins->getNthReg (j));
 			else if  (ins->getNthRegType (j) == WRITE)
 				def_set.insert (ins->getNthReg (j));
 		}
-		//Construct new Basicblock or add ins to an existing one 
+		//CONSTRUCT NEW BASICBLOCK OR ADD INS TO AN EXISTING ONE 
 		//printf ("Type: %c\n", insList->Nth (i)->getType ());
 		if  (i == 0 ||
 		    brDstSet->find (ins->getInsAddr ()) != brDstSet->end ()) {
@@ -34,14 +34,14 @@ void make_basicblock  (List<instruction*> *insList,
 				newBB->setListIndx (bbList->NumElements ());
 				bbList->Append (newBB);
 			} else {
-				//avoid making empty BB's
+				//AVOID MAKING EMPTY BB'S
 				newBB = bbList->Last ();
 			}
 			newBB->addIns (ins, BR_DST);
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
-			//The case with a single branch/jump/call instruction in BB  (closing BB)
+			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
 			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r') {
-				bbList->Last ()->setBBbrHeader (ins->getInsAddr ());
+				bbList->Last()->setBBbrHeader (ins->getInsAddr ());
 				newBB = new basicblock;
 				newBB->setListIndx (bbList->NumElements ());
 				bbList->Append (newBB);
@@ -69,7 +69,7 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}
 	printf ("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements ());
-	//get rid of empty basicblocks  (shouldn't find any empty ones - just precaution)
+	//GET RID OF EMPTY BASICBLOCKS  (SHOULDN'T FIND ANY EMPTY ONES - JUST PRECAUTION)
 	set<ADDR> toRemoveInsSet;
 	for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
 		if  (bbList->Nth (i)->getBbSize () == 0) {
@@ -86,7 +86,7 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}
 	printf ("\tNum BB after Dead BB Elimination: %d\n",bbList->NumElements ());
-	//Remove NOP instructions from insList
+	//REMOVE NOP INSTRUCTIONS FROM INSLIST
 	for  (int i = insList->NumElements () - 1; i >= 0; i--) {
 		instruction* ins = insList->Nth (i);
 		if  (toRemoveInsSet.find (ins->getInsAddr ()) != toRemoveInsSet.end ()) {
@@ -95,7 +95,7 @@ void make_basicblock  (List<instruction*> *insList,
 			insAddrMap->erase (ins->getInsAddr ());
 		}
 	}
-	// Setup BB Dependencies
+	// SETUP BB DEPENDENCIES
 	for  (int i = 0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
 		Assert (bb->getBbSize () > 0 && "Invalid BB Size.");
@@ -150,8 +150,13 @@ void make_basicblock  (List<instruction*> *insList,
 			Assert  (true == false && "WRONG INSTRUTION. Terminating...");
 		}
 	}	
-	// Perform List Scheduling on BB
+	// PERFORM LIST SCHEDULING ON BB
     if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
+        
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+            basicblock* bb = bbList->Nth (i);
+            bb->brDependencyTableCheck ();
+        }
         printf ("\tRun List Scheduling\n");
         for  (int i = 0; i < bbList->NumElements (); i++) {
             basicblock* bb = bbList->Nth (i);

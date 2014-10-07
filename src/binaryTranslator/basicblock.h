@@ -32,7 +32,10 @@ class basicblock {
 		instruction* getLastIns();
 		List<instruction*>* getInsList();
 		bool isInsAddrInBB(ADDR insAddr);
-		
+
+        //DEPENDENCY TABLE
+        void brDependencyTableCheck ();
+
 		//BB INFO
 		void printBb();
 		int getBbSize();

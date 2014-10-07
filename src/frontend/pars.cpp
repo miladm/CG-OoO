@@ -617,7 +617,7 @@ VOID doCount ()
 		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
-    if (s_pin_ins_cnt.getValue () == 5 * MILLION) {
+    if (s_pin_ins_cnt.getValue () == g_cfg->getMaxInsCnt ()) {
         pin__doFinish ();
         exit (-1);
     }

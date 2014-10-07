@@ -12,6 +12,7 @@ typedef enum {noType, ALU, MEM, FPU, BR} type;
 typedef enum {LRF, GRF} regKind;
 typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
 typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
+typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 
 #define CFG_STRING_SIZE 400
 #define INS_STRING_SIZE 330
@@ -33,7 +34,7 @@ typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 // #define DEBUG_SSA 0
 
 //Data Dependency
-#define NUM_REGISTERS 40
+#define NUM_REGISTERS 67
 #define INIT_RENAME_REG_NUM 100 //TODO change this number - not 
 
 //Latencies
@@ -43,11 +44,12 @@ typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 #define L1_LATENCY 4
 #define L2_LATENCY 20
 #define L3_LATENCY 40
+#define ST_LATENCY 2 //To make it more high priority then ALU ops
 #define MEM_LATENCY 100
 #define MEM_HIGHERARCHY 4
 
 //Hardware Specifications
-#define NUM_EU 4
+#define NUM_EU 1
 
 //Resgiter Allocation
 #define LRF_SIZE 2000

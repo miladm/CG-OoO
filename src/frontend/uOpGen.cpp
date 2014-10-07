@@ -23,6 +23,7 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
     if (g__staticCode->hasIns (ins_addr)) {
 //        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
             if (insObj != NULL) {
@@ -122,7 +123,7 @@ dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
 bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     dynBasicblock* bbObj = g_var.getLastCacheBB ();
     if (bbObj == NULL) return NULL;
-    if (g_var.scheduling_mode == STATIC_SCH && bbObj->isInInsMap(ins_addr)) return NULL;
+    if (g_var.scheduling_mode == STATIC_SCH && bbObj->isInInsMap (ins_addr)) return NULL;
     bbInstruction* insObj = g_var.getNewIns ();
     stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
     staticIns->copyRegsTo (insObj);
@@ -215,9 +216,9 @@ void pin__getOp (INS ins) {
     BOOL is_br_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins));
 
     if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
-        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret(ins) || 
+        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
         INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
-        INS_IsCall(ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
         INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) { //TODO put is back
         if (INS_HasFallThrough (ins)) {
             INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) pin__getBrIns,
@@ -253,7 +254,7 @@ void pin__getOp (INS ins) {
         IARG_END);
         }
         */
-    } else if (INS_IsSyscall(ins)) {
+    } else if (INS_IsSyscall (ins)) {
         INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) pin__getBrIns,
                 IARG_ADDRINT, INS_Address (ins),
                 IARG_BOOL, INS_HasFallThrough (ins),

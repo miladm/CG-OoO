@@ -7,9 +7,9 @@ BENCH_EXEC='/home/milad/zsim-apps/build/speccpu2006'
 BENCH_INPUT='/home/milad/zsim-apps/inputs'
 PIN_PARAM=-separate_memory  #-pin_memory_range 0x80000000:0x90000000 -pause_tool 15 
 
-$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 403.gcc -- $BENCH_EXEC/403.gcc/403.gcc -C $BENCH_INPUT/403.gcc/test/input/cccp.i -o out.o
+#$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 403.gcc -- $BENCH_EXEC/403.gcc/403.gcc -C $BENCH_INPUT/403.gcc/test/input/cccp.i -o out.o
 
-#$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 429.mcf -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/test/input/inp.in
+$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 429.mcf -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/test/input/inp.in
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b 401.bzip2 -- $BENCH_EXEC/401.bzip2/401.bzip2  $BENCH_INPUT/401.bzip2/test/input/dryer.jpg 2
 

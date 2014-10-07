@@ -71,12 +71,15 @@ void dependencyTable::addReg  (int indx, long int reg, instruction* ins, tableTy
 	Assert (table != MEM_READ && table != MEM_WRITE);
 
 	if (table == REG_WRITE) {
-		if (regWriteList.count(reg) > 0 || regReadList.count(reg) > 0) {
+//		if (regWriteList.count(reg) > 0 || regReadList.count(reg) > 0) { //TODO no lnoger ncessary in compiler I think
+//			regWriteList.erase(reg);
+//			ins->renameWriteReg(indx, reg);
+//		} else if (regReadList.count(reg) > 0) {
+//			/*We assume that no regiter is ever read before having been written B4*/
+//			printf ("\tERROR: Register Renaming Violation (%s, line: %d)\n", __FILE__, __LINE__);
+//		}
+		if (regWriteList.count(reg) > 0) {
 			regWriteList.erase(reg);
-			ins->renameWriteReg(indx, reg);
-		} else if (regReadList.count(reg) > 0) {
-			/*We assume that no regiter is ever read before having been written B4*/
-			printf ("\tERROR: Register Renaming Violation (%s, line: %d)\n", __FILE__, __LINE__);
 		}
 		regWriteList.insert(pair<long int,instruction*>(reg,ins));
 		//printf("ADD: Address REG Map Size = %d\n", regWriteList.size());

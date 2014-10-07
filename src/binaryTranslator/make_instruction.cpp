@@ -36,7 +36,7 @@ void parse_instruction (List<instruction*> *insList,
 	char c[INS_STRING_SIZE], ins[INS_STRING_SIZE];
 	ADDR insAddr, brDst;
 	FILE * input_assembly;
-	// dependencyTable* depTables = new dependencyTable; /* DISABLED */
+	 dependencyTable* depTables = new dependencyTable; /* DISABLED */
 	// if ((input_assembly = fopen (input_asm_file, "r")) == NULL) {
     string input_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/input_files/";
 	if ((input_assembly = fopen ((input_path + (*program_name) + ".s").c_str (), "r")) == NULL) {
@@ -168,7 +168,7 @@ void parse_instruction (List<instruction*> *insList,
 		// newIns->setOpCode (opCode); done somewhere else
 		insList->Append (newIns);
 		insAddrMap->insert (pair<ADDR, instruction*> (newIns->getInsAddr (), newIns));
-		// newIns->dependencyTableCheck (depTables); /* DISABLED */
+		newIns->dependencyTableCheck (depTables); /* DISABLED */
 	}
 
 	//Close files
