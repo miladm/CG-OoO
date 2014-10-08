@@ -73,7 +73,7 @@ class ScalarHistStat : public stat {
         stat& operator[] (LENGTH);
         void print (ofstream*);
 
-    private:
+    protected:
         stat* _scalar_arr_stat;
         LENGTH _histogram_size;
 };
@@ -92,6 +92,19 @@ class RatioStat : public ScalarStat {
 };
 
 /* **************************** *
+ * RATIO HIST STAT
+ * **************************** */
+class RatioHistStat : public ScalarHistStat {
+    public:
+        RatioHistStat (ScalarStat* divisor, LENGTH, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        ~RatioHistStat () {}
+        void print (ofstream*);
+
+    private:
+        ScalarStat* _divisor;
+};
+
+/* **************************** *
  * STATISTIC
  * **************************** */
 class statistic {
@@ -100,6 +113,7 @@ class statistic {
 		~statistic ();
         void dump ();
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
+        RatioHistStat& newRatioHistStat (ScalarStat*, LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
 
@@ -108,6 +122,7 @@ class statistic {
 
     private:
         list<ScalarHistStat*> _ScalarHistStats;
+        list<RatioHistStat*> _RatioHistStats;
         list<ScalarStat*> _ScalarStats;
         list<RatioStat*> _RatioStats;
         ofstream _out_file;

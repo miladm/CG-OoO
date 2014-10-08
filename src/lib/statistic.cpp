@@ -19,6 +19,12 @@ statistic::~statistic() {
         }
     }
     {
+        list<RatioHistStat*>::iterator it;
+        for (it = _RatioHistStats.begin(); it != _RatioHistStats.end(); it++) {
+            delete (*it);
+        }
+    }
+    {
         list<ScalarStat*>::iterator it;
         for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
             delete (*it);
@@ -60,6 +66,12 @@ ScalarHistStat& statistic::newScalarHistStat (LENGTH histogram_size, string clas
     return *cnt;
 }
 
+RatioHistStat& statistic::newRatioHistStat (ScalarStat* divisor, LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    RatioHistStat* cnt = new RatioHistStat (divisor, histogram_size, class_name, param_name, _description, init_val, print_if_zero);
+    _RatioHistStats.push_back (cnt);
+    return *cnt;
+}
+
 ScalarStat& statistic::newScalarStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     ScalarStat* cnt = new ScalarStat (class_name, param_name, _description, init_val, print_if_zero);
     _ScalarStats.push_back (cnt);
@@ -77,6 +89,14 @@ void statistic::dump () {
     {
         list<ScalarHistStat*>::iterator it;
         for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+    {
+        list<RatioHistStat*>::iterator it;
+        for (it = _RatioHistStats.begin (); it != _RatioHistStats.end (); it++) {
             (*it)->print (&_out_file);
         }
         _out_file << endl;
@@ -228,6 +248,23 @@ void RatioStat::print (ofstream* _out_file) {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
         if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << _ScalarStat / _divisor->getValue () << "\t\t\t # " << _description << endl;
+    }
+}
+
+/* **************************** *
+ * RATIO HIST STAT
+ * **************************** */
+RatioHistStat::RatioHistStat (ScalarStat* divisor, LENGTH histogram_size, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+    : ScalarHistStat (histogram_size, class_name, param_name, description, init_val, print_if_zero)
+{ _divisor = divisor; }
+
+void RatioHistStat::print (ofstream* _out_file) {
+    cout << "* " << _name  << ": " << "\t\t\t # " << _description << endl;
+    for (LENGTH i = 0; i < _histogram_size; i++) {
+        if (!(_scalar_arr_stat[i].getValue () == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+            cout << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << _scalar_arr_stat[i].getValue () / _divisor->getValue () << endl;
+            if (_enable_log_stat) (*_out_file) << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << _scalar_arr_stat[i].getValue () / _divisor->getValue () << endl;
+        }
     }
 }
 
