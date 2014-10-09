@@ -15,6 +15,7 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
 	: stage (execution_width, stage_name, clk),
       s_pipe_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
       s_eu_busy_state_hist (g_stats.newScalarHistStat ((LENGTH) execution_width, stage_name, "eu_busy_state_hist", "Number of cycles execution unit is busy", 0, PRINT_ZERO)),
+      s_pipe_state_hist_rat (g_stats.newRatioHistStat (clk->getStatObj (), (LENGTH) NUM_PIPE_STATE, stage_name, "pipe_state_hist_rat", "Ratio of cycles in each squash stage / total cycles", 0, PRINT_ZERO)),
       s_br_mispred_cnt (g_stats.newScalarStat (stage_name, "br_mispred_cnt", "Number of branch mis-predict events", 0, PRINT_ZERO)),
       s_mem_mispred_cnt (g_stats.newScalarStat (stage_name, "mem_mispred_cnt", "Number of memory mis-predict events", 0, PRINT_ZERO))
 {
@@ -54,6 +55,7 @@ void o3_execution::doEXECUTION () {
 
     /*-- STAT --*/
     s_pipe_state_hist[g_var.g_pipe_state]++;
+    s_pipe_state_hist_rat[g_var.g_pipe_state]++;
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
     for (WIDTH i = 0; i < _stage_width; i++) {

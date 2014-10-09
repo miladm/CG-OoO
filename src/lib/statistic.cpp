@@ -41,7 +41,7 @@ statistic::~statistic() {
 
 void statistic::setupOutFile () {
     /*-- OUT FILE --*/
-    string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out1/";
+    string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out2/";
     string prog_name (g_cfg->getProgName ());
     string core_type;
     ostringstream core_t, stat_sched_mode, reg_alloc_mode, mem_model;

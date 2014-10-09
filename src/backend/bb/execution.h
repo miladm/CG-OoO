@@ -50,8 +50,9 @@ class bb_execution : protected stage {
         List<bbWindow*>* _bbWindows;
 
         /*-- STATS --*/
-        ScalarHistStat& s_squash_state_hist;
+        ScalarHistStat& s_pipe_state_hist;
         ScalarHistStat& s_eu_busy_state_hist;
+        RatioHistStat& s_pipe_state_hist_rat;
         ScalarStat& s_br_mispred_cnt;
         ScalarStat& s_mem_mispred_cnt;
 };

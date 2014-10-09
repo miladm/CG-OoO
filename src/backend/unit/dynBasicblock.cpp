@@ -262,13 +262,14 @@ SCALAR dynBasicblock::getNumWasteIns () {
 }
 
 void dynBasicblock::setNumWasteIns (INS_ID faulty_ins_sn) {
-    for (int i = 0; i < _schedInsList.NumElements (); i++) {
+    int i;
+    for (i = 0; i < _schedInsList.NumElements (); i++) {
         if (_schedInsList.Nth(i)->getInsID () == faulty_ins_sn) {
-            _wasted_ins_cnt = i - 1;
+            _wasted_ins_cnt = i;
             break;
         }
     }
-    if (_wasted_ins_cnt < 0) _wasted_ins_cnt = 0;
+    Assert (i < _schedInsList.NumElements () && "The faulty instruction was not found! Invalid behavior.");
 }
 
 void dynBasicblock::setDoneFetch () {

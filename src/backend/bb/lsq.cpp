@@ -140,8 +140,8 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasAnyCompleteLdFromAddr (ADDRS completed_
         if (ins->getInsID () <= lo_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
             if (ins->getLQstate () == LQ_COMPLETE && ins->isCacheAxes ()) {
-                if (ins->getBBWinID () == st_ins_bb_id) s_inter_bb_mem_mis_pred_cnt++;
-                else s_intra_bb_mem_mis_pred_cnt++;
+                if (ins->getBBWinID () == st_ins_bb_id) s_intra_bb_mem_mis_pred_cnt++;
+                else s_inter_bb_mem_mis_pred_cnt++;
                 return pair<bool, bbInstruction*> (true, ins); //TODO double cehck that this means a register write has happened in the stage
             } else if (ins->getLQstate () == LQ_FWD_FROM_SQ ||
                        ins->getLQstate () == LQ_MSHR_WAIT ||
