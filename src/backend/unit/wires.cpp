@@ -33,8 +33,9 @@ bool wires::hasFreeWire () {
 void wires::updateWireState () {
     CYCLE now = _clk->now ();
     if (_cycle < now) {
-        _num_free_wire = _wire_cnt;
+        _num_free_wire = _wire_cnt - 1; /*-- 1 for having used the wire once already --*/
         _cycle = now;
+        Assert (_num_free_wire >= 0);
     } else if (_cycle == now) {
         _num_free_wire--;
     }

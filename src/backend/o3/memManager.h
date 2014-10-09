@@ -59,6 +59,7 @@ class o3_memManager : public unit {
         o3_lsqCAM _SQ;
  
         /*-- STAT OBJS --*/
+        ScalarStat& s_ld_cnt;
         ScalarStat& s_cache_hit_cnt;
         ScalarStat& s_cache_miss_cnt;
         ScalarStat& s_ld_hit_cnt;
@@ -67,8 +68,10 @@ class o3_memManager : public unit {
         ScalarStat& s_st_hit_cnt;
         ScalarStat& s_cache_to_ld_fwd_cnt;
         ScalarStat& s_st_to_ld_fwd_cnt;
-        RatioStat& s_in_flight_ld_rat;
-        RatioStat& s_in_flight_cache_ld_rat;
+        RatioStat& s_st_to_ld_fwd_rat;
+        RatioStat& s_ld_miss_rat;
+        RatioStat& s_inflight_ld_rat;
+        RatioStat& s_inflight_cache_ld_rat;
 };
 
 extern o3_memManager* g_LSQ_MGR;

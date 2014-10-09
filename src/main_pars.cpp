@@ -10,9 +10,9 @@
 using namespace INSTLIB;
 
 KNOB<string> KnobBenchInputFile(KNOB_MODE_WRITEONCE, "pintool",
-            "b", "bench.in", "specify input benchmark config file name");
+            "b", "bench", "specify input benchmark config file name");
 KNOB<string> KnobSimCfgInputFile(KNOB_MODE_WRITEONCE, "pintool",
-            "c", "default.cfg", "specify input simulator config file name");
+            "c", "default", "specify input simulator config file name");
 
 
 INT32 Usage() {

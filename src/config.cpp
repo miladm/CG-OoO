@@ -34,9 +34,12 @@ config::config (string bench_path, string config_path) {
 
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");
-    string pars_cfg = "/home/milad/esc_project/svn/PARS/src/config/";
-    _config_path  = pars_cfg + config_path;
-    _bench_path   = pars_cfg + bench_path + ".cfg";
+//    string pars_cfg = "/home/milad/esc_project/svn/PARS/src/config/";
+    string cfg_file_ext = ".cfg";
+    cout << config_path << endl;
+    _config_path  = config_path + cfg_file_ext;
+    cout << _config_path << endl;
+    _bench_path   = bench_path + cfg_file_ext;
 	_f_sim_cfg    = fopen (_config_path.c_str (), "r");
 	_f_bench_cfg  = fopen (_bench_path.c_str (), "r");
 
@@ -237,7 +240,6 @@ config::config (string bench_path, string config_path) {
 	#ifdef ASSERTION
 	Assert (strcmp (_param,"FETCH_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
-
 
 	fscanf (_f_sim_cfg, "%s = \" %s \"", _param, output_w_file);
 	#ifdef ASSERTION

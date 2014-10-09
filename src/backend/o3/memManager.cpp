@@ -13,6 +13,7 @@ o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       _L3 (1, 64, 8388608),
       _LQ (LQ_SIZE, 8, 4, clk, "LQtable"),
       _SQ (SQ_SIZE, 8, 4, clk, "SQtable"),
+      s_ld_cnt (g_stats.newScalarStat (lsq_name, "ld_cnt", "Number of load ops", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
       s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
@@ -21,8 +22,10 @@ o3_memManager::o3_memManager (port<dynInstruction*>& memory_to_scheduler_port,
       s_st_hit_cnt  (g_stats.newScalarStat (lsq_name, "st_hit_cnt", "Number of store hits", 0, PRINT_ZERO)),
       s_cache_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "cache_to_ld_fwd_cnt", "Number of cache accesses", 0, PRINT_ZERO)),
       s_st_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "st_to_ld_fwd_cnt", "Number of SQ -> LQ forwarding events", 0, PRINT_ZERO)),
-      s_in_flight_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "in_flight_ld_rat", "Number of in-flight LOAD instructions", 0, PRINT_ZERO)),
-      s_in_flight_cache_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "in_flight_cache_ld_rat", "Number of in-flight LOAD instructions in CACHES", 0, PRINT_ZERO))
+      s_st_to_ld_fwd_rat (g_stats.newRatioStat (&s_ld_cnt, lsq_name, "st_to_ld_fwd_rat", "Rate of SQ -> LQ forwarding events / all load ops", 0, PRINT_ZERO)),
+      s_ld_miss_rat (g_stats.newRatioStat (&s_cache_to_ld_fwd_cnt, lsq_name, "ld_miss_rat", "Load op miss rate", 0, PRINT_ZERO)),
+      s_inflight_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "inflight_ld_rat", "Number of in-flight LOAD instructions", 0, PRINT_ZERO)),
+      s_inflight_cache_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "inflight_cache_ld_rat", "Number of in-flight LOAD instructions in CACHES", 0, PRINT_ZERO))
 { 
     _memory_to_scheduler_port = &memory_to_scheduler_port;
 }
@@ -91,8 +94,11 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
         if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
-        (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
-        s_in_flight_ld_rat += axes_lat;
+        if (axes_lat > L1_LATENCY) { 
+            s_ld_miss_cnt++; s_ld_miss_rat++;
+        } else { s_ld_hit_cnt++; }
+        s_inflight_ld_rat += axes_lat;
+        s_ld_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
@@ -115,6 +121,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
 CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
     if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
         s_st_to_ld_fwd_cnt++;
+        s_st_to_ld_fwd_rat++;
         mem_ins->setLQstate (LQ_FWD_FROM_SQ);
         return g_eu_lat._st_buff_lat;
     //} else if () { /*TODO for MSHR */
@@ -126,7 +133,7 @@ CYCLE o3_memManager::getAxesLatency (dynInstruction* mem_ins) {
                     mem_ins->getMemAxesSize(),
                     &_L1, &_L2, &_L3);
         s_cache_to_ld_fwd_cnt++;
-        s_in_flight_cache_ld_rat += lat;
+        s_inflight_cache_ld_rat += lat;
         return lat;
     }
 }
@@ -198,8 +205,8 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
  *  LOAD QUEUE FUNC  *
  * ***************** */
 void o3_memManager::completeLd (dynInstruction* ins) {
-    if (ins->getLQstate ()) s_in_flight_cache_ld_rat--;
-    s_in_flight_ld_rat--;
+    if (ins->getLQstate ()) s_inflight_cache_ld_rat--;
+    s_inflight_ld_rat--;
     ins->setLQstate (LQ_COMPLETE);
 }
 

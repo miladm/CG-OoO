@@ -62,10 +62,11 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
             return pipe_stall; 
         } else {
             if (getNewBB () == EMPTY_BUFF) return pipe_stall;
-            s_bb_size_avg += _current_bb->getBBsize ();
             dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                     "NEW BB:", _current_bb->getBBID (), _clk->now ());
             _bbQUE->pushBack (_current_bb);
+            s_bb_size_avg += _current_bb->getBBsize ();
+            s_bb_cnt++;
         }
     }
 

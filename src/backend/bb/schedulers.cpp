@@ -17,10 +17,10 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             sysClock* clk,
 	    	                string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
-      s_mem_g_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_g_fwd_cnt", "Number of global memory forwarding events", 0, PRINT_ZERO)),
-      s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, PRINT_ZERO)),
-      s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, PRINT_ZERO)),
-      s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, PRINT_ZERO)),
+      s_mem_g_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_g_fwd_cnt", "Number of global memory forwarding events", 0, NO_PRINT_ZERO)),
+      s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, NO_PRINT_ZERO)),
+      s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, NO_PRINT_ZERO)),
+      s_alu_l_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_l_fwd_cnt", "Number of local ALU forwarding events", 0, NO_PRINT_ZERO)),
       s_bbWin_inflight_rat (g_stats.newRatioStat (clk->getStatObj (), stage_name, "bbWin_inflight_rat", "Number of in-flight bbWindows / cycle ", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
@@ -77,8 +77,8 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         /*-- READ INS WIN --*/
         _RF_MGR->reserveRF (ins);
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.popFront ();
-        ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
+        ins->setPipeStage (ISSUE);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE RESOURCES --*/

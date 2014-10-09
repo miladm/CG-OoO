@@ -15,8 +15,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
-      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
-      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO)),
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, NO_PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, NO_PRINT_ZERO)),
       s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
@@ -77,8 +77,8 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 
             /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
-            ins->setPipeStage (ISSUE);
             _scheduler_to_execution_port->pushBack (ins);
+            ins->setPipeStage (ISSUE);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
             /*-- UPDATE WIRES --*/
