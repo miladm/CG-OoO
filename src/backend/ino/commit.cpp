@@ -62,6 +62,9 @@ PIPE_ACTIVITY commit::commitImpl () {
                 "Commit ins", ins->getInsID (), _clk->now ());
         delete ins;
 
+        /*-- UPDATE WIRES --*/
+        _iROB->updateWireState (READ);
+
         /* STAT */
         s_ipc++;
         s_ins_cnt++;

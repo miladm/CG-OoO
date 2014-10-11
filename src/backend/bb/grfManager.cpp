@@ -8,7 +8,8 @@ bb_grfManager::bb_grfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _GRF (clk, "GlobalRegisterRename"),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
-      s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO))
+      s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 
 bb_grfManager::~bb_grfManager () { }
@@ -114,10 +115,12 @@ void bb_grfManager::squashRenameReg () {
 }
 
 bool bb_grfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
-    if (_GRF.getNumFreeWires (axes_type) >= numRegWires)
+    if (_GRF.getNumFreeWires (axes_type) >= numRegWires) {
         return true;
-    else
+    } else {
+        s_unavailable_cnt++;
         return false;
+    }
 }
 
 void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {

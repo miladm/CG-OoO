@@ -7,7 +7,8 @@
 bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
-      _lrf_id (lrf_id)
+      _lrf_id (lrf_id),
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 
 bb_lrfManager::~bb_lrfManager () { }
@@ -85,10 +86,12 @@ void bb_lrfManager::updateReg (PR reg) {
 }
 
 bool bb_lrfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
-    if (_RF.getNumFreeWires (axes_type) >= numRegWires)
+    if (_RF.getNumFreeWires (axes_type) >= numRegWires) {
         return true;
-    else
+    } else {
+        s_unavailable_cnt++;
         return false;
+    }
 }
 
 void bb_lrfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {

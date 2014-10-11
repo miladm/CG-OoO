@@ -31,6 +31,7 @@ class bb_grfManager : public unit {
         /*-- STAT OBJS --*/
         ScalarStat& s_cant_rename_cnt;
         ScalarStat& s_can_rename_cnt;
+        ScalarStat& s_unavailable_cnt;
 };
 
 #endif

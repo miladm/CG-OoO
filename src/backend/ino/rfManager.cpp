@@ -8,7 +8,8 @@ rfManager::rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "registerFile"),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
-      s_lrf_busy_cnt (g_stats.newScalarStat (rf_name, "rf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO))
+      s_lrf_busy_cnt (g_stats.newScalarStat (rf_name, "rf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO)),
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 
 rfManager::~rfManager () { }
@@ -71,10 +72,12 @@ void rfManager::updateReg (PR reg) {
 }
 
 bool rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
-    if (_RF.getNumFreeWires (axes_type) >= numRegWires)
+    if (_RF.getNumFreeWires (axes_type) >= numRegWires) {
         return true;
-    else
+    } else {
+        s_unavailable_cnt++;
         return false;
+    }
 }
 
 void rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {

@@ -34,7 +34,6 @@ config::config (string bench_path, string config_path) {
 
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");
-//    string pars_cfg = "/home/milad/esc_project/svn/PARS/src/config/";
     string cfg_file_ext = ".cfg";
     cout << config_path << endl;
     _config_path  = config_path + cfg_file_ext;

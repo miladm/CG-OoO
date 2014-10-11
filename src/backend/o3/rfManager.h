@@ -32,6 +32,7 @@ class o3_rfManager : public unit {
         ScalarStat& s_rf_not_ready_cnt;
         ScalarStat& s_cant_rename_cnt;
         ScalarStat& s_can_rename_cnt;
+        ScalarStat& s_unavailable_cnt;
 };
 
 extern o3_rfManager* g_GRF_MGR;

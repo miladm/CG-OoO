@@ -27,6 +27,9 @@ class bb_lrfManager : public unit {
 	private:
         registerFile _RF;
         WIDTH _lrf_id;
+
+        /*-- STAT OBJS --*/
+        ScalarStat& s_unavailable_cnt;
 };
 
 #endif

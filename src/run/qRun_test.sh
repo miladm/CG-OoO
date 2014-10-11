@@ -2,7 +2,7 @@
 
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out1'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out3'
 BENCH_EXEC='/home/milad/zsim-apps/build/speccpu2006'
 BENCH_INPUT='/home/milad/zsim-apps/inputs'
 RUN_DIR='/home/milad/esc_project/svn/PARS/src/run'

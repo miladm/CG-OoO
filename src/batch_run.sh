@@ -1,4 +1,4 @@
-#./run/qRun_test.sh 1.0.0.0
+./run/qRun_test.sh 1.0.0.0
 
 ./run/qRun_test.sh 2.0.0.0
 ./run/qRun_test.sh 2.0.0.2
