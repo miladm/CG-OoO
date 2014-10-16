@@ -5,10 +5,11 @@
 ##############################################################
 
 # If the tool is built out of the kit, PIN_ROOT must be specified in the make invocation and point to the kit root.
+PIN_ROOT := /home/milad/esc_project/svn/pin-2.12
 ifdef PIN_ROOT
 CONFIG_ROOT := $(PIN_ROOT)/source/tools/Config
 else
-CONFIG_ROOT := /home/milad/esc_project/svn/pin-2.12/source/tools/Config
+CONFIG_ROOT := /home/milad/esc_project/svn/pin-2.14-67254-gcc.4.4.7-linux/source/tools/Config
 endif
 include $(CONFIG_ROOT)/makefile.config
 include makefile.rules

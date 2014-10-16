@@ -11,6 +11,7 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
+      _cache ("/home/milad/esc_project/svn/PARS/src/config/simple.yaml"),
       _LQ (BB_LQ_SIZE, 8, 4, clk, "LQtable"),
       _SQ (BB_SQ_SIZE, 8, 4, clk, "SQtable"),
       s_ld_cnt (g_stats.newScalarStat (lsq_name, "ld_cnt", "Number of load ops", 0, PRINT_ZERO)),
@@ -104,10 +105,12 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
-        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
-                mem_ins->getMemAddr (),
-                mem_ins->getMemAxesSize(),
-                &_L1, &_L2, &_L3);
+        axes_lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_WRITE);
+//        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
+//                mem_ins->getMemAddr (),
+//                4,
+//                mem_ins->getMemAxesSize(),
+//                &_L1, &_L2, &_L3);
         _SQ.setTimer (mem_ins, axes_lat);
         (axes_lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
     }
@@ -128,10 +131,12 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
     } else {
         if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         mem_ins->setLQstate (LQ_CACHE_WAIT);
-        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
-                    mem_ins->getMemAddr (),
-                    mem_ins->getMemAxesSize(),
-                    &_L1, &_L2, &_L3);
+        CYCLE lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_READ);
+//        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
+//                    mem_ins->getMemAddr (),
+//                    4,
+////                    mem_ins->getMemAxesSize(),
+//                    &_L1, &_L2, &_L3);
         s_cache_to_ld_fwd_cnt++;
         s_inflight_cache_ld_rat += lat;
         return lat;

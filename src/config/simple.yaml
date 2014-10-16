@@ -1,0 +1,63 @@
+---
+interconnects:
+    - name: interconn_0
+      type: crossbar
+      latency: 1
+
+cpucontrollers:
+    - name: cpucont_0
+      core: 0
+      icache: l1_i_0
+      dcache: l1_d_0
+      interconn: interconn_0
+
+controllers:
+    - name: l1_i_0
+      type: simple
+      cache:
+        size: 32768
+        assoc: 8
+        linesize: 64
+        latency: 3
+        energy: 0.096767
+      lower: l2_0
+      interconn: interconn_0
+
+    - name: l1_d_0
+      type: simple
+      cache:
+        size: 32768
+        assoc: 8
+        linesize: 64
+        latency: 3
+        energy: 0.096767
+      lower: l2_0
+      interconn: interconn_0
+
+    - name: l2_0
+      type: simple
+      cache:
+        size: 262144
+        assoc: 16
+        linesize: 64
+        latency: 11
+        energy: 0.321491
+      lower: l3_0
+      interconn: interconn_0
+
+    - name: l3_0
+      type: simple
+      cache:
+        size: 4194304
+        assoc: 16
+        linesize: 64
+        latency: 19
+        energy: 1.054820
+      lower: dram_0
+      interconn: interconn_0
+
+drams:
+    - name: dram_0
+      type: dram
+      latency: 99
+      interconn: interconn_0

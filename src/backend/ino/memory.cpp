@@ -17,6 +17,7 @@ memory::memory (port<dynInstruction*>& execution_to_memory_port,
       _L1 (1, 64, 32768),
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
+      _cache ("/home/milad/esc_project/svn/PARS/src/config/simple.yaml"),
       s_cache_miss_cnt (g_stats.newScalarStat (stage_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (stage_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_ld_miss_cnt (g_stats.newScalarStat (stage_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
@@ -97,10 +98,11 @@ PIPE_ACTIVITY memory::memoryImpl () {
             dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Add to st_buff ins", mem_ins->getInsID (), _clk->now ());
         } else {
-            axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
-                                           mem_ins->getMemAddr (),
-                                           mem_ins->getMemAxesSize(),
-                                           &_L1, &_L2, &_L3);
+            axes_lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_READ);
+//            axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
+//                                           mem_ins->getMemAddr (),
+//                                           mem_ins->getMemAxesSize(),
+//                                           &_L1, &_L2, &_L3);
 #ifdef ASSERTION
             Assert(axes_lat > 0);
 #endif
@@ -155,10 +157,11 @@ void memory::manageSTbuffer () {
         /* MEM ACCESS */
         dynInstruction* st_ins = _st_buff.popFront ();
         Assert (st_ins->getNumRdAR () == 0 && "instruction must have been ready long ago!");
-        CYCLE lat = (CYCLE) cacheCtrl (WRITE, //st_ins->getMemType (),
-                                       st_ins->getMemAddr (),
-                                       st_ins->getMemAxesSize(), 
-                                       &_L1, &_L2, &_L3);
+        CYCLE lat = _cache.request (st_ins->getMemAddr (), false, REQUEST_WRITE);
+//        CYCLE lat = (CYCLE) cacheCtrl (WRITE, //st_ins->getMemType (),
+//                                       st_ins->getMemAddr (),
+//                                       st_ins->getMemAxesSize(), 
+//                                       &_L1, &_L2, &_L3);
         (lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
         (lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 

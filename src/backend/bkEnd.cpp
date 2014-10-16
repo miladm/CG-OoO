@@ -2344,6 +2344,7 @@ int setupNewInsV2 (instruction* ins, char *c) {
 	};
 	/// if (debug) printf("ins addr: %llu\n", insAddr);
 	return 0; //Successful completion (TODO: fix return values)
+    return memAccessSize;
 }
 
 int PhListSize = 100; //TODO put it in the right place

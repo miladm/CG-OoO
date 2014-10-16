@@ -17,6 +17,7 @@
 #include "../cache.h"
 #include "../unit/port.h"
 #include "lsq.h"
+#include <driver_simple.h>
 
 class o3_memManager : public unit {
     public:
@@ -54,6 +55,7 @@ class o3_memManager : public unit {
         cache _L1;
         cache _L2;
         cache _L3;
+        Driver _cache;
 
         o3_lsqCAM _LQ;
         o3_lsqCAM _SQ;

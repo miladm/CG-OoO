@@ -1,0 +1,238 @@
+//#include <superstl.h>
+#include <vector>
+#include <tagmap.h>
+
+namespace Memory {
+
+typedef std::vector<bool> boolvec;
+
+class BloomFilter {
+    private:
+        int NBITS;
+        int log2_NBITS;
+        int NWAYS;
+        int NHASHES;
+        boolvec filter;
+        uint64_t *tags;
+        uint64_t *hash_weights;
+
+        int hash(uint64_t addr, int index) {
+            int result = 0;
+            foreach (pos, log2_NBITS) {
+                int val = popcount64(hash_weights[index*log2_NBITS+pos] & addr) % 2;
+                result |= val << pos;
+            }
+            assert(result < NBITS);
+            return result;
+        }
+
+        void addToFilter(uint64_t addr) {
+            foreach(i, NHASHES) {
+                int hash_index = hash(addr, i);
+                filter[hash_index] = true;
+            }
+        }
+    public:
+        BloomFilter() {
+            tags = NULL;
+            hash_weights = NULL;
+        }
+
+        ~BloomFilter() {
+            delete[] tags;
+            delete[] hash_weights;
+        }
+
+        void init(int _NBITS, int _NWAYS, int _NHASHES) {
+            NBITS = _NBITS;
+            NWAYS = _NWAYS;
+            NHASHES = _NHASHES;
+
+            log2_NBITS = vlog2(NBITS);
+            filter = boolvec(NBITS);
+            tags = new uint64_t[NWAYS];
+            foreach(i, NWAYS) {
+                tags[i] = 0xffffffffffffffffULL;
+            }
+        }
+
+        // set weight vector
+        void setWeights(uint64_t *_hash_weights) {
+            hash_weights = _hash_weights;
+        }
+
+        // insert into bloom filter and into the tag set
+        void insert(uint64_t addr) {
+            // insert into bloom filter
+            addToFilter(addr);
+            // insert into tag set
+            foreach (i, NWAYS) {
+                if(tags[i] == addr)
+                    return;
+                if(tags[i] == 0xffffffffffffffffULL) {
+                    tags[i] = addr;
+                    return;
+                }
+            }
+            // should never come here
+            assert(0);
+        }
+        // invalidate by reading all the tags and re-initializing
+        // the bloom filter
+        void invalidate(uint64_t addr) {
+            // build new bloom filter
+            foreach(i, NBITS) {
+                filter[i] = false;
+            }
+            foreach(i, NWAYS) {
+                if(tags[i] != addr) {
+                    addToFilter(tags[i]);
+                } else {
+                    tags[i] = 0xffffffffffffffffULL;
+                }
+            }
+        }
+        // check against bloom filter
+        bool check(uint64_t addr) {
+            foreach(i, NHASHES) {
+                if(!(filter[hash(addr, i)])) {
+                    return false;
+                }
+            }
+            return true;
+        }
+};
+
+// abstract base class for each level tagless directory
+
+class BloomLevelBase {
+    public:
+        virtual void insert(uint64_t addr) =0;
+        virtual void invalidate(uint64_t addr) =0;
+        virtual bool check(uint64_t addr) =0;
+};
+
+class BloomTagMapLevel : public BloomLevelBase {
+    private:
+        BloomFilter *filters;
+        uint64_t *weights;
+        uint64_t numsets;
+    public:
+        BloomTagMapLevel() {
+            filters = NULL;
+            weights = NULL;
+        }
+
+        void init(int NBITS, int NHASHES, int NWAYS, int NSETS, RandomNumberGenerator &bloomRand) {
+            weights = new uint64_t[NHASHES*vlog2(NBITS)];
+            foreach(i, NHASHES*vlog2(NBITS)) {
+                weights[i] = bloomRand.random64();
+            }
+            filters = new BloomFilter[NSETS];
+            foreach(i, NSETS) {
+                filters[i].init(NBITS, NWAYS, NHASHES);
+            }
+            foreach(i, NSETS) {
+                filters[i].setWeights(weights);
+            }
+            numsets = NSETS;
+        }
+
+        ~BloomTagMapLevel() {
+            delete[] weights;
+            delete[] filters;
+        }
+
+        inline Waddr setof(uint64_t addr) {
+            return (addr >> 6) & (numsets-1);
+        }
+
+        virtual void insert(uint64_t addr) {
+            filters[setof(addr)].insert(addr);
+        }
+
+        virtual void invalidate(uint64_t addr) {
+            filters[setof(addr)].invalidate(addr);
+        }
+
+        virtual bool check(uint64_t addr) {
+            return filters[setof(addr)].check(addr);
+        }
+};
+        
+
+class BloomTagMap : public TagMap {
+    private:
+        BloomTagMapLevel **levelFilters;
+        int numlevels;
+        int lat;
+
+        uint64_t tagof(uint64_t address) {
+            return address & (~63ULL);
+        }
+
+    public:
+        BloomTagMap() {}
+
+        ~BloomTagMap() {
+            foreach(i, numlevels) {
+                delete levelFilters[i];
+            }
+        }
+
+        virtual void init(const YAML::Node &root) {
+            RandomNumberGenerator bloomRand(0x87624876);
+            const YAML::Node &cachesnode = root["caches"];
+            int nbits, nhashes;
+            root["tagmap"]["nbits"] >> nbits;
+            root["tagmap"]["nhashes"] >> nhashes;
+            root["tagmap"]["latency"] >> lat;
+
+            levelFilters = new BloomTagMapLevel*[(int)cachesnode.size()];
+
+            for(int i = 0; i < (int)cachesnode.size(); i++) {
+                const YAML::Node &cachenode = cachesnode[i];
+                int size, assoc;
+                cachenode["assoc"] >> assoc;
+                cachenode["size"] >> size;
+                levelFilters[i] = new BloomTagMapLevel();
+                levelFilters[i]->init(nbits, nhashes, assoc, size/assoc/64, bloomRand);
+            }
+
+            numlevels = (int)cachesnode.size();
+        }
+
+        virtual LevelMask lookup(uint64_t addr) {
+            LevelMask mask;
+            foreach(i, numlevels) {
+                if(levelFilters[i]->check(tagof(addr)))
+                    mask.set(i);
+                else
+                    mask.reset(i);
+            }
+            return mask;
+        }
+
+        virtual void insert_cb(uint64_t addr, int level) {
+            levelFilters[level]->insert(tagof(addr));
+        }
+
+        virtual void evict_cb(uint64_t addr, int level) {
+            levelFilters[level]->invalidate(tagof(addr));
+        }
+        
+        virtual void reset(uint64_t addr) {
+            assert(0);
+        }
+
+        virtual ostream& print(ostream& os) const {
+            os << "bloom filter print not supported\n";
+            return os;
+        }
+
+        virtual int latency() const {
+            return lat;
+        }
+};
+
+};

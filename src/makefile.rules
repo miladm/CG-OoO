@@ -13,7 +13,6 @@
 ##############################################################
 
 ###### Place all generic definitions here ######
-yaml-cpp = /home/milad/esc_project/svn/PARS/src/lib/yaml-cpp
 # This defines tests which run tools of the same name.  This is simply for convenience to avoid
 # defining the test name twice (once in TOOL_ROOTS and again in TEST_ROOTS).
 # Tests defined here should not be defined in TOOL_ROOTS and TEST_ROOTS.
@@ -42,7 +41,7 @@ OBJECT_ROOTS :=
 DLL_ROOTS :=
 
 # This defines any static libraries (archives), that need to be built.
-LIB_ROOTS :=/home/milad/lib/libyaml-cpp
+LIB_ROOTS :=
 
 ###### Place architecture-specific definitions here ######
 
@@ -215,6 +214,58 @@ $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/wires$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/bbStat$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/arrayStats$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/baseAction$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/cacheController$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/cache$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/cacheline$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/cacheQueueEntry$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/common$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/controller$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/cpuController$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/crossbarInterconnect$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/DRAMController$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/energyProfile$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/exclusivePolicy$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/interconnect$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/intStats$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/levelmask$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/memoryHierarchy$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/message$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/named$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/optype$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/perfectTagMap$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/randomPolicy$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/simpleCacheController$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/simpleCacheActions$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/stats$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/tagmap$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/yamlInit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/optype$(OBJ_SUFFIX) \
+$(OBJDIR)backend/cache/driver_simple$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/aliascontent$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/conversion$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/exp$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/iterator$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/map$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/node$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/null$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/ostream$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/parser$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/parserstate$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/regex$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/scalar$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/scanner$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/scanscalar$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/scantag$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/scantoken$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/sequence$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/simplekey$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/stream$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/tag$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/emitter$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/emitterstate$(OBJ_SUFFIX) \
+$(OBJDIR)lib/yaml/emitterutils$(OBJ_SUFFIX) \
 $(SUPPORTS_AVX_OBJ) 
 	$(LINKER) $(TOOL_LDFLAGS) $(LINK_EXE)$@ $^ $(TOOL_LPATHS) $(TOOL_LIBS)
 

@@ -9,6 +9,7 @@
 #include "../cacheCtrl.h"
 #include "../cache.h"
 #include "rfManager.h"
+#include <driver_simple.h>
 
 class memory : protected stage {
 	public:
@@ -42,6 +43,7 @@ class memory : protected stage {
         cache _L1;
         cache _L2;
         cache _L3;
+        Driver _cache;
 
         /* STAT OBJS */
         ScalarStat& s_cache_miss_cnt;

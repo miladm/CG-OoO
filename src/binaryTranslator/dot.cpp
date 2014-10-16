@@ -10,12 +10,15 @@
 extern float unpredMemOpThreshold;
 
 dot::dot(int mode, string *program_name) {
+    string out_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/dotFiles/";
 	if (mode == 0) { //Make CFG
-		if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg.dot").c_str(), "w+")) == NULL) {
+        string cfg_file = out_dir + (*program_name) + "_cfg.dot";
+		if((_outFile=fopen(cfg_file.c_str(), "w+")) == NULL) {
 		    Assert("Cannot open dot file(s).");
 		}		
 	} else if (mode = 1) { //Make Phrase CFG
-		if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg_phrase.dot").c_str(), "w+")) == NULL) {
+        string cfg_file = out_dir + (*program_name) + "_cfg_phrase.dot";
+		if((_outFile=fopen(cfg_file.c_str(), "w+")) == NULL) {
 		    Assert("Cannot open dot file(s).");
 		}		
 	} else {

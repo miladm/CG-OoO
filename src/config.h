@@ -14,7 +14,7 @@
 #include "lib/utility.h"
 #include "global/global.h"
 #include "lib/message.h"
-#include "lib/yaml-cpp/yaml.h"
+//#include "lib/yaml-cpp/yaml.h"
 
 using namespace std;
 

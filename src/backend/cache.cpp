@@ -4,6 +4,8 @@
  * Also contains state of line (per line state)
  ******************************************************************************/
 #include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 #include "cache.h"
 #include "latency.h"
 #include "../global/global.h"
