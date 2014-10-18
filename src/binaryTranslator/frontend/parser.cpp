@@ -3,12 +3,16 @@
 #include <fstream>
 #include <string.h>
 #include <string>
+#include "stInstruction.h"
+
 using namespace std;
 
 
-FILE *trace_static;
-FILE *mem_trace;
-FILE *insAddrs;
+FILE* trace_static;
+FILE* mem_trace;
+FILE* insAddrs;
+
+List<stInstruction*>* g_ins_list;
 
 /*
  * Analysis routines
@@ -17,66 +21,91 @@ VOID trace_info(ADDRINT ins_addr) {
     fprintf(trace_static, "%lld\n", ins_addr);  
 }
 
-VOID setDestination (INS ins) {
-	if (INS_IsDirectBranchOrCall(ins)) {
-		fprintf(trace_static, "%lx\n", INS_DirectBranchOrCallTargetAddress(ins));
-	}
+VOID setTarget (INS ins) {
+    if (g_ins_list->NumElements () != 2) return;
+    stInstruction* cur_ins = g_ins_list->Nth (1);
+    stInstruction* prv_ins = g_ins_list->Nth (0);
+	if (cur_ins->_has_destination == false && INS_IsDirectBranchOrCall (ins)) {
+		cur_ins->_has_destination = true;
+        cur_ins->_destination = INS_DirectBranchOrCallTargetAddress(ins);
+    }
+
+    if (prv_ins->_type == 'r' ||
+        (prv_ins->_type == 'j' && prv_ins->_has_destination == false) ||
+        (prv_ins->_type == 'c' && prv_ins->_has_destination == false)) {
+        prv_ins->_destination = INS_Address (ins);
+        prv_ins->_has_destination = true;
+    }
+    if (prv_ins->_type == 'b' && prv_ins->_has_destination == false) {
+        cout << prv_ins->_disassemble << endl;
+        Assert (0 && "this feature is not supported");
+    }
 }
 
 VOID setType (INS ins) {
+    stInstruction* st_ins = g_ins_list->Last ();
 	bool noType = true;
-	if (INS_IsCall(ins) || INS_IsSyscall(ins) || INS_IsProcedureCall (ins)) {
-		fprintf(trace_static, "c\n");
+	if (INS_IsSyscall(ins)) {
+        st_ins->_type = 's';
 		noType = false;
-	} if (INS_IsRet(ins) || INS_IsSysret(ins)) {
-		fprintf(trace_static, "r\n");
+    } else if(INS_IsCall(ins) || INS_IsProcedureCall (ins)) {
+        st_ins->_type = 'c';
 		noType = false;
-	} if (INS_IsBranch(ins) && INS_HasFallThrough(ins)) {
-		fprintf(trace_static, "b\n");
+	} else if(INS_IsRet(ins) || INS_IsSysret(ins)) {
+        st_ins->_type = 'r';
 		noType = false;
-	} if (INS_IsBranch(ins) && !INS_HasFallThrough(ins)) {
-		fprintf(trace_static, "j\n");
+	} else if(INS_IsBranch(ins) && INS_HasFallThrough(ins)) {
+        st_ins->_type = 'b';
 		noType = false;
-	} if (INS_IsMemoryRead(ins)) {
-		fprintf(trace_static, "R\n");
-		fprintf(trace_static, "%d\n", INS_MemoryReadSize(ins)); //size in bytes
+	} else if(INS_IsBranch(ins) && !INS_HasFallThrough(ins)) {
+        st_ins->_type = 'j';
 		noType = false;
-	} if (INS_IsMemoryWrite(ins)) {
-		fprintf(trace_static, "W\n");
-		fprintf(trace_static, "%d\n", INS_MemoryWriteSize(ins)); //size in bytes
+	} else if(INS_IsMemoryRead(ins)) {
+        st_ins->_type = 'R';
+        st_ins->_mem_r_size = INS_MemoryReadSize(ins);
 		noType = false;
-	} if (INS_IsNop(ins)) {
-		fprintf(trace_static, "n\n");
+	} else if(INS_IsMemoryWrite(ins)) {
+        st_ins->_type = 'W';
+        st_ins->_mem_w_size = INS_MemoryWriteSize(ins);
 		noType = false;
-	} if (noType == true) {
-		fprintf(trace_static, "o\n");
+	} else if(INS_IsNop(ins)) {
+        st_ins->_type = 'n';
+		noType = false;
+	} else if(noType == true) {
+        st_ins->_type = 'o';
 	}
 }
 
 VOID setReg (INS ins) {
+    stInstruction* st_ins = g_ins_list->Last ();
 	// UINT32 operandCount = INS_MaxNumRRegs(ins)+INS_MaxNumWRegs(ins);
 	if (INS_MaxNumRRegs(ins) > 0) {
-		for (int i = 0; i < INS_MaxNumRRegs(ins); i++) {
-			fprintf(trace_static,"%s\n%d\n", REG_StringShort(INS_RegR(ins,i)).c_str(), 1);
+		for (int i = 0; i < (int)INS_MaxNumRRegs(ins); i++) {
+			st_ins->_regs.Append (REG_StringShort(INS_RegR(ins,i)));
+			st_ins->_reg_types.Append (REG_READ);
 		}
 	}
 	if (INS_MaxNumWRegs(ins) > 0) {
-		for (int i = 0; i < INS_MaxNumWRegs(ins); i++) {
-			fprintf(trace_static,"%s\n%d\n", REG_StringShort(INS_RegW(ins,i)).c_str(), 2);
+		for (int i = 0; i < (int)INS_MaxNumWRegs(ins); i++) {
+			st_ins->_regs.Append (REG_StringShort(INS_RegW(ins,i)));
+			st_ins->_reg_types.Append (REG_WRITE);
 		}
 	}		
 }
 
-// Print a memory read record
-VOID RecordMemRead(VOID * ip, VOID * addr)
-{
-	//fprintf(mem_trace,"%lx: R %lx\n", ip, addr);
+void dumpIns () {
+    Assert (g_ins_list->NumElements () <= 2);
+    if (g_ins_list->NumElements () == 2) {
+        stInstruction* st_ins = g_ins_list->Nth (0);
+        st_ins->dump ();
+        delete g_ins_list->Nth (0);
+        g_ins_list->RemoveAt (0);
+    }
 }
 
-// Print a memory write record
-VOID RecordMemWrite(VOID * ip, VOID * addr)
-{
-    //fprintf(mem_trace,"%lx: W %lx\n", ip, addr);
+void makeNewIns () {
+    stInstruction* st_ins = new stInstruction (trace_static);
+    g_ins_list->Append (st_ins);
 }
 
 /*
@@ -95,36 +124,19 @@ VOID ImageLoad(TRACE trace, VOID *v)
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
 //            for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
             {
-				setType(ins);
-				fprintf(trace_static, "#%s\n", INS_Mnemonic(ins).c_str());
-				fprintf(trace_static, "%s\n", INS_Disassemble(ins).c_str());
-				fprintf(trace_static, "%lx\n", INS_Address(ins));
-				//fprintf(insAddrs, "%lx\n", INS_Address(ins)); //for debugging address space
-				setDestination(ins);
-				setReg(ins);
-				fprintf(trace_static, "---\n");
-				// Instruments memory accesses using a predicated call
-			    UINT32 memOperands = INS_MemoryOperandCount(ins);
-			    // Iterate over each memory operand of the instruction.
-			    for (UINT32 memOp = 0; memOp < memOperands; memOp++)
-			    {
-			        if (INS_MemoryOperandIsRead(ins, memOp))
-			        {
-			            INS_InsertPredicatedCall(
-			                ins, IPOINT_BEFORE, (AFUNPTR)RecordMemRead,
-			                IARG_INST_PTR,
-			                IARG_MEMORYOP_EA, memOp,
-			                IARG_END);
-			        }
-			        if (INS_MemoryOperandIsWritten(ins, memOp))
-			        {
-			            INS_InsertPredicatedCall(
-			                ins, IPOINT_BEFORE, (AFUNPTR)RecordMemWrite,
-			                IARG_INST_PTR,
-			                IARG_MEMORYOP_EA, memOp,
-			                IARG_END);
-			        }
-			    }
+                makeNewIns ();
+                stInstruction* st_ins = g_ins_list->Last ();
+				setType (ins);
+				st_ins->_mnemonic = INS_Mnemonic (ins);
+                st_ins->_disassemble = INS_Disassemble (ins);
+                st_ins->_addr = INS_Address (ins);
+                if (INS_HasFallThrough (ins)) {
+                    st_ins->_has_fall_through = true; 
+                    st_ins->_fall_through = INS_NextAddress (ins);
+                }
+				setTarget (ins);
+				setReg (ins);
+                dumpIns ();
             }
             // Close the RTN.
 //            RTN_Close( rtn );
@@ -158,6 +170,7 @@ int main(int argc, char * argv[])
 	trace_static = fopen((ioPath+"/static_trace.s").c_str(), "w");  
 	mem_trace    = fopen("/scratch/tracesim/specint2006/mem_trace.csv", "w");  
 	insAddrs     = fopen("/scratch/tracesim/specint2006/ins_addrs.csv", "w");  
+    g_ins_list = new List<stInstruction*>;
 
     // Initialize pin & symbol manager
     if (PIN_Init(argc, argv)) return Usage();

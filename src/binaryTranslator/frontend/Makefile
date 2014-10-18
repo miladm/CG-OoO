@@ -70,17 +70,17 @@ PIN_LDFLAGS += -L/home/qtedq/lib
 ##############################################################
 
 
-TOOL_ROOTS = parser
+TOOL_ROOTS = parser 
 #TOOL_ROOTS = unum
 
 TOOL_CXXFLAGS += 
 TOOL_LDFLAGS += -lconfig++ -lz
-CSFILES= 
+CSFILES= stInstruction utility
 	
 CSDIR=
 CSOBJ = $(addsuffix .o, $(addprefix $(OBJDIR), $(CSFILES)))
 
-CSFILES_SUB = 
+CSFILES_SUB = stInstruction
 
 CSOBJ_SUB = $(addsuffix .o, $(addprefix $(OBJDIR), $(CSFILES_SUB)))
 
