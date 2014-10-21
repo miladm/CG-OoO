@@ -166,8 +166,6 @@ void make_basicblock  (List<instruction*> *insList,
 			Assert  (0 && "WRONG INSTRUTION. Terminating...");
 		}
 	}
-    if (bbMap->find (0x400532) != bbMap->end ()) cout << "400532 is there" << endl;
-    if (bbMap->find (0x400556) != bbMap->end ()) cout << "400556 is there" << endl;
 	// PERFORM LIST SCHEDULING ON BB
     if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
         

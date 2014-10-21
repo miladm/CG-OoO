@@ -106,37 +106,38 @@ void makeNewIns () {
 /*
  * Instrumentation routines
  */
-VOID ImageLoad(TRACE trace, VOID *v)
+//VOID ImageLoad(TRACE trace, VOID *v)
+VOID ImageLoad(IMG img, VOID *v)
 {
-    for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
-//    for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec))
+//    for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
+    for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec))
     {
-//        for (RTN rtn = SEC_RtnHead(sec); RTN_Valid(rtn); rtn = RTN_Next(rtn))
-//        {
+        for (RTN rtn = SEC_RtnHead(sec); RTN_Valid(rtn); rtn = RTN_Next(rtn))
+        {
             // Open the RTN.
-//            RTN_Open( rtn );            
+            RTN_Open( rtn );            
             // Examine each instruction in the routine.
-        for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
-//            for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
+//            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
+            for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
             {
                 makeNewIns ();
                 stInstruction* st_ins = g_ins_list->Last ();
-				setType (ins);
-				st_ins->_mnemonic = INS_Mnemonic (ins);
+                setType (ins);
+                st_ins->_mnemonic = INS_Mnemonic (ins);
                 st_ins->_disassemble = INS_Disassemble (ins);
                 st_ins->_addr = INS_Address (ins);
                 if (INS_HasFallThrough (ins)) {
                     st_ins->_has_fall_through = true; 
                     st_ins->_fall_through = INS_NextAddress (ins);
                 }
-				setTarget (ins);
-				setReg (ins);
+                setTarget (ins);
+                setReg (ins);
                 dumpIns ();
             }
             // Close the RTN.
-//            RTN_Close( rtn );
+            RTN_Close( rtn );
         }
-//    }
+    }
 }
 
 VOID Fini(INT32 code, VOID *v)
@@ -172,8 +173,8 @@ int main(int argc, char * argv[])
     PIN_InitSymbols();
 
     // Register ImageLoad to be called to instrument instructions
-//    IMG_AddInstrumentFunction(ImageLoad, 0);
-    TRACE_AddInstrumentFunction (ImageLoad, 0);
+    IMG_AddInstrumentFunction(ImageLoad, 0);
+//    TRACE_AddInstrumentFunction (ImageLoad, 0);
     PIN_AddFiniFunction(Fini, 0);
     
     // Start the program, never returns
