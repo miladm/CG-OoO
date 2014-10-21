@@ -14,6 +14,7 @@ class message {
 		message();
 		~message();
 		void simStep(const char* msg);
+        void simEvent (const char* msg);
 
 	private:
 		void heading();

@@ -75,7 +75,7 @@ TOOL_ROOTS = parser
 
 TOOL_CXXFLAGS += 
 TOOL_LDFLAGS += -lconfig++ -lz
-CSFILES= stInstruction utility
+CSFILES= stInstruction utility ../../lib/benchAddrRangeParser ../../lib/message
 	
 CSDIR=
 CSOBJ = $(addsuffix .o, $(addprefix $(OBJDIR), $(CSFILES)))

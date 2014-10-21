@@ -22,4 +22,8 @@ void message::simStep(const char* msg) {
 	_simStepCnt++;
 }
 
+void message::simEvent (const char* msg) {
+	cout << "   " << msg << endl;
+}
+
 message g_msg;

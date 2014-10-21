@@ -1,7 +1,7 @@
 using namespace std;
 
 int main () {
-    int len = 2;
+    int len = 27;
     int y;
 
     for (int i = 0; i < len; i++) {

@@ -1,18 +1,26 @@
 #include "pin.H"
+#include "instlib.H"
+#include "portability.H"
 #include <iostream>
 #include <fstream>
 #include <string.h>
 #include <string>
 #include "stInstruction.h"
+#include "../../lib/benchAddrRangeParser.h"
+#include "../../lib/message.h"
 
 using namespace std;
+using namespace INSTLIB;
 
+KNOB<string> KnobBenchName (KNOB_MODE_WRITEONCE, "pintool",
+            "b", "bench", "specify input benchmark config file name");
 
 FILE* trace_static;
 FILE* mem_trace;
 FILE* insAddrs;
 
 List<stInstruction*>* g_ins_list;
+benchAddrRangeParser* bench_addr_space;
 
 VOID setTarget (INS ins) {
     if (g_ins_list->NumElements () != 2) return;
@@ -120,6 +128,8 @@ VOID ImageLoad(IMG img, VOID *v)
 //            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
             for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
             {
+                if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
+                      INS_Address (ins) <= bench_addr_space->getEndAddr ())) continue;
                 makeNewIns ();
                 stInstruction* st_ins = g_ins_list->Last ();
                 setType (ins);
@@ -162,15 +172,21 @@ INT32 Usage()
 
 int main(int argc, char * argv[])
 {
+    g_msg.simStep ("INITIALIZE STATIC CODE PARSER");
+    // Initialize pin & symbol manager
+    if (PIN_Init(argc, argv)) return Usage();
+    PIN_InitSymbols();
+
 	const string ioPath = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend/"; //argv[argc-2];
 	trace_static = fopen((ioPath+"/static_trace.s").c_str(), "w");  
 	mem_trace    = fopen("/scratch/tracesim/specint2006/mem_trace.csv", "w");  
 	insAddrs     = fopen("/scratch/tracesim/specint2006/ins_addrs.csv", "w");  
     g_ins_list = new List<stInstruction*>;
+    string benchmark = KnobBenchName.Value ();
+    g_msg.simEvent (("BENCHMARK: " + benchmark).c_str ());
+    bench_addr_space = new benchAddrRangeParser (benchmark);
+    g_msg.simStep ("START OF CODE GENERATION");
 
-    // Initialize pin & symbol manager
-    if (PIN_Init(argc, argv)) return Usage();
-    PIN_InitSymbols();
 
     // Register ImageLoad to be called to instrument instructions
     IMG_AddInstrumentFunction(ImageLoad, 0);

@@ -80,8 +80,7 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, map<l
 				node->removeFromGraph ();
 				removedIntfNodeVector.push_back (node);
 				// if  (allIntfNodeMap.find (candidateNodeIt->first) != allIntfNodeMap.end ()) printf ("\n============================================\n");
-				#ifdef DEBUG_RA 
-                printf ("adding to ALL: %d\n",candidateNodeIt->first);
+				#ifdef DEBUG_RA printf ("adding to ALL: %d\n",candidateNodeIt->first);
 				#endif
 				allIntfNodeMap.insert (pair<long int,interfNode*>  (candidateNodeIt->first,candidateNodeIt->second));
 				locallIntfNodeMap.erase (candidateNodeIt);
@@ -132,8 +131,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, map<
 				interfNode* node = candidateNodeIt->second;
 				node->removeFromGraph ();
 				removedIntfNodeVector.push_back (node);
-				#ifdef DEBUG_RA 
-                printf ("adding to ALL: %d\n",candidateNodeIt->first); 
+				#ifdef DEBUG_RA printf ("adding to ALL: %d\n",candidateNodeIt->first); 
 				#endif
 				allIntfNodeMap.insert (pair<long int,interfNode*>  (candidateNodeIt->first,candidateNodeIt->second));
 				globalIntfNodeMap.erase (candidateNodeIt);

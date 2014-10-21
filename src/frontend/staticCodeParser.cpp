@@ -56,7 +56,7 @@ void staticCodeParser::parse () {
 		scanStatus = fscanf (_inFile, "%c", &insType);
 		if (insType == '{') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld\n", &bbAddr);
+			scanStatus = fscanf (_inFile, ",%lx\n", &bbAddr);
 			Assert (scanStatus != EOF);
 			makeNewBB (bbAddr);
 		} else if (insType == '}') {
@@ -64,29 +64,29 @@ void staticCodeParser::parse () {
 			scanStatus = fscanf (_inFile, "\n");
 		} else if (insType == 'H') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld\n", &insAddr);
+			scanStatus = fscanf (_inFile, ",%lx\n", &insAddr);
 			Assert (scanStatus != EOF);
 			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld,-brTaken-,%ld%s\n", &insAddr, &brDest, regs_dummy);
-			string registers (regs_dummy,100);
+			scanStatus = fscanf (_inFile, ",%lx,-brTaken-,%lx%s\n", &insAddr, &brDest, regs_dummy);
+			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
 			addToBB (insAddr, bbAddr, insType);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",-memAddr-,%ld,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
-			string registers (regs_dummy,100);
+			scanStatus = fscanf (_inFile, ",-memAddr-,%lx,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
+			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);
 			addToBB (insAddr, bbAddr, insType);
-		} else if (insType == 'o' || insType == 'n') {
+		} else if (insType == 'o' || insType == 'n' || insType == 's') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%ld%s\n", &insAddr, regs_dummy);
-			string registers (regs_dummy,100);
+			scanStatus = fscanf (_inFile, ",%lx%s\n", &insAddr, regs_dummy);
+			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
 			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
             getRegisters (insAddr, registers);

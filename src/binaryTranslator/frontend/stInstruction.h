@@ -8,7 +8,7 @@
 #include <string.h>
 #include <string>
 
-typedef enum {none, REG_READ, REG_WRITE} TYPE;
+typedef enum {NO_REG, REG_READ, REG_WRITE} TYPE;
 typedef long long unsigned int ADDRS;
 
 class stInstruction {
