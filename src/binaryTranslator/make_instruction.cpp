@@ -19,7 +19,7 @@ void parseRegisters (instruction* newIns, FILE* input_assembly) {
 		if (regCode != INVALID_REG) {
 			newIns->setRegister (&regCode, &read_write);
 		}
-		// printf ("debug: %d, %d, %s\n", read_write, regCode, reg);
+//        printf ("debug: %d, %d, %s\n", read_write, regCode, reg);
 	}
 	delete RF;
 }
@@ -34,7 +34,8 @@ void parse_instruction (List<instruction*> *insList,
 			   		map<ADDR,set<ADDR> > &memWrAddrMap,
 			   		std::string *program_name) {
 	char c[INS_STRING_SIZE], ins[INS_STRING_SIZE];
-	ADDR insAddr, brDst;
+	ADDR insAddr, insFallThru, insDst, brDst;
+	bool hasFallThru, hasDst;
 	FILE * input_assembly;
 	 dependencyTable* depTables = new dependencyTable; /* DISABLED */
 	// if ((input_assembly = fopen (input_asm_file, "r")) == NULL) {
@@ -98,18 +99,18 @@ void parse_instruction (List<instruction*> *insList,
 	// 		Assert ("Invalid memory address access type.");
 	// 	}
 	// }
-	//Parse assembly instructions
+
+	/* PARSE ASSEMBLY INSTRUCTIONS */
 	while (1) {
-		// printf ("---\n");
 		instruction *newIns = new instruction;
 		while (1) {
 			if (fgets (c, OPCODE_STRING_SIZE, input_assembly) == NULL) break;
 			// printf ("debug: insType: %s\n", c);
-			if (c[0] == 'j'  || c[0] == 'b'|| c[0] == 'c' || c[0] == 'r'  || c[0] == 'o'|| c[0] == 'n') {
-				//Find instruction type
-				newIns->setType (c[0]);				
+			if (c[0] == 'j'  || c[0] == 'b'|| c[0] == 'c' || c[0] == 'r'  || c[0] == 'o'|| c[0] == 'n' || c[0] == 's') {
+				/* SET INSTRUCTION TYPE */
+				newIns->setType (c[0]);
 			} else if (c[0] == 'R' || c[0] == 'W') {
-				//Find if instruction is a memory op
+				/* SET IF INSTRUCTION IS A MEMORY OP */
 				int memAccessSize = -1;
 				if (c[0] == 'W') newIns->setWrMemType ();
 				else if (c[0] == 'R') newIns->setRdMemType ();
@@ -117,34 +118,51 @@ void parse_instruction (List<instruction*> *insList,
 				newIns->setMemAccessSize (memAccessSize);
 				newIns->setType ('M');//TODO: must not set if already set
 			} else if (c[0] == '#') {
-				//Set the instruction opcode mnemonic
+				/* SET THE INSTRUCTION OPCODE MNEMONIC */
 				newIns->setOpCode (c);
 				break;
 			} else {
-				Assert ("Instruction Type was not recognized.");
+				Assert (0 && "Instruction Type was not recognized.");
 			}
 		}
-		//Set instruction disassembled code
+
+		/* SET INSTRUCTION DISASSEMBLED CODE */
 		if (fgets (ins, INS_STRING_SIZE, input_assembly) == NULL) break;
 		newIns->setInsAsm (ins);
 		// printf ("debug: ASM: %s\n", ins);
-		//Set instruction address
+
+		/* SET INSTRUCTION ADDRESS */
 		if (fscanf (input_assembly, "%llx\n", &insAddr) == EOF) break;
 		newIns->setInsAddr (insAddr);
 		// printf ("debug: insAddr = %llx\n", insAddr);
-		//Setup instruction branch destination/bias/accuracy information
-		if (newIns->getType () == 'j'  || newIns->getType () == 'b'|| newIns->getType () == 'c') {
-			if (fscanf (input_assembly, "%llx\n", &brDst) == EOF) break;
-			newIns->setBrDst (brDst);
-			brDstSet->insert (brDst);
-			//Setup branch prediction accuracy information
+
+        /* SET INSTRUCTION FALL-THROUGH */
+        insFallThru = 0;
+		if (fscanf (input_assembly, "%d\n", &hasFallThru) == EOF) break;
+		if (hasFallThru) {if (fscanf (input_assembly, "%llx\n", &insFallThru) == EOF) break;}
+		newIns->setInsFallThru (insFallThru, hasFallThru);
+
+        /* SET INSTRUCTION DESTIATION */
+        insDst = 0;
+		if (fscanf (input_assembly, "%d\n", &hasDst) == EOF) break;
+        if (hasDst) {if (fscanf (input_assembly, "%llx\n", &insDst) == EOF) break;}
+		newIns->setInsDst (insDst, hasDst);
+
+		/* SETUP INSTRUCTION BRANCH DESTINATION/BIAS/ACCURACY INFORMATION */
+		if (newIns->getType () == 'j' || newIns->getType () == 'b' || 
+            newIns->getType () == 'c' || newIns->getType () == 'r') {
+//			if (fscanf (input_assembly, "%llx\n", &brDst) == EOF) break;
+//			newIns->setBrDst (brDst);
+			brDstSet->insert (newIns->getInsDst ());
+			if (newIns->getType () == 'b') brDstSet->insert (newIns->getInsFallThru ());
+			//SETUP BRANCH PREDICTION ACCURACY INFORMATION
 			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
 				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
 				;// printf ("ERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
 				//exit (1);
 			}
-			//Setup branch bias information
+			//SETUP BRANCH BIAS INFORMATION
 			if (brBiasMap->find (insAddr) != brBiasMap->end ()) {
 				newIns->setBrTakenBias ((*brBiasMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
@@ -159,11 +177,13 @@ void parse_instruction (List<instruction*> *insList,
 				newIns->setWrAddrSet (memWrAddrMap[insAddr]);
 			}
 		}
-		//Set miss-rate if instruction is a UPLD
+
+		/* SET MISS-RATE IF INSTRUCTION IS A UPLD */
 		if (upldMap->find (insAddr) != upldMap->end () && newIns->isRdMemType () == true) {
 			newIns->setLdMissRate ((*upldMap)[insAddr]);
 		}
-		//Set instruction registers (read & write)
+
+		/* SET INSTRUCTION REGISTERS (READ & WRITE) */
 		parseRegisters (newIns, input_assembly);
 		// newIns->setOpCode (opCode); done somewhere else
 		insList->Append (newIns);

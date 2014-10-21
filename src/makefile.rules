@@ -130,15 +130,14 @@ $(OBJDIR)global/g_info$(OBJ_SUFFIX) \
 $(OBJDIR)global/g_variable$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/pars$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/memlog$(OBJ_SUFFIX) \
-$(OBJDIR)frontend/tournament$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/uOpGen$(OBJ_SUFFIX) \
-$(OBJDIR)frontend/sat_counter$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/staticCodeParser$(OBJ_SUFFIX) \
 $(OBJDIR)lib/utility$(OBJ_SUFFIX) \
 $(OBJDIR)lib/message$(OBJ_SUFFIX) \
 $(OBJDIR)lib/statistic$(OBJ_SUFFIX) \
 $(OBJDIR)lib/timer$(OBJ_SUFFIX) \
 $(OBJDIR)lib/debug$(OBJ_SUFFIX) \
+$(OBJDIR)lib/bp_lib/sat_counter$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/instruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/cache$(OBJ_SUFFIX) \
@@ -163,6 +162,8 @@ $(OBJDIR)backend/binarySearch$(OBJ_SUFFIX) \
 $(OBJDIR)backend/heapTree$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unique$(OBJ_SUFFIX) \
 $(OBJDIR)backend/basicblock$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bp/tournament$(OBJ_SUFFIX) \
+$(OBJDIR)backend/bp/hybrid_skew$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/registerFile$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/rfManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/memory$(OBJ_SUFFIX) \

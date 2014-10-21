@@ -24,86 +24,90 @@ class dependencyTable; /*used in another version of C compiler*/
 
 class instruction {
 	public:
-		instruction();
-		~instruction();
+		instruction ();
+		~instruction ();
 
-		void setOpCode(const char *);
-		void setInsAddr(ADDR);
-		void setBrDst(ADDR);
-		void setInsAsm(const char *);
-		void setType(const char);
-		void setBrTakenBias(double brBias);
-		void setBPaccuracy(double bpAccuracy);
-		void setLdMissRate(double missRate);
-		void setRegister(long int *r, int *rt);
-		void setReadVar(int var, int subscript);
-		void setWriteVar(int var, int subscript);
-		void setArchReg(long int r);
-		void setWrMemType();
-		void setRdMemType();
-		void setMemAccessSize(int memSize); //in bytes
+		void setOpCode (const char *);
+		void setInsAddr (ADDR);
+		void setInsDst (ADDR, bool);
+		void setInsFallThru (ADDR, bool);
+		void setInsAsm (const char *);
+		void setType (const char);
+		void setBrTakenBias (double brBias);
+		void setBPaccuracy (double bpAccuracy);
+		void setLdMissRate (double missRate);
+		void setRegister (long int *r, int *rt);
+		void setReadVar (int var, int subscript);
+		void setWriteVar (int var, int subscript);
+		void setArchReg (long int r);
+		void setWrMemType ();
+		void setRdMemType ();
+		void setMemAccessSize (int memSize); //in bytes
 
-		const char *getOpCode();
-		ADDR getInsAddr();
-		ADDR getBrDst();
-		const char *getInsAsm();
-		const char getType();
-		double getBrTakenBias();
-		double getBPaccuracy();
-		double getLdMissRate();
-		int getLatency();
-		int getNthRegType(int i);
-		long int getNthReg(int i);
-		long int getNthArchReg(int indx);
-		long int getNthOldWriteReg(int i);
-		long int getNthReadReg(int i);
-		long int getNthWriteReg(int i);
-		void removeNthRegister(int i);
-		int getNumReg();
-		int getNumReadReg();
-		int getNumWriteReg();
-		long int getReadRegSubscript(long int var);
-		long int getWriteRegSubscript(long int var);
-		void makeUniqueRegs();
-		string getRegisterStr(); //legacy code
-		string getArchRegisterStr();
-		int getMemAccessSize(); //in bytes
-		bool isRdMemType();
-		bool isWrMemType();
+		const char *getOpCode ();
+		ADDR getInsAddr ();
+		ADDR getInsDst ();
+		ADDR getInsFallThru ();
+		const char *getInsAsm ();
+		const char getType ();
+		double getBrTakenBias ();
+		double getBPaccuracy ();
+		double getLdMissRate ();
+		int getLatency ();
+		int getNthRegType (int i);
+		long int getNthReg (int i);
+		long int getNthArchReg (int indx);
+		long int getNthOldWriteReg (int i);
+		long int getNthReadReg (int i);
+		long int getNthWriteReg (int i);
+		void removeNthRegister (int i);
+		int getNumReg ();
+		int getNumReadReg ();
+		int getNumWriteReg ();
+		long int getReadRegSubscript (long int var);
+		long int getWriteRegSubscript (long int var);
+		void makeUniqueRegs ();
+		string getRegisterStr (); //legacy code
+		string getArchRegisterStr ();
+		int getMemAccessSize (); //in bytes
+		bool isRdMemType ();
+		bool isWrMemType ();
+		bool hasDst ();
+		bool hasFallThru ();
 		
 		/* Dependency checking methods */
-		List<instruction*>* getDependents();
-		List<instruction*>* getAncestors();
-		List<instruction*>* getRegAncestors();
-		void setAsDependent(instruction* ins);
-		void setAsAncestor(instruction* ins);
-		void setAsRegAncestor(instruction* ins);
-		void dependencyTableCheck(dependencyTable *depTables);
-		bool isInsRepeated(instruction* ins, List<instruction*>*ancestors);
-		void setRdAddrSet(set<ADDR> &addrSet);
-		void setWrAddrSet(set<ADDR> &addrSet);
-		int getNumAncestors();
-		int getNumDependents();
+		List<instruction*>* getDependents ();
+		List<instruction*>* getAncestors ();
+		List<instruction*>* getRegAncestors ();
+		void setAsDependent (instruction* ins);
+		void setAsAncestor (instruction* ins);
+		void setAsRegAncestor (instruction* ins);
+		void dependencyTableCheck (dependencyTable *depTables);
+		bool isInsRepeated (instruction* ins, List<instruction*>*ancestors);
+		void setRdAddrSet (set<ADDR> &addrSet);
+		void setWrAddrSet (set<ADDR> &addrSet);
+		int getNumAncestors ();
+		int getNumDependents ();
 
 		/* Register Renaming */
-	    void renameWriteReg(int indx, long int reg);                                                                                                                       
-	    void renameReadReg(int indx, long int renReg);                                                                                                           
-	    long int getRenamedReg(long int reg);                                                                                                                    
-	    bool isRepeated(instruction* temp, List<instruction*>*ancestors);                                                                                        
+	    void renameWriteReg (int indx, long int reg);                                                                                                                       
+	    void renameReadReg (int indx, long int renReg);                                                                                                           
+	    long int getRenamedReg (long int reg);                                                                                                                    
+	    bool isRepeated (instruction* temp, List<instruction*>*ancestors);                                                                                        
 		
 		/* BB/PB Related */
-		bool isLongestPathSet();
-		int getLongestPath();
-		void resetLongestPath();
-		void setLongestPath(int longestPath);
+		bool isLongestPathSet ();
+		int getLongestPath ();
+		void resetLongestPath ();
+		void setLongestPath (int longestPath);
 		void setMy_BBorPB_id (ADDR id);
-		ADDR getMy_BB_id();
-		set<ADDR> getMy_PB_id();
-		ADDR getMy_first_PB_id();
+		ADDR getMy_BB_id ();
+		set<ADDR> getMy_PB_id ();
+		ADDR getMy_first_PB_id ();
 		
 		/* Reg Allocation */
-		void allocatedRegister(long int r_allocated, regKind rk);
-		bool isAlreadyAssignedArcRegs();
+		void allocatedRegister (long int r_allocated, regKind rk);
+		bool isAlreadyAssignedArcRegs ();
 		
 
 	private:
@@ -127,10 +131,13 @@ class instruction {
         set<ADDR> _memWrAddr;
 		set<ADDR> _myBBs;
 		ADDR _insAddr;
-		ADDR _brDst;
+		ADDR _insDst;
+		ADDR _insFallThru;
 		int _latency;
 		int _memSize;
 		int _longestPath;
+		bool _hasDst;
+		bool _hasFallThru;
 		bool _memRead;
 		bool _memWrite;
 		char _insType;

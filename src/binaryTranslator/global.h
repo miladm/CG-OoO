@@ -6,7 +6,7 @@
 
 #include <map>
 
-typedef long unsigned ADDR;
+typedef long long unsigned int ADDR;
 typedef enum {none, READ, WRITE} memType;
 typedef enum {noType, ALU, MEM, FPU, BR} type;
 typedef enum {LRF, GRF} regKind;

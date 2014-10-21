@@ -39,8 +39,8 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
 					Assert (true == false && "ERROR: A memory operation is either read or write");
 				}
 			} else if (ins->getType () == 'j' || ins->getType () == 'c' || ins->getType () == 'b' || ins->getType () == 'r') {
-				fprintf (outFile, "%c,%lx,-brTaken-,%lx,%s", ins->getType (), ins->getInsAddr (), ins->getBrDst (), ins->getArchRegisterStr ().c_str ());
-			} else if (ins->getType () == 'o' || ins->getType () == 'n') { /*-- A, D, F, N for ins->getType () --*/
+				fprintf (outFile, "%c,%lx,-brTaken-,%lx,%s", ins->getType (), ins->getInsAddr (), ins->getInsDst (), ins->getArchRegisterStr ().c_str ());
+			} else if (ins->getType () == 'o' || ins->getType () == 'n' || ins->getType () == 's') { /*-- A, D, F, N for ins->getType () --*/
 				fprintf (outFile, "%c,%lx,%s", ins->getType (), ins->getInsAddr (), ins->getArchRegisterStr ().c_str ());
 			} else {
 				Assert (true == false && "Unrecognized instruction type");

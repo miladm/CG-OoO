@@ -179,13 +179,18 @@ ADDR basicblock::getID () {
 	return bbID;
 }
 
+ADDR basicblock::getLastInsFallThru () {
+	Assert (_insList->NumElements () > 0 && "BB size is zero.");
+	return _insList->Last()->getInsFallThru ();
+}
+
 ADDR basicblock::getLastInsDst () {
-	Assert (_insList->NumElements ()> 0 && "BB size is zero.");
-	return _insList->Nth (_insList->NumElements ()-1)->getBrDst ();
+	Assert (_insList->NumElements () > 0 && "BB size is zero.");
+	return _insList->Last()->getInsDst ();
 }
 
 instruction* basicblock::getLastIns () {
-	Assert (_insList->NumElements ()> 0 && "BB size is zero.");
+	Assert (_insList->NumElements () > 0 && "BB size is zero.");
 	return _insList->Nth (_insList->NumElements ()-1);
 }
 

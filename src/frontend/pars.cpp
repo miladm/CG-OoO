@@ -8,10 +8,9 @@
 
 #include "pars.h"
 #include "../global/g_info.h"
-#include "tournament.hh"
-#include "lib/bp_lib/types.hh"
-#include "lib/bp_lib/intmath.hh"
-#include "tournament.hh"
+#include "../backend/bp/tournament.h"
+#include <bp_lib/types.hh>
+#include <bp_lib/intmath.hh>
 #include "utilities.h"
 //#include "../config.h"
 
@@ -727,20 +726,19 @@ VOID pin__instruction (TRACE trace, VOID * val)
                    }
                    */
 
-//                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) { //TODO put it back
-                if (INS_IsBranchOrCall (ins)) {
+                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
-//                    if (INS_HasFallThrough (ins)) { //TODO put it back
-//                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
-//                                IARG_UINT32, uid,
-//                                IARG_CONTEXT,
-//                                IARG_BRANCH_TAKEN,
-//                                IARG_BRANCH_TARGET_ADDR, 
-//                                IARG_FALLTHROUGH_ADDR,
-//                                IARG_ADDRINT, INS_Address (ins),
-//                                IARG_BOOL, INS_HasFallThrough (ins),
-//                                IARG_END);
-//                    }
+                    if (INS_HasFallThrough (ins)) {
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
+                                IARG_UINT32, uid,
+                                IARG_CONTEXT,
+                                IARG_BRANCH_TAKEN,
+                                IARG_BRANCH_TARGET_ADDR, 
+                                IARG_FALLTHROUGH_ADDR,
+                                IARG_ADDRINT, INS_Address (ins),
+                                IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_END);
+                    }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
                             IARG_CONTEXT,

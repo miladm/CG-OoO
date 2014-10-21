@@ -4,7 +4,7 @@
  ******************************************************************************/
 #include "bkEnd.h"
 #include "parser.h"
-#include "../frontend/tournament.hh"
+#include "bp/tournament.h"
 #include "dependencyTable.h"
 #include "../global/global.h"
 

@@ -18,7 +18,7 @@
 #include "registerRename.h"
 #include "vliwScheduler.h"
 #include "instruction.h"
-#include "../frontend/tournament.hh"
+#include "bp/tournament.h"
 #include "cacheLine.h"
 #include "cacheCtrl.h"
 #include "quickSort.h"

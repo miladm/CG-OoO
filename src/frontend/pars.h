@@ -21,7 +21,7 @@
 #include "pin.H"
 #include "pin_isa.H"
 #include "instlib.H"
-#include "lib/bp_lib/types.hh"
+#include <bp_lib/types.hh>
 
 #include "../lib/utility.h"
 //#include "../lib/debug.h"

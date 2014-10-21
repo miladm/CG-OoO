@@ -125,7 +125,7 @@ void o3_commit::bpMispredSquash () {
         Assert (ins->getPipeStage () != EXECUTE);
         if (ins->getInsID () == squashSeqNum) {
             start_indx = i;
-            Assert (ins->isOnWrongPath () == true);
+//            Assert (ins->isOnWrongPath () == true);
         } else if (ins->getInsID () > squashSeqNum) {
             if (!ins->isMemOrBrViolation ()) {
                 stop_indx = i - 1;

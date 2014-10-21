@@ -40,9 +40,9 @@
  * Authors: Kevin Lim
  */
 
-#include "lib/bp_lib/types.hh"
-#include "lib/bp_lib/intmath.hh"
-#include "tournament.hh"
+#include "tournament.h"
+#include <bp_lib/types.hh>
+#include <bp_lib/intmath.hh>
 #include <cassert>
 #include <stdio.h>
 

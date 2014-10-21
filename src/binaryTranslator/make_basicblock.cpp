@@ -102,7 +102,7 @@ void make_basicblock  (List<instruction*> *insList,
 		Assert (bb->getBbSize () > 0 && "Invalid BB Size.");
 		instruction* ins = bb->getLastIns ();
 		char type = ins->getType ();
-		if  (type == 'j') { //unconditional jump 
+		if  (type == 'j' || type == 'c' || type == 'r') { //unconditional jump 
 			ADDR insDst = bb->getLastInsDst ();
 			basicblock* bbDst;
 			if  (bbMap->find (insDst) != bbMap->end ()) {
@@ -115,15 +115,30 @@ void make_basicblock  (List<instruction*> *insList,
 				continue;
 			}
 		} else if  (type == 'n' || type == 'o' || type == 'M') { //non-jump
-			if  (i+1 < bbList->NumElements ()) {				
-				bb->setDescendent (bbList->Nth (i+1));
-				bb->setFallThrough (bbList->Nth (i+1));
+			ADDR insFallThru = bb->getLastInsFallThru ();
+			basicblock* bbFallThru;
+			if  (bbMap->find (insFallThru) != bbMap->end ()) {
+				bbFallThru =  (*bbMap)[insFallThru];
+				bb->setDescendent (bbFallThru);
+				bb->setFallThrough (bbFallThru);
+			} else {
+				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				//exit (1);
+				continue;
 			}
 		} else if  (type == 'b') { //conditional jump
-			if  (i+1 < bbList->NumElements ()) {
-				bb->setDescendent (bbList->Nth (i+1));
-				bb->setFallThrough (bbList->Nth (i+1));
+			ADDR insFallThru = bb->getLastInsFallThru ();
+			basicblock* bbFallThru;
+			if  (bbMap->find (insFallThru) != bbMap->end ()) {
+				bbFallThru =  (*bbMap)[insFallThru];
+				bb->setDescendent (bbFallThru);
+				bb->setFallThrough (bbFallThru);
+			} else {
+				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				//exit (1);
+				continue;
 			}
+
 			ADDR insDst = bb->getLastInsDst ();
 			basicblock* bbDst;
 			if  (bbMap->find (insDst) != bbMap->end ()) {
@@ -135,22 +150,24 @@ void make_basicblock  (List<instruction*> *insList,
 				//exit (1);
 				continue;
 			}
-		} else if  (type == 'c') { //func call
-			// Assumptions on function calls 
-			// Call does not terminate BB's
-			// The CFG links to function called is not established
-			// Call does not disturb the CFG flow and dependency b/w BB's
-			if  (i+1 < bbList->NumElements ()) {				
-				bb->setDescendent (bbList->Nth (i+1));
-				bb->setFallThrough (bbList->Nth (i+1));
-			}
-		} else if  (type == 'r') { //func return
-			;//do nothing on return. must have been the end of function
+//		} else if  (type == 'c') { //func call - TODO this block should be useless - check and remove if possible
+//			// Assumptions on function calls 
+//			// Call does not terminate BB's
+//			// The CFG links to function called is not established
+//			// Call does not disturb the CFG flow and dependency b/w BB's
+//			if  (i+1 < bbList->NumElements ()) {				
+//				bb->setDescendent (bbList->Nth (i+1));
+//				bb->setFallThrough (bbList->Nth (i+1));
+//			}
+		} else if  (type == 's') { //syscall
+			;//do nothing on syscall - no fthru, no destination
 		} else {
 			printf ("Wrong Ins Type: %c\n", type);
-			Assert  (true == false && "WRONG INSTRUTION. Terminating...");
+			Assert  (0 && "WRONG INSTRUTION. Terminating...");
 		}
-	}	
+	}
+    if (bbMap->find (0x400532) != bbMap->end ()) cout << "400532 is there" << endl;
+    if (bbMap->find (0x400556) != bbMap->end ()) cout << "400556 is there" << endl;
 	// PERFORM LIST SCHEDULING ON BB
     if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
         

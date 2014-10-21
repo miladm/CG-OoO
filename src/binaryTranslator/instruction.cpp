@@ -10,8 +10,9 @@
 long int nextRenReg = INIT_RENAME_REG_NUM;
 
 instruction::instruction () {
-	_brDst = -1;
 	_insAddr = -1;
+	_insDst = -1;
+	_insFallThru= -1;
 	_memSize = 0;
 	_memWrite = false;
 	_memRead = false;
@@ -22,6 +23,8 @@ instruction::instruction () {
 	_missRate = 0.0;
 	_longestPath = -1;
     _mem_sch_mode = STORE_ORDER;
+    _hasFallThru = false;
+    _hasDst = false;
 
     /*-- OBJ INSTANTIATIONS --*/
 	_r_read  = new List<long int>;
@@ -56,16 +59,27 @@ void instruction::setInsAddr (ADDR insAddr) {
 	_insAddr = insAddr;
 }
 
-void instruction::setBrDst (ADDR brDst) {
-	Assert (brDst >= 0 && "brDst must be larger than zero.");
-	_brDst = brDst;
+void instruction::setInsFallThru (ADDR insFallThru, bool hasFallThru) {
+	_hasFallThru = hasFallThru;
+    if (_hasFallThru) {
+	    Assert (insFallThru > 0 && "insFallThru must be larger than zero.");
+        _insFallThru = insFallThru;
+    }
+}
+
+void instruction::setInsDst (ADDR insDst, bool hasDst) {
+	_hasDst = hasDst;
+    if (_hasDst) {
+	    Assert (insDst > 0 && "insDst must be larger than zero.");
+        _insDst = insDst;
+    }
 }
 
 void instruction::setInsAsm (const char *command) {strcpy (_command, command);}
 
 void instruction::setType (const char insType) {
 	Assert ((insType == 'j' || insType == 'o' || insType == 'n' || insType == 'c' || 
-	        insType == 'r' || insType == 'b' || insType == 'M') && "insType value is not recognized.");
+	         insType == 'r' || insType == 'b' || insType == 'M' || insType == 's') && "insType value is not recognized.");
 	if (_insType != 'x') return; //Do not set type more than once
 	Assert (_latency == -1 && "Invalid latency value detected.");
 	_insType = insType;
@@ -73,7 +87,7 @@ void instruction::setType (const char insType) {
 		_brBias = 0.5;
 		_bpAccuracy = 0.5;
 		_latency = BR_LATENCY;
-	} else if (getType ()  == 'c' || getType ()  == 'j') {
+	} else if (getType ()  == 'c' || getType ()  == 'j' || getType ()  == 's') {
 		_brBias = 1.0;
 		_bpAccuracy = 1.0;
 		_latency = ALU_LATENCY;
@@ -111,16 +125,41 @@ ADDR instruction::getInsAddr () {
 	return _insAddr;
 }
 
-ADDR instruction::getBrDst () {
-	//Assert (_brDst >= 0 && "brDst must be larger than zero.");
-	return _brDst;
+ADDR instruction::getInsDst () {
+	Assert (_insDst > 0 && "insDst must be larger than zero.");
+	return _insDst;
+}
+
+ADDR instruction::getInsFallThru () {
+	Assert (_insFallThru > 0 && "insFallThru must be larger than zero.");
+	return _insFallThru;
+}
+
+bool instruction::hasDst () {
+    if ((getType () == 'c' || getType () == 'r' || 
+         getType () == 'j' || getType () == 'b') && !_hasDst) 
+        Assert (0 && "a destination must have existed");
+    if ((getType () == 's' || getType () == 'o' || 
+         getType () == 'n') && _hasDst) 
+        Assert (0 && "a destination must not have existed");
+	return _hasDst;
+}
+
+bool instruction::hasFallThru () {
+    if ((getType () == 'o' || getType () == 'n' || 
+         getType () == 'b') && !_hasFallThru) 
+        Assert (0 && "a fall-through must have existed");
+    if ((getType () == 's' || getType () == 'r' || 
+         getType () == 'j' || getType () == 'c') && _hasFallThru) 
+        Assert (0 && "a fall-through must not have existed");
+	return _hasFallThru;
 }
 
 const char *instruction::getInsAsm () {return _command;}
 
 const char instruction::getType () {
 	Assert ((_insType == 'j' || _insType == 'o' || _insType == 'n' || _insType == 'c' || 
-	        _insType == 'r' || _insType == 'b' || _insType == 'M') && "insType value is invalid.");
+	         _insType == 'r' || _insType == 'b' || _insType == 'M' || _insType == 's') && "insType value is invalid.");
 	return _insType;
 }
 

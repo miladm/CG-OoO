@@ -36,6 +36,8 @@ VOID setTarget (INS ins) {
         prv_ins->_destination = INS_Address (ins);
         prv_ins->_has_destination = true;
     }
+
+    // Not sure if I should add the following check to the above line - TODO for later
     if (prv_ins->_type == 'b' && prv_ins->_has_destination == false) {
         cout << prv_ins->_disassemble << endl;
         Assert (0 && "this feature is not supported");
@@ -90,7 +92,7 @@ VOID setReg (INS ins) {
 			st_ins->_regs.Append (REG_StringShort(INS_RegW(ins,i)));
 			st_ins->_reg_types.Append (REG_WRITE);
 		}
-	}		
+	}
 }
 
 void dumpIns () {
