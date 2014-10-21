@@ -16,13 +16,14 @@ void stInstruction::dump () {
     fprintf(_trace_static, "%c\n", _type);
     if (_type == 'R') fprintf(_trace_static, "%d\n", _mem_r_size); //SIZE IN BYTES
     else if (_type == 'W') fprintf(_trace_static, "%d\n", _mem_w_size); //SIZE IN BYTES
+
     fprintf(_trace_static, "#%s\n", _mnemonic.c_str());
     fprintf(_trace_static, "%s\n", _disassemble.c_str());
-    fprintf(_trace_static, "%lx\n", _addr);
 
-    if (_has_fall_through) fprintf(_trace_static, "1\n%lx\n", _fall_through);
+    fprintf(_trace_static, "%llx\n", _addr);
+    if (_has_fall_through) fprintf(_trace_static, "1\n%llx\n", _fall_through);
     else fprintf(_trace_static, "0\n");
-    if (_has_destination) fprintf(_trace_static, "1\n%lx\n", _destination);
+    if (_has_destination) fprintf(_trace_static, "1\n%llx\n", _destination);
     else fprintf(_trace_static, "0\n");
 
     // UINT32 operandCount = INS_MaxNumRRegs(ins)+INS_MaxNumWRegs(ins);

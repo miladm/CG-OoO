@@ -14,13 +14,6 @@ FILE* insAddrs;
 
 List<stInstruction*>* g_ins_list;
 
-/*
- * Analysis routines
- */
-VOID trace_info(ADDRINT ins_addr) {
-    fprintf(trace_static, "%lld\n", ins_addr);  
-}
-
 VOID setTarget (INS ins) {
     if (g_ins_list->NumElements () != 2) return;
     stInstruction* cur_ins = g_ins_list->Nth (1);
