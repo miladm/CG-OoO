@@ -9,7 +9,7 @@ using namespace std;
 config::config () {
 	Assert (false && "This constructor is unsupported - config ()");
 	_core_type = OUT_OF_ORDER;
-	_branch_mode = dynPredBr;
+	_bp_type = PERFECT_BP;
 	_mem_model = TOTAL_ORDER;
 	//rrMode _reg_ren_mode = RR_ACTIVE; TODO put this line back
 }
@@ -91,7 +91,7 @@ config::config (string bench_path, string config_path) {
 	#ifdef ASSERTION
 	Assert (strcmp (_param,"CORE_TYPE") == 0 && "Wrong Parameter parsed.");
 	#endif
-	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_branch_mode);
+	fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_bp_type);
 	#ifdef ASSERTION
 	Assert (strcmp (_param,"BRANCH_PRED_MODE") == 0 && "Wrong Parameter parsed.");
 	#endif
@@ -369,6 +369,8 @@ REG_ALLOC_MODE config::getRegAllocMode  () { return _reg_alloc_mode; }
 CORE_TYPE config::getCoreType () {return _core_type;}
 
 MEM_MODEL config::getMemModel () {return _mem_model;}
+
+BP_TYPE config::getBPtype () {return _bp_type;}
 
 float config::getMaxInsCnt () {return _max_ins_cnt;}
 

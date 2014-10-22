@@ -166,7 +166,7 @@ HybridBPskew::BTBUpdate(Addr &branch_addr, void * &bp_history)
 }
 
 bool
-HybridBPskew::gSkewPredict(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup, bool onDemand, bool &choice, BPHistory *history)
+HybridBPskew::gSkewPredict(Addr& branch_addr, void*& bp_history, unsigned positionInFetchGroup, BPHistory* history)
 {
     unsigned local_predictor_idx;
     unsigned global0_predictor_idx, global1_predictor_idx;
@@ -206,7 +206,7 @@ HybridBPskew::gSkewPredict(Addr &branch_addr, void * &bp_history, unsigned posit
 }
 
 bool
-HybridBPskew::lookup(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup, bool onDemand, bool &choice, bool onlyLP)
+HybridBPskew::lookup(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup)
 {
     unsigned local_predictor_idx;
     unsigned choice_predictor_idx;
@@ -222,14 +222,10 @@ HybridBPskew::lookup(Addr &branch_addr, void * &bp_history, unsigned positionInF
     local_prediction = localCtrs[local_predictor_idx].read() > threshold;
 
     //Lookup in the global predictor to get its branch prediction
-    global_prediction = gSkewPredict(branch_addr, bp_history, positionInFetchGroup, onDemand, choice, history);
+    global_prediction = gSkewPredict(branch_addr, bp_history, positionInFetchGroup, history);
 
     //Lookup in the choice predictor to see which one to use
     choice_predictor_idx = computeChoiceIndex(branch_addr, positionInFetchGroup);
-    if (onlyLP) {
-        choiceCtrs[choice_predictor_idx].decrement();
-        choiceCtrs[choice_predictor_idx].decrement();
-    }
     choice_prediction = choiceCtrs[choice_predictor_idx].read() > threshold;
 
     // Create BPHistory and pass it back to be recorded.
@@ -273,7 +269,6 @@ HybridBPskew::lookup(Addr &branch_addr, void * &bp_history, unsigned positionInF
   //    updateGlobalHistNotTaken();
   //}
     /* testing if local predictor functions right */
-	choice = choice_prediction;
     return prediction;
 }
 
@@ -293,19 +288,6 @@ HybridBPskew::uncondBr(void * &bp_history)
     bp_history = static_cast<void *>(history);
 
     updateGlobalHistTaken();
-}
-
-void
-HybridBPskew::onDemandBr(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup)
-{
-  // Create BPHistory and pass it back to be recorded.
-  BPHistory *history = new BPHistory;
-  history->globalHistory = globalHistory;
-  history->choicePredictorIdx = invalidPredictorIndex; //computeChoiceIndex(branch_addr, positionInFetchGroup);
-  history->globalPredictorIdx0 = invalidPredictorIndex; //computeGlobalIndex0(branch_addr, positionInFetchGroup);
-  history->globalPredictorIdx1 = invalidPredictorIndex; //computeGlobalIndex1(branch_addr, positionInFetchGroup);
-  history->localPredictorIdx  = invalidPredictorIndex; //computeLocalIndex(branch_addr, positionInFetchGroup);
-  bp_history = static_cast<void *>(history);
 }
 
 void

@@ -35,7 +35,8 @@ typedef enum {noType, ALU, MEM, FPU, BR, ASSIGN, NOP, bbHEAD, NUM_INS_TYPE} type
 typedef enum {CALL, RET, DIR_BR, INDIR_BR, JMP} brType; typedef brType BR_TYPE; //TODO clean this up
 typedef enum {LOAD, STORE, NUM_MEM_TYPE} MEM_TYPE;
 typedef enum {none, READ, WRITE} memType; typedef memType AXES_TYPE; //TODO clean this up
-typedef enum {noBrMode, noBr, allBr, statPredBr, scheduleBr, lowBiasBr, dynPredBr} brMode;
+typedef enum {noBrMode, noBr, allBr, statPredBr, scheduleBr, lowBiasBr, dynPredBr} brMode; //TODO remove this
+typedef enum {PERFECT_BP, LOCAL_BP, GSHARE_BP, GSHARE_LOCAL_BP, BCG_SKEW_BP} BP_TYPE;
 typedef enum {NO_CORE, IN_ORDER, OUT_OF_ORDER, ONE_LEVEL_DEEP_DYN, X_LEVEL_DEEP_DYN, ONE_LEVE_DEEP_STAT, X_LEVE_DEEP_STAT, PHRASE, FRAGMENT, FRAGMENT2, DOT, STRAND, PHRASEBLOCK, BASICBLOCK} core; typedef core CORE_TYPE; //TODO clean this up
 typedef enum {PERFECT, TOTAL_ORDER, NAIVE_SPECUL, STORE_SET_SPECUL} memModel; typedef memModel MEM_MODEL; //TODO clean this up
 typedef enum {RR_ACTIVE, RR_INACTIVE} rrMode;

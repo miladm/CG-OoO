@@ -136,21 +136,15 @@ ADDR instruction::getInsFallThru () {
 }
 
 bool instruction::hasDst () {
-    if ((getType () == 'c' || getType () == 'r' || 
-         getType () == 'j' || getType () == 'b') && !_hasDst) 
-        Assert (0 && "a destination must have existed");
     if ((getType () == 's' || getType () == 'o' || 
-         getType () == 'n') && _hasDst) 
+         getType () == 'n' || getType () == 'r') && _hasDst) 
         Assert (0 && "a destination must not have existed");
 	return _hasDst;
 }
 
 bool instruction::hasFallThru () {
-    if ((getType () == 'o' || getType () == 'n' || 
-         getType () == 'b') && !_hasFallThru) 
-        Assert (0 && "a fall-through must have existed");
     if ((getType () == 's' || getType () == 'r' || 
-         getType () == 'j' || getType () == 'c') && _hasFallThru) 
+         getType () == 'j') && _hasFallThru) 
         Assert (0 && "a fall-through must not have existed");
 	return _hasFallThru;
 }

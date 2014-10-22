@@ -31,6 +31,7 @@ class config {
         REG_ALLOC_MODE getRegAllocMode ();
         CORE_TYPE getCoreType ();
         MEM_MODEL getMemModel ();
+        BP_TYPE getBPtype ();
         int getNumEu ();
         float getMaxInsCnt ();
         bool isEnSquash ();
@@ -67,7 +68,7 @@ class config {
 
 		//CPU Config
 		CORE_TYPE _core_type;
-		brMode _branch_mode;
+		BP_TYPE _bp_type;
 		MEM_MODEL _mem_model;
 		rrMode _reg_ren_mode;
 		int _num_mem_levels;

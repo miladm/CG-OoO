@@ -1,35 +1,5 @@
-/*
- * Copyright (c) 2004-2006 The Regents of The University of Michigan
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met: redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer;
- * redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution;
- * neither the name of the copyright holders nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * Authors: Kevin Lim
- */
-
-#ifndef __CPU_O3_HYBRID_SKEW_PRED_HH__
-#define __CPU_O3_HYBRID_SKEW_PRED_HH__
+#ifndef _H_HYBRID_SKEW_PRED_
+#define _H_HYBRID_SKEW_PRED_
 
 #include <vector>
 #include <math.h>
@@ -42,15 +12,6 @@
 #define HIST_SHFT_0 4
 #define HIST_SHFT_1 8
 
-/**
- * Implements a tournament branch predictor, hopefully identical to the one
- * used in the 21264.  It has a local predictor, which uses a local history
- * table to index into a table of counters, and a global predictor, which
- * uses a global history to index into a table of counters.  A choice
- * predictor chooses between the two.  Only the global history register
- * is speculatively updated, the rest are updated upon branches committing
- * or misspeculating.
- */
 class HybridBPskew
 {
   public:
@@ -94,7 +55,7 @@ class HybridBPskew
      * @param bp_history Pointer that will be set to the BPHistory object.
      * @return Whether or not the branch is taken.
      */
-    bool lookup(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup, bool onDemand, bool &choice, bool onlyLP);
+    bool lookup(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup);
 
     /**
      * Records that there was an unconditional branch, and modifies
@@ -103,10 +64,6 @@ class HybridBPskew
      * @param bp_history Pointer that will be set to the BPHistory object.
      */
     void uncondBr(void * &bp_history);
-
-    /* Records that there was a branch that was ondemand predicted
-       create a bp history for it */
-    void onDemandBr(Addr &branch_addr, void * &bp_history, unsigned positionInFetchGroup);
 
     /**
      * Updates the branch predictor to Not Taken if a BTB entry is
@@ -195,7 +152,7 @@ class HybridBPskew
 	/**
 	 * the gskre branch prediction unit
 	 */
-	bool gSkewPredict(Addr&, void*&, unsigned int, bool, bool&, BPHistory *history);
+	bool gSkewPredict(Addr&, void*&, unsigned, BPHistory*);
 
     /** Flag for invalid predictor index */
     static const int invalidPredictorIndex = -1;

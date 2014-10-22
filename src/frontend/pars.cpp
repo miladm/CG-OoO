@@ -40,7 +40,8 @@ unsigned char g_store_buffer[MAX_MEM_WRITE_LEN];
 map<unsigned,i_info> g_i_info;
 #endif
 clock_t start_pars, stop_pars;
-TournamentBP *g_predictor = NULL;
+TournamentBP *g_tournament_bp = NULL;
+HybridBPskew *g_2bcgskew_bp = NULL;
 PIN_SEMAPHORE semaphore0, semaphore1; // semaphore that serializes access to global vars
 void * rootThreadArg = (void *)0xABBA;
 PIN_THREAD_UID rootThreadUid;
@@ -124,8 +125,8 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
         g_var.g_wrong_path_count++;
         if (__is_call) g_var.g_context_call_depth++;
         if (g_var.g_debug_level & DBG_SPEC) cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
-        if ( (g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
-           ( (g_var.g_context_call_depth==0) && __is_ret) ||
+        if ((g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
+           ((g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
             if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
@@ -271,7 +272,14 @@ VOID pin__init (string bench_path, string config_path) {
 	PIN_SemaphoreInit (&semaphore1);
 	PIN_SemaphoreClear (&semaphore0);
 	PIN_SemaphoreClear (&semaphore1);
-    g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+    if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+    } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+        g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, g_cfg->getNumEu ());
+    } else {
+        Assert (0 && "Invalid BP type chosen");
+    }
+
     /* TODO take care of these cout's*/
 	g_msg.simStep ("PARS COMPILED CODE");
 	g_var.g_insList = new List<string*>;
@@ -338,7 +346,7 @@ VOID pin__doFinish () {
 	delete g_var.g_codeCache;
 	delete g_var.g_bbCache;
 	delete g_var.g_BBlist;
-	delete g_predictor;
+	delete g_tournament_bp;
 	delete g_staticCode;
     delete g_bbStat;
 
@@ -390,7 +398,7 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 
 	for (int i=len-1; i >= 0; i--) {
 		PIN_SafeCopy (&g_store_buffer[i], (ADDRINT*) (eaddr+i), sizeof (unsigned char));
-		//g_store_buffer[i] = * ( ( (unsigned char*)eaddr)+i);
+		//g_store_buffer[i] = * (((unsigned char*)eaddr)+i);
 		if (g_var.g_debug_level & DBG_WRITE_MEM) cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
@@ -410,7 +418,7 @@ void read_mem_new ()
 	if (g_var.g_debug_level & DBG_WRITE_MEM) cout << "  mem[" << hex << g_var.g_last_eaddr << " ] = ";
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
-		g_specmem[g_var.g_last_eaddr+i] = * ( ( (unsigned char*)g_last_eaddr)+i);
+		g_specmem[g_var.g_last_eaddr+i] = * (((unsigned char*)g_last_eaddr)+i);
 		if (g_var.g_debug_level & DBG_WRITE_MEM) cout << hex << (unsigned) g_specmem[g_var.g_last_eaddr+i] << " ";
 	}
 
@@ -438,7 +446,7 @@ void restore_mem_orig ()
 	}
 
 	for (int i=g_var.g_last_len-1; i >= 0; i--) {
-		* ( ( (unsigned char*)g_var.g_last_eaddr)+i) = g_store_buffer[i];
+		* (((unsigned char*)g_var.g_last_eaddr)+i) = g_store_buffer[i];
 		if (g_var.g_debug_level & DBG_RESTORE_MEM) cout << hex << (unsigned) g_store_buffer[i] << " ";
 	}
 
@@ -777,21 +785,35 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     bool taken = __taken;
     ADDRINT pc = __pc;
     void *bp_hist = NULL;
-    bool pred = g_predictor->lookup (pc, bp_hist);
+    bool pred = taken;
+
+    /*-- BP LOOKUP --*/
+    if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        pred = g_tournament_bp->lookup (pc, bp_hist);
+    } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+        pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
+    }
+
+    /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
-	if (!g_var.g_wrong_path) {
-   		if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : "; 
-		if (pred != taken) {
-		    if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
-			g_var.g_wrong_path = true;
-			//printf ("\nSTART OF WRONG PATH\n");
-			//fprintf (__outFile, "\nSTART OF WRONG PATH\n");
-		} else {
-		    if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
-		}
-		g_predictor->update (pc, taken, bp_hist, false);
-	} else {
+    if (!g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : "; 
+        if (pred != taken) {
+            if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
+            g_var.g_wrong_path = true;
+            //printf ("\nSTART OF WRONG PATH\n");
+            //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
+        } else {
+            if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
+        }
+        if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+            g_tournament_bp->update (pc, taken, bp_hist, false);
+        } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+            g_2bcgskew_bp->update (pc, taken, bp_hist, false);
+        }
+    } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
 	}
+
     return  pred ? tgt : fthru;
 }

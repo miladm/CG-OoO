@@ -9,7 +9,7 @@ CFG_PATH='/home/milad/esc_project/svn/PARS/src/config'
 CFG_FILE=$1
 PIN_PARAM=-separate_memory  #-pin_memory_range 0x80000000:0x90000000 -pause_tool 15 
 
-#$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/403.gcc -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/403.gcc/403.gcc  -c $BENCH_INPUT/403.gcc/test/input/cccp.i -o out.o
+$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/403.gcc -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/403.gcc/403.gcc  -c $BENCH_INPUT/403.gcc/test/input/cccp.i -o out.o
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/429.mcf -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/test/input/inp.in
 
@@ -17,7 +17,7 @@ PIN_PARAM=-separate_memory  #-pin_memory_range 0x80000000:0x90000000 -pause_tool
 
 # $PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/456.hmmer -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/456.hmmer/456.hmmer --fixed 0 --mean 325 --num 45000 --sd 200 --seed 0  $BENCH_INPUT/456.hmmer/test/input/bombesin.hmm
 
-$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/458.sjeng -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/458.sjeng/458.sjeng $BENCH_INPUT/458.sjeng/test/input/test.txt
+#$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/458.sjeng -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/458.sjeng/458.sjeng $BENCH_INPUT/458.sjeng/test/input/test.txt
 
 #$PIN_ROOT/pin $PIN_PARAM -t $PARS_ROOT/obj-intel64/main_pars.so -b $CFG_PATH/445.gobmk -c $CFG_PATH/$CFG_FILE -- $BENCH_EXEC/445.gobmk/445.gobmk --quiet --mode gtp < $BENCH_INPUT/445.gobmk/test/input/capture.tst
 

@@ -108,21 +108,25 @@ void make_basicblock  (List<instruction*> *insList,
 			ADDR insDst = bb->getLastInsDst ();
 			basicblock* bbDst;
 			if  (bbMap->find (insDst) != bbMap->end ()) {
-				bbDst =  (*bbMap)[insDst];
-				bb->setDescendent (bbDst);
-				bb->setTakenTarget (bbDst);
+                if (ins->hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb->setDescendent (bbDst);
+                    bb->setTakenTarget (bbDst);
+                }
 			} else {
 				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
-		} else if  (type == 'n' || type == 'o' || type == 'M' || type == 'c') {
+		} else if (type == 'n' || type == 'o' || type == 'M' || type == 'c') {
 			ADDR insFallThru = bb->getLastInsFallThru ();
 			basicblock* bbFallThru;
 			if  (bbMap->find (insFallThru) != bbMap->end ()) {
-				bbFallThru =  (*bbMap)[insFallThru];
-				bb->setDescendent (bbFallThru);
-				bb->setFallThrough (bbFallThru);
+                if (ins->hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb->setDescendent (bbFallThru);
+                    bb->setFallThrough (bbFallThru);
+                }
 			} else {
 				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
@@ -132,9 +136,11 @@ void make_basicblock  (List<instruction*> *insList,
 			ADDR insFallThru = bb->getLastInsFallThru ();
 			basicblock* bbFallThru;
 			if  (bbMap->find (insFallThru) != bbMap->end ()) {
-				bbFallThru =  (*bbMap)[insFallThru];
-				bb->setDescendent (bbFallThru);
-				bb->setFallThrough (bbFallThru);
+                if (ins->hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb->setDescendent (bbFallThru);
+                    bb->setFallThrough (bbFallThru);
+                }
 			} else {
 				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
@@ -144,9 +150,11 @@ void make_basicblock  (List<instruction*> *insList,
 			ADDR insDst = bb->getLastInsDst ();
 			basicblock* bbDst;
 			if  (bbMap->find (insDst) != bbMap->end ()) {
-				bbDst =  (*bbMap)[insDst];
-				bb->setDescendent (bbDst);
-				bb->setTakenTarget (bbDst);
+                if (ins->hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb->setDescendent (bbDst);
+                    bb->setTakenTarget (bbDst);
+                }
 			} else {
 				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);

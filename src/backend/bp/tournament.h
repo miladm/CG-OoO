@@ -65,7 +65,7 @@ class TournamentBP
     /**
      * Default branch predictor constructor.
      */
-    TournamentBP(unsigned localPredictorSize,
+    TournamentBP (unsigned localPredictorSize,
                  unsigned localCtrBits,
                  unsigned localHistoryTableSize,
                  unsigned localHistoryBits,
@@ -84,7 +84,7 @@ class TournamentBP
      * @param bp_history Pointer that will be set to the BPHistory object.
      * @return Whether or not the branch is taken.
      */
-    bool lookup(uint64_t &branch_addr, void * &bp_history);
+    bool lookup (uint64_t &branch_addr, void * &bp_history);
 
     /**
      * Records that there was an unconditional branch, and modifies
@@ -92,7 +92,7 @@ class TournamentBP
      * global history stored in it.
      * @param bp_history Pointer that will be set to the BPHistory object.
      */
-    void uncondBr(void * &bp_history);
+    void uncondBr (void * &bp_history);
     /**
      * Updates the branch predictor to Not Taken if a BTB entry is
      * invalid or not found.
@@ -100,7 +100,7 @@ class TournamentBP
      * @param bp_history Pointer to any bp history state.
      * @return Whether or not the branch is taken.
      */
-    void BTBUpdate(uint64_t &branch_addr, void * &bp_history);
+    void BTBUpdate (uint64_t &branch_addr, void * &bp_history);
     /**
      * Updates the branch predictor with the actual result of a branch.
      * @param branch_addr The address of the branch to update.
@@ -110,17 +110,17 @@ class TournamentBP
      * @param squashed is set when this function is called during a squash
      * operation.
      */
-    void update(uint64_t &branch_addr, bool taken, void *bp_history, bool squashed);
+    void update (uint64_t &branch_addr, bool taken, void *bp_history, bool squashed);
 
     /**
      * Restores the global branch history on a squash.
      * @param bp_history Pointer to the BPHistory object that has the
      * previous global branch history in it.
      */
-    void squash(void *bp_history);
+    void squash (void *bp_history);
 
     /** Returns the global history. */
-    inline unsigned readGlobalHist() { return globalHistory; }
+    inline unsigned readGlobalHist () { return globalHistory; }
 
   private:
     /**
@@ -128,33 +128,33 @@ class TournamentBP
      * value.
      * @param count The counter value.
      */
-    inline bool getPrediction(uint8_t &count);
+    inline bool getPrediction (uint8_t &count);
 
     /**
      * Returns the local history index, given a branch address.
      * @param branch_addr The branch's PC address.
      */
-    inline unsigned calcLocHistIdx(uint64_t &branch_addr);
+    inline unsigned calcLocHistIdx (uint64_t &branch_addr);
 
     /** Updates global history as taken. */
-    inline void updateGlobalHistTaken();
+    inline void updateGlobalHistTaken ();
 
     /** Updates global history as not taken. */
-    inline void updateGlobalHistNotTaken();
+    inline void updateGlobalHistNotTaken ();
 
     /**
      * Updates local histories as taken.
      * @param local_history_idx The local history table entry that
      * will be updated.
      */
-    inline void updateLocalHistTaken(unsigned local_history_idx);
+    inline void updateLocalHistTaken (unsigned local_history_idx);
 
     /**
      * Updates local histories as not taken.
      * @param local_history_idx The local history table entry that
      * will be updated.
      */
-    inline void updateLocalHistNotTaken(unsigned local_history_idx);
+    inline void updateLocalHistNotTaken (unsigned local_history_idx);
 
     /**
      * The branch history information that is created upon predicting
@@ -164,9 +164,9 @@ class TournamentBP
      */
     struct BPHistory {
 #ifdef DEBUG
-        BPHistory()
+        BPHistory ()
         { newCount++; }
-        ~BPHistory()
+        ~BPHistory ()
         { newCount--; }
 
         static int newCount;
