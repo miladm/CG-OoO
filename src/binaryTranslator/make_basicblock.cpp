@@ -40,7 +40,8 @@ void make_basicblock  (List<instruction*> *insList,
 			newBB->addIns (ins, BR_DST);
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
 			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
-			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || ins->getType () == 'c') {
+			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+                 ins->getType () == 'c' || ins->getType () == 's') {
 			    basicblock *bb = bbList->Last ();
 				bb->setBBbrHeader (ins->getInsAddr ());
 				newBB = new basicblock;
@@ -48,7 +49,8 @@ void make_basicblock  (List<instruction*> *insList,
 				bbList->Append (newBB);
 			}
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
-		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || ins->getType () == 'c') {
+		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+                    ins->getType () == 'c' || ins->getType () == 's') {
 			basicblock *bb = bbList->Last ();
 			bb->setBBbrHeader (ins->getInsAddr ());
 			bb->addIns (ins, NO_BR_DST);
@@ -102,7 +104,7 @@ void make_basicblock  (List<instruction*> *insList,
 		Assert (bb->getBbSize () > 0 && "Invalid BB Size.");
 		instruction* ins = bb->getLastIns ();
 		char type = ins->getType ();
-		if  (type == 'j' || type == 'c' || type == 'r') { //unconditional jump 
+		if  (type == 'j') { //unconditional jump 
 			ADDR insDst = bb->getLastInsDst ();
 			basicblock* bbDst;
 			if  (bbMap->find (insDst) != bbMap->end ()) {
@@ -114,7 +116,7 @@ void make_basicblock  (List<instruction*> *insList,
 				//exit (1);
 				continue;
 			}
-		} else if  (type == 'n' || type == 'o' || type == 'M') { //non-jump
+		} else if  (type == 'n' || type == 'o' || type == 'M' || type == 'c') {
 			ADDR insFallThru = bb->getLastInsFallThru ();
 			basicblock* bbFallThru;
 			if  (bbMap->find (insFallThru) != bbMap->end ()) {
@@ -150,16 +152,16 @@ void make_basicblock  (List<instruction*> *insList,
 				//exit (1);
 				continue;
 			}
-//		} else if  (type == 'c') { //func call - TODO this block should be useless - check and remove if possible
-//			// Assumptions on function calls 
-//			// Call does not terminate BB's
-//			// The CFG links to function called is not established
-//			// Call does not disturb the CFG flow and dependency b/w BB's
-//			if  (i+1 < bbList->NumElements ()) {				
-//				bb->setDescendent (bbList->Nth (i+1));
-//				bb->setFallThrough (bbList->Nth (i+1));
-//			}
-		} else if  (type == 's') { //syscall
+//        } else if  (type == 'c') { //func call - TODO this block should be useless - check and remove if possible
+//            // Assumptions on function calls 
+//            // Call does not terminate BB's
+//            // The CFG links to function called is not established
+//            // Call does not disturb the CFG flow and dependency b/w BB's
+//            if  (i+1 < bbList->NumElements ()) {				
+//                bb->setDescendent (bbList->Nth (i+1));
+//                bb->setFallThrough (bbList->Nth (i+1));
+//            }
+        } else if  (type == 's' || type == 'r') {
 			;//do nothing on syscall - no fthru, no destination
 		} else {
 			printf ("Wrong Ins Type: %c\n", type);

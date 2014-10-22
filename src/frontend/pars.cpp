@@ -9,6 +9,7 @@
 #include "pars.h"
 #include "../global/g_info.h"
 #include "../backend/bp/tournament.h"
+#include "../backend/bp/hybrid_skew.h"
 #include <bp_lib/types.hh>
 #include <bp_lib/intmath.hh>
 #include "utilities.h"

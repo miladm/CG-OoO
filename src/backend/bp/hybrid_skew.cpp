@@ -57,7 +57,7 @@ HybridBPskew::HybridBPskew(unsigned _localPredictorSize,
     //Setup the array of counters for the local predictor
     localCtrs.resize(localPredictorSize);
 
-    for (int i = 0; i < localPredictorSize; ++i)
+    for (int i = 0; i < (int)localPredictorSize; ++i)
         localCtrs[i].setBits(localCtrBits);
 
     //localPredictorMask = floorPow2(localPredictorSize) - 1;
@@ -70,7 +70,7 @@ HybridBPskew::HybridBPskew(unsigned _localPredictorSize,
     globalCtrs0.resize(globalPredictorSize);
     globalCtrs1.resize(globalPredictorSize);
 
-    for (int i = 0; i < globalPredictorSize; ++i) {
+    for (int i = 0; i < (int)globalPredictorSize; ++i) {
         globalCtrs0[i].setBits(globalCtrBits);
         globalCtrs1[i].setBits(globalCtrBits);
 	}
@@ -87,7 +87,7 @@ HybridBPskew::HybridBPskew(unsigned _localPredictorSize,
     //Setup the array of counters for the choice predictor
     choiceCtrs.resize(choicePredictorSize);
 
-    for (int i = 0; i < choicePredictorSize; ++i)
+    for (int i = 0; i <(int) choicePredictorSize; ++i)
         choiceCtrs[i].setBits(choiceCtrBits);
 
     // @todo: Allow for different thresholds between the predictors.
@@ -329,36 +329,36 @@ HybridBPskew::update(Addr &branch_addr, bool taken, void *bp_history,
 			if (history->localPredTaken != history->globalPredTaken) {
 			    // If the local prediction matches the actual outcome,
 			    // decerement the counter.  Otherwise increment the counter
-			    if (!history->globalUsed && history->choicePredictorIdx != invalidPredictorIndex) {
+			    if (!history->globalUsed && (int)history->choicePredictorIdx != invalidPredictorIndex) {
 			        choiceCtrs[history->choicePredictorIdx].decrement();
-			    } else if (history->globalUsed && history->choicePredictorIdx != invalidPredictorIndex) {
+			    } else if (history->globalUsed && (int)history->choicePredictorIdx != invalidPredictorIndex) {
 			        choiceCtrs[history->choicePredictorIdx].increment();
 			    }
 			}
 			if (!history->globalUsed) {
 			   //Strengthen bimodal
 				if (taken) {
-					if (history->localPredictorIdx != invalidPredictorIndex)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex)
 						localCtrs[history->localPredictorIdx].increment();
 				} else {
-					if (history->localPredictorIdx != invalidPredictorIndex)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex)
 					   localCtrs[history->localPredictorIdx].decrement();
 				}
 			} else {
 			   //Strengthen gskew
 				if (taken) {
-					if (history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
+					if ((int)history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
 						globalCtrs0[history->globalPredictorIdx0].increment();
-					if (history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
+					if ((int)history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
 						globalCtrs1[history->globalPredictorIdx1].increment();
-					if (history->localPredictorIdx != invalidPredictorIndex && history->localused)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex && history->localused)
 						localCtrs[history->localPredictorIdx].increment();
 				} else {
-					if (history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
+					if ((int)history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
 						globalCtrs0[history->globalPredictorIdx0].decrement();
-					if (history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
+					if ((int)history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
 						globalCtrs1[history->globalPredictorIdx1].decrement();
-					if (history->localPredictorIdx != invalidPredictorIndex && history->localused)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex && history->localused)
 						localCtrs[history->localPredictorIdx].decrement();
 				}
 			}
@@ -366,53 +366,53 @@ HybridBPskew::update(Addr &branch_addr, bool taken, void *bp_history,
 			if (history->localPredTaken == history->globalPredTaken) {
 				//strengthen all predictors
 				if (taken) {
-					if (history->globalPredictorIdx0 != invalidPredictorIndex)
+					if ((int)history->globalPredictorIdx0 != invalidPredictorIndex)
 						globalCtrs0[history->globalPredictorIdx0].increment();
-					if (history->globalPredictorIdx1 != invalidPredictorIndex)
+					if ((int)history->globalPredictorIdx1 != invalidPredictorIndex)
 						globalCtrs1[history->globalPredictorIdx1].increment();
-					if (history->localPredictorIdx != invalidPredictorIndex)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex)
 						localCtrs[history->localPredictorIdx].increment();
 				} else {
-					if (history->globalPredictorIdx0 != invalidPredictorIndex)
+					if ((int)history->globalPredictorIdx0 != invalidPredictorIndex)
 						globalCtrs0[history->globalPredictorIdx0].decrement();
-					if (history->globalPredictorIdx1 != invalidPredictorIndex)
+					if ((int)history->globalPredictorIdx1 != invalidPredictorIndex)
 						globalCtrs1[history->globalPredictorIdx1].decrement();
-					if (history->localPredictorIdx != invalidPredictorIndex)
+					if ((int)history->localPredictorIdx != invalidPredictorIndex)
 						localCtrs[history->localPredictorIdx].decrement();
 				}
 			} else {
 				// Meta predictor update:
 				// If the local prediction matches the actual outcome,
 				// decerement the counter.  Otherwise increment the counter
-				if (!history->globalUsed && history->choicePredictorIdx != invalidPredictorIndex) {
+				if (!history->globalUsed && (int)history->choicePredictorIdx != invalidPredictorIndex) {
 				    choiceCtrs[history->choicePredictorIdx].increment();
-				} else if (history->globalUsed && history->choicePredictorIdx != invalidPredictorIndex) {
+				} else if (history->globalUsed && (int)history->choicePredictorIdx != invalidPredictorIndex) {
 				    choiceCtrs[history->choicePredictorIdx].decrement();
 				}
 				if (history->globalUsed) {
 				   //Strengthen bimodal when gskew fails
 					if (taken) {
-						if (history->localPredictorIdx != invalidPredictorIndex)
+						if ((int)history->localPredictorIdx != invalidPredictorIndex)
 							localCtrs[history->localPredictorIdx].increment();
 					} else {
-						if (history->localPredictorIdx != invalidPredictorIndex)
+						if ((int)history->localPredictorIdx != invalidPredictorIndex)
 						   localCtrs[history->localPredictorIdx].decrement();
 					}
 				} else {
 				   //Strengthen gskew when bimodal fails
 					if (taken) {
-						if (history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
+						if ((int)history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
 							globalCtrs0[history->globalPredictorIdx0].increment();
-						if (history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
+						if ((int)history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
 							globalCtrs1[history->globalPredictorIdx1].increment();
-						if (history->localPredictorIdx != invalidPredictorIndex && history->localused)
+						if ((int)history->localPredictorIdx != invalidPredictorIndex && history->localused)
 							localCtrs[history->localPredictorIdx].increment();
 					} else {
-						if (history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
+						if ((int)history->globalPredictorIdx0 != invalidPredictorIndex && history->global0used)
 							globalCtrs0[history->globalPredictorIdx0].decrement();
-						if (history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
+						if ((int)history->globalPredictorIdx1 != invalidPredictorIndex && history->global1used)
 							globalCtrs1[history->globalPredictorIdx1].decrement();
-						if (history->localPredictorIdx != invalidPredictorIndex && history->localused)
+						if ((int)history->localPredictorIdx != invalidPredictorIndex && history->localused)
 							localCtrs[history->localPredictorIdx].decrement();
 					}
 				}

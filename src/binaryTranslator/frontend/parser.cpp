@@ -22,26 +22,36 @@ FILE* insAddrs;
 List<stInstruction*>* g_ins_list;
 benchAddrRangeParser* bench_addr_space;
 
-VOID setTarget (INS ins) {
+VOID setFallThrough (INS ins) {
+    stInstruction* cur_ins = g_ins_list->Last ();
+    if (INS_HasFallThrough (ins)) {
+        cur_ins->_has_fall_through = true; 
+        cur_ins->_fall_through = INS_NextAddress (ins);
+    }
+
     if (g_ins_list->NumElements () != 2) return;
-    stInstruction* cur_ins = g_ins_list->Nth (1);
     stInstruction* prv_ins = g_ins_list->Nth (0);
+
+    /*-- 
+     * CALL FUNCTINOS NEED SPECIAL TREATMENT FOR FINDING THEIR FALL-THROUGH 
+     * --*/
+    if (prv_ins->_type == 'c' && prv_ins->_has_fall_through == false) {
+        prv_ins->_has_fall_through = true;
+        prv_ins->_fall_through = INS_Address (ins);
+    }
+}
+
+/*-- 
+ * SOME BRANCH/JMP/CALL OPS HAVE DESTINATIONS THAT ARE INDIRECT. SUCH
+ * INSTRUCTIONS ARE NOT OUR CONCERN TO CAPTURE IN CFG BECAUSE THE COMPILER
+ * WOULD NOT KNOW HOW THEY ARE LINKED TO OTHER PARTS OF THE PROGRAM - SO NO
+ * WORRIES ABOUT THEM 
+ * --*/
+VOID setDestination (INS ins) {
+    stInstruction* cur_ins = g_ins_list->Last ();
 	if (cur_ins->_has_destination == false && INS_IsDirectBranchOrCall (ins)) {
 		cur_ins->_has_destination = true;
         cur_ins->_destination = INS_DirectBranchOrCallTargetAddress(ins);
-    }
-
-    if (prv_ins->_type == 'r' ||
-        (prv_ins->_type == 'j' && prv_ins->_has_destination == false) ||
-        (prv_ins->_type == 'c' && prv_ins->_has_destination == false)) {
-        prv_ins->_destination = INS_Address (ins);
-        prv_ins->_has_destination = true;
-    }
-
-    // Not sure if I should add the following check to the above line - TODO for later
-    if (prv_ins->_type == 'b' && prv_ins->_has_destination == false) {
-        cout << prv_ins->_disassemble << endl;
-        Assert (0 && "this feature is not supported");
     }
 }
 
@@ -136,11 +146,8 @@ VOID ImageLoad(IMG img, VOID *v)
                 st_ins->_mnemonic = INS_Mnemonic (ins);
                 st_ins->_disassemble = INS_Disassemble (ins);
                 st_ins->_addr = INS_Address (ins);
-                if (INS_HasFallThrough (ins)) {
-                    st_ins->_has_fall_through = true; 
-                    st_ins->_fall_through = INS_NextAddress (ins);
-                }
-                setTarget (ins);
+                setFallThrough (ins);
+                setDestination (ins);
                 setReg (ins);
                 dumpIns ();
             }
