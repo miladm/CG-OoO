@@ -71,15 +71,17 @@ void make_basicblock  (List<instruction*> *insList,
 				//printf ("%llx\n", ins->getInsAddr ());
 		}
 	}
-	printf ("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements ());
+
 	//GET RID OF EMPTY BASICBLOCKS  (SHOULDN'T FIND ANY EMPTY ONES - JUST PRECAUTION)
+	printf ("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements ());
 	set<ADDR> toRemoveInsSet;
 	for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
-		if  (bbList->Nth (i)->getBbSize () == 0) {
+        basicblock* bb = bbList->Nth (i);
+		if  (bb->getBbSize () == 0) {
 			// delete bbList->Nth (i);
 			bbList->RemoveAt (i);
-		} else if  (bbList->Nth (i)->getBbSize () == 1) {
-			instruction* ins = bbList->Nth (i)->getLastIns ();
+		} else if  (bb->getBbSize () == 1) {
+			instruction* ins = bb->getLastIns ();
 			string str (ins->getOpCode ());
 			if  (str.compare ("#NOP\n") == 0) {
 				toRemoveInsSet.insert (ins->getInsAddr ());
@@ -89,16 +91,18 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}
 	printf ("\tNum BB after Dead BB Elimination: %d\n",bbList->NumElements ());
-	//REMOVE NOP INSTRUCTIONS FROM INSLIST
+
+	/* REMOVE DEAD NOP INSTRUCTIONS FROM INSLIST */
 	for  (int i = insList->NumElements () - 1; i >= 0; i--) {
 		instruction* ins = insList->Nth (i);
 		if  (toRemoveInsSet.find (ins->getInsAddr ()) != toRemoveInsSet.end ()) {
-			// delete insList->Nth (i);
 			insList->RemoveAt (i);
 			insAddrMap->erase (ins->getInsAddr ());
+            // delete ins;
 		}
 	}
-	// SETUP BB DEPENDENCIES
+
+	/* SETUP BB DEPENDENCIES */
 	for  (int i = 0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
 		Assert (bb->getBbSize () > 0 && "Invalid BB Size.");
@@ -178,7 +182,6 @@ void make_basicblock  (List<instruction*> *insList,
 	}
 	// PERFORM LIST SCHEDULING ON BB
     if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
-        
         for  (int i = 0; i < bbList->NumElements (); i++) {
             basicblock* bb = bbList->Nth (i);
             bb->brDependencyTableCheck ();

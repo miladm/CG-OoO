@@ -37,13 +37,13 @@ int regFile::getRegStat(int regNum) {
 }
 */
 long int regFile::getRegNum(const char* regName) {
-	if (RF.count(regName) > 0)
+	if (RF.count(regName) > 0) {
 		return RF.find(regName)->second;
-	else if (atoi(regName) >= INIT_RENAME_REG_NUM) {
-		numRegs++;
-		return atoi(regName);
+//    } else if (atoi(regName) >= INIT_RENAME_REG_NUM) {
+//		numRegs++;
+//		return atoi(regName);
 	} else {
-		printf("\tERROR: Missing X86 Regiter: %s\n",regName);
+//		printf("\tERROR: Missing X86 Regiter: %s\n",regName);
 		// Assert(true == false && "Didn't find the required register.");
 		return INVALID_REG;
 	}
@@ -94,46 +94,46 @@ void regFile::setupRegFile () {
 	RF.insert(pair<string,long int>("ch",   3));
 	RF.insert(pair<string,long int>("dh",   4));
 
-	// Segment Registers
-	RF.insert(pair<string,long int>("cs",   5));
-	RF.insert(pair<string,long int>("ds",   6));
-	RF.insert(pair<string,long int>("ss",   7));
-	RF.insert(pair<string,long int>("es",   8));
-	RF.insert(pair<string,long int>("fs",   9));
-	RF.insert(pair<string,long int>("gs",  10));
+//	// Segment Registers
+//	RF.insert(pair<string,long int>("cs",   5));
+//	RF.insert(pair<string,long int>("ds",   6));
+//	RF.insert(pair<string,long int>("ss",   7));
+//	RF.insert(pair<string,long int>("es",   8));
+//	RF.insert(pair<string,long int>("fs",   9));
+//	RF.insert(pair<string,long int>("gs",  10));
+//
+//	// Pointer Registers
+//	RF.insert(pair<string,long int>("rsp", 11));
+//	RF.insert(pair<string,long int>("rbp", 12));
+//
+//	RF.insert(pair<string,long int>("esp", 11));
+//	RF.insert(pair<string,long int>("ebp", 12));
+//
+//	RF.insert(pair<string,long int>("sp",  11));
+//	RF.insert(pair<string,long int>("bp",  12));
+//
+//	RF.insert(pair<string,long int>("spl", 11));
+//	RF.insert(pair<string,long int>("bpl", 12));
+//
+//	// Index Registers
+//	RF.insert(pair<string,long int>("rsi", 13));
+//	RF.insert(pair<string,long int>("rdi", 14));
+//
+//	RF.insert(pair<string,long int>("esi", 13));
+//	RF.insert(pair<string,long int>("edi", 14));
+//
+//	RF.insert(pair<string,long int>("si",  13));
+//	RF.insert(pair<string,long int>("di",  14));
+//
+//	RF.insert(pair<string,long int>("sil", 13));
+//	RF.insert(pair<string,long int>("dil", 14));
 
-	// Pointer Registers
-	RF.insert(pair<string,long int>("rsp", 11));
-	RF.insert(pair<string,long int>("rbp", 12));
-
-	RF.insert(pair<string,long int>("esp", 11));
-	RF.insert(pair<string,long int>("ebp", 12));
-
-	RF.insert(pair<string,long int>("sp",  11));
-	RF.insert(pair<string,long int>("bp",  12));
-
-	RF.insert(pair<string,long int>("spl", 11));
-	RF.insert(pair<string,long int>("bpl", 12));
-
-	// Index Registers
-	RF.insert(pair<string,long int>("rsi", 13));
-	RF.insert(pair<string,long int>("rdi", 14));
-
-	RF.insert(pair<string,long int>("esi", 13));
-	RF.insert(pair<string,long int>("edi", 14));
-
-	RF.insert(pair<string,long int>("si",  13));
-	RF.insert(pair<string,long int>("di",  14));
-
-	RF.insert(pair<string,long int>("sil", 13));
-	RF.insert(pair<string,long int>("dil", 14));
-
-	// Instruction Pointer Register
-	RF.insert(pair<string,long int>("rip", 15));
-
-	RF.insert(pair<string,long int>("eip", 15));
-
-	RF.insert(pair<string,long int>("ip",  15));
+//	// Instruction Pointer Register
+//	RF.insert(pair<string,long int>("rip", 15));
+//
+//	RF.insert(pair<string,long int>("eip", 15));
+//
+//	RF.insert(pair<string,long int>("ip",  15));
 
 	// 64-bit mode-only General Purpose Registers
 	RF.insert(pair<string,long int>("r8" , 16));
@@ -173,7 +173,7 @@ void regFile::setupRegFile () {
 	RF.insert(pair<string,long int>("r15b",23));
 
 	// Flag
-	RF.insert(pair<string,long int>("rflags",24));
+//	RF.insert(pair<string,long int>("rflags",24));
 
 	//XMM registers
 	RF.insert(pair<string,long int>("xmm0", 25));
@@ -214,52 +214,55 @@ void regFile::setupRegFile () {
 
 
 	//ZMM registers
-	RF.insert(pair<string,long int>("ymm0", 25));
-	RF.insert(pair<string,long int>("ymm1", 26));
-	RF.insert(pair<string,long int>("ymm2", 27));
-	RF.insert(pair<string,long int>("ymm3", 28));
-	RF.insert(pair<string,long int>("ymm4", 29));
-	RF.insert(pair<string,long int>("ymm5", 30));
-	RF.insert(pair<string,long int>("ymm6", 31));
-	RF.insert(pair<string,long int>("ymm7", 32));
-	RF.insert(pair<string,long int>("xmm8", 33));
-	RF.insert(pair<string,long int>("xmm9", 34));
-	RF.insert(pair<string,long int>("xmm10",35));
-	RF.insert(pair<string,long int>("xmm11",36));
-	RF.insert(pair<string,long int>("xmm12",37));
-	RF.insert(pair<string,long int>("xmm13",38));
-	RF.insert(pair<string,long int>("xmm14",39));
-	RF.insert(pair<string,long int>("xmm15",40));
-	RF.insert(pair<string,long int>("ymm16",41));
-	RF.insert(pair<string,long int>("ymm17",42));
-	RF.insert(pair<string,long int>("ymm18",43));
-	RF.insert(pair<string,long int>("ymm19",44));
-	RF.insert(pair<string,long int>("ymm20",45));
-	RF.insert(pair<string,long int>("ymm21",46));
-	RF.insert(pair<string,long int>("ymm22",47));
-	RF.insert(pair<string,long int>("ymm23",48));
-	RF.insert(pair<string,long int>("xmm24",49));
-	RF.insert(pair<string,long int>("xmm25",50));
-	RF.insert(pair<string,long int>("xmm26",51));
-	RF.insert(pair<string,long int>("xmm27",52));
-	RF.insert(pair<string,long int>("xmm28",53));
-	RF.insert(pair<string,long int>("xmm29",54));
-	RF.insert(pair<string,long int>("xmm30",55));
-	RF.insert(pair<string,long int>("xmm31",56));
+	RF.insert(pair<string,long int>("zmm0", 25));
+	RF.insert(pair<string,long int>("zmm1", 26));
+	RF.insert(pair<string,long int>("zmm2", 27));
+	RF.insert(pair<string,long int>("zmm3", 28));
+	RF.insert(pair<string,long int>("zmm4", 29));
+	RF.insert(pair<string,long int>("zmm5", 30));
+	RF.insert(pair<string,long int>("zmm6", 31));
+	RF.insert(pair<string,long int>("zmm7", 32));
+	RF.insert(pair<string,long int>("zmm8", 33));
+	RF.insert(pair<string,long int>("zmm9", 34));
+	RF.insert(pair<string,long int>("zmm10",35));
+	RF.insert(pair<string,long int>("zmm11",36));
+	RF.insert(pair<string,long int>("zmm12",37));
+	RF.insert(pair<string,long int>("zmm13",38));
+	RF.insert(pair<string,long int>("zmm14",39));
+	RF.insert(pair<string,long int>("zmm15",40));
+	RF.insert(pair<string,long int>("zmm16",41));
+	RF.insert(pair<string,long int>("zmm17",42));
+	RF.insert(pair<string,long int>("zmm18",43));
+	RF.insert(pair<string,long int>("zmm19",44));
+	RF.insert(pair<string,long int>("zmm20",45));
+	RF.insert(pair<string,long int>("zmm21",46));
+	RF.insert(pair<string,long int>("zmm22",47));
+	RF.insert(pair<string,long int>("zmm23",48));
+	RF.insert(pair<string,long int>("zmm24",49));
+	RF.insert(pair<string,long int>("zmm25",50));
+	RF.insert(pair<string,long int>("zmm26",51));
+	RF.insert(pair<string,long int>("zmm27",52));
+	RF.insert(pair<string,long int>("zmm28",53));
+	RF.insert(pair<string,long int>("zmm29",54));
+	RF.insert(pair<string,long int>("zmm30",55));
+	RF.insert(pair<string,long int>("zmm31",56));
 
-	RF.insert(pair<string,long int>("st0",57));
-	RF.insert(pair<string,long int>("st1",58));
-	RF.insert(pair<string,long int>("st2",59));
-	RF.insert(pair<string,long int>("st3",60));
-	RF.insert(pair<string,long int>("st4",61));
-	RF.insert(pair<string,long int>("st5",62));
-	RF.insert(pair<string,long int>("st6",63));
-	RF.insert(pair<string,long int>("st7",64));
+    // X87 NON-STRICT STACK REGISTERS
+//	RF.insert(pair<string,long int>("st0",57));
+//	RF.insert(pair<string,long int>("st1",58));
+//	RF.insert(pair<string,long int>("st2",59));
+//	RF.insert(pair<string,long int>("st3",60));
+//	RF.insert(pair<string,long int>("st4",61));
+//	RF.insert(pair<string,long int>("st5",62));
+//	RF.insert(pair<string,long int>("st6",63));
+//	RF.insert(pair<string,long int>("st7",64));
 	
 	RF.insert(pair<string,long int>("mxcsr",65));
 
 	RF.insert(pair<string,long int>("x",66));
 	RF.insert(pair<string,long int>("s",67));
+
+	RF.insert(pair<string,long int>("x87", 68));
 
 	//TODO To be verified
 	//RF.insert(pair<string,long int>("p",41));

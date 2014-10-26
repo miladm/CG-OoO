@@ -12,6 +12,7 @@ basicblock::basicblock () {
 	bbID = -1; //place holder
 	_listIndx = -1; //place holder
 	_visited = false;
+	_regAllocated = false;
 	_entryPoint = false;
 	_domSetIsAll = false;
 	_hasBrHeader = false;
@@ -44,6 +45,7 @@ basicblock& basicblock::operator=  (const basicblock& bb) { //TODO: UPDATE THIS 
 	bbID = bb.bbID;
 	_listIndx = bb._listIndx;
 	_visited = bb._visited;
+	_regAllocated = bb._regAllocated;
 	_entryPoint = bb._entryPoint;
 	_domSetIsAll = bb._domSetIsAll;
 	_backEdgeDest = bb._backEdgeDest;
@@ -254,6 +256,14 @@ bool basicblock::isVisited () {
 	return _visited;
 }
 
+void basicblock::setRegAllocated () {
+	_regAllocated = true;
+}
+
+bool basicblock::isRegAllocated () {
+	return _regAllocated;
+}
+
 bool basicblock::setDominators () {
 	// Assert (_dominatorMap.size () == 0 && "set size must be zero initially.");
 	if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
@@ -420,8 +430,10 @@ void basicblock::setPhiWriteVar (long int var, long int subscript) {
 	_phiDestMap.insert (pair<long int, long int> (var,subscript));
 }
 
-/* done at register allocation phase
-   Here we don't actually "eliminate" phi functions, but we will add code to represent them in real program */
+/*--
+ * DONE AT REGISTER ALLOCATION PHASE HERE WE DON'T ACTUALLY "ELIMINATE" PHI
+ * FUNCTIONS, BUT WE WILL ADD CODE TO REPRESENT THEM IN REAL PROGRAMS
+ --*/
 int basicblock::elimPhiFuncs () {
 	map<long int, vector<long int> >::iterator it0;
 	int temp = 0;
@@ -447,12 +459,12 @@ int basicblock::elimPhiFuncs () {
 	return temp*_phiFuncMap.size ();
 }
 
-/* 
+/*
 	These instructions
 	- are not part of insList
 	- do not have their asm variable setup
 	- do not have their ins address setup
-*/ 
+*/
 void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs) {
 	instruction* newIns = new instruction;
 	//TODO do all the bells and whistles for adding an ins.
@@ -663,7 +675,8 @@ set<long int> basicblock::getLocalRegSet () {
 bool basicblock::update_InOutSet () {
 	int outSetSize = _outSet.size ();
 	int inSetSize = _inSet.size ();
-	// Update _outSet
+
+	// UPDATE _outSet
 	for  (int i = 0; i < getNumDescendents (); i++) {
 		set<long int> tempSet;
 		tempSet.clear ();
@@ -675,14 +688,15 @@ bool basicblock::update_InOutSet () {
 		_outSet = tempSet;
 		// printf ("%d,%d\n",succInSet.size (),_outSet.size ());
 	}
-	// Update _inSet
+
+	// UPDATE _inSet
 	set<long int> result1,result2;
 	std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result1, result1.begin ()));
 	std::set_difference (_useSet.begin (), _useSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result2, result2.begin ()));
 	std::set_union (result1.begin (), result1.end (), result2.begin (), result2.end (), std::inserter (_inSet, _inSet.begin ()));
 	// printf ("%d,%d,%d\n",_useSet.size (),_inSet.size (),_outSet.size ());
 
-	// Has there been a change in the BB sets?
+	// ANY CHANGE IN THE BB SETS?
 	bool change;
 	if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
 		change = true;

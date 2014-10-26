@@ -61,11 +61,13 @@ class basicblock {
 		List<basicblock*>* getDescendentList ();
 		int getNumDescendents ();
 		int getNumAncestors ();
-		
+
 		//Visit
 		void setAsVisited ();
 		void setAsUnvisited ();
 		bool isVisited ();
+		bool isRegAllocated ();
+		void setRegAllocated ();
 		
 		//Dominator / Loop
 		bool setDominators ();
@@ -144,6 +146,7 @@ class basicblock {
 	private:
 		int _listIndx;
 		bool _visited;
+        bool _regAllocated;
 		bool _entryPoint;
 		bool _domSetIsAll;
 		bool _hasBrHeader;

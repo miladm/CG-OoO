@@ -61,16 +61,16 @@ void dot::createSubGraph (int subGraphID) {
 
 void dot::defn () {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
-		_insList = _bBlist->Nth (j)->getInsList ();
-		ADDR bbID = _bBlist->Nth (j)->getID ();
-        if (!(bbID >= 0x400408 && bbID <= 0x400695)) continue;
+        basicblock* bb = _bBlist->Nth (j);
+		_insList = bb->getInsList ();
+		ADDR bbID = bb->getID ();
 		//if (bbID == 18446744073709551615) continue; //TODO remove/fix this problem
 		fprintf (_outFile, "\t\"%llu\" ", bbID);
 		string color;
-		if (_bBlist->Nth (j)->isAPhraseblock ()) color.append ("lightgrey");
+		if (bb->isAPhraseblock ()) color.append ("lightgrey");
 		else									 color.append ("white");	
 		setupBox (color);
-		map<long int, vector<long int> > phiFuncs = _bBlist->Nth (j)->getPhiFuncs ();
+		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
 		if (phiFuncs.size () > 0) {
 			for (map<long int, vector<long int> >::iterator it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
 				vector<long int> phiVec;
@@ -82,20 +82,34 @@ void dot::defn () {
 				fprintf (_outFile, "</td></tr>\n");
 			}
 		}
+        /*-TODO delete this-*/
 		fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"></td></tr>\n");
-		for (int i = 0; i < _insList->NumElements (); i++) {
-			ADDR insAddr = _insList->Nth (i)->getInsAddr ();
-			double missRate = _insList->Nth (i)->getLdMissRate ();
-			if (missRate > UPLD_THRESHOLD)
-				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s (UPLD-%.2f) </td></tr>\n", insAddr, _insList->Nth (i)->getOpCode (), missRate);
-			else {
-				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s", insAddr, _insList->Nth (i)->getOpCode ());				
-				for (int j = 0; j < _insList->Nth (i)->getNumReg (); j++) {
-					if (_insList->Nth (i)->getNthRegType (j) == READ)
-						fprintf (_outFile, ",%dR\n", _insList->Nth (i)->getNthReg (j));
-					else
-						fprintf (_outFile, ",%dW\n", _insList->Nth (i)->getNthReg (j));
+				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> IN/DEF: ");				
+                set<long int> inset = bb->getInSet ();
+				for (set<long int>::iterator it = inset.begin(); it != inset.end(); it++) {
+				    fprintf (_outFile, ",%dI\n", *it);
 				}
+                set<long int> defset = bb->getDefSet ();
+				for (set<long int>::iterator it = defset.begin(); it != defset.end(); it++) {
+				    fprintf (_outFile, ",%dD\n", *it);
+				}
+		fprintf (_outFile, "</td></tr>\n");				
+        /* ---------------- */
+		for (int i = 0; i < _insList->NumElements (); i++) {
+            instruction* ins = _insList->Nth (i);
+			ADDR insAddr = ins->getInsAddr ();
+			double missRate = ins->getLdMissRate ();
+			if (missRate > UPLD_THRESHOLD)
+				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s (UPLD-%.2f) </td></tr>\n", insAddr, ins->getOpCode (), missRate);
+			else {
+				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s", insAddr, ins->getOpCode ());				
+				for (int j = 0; j < ins->getNumReg (); j++) {
+					if (ins->getNthRegType (j) == READ)
+						fprintf (_outFile, ",%dR\n", ins->getNthReg (j));
+					else
+						fprintf (_outFile, ",%dW\n", ins->getNthReg (j));
+				}
+				fprintf (_outFile, ",%s", ins->getInsAsm ());				
 /*				fprintf (_outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s", insAddr, _insList->Nth (i)->getOpCode ());				
 				for (int j = 0; j < _insList->Nth (i)->getNumReadReg (); j++) {
 					fprintf (_outFile, ",%d_%dR", _insList->Nth (i)->getNthReadReg (j),_insList->Nth (i)->getReadRegSubscript (_insList->Nth (i)->getNthReadReg (j)));				
@@ -118,7 +132,6 @@ void dot::createGraph () {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
 		ADDR bbID = _bBlist->Nth (j)->getID ();
 		basicblock* bb = _bBlist->Nth (j);
-        if (!(bbID >= 0x400408 && bbID <= 0x400695)) continue;
 		//if (bbID == 18446744073709551615) continue; //TODO remove this
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			if (bb->getLastInsDst () == -1) {

@@ -411,12 +411,12 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
 	//Register true dependency check for all instruction types
 	for (int i = 0; i < _r->NumElements (); i++) {
 		if (_rt->Nth (i) == READ) { //TODO Does this line make sense? (int vs. memType)
-			instruction *temp = depTables->regLookup (_r->Nth (i),REG_WRITE);//RAW
-			if (temp != NULL) {
-				if (isInsRepeated (temp,_ancestors)==false) {
-					temp->setAsDependent (this);
-					setAsAncestor (temp);
-					setAsRegAncestor (temp);
+			instruction *ins = depTables->regLookup (_r->Nth (i),REG_WRITE);//RAW
+			if (ins != NULL) {
+				if (isInsRepeated (ins,_ancestors)==false) {
+					ins->setAsDependent (this);
+					setAsAncestor (ins);
+					setAsRegAncestor (ins);
 				}
 //				long int renReg = temp->getRenamedReg (_r->Nth (i)); //TODO no longer necessary in a compiler I think
 //				renameReadReg (i,renReg);

@@ -94,13 +94,13 @@ VOID setReg (INS ins) {
 	// UINT32 operandCount = INS_MaxNumRRegs(ins)+INS_MaxNumWRegs(ins);
 	if (INS_MaxNumRRegs(ins) > 0) {
 		for (int i = 0; i < (int)INS_MaxNumRRegs(ins); i++) {
-			st_ins->_regs.Append (REG_StringShort(INS_RegR(ins,i)));
+			st_ins->_regs.Append (REG_StringShort(REG_FullRegName(INS_RegR(ins,i))));
 			st_ins->_reg_types.Append (REG_READ);
 		}
 	}
 	if (INS_MaxNumWRegs(ins) > 0) {
 		for (int i = 0; i < (int)INS_MaxNumWRegs(ins); i++) {
-			st_ins->_regs.Append (REG_StringShort(INS_RegW(ins,i)));
+			st_ins->_regs.Append (REG_StringShort(REG_FullRegName(INS_RegW(ins,i))));
 			st_ins->_reg_types.Append (REG_WRITE);
 		}
 	}

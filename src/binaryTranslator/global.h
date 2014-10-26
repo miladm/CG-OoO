@@ -34,7 +34,7 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 // #define DEBUG_SSA 0
 
 //Data Dependency
-#define NUM_REGISTERS 67
+#define NUM_REGISTERS 68
 #define INIT_RENAME_REG_NUM 100 //TODO change this number - not 
 
 //Latencies
@@ -61,7 +61,7 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 #define GRF_HI GRF_LO+GRF_SIZE-1
 
 #define X86_REG_LO 1
-#define X86_REG_HI 67
+#define X86_REG_HI 68
 
 #define INVALID_REG -1
 

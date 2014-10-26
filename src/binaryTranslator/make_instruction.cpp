@@ -18,7 +18,7 @@ void parseRegisters (instruction* newIns, FILE* input_assembly) {
 		regCode = RF->getRegNum (reg);
 		if (regCode != INVALID_REG) {
 			newIns->setRegister (&regCode, &read_write);
-		}
+        }
 //        printf ("debug: %d, %d, %s\n", read_write, regCode, reg);
 	}
 	delete RF;
@@ -150,19 +150,24 @@ void parse_instruction (List<instruction*> *insList,
 
 		/* SETUP INSTRUCTION BRANCH DESTINATION/BIAS/ACCURACY INFORMATION */
 		if (newIns->getType () == 'j' || newIns->getType () == 'b' || 
-            newIns->getType () == 'c' || newIns->getType () == 'r') {
-//			if (fscanf (input_assembly, "%llx\n", &brDst) == EOF) break;
-//			newIns->setBrDst (brDst);
-			brDstSet->insert (newIns->getInsDst ());
-			if (newIns->getType () == 'b') brDstSet->insert (newIns->getInsFallThru ());
-			//SETUP BRANCH PREDICTION ACCURACY INFORMATION
+            newIns->getType () == 'c') {
+
+			/* SETUP BB START SET */
+			if (newIns->hasDst ()) 
+                brDstSet->insert (newIns->getInsDst ());
+			if (newIns->hasFallThru () && 
+                (newIns->getType () == 'b' || newIns->getType () == 'c')) 
+                brDstSet->insert (newIns->getInsFallThru ());
+
+			/* SETUP BRANCH PREDICTION ACCURACY INFORMATION */
 			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
 				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
 				;// printf ("ERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
 				//exit (1);
 			}
-			//SETUP BRANCH BIAS INFORMATION
+
+			/* SETUP BRANCH BIAS INFORMATION */
 			if (brBiasMap->find (insAddr) != brBiasMap->end ()) {
 				newIns->setBrTakenBias ((*brBiasMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
