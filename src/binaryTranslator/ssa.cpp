@@ -20,11 +20,12 @@ void buildDefUseSets (List<basicblock*> *bbList) {
 		bbList->Nth (i)->setupDefUseSets ();
 }
 
-/* Tracks the basicblocks that define different x86 vairables in them. Each x86
- * variable is assigned the BB pointers that have it defined in them.
+/*
+ * TRACKS THE BASICBLOCKS THAT DEFINE DIFFERENT X86 VAIRABLES IN THEM. EACH X86
+ * VARIABLE IS ASSIGNED THE BB POINTERS THAT HAVE IT DEFINED IN THEM.
  */
 void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {
-	// Build the variables list for x86 registers
+	/* BUILD THE VARIABLES LIST FOR X86 REGISTERS */
 	for (long int i = X86_REG_LO; i <= X86_REG_HI; i++) {
 		variable *var = new variable (i);
 		varList.insert (pair<int,variable*> (i,var));
@@ -32,7 +33,8 @@ void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {
 	for (int i = 0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
 		set<long int> defSet = bb->getDefSet (); //NOTE: some variables are "somehow" never defined in x86!
-		for (set<long int>::iterator it = defSet.begin (); it != defSet.end (); it++) {
+        set<long int>::iterator it;
+		for (it = defSet.begin (); it != defSet.end (); it++) {
 			if (!((*it) >= X86_REG_LO && (*it) <= X86_REG_HI))
 				printf ("ERROR: %d\n",*it);
 			Assert ((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "invalid x86 variable.");
@@ -90,7 +92,7 @@ int whichPred (basicblock* Y, basicblock* X) {
 		if (Y->getNthAncestor (i)->getID () == bbID)
 			return i;
 	}
-	Assert (true == false && "CFG Fault. The BB ancesor was not found.");
+	Assert (0 && "CFG Fault. The BB ancesor was not found.");
 }
 
 int counter = 0; //TODO for debug
@@ -154,7 +156,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 				varList[var]->popFromStack ();
 			}
-			// This is another part of the stack hack
+			/* THIS IS ANOTHER PART OF THE STACK HACK */
 			for (int j = 0; j < ins->getNumReadReg (); j++) {
 				int var = ins->getNthReadReg (j);
 				Assert (varList.find (var) != varList.end ());

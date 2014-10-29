@@ -9,8 +9,8 @@
 #include "basicblock.h"
 
 basicblock::basicblock () {
-	bbID = -1; //place holder
-	_listIndx = -1; //place holder
+	bbID = -1; // PLACE HOLDER
+	_listIndx = -1; // PLACE HOLDER
 	_visited = false;
 	_regAllocated = false;
 	_entryPoint = false;
@@ -118,6 +118,60 @@ void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
 	// printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/ (double)ins->getNumReg ());
 }
 
+void basicblock::addMovIns (instruction* ins) {
+    instruction* last_ins = _insList->Last ();
+    if (last_ins->getType () == 'r' || last_ins->getType () == 'c' || last_ins->getType () == 's' || 
+            last_ins->getType () == 'j' || last_ins->getType () == 'b') {
+        _insList->InsertAt (ins, _insList->NumElements () - 1);
+        _insList_orig->InsertAt (ins, _insList->NumElements () - 1);
+
+        /* CONNECT UP INSTRUCTIONS */
+        instruction* top_ins;
+        if (_insList->NumElements () >= 3) {
+            top_ins = _insList->Nth (_insList->NumElements () - 3);
+            Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+            top_ins->resetInsFallThru ();
+            top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+            top_ins->setInsFallThru (ins);
+        } else {
+            //TODO implement this
+        }
+        instruction* bottom_ins = _insList->Nth (_insList->NumElements () - 1);
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+    } else {
+        _insList->Append (ins);
+        _insList_orig->Append (ins);
+
+        /* CONNECT UP INSTRUCTIONS */
+        instruction* top_ins = _insList->Nth (_insList->NumElements () - 2);
+        instruction* bottom_ins = _insList->Nth(_insList->NumElements () - 2)->getInsFallThru ();
+        Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+        top_ins->resetInsFallThru ();
+        top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+        top_ins->setInsFallThru (ins);
+    }
+    _insAddrList.insert (ins->getInsAddr ());
+//    Assert (bbID != -1);
+//    ins->setMy_BBorPB_id (getID ()); TODO don't think this is necessary
+    //Update Use Set & Def Set
+    // int counter = 0;
+    // for  (int i = 0; i < ins->getNumReg (); i++) {
+    // 	if  (ins->getNthRegType (i) == READ && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) {
+    // 		//second condition avoids ud-chains within a BB from propagating
+    // 		updateUseSet (ins->getNthReg (i));
+    // 	} else if  (ins->getNthRegType (i) == WRITE) {
+    //  			updateDefSet (ins->getNthReg (i));
+    // 	} else {
+    // 		// updateLocalRegSet (ins->getNthReg (i));
+    // 		counter++;
+    // 	}
+    // }
+    // printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/ (double)ins->getNumReg ());
+}
+
 void basicblock::addIns (instruction* ins, ADDR ID) {
 	_insList->Append (ins);
 	_insAddrList.insert (ins->getInsAddr ());
@@ -183,12 +237,12 @@ ADDR basicblock::getID () {
 
 ADDR basicblock::getLastInsFallThru () {
 	Assert (_insList->NumElements () > 0 && "BB size is zero.");
-	return _insList->Last()->getInsFallThru ();
+	return _insList->Last()->getInsFallThruAddr ();
 }
 
 ADDR basicblock::getLastInsDst () {
 	Assert (_insList->NumElements () > 0 && "BB size is zero.");
-	return _insList->Last()->getInsDst ();
+	return _insList->Last()->getInsDstAddr ();
 }
 
 instruction* basicblock::getLastIns () {
@@ -270,12 +324,12 @@ bool basicblock::setDominators () {
 		_dominatorSet.insert (getID ());
 		_dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));
 	} else {
-		return false;//Assert (true == false && "Invalid dominator set.");
+		return false;//Assert (0 && "Invalid dominator set.");
 	}
 	return true;
 }
 
-/* Set of Strict Dominators */
+/* SET OF STRICT DOMINATORS */
 void basicblock::buildSDominators () {
 	map<ADDR,basicblock*> self;
 	self.insert (pair<ADDR,basicblock*> (getID (),this));	
@@ -309,8 +363,8 @@ int basicblock::getSDominatorSize () {
 }
 
 /* 
- * NOTE: _idomMap provides the bottom-up link for dom tree.
- *       This module makes the top-down link  (a little bit countrary to the func name).
+ * NOTE: _IDOMMAP PROVIDES THE BOTTOM-UP LINK FOR DOM TREE.
+ *       THIS MODULE MAKES THE TOP-DOWN LINK  (A LITTLE BIT COUNTRARY TO THE FUNC NAME).
  */
 void basicblock::buildDomTree () {
 	for  (map<ADDR,basicblock*>::iterator it = _parentsMap.begin (); it != _parentsMap.end (); it++) {
@@ -460,11 +514,11 @@ int basicblock::elimPhiFuncs () {
 }
 
 /*
-	These instructions
-	- are not part of insList
-	- do not have their asm variable setup
-	- do not have their ins address setup
-*/
+ * THESE INSTRUCTIONS
+ * - ARE NOT PART OF INSLIST
+ * - DO NOT HAVE THEIR ASM VARIABLE SETUP
+ * - DO NOT HAVE THEIR INS ADDRESS SETUP
+ */
 void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs) {
 	instruction* newIns = new instruction;
 	//TODO do all the bells and whistles for adding an ins.
@@ -477,13 +531,17 @@ void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_
 	type = WRITE;
 	newIns->setRegister (&dst_var, &type);
 	newIns->setWriteVar (dst_var,dst_subs);
+    newIns->setupDefUseSets ();
+    for  (int j = 0; j < newIns->getNumReg (); j++) {
+        if  (newIns->getNthRegType (j) == WRITE) {
+            updateDefSet (newIns->getNthReg (j));
+        }
+    }
 	// newIns->makeUniqueRegs (); //THIS STEP is done later  (don't put back)
 
 	// If the last BB instruction is a branch/jump/return, hist to the secodn to last position
 	//TODO: check if the phi-function is associated with neither of branch/jump/return
-	//Since I run a trace and dump the whole BB during BB-annotation, I don't have to worry about
-	//the points made above.
-	addIns (newIns, NO_BR_DST); // _insList->Append (newIns);
+	addMovIns (newIns); // _insList->Append (newIns);
 }
 
 void basicblock::setupBackEdge () {
@@ -676,33 +734,31 @@ bool basicblock::update_InOutSet () {
 	int outSetSize = _outSet.size ();
 	int inSetSize = _inSet.size ();
 
-	// UPDATE _outSet
-	for  (int i = 0; i < getNumDescendents (); i++) {
-		set<long int> tempSet;
-		tempSet.clear ();
-		basicblock *successor = getNthDescendent (i);
-		set<long int> succInSet;
-		vector<long int> result;
-		succInSet = successor->getInSet ();
-		std::set_union (succInSet.begin (), succInSet.end (), _outSet.begin (), _outSet.end (), std::inserter (tempSet, tempSet.begin ()));
-		_outSet = tempSet;
-		// printf ("%d,%d\n",succInSet.size (),_outSet.size ());
-	}
+    bool intra_bb_change = false;
+    do {
+        intra_bb_change = false;
+        int ins_list_size = _insList->NumElements ();
+        for  (int i = ins_list_size - 1; i >= 0; i--) {
+            instruction* ins = _insList->Nth (i);
+            bool is_intra_bb_change = ins->update_InOutSet ();
+            if (is_intra_bb_change) intra_bb_change = true;
+//            cout <<  is_intra_bb_change << " " << intra_bb_change << endl;
+        }
+    } while (intra_bb_change);
 
-	// UPDATE _inSet
-	set<long int> result1,result2;
-	std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result1, result1.begin ()));
-	std::set_difference (_useSet.begin (), _useSet.end (), _defSet.begin (), _defSet.end (), std::inserter (result2, result2.begin ()));
-	std::set_union (result1.begin (), result1.end (), result2.begin (), result2.end (), std::inserter (_inSet, _inSet.begin ()));
-	// printf ("%d,%d,%d\n",_useSet.size (),_inSet.size (),_outSet.size ());
+    _inSet = _insList->Nth(0)->getInSet ();
+    _outSet = _insList->Last()->getOutSet ();
 
-	// ANY CHANGE IN THE BB SETS?
-	bool change;
-	if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
-		change = true;
-	else
-		change = false;
-	return change;
+	/* ANY CHANGE IN THE BB SETS? */
+	bool inter_bb_change;
+	if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ()) {
+//        cout << "true " << getID () << " " << _outSet.size () << " " << _inSet.size () << endl;
+		inter_bb_change = true;
+    } else {
+//        cout << getID () << " " << _outSet.size () << " " << _inSet.size () << endl;
+		inter_bb_change = false;
+    }
+	return inter_bb_change;
 }
 
 void basicblock::brDependencyTableCheck () {
@@ -724,41 +780,43 @@ void basicblock::brDependencyTableCheck () {
     delete brList;
 }
 
-/* Construct def/use sets from x86 format of registers */
+/* CONSTRUCT DEF/USE SETS FROM X86 FORMAT OF REGISTERS */
 void basicblock::setupDefUseSets () {
 	for  (int i =0 ; i < _insList->NumElements (); i++) {
 		instruction* ins = _insList->Nth (i);
+        ins->setupDefUseSets ();
+        //TODO upgrade this by getting def and use sets from instructions
 		for  (int j = 0; j < ins->getNumReg (); j++) {
-			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
-				//second condition avoids ud-chains within a BB from propagating
-				updateUseSet (ins->getNthReg (j));
-			} else if  (ins->getNthRegType (j) == WRITE) {
+//			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
+//				//second condition avoids ud-chains within a BB from propagating
+//				updateUseSet (ins->getNthReg (j));
+//			} else if  (ins->getNthRegType (j) == WRITE) {
+			if  (ins->getNthRegType (j) == WRITE) {
 	 			updateDefSet (ins->getNthReg (j));
-			} else {
-				Assert (true == false && "Invalid register type");
+//			} else {
+//				Assert (0 && "Invalid register type");
 			}
 		}
 	}
 }
 
-/* Re-Construct def/use sets from SSA format of registers */
+/* RE-CONSTRUCT DEF/USE SETS FROM SSA FORMAT OF REGISTERS */
 void basicblock::renameAllInsRegs () {
 	_defSet.clear ();
 	_useSet.clear ();
 	for  (int i =0 ; i < _insList->NumElements (); i++) {
 		instruction* ins = _insList->Nth (i);
-		ins->makeUniqueRegs ();
-		//printf ("ins %llx\n",ins->getInsAddr ());
+        ins->renameAllInsRegs ();
 		for  (int j = 0; j < ins->getNumReg (); j++) {
 			long int reg = ins->getNthReg (j);
-			//printf ("reg: %ld\n",reg);
-			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
-				//second condition avoids ud-chains within a BB from propagating
-				updateUseSet (reg);
-			} else if  (ins->getNthRegType (j) == WRITE) {
+//			if  (ins->getNthRegType (j) == READ) {// && _defSet.find (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
+//				//second condition avoids ud-chains within a BB from propagating
+//				updateUseSet (reg);
+//			} else if  (ins->getNthRegType (j) == WRITE) {
+			if  (ins->getNthRegType (j) == WRITE) {
 	 			updateDefSet (reg);
-			} else {
-				Assert (true == false && "Invalid register type");
+//			} else {
+//				Assert (0 && "Invalid register type");
 			}
 		}
 	}

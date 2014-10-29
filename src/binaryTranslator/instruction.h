@@ -10,17 +10,18 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <set>
-#include <map>
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <set>
+#include <map>
 
 #include "list.h"
 #include "global.h"
 // #include "registerRename.h"
 
-class dependencyTable; /*used in another version of C compiler*/
+class dependencyTable; /*USED IN ANOTHER VERSION OF C COMPILER*/
 
 class instruction {
 	public:
@@ -29,8 +30,10 @@ class instruction {
 
 		void setOpCode (const char *);
 		void setInsAddr (ADDR);
-		void setInsDst (ADDR, bool);
-		void setInsFallThru (ADDR, bool);
+		void setInsDstAddr (ADDR, bool);
+		void setInsFallThruAddr (ADDR, bool);
+		void setInsDst (instruction*);
+		void setInsFallThru (instruction*);
 		void setInsAsm (const char *);
 		void setType (const char);
 		void setBrTakenBias (double brBias);
@@ -45,9 +48,12 @@ class instruction {
 		void setMemAccessSize (int memSize); //in bytes
 
 		const char *getOpCode ();
+		void resetInsDst ();
+		void resetInsFallThru ();
 		ADDR getInsAddr ();
-		ADDR getInsDst ();
-		ADDR getInsFallThru ();
+		ADDR getInsDstAddr ();
+		ADDR getInsFallThruAddr ();
+		instruction* getInsFallThru ();
 		const char *getInsAsm ();
 		const char getType ();
 		double getBrTakenBias ();
@@ -75,7 +81,7 @@ class instruction {
 		bool hasDst ();
 		bool hasFallThru ();
 		
-		/* Dependency checking methods */
+		/* DEPENDENCY CHECKING METHODS */
 		List<instruction*>* getDependents ();
 		List<instruction*>* getAncestors ();
 		List<instruction*>* getRegAncestors ();
@@ -89,13 +95,13 @@ class instruction {
 		int getNumAncestors ();
 		int getNumDependents ();
 
-		/* Register Renaming */
+		/* REGISTER RENAMING */
 	    void renameWriteReg (int indx, long int reg);                                                                                                                       
 	    void renameReadReg (int indx, long int renReg);                                                                                                           
 	    long int getRenamedReg (long int reg);                                                                                                                    
 	    bool isRepeated (instruction* temp, List<instruction*>*ancestors);                                                                                        
 		
-		/* BB/PB Related */
+		/* BB/PB RELATED */
 		bool isLongestPathSet ();
 		int getLongestPath ();
 		void resetLongestPath ();
@@ -105,46 +111,83 @@ class instruction {
 		set<ADDR> getMy_PB_id ();
 		ADDR getMy_first_PB_id ();
 		
-		/* Reg Allocation */
+		/* REG ALLOCATION */
 		void allocatedRegister (long int r_allocated, regKind rk);
 		bool isAlreadyAssignedArcRegs ();
 		
+		/* DATA-FLOW ANALYSIS */
+    private:
+		void updateDefSet (long int reg);
+		void updateUseSet (long int reg);
+		void updateLocalRegSet ();
+    public:
+		bool update_InOutSet ();
+		void setupDefUseSets ();
+		void renameAllInsRegs ();
+		set<long int> getInSet ();
+		set<long int> getOutSet ();
+		set<long int> getDefSet ();
+		set<long int> getLocalRegSet ();
+		bool isInLocalRegSet (long int reg);
+		int getLiveVarSize () { return _inSet.size ()+_defSet.size (); }
+
 
 	private:
 		char _opCode[OPCODE_STRING_SIZE];
 		char _command[INS_STRING_SIZE];
-        List<long int> *_r;  //SSA Register List
-        List<long int> *_r_read;  //SSA Register List
-        List<long int> *_r_write;  //SSA Register List
-        List<long int> *_r_write_old;  //SSA Register List (not renamed by SSA)
-        List<long int> *_r_allocated;  //Register List
-        List<int> *_rt; //Register Type List
-		List<regKind> *_rk; //Register Kind (LRF=0 vs. GRF=1)
+		set<ADDR> _myBBs;
+		ADDR _insAddr;
+
+        /* REGS */
+        List<long int> *_r; //SSA REGISTER LIST
+        List<long int> *_r_read; //SSA REGISTER LIST
+        List<long int> *_r_write; //SSA REGISTER LIST
+        List<long int> *_r_write_old; //SSA REGISTER LIST (NOT RENAMED BY SSA)
+        List<long int> *_r_allocated; //REGISTER LIST
+        List<int> *_rt; //REGISTER TYPE LIST
+		List<regKind> *_rk; //REGISTER KIND (LRF=0 VS. GRF=1)
+
+        /* DATA DEPENDENCIES */
 		List<instruction*>* _ancestors;
 		List<instruction*>* _dependents;
 		List<instruction*>* _regAncestors;
+
+        /* SSA */
 		map<int,int> _readVar;
 		map<int,int> _writeVar;
+
+        /* MEM */
 		map<long int,long int> writeRegRenMap;
 	    map<long int,long int> readRegRenMap;
         set<ADDR> _memRdAddr;
         set<ADDR> _memWrAddr;
-		set<ADDR> _myBBs;
-		ADDR _insAddr;
-		ADDR _insDst;
-		ADDR _insFallThru;
-		int _latency;
 		int _memSize;
-		int _longestPath;
-		bool _hasDst;
-		bool _hasFallThru;
 		bool _memRead;
 		bool _memWrite;
+
+        /* NEXT INS's */
+		ADDR _insDstAddr;
+		ADDR _insFallThruAddr;
+		instruction* _insDst;
+		instruction* _insFallThru;
+		bool _hasDst;
+		bool _hasFallThru;
+
+        /* SCHEDULING */
+		int _latency;
+		int _longestPath;
 		char _insType;
 		double _brBias;
 		double _bpAccuracy;
 		double _missRate;
         MEM_SCH_MODE _mem_sch_mode;
+
+        /* LIVENESS */
+		std::set<long int> _useSet;
+		std::set<long int> _defSet;
+		std::set<long int> _inSet;
+		std::set<long int> _outSet;
+		std::set<long int> _localRegSet;
 };
 
 #endif

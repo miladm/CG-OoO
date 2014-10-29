@@ -140,13 +140,13 @@ void parse_instruction (List<instruction*> *insList,
         insFallThru = 0;
 		if (fscanf (input_assembly, "%d\n", &hasFallThru) == EOF) break;
 		if (hasFallThru) {if (fscanf (input_assembly, "%llx\n", &insFallThru) == EOF) break;}
-		newIns->setInsFallThru (insFallThru, hasFallThru);
+		newIns->setInsFallThruAddr (insFallThru, hasFallThru);
 
         /* SET INSTRUCTION DESTIATION */
         insDst = 0;
 		if (fscanf (input_assembly, "%d\n", &hasDst) == EOF) break;
         if (hasDst) {if (fscanf (input_assembly, "%llx\n", &insDst) == EOF) break;}
-		newIns->setInsDst (insDst, hasDst);
+		newIns->setInsDstAddr (insDst, hasDst);
 
 		/* SETUP INSTRUCTION BRANCH DESTINATION/BIAS/ACCURACY INFORMATION */
 		if (newIns->getType () == 'j' || newIns->getType () == 'b' || 
@@ -154,10 +154,10 @@ void parse_instruction (List<instruction*> *insList,
 
 			/* SETUP BB START SET */
 			if (newIns->hasDst ()) 
-                brDstSet->insert (newIns->getInsDst ());
+                brDstSet->insert (newIns->getInsDstAddr ());
 			if (newIns->hasFallThru () && 
                 (newIns->getType () == 'b' || newIns->getType () == 'c')) 
-                brDstSet->insert (newIns->getInsFallThru ());
+                brDstSet->insert (newIns->getInsFallThruAddr ());
 
 			/* SETUP BRANCH PREDICTION ACCURACY INFORMATION */
 			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
@@ -196,7 +196,52 @@ void parse_instruction (List<instruction*> *insList,
 		newIns->dependencyTableCheck (depTables); /* DISABLED */
 	}
 
-	//Close files
+    
+    /* 
+     * - IF AN INSTRUCTION NEXT INS IS NOT IN THE INSLIST, CLEAN THE INS ENTRIED
+     * - THIS CLEANS UP THE DESTINATION OF CALL INSTRUCTIONS
+     */
+    int num_missing_ins = 0;
+    for (int i = 0; i < insList->NumElements (); i++) {
+        ADDR dst, fallThru;
+        instruction* ins = insList->Nth (i);
+        if (ins->hasDst ()) {
+            dst = ins->getInsDstAddr ();
+            if (insAddrMap->find (dst) == insAddrMap->end ()) {
+                ins->resetInsDst (); num_missing_ins++;
+            }
+        }
+        if (ins->hasFallThru ()) {
+            fallThru = ins->getInsFallThruAddr ();
+            if (insAddrMap->find (fallThru) == insAddrMap->end ()) {
+                ins->resetInsFallThru (); num_missing_ins++;
+            }
+        }
+    }
+	printf ("\tNumber of missin instructions in insList: %d\n", num_missing_ins);
+
+    for (int i = 0; i < insList->NumElements (); i++) {
+        ADDR dst, fallThru;
+        instruction* ins = insList->Nth (i);
+
+        /* FIND DESTINATION POINTERS */
+        if (ins->hasDst ()) {
+            dst = ins->getInsDstAddr ();
+            Assert (insAddrMap->find (dst) != insAddrMap->end ());
+            instruction* dst_ins = (*insAddrMap)[dst];
+            ins->setInsDst (dst_ins);
+        }
+
+        /* FIND FALL-THROUGH POINTERS */
+        if (ins->hasFallThru ()) {
+            fallThru = ins->getInsFallThruAddr ();
+            Assert (insAddrMap->find (fallThru) != insAddrMap->end ());
+            instruction* fallThru_ins = (*insAddrMap)[fallThru];
+            ins->setInsFallThru (fallThru_ins);
+        }
+    }
+
+	/* CLOSE FILES */
 	fclose (input_assembly);
 	fclose (input_brBias);
 	fclose (input_bpAccuracy);

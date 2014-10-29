@@ -25,9 +25,10 @@ class basicblock {
 		basicblock& operator= (const basicblock& bb);
 		void transferPointersToNewList (List<basicblock*>* bbList);
 		
-		//Instruction
+		//INSTRUCTION
 		void addIns (instruction*, REACHING_TYPE);
 		void addIns (instruction*, ADDR);
+		void addMovIns (instruction*);
 		ADDR getLastInsDst ();
 		ADDR getLastInsFallThru ();
 		instruction* getLastIns ();
@@ -47,7 +48,7 @@ class basicblock {
 		bool hasHeader ();
         ADDR getBBtail ();
 		
-		//Pointers to other BB
+		//POINTERS TO OTHER BB
 		void setFallThrough (basicblock* bb);
 		void setTakenTarget (basicblock* bb);
 		void setDescendent (basicblock* bb);
@@ -62,14 +63,14 @@ class basicblock {
 		int getNumDescendents ();
 		int getNumAncestors ();
 
-		//Visit
+		//VISIT
 		void setAsVisited ();
 		void setAsUnvisited ();
 		bool isVisited ();
 		bool isRegAllocated ();
 		void setRegAllocated ();
 		
-		//Dominator / Loop
+		//DOMINATOR / LOOP
 		bool setDominators ();
 		map<ADDR,basicblock*> getDominators ();
 		bool setDominators (map<ADDR,basicblock*> &intersection);
@@ -98,7 +99,7 @@ class basicblock {
 		bool getAllasDominators ();
 		void setAllasDominators (bool domSetIsAll);
 		
-		//SSA / Phi-function
+		//SSA / PHI-FUNCTION
 		void insertPhiFunc (long int var);
 		map<long int, vector<long int> > getPhiFuncs ();
 		void replaceNthPhiOperand (long int var, int indx, long int subscript);
@@ -107,27 +108,28 @@ class basicblock {
 		int elimPhiFuncs ();
 		void insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs);
 	
-		//Profile
+		//PROFILE
 		float getTakenBias ();
 		int getListIndx ();
 		void setListIndx (int listIndx);
 		
-		//Phraseblock
+		//PHRASEBLOCK
 		void addBBtoPBList (ADDR bbID);
 		List<ADDR>* getBBListForPB ();
 		bool isAPhraseblock ();
 		
-		// Phrase
+		// PHRASE
 		void basicblockToPhrase ();
 		
 		// List-Scheduling Functions
 		void addToBB_ListSchedule (instruction* ins);
 		List<instruction*>* getInsList_ListSchedule ();
 		
-		// Data-flow analysis
+		// DATA-FLOW ANALYSIS
+    private:
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
-		void updateLocalRegSet ();
+    public:
 		bool update_InOutSet ();
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
@@ -135,6 +137,7 @@ class basicblock {
 		set<long int> getDefSet ();
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
+		void updateLocalRegSet ();
 		int getLiveVarSize () {
 			// for (set<long int>::iterator it = _inSet.begin (); it != _inSet.end (); it++) {
 			// 	printf (", %ld", *it);

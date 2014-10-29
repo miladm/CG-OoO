@@ -11,8 +11,10 @@ long int nextRenReg = INIT_RENAME_REG_NUM;
 
 instruction::instruction () {
 	_insAddr = -1;
-	_insDst = -1;
-	_insFallThru= -1;
+	_insDstAddr = -1;
+	_insFallThruAddr = -1;
+	_insDst = NULL;
+	_insFallThru = NULL;
 	_memSize = 0;
 	_memWrite = false;
 	_memRead = false;
@@ -59,20 +61,28 @@ void instruction::setInsAddr (ADDR insAddr) {
 	_insAddr = insAddr;
 }
 
-void instruction::setInsFallThru (ADDR insFallThru, bool hasFallThru) {
+void instruction::setInsFallThruAddr (ADDR insFallThruAddr, bool hasFallThru) {
 	_hasFallThru = hasFallThru;
     if (_hasFallThru) {
-	    Assert (insFallThru > 0 && "insFallThru must be larger than zero.");
-        _insFallThru = insFallThru;
+	    Assert (insFallThruAddr > 0 && "insFallThruAddr must be larger than zero.");
+        _insFallThruAddr = insFallThruAddr;
     }
 }
 
-void instruction::setInsDst (ADDR insDst, bool hasDst) {
+void instruction::setInsDstAddr (ADDR insDstAddr, bool hasDst) {
 	_hasDst = hasDst;
     if (_hasDst) {
-	    Assert (insDst > 0 && "insDst must be larger than zero.");
-        _insDst = insDst;
+	    Assert (insDstAddr > 0 && "insDstAddr must be larger than zero.");
+        _insDstAddr = insDstAddr;
     }
+}
+
+void instruction::setInsFallThru (instruction* insFallThru) {
+    if (_hasFallThru) { _insFallThru = insFallThru; }
+}
+
+void instruction::setInsDst (instruction* insDst) {
+    if (_hasDst) { _insDst = insDst; }
 }
 
 void instruction::setInsAsm (const char *command) {strcpy (_command, command);}
@@ -100,7 +110,7 @@ void instruction::setType (const char insType) {
 		_bpAccuracy = 1.0;
 		_latency = ST_LATENCY;
 	} else if (getType () == 'M') {
-        Assert (true == false && "Invalid memory type");
+        Assert (0 && "Invalid memory type");
 	} else { //NOTE: in this not wrong to do? covers fall through paths that are not all branch ops
 		_brBias = 0.0;
 		_bpAccuracy = 1.0;
@@ -120,31 +130,50 @@ void instruction::setBPaccuracy (double bpAccuracy) {
 
 const char *instruction::getOpCode () {return _opCode;}
 
+void instruction::resetInsDst () {
+    _hasDst = false;
+	_insDstAddr = -1;
+	_insDst = NULL;
+}
+
+void instruction::resetInsFallThru () {
+    _hasFallThru = false;
+	_insFallThruAddr = -1;
+	_insFallThru = NULL;
+}
+
 ADDR instruction::getInsAddr () {
 	Assert (_insAddr > 0 && "insAddr must be larger than zero.");
 	return _insAddr;
 }
 
-ADDR instruction::getInsDst () {
-	Assert (_insDst > 0 && "insDst must be larger than zero.");
-	return _insDst;
+ADDR instruction::getInsDstAddr () {
+	Assert (_insDstAddr > 0 && "insDstAddr must be larger than zero.");
+	return _insDstAddr;
 }
 
-ADDR instruction::getInsFallThru () {
-	Assert (_insFallThru > 0 && "insFallThru must be larger than zero.");
+ADDR instruction::getInsFallThruAddr () {
+	Assert (_insFallThruAddr > 0 && "insFallThruAddr must be larger than zero.");
+	return _insFallThruAddr;
+}
+
+instruction* instruction::getInsFallThru () {
+	Assert (_insFallThru != NULL && "insFallThru must not be NULL.");
 	return _insFallThru;
 }
 
 bool instruction::hasDst () {
     if ((getType () == 's' || getType () == 'o' || 
-         getType () == 'n' || getType () == 'r') && _hasDst) 
+         getType () == 'n' || getType () == 'r') && _hasDst) {
+        cout << "*** Instruction Address: " << hex << getInsAddr () << endl;
         Assert (0 && "a destination must not have existed");
+    }
 	return _hasDst;
 }
 
 bool instruction::hasFallThru () {
     if ((getType () == 's' || getType () == 'r' || 
-         getType () == 'j') && _hasFallThru) 
+         getType () == 'j') && _hasFallThru)
         Assert (0 && "a fall-through must not have existed");
 	return _hasFallThru;
 }
@@ -308,7 +337,7 @@ void instruction::makeUniqueRegs () {
 			Assert (_writeVar.find (reg) != _writeVar.end ());
 			ssa = _writeVar[reg]*100+reg;
 		} else {
-			Assert ( true == false && "Invalid register type.");
+			Assert ( 0 && "Invalid register type.");
 		}
 		_r->RemoveAt (i);
 		_r->InsertAt (ssa,i);
@@ -449,7 +478,7 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
             setAsAncestor (storeOp);
         }
     } else {
-        Assert (true == false && "Invalid memory scheduling options");
+        Assert (0 && "Invalid memory scheduling options");
     }
 
 	if (getType () == 'M' && isWrMemType ()) {
@@ -573,3 +602,130 @@ void instruction::allocatedRegister (long int r_allocated, regKind rk) {
 	_r_allocated->Append (r_allocated);
 	_rk->Append (rk);
 }
+
+void instruction::updateDefSet (long int reg) {
+	_defSet.insert (reg);
+}
+
+void instruction::updateUseSet (long int reg) {
+	_useSet.insert (reg);
+}
+
+void instruction::updateLocalRegSet () {
+	Assert (_localRegSet.size () == 0 && "The local register set must be empty at this point.");
+	//The commented code makes write-registers that are never read be assigned in GRF	
+	//std::set<long int> _defUseIntersection;
+	//std::set_intersection (_defSet.begin (), _defSet.end (), _useSet.begin (), _useSet.end (), std::inserter (_defUseIntersection, _defUseIntersection.begin ()));
+	//std::set_difference (_defUseIntersection.begin (), _defUseIntersection.end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
+	std::set_difference (_defSet.begin (), _defSet.end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
+/* debug	
+	printf ("local set ratio:, %f\n",  (double)_localRegSet.size ()/ (double) (_inSet.size ()+_defSet.size ()));
+	std::set<long int> test1,test2;
+	std::set_union (_outSet.begin (), _outSet.end (), _useSet.begin (), _useSet.end (), std::inserter (test1, test1.begin ()));
+	std::set_difference (_defSet.begin (), _defSet.end (), test1.begin (), test1.end (), std::inserter (test2, test2.begin ()));
+	for  (set<long int>::iterator it = test2.begin (); it != test2.end (); it++) {
+		printf ("stale register: %d\n", (*it)%100);
+	}
+*/
+}
+
+bool instruction::isInLocalRegSet (long int reg) {
+	if  (_localRegSet.find (reg) == _localRegSet.end ())
+		return false;
+	else
+		return true;
+}
+
+set<long int> instruction::getOutSet () {
+	return _outSet;
+}
+
+set<long int> instruction::getInSet () {
+	return _inSet;
+}
+
+set<long int> instruction::getDefSet () {
+	return _defSet;
+}
+
+set<long int> instruction::getLocalRegSet () {
+	return _localRegSet;
+}
+
+bool instruction::update_InOutSet () {
+    int outSetSize = _outSet.size ();
+    int inSetSize = _inSet.size ();
+
+    /*-- UPDATE _outSet --*/
+    set<long int> tempSet;
+    set<long int> succInSet;
+
+    /* DESTINATION */
+    if (_hasDst) {
+        tempSet.clear ();
+        succInSet.clear ();
+        Assert (_insDst != NULL);
+        succInSet = _insDst->getInSet ();
+        std::set_union (succInSet.begin (), succInSet.end (), _outSet.begin (), _outSet.end (), std::inserter (tempSet, tempSet.begin ()));
+        _outSet = tempSet;
+    }
+
+    /* FALL-THROUGH */
+    if (_hasFallThru) {
+        tempSet.clear ();
+        succInSet.clear ();
+        Assert (_insFallThru != NULL);
+        succInSet = _insFallThru->getInSet ();
+        std::set_union (succInSet.begin (), succInSet.end (), _outSet.begin (), _outSet.end (), std::inserter (tempSet, tempSet.begin ()));
+        _outSet = tempSet;
+    }
+
+    /*-- UPDATE _inSet --*/
+    set<long int> outMinusDef;
+    std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (outMinusDef, outMinusDef.begin ()));
+    std::set_union (outMinusDef.begin (), outMinusDef.end (), _useSet.begin (), _useSet.end (), std::inserter (_inSet, _inSet.begin ()));
+
+    /*-- ANY CHANGE IN THE BB SETS? --*/
+    bool change;
+//    cout << outSetSize << " " << _outSet.size () << " " << inSetSize << " " << _inSet.size () << endl;
+    if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
+        change = true;
+    else
+        change = false;
+    return change;
+}
+
+/* CONSTRUCT DEF/USE SETS FROM X86 FORMAT OF REGISTERS */
+void instruction::setupDefUseSets () {
+    for  (int j = 0; j < getNumReg (); j++) {
+        long int reg = getNthReg (j);
+        if  (getNthRegType (j) == READ) {
+            //second condition avoids ud-chains within a BB from propagating
+            updateUseSet (reg);
+        } else if  (getNthRegType (j) == WRITE) {
+            updateDefSet (reg);
+        } else {
+            Assert (0 && "Invalid register type");
+        }
+    }
+}
+
+/* RE-CONSTRUCT DEF/USE SETS FROM SSA FORMAT OF REGISTERS */
+void instruction::renameAllInsRegs () {
+    _defSet.clear ();
+    _useSet.clear ();
+    makeUniqueRegs ();
+    //printf ("ins %llx\n",ins->getInsAddr ());
+    for  (int j = 0; j < getNumReg (); j++) {
+        long int reg = getNthReg (j);
+        if  (getNthRegType (j) == READ) {
+            //second condition avoids ud-chains within a BB from propagating
+            updateUseSet (reg);
+        } else if  (getNthRegType (j) == WRITE) {
+            updateDefSet (reg);
+        } else {
+            Assert (0 && "Invalid register type");
+        }
+    }
+}
+
