@@ -214,7 +214,7 @@ void instruction::setRegister (long int *r, int *rt) {
     int tempRT = *rt; 
 	if (! (tempR <= X86_REG_HI && tempR >= X86_REG_LO)) printf ("invalid reg: %d\n",tempR);
     //Assert (tempR >= 1); //TODO this is remved to enable instruction injection
-    Assert (tempRT >= READ && tempRT <= WRITE);
+    Assert (tempRT == READ || tempRT == WRITE);
 	Assert (tempR <= X86_REG_HI && tempR >= X86_REG_LO && "Invalid register value");
     (_r)->Append (tempR);
     (_rt)->Append (tempRT);
@@ -661,7 +661,8 @@ bool instruction::update_InOutSet () {
     set<long int> succInSet;
 
     /* DESTINATION */
-    if (_hasDst) {
+    if (_hasDst && 
+       (getType () == 'j' || getType () == 'b')) {
         tempSet.clear ();
         succInSet.clear ();
         Assert (_insDst != NULL);
@@ -671,7 +672,8 @@ bool instruction::update_InOutSet () {
     }
 
     /* FALL-THROUGH */
-    if (_hasFallThru) {
+    if (_hasFallThru &&
+        !(getType () == 'r' || getType () == 'j' || getType () == 's')) {
         tempSet.clear ();
         succInSet.clear ();
         Assert (_insFallThru != NULL);

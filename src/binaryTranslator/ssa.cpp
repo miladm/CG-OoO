@@ -175,7 +175,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 
 void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
-	findDomEntryPoints (bbList, interiorBB); //TODO: this is done twice (another time in reg-allocation - fix it)
+	findDomEntryPoints (bbList, interiorBB);
 	for (int i = 0; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->setAsUnvisited ();
 	for (int i = 0; i < interiorBB->NumElements (); i++) {
