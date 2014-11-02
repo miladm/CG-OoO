@@ -61,7 +61,7 @@ void parse_instruction (List<instruction*> *insList,
 		Assert ("Cannot open mem addresses file.");
 	}
 
-	//Parse branch bias numbers
+	/* PARSE BRANCH BIAS NUMBERS */
 	printf ("\tRead branch bias profile file: %s\n", ("input_files/"+ (*program_name) + "_bias.csv").c_str ());
 	while (1) {
 		ADDR addr;
@@ -69,7 +69,7 @@ void parse_instruction (List<instruction*> *insList,
 		if (fscanf (input_brBias, "%lx, %lf\n", &addr, &bias) == EOF) break;
 		brBiasMap->insert (pair<ADDR, double> (addr,bias));
 	}
-	//Parse branch prediction numbers
+	/* PARSE BRANCH PREDICTION NUMBERS */
 	printf ("\tRead branch prediction accuracy profile file: %s\n", ("input_files/"+ (*program_name) + "_bpAccuracy.csv").c_str ());
 	while (1) {
 		ADDR addr;
@@ -77,7 +77,7 @@ void parse_instruction (List<instruction*> *insList,
 		if (fscanf (input_bpAccuracy, "%lx, %lf\n", &addr, &accuracy) == EOF) break;
 		bpAccuracyMap->insert (pair<ADDR, double> (addr,accuracy));
 	}
-	//Parse unpredictable load numbers
+	/* PARSE UNPREDICTABLE LOAD NUMBERS */
 	printf ("\tRead UPLD profile file: input_files/input_upld.csv\n");
 	while (1) {
 		ADDR addr;
@@ -101,6 +101,7 @@ void parse_instruction (List<instruction*> *insList,
 	// }
 
 	/* PARSE ASSEMBLY INSTRUCTIONS */
+	printf ("\tRead X86 .s file: %s\n", ("input_files/"+ (*program_name) + ".s").c_str ());
 	while (1) {
 		instruction *newIns = new instruction;
 		while (1) {
@@ -218,7 +219,7 @@ void parse_instruction (List<instruction*> *insList,
             }
         }
     }
-	printf ("\tNumber of missin instructions in insList: %d\n", num_missing_ins);
+	printf ("\tNumber of missing instructions in insList: %d\n", num_missing_ins);
 
     for (int i = 0; i < insList->NumElements (); i++) {
         ADDR dst, fallThru;

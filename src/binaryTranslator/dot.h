@@ -26,6 +26,8 @@ class dot {
 		void closeBlock();
 		void setupBox(string color);
 		void finishBox();
+        void getInteriorBB ();
+        void makeLink (basicblock*);
 
 	private:
 		char* _fillColor;
@@ -39,6 +41,8 @@ class dot {
 		FILE* _outFile;
 		List<instruction*>* _insList;
 		List<basicblock*>* _bBlist;
+
+        List<basicblock*>* _interiorBB;
 };
 
 #endif

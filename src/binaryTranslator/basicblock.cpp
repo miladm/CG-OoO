@@ -247,7 +247,7 @@ ADDR basicblock::getLastInsDst () {
 
 instruction* basicblock::getLastIns () {
 	Assert (_insList->NumElements () > 0 && "BB size is zero.");
-	return _insList->Nth (_insList->NumElements ()-1);
+	return _insList->Last ();
 }
 
 
@@ -409,6 +409,7 @@ bool basicblock::getAllasDominators () {
 	return _domSetIsAll;
 }
 
+/* TODO - this function is no longer used - remove when sure */
 bool basicblock::setDominators (List<basicblock*>* bbList) {
 	Assert (_dominatorMap.size () == 0 && "set size must be zero initially.");
 	if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
@@ -426,24 +427,31 @@ bool basicblock::setDominators (List<basicblock*>* bbList) {
 }
 
 bool basicblock::setDominators (map<ADDR,basicblock*> &intersection) {
+    map<ADDR,basicblock*> out;
 	map<ADDR,basicblock*> oldMap = _dominatorMap;
-	_dominatorMap.clear ();
-	_dominatorMap = intersection;
+    if (_dominatorMap.size () > 0) {
+        set_intersection (intersection.begin (), intersection.end (),
+                          _dominatorMap.begin (), _dominatorMap.end (),
+                          std::inserter (out, out.begin ()));
+        _dominatorMap = out;
+    } else {
+	    _dominatorMap = intersection;
+    }
 	if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
 		_dominatorSet.insert (getID ());
 		_dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));
 	}
+
 	for  (map<ADDR,basicblock*>::iterator it = _dominatorMap.begin (); it != _dominatorMap.end (); it++) {
 		_dominatorSet.insert (it->first);
 	}
+
 	if  (oldMap.size () != _dominatorMap.size ()) {
 		return true;
 	} else {
-		map<ADDR,basicblock*>::iterator it1, it2;
-		for  (it1 = _dominatorMap.begin (), it2 = oldMap.begin (); it1 != _dominatorMap.end (); it1++, it2++) {
-			if  (*it1 != *it2) {
-				return true;
-			}
+		map<ADDR,basicblock*>::iterator it1;
+		for  (it1 = _dominatorMap.begin (); it1 != _dominatorMap.end (); it1++) {
+            if (oldMap.find (it1->first) == oldMap.end ()) return true;
 		}
 		return false;
 	}

@@ -35,6 +35,7 @@ class variable {
 		int _c; //number of processed assignments to _var 
 		vector<long int> _s; //the index for var_i is kept here
 		List<basicblock*>* bbList;
+    public:
 		int _hackPushCount;
 };
 

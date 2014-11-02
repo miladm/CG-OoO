@@ -62,6 +62,7 @@ void dot::createSubGraph (int subGraphID) {
 void dot::defn () {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
         basicblock* bb = _bBlist->Nth (j);
+//        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		_insList = bb->getInsList ();
 		ADDR bbID = bb->getID ();
 		//if (bbID == 18446744073709551615) continue; //TODO remove/fix this problem
@@ -132,7 +133,7 @@ void dot::createGraph () {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
 		ADDR bbID = _bBlist->Nth (j)->getID ();
 		basicblock* bb = _bBlist->Nth (j);
-		//if (bbID == 18446744073709551615) continue; //TODO remove this
+//        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			if (bb->getLastInsDst () == -1) {
 				fprintf (_outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());

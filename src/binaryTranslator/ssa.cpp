@@ -119,7 +119,10 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 			for (int j = 0; j < ins->getNumReadReg (); j++) {
 				int var = ins->getNthReadReg (j);
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
-				ins->setReadVar (var, varList[var]->getTopStack ());
+                int v1 = varList[var]->_hackPushCount;
+                int subscript = varList[var]->getTopStack ();
+//                if (varList[var]->_hackPushCount - v1 == 1) cout << "-" << subscript*100+var << endl;
+				ins->setReadVar (var, subscript);
 			}
 			for (int j = 0; j < ins->getNumWriteReg (); j++) {
 				int var = ins->getNthWriteReg (j);
@@ -139,7 +142,10 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 				//TODO see if j ever larger than 0
 				//we want to have as many elemenet in teh phi-vector as the number of ancestors of the BB. Then every ancestor must come and fill in the hole
-				Y->replaceNthPhiOperand (var,j,varList[var]->getTopStack ()); //TODO correct?
+                int v1 = varList[var]->_hackPushCount;
+                int subscript = varList[var]->getTopStack ();
+//                if (varList[var]->_hackPushCount - v1 == 1) cout << "*" << subscript*100+var << endl;
+				Y->replaceNthPhiOperand (var, j, subscript); //TODO correct?
 			}
 		}
 		map<ADDR,basicblock*> children = bb->getChildren ();
@@ -183,7 +189,15 @@ void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
 		search (bbHead, varList);
 	}
 	for (int i = 0; i < bbList->NumElements (); i++) {
-		if (bbList->Nth (i)->isVisited () == false) printf ("unvisited BB ID: %llx,%d,%d\n", bbList->Nth (i)->getID (), bbList->Nth (i)->getNumAncestors (), bbList->Nth (i)->numNonBackEdgeAncestors ());
+        if (bbList->Nth (i)->isVisited () == false) {
+            printf ("Unvisited BB ID: %llx,%d,%d <- ", bbList->Nth (i)->getID (), 
+                                                       bbList->Nth (i)->getNumAncestors (), 
+                                                       bbList->Nth (i)->numNonBackEdgeAncestors ());
+            for (int j = 0; j < bbList->Nth (i)->getNumAncestors (); j++) { 
+                printf ("%llx, ", bbList->Nth (i)->getNthAncestor (j)->getID ());
+            }
+            cout << endl;
+        }
 		bbList->Nth (i)->setAsUnvisited ();
 	}
 }

@@ -240,7 +240,8 @@ void instruction::setReadVar (int var, int subscript) {
 void instruction::setWriteVar (int var, int subscript) {
 	Assert ((var <= X86_REG_HI && var >= X86_REG_LO) && "Invalid architectural register assignment.");
 	Assert (subscript >= 0 && "Invalid SSA register assignment value");
-	if (_writeVar.find (var) != _writeVar.end ()) printf ("trying to rewrite an already assigned write register (old:%d,new:%d)\n", subscript,_writeVar[var]);
+	if (_writeVar.find (var) != _writeVar.end ()) 
+        printf ("Trying to rewrite an already assigned write register (old:%d,new:%d)\n", subscript,_writeVar[var]);
 	if (_writeVar.find (var) != _writeVar.end () && subscript>0 && _writeVar[var]==0)
 		_writeVar.erase (var);
 	_writeVar.insert (pair<int,int> (var,subscript));
