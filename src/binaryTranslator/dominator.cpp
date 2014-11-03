@@ -37,23 +37,6 @@ void build_dominators (List<basicblock*>* bbList) {
             for (indx = 0; indx < n->getNumAncestors (); indx++) {
 				if (n->getNthAncestor (indx)->getAllasDominators () == true) continue;
 				intersection = n->getNthAncestor (indx)->getDominators ();
-				if (intersection.find (n->getID ()) != intersection.end ()) {
-//                    cout << "found loop edge from " << hex << n->getNthAncestor (indx)->getID () << " to " << n->getID () << endl;
-					intersection.clear ();
-                    if (n->getID () == 0x410170) {
-                        cout << "damn" << endl;
-                    }
-					continue;
-				}
-                if (n->getID () == 0x410170) {
-                    cout << "hoy: (" << indx << " " << n->getNthAncestor (indx)->getID () << ") ";
-                    map<ADDR,basicblock*> df = n->getNthAncestor (indx)->getDominators ();
-                    map<ADDR,basicblock*>::iterator it;
-                    for (it = df.begin (); it != df.end (); it++) {
-                        cout << it->first << ", ";
-                    }
-                    cout << endl;
-                }
 				foundFirstAncestor = true;
 				break;
 			}
@@ -61,25 +44,10 @@ void build_dominators (List<basicblock*>* bbList) {
             /* DO THE INTERSECT OF DOMINATOR SET OF ALL TRUE DOMINATORS */
             bool old_change = change;
 			if (foundFirstAncestor == true) {
-                for (int j = indx+1; j < n->getNumAncestors (); j++) {
+                for (int j = indx + 1; j < n->getNumAncestors (); j++) {
                     if (n->getNthAncestor (j)->getAllasDominators () == true) continue;
                     map<ADDR,basicblock*> out, nthAncestorDom;
                     nthAncestorDom = n->getNthAncestor (j)->getDominators ();
-                    if (nthAncestorDom.find (n->getID ()) != nthAncestorDom.end ()) {
-                        nthAncestorDom.clear ();
-                        continue;
-                    }
-
-                    if (n->getID () == 0x410170) {
-                        cout << "hey: ";
-                        map<ADDR,basicblock*> df = n->getNthAncestor (j)->getDominators ();
-                        map<ADDR,basicblock*>::iterator it;
-                        for (it = df.begin (); it != df.end (); it++) {
-                            cout << it->first << ", ";
-                        }
-                        cout << endl;
-                    }
-
                     set_intersection (intersection.begin (), intersection.end (),
                                       nthAncestorDom.begin (), nthAncestorDom.end (),
                                       std::inserter (out, out.begin ()));
@@ -87,22 +55,13 @@ void build_dominators (List<basicblock*>* bbList) {
                 }
 				if (change == false) change = n->setDominators (intersection);
 				else 			  bool temp = n->setDominators (intersection);
+			    n->setAllasDominators (false);
 			} else {
 				if (change == false) change = n->setDominators ();
 				else		      bool temp = n->setDominators ();
 			}
-			n->setAllasDominators (false);
-            if (change && old_change == false) {
-                cout << "shit- " << hex<< n->getID () << " - ";
-				map<ADDR,basicblock*> df = n->getDominators ();
-                map<ADDR,basicblock*>::iterator it;
-                for (it = df.begin (); it != df.end (); it++) {
-                    cout << it->first << ", ";
-                }
-                cout << endl;
-            }
 		}
-	} //TODO: I must have a start node (the start node at the moment may always have an ancestor - due to loops)
+	}
 
 	#ifdef DEBUG_DOM
 	for (int i = 0; i < bbList->NumElements (); i++) {
@@ -119,6 +78,7 @@ void build_dominators (List<basicblock*>* bbList) {
 void build_strict_dominators (List<basicblock*>* bbList) {
 	for (int i = 0; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->buildSDominators ();
+
 	#ifdef DEBUG_DOM
 	for (int i = 0; i < bbList->NumElements (); i++) {
 		map<ADDR,basicblock*> dom = bbList->Nth (i)->getDominators ();

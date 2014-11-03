@@ -427,16 +427,9 @@ bool basicblock::setDominators (List<basicblock*>* bbList) {
 }
 
 bool basicblock::setDominators (map<ADDR,basicblock*> &intersection) {
-    map<ADDR,basicblock*> out;
 	map<ADDR,basicblock*> oldMap = _dominatorMap;
-    if (_dominatorMap.size () > 0) {
-        set_intersection (intersection.begin (), intersection.end (),
-                          _dominatorMap.begin (), _dominatorMap.end (),
-                          std::inserter (out, out.begin ()));
-        _dominatorMap = out;
-    } else {
-	    _dominatorMap = intersection;
-    }
+	_dominatorMap.clear ();
+	_dominatorMap = intersection;
 	if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
 		_dominatorSet.insert (getID ());
 		_dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));

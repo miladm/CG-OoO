@@ -189,15 +189,10 @@ void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
 		search (bbHead, varList);
 	}
 	for (int i = 0; i < bbList->NumElements (); i++) {
-        if (bbList->Nth (i)->isVisited () == false) {
-            printf ("Unvisited BB ID: %llx,%d,%d <- ", bbList->Nth (i)->getID (), 
-                                                       bbList->Nth (i)->getNumAncestors (), 
-                                                       bbList->Nth (i)->numNonBackEdgeAncestors ());
-            for (int j = 0; j < bbList->Nth (i)->getNumAncestors (); j++) { 
-                printf ("%llx, ", bbList->Nth (i)->getNthAncestor (j)->getID ());
-            }
-            cout << endl;
-        }
+		if (bbList->Nth (i)->isVisited () == false) 
+            printf ("Unvisited BB ID: %llx,%d,%d\n", bbList->Nth (i)->getID (), 
+                                                     bbList->Nth (i)->getNumAncestors (), 
+                                                     bbList->Nth (i)->numNonBackEdgeAncestors ());
 		bbList->Nth (i)->setAsUnvisited ();
 	}
 }
