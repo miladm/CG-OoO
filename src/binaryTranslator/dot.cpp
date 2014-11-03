@@ -24,24 +24,18 @@ dot::dot (int mode, string *program_name) {
 	} else {
 		Assert ("ILLEGAL Control Flow Graph file.");
 	}
-    _interiorBB = new List<basicblock*>;
 	init ();
 }
 
 void dot::runDot (List<basicblock*>* list) {
 	_bBlist = list;
 	//createSubGraph (subGraphID);
-    cout << "Defn" << endl;
 	defn ();
-    cout << "Create Graph" << endl;
 	createGraph ();
-    cout << "Close Block" << endl;
 	closeBlock ();
-    cout << "Done with DOT file" << endl;
 }
 
 dot::~dot () {
-    delete _interiorBB;
 }
 
 void dot::setupBox (string color) {
@@ -124,7 +118,7 @@ void dot::defn () {
 				for (int j = 0; j < _insList->Nth (i)->getNumWriteReg (); j++) {
 					fprintf (_outFile, ",%d_%dW", _insList->Nth (i)->getNthWriteReg (j),_insList->Nth (i)->getWriteRegSubscript (_insList->Nth (i)->getNthWriteReg (j)));				
 				}
-*/				fprintf (_outFile, "</td></tr>\n");
+*/				fprintf (_outFile, "</td></tr>\n");				
 			}
 		}
 		finishBox ();
@@ -135,37 +129,21 @@ void dot::closeBlock () {
 	fprintf (_outFile, "\t}\n");
 }
 
-void dot::getInteriorBB () {
-    for (int i = 0; i < _bBlist->NumElements (); i++) {
-        basicblock* bb = _bBlist->Nth (i);
-        if (bb->getSDominatorSize () == 0) {
-            _interiorBB->Append (bb);
-            cout << "\tDominator Interior BB: " << hex << bb->getID () << endl;
-        }
-    }
-}
-
 void dot::createGraph () {
-    getInteriorBB ();
-    for (int j = 0; j < _interiorBB->NumElements (); j++) {
-        basicblock* bb = _interiorBB->Nth (j);
-        ADDR bbID = bb->getID ();
-        makeLink (bb);
+	for (int j = 0; j < _bBlist->NumElements (); j++) {
+		ADDR bbID = _bBlist->Nth (j)->getID ();
+		basicblock* bb = _bBlist->Nth (j);
 //        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
-    }
-}
-
-void dot::makeLink (basicblock* bb) {
-    map<ADDR,basicblock*> children = bb->getChildren ();
-    map<ADDR,basicblock*>::iterator it;
-    for (it = children.begin (); it != children.end (); it++) {
-        basicblock* child = it->second;
-        fprintf (_outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bb->getID (), child->getID (), 1.0-bb->getTakenBias ());
-    }
-    for (it = children.begin (); it != children.end (); it++) {
-        basicblock* child = it->second;
-        makeLink (child);
-    }
+		for (int i = 0; i < bb->getNumDescendents (); i++) {
+			if (bb->getLastInsDst () == -1) {
+				fprintf (_outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
+			} else if (bb->getLastInsDst () == bb->getNthDescendent (i)->getID ()) {
+				fprintf (_outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), bb->getTakenBias ());	
+			} else {
+				fprintf (_outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
+			}
+		}
+	}
 }
 
 void dot::finish () {

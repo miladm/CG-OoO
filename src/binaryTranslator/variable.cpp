@@ -70,9 +70,12 @@ int variable::getTopStack() {
 	return _s.back();
 }
 
-void variable::popHackPushes() {
-	while (_hackPushCount > 0) {
+void variable::popHackPushes(int counter) {
+	while (counter > 0) {
+        counter--;
 		_hackPushCount--;
 		_s.pop_back();
+        Assert (_hackPushCount >= 0);
 	}
+    cout << endl;
 }

@@ -28,7 +28,7 @@ class variable {
 		int getTopStack();
 		basicblock* getTopBbStack();
 		//Hack
-		void popHackPushes();
+		void popHackPushes(int);
 
 	private:
 		long int _var;

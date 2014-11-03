@@ -104,6 +104,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 		//TODO: check if the block is visited
 		//Process assignment operations
 		//Process phi operations
+        map<int, int> hackPushes;
 		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
         map<long int, vector<long int> >::iterator it;
 		for (it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
@@ -111,6 +112,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 			Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 			int k = varList[var]->getC ();
 			bb->setPhiWriteVar (var, k);
+//            if (var == 16) cout << "**" << k*100+var << endl;
 			varList[var]->pushToStack (k);
 			varList[var]->setC (k+1);
 		}
@@ -121,7 +123,14 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
                 int v1 = varList[var]->_hackPushCount;
                 int subscript = varList[var]->getTopStack ();
-//                if (varList[var]->_hackPushCount - v1 == 1) cout << "-" << subscript*100+var << endl;
+                if (varList[var]->_hackPushCount - v1 == 1) {
+                    if (hackPushes.find (var) == hackPushes.end ()) 
+                        hackPushes.insert(pair<int, int> (var, 1));
+                    else 
+                        hackPushes[var]++;
+//                    cout << "-" << subscript*100+var << endl;
+                }
+//                if (var == 16) cout << "-" << subscript*100+var << endl;
 				ins->setReadVar (var, subscript);
 			}
 			for (int j = 0; j < ins->getNumWriteReg (); j++) {
@@ -129,6 +138,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 				int k = varList[var]->getC ();
 				ins->setWriteVar (var, k);
+//                if (var == 16) cout << "*" << k*100+var << endl;
 				varList[var]->pushToStack (k);
 				varList[var]->setC (k+1);
 			}
@@ -144,7 +154,14 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				//we want to have as many elemenet in teh phi-vector as the number of ancestors of the BB. Then every ancestor must come and fill in the hole
                 int v1 = varList[var]->_hackPushCount;
                 int subscript = varList[var]->getTopStack ();
+                if (varList[var]->_hackPushCount - v1 == 1) {
+                    if (hackPushes.find (var) == hackPushes.end ()) 
+                        hackPushes.insert(pair<int, int> (var, 1));
+                    else 
+                        hackPushes[var]++;
+                }
 //                if (varList[var]->_hackPushCount - v1 == 1) cout << "*" << subscript*100+var << endl;
+//                if (var == 16) cout << "--" << subscript*100+var << endl;
 				Y->replaceNthPhiOperand (var, j, subscript); //TODO correct?
 			}
 		}
@@ -166,7 +183,10 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 			for (int j = 0; j < ins->getNumReadReg (); j++) {
 				int var = ins->getNthReadReg (j);
 				Assert (varList.find (var) != varList.end ());
-				varList[var]->popHackPushes ();
+                if (hackPushes.find (var) != hackPushes.end ()) {
+				    varList[var]->popHackPushes (hackPushes[var]);
+                    hackPushes.erase (var);
+                }
 			}
 		}
 		for (map<long int, vector<long int> >::iterator it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
