@@ -346,7 +346,7 @@ void basicblock::buildImmediateDominators () {
 	for  (it1 = _sDominatorMap.begin (); it1 != _sDominatorMap.end (); it1++) {
 		for  (it2 = _sDominatorMap.begin (); it2 != _sDominatorMap.end (); it2++) {
 			if  (it1->first == it2->first) continue;
-			if  (it2->second->isASDominator (it1->first) == false) {
+			if  (it1->second->isASDominator (it2->first) == false) {
 				_notParentsMap.insert (pair<ADDR,basicblock*> (it1->first, it1->second));
                 break; /* it1 NOT AN idom */
             }
