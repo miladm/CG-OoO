@@ -179,8 +179,8 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             // set_intersection (liveSet.begin (), liveSet.end (), localSet.begin (), localSet.end (), std::inserter (test, test.begin ()));
             // printf ("test set: %d, %d, %d\n", liveSet.size (), localSet.size (), test.size ());
             // For each live value, connect the node to all other live nodes at that BB
-            if (liveSet.size () > 65) {
-                cout << bb->getID () << " " << liveSet.size () << " " << inSet.size () << " " << defSet.size () << " " << bb->getBbSize () << endl;
+            if (liveSet.size () > 75) {
+                cout << hex << bb->getID () << dec << " " << liveSet.size () << " " << inSet.size () << " " << defSet.size () << " " << bb->getBbSize () << endl;
             }
             if (liveMaxSize < liveSet.size ()) liveMaxSize = liveSet.size ();
             for (set<long int>::iterator it = liveSet.begin (); it != liveSet.end (); it++) {

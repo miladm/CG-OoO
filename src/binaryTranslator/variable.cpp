@@ -61,7 +61,7 @@ int variable::getTopStack() {
 	if (_s.size() == 0) {
 		int k = getC();
 		_s.push_back(k);
-		setC(k+1);
+		setC(k + 1);
 		_hackPushCount++;
 	} //means don't assign anything
 	// if (_s.size() == 0) { printf("read stack: %d_-2\n", _var); return -2; }

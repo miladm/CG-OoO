@@ -60,7 +60,8 @@ void phi_func_placement (List<basicblock*> *bbList, map<int,variable*> &varList)
 		work.insert (pair<ADDR,int> (bb->getID (),ZERO_ITER));
 	}
 	int iterCount = 0;
-	for (map<int,variable*>::iterator it = varList.begin (); it != varList.end (); it++) {
+    map<int,variable*>::iterator it;
+	for (it = varList.begin (); it != varList.end (); it++) {
 		iterCount++;
 		variable *var = it->second;
 		for (int j = 0; j < var->getNumAssignedBB (); j++) {
@@ -106,15 +107,14 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 		//Process phi operations
         map<int, int> hackPushes;
 		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
-        map<long int, vector<long int> >::iterator it;
-		for (it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
-			int var = it->first;
+        map<long int, vector<long int> >::iterator phiFunc;
+		for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+			int var = phiFunc->first;
 			Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 			int k = varList[var]->getC ();
 			bb->setPhiWriteVar (var, k);
-//            if (var == 16) cout << "**" << k*100+var << endl;
 			varList[var]->pushToStack (k);
-			varList[var]->setC (k+1);
+			varList[var]->setC (k + 1);
 		}
 		for (int i = 0; i < insList->NumElements (); i++) {
 			instruction *ins = insList->Nth (i);
@@ -130,7 +130,6 @@ void search (basicblock* bb, map<int,variable*> &varList) {
                         hackPushes[var]++;
 //                    cout << "-" << subscript*100+var << endl;
                 }
-//                if (var == 16) cout << "-" << subscript*100+var << endl;
 				ins->setReadVar (var, subscript);
 			}
 			for (int j = 0; j < ins->getNumWriteReg (); j++) {
@@ -138,20 +137,25 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 				int k = varList[var]->getC ();
 				ins->setWriteVar (var, k);
-//                if (var == 16) cout << "*" << k*100+var << endl;
 				varList[var]->pushToStack (k);
-				varList[var]->setC (k+1);
+				varList[var]->setC (k + 1);
 			}
 		}
+
+        /*--
+         * SET SSA VALUES OF EACH VARIABLE FROM this BB TO EACH OF ITS
+         * DESCENDENTS. WE WANT TO HAVE AS MANY ELEMENET IN TEH PHI-VECTOR AS
+         * THE NUMBER OF ANCESTORS OF THE BB. THEN EVERY ANCESTOR MUST COME AND
+         * FILL IN THE HOLE
+         --*/
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			basicblock* Y = bb->getNthDescendent (i);
 			int j = whichPred (Y, bb);
 			map<long int, vector<long int> > phiFuncs = Y->getPhiFuncs ();
-			for (map<long int, vector<long int> >::iterator it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
+            map<long int, vector<long int> >::iterator it;
+			for (it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
 				int var = it->first;
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
-				//TODO see if j ever larger than 0
-				//we want to have as many elemenet in teh phi-vector as the number of ancestors of the BB. Then every ancestor must come and fill in the hole
                 int v1 = varList[var]->_hackPushCount;
                 int subscript = varList[var]->getTopStack ();
                 if (varList[var]->_hackPushCount - v1 == 1) {
@@ -161,17 +165,19 @@ void search (basicblock* bb, map<int,variable*> &varList) {
                         hackPushes[var]++;
                 }
 //                if (varList[var]->_hackPushCount - v1 == 1) cout << "*" << subscript*100+var << endl;
-//                if (var == 16) cout << "--" << subscript*100+var << endl;
 				Y->replaceNthPhiOperand (var, j, subscript); //TODO correct?
 			}
 		}
+
+        /* SEARCH EVERY CHILD OF this BB IN THE DOMINATOR TREE */
 		map<ADDR,basicblock*> children = bb->getChildren ();
-		for (map<ADDR,basicblock*>::iterator it = children.begin (); it != children.end (); it++) {
-		// for (int i = 0; i < bb->getNumChildren (); i++) {
-			// printf ("children\n");
-			basicblock* Y = it->second;// bb->getNthChild (i);
-			search (Y,varList);
+        map<ADDR,basicblock*>::iterator child;
+		for (child = children.begin (); child != children.end (); child++) {
+			basicblock* Y = child->second;
+			search (Y, varList);
 		}
+
+        /* CLEAN THE STACKES THAT HAD A DEFINITION DONE BY this BB */
 		for (int i = 0; i < insList->NumElements (); i++) {
 			instruction *ins = insList->Nth (i);
 			for (int j = 0; j < ins->getNumWriteReg (); j++) {
@@ -189,8 +195,8 @@ void search (basicblock* bb, map<int,variable*> &varList) {
                 }
 			}
 		}
-		for (map<long int, vector<long int> >::iterator it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
-			int var = it->first;
+		for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+			int var = phiFunc->first;
 			Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 			varList[var]->popFromStack ();
 		}

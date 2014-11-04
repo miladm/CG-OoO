@@ -14,6 +14,7 @@ void build_dominators (List<basicblock*>* bbList) {
 			bool change = n->setDominators ();
 			n->markAsEntryPoint ();
 			n->setAllasDominators (false);
+            cout << "entry: " << hex << n->getID () << endl;
 		} else {
 			// bool change = n->setDominators (bbList); this approach is too mem expensive
 			n->setAllasDominators (true);
@@ -42,7 +43,6 @@ void build_dominators (List<basicblock*>* bbList) {
 			}
 
             /* DO THE INTERSECT OF DOMINATOR SET OF ALL TRUE DOMINATORS */
-            bool old_change = change;
 			if (foundFirstAncestor == true) {
                 for (int j = indx + 1; j < n->getNumAncestors (); j++) {
                     if (n->getNthAncestor (j)->getAllasDominators () == true) continue;
@@ -82,7 +82,7 @@ void build_strict_dominators (List<basicblock*>* bbList) {
 	#ifdef DEBUG_DOM
 	for (int i = 0; i < bbList->NumElements (); i++) {
 		map<ADDR,basicblock*> dom = bbList->Nth (i)->getDominators ();
-		printf ("strict dom of %llx: ",bbList->Nth (i)->getID ());
+		printf ("Strict dom of %llx: ",bbList->Nth (i)->getID ());
 		for (map<ADDR,basicblock*>::iterator it = dom.begin (); it != dom.end (); it++) {
 			if (bbList->Nth (i)->isASDominator (it->first)) printf ("%llx, ",it->first);
 		}
