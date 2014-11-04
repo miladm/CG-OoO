@@ -77,5 +77,4 @@ void variable::popHackPushes(int counter) {
 		_s.pop_back();
         Assert (_hackPushCount >= 0);
 	}
-    cout << endl;
 }

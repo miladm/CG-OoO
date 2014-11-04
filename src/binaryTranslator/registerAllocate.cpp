@@ -156,6 +156,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, map<
 	}
 }
 
+int liveMaxSize = 0;
 void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
     if (!bb->isVisited ()) {
         bb->setAsVisited ();
@@ -178,7 +179,10 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             // set_intersection (liveSet.begin (), liveSet.end (), localSet.begin (), localSet.end (), std::inserter (test, test.begin ()));
             // printf ("test set: %d, %d, %d\n", liveSet.size (), localSet.size (), test.size ());
             // For each live value, connect the node to all other live nodes at that BB
-            cout << bb->getID () << " " << liveSet.size () << " " << inSet.size () << " " << defSet.size () << " " << bb->getBbSize () << endl;
+            if (liveSet.size () > 65) {
+                cout << bb->getID () << " " << liveSet.size () << " " << inSet.size () << " " << defSet.size () << " " << bb->getBbSize () << endl;
+            }
+            if (liveMaxSize < liveSet.size ()) liveMaxSize = liveSet.size ();
             for (set<long int>::iterator it = liveSet.begin (); it != liveSet.end (); it++) {
                 if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                     interfNode *IntfNd = new interfNode (*it);
@@ -310,5 +314,6 @@ void allocate_register (List<basicblock*> *bbList, List<instruction*> *insList, 
 		// bb->getLiveVarSize ();
 	}
 	printf ("\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n",numInsInsertion,insList->NumElements ());
+    cout << "max number of live values: " << dec << liveMaxSize << endl;
 	delete interiorBB;
 }

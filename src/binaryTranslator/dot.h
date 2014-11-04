@@ -15,19 +15,20 @@
 
 class dot {
 	public:
-		dot(int mode, string *program_name);
-		~dot();
-		void runDot(List<basicblock*>* list);
-		void init();
-		void defn();
-		void createSubGraph(int subGraphID);
-		void createGraph();
-		void finish();
-		void closeBlock();
-		void setupBox(string color);
-		void finishBox();
+		dot (int mode, string *program_name);
+		~dot ();
+		void runDot (List<basicblock*>* list);
+		void init ();
+		void defn (FILE*);
+		void createSubGraph (int, FILE*);
+		void createCFG (FILE*);
+		void createDT (FILE*);
+		void finish (FILE*);
+		void closeBlock (FILE*);
+		void setupBox (string, FILE*);
+		void finishBox (FILE*);
         void getInteriorBB ();
-        void makeLink (basicblock*);
+        void makeLink (basicblock*, FILE*);
 
 	private:
 		char* _fillColor;
@@ -39,6 +40,7 @@ class dot {
 
 		string fileName;
 		FILE* _outFile;
+		FILE* _outDomTreeFile;
 		List<instruction*>* _insList;
 		List<basicblock*>* _bBlist;
 
