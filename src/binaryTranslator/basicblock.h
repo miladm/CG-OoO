@@ -82,6 +82,7 @@ class basicblock {
 		int getChildrenSize ();
 		map<ADDR,basicblock*> getChildren ();
 		map<ADDR,basicblock*> getDF ();
+		void resetDF ();
 		void addToDFset (basicblock *node);
 		bool isInIDom (ADDR nodeID);
 		bool isASDominator (ADDR nodeID);

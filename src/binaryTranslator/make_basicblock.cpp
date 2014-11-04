@@ -41,7 +41,7 @@ void make_basicblock  (List<instruction*> *insList,
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
 			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
 			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
-                 ins->getType () == 'c' || ins->getType () == 's') {
+                 ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			    basicblock *bb = bbList->Last ();
 				bb->setBBbrHeader (ins->getInsAddr ());
 				newBB = new basicblock;
@@ -50,7 +50,7 @@ void make_basicblock  (List<instruction*> *insList,
 			}
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
 		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
-                    ins->getType () == 'c' || ins->getType () == 's') {
+                    ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			basicblock *bb = bbList->Last ();
 			bb->setBBbrHeader (ins->getInsAddr ());
 			bb->addIns (ins, NO_BR_DST);

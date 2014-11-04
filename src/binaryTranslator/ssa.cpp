@@ -6,7 +6,7 @@
 
 #define ZERO_ITER 0
 
-void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
+void findDomEntryPoints2 (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
 	for (int i = 0; i < bbList->NumElements (); i++) {	
 		basicblock* bb = bbList->Nth (i);
 		if (bb->getSDominatorSize () == 0) {
@@ -204,7 +204,7 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 
 void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
-	findDomEntryPoints (bbList, interiorBB);
+	findDomEntryPoints2 (bbList, interiorBB);
 	for (int i = 0; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->setAsUnvisited ();
 	for (int i = 0; i < interiorBB->NumElements (); i++) {
@@ -218,6 +218,7 @@ void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
                                                      bbList->Nth (i)->numNonBackEdgeAncestors ());
 		bbList->Nth (i)->setAsUnvisited ();
 	}
+//    delete interiorBB; TODO put it in
 }
 
 void build_ssa_form (List<basicblock*> *bbList, map<int,variable*> &varList) {

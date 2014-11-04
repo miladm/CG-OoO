@@ -129,6 +129,7 @@ void basicblock::addMovIns (instruction* ins) {
         instruction* top_ins;
         if (_insList->NumElements () >= 3) {
             top_ins = _insList->Nth (_insList->NumElements () - 3);
+            if (!(top_ins->hasFallThru () && !top_ins->hasDst ())) cout << top_ins->getInsAddr () << endl;
             Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
             top_ins->resetInsFallThru ();
             top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
@@ -340,8 +341,8 @@ void basicblock::buildSDominators () {
 
 void basicblock::buildImmediateDominators () {
 	map<ADDR,basicblock*> _notParentsMap;
-    map<ADDR,basicblock*>::iterator it1;
-    map<ADDR,basicblock*>::iterator it2;
+    map<ADDR,basicblock*>::iterator it1, it2;
+
     /* FIND THE DOMINATORS THAT ARE NOT IMMEDIATE DOMINATORS */
 	for  (it1 = _sDominatorMap.begin (); it1 != _sDominatorMap.end (); it1++) {
 		for  (it2 = _sDominatorMap.begin (); it2 != _sDominatorMap.end (); it2++) {
@@ -395,15 +396,19 @@ map<ADDR,basicblock*> basicblock::getChildren () {
 	return _childrenMap;
 }
 
-void basicblock::addToDFset (basicblock *node) {
-	_dominanceFrontier.insert (pair<ADDR,basicblock*> (node->getID (), node));
-}
-
 bool basicblock::isInIDom (ADDR nodeID) {
 	if  (_idomSet.find (nodeID) == _idomSet.end ())
 		return false;
 	else
 		return true;
+}
+
+void basicblock::addToDFset (basicblock *node) {
+	_dominanceFrontier.insert (pair<ADDR,basicblock*> (node->getID (), node));
+}
+
+void basicblock::resetDF () {
+	_dominanceFrontier.clear ();
 }
 
 map<ADDR,basicblock*> basicblock::getDF () {
