@@ -16,6 +16,7 @@ dot::dot (int mode, string *program_name) {
 		if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
 		}		
+
         string dt_file = out_dir + (*program_name) + "_dt.dot";
 		if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
@@ -24,16 +25,27 @@ dot::dot (int mode, string *program_name) {
         string cfg_file = out_dir + (*program_name) + "_cfg_phrase.dot";
 		if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
-		}		
+		}
+
         string dt_file = out_dir + (*program_name) + "_dt_phrase.dot";
 		if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
-		}		
+		}
 	} else {
 		Assert ("ILLEGAL Control Flow Graph file.");
 	}
     _interiorBB = new List<basicblock*>;
 	init ();
+}
+
+void dot::init () {
+	fprintf (_outFile, "digraph G {\n"
+			  "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines=true overlap=false rankdir = \"LR\"];\n"
+			  "\tratio = auto;\n");
+
+	fprintf (_outDomTreeFile, "digraph G {\n"
+			  "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines=true overlap=false rankdir = \"LR\"];\n"
+			  "\tratio = auto;\n");
 }
 
 void dot::runDot (List<basicblock*>* list) {
@@ -62,16 +74,6 @@ void dot::finishBox (FILE* outFile) {
 	fprintf (outFile, "\t\t</table>> ];\n");
 }
 
-void dot::init () {
-	fprintf (_outFile, "digraph G {\n"
-			  "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines=true overlap=false rankdir = \"LR\"];\n"
-			  "\tratio = auto;\n");
-
-	fprintf (_outDomTreeFile, "digraph G {\n"
-			  "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines=true overlap=false rankdir = \"LR\"];\n"
-			  "\tratio = auto;\n");
-}
-
 void dot::createSubGraph (int subGraphID, FILE* outFile) {
 	fprintf (outFile, "\n\n");
 	fprintf (outFile, "\tsubgraph cluster_%d {\n", subGraphID);
@@ -81,7 +83,6 @@ void dot::createSubGraph (int subGraphID, FILE* outFile) {
 void dot::defn (FILE* outFile) {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
         basicblock* bb = _bBlist->Nth (j);
-//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		_insList = bb->getInsList ();
 		ADDR bbID = bb->getID ();
 		//if (bbID == 18446744073709551615) continue; //TODO remove/fix this problem
@@ -148,7 +149,6 @@ void dot::createCFG (FILE* outFile) {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
 		ADDR bbID = _bBlist->Nth (j)->getID ();
 		basicblock* bb = _bBlist->Nth (j);
-//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			if (bb->getLastInsDst () == -1) {
 				fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
@@ -167,7 +167,6 @@ void dot::createDT (FILE* outFile) {
         basicblock* bb = _interiorBB->Nth (j);
         ADDR bbID = bb->getID ();
         makeLink (bb, outFile);
-//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
     }
 }
 
