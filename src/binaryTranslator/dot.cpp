@@ -13,20 +13,20 @@ dot::dot (int mode, string *program_name) {
     string out_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/dotFiles/";
 	if (mode == 0) { //Make CFG
         string cfg_file = out_dir + (*program_name) + "_cfg.dot";
-		if ( (_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
+		if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
 		}		
         string dt_file = out_dir + (*program_name) + "_dt.dot";
-		if ( (_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
+		if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
 		}		
 	} else if (mode = 1) { //Make Phrase CFG
         string cfg_file = out_dir + (*program_name) + "_cfg_phrase.dot";
-		if ( (_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
+		if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
 		}		
         string dt_file = out_dir + (*program_name) + "_dt_phrase.dot";
-		if ( (_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
+		if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
 		    Assert ("Cannot open dot file (s).");
 		}		
 	} else {
@@ -81,7 +81,7 @@ void dot::createSubGraph (int subGraphID, FILE* outFile) {
 void dot::defn (FILE* outFile) {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
         basicblock* bb = _bBlist->Nth (j);
-//        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
+//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		_insList = bb->getInsList ();
 		ADDR bbID = bb->getID ();
 		//if (bbID == 18446744073709551615) continue; //TODO remove/fix this problem
@@ -106,11 +106,11 @@ void dot::defn (FILE* outFile) {
 		fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"></td></tr>\n");
 				fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> IN/DEF: ");				
                 set<long int> inset = bb->getInSet ();
-				for (set<long int>::iterator it = inset.begin(); it != inset.end(); it++) {
+				for (set<long int>::iterator it = inset.begin (); it != inset.end (); it++) {
 				    fprintf (outFile, ",%dI\n", *it);
 				}
                 set<long int> defset = bb->getDefSet ();
-				for (set<long int>::iterator it = defset.begin(); it != defset.end(); it++) {
+				for (set<long int>::iterator it = defset.begin (); it != defset.end (); it++) {
 				    fprintf (outFile, ",%dD\n", *it);
 				}
 		fprintf (outFile, "</td></tr>\n");				
@@ -148,7 +148,7 @@ void dot::createCFG (FILE* outFile) {
 	for (int j = 0; j < _bBlist->NumElements (); j++) {
 		ADDR bbID = _bBlist->Nth (j)->getID ();
 		basicblock* bb = _bBlist->Nth (j);
-//        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
+//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			if (bb->getLastInsDst () == -1) {
 				fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
@@ -167,7 +167,7 @@ void dot::createDT (FILE* outFile) {
         basicblock* bb = _interiorBB->Nth (j);
         ADDR bbID = bb->getID ();
         makeLink (bb, outFile);
-//        if (!(bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
+//        if (! (bb->getID () >= 4260864 && bb->getID () <= 4262750)) continue;
     }
 }
 
