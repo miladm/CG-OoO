@@ -37,7 +37,7 @@ void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {
 		for (it = defSet.begin (); it != defSet.end (); it++) {
 			if (!((*it) >= X86_REG_LO && (*it) <= X86_REG_HI))
 				printf ("ERROR: %d\n",*it);
-			Assert ((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "invalid x86 variable.");
+			Assert ((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "Invalid x86 variable.");
 			int varIndx = *it;
 			varList[varIndx]->addBB (bb);
 		}
@@ -73,9 +73,10 @@ void phi_func_placement (List<basicblock*> *bbList, map<int,variable*> &varList)
 			basicblock* X = (W.begin ())->second;
 			W.erase (W.begin ());
 			map<ADDR,basicblock*> xDF = X->getDF ();
-			for (map<ADDR,basicblock*>::iterator Y = xDF.begin (); Y != xDF.end (); Y++) {
+            map<ADDR,basicblock*>::iterator Y;
+			for (Y = xDF.begin (); Y != xDF.end (); Y++) {
 				if (hasAlready[Y->first] < iterCount) {
-					 (Y->second)->insertPhiFunc (var->getID ());
+					(Y->second)->insertPhiFunc (var->getID ());
 					hasAlready[Y->first] = iterCount;
 					if (work[Y->first] < iterCount) {
 						work[Y->first] = iterCount;
@@ -96,17 +97,14 @@ int whichPred (basicblock* Y, basicblock* X) {
 	Assert (0 && "CFG Fault. The BB ancesor was not found.");
 }
 
-int counter = 0; //TODO for debug
 void search (basicblock* bb, map<int,variable*> &varList) {
-	// if (!bb->isVisited ()) {
+	 if (!bb->isVisited ()) {
 		bb->setAsVisited ();
-		// printf ("================================%d\n", counter++);
 		List<instruction*> *insList = bb->getInsList ();
-		//TODO: check if the block is visited
-		//Process assignment operations
-		//Process phi operations
         map<int, int> hackPushes;
 		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
+
+        /* ASSIGN DESTINATION SSA REGISTER TO PHI-FUNCTIONS */
         map<long int, vector<long int> >::iterator phiFunc;
 		for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
 			int var = phiFunc->first;
@@ -116,6 +114,8 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 			varList[var]->pushToStack (k);
 			varList[var]->setC (k + 1);
 		}
+
+        /* ASSIGN SSA REGISTERS TO REGULAR INSTRUCTIONS */
 		for (int i = 0; i < insList->NumElements (); i++) {
 			instruction *ins = insList->Nth (i);
 			for (int j = 0; j < ins->getNumReadReg (); j++) {
@@ -128,7 +128,6 @@ void search (basicblock* bb, map<int,variable*> &varList) {
                         hackPushes.insert(pair<int, int> (var, 1));
                     else 
                         hackPushes[var]++;
-//                    cout << "-" << subscript*100+var << endl;
                 }
 				ins->setReadVar (var, subscript);
 			}
@@ -144,17 +143,16 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 
         /*--
          * SET SSA VALUES OF EACH VARIABLE FROM this BB TO EACH OF ITS
-         * DESCENDENTS. WE WANT TO HAVE AS MANY ELEMENET IN TEH PHI-VECTOR AS
-         * THE NUMBER OF ANCESTORS OF THE BB. THEN EVERY ANCESTOR MUST COME AND
-         * FILL IN THE HOLE
+         * DESCENDENTS (RHS of PHI-FUNCTION). WE WANT TO HAVE AS MANY ELEMENET
+         * IN TEH PHI-VECTOR AS THE NUMBER OF ANCESTORS OF THE BB. THEN EVERY
+         * ANCESTOR MUST COME AND FILL IN THE HOLE
          --*/
 		for (int i = 0; i < bb->getNumDescendents (); i++) {
 			basicblock* Y = bb->getNthDescendent (i);
 			int j = whichPred (Y, bb);
 			map<long int, vector<long int> > phiFuncs = Y->getPhiFuncs ();
-            map<long int, vector<long int> >::iterator it;
-			for (it = phiFuncs.begin (); it != phiFuncs.end (); it++) {
-				int var = it->first;
+			for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+				int var = phiFunc->first;
 				Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
                 int v1 = varList[var]->_hackPushCount;
                 int subscript = varList[var]->getTopStack ();
@@ -164,7 +162,6 @@ void search (basicblock* bb, map<int,variable*> &varList) {
                     else 
                         hackPushes[var]++;
                 }
-//                if (varList[var]->_hackPushCount - v1 == 1) cout << "*" << subscript*100+var << endl;
 				Y->replaceNthPhiOperand (var, j, subscript); //TODO correct?
 			}
 		}
@@ -200,10 +197,10 @@ void search (basicblock* bb, map<int,variable*> &varList) {
 			Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
 			varList[var]->popFromStack ();
 		}
-	// }
+	 } else {
+         printf ("\tWARNING: an attempt to revisit a block by search () in SSA\n");
+     }
 }
-// TODO: I don't know if the process of pushing and popping from the "variable" stack is well synchronized 
-//       (without any mis-push or mis-pop). What is going on?
 
 void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;

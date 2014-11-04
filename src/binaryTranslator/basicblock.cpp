@@ -333,21 +333,31 @@ bool basicblock::setDominators () {
 void basicblock::buildSDominators () {
 	map<ADDR,basicblock*> self;
 	self.insert (pair<ADDR,basicblock*> (getID (),this));	
-	set_difference (_dominatorMap.begin (),_dominatorMap.end (),self.begin (),self.end (),std::inserter (_sDominatorMap, _sDominatorMap.begin ()));
+	set_difference (_dominatorMap.begin (), _dominatorMap.end (),
+                    self.begin (), self.end (),
+                    std::inserter (_sDominatorMap, _sDominatorMap.begin ()));
 }
-
 
 void basicblock::buildImmediateDominators () {
 	map<ADDR,basicblock*> _notParentsMap;
-	for  (map<ADDR,basicblock*>::iterator it1 = _sDominatorMap.begin (); it1 != _sDominatorMap.end (); it1++) {
-		for  (map<ADDR,basicblock*>::iterator it2 = _sDominatorMap.begin (); it2 != _sDominatorMap.end (); it2++) {
+    map<ADDR,basicblock*>::iterator it1;
+    map<ADDR,basicblock*>::iterator it2;
+    /* FIND THE DOMINATORS THAT ARE NOT IMMEDIATE DOMINATORS */
+	for  (it1 = _sDominatorMap.begin (); it1 != _sDominatorMap.end (); it1++) {
+		for  (it2 = _sDominatorMap.begin (); it2 != _sDominatorMap.end (); it2++) {
 			if  (it1->first == it2->first) continue;
-			if  (it2->second->isASDominator (it1->first) == true)
+			if  (it2->second->isASDominator (it1->first) == false) {
 				_notParentsMap.insert (pair<ADDR,basicblock*> (it1->first, it1->second));
+                break; /* it1 NOT AN idom */
+            }
 		}
 	}
-	set_difference (_sDominatorMap.begin (),_sDominatorMap.end (),_notParentsMap.begin (),_notParentsMap.end (),std::inserter (_parentsMap, _parentsMap.begin ()));
-	for  (map<ADDR,basicblock*>::iterator it1 = _parentsMap.begin (); it1 != _parentsMap.end (); it1++)
+
+    /* EXTRACT THE IMMEDIATE DOMINATORS */
+	set_difference (_sDominatorMap.begin (), _sDominatorMap.end (),
+                    _notParentsMap.begin (), _notParentsMap.end (),
+                    std::inserter (_parentsMap, _parentsMap.begin ()));
+	for  (it1 = _parentsMap.begin (); it1 != _parentsMap.end (); it1++)
 		_idomSet.insert (it1->first);
 }
 
