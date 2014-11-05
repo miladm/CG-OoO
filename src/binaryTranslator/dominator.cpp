@@ -100,7 +100,7 @@ void build_idom (List<basicblock*>* bbList) {
 		bbList->Nth (i)->buildImmediateDominators ();
 }
 
-/* Setup dominator tree */
+/* SETUP DOMINATOR TREE */
 void build_dominator_tree (List<basicblock*>* bbList) {
 	for (int i = 0; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->buildDomTree ();
@@ -116,7 +116,7 @@ void build_dominator_tree (List<basicblock*>* bbList) {
 	#endif
 }
 
-void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
+static void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
 	for (int i = 0; i < bbList->NumElements (); i++) {	
 		basicblock* bb = bbList->Nth (i);
 		if (bb->getSDominatorSize () == 0) {
@@ -125,15 +125,11 @@ void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorB
 	}
 }
 
-//void findDomTreeBottomSet (List<basicblock*>* bbList, map<ADDR, basicblock*> &domTree_Bottoms) {
-//	for (int i = 0; i < bbList->NumElements (); i++) {
-//		basicblock *bb = bbList->Nth (i);
-//		if (bb->getChildrenSize () == 0)
-//			domTree_Bottoms.insert (pair<ADDR,basicblock*> (bb->getID (), bb));
-//	}
-//}
-
+/* FIND THE DOMINANCE FRONTIER OF ONE BB */
 void findDF (basicblock* bb) {
+    Assert (!bb->isVisited () && "An attempt to revisit a block in findDF");
+	bb->setAsVisited ();
+
     map<ADDR,basicblock*> children = bb->getChildren ();
     map<ADDR,basicblock*>::iterator it1, it2;
 
@@ -160,43 +156,21 @@ void build_dominance_frontier (List<basicblock*>* bbList) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
 	findDomEntryPoints (bbList, interiorBB);
 
+	for (int i = 0; i < bbList->NumElements (); i++)
+		bbList->Nth (i)->setAsUnvisited ();
 	for (int i = 0; i < interiorBB->NumElements (); i++) {
 		basicblock *bb = interiorBB->Nth (i);
         findDF (bb);
     }
-//    delete interiorBB; TODO put it in
+	for (int i = 0; i < bbList->NumElements (); i++) {
+		if (!bbList->Nth (i)->isVisited ()) 
+            printf ("Unvisited BB ID: %llx,%d,%d\n", bbList->Nth (i)->getID (), 
+                                                     bbList->Nth (i)->getNumAncestors (), 
+                                                     bbList->Nth (i)->numNonBackEdgeAncestors ());
+		bbList->Nth (i)->setAsUnvisited ();
+	}
+    delete interiorBB;
 }
-
-//void build_dominance_frontier (List<basicblock*>* bbList) {
-//	map<ADDR, basicblock*> domTree_Bottoms;
-//    map<ADDR, basicblock*>::iterator it;
-//
-//	findDomTreeBottomSet (bbList, domTree_Bottoms);
-//
-//	for (it = domTree_Bottoms.begin (); it != domTree_Bottoms.end (); it++) {
-//		basicblock *bb = it->second;
-//		/* LOCAL DF DETECTION */
-//		for (int i = 0; i < bb->getNumDescendents (); i++) {
-//			basicblock* descendent = bb->getNthDescendent (i);
-//			if (descendent->isInIDom (bb->getID ()) == false)
-//				bb->addToDFset (descendent);
-//		}
-//
-//		/* UP DF DETECTION */
-//		map<ADDR,basicblock*> children = bb->getChildren ();
-//        map<ADDR,basicblock*>::iterator it1, it2;
-//		for (it1 = children.begin (); it1 != children.end (); it1++) {
-//            cout << "shit" << endl;
-//			basicblock *child = it1->second;
-//			map<ADDR,basicblock*> childDF = child->getDF ();
-//			for (it2 = childDF.begin (); it2 != childDF.end (); it2++) {
-//				basicblock* y = it2->second;
-//				if (y->isInIDom (bb->getID ()) == false)
-//					bb->addToDFset (y);
-//			}
-//		}
-//	}
-//}
 
 void setup_dominance_frontier (List<basicblock*>* bbList) {
 	printf ("\tBuild Dominators\n");
