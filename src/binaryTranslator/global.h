@@ -20,11 +20,12 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 #define OPCODE_STRING_SIZE 30
 //Found using: awk ' { if ( length > x ) { x = length } }END{ print x }' x86_opcode.txt
 
+//PROFILING
 #define UPLD_THRESHOLD 0.01
 #define WBB_LOWER_BOUND 0.1
 #define WBB_UPPER_BOUND 0.9
 
-//DEBUG Flags
+//DEBUG FLAGS
 #define DEBUG_MAIN 0
 #define DEBUG_INS 0
 #define DEBUG_BB 0
@@ -33,11 +34,11 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 // #define DEBUG_DOM 0
 // #define DEBUG_SSA 0
 
-//Data Dependency
+//DATA DEPENDENCY
 #define NUM_REGISTERS 68
 #define INIT_RENAME_REG_NUM 100 //TODO change this number - not 
 
-//Latencies
+//LATENCIES
 #define ALU_LATENCY 1
 #define FPU_LATENCY 5
 #define BR_LATENCY 3 //IF 1 cycles + ID 2 cycles (should be 5 for OOO?)
@@ -48,25 +49,24 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 #define MEM_LATENCY 100
 #define MEM_HIGHERARCHY 4
 
-//Hardware Specifications
+//HARDWARE SPECIFICATIONS
 #define NUM_EU 1
 
-//Resgiter Allocation
-#define LRF_SIZE 2000
-#define GRF_SIZE 6000
+//RESGITER ALLOCATION
+#define LRF_SIZE 10
+#define GRF_SIZE 50
 
 #define LRF_LO 100
-#define LRF_HI LRF_LO+LRF_SIZE-1
-#define GRF_LO LRF_HI+1
-#define GRF_HI GRF_LO+GRF_SIZE-1
+#define LRF_HI LRF_LO + LRF_SIZE - 1
+#define GRF_LO LRF_HI + 1
+#define GRF_HI GRF_LO + GRF_SIZE - 1
 
 #define X86_REG_LO 1
 #define X86_REG_HI 68
 
 #define INVALID_REG -1
 
-//Phi Function
+//PHI FUNCTION
 #define PHI_INS_ADDR 1
-
 
 #endif

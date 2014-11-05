@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REG_ALLOC_MODE="global_reg"
+REG_ALLOC_MODE="local_global_reg"
 SCH_MODE="no_list_sch"
 
 UBENCH_NAME="ub_simple_cfg_loop"

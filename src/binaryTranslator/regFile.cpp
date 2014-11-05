@@ -13,7 +13,7 @@ using namespace std;
 
 regFile::regFile()
 {
-    numRegs = NUM_REGISTERS+INIT_RENAME_REG_NUM; //TODO this is NOT Accrate
+    numRegs = NUM_REGISTERS + INIT_RENAME_REG_NUM; //TODO this is NOT Accrate
     //Construct the register file map
     setupRegFile();
     //initialize the register file status
