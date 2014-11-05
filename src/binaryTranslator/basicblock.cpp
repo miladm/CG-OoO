@@ -889,7 +889,7 @@ ADDR basicblock::getBBtail  () {
 }
 
 void basicblock::setBBbrHeader (ADDR brAddr) {
-	Assert (brAddr > 0);
+	Assert (brAddr >= 0);
 	_brHeaderAddr = brAddr;
 	_hasBrHeader = true;
 }

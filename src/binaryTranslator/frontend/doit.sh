@@ -9,13 +9,13 @@ FRONTEND_PATH="/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend"
 # mv static_trace.s ../input_files/429.mcf.s
 # mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/429.mcf_mem_trace.csv
 # mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/429.mcf_ins_addrs.csv
- ####
-  cd /home/milad/zsim-apps/build/speccpu2006/400.perlbench
-  /home/milad/esc_project/svn/pin/pin -t $FRONTEND_PATH/obj-intel64/parser.so -b 400.perlbench -- ./400.perlbench -I. -I /home/milad/zsim-apps/inputs/400.perlbench/all/input/lib /home/milad/zsim-apps/inputs/400.perlbench/test/input/attrs.pl
-  cd $FRONTEND_PATH
-  mv static_trace.s ../input_files/400.perlbench.s
-  mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/400.perlbench_mem_trace.csv
-  mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/400.perlbench_ins_addrs.csv
+# ####
+#  cd /home/milad/zsim-apps/build/speccpu2006/400.perlbench
+#  /home/milad/esc_project/svn/pin/pin -t $FRONTEND_PATH/obj-intel64/parser.so -b 400.perlbench -- ./400.perlbench -I. -I /home/milad/zsim-apps/inputs/400.perlbench/all/input/lib /home/milad/zsim-apps/inputs/400.perlbench/test/input/attrs.pl
+#  cd $FRONTEND_PATH
+#  mv static_trace.s ../input_files/400.perlbench.s
+#  mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/400.perlbench_mem_trace.csv
+#  mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/400.perlbench_ins_addrs.csv
 #####
 # ../../../../pin/pin -t ./obj-intel64/parser.so -b 403.gcc -- ~/zsim-apps/build/speccpu2006/403.gcc/403.gcc -C ~/zsim-apps/inputs/403.gcc/test/input/cccp.i  -o junk.o
 # mv static_trace.s ../input_files/403.gcc.s
@@ -36,11 +36,11 @@ FRONTEND_PATH="/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend"
 # mv static_trace.s ../input_files/458.sjeng.s
 # mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/458.sjeng_mem_trace.csv
 # mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/458.sjeng_ins_addrs.csv
-####
-# ../../../../pin/pin -t ./obj-intel64/parser.so -b 462.libquantum -- ~/zsim-apps/build/speccpu2006/462.libquantum/462.libquantum 33 5
-# mv static_trace.s ../input_files/462.libquantum.s
-# mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/462.libquantum_mem_trace.csv
-# mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/462.libquantum_ins_addrs.csv
+###
+ ../../../../pin/pin -t ./obj-intel64/parser.so -b 462.libquantum -- ~/zsim-apps/build/speccpu2006/462.libquantum/462.libquantum 33 5
+ mv static_trace.s ../input_files/462.libquantum.s
+ mv /scratch/tracesim/specint2006/mem_trace.csv /scratch/tracesim/specint2006/462.libquantum_mem_trace.csv
+ mv /scratch/tracesim/specint2006/ins_addrs.csv /scratch/tracesim/specint2006/462.libquantum_ins_addrs.csv
 ####
 # ../../../../pin/pin -t ./obj-intel64/parser.so -b 464.h264ref -- ~/zsim-apps/build/speccpu2006/464.h264ref/464.h264ref -d ~/zsim-apps/inputs/464.h264ref/test/input/foreman_test_encoder_baseline.cfg -p InputFile=/home/milad/zsim-apps/inputs/464.h264ref/all/input/foreman_qcif.yuv
 # mv static_trace.s ../input_files/464.h264ref.s

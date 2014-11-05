@@ -57,14 +57,14 @@ instruction::~instruction () {
 void instruction::setOpCode (const char *opCode) {strcpy (_opCode, opCode);}
 
 void instruction::setInsAddr (ADDR insAddr) {
-	Assert (insAddr > 0 && "insAddr must be larger than zero.");
+	Assert (insAddr >= 0 && "insAddr must be larger than zero.");
 	_insAddr = insAddr;
 }
 
 void instruction::setInsFallThruAddr (ADDR insFallThruAddr, bool hasFallThru) {
 	_hasFallThru = hasFallThru;
     if (_hasFallThru) {
-	    Assert (insFallThruAddr > 0 && "insFallThruAddr must be larger than zero.");
+	    Assert (insFallThruAddr >= 0 && "insFallThruAddr must be larger than zero.");
         _insFallThruAddr = insFallThruAddr;
     }
 }
@@ -72,7 +72,7 @@ void instruction::setInsFallThruAddr (ADDR insFallThruAddr, bool hasFallThru) {
 void instruction::setInsDstAddr (ADDR insDstAddr, bool hasDst) {
 	_hasDst = hasDst;
     if (_hasDst) {
-	    Assert (insDstAddr > 0 && "insDstAddr must be larger than zero.");
+	    Assert (insDstAddr >= 0 && "insDstAddr must be larger than zero.");
         _insDstAddr = insDstAddr;
     }
 }
@@ -143,17 +143,17 @@ void instruction::resetInsFallThru () {
 }
 
 ADDR instruction::getInsAddr () {
-	Assert (_insAddr > 0 && "insAddr must be larger than zero.");
+	Assert (_insAddr >= 0 && "insAddr must be larger than zero.");
 	return _insAddr;
 }
 
 ADDR instruction::getInsDstAddr () {
-	Assert (_insDstAddr > 0 && "insDstAddr must be larger than zero.");
+	Assert (_insDstAddr >= 0 && "insDstAddr must be larger than zero.");
 	return _insDstAddr;
 }
 
 ADDR instruction::getInsFallThruAddr () {
-	Assert (_insFallThruAddr > 0 && "insFallThruAddr must be larger than zero.");
+	Assert (_insFallThruAddr >= 0 && "insFallThruAddr must be larger than zero.");
 	return _insFallThruAddr;
 }
 
