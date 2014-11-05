@@ -29,6 +29,7 @@ class basicblock {
 		void addIns (instruction*, REACHING_TYPE);
 		void addIns (instruction*, ADDR);
 		void addMovIns (instruction*);
+        bool isThisBBfallThru (basicblock*);
 		ADDR getLastInsDst ();
 		ADDR getLastInsFallThru ();
 		instruction* getLastIns ();

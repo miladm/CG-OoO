@@ -14,7 +14,6 @@ void build_dominators (List<basicblock*>* bbList) {
 			bool change = n->setDominators ();
 			n->markAsEntryPoint ();
 			n->setAllasDominators (false);
-            cout << "entry: " << hex << n->getID () << endl;
 		} else {
 			// bool change = n->setDominators (bbList); this approach is too mem expensive
 			n->setAllasDominators (true);
@@ -133,6 +132,7 @@ void findDF (basicblock* bb) {
     map<ADDR,basicblock*> children = bb->getChildren ();
     map<ADDR,basicblock*>::iterator it1, it2;
 
+    /* VISIT DOMINANCE TREE CHILDREN */
     bb->resetDF ();
     for (it1 = children.begin (); it1 != children.end (); it1++) {
         basicblock *child = it1->second;
@@ -145,6 +145,7 @@ void findDF (basicblock* bb) {
         }
     }
 
+    /* VISIT CFG DESCENDENTS */
     for (int i = 0; i < bb->getNumDescendents (); i++) {
         basicblock* descendent = bb->getNthDescendent (i);
         if (descendent->isASDominator (bb->getID ()) == false)

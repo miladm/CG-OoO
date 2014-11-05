@@ -118,10 +118,22 @@ void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
 	// printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/ (double)ins->getNumReg ());
 }
 
+/* FIND IF THIS BB THE FALL-THROUGH OR DESTINATION OF ITS ANCESTOR BB */
+bool basicblock::isThisBBfallThru (basicblock* anc) {
+    instruction* last_ins = anc->getLastIns ();
+    if (last_ins->hasFallThru () && anc->getLastInsFallThru () == getID ())
+        return true;
+    else if (last_ins->hasDst () && anc->getLastInsDst () == getID ())
+        return false;
+    else
+        Assert (0 && "This BB is falsely not present as the fallthru or dst of its ancestor");
+}
+
 void basicblock::addMovIns (instruction* ins) {
     instruction* last_ins = _insList->Last ();
     if (last_ins->getType () == 'r' || last_ins->getType () == 'c' || last_ins->getType () == 's' || 
-            last_ins->getType () == 'j' || last_ins->getType () == 'b') {
+        last_ins->getType () == 'j' || last_ins->getType () == 'b') {
+        /* PUSH THE INS TO THE SECOND TO LAST SPOT IN INSLIST */
         _insList->InsertAt (ins, _insList->NumElements () - 1);
         _insList_orig->InsertAt (ins, _insList->NumElements () - 1);
 
@@ -129,18 +141,30 @@ void basicblock::addMovIns (instruction* ins) {
         instruction* top_ins;
         if (_insList->NumElements () >= 3) {
             top_ins = _insList->Nth (_insList->NumElements () - 3);
-            if (!(top_ins->hasFallThru () && !top_ins->hasDst ())) cout << top_ins->getInsAddr () << endl;
             Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
             top_ins->resetInsFallThru ();
             top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
             top_ins->setInsFallThru (ins);
         } else {
-            //TODO implement this
+            for (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                basicblock* anc = _ancestorBbList->Nth(i);
+                instruction* top_ins = anc->getLastIns ();
+                if (isThisBBfallThru (anc)) {
+                    top_ins->resetInsFallThru ();
+                    top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                    top_ins->setInsFallThru (ins);
+                } else {
+                    top_ins->resetInsDst ();
+                    top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                    top_ins->setInsDst (ins);
+                }
+            }
         }
         instruction* bottom_ins = _insList->Nth (_insList->NumElements () - 1);
         ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
         ins->setInsFallThru (bottom_ins);
     } else {
+        /* PUSH THE INS TO THE LAST SPOT IN INSLIST */
         _insList->Append (ins);
         _insList_orig->Append (ins);
 
