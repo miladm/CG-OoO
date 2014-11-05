@@ -106,9 +106,8 @@ class basicblock {
 		map<long int, vector<long int> > getPhiFuncs ();
 		void replaceNthPhiOperand (long int var, int indx, long int subscript);
 		void setPhiWriteVar (long int var, long int subscript);
-		void insertMOVop ();
-		int elimPhiFuncs ();
-		void insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs);
+		int elimPhiFuncs (ADDR&, map<ADDR,instruction*>*);
+		void insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs, ADDR insAddr);
 	
 		//PROFILE
 		float getTakenBias ();

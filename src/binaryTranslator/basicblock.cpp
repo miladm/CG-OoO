@@ -528,7 +528,7 @@ void basicblock::setPhiWriteVar (long int var, long int subscript) {
  * DONE AT REGISTER ALLOCATION PHASE HERE WE DON'T ACTUALLY "ELIMINATE" PHI
  * FUNCTIONS, BUT WE WILL ADD CODE TO REPRESENT THEM IN REAL PROGRAMS
  --*/
-int basicblock::elimPhiFuncs () {
+int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAddrMap) {
 	map<long int, vector<long int> >::iterator it0;
 	int temp = 0;
 	for  (it0 = _phiFuncMap.begin (); it0 != _phiFuncMap.end (); it0++) {
@@ -543,13 +543,15 @@ int basicblock::elimPhiFuncs () {
 		for  (it1 = phiVector.begin (); it1 != phiVector.end (); it1++) {
 			int subscript = *it1;
 			basicblock* NthAncestor = getNthAncestor (indx);
-			//printf ("values: %d=>%d, %d\n",var,renameToSub,subscript);
-			NthAncestor->insertMOVop (var,renameToSub,var,subscript);
+            ADDR insAddr = PHI_INS_ADDR + phiAddrOffset++;
+            Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins address already exists.");
+			NthAncestor->insertMOVop (var, renameToSub, var, subscript, insAddr);
 			indx++;
 		}
 		temp = phiVector.size ();
 	}
-	//repost the number of MOV isntructions inserted.
+
+	/* REPORT THE NUMBER OF MOV ISNTRUCTIONS INSERTED */
 	return temp*_phiFuncMap.size ();
 }
 
@@ -559,12 +561,12 @@ int basicblock::elimPhiFuncs () {
  * - DO NOT HAVE THEIR ASM VARIABLE SETUP
  * - DO NOT HAVE THEIR INS ADDRESS SETUP
  */
-void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs) {
+void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs, ADDR insAddr) {
 	instruction* newIns = new instruction;
 	//TODO do all the bells and whistles for adding an ins.
 	newIns->setType ('o');
 	newIns->setOpCode ("#MOV\n");
-	newIns->setInsAddr (PHI_INS_ADDR); //this is just a psudo instruction address.
+	newIns->setInsAddr (insAddr);
 	int type = READ;
 	newIns->setRegister (&src_var, &type);
 	newIns->setReadVar (src_var,src_subs);

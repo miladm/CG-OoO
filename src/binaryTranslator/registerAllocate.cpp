@@ -5,14 +5,15 @@
 #include "registerAllocate.h"
 
 
-int eliminatePhiFuncs (List<basicblock*> *bbList) {
+int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {
 	/* CAUTION:
 		After phi-function elimination you must never poke into 
         the end of a BB to search for a branch of some sort.
 	*/
 	int numInsInsertion = 0;
+    ADDR phiAddrOffset = 0;
 	for (int i =0 ; i < bbList->NumElements (); i++) {
-		numInsInsertion += bbList->Nth (i)->elimPhiFuncs ();
+		numInsInsertion += bbList->Nth (i)->elimPhiFuncs (phiAddrOffset, insAddrMap);
 	}
 	return numInsInsertion;
 }
@@ -274,11 +275,11 @@ void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &global
     }
 }
 
-void allocate_register (List<basicblock*> *bbList, List<instruction*> *insList, REG_ALLOC_MODE reg_alloc_mode) {
+void allocate_register (List<basicblock*> *bbList, List<instruction*> *insList, map<ADDR,instruction*> *insAddrMap, REG_ALLOC_MODE reg_alloc_mode) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
 	map<long int,interfNode*> locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
 	printf ("\tPhi-Function Elimination\n");
-	int numInsInsertion = eliminatePhiFuncs (bbList);
+	int numInsInsertion = eliminatePhiFuncs (bbList, insAddrMap);
 	printf ("\tSSA Rename & Build Def/Use Set\n");
 	renameAndbuildDefUseSets (bbList); //TODO: make sure this step does not impact next step
 	printf ("\tLiveness Analysis\n");
