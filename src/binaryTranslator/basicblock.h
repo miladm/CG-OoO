@@ -140,10 +140,6 @@ class basicblock {
 		bool isInLocalRegSet (long int reg);
 		void updateLocalRegSet ();
 		int getLiveVarSize () {
-			// for (set<long int>::iterator it = _inSet.begin (); it != _inSet.end (); it++) {
-			// 	printf (", %ld", *it);
-			// }
-			// printf ("\n");
 			return _inSet.size ()+_defSet.size ();
 		}
 

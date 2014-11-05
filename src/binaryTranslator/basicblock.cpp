@@ -777,7 +777,6 @@ bool basicblock::update_InOutSet () {
 	int inSetSize = _inSet.size ();
 
     bool intra_bb_change = false;
-//    int counter = 0;
     do {
         intra_bb_change = false;
         int ins_list_size = _insList->NumElements ();
@@ -785,32 +784,18 @@ bool basicblock::update_InOutSet () {
             instruction* ins = _insList->Nth (i);
             bool is_intra_bb_change = ins->update_InOutSet ();
             if (is_intra_bb_change) intra_bb_change = true;
-//            cout <<  is_intra_bb_change << " " << intra_bb_change << endl;
         }
-//        cout << counter++ << endl;
     } while (intra_bb_change);
 
+    /* SET INSET AND OUTSET OF THE BB */
     _inSet = _insList->Nth(0)->getInSet ();
     _outSet = _insList->Last()->getOutSet ();
 
 	/* ANY CHANGE IN THE BB SETS? */
 	bool inter_bb_change;
 	if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ()) {
-//        cout << "true " << hex << "[" << getID () << " - > " << _insList->Last ()->getInsFallThruAddr () << "] ";
-//        cout << "[" << getID () << " - > " << _insList->Last ()->getInsDstAddr () << "] (";
-//        std::set<long int>::iterator it;
-//        for (it = _outSet.begin (); it != _outSet.end(); it++) {
-//            cout << dec << (*it) << ",";
-//        }
-//        cout << ") (";
-//        for (it = _defSet.begin (); it != _defSet.end(); it++) {
-//            cout << dec << (*it) << ",";
-//        }
-//        cout << ")";
-//        cout << dec << _outSet.size () << " " << _inSet.size () << endl;
 		inter_bb_change = true;
     } else {
-//        cout << getID () << " " << _outSet.size () << " " << _inSet.size () << endl;
 		inter_bb_change = false;
     }
 	return inter_bb_change;
