@@ -3,6 +3,19 @@
  ******************************************************************************/
 
 #include "interfNode.h"
+#include <unistd.h>
+#include <signal.h>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <string>
+#include <list>
+#include <time.h>
 
 interfNode::interfNode (long int psudoReg) {
 	_reg = -1;

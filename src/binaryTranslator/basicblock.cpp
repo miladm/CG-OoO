@@ -751,7 +751,7 @@ void basicblock::updateLocalRegSet () {
 		printf ("stale register: %d\n", (*it)%100);
 	}
 */
-    cout << getID () << " " << _localRegSet.size () << endl;
+//    cout << getID () << " " << _localRegSet.size () << endl;
 }
 
 bool basicblock::isInLocalRegSet (long int reg) {
