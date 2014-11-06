@@ -284,7 +284,7 @@ basicblock* basicblock::getNxtBB () {
 	Assert  (getTakenBias () >= 0.0 && getTakenBias () <= 1.0 && "Invalid bias value\n");
 	if  (getTakenBias () > WBB_LOWER_BOUND && 
 		getTakenBias () < WBB_UPPER_BOUND) {
-			printf ("\tWARNING: There is no clear answer for the next BB  (%s, line: %d)\n",__FILE__, __LINE__);
+			printf ("\t\tWARNING: There is no clear answer for the next BB  (%s, line: %d)\n",__FILE__, __LINE__);
 			printf ("%llx\n", getID ()); //TODO remove this line
 			return NULL; //Best action @ this point: give up
 	} else if  (getTakenBias () <= 0.1) {
@@ -545,7 +545,7 @@ int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAd
 			basicblock* NthAncestor = getNthAncestor (indx);
             ADDR insAddr = PHI_INS_ADDR + phiAddrOffset++;
             Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins address already exists.");
-			NthAncestor->insertMOVop (var, renameToSub, var, subscript, insAddr);
+			NthAncestor->insertMOVop (var, renameToSub, var, subscript, 1);
 			indx++;
 		}
 		temp = phiVector.size ();
@@ -751,6 +751,7 @@ void basicblock::updateLocalRegSet () {
 		printf ("stale register: %d\n", (*it)%100);
 	}
 */
+    cout << getID () << " " << _localRegSet.size () << endl;
 }
 
 bool basicblock::isInLocalRegSet (long int reg) {

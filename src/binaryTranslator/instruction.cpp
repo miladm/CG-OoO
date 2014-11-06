@@ -231,7 +231,7 @@ void instruction::setReadVar (int var, int subscript) {
 	Assert ((subscript >= 0 || subscript == -2) && "Invalid SSA register assignment value");
 	// printf ("ins (%llx): %d_%d\n", getInsAddr (),var,subscript);
 	if (_readVar.find (var) != _readVar.end () && subscript != _readVar[var]) 
-		printf ("\tWARNING: Rewriting an already assigned READ reg (old:%d,new:%d)\n", subscript,_readVar[var]);
+		printf ("\t\tWARNING: Rewriting an already assigned READ reg (old:%d,new:%d)\n", subscript,_readVar[var]);
 	if (_readVar.find (var) != _readVar.end () && subscript!=-2 && _readVar[var]==-2)
 		_readVar.erase (var);
 	_readVar.insert (pair<int,int> (var,subscript));
@@ -241,7 +241,7 @@ void instruction::setWriteVar (int var, int subscript) {
 	Assert ((var <= X86_REG_HI && var >= X86_REG_LO) && "Invalid architectural register assignment.");
 	Assert (subscript >= 0 && "Invalid SSA register assignment value");
 	if (_writeVar.find (var) != _writeVar.end ()) 
-        printf ("Trying to rewrite an already assigned write register (old:%d,new:%d)\n", subscript,_writeVar[var]);
+        printf ("\t\tWARNING: Trying to rewrite an already assigned write register (old:%d,new:%d)\n", subscript,_writeVar[var]);
 	if (_writeVar.find (var) != _writeVar.end () && subscript>0 && _writeVar[var]==0)
 		_writeVar.erase (var);
 	_writeVar.insert (pair<int,int> (var,subscript));

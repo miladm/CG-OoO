@@ -115,6 +115,6 @@ void loop::findFallThroughBBs() {
 
 List<basicblock*>* loop::getFallThroughBBs() {
 	//Assert(_fallThroughBBList->NumElements() > 0 && "No loop fallthrough found");
-	if (_fallThroughBBList->NumElements() <= 0) printf("\tWARNING: No loop fallthrough found in loop %llx\n", getLoopEntryID()); //TOOD bring this back to an assert soon
+	if (_fallThroughBBList->NumElements() <= 0) printf("\t\tWARNING: No loop fallthrough found in loop %llx\n", getLoopEntryID()); //TOOD bring this back to an assert soon
 	return _fallThroughBBList;
 }

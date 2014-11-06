@@ -118,7 +118,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setTakenTarget (bbDst);
                 }
 			} else {
-				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -132,7 +132,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setFallThrough (bbFallThru);
                 }
 			} else {
-				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -146,7 +146,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setFallThrough (bbFallThru);
                 }
 			} else {
-				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -160,7 +160,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setTakenTarget (bbDst);
                 }
 			} else {
-				printf ("\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}

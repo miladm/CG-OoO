@@ -35,8 +35,6 @@ void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {
 		set<long int> defSet = bb->getDefSet (); //NOTE: some variables are "somehow" never defined in x86!
         set<long int>::iterator it;
 		for (it = defSet.begin (); it != defSet.end (); it++) {
-			if (!((*it) >= X86_REG_LO && (*it) <= X86_REG_HI))
-				printf ("ERROR: %d\n",*it);
 			Assert ((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "Invalid x86 variable.");
 			int varIndx = *it;
 			varList[varIndx]->addBB (bb);

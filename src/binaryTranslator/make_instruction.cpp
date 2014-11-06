@@ -164,7 +164,7 @@ void parse_instruction (List<instruction*> *insList,
 			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
 				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
-				;// printf ("ERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
+				;// printf ("\t\tERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
 				//exit (1);
 			}
 
@@ -172,7 +172,7 @@ void parse_instruction (List<instruction*> *insList,
 			if (brBiasMap->find (insAddr) != brBiasMap->end ()) {
 				newIns->setBrTakenBias ((*brBiasMap)[insAddr]);
 			} else if (newIns->getType () == 'b') {
-				;// printf ("ERROR: branch instruction bias not found! (%s, line: %d)\n" , __FILE__, __LINE__);
+				;// printf ("\t\tERROR: branch instruction bias not found! (%s, line: %d)\n" , __FILE__, __LINE__);
 				//exit (1);
 			}
 		} else if (newIns->getType () == 'M') {
@@ -219,7 +219,7 @@ void parse_instruction (List<instruction*> *insList,
             }
         }
     }
-	printf ("\tNumber of missing instructions in insList: %d\n", num_missing_ins);
+	printf ("\t\tWARNING: Number of missing instructions in insList: %d\n", num_missing_ins);
 
     for (int i = 0; i < insList->NumElements (); i++) {
         ADDR dst, fallThru;

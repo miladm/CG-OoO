@@ -43,7 +43,7 @@ long int regFile::getRegNum(const char* regName) {
 //		numRegs++;
 //		return atoi(regName);
 	} else {
-//		printf("\tERROR: Missing X86 Regiter: %s\n",regName);
+//		printf("\t\tERROR: Missing X86 Regiter: %s\n",regName);
 		// Assert(true == false && "Didn't find the required register.");
 		return INVALID_REG;
 	}

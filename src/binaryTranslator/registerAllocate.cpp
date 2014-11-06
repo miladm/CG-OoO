@@ -55,7 +55,6 @@ void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode)
     }
 }
 
-
 void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap) {
 	if (locallIntfNodeMap.size () == 0) return;
 	if (locallIntfNodeMap.size () > 0) {
@@ -143,7 +142,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, map<
 				for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
 					printf ("remaining nodes size: %d\n", (it->second)->getNeighborSize ());
 				}
-				Assert (0 && "no candidate neighbors found.");
+				Assert (0 && "No candidate neighbors found.");
 			}
 		}
 		// Step 2: Color Registers (reg assignment)
@@ -174,7 +173,8 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                 set_difference (inSet.begin (), inSet.end (), localSet.begin (), localSet.end (), std::inserter (inSet_noLocal, inSet_noLocal.begin ()));
                 set_union (defSet_noLocal.begin (), defSet_noLocal.end (), inSet_noLocal.begin (), inSet_noLocal.end (), std::inserter (liveSet, liveSet.begin ()));
             } else {
-                set_union (defSet.begin (), defSet.end (), inSet.begin (), inSet.end (), std::inserter (liveSet, liveSet.begin ()));
+//                set_union (defSet.begin (), defSet.end (), inSet.begin (), inSet.end (), std::inserter (liveSet, liveSet.begin ()));
+                liveSet = ins->getOutSet ();
             }
             //TODO - debug - to remove
             // set<long int> test;
@@ -186,13 +186,13 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             }
             Assert (liveSet.size () <= GRF_SIZE && "Global register allocation spilling in not supported");
             if (liveMaxSize < liveSet.size ()) liveMaxSize = liveSet.size ();
-            for (set<long int>::iterator it = liveSet.begin (); it != liveSet.end (); it++) {
+            for (set<long int>::iterator it = inSet.begin (); it != inSet.end (); it++) {
                 if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                     interfNode *IntfNd = new interfNode (*it);
                     globalIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
                 }
                 interfNode *defNode = globalIntfNodeMap[*it];
-                for (set<long int>::iterator it_live = liveSet.begin (); it_live != liveSet.end (); it_live++) {
+                for (set<long int>::iterator it_live = inSet.begin (); it_live != inSet.end (); it_live++) {
                     if (*it != *it_live) { /* AVOID EDGES TO SELF */
                         if (globalIntfNodeMap.find (*it_live) == globalIntfNodeMap.end ()) {
                             interfNode *IntfNd = new interfNode (*it_live);
@@ -203,8 +203,15 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                     }
                 }
             }
+            for (set<long int>::iterator it = defSet.begin (); it != defSet.end (); it++) {
+                if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
+                    interfNode *IntfNd = new interfNode (*it);
+                    globalIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
+                }
+            }
         }
         if (reg_alloc_mode == LOCAL_GLOBAL) {
+            cout << "local: " << bb->getID () << " " << localSet.size () << endl;
             Assert (localSet.size () <= LRF_SIZE && "Local register allocation spilling in not supported");
             // For each local value, connect the node to all other local nodes at that BB
             for (set<long int>::iterator it = localSet.begin (); it != localSet.end (); it++) {
@@ -317,7 +324,7 @@ void allocate_register (List<basicblock*> *bbList, List<instruction*> *insList, 
 		// printf ("%llx, %d\n", bb->getID (),	bb->getLiveVarSize ());
 		// bb->getLiveVarSize ();
 	}
-	printf ("\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n",numInsInsertion,insList->NumElements ());
-    cout << "max number of live values: " << dec << liveMaxSize << endl;
+	printf ("\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n", numInsInsertion, insList->NumElements ());
+	printf ("\tMAX number of global live variables: %d\n", liveMaxSize);
 	delete interiorBB;
 }
