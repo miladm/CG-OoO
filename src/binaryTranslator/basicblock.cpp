@@ -775,13 +775,12 @@ set<long int> basicblock::getLocalRegSet () {
 bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {
 	int outSetSize = _outSet.size ();
 	int inSetSize = _inSet.size ();
-	set<long int> bbDefSet, temp;
 
     bool intra_bb_change = false;
     do {
         intra_bb_change = false;
         int ins_list_size = _insList->NumElements ();
-        bbDefSet.clear ();
+	    set<long int> bbDefSet, temp;
         for  (int i =  0; i < ins_list_size; i++) {
             instruction* ins = _insList->Nth (i);
             bool isLastInsInBB = (i == (ins_list_size - 1)) ? true : false;

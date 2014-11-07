@@ -166,7 +166,7 @@ bool instruction::hasDst () {
     if ((getType () == 's' || getType () == 'o' || 
          getType () == 'n' || getType () == 'r') && _hasDst) {
         cout << "*** Instruction Address: " << hex << getInsAddr () << endl;
-        Assert (0 && "a destination must not have existed");
+        Assert (0 && "A destination must not have existed");
     }
 	return _hasDst;
 }
@@ -174,7 +174,7 @@ bool instruction::hasDst () {
 bool instruction::hasFallThru () {
     if ((getType () == 's' || getType () == 'r' || 
          getType () == 'j') && _hasFallThru)
-        Assert (0 && "a fall-through must not have existed");
+        Assert (0 && "A fall-through must not have existed");
 	return _hasFallThru;
 }
 
@@ -654,9 +654,9 @@ set<long int> instruction::getLocalRegSet () {
 }
 
 bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> &bbDefSet, bool isLastInsInBB) {
-    int outSetSize = _outSet.size ();
-    int inSetSize = _inSet.size ();
-    int localSetSize = _localRegSet.size ();
+    set<long int> oldOutSet = _outSet;
+    set<long int> oldInSet = _inSet;
+    set<long int> oldLocalSet = _localRegSet;
 
     /*-- UPDATE _outSet --*/
     set<long int> tempSet;
@@ -669,7 +669,9 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
         succInSet.clear ();
         Assert (_insDst != NULL);
         succInSet = _insDst->getInSet ();
-        std::set_union (succInSet.begin (), succInSet.end (), _outSet.begin (), _outSet.end (), std::inserter (tempSet, tempSet.begin ()));
+        std::set_union (succInSet.begin (), succInSet.end (), 
+                        _outSet.begin (), _outSet.end (), 
+                        std::inserter (tempSet, tempSet.begin ()));
         _outSet = tempSet;
     }
 
@@ -680,24 +682,38 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
         succInSet.clear ();
         Assert (_insFallThru != NULL);
         succInSet = _insFallThru->getInSet ();
-        std::set_union (succInSet.begin (), succInSet.end (), _outSet.begin (), _outSet.end (), std::inserter (tempSet, tempSet.begin ()));
+        std::set_union (succInSet.begin (), succInSet.end (), 
+                        _outSet.begin (), _outSet.end (), 
+                        std::inserter (tempSet, tempSet.begin ()));
         _outSet = tempSet;
     }
 
     /*-- UPDATE _inSet --*/
     set<long int> outMinusDef;
-    std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (outMinusDef, outMinusDef.begin ()));
-    std::set_union (outMinusDef.begin (), outMinusDef.end (), _useSet.begin (), _useSet.end (), std::inserter (_inSet, _inSet.begin ()));
+    std::set_difference (_outSet.begin (), _outSet.end (), 
+                         _defSet.begin (), _defSet.end (), 
+                         std::inserter (outMinusDef, outMinusDef.begin ()));
+    std::set_union (outMinusDef.begin (), outMinusDef.end (), 
+                    _useSet.begin (), _useSet.end (), 
+                    std::inserter (_inSet, _inSet.begin ()));
 
 
     /*-- CALCULATE LOCAL REGISTER SET --*/
     if (reg_alloc_mode == LOCAL_GLOBAL) {
 //        cout << "- " << bbDefSet.size () << " " << _outSet.size () << endl;
-        set<long int> temp1, temp2, temp3;
-        if (!isLastInsInBB) 
+        set<long int> temp, temp0, temp1, temp2, temp3;
+        if (!isLastInsInBB) {
             _localRegSet = _insFallThru->getLocalRegSet ();
-        else
+            std::set_union (_defSet.begin (), _defSet.end (), 
+                            bbDefSet.begin (), bbDefSet.end (), 
+                            std::inserter (temp, temp.begin ()));
+            std::set_intersection (_localRegSet.begin (), _localRegSet.end (), 
+                                   temp.begin (), temp.end (), 
+                                   std::inserter (temp0, temp0.begin ()));
+            _localRegSet = temp0;
+        } else {
             _localRegSet.clear ();
+        }
         std::set_difference (_useSet.begin (), _useSet.end (), 
                              _outSet.begin (), _outSet.end (), 
                              std::inserter (temp1, temp1.begin ()));
@@ -713,13 +729,31 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
     /*-- ANY CHANGE IN THE BB SETS? --*/
     bool change;
 //    cout << outSetSize << " " << _outSet.size () << " " << inSetSize << " " << _inSet.size () << endl;
+    set<long int> localDiff, inDiff, outDiff;
+    std::set_difference (_outSet.begin (), _outSet.end (), 
+                         oldOutSet.begin (), oldOutSet.end (), 
+                         std::inserter (outDiff, outDiff.begin ()));
+    std::set_difference (_inSet.begin (), _inSet.end (), 
+                         oldInSet.begin (), oldInSet.end (), 
+                         std::inserter (inDiff, inDiff.begin ()));
     if (reg_alloc_mode == LOCAL_GLOBAL) {
-        if  (outSetSize != _outSet.size () || inSetSize != _inSet.size () || _localRegSet.size () != localSetSize)
+        std::set_difference (_localRegSet.begin (), _localRegSet.end (), 
+                             oldLocalSet.begin (), oldLocalSet.end (), 
+                             std::inserter (localDiff, localDiff.begin ()));
+        if (oldOutSet.size () != _outSet.size () || 
+            oldInSet.size () != _inSet.size () || 
+            oldLocalSet.size () != _localRegSet.size () ||
+            outDiff.size () != 0 || 
+            inDiff.size () != 0 || 
+            localDiff.size () != 0)
             change = true;
         else
             change = false;
     } else {
-        if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
+        if (oldOutSet.size () != _outSet.size () || 
+            oldInSet.size () != _inSet.size () || 
+            outDiff.size () != 0 || 
+            inDiff.size () != 0)
             change = true;
         else
             change = false;

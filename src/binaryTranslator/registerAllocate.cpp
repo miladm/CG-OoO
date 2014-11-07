@@ -85,8 +85,6 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap,
 				interfNode* node = candidateNodeIt->second;
 				node->removeFromGraph ();
 				removedIntfNodeVector.push_back (node);
-				// if (allIntfNodeMap.find (candidateNodeIt->first) != allIntfNodeMap.end ()) 
-                //  printf ("\n============================================\n");
 //				#ifdef DEBUG_RA 
 //                printf ("adding to ALL: %d\n", candidateNodeIt->first);
 //				#endif
@@ -95,9 +93,9 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap,
 			} else {
                 map<long int,interfNode*>::iterator it;
 				for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
-					printf ("remaining nodes size: %d\n", (it->second)->getNeighborSize ());
+					printf ("remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
 				}
-				Assert (0 && "no candidate neighbors found.");
+				Assert (0 && "No candidate neighbors found.");
 			}
 		}
 
@@ -151,7 +149,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap,
 			} else {
                 map<long int,interfNode*>::iterator it;
 				for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-					printf ("remaining nodes size: %d\n", (it->second)->getNeighborSize ());
+					printf ("Remaining global nodes size: %d\n", (it->second)->getNeighborSize ());
 				}
 				Assert (0 && "No candidate neighbors found.");
 			}
@@ -160,14 +158,14 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap,
 		// STEP 2: COLOR REGISTERS (REG ASSIGNMENT)
 		set<long int> GRFset;
 		for (int i = GRF_LO; i <= GRF_HI; i++) GRFset.insert (i);
-		for (int i = 0; i < removedIntfNodeVector.size (); i++) {
+		for (int i = removedIntfNodeVector.size () - 1; i>= 0; i--) {
 			interfNode *node = removedIntfNodeVector.at (i);
 			node->assignReg (GRFset);
 		}
 	}
 }
 
-int liveMaxSize = 0;
+int liveGlbMaxSize = 0, liveLclMaxSize = 0;
 void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
     if (!bb->isVisited ()) {
         bb->setAsVisited ();
@@ -180,6 +178,7 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             set<long int> localSet = ins->getLocalRegSet ();
             set<long int> liveSet, defSet_noLocal, inSet_noLocal;
 
+            /* BUILD THE LIVESET */
             if (reg_alloc_mode == LOCAL_GLOBAL) {
                 set_difference (defSet.begin (), defSet.end (), 
                                 localSet.begin (), localSet.end (), 
@@ -194,8 +193,9 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                 liveSet = ins->getOutSet ();
             }
 
+            /* BUILD THE INTERFERENCE GRAPH OF A NODE */
             Assert (liveSet.size () <= GRF_SIZE && "Global register allocation spilling in not supported");
-            if (liveMaxSize < liveSet.size ()) liveMaxSize = liveSet.size ();
+            if (liveGlbMaxSize < liveSet.size ()) liveGlbMaxSize = liveSet.size ();
             for (set<long int>::iterator it = liveSet.begin (); it != liveSet.end (); it++) {
                 if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                     interfNode *IntfNd = new interfNode (*it);
@@ -214,6 +214,7 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                 }
             }
 
+            /* HANDLE LONELY NODES TO AVOID PROGRAM FAILURE - A HACK */
             if (reg_alloc_mode == LOCAL_GLOBAL) {
                 for (set<long int>::iterator it = inSet_noLocal.begin (); it != inSet_noLocal.end (); it++) {
                     if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
@@ -229,6 +230,7 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                 }
 
                 if (localSet.size () > LRF_SIZE ) cout << "local: " << bb->getID () << " " << localSet.size () << endl;
+                if (liveLclMaxSize < localSet.size ()) liveLclMaxSize = liveSet.size ();
                 Assert (localSet.size () <= LRF_SIZE && "Local register allocation spilling in not supported");
                 for (set<long int>::iterator it = localSet.begin (); it != localSet.end (); it++) {
                     if (locallIntfNodeMap.find (*it) == locallIntfNodeMap.end ()) {
@@ -263,10 +265,16 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             }
         }
 
-        for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-            if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ()) 
-                printf ("\t\tERROR: register present in both local and global interference network %d\n", it->first);
-        }
+        /* CHECK FOR CONFLICTS IN THE TWO INTEREFERENCE NETWORKS */
+        map<long int,interfNode*>::iterator it;
+		for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+			if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
+                printf ("\t\tERROR: register conflict between local & global interference networks %d\n", it->first);
+		}
+		for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
+			if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ())
+                printf ("\t\tERROR: register conflict between global & local interference networks %d\n", it->first);
+		}
 
         /*
          * DO REGISTER ALLOCATION FOR LOCAL REGISTERRS THIS MUST BE DONE HERE
@@ -275,6 +283,7 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
         assign_local_registers (locallIntfNodeMap,allIntfNodeMap);
         locallIntfNodeMap.clear ();
 
+        /* CHECK DESCENDENTS AND ANCESTORS */
         for (int i = 0; i < bb->getNumDescendents (); i++)
             make_interference_nodes_network (bb->getNthDescendent (i), globalIntfNodeMap, locallIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
         for (int i = 0; i < bb->getNumAncestors (); i++)
@@ -341,17 +350,7 @@ void allocate_register (List<basicblock*> *bbList,
 		globalIntfNodeMap.clear ();
 		allIntfNodeMap.clear ();
 		make_interference_nodes_network (bbHead, globalIntfNodeMap, locallIntfNodeMap,allIntfNodeMap, reg_alloc_mode);
-		for (map<long int,interfNode*>::iterator it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
-			if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
-                printf ("\t\tERROR: register present in both local and global interference network %d\n", it->first);
-		}
-		for (map<long int,interfNode*>::iterator it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-			if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ())
-                printf ("\t\tERROR: register present in both local and global interference network %d\n", it->first);
-		}
-		// printf ("sizes: %d,%d,%d\n",allIntfNodeMap.size (),globalIntfNodeMap.size (),locallIntfNodeMap.size ());
 		assign_global_registers (locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap);
-		// printf ("sizes: %d,%d,%d\n",allIntfNodeMap.size (),globalIntfNodeMap.size (),locallIntfNodeMap.size ());
 		set_arch_reg_for_all_ins (bbHead, allIntfNodeMap);
 	}
 
@@ -362,7 +361,7 @@ void allocate_register (List<basicblock*> *bbList,
 	}
 
 	printf ("\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n", numInsInsertion, insList->NumElements ());
-	printf ("\tMAX number of global live variables: %d\n", liveMaxSize);
+	printf ("\tMAX number of global/local live variables: %d / %d\n", liveGlbMaxSize, liveLclMaxSize);
 
 	delete interiorBB;
 }
