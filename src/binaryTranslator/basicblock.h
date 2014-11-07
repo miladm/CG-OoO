@@ -131,7 +131,7 @@ class basicblock {
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
     public:
-		bool update_InOutSet ();
+		bool update_InOutSet (REG_ALLOC_MODE);
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();

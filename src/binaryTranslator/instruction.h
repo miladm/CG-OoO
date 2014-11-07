@@ -121,7 +121,7 @@ class instruction {
 		void updateUseSet (long int reg);
 		void updateLocalRegSet ();
     public:
-		bool update_InOutSet ();
+		bool update_InOutSet (REG_ALLOC_MODE, set<long int>&, bool);
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();

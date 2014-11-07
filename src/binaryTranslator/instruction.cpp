@@ -653,9 +653,10 @@ set<long int> instruction::getLocalRegSet () {
 	return _localRegSet;
 }
 
-bool instruction::update_InOutSet () {
+bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> &bbDefSet, bool isLastInsInBB) {
     int outSetSize = _outSet.size ();
     int inSetSize = _inSet.size ();
+    int localSetSize = _localRegSet.size ();
 
     /*-- UPDATE _outSet --*/
     set<long int> tempSet;
@@ -688,13 +689,41 @@ bool instruction::update_InOutSet () {
     std::set_difference (_outSet.begin (), _outSet.end (), _defSet.begin (), _defSet.end (), std::inserter (outMinusDef, outMinusDef.begin ()));
     std::set_union (outMinusDef.begin (), outMinusDef.end (), _useSet.begin (), _useSet.end (), std::inserter (_inSet, _inSet.begin ()));
 
+
+    /*-- CALCULATE LOCAL REGISTER SET --*/
+    if (reg_alloc_mode == LOCAL_GLOBAL) {
+//        cout << "- " << bbDefSet.size () << " " << _outSet.size () << endl;
+        set<long int> temp1, temp2, temp3;
+        if (!isLastInsInBB) 
+            _localRegSet = _insFallThru->getLocalRegSet ();
+        else
+            _localRegSet.clear ();
+        std::set_difference (_useSet.begin (), _useSet.end (), 
+                             _outSet.begin (), _outSet.end (), 
+                             std::inserter (temp1, temp1.begin ()));
+        std::set_intersection (bbDefSet.begin (), bbDefSet.end (), 
+                               temp1.begin (), temp1.end (),
+                               std::inserter (temp2, temp2.begin ()));
+        std::set_union (_localRegSet.begin (), _localRegSet.end (), 
+                        temp2.begin (), temp2.end (), 
+                        std::inserter (temp3, temp3.begin ()));
+        _localRegSet = temp3;
+    }
+
     /*-- ANY CHANGE IN THE BB SETS? --*/
     bool change;
 //    cout << outSetSize << " " << _outSet.size () << " " << inSetSize << " " << _inSet.size () << endl;
-    if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
-        change = true;
-    else
-        change = false;
+    if (reg_alloc_mode == LOCAL_GLOBAL) {
+        if  (outSetSize != _outSet.size () || inSetSize != _inSet.size () || _localRegSet.size () != localSetSize)
+            change = true;
+        else
+            change = false;
+    } else {
+        if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ())
+            change = true;
+        else
+            change = false;
+    }
     return change;
 }
 

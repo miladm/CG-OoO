@@ -31,15 +31,22 @@ interfNode::~interfNode () {
 
 void interfNode::assignReg (set<long int> &RFset) {
 	set<long int> usedRegSet, unusedRegSet;
+
+    /* FIND THE REGISTRE NAME NOT USED BY THE INTERFERING NODES */
 	for (int i = 0; i < _edgeList_static->NumElements (); i++) {
 		interfNode *node = _edgeList_static->Nth (i);
 		long int nodeReg = node->getReg ();
 		if (nodeReg != -1) usedRegSet.insert (nodeReg);
 	}
-	std::set_difference (RFset.begin (), RFset.end (), usedRegSet.begin (), usedRegSet.end (), std::inserter (unusedRegSet, unusedRegSet.begin ()));
+
+	std::set_difference (RFset.begin (), RFset.end (), 
+                         usedRegSet.begin (), usedRegSet.end (), 
+                         std::inserter (unusedRegSet, unusedRegSet.begin ()));
+
 	Assert (unusedRegSet.size () > 0 && "No register value found to assign.");
 	_reg = * (unusedRegSet.begin ());
-	Assert (((_reg >= GRF_LO && _reg <= GRF_HI) || (_reg >= LRF_LO && _reg <= LRF_HI)) && "Invalid Register Value");
+	Assert (((_reg >= GRF_LO && _reg <= GRF_HI) || 
+             (_reg >= LRF_LO && _reg <= LRF_HI)) && "Invalid Register Value");
 }
 
 void interfNode::addEdge (interfNode* node) {

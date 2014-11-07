@@ -741,7 +741,7 @@ void basicblock::updateLocalRegSet () {
 	//std::set<long int> _defUseIntersection;
 	//std::set_intersection (_defSet.begin (), _defSet.end (), _useSet.begin (), _useSet.end (), std::inserter (_defUseIntersection, _defUseIntersection.begin ()));
 	//std::set_difference (_defUseIntersection.begin (), _defUseIntersection.end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
-	std::set_difference (_defSet.begin (), _defSet.end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
+//	std::set_difference (_defSet.begin (), _defSet.end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
 /* debug	
 	printf ("local set ratio:, %f\n",  (double)_localRegSet.size ()/ (double) (_inSet.size ()+_defSet.size ()));
 	std::set<long int> test1,test2;
@@ -751,7 +751,6 @@ void basicblock::updateLocalRegSet () {
 		printf ("stale register: %d\n", (*it)%100);
 	}
 */
-//    cout << getID () << " " << _localRegSet.size () << endl;
 }
 
 bool basicblock::isInLocalRegSet (long int reg) {
@@ -773,18 +772,26 @@ set<long int> basicblock::getLocalRegSet () {
 	return _localRegSet;
 }
 
-bool basicblock::update_InOutSet () {
+bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {
 	int outSetSize = _outSet.size ();
 	int inSetSize = _inSet.size ();
+	set<long int> bbDefSet, temp;
 
     bool intra_bb_change = false;
     do {
         intra_bb_change = false;
         int ins_list_size = _insList->NumElements ();
-        for  (int i = ins_list_size - 1; i >= 0; i--) {
+        bbDefSet.clear ();
+        for  (int i =  0; i < ins_list_size; i++) {
             instruction* ins = _insList->Nth (i);
-            bool is_intra_bb_change = ins->update_InOutSet ();
+            bool isLastInsInBB = (i == (ins_list_size - 1)) ? true : false;
+            bool is_intra_bb_change = ins->update_InOutSet (reg_alloc_mode, bbDefSet, isLastInsInBB);
             if (is_intra_bb_change) intra_bb_change = true;
+            set<long int> defSet = ins->getDefSet ();
+	        std::set_union (defSet.begin (), defSet.end (), 
+                            bbDefSet.begin (), bbDefSet.end (), 
+                            std::inserter (temp, temp.begin ()));
+            bbDefSet = temp;
         }
     } while (intra_bb_change);
 
