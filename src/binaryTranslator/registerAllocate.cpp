@@ -72,8 +72,7 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap,
 					// 	globalIntfNodeMap.erase (it);
 					// 	continue;
 					// }
-				if ((it->second)->getNeighborSize () > neighborCount &&
-				    (it->second)->getNeighborSize () < LRF_SIZE) {
+				if ((it->second)->getNeighborSize () > neighborCount) {
 						neighborCount =  (it->second)->getNeighborSize ();
 						candidateNodeIt = it;
 				}
@@ -90,10 +89,10 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap,
 //				#endif
 				allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
 				locallIntfNodeMap.erase (candidateNodeIt);
-			} else {
+			} else { //TODO this block is no longer accessible - can remove it
                 map<long int,interfNode*>::iterator it;
 				for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
-					printf ("remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
+					printf ("Remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
 				}
 				Assert (0 && "No candidate neighbors found.");
 			}
@@ -128,8 +127,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap,
 				// 	globalIntfNodeMap.erase (it);
 				// 	continue;
 				// }
-				if ((it->second)->getNeighborSize () > neighborCount &&
-				    (it->second)->getNeighborSize () < GRF_SIZE) {
+				if ((it->second)->getNeighborSize () > neighborCount) {
 						neighborCount = (it->second)->getNeighborSize ();
 						candidateNodeIt = it;
 				}
@@ -146,7 +144,7 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap,
 //				#endif
 				allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
 				globalIntfNodeMap.erase (candidateNodeIt);
-			} else {
+			} else { //TODO this block is no longer accessible - can remove it
                 map<long int,interfNode*>::iterator it;
 				for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
 					printf ("Remaining global nodes size: %d\n", (it->second)->getNeighborSize ());
@@ -202,7 +200,8 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                     globalIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
                 }
                 interfNode *defNode = globalIntfNodeMap[*it];
-                for (set<long int>::iterator it_live = liveSet.begin (); it_live != liveSet.end (); it_live++) {
+                set<long int>::iterator it_live;
+                for (it_live = liveSet.begin (); it_live != liveSet.end (); it_live++) {
                     if (*it != *it_live) { /* AVOID EDGES TO SELF */
                         if (globalIntfNodeMap.find (*it_live) == globalIntfNodeMap.end ()) {
                             interfNode *IntfNd = new interfNode (*it_live);
@@ -265,23 +264,25 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
             }
         }
 
-        /* CHECK FOR CONFLICTS IN THE TWO INTEREFERENCE NETWORKS */
-        map<long int,interfNode*>::iterator it;
-		for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
-			if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
-                printf ("\t\tERROR: register conflict between local & global interference networks %d\n", it->first);
-		}
-		for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-			if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ())
-                printf ("\t\tERROR: register conflict between global & local interference networks %d\n", it->first);
-		}
+        if (reg_alloc_mode == LOCAL_GLOBAL) {
+            /* CHECK FOR CONFLICTS IN THE TWO INTEREFERENCE NETWORKS */
+            map<long int,interfNode*>::iterator it;
+            for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+                if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
+                    printf ("\t\tERROR: register conflict between local & global interference networks %d\n", it->first);
+            }
+            for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
+                if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ())
+                    printf ("\t\tERROR: register conflict between global & local interference networks %d\n", it->first);
+            }
 
-        /*
-         * DO REGISTER ALLOCATION FOR LOCAL REGISTERRS THIS MUST BE DONE HERE
-         * TO AVOID EDGES BETWEEN LOCAL REGISTERS OF DIFFERNT BBs 
-         */ 
-        assign_local_registers (locallIntfNodeMap,allIntfNodeMap);
-        locallIntfNodeMap.clear ();
+            /*
+             * DO REGISTER ALLOCATION FOR LOCAL REGISTERRS THIS MUST BE DONE HERE
+             * TO AVOID EDGES BETWEEN LOCAL REGISTERS OF DIFFERNT BBs 
+             */ 
+            assign_local_registers (locallIntfNodeMap,allIntfNodeMap);
+            locallIntfNodeMap.clear ();
+        }
 
         /* CHECK DESCENDENTS AND ANCESTORS */
         for (int i = 0; i < bb->getNumDescendents (); i++)

@@ -728,8 +728,7 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
 
     /*-- ANY CHANGE IN THE BB SETS? --*/
     bool change;
-//    cout << outSetSize << " " << _outSet.size () << " " << inSetSize << " " << _inSet.size () << endl;
-    set<long int> localDiff, inDiff, outDiff;
+    set<long int> inDiff, outDiff;
     std::set_difference (_outSet.begin (), _outSet.end (), 
                          oldOutSet.begin (), oldOutSet.end (), 
                          std::inserter (outDiff, outDiff.begin ()));
@@ -737,6 +736,7 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
                          oldInSet.begin (), oldInSet.end (), 
                          std::inserter (inDiff, inDiff.begin ()));
     if (reg_alloc_mode == LOCAL_GLOBAL) {
+        set<long int> localDiff;
         std::set_difference (_localRegSet.begin (), _localRegSet.end (), 
                              oldLocalSet.begin (), oldLocalSet.end (), 
                              std::inserter (localDiff, localDiff.begin ()));
