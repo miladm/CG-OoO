@@ -233,10 +233,8 @@ void instruction::setRegister (long int *r, int *rt) {
 void instruction::setSpecialRegister (long int *r, int *rt) {
     long int tempR = *r;
     int tempRT = *rt; 
-	if (! (tempR <= X86_REG_HI && tempR >= X86_REG_LO)) printf ("invalid reg: %d\n",tempR);
-    //Assert (tempR >= 1); //TODO this is remved to enable instruction injection
     Assert (tempRT == READ || tempRT == WRITE);
-	Assert (tempR <= X86_REG_HI && tempR >= X86_REG_LO && "Invalid register value");
+	Assert (tempR <= X86_SPECIAL_REG_HI && tempR >= X86_SPECIAL_REG_LO && "Invalid register value");
     (_sr)->Append (tempR);
     (_srt)->Append (tempRT);
 }
