@@ -235,6 +235,11 @@ void instruction::setSpecialRegister (long int *r, int *rt) {
     int tempRT = *rt; 
     Assert (tempRT == READ || tempRT == WRITE);
 	Assert (tempR <= X86_SPECIAL_REG_HI && tempR >= X86_SPECIAL_REG_LO && "Invalid register value");
+
+    /* RENAME SPECIAL REGISTER TO THE APPROPRIATE REG SPACE NAME */
+    tempR = (tempR - 1) + SGRF_LO;
+	Assert (tempR <= SGRF_HI && tempR >= SGRF_LO && "Invalid register value");
+
     (_sr)->Append (tempR);
     (_srt)->Append (tempRT);
 }
