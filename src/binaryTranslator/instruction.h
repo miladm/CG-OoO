@@ -40,6 +40,7 @@ class instruction {
 		void setBPaccuracy (double bpAccuracy);
 		void setLdMissRate (double missRate);
 		void setRegister (long int *r, int *rt);
+		void setSpecialRegister (long int *r, int *rt);
 		void setReadVar (int var, int subscript);
 		void setWriteVar (int var, int subscript);
 		void setArchReg (long int r);
@@ -61,7 +62,9 @@ class instruction {
 		double getLdMissRate ();
 		int getLatency ();
 		int getNthRegType (int i);
+		int getNthSpecialRegType (int i);
 		long int getNthReg (int i);
+		long int getNthSpecialReg (int i);
 		long int getNthArchReg (int indx);
 		long int getNthOldWriteReg (int i);
 		long int getNthReadReg (int i);
@@ -70,6 +73,7 @@ class instruction {
 		int getNumReg ();
 		int getNumReadReg ();
 		int getNumWriteReg ();
+		int getNumSpecialReg ();
 		long int getReadRegSubscript (long int var);
 		long int getWriteRegSubscript (long int var);
 		void makeUniqueRegs ();
@@ -140,11 +144,13 @@ class instruction {
 
         /* REGS */
         List<long int> *_r; //SSA REGISTER LIST
+        List<long int> *_sr; //SPECIAL REGISTER LIST
         List<long int> *_r_read; //SSA REGISTER LIST
         List<long int> *_r_write; //SSA REGISTER LIST
         List<long int> *_r_write_old; //SSA REGISTER LIST (NOT RENAMED BY SSA)
         List<long int> *_r_allocated; //REGISTER LIST
         List<int> *_rt; //REGISTER TYPE LIST
+        List<int> *_srt; //SPECIAL REGISTER TYPE LIST
 		List<regKind> *_rk; //REGISTER KIND (LRF=0 VS. GRF=1)
 
         /* DATA DEPENDENCIES */

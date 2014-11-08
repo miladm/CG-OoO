@@ -54,7 +54,7 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 
 //RESGITER ALLOCATION
 #define LRF_SIZE 100
-#define GRF_SIZE 60
+#define GRF_SIZE 100
 
 #define LRF_LO 100
 #define LRF_HI LRF_LO + LRF_SIZE - 1

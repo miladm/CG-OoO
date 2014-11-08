@@ -9,17 +9,26 @@ void parseRegisters (instruction* newIns, FILE* input_assembly) {
 	regFile* RF = new regFile;
 	char reg[REG_STRING_SIZE];
 	int read_write = 0;
-	long int regCode;
+	long int regCode, specialRegCode;
+
 	while (1) {
-		if (fgets (reg, REG_STRING_SIZE, input_assembly) == NULL) Assert ("Register name not found");
-		if (reg[0] == '-') break; //some ops have no reg
-		if (fscanf (input_assembly, "%d\n", &read_write) == EOF) Assert ("Register type not found");
-		reg[strlen (reg) - 1] = 0; //cut out newline
+		if (fgets (reg, REG_STRING_SIZE, input_assembly) == NULL) 
+            Assert (0 && "Register name not found");
+		if (reg[0] == '-') break; //SOME OPS HAVE NO REG
+
+		if (fscanf (input_assembly, "%d\n", &read_write) == EOF) 
+            Assert (0 && "Register type not found");
+		reg[strlen (reg) - 1] = 0; //CUT OUT NEWLINE
+
 		regCode = RF->getRegNum (reg);
+		specialRegCode = RF->getSpecialRegNum (reg);
 		if (regCode != INVALID_REG) {
 			newIns->setRegister (&regCode, &read_write);
+        } else if (specialRegCode != INVALID_REG) {
+			newIns->setSpecialRegister (&specialRegCode, &read_write);
+        } else {
+            printf ("\t\tWARNING: Unrecorgnized register %s\n", reg);
         }
-//        printf ("debug: %d, %d, %s\n", read_write, regCode, reg);
 	}
 	delete RF;
 }

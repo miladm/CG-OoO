@@ -88,8 +88,8 @@ void dot::defn (FILE* outFile) {
 		//if (bbID == 18446744073709551615) continue; //TODO remove/fix this problem
 		fprintf (outFile, "\t\"%llu\" ", bbID);
 		string color;
-		if (bb->isAPhraseblock ()) color.append ("lightgrey");
-		else									 color.append ("white");	
+		if (bb->isAPhraseblock ())  color.append ("lightgrey");
+		else                        color.append ("white");	
 		setupBox (color, outFile);
 		map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
 		if (phiFuncs.size () > 0) {
@@ -124,12 +124,25 @@ void dot::defn (FILE* outFile) {
 				fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s (UPLD-%.2f) </td></tr>\n", insAddr, ins->getOpCode (), missRate);
 			else {
 				fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s", insAddr, ins->getOpCode ());				
-				for (int j = 0; j < ins->getNumReg (); j++) {
-					if (ins->getNthRegType (j) == READ)
-						fprintf (outFile, ",%dR\n", ins->getNthReg (j));
-					else
-						fprintf (outFile, ",%dW\n", ins->getNthReg (j));
-				}
+                bool enSpecialRegLog = true;
+                for (int j = 0; j < ins->getNumReg (); j++) {
+                    if (ins->getNthRegType (j) == READ) {
+                        fprintf (outFile, ",%dR\n", ins->getNthReg (j));
+                    } else {
+                        if (enSpecialRegLog) {
+                            /* WRITE SPECIAL REGISTER VALUES */
+                            enSpecialRegLog = false;
+                            for (int k = 0; k < ins->getNumSpecialReg (); k++) {
+                                if (ins->getNthSpecialRegType (k) == READ) {
+                                    fprintf (outFile, ",%dR\n", ins->getNthSpecialReg (k));
+                                } else {
+                                    fprintf (outFile, ",%dW\n", ins->getNthSpecialReg (k));
+                                }
+                            }
+                        }
+                        fprintf (outFile, ",%dW\n", ins->getNthReg (j));
+                    }
+                }
 				fprintf (outFile, ",%s", ins->getInsAsm ());				
 /*				fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"> %llx, %s", insAddr, _insList->Nth (i)->getOpCode ());				
 				for (int j = 0; j < _insList->Nth (i)->getNumReadReg (); j++) {

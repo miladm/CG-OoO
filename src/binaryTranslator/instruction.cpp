@@ -33,8 +33,10 @@ instruction::instruction () {
 	_r_write = new List<long int>;
 	_r_write_old = new List<long int>;
 	_r  = new List<long int>;
+	_sr  = new List<long int>;
 	_r_allocated = new List<long int>;
 	_rt = new List<int>;
+	_srt = new List<int>;
 	_rk = new List<regKind>;
 	_ancestors = new List<instruction*>;
 	_regAncestors = new List<instruction*>;
@@ -46,8 +48,10 @@ instruction::~instruction () {
 	delete _r_write;
 	delete _r_write_old;
 	delete _r;
+	delete _sr;
 	delete _r_allocated;
 	delete _rt;
+	delete _srt;
 	delete _rk;
 	delete _ancestors;
 	delete _dependents;
@@ -226,6 +230,17 @@ void instruction::setRegister (long int *r, int *rt) {
 	}
 }
 
+void instruction::setSpecialRegister (long int *r, int *rt) {
+    long int tempR = *r;
+    int tempRT = *rt; 
+	if (! (tempR <= X86_REG_HI && tempR >= X86_REG_LO)) printf ("invalid reg: %d\n",tempR);
+    //Assert (tempR >= 1); //TODO this is remved to enable instruction injection
+    Assert (tempRT == READ || tempRT == WRITE);
+	Assert (tempR <= X86_REG_HI && tempR >= X86_REG_LO && "Invalid register value");
+    (_sr)->Append (tempR);
+    (_srt)->Append (tempRT);
+}
+
 void instruction::setReadVar (int var, int subscript) {
 	Assert ((var <= X86_REG_HI && var >= X86_REG_LO) && "Invalid architectural register assignment.");
 	Assert ((subscript >= 0 || subscript == -2) && "Invalid SSA register assignment value");
@@ -275,6 +290,11 @@ long int instruction::getNthReg (int i) {
     return _r->Nth (i);
 }
 
+long int instruction::getNthSpecialReg (int i) { 
+    Assert (i < _sr->NumElements () && i >= 0);
+    return _sr->Nth (i);
+}
+
 long int instruction::getNthOldWriteReg (int i) {
     Assert (i < _r_write_old->NumElements () && i >= 0);
     return _r_write_old->Nth (i);
@@ -307,8 +327,13 @@ long int instruction::getWriteRegSubscript (long int var) {
 }
 
 int instruction::getNthRegType (int i) { 
-    Assert (i < _r->NumElements () && i >= 0);
+    Assert (i < _rt->NumElements () && i >= 0);
     return _rt->Nth (i);
+}
+
+int instruction::getNthSpecialRegType (int i) { 
+    Assert (i < _srt->NumElements () && i >= 0);
+    return _srt->Nth (i);
 }
 
 int instruction::getNumReg () {
@@ -322,6 +347,10 @@ int instruction::getNumReadReg () {
 
 int instruction::getNumWriteReg () {
     return _r_write->NumElements ();
+}
+
+int instruction::getNumSpecialReg () {
+    return _sr->NumElements ();
 }
 
 /* replace each register with its corresponding SSA value */ 
@@ -371,7 +400,17 @@ std::string instruction::getArchRegisterStr () {
 		ss << "\n";
 	} else {
 		for (int i = 0; i < getNumReg (); i++) {
-			ss << getNthArchReg (i) << "#" << getNthRegType (i) << ",";
+            long int archReg = getNthArchReg (i);
+            int regType = getNthRegType (i);
+            if (regType == WRITE) {
+                /* INTEGRATE SPECIAL REGISTERS */
+                for (int j = 0; j < getNumSpecialReg (); j++) {
+                    long int archReg = getNthSpecialReg (j);
+                    int regType = getNthSpecialRegType (j);
+			        ss << archReg << "#" << regType << ",";
+                }
+            }
+			ss << archReg << "#" << regType << ",";
 		}
 		ss << "\n";
 	}
