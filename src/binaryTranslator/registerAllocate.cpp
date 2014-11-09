@@ -215,8 +215,8 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                 }
             }
 
-            /* HANDLE LONELY NODES TO AVOID PROGRAM FAILURE - A HACK */
             if (reg_alloc_mode == LOCAL_GLOBAL) {
+                /* HANDLE LONELY NODES TO AVOID PROGRAM FAILURE - A HACK */
                 for (set<long int>::iterator it = inSet_noLocal.begin (); it != inSet_noLocal.end (); it++) {
                     if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                         interfNode *IntfNd = new interfNode (*it);
@@ -227,6 +227,18 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                     if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                         interfNode *IntfNd = new interfNode (*it);
                         globalIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
+                    }
+                    interfNode *defNode = globalIntfNodeMap[*it];
+                    set<long int>::iterator it_def;
+                    for (it_def = defSet_noLocal.begin (); it_def != defSet_noLocal.end (); it_def++) {
+                        if (*it != *it_def) { /* AVOID EDGES TO SELF */
+                            if (globalIntfNodeMap.find (*it_def) == globalIntfNodeMap.end ()) {
+                                interfNode *IntfNd = new interfNode (*it_def);
+                                globalIntfNodeMap.insert (pair<long int,interfNode*> (*it_def,IntfNd));
+                            }
+                            interfNode *node = globalIntfNodeMap[*it_def];
+                            defNode->addEdge (node);
+                        }
                     }
                 }
 
@@ -261,6 +273,18 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
                     if (globalIntfNodeMap.find (*it) == globalIntfNodeMap.end ()) {
                         interfNode *IntfNd = new interfNode (*it);
                         globalIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
+                    }
+                    interfNode *defNode = globalIntfNodeMap[*it];
+                    set<long int>::iterator it_def;
+                    for (it_def = defSet.begin (); it_def != defSet.end (); it_def++) {
+                        if (*it != *it_def) { /* AVOID EDGES TO SELF */
+                            if (globalIntfNodeMap.find (*it_def) == globalIntfNodeMap.end ()) {
+                                interfNode *IntfNd = new interfNode (*it_def);
+                                globalIntfNodeMap.insert (pair<long int,interfNode*> (*it_def,IntfNd));
+                            }
+                            interfNode *node = globalIntfNodeMap[*it_def];
+                            defNode->addEdge (node);
+                        }
                     }
                 }
             }
