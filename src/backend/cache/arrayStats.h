@@ -13,13 +13,13 @@ class ArrayStats : public Stats {
 
     protected:
         virtual void printValue(FILE *fp) {
-//            if(size == 0)
-//                return;
-//            fprintf(fp, "[%" PRId64, value[0]);
-//            for(int i = 1; i < size; i++) {
-//                fprintf(fp, ", %" PRId64, value[i]);
-//            }
-//            fprintf(fp, "]");
+            if(size == 0)
+                return;
+            fprintf(fp, "[%ld", value[0]);
+            for(int i = 1; i < size; i++) {
+                fprintf(fp, ", %ld", value[i]);
+            }
+            fprintf(fp, "]");
         }
 
     public:

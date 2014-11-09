@@ -17,6 +17,7 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       s_ld_cnt (g_stats.newScalarStat (lsq_name, "ld_cnt", "Number of load ops", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
+      s_cache_access_cnt (g_stats.newScalarStat (lsq_name, "cache_access", "Number of cache accesses", 0, PRINT_ZERO)),
       s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of load hits", 0, PRINT_ZERO)),
       s_ld_miss_cnt (g_stats.newScalarStat (lsq_name, "ld_miss_cnt", "Number of load misses", 0, PRINT_ZERO)),
       s_st_miss_cnt (g_stats.newScalarStat (lsq_name, "st_miss_cnt", "Number of store misses", 0, PRINT_ZERO)),
@@ -25,6 +26,7 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       s_st_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "st_to_ld_fwd_cnt", "Number of SQ -> LQ forwarding events", 0, PRINT_ZERO)),
       s_st_to_ld_fwd_rat (g_stats.newRatioStat (&s_ld_cnt, lsq_name, "st_to_ld_fwd_rat", "Rate of SQ -> LQ forwarding events / all load ops", 0, PRINT_ZERO)),
       s_ld_miss_rat (g_stats.newRatioStat (&s_cache_to_ld_fwd_cnt, lsq_name, "ld_miss_rat", "Load op miss rate", 0, PRINT_ZERO)),
+      s_mem_miss_rat (g_stats.newRatioStat (&s_cache_access_cnt, lsq_name, "mem_miss_rat", "Memory miss rate", 0, PRINT_ZERO)),
       s_inflight_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "inflight_ld_rat", "Number of in-flight LOAD instructions", 0, PRINT_ZERO)),
       s_inflight_cache_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "inflight_cache_ld_rat", "Number of in-flight LOAD instructions in CACHES", 0, PRINT_ZERO))
 { 
@@ -96,7 +98,9 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         _LQ.setTimer (mem_ins, axes_lat);
         if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
         if (axes_lat > L1_LATENCY) { 
-            s_ld_miss_cnt++; s_ld_miss_rat++;
+            s_ld_miss_cnt++; 
+            s_ld_miss_rat++;
+            s_mem_miss_rat++;
         } else { s_ld_hit_cnt++; }
         s_inflight_ld_rat += axes_lat;
         s_ld_cnt++;
@@ -105,14 +109,18 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
-        axes_lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_WRITE);
+        axes_lat = _cache.request ((uint64_t)mem_ins->getMemAddr (), false, REQUEST_WRITE);
 //        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix this line
 //                mem_ins->getMemAddr (),
 //                4,
 //                mem_ins->getMemAxesSize(),
 //                &_L1, &_L2, &_L3);
         _SQ.setTimer (mem_ins, axes_lat);
-        (axes_lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
+        if (axes_lat > L1_LATENCY) { 
+            s_st_miss_cnt++;
+            s_mem_miss_rat++;
+        } else { s_st_hit_cnt++; }
+        s_cache_access_cnt++;
     }
     (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
 #ifdef ASSERTION
@@ -131,7 +139,7 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
     } else {
         if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         mem_ins->setLQstate (LQ_CACHE_WAIT);
-        CYCLE lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_READ);
+        CYCLE lat = _cache.request ((uint64_t)mem_ins->getMemAddr (), false, REQUEST_READ);
 //        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
 //                    mem_ins->getMemAddr (),
 //                    4,
@@ -139,6 +147,7 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
 //                    &_L1, &_L2, &_L3);
         s_cache_to_ld_fwd_cnt++;
         s_inflight_cache_ld_rat += lat;
+        s_cache_access_cnt++;
         return lat;
     }
 }

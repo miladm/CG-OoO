@@ -64,6 +64,7 @@ class o3_memManager : public unit {
         ScalarStat& s_ld_cnt;
         ScalarStat& s_cache_hit_cnt;
         ScalarStat& s_cache_miss_cnt;
+        ScalarStat& s_cache_access_cnt;
         ScalarStat& s_ld_hit_cnt;
         ScalarStat& s_ld_miss_cnt;
         ScalarStat& s_st_miss_cnt;
@@ -72,6 +73,7 @@ class o3_memManager : public unit {
         ScalarStat& s_st_to_ld_fwd_cnt;
         RatioStat& s_st_to_ld_fwd_rat;
         RatioStat& s_ld_miss_rat;
+        RatioStat& s_mem_miss_rat;
         RatioStat& s_inflight_ld_rat;
         RatioStat& s_inflight_cache_ld_rat;
 };

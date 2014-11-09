@@ -10,7 +10,7 @@ namespace Memory {
 class IntStats : public Stats {
     protected:
         virtual void printValue(FILE *fp) {
-//            fprintf(fp, "%" PRId64, value);
+            fprintf(fp, "%ld", value);
         }
 
     public:
