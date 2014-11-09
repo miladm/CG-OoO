@@ -61,7 +61,7 @@ struct Driver {
         }
 
         /* FOR DEBUGGING PURPOSES */
-        hier->dump_stats(cache_stat);
+//        hier->dump_stats(cache_stat);
 //        hier->dump_state();
 
         return numcycles;
