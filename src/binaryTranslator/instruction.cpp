@@ -399,28 +399,29 @@ std::string instruction::getRegisterStr () {
 std::string instruction::getArchRegisterStr () {
 	std::stringstream ss;
 	std::string s;
-	if (getNumReg () == 0) {
+	if (getNumReg () == 0 && getNumSpecialReg () == 0) {
 		ss << "\n";
-	} else {
-		for (int i = 0; i < getNumReg (); i++) {
+    } else {
+        /* INTEGRATE GENERAL PURPOSE REGISTERS */
+        for (int i = 0; i < getNumReg (); i++) {
             long int archReg = getNthArchReg (i);
             int regType = getNthRegType (i);
-            if (regType == WRITE) {
-                /* INTEGRATE SPECIAL REGISTERS */
-                for (int j = 0; j < getNumSpecialReg (); j++) {
-                    long int archReg = getNthSpecialReg (j);
-                    int regType = getNthSpecialRegType (j);
-			        ss << archReg << "#" << regType << ",";
-                }
-            }
-			ss << archReg << "#" << regType << ",";
-		}
-		ss << "\n";
-	}
+            ss << archReg << "#" << regType << ",";
+        }
+
+        /* INTEGRATE SPECIAL REGISTERS */
+        for (int j = 0; j < getNumSpecialReg (); j++) {
+            long int archReg = getNthSpecialReg (j);
+            int regType = getNthSpecialRegType (j);
+            ss << archReg << "#" << regType << ",";
+        }
+        ss << "\n";
+    }
 	s = ss.str ();
 	return s;
 }
 
+//o,429dd2,117#1,118#1,185#1,188#2,117#2,185#1,188#2,120#2,
 
 int instruction::getLatency () {
     return _latency;

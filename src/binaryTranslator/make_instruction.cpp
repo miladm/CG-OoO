@@ -11,7 +11,7 @@ void parseRegisters (instruction* newIns, FILE* input_assembly) {
 	int read_write = 0;
 	long int regCode, specialRegCode;
 
-	while (1) {
+	while (true) {
 		if (fgets (reg, REG_STRING_SIZE, input_assembly) == NULL) 
             Assert (0 && "Register name not found");
 		if (reg[0] == '-') break; //SOME OPS HAVE NO REG
@@ -22,6 +22,9 @@ void parseRegisters (instruction* newIns, FILE* input_assembly) {
 
 		regCode = RF->getRegNum (reg);
 		specialRegCode = RF->getSpecialRegNum (reg);
+        Assert ((regCode == INVALID_REG || specialRegCode == INVALID_REG) && 
+                "One of the two fields must return invalid");
+
 		if (regCode != INVALID_REG) {
 			newIns->setRegister (&regCode, &read_write);
         } else if (specialRegCode != INVALID_REG) {

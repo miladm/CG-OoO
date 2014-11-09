@@ -116,7 +116,7 @@ typedef enum {
 #define COEFF 1000000
 
 
-//Latencies (from SandyBridge)
+//LATENCIES (FROM SANDYBRIDGE)
 #define LONG_LATENCY 1000 //a latency placeholder until actual value found
 #define ST_LATENCY 2 //1: addr compute 2: SQ access
 #define ADDR_COMPUTE_LATENCY 1
@@ -126,25 +126,24 @@ typedef enum {
 #define MEM_LATENCY 100 //+ADDR_COMPUTE_LATENCY+CAM_ACCESS_LATENCY
 #define MEM_HIGHERARCHY 4
 
-// Regsiter Renaming
+/*-- REGSITER RENAMING --*/
 #define USE_LRF true
 
-#define LARF_SIZE 2000
-#define GARF_SIZE 6000
-#define GRRF_SIZE 8000
-#define GPRF_SIZE GARF_SIZE+GRRF_SIZE
+#define LARF_SIZE 17
+#define SGRARF_SIZE 20
+#define GARF_SIZE 60 + SGRARF_SIZE
+#define GRRF_SIZE 120
+#define GPRF_SIZE GARF_SIZE + GRRF_SIZE
 
 #define LARF_LO 100
-#define LARF_HI LARF_LO+LARF_SIZE-1
-
-#define GARF_LO LARF_HI+1
-#define GARF_HI GARF_LO+GARF_SIZE-1
-
-#define GRRF_LO GARF_HI+1
-#define GRRF_HI GRRF_LO+GRRF_SIZE-1
+#define LARF_HI LARF_LO + LARF_SIZE - 1
+#define GARF_LO LARF_HI + 1
+#define GARF_HI GARF_LO + GARF_SIZE - 1
+#define GRRF_LO GARF_HI + 1
+#define GRRF_HI GRRF_LO + GRRF_SIZE - 1
 
 #define GPRF_LO 1
-#define GPRF_HI GPRF_LO+GARF_SIZE+GRRF_SIZE-1
+#define GPRF_HI GPRF_LO + GPRF_SIZE - 1
 
 //FRONT END GLOBALS
 

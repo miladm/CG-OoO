@@ -13,7 +13,7 @@ registerFile::registerFile (PR rf_begin_num,
     : unit (rf_name, clk),
       _rf_size (rf_size),
       _rf_begin_num (rf_begin_num),
-      _rf_end_num (rf_begin_num+rf_size-1),
+      _rf_end_num (rf_begin_num + rf_size - 1),
       _wr_port (wr_port_cnt, WRITE, clk, rf_name + ".wr_wire"),
       _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
 {
@@ -46,6 +46,7 @@ void registerFile::updateReg (PR reg) {
 /* REG RESERVE WHEN THE OPERATION IS ISSUED FOR EXECUTION */
 void registerFile::reserveReg (PR reg) {
 #ifdef ASSERTION
+    cout << " " << reg << " " << _RF[reg]->_reg_state << endl;
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
     Assert (_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == NO_VAL_REG);
 #endif
@@ -76,6 +77,7 @@ bool registerFile::isRegBusy (PR reg) {
 	Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
 #endif
 
+    cout << "can? " << reg << " " << _RF[reg]->_reg_state << endl;
     return (_RF[reg]->_reg_state == WAIT_ON_WRITE_REG ? true : false);
 }
 
