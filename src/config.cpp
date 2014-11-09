@@ -334,6 +334,7 @@ void config::storeSimConfig (ofstream* _out_file) {
         (*_out_file) << "* CORE: " << _core_type << endl;
         (*_out_file) << "* STAT_SCH_MODE: " << _sch_mode << endl;
         (*_out_file) << "* REG_ALLOC_MODE: " << _reg_alloc_mode << endl;
+        (*_out_file) << "* BRANCH_PRED_MODE: " << _bp_type << endl;
         (*_out_file) << "* MEM_MODEL: " << _mem_model << endl;
         (*_out_file) << "* ENABLE_SQUASH: " << _enable_squash << endl;
         (*_out_file) << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
@@ -348,6 +349,7 @@ void config::storeSimConfig (ofstream* _out_file) {
         cout << "* CORE: " << _core_type << endl;
         cout << "* STAT_SCH_MODE: " << _sch_mode << endl;
         cout << "* REG_ALLOC_MODE: " << _reg_alloc_mode << endl;
+        cout << "* BRANCH_PRED_MODE: " << _bp_type << endl;
         cout << "* MEM_MODEL: " << _mem_model << endl;
         cout << "* ENABLE_SQUASH: " << _enable_squash << endl;
         cout << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;

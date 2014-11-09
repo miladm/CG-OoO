@@ -46,7 +46,6 @@ void registerFile::updateReg (PR reg) {
 /* REG RESERVE WHEN THE OPERATION IS ISSUED FOR EXECUTION */
 void registerFile::reserveReg (PR reg) {
 #ifdef ASSERTION
-    cout << " " << reg << " " << _RF[reg]->_reg_state << endl;
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
     Assert (_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == NO_VAL_REG);
 #endif
@@ -77,7 +76,6 @@ bool registerFile::isRegBusy (PR reg) {
 	Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
 #endif
 
-    cout << "can? " << reg << " " << _RF[reg]->_reg_state << endl;
     return (_RF[reg]->_reg_state == WAIT_ON_WRITE_REG ? true : false);
 }
 

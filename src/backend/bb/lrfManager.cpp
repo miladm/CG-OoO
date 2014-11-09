@@ -6,7 +6,7 @@
 
 bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name)
     : unit (rf_name, clk),
-      _RF (1, LARF_SIZE+GARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
+      _RF (LARF_LO, LARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
       _lrf_id (lrf_id),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }

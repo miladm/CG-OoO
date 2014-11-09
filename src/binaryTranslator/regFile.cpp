@@ -168,7 +168,7 @@ void regFile::setupRegFile () {
 	RF.insert (pair<string,long int> ("x",66));
 	RF.insert (pair<string,long int> ("s",67));
 
-	RF.insert (pair<string,long int> ("x87", 68));
+//	RF.insert (pair<string,long int> ("x87", 68));
 }
 
 void regFile::setupSpecialRegFile () {

@@ -61,7 +61,6 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
 
         /* READ INS WIN */
-        cout << hex << ins->getInsAddr () << endl;
         g_RF_MGR->reserveRF (ins);
         ins = _iWindow.popFront ();
         ins->setPipeStage (ISSUE);
