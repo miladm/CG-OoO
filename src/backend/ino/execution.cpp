@@ -92,6 +92,7 @@ COMPLETE_STATUS execution::completeIns () {
         }
         EU->resetEU ();
 
+        /* SQUASH DETECTION */
         if (ins->isOnWrongPath () && 
             g_var.g_pipe_state == PIPE_NORMAL &&
             (ins->getInsID () < badInsID || badInsID == 0)) {
@@ -101,7 +102,7 @@ COMPLETE_STATUS execution::completeIns () {
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
     }
 
-    /* SQUASH DETECTION */
+    /*-- SQUASH HANDLING --*/
     if (badIns != NULL) {
         g_var.setSquashSN (badIns->getInsID ());
         s_br_mispred_cnt++;

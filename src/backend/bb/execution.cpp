@@ -72,6 +72,11 @@ void bb_execution::doEXECUTION () {
 /*-- WRITE COMPLETE INS - WRITEBACK --*/
 COMPLETE_STATUS bb_execution::completeIns () {
     g_var.setOldSquashSN ();
+    bool squashTypeChange = false;
+    dynInstruction* badIns = NULL;
+    static INS_ID badInsID = 0; //i.e. FIRST_INS_ID - 1
+    if (g_var.g_pipe_state == PIPE_NORMAL) badInsID = 0;
+
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
         bbInstruction* ins = (bbInstruction*) EU->getEUins ();
@@ -118,23 +123,45 @@ COMPLETE_STATUS bb_execution::completeIns () {
         EU->resetEU ();
 
         /*-- SQUASH DETECTION --*/
-        if (ins->isMemOrBrViolation ()) {
-            g_var.setSquashSN (ins->getBB()->getBBheadID ());
+        if (ins->isMemOrBrViolation () &&
+           (ins->getInsID () < badInsID || badInsID == 0)) {
+            badIns = ins;
+            badInsID = ins->getInsID ();
+            if (g_var.getSquashType () == MEM_MISPRED) squashTypeChange = true;
             g_var.setSquashType (BP_MISPRED);
             ins->getBB()->setNumWasteIns (ins->getInsID ());
-//            cout << "false ins: " << ins->getInsAddr () << endl;
-            if (ins->isMemViolation () || (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ())) s_mem_mispred_cnt++;
-            else s_br_mispred_cnt++;
+//            if (ins->isMemViolation () || (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ())) 
+//                s_mem_mispred_cnt++;
+//            else s_br_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "BP_MISPRED", _clk->now ());
-        } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ()) {
-            g_var.setSquashSN (violating_ld_ins->getBB()->getBBheadID ());
+        } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation () &&
+                  (violating_ld_ins->getInsID () < badInsID || badInsID == 0)) {
+            badIns = violating_ld_ins;
+            badInsID = violating_ld_ins->getInsID ();
+            if (g_var.getSquashType () == BP_MISPRED) squashTypeChange = true;
             g_var.setSquashType (MEM_MISPRED);
             violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
-//            cout << "false ins*: " << violating_ld_ins->getInsAddr () << endl;
-            s_mem_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
+        }
+    }
+
+    /*-- SQUASH HANDLING --*/
+    if (badIns != NULL) {
+        g_var.setSquashSN (badIns->getInsID ());
+        if (g_var.g_pipe_state == PIPE_NORMAL) {
+            if (g_var.getSquashType () == BP_MISPRED) s_br_mispred_cnt++;
+            else if (g_var.getSquashType () == MEM_MISPRED) s_mem_mispred_cnt++;
+            else Assert (0 && "invalid alternative");
+        } else if (squashTypeChange) {
+            if (g_var.getSquashType () == BP_MISPRED) {
+                s_br_mispred_cnt++;
+                s_mem_mispred_cnt--;
+            } else if (g_var.getSquashType () == MEM_MISPRED) {
+                s_mem_mispred_cnt++;
+                s_br_mispred_cnt--;
+            } else { Assert (0 && "invalid alternative"); }
         }
     }
 
@@ -224,6 +251,7 @@ void bb_execution::squashCtrl () {
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
         _bbROB->updateWireState (READ);
     } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _bbROB->getTableSize () == 0) {
+        g_var.setSquashType (NO_MISPRED);
         g_var.resetSquashSN ();
         g_var.g_pipe_state = PIPE_NORMAL;
         state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
