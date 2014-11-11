@@ -73,7 +73,7 @@ void bb_execution::doEXECUTION () {
 COMPLETE_STATUS bb_execution::completeIns () {
     g_var.setOldSquashSN ();
     bool squashTypeChange = false;
-    dynInstruction* badIns = NULL;
+    bbInstruction* badIns = NULL;
     static INS_ID badInsID = 0; //i.e. FIRST_INS_ID - 1
     if (g_var.g_pipe_state == PIPE_NORMAL) badInsID = 0;
 
@@ -149,7 +149,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
 
     /*-- SQUASH HANDLING --*/
     if (badIns != NULL) {
-        g_var.setSquashSN (badIns->getInsID ());
+        g_var.setSquashSN (badIns->getBB()->getBBheadID ());
         if (g_var.g_pipe_state == PIPE_NORMAL) {
             if (g_var.getSquashType () == BP_MISPRED) s_br_mispred_cnt++;
             else if (g_var.getSquashType () == MEM_MISPRED) s_mem_mispred_cnt++;
