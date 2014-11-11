@@ -545,7 +545,7 @@ int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAd
 			basicblock* NthAncestor = getNthAncestor (indx);
             ADDR insAddr = PHI_INS_ADDR + phiAddrOffset++;
             Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins address already exists.");
-			NthAncestor->insertMOVop (var, renameToSub, var, subscript, 1);
+			NthAncestor->insertMOVop (var, renameToSub, var, subscript, insAddr);
 			indx++;
 		}
 		temp = phiVector.size ();

@@ -609,10 +609,6 @@ inline BOOL simpointMode () {
 }
 
 /*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
-VOID doCount1 (ADDRINT pc)
-{
-//    cout << hex << "hey " << pc << endl;
-}
 VOID doCount ()
 {
 	s_pin_ins_cnt++; /*total ins count: wrong and right path*/
@@ -638,7 +634,8 @@ VOID doCount ()
 		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
-    if (s_pin_ins_cnt.getValue () == g_cfg->getMaxInsCnt ()) {
+    if (s_pin_ins_cnt.getValue () >= 600000) {
+        cout << "shiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiit" << endl;
         pin__doFinish ();
         exit (-1);
     }
@@ -717,9 +714,6 @@ VOID pin__instruction (TRACE trace, VOID * val)
                     IARG_END);
 
             if (g_var.g_enable_instrumentation) {
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount1,
-                    IARG_ADDRINT, INS_Address (ins),
-                    IARG_END);
                 if (INS_IsMemoryWrite (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemWriteOrigValue,
@@ -829,7 +823,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
-//            cout << hex << "FR " << __pc << endl;
+            cout << hex << "FR " << __pc << endl;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
         } else {

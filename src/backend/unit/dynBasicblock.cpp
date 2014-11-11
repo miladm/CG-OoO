@@ -248,11 +248,11 @@ void dynBasicblock::resetStates () {
         bbInstruction* ins = _schedInsList.Nth (i);
         _schedInsList_waitList.Append (ins);
         ins->resetStates ();
-        ins->resetWrongPath ();
+//        ins->resetWrongPath ();
     }
     _num_completed_ins = 0;
     _bb_has_mem_violation = false;
-    _bb_on_wrong_path = false;
+//    _bb_on_wrong_path = false;
     _wasted_ins_cnt = 0;
     _done_fetch = false;
 }

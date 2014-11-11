@@ -123,20 +123,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
         EU->resetEU ();
 
         /*-- SQUASH DETECTION --*/
-        if (ins->isMemOrBrViolation () &&
-           (ins->getInsID () < badInsID || badInsID == 0)) {
-            badIns = ins;
-            badInsID = ins->getInsID ();
-            if (g_var.getSquashType () == MEM_MISPRED) squashTypeChange = true;
-            g_var.setSquashType (BP_MISPRED);
-            ins->getBB()->setNumWasteIns (ins->getInsID ());
-//            if (ins->isMemViolation () || (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ())) 
-//                s_mem_mispred_cnt++;
-//            else s_br_mispred_cnt++;
-            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
-                    _stage_name.c_str (), "BP_MISPRED", _clk->now ());
-        } else if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation () &&
-                  (violating_ld_ins->getInsID () < badInsID || badInsID == 0)) {
+        if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation () &&
+           (violating_ld_ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
             badIns = violating_ld_ins;
             badInsID = violating_ld_ins->getInsID ();
             if (g_var.getSquashType () == BP_MISPRED) squashTypeChange = true;
@@ -144,6 +132,15 @@ COMPLETE_STATUS bb_execution::completeIns () {
             violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
+        } else if (ins->isMemOrBrViolation () &&
+                  (ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
+            badIns = ins;
+            badInsID = ins->getInsID ();
+            ins->getBB()->setNumWasteIns (ins->getInsID ());
+            if (g_var.getSquashType () == MEM_MISPRED) squashTypeChange = true;
+            g_var.setSquashType (BP_MISPRED);
+            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                    _stage_name.c_str (), "BP_MISPRED", _clk->now ());
         }
     }
 
@@ -154,7 +151,9 @@ COMPLETE_STATUS bb_execution::completeIns () {
             if (g_var.getSquashType () == BP_MISPRED) s_br_mispred_cnt++;
             else if (g_var.getSquashType () == MEM_MISPRED) s_mem_mispred_cnt++;
             else Assert (0 && "invalid alternative");
+            if (badIns->getBB()->bbHasBr ()) cout << hex << badIns->getBB()->getBBbrAddr () << endl;
         } else if (squashTypeChange) {
+            if (badIns->getBB()->bbHasBr ()) cout << hex << "shit " << badIns->getBB()->getBBbrAddr () << endl;
             if (g_var.getSquashType () == BP_MISPRED) {
                 s_br_mispred_cnt++;
                 s_mem_mispred_cnt--;

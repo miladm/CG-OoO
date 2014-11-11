@@ -133,7 +133,8 @@ void bb_commit::bpMispredSquash () {
             Assert (bb->isOnWrongPath () == true);
 //            cout << "BK " << hex << bb->getBBbrAddr () << " " << bb->getBBinsList()->Last()->getInsAddr () << endl;
         } else if (bb->getBBheadID () > squashSeqNum) {
-            if (!bb->isMemOrBrViolation ()) {
+            if (!bb->isMemOrBrViolation () || 
+                !bb->getBBinsList()->Nth(0)->isMemOrBrViolation ()) {
                 stop_indx = i - 1;
                 Assert (i > start_indx);
                 break;
