@@ -122,6 +122,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             g_var.setSquashSN (ins->getBB()->getBBheadID ());
             g_var.setSquashType (BP_MISPRED);
             ins->getBB()->setNumWasteIns (ins->getInsID ());
+            cout << "false ins: " << ins->getInsAddr () << endl;
             if (ins->isMemViolation () || (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation ())) s_mem_mispred_cnt++;
             else s_br_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
@@ -130,6 +131,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             g_var.setSquashSN (violating_ld_ins->getBB()->getBBheadID ());
             g_var.setSquashType (MEM_MISPRED);
             violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
+            cout << "false ins*: " << violating_ld_ins->getInsAddr () << endl;
             s_mem_mispred_cnt++;
             dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
                     _stage_name.c_str (), "MEM_MISPRED", _clk->now ());

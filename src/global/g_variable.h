@@ -37,6 +37,7 @@ struct g_variable {
         g_pintool_signal_count = 0; //TODO delete this - not used - move other signal vars to stat first
         g_context_call_depth = 0;
         g_wrong_path = false;
+        g_was_wp = false;
         g_spec_syscall = false;
         g_appEnd = false;
         g_inSimpoint = false;
@@ -79,6 +80,7 @@ struct g_variable {
     unsigned g_pintool_signal_count;
     int g_context_call_depth;
     BOOL g_wrong_path;
+    BOOL g_was_wp;
     bool g_spec_syscall;
     bool g_appEnd;
     bool g_inSimpoint;

@@ -113,7 +113,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         WIDTH bbWin_id = it->first;
         bbWindow* bbWin = it->second;
         if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
-        BB_ID bb_id = bbWin->_win.getNth_unsafe (0)->getBB()->getBBID ();
+        BB_ID bb_id = bbWin->_win.getNth_unsafe(0)->getBB()->getBBID ();
         sorted_busy_bbWin.insert (pair<BB_ID, WIDTH> (bb_id, bbWin_id));
     }
     map<BB_ID, WIDTH>::iterator bbWinEntry;

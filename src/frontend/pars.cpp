@@ -46,6 +46,7 @@ PIN_SEMAPHORE semaphore0, semaphore1; // semaphore that serializes access to glo
 void * rootThreadArg = (void *)0xABBA;
 PIN_THREAD_UID rootThreadUid;
 staticCodeParser * g_staticCode;
+benchAddrRangeParser* bench_addr_space;
 
 /* ****************************************************************** *
  * CLASS OBJECTS INTERFACE FUNCTIONS
@@ -56,6 +57,7 @@ memory_buffer g_log;
 void recover ()
 {
 	g_var.g_wrong_path = false;
+	g_var.g_was_wp = false;
 	g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
 	s_pin_sig_recover_cnt++;
 	if (g_var.g_debug_level & DBG_SPEC) {
@@ -97,7 +99,7 @@ BOOL signal_handler (THREADID tid, INT32 sig, CONTEXT *ctxt, BOOL hasHandler, co
         if (g_var.g_debug_level & DBG_SPEC) cout << " caught signal " << dec << sig << " on wrong path " << endl;
         if (g_var.g_debug_level & DBG_SPEC) cout << " application signal count = " << dec << g_var.g_app_signal_count << endl;
         recover ();
-        PIN_SaveContext (&g_var.g_context,ctxt);
+        PIN_SaveContext (&g_var.g_context, ctxt);
         if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
         return FALSE;
     } else {
@@ -130,9 +132,7 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
             if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << endl;
-            if (g_var.g_enable_wp) {
-                PIN_ExecuteAt (&g_var.g_context);
-            }
+            if (g_var.g_enable_wp) { PIN_ExecuteAt (&g_var.g_context); }
         }
     } else if (g_var.g_debug_level & DBG_EXEC) cout << endl;
     return;
@@ -267,6 +267,11 @@ VOID pin__parseConfig (string bench_path, string config_path) {
 
 VOID pin__init (string bench_path, string config_path) {
 	pin__parseConfig (bench_path, config_path);
+
+	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
+    string bench_name = g_cfg->getProgName ();
+    bench_addr_space = new benchAddrRangeParser (bench_name);
+
 	g_msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
 	PIN_SemaphoreInit (&semaphore0);
 	PIN_SemaphoreInit (&semaphore1);
@@ -502,7 +507,7 @@ VOID GetMemReadBypass (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
 	return;
 }
 
-VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT __pc, BOOL __has_ft)
+VOID HandleBranch (UINT32 uid, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT __pc, BOOL __has_ft)
 {
     if (!g_var.g_enable_wp) {
         if (g_var.g_enable_bkEnd) {
@@ -512,14 +517,14 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
         }
         return;
     }
-    if (g_var.g_enable_wp && g_var.g_wrong_path) return;
+    if (g_var.g_wrong_path) return;
+
 #ifdef G_I_INFO_EN
 	Assert (g_i_info.find (uid)!=g_i_info.end ());
 	//const i_info &i = g_i_info[uid];
 #endif
-	bool was_wp = g_var.g_wrong_path;
+	g_var.g_was_wp = false;
 
-	ADDRINT pred_eip = tgt;
     if (true) { // uasd to be if (__has_ft) { - clean up? (TODO)
         g_var.g_pc = __pc;
         g_var.g_taken = taken;
@@ -528,36 +533,40 @@ VOID HandleBranch (UINT32 uid, CONTEXT *c, BOOL taken, ADDRINT tgt, ADDRINT fthr
         PIN_SemaphoreSet (&semaphore0);
         PIN_SemaphoreWait (&semaphore1); 
         PIN_SemaphoreClear (&semaphore1);
-        pred_eip = g_var.g_pred_eip;
     }
-	if (g_var.g_wrong_path && !was_wp) {
-		s_pin_wp_cnt++;
-		if (g_var.g_debug_level & DBG_SPEC) cout << "  *** transitioning to wrong path ***\n";
-		if (g_var.g_debug_level & DBG_SPEC) cout << "  wrong path number = " << dec << s_pin_wp_cnt.getValue () << endl;
-		PIN_SaveContext (c,&g_var.g_context);
-	}
-
-	ADDRINT eip = taken?tgt:fthru;
-	if (eip != pred_eip) {
-		Assert (g_var.g_wrong_path);
-		if (g_var.g_debug_level & DBG_SPEC) cout << "  *** forcing PIN to change control flow ***\n";
-		if (g_var.g_debug_level & DBG_SPEC) cout << "      predicted EIP = " << hex << pred_eip << "\n";
-		if (g_var.g_enable_wp) {
-			PIN_SetContextReg (c,REG_INST_PTR, pred_eip);
-			g_var.g_context_call_depth=0;
-			PIN_ExecuteAt (c);
-		}
-	}
 	return;
+}
+
+VOID HandleContext (CONTEXT *c)
+{
+    if (!g_var.g_enable_wp) return;
+    if (!(g_var.g_wrong_path && !g_var.g_was_wp)) return;
+
+    ADDRINT eip = g_var.g_taken ? g_var.g_tgt : g_var.g_fthru;
+    ADDRINT pred_eip = g_var.g_pred_eip;
+    Assert (eip != pred_eip && "Invalid program state");
+
+    g_var.g_was_wp = true;
+    s_pin_wp_cnt++;
+    if (g_var.g_debug_level & DBG_SPEC) cout << "  *** transitioning to wrong path ***\n";
+    if (g_var.g_debug_level & DBG_SPEC) cout << "  wrong path number = " << dec << s_pin_wp_cnt.getValue () << endl;
+    PIN_SaveContext (c, &g_var.g_context);
+
+    if (g_var.g_debug_level & DBG_SPEC) cout << "  *** forcing PIN to change control flow ***\n";
+    if (g_var.g_debug_level & DBG_SPEC) cout << "      predicted EIP = " << hex << pred_eip << "\n";
+    PIN_SetContextReg (c, REG_INST_PTR, pred_eip);
+    g_var.g_context_call_depth = 0;
+    PIN_ExecuteAt (c);
 }
 
 VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 {
     if (!g_var.g_enable_wp) return;
 #ifdef G_I_INFO_EN
-	Assert (g_i_info.find (uid)!=g_i_info.end ());
+	Assert (g_i_info.find (uid) != g_i_info.end ());
 	const i_info &i = g_i_info[uid];
-	if (g_var.g_debug_level & DBG_EXEC) cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
+	if (g_var.g_debug_level & DBG_EXEC) 
+        cout << "EXEC hs " << (g_var.g_wrong_path?"*":" ") << " " << dec << g_var.g_seq_num << " : " << hex << i.pc << " " << i.diss << " : ";
 #endif
 	if (g_var.g_wrong_path) {
 	    if (g_var.g_debug_level & DBG_SPEC) cout << " *** detected system call on wrong path ***\n";
@@ -600,6 +609,10 @@ inline BOOL simpointMode () {
 }
 
 /*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
+VOID doCount1 (ADDRINT pc)
+{
+//    cout << hex << "hey " << pc << endl;
+}
 VOID doCount ()
 {
 	s_pin_ins_cnt++; /*total ins count: wrong and right path*/
@@ -678,6 +691,10 @@ VOID pin__instruction (TRACE trace, VOID * val)
 
         for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
         {
+            /* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */
+            if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
+                  INS_Address (ins) <= bench_addr_space->getEndAddr ())) continue;
+
             ADDRINT pc = INS_Address (ins);
             string diss =  INS_Disassemble (ins);
             static unsigned long uid=0;
@@ -700,7 +717,9 @@ VOID pin__instruction (TRACE trace, VOID * val)
                     IARG_END);
 
             if (g_var.g_enable_instrumentation) {
-                if (g_var.g_enable_bkEnd) pin__getOp (ins);
+            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount1,
+                    IARG_ADDRINT, INS_Address (ins),
+                    IARG_END);
                 if (INS_IsMemoryWrite (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemWriteOrigValue,
@@ -740,7 +759,6 @@ VOID pin__instruction (TRACE trace, VOID * val)
                     if (INS_HasFallThrough (ins)) {
                         INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
                                 IARG_UINT32, uid,
-                                IARG_CONTEXT,
                                 IARG_BRANCH_TAKEN,
                                 IARG_BRANCH_TARGET_ADDR, 
                                 IARG_FALLTHROUGH_ADDR,
@@ -750,7 +768,6 @@ VOID pin__instruction (TRACE trace, VOID * val)
                     }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
-                            IARG_CONTEXT,
                             IARG_BRANCH_TAKEN,
                             IARG_BRANCH_TARGET_ADDR, 
                             IARG_FALLTHROUGH_ADDR,
@@ -764,6 +781,17 @@ VOID pin__instruction (TRACE trace, VOID * val)
                             IARG_UINT32, uid,
                             IARG_CONTEXT,
                             IARG_END);
+                }
+
+                /* CREARE OPERATION OBJECTS FOR TEH BACKEWND */
+                if (g_var.g_enable_bkEnd) pin__getOp (ins);
+
+                /* HANDLE CHANGE OF CONTEXT */
+                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
+                    if (INS_HasFallThrough (ins))
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleContext, IARG_CONTEXT, IARG_END);
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleContext, IARG_CONTEXT, IARG_END);
                 }
 
                 INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleInst,
@@ -801,6 +829,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
+            cout << hex << "FR " << __pc << endl;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
         } else {

@@ -138,6 +138,7 @@ VOID ImageLoad(IMG img, VOID *v)
 //            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
             for( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
             {
+                /* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */
                 if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
                       INS_Address (ins) <= bench_addr_space->getEndAddr ())) continue;
                 makeNewIns ();

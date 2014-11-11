@@ -32,6 +32,7 @@
 #include "memlog.h"
 #include "staticCodeParser.h"
 #include "../lib/statistic.h"
+#include "../lib/benchAddrRangeParser.h"
 #include "../global/g_variable.h"
 #include "../backend/bkEnd.h"
 #include "../backend/basicblock.h"
