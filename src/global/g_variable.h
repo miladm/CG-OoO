@@ -22,8 +22,8 @@
 
 struct g_variable {
     g_variable() {
-        g_seq_num = 1;
-        g_bb_seq_num = 1;
+        g_seq_num = FIRST_INS_ID;
+        g_bb_seq_num = FIRST_BB_ID;
         g_seqnum = 1;
         g_icount = 0;
         g_debug_level = 0; //DBG_EXEC|DBG_UOP; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;

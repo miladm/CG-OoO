@@ -829,7 +829,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
-            cout << hex << "FR " << __pc << endl;
+//            cout << hex << "FR " << __pc << endl;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
         } else {

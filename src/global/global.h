@@ -115,6 +115,8 @@ typedef enum {
 
 #define COEFF 1000000
 
+#define FIRST_INS_ID 1
+#define FIRST_BB_ID 1
 
 //LATENCIES (FROM SANDYBRIDGE)
 #define LONG_LATENCY 1000 //a latency placeholder until actual value found

@@ -64,6 +64,9 @@ void execution::doEXECUTION () {
 /* WRITE COMPLETE INS - WRITEBACK */
 COMPLETE_STATUS execution::completeIns () {
     g_var.setOldSquashSN ();
+    dynInstruction* badIns = NULL;
+    INS_ID badInsID = 0; //i.e. FIRST_INS_ID - 1
+
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* EU = _aluExeUnits->Nth (i);
         dynInstruction* ins = EU->getEUins ();
@@ -89,12 +92,19 @@ COMPLETE_STATUS execution::completeIns () {
         }
         EU->resetEU ();
 
-        /* SQUASH DETECTION */
-        if (ins->isOnWrongPath ()) {
-            g_var.setSquashSN (ins->getInsID ());
-            s_br_mispred_cnt++;
+        if (ins->isOnWrongPath () && 
+            g_var.g_pipe_state == PIPE_NORMAL &&
+            (ins->getInsID () < badInsID || badInsID == 0)) {
+            badIns = ins;
+            badInsID = ins->getInsID ();
         }
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
+    }
+
+    /* SQUASH DETECTION */
+    if (badIns != NULL) {
+        g_var.setSquashSN (badIns->getInsID ());
+        s_br_mispred_cnt++;
     }
 
     if (g_var.isSpeculationViolation ()) {
