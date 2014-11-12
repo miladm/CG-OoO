@@ -511,9 +511,9 @@ VOID HandleBranch (UINT32 uid, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT _
 {
     if (!g_var.g_enable_wp) {
         if (g_var.g_enable_bkEnd) {
-            //PIN_SemaphoreSet (&semaphore0);
-            //PIN_SemaphoreWait (&semaphore1); 
-            //PIN_SemaphoreClear (&semaphore1);
+            PIN_SemaphoreSet (&semaphore0);
+            PIN_SemaphoreWait (&semaphore1); 
+            PIN_SemaphoreClear (&semaphore1);
         }
         return;
     }
@@ -634,8 +634,7 @@ VOID doCount ()
 		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
 		past = now;
 	}
-    if (s_pin_ins_cnt.getValue () >= 600000) {
-        cout << "shiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiit" << endl;
+    if ((long int)s_pin_ins_cnt.getValue () >= (long int)g_cfg->getMaxInsCnt ()) {
         pin__doFinish ();
         exit (-1);
     }
@@ -749,21 +748,21 @@ VOID pin__instruction (TRACE trace, VOID * val)
                    */
 
                 if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
-        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
-        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
-        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
-        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
-                    if (INS_HasFallThrough (ins)) {
-                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
-                                IARG_UINT32, uid,
-                                IARG_BRANCH_TAKEN,
-                                IARG_BRANCH_TARGET_ADDR, 
-                                IARG_FALLTHROUGH_ADDR,
-                                IARG_ADDRINT, INS_Address (ins),
-                                IARG_BOOL, INS_HasFallThrough (ins),
-                                IARG_END);
-                    }
+//                    if (INS_HasFallThrough (ins)) {
+//                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
+//                                IARG_UINT32, uid,
+//                                IARG_BRANCH_TAKEN,
+//                                IARG_BRANCH_TARGET_ADDR, 
+//                                IARG_FALLTHROUGH_ADDR,
+//                                IARG_ADDRINT, INS_Address (ins),
+//                                IARG_BOOL, INS_HasFallThrough (ins),
+//                                IARG_END);
+//                    }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
                             IARG_BRANCH_TAKEN,
@@ -786,10 +785,10 @@ VOID pin__instruction (TRACE trace, VOID * val)
 
                 /* HANDLE CHANGE OF CONTEXT */
                 if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
-        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
-        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
-        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
-        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
                     if (INS_HasFallThrough (ins))
                         INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleContext, IARG_CONTEXT, IARG_END);

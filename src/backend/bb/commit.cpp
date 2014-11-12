@@ -132,8 +132,7 @@ void bb_commit::bpMispredSquash () {
             start_indx = i;
             Assert (bb->isOnWrongPath () == true);
         } else if (bb->getBBheadID () > squashSeqNum) {
-            if (!bb->isMemOrBrViolation () || 
-                bb->hasCorrectPathIns ()) {
+            if (!bb->isMemOrBrViolation () || bb->hasCorrectPathIns ()) {
                 stop_indx = i - 1;
                 Assert (i > start_indx);
                 break;
