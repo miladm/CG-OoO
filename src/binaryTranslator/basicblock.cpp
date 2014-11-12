@@ -91,6 +91,14 @@ void basicblock::transferPointersToNewList (List<basicblock*>* bbList) {
 	}
 }
 
+/* THIS CODE IS DESIGNED TO FORCE NOP BB'S HAVE A NON -1 BBID */
+void basicblock::forceAssignBBID () {
+	if  (bbID == -1 && _insList->NumElements () > 0) {
+		bbID = _insList->Nth (0)->getInsAddr ();
+		Assert (bbID > 0 && "Invalid basicblock ID assigned.");
+	}
+}
+
 void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
 	_insList->Append (ins);
 	_insList_orig->Append (ins);

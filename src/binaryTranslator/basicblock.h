@@ -28,6 +28,7 @@ class basicblock {
 		//INSTRUCTION
 		void addIns (instruction*, REACHING_TYPE);
 		void addIns (instruction*, ADDR);
+        void forceAssignBBID ();
 		void addMovIns (instruction*);
         bool isThisBBfallThru (basicblock*);
 		ADDR getLastInsDst ();

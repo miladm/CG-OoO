@@ -72,7 +72,7 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}
 
-	//GET RID OF EMPTY BASICBLOCKS  (SHOULDN'T FIND ANY EMPTY ONES - JUST PRECAUTION)
+	/* GET RID OF EMPTY BASICBLOCKS  (SHOULDN'T FIND ANY EMPTY ONES - JUST PRECAUTION) */
 	printf ("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements ());
 	set<ADDR> toRemoveInsSet;
 	for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
@@ -91,6 +91,12 @@ void make_basicblock  (List<instruction*> *insList,
 		}
 	}
 	printf ("\tNum BB after Dead BB Elimination: %d\n",bbList->NumElements ());
+
+	/* IF A BB DOES NOT YET HAVE AN ID, ASSIGN IT AN ID */
+	for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* bb = bbList->Nth (i);
+        bb->forceAssignBBID ();
+    }
 
 	/* REMOVE DEAD NOP INSTRUCTIONS FROM INSLIST */
 	for  (int i = insList->NumElements () - 1; i >= 0; i--) {
