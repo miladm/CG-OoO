@@ -7,6 +7,7 @@
 dynInstruction::dynInstruction (string class_name)
     : unit (class_name)
 {
+	_seq_num = 0;
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
@@ -161,7 +162,7 @@ void dynInstruction::setCacheAxes () {
  * *********************** */
 ADDRS dynInstruction::getInsAddr () { return _ins_addr; }
 
-INS_ID dynInstruction::getInsID () { return _seq_num; }
+INS_ID dynInstruction::getInsID () {Assert (_seq_num > 0); return _seq_num; }
 
 INS_TYPE dynInstruction::getInsType () { return _ins_type; }
 

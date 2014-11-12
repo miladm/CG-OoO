@@ -11,6 +11,7 @@ dynBasicblock::dynBasicblock (SCHED_MODE scheduling_mode, string class_name)
 { 
     _num_completed_ins = 0;
     _bb_on_wrong_path = false;
+    _bb_has_correct_path_ins = false;
     _bb_has_mem_violation = false;
     _head_ins_seq_num = 0;
     _wasted_ins_cnt = 0;
@@ -159,6 +160,12 @@ void dynBasicblock::setWrongPath () {
     _bb_on_wrong_path = true;
 }
 
+/* IDENTIFIES IF THERE EXISTS AT LEAST ONE INSTRUCTION IN BB THAT IS NOT ON
+ * WRONG-PATH */
+void dynBasicblock::setHasCorrectPathIns () {
+    _bb_has_correct_path_ins = true;
+}
+
 void dynBasicblock::setMemViolation () {
     _bb_has_mem_violation = true;
 }
@@ -218,6 +225,11 @@ LENGTH dynBasicblock::getBBsize () { return _schedInsList_waitList.NumElements (
 LENGTH dynBasicblock::getBBorigSize () { return _schedInsList.NumElements (); }
 
 bool dynBasicblock::isOnWrongPath () {return _bb_on_wrong_path;}
+
+bool dynBasicblock::hasCorrectPathIns () {
+    if (!_bb_on_wrong_path) Assert (_bb_has_correct_path_ins == true);
+    return _bb_has_correct_path_ins;
+}
 
 BUFF_STATE dynBasicblock::getBBstate () {
     LENGTH bb_size = getBBsize ();

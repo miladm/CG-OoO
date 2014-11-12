@@ -29,13 +29,13 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             if (insObj != NULL) {
                 insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
             }
-            g_br_detected = true;
+//            g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
         }
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+            std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         s_missing_ins_in_stat_code_cnt++;
@@ -61,7 +61,7 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
             insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
         }
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+            std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         s_missing_ins_in_stat_code_cnt++;
@@ -80,7 +80,7 @@ VOID pin__getIns (ADDRINT ins_addr) {
             pin__makeNewIns (ins_addr, ALU);
         }
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+            std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         s_missing_ins_in_stat_code_cnt++;
@@ -99,7 +99,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
             pin__makeNewIns (ins_addr, NOP);
         }
         if (g_var.g_debug_level & DBG_UOP) 
-            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << dec << ins_addr << 
+            std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
                 " (" << g_var.g_seq_num << ") in BB " << g_var.g_bb_seq_num-1 << std::endl;
     } else {
         s_missing_ins_in_stat_code_cnt++;
@@ -132,7 +132,8 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     if (g_var.scheduling_mode == DYNAMIC_SCH) insObj->setInsID (g_var.g_seq_num++);
     insObj->setWrongPath (g_var.g_wrong_path);
     if (g_var.g_wrong_path) bbObj->setWrongPath ();
-    if (bbObj->insertIns (insObj)) Assert (true == false && "to be implemented");
+    else bbObj->setHasCorrectPathIns ();
+    if (bbObj->insertIns (insObj)) Assert (0 && "to be implemented");
     insObj->setBB (bbObj);
     return insObj;
 }
@@ -158,7 +159,7 @@ void pin__detectBB (ADDRINT ins_addr) {
 
 void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
-        std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << dec << g_var.g_bb_seq_num << std::endl;
+        std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << hex << g_var.g_bb_seq_num << std::endl;
     if (g_var.scheduling_mode == STATIC_SCH) {
         dynBasicblock* lastBB = g_var.getLastCacheBB ();
         if (lastBB != NULL) lastBB->rescheduleInsList (&g_var.g_seq_num);

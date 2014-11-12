@@ -126,10 +126,10 @@ void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest
 
     stInstruction* newInsObj = new stInstruction;
     newInsObj->setInsAddr (insAddr);
-    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
+    if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's') {
         newInsObj->setInsType (BR);
         bool isJump = (insType == 'j' ? true : false);
-        bool isCall = (insType == 'c' ? true : false);
+        bool isCall = ((insType == 'c' || insType == 's') ? true : false);
         bool isRet  = (insType == 'r' ? true : false);
         newInsObj->setBrAtr (brDest, isCall, isRet, isJump);
     } else if (insType == 'R') {
@@ -184,12 +184,12 @@ void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr, char insType) {
 	#endif
 	_bbMap[bbAddr]->bbInsList.push_back (insAddr);
     if (!_bbMap[bbAddr]->hasBr &&
-        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r')) {
+        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's')) {
         _bbMap[bbAddr]->hasBr = true;
         _bbMap[bbAddr]->brAddr = insAddr;
     } else if (_bbMap[bbAddr]->hasBr &&
-        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r')) {
-//        Assert (true == false && "A BB can only hold one branch / jump"); //TODO put this back when the reason is uncovered
+        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's')) {
+        Assert (true == false && "A BB can only hold one branch / jump"); //TODO put this back when the reason is uncovered
     }
 }
 

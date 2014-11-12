@@ -151,9 +151,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             if (g_var.getSquashType () == BP_MISPRED) s_br_mispred_cnt++;
             else if (g_var.getSquashType () == MEM_MISPRED) s_mem_mispred_cnt++;
             else Assert (0 && "invalid alternative");
-            if (badIns->getBB()->bbHasBr ()) cout << hex << badIns->getBB()->getBBbrAddr () << endl;
         } else if (squashTypeChange) {
-            if (badIns->getBB()->bbHasBr ()) cout << hex << "shit " << badIns->getBB()->getBBbrAddr () << endl;
             if (g_var.getSquashType () == BP_MISPRED) {
                 s_br_mispred_cnt++;
                 s_mem_mispred_cnt--;

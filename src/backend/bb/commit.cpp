@@ -116,7 +116,7 @@ void bb_commit::squash () {
 void bb_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynBasicblock* bb = NULL;
-    LENGTH start_indx = 0, stop_indx = _bbROB->getTableSize () - 1;
+    LENGTH start_indx = 0, stop_indx = _bbQUE->getTableSize () - 1;
     /*-- SQUASH BBROB --*/
     for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
         if (_bbROB->getTableSize () == 0) break;
@@ -131,10 +131,9 @@ void bb_commit::bpMispredSquash () {
         if (bb->getBBheadID () == squashSeqNum) {
             start_indx = i;
             Assert (bb->isOnWrongPath () == true);
-//            cout << "BK " << hex << bb->getBBbrAddr () << " " << bb->getBBinsList()->Last()->getInsAddr () << endl;
         } else if (bb->getBBheadID () > squashSeqNum) {
             if (!bb->isMemOrBrViolation () || 
-                !bb->getBBinsList()->Nth(0)->isMemOrBrViolation ()) {
+                bb->hasCorrectPathIns ()) {
                 stop_indx = i - 1;
                 Assert (i > start_indx);
                 break;

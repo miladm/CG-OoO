@@ -66,6 +66,7 @@ class dynBasicblock : public unit {
         void buildInsSchedule ();
         void incCompletedInsCntr ();
         void setWrongPath ();
+        void setHasCorrectPathIns ();
         void setMemViolation ();
         void setBBstaticInsList (list<ADDRS>&);
         bool isInInsMap (ADDRS);
@@ -81,6 +82,7 @@ class dynBasicblock : public unit {
         LENGTH getBBorigSize ();
         BUFF_STATE getBBstate ();
         bool isOnWrongPath ();
+        bool hasCorrectPathIns ();
         PR getGPR (AR, AXES_TYPE);
         bool isMemOrBrViolation ();
         List<bbInstruction*>* getBBinsList ();
@@ -114,6 +116,7 @@ class dynBasicblock : public unit {
         const LENGTH _max_bb_size;
         LENGTH _num_completed_ins;
 
+        bool _bb_has_correct_path_ins;
         bool _bb_on_wrong_path;
         bool _bb_has_mem_violation;
         bool _done_fetch;

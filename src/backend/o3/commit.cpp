@@ -110,7 +110,7 @@ void o3_commit::squash () {
 void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
-    LENGTH start_indx = 0, stop_indx = _iROB->getTableSize () - 1;
+    LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize () - 1;
     /*-- SQUASH iROB --*/
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;

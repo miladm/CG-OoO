@@ -28,7 +28,7 @@ struct g_variable {
         g_icount = 0;
         g_debug_level = 0; //DBG_EXEC|DBG_UOP; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
-        g_branch_mispredict_delay = 20;
+        g_branch_mispredict_delay = 10; //NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
         g_wrong_path_count = 0;
         g_total_wrong_path_count = 0;
         g_app_signal_count = 0;

@@ -178,7 +178,7 @@ VOID backEnd (void *ptr) {
 		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
         if (g_var.g_enable_bkEnd) {
             if (g_var.g_core_type == BASICBLOCK) {
-                if (g_var.g_bbCache->NumElements () >= BB_CNT_THR) {
+                if (g_var.g_bbCache->NumElements () >= BB_CNT_THR && !g_var.g_wrong_path) {
                     //	cout << "FRONTEND->BACKEND " << endl;
 //                    g_var.stat.matchIns = 0;
                     bbBkEndRun (FRONTEND_RUNNING);
@@ -186,7 +186,7 @@ VOID backEnd (void *ptr) {
                     // cout << "BACKEND->FRONTEND" << endl;
                 }
             } else { /* INO & O3 */
-                if (g_var.g_codeCache->NumElements () >= INS_CNT_THR) {
+                if (g_var.g_codeCache->NumElements () >= INS_CNT_THR && !g_var.g_wrong_path) {
                     // cout << "FRONTEND->BACKEND " << endl;
 //                    g_var.stat.matchIns = 0;
                     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_RUNNING);
@@ -748,7 +748,11 @@ VOID pin__instruction (TRACE trace, VOID * val)
                    }
                    */
 
-                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+                if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
                     if (INS_HasFallThrough (ins)) {
                         INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
@@ -781,7 +785,11 @@ VOID pin__instruction (TRACE trace, VOID * val)
                 if (g_var.g_enable_bkEnd) pin__getOp (ins);
 
                 /* HANDLE CHANGE OF CONTEXT */
-                if (INS_IsBranchOrCall (ins) || INS_IsFarRet (ins) || INS_IsRet (ins)) {
+                if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
                     if (INS_HasFallThrough (ins))
                         INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleContext, IARG_CONTEXT, IARG_END);
@@ -823,7 +831,6 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
-            cout << hex << "FR " << __pc << endl;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
         } else {
