@@ -44,7 +44,7 @@ bb_commit::~bb_commit () {}
 void bb_commit::doCOMMIT () {
     /*-- STAT & DEBUG --*/
     dbg.print (DBG_COMMIT, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
-    dbg.print (DBG_COMMIT, "bbROB size: %d (cyc: %d)\n", _bbROB->getTableSize (), _clk->now ());
+    dbg.print (DBG_COMMIT, "bbROB size: %d, pipe_state: %d (cyc: %d)\n", _bbROB->getTableSize (), g_var.g_pipe_state, _clk->now ());
 //    for (int i = 0; i < _bbROB->getTableSize (); i++) {
 //        cout << "BB ID: " << _bbROB->getNth_unsafe (i)->getBBID () << " " << _bbROB->getNth_unsafe(i)->getBBheadID () << " | ";
 //        List<bbInstruction*>* insList = _bbROB->getNth_unsafe (i)->getBBinsList ();
@@ -77,9 +77,17 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         if (_bbROB->getTableState () == EMPTY_BUFF) break;
         if (!_bbROB->hasFreeWire (READ)) break;
         dynBasicblock* bb = _bbROB->getFront ();
-        if (g_cfg->isEnSquash () && bb->isMemOrBrViolation ()) break;
+        if (g_cfg->isEnSquash () && bb->isMemOrBrViolation ()) {
+            dbg.print (DBG_COMMIT, "%s: BB %llu is mis-speculated (cyc: %d)\n", 
+                    _stage_name.c_str (), bb->getBBID (), _clk->now ());
+            break;
+        }
         if (bb->getBBstate () != EMPTY_BUFF) break; //TODO what is a BB is still getting filled up?
-        if (!bb->isBBcomplete ()) break;
+        if (!bb->isBBcomplete ()) {
+            dbg.print (DBG_COMMIT, "%s: BB %llu is not complete (cyc: %d)\n", 
+                    _stage_name.c_str (), bb->getBBID (), _clk->now ());
+            break;
+        }
 
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
@@ -117,6 +125,7 @@ void bb_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynBasicblock* bb = NULL;
     LENGTH start_indx = 0, stop_indx = _bbQUE->getTableSize () - 1;
+
     /*-- SQUASH BBROB --*/
     for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
         if (_bbROB->getTableSize () == 0) break;
@@ -124,6 +133,7 @@ void bb_commit::bpMispredSquash () {
         if (bb->getBBheadID () < squashSeqNum) break;
         _bbROB->removeNth_unsafe (i);
     }
+
     /*-- SQUASH BBQUE --*/
     for (LENGTH i = 0; i < _bbQUE->getTableSize (); i++) {
         if (_bbQUE->getTableSize () == 0) break;
@@ -132,7 +142,8 @@ void bb_commit::bpMispredSquash () {
             start_indx = i;
             Assert (bb->isOnWrongPath () == true);
         } else if (bb->getBBheadID () > squashSeqNum) {
-            if (!bb->isMemOrBrViolation () || bb->hasCorrectPathIns ()) {
+            if (!bb->isMemOrBrViolation () || 
+                bb->hasCorrectPathIns ()) { // BOTH CONDITIONS SHOULD AGREE - A PRECAUTION
                 stop_indx = i - 1;
                 Assert (i > start_indx);
                 break;
@@ -140,6 +151,8 @@ void bb_commit::bpMispredSquash () {
         }
     }
     Assert (_bbQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+
+    /* PUSH BACK BB'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _bbQUE->getTableSize () - 1; i > stop_indx; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
@@ -153,6 +166,8 @@ void bb_commit::bpMispredSquash () {
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
     }
+
+    /* DELETE BB'S THAT ARE ON WRONG PATH */
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
@@ -174,6 +189,7 @@ void bb_commit::bpMispredSquash () {
 void bb_commit::memMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynBasicblock* bb = NULL;
+
     /*-- SQUASH BBROB --*/
     for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
         if (_bbROB->getTableSize () == 0) break;
@@ -181,6 +197,7 @@ void bb_commit::memMispredSquash () {
         if (bb->getBBheadID () < squashSeqNum) break;
         _bbROB->removeNth_unsafe (i);
     }
+
     /*-- SQUASH BBQUE --*/
     for (LENGTH i = _bbQUE->getTableSize () - 1; i >= 0; i--) {
         if (_bbQUE->getTableSize () == 0) break;

@@ -90,6 +90,8 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
             _schedInsList_waitList.Append (ins);
             setBBheadID ();
         }
+
+        /* REMOVE INSTRUCTIONS THAT ARE ALREADY SCHEDULED */
         for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
             ADDRS ins_addr = *it;
             if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) continue;
@@ -103,6 +105,21 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
 //            itt++;
 //        }
 //        cout << endl;
+    }
+}
+
+/* 
+ * PRE: 
+ * THIS STAGE MUST NECESSARILY COME AFTER RESCHEDULEINSLIST () FOR STATIC_SCH MODE 
+ */
+void dynBasicblock::wrongPathCheck () {
+    for (int i = 0; i < _schedInsList.NumElements (); i++) {
+        bbInstruction* ins = _schedInsList.Nth (i);
+        if (ins->isOnWrongPath ()) {
+            setWrongPath ();
+        } else {
+            setHasCorrectPathIns ();
+        }
     }
 }
 

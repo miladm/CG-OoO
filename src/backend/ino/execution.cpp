@@ -106,6 +106,8 @@ COMPLETE_STATUS execution::completeIns () {
     if (badIns != NULL) {
         g_var.setSquashSN (badIns->getInsID ());
         s_br_mispred_cnt++;
+        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Squash SN: ", badIns->getInsID (), _clk->now ());
     }
 
     if (g_var.isSpeculationViolation ()) {

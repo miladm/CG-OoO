@@ -115,18 +115,31 @@ void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
             break;
         }
         _bp->doBP ();
-//        if (_clk->now () == 1000) {
-//            for (int i = 0; i < _bbROB->getTableSize (); i++) {
-//                dynBasicblock* bb = _bbROB->getNth(i);
-//                List<bbInstruction*>* insList = bb->getBBinsList ();
-//                for (int i = insList->NumElements () - 1; i >= 0; i--) {
-//                    bbInstruction* ins = insList->Nth (i);
-//                    cout << "stage: " << ins->getPipeStage () << 
-//                        " id: " << ins->getInsID () <<
-//                        " type: " << ins->getInsType () << endl;
-//                }
-//            }
-//            exit (-1); /*-- for debug --*/
-//        }
+
+        /*==========*
+         * DEBUGGING
+         *==========*/ /*
+        if (_clk->now () == 300000) {
+            debugDump ();
+            exit (-1);
+        } */
 	}
+}
+
+/* DEBUG CODE TO GET A SUMMARY OF PROGRAM STATE AT TERMINATION */
+void bb_sysCore::debugDump () {
+    for (int i = 0; i < _bbROB->getTableSize (); i++) {
+        dynBasicblock* bb = _bbROB->getNth(i);
+        List<bbInstruction*>* insList = bb->getBBinsList ();
+        for (int i = insList->NumElements () - 1; i >= 0; i--) {
+            bbInstruction* ins = insList->Nth (i);
+            cout << "stage: " << ins->getPipeStage () << 
+                " ID: " << ins->getInsID () <<
+                " wp: " << ins->isMemOrBrViolation () <<
+                " type: " << ins->getInsType () <<
+                " (bbID: " << ins->getBB()->getBBID () <<
+                "  wp: " << ins->getBB()->isMemOrBrViolation () << ")" <<
+                endl;
+        }
+    }
 }

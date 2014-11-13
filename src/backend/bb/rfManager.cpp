@@ -65,8 +65,8 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     }
     bool grf_ready = _GRF_MGR.isReady (ins);
     dbg.print (DBG_REG_FILES, "%s: %s %d - %s %d - %s %d (cyc: %d)\n", _c_name.c_str (), 
-            "LRF read ops are ready: ", lrf_ready?"YES":"NO", 
-            "GRF read ops are ready: ", grf_ready?"YES":"NO", 
+            "LRF read ops are ready: ", ((lrf_ready)?"YES":"NO"), 
+            "GRF read ops are ready: ", ((grf_ready)?"YES":"NO"), 
             "for ins: ", ins->getInsID (), _clk->now ());
     if (!lrf_ready) s_lrf_not_ready_cnt++;
     if (!grf_ready) s_grf_not_ready_cnt++;

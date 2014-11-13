@@ -129,11 +129,9 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     staticIns->copyRegsTo (insObj);
     insObj->setInsType (ins_type);
     insObj->setInsAddr (ins_addr);
-    if (g_var.scheduling_mode == DYNAMIC_SCH) insObj->setInsID (g_var.g_seq_num++);
+    if (g_var.scheduling_mode == DYNAMIC_SCH) { insObj->setInsID (g_var.g_seq_num++); }
     insObj->setWrongPath (g_var.g_wrong_path);
-    if (g_var.g_wrong_path) bbObj->setWrongPath ();
-    else bbObj->setHasCorrectPathIns ();
-    if (bbObj->insertIns (insObj)) Assert (0 && "to be implemented");
+    if (bbObj->insertIns (insObj)) { Assert (0 && "to be implemented"); }
     insObj->setBB (bbObj);
     return insObj;
 }
@@ -160,10 +158,17 @@ void pin__detectBB (ADDRINT ins_addr) {
 void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
         std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << hex << g_var.g_bb_seq_num << std::endl;
-    if (g_var.scheduling_mode == STATIC_SCH) {
-        dynBasicblock* lastBB = g_var.getLastCacheBB ();
-        if (lastBB != NULL) lastBB->rescheduleInsList (&g_var.g_seq_num);
+
+    /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
+    dynBasicblock* lastBB = g_var.getLastCacheBB ();
+    if (lastBB != NULL) {
+        if (g_var.scheduling_mode == STATIC_SCH) {
+            lastBB->rescheduleInsList (&g_var.g_seq_num);
+        }
+        lastBB->wrongPathCheck ();
     }
+
+    /* MAKE THE NEXT BASICBLOCK */
     dynBasicblock* bbObj = g_var.getNewCacheBB ();
     bbObj->setBBID (g_var.g_bb_seq_num++);
     bbObj->setBBbrAddr (is_tail_br, bb_br_addr);

@@ -49,6 +49,9 @@ class bb_sysCore : public unit {
         ~bb_sysCore();
 		void runCore (FRONTEND_STATUS);
 
+    private:
+        void debugDump ();
+
 	private:
 		// PORT CONFIGS
 		const CYCLE  _fetch_to_decode_delay;

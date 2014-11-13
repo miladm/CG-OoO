@@ -62,15 +62,15 @@ class dynBasicblock : public unit {
         void setGPR (AR, PR, AXES_TYPE);
         bool insertIns (bbInstruction*);
         void rescheduleInsList (INS_ID*);
+        void wrongPathCheck ();
         bool setupAR (bbInstruction*);
         void buildInsSchedule ();
         void incCompletedInsCntr ();
-        void setWrongPath ();
-        void setHasCorrectPathIns ();
         void setMemViolation ();
         void setBBstaticInsList (list<ADDRS>&);
         bool isInInsMap (ADDRS);
 
+    public:
         bool bbHasBr ();
         ADDRS getBBbrAddr ();
         BB_ID getBBID ();
@@ -102,6 +102,8 @@ class dynBasicblock : public unit {
 
     private:
         void setBBheadID ();
+        void setWrongPath ();
+        void setHasCorrectPathIns ();
 
     private:
         bbHead _head;

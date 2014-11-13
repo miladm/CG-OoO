@@ -151,6 +151,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
             if (g_var.getSquashType () == BP_MISPRED) s_br_mispred_cnt++;
             else if (g_var.getSquashType () == MEM_MISPRED) s_mem_mispred_cnt++;
             else Assert (0 && "invalid alternative");
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                    "Squash SN: ", badIns->getBB()->getBBheadID (), _clk->now ());
         } else if (squashTypeChange) {
             if (g_var.getSquashType () == BP_MISPRED) {
                 s_br_mispred_cnt++;
@@ -159,6 +161,11 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 s_mem_mispred_cnt++;
                 s_br_mispred_cnt--;
             } else { Assert (0 && "invalid alternative"); }
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                    "Squash type changed - SN: ", badIns->getBB()->getBBheadID (), _clk->now ());
+        } else {
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                    "Squash type updated - SN: ", badIns->getBB()->getBBheadID (), _clk->now ());
         }
     }
 
@@ -216,6 +223,8 @@ void bb_execution::forward (bbInstruction* ins, CYCLE eu_latency) {
 
 void bb_execution::squashCtrl () {
     string state_switch;
+//    if (_bbROB->getTableSize () > 0) 
+//        cout << _bbROB->getFront()->getBBheadID () << " " << g_var.getSquashSN () << endl;
     if ((g_var.g_pipe_state == PIPE_NORMAL || 
          g_var.g_pipe_state == PIPE_WAIT_FLUSH || 
          g_var.g_pipe_state == PIPE_FLUSH || 
@@ -225,6 +234,7 @@ void bb_execution::squashCtrl () {
         g_var.g_pipe_state = PIPE_WAIT_FLUSH;
         state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
     } else if (g_var.g_pipe_state == PIPE_NORMAL) {
+        g_var.setSquashType (NO_MISPRED);
         g_var.resetSquashSN ();
         return;
     } else if (g_var.g_pipe_state == PIPE_WAIT_FLUSH) {

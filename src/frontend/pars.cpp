@@ -753,16 +753,16 @@ VOID pin__instruction (TRACE trace, VOID * val)
                         INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
                         INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [branch]\n";
-//                    if (INS_HasFallThrough (ins)) {
-//                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
-//                                IARG_UINT32, uid,
-//                                IARG_BRANCH_TAKEN,
-//                                IARG_BRANCH_TARGET_ADDR, 
-//                                IARG_FALLTHROUGH_ADDR,
-//                                IARG_ADDRINT, INS_Address (ins),
-//                                IARG_BOOL, INS_HasFallThrough (ins),
-//                                IARG_END);
-//                    }
+                    if (INS_HasFallThrough (ins)) {
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) HandleBranch,
+                                IARG_UINT32, uid,
+                                IARG_BRANCH_TAKEN,
+                                IARG_BRANCH_TARGET_ADDR, 
+                                IARG_FALLTHROUGH_ADDR,
+                                IARG_ADDRINT, INS_Address (ins),
+                                IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_END);
+                    }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
                             IARG_BRANCH_TAKEN,
