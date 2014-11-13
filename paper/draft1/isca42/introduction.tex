@@ -1,0 +1,28 @@
+\section{Introduction} 
+\label{sec:intro}
+
+As described by~\cite{}, the exceptionally high
+performance of out-of-order (OoO) processors is fundamentally due to two key
+attributes: dynamism and speculation.  Lack of either feature can significantly
+impact its performance. 
+
+The key sources of energy consumption in OoO processors is data-movement and XX
+(back this up).
+
+Dynamism and speculation enable significant single-threaded performance benefits
+through effective latency hiding of unpredictable events such as cache miss and
+control mis-speculation.  Despite their performance advantages, dynamism and
+speculation cause a significant energy overhead for keeping track of instruction
+states and on-chip data movement; this energy overhead can be acceptable when,
+in fact, an unpredictable event stalls the execution flow; otherwise, a
+statically scheduled program can perform at least as well as a
+dynamically generated schedule.
+
+The key contribution of this work is a scheduling model that combines static and
+dynamic scheduling with the gaol of reducing the processor energy overhead while
+maintaining near out-of-order (OoO) processor performance. Static scheduling provides
+fine-grain, optimal instruction-level scheduling while dynamic scheduling
+enables coarse grain, basicblock-level scheduling to dynamically hide
+unpredictable latencies.  In this model, each basicblock executes its
+instructions in-order while multiple basicblocks execute out of order with
+respect to one another.

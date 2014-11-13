@@ -1,0 +1,16 @@
+\subsubsection{Register File Structure}
+\label{sec:reg_files}
+
+We find that on average roughly 50\% of data communication in SPEC benchmarks
+are done across def-uses that have sub-basicblock live ranges. Such registers
+do not need to be register renamed if an additional register space is available
+for them to temporarily hold their values for the upcoming user instruction.  As
+a result, two classes of registers are defined in this architecture: local registers
+and a global register. The global register is a big register file with register
+renaming support. Local registers, on the other hand, are small register
+file blocks with no register renaming; allocation for these registers is
+done at compile time.  Global registers are designed for data communication
+across basicblocks while local registers are designed for data communication
+within a bsaicblock.
+
+A discussion of the compiler algorithm to construct local registers goes here.

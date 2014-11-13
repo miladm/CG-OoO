@@ -1,0 +1,15 @@
+\subsubsection{Basicblock Window}
+\label{sec:bb_window}
+
+BB window is a small buffer, typically, with 16 entries to hold instructions. It
+has a small buffer space to store the address of global read and write registers
+of the basicblock operations. BB window is accessed in a FIFO manner as each basicblock is
+designed to execute in-order.
+
+This architecture has 16 basicblock window buffers allowing for concurrent
+execution of instructions from multiple basicblocks speculatively. Each cycle,
+the head of each buffer is accessed to issue ready instructions.  Instruction
+scheduler issues instructions from older basicblocks first.
+
+Figure XX shows the average number of in-flight basicblocks for SPEC2006
+benchmark.

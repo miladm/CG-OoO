@@ -1,0 +1,24 @@
+\subsubsection{Basicblock Reorder Buffer (BBROB)}
+\label{sec:bb_rob}
+
+Contrary to the OoO execution model where the program order is tracked at
+instruction granularity through the reorder buffer (ROB), in this design, we only
+track program order at basicblock granularity. BBROB is a content addressable
+memory array (CAM) with only 16 entries (~10x smaller than ROB size in OoO) that
+enables issuing, committing, and squashing basicblocks as a whole in one cycle
+(per basicblock). The smaller size of BBROB compared to a ROB enables
+significant energy savings.
+
+Discussion on what is held on each BBROB entry: BBID, number of comlpeted
+basicblock instructions, total number of instructions in the BB that need to
+complete, valid bit, mis-speculation bit, global physical register writes.
+
+Discussion on how basicblock entry updates the GRF upon commit through its
+global physical register writes (its GRF write regsiter(s) go from speculative
+to architectural).
+
+After the decode stage, a BB entry is reserved in BBROB, and when all
+instructions in a basicblock are completed and the basicblock reaches the head
+of the BBROB, the basicblock is committed as a whole in one cycle. Upon a branch
+mis-speculation event (either branch or memory), younger basicblocks are flushed
+in one cycle. (TODO: talk more about the squash process here)

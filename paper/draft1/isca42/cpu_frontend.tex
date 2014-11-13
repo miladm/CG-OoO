@@ -1,0 +1,13 @@
+\subsection{CPU Frontend}
+\label{sec:cpu_frontend}
+
+The processor frontend consists of the branch-prediction, fetch, decode, and
+register rename stages. Branch prediction only looks up H instructions. Fetch
+and decode stages are designed similar to existing architectures with
+configurable withs of 2, 4, 8. Contrary to the OoO model where register renaming
+happens in dispatch stage, here register renaming is done right after decode
+(explain why).  The register rename unit is only accessed by H instructions.
+Local registers do not access the register rename unit.
+
+Given the smaller utility of register renaming, this processor can use a
+smaller set of physical registers (less area and energy per access).
