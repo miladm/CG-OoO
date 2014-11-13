@@ -28,7 +28,7 @@ struct g_variable {
         g_icount = 0;
         g_debug_level = 0; //DBG_EXEC|DBG_UOP; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
-        g_branch_mispredict_delay = 10; //NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
+        g_branch_mispredict_delay = 4; //NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
         g_wrong_path_count = 0;
         g_total_wrong_path_count = 0;
         g_app_signal_count = 0;
@@ -170,6 +170,10 @@ struct g_variable {
         dynBasicblock* newBB = new dynBasicblock (scheduling_mode, "dynBasicblock");
         g_bbCache->Append (newBB);
         return newBB;
+    }
+    dynBasicblock* getNthCacheBB (int i) {
+        if (g_bbCache->NumElements () == 0) { return NULL;}
+        else {return g_bbCache->Nth (i);}
     }
     dynBasicblock* getLastCacheBB () {
         if (g_bbCache->NumElements () == 0) { return NULL;}

@@ -223,8 +223,6 @@ void bb_execution::forward (bbInstruction* ins, CYCLE eu_latency) {
 
 void bb_execution::squashCtrl () {
     string state_switch;
-//    if (_bbROB->getTableSize () > 0) 
-//        cout << _bbROB->getFront()->getBBheadID () << " " << g_var.getSquashSN () << endl;
     if ((g_var.g_pipe_state == PIPE_NORMAL || 
          g_var.g_pipe_state == PIPE_WAIT_FLUSH || 
          g_var.g_pipe_state == PIPE_FLUSH || 
@@ -253,7 +251,7 @@ void bb_execution::squashCtrl () {
         g_var.g_pipe_state = PIPE_DRAIN;
         state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
     } else if (g_var.g_pipe_state == PIPE_DRAIN && _bbROB->hasFreeWire (READ) && 
-               _bbROB->getFront()->getBBheadID () >= g_var.getSquashSN ()) { //TODO this needs a fix
+               _bbROB->getFront()->getBBheadID () >= g_var.getSquashSN ()) {
         g_var.g_pipe_state = PIPE_SQUASH_ROB;
         state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
         _bbROB->updateWireState (READ);

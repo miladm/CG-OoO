@@ -150,6 +150,15 @@ void bb_commit::bpMispredSquash () {
             }
         }
     }
+//    if (stop_indx == _bbQUE->getTableSize () - 1) { TODO see Issue #167 for this block of code.
+//        while (1) {
+//            dynBasicblock* bb = g_var.getNthCacheBB (0);
+//            if (bb->isMemOrBrViolation () && !bb->hasCorrectPathIns ()) {
+//                cout << "SHIIIIIIIIIIIIIIIIIIIIIIT " << _clk->now () << endl;
+//                g_var.popBBcache ();
+//            } else {break;}
+//        }
+//    }
     Assert (_bbQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
 
     /* PUSH BACK BB'S THAT ARE NOT ON WRONG PATH */
@@ -184,6 +193,7 @@ void bb_commit::bpMispredSquash () {
                                "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
         delBB (bb);
     }
+
 }
 
 void bb_commit::memMispredSquash () {
@@ -206,10 +216,10 @@ void bb_commit::memMispredSquash () {
         bb->resetStates ();
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
-        s_mem_squash_bb_cnt++;
         s_squash_ins_cnt += bb->getBBorigSize ();
         s_squash_mem_cnt += bb->getBBorigSize ();
         s_num_waste_ins += bb->getNumWasteIns ();
+        s_mem_squash_bb_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
     }
