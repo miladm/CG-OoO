@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include "../global/global.h"
+#include "../config.h"
 
 class benchAddrRangeParser {
     public:
