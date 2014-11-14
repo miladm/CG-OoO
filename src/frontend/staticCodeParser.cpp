@@ -21,13 +21,12 @@ staticCodeParser::staticCodeParser (config *g_cfg)
     else if (reg_alloc_mode == LOCAL_GLOBAL) reg_alloc_mode_s = "local_global_reg";
     else Assert ("invalid reg allocation mode");
 
-    string in_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/";
-    string in_file_path = in_dir + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_obj.s";
-//	string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name)+"_obj.s";
-//	string file = "/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+string (bench_name)+"_obj.s";
+    string in_dir (_g_cfg->getSfilePath ());
+    string in_file_path = in_dir + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_obj.s";
 	if ( (_inFile  = fopen (in_file_path.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << in_file_path.c_str () << endl;
+
 	parse ();
 }
 

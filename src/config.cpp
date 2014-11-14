@@ -7,7 +7,7 @@
 using namespace std;
 
 config::config () {
-	Assert (false && "This constructor is unsupported - config ()");
+	Assert (0 && "This constructor is unsupported - config ()");
 	_core_type = OUT_OF_ORDER;
 	_bp_type = PERFECT_BP;
 	_mem_model = TOTAL_ORDER;
@@ -15,9 +15,9 @@ config::config () {
 }
 
 // PRE:
-//		cfgFile to exist
-//		PinPointFile to exist
-config::config (string bench_path, string config_path) {
+//		cfgFile TO EXIST
+//		PinPointFile TO EXIST
+config::config (string bench_path, string config_path, string out_dir) {
 //    YAML::Node config;
 //    config = YAML::LoadFile ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
 //    std::ifstream fin ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
@@ -37,6 +37,7 @@ config::config (string bench_path, string config_path) {
     string cfg_file_ext = ".cfg";
     cout << config_path << endl;
     _config_path  = config_path + cfg_file_ext;
+    _out_path = out_dir;
     cout << _config_path << endl;
     _bench_path   = bench_path + cfg_file_ext;
 	_f_sim_cfg    = fopen (_config_path.c_str (), "r");
@@ -240,6 +241,10 @@ config::config (string bench_path, string config_path) {
 	Assert (strcmp (_param,"FETCH_WIDTH") == 0 && "Wrong Parameter parsed.");
 	#endif
 
+	fscanf (_f_sim_cfg, "%s = \" %s \"", _param, _s_file_root_path);
+	#ifdef ASSERTION
+	Assert (strcmp (_param,"S_FILE_PATH") == 0 && "Wrong Parameter parsed.");
+	#endif
 	fscanf (_f_sim_cfg, "%s = \" %s \"", _param, output_w_file);
 	#ifdef ASSERTION
 	Assert (strcmp (_param,"OUTPUT_FILE") == 0 && "Wrong Parameter parsed.");
@@ -363,6 +368,10 @@ void config::storeSimConfig (ofstream* _out_file) {
  * GET CONFIG ATTRIBUTES
  * *********************** */
 char* config::getProgName () { return _program_name; }
+
+char* config::getSfilePath () { return _s_file_root_path; }
+
+string config::getOutPath () { return _out_path; }
 
 SCH_MODE config::getSchMode  () { return _sch_mode; }
 

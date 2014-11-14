@@ -223,9 +223,9 @@ VOID backEnd (void *ptr) {
 //    }
 //}
 
-VOID pin__runPARS (string bench_path, string config_path)
+VOID pin__runPARS (string bench_path, string config_path, string out_dir)
 {
-    pin__init (bench_path, config_path);
+    pin__init (bench_path, config_path, out_dir);
 
 	// Register a routine that gets called every time the trace is inserted
     CODECACHE_AddTraceInsertedFunction (countTrace, 0);
@@ -261,12 +261,12 @@ VOID pin__runPARS (string bench_path, string config_path)
 /* ****************************************************************** *
  * INITALIZATION & CLEAN UP
  * ****************************************************************** */
-VOID pin__parseConfig (string bench_path, string config_path) {
-	g_cfg = new config (bench_path, config_path);
+VOID pin__parseConfig (string bench_path, string config_path, string out_dir) {
+	g_cfg = new config (bench_path, config_path, out_dir);
 }
 
-VOID pin__init (string bench_path, string config_path) {
-	pin__parseConfig (bench_path, config_path);
+VOID pin__init (string bench_path, string config_path, string out_dir) {
+	pin__parseConfig (bench_path, config_path, out_dir);
 
 	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
     string bench_name = g_cfg->getProgName ();

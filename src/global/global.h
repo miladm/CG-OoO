@@ -175,7 +175,7 @@ typedef enum {
 
 /*-- DEFINE --*/
 #ifndef DEFS
-#define PARSE_LEN 300
+#define PARSE_LEN 400
 #define SIMP_WINDOW_SIZE 3000000
 #define MILLION 1000000
 #define BILLION 1000000000

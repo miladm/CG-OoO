@@ -41,7 +41,7 @@ statistic::~statistic() {
 
 void statistic::setupOutFile () {
     /*-- OUT FILE --*/
-    string out_path = "/scratch/milad/qsub_outputs/perf_sim_test/out1/";
+    string out_path = g_cfg->getOutPath ();
     string prog_name (g_cfg->getProgName ());
     string core_type;
     ostringstream core_t, stat_sched_mode, reg_alloc_mode, mem_model;
@@ -49,7 +49,7 @@ void statistic::setupOutFile () {
     stat_sched_mode << g_cfg->getSchMode ();
     reg_alloc_mode << g_cfg->getRegAllocMode ();
     mem_model << g_cfg->getMemModel ();
-    string out_file_path = out_path + prog_name + 
+    string out_file_path = out_path + "/" + prog_name + 
                            "_c" + core_t.str () + 
                            "_s" + stat_sched_mode.str () +
                            "_r" + reg_alloc_mode.str () +

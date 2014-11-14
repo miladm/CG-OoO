@@ -13,6 +13,8 @@ KNOB<string> KnobBenchInputFile (KNOB_MODE_WRITEONCE, "pintool",
             "b", "bench", "specify input benchmark config file name");
 KNOB<string> KnobSimCfgInputFile (KNOB_MODE_WRITEONCE, "pintool",
             "c", "default", "specify input simulator config file name");
+KNOB<string> KnobSimCfgOutputFile (KNOB_MODE_WRITEONCE, "pintool",
+            "o", "out1", "specify input simulator config file name");
 
 
 INT32 Usage () {
@@ -27,8 +29,9 @@ int main (int argc, char * argv[]) {
 
     std::string benchmark = KnobBenchInputFile.Value ().c_str ();
     std::string sim_cfg = KnobSimCfgInputFile.Value ().c_str ();
+    std::string out_dir = KnobSimCfgOutputFile.Value ().c_str ();
     cout << sim_cfg << " " << benchmark << endl;
-    pin__runPARS (benchmark, sim_cfg);
+    pin__runPARS (benchmark, sim_cfg, out_dir);
     
     PIN_StartProgram ();
     return 0;

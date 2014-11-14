@@ -45,9 +45,9 @@
 /* ****************************************************************** *
  * FUNCTION DECLARATIONS
  * ****************************************************************** */
-VOID pin__parseConfig (string, string);
-VOID pin__init (string, string);
-VOID pin__runPARS (string, string);
+VOID pin__parseConfig (string, string, string);
+VOID pin__init (string, string, string);
+VOID pin__runPARS (string, string, string);
 VOID pin__fini (INT32, VOID*);
 VOID pin__instruction (TRACE, VOID*);
 

@@ -21,12 +21,14 @@ using namespace std;
 class config {
 	public:
 		config ();
-		config (string, string);
+		config (string, string, string);
 		~config ();
         void storeSimConfig (ofstream*);
 
         /*-- GET CONFIG ATTRIBUTES --*/
 		char* getProgName ();
+		char* getSfilePath ();
+        string getOutPath ();
         SCH_MODE getSchMode ();
         REG_ALLOC_MODE getRegAllocMode ();
         CORE_TYPE getCoreType ();
@@ -56,6 +58,7 @@ class config {
         SCH_MODE _sch_mode;
         REG_ALLOC_MODE _reg_alloc_mode;
         string _config_path;
+        string _out_path;
         string _bench_path;
         bool _enable_log_stat;
         float _max_ins_cnt;
@@ -65,6 +68,7 @@ class config {
 		char pinPoint_w_file[PARSE_LEN];
 		char output_w_file[PARSE_LEN];
 		char obj_r_file[PARSE_LEN];
+		char _s_file_root_path[PARSE_LEN];
 
 		//CPU Config
 		CORE_TYPE _core_type;
