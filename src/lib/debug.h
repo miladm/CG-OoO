@@ -13,9 +13,9 @@
 
 class DEBUG {
     public:
-        DEBUG(DBG_LEVEL dbg);
-        ~DEBUG();
-        void print(DBG_LEVEL dbg, const char* fmt, ...);
+        DEBUG (DBG_LEVEL dbg);
+        ~DEBUG ();
+        void print (DBG_LEVEL dbg, const char* fmt, ...);
     private:
         DBG_LEVEL _dbg;
 };

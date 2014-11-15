@@ -129,6 +129,7 @@ $(OBJDIR)config$(OBJ_SUFFIX) \
 $(OBJDIR)global/g_info$(OBJ_SUFFIX) \
 $(OBJDIR)global/g_variable$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/pars$(OBJ_SUFFIX) \
+$(OBJDIR)frontend/simpointTracker$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/memlog$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/uOpGen$(OBJ_SUFFIX) \
 $(OBJDIR)frontend/staticCodeParser$(OBJ_SUFFIX) \

@@ -118,6 +118,8 @@ typedef enum {
 #define FIRST_INS_ID 1
 #define FIRST_BB_ID 1
 
+#define DISABLE_MAX_CNT 0
+
 //LATENCIES (FROM SANDYBRIDGE)
 #define LONG_LATENCY 1000 //a latency placeholder until actual value found
 #define ST_LATENCY 2 //1: addr compute 2: SQ access
@@ -182,7 +184,7 @@ typedef enum {
 #define START_CYCLE 0
 #endif
 
-typedef unsigned long SIMP;
+typedef unsigned long long SIMP;
 typedef double SIMW;
 
 #endif /*_GLOBAL_H*/

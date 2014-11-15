@@ -63,7 +63,7 @@ config::config (string bench_path, string config_path, string out_dir) {
 	Assert (parsePinPointFiles () == true && "No simpoint data parsed.");
 
     /*-- SIMULATION PARAMS --*/
-	fscanf (_f_sim_cfg, "%s = %f\n", _param, &_max_ins_cnt);
+	fscanf (_f_sim_cfg, "%s = %Lf\n", _param, &_max_ins_cnt);
     _max_ins_cnt *= (float) MILLION;
 	#ifdef ASSERTION
 	Assert (strcmp (_param,"MAX_INS_CNT") == 0 && "Wrong Parameter parsed.");
@@ -298,6 +298,7 @@ void config::verifyConfig () {
 bool config::parsePinPointFiles () {
     cout << pinPoint_s_file << endl;
     cout << pinPoint_w_file << endl;
+
 	g_msg.simStep ("PARSING PINPOINTS CONFIGURATIONS");
 	//TODO check if the file exists - assert if not
 	FILE* f_s_pinPoint = fopen (pinPoint_s_file, "r");
@@ -309,19 +310,21 @@ bool config::parsePinPointFiles () {
 	int s_id, w_id;
 	SIMP s_val; 
 	SIMW w_val;
-	while  (fscanf (f_s_pinPoint,"%lu %d\n", &s_val, &s_id) != EOF && 
+
+	while  (fscanf (f_s_pinPoint,"%llu %d\n", &s_val, &s_id) != EOF && 
 		   fscanf (f_w_pinPoint,"%lf %d\n", &w_val, &w_id) != EOF) {
 		#ifdef ASSERTION
 		Assert (s_id == w_id && "simpoint and weight files mispatch.");
 		#endif
 		s_val = s_val * SIMP_WINDOW_SIZE;
-		_simpoint.insert (std::pair<SIMP,SIMW> (s_val,w_val));
+		_simpoint.insert (std::pair<SIMP, SIMW> (s_val,w_val));
 	}
+
 	//#ifdef DBG
-	cout << "** PinPoint Locations:\n";
-	map<SIMP,SIMW>::iterator it;
+    g_msg.simEvent ("SIMPOINT LOCATIONS:\n");
+	map<SIMP, SIMW>::iterator it;
 	for  (it = _simpoint.begin (); it != _simpoint.end (); it++) {
-		cout << it->first << " " << it->second << endl;
+        g_msg.simEvent ("%llu %f\n", it->second, it->first );
 	}
 	//#endif
 	return  ( (_simpoint.size () > 0) ? true : false);
@@ -383,7 +386,7 @@ MEM_MODEL config::getMemModel () {return _mem_model;}
 
 BP_TYPE config::getBPtype () {return _bp_type;}
 
-float config::getMaxInsCnt () {return _max_ins_cnt;}
+long double config::getMaxInsCnt () {return _max_ins_cnt;}
 
 int config::getNumEu () {return _num_eu;}
 

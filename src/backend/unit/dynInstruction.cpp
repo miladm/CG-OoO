@@ -7,6 +7,7 @@
 dynInstruction::dynInstruction (string class_name)
     : unit (class_name)
 {
+    _memAddr = 0;
 	_seq_num = 0;
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;

@@ -387,7 +387,7 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 	g_var.g_invalid_addr = false;
 
 	THREADID tid=PIN_ThreadId ();
-	if (tid==INVALID_THREADID) {
+	if (tid == INVALID_THREADID) {
 		cout << " could not get thread id\n";
 		exit (1);
 	}
@@ -574,92 +574,21 @@ VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 	}
 }
 
-inline BOOL simpointMode () {
-	static int simpCount=0; 
-	unsigned long next_simp = g_cfg->_simpoint.begin ()->first; 
-	if (g_var.g_enable_simpoint && !g_var.g_wrong_path) {
-		if (g_var.g_inSimpoint) {
-			g_var.g_simpInsCnt++;
-			if (g_var.g_simpInsCnt >= SIMP_WINDOW_SIZE) {
-				cout << "*** Simpoint end\n\n";
-				g_var.g_inSimpoint = false;
-				g_var.g_enable_wp = false;
-				g_var.g_simpInsCnt = 0;
-				PIN_RemoveInstrumentation ();
-				g_var.g_enable_instrumentation = false;
-                g_var.g_enable_bkEnd = false;
-			}
-		} else {
-			if (next_simp == g_var.g_insCountRightPath) {
-				g_var.g_inSimpoint = true;
-				g_var.g_enable_wp = true;
-				g_var.g_simpInsCnt = 0;
-				g_var.g_enable_instrumentation = true;
-                g_var.g_enable_bkEnd = true;
-				g_cfg->_simpoint.erase (next_simp);
-				next_simp = g_cfg->_simpoint.begin ()->first;
-				cout << "\n*** Simpoint #" << ++simpCount << ": " << g_var.g_insCountRightPath << "\n";
-				cout << "*** Next Simpoint is: #" << next_simp << "\n";
-			} else {
-                //TODO implement this condition once you are on serious simulating mode
-            }
-		}
-	}
-	return g_var.g_inSimpoint;
-}
-
-/*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
-VOID doCount ()
+VOID doBBcount (UINT32 ins_cnt)
 {
-	s_pin_ins_cnt++; /*total ins count: wrong and right path*/
-	if (!g_var.g_wrong_path) g_var.g_insCountRightPath++;
-	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
-	unsigned long countQ = (unsigned long) s_pin_ins_cnt.getValue () / MILLION;
-	static clock_t past = 0.0;
-	static clock_t now = double (clock ())/CLOCKS_PER_SEC;
-	simpointMode ();
-	if (countRem == 0) {
-	    now = double (clock ())/CLOCKS_PER_SEC;
-		cout << countQ << " million passed at " << double (clock ())/CLOCKS_PER_SEC << " seconds. (Diff Time: " << now-past << ")\n";
-		cout << "  correct path ins count: " << g_var.g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath)/ s_pin_ins_cnt.getValue () << ")\n";
-		cout << "  wrong path ins count: " << g_var.g_total_wrong_path_count << "\n";
-		cout << "  wrong path count: " << s_pin_wp_cnt.getValue () << "\n";
-		cout << "  trace count: " << s_pin_trace_cnt.getValue () << "\n";
-		cout << "  app signal count: " << s_pin_sig_cnt.getValue () << "\n";
-		cout << "  pin signal count: " << s_pin_sig_cnt.getValue () << "\n";
-		cout << "  out of mem count: " << s_pin_flush_cnt.getValue () << "\n";
-		cout << "  recovery count: " << s_pin_sig_recover_cnt.getValue () << "\n";
-		cout << "  code cache flush count: " << s_pin_flush_cnt.getValue () << "\n";
-		cout << "  avg wrong-path length: " << double (s_pin_wp_cnt.getValue ()) / double (s_pin_wp_cnt.getValue ()) << "\n";
-		cout << "  code cache size (MB): " << double (g_var.g_codeCacheSize) / (1024.0 * 1024.0) << "\n\n";
-		past = now;
-	}
-    if ((long int)s_pin_ins_cnt.getValue () >= (long int)g_cfg->getMaxInsCnt ()) {
+    s_pin_ins_cnt += ins_cnt; /*total ins count: wrong and right path*/
+    bool finished_last_simpoint = doCount (s_pin_ins_cnt, s_pin_trace_cnt, 
+                                           s_pin_wp_cnt, s_pin_sig_cnt, 
+                                           s_pin_flush_cnt, s_pin_sig_recover_cnt, 
+                                           ins_cnt);
+
+    if ((g_cfg->getMaxInsCnt () != DISABLE_MAX_CNT && 
+        (SIMP) s_pin_ins_cnt.getValue () >= (SIMP) g_cfg->getMaxInsCnt ()) ||
+        finished_last_simpoint)
+    {
         pin__doFinish ();
         exit (-1);
     }
-}
-
-long unsigned imgInsCallCount_=0;
-VOID doImpCallCount_ (BOOL isCall)
-{
-	if (isCall)
-		imgInsCallCount_++;
-	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
-	if (countRem == 0) {
-		cout << " (CALL_) :" << imgInsCallCount_ << "\n";
-	}
-}
-
-long unsigned imgInsMemCount_=0;
-VOID doImpMemCount_ (UINT32 isMem)
-{
-	if (isMem > 0)
-		imgInsMemCount_++;
-	unsigned long countRem = (unsigned long) s_pin_ins_cnt.getValue () % BILLION;
-	if (countRem == 0) {
-		cout << " (MEM_) :" << imgInsMemCount_ << "\n";
-	}
 }
 
 VOID pin__instruction (TRACE trace, VOID * val) 
@@ -669,50 +598,44 @@ VOID pin__instruction (TRACE trace, VOID * val)
         return;
     }
 
-//    bool first_bb = true;
+    //    bool first_bb = true;
     for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
     {
-//        if (g_var.g_enable_bkEnd) {
-//            ADDRINT bb_addr = BBL_Address (bbl);
-//            if (g_var.g_core_type == BASICBLOCK) {
-//                if (first_bb) {
-//                    first_bb = false;
-//                    INS bb_head = BBL_InsHead (bbl);
-//                    pin__get_bb_header (bb_addr, bb_head);
-//                }
-//                INS bb_tail = BBL_InsTail (bbl);
-//                pin__get_bb_header (bb_addr, bb_tail);
-//            } //TODO simpoint commands do not apply here - fix if put back
-//        }
+        //        if (g_var.g_enable_bkEnd) {
+        //            ADDRINT bb_addr = BBL_Address (bbl);
+        //            if (g_var.g_core_type == BASICBLOCK) {
+        //                if (first_bb) {
+        //                    first_bb = false;
+        //                    INS bb_head = BBL_InsHead (bbl);
+        //                    pin__get_bb_header (bb_addr, bb_head);
+        //                }
+        //                INS bb_tail = BBL_InsTail (bbl);
+        //                pin__get_bb_header (bb_addr, bb_tail);
+        //            } //TODO simpoint commands do not apply here - fix if put back
+        //        }
 
-        for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
+        BBL_InsertCall (bbl, IPOINT_BEFORE, (AFUNPTR) doBBcount, IARG_UINT32, BBL_NumIns(bbl), IARG_END);
+
+        if (g_var.g_enable_instrumentation) 
         {
-            /* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */
-            if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
-                  INS_Address (ins) <= bench_addr_space->getEndAddr ())) continue;
+            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
+            {
+                /* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */
+                if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
+                      INS_Address (ins) <= bench_addr_space->getEndAddr ())) continue;
 
-            ADDRINT pc = INS_Address (ins);
-            string diss =  INS_Disassemble (ins);
-            static unsigned long uid=0;
-            ++uid;
+                ADDRINT pc = INS_Address (ins);
+                string diss =  INS_Disassemble (ins);
+                static unsigned long uid=0;
+                ++uid;
 #ifdef G_I_INFO_EN
-            OPCODE opcode = INS_Opcode (ins);
-            bool is_call = INS_IsCall (ins);
-            bool is_ret = INS_IsRet (ins);
-            bool has_ft = INS_HasFallThrough (ins);
-            g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
-            if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+                OPCODE opcode = INS_Opcode (ins);
+                bool is_call = INS_IsCall (ins);
+                bool is_ret = INS_IsRet (ins);
+                bool has_ft = INS_HasFallThrough (ins);
+                g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+                if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
 #endif
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount,
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpMemCount_,
-                    IARG_UINT32, INS_MemoryOperandCount (ins),
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpCallCount_,
-                    IARG_BOOL, INS_IsCall (ins),
-                    IARG_END);
-
-            if (g_var.g_enable_instrumentation) {
                 if (INS_IsMemoryWrite (ins)) {
                     if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemWriteOrigValue,

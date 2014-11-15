@@ -272,17 +272,6 @@ void pin__getOp (INS ins) {
                 IARG_BOOL, is_br_jmp,
                 IARG_BOOL, is_dir_br_jmp,
                 IARG_END);
-    } else if (INS_IsMemoryWrite (ins)) {
-        BOOL isMemRead;
-        isMemRead = false;
-        INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) pin__getMemIns,
-                IARG_ADDRINT, INS_Address (ins),
-                IARG_MEMORYWRITE_SIZE,
-                IARG_MEMORYWRITE_EA,
-                IARG_BOOL, INS_IsStackRead (ins),
-                IARG_BOOL, INS_IsStackWrite (ins),
-                IARG_BOOL, isMemRead,
-                IARG_END);
     } else if (INS_IsMemoryRead (ins)) {
         bool isMemRead;
         isMemRead = true;
@@ -290,6 +279,17 @@ void pin__getOp (INS ins) {
                 IARG_ADDRINT, INS_Address (ins),        
                 IARG_MEMORYREAD_SIZE,
                 IARG_MEMORYREAD_EA,
+                IARG_BOOL, INS_IsStackRead (ins),
+                IARG_BOOL, INS_IsStackWrite (ins),
+                IARG_BOOL, isMemRead,
+                IARG_END);
+    } else if (INS_IsMemoryWrite (ins)) {
+        BOOL isMemRead;
+        isMemRead = false;
+        INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) pin__getMemIns,
+                IARG_ADDRINT, INS_Address (ins),
+                IARG_MEMORYWRITE_SIZE,
+                IARG_MEMORYWRITE_EA,
                 IARG_BOOL, INS_IsStackRead (ins),
                 IARG_BOOL, INS_IsStackWrite (ins),
                 IARG_BOOL, isMemRead,

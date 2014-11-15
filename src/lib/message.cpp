@@ -22,8 +22,11 @@ void message::simStep(const char* msg) {
 	_simStepCnt++;
 }
 
-void message::simEvent (const char* msg) {
-	cout << "   " << msg << endl;
+void message::simEvent (const char* fmt, ...) {
+    va_list args;
+    va_start (args,fmt);
+    vprintf (fmt,args);
+    va_end (args);
 }
 
 message g_msg;
