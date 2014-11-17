@@ -6,7 +6,7 @@
 
 /* GLOBAL VARIABLES */
 static SIMP prev_ins_cnt = 0;
-static SIMP thr_ins_cnt = 2 * BILLION;
+static SIMP thr_ins_cnt = BILLION;
 
 /*--
  * FIND SIMPOINTS, ENABLE SIMULATION FLAGS, 
@@ -90,8 +90,8 @@ inline BOOL simpleMode ()
 			g_var.g_simpInsCnt++;
 			if (g_var.g_simpInsCnt >= SIM_WINDOW_SIZE) { /* LEAVE SIM */
                 clock_t sim_stop = double (clock ()) / CLOCKS_PER_SEC;
-	            g_msg.simEvent ("SIM SPEED: %f Ops/Sec\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)));
-	            g_msg.simEvent ("SIM END\n");
+	            g_msg.simEvent ("SIM SPEED: %f Ops/Sec for %lu ops\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)), g_var.g_simpInsCnt);
+	            g_msg.simStep ("SIM END\n");
 				g_var.g_inSimpoint = false;
 				g_var.g_enable_wp = false;
 				g_var.g_simpInsCnt = 0;
@@ -134,10 +134,11 @@ BOOL doSimpleCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
 BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt, 
               ScalarStat& s_pin_wp_cnt, ScalarStat& s_pin_sig_cnt, 
               ScalarStat& s_pin_flush_cnt, ScalarStat& s_pin_sig_recover_cnt, 
-              UINT32 bb_ins_cnt, SAMPLING_MODE sampling_mode) {
-
+              UINT32 bb_ins_cnt, SAMPLING_MODE sampling_mode) 
+{
     if (!g_var.g_wrong_path) g_var.g_insCountRightPath += bb_ins_cnt;
 
+    BOOL is_finished = false;
     static clock_t past = 0.0;
     static clock_t now = double (clock ()) / CLOCKS_PER_SEC;
     SIMP countQ    = (SIMP) s_pin_ins_cnt.getValue () / MILLION;
@@ -145,20 +146,20 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
 
     /* RUN A SIMULATION TRACKING MODE */
     if (sampling_mode == SIMPOINT_MODE) {
-        return doSimPointCount (s_pin_ins_cnt, s_pin_trace_cnt, 
+        is_finished = doSimPointCount (s_pin_ins_cnt, s_pin_trace_cnt, 
                 s_pin_wp_cnt, s_pin_sig_cnt, 
                 s_pin_flush_cnt, s_pin_sig_recover_cnt, 
                 bb_ins_cnt);
     } else if (sampling_mode == SIMPLE_SLICE_MODE) {
-        return doSimpleCount (s_pin_ins_cnt, s_pin_trace_cnt, 
+        is_finished = doSimpleCount (s_pin_ins_cnt, s_pin_trace_cnt, 
                 s_pin_wp_cnt, s_pin_sig_cnt, 
                 s_pin_flush_cnt, s_pin_sig_recover_cnt, 
                 bb_ins_cnt);
     } else if (sampling_mode == NO_SIMPOINT_MODE) {
         if ((SIMP) s_pin_ins_cnt.getValue () >= INIT_WINDOW_SIZE)
-            return true;
+            is_finished = true;
         else
-            return false;
+            is_finished = false;
     } else {
         Assert (0 && "Invalid simulation mode");
     }
@@ -169,7 +170,7 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
         cout << countDiff << " " << thr_ins_cnt << endl;
         now = double (clock ()) / CLOCKS_PER_SEC;
         cout << countQ << " million passed at " << double (clock ()) / CLOCKS_PER_SEC << " seconds. (Diff Time: " << now-past << ")" << endl;
-        cout << "  correct path ins count: " << g_var.g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath)/ s_pin_ins_cnt.getValue () << ")" << endl;
+        cout << "  correct path ins count: " << g_var.g_insCountRightPath << " (fraction: " << double (g_var.g_insCountRightPath) / s_pin_ins_cnt.getValue () << ")" << endl;
         cout << "  wrong path ins count: " << g_var.g_total_wrong_path_count << endl;
         cout << "  wrong path count: " << s_pin_wp_cnt.getValue () << endl;
         cout << "  trace count: " << s_pin_trace_cnt.getValue () << endl;
@@ -183,6 +184,8 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
         prev_ins_cnt = s_pin_ins_cnt.getValue ();
         past = now;
     }
+
+    return is_finished;
 }
 
 //LEGACY CODE

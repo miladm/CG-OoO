@@ -585,7 +585,7 @@ VOID doBBcount (UINT32 ins_cnt)
     bool finished_last_simpoint = doCount (s_pin_ins_cnt, s_pin_trace_cnt, 
                                            s_pin_wp_cnt, s_pin_sig_cnt, 
                                            s_pin_flush_cnt, s_pin_sig_recover_cnt, 
-                                           ins_cnt, NO_SIMPOINT_MODE);
+                                           ins_cnt, SIMPLE_SLICE_MODE);
 
     if (finished_last_simpoint) {
         pin__doFinish ();
