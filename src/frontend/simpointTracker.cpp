@@ -61,11 +61,81 @@ inline BOOL simpointMode ()
 }
 
 /*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
-BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt, 
+BOOL doSimPointCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt, 
               ScalarStat& s_pin_wp_cnt, ScalarStat& s_pin_sig_cnt, 
               ScalarStat& s_pin_flush_cnt, ScalarStat& s_pin_sig_recover_cnt, 
               UINT32 bb_ins_cnt)
 {
+    bool finished_last_simpoint = false;
+    if (g_var.g_enable_simpoint) finished_last_simpoint = simpointMode ();
+    return finished_last_simpoint;
+}
+
+
+
+/*--
+ * FAST-FORWARD BY X NUMBER OF INSTRUCTION
+ * RUN THE PROGRAM FOR Y NUMBER OF INSTRUCTIONS
+ * TERMINATE
+ --*/
+inline BOOL simpleMode () 
+{
+    static bool finished = false;
+    static SIMP sim_ins_cnt_with_wp = 0;
+    static clock_t sim_strt = 0;
+
+    sim_ins_cnt_with_wp++;
+	if (!g_var.g_wrong_path) {
+		if (g_var.g_inSimpoint) { /* INSIDE SIM */
+			g_var.g_simpInsCnt++;
+			if (g_var.g_simpInsCnt >= SIM_WINDOW_SIZE) { /* LEAVE SIM */
+                clock_t sim_stop = double (clock ()) / CLOCKS_PER_SEC;
+	            g_msg.simEvent ("SIM SPEED: %f Ops/Sec\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)));
+	            g_msg.simEvent ("SIM END\n");
+				g_var.g_inSimpoint = false;
+				g_var.g_enable_wp = false;
+				g_var.g_simpInsCnt = 0;
+				PIN_RemoveInstrumentation ();
+				g_var.g_enable_instrumentation = false;
+                g_var.g_enable_bkEnd = false;
+                finished = true;
+			}
+		} else { /* OUTSIDE SIM */
+			if (g_var.g_insCountRightPath >= FAST_FWD_WINDOW_SIZE) { /* ENTER SIM */
+	            g_msg.simEvent ("\nIN SIM WINDOW\n");
+				g_var.g_inSimpoint = true;
+				g_var.g_enable_wp = true;
+				g_var.g_simpInsCnt = 0;
+                sim_ins_cnt_with_wp = 0;
+				PIN_RemoveInstrumentation ();
+				g_var.g_enable_instrumentation = true;
+                g_var.g_enable_bkEnd = true;
+                sim_strt = double (clock ()) / CLOCKS_PER_SEC;
+            }
+		}
+    }
+
+	return finished;
+}
+
+/*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/
+BOOL doSimpleCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt, 
+              ScalarStat& s_pin_wp_cnt, ScalarStat& s_pin_sig_cnt, 
+              ScalarStat& s_pin_flush_cnt, ScalarStat& s_pin_sig_recover_cnt, 
+              UINT32 bb_ins_cnt)
+{
+    bool finished = false;
+    if (g_var.g_enable_simpoint) finished = simpleMode ();
+    return finished;
+}
+
+
+
+BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt, 
+              ScalarStat& s_pin_wp_cnt, ScalarStat& s_pin_sig_cnt, 
+              ScalarStat& s_pin_flush_cnt, ScalarStat& s_pin_sig_recover_cnt, 
+              UINT32 bb_ins_cnt, SAMPLING_MODE sampling_mode) {
+
     if (!g_var.g_wrong_path) g_var.g_insCountRightPath += bb_ins_cnt;
 
     static clock_t past = 0.0;
@@ -73,10 +143,27 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
     SIMP countQ    = (SIMP) s_pin_ins_cnt.getValue () / MILLION;
     SIMP countDiff = (SIMP) s_pin_ins_cnt.getValue () - prev_ins_cnt;
 
-    bool finished_last_simpoint = false;
-    if (g_var.g_enable_simpoint) 
-        finished_last_simpoint = simpointMode ();
+    /* RUN A SIMULATION TRACKING MODE */
+    if (sampling_mode == SIMPOINT_MODE) {
+        return doSimPointCount (s_pin_ins_cnt, s_pin_trace_cnt, 
+                s_pin_wp_cnt, s_pin_sig_cnt, 
+                s_pin_flush_cnt, s_pin_sig_recover_cnt, 
+                bb_ins_cnt);
+    } else if (sampling_mode == SIMPLE_SLICE_MODE) {
+        return doSimpleCount (s_pin_ins_cnt, s_pin_trace_cnt, 
+                s_pin_wp_cnt, s_pin_sig_cnt, 
+                s_pin_flush_cnt, s_pin_sig_recover_cnt, 
+                bb_ins_cnt);
+    } else if (sampling_mode == NO_SIMPOINT_MODE) {
+        if ((SIMP) s_pin_ins_cnt.getValue () >= INIT_WINDOW_SIZE)
+            return true;
+        else
+            return false;
+    } else {
+        Assert (0 && "Invalid simulation mode");
+    }
 
+    /* INTERMEDIATE STAT COLLECTION */
     if (countDiff > thr_ins_cnt) 
     {
         cout << countDiff << " " << thr_ins_cnt << endl;
@@ -96,10 +183,7 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
         prev_ins_cnt = s_pin_ins_cnt.getValue ();
         past = now;
     }
-
-    return finished_last_simpoint;
 }
-
 
 //LEGACY CODE
 //

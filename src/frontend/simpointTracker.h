@@ -21,6 +21,7 @@
 
 BOOL doCount (ScalarStat&, ScalarStat&, 
               ScalarStat&, ScalarStat&, 
-              ScalarStat&, ScalarStat&, UINT32);
+              ScalarStat&, ScalarStat&, 
+              UINT32, SAMPLING_MODE);
 
 #endif

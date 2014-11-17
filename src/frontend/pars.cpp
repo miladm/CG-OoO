@@ -585,13 +585,9 @@ VOID doBBcount (UINT32 ins_cnt)
     bool finished_last_simpoint = doCount (s_pin_ins_cnt, s_pin_trace_cnt, 
                                            s_pin_wp_cnt, s_pin_sig_cnt, 
                                            s_pin_flush_cnt, s_pin_sig_recover_cnt, 
-                                           ins_cnt);
+                                           ins_cnt, NO_SIMPOINT_MODE);
 
-//    if ((g_cfg->getMaxInsCnt () != DISABLE_MAX_CNT && 
-//        (SIMP) s_pin_ins_cnt.getValue () >= (SIMP) g_cfg->getMaxInsCnt ()) ||
-//        finished_last_simpoint)
-//    {
-    if ((SIMP) s_pin_ins_cnt.getValue () >= 100000000) {
+    if (finished_last_simpoint) {
         pin__doFinish ();
         exit (-1);
     }
