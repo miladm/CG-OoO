@@ -57,6 +57,9 @@ bb_sysCore::bb_sysCore (sysClock* clk,
       _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, _clk, "commit_to_bp_port"),
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
+    /*-- CONFIG OBJS --*/
+//    const YAML::Node& bk_cfg = g_cfg->_params["processor"]["backend"];
+
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_rfManager (num_bbWin, _clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");

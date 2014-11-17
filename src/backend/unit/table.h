@@ -31,7 +31,8 @@ typedef enum {RAM_ARRAY, CAM_ARRAY, FIFO_ARRAY} TABLE_TYPE;
 template <typename tableType_T>
 class table : public unit {
     public:
-        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, string);
+        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, string, 
+               PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
         ~table () {}
 
         /* SET ROUTINS */
@@ -67,7 +68,8 @@ class table : public unit {
 template <typename tableType_T>
 class CAMtable : public table<tableType_T> {
     public:
-        CAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string);
+        CAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string,
+                  PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
         ~CAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -82,7 +84,8 @@ class CAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class RAMtable : public table<tableType_T> {
     public:
-        RAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string);
+        RAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string,
+                  PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
         ~RAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -92,7 +95,8 @@ class RAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class FIFOtable : public table<tableType_T> {
     public:
- 		FIFOtable (LENGTH, WIDTH, WIDTH, sysClock*, string);
+ 		FIFOtable (LENGTH, WIDTH, WIDTH, sysClock*, string, 
+                   PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
         ~FIFOtable () {}
 
         //bool isFrontReady ();

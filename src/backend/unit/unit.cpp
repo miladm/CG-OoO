@@ -4,8 +4,8 @@
 
 #include "unit.h"
 
-unit::unit (string class_name, sysClock* clk, PJ cam_energy_per_access, PJ ram_energy_per_access) 
-    : energy (class_name, cam_energy_per_access, ram_energy_per_access),
+unit::unit (string class_name, sysClock* clk, PJ cam_epa, PJ ram_epa) 
+    : energy (class_name, cam_epa, ram_epa),
       _c_name (class_name),
       _clk (clk)
 { }

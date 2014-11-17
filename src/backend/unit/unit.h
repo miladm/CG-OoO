@@ -13,6 +13,7 @@
 #include <utility>
 #include <iostream>
 #include <sstream>
+#include <yaml/yaml.h>
 #include "energy.h"
 #include "sysClock.h"
 #include "../../global/global.h"
@@ -26,7 +27,8 @@
 
 class unit : public energy {
     public:
-        unit (string class_name, sysClock* clk = NULL, PJ cam_energy_per_access = 0, PJ ram_energy_per_access = 0);
+        unit (string class_name, sysClock* clk = NULL, 
+              PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
         ~unit ();
 
         const string _c_name;

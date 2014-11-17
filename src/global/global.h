@@ -123,6 +123,8 @@ typedef enum {
 
 #define DISABLE_MAX_CNT 0
 
+#define ZERO_ENERGY 0
+
 //LATENCIES (FROM SANDYBRIDGE)
 #define LONG_LATENCY 1000 //a latency placeholder until actual value found
 #define ST_LATENCY 2 //1: addr compute 2: SQ access

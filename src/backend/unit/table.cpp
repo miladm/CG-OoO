@@ -13,8 +13,9 @@ table<tableType_T>::table (LENGTH len,
                            WIDTH rd_port_cnt, 
                            WIDTH wr_port_cnt,
                            sysClock* clk,
-                           string table_name = "table") 
-    : unit (table_name, clk),
+                           string table_name = "table",
+                           PJ cam_epa, PJ ram_epa) 
+    : unit (table_name, clk, cam_epa, ram_epa),
       _wr_port (wr_port_cnt, WRITE, clk, table_name + ".wr_wire"),
       _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
       _table_size (len),
@@ -134,10 +135,12 @@ CAMtable<tableType_T>::CAMtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "CAMtable") 
+                              string table_name = "CAMtable",
+                              PJ cam_epa, PJ ram_epa) 
     : table<tableType_T> (len, CAM_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name)
+                          clk, table_name,
+                          cam_epa, ram_epa) 
 {}
 
 template <typename tableType_T>
@@ -224,10 +227,12 @@ RAMtable<tableType_T>::RAMtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "RAMtable") 
+                              string table_name = "RAMtable",
+                              PJ cam_epa, PJ ram_epa) 
     : table<tableType_T> (len, RAM_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name)
+                          clk, table_name,
+                          ZERO_ENERGY, ram_epa) 
 {}
 
 /***********************************************/
@@ -238,10 +243,12 @@ FIFOtable<tableType_T>::FIFOtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "FIFOtable") 
+                              string table_name = "FIFOtable",
+                              PJ cam_epa, PJ ram_epa) 
     : table<tableType_T> (len, FIFO_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name)
+                          clk, table_name, 
+                          ZERO_ENERGY, ram_epa) 
 {}
 /*
 template <typename tableType_T>
