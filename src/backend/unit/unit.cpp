@@ -4,10 +4,10 @@
 
 #include "unit.h"
 
-unit::unit (string class_name, sysClock* clk, PJ energy_per_access) 
-    : _c_name (class_name),
-      _clk (clk),
-      s_energy (g_stats.newEnergyStat (energy_per_access, class_name, "energy", "Energy consumped (pJ)", 0, NO_PRINT_ZERO))
+unit::unit (string class_name, sysClock* clk, PJ cam_energy_per_access, PJ ram_energy_per_access) 
+    : energy (class_name, cam_energy_per_access, ram_energy_per_access),
+      _c_name (class_name),
+      _clk (clk)
 { }
 
 unit::~unit () {}

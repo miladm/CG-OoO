@@ -206,6 +206,7 @@ $(OBJDIR)backend/bb/sysCore$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/bbWindow$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/bbBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/unit$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/energy$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \
