@@ -29,7 +29,7 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             if (insObj != NULL) {
                 insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
             }
-//            g_br_detected = true;
+            g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
@@ -139,6 +139,8 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
 /* ************************************* *
  * BB INSTRUMENTATIONS
  * ************************************ */
+
+/*-- DETECT IF A NEW BB BEGINS --*/
 void pin__detectBB (ADDRINT ins_addr) {
     if (g__staticCode->hasStaticBB (ins_addr)) {
         BOOL is_tail_br = g__staticCode->bbHasBr (ins_addr);
@@ -155,6 +157,7 @@ void pin__detectBB (ADDRINT ins_addr) {
     g_br_detected = false;
 }
 
+/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
 void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
         std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << hex << g_var.g_bb_seq_num << std::endl;
@@ -181,31 +184,31 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     s_pin_bb_cnt++;
 }
 
-void pin__get_bb_header (ADDRINT bb_addr, INS bb_tail_ins) {
-    Assert (g_var.g_enable_bkEnd);
-    BOOL is_br = INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins);
-    ADDRINT bb_br_addr = INS_Address (bb_tail_ins);
-    if (is_br) {
-        if (INS_HasFallThrough (bb_tail_ins)) {
-            INS_InsertCall (bb_tail_ins, IPOINT_AFTER, (AFUNPTR) pin__getBBhead,
-                    IARG_ADDRINT, bb_addr,
-                    IARG_ADDRINT, bb_br_addr,
-                    IARG_BOOL, is_br,
-                    IARG_END);
-        }
-        INS_InsertCall (bb_tail_ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) pin__getBBhead,
-                IARG_ADDRINT, bb_addr,
-                IARG_ADDRINT, bb_br_addr,
-                IARG_BOOL, is_br,
-                IARG_END);
-    } else {
-        INS_InsertCall (bb_tail_ins, IPOINT_BEFORE, (AFUNPTR) pin__getBBhead,
-                IARG_ADDRINT, bb_addr,
-                IARG_ADDRINT, bb_br_addr,
-                IARG_BOOL, is_br,
-                IARG_END);
-    }
-}
+//void pin__get_bb_header (ADDRINT bb_addr, INS bb_tail_ins) {
+//    Assert (g_var.g_enable_bkEnd);
+//    BOOL is_br = INS_IsBranchOrCall (bb_tail_ins) || INS_IsFarRet (bb_tail_ins) || INS_IsRet (bb_tail_ins);
+//    ADDRINT bb_br_addr = INS_Address (bb_tail_ins);
+//    if (is_br) {
+//        if (INS_HasFallThrough (bb_tail_ins)) {
+//            INS_InsertCall (bb_tail_ins, IPOINT_AFTER, (AFUNPTR) pin__getBBhead,
+//                    IARG_ADDRINT, bb_addr,
+//                    IARG_ADDRINT, bb_br_addr,
+//                    IARG_BOOL, is_br,
+//                    IARG_END);
+//        }
+//        INS_InsertCall (bb_tail_ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) pin__getBBhead,
+//                IARG_ADDRINT, bb_addr,
+//                IARG_ADDRINT, bb_br_addr,
+//                IARG_BOOL, is_br,
+//                IARG_END);
+//    } else {
+//        INS_InsertCall (bb_tail_ins, IPOINT_BEFORE, (AFUNPTR) pin__getBBhead,
+//                IARG_ADDRINT, bb_addr,
+//                IARG_ADDRINT, bb_br_addr,
+//                IARG_BOOL, is_br,
+//                IARG_END);
+//    }
+//}
 
 /* ************************************* *
  * PIN INSTRUMENTATION
@@ -225,7 +228,7 @@ void pin__getOp (INS ins) {
         INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
         INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
         INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
-        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) { //TODO put is back
+        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
         if (INS_HasFallThrough (ins)) {
             INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) pin__getBrIns,
                     IARG_ADDRINT, INS_Address (ins),

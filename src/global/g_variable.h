@@ -46,10 +46,10 @@ struct g_variable {
         g_traceCount = 0;
         g_codeCacheSize = 0;
         g_flushes = 0;
-        g_enable_simpoint = true;
-        g_enable_wp = false;
-        g_enable_instrumentation = false;
-        g_enable_bkEnd = false;
+        g_enable_simpoint = false;
+        g_enable_wp = true;
+        g_enable_instrumentation = true;
+        g_enable_bkEnd = true;
 
         g_pipe_state = PIPE_NORMAL;
         g_squash_seq_num = 0;
@@ -88,7 +88,7 @@ struct g_variable {
     bool g_enable_wp;
     bool g_enable_instrumentation;
     bool g_enable_bkEnd;
-    long unsigned g_simpInsCnt;
+    SIMP g_simpInsCnt;
     long int g_traceCount;
     long int g_codeCacheSize;
     unsigned long g_insCountRightPath;
@@ -170,10 +170,6 @@ struct g_variable {
         dynBasicblock* newBB = new dynBasicblock (scheduling_mode, "dynBasicblock");
         g_bbCache->Append (newBB);
         return newBB;
-    }
-    dynBasicblock* getNthCacheBB (int i) {
-        if (g_bbCache->NumElements () == 0) { return NULL;}
-        else {return g_bbCache->Nth (i);}
     }
     dynBasicblock* getLastCacheBB () {
         if (g_bbCache->NumElements () == 0) { return NULL;}

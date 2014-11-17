@@ -105,6 +105,19 @@ class RatioHistStat : public ScalarHistStat {
 };
 
 /* **************************** *
+ * EENRGY STAT
+ * **************************** */
+class EnergyStat : public ScalarStat {
+    public:
+        EnergyStat (PJ energy_per_access, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        ~EnergyStat () {}
+        void print (ofstream*);
+
+    private:
+        PJ _energy_per_access;
+};
+
+/* **************************** *
  * STATISTIC
  * **************************** */
 class statistic {
@@ -112,10 +125,12 @@ class statistic {
 		statistic ();
 		~statistic ();
         void dump ();
+        void dumpSummary ();
         ScalarHistStat& newScalarHistStat (LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioHistStat& newRatioHistStat (ScalarStat*, LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
+        EnergyStat& newEnergyStat (PJ, string, string, string, SCALAR, PRINT_ON_ZERO);
 
     private:
         void setupOutFile ();
@@ -125,6 +140,7 @@ class statistic {
         list<RatioHistStat*> _RatioHistStats;
         list<ScalarStat*> _ScalarStats;
         list<RatioStat*> _RatioStats;
+        list<EnergyStat*> _EnergyStats;
         ofstream _out_file;
 };
 

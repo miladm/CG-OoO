@@ -25,11 +25,14 @@
 
 class unit {
     public:
-        unit (string class_name, sysClock* clk = NULL);
+        unit (string class_name, sysClock* clk = NULL, PJ energy_per_access = 0);
         ~unit ();
 
         const string _c_name;
         sysClock* _clk; /* PROGRAM CLOCK */
+
+    protected:
+        EnergyStat& s_energy;
 };
 
 #endif

@@ -84,6 +84,12 @@ RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, stri
     return *cnt;
 }
 
+EnergyStat& statistic::newEnergyStat (PJ energy_per_access, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    EnergyStat* cnt = new EnergyStat (energy_per_access, class_name, param_name, _description, init_val, print_if_zero);
+    _EnergyStats.push_back (cnt);
+    return *cnt;
+}
+
 void statistic::dump () {
     setupOutFile ();
     {
@@ -118,6 +124,27 @@ void statistic::dump () {
         _out_file << endl;
         cout << endl;
     }
+    {
+        list<EnergyStat*>::iterator it;
+        for (it = _EnergyStats.begin (); it != _EnergyStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+}
+
+void statistic::dumpSummary () {
+//    _enable_log_stat = false;
+    {
+        list<RatioStat*>::iterator it;
+        for (it = _RatioStats.begin (); it != _RatioStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+//    _enable_log_stat = true;
 }
 
 /* **************************** *
@@ -265,6 +292,20 @@ void RatioHistStat::print (ofstream* _out_file) {
             cout << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << _scalar_arr_stat[i].getValue () / _divisor->getValue () << endl;
             if (_enable_log_stat) (*_out_file) << "\t- " << _scalar_arr_stat[i].getName ()  << ": " << _scalar_arr_stat[i].getValue () / _divisor->getValue () << endl;
         }
+    }
+}
+
+/* **************************** *
+ * ENERGY STAT
+ * **************************** */
+EnergyStat::EnergyStat (PJ energy_per_access, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+    : ScalarStat (class_name, param_name, description, init_val, print_if_zero)
+{ _energy_per_access = energy_per_access; }
+
+void EnergyStat::print (ofstream* _out_file) {
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+        cout << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
     }
 }
 

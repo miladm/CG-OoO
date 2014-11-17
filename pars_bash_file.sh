@@ -14,7 +14,7 @@ alias bin='cd /home/milad/esc_project/svn/PARS/src/binaryTranslator'
 alias rn='cd /home/milad/esc_project/svn/PARS/src/run'
 alias cfg='cd /home/milad/esc_project/svn/PARS/src/config'
 alias ub='cd /home/milad/esc_project/svn/PARS/benchmarks/ubench'
-alias res='cd /scratch/milad/qsub_outputs/perf_sim_test/out1'
+alias res='cd /scratch/milad/qsub_outputs/perf_sim_test'
 
 
 # OTHER COMMANDS TO SET

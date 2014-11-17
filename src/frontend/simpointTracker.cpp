@@ -5,8 +5,6 @@
 #include "simpointTracker.h"
 
 /* GLOBAL VARIABLES */
-//static long unsigned imgInsCallCount_ = 0;
-//static long unsigned imgInsMemCount_ = 0;
 static SIMP prev_ins_cnt = 0;
 static SIMP thr_ins_cnt = 2 * BILLION;
 
@@ -19,11 +17,17 @@ inline BOOL simpointMode ()
 	static SIMP simp_count = 0; 
     static bool finished_last_simpoint = (g_cfg->_simpoint.size () == 0) ? true : false;
 	static SIMP next_simp = g_cfg->_simpoint.begin()->first; 
+    static SIMP simp_ins_cnt_with_wp = 0;
+    static clock_t simp_strt = 0;
 
-	if (g_var.g_enable_simpoint && !g_var.g_wrong_path) {
+    simp_ins_cnt_with_wp++;
+	if (!g_var.g_wrong_path) {
 		if (g_var.g_inSimpoint) { /* INSIDE SIMPOINT */
 			g_var.g_simpInsCnt++;
 			if (g_var.g_simpInsCnt >= SIMP_WINDOW_SIZE) { /* LEAVE SIMPOINT */
+                clock_t simp_stop = double (clock ()) / CLOCKS_PER_SEC;
+                g_stats.dumpSummary ();
+	            g_msg.simEvent ("SIMPOINT SPEED: %f Ops/Sec\n", ((double)simp_ins_cnt_with_wp / (double)(simp_stop - simp_strt)));
 	            g_msg.simEvent ("SIMPOINT END\n");
 				g_var.g_inSimpoint = false;
 				g_var.g_enable_wp = false;
@@ -44,12 +48,14 @@ inline BOOL simpointMode ()
 				g_var.g_inSimpoint = true;
 				g_var.g_enable_wp = true;
 				g_var.g_simpInsCnt = 0;
+                simp_ins_cnt_with_wp = 0;
 				PIN_RemoveInstrumentation ();
 				g_var.g_enable_instrumentation = true;
                 g_var.g_enable_bkEnd = true;
+                simp_strt = double (clock ()) / CLOCKS_PER_SEC;
             }
 		}
-	}
+    }
 
 	return finished_last_simpoint;
 }
@@ -67,7 +73,9 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
     SIMP countQ    = (SIMP) s_pin_ins_cnt.getValue () / MILLION;
     SIMP countDiff = (SIMP) s_pin_ins_cnt.getValue () - prev_ins_cnt;
 
-    bool finished_last_simpoint = simpointMode ();
+    bool finished_last_simpoint = false;
+    if (g_var.g_enable_simpoint) 
+        finished_last_simpoint = simpointMode ();
 
     if (countDiff > thr_ins_cnt) 
     {
@@ -95,6 +103,8 @@ BOOL doCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
 
 //LEGACY CODE
 //
+//static long unsigned imgInsCallCount_ = 0;
+//static long unsigned imgInsMemCount_ = 0;
 //VOID doImpCallCount_ (BOOL isCall)
 //{
 //    if (isCall)

@@ -2,7 +2,7 @@
  * pars.cpp
  *******************************************************************************/
 
-#define INS_CNT_THR 1000
+#define INS_CNT_THR 10000
 #define BB_CNT_THR 100 + BB_NEAR_EMPTY_SIZE
 #define G_I_INFO_EN 1
 
@@ -176,6 +176,7 @@ VOID backEnd (void *ptr) {
 		ADDRINT tgt = g_var.g_tgt;
 		ADDRINT fthru = g_var.g_fthru;
 		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
+
         if (g_var.g_enable_bkEnd) {
             if (g_var.g_core_type == BASICBLOCK) {
                 if (g_var.g_bbCache->NumElements () >= BB_CNT_THR && !g_var.g_wrong_path) {
@@ -187,15 +188,16 @@ VOID backEnd (void *ptr) {
                 }
             } else { /* INO & O3 */
                 if (g_var.g_codeCache->NumElements () >= INS_CNT_THR && !g_var.g_wrong_path) {
-                    // cout << "FRONTEND->BACKEND " << endl;
+//                     cout << "FRONTEND->BACKEND " << endl;
 //                    g_var.stat.matchIns = 0;
                     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEndRun (FRONTEND_RUNNING);
                     else if (g_var.g_core_type == IN_ORDER) inoBkEndRun (FRONTEND_RUNNING);
                     s_pin_fr_to_bk_cnt++;
-                    // cout << "BACKEND->FRONTEND" << endl;
+//                     cout << "BACKEND->FRONTEND" << endl;
                 }
             }
         }
+
 		PIN_SemaphoreSet (&semaphore1);
 	}
 }
@@ -291,9 +293,9 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
-    g_var.g_core_type = g_cfg->getCoreType (); //OUT_OF_ORDER; //BASICBLOCK; //IN_ORDER;
-    g_var.g_mem_model = g_cfg->getMemModel (); //NAIVE_SPECUL;
-    g_var.scheduling_mode = STATIC_SCH;
+    g_var.g_core_type = g_cfg->getCoreType ();
+    g_var.g_mem_model = g_cfg->getMemModel ();
+    g_var.scheduling_mode = STATIC_SCH;//DYNAMIC_SCH; //STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;
 	pin__uOpGenInit (*g_staticCode);
@@ -311,12 +313,15 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
                                  "-e", "num_wbb_bypassed_in_scheduling_each_ins", 
                                  "-z", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/branch_exe_count_map.csv", 
                                  NULL};
+
 	int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
 	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
 	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
+
     if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
     else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init (dummy_argc, dummy_argv);
     else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init (dummy_argc, dummy_argv);
+
 	g_msg.simStep ("START OF SIMULATION");
 }
 
@@ -369,7 +374,7 @@ EXCEPT_HANDLING_RESULT handle (THREADID tid, EXCEPTION_INFO *pExceptInfo, PHYSIC
 {
 	s_pin_sig_cnt++;
 	if (g_var.g_debug_level & DBG_SPEC) cout << " pintool signal count = " << dec << s_pin_sig_cnt.getValue () << endl;
-	longjmp (g_var.g_env,1);
+	longjmp (g_var.g_env, 1);
 }
 
 void read_mem_orig (ADDRINT eaddr, ADDRINT len)
@@ -386,7 +391,7 @@ void read_mem_orig (ADDRINT eaddr, ADDRINT len)
 	g_var.g_last_eaddr = eaddr;
 	g_var.g_invalid_addr = false;
 
-	THREADID tid=PIN_ThreadId ();
+	THREADID tid = PIN_ThreadId ();
 	if (tid == INVALID_THREADID) {
 		cout << " could not get thread id\n";
 		exit (1);
@@ -582,10 +587,11 @@ VOID doBBcount (UINT32 ins_cnt)
                                            s_pin_flush_cnt, s_pin_sig_recover_cnt, 
                                            ins_cnt);
 
-    if ((g_cfg->getMaxInsCnt () != DISABLE_MAX_CNT && 
-        (SIMP) s_pin_ins_cnt.getValue () >= (SIMP) g_cfg->getMaxInsCnt ()) ||
-        finished_last_simpoint)
-    {
+//    if ((g_cfg->getMaxInsCnt () != DISABLE_MAX_CNT && 
+//        (SIMP) s_pin_ins_cnt.getValue () >= (SIMP) g_cfg->getMaxInsCnt ()) ||
+//        finished_last_simpoint)
+//    {
+    if ((SIMP) s_pin_ins_cnt.getValue () >= 100000000) {
         pin__doFinish ();
         exit (-1);
     }

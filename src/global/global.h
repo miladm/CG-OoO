@@ -25,6 +25,7 @@ typedef int LENGTH;
 typedef int WIDTH;
 typedef int nMETER;
 typedef long double SCALAR;
+typedef long double PJ; /* PICO-JOULE */
 
 typedef char INS_STR;
 //typedef dynInstruction INS_OBJ;
@@ -54,6 +55,8 @@ typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
 typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 typedef enum {STATIC_SCH, DYNAMIC_SCH} SCHED_MODE;
 typedef enum {FRONTEND_DONE, FRONTEND_RUNNING} FRONTEND_STATUS;
+
+typedef enum {NO_SIMPOINT, USE_SIMPOINT, USE_SIMPLE_SLICE} CODE_SAMPLE_SIM;
 
 typedef enum {
 //  DBG_ALL = 0x0, 
