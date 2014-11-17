@@ -1,280 +1,298 @@
-processor: 1
-#   general:
-#       assertion: enable
-#       debug: 0xFFFFF
-#       stat_detail: EXTENSIVE       #OPTIONS: EXTENSIVE, SUMMARY
-#       stat_file: #NOTE: files must not be included in this file
-#       runtime_init:
-#           bench_name_in: RUNTIM_GEN
-#           bench_path_in: RUNTIM_GEN
-#           simpoint_w_file_in: RUNTIM_GEN
-#           simpoint_s_file_in: RUNTIM_GEN
-#           static_code_file_in: RUNTIM_GEN
-#           stat_file_out: RUNTIME_GEN
-#           debug_file_out: RUNTIME_GEN
+---
+processor:
+   general:
+       assertion: enable
+       debug: 0xFFFFF
+       stat_detail: EXTENSIVE       #OPTIONS: EXTENSIVE, SUMMARY
+       stat_file: #NOTE: files must not be included in this file
+       runtime_init:
+           bench_name_in: RUNTIM_GEN
+           bench_path_in: RUNTIM_GEN
+           simpoint_w_file_in: RUNTIM_GEN
+           simpoint_s_file_in: RUNTIM_GEN
+           static_code_file_in: RUNTIM_GEN
+           stat_file_out: RUNTIME_GEN
+           debug_file_out: RUNTIME_GEN
 
-#   frontend:
-#       gen_uop: enable
-#       wrong_path: enable
-#       instrumentation: enable
-#       sim_point: enable
-#       simpoint_file: 
+   frontend:
+       gen_uop: enable
+       wrong_path: enable
+       instrumentation: enable
+       sim_point: enable
+       simpoint_file: 
+       code_cache_size_thr: 100 #TODO be considerate of BB_NEAR_EMPTY_SIZE param
+
+   backend:
+       core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
+       width: 4 #TODO use it?
+       lrf: enable
+       squash: enable
+       mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
+
+       branch_predictor:
+           type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW
+           BIM:
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               instShiftAmt: 0
+           G_SHARE:
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               instShiftAmt: 0
+           TOURNAMENT:
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               choicePredictorSize: 8192
+               choiceCtrBits: 2
+               instShiftAmt: 0
+           _2BC_GSKEW:                             #TODO: take _ out + fix this list when added this predictor
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               choicePredictorSize: 8192
+               choiceCtrBits: 2
+               instShiftAmt: 0
+
+       register_file:
+           reg_ren:
+               a_size:
+               a_hi:
+               a_lo:
+               p_size:
+               p_hi:
+               p_lo:
+               wr_wire_cnt:
+               rd_wire_cnt:
+               name:
+               cout: 1
+           simple:
+               rf_size:
+               rf_hi:
+               rf_lo:
+               wr_wire_cnt:
+               rd_wire_cnt:
+               name:
+               cout: 16 #NOTE equal to the number of BBWINDOWS
+
+       space:
+           - global_arch:
+               size: 80
+               start: 117
+               end: 196
+               name: GARF
+           - global_phys:
+               size: 200
+               start: 1
+               end: 200
+               name: GPRF
+           - local:
+               size: 17
+               start: 100
+               end: 116
+               name: LRF
+
+       table:
+           - QUE:
+               size: 1000
+               count: 1
+               rd_wire_cnt: 1000
+               wr_wire_cnt: 1000
+               e_cam: 0
+               e_ram: 0
+               name: bbQUE
+               type: FIFO
+           - ROB:
+               size: 100
+               count: 1
+               rd_wire_cnt: 32
+               wr_wire_cnt: 32
+               e_cam: 1
+               e_ram: 1
+               name: bbROB
+               type: CAM
+           - LQ:
+               size: 64
+               count: 1
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
+               e_cam: 1
+               e_ram: 1
+               name: LQtable
+               type: CAM
+           - SQ:
+               size: 32
+               count: 1
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
+               e_cam: 1
+               e_ram: 1
+               name: SQtable
+               type: CAM
+           - bbWindow: #TODO replace with resStn for O3
+               size: 15
+               count: 16
+               rd_wire_cnt: 8
+               wr_wire_cnt: 8
+               e_cam: 1
+               e_ram: 1
+               name: bbWindow_ #TODO get rid of _
+               type: FIFO
+           - iWindow: #only for INO
+               size: 120
+               count: 1
+               rd_wire_cnt: 4
+               wr_wire_cnt: 4
+               e_cam: 1
+               e_ram: 1
+               name: iWindow
+               type: CAM
+           - mshr:
+               size: 10
+               count: 1
+               rd_wire_cnt: 1
+               wr_wire_cnt: 1
+               e_cam: 1
+               e_ram: 1
+               name: MSHR
+               type: RAM
+           - store_buffer: #only for INO
+               size: 20
+               count: 1
+               rd_wire_cnt: 4
+               wr_wire_cnt: 4
+               e_cam: 1
+               e_ram: 1
+               name: st_buff
+               type: FIFO
+       
+       execute_unit:
+           - alu:
+               count: 4
+               latency: 1
+           - fpu:
+               count: 0
+               latency: 5
+           - memu:
+               count: 0
+               latency: 1
+           - bru:
+               count: 0
+               latency: 4
+
+       pipe_stage:
+           - branch_prediction:
+               width: 4
+               name: branchPred
+           - fetch:
+               width: 4
+               name: fetch
+           - decode:
+               width: 4
+               name: decode
+           - schedule:
+               width: 4
+               name: schedule
+           - execution:
+               width: 4
+               name: execution
+           - memory:
+               width: 4
+               name: memory
+           - commit:
+               width: 4
+               name: commit
+       
+       port:
+           - fetch_to_decode:
+               delay: 2
+               length: 10
+               name: fetch_to_decode
+           - fetch_to_bp:
+               delay: 1
+               length: 10
+               name: fetch_to_bp
+           - bp_to_fetch:
+               delay: 1
+               length: 10
+               name: bp_to_fetch
+           - decode_to_scheduler:
+               delay: 1
+               length: 10
+               name: decode_to_scheduler
+           - scheduler_to_execution:
+               delay: 1
+               length: 10
+               name: scheduler_to_execution
+           - execution_to_scheduler:
+               delay: 1
+               length: 10
+               name: execution_to_scheduler
+           - execution_to_memory:
+               delay: 1
+               length: 10
+               name: execution_to_memory
+           - memory_to_scheduler:
+               delay: 1
+               length: 10
+               name: memory_to_scheduler
+           - commit_to_bp:
+               delay: 1
+               length: 10
+               name: commit_to_bp
+           - commit_to_scheduler:
+               delay: 1
+               length: 10
+               name: commit_to_scheduler
+           - commit_to_scheduler: #TODO for INO only
+               delay: 1
+               length: 20
+               name: mem_buff
+       
+#      mem_hierarchy:
+#          - L1:
+#              sa: 1 # Set Associativity
+#              size: 32768
+#              line_size: 64
+#              latency: 3
+#              num_port: 1
+#              name: L1
+#          - L2:
+#              sa: 1 # Set Associativity
+#              size: 2097152
+#              line_size: 64
+#              latency: 12
+#              num_port: 1
+#              name: L2
+#          - L3:
+#              sa: 1 # Set Associativity
+#              size: 8388688
+#              line_size: 64
+#              latency: 20
+#              num_port: 1
+#              name: L3
+#          - MEM:
+#              sa: 1 # Set Associativity
+#              size: 0 #TODO need this one?
+#              line_size: 64
+#              latency: 100
+#              num_port: 1
+#              name: MEM
+
+compiler:
+   lrf: enable
+   schedule: disable
+   dot: disable
+
 #       s_file: "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s"
-#       code_cache_size_thr: 100 #TODO be considerate of BB_NEAR_EMPTY_SIZE param
-
-#   backend:
-#       core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
-#       width: 4 #TODO use it?
-#       lrf: enable
-#       squash: enable
-#       mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
-
-#       branch_predictor:
-#           type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW
-#           BIM:
-#               localPredictorSize: 2048
-#               localCtrBits: 2
-#               localHistoryTableSize: 2048
-#               localHistoryBits: 11
-#               instShiftAmt: 0
-#           G_SHARE:
-#               globalPredictorSize: 8192
-#               globalHistoryBits: 13
-#               globalCtrBits: 2
-#               instShiftAmt: 0
-#           TOURNAMENT:
-#               localPredictorSize: 2048
-#               localCtrBits: 2
-#               localHistoryTableSize: 2048
-#               localHistoryBits: 11
-#               globalPredictorSize: 8192
-#               globalHistoryBits: 13
-#               globalCtrBits: 2
-#               choicePredictorSize: 8192
-#               choiceCtrBits: 2
-#               instShiftAmt: 0
-#           _2BC_GSKEW:                             #TODO: take _ out + fix this list when added this predictor
-#               localPredictorSize: 2048
-#               localCtrBits: 2
-#               localHistoryTableSize: 2048
-#               localHistoryBits: 11
-#               globalPredictorSize: 8192
-#               globalHistoryBits: 13
-#               globalCtrBits: 2
-#               choicePredictorSize: 8192
-#               choiceCtrBits: 2
-#               instShiftAmt: 0
-
-#       register_file:
-#           reg_ren:
-#               a_size:
-#               a_hi:
-#               a_lo:
-#               p_size:
-#               p_hi:
-#               p_lo:
-#               wr_wire_cnt:
-#               rd_wire_cnt:
-#               name:
-#               cout: 1
-#           simple:
-#               rf_size:
-#               rf_hi:
-#               rf_lo:
-#               wr_wire_cnt:
-#               rd_wire_cnt:
-#               name:
-#               cout: 16 #NOTE equal to the number of BBWINDOWS
-
-#       space:
-#           - global_arch:
-#               size: 2000
-#               start: ?
-#               end: ?
-#               name: ?
-#           - global_phys:
-#               size: 2000
-#               start: ?
-#               end: ?
-#               name: ?
-#           - local:
-#               size: 2000
-#               start: ?
-#               end: ?
-#               name: ?
-#
-#       table:
-#           - QUE:
-#               size: 1000
-#               count: 1
-#               rd_wire_cnt: 1000
-#               wr_wire_cnt: 1000
-#               name: bbQUE
-#               type: FIFO
-#           - ROB:
-#               size: 100
-#               count: 1
-#               rd_wire_cnt: 32
-#               wr_wire_cnt: 32
-#               name: bbROB
-#               type: CAM
-#           - LQ:
-#               size: 64
-#               count: 1
-#               rd_wire_cnt: 8
-#               wr_wire_cnt: 4
-#               name: LQtable
-#               type: CAM
-#           - SQ:
-#               size: 32
-#               count: 1
-#               rd_wire_cnt: 8
-#               wr_wire_cnt: 4
-#               name: SQtable
-#               type: CAM
-#           - bbWindow: #TODO replace with resStn for O3
-#               size: 15
-#               count: 16
-#               rd_wire_cnt: 8
-#               wr_wire_cnt: 8
-#               name: bbWindow_ #TODO get rid of _
-#               type: FIFO
-#           - iWindow: #only for INO
-#               size: 
-#               count: 1
-#               rd_wire_cnt: ?
-#               wr_wire_cnt: ?
-#               name: iWindow
-#               type: CAM
-#           - mshr:
-#               size: ?
-#               count: ?
-#               rd_wire_cnt: ?
-#               wr_wire_cnt: ?
-#               name: MSHR
-#               type: RAM
-#           - store_buffer: #only for INO
-#               size: 20
-#               count: 1
-#               rd_wire_cnt: 4
-#               wr_wire_cnt: 4
-#               name: st_buff
-#               type: FIFO
-#       
-#       execute_unit:
-#           - alu:
-#               count: 4
-#               latency: 1
-#           - fpu:
-#               count: 0
-#               latency: 5
-#           - memu:
-#               count: 0
-#               latency: 1
-#           - bru:
-#               count: 0
-#               latency: 4
-#
-#       pipe_stage:
-#           - branch_prediction:
-#               width: 4
-#               name: branchPred
-#           - fetch:
-#               width: 4
-#               name: fetch
-#           - decode:
-#               width: 4
-#               name: decode
-#           - schedule:
-#               width: 4
-#               name: schedule
-#           - execution:
-#               width: 4
-#               name: execution
-#           - memory:
-#               width: 4
-#               name: memory
-#           - commit:
-#               width: 4
-#               name: commit
-#       
-#       port:
-#           - fetch_to_decode:
-#               delay: 2
-#               length: 10
-#               name: fetch_to_decode
-#           - fetch_to_bp:
-#               delay: 1
-#               length: 10
-#               name: fetch_to_bp
-#           - bp_to_fetch:
-#               delay: 1
-#               length: 10
-#               name: bp_to_fetch
-#           - decode_to_scheduler:
-#               delay: 1
-#               length: 10
-#               name: decode_to_scheduler
-#           - scheduler_to_execution:
-#               delay: 1
-#               length: 10
-#               name: scheduler_to_execution
-#           - execution_to_scheduler:
-#               delay: 1
-#               length: 10
-#               name: execution_to_scheduler
-#           - execution_to_memory:
-#               delay: 1
-#               length: 10
-#               name: execution_to_memory
-#           - memory_to_scheduler:
-#               delay: 1
-#               length: 10
-#               name: memory_to_scheduler
-#           - commit_to_bp:
-#               delay: 1
-#               length: 10
-#               name: commit_to_bp
-#           - commit_to_scheduler:
-#               delay: 1
-#               length: 10
-#               name: commit_to_scheduler
-#           - commit_to_scheduler: #TODO for INO only
-#               delay: 1
-#               length: 20
-#               name: mem_buff
-#       
-#       mem_hierarchy:
-#           - L1:
-#               sa: 1 # Set Associativity
-#               size: 32768
-#               line_size: 64
-#               latency: 3
-#               num_port: 1
-#               name: L1
-#           - L2:
-#               sa: 1 # Set Associativity
-#               size: 2097152
-#               line_size: 64
-#               latency: 12
-#               num_port: 1
-#               name: L2
-#           - L3:
-#               sa: 1 # Set Associativity
-#               size: 8388688
-#               line_size: 64
-#               latency: 20
-#               num_port: 1
-#               name: L3
-#           - MEM:
-#               sa: 1 # Set Associativity
-#               size: 0 #TODO need this one?
-#               line_size: 64
-#               latency: 100
-#               num_port: 1
-#               name: MEM
-
-#compiler:
-#   lrf: enable
-#   schedule: enable
-#   dot: disable

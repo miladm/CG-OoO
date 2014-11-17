@@ -18,19 +18,9 @@ config::config () {
 //		cfgFile TO EXIST
 //		PinPointFile TO EXIST
 config::config (string bench_path, string config_path, string out_dir) {
-//    YAML::Node config;
-//    config = YAML::LoadFile ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
-//    std::ifstream fin ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
-//    YAML::Parser parser (fin);
-//    YAML::Node doc;
-//    for (YAML::iterator it=doc.begin ();it!=doc.end ();++it) {
-//        std::string scalar;
-//        *it >> scalar;
-//        std::cout << "Found scalar: " << scalar << std::endl;
-//    }
-
-//    cout << conf["processor"] << endl;
-
+    ifstream fin ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
+    YAML::Parser parser (fin);
+    parser.GetNextDocument (_params);
 
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");

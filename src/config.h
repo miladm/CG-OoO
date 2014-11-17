@@ -11,10 +11,10 @@
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
+#include <yaml/yaml.h>
 #include "lib/utility.h"
 #include "global/global.h"
 #include "lib/message.h"
-//#include "lib/yaml-cpp/yaml.h"
 
 using namespace std;
 
@@ -110,6 +110,9 @@ class config {
 		int _pb_win_width;
 		int _regren_width;
 		int _fetch_width;
+
+    public:
+        YAML::Node _params;
 };
 
 extern config* g_cfg;
