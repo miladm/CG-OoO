@@ -31,8 +31,7 @@ typedef enum {RAM_ARRAY, CAM_ARRAY, FIFO_ARRAY} TABLE_TYPE;
 template <typename tableType_T>
 class table : public unit {
     public:
-        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, string, 
-               PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
+        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
         ~table () {}
 
         /* SET ROUTINS */
@@ -59,6 +58,9 @@ class table : public unit {
         const LENGTH _table_size;
         const TABLE_TYPE _table_type;
 
+        /*-- ENERGY --*/
+        energy _energy;
+
         /* STAT OBJS */
         ScalarStat& s_table_empty_cyc;
         ScalarStat& s_table_full_cyc;
@@ -68,8 +70,7 @@ class table : public unit {
 template <typename tableType_T>
 class CAMtable : public table<tableType_T> {
     public:
-        CAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string,
-                  PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
+        CAMtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
         ~CAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -84,8 +85,7 @@ class CAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class RAMtable : public table<tableType_T> {
     public:
-        RAMtable (LENGTH, WIDTH, WIDTH, sysClock*, string,
-                  PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
+        RAMtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
         ~RAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -95,8 +95,7 @@ class RAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class FIFOtable : public table<tableType_T> {
     public:
- 		FIFOtable (LENGTH, WIDTH, WIDTH, sysClock*, string, 
-                   PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
+ 		FIFOtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
         ~FIFOtable () {}
 
         //bool isFrontReady ();

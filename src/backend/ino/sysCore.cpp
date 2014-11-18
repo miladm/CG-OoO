@@ -56,10 +56,13 @@ sysCore::sysCore (sysClock* clk,
       _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, clk, "commit_to_bp_port"),
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, clk, "commit_to_scheduler_port")
 {
+    /*-- CONFIG OBJS --*/
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+
     /* INIT UNITS */
     g_RF_MGR = new rfManager (clk, "rfManager");
-    _iROB = new CAMtable<dynInstruction*>(50, 4, 4, _clk, "iROB");
-    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk, "iQUE");
+    _iROB = new CAMtable<dynInstruction*>(50, 4, 4, _clk, root["table"]["ROB"], "iROB");
+    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk,root["table"]["QUE"],  "iQUE");
 
     /* INIT STAGES */
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());

@@ -25,10 +25,9 @@
 #include "../../lib/statistic.h"
 
 
-class unit : public energy {
+class unit {
     public:
-        unit (string class_name, sysClock* clk = NULL, 
-              PJ cam_epa = ZERO_ENERGY, PJ ram_epa = ZERO_ENERGY);
+        unit (string class_name, sysClock* clk = NULL);
         ~unit ();
 
         const string _c_name;

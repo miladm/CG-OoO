@@ -13,13 +13,14 @@ table<tableType_T>::table (LENGTH len,
                            WIDTH rd_port_cnt, 
                            WIDTH wr_port_cnt,
                            sysClock* clk,
-                           string table_name = "table",
-                           PJ cam_epa, PJ ram_epa) 
-    : unit (table_name, clk, cam_epa, ram_epa),
+                           const YAML::Node& root,
+                           string table_name = "table")
+    : unit (table_name, clk),
       _wr_port (wr_port_cnt, WRITE, clk, table_name + ".wr_wire"),
       _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
       _table_size (len),
       _table_type (table_type),
+      _energy (table_name, root),
       s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
       s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
       s_table_size_rat  (g_stats.newRatioStat (clk->getStatObj (), table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
@@ -39,6 +40,7 @@ BUFF_STATE table<tableType_T>::pushBack (tableType_T obj) {
     }
 	TableElement<tableType_T>* newEntry = new TableElement<tableType_T> (obj);
 	table<tableType_T>::_table.Append (newEntry);
+    _energy.ramAccess ();
 	return AVAILABLE_BUFF;
 }
 
@@ -49,6 +51,7 @@ tableType_T table<tableType_T>::popBack () {
 	tableType_T elem = table<tableType_T>::_table.Last ()->_element;
 	delete table<tableType_T>::_table.Nth (getTableSize () - 1);
 	table<tableType_T>::_table.RemoveAt (getTableSize () - 1);
+    _energy.ramAccess ();
 	return elem;
 }
 
@@ -56,6 +59,7 @@ template <typename tableType_T>
 tableType_T table<tableType_T>::getBack () {
     Assert (_wr_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
     Assert (getTableSize () > 0);
+    _energy.ramAccess ();
 	return table<tableType_T>::_table.Last ()->_element;
 }
 
@@ -135,12 +139,11 @@ CAMtable<tableType_T>::CAMtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "CAMtable",
-                              PJ cam_epa, PJ ram_epa) 
+                              const YAML::Node& root,
+                              string table_name = "CAMtable")
     : table<tableType_T> (len, CAM_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name,
-                          cam_epa, ram_epa) 
+                          clk, root, table_name)
 {}
 
 template <typename tableType_T>
@@ -178,6 +181,7 @@ tableType_T CAMtable<tableType_T>::popFront () {
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
+    table<tableType_T>::_energy.ramAccess ();
     return dyIns;
 }
 
@@ -187,7 +191,8 @@ tableType_T CAMtable<tableType_T>::getFront () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-     return table<tableType_T>::_table.Nth (0)->_element;
+    table<tableType_T>::_energy.ramAccess ();
+    return table<tableType_T>::_table.Nth (0)->_element;
 }
 
 template <typename tableType_T>
@@ -196,7 +201,8 @@ tableType_T CAMtable<tableType_T>::getNth (LENGTH indx) {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-     return table<tableType_T>::_table.Nth (indx)->_element;
+    table<tableType_T>::_energy.camAccess ();
+    return table<tableType_T>::_table.Nth (indx)->_element;
 }
 
 template <typename tableType_T>
@@ -205,9 +211,10 @@ tableType_T CAMtable<tableType_T>::pullNth (LENGTH indx) {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-     tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
-     table<tableType_T>::_table.RemoveAt (indx);
-     return elem;
+    tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
+    table<tableType_T>::_table.RemoveAt (indx);
+    table<tableType_T>::_energy.camAccess ();
+    return elem;
 }
 
 template <typename tableType_T>
@@ -216,7 +223,8 @@ tableType_T CAMtable<tableType_T>::getLast () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first"); //TODO - don't think this is needed, is it?
 #endif
-     return table<tableType_T>::_table.Last()->_element;
+    table<tableType_T>::_energy.ramAccess ();
+    return table<tableType_T>::_table.Last()->_element;
 }
 
 /***********************************************/
@@ -227,12 +235,11 @@ RAMtable<tableType_T>::RAMtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "RAMtable",
-                              PJ cam_epa, PJ ram_epa) 
+                              const YAML::Node& root,
+                              string table_name = "RAMtable")
     : table<tableType_T> (len, RAM_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name,
-                          ZERO_ENERGY, ram_epa) 
+                          clk, root, table_name)
 {}
 
 /***********************************************/
@@ -243,12 +250,11 @@ FIFOtable<tableType_T>::FIFOtable (LENGTH len,
                               WIDTH rd_port_cnt, 
                               WIDTH wr_port_cnt,
                               sysClock* clk,
-                              string table_name = "FIFOtable",
-                              PJ cam_epa, PJ ram_epa) 
+                              const YAML::Node& root,
+                              string table_name = "FIFOtable") 
     : table<tableType_T> (len, FIFO_ARRAY,
                           wr_port_cnt, rd_port_cnt, 
-                          clk, table_name, 
-                          ZERO_ENERGY, ram_epa) 
+                          clk, root, table_name)
 {}
 /*
 template <typename tableType_T>
@@ -263,6 +269,7 @@ tableType_T FIFOtable<tableType_T>::getFront () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
+    table<tableType_T>::_energy.fifoAccess ();
     return table<tableType_T>::_table.Nth (0)->_element;
 }
 
@@ -275,6 +282,7 @@ tableType_T FIFOtable<tableType_T>::popFront () {
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
+    table<tableType_T>::_energy.fifoAccess ();
     return dyIns;
 }
 

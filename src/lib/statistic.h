@@ -109,8 +109,9 @@ class RatioHistStat : public ScalarHistStat {
  * **************************** */
 class EnergyStat : public ScalarStat {
     public:
-        EnergyStat (PJ energy_per_access, string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        EnergyStat (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
         ~EnergyStat () {}
+        void setEnergyPerAccess (PJ);
         void print (ofstream*);
 
     private:
@@ -130,7 +131,7 @@ class statistic {
         RatioHistStat& newRatioHistStat (ScalarStat*, LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO);
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
-        EnergyStat& newEnergyStat (PJ, string, string, string, SCALAR, PRINT_ON_ZERO);
+        EnergyStat& newEnergyStat (string, string, string, SCALAR, PRINT_ON_ZERO);
 
     private:
         void setupOutFile ();

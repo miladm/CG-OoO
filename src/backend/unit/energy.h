@@ -10,7 +10,7 @@
 class energy
 {
  	public:
- 		energy (string, PJ cam_energy_per_access = ZERO_ENERGY, PJ ram_energy_per_access = ZERO_ENERGY);
+ 		energy (string, const YAML::Node& root);
  		~energy ();
         void camAccess ();
         void ramAccess ();
@@ -19,6 +19,9 @@ class energy
     protected:
         EnergyStat& e_cam;
         EnergyStat& e_ram;
+
+        PJ _cam_energy_per_access; 
+        PJ _ram_energy_per_access;
 };
 
 #endif

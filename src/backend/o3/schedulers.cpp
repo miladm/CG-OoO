@@ -30,7 +30,7 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
-        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(120, 4, 4, _clk, "ResStn_"+rs_num.str ());
+        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(120, 4, 4, _clk, g_cfg->_root["cpu"]["backend"]["table"]["resStn"], "ResStn_"+rs_num.str ());
         _ResStns.Append(resStn);
     }
 }

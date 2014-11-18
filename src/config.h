@@ -112,7 +112,7 @@ class config {
 		int _fetch_width;
 
     public:
-        YAML::Node _params;
+        YAML::Node _root;
 };
 
 extern config* g_cfg;

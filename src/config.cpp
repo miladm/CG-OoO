@@ -20,7 +20,7 @@ config::config () {
 config::config (string bench_path, string config_path, string out_dir) {
     ifstream fin ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
     YAML::Parser parser (fin);
-    parser.GetNextDocument (_params);
+    parser.GetNextDocument (_root);
 
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");

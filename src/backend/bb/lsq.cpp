@@ -9,7 +9,7 @@ bb_lsqCAM::bb_lsqCAM (LENGTH len,
                 WIDTH wr_port_cnt,
                 sysClock* clk,
                 string table_name)
-    : CAMtable<bbInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, table_name),
+    : CAMtable<bbInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, g_cfg->_root["cpu"]["backend"]["table"][table_name.c_str ()], table_name),
       s_inter_bb_mem_mis_pred_cnt (g_stats.newScalarStat (table_name, "inter_bb_mem_mis_pred_cnt", "Number of mis-predictions of load-store in diff BB's", 0, NO_PRINT_ZERO)),
       s_intra_bb_mem_mis_pred_cnt (g_stats.newScalarStat (table_name, "intra_bb_mem_mis_pred_cnt", "Number of mis-predictions of load-store in the same BB", 0, NO_PRINT_ZERO))
 {}

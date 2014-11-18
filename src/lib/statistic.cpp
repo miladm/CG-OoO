@@ -84,8 +84,8 @@ RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, stri
     return *cnt;
 }
 
-EnergyStat& statistic::newEnergyStat (PJ energy_per_access, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
-    EnergyStat* cnt = new EnergyStat (energy_per_access, class_name, param_name, _description, init_val, print_if_zero);
+EnergyStat& statistic::newEnergyStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    EnergyStat* cnt = new EnergyStat (class_name, param_name, _description, init_val, print_if_zero);
     _EnergyStats.push_back (cnt);
     return *cnt;
 }
@@ -298,9 +298,13 @@ void RatioHistStat::print (ofstream* _out_file) {
 /* **************************** *
  * ENERGY STAT
  * **************************** */
-EnergyStat::EnergyStat (PJ energy_per_access, string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+EnergyStat::EnergyStat (string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
     : ScalarStat (class_name, param_name, description, init_val, print_if_zero)
-{ _energy_per_access = energy_per_access; }
+{ _energy_per_access = 0; }
+
+void EnergyStat::setEnergyPerAccess (PJ energy_per_access) {
+    _energy_per_access = energy_per_access; 
+}
 
 void EnergyStat::print (ofstream* _out_file) {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
