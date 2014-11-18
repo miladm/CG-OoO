@@ -137,7 +137,7 @@ void bb_memory::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
-    _LSQ_MGR->squash (squashSeqNum, squash_type);
+    _LSQ_MGR->squash (squashSeqNum);
 }
 
 void bb_memory::regStat () {

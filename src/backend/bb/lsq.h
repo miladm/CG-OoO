@@ -25,7 +25,7 @@ class bb_lsqCAM : public CAMtable<bbInstruction*> {
 
         bbInstruction* findPendingMemIns (LSQ_ID);
         void setTimer (bbInstruction*, CYCLE);
-        void squash (INS_ID, PIPE_SQUASH_TYPE);
+        void squash (INS_ID);
         void delFinishedMemAxes ();
         bool hasCommit ();
         bool hasMemAddr (ADDRS, INS_ID);

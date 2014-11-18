@@ -172,11 +172,11 @@ bool bb_memManager::commit (bbInstruction* ins) {
     return true;
 }
 
-void bb_memManager::squash (INS_ID squash_seq_num, PIPE_SQUASH_TYPE squash_type) {
+void bb_memManager::squash (INS_ID squash_seq_num) {
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
-    _LQ.squash (squash_seq_num, squash_type);
+    _LQ.squash (squash_seq_num);
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
-    _SQ.squash (squash_seq_num, squash_type);
+    _SQ.squash (squash_seq_num);
 }
 
 /* ***************** *

@@ -60,11 +60,7 @@ void bb_lsqCAM::setTimer (bbInstruction* elem, CYCLE axes_lat) {
     Assert (true == false && "The LSQ enetry not found.");
 }
 
-void bb_lsqCAM::squash (INS_ID ins_seq_num, PIPE_SQUASH_TYPE squash_type) {
-//    if (squash_type == BP_MISPRED) bpMispredSquash (ins_seq_num);
-//    else if (squash_type == MEM_MISPRED) memMispredSquash (ins_seq_num);
-//    else {Assert (0 && "Invalid squash type.");}
-
+void bb_lsqCAM::squash (INS_ID ins_seq_num) {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
         bbInstruction* ins = getNth_unsafe (i);
@@ -76,35 +72,6 @@ void bb_lsqCAM::squash (INS_ID ins_seq_num, PIPE_SQUASH_TYPE squash_type) {
         } else { break; }
     }
 }
-
-//TODO either incorporte or deelete soon
-//void bb_lsqCAM::bpMispredSquash (INS_ID ins_seq_num) {
-//    LENGTH table_size = _table.NumElements ();
-//    LENGTH start_indx = 0, stop_indx = table_size - 1;
-//
-//    for (LENGTH i = table_size - 1; i >= 0; i--) {
-//        bbInstruction* ins = getNth_unsafe (i);
-//        if (ins->getInsID () >= ins_seq_num) {
-////            delete _table.Nth (i);
-//            _table.RemoveAt (i);
-//            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
-//                       "Squashing mem ins:", ins->getInsID (), "due to BB", ins_seq_num);
-//        } else { break; }
-//    }
-//}
-//
-//void bb_lsqCAM::memMispredSquash (INS_ID ins_seq_num) {
-//    LENGTH table_size = _table.NumElements ();
-//    for (LENGTH i = table_size - 1; i >= 0; i--) {
-//        bbInstruction* ins = getNth_unsafe (i);
-//        if (ins->getInsID () >= ins_seq_num) {
-////            delete _table.Nth (i);
-//            _table.RemoveAt (i);
-//            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
-//                       "Squashing mem ins:", ins->getInsID (), "due to BB", ins_seq_num);
-//        } else { break; }
-//    }
-//}
 
 void bb_lsqCAM::delFinishedMemAxes () {
     CYCLE now = _clk->now ();
