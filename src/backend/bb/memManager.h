@@ -35,7 +35,7 @@ class bb_memManager : public unit {
         void memAddrReady (bbInstruction*);
         bool issueToMem (LSQ_ID);
         bool commit (bbInstruction*);
-        void squash (INS_ID);
+        void squash (INS_ID, PIPE_SQUASH_TYPE);
         pair<bool, bbInstruction*> hasFinishedIns (LSQ_ID);
         CYCLE getAxesLatency (bbInstruction*);
 

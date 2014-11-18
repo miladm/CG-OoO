@@ -117,7 +117,7 @@ void bb_commit::squash () {
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
     if (squash_type == BP_MISPRED) bpMispredSquash ();
     else if (squash_type == MEM_MISPRED) memMispredSquash ();
-    else {Assert (true == false && "Invalid squash type.");}
+    else {Assert (0 && "Invalid squash type.");}
     g_var.resetSquashType ();
 }
 
@@ -193,7 +193,6 @@ void bb_commit::bpMispredSquash () {
                                "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
         delBB (bb);
     }
-
 }
 
 void bb_commit::memMispredSquash () {
@@ -243,7 +242,7 @@ void bb_commit::commitBB (dynBasicblock* bb) {
                 insList->RemoveAt (0);
             } else {
 //                return; //TODO add stat on average number of cycles to commit a BB
-                Assert (true == false && "implement this condition"); //TODO finish this
+                Assert (0 && "implement this condition"); //TODO finish this
             }
         } else {
             _RF_MGR->commitRegs (ins);

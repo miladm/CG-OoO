@@ -172,11 +172,11 @@ bool bb_memManager::commit (bbInstruction* ins) {
     return true;
 }
 
-void bb_memManager::squash (INS_ID squash_seq_num) {
+void bb_memManager::squash (INS_ID squash_seq_num, PIPE_SQUASH_TYPE squash_type) {
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
-    _LQ.squash (squash_seq_num);
+    _LQ.squash (squash_seq_num, squash_type);
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
-    _SQ.squash (squash_seq_num);
+    _SQ.squash (squash_seq_num, squash_type);
 }
 
 /* ***************** *
@@ -226,11 +226,12 @@ void bb_memManager::completeLd (bbInstruction* ins) {
     ins->setLQstate (LQ_COMPLETE);
 }
 
-/* FORWARD DATA 
- * NOTE: this function is not sorted based on the order in which LOAD ops
- * return data. The port must be searched for finding the data that is being
- * forwarded every cycle (in the scheduler)
- */
+/*--
+ * FORWARD DATA 
+ * NOTE: THIS FUNCTION IS NOT SORTED BASED ON THE ORDER IN WHICH LOAD OPS
+ * RETURN DATA. THE PORT MUST BE SEARCHED FOR FINDING THE DATA THAT IS BEING
+ * FORWARDED EVERY CYCLE (IN THE SCHEDULER)
+ --*/
 void bb_memManager::forward (bbInstruction* ins, CYCLE mem_latency) {
 #ifdef ASSERTION
     Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);

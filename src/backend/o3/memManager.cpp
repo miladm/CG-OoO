@@ -171,7 +171,9 @@ bool o3_memManager::commit (dynInstruction* ins) {
 }
 
 void o3_memManager::squash (INS_ID squash_seq_num) {
+    dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
     _LQ.squash (squash_seq_num);
+    dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
     _SQ.squash (squash_seq_num);
 }
 

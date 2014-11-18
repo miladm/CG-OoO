@@ -98,13 +98,14 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
             _bbInsMap.erase (ins_addr);
         }
         g_bbStat->s_missing_dynIns_in_stList_cnt += _bbInsMap.size ();
-//        map<ADDRS, bbInstruction*>::iterator itt = _bbInsMap.begin ();
-//        while (itt != _bbInsMap.end ()) {
-//            ADDRS ins_addr = itt->first;
-//            cout << ins_addr << " in BB " <<  _head._bb_br_ins_addr<< endl;
-//            itt++;
-//        }
-//        cout << endl;
+
+        //        map<ADDRS, bbInstruction*>::iterator itt = _bbInsMap.begin ();
+        //        while (itt != _bbInsMap.end ()) {
+        //            ADDRS ins_addr = itt->first;
+        //            cout << ins_addr << " in BB " <<  _head._bb_br_ins_addr<< endl;
+        //            itt++;
+        //        }
+        //        cout << endl;
     }
 }
 

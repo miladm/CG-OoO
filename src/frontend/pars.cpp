@@ -296,18 +296,20 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
         Assert (0 && "Invalid BP type chosen");
     }
 
-    /* TODO take care of these cout's*/
 	g_msg.simStep ("PARS COMPILED CODE");
+    g_var.scheduling_mode = STATIC_SCH;//DYNAMIC_SCH;
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
 	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = g_cfg->getCoreType ();
     g_var.g_mem_model = g_cfg->getMemModel ();
-    g_var.scheduling_mode = STATIC_SCH;//DYNAMIC_SCH; //STATIC_SCH;
 	g_staticCode = new staticCodeParser (g_cfg);
     g_bbStat = new bbStat;
+
 	pin__uOpGenInit (*g_staticCode);
+
+    /* TODO take care of these cout's*/
     cout << "CORE: " << g_var.g_core_type << endl;
     cout << "MEM MODEL: " << g_var.g_mem_model << endl;
     cout << "SCHEDULING MODE: " << g_var.scheduling_mode << endl;
