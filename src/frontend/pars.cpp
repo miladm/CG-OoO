@@ -48,6 +48,11 @@ PIN_THREAD_UID rootThreadUid;
 staticCodeParser * g_staticCode;
 benchAddrRangeParser* bench_addr_space;
 
+/* TODO - TEMPERARY LOCATIONS */
+table_energy* _e_table1;
+table_energy* _e_table2;
+
+
 /* ****************************************************************** *
  * CLASS OBJECTS INTERFACE FUNCTIONS
  * ****************************************************************** */
@@ -269,6 +274,10 @@ VOID pin__parseConfig (string bench_path, string config_path, string out_dir) {
 
 VOID pin__init (string bench_path, string config_path, string out_dir) {
 	pin__parseConfig (bench_path, config_path, out_dir);
+
+    /* TODO - TEMPERARY LOCATIONS */
+    _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
+    _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
 
 	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
     string bench_name = g_cfg->getProgName ();
@@ -745,14 +754,17 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     /*-- BP LOOKUP --*/
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         pred = g_tournament_bp->lookup (pc, bp_hist);
+        _e_table1->ramAccess (3);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
         pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
+        _e_table2->ramAccess (4);
     }
 
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
     if (!g_var.g_wrong_path) {
         if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : "; 
+
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
@@ -761,10 +773,13 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }
+
         if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
             g_tournament_bp->update (pc, taken, bp_hist, false);
+            _e_table1->ramAccess (2);
         } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
             g_2bcgskew_bp->update (pc, taken, bp_hist, false);
+            _e_table2->ramAccess (2);
         }
     } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";

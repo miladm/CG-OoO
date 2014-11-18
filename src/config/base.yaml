@@ -29,9 +29,9 @@ cpu:
        squash: enable
        mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
 
-       branch_predictor:
+       bp:
            type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW
-           BIM:
+           bim:
                localPredictorSize: 2048
                localCtrBits: 2
                localHistoryTableSize: 2048
@@ -39,14 +39,14 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 1
-           G_SHARE:
+           g_share:
                globalPredictorSize: 8192
                globalHistoryBits: 13
                globalCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
                e_ram: 1
-           TOURNAMENT:
+           tournament:
                localPredictorSize: 2048
                localCtrBits: 2
                localHistoryTableSize: 2048
@@ -59,7 +59,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 1
-           _2BC_GSKEW:                             #TODO: take _ out + fix this list when added this predictor
+           bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
                localCtrBits: 2
                localHistoryTableSize: 2048
