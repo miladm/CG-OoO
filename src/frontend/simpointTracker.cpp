@@ -12,7 +12,7 @@ static SIMP thr_ins_cnt = BILLION;
  * FIND SIMPOINTS, ENABLE SIMULATION FLAGS, 
  * TERMINATE SIMPOINTS, DISABLE SIMULATION FLAGS
  --*/
-inline BOOL simpointMode () 
+inline BOOL simpointMode (UINT32 bb_ins_cnt) 
 {
 	static SIMP simp_count = 0; 
     static bool finished_last_simpoint = (g_cfg->_simpoint.size () == 0) ? true : false;
@@ -20,10 +20,10 @@ inline BOOL simpointMode ()
     static SIMP simp_ins_cnt_with_wp = 0;
     static clock_t simp_strt = 0;
 
-    simp_ins_cnt_with_wp++;
+    simp_ins_cnt_with_wp += bb_ins_cnt;
 	if (!g_var.g_wrong_path) {
 		if (g_var.g_inSimpoint) { /* INSIDE SIMPOINT */
-			g_var.g_simpInsCnt++;
+			g_var.g_simpInsCnt += bb_ins_cnt;
 			if (g_var.g_simpInsCnt >= SIMP_WINDOW_SIZE) { /* LEAVE SIMPOINT */
                 clock_t simp_stop = double (clock ()) / CLOCKS_PER_SEC;
                 g_stats.dumpSummary ();
@@ -67,7 +67,7 @@ BOOL doSimPointCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
               UINT32 bb_ins_cnt)
 {
     bool finished_last_simpoint = false;
-    if (g_var.g_enable_simpoint) finished_last_simpoint = simpointMode ();
+    if (g_var.g_enable_simpoint) finished_last_simpoint = simpointMode (bb_ins_cnt);
     return finished_last_simpoint;
 }
 
@@ -78,16 +78,16 @@ BOOL doSimPointCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
  * RUN THE PROGRAM FOR Y NUMBER OF INSTRUCTIONS
  * TERMINATE
  --*/
-inline BOOL simpleMode () 
+inline BOOL simpleMode (UINT32 bb_ins_cnt) 
 {
     static bool finished = false;
     static SIMP sim_ins_cnt_with_wp = 0;
     static clock_t sim_strt = 0;
 
-    sim_ins_cnt_with_wp++;
+    sim_ins_cnt_with_wp += bb_ins_cnt;
 	if (!g_var.g_wrong_path) {
 		if (g_var.g_inSimpoint) { /* INSIDE SIM */
-			g_var.g_simpInsCnt++;
+			g_var.g_simpInsCnt += bb_ins_cnt;
 			if (g_var.g_simpInsCnt >= SIM_WINDOW_SIZE) { /* LEAVE SIM */
                 clock_t sim_stop = double (clock ()) / CLOCKS_PER_SEC;
 	            g_msg.simEvent ("SIM SPEED: %f Ops/Sec for %lu ops\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)), g_var.g_simpInsCnt);
@@ -125,7 +125,7 @@ BOOL doSimpleCount (ScalarStat& s_pin_ins_cnt, ScalarStat& s_pin_trace_cnt,
               UINT32 bb_ins_cnt)
 {
     bool finished = false;
-    if (g_var.g_enable_simpoint) finished = simpleMode ();
+    if (g_var.g_enable_simpoint) finished = simpleMode (bb_ins_cnt);
     return finished;
 }
 
