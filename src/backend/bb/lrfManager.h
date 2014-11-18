@@ -7,7 +7,7 @@
 
 #include "../unit/unit.h"
 #include "../unit/bbInstruction.h"
-#include "../ino/registerFile.h"
+#include "../unit/registerFile.h"
 
 class bb_lrfManager : public unit {
 	public:
@@ -27,6 +27,9 @@ class bb_lrfManager : public unit {
 	private:
         registerFile _RF;
         WIDTH _lrf_id;
+
+        /*-- ENERGY --*/
+        table_energy _e_table;
 
         /*-- STAT OBJS --*/
         ScalarStat& s_unavailable_cnt;

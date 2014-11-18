@@ -7,7 +7,7 @@
 
 #include "../unit/unit.h"
 #include "../unit/dynInstruction.h"
-#include "registerFile.h"
+#include "../unit/registerFile.h"
 
 class rfManager : public unit {
 	public:
@@ -18,7 +18,6 @@ class rfManager : public unit {
         void reserveRF (dynInstruction* ins);
         bool canReserveRF (dynInstruction* ins);
         void writeToRF (dynInstruction* ins);
-        void updateReg (PR reg);
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
@@ -26,6 +25,9 @@ class rfManager : public unit {
 
 	private:
         registerFile _RF;
+
+        /*-- ENERGY --*/
+        table_energy _e_table;
 
         /*-- STAT --*/
         ScalarStat& s_rf_not_ready_cnt;

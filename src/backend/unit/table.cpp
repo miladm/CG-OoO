@@ -20,7 +20,7 @@ table<tableType_T>::table (LENGTH len,
       _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
       _table_size (len),
       _table_type (table_type),
-      _energy (table_name, root),
+      _e_table (table_name, root),
       s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
       s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
       s_table_size_rat  (g_stats.newRatioStat (clk->getStatObj (), table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
@@ -40,7 +40,7 @@ BUFF_STATE table<tableType_T>::pushBack (tableType_T obj) {
     }
 	TableElement<tableType_T>* newEntry = new TableElement<tableType_T> (obj);
 	table<tableType_T>::_table.Append (newEntry);
-    _energy.ramAccess ();
+    _e_table.ramAccess ();
 	return AVAILABLE_BUFF;
 }
 
@@ -51,7 +51,7 @@ tableType_T table<tableType_T>::popBack () {
 	tableType_T elem = table<tableType_T>::_table.Last ()->_element;
 	delete table<tableType_T>::_table.Nth (getTableSize () - 1);
 	table<tableType_T>::_table.RemoveAt (getTableSize () - 1);
-    _energy.ramAccess ();
+    _e_table.ramAccess ();
 	return elem;
 }
 
@@ -59,7 +59,7 @@ template <typename tableType_T>
 tableType_T table<tableType_T>::getBack () {
     Assert (_wr_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
     Assert (getTableSize () > 0);
-    _energy.ramAccess ();
+    _e_table.ramAccess ();
 	return table<tableType_T>::_table.Last ()->_element;
 }
 
@@ -181,7 +181,7 @@ tableType_T CAMtable<tableType_T>::popFront () {
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
-    table<tableType_T>::_energy.ramAccess ();
+    table<tableType_T>::_e_table.ramAccess ();
     return dyIns;
 }
 
@@ -191,7 +191,7 @@ tableType_T CAMtable<tableType_T>::getFront () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-    table<tableType_T>::_energy.ramAccess ();
+    table<tableType_T>::_e_table.ramAccess ();
     return table<tableType_T>::_table.Nth (0)->_element;
 }
 
@@ -201,7 +201,7 @@ tableType_T CAMtable<tableType_T>::getNth (LENGTH indx) {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-    table<tableType_T>::_energy.camAccess ();
+    table<tableType_T>::_e_table.camAccess ();
     return table<tableType_T>::_table.Nth (indx)->_element;
 }
 
@@ -213,7 +213,7 @@ tableType_T CAMtable<tableType_T>::pullNth (LENGTH indx) {
 #endif
     tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
     table<tableType_T>::_table.RemoveAt (indx);
-    table<tableType_T>::_energy.camAccess ();
+    table<tableType_T>::_e_table.camAccess ();
     return elem;
 }
 
@@ -223,7 +223,7 @@ tableType_T CAMtable<tableType_T>::getLast () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first"); //TODO - don't think this is needed, is it?
 #endif
-    table<tableType_T>::_energy.ramAccess ();
+    table<tableType_T>::_e_table.ramAccess ();
     return table<tableType_T>::_table.Last()->_element;
 }
 
@@ -269,7 +269,7 @@ tableType_T FIFOtable<tableType_T>::getFront () {
     Assert (table<tableType_T>::_table.NumElements () > 0);
     Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have checked the available ports count first");
 #endif
-    table<tableType_T>::_energy.fifoAccess ();
+    table<tableType_T>::_e_table.fifoAccess ();
     return table<tableType_T>::_table.Nth (0)->_element;
 }
 
@@ -282,7 +282,7 @@ tableType_T FIFOtable<tableType_T>::popFront () {
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
-    table<tableType_T>::_energy.fifoAccess ();
+    table<tableType_T>::_e_table.fifoAccess ();
     return dyIns;
 }
 

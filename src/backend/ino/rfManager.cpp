@@ -7,6 +7,7 @@
 rfManager::rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _RF (GARF_LO, GARF_SIZE, 8, 4, clk, "registerFile"),
+      _e_table (rf_name, g_cfg->_root["cpu"]["backend"]["rf"]["simple"]),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_lrf_busy_cnt (g_stats.newScalarStat (rf_name, "rf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO)),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
@@ -30,9 +31,12 @@ bool rfManager::isReady (dynInstruction* ins) {
             a_rdReg_list->RemoveAt (i); /*optimization */
         }
     }
+
     if (a_rdReg_list->NumElements () == 0) {
+        _e_table.ramAccess (ins->getTotNumRdAR ());
         return true; /* all operands available */
     }
+
     s_rf_not_ready_cnt++;
     return false; /* not all operands available */
 }
@@ -64,11 +68,8 @@ void rfManager::writeToRF (dynInstruction* ins) {
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);
+        _e_table.ramAccess ();
     }
-}
-
-void rfManager::updateReg (PR reg) {
-    _RF.updateReg(reg);
 }
 
 bool rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {

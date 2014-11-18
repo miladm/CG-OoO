@@ -8,6 +8,7 @@ bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _RF (LARF_LO, LARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
       _lrf_id (lrf_id),
+      _e_table (rf_name, g_cfg->_root["cpu"]["backend"]["rf"]["simple"]),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 
@@ -36,6 +37,7 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
     if (a_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_L_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        _e_table.ramAccess (ins->getTotNumRdLAR ());
         return true; /* all operands available */
     }
 
@@ -78,6 +80,7 @@ void bb_lrfManager::writeToRF (bbInstruction* ins) {
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);
+        _e_table.ramAccess ();
     }
 }
 

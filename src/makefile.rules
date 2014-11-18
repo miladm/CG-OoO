@@ -140,6 +140,10 @@ $(OBJDIR)lib/timer$(OBJ_SUFFIX) \
 $(OBJDIR)lib/debug$(OBJ_SUFFIX) \
 $(OBJDIR)lib/benchAddrRangeParser$(OBJ_SUFFIX) \
 $(OBJDIR)lib/bp_lib/sat_counter$(OBJ_SUFFIX) \
+$(OBJDIR)energy/energy$(OBJ_SUFFIX) \
+$(OBJDIR)energy/table_energy$(OBJ_SUFFIX) \
+$(OBJDIR)energy/wire_energy$(OBJ_SUFFIX) \
+$(OBJDIR)energy/eu_energy$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/instruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/cache$(OBJ_SUFFIX) \
@@ -166,7 +170,6 @@ $(OBJDIR)backend/unique$(OBJ_SUFFIX) \
 $(OBJDIR)backend/basicblock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bp/tournament$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bp/hybrid_skew$(OBJ_SUFFIX) \
-$(OBJDIR)backend/ino/registerFile$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/rfManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/memory$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/branchPred$(OBJ_SUFFIX) \
@@ -179,7 +182,6 @@ $(OBJDIR)backend/ino/sysCore$(OBJ_SUFFIX) \
 $(OBJDIR)backend/ino/inoBkEnd$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/memManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/lsq$(OBJ_SUFFIX) \
-$(OBJDIR)backend/o3/registerRename$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/rfManager$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/memory$(OBJ_SUFFIX) \
 $(OBJDIR)backend/o3/branchPred$(OBJ_SUFFIX) \
@@ -205,8 +207,9 @@ $(OBJDIR)backend/bb/fetch$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/sysCore$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/bbWindow$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bb/bbBkEnd$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/registerFile$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/registerRename$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/unit$(OBJ_SUFFIX) \
-$(OBJDIR)backend/unit/energy$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/port$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/sysClock$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/stage$(OBJ_SUFFIX) \

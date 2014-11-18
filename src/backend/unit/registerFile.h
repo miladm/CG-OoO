@@ -5,8 +5,8 @@
 #ifndef _REGISTER_FILE_H
 #define _REGISTER_FILE_H
 
-#include "../unit/unit.h"
-#include "../unit/wires.h"
+#include "unit.h"
+#include "wires.h"
 
 #define RD_TO_WR_WIRE_CNT_RATIO 2
 

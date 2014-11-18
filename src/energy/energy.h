@@ -12,16 +12,6 @@ class energy
  	public:
  		energy (string, const YAML::Node& root);
  		~energy ();
-        void camAccess ();
-        void ramAccess ();
-        void fifoAccess ();
-
-    protected:
-        EnergyStat& e_cam;
-        EnergyStat& e_ram;
-
-        PJ _cam_energy_per_access; 
-        PJ _ram_energy_per_access;
 };
 
 #endif

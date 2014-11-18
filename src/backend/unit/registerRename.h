@@ -5,9 +5,9 @@
 #ifndef _O3_REGISTER_RENAME_H
 #define _O3_REGISTER_RENAME_H
 
-#include "../unit/dynInstruction.h"
-#include "../unit/unit.h"
-#include "../unit/wires.h"
+#include "dynInstruction.h"
+#include "unit.h"
+#include "wires.h"
 
 #define RD_TO_WR_WIRE_CNT_RATIO 2
 

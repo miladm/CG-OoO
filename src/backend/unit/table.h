@@ -59,7 +59,7 @@ class table : public unit {
         const TABLE_TYPE _table_type;
 
         /*-- ENERGY --*/
-        energy _energy;
+        table_energy _e_table;
 
         /* STAT OBJS */
         ScalarStat& s_table_empty_cyc;

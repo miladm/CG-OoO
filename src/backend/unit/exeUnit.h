@@ -34,13 +34,15 @@ struct exeUnitLat {
 };
 
 struct exeUnit {
-    exeUnit (CYCLE start, CYCLE latency, EU_TYPE eu_type) 
+    exeUnit (CYCLE start, CYCLE latency, EU_TYPE eu_type, const YAML::Node& root) 
         : _eu_timer (start, latency),
-          _eu_type (eu_type)
+          _eu_type (eu_type),
+          _e_eu ("EU", root)
     {
         _eu_ins = NULL;
         _eu_state = AVAILABLE_EU;
     }
+
     EU_STATE getEUstate (CYCLE now, bool limit_eu_state_access) {
         if (!limit_eu_state_access) {
             return _eu_state;
@@ -59,10 +61,13 @@ struct exeUnit {
             return _eu_state;
         }
     }
+
     void runEU () {
         Assert (_eu_state == AVAILABLE_EU);
         _eu_state = RUNNING_EU;
+        _e_eu.euAccess ();
     }
+
     void setEUins (dynInstruction* ins) { Assert (_eu_ins == NULL); _eu_ins = ins;}
     dynInstruction* getEUins () {return _eu_ins;}
     void resetEU () {_eu_ins = NULL; _eu_state = AVAILABLE_EU;}
@@ -72,6 +77,7 @@ struct exeUnit {
 
     private:
         const EU_TYPE _eu_type;
+        eu_energy _e_eu;
         EU_STATE _eu_state;
         dynInstruction* _eu_ins;
 };

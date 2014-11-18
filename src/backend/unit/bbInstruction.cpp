@@ -48,7 +48,7 @@ void bbInstruction::setAR (AR ar, AXES_TYPE type) {
         } else {
             Assert (true == false && "wrong instruction type");
         }
-    } else {
+    } else { /* GLOBAL REGISTERS */
         if  (type == READ) {
             _a_rdReg.Append (ar);
             _a_rdReg_waitList.Append (ar);

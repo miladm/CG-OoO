@@ -8,7 +8,6 @@
 #ifndef _SYSCORE_H
 #define _SYSCORE_H
 
-#include "registerFile.h"
 #include "branchPred.h"
 #include "fetch.h"
 #include "decode.h"
@@ -17,6 +16,7 @@
 #include "memory.h"
 #include "commit.h"
 
+#include "../unit/registerFile.h"
 #include "../unit/unit.h"
 #include "../unit/table.h"
 #include "../unit/port.h"

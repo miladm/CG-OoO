@@ -7,6 +7,7 @@
 bb_grfManager::bb_grfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _GRF (clk, "GlobalRegisterRename"),
+      _e_table (rf_name, g_cfg->_root["cpu"]["backend"]["rf"]["reg_ren"]),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
@@ -31,6 +32,7 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
     if (p_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        _e_table.ramAccess (ins->getTotNumRdAR ());
         return true; /*-- all operands available --*/
     }
 
@@ -66,6 +68,7 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
         AR a_reg = ar_rd->Nth (i);
         PR p_reg = _GRF.renameReg (a_reg);
         ins->setPR (p_reg, READ);
+        _e_table.ramAccess ();
     }
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
@@ -73,9 +76,12 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
         Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have been available.");
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
+        _e_table.ramAccess ();
         PR new_pr = _GRF.getAvailablePR ();
         _GRF.update_fRAT (a_reg, new_pr);
+        _e_table.ramAccess ();
         _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
+        _e_table.ramAccess (2); /* 2 ACCESSS */
         ins->setPR (new_pr, WRITE);
     }
 }
@@ -88,6 +94,7 @@ void bb_grfManager::completeRegs (bbInstruction* ins) {
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
         _GRF.updatePRstate (p_reg, RENAMED_VALID);
+        _e_table.ramAccess ();
     }
 }
 
@@ -103,8 +110,11 @@ void bb_grfManager::commitRegs (bbInstruction* ins) {
         AR a_reg = _ar->Nth (i);
         PR prev_pr = _GRF.getPrevPR (p_reg);
         _GRF.updatePRstate (p_reg, ARCH_REG);
+        _e_table.ramAccess ();
         _GRF.updatePRstate (prev_pr, AVAILABLE);
+        _e_table.ramAccess ();
         _GRF.update_cRAT (a_reg,p_reg);
+        _e_table.ramAccess ();
         _GRF.setAsAvailablePR (prev_pr);
     }
 }

@@ -14,7 +14,6 @@
 #include <iostream>
 #include <sstream>
 #include <yaml/yaml.h>
-#include "energy.h"
 #include "sysClock.h"
 #include "../../global/global.h"
 #include "../../global/g_objs.h"
@@ -23,6 +22,10 @@
 #include "../../lib/list.h"
 #include "../../lib/debug.h"
 #include "../../lib/statistic.h"
+#include "../../energy/energy.h"
+#include "../../energy/wire_energy.h"
+#include "../../energy/table_energy.h"
+#include "../../energy/eu_energy.h"
 
 
 class unit {

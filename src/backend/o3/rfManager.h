@@ -7,7 +7,7 @@
 
 #include "../unit/unit.h"
 #include "../unit/dynInstruction.h"
-#include "registerRename.h"
+#include "../unit/registerRename.h"
 
 class o3_rfManager : public unit {
 	public:
@@ -27,6 +27,9 @@ class o3_rfManager : public unit {
 
 	private:
         o3_registerRename _GRF;
+
+        /*-- ENERGY --*/
+        table_energy _e_table;
 
         /*-- STAT --*/
         ScalarStat& s_rf_not_ready_cnt;

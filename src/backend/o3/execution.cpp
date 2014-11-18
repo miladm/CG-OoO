@@ -19,6 +19,9 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
       s_br_mispred_cnt (g_stats.newScalarStat (stage_name, "br_mispred_cnt", "Number of branch mis-predict events", 0, PRINT_ZERO)),
       s_mem_mispred_cnt (g_stats.newScalarStat (stage_name, "mem_mispred_cnt", "Number of memory mis-predict events", 0, PRINT_ZERO))
 {
+    /*-- CONFIG OBJS --*/
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _iROB = iROB;
@@ -26,7 +29,7 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
     _RF_MGR = RF_MGR;
     _aluExeUnits = new List<exeUnit*>;
     for (WIDTH i = 0; i < _stage_width; i++) {
-        exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU); //TODO make this config better with more EU types
+        exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU, root["eu"]["alu"]); //TODO make this config better with more EU types
         _aluExeUnits->Append (newEU);
     }
 }

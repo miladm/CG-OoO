@@ -7,7 +7,7 @@
 
 #include "../unit/unit.h"
 #include "../unit/bbInstruction.h"
-#include "../o3/registerRename.h"
+#include "../unit/registerRename.h"
 
 class bb_grfManager : public unit {
 	public:
@@ -27,6 +27,9 @@ class bb_grfManager : public unit {
 
 	private:
         o3_registerRename _GRF;
+
+        /*-- ENERGY --*/
+        table_energy _e_table;
 
         /*-- STAT OBJS --*/
         ScalarStat& s_cant_rename_cnt;
