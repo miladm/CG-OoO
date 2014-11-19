@@ -206,24 +206,24 @@ cpu:
                 e_ram: 1
                 name: BTB
                 type: CAM
-       
+
        eu:
            alu:
                count: 4
                latency: 1
-               e_eu: 1
+               e_eu: 1.040
            fpu:
                count: 0
                latency: 5
-               e_eu: 1
+               e_eu: 8.800
            memu:
                count: 0
                latency: 1
-               e_eu: 1
+               e_eu: 1.040
            bru:
                count: 0
                latency: 4
-               e_eu: 1
+               e_eu: 1.040
 
        pipe_stage:
            branch_prediction:

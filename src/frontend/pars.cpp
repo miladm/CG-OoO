@@ -279,7 +279,7 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
     /* TODO - TEMPERARY LOCATIONS */
     _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
     _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
-    _e_btb = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["table"]["BTB"]);
+    _e_btb = new table_energy("BTB", g_cfg->_root["cpu"]["backend"]["table"]["BTB"]);
 
 	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
     string bench_name = g_cfg->getProgName ();
