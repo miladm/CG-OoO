@@ -50,6 +50,10 @@ class table : public unit {
         void updateWireState (AXES_TYPE);
         bool hasFreeWire (AXES_TYPE);
 
+        /* ENERGY FUNCTIONS */
+        void camAccess ();
+        void ramAccess ();
+
     public:
         List<TableElement<tableType_T>* > _table;
         CYCLE _cycle;

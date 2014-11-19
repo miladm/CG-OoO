@@ -56,6 +56,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!_iWindow.hasFreeWire (READ)) break;
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
+        _iWindow.ramAccess ();
         if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break; /*-- INO SCHEDULING --*/
         if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
@@ -181,6 +182,7 @@ void scheduler::squash () {
     for (int i = (int)_iWindow.getTableSize() - 1; i >= 0; i--) {
         if (_iWindow.getTableSize() == 0) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (i);
+        _iWindow.camAccess (); /* FIND SQUASH SN AND RESET POINTER */
         if (ins->getInsID () >= squashSeqNum) {
             _iWindow.removeNth_unsafe (i);
         }
@@ -191,5 +193,5 @@ void scheduler::regStat () {
     _decode_to_scheduler_port->regStat ();
     _execution_to_scheduler_port->regStat ();
     _memory_to_scheduler_port->regStat ();
-    //_iWindow.regStat (); -TODO fix this - put it back
+    _iWindow.regStat ();
 }

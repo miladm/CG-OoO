@@ -108,6 +108,7 @@ void bb_scheduler::manageBusyBBWin (bbWindow* bbWin) {
 bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
     map<WIDTH, bbWindow*>::iterator it;
     map<BB_ID,WIDTH> sorted_busy_bbWin;
+
     /*-- SORT BASED ON BASICBLOCK AGE --*/
     for (it= _busy_bbWin.begin (); it != _busy_bbWin.end (); it++) {
         WIDTH bbWin_id = it->first;
@@ -116,6 +117,8 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         BB_ID bb_id = bbWin->_win.getNth_unsafe(0)->getBB()->getBBID ();
         sorted_busy_bbWin.insert (pair<BB_ID, WIDTH> (bb_id, bbWin_id));
     }
+
+    /* FIND READY INS */
     map<BB_ID, WIDTH>::iterator bbWinEntry;
     for (bbWinEntry = sorted_busy_bbWin.begin (); bbWinEntry != sorted_busy_bbWin.end (); bbWinEntry++) {
         WIDTH bbWin_id = bbWinEntry->second;
@@ -124,6 +127,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         if (!bbWin->_win.hasFreeWire (READ)) continue;
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
+        bbWin->_win.ramAccess ();
         if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) {continue;}
         else {
@@ -132,6 +136,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
            return true;
         }
     }
+
     dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
             "Found NO ready ins OR BBWindows are empty or out of ports.", _clk->now ());
     return false;
@@ -354,6 +359,8 @@ void bb_scheduler::squash () {
 }
 
 void bb_scheduler::flushBBWindow (bbWindow* bbWin) {
+    bbWin->_win.camAccess (); /* FIND SQUASH SN AND RESET POINTER */
+
     INS_ID squashSeqNum = g_var.getSquashSN ();
     while (bbWin->_win.getTableState () != EMPTY_BUFF &&
            bbWin->_win.getBack()->getInsID () >= squashSeqNum) {

@@ -96,6 +96,8 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 }
 
 bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
+    _ResStns.Nth(resStnId)->camAccess ();
+
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
         readyInsIndx = i;
@@ -222,7 +224,8 @@ void o3_scheduler::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _scheduler_to_execution_port->searchNflushPort (squashSeqNum);
     for (WIDTH j = 0; j < _num_res_stns; j++) {
-        for (int i = (int)_ResStns.Nth(j)->getTableSize() - 1; i >= 0; i--) {
+        _ResStns.Nth(j)->camAccess (); /* FIND SQUASH SN AND RESET POINTER */
+        for (int i = (int)_ResStns.Nth(j)->getTableSize () - 1; i >= 0; i--) {
             if (_ResStns.Nth(j)->getTableSize() == 0) break;
             dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (i);
             if (ins->getInsID () >= squashSeqNum) {

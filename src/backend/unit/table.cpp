@@ -131,6 +131,16 @@ void table<tableType_T>::updateWireState (AXES_TYPE axes_type) {
     }
 }
 
+template <typename tableType_T>
+void table<tableType_T>::ramAccess () {
+    table<tableType_T>::_e_table.ramAccess ();
+}
+
+template <typename tableType_T>
+void table<tableType_T>::camAccess () {
+    table<tableType_T>::_e_table.camAccess ();
+}
+
 /***********************************************/
 /***************** CAM TABLE *******************/
 /***********************************************/
@@ -151,6 +161,7 @@ tableType_T CAMtable<tableType_T>::pullNextReady (LENGTH next_ins_indx) {
     tableType_T obj = table<tableType_T>::_table.Nth (next_ins_indx)->_element;
     delete table<tableType_T>::_table.Nth (next_ins_indx);
     table<tableType_T>::_table.RemoveAt (next_ins_indx);
+    table<tableType_T>::_e_table.ramAccess ();
     return obj;
 }
 

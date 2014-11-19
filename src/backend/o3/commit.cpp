@@ -111,13 +111,17 @@ void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize () - 1;
+
     /*-- SQUASH iROB --*/
+    _iROB->camAccess (); /* TO FIND THE SQUASH ADDRESS */
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         if (ins->getInsID () < squashSeqNum) break;
         _iROB->removeNth_unsafe (i);
+        _iROB->ramAccess ();
     }
+
     /*-- SQUASH iQUE --*/
     for (LENGTH i = 0; i < _iQUE->getTableSize (); i++) {
         if (_iQUE->getTableSize () == 0) break;
@@ -136,6 +140,8 @@ void o3_commit::bpMispredSquash () {
         }
     }
     Assert (_iQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+
+    /* PUSH BACK INS'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _iQUE->getTableSize () - 1; i > stop_indx; i--) {
         if (_iQUE->getTableSize () == 0) break;
         ins = _iQUE->getNth_unsafe (i);
@@ -147,6 +153,8 @@ void o3_commit::bpMispredSquash () {
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }
+
+    /* DELETE INS THAT ARE ON WRONG PATH */
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_iQUE->getTableSize () == 0) break;
         ins = _iQUE->getNth_unsafe (i);
@@ -165,13 +173,17 @@ void o3_commit::bpMispredSquash () {
 void o3_commit::memMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
+
     /*-- SQUASH iROB --*/
+    _iROB->camAccess (); /* TO FIND THE SQUASH ADDRESS */
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         if (ins->getInsID () < squashSeqNum) break;
         _iROB->removeNth_unsafe (i);
+        _iROB->ramAccess ();
     }
+
     /*-- SQUASH iQUE --*/
     for (LENGTH i = _iQUE->getTableSize () - 1; i >= 0; i--) {
         if (_iQUE->getTableSize () == 0) break;
