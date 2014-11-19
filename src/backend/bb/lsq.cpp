@@ -84,7 +84,7 @@ void bb_lsqCAM::delFinishedMemAxes () {
             dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), 
                        "Found a finished ST ins: ", ins->getInsID ());
             delete ins;
-            break; /*-- REMOVE ONE ELEM PER INVOCATION --*/
+            break; /*-- REMOVE ONE ELEM PER INVOCATION (pullNth DELETED OBJ'S MORE THAN ONE REM CAN CAUSE A BUG) --*/
         }
         dbg.print (DBG_MEMORY, "%s: %s %ld %llu (cyc: %ld)\n", _c_name.c_str (), 
                    "No finished ST ins.", _table.Nth(0)->_delay.isValidStopTime (), _table.Nth(i)->_element->getInsID (), now);
