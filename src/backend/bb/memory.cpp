@@ -135,7 +135,6 @@ void bb_memory::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _LSQ_MGR->squash (squashSeqNum);
 }

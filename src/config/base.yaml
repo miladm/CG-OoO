@@ -197,6 +197,15 @@ cpu:
                 e_ram: 1
                 name: st_buff
                 type: FIFO
+            BTB: 
+                size: 4096
+                count: 1
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
+                e_cam: 1
+                e_ram: 1
+                name: BTB
+                type: CAM
        
        eu:
            alu:

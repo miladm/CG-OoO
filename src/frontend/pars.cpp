@@ -51,6 +51,7 @@ benchAddrRangeParser* bench_addr_space;
 /* TODO - TEMPERARY LOCATIONS */
 table_energy* _e_table1;
 table_energy* _e_table2;
+table_energy* _e_btb;
 
 
 /* ****************************************************************** *
@@ -278,6 +279,7 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
     /* TODO - TEMPERARY LOCATIONS */
     _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
     _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
+    _e_btb = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["table"]["BTB"]);
 
 	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
     string bench_name = g_cfg->getProgName ();
@@ -761,6 +763,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
         _e_table2->ramAccess (4);
     }
+    if (pred) {_e_btb->camAccess (); _e_btb->ramAccess ();}
 
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
@@ -772,6 +775,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             g_var.g_wrong_path = true;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
+            if (taken) {_e_btb->camAccess (); _e_btb->ramAccess ();}
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }

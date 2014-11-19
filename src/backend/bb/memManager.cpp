@@ -192,7 +192,7 @@ void bb_memManager::squash (INS_ID squash_seq_num) {
     _LQ.squash (squash_seq_num);
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
     _SQ.squash (squash_seq_num);
-    _SQ.camAccss (); /* FIND INS ADDRESSES > SQUASH SN */
+    _SQ.camAccess (); /* FIND INS ADDRESSES > SQUASH SN */
 }
 
 /* ***************** *
