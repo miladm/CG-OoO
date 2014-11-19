@@ -126,9 +126,16 @@ void statistic::dump () {
     }
     {
         list<EnergyStat*>::iterator it;
+        PJ total_energy = 0;
         for (it = _EnergyStats.begin (); it != _EnergyStats.end (); it++) {
             (*it)->print (&_out_file);
+            total_energy += (*it)->getEnergyValue ();
         }
+
+        /*-- REPORT TOTAL ENERGY --*/
+        cout << "* TOTAL: " << total_energy << "\t\t\t # Toal processor energu (PJ)" << endl;
+        _out_file << "* TOTAL:" << total_energy << "\t\t\t # Toal processor energu (PJ)" << endl;
+
         _out_file << endl;
         cout << endl;
     }
@@ -311,6 +318,10 @@ void EnergyStat::print (ofstream* _out_file) {
         cout << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
         if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
     }
+}
+
+PJ EnergyStat::getEnergyValue () {
+    return _ScalarStat * _energy_per_access;
 }
 
 statistic g_stats;

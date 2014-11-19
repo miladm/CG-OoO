@@ -16,6 +16,7 @@ alias cfg='cd /home/milad/esc_project/svn/PARS/src/config'
 alias ub='cd /home/milad/esc_project/svn/PARS/benchmarks/ubench'
 alias res='cd /scratch/milad/qsub_outputs/perf_sim_test'
 alias en='cd /home/milad/esc_project/svn/PARS/src/energy'
+alias paper='cd /home/milad/esc_project/svn/PARS/paper/draft1/isca42'
 
 
 # OTHER COMMANDS TO SET

@@ -113,6 +113,7 @@ class EnergyStat : public ScalarStat {
         ~EnergyStat () {}
         void setEnergyPerAccess (PJ);
         void print (ofstream*);
+        PJ getEnergyValue ();
 
     private:
         PJ _energy_per_access;
