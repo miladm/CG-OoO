@@ -43,6 +43,7 @@ class Array:
         total_energy = 0
         for i,s in enumerate(self.gate_stats):
             e = float(s["e_switch_nj"])
+            print i, e
             total_energy += e
         # estimate the array energy from the array simulation
         # note that the array simulation assumes activation of all the cells in

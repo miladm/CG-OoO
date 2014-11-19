@@ -359,7 +359,7 @@ void bb_scheduler::squash () {
 }
 
 void bb_scheduler::flushBBWindow (bbWindow* bbWin) {
-    bbWin->_win.camAccess (); /* FIND SQUASH SN AND RESET POINTER */
+    bbWin->_win.ramAccess (); /* BECAUSE SN IS THE HEAD OF BB, THE WHOLE BB GETS SQUASHED AT ONCE */
 
     INS_ID squashSeqNum = g_var.getSquashSN ();
     while (bbWin->_win.getTableState () != EMPTY_BUFF &&

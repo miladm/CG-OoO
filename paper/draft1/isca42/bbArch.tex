@@ -17,7 +17,15 @@ Basicblock Architecture}
 
 %%%%%%% ABSTRACT %%%%%%%
 \begin{abstract}
-TODO
+Processor on-chip data movement and out-of-order execution bookkeeping overheads
+are the key energy consumption factors in modern processors. This work minimize
+these energy overheads via introducing compiler-generated latency hiding
+techniques that enable near out-of-order performance while maintaining near
+in-order energy overheads. Specifically, we introduce the notion of coarse-grain
+program execution; in this computation model program basic-blocks are
+speculatively run out-of-order while instructions within each basic-block run in
+program order. Basic-block execution closes 90\% of the energy gap and 78\% of the
+performance gap between in-order and out-of-order.
 \end{abstract}
 
 %%%%%%% BODY %%%%%%%
