@@ -43,7 +43,6 @@ class Array:
         total_energy = 0
         for i,s in enumerate(self.gate_stats):
             e = float(s["e_switch_nj"])
-            # print i, e
             total_energy += e
         # estimate the array energy from the array simulation
         # note that the array simulation assumes activation of all the cells in
@@ -141,7 +140,9 @@ if __name__ == '__main__':
     # create an approximately square array
     num_words = yaml_doc["array"]["num_words"]
     word_width = yaml_doc["array"]["word_width"]
-    total_bits = num_words * word_width
+
+    num_cols = yaml_doc["array"]["num_cols"]
+    num_rows = yaml_doc["array"]["num_rows"]
 
     def floor_sqrt_pwr2(x):
         sqrt = int(x**0.5)
@@ -156,7 +157,20 @@ if __name__ == '__main__':
         else:
             return log2(x/2) + 1
 
-    height = floor_sqrt_pwr2(total_bits)
+    if num_cols != 0:
+        assert(num_words == 0 and word_width == 0), ("num_words and word_width must be 0")
+        num_words = num_rows
+        word_width = num_cols
+
+        total_bits = num_words * word_width
+        height = num_rows
+    else:
+        assert(num_cols == 0 and num_rows == 0), ("num_cols and num_rows must be 0")
+        total_bits = num_words * word_width
+        if num_words < word_width:
+            height = num_words
+        else:
+            height = floor_sqrt_pwr2(total_bits)
 
     Ba = log2(num_words)
     Bp = log2(height)/2

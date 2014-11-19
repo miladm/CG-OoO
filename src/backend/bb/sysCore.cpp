@@ -63,7 +63,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_rfManager (num_bbWin, _clk, "rfManager");
     _LSQ_MGR = new bb_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
-    _bbROB = new CAMtable<dynBasicblock*>(100, 32, 32, _clk, root["table"]["ROB"], "bbROB");
+    _bbROB = new CAMtable<dynBasicblock*>(100, 32, 32, _clk, root["table"]["bbROB"], "bbROB");
     _bbQUE = new CAMtable<dynBasicblock*>(1000, 1000, 1000, _clk, root["table"]["QUE"], "bbQUE");
 //    _RF_MGR = new bb_grfManager (_clk, "grfManager"); //TODO remove it
     for (WIDTH i = 0; i < num_bbWin; i++) {

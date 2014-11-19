@@ -38,14 +38,14 @@ cpu:
                localHistoryBits: 11
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 1
+               e_ram: 3.1158375
            g_share:
                globalPredictorSize: 8192
                globalHistoryBits: 13
                globalCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 1
+               e_ram: 3.1158375
            tournament:
                localPredictorSize: 2048
                localCtrBits: 2
@@ -58,7 +58,7 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 1
+               e_ram: 3.1158375
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
                localCtrBits: 2
@@ -71,7 +71,7 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 1
+               e_ram: 3.1158375
 
        rf:
            reg_ren:
@@ -86,7 +86,7 @@ cpu:
                name:
                cout: 1
                e_cam: 0
-               e_ram: 1
+               e_ram: 1.30802
            simple:
                rf_size:
                rf_hi:
@@ -96,7 +96,7 @@ cpu:
                name:
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
-               e_ram: 1
+               e_ram: 1.83216
  
        space:
             global_arch:
@@ -125,22 +125,31 @@ cpu:
                 e_ram: 0
                 name: bbQUE
                 type: FIFO
+            bbROB: 
+                size: 100
+                count: 1
+                rd_wire_cnt: 32
+                wr_wire_cnt: 32
+                e_cam: 48.00816
+                e_ram: 1.83216
+                name: bbROB
+                type: CAM
             ROB: 
                 size: 100
                 count: 1
                 rd_wire_cnt: 32
                 wr_wire_cnt: 32
-                e_cam: 1
-                e_ram: 1
-                name: bbROB
+                e_cam: 261.65874
+                e_ram: 1.91874
+                name: ROB
                 type: CAM
             LQ:
                 size: 64
                 count: 1
                 rd_wire_cnt: 8
                 wr_wire_cnt: 4
-                e_cam: 1
-                e_ram: 1
+                e_cam: 4.44354
+                e_ram: 3.52002
                 name: LQtable
                 type: CAM
             SQ:
@@ -148,8 +157,8 @@ cpu:
                 count: 1
                 rd_wire_cnt: 8
                 wr_wire_cnt: 4
-                e_cam: 1
-                e_ram: 1
+                e_cam: 2.35164
+                e_ram: 1.83216
                 name: SQtable
                 type: CAM
             resStn:
@@ -157,8 +166,8 @@ cpu:
                 count: 16
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
-                e_cam: 1
-                e_ram: 1
+                e_cam: 3.76578
+                e_ram: 1.91874
                 name: resStn
                 type: FIFO
             bbWindow:
@@ -166,8 +175,8 @@ cpu:
                 count: 16
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
-                e_cam: 1
-                e_ram: 1
+                e_cam: 0
+                e_ram: 1.83216
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
             iWindow: #only for INO
@@ -175,8 +184,8 @@ cpu:
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 1
-                e_ram: 1
+                e_cam: 3.76578
+                e_ram: 1.91874
                 name: iWindow
                 type: CAM
             mshr:
@@ -184,8 +193,8 @@ cpu:
                 count: 1
                 rd_wire_cnt: 1
                 wr_wire_cnt: 1
-                e_cam: 1
-                e_ram: 1
+                e_cam: 0        #TODO develop this
+                e_ram: 0        #TODO develop this
                 name: MSHR
                 type: RAM
             st_buff: #only for INO
@@ -193,8 +202,8 @@ cpu:
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 1
-                e_ram: 1
+                e_cam: 0        #TODO develop this
+                e_ram: 3.43344
                 name: st_buff
                 type: FIFO
             BTB: 
@@ -202,8 +211,8 @@ cpu:
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 1
-                e_ram: 1
+                e_cam: 59.604
+                e_ram: 0.495975
                 name: BTB
                 type: CAM
 
