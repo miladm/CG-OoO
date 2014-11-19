@@ -51,8 +51,10 @@ class table : public unit {
         bool hasFreeWire (AXES_TYPE);
 
         /* ENERGY FUNCTIONS */
-        void camAccess ();
-        void ramAccess ();
+        /* IT IS A LOOSE DESIGN PUTTING THESE ACCESSORS IN THE BASE CLASS */
+        void camAccess (SCALAR num_access = 1);
+        void ramAccess (SCALAR num_access = 1);
+        void fifoAccess (SCALAR num_access = 1);
 
     public:
         List<TableElement<tableType_T>* > _table;

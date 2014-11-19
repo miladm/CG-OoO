@@ -83,8 +83,12 @@ void o3_memManager::pushBack (dynInstruction *ins) {
 void o3_memManager::memAddrReady (dynInstruction* ins) {
     if (ins->getMemType () == LOAD) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
+        _LQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _LQ.ramAccess (); /* ADDRESS WRITE ENERGY */
     } else {
         ins->setSQstate (SQ_COMPLETE);
+        _SQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _SQ.ramAccess (); /* ADDRESS WRITE ENERGY */
     }
 }
 
@@ -93,6 +97,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
     dynInstruction* mem_ins;
     if (lsq_id == LD_QU) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
+        _LQ.camAccess ();
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
@@ -106,6 +111,7 @@ bool o3_memManager::issueToMem (LSQ_ID lsq_id) {
         s_ld_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
+        _SQ.ramAccess (); /* GET THE OUTSTANDING COMMITED ST OP */
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
@@ -165,39 +171,50 @@ bool o3_memManager::commit (dynInstruction* ins) {
     } else {
         Assert (ins->getSQstate () == SQ_COMPLETE);
         ins->setSQstate (SQ_COMMIT);
+        _SQ.camAccess (); /* MUST FIND THE COMMITTING ST OPs */
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:", ins->getInsID ());
     }
     return true;
 }
 
+/* PRE: 
+ * LQ INDEX POSITION OF THE FAULTY LD IS KNOWN HERE, SO NO EXTRA ENERGY TO
+ * SQUASH LQ. NOT THE CAES FOR SQ.
+ */
 void o3_memManager::squash (INS_ID squash_seq_num) {
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
     _LQ.squash (squash_seq_num);
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
     _SQ.squash (squash_seq_num);
+    _SQ.camAccss (); /* FIND INS ADDRESSES > SQUASH SN */
 }
 
 /* ***************** *
  * STORE QUEUE FUNC  *
  * ***************** */
 bool o3_memManager::hasCommitSt () {
+    /* NO CAM ENERGY CONSUMED - ASSUMING HEAD OF QUE IS ALWAYS THE RESULT IF ANY */
     return _SQ.hasCommit ();
 }
 
 /*-- DELETE ONE INS WITH FINISHED MEM STORE --*/
 void o3_memManager::delAfinishedSt () {
+    /* ENERGY OF THIS STEP IS ACCOUNTED FOR IN table CLASS */
     _SQ.delFinishedMemAxes ();
 }
 
 pair<bool, dynInstruction*> o3_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
+        _LQ.camAccess ();
         return _LQ.hasFinishedIns (lsq_id);
     } else {
+        _SQ.camAccess ();
         return _SQ.hasFinishedIns (lsq_id);
     }
 }
 
 bool o3_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
+    _SQ.camAccess (); /* FIND ADDRESS ENERGY */
     return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 
@@ -206,12 +223,17 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
+
     INS_ID WAW_st_ins_sn = _SQ.hasAnyCompleteStFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    _SQ.camAccess ();
     pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID (), WAW_st_ins_sn);
+    _LQ.camAccess ();
+
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);
 #endif
+
     return violation;
 }
 
@@ -219,6 +241,7 @@ pair<bool, dynInstruction*> o3_memManager::isLQviolation (dynInstruction* st_ins
  *  LOAD QUEUE FUNC  *
  * ***************** */
 void o3_memManager::completeLd (dynInstruction* ins) {
+    /* NO ENERGY TRACKING HERE - HASFINISHEDINS () WILL COVER IT */
     if (ins->getLQstate ()) s_inflight_cache_ld_rat--;
     s_inflight_ld_rat--;
     ins->setLQstate (LQ_COMPLETE);

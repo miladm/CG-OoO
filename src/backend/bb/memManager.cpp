@@ -83,20 +83,27 @@ void bb_memManager::pushBack (bbInstruction *ins) {
 void bb_memManager::memAddrReady (bbInstruction* ins) {
     if (ins->getMemType () == LOAD) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
+        _LQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _LQ.ramAccess (); /* ADDRESS WRITE ENERGY */
     } else {
         ins->setSQstate (SQ_COMPLETE);
+        _SQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _SQ.ramAccess (); /* ADDRESS WRITE ENERGY */
     }
 }
 
 bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
     CYCLE axes_lat;
     bbInstruction* mem_ins;
+
     if (lsq_id == LD_QU) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
+        _LQ.camAccess ();
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         axes_lat = getAxesLatency (mem_ins);
         _LQ.setTimer (mem_ins, axes_lat);
         if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
+
         if (axes_lat > L1_LATENCY) { 
             s_ld_miss_cnt++; 
             s_ld_miss_rat++;
@@ -104,8 +111,9 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
         } else { s_ld_hit_cnt++; }
         s_inflight_ld_rat += axes_lat;
         s_ld_cnt++;
-    } else {
+    } else { /* ST_QU */
         mem_ins = _SQ.findPendingMemIns (ST_QU);
+        _SQ.ramAccess (); /* GET THE OUTSTANDING COMMITED ST OP */
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
@@ -116,12 +124,14 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
 //                mem_ins->getMemAxesSize(),
 //                &_L1, &_L2, &_L3);
         _SQ.setTimer (mem_ins, axes_lat);
+
         if (axes_lat > L1_LATENCY) { 
             s_st_miss_cnt++;
             s_mem_miss_rat++;
         } else { s_st_hit_cnt++; }
         s_cache_access_cnt++;
     }
+
     (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
 #ifdef ASSERTION
     Assert(axes_lat > 0);
@@ -167,39 +177,50 @@ bool bb_memManager::commit (bbInstruction* ins) {
     } else { /*-- STORE --*/
         Assert (ins->getSQstate () == SQ_COMPLETE);
         ins->setSQstate (SQ_COMMIT);
+        _SQ.camAccess (); /* MUST FIND THE COMMITTING ST OPs */
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:", ins->getInsID ());
     }
     return true;
 }
 
+/* PRE: 
+ * LQ INDEX POSITION OF THE FAULTY LD IS KNOWN HERE, SO NO EXTRA ENERGY TO
+ * SQUASH LQ. NOT THE CAES FOR SQ.
+ */
 void bb_memManager::squash (INS_ID squash_seq_num) {
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
     _LQ.squash (squash_seq_num);
     dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
     _SQ.squash (squash_seq_num);
+    _SQ.camAccss (); /* FIND INS ADDRESSES > SQUASH SN */
 }
 
 /* ***************** *
  * STORE QUEUE FUNC  *
  * ***************** */
 bool bb_memManager::hasCommitSt () {
+    /* NO CAM ENERGY CONSUMED - ASSUMING HEAD OF QUE IS ALWAYS THE RESULT IF ANY */
     return _SQ.hasCommit ();
 }
 
 /*-- DELETE ONE INS WITH FINISHED MEM STORE --*/
 void bb_memManager::delAfinishedSt () {
+    /* ENERGY OF THIS STEP IS ACCOUNTED FOR IN table CLASS */
     _SQ.delFinishedMemAxes ();
 }
 
 pair<bool, bbInstruction*> bb_memManager::hasFinishedIns (LSQ_ID lsq_id) {
     if (lsq_id == LD_QU) {
+        _LQ.camAccess ();
         return _LQ.hasFinishedIns (lsq_id);
     } else {
+        _SQ.camAccess ();
         return _SQ.hasFinishedIns (lsq_id);
     }
 }
 
 bool bb_memManager::hasStToAddr (ADDRS mem_addr, INS_ID ins_seq_num) {
+    _SQ.camAccess (); /* FIND ADDRESS ENERGY */
     return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 
@@ -208,12 +229,17 @@ pair<bool, bbInstruction*> bb_memManager::isLQviolation (bbInstruction* st_ins) 
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
 #endif
+
     INS_ID WAW_st_ins_sn = _SQ.hasAnyCompleteStFromAddr (st_ins->getMemAddr (), st_ins->getInsID ());
+    _SQ.camAccess ();
     pair<bool, bbInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), st_ins->getInsID (), WAW_st_ins_sn, st_ins->getBBWinID ());
+    _LQ.camAccess ();
+
 #ifdef ASSERTION
     if (violation.first) Assert (violation.second != NULL);
     else Assert (violation.second == NULL);
 #endif
+
     return violation;
 }
 
@@ -221,6 +247,7 @@ pair<bool, bbInstruction*> bb_memManager::isLQviolation (bbInstruction* st_ins) 
  *  LOAD QUEUE FUNC  *
  * ***************** */
 void bb_memManager::completeLd (bbInstruction* ins) {
+    /* NO ENERGY TRACKING HERE - hasFinishedIns () WILL COVER IT */
     if (ins->getLQstate ()) s_inflight_cache_ld_rat--;
     s_inflight_ld_rat--;
     ins->setLQstate (LQ_COMPLETE);

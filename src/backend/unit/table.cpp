@@ -132,13 +132,18 @@ void table<tableType_T>::updateWireState (AXES_TYPE axes_type) {
 }
 
 template <typename tableType_T>
-void table<tableType_T>::ramAccess () {
-    table<tableType_T>::_e_table.ramAccess ();
+void table<tableType_T>::camAccess (SCALAR num_access) {
+    table<tableType_T>::_e_table.camAccess (num_access);
 }
 
 template <typename tableType_T>
-void table<tableType_T>::camAccess () {
-    table<tableType_T>::_e_table.camAccess ();
+void table<tableType_T>::ramAccess (SCALAR num_access) {
+    table<tableType_T>::_e_table.ramAccess (num_access);
+}
+
+template <typename tableType_T>
+void table<tableType_T>::fifoAccess (SCALAR num_access) {
+    table<tableType_T>::_e_table.fifoAccess (num_access);
 }
 
 /***********************************************/
