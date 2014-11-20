@@ -98,8 +98,9 @@ COMPLETE_STATUS o3_execution::completeIns () {
         } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
             ins->setPipeStage (COMPLETE);
             _LSQ_MGR->memAddrReady (ins);
-            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
+            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases) - not counting its resStn energy
             _RF_MGR->updateWireState (WRITE, ins->getNumWrPR ());
+            _iROB->ramAccess (); /* INS COMPLETE NOTICE */
             pair<bool, dynInstruction*> p = _LSQ_MGR->isLQviolation (ins);
             bool is_violation = p.first;
             violating_ld_ins = p.second;
@@ -111,6 +112,7 @@ COMPLETE_STATUS o3_execution::completeIns () {
             ins->setPipeStage (COMPLETE);
             _RF_MGR->completeRegs (ins);
             _RF_MGR->updateWireState (WRITE, ins->getNumWrPR ());
+            _iROB->ramAccess (); /* INS COMPLETE NOTICE */
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                        "Complete ins", ins->getInsID (), _clk->now ());
         }

@@ -127,7 +127,7 @@ void bb_commit::bpMispredSquash () {
     LENGTH start_indx = 0, stop_indx = _bbQUE->getTableSize () - 1;
 
     /*-- SQUASH BBROB --*/
-    _bbROB->camAccess (); /* TO FIND THE SQUASH ADDRESS */
+    _bbROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
     for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
         if (_bbROB->getTableSize () == 0) break;
         bb = _bbROB->getNth_unsafe (i);
@@ -202,7 +202,7 @@ void bb_commit::memMispredSquash () {
     dynBasicblock* bb = NULL;
 
     /*-- SQUASH BBROB --*/
-    _bbROB->camAccess (); /* TO FIND THE SQUASH ADDRESS */
+    _bbROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
     for (LENGTH i = _bbROB->getTableSize () - 1; i >= 0; i--) {
         if (_bbROB->getTableSize () == 0) break;
         bb = _bbROB->getNth_unsafe (i);

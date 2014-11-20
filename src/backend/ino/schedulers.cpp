@@ -182,7 +182,7 @@ void scheduler::squash () {
     for (int i = (int)_iWindow.getTableSize() - 1; i >= 0; i--) {
         if (_iWindow.getTableSize() == 0) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (i);
-        _iWindow.camAccess (); /* FIND SQUASH SN AND RESET POINTER */
+        _iWindow.ramAccess (); /* SQUASH CAUSED BY ONE OF THE INSTRUCTIONS IN THE QUE HEAD */
         if (ins->getInsID () >= squashSeqNum) {
             _iWindow.removeNth_unsafe (i);
         }

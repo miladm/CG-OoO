@@ -92,6 +92,7 @@ COMPLETE_STATUS execution::completeIns () {
             ins->setPipeStage (COMPLETE);
             g_RF_MGR->writeToRF (ins);
             g_RF_MGR->updateWireState (WRITE, ins->getNumWrAR ());
+            _iROB->ramAccess (); /* NOTIFY THE INSTRUCTION IS COMPLETE */
         }
         EU->resetEU ();
 

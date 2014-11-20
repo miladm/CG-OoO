@@ -29,7 +29,10 @@ class o3_rfManager : public unit {
         o3_registerRename _GRF;
 
         /*-- ENERGY --*/
-        table_energy _e_table;
+        table_energy _e_rf;
+        table_energy _e_rat;
+        table_energy _e_apr; /* AVIALBLE PR LIST */
+        table_energy _e_arst;
 
         /*-- STAT --*/
         ScalarStat& s_rf_not_ready_cnt;

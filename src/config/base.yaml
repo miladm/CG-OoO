@@ -38,14 +38,14 @@ cpu:
                localHistoryBits: 11
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 3.1158375
+               e_ram: 0.33415725
            g_share:
                globalPredictorSize: 8192
                globalHistoryBits: 13
                globalCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 3.1158375
+               e_ram: 0.33415725
            tournament:
                localPredictorSize: 2048
                localCtrBits: 2
@@ -58,7 +58,7 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 3.1158375
+               e_ram: 0.33415725
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
                localCtrBits: 2
@@ -71,10 +71,10 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 3.1158375
+               e_ram: 0.33415725
 
        rf:
-           reg_ren:
+           rf:
                a_size:
                a_hi:
                a_lo:
@@ -86,7 +86,20 @@ cpu:
                name:
                cout: 1
                e_cam: 0
-               e_ram: 1.30802
+               e_ram: 9.037722
+           grf:
+               a_size:
+               a_hi:
+               a_lo:
+               p_size:
+               p_hi:
+               p_lo:
+               wr_wire_cnt:
+               rd_wire_cnt:
+               name:
+               cout: 1
+               e_cam: 0
+               e_ram: 8.3939885
            simple:
                rf_size:
                rf_hi:
@@ -96,7 +109,25 @@ cpu:
                name:
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
-               e_ram: 1.83216
+               e_ram: 0.581841
+           arst:
+               e_cam: 0
+               e_ram: 0.504776
+           apr:
+               e_cam: 0
+               e_ram: 0.677302
+           rat:
+               e_cam: 0
+               e_ram: 1.170876
+           garst:
+               e_cam: 0
+               e_ram: 0.602778
+           gapr:
+               e_cam: 0
+               e_ram: 0.402384
+           grat:
+               e_cam: 0
+               e_ram: 1.069866
  
        space:
             global_arch:
@@ -130,44 +161,44 @@ cpu:
                 count: 1
                 rd_wire_cnt: 32
                 wr_wire_cnt: 32
-                e_cam: 48.00816
-                e_ram: 1.83216
+                e_cam: 0
+                e_ram: 0.112165
                 name: bbROB
-                type: CAM
+                type: RAM
             ROB: 
                 size: 100
                 count: 1
                 rd_wire_cnt: 32
                 wr_wire_cnt: 32
-                e_cam: 261.65874
-                e_ram: 1.91874
+                e_cam: 0
+                e_ram: 0.608496
                 name: ROB
-                type: CAM
+                type: RAM
             LQ:
                 size: 64
                 count: 1
                 rd_wire_cnt: 8
                 wr_wire_cnt: 4
-                e_cam: 4.44354
-                e_ram: 3.52002
-                name: LQtable
+                e_cam: 2.204357
+                e_ram: 1.236428
+                name: LQ
                 type: CAM
             SQ:
                 size: 32
                 count: 1
                 rd_wire_cnt: 8
                 wr_wire_cnt: 4
-                e_cam: 2.35164
-                e_ram: 1.83216
-                name: SQtable
+                e_cam: 1.315326
+                e_ram: 1.620642
+                name: SQ
                 type: CAM
             resStn:
                 size: 15
                 count: 16
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
-                e_cam: 3.76578
-                e_ram: 1.91874
+                e_cam: 14.168497
+                e_ram: 2.638897
                 name: resStn
                 type: FIFO
             bbWindow:
@@ -176,7 +207,7 @@ cpu:
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
                 e_cam: 0
-                e_ram: 1.83216
+                e_ram: 0.510727
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
             iWindow: #only for INO
@@ -184,10 +215,10 @@ cpu:
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 3.76578
-                e_ram: 1.91874
+                e_cam: 0
+                e_ram: 2.535452
                 name: iWindow
-                type: CAM
+                type: FIFO
             mshr:
                 size: 10
                 count: 1
@@ -202,17 +233,26 @@ cpu:
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 0        #TODO develop this
-                e_ram: 3.43344
+                e_cam: 0.763521
+                e_ram: 1.160567
                 name: st_buff
                 type: FIFO
+            ras: 
+                size: 16
+                count: 1
+                rd_wire_cnt: 1
+                wr_wire_cnt: 1
+                e_cam: 0
+                e_ram: 0.633863
+                name: RAS
+                type: RAM
             BTB: 
                 size: 4096
                 count: 1
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
-                e_cam: 59.604
-                e_ram: 0.495975
+                e_cam: 1.238
+                e_ram: 0
                 name: BTB
                 type: CAM
 

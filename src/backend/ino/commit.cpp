@@ -82,7 +82,7 @@ void commit::squash () {
     LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize() - 1;
 
     /*-- SQUASH iROB --*/
-    _iROB->camAccess (); /* TO FIND THE SQUASH ADDRESS */
+    _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);

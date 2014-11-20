@@ -80,6 +80,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             _scheduler_to_execution_port->pushBack (ins);
             ins->setPipeStage (ISSUE);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
+            _ResStns.Nth(j)->camAccess (); //TODO: this is for the update (move to right place); - wakeup logic
 
             /*-- UPDATE WIRES --*/
             _ResStns.Nth(j)->updateWireState (READ);

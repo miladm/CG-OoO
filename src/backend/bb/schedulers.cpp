@@ -80,6 +80,13 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         _scheduler_to_execution_port->pushBack (ins);
         ins->setPipeStage (ISSUE);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
+        //---------------------------------------
+        //TODO put this code where it belongs 
+        WIDTH num_glb_update = ins->getNumWrPR () * _num_bbWin; //TODO mus replace with a loop thru all BBWin's - wake up logic
+        WIDTH num_loc_update = ins->getNumWrLAR ();
+        _busy_bbWin[readyInsInBBWinIndx]->_win.ramAccess (num_glb_update);
+        _busy_bbWin[readyInsInBBWinIndx]->_win.ramAccess (num_loc_update);
+        //---------------------------------------
 
         /*-- UPDATE RESOURCES --*/
         _busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);

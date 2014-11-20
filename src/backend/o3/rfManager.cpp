@@ -7,7 +7,10 @@
 o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
     : unit (rf_name, clk),
       _GRF (clk, "registerRename"),
-      _e_table (rf_name, g_cfg->_root["cpu"]["backend"]["rf"]["reg_ren"]),
+      _e_rf (rf_name + ".rf", g_cfg->_root["cpu"]["backend"]["rf"]["rf"]),
+      _e_rat (rf_name + ".rat", g_cfg->_root["cpu"]["backend"]["rf"]["rat"]),
+      _e_apr (rf_name + ".apr", g_cfg->_root["cpu"]["backend"]["rf"]["apr"]),
+      _e_arst (rf_name + ".arst" , g_cfg->_root["cpu"]["backend"]["rf"]["arst"]),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
@@ -31,7 +34,7 @@ bool o3_rfManager::isReady (dynInstruction* ins) {
         }
     }
     if (p_rdReg_list->NumElements () == 0) {
-        _e_table.ramAccess (ins->getTotNumRdAR ());
+        _e_rf.ramAccess (ins->getTotNumRdAR ());
         dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                 "RF read ops are ready: YES", "for ins: ", ins->getInsID (), _clk->now ());
         return true; /*-- all operands available --*/
@@ -63,7 +66,7 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
         AR a_reg = ar_rd->Nth (i);
         PR p_reg = _GRF.renameReg (a_reg);
         ins->setPR (p_reg, READ);
-        _e_table.ramAccess ();
+        _e_rat.ramAccess ();
     }
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
@@ -71,12 +74,13 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
         Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have been available.");
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
-        _e_table.ramAccess ();
+        _e_rat.ramAccess ();
         PR new_pr = _GRF.getAvailablePR ();
+        _e_apr.ramAccess ();
         _GRF.update_fRAT (a_reg, new_pr);
-        _e_table.ramAccess ();
+        _e_rat.ramAccess ();
         _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
-        _e_table.ramAccess (2); /* 2 ACCESSS */
+        _e_arst.ramAccess ();
         ins->setPR (new_pr, WRITE);
     }
     return false; /*-- DON'T STALL FETCH --*/
@@ -88,7 +92,7 @@ void o3_rfManager::completeRegs (dynInstruction* ins) {
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
         _GRF.updatePRstate (p_reg, RENAMED_VALID);
-        _e_table.ramAccess ();
+        _e_rf.ramAccess ();
     }
 }
 
@@ -101,13 +105,13 @@ void o3_rfManager::commitRegs (dynInstruction* ins) {
         PR p_reg = _pr->Nth (i);
         AR a_reg = _ar->Nth (i);
         PR prev_pr = _GRF.getPrevPR (p_reg);
+        _e_arst.ramAccess ();
         _GRF.updatePRstate (p_reg,ARCH_REG);
-        _e_table.ramAccess ();
         _GRF.updatePRstate (prev_pr,AVAILABLE);
-        _e_table.ramAccess ();
         _GRF.update_cRAT (a_reg,p_reg);
-        _e_table.ramAccess ();
+        _e_rat.ramAccess ();
         _GRF.setAsAvailablePR (prev_pr);
+        _e_apr.ramAccess ();
     }
 }
 
@@ -119,6 +123,7 @@ void o3_rfManager::commitRegs (dynInstruction* ins) {
 void o3_rfManager::squashRenameReg () {
     dbg.print (DBG_TEST, "** %s: %s (cyc:)\n", _c_name.c_str (), "in squash for RR");
     _GRF.squashRenameReg ();
+    /* TODO model the ARST and APR table energies for squash */
 }
 
 bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {

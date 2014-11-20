@@ -763,7 +763,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
         _e_table2->ramAccess (4);
     }
-    if (pred) {_e_btb->camAccess (); _e_btb->ramAccess ();}
+    if (pred) {_e_btb->camAccess ();}
 
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
@@ -775,7 +775,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             g_var.g_wrong_path = true;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
-            if (taken) {_e_btb->camAccess (); _e_btb->ramAccess ();}
+            if (taken) {_e_btb->camAccess ();}
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }

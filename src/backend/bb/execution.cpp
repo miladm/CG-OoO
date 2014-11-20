@@ -103,11 +103,12 @@ COMPLETE_STATUS bb_execution::completeIns () {
             ins->setPipeStage (COMPLETE);
             ins->getBB()->incCompletedInsCntr ();
             _LSQ_MGR->memAddrReady (ins);
-            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases)
+            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases) - not counting its bbWindow energy
             _RF_MGR->updateWireState (WRITE, ins);
             pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
             bool is_violation = p.first;
             violating_ld_ins = p.second;
+            _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
             /*-- SQUASH DETECTION --*/
             if (is_violation) { 
                 violating_ld_ins->setMemViolation ();
@@ -120,6 +121,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
             ins->getBB()->incCompletedInsCntr ();
             _RF_MGR->completeRegs (ins);
             _RF_MGR->updateWireState (WRITE, ins);
+            _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
             dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                     _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
         }
