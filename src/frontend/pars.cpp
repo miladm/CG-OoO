@@ -172,6 +172,7 @@ VOID FlushOnFull (UINT32 trace_size, UINT32 stub_size)
  * USING LOCKS ON BOTH THE ANALYSIS ROUTIN AND THIS ROUTIN.  WE USE PIN LOCKS
  * AS SHOWN BELOW.
  --*/
+UINT32 bbInsCnt = 0; /* TODO (TO RMEOVE) - THIS IS A HACK TO GET BP ENERGY MODELING */
 VOID backEnd (void *ptr) {
 	while (!g_var.g_appEnd) { //TODO fix this while loop
 		PIN_SemaphoreWait (&semaphore0);
@@ -181,7 +182,12 @@ VOID backEnd (void *ptr) {
 		BOOL taken = g_var.g_taken;
 		ADDRINT tgt = g_var.g_tgt;
 		ADDRINT fthru = g_var.g_fthru;
-		if (g_var.g_enable_wp) g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru);
+        if (g_var.g_enable_wp) {
+            if (g_var.g_core_type == BASICBLOCK)
+                g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru, 1);
+            else
+                g_var.g_pred_eip = PredictAndUpdate (__pc, taken, tgt, fthru, bbInsCnt);
+        }
 
         if (g_var.g_enable_bkEnd) {
             if (g_var.g_core_type == BASICBLOCK) {
@@ -525,7 +531,7 @@ VOID GetMemReadBypass (UINT32 uid, CONTEXT *c, ADDRINT eaddr, ADDRINT len)
 	return;
 }
 
-VOID HandleBranch (UINT32 uid, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT __pc, BOOL __has_ft)
+VOID HandleBranch (UINT32 uid, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT __pc, BOOL __has_ft, UINT32 _bbInsCnt)
 {
     if (!g_var.g_enable_wp) {
         if (g_var.g_enable_bkEnd) {
@@ -548,6 +554,7 @@ VOID HandleBranch (UINT32 uid, BOOL taken, ADDRINT tgt, ADDRINT fthru, ADDRINT _
         g_var.g_taken = taken;
         g_var.g_tgt = tgt;
         g_var.g_fthru = fthru;
+        bbInsCnt = _bbInsCnt; /* TODO remove - this is a hacl */
         PIN_SemaphoreSet (&semaphore0);
         PIN_SemaphoreWait (&semaphore1); 
         PIN_SemaphoreClear (&semaphore1);
@@ -700,6 +707,7 @@ VOID pin__instruction (TRACE trace, VOID * val)
                                 IARG_FALLTHROUGH_ADDR,
                                 IARG_ADDRINT, INS_Address (ins),
                                 IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_UINT32, BBL_NumIns(bbl),
                                 IARG_END);
                     }
                     INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
@@ -709,6 +717,7 @@ VOID pin__instruction (TRACE trace, VOID * val)
                             IARG_FALLTHROUGH_ADDR,
                             IARG_ADDRINT, INS_Address (ins),
                             IARG_BOOL, INS_HasFallThrough (ins),
+                            IARG_UINT32, BBL_NumIns(bbl),
                             IARG_END);
                 }
 
@@ -748,22 +757,26 @@ VOID pin__instruction (TRACE trace, VOID * val)
 /* ****************************************************************** *
  * BRANCH PREDICTOR
  * ****************************************************************** */
-ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru)
+ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru, UINT32 _bbInsCnt)
 {
     bool taken = __taken;
     ADDRINT pc = __pc;
     void *bp_hist = NULL;
     bool pred = taken;
 
+    /* THIS IS A HACK - TODO REMOVE IT */
+    int num_lookup = (int)(_bbInsCnt / g_cfg->getNumEu ());
+    if (num_lookup == 0) num_lookup = 1;
+
     /*-- BP LOOKUP --*/
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         pred = g_tournament_bp->lookup (pc, bp_hist);
-        _e_table1->ramAccess (3);
+        _e_table1->ramAccess (3*num_lookup);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
         pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
-        _e_table2->ramAccess (4);
+        _e_table2->ramAccess (4*num_lookup);
     }
-    if (pred) {_e_btb->camAccess ();}
+    if (pred) {_e_btb->camAccess (num_lookup);}
 
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
@@ -775,17 +788,17 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             g_var.g_wrong_path = true;
             //printf ("\nSTART OF WRONG PATH\n");
             //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
-            if (taken) {_e_btb->camAccess ();}
+            if (taken) {_e_btb->camAccess (num_lookup);}
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }
 
         if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
             g_tournament_bp->update (pc, taken, bp_hist, false);
-            _e_table1->ramAccess (2);
+            _e_table1->ramAccess (2*num_lookup);
         } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
             g_2bcgskew_bp->update (pc, taken, bp_hist, false);
-            _e_table2->ramAccess (2);
+            _e_table2->ramAccess (2*num_lookup);
         }
     } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
