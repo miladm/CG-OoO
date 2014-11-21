@@ -41,6 +41,11 @@ class config {
         bool isEnMemFwd ();
         bool isEnFwd ();
         bool isEnLogStat ();
+        
+        /* PROGRAM WARMUP */
+        void setWarmedUp ();
+        bool isWarmedUp ();
+        bool warmUpEn ();
 
     private:
 		bool parsePinPointFiles ();
@@ -110,6 +115,10 @@ class config {
 		int _pb_win_width;
 		int _regren_width;
 		int _fetch_width;
+
+        //PROGRAM WARMUP
+        bool _enable_warm_up;
+        bool _warmed_up;
 
     public:
         YAML::Node _root;

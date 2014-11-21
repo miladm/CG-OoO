@@ -84,38 +84,54 @@ inline BOOL simpleMode (UINT32 bb_ins_cnt)
     static SIMP sim_ins_cnt_with_wp = 0;
     static clock_t sim_strt = 0;
 
+    static bool warmUpEn = false;
+
     sim_ins_cnt_with_wp += bb_ins_cnt;
-	if (!g_var.g_wrong_path) {
-		if (g_var.g_inSimpoint) { /* INSIDE SIM */
-			g_var.g_simpInsCnt += bb_ins_cnt;
-			if (g_var.g_simpInsCnt >= SIM_WINDOW_SIZE) { /* LEAVE SIM */
+    if (!g_var.g_wrong_path) {
+        if (g_var.g_inSimpoint) { /* INSIDE SIM */
+            g_var.g_simpInsCnt += bb_ins_cnt;
+            if (g_var.g_simpInsCnt >= SIM_WINDOW_SIZE) { /* LEAVE SIM */
                 clock_t sim_stop = double (clock ()) / CLOCKS_PER_SEC;
-	            g_msg.simEvent ("SIM SPEED: %f Ops/Sec for %lu ops\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)), g_var.g_simpInsCnt);
-	            g_msg.simStep ("SIM END\n");
-				g_var.g_inSimpoint = false;
-				g_var.g_enable_wp = false;
-				g_var.g_simpInsCnt = 0;
-				PIN_RemoveInstrumentation ();
-				g_var.g_enable_instrumentation = false;
+                g_msg.simEvent ("SIM SPEED: %f Ops/Sec for %lu ops\n", ((double)sim_ins_cnt_with_wp / (double)(sim_stop - sim_strt)), g_var.g_simpInsCnt);
+                g_msg.simStep ("SIM END\n");
+                g_var.g_inSimpoint = false;
+                g_var.g_enable_wp = false;
+                g_var.g_simpInsCnt = 0;
+                PIN_RemoveInstrumentation ();
+                g_var.g_enable_instrumentation = false;
                 g_var.g_enable_bkEnd = false;
                 finished = true;
-			}
-		} else { /* OUTSIDE SIM */
-			if (g_var.g_insCountRightPath >= FAST_FWD_WINDOW_SIZE) { /* ENTER SIM */
-	            g_msg.simEvent ("\nIN SIM WINDOW\n");
-				g_var.g_inSimpoint = true;
-				g_var.g_enable_wp = true;
-				g_var.g_simpInsCnt = 0;
-                sim_ins_cnt_with_wp = 0;
-				PIN_RemoveInstrumentation ();
-				g_var.g_enable_instrumentation = true;
-                g_var.g_enable_bkEnd = true;
-                sim_strt = double (clock ()) / CLOCKS_PER_SEC;
             }
-		}
+        } else { /* OUTSIDE SIM */
+            if (!warmUpEn) {
+                if (g_var.g_insCountRightPath >= (FAST_FWD_WINDOW_SIZE - 2 * MILLION)) { /* WARMUP SIM */
+                    g_msg.simEvent ("\nSIM WARMUP\n");
+                    warmUpEn = true;
+                    g_var.g_enable_wp = true;
+                    g_var.g_simpInsCnt = 0;
+                    sim_ins_cnt_with_wp = 0;
+                    PIN_RemoveInstrumentation ();
+                    g_var.g_enable_instrumentation = true;
+                    g_var.g_enable_bkEnd = true;
+                }
+            } else {
+                if (g_var.g_insCountRightPath >= FAST_FWD_WINDOW_SIZE) { /* ENTER SIM */
+                    g_msg.simEvent ("\nIN SIM WINDOW\n");
+                    g_var.g_inSimpoint = true;
+                    g_var.g_enable_wp = true;
+                    g_var.g_simpInsCnt = 0;
+                    sim_ins_cnt_with_wp = 0;
+                    PIN_RemoveInstrumentation ();
+                    g_var.g_enable_instrumentation = true;
+                    g_var.g_enable_bkEnd = true;
+                    sim_strt = double (clock ()) / CLOCKS_PER_SEC;
+                    g_cfg->setWarmedUp ();
+                }
+            }
+        }
     }
 
-	return finished;
+    return finished;
 }
 
 /*-- COUNTS THE NUMBER OF DYNAMIC INSTRUCTIONS (WRONG-PATH INSTRUCTIONS INCLUDED) --*/

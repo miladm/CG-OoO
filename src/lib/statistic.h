@@ -43,6 +43,7 @@ class stat {
         stat& operator-- ();
         stat  operator-- (int);
         stat operator+= (SCALAR);
+        stat operator-= (SCALAR);
 
     protected:
         string _name;

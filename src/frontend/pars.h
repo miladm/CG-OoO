@@ -53,6 +53,6 @@ VOID pin__runPARS (string, string, string);
 VOID pin__fini (INT32, VOID*);
 VOID pin__instruction (TRACE, VOID*);
 
-ADDRINT PredictAndUpdate (ADDRINT, INT32, ADDRINT, ADDRINT, INT32);
+ADDRINT PredictAndUpdate (ADDRINT, INT32, ADDRINT, ADDRINT, UINT32);
 
 #endif

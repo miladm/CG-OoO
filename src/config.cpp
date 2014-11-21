@@ -22,6 +22,10 @@ config::config (string bench_path, string config_path, string out_dir) {
     YAML::Parser parser (fin);
     parser.GetNextDocument (_root);
 
+    /* organzie this code  - hack */
+    _warmed_up = false;
+    _enable_warm_up = true;
+
     /* =========== OLD CODE ============ */
 	g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");
     string cfg_file_ext = ".cfg";
@@ -389,5 +393,11 @@ bool config::isEnMemFwd () {return _enable_mem_fwd;}
 bool config::isEnFwd () {return _enable_mem_fwd || _enable_eu_fwd;}
 
 bool config::isEnLogStat () {return _enable_log_stat;}
+
+void config::setWarmedUp () {_warmed_up = true;} /* TODO this bad hack - change it*/
+
+bool config::isWarmedUp () {return _warmed_up;}
+
+bool config::warmUpEn () {return _enable_warm_up;}
 
 config* g_cfg;

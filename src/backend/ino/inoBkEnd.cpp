@@ -16,10 +16,10 @@ void inoBkEnd_init (int argc, char const * argv[]) {
 	g_ino_clk = new sysClock (1);
     _core = new sysCore (g_ino_clk,
                          16, 16, 16, 4, g_cfg->getNumEu (), 4, 4,
-                         2, 50, 
+                         3, 50, 
                          1, 50, 
                          1, 50, 
-                         1, 50, 
+                         3, 50, 
                          1, 50, 
                          1, 50, 
                          1, 50, 

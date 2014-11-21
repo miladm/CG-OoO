@@ -73,7 +73,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
     Assert (_current_bb != NULL);
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
-        if (_current_bb->getBBstate () == EMPTY_BUFF) break; //TODO no back-to-back BB fetch in 1 cycle
+        if (_current_bb->getBBstate () == EMPTY_BUFF) break; /* NO BACK-TO-BACK BB FETCH IN 1 CYCLE FOR NOW (TODO) */
         if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
 
         /*-- FETCH INS --*/
@@ -88,6 +88,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }
+
     updateBBfetchState ();
     return pipe_stall;
 }

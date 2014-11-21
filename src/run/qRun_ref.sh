@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref_medium_pipe'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
 RUN_DIR='/home/milad/esc_project/svn/PARS/src/run'
