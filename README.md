@@ -16,3 +16,6 @@ This README documents the steps necessary to get this application up and running
 ### Who do I talk to? ###
 
 * Milad Mohammad: milad-at-alumni-dot-stanford-dot-edu
+
+
+(You can access this repo with SSH or with HTTPS.)
