@@ -19,7 +19,7 @@ void bbBkEnd_init (int argc, char const * argv[]) {
                                 3, 50,
                                 1, 50,
                                 1, 50,
-                                2, 50,
+                                4, 50,
                                 2, 50,
                                 1, 50,
                                 1, 50,

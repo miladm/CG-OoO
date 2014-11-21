@@ -109,7 +109,7 @@ bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
     return false;
 }
 
-/*-- WRITE INTO INS WINDOW --*/
+/*-- WRITE INTO RESERVATION STATION(S) --*/
 void o3_scheduler::updateResStns () {
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         for (WIDTH i = 0; i < _stage_width; i++) {
