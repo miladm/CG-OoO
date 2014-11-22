@@ -19,13 +19,13 @@ table_energy::table_energy (string class_name, const YAML::Node& root)
         std::string key,value;
         it.first() >> key; it.second() >> value;
 
-        if (value.compare ("e_cam") == 0) {
+        if (key.compare ("e_cam") == 0) {
             root["e_cam"] >> _cam_energy_per_access;
             e_cam.setEnergyPerAccess (_cam_energy_per_access);
-        } else if (value.compare ("e_cam2") == 0) {
+        } else if (key.compare ("e_cam2") == 0) {
             root["e_cam2"] >> _cam2_energy_per_access;
             e_cam2.setEnergyPerAccess (_cam2_energy_per_access);
-        } else if (value.compare ("e_ram") == 0) {
+        } else if (key.compare ("e_ram") == 0) {
             root["e_ram"] >> _ram_energy_per_access;
             e_ram.setEnergyPerAccess (_ram_energy_per_access);
         }
