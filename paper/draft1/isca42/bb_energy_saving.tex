@@ -22,7 +22,6 @@ eliminated excessive register file lookup, update and commit and in turn
 enabling a register structure with fewer physical registers. discuss the local
 register assignment algorithm here.
 \input{reg_allocation}
-\input{reg_files}
 
 Discussion on cheap issue and update operations through basicblock buffer and
 register scoreboards. also talk about the savings in the number of cycles.
@@ -41,6 +40,5 @@ Load-store conflict reduction through static schedule of instructions.
 commit benefits under bbROB: enables bulk squash, runs the chance of wasted
 instructions (show how many on avg), much smaller ROB with fewer ports and much
 smaller size.
-\input{bb_rob}
 
 Static schedule of instructions to leverage effective data forwarding results.
