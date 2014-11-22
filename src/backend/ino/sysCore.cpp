@@ -60,9 +60,9 @@ sysCore::sysCore (sysClock* clk,
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
 
     /* INIT UNITS */
-    g_RF_MGR = new rfManager (clk, "rfManager");
-    _iROB = new CAMtable<dynInstruction*>(50, 4, 4, _clk, root["table"]["ROB"], "iROB");
-    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk,root["table"]["QUE"],  "iQUE");
+    g_RF_MGR = new rfManager (clk, root["rf"]["simple"], "rfManager");
+    _iROB = new CAMtable<dynInstruction*>(_clk, root["table"]["inoROB"], "iROB");
+    _iQUE = new CAMtable<dynInstruction*>(_clk,root["table"]["QUE"],  "iQUE");
 
     /* INIT STAGES */
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());

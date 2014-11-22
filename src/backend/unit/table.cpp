@@ -8,26 +8,26 @@
 /******************* TABLE *********************/
 /***********************************************/
 template <typename tableType_T>
-table<tableType_T>::table (LENGTH len, 
-                           TABLE_TYPE table_type, 
-                           WIDTH rd_port_cnt, 
-                           WIDTH wr_port_cnt,
-                           sysClock* clk,
+table<tableType_T>::table (TABLE_TYPE table_type, sysClock* clk,
                            const YAML::Node& root,
                            string table_name = "table")
     : unit (table_name, clk),
-      _wr_port (wr_port_cnt, WRITE, clk, table_name + ".wr_wire"),
-      _rd_port (rd_port_cnt, READ,  clk, table_name + ".rd_wire"),
-      _table_size (len),
+      _wr_port (WRITE, clk, root, table_name + ".wr_wire"),
+      _rd_port (READ,  clk, root, table_name + ".rd_wire"),
       _table_type (table_type),
       _e_table (table_name, root),
       s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
       s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number of cycles with table full", 0, NO_PRINT_ZERO)),
       s_table_size_rat  (g_stats.newRatioStat (clk->getStatObj (), table_name, "size_rat", "Average table size", 0, NO_PRINT_ZERO))
 {
+    WIDTH rd_wire_cnt, wr_wire_cnt;
+    root["rd_wire_cnt"] >> rd_wire_cnt;
+    root["wr_wire_cnt"] >> wr_wire_cnt; 
+    root["size"] >> _table_size;
+
 	Assert (_table_size > 0 && 
-            rd_port_cnt > 0 && rd_port_cnt <= _table_size &&
-            wr_port_cnt > 0 && wr_port_cnt <= _table_size);
+            rd_wire_cnt > 0 && rd_wire_cnt <= _table_size &&
+            wr_wire_cnt > 0 && wr_wire_cnt <= _table_size);
     _cycle = START_CYCLE;
 }
 
@@ -137,6 +137,11 @@ void table<tableType_T>::camAccess (SCALAR num_access) {
 }
 
 template <typename tableType_T>
+void table<tableType_T>::cam2Access (SCALAR num_access) {
+    table<tableType_T>::_e_table.cam2Access (num_access);
+}
+
+template <typename tableType_T>
 void table<tableType_T>::ramAccess (SCALAR num_access) {
     table<tableType_T>::_e_table.ramAccess (num_access);
 }
@@ -150,15 +155,10 @@ void table<tableType_T>::fifoAccess (SCALAR num_access) {
 /***************** CAM TABLE *******************/
 /***********************************************/
 template <typename tableType_T>
-CAMtable<tableType_T>::CAMtable (LENGTH len, 
-                              WIDTH rd_port_cnt, 
-                              WIDTH wr_port_cnt,
-                              sysClock* clk,
-                              const YAML::Node& root,
-                              string table_name = "CAMtable")
-    : table<tableType_T> (len, CAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, 
-                          clk, root, table_name)
+CAMtable<tableType_T>::CAMtable (sysClock* clk,
+                                 const YAML::Node& root,
+                                 string table_name = "CAMtable")
+    : table<tableType_T> (CAM_ARRAY, clk, root, table_name)
 {}
 
 /*
@@ -248,30 +248,20 @@ tableType_T CAMtable<tableType_T>::getLast () {
 /***************** RAM TABLE *******************/
 /***********************************************/
 template <typename tableType_T>
-RAMtable<tableType_T>::RAMtable (LENGTH len, 
-                              WIDTH rd_port_cnt, 
-                              WIDTH wr_port_cnt,
-                              sysClock* clk,
-                              const YAML::Node& root,
-                              string table_name = "RAMtable")
-    : table<tableType_T> (len, RAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, 
-                          clk, root, table_name)
+RAMtable<tableType_T>::RAMtable (sysClock* clk,
+                                 const YAML::Node& root,
+                                 string table_name = "RAMtable")
+    : table<tableType_T> (RAM_ARRAY, clk, root, table_name)
 {}
 
 /***********************************************/
 /***************** FIFO TABLE ******************/
 /***********************************************/
 template <typename tableType_T>
-FIFOtable<tableType_T>::FIFOtable (LENGTH len, 
-                              WIDTH rd_port_cnt, 
-                              WIDTH wr_port_cnt,
-                              sysClock* clk,
-                              const YAML::Node& root,
-                              string table_name = "FIFOtable") 
-    : table<tableType_T> (len, FIFO_ARRAY,
-                          wr_port_cnt, rd_port_cnt, 
-                          clk, root, table_name)
+FIFOtable<tableType_T>::FIFOtable (sysClock* clk,
+                                   const YAML::Node& root,
+                                   string table_name = "FIFOtable") 
+    : table<tableType_T> (FIFO_ARRAY, clk, root, table_name)
 {}
 /*
 template <typename tableType_T>

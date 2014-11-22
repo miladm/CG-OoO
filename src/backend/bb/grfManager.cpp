@@ -4,13 +4,13 @@
 
 #include "grfManager.h"
 
-bb_grfManager::bb_grfManager (sysClock* clk, string rf_name)
+bb_grfManager::bb_grfManager (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, "GlobalRegisterRename"),
-      _e_rf (rf_name + ".grf", g_cfg->_root["cpu"]["backend"]["rf"]["grf"]),
-      _e_rat (rf_name + ".grat", g_cfg->_root["cpu"]["backend"]["rf"]["grat"]),
-      _e_apr (rf_name + ".gapr", g_cfg->_root["cpu"]["backend"]["rf"]["gapr"]),
-      _e_arst (rf_name + ".garst" , g_cfg->_root["cpu"]["backend"]["rf"]["garst"]),
+      _GRF (clk, root["grf"], "GlobalRegisterRename"),
+      _e_rf (rf_name + ".grf", root["grf"]),
+      _e_rat (rf_name + ".grat", root["grat"]),
+      _e_apr (rf_name + ".gapr", root["gapr"]),
+      _e_arst (rf_name + ".garst", root["garst"]),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))

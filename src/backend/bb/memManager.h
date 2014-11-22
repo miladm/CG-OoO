@@ -60,6 +60,9 @@ class bb_memManager : public unit {
         bb_lsqCAM _LQ;
         bb_lsqCAM _SQ;
 
+        /*-- TLB ENERGY (must remove from here TODO) --*/
+        table_energy _e_dtlb;
+
         /*-- STAT OBJS --*/
         ScalarStat& s_ld_cnt;
         ScalarStat& s_cache_hit_cnt;

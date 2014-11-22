@@ -15,8 +15,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (scheduler_width, stage_name, clk),
-      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, NO_PRINT_ZERO)),
-      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, NO_PRINT_ZERO)),
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
@@ -27,10 +27,11 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     _num_res_stns = 1;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
-        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(120, 4, 4, _clk, g_cfg->_root["cpu"]["backend"]["table"]["resStn"], "ResStn_"+rs_num.str ());
+        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(_clk, g_cfg->_root["cpu"]["backend"]["table"]["resStn"], "ResStn_" + rs_num.str ());
         _ResStns.Append(resStn);
     }
 }
@@ -97,7 +98,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
 }
 
 bool o3_scheduler::hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx) {
-    _ResStns.Nth(resStnId)->camAccess ();
+    _ResStns.Nth(resStnId)->cam2Access ();
 
     for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
         dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);

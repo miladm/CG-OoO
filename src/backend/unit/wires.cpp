@@ -4,15 +4,22 @@
 
 #include "wires.h"
 
-wires::wires (WIDTH wire_cnt, AXES_TYPE axes_type, sysClock* clk, string wire_name) 
+wires::wires (AXES_TYPE axes_type, sysClock* clk, const YAML::Node& root, string wire_name) 
 	: unit (wire_name, clk),
       _axes_type (axes_type),
-      _wire_cnt (wire_cnt),
       _wire_len (10),
       s_unavailable_cnt (g_stats.newScalarStat (wire_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 {
+    if (_axes_type == READ) {
+        root["rd_wire_cnt"] >> _wire_cnt;
+    } else if (_axes_type == WRITE) {
+        root["wr_wire_cnt"] >> _wire_cnt;
+    } else {
+        Assert (0 && "Invalid wire type");
+    }
+    Assert (_wire_cnt > 0);
+
     _cycle = _clk->now ();
-	Assert (_wire_cnt > 0);
 }
 
 wires::~wires () {}

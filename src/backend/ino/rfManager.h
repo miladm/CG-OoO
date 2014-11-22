@@ -11,7 +11,7 @@
 
 class rfManager : public unit {
 	public:
-		rfManager (sysClock* clk, string rf_name = "rfManager");
+		rfManager (sysClock*, const YAML::Node&, string rf_name = "rfManager");
 		~rfManager ();
         void resetRF ();
         bool isReady (dynInstruction* ins);

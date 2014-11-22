@@ -4,7 +4,7 @@
 
 #include "registerRename.h"
 
-o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
+o3_registerRename::o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk), 
       _a_rf_size (GARF_HI - GARF_LO + 1), 
       _a_rf_hi (GARF_HI), 
@@ -12,8 +12,8 @@ o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
       _p_rf_size (GPRF_HI - GPRF_LO + 1), 
       _p_rf_hi (GPRF_HI), 
       _p_rf_lo (GPRF_LO), 
-      _wr_port (4, WRITE, clk, rf_name + ".wr_wire"),
-      _rd_port (8, READ,  clk, rf_name + ".rd_wire")
+      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
+      _rd_port (READ,  clk, root, rf_name + ".rd_wire")
 {
     _cycle = START_CYCLE;
 
@@ -45,9 +45,8 @@ o3_registerRename::o3_registerRename (sysClock* clk, string rf_name)
 
 o3_registerRename::o3_registerRename (AR a_rf_lo, 
                                      AR a_rf_hi, 
-                                     WIDTH rd_port_cnt, 
-                                     WIDTH wr_port_cnt, 
                                      sysClock* clk,
+                                     const YAML::Node& root, 
                                      string rf_name) 
     : unit (rf_name, clk),
       _a_rf_size (a_rf_hi - a_rf_lo + 1), 
@@ -56,9 +55,13 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
       _p_rf_size (GPRF_HI - GPRF_LO + 1), 
       _p_rf_hi (GPRF_HI), 
       _p_rf_lo (GPRF_LO), 
-      _wr_port (wr_port_cnt, WRITE, clk, rf_name + ".wr_wire"),
-      _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
+      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
+      _rd_port (READ,  clk, root, rf_name + ".rd_wire")
 {
+    WIDTH rd_wire_cnt, wr_wire_cnt;
+    root["rd_wire_cnt"] >> rd_wire_cnt;
+    root["wr_wire_cnt"] >> wr_wire_cnt;
+
     _cycle = START_CYCLE;
 
 	/*-- INITIALIZE ALL TABLES --*/
@@ -81,7 +84,7 @@ o3_registerRename::o3_registerRename (AR a_rf_lo,
 		PR_counter++;
 	}
 
-    Assert (rd_port_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_port_cnt && "Must have twice as many read ports than write ports.");
+    Assert (rd_wire_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_wire_cnt && "Must have twice as many read wires than write wires.");
 	Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structure initialization.");
 	Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initialization.");
 	Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");

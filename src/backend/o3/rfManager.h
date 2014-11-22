@@ -11,7 +11,7 @@
 
 class o3_rfManager : public unit {
 	public:
-		o3_rfManager (sysClock* clk, string rf_name = "o3_rfManager");
+		o3_rfManager (sysClock*, const YAML::Node&, string rf_name = "o3_rfManager");
 		~o3_rfManager ();
 
         bool canRename (dynInstruction* ins);

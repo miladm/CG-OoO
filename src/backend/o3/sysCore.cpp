@@ -60,10 +60,10 @@ o3_sysCore::o3_sysCore (sysClock* clk,
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
 
     /*-- INIT UNITS --*/
-    _RF_MGR = new o3_rfManager (_clk, "rfManager");
+    _RF_MGR = new o3_rfManager (_clk, root["rf"], "rfManager");
     _LSQ_MGR = new o3_memManager (_memory_to_scheduler_port, _clk, "lsqManager");
-    _iROB = new CAMtable<dynInstruction*>(180, 32, 32, _clk, root["table"]["ROB"], "iROB");
-    _iQUE = new CAMtable<dynInstruction*>(1000, 1000, 1000, _clk, root["table"]["QUE"], "iQUE");
+    _iROB = new CAMtable<dynInstruction*>(_clk, root["table"]["o3ROB"], "iROB");
+    _iQUE = new CAMtable<dynInstruction*>(_clk, root["table"]["QUE"], "iQUE");
 
     /*-- INIT STAGES --*/
     dbg.print (DBG_CORE, "%s: Constructing CPU Stages", _c_name.c_str ());

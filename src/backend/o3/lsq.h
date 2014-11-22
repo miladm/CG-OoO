@@ -10,17 +10,11 @@
 #include "../unit/table.h"
 #include "../../global/g_variable.h"
 
-#define SQ_SIZE 36
-#define LQ_SIZE 64
 #define NO_WAW_ST_INS 0
 
 class o3_lsqCAM : public CAMtable<dynInstruction*> {
 	public:
-		o3_lsqCAM (LENGTH len, 
-                   WIDTH rd_port_cnt, 
-                   WIDTH wr_port_cnt,
-                   sysClock* clk,
-                   string table_name);
+		o3_lsqCAM (sysClock*, const YAML::Node&, string);
 		~o3_lsqCAM ();
 
         dynInstruction* findPendingMemIns (LSQ_ID);

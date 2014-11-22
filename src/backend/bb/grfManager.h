@@ -11,7 +11,7 @@
 
 class bb_grfManager : public unit {
 	public:
-		bb_grfManager (sysClock* clk, string rf_name = "bb_grfManager");
+		bb_grfManager (sysClock*, const YAML::Node&, string rf_name = "bb_grfManager");
 		~bb_grfManager ();
 
         bool canRename (bbInstruction* ins);

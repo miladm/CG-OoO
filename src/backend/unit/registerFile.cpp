@@ -4,21 +4,22 @@
 
 #include "registerFile.h"
 
-registerFile::registerFile (PR rf_begin_num, 
-                            PR rf_size, 
-                            WIDTH rd_port_cnt, 
-                            WIDTH wr_port_cnt,
-                            sysClock* clk,
+registerFile::registerFile (PR rf_begin_num, PR rf_size, 
+                            sysClock* clk, const YAML::Node& root,
                             string rf_name)
     : unit (rf_name, clk),
       _rf_size (rf_size),
       _rf_begin_num (rf_begin_num),
       _rf_end_num (rf_begin_num + rf_size - 1),
-      _wr_port (wr_port_cnt, WRITE, clk, rf_name + ".wr_wire"),
-      _rd_port (rd_port_cnt, READ,  clk, rf_name + ".rd_wire")
+      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
+      _rd_port (READ, clk, root, rf_name + ".rd_wire")
 {
+    WIDTH rd_wire_cnt, wr_wire_cnt;
+    root["rd_wire_cnt"] >> rd_wire_cnt;
+    root["wr_wire_cnt"] >> wr_wire_cnt;
+
     Assert (_rf_size > 0);
-    Assert (rd_port_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_port_cnt && 
+    Assert (rd_wire_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_wire_cnt && 
             "Must have twice as many read ports than write ports.");
     for (PR i = _rf_begin_num; i < _rf_end_num; i++) {
         registerElement* reg = new registerElement (i);

@@ -12,8 +12,9 @@ bb_memManager::bb_memManager (port<bbInstruction*>& memory_to_scheduler_port,
       _L2 (1, 64, 2097152),
       _L3 (1, 64, 8388608),
       _cache ("/home/milad/esc_project/svn/PARS/src/config/simple.yaml"),
-      _LQ (BB_LQ_SIZE, 8, 4, clk, "LQ"),
-      _SQ (BB_SQ_SIZE, 8, 4, clk, "SQ"),
+      _LQ (clk, g_cfg->_root["cpu"]["backend"]["table"]["LQ"], "LQ"),
+      _SQ (clk, g_cfg->_root["cpu"]["backend"]["table"]["SQ"], "SQ"),
+      _e_dtlb ("dtlb", g_cfg->_root["cpu"]["backend"]["mem"]["dtlb"]),
       s_ld_cnt (g_stats.newScalarStat (lsq_name, "ld_cnt", "Number of load ops", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number of cache hits", 0, PRINT_ZERO)),
       s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Number of cache misses", 0, PRINT_ZERO)),
@@ -85,10 +86,12 @@ void bb_memManager::memAddrReady (bbInstruction* ins) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
         _LQ.camAccess (); /* FIND ADDRESS ENERGY */
         _LQ.ramAccess (); /* ADDRESS WRITE ENERGY */
+        _e_dtlb.camAccess ();
     } else {
         ins->setSQstate (SQ_COMPLETE);
         _SQ.camAccess (); /* FIND ADDRESS ENERGY */
         _SQ.ramAccess (); /* ADDRESS WRITE ENERGY */
+        _e_dtlb.camAccess ();
     }
 }
 

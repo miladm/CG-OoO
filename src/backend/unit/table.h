@@ -31,7 +31,7 @@ typedef enum {RAM_ARRAY, CAM_ARRAY, FIFO_ARRAY} TABLE_TYPE;
 template <typename tableType_T>
 class table : public unit {
     public:
-        table (LENGTH, TABLE_TYPE, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
+        table (TABLE_TYPE, sysClock*, const YAML::Node&, string);
         ~table () {}
 
         /* SET ROUTINS */
@@ -53,6 +53,7 @@ class table : public unit {
         /* ENERGY FUNCTIONS */
         /* IT IS A LOOSE DESIGN PUTTING THESE ACCESSORS IN THE BASE CLASS */
         void camAccess (SCALAR num_access = 1);
+        void cam2Access (SCALAR num_access = 1);
         void ramAccess (SCALAR num_access = 1);
         void fifoAccess (SCALAR num_access = 1);
 
@@ -61,7 +62,7 @@ class table : public unit {
         CYCLE _cycle;
         wires _wr_port;
         wires _rd_port;
-        const LENGTH _table_size;
+        LENGTH _table_size;
         const TABLE_TYPE _table_type;
 
         /*-- ENERGY --*/
@@ -76,7 +77,7 @@ class table : public unit {
 template <typename tableType_T>
 class CAMtable : public table<tableType_T> {
     public:
-        CAMtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
+        CAMtable (sysClock*, const YAML::Node&, string);
         ~CAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -91,7 +92,7 @@ class CAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class RAMtable : public table<tableType_T> {
     public:
-        RAMtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
+        RAMtable (sysClock*, const YAML::Node&, string);
         ~RAMtable () {}
 
         //LENGTH getNextReadyIndx ();
@@ -101,7 +102,7 @@ class RAMtable : public table<tableType_T> {
 template <typename tableType_T>
 class FIFOtable : public table<tableType_T> {
     public:
- 		FIFOtable (LENGTH, WIDTH, WIDTH, sysClock*, const YAML::Node&, string);
+ 		FIFOtable (sysClock*, const YAML::Node&, string);
         ~FIFOtable () {}
 
         //bool isFrontReady ();

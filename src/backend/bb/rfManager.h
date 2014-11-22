@@ -12,7 +12,7 @@
 
 class bb_rfManager : public unit {
 	public:
-		bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rf_name = "bb_rfManager");
+		bb_rfManager (WIDTH, sysClock*, const YAML::Node&, string rf_name = "bb_rfManager");
 		~bb_rfManager ();
 
         // GRF ONLY

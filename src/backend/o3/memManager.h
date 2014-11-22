@@ -59,6 +59,9 @@ class o3_memManager : public unit {
 
         o3_lsqCAM _LQ;
         o3_lsqCAM _SQ;
+
+        /*-- TLB ENERGY (must remove from here TODO) --*/
+        table_energy _e_dtlb;
  
         /*-- STAT OBJS --*/
         ScalarStat& s_ld_cnt;

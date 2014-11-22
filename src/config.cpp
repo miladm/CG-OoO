@@ -382,8 +382,6 @@ BP_TYPE config::getBPtype () {return _bp_type;}
 
 long double config::getMaxInsCnt () {return _max_ins_cnt;}
 
-int config::getNumEu () {return _num_eu;}
-
 bool config::isEnSquash () {return _enable_squash;}
 
 bool config::isEnEuFwd () {return _enable_eu_fwd;}

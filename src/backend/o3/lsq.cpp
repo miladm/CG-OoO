@@ -4,12 +4,8 @@
 
 #include "lsq.h"
 
-o3_lsqCAM::o3_lsqCAM (LENGTH len, 
-                WIDTH rd_port_cnt, 
-                WIDTH wr_port_cnt,
-                sysClock* clk,
-                string table_name)
-    : CAMtable<dynInstruction*> (len, rd_port_cnt, wr_port_cnt, clk, g_cfg->_root["cpu"]["backend"]["table"][table_name.c_str ()], table_name)
+o3_lsqCAM::o3_lsqCAM (sysClock* clk, const YAML::Node& root, string table_name)
+    : CAMtable<dynInstruction*> (clk, root, table_name)
 {}
 
 o3_lsqCAM::~o3_lsqCAM () {}

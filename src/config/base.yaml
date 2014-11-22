@@ -24,7 +24,7 @@ cpu:
 
     backend: 
        core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
-       width: 4 #TODO use it?
+       width: 8 #TODO use it?
        lrf: enable
        squash: enable
        mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
@@ -81,8 +81,8 @@ cpu:
                p_size:
                p_hi:
                p_lo:
-               wr_wire_cnt:
-               rd_wire_cnt:
+               rd_wire_cnt: 16
+               wr_wire_cnt: 8
                name:
                cout: 1
                e_cam: 0
@@ -94,8 +94,8 @@ cpu:
                p_size:
                p_hi:
                p_lo:
-               wr_wire_cnt:
-               rd_wire_cnt:
+               rd_wire_cnt: 16
+               wr_wire_cnt: 8
                name:
                cout: 1
                e_cam: 0
@@ -104,8 +104,8 @@ cpu:
                rf_size:
                rf_hi:
                rf_lo:
-               wr_wire_cnt:
-               rd_wire_cnt:
+               rd_wire_cnt: 16
+               wr_wire_cnt: 8
                name:
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
@@ -157,19 +157,28 @@ cpu:
                 name: bbQUE
                 type: FIFO
             bbROB: 
-                size: 100
+                size: 20
                 count: 1
-                rd_wire_cnt: 32
-                wr_wire_cnt: 32
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0
                 e_ram: 0.112165
                 name: bbROB
                 type: RAM
-            ROB: 
+            inoROB: 
+                size: 50
+                count: 1
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
+                e_cam: 0
+                e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
+                name: ROB
+                type: RAM
+            o3ROB: 
                 size: 100
                 count: 1
-                rd_wire_cnt: 32
-                wr_wire_cnt: 32
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0
                 e_ram: 0.608496
                 name: ROB
@@ -178,7 +187,7 @@ cpu:
                 size: 64
                 count: 1
                 rd_wire_cnt: 8
-                wr_wire_cnt: 4
+                wr_wire_cnt: 8
                 e_cam: 2.204357
                 e_ram: 1.236428
                 name: LQ
@@ -187,17 +196,18 @@ cpu:
                 size: 32
                 count: 1
                 rd_wire_cnt: 8
-                wr_wire_cnt: 4
+                wr_wire_cnt: 8
                 e_cam: 1.315326
                 e_ram: 1.620642
                 name: SQ
                 type: CAM
             resStn:
-                size: 15
-                count: 16
+                size: 120
+                count: 1
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
-                e_cam: 14.168497
+                e_cam: 4.08806
+                e_cam2: 1.184757
                 e_ram: 2.638897
                 name: resStn
                 type: FIFO
@@ -207,23 +217,23 @@ cpu:
                 rd_wire_cnt: 8
                 wr_wire_cnt: 8
                 e_cam: 0
-                e_ram: 0.510727
+                e_ram: 0.439745
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
             iWindow: #only for INO
-                size: 120
+                size: 50
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0
                 e_ram: 2.535452
                 name: iWindow
                 type: FIFO
             mshr:
-                size: 10
+                size: 20
                 count: 1
-                rd_wire_cnt: 1
-                wr_wire_cnt: 1
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0        #TODO develop this
                 e_ram: 0        #TODO develop this
                 name: MSHR
@@ -231,8 +241,8 @@ cpu:
             st_buff: #only for INO
                 size: 20
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0.763521
                 e_ram: 1.160567
                 name: st_buff
@@ -240,8 +250,8 @@ cpu:
             ras: 
                 size: 16
                 count: 1
-                rd_wire_cnt: 1
-                wr_wire_cnt: 1
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 0
                 e_ram: 0.633863
                 name: RAS
@@ -249,8 +259,8 @@ cpu:
             BTB: 
                 size: 4096
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 8
+                wr_wire_cnt: 8
                 e_cam: 1.238
                 e_ram: 0
                 name: BTB
@@ -274,27 +284,34 @@ cpu:
                latency: 4
                e_eu: 1.040
 
-       pipe_stage:
-           branch_prediction:
-               width: 4
+       pipe:
+           bp:
+               width: 8
+               latency: 1
                name: branchPred
            fetch:
-               width: 4
+               width: 8
+               latency: 3
                name: fetch
            decode:
-               width: 4
+               width: 8
+               latency: 4
                name: decode
            schedule:
-               width: 4
+               width: 8
+               latency: 2
                name: schedule
            execution:
-               width: 4
+               width: 8
+               latency: 1 #TODO what does it mean for FPU?
                name: execution
            memory:
-               width: 4
+               width: 8
+               latency: 1
                name: memory
            commit:
-               width: 4
+               width: 8
+               latency: 1
                name: commit
        
        port:
@@ -343,7 +360,13 @@ cpu:
                length: 20
                name: mem_buff
        
-       mem_hierarchy:
+       mem:
+           itlb:
+               e_ram: 0
+               e_cam: 2.341
+           dtlb:
+               e_ram: 0
+               e_cam: 2.133
            L1:
                sa: 1 # Set Associativity
                size: 32768

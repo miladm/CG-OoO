@@ -91,6 +91,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         /*-- UPDATE RESOURCES --*/
         _busy_bbWin[readyInsInBBWinIndx]->_win.updateWireState (READ);
         _RF_MGR->updateWireState (READ, ins);
+        _busy_bbWin[readyInsInBBWinIndx]->_win.ramAccess (); //assume this step is not free for now - TODO
 
         /*-- STAT --*/
         s_ipc++;
@@ -134,7 +135,8 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx) {
         if (!bbWin->_win.hasFreeWire (READ)) continue;
         bbInstruction* ins = bbWin->_win.getNth_unsafe (0);
         readyInsInBBWinIndx = bbWin_id;
-        bbWin->_win.ramAccess ();
+//        bbWin->_win.ramAccess (); //assume this step is free for now - TODO
+
         if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) {continue;}
         else {

@@ -299,7 +299,8 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
-        g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, g_cfg->getNumEu ());
+        int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+        g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, width);
     } else {
         Assert (0 && "Invalid BP type chosen");
     }
@@ -765,7 +766,8 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     bool pred = taken;
 
     /* THIS IS A HACK - TODO REMOVE IT */
-    int num_lookup = (int)(_bbInsCnt / g_cfg->getNumEu ());
+    int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+    int num_lookup = (int)(_bbInsCnt / width);
     if (num_lookup == 0) num_lookup = 1;
 
     /*-- BP LOOKUP --*/

@@ -10,7 +10,7 @@
 class wires : public unit
 {
  	public:
- 		wires (WIDTH, AXES_TYPE, sysClock*, string wire_name = "wire");
+ 		wires (AXES_TYPE, sysClock*, const YAML::Node&, string wire_name = "wire");
  		~wires ();
         bool hasFreeWire ();
         void updateWireState ();
@@ -20,8 +20,8 @@ class wires : public unit
         CYCLE _cycle;
         WIDTH _num_free_wire;
         const AXES_TYPE _axes_type;
-        const WIDTH _wire_cnt;
         const nMETER _wire_len;
+        WIDTH _wire_cnt;
 
         /* STAT OBJS */
         ScalarStat& s_unavailable_cnt;

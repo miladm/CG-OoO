@@ -14,7 +14,7 @@ scheduler::scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 	    	          string stage_name) 
 	: stage (issue_width, stage_name, clk),
       //_iWindow (iWin_length, CAM_ARRAY, iWin_rd_port, iWin_wr_port, "iWindow") - TODO fix this
-      _iWindow (50, 4, 4, clk, g_cfg->_root["cpu"]["backend"]["table"]["iWindow"], "iWindow"),
+      _iWindow (clk, g_cfg->_root["cpu"]["backend"]["table"]["iWindow"], "iWindow"),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
       s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events"+stage_name, 0, PRINT_ZERO))
 {

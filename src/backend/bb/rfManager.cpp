@@ -4,9 +4,9 @@
 
 #include "rfManager.h"
 
-bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rfm_name)
+bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, const YAML::Node& root, string rfm_name)
     : unit (rfm_name, clk),
-      _GRF_MGR (_clk, "grfManager"),
+      _GRF_MGR (_clk, root, "grfManager"),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF read operand-not-ready events", 0, PRINT_ZERO)),
       s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF read operand-not-ready events", 0, PRINT_ZERO)),
@@ -15,7 +15,7 @@ bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, string rfm_name)
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
         bbWin_id << i;
-        bb_lrfManager* LRF_MGR = new bb_lrfManager (i, _clk, "lrfManager_" + bbWin_id.str ());
+        bb_lrfManager* LRF_MGR = new bb_lrfManager (i, _clk, root["simple"], "lrfManager_" + bbWin_id.str ());
         _LRF_MGRS.insert (pair<WIDTH, bb_lrfManager*>(i, LRF_MGR));
     }
 }

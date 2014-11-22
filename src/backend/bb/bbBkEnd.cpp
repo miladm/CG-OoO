@@ -13,19 +13,40 @@ void bbBkEndRun (FRONTEND_STATUS frontend_status) {
 
 void bbBkEnd_init (int argc, char const * argv[]) {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+
+    WIDTH width, num_bbW;
+    CYCLE bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
+
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+    const YAML::Node& bbWin = root["table"]["bbWindow"];
+    const YAML::Node& pipe = root["pipe"];
+    const YAML::Node& bpu = pipe["bp"];
+    const YAML::Node& fch = pipe["fetch"];
+    const YAML::Node& dcd = pipe["decode"];
+    const YAML::Node& sch = pipe["schedule"];
+    const YAML::Node& exe = pipe["execution"];
+    const YAML::Node& mem = pipe["memory"];
+    const YAML::Node& cmt = pipe["commit"];
+
+    bpu["latency"] >> bpu_lat; fch["latency"] >> fch_lat;
+    dcd["latency"] >> dcd_lat; sch["latency"] >> sch_lat;
+    exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
+    cmt["latency"] >> cmt_lat;
+    root["width"] >> width; bbWin["count"] >> num_bbW;
+
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
-                                16, 16, 16, 4, g_cfg->getNumEu (), 4, 4, 16,
-                                3, 50,
-                                1, 50,
-                                1, 50,
-                                4, 50,
-                                2, 50,
-                                1, 50,
-                                1, 50,
-                                1, 50,
-                                1, 50,
-                                1, 50);
+            2*width, 2*width, 2*width, width, width, width, width, num_bbW,
+            fch_lat, 50, 
+            1, 50, 
+            bpu_lat, 50, 
+            dcd_lat - 1, 50, 
+            sch_lat, 50, 
+            1, 50, 
+            exe_lat, 50, 
+            1, 50, 
+            1, 50, 
+            1, 50);
 }
 
 void bbBkEnd_fini () {

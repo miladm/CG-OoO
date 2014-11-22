@@ -11,7 +11,7 @@
 
 class bb_lrfManager : public unit {
 	public:
-		bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name = "bb_lrfManager");
+		bb_lrfManager (WIDTH, sysClock*, const YAML::Node&, string rf_name = "bb_lrfManager");
 		~bb_lrfManager ();
         void resetRF ();
         bool isReady (bbInstruction* ins);

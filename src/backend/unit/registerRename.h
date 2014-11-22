@@ -26,10 +26,9 @@ struct o3_regElem {
 
 class o3_registerRename : public unit {
 	public:
-		o3_registerRename (sysClock* clk, string rf_name);
+		o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name);
 		o3_registerRename (AR a_rf_lo, AR a_rf_hi, 
-                           WIDTH rd_port_cnt, WIDTH wr_port_cnt, 
-                           sysClock* clk, string rf_name);
+                           sysClock* clk, const YAML::Node& root, string rf_name);
 		~o3_registerRename ();
 
 		PR renameReg (AR a_reg);

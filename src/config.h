@@ -34,7 +34,6 @@ class config {
         CORE_TYPE getCoreType ();
         MEM_MODEL getMemModel ();
         BP_TYPE getBPtype ();
-        int getNumEu ();
         long double getMaxInsCnt ();
         bool isEnSquash ();
         bool isEnEuFwd ();

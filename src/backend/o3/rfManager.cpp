@@ -4,13 +4,13 @@
 
 #include "rfManager.h"
 
-o3_rfManager::o3_rfManager (sysClock* clk, string rf_name)
+o3_rfManager::o3_rfManager (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, "registerRename"),
-      _e_rf (rf_name + ".rf", g_cfg->_root["cpu"]["backend"]["rf"]["rf"]),
-      _e_rat (rf_name + ".rat", g_cfg->_root["cpu"]["backend"]["rf"]["rat"]),
-      _e_apr (rf_name + ".apr", g_cfg->_root["cpu"]["backend"]["rf"]["apr"]),
-      _e_arst (rf_name + ".arst" , g_cfg->_root["cpu"]["backend"]["rf"]["arst"]),
+      _GRF (clk, root["rf"], "registerRename"),
+      _e_rf (rf_name + ".rf", root["rf"]),
+      _e_rat (rf_name + ".rat", root["rat"]),
+      _e_apr (rf_name + ".apr", root["apr"]),
+      _e_arst (rf_name + ".arst" , root["arst"]),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),

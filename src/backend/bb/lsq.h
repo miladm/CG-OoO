@@ -10,17 +10,11 @@
 #include "../unit/table.h"
 #include "../../global/g_variable.h"
 
-#define BB_SQ_SIZE 136
-#define BB_LQ_SIZE 164
 #define BB_NO_WAW_ST_INS 0
 
 class bb_lsqCAM : public CAMtable<bbInstruction*> {
 	public:
-		bb_lsqCAM (LENGTH len, 
-                   WIDTH rd_port_cnt, 
-                   WIDTH wr_port_cnt,
-                   sysClock* clk,
-                   string table_name);
+		bb_lsqCAM ( sysClock*, const YAML::Node&, string);
 		~bb_lsqCAM ();
 
         bbInstruction* findPendingMemIns (LSQ_ID);

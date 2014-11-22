@@ -4,11 +4,11 @@
 
 #include "lrfManager.h"
 
-bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, string rf_name)
+bb_lrfManager::bb_lrfManager (WIDTH lrf_id, sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _RF (LARF_LO, LARF_SIZE, 8, 4, clk, "LocalRegisterFile"),
+      _RF (LARF_LO, LARF_SIZE, clk, root, "LocalRegisterFile"),
       _lrf_id (lrf_id),
-      _e_table (rf_name, g_cfg->_root["cpu"]["backend"]["rf"]["simple"]),
+      _e_table (rf_name, root),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 
