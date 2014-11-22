@@ -14,6 +14,14 @@ static set<ADDRINT> _bbHeadSet;
 static ScalarStat& s_pin_missing_static_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_missing_static_bb_cnt", "Number of dynamic BB's with no static counterpart.", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_bb_cnt", "Number of basicblocks instrumented in frontend", 0, NO_PRINT_ZERO));
 static ScalarStat& s_missing_ins_in_stat_code_cnt (g_stats.newScalarStat ("uOpGen", "missing_ins_in_stat_code_cnt", "Number of dynamic instructions not found in static code", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_gr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_cnt", "Number of global register operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_lr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_cnt", "Number of local register operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_gr_rd_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_rd_cnt", "Number of global register read operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_gr_wr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_wr_cnt", "Number of global register write operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_lr_rd_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_rd_cnt", "Number of local register read operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_dyn_lr_wr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_wr_cnt", "Number of local register write operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_ins_with_lr_operand_cnt (g_stats.newScalarStat ("uOpGen", "ins_with_lr_operand_cnt", "Number of operations with local reg operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_ins_without_lr_operand_cnt (g_stats.newScalarStat ("uOpGen", "ins_without_lr_operand_cnt", "Number of operations without local reg operands", 0, NO_PRINT_ZERO));
 
 /* ************************************* *
  * INS INSTRUMENTATIONS
@@ -155,6 +163,28 @@ void pin__detectBB (ADDRINT ins_addr) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
     }
     g_br_detected = false;
+}
+
+void pin__genInsStat (dynBasicblock* bb) {
+    List<bbInstruction*>* insList = bb->getBBinsList ();
+    LENGTH bb_size = bb->getBBsize ();
+    for (LENGTH i = 0; i < bb_size; i++) {
+        /* LOCAL VS. GLOBAL REGISTER OPERAND STAT */
+        bbInstruction* ins = insList->Nth (i);
+        s_dyn_lr_cnt    += ins->getTotNumRdLAR () + ins->getNumWrLAR ();
+        s_dyn_gr_cnt    += ins->getTotNumRdAR () + ins->getNumWrAR ();
+        s_dyn_lr_rd_cnt += ins->getTotNumRdLAR ();
+        s_dyn_lr_wr_cnt += ins->getNumWrLAR ();
+        s_dyn_gr_rd_cnt += ins->getTotNumRdAR ();
+        s_dyn_gr_wr_cnt += ins->getNumWrAR ();
+
+        /* INSTRUCTIONS WITH AND WITHOUGHT LOCAL OPERANDS */
+        if (ins->getTotNumRdLAR () == 0 && ins->getNumWrLAR () == 0)
+            s_ins_without_lr_operand_cnt++;
+        else
+            s_ins_with_lr_operand_cnt++;
+    }
+
 }
 
 /*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/

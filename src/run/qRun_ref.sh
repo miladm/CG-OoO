@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/fu_2'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref_medium_pipe/16_bb'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
@@ -20,7 +20,11 @@ mkdir $QSUB_OUT_PATH
  NOW=$(date +"%Y_%m_%d")
  if [ -f $FILE ];
  then
-	echo "File \"$FILE\" exists."
+	echo "File \"$FILE\" exists. Rewriting."
+	echo "Milad Mohammadi" > $FILE
+	echo $NOW >> $FILE
+	echo "---------------" >> $FILE
+	echo $@ >> $FILE
  else
 	echo "File \"$FILE\" does not exist. Creating it..."
 	touch $FILE

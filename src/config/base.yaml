@@ -24,7 +24,7 @@ cpu:
 
     backend: 
        core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
-       width: 2 #TODO use it?
+       width: 4 #TODO use it?
        lrf: enable
        squash: enable
        mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
@@ -81,8 +81,8 @@ cpu:
                p_size:
                p_hi:
                p_lo:
-               rd_wire_cnt: 4
-               wr_wire_cnt: 2
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name:
                cout: 1
                e_cam: 0
@@ -94,8 +94,8 @@ cpu:
                p_size:
                p_hi:
                p_lo:
-               rd_wire_cnt: 4
-               wr_wire_cnt: 2
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name:
                cout: 1
                e_cam: 0
@@ -104,8 +104,8 @@ cpu:
                rf_size:
                rf_hi:
                rf_lo:
-               rd_wire_cnt: 4
-               wr_wire_cnt: 2
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name:
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
@@ -168,8 +168,8 @@ cpu:
             inoROB: 
                 size: 50
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
                 name: ROB
@@ -177,8 +177,8 @@ cpu:
             o3ROB: 
                 size: 100
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.608496
                 name: ROB
@@ -186,8 +186,8 @@ cpu:
             LQ:
                 size: 64
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 2.204357
                 e_ram: 1.236428
                 name: LQ
@@ -195,8 +195,8 @@ cpu:
             SQ:
                 size: 32
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 1.315326
                 e_ram: 1.620642
                 name: SQ
@@ -204,8 +204,8 @@ cpu:
             resStn:
                 size: 120
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 4.08806
                 e_cam2: 1.184757
                 e_ram: 2.638897
@@ -214,8 +214,8 @@ cpu:
             bbWindow:
                 size: 15
                 count: 16
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.439745
                 name: bbWindow_ #TODO get rid of _
@@ -223,8 +223,8 @@ cpu:
             iWindow: #only for INO
                 size: 50
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 2.535452
                 name: iWindow
@@ -232,8 +232,8 @@ cpu:
             mshr:
                 size: 20
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0        #TODO develop this
                 e_ram: 0        #TODO develop this
                 name: MSHR
@@ -241,8 +241,8 @@ cpu:
             st_buff: #only for INO
                 size: 20
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0.763521
                 e_ram: 1.160567
                 name: st_buff
@@ -250,8 +250,8 @@ cpu:
             ras: 
                 size: 16
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.633863
                 name: RAS
@@ -259,8 +259,8 @@ cpu:
             BTB: 
                 size: 4096
                 count: 1
-                rd_wire_cnt: 2
-                wr_wire_cnt: 2
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 1.238
                 e_ram: 0
                 name: BTB
@@ -286,31 +286,31 @@ cpu:
 
        pipe:
            bp:
-               width: 2
+               width: 4
                latency: 1
                name: branchPred
            fetch:
-               width: 2
+               width: 4
                latency: 3
                name: fetch
            decode:
-               width: 2
+               width: 4
                latency: 4
                name: decode
            schedule:
-               width: 2
+               width: 4
                latency: 2
                name: schedule
            execution:
-               width: 2
+               width: 4
                latency: 1 #TODO what does it mean for FPU?
                name: execution
            memory:
-               width: 2
+               width: 4
                latency: 1
                name: memory
            commit:
-               width: 2
+               width: 4
                latency: 1
                name: commit
        

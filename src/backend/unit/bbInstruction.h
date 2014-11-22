@@ -31,6 +31,7 @@ class bbInstruction : public dynInstruction {
         WIDTH getTotNumRdLAR ();
         WIDTH getNumRdPR ();
         WIDTH getNumWrPR ();
+        WIDTH getNumWrAR ();
         WIDTH getNumWrLAR ();
         List<AR>* getARrdList ();
         List<AR>* getARwrList ();

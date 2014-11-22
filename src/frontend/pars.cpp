@@ -27,6 +27,7 @@ static ScalarStat& s_pin_sig_cnt (g_stats.newScalarStat ("pars", "pin_sig_cnt", 
 static ScalarStat& s_pin_sig_recover_cnt (g_stats.newScalarStat ("pars", "pin_sig_recover_cnt", "Number of SIGNAL recovery events in frontend", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_flush_cnt (g_stats.newScalarStat ("pars", "pin_flush_cnt", "Number of Pintool code cache flush events", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_trace_cnt (g_stats.newScalarStat ("pars", "pin_trace_cnt", "Number of Pintool code cache traces", 0, NO_PRINT_ZERO));
+static ScalarStat& s_bpu_lookup_cnt (g_stats.newScalarStat ("pars", "bpu_lookup_cnt", "Number of BPU lookups", 0, NO_PRINT_ZERO));
 
 /* ******************************************************************* *
  * GLOBAL VARIABLES
@@ -769,6 +770,8 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
     int num_lookup = (int)(_bbInsCnt / width);
     if (num_lookup == 0) num_lookup = 1;
+
+    s_bpu_lookup_cnt += num_lookup;
 
     /*-- BP LOOKUP --*/
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
