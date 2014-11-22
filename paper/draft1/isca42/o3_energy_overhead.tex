@@ -1,0 +1,38 @@
+\section{Energy Overheads of OoO}
+\label{sec:o3_overhead}
+
+iWindow: update and ready are CAM lookups. both take up a lot of energy
+
+Register Renamer: renaming for short lived registers: lots of table lookups,
+         large port count
+
+Register file: lots of renaming means lots of PR's and lots of ports
+
+BPU: lookup per fetch-width is excessive and hence prone to energy loss and
+aliasing problems. can only do lookup for H instructions
+to reduce port count + traffic of access.
+
+having smaller instructions reduces the decoding overhead making the instruction
+decoding energy much smaller.
+
+Squash drain overhead. This process involves either draining the entire ROB upto
+the point of flush or define tables that checkpoint program state. The latter
+approach is significantly more high performance, esp. for deep pipeline
+structures while being more energy consuming for keeping track of program state.
+WE choose to evalaute our work against the case with only ROB. 
+
+Squash support in this model eliminates the need for a register rename commit
+RAT only because on a squash the younger basicblocks can invalidate the faulty
+entries (talk about it the solution later and give a teaser here)
+
+LSQ: fewer mis-speculations because clos-by LS's can't conflict
+
+Pipeline stage resduction: faster BP, fast and fewer RR, faster scheduling
+
+forwarding: arbitrary in OOO, but here it is scheduled to leverage it.
+
+
+fetch overhead is completely justified because each instruction in this ISA is
+shortened, making more than enough room to fetch additional instructions (i.e.
+        H).
+ 

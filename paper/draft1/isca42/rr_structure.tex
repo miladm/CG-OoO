@@ -1,0 +1,11 @@
+\section{BB Register Renaming Model}
+\label{sec:bb_reg_ren}
+
+Upon a squash, we want to flush younger basic-blocks and invalidate any write
+that has been done to the PR by checking the RAT. This way, the drain stage is
+fully flushed out, making long-pipeline designs extremely affordable.
+
+We still have to spend some cycles cleaning up the PR (but not nearly as must we
+        would pay with RR model in OOO)
+
+It is also much more energy efficient.
