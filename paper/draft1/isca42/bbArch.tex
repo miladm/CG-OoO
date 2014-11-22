@@ -4,6 +4,17 @@
 \newcommand{\iscasubmissionnumber}{XXX}
 
 \usepackage[normalem]{ulem}
+\usepackage[nocompress]{cite}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+%\usepackage{amssym}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
 
 \begin{document}
 
@@ -33,12 +44,11 @@ performance gap between in-order and out-of-order.
 
 %%%%%%% BODY %%%%%%%
 \input{introduction}
-%\input{basicblock}
-\input{data_flow}
+\input{related_work}
+\input{o3_energy_overhead}
 \input{architecture}
-%\input{compiler}
+\input{bb_energy_saving}
 \input{simulation}
-\input{reg_allocation}
 \input{discussion}
 %\input{outline}
 

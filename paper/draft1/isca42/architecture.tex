@@ -5,11 +5,31 @@ Coarse grain execution exposes energy saving opportunities in most pipeline
 stages. In this section we discuss the flow of basicblocks through different
 pipeline stages and elaborate on how energy is saved in each stage.
 
+provide an example of the execution here.  it should contain a code with
+multiple BB's with local/global registers, header ins.  It should show flow of
+BB in a 2-wide machine. provide execution schedule, update and issue register
+activity. instruction issue logic information.
+
 Below, we discuss the various architectural components of this architecture.
 Figure XX illustrates the processor stages in detail.
 
+Discuss the overall structure of a basicblock. Focus on its unique attributes:
+MOV ops for turning global to local, local registers, header instructions. Show
+the image of BB.
 \input{bb_structure}
+
+Discuss the overall CPU frontend. Focus on what is differnet.
 \input{cpu_frontend}
+
+Discuss the overall CPU backend. Focus on what is differnet.
 \input{cpu_backend}
+
+Discuss BB scheduling. Perhaps here the example discussion is a great fit. (but
+        cook up the example throughout this whole section and explain it in
+        detail here.). This step should signify the dynamic ooo execution
+aspect.
 \input{scheduling}
+
+Focus on speculation support for memory and branch and how it impacts execution.
+again describe the example here.
 \input{speculation}

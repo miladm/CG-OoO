@@ -1,0 +1,47 @@
+\section{Energy Overheads of OoO}
+\label{sec:o3_overhead}
+
+BPU: lookup per fetch-width is excessive and hence prone to energy loss and
+aliasing problems. can only do lookup for H instructions
+to reduce port count + traffic of access.
+
+Fetch overhead can be optimized if registers did not take up so many bits.
+Looking into approaches to compress bits. This is possible if we use summary
+instructions. This is completely justified because each instruction in this ISA
+is shortened, making more than enough room to fetch additional instructions
+(i.e.  H). Provide proof this is justifiable.
+ 
+Having smaller instructions reduces the decoding overhead making the instruction
+decoding energy smaller.
+
+Register Renamer: renaming for short lived registers; lots of table lookups,
+         large port count (knowing the \~14x difference between LRF and GRF
+                 energy - not accounting for RR energy)
+
+Register file: lots of renaming means lots of PR's and lots of ports. Finding a
+solution to use a smaller register with fewer ports is attractive.
+
+iWindow: update and ready are CAM lookups. both take up a lot of energy.
+
+forwarding: arbitrary in OOO, but here it is scheduled to leverage it.
+
+LSQ: fewer mis-speculations because clos-by LS's can't conflict
+
+Squash drain overhead. This process involves either draining the entire ROB upto
+the point of flush or define tables that checkpoint program state. The latter
+approach is significantly more high performance, esp. for deep pipeline
+structures while being more energy consuming for keeping track of program state.
+WE choose to evalaute our work against the case with only ROB. ROB itself is an
+expensive structure.
+
+Register renaming is an energy efficient and latency intensive process. It
+consists of cRAT and fRAT, both tracking nearly the same information. An
+effective mechanism to consolidate the two tables into one is desirable.
+%Squash support in this model eliminates the need for a register rename commit
+%RAT only because on a squash the younger basicblocks can invalidate the faulty
+%entries (talk about it the solution later and give a teaser here)
+
+The complexity of operation and operand tracking is the root cause of deep
+pipelines. Simplifying the design space will open up chances for shortening the
+pipeline. Pipeline stage resduction: faster BP, fast and fewer RR, faster scheduling
+
