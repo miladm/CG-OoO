@@ -199,6 +199,9 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
             lastBB->rescheduleInsList (&g_var.g_seq_num);
         }
         lastBB->wrongPathCheck ();
+
+        /* GENERATE SOME STATISTICS */
+        pin__genInsStat (lastBB);
     }
 
     /* MAKE THE NEXT BASICBLOCK */

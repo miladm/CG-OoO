@@ -111,6 +111,7 @@ void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize () - 1;
+    LENGTH iROB_size = _iROB->getTableSize ();
 
     /*-- SQUASH iROB --*/
     _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
@@ -120,6 +121,8 @@ void o3_commit::bpMispredSquash () {
         if (ins->getInsID () < squashSeqNum) break;
         _iROB->removeNth_unsafe (i);
         _iROB->ramAccess ();
+        s_squash_ins_cnt++;
+        s_squash_br_cnt++;
     }
 
     /*-- SQUASH iQUE --*/
@@ -139,7 +142,7 @@ void o3_commit::bpMispredSquash () {
             }
         }
     }
-    Assert (_iQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    Assert (iROB_size > stop_indx && stop_indx >= start_indx && start_indx >= 0);
 
     /* PUSH BACK INS'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _iQUE->getTableSize () - 1; i > stop_indx; i--) {
@@ -148,8 +151,6 @@ void o3_commit::bpMispredSquash () {
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
         _iQUE->removeNth_unsafe (i);
-        s_squash_ins_cnt++;
-        s_squash_br_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }
@@ -161,8 +162,6 @@ void o3_commit::bpMispredSquash () {
         Assert (ins->isMemOrBrViolation () == true);
         Assert (ins->getInsID () >= squashSeqNum);
         _iQUE->removeNth_unsafe (i);
-        s_squash_ins_cnt++;
-        s_squash_br_cnt++;
         s_wp_ins_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(BR_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
@@ -182,6 +181,8 @@ void o3_commit::memMispredSquash () {
         if (ins->getInsID () < squashSeqNum) break;
         _iROB->removeNth_unsafe (i);
         _iROB->ramAccess ();
+        s_squash_ins_cnt++;
+        s_squash_mem_cnt++;
     }
 
     /*-- SQUASH iQUE --*/
@@ -192,8 +193,6 @@ void o3_commit::memMispredSquash () {
         ins->resetStates ();
         g_var.insertFrontCodeCache (ins);
         _iQUE->removeNth_unsafe (i);
-        s_squash_ins_cnt++;
-        s_squash_mem_cnt++;
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "(MEM_MISPRED) Squash ins", ins->getInsID (), _clk->now ());
     }

@@ -212,7 +212,7 @@ cpu:
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 15
+                size: 35
                 count: 16
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
@@ -290,11 +290,11 @@ cpu:
                latency: 1
                name: branchPred
            fetch:
-               width: 4
+               width: 8
                latency: 3
                name: fetch
            decode:
-               width: 4
+               width: 8
                latency: 4
                name: decode
            schedule:
