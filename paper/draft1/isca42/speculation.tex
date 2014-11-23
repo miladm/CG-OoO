@@ -1,5 +1,15 @@
-\subsection{Control Speculation}
+\subsection{Squash Handling}
 \label{sec:speculation}
+
+In BBE, squash events are handled at basic-block granularity. To avoid wasting
+{\it{useful}} instructions executed in a mis-speculated BB, the compiler uses
+profiling information to separate weakly biased branches form the rest of the BB
+into a single-instruction BB. Less than 0.01\% of useful instructions are wasted
+in BBE.
+
+The average number of BB's 
+
+
 
 Mis-speculation handling is coarse grain, making it fast and energy efficient.
 Discussion on number of wasted instructions.

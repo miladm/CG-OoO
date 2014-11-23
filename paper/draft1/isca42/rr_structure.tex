@@ -1,6 +1,10 @@
 \subsection{BB Register Renaming Model}
 \label{sec:bb_reg_ren}
 
+BBE enables the design of an energy efficient register rename model with one
+register aliasing table that holds both architectural and speculative register
+states.
+
 Upon a squash, we want to flush younger basic-blocks and invalidate any write
 that has been done to the PR by checking the RAT. This way, the drain stage is
 fully flushed out, making long-pipeline designs extremely affordable.
