@@ -70,15 +70,15 @@ it. The bulk of the squash penalty is in committing instructions older than the
 instruction causing the mis-speculation.  The reason why in squash recovery, all
 older instruction must commit is for the program to reach a non-speculative
 register file state.  Program checkpointing has been proposed to eliminate the
-need for the re-order buffer (ROB) to avoid this problem.  While quite effective
-in reducing squash penalty cost, program checkpoints utilize additional tables
-to keep track of multiple program state snapshots.  On average, these tables
-consume XX\% extra energy compared to ROB-based designs.  An energy efficient
-approach that supports fast squash recovery without paying the cost of
-checkpoint table structures is discussed later in this paper. This design will
-employs a technique that uses one register alias table (RAT) as opposed to
-conventional register renaming approaches that have two: fetch RAT and commit
-RAT.
+need for the re-order buffer (ROB) to avoid this problem~\cite{checkpoint}.
+While quite effective in reducing squash penalty cost, program checkpoints
+utilize additional tables to keep track of multiple program state snapshots.  On
+average, these tables consume XX\% extra energy compared to ROB-based designs.
+An energy efficient approach that supports fast squash recovery without paying
+the cost of checkpoint table structures is discussed later in this paper. This
+design will employs a technique that uses one register alias table (RAT) as
+opposed to conventional register renaming approaches that have two: fetch RAT
+and commit RAT.
 
 %Squash support in this model eliminates the need for a register rename commit
 %RAT only because on a squash the younger basicblocks can invalidate the faulty
