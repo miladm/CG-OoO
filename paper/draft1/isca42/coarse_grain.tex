@@ -37,7 +37,6 @@ the latency of unpredictable long latency events such as cache misses. To do so,
     scheduled and issues its instructions in-order.  As a result, when a load
     operation in a basic-block misses in the L1, it stalls but other in-flight
     basic-blocks issue instructions to hide its latency.
-    Figure~\ref{fig:coarse_grain_sch} illustrates three speculative basic-blocks
-    placed into three first-in-first-out (FIFO) instruction queues, contending
-    to schedule their instructions on the execution units (EU).
-
+    Figure~\ref{fig:coarse_grain_sch} illustrates four basic-blocks placed in
+    four first-in-first-out (FIFO) instruction queues, contending to schedule
+    their instructions on one of the available execution units (EU).
