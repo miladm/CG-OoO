@@ -1,9 +1,47 @@
 \section{Microarchitecture}
 \label{sec:arch}
 
+
+We find that instruction basicblocks can store up to ?
+
+
+talk abouat basicblock in compiler. the ability to do energy aware optimization
+passes such as scheduling, clever register allocation. these basicblocks then
+must be sent off to the cpu and treated as coarse grain entities.
+
+Figure~\ref{fig:bb_arch} shows the basic-block execution microarchitecture. The
+hardware units distinguishing BBE from OoO are Basic-block Window (BB Window),
+         Local Register File (LRF), Basic-block Re-order Buffer (BB-ROB), the
+         Register Rename bypass line, basic-block scheduler, and the branch
+         Prediction lookup line coming out from the BB Scheduler rather than
+         instruction scheduler. 
+
+BB Windows are FIFO buffers used to store up to 16 outstanding instructions.
+Instructions in a BB Window execute in-order. In this figure eight BB Windows
+are shown where each BB Window can issue up to one instruction per cycle. Each
+cycle, the head of each BB Window is checked for ready instructions. If more
+than four instructions are available, the four oldest instructions are issued.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\columnwidth]{fig/bb_architecture.pdf} 
+	\caption{Basicblock execution microarchitecture}
+	\label{fig:bb_arch}
+\end{figure}
+
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=\textwidth]{fig/pipeline.pdf} 
+	\caption{Basicblock execution pipeline}
+	\label{fig:pipeline}
+\end{figure*}
+
 Coarse grain execution exposes energy saving opportunities in most pipeline
 stages. In this section we discuss the flow of basicblocks through different
 pipeline stages and elaborate on how energy is saved in each stage.
+
 
 provide an example of the execution here.  it should contain a code with
 multiple BB's with local/global registers, header ins.  It should show flow of
@@ -33,3 +71,5 @@ aspect.
 Focus on speculation support for memory and branch and how it impacts execution.
 again describe the example here.
 \input{speculation}
+
+discuss how large basicblocks are partitioned.
