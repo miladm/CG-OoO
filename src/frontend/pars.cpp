@@ -326,22 +326,22 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
     cout << "BENCH: " << g_cfg->getProgName () << endl;
 
 	g_msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
-	char const * dummy_argv[] = {"TraceSim", 
-                                 "-o", "/scratch/tracesim/specint2006/results/ooo_listSch_dynBP_manyCache/401.bzip2.txt", 
-                                 "-i", "/scratch/tracesim/specint2006/bb_trace_archReg/401.bzip2.trace", 
-                                 "-c", "1", "-n", "4", "-s", "1", "-y", "1", "-j", "1", "-w", "160", 
-                                 "-x", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv", 
-                                 "-e", "num_wbb_bypassed_in_scheduling_each_ins", 
-                                 "-z", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/branch_exe_count_map.csv", 
-                                 NULL};
+//	char const * dummy_argv[] = {"TraceSim", 
+//                                 "-o", "/scratch/tracesim/specint2006/results/ooo_listSch_dynBP_manyCache/401.bzip2.txt", 
+//                                 "-i", "/scratch/tracesim/specint2006/bb_trace_archReg/401.bzip2.trace", 
+//                                 "-c", "1", "-n", "4", "-s", "1", "-y", "1", "-j", "1", "-w", "160", 
+//                                 "-x", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv", 
+//                                 "-e", "num_wbb_bypassed_in_scheduling_each_ins", 
+//                                 "-z", "/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/branch_exe_count_map.csv", 
+//                                 NULL};
 
-	int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
-	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
-	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
+//	int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
+//	bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
+//	bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
 
-    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init (dummy_argc, dummy_argv);
-    else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init (dummy_argc, dummy_argv);
-    else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init (dummy_argc, dummy_argv);
+    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init ();
+    else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init ();
+    else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init ();
 
 	g_msg.simStep ("START OF SIMULATION");
 }

@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include "sysCore.h"
 
-void bbBkEnd_init (int argc, char const * argv[]);
+void bbBkEnd_init ();
 void bbBkEndRun (FRONTEND_STATUS);
 void bbBkEnd_fini ();
 

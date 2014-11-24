@@ -28,9 +28,11 @@ class bb_lrfManager : public unit {
         registerFile _RF;
         WIDTH _lrf_id;
 
+    public:
         /*-- ENERGY --*/
         table_energy _e_table;
 
+    private:
         /*-- STAT OBJS --*/
         ScalarStat& s_unavailable_cnt;
 };

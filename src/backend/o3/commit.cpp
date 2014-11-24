@@ -111,7 +111,6 @@ void o3_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
     LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize () - 1;
-    LENGTH iROB_size = _iROB->getTableSize ();
 
     /*-- SQUASH iROB --*/
     _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
@@ -142,7 +141,8 @@ void o3_commit::bpMispredSquash () {
             }
         }
     }
-    Assert (iROB_size > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    /* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */
+    Assert (_iQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
 
     /* PUSH BACK INS'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _iQUE->getTableSize () - 1; i > stop_indx; i--) {

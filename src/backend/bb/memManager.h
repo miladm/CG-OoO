@@ -13,8 +13,8 @@
 #include "../unit/bbInstruction.h"
 #include "../unit/exeUnit.h"
 #include "../unit/unit.h"
-#include "../cacheCtrl.h"
-#include "../cache.h"
+//#include "../cacheCtrl.h"
+//#include "../cache.h"
 #include "../unit/port.h"
 #include "lsq.h"
 #include <driver_simple.h>
@@ -52,9 +52,9 @@ class bb_memManager : public unit {
     private:
         port<bbInstruction*>* _memory_to_scheduler_port;
 
-        cache _L1;
-        cache _L2;
-        cache _L3;
+//        cache _L1;
+//        cache _L2;
+//        cache _L3;
         Driver _cache;
 
         bb_lsqCAM _LQ;

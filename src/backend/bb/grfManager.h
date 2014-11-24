@@ -29,7 +29,9 @@ class bb_grfManager : public unit {
         o3_registerRename _GRF;
 
         /*-- ENERGY --*/
+    public:
         table_energy _e_rf;
+    private:
         table_energy _e_rat;
         table_energy _e_apr; /* AVIALBLE PR LIST */
         table_energy _e_arst;

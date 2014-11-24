@@ -11,7 +11,7 @@ void bbBkEndRun (FRONTEND_STATUS frontend_status) {
     _bb_core->runCore(frontend_status);
 }
 
-void bbBkEnd_init (int argc, char const * argv[]) {
+void bbBkEnd_init () {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
 
     WIDTH width, num_bbW;

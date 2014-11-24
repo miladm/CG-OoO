@@ -65,8 +65,8 @@ REG_TYPE bbInstruction::getARtype (AR a_reg) {
 #ifdef ASSERTION
     Assert (USE_LRF == true);
 #endif
-    if (a_reg >= LARF_LO && a_reg <= LARF_HI) return LOCAL_REG;
-    else if (a_reg >= GARF_LO && a_reg <= GARF_HI) return GLOBAL_REG;
+    if (a_reg >= g_cfg->getLARF_LO () && a_reg <= g_cfg->getLARF_HI () ) return LOCAL_REG;
+    else if (a_reg >= g_cfg->getGARF_LO () && a_reg <= g_cfg->getGARF_HI ()) return GLOBAL_REG;
     else Assert (true == false && "Architectural register is neither LOCAL nor GLOBAL");
     return LOCAL_REG; //Placeholder for compiler
 }

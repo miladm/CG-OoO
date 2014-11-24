@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/bbWin_size/35_ins'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref_medium_pipe/12_bb'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
@@ -13,6 +13,9 @@ FILE=$OUT_PATH/README
 
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
+
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE

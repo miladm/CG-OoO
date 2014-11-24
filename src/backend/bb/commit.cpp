@@ -125,7 +125,6 @@ void bb_commit::bpMispredSquash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynBasicblock* bb = NULL;
     LENGTH start_indx = 0, stop_indx = _bbQUE->getTableSize () - 1;
-    LENGTH bbROB_size = _bbROB->getTableSize ();
 
     /*-- SQUASH BBROB --*/
     _bbROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
@@ -166,7 +165,8 @@ void bb_commit::bpMispredSquash () {
 //            } else {break;}
 //        }
 //    }
-    Assert (bbROB_size > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+    /* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */
+    Assert (_bbQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
 
     /* PUSH BACK BB'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _bbQUE->getTableSize () - 1; i > stop_indx; i--) {

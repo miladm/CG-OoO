@@ -136,21 +136,21 @@ typedef enum {
 /*-- REGSITER RENAMING --*/
 #define USE_LRF true
 
-#define LARF_SIZE 17
-#define SGRARF_SIZE 20
-#define GARF_SIZE 60 + SGRARF_SIZE
-#define GRRF_SIZE 120
-#define GPRF_SIZE GARF_SIZE + GRRF_SIZE
-
-#define LARF_LO 100
-#define LARF_HI LARF_LO + LARF_SIZE - 1
-#define GARF_LO LARF_HI + 1
-#define GARF_HI GARF_LO + GARF_SIZE - 1
-#define GRRF_LO GARF_HI + 1
-#define GRRF_HI GRRF_LO + GRRF_SIZE - 1
-
-#define GPRF_LO 1
-#define GPRF_HI GPRF_LO + GPRF_SIZE - 1
+//#define LARF_SIZE 17
+//#define SGRARF_SIZE 20
+//#define GARF_SIZE 60 + SGRARF_SIZE
+//#define GRRF_SIZE 40
+//#define GPRF_SIZE GARF_SIZE + GRRF_SIZE
+//
+//#define LARF_LO 100
+//#define LARF_HI LARF_LO + LARF_SIZE - 1
+//#define GARF_LO LARF_HI + 1
+//#define GARF_HI GARF_LO + GARF_SIZE - 1
+//#define GRRF_LO GARF_HI + 1
+//#define GRRF_HI GRRF_LO + GRRF_SIZE - 1
+//
+//#define GPRF_LO 1
+//#define GPRF_HI GPRF_LO + GPRF_SIZE - 1
 
 //FRONT END GLOBALS
 

@@ -42,9 +42,9 @@ class bb_memory : protected stage {
         bb_rfManager* _RF_MGR;
         RAMtable<bbInstruction*> _mshr;
 
-        cache _L1;
-        cache _L2;
-        cache _L3;
+//        cache _L1;
+//        cache _L2;
+//        cache _L3;
 
         // BB WIN STRUCTURES
         WIDTH _num_bbWin;

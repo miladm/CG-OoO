@@ -11,7 +11,7 @@ void inoBkEndRun(FRONTEND_STATUS frontend_status) {
     _core->runCore(frontend_status);
 }
 
-void inoBkEnd_init (int argc, char const * argv[]) {
+void inoBkEnd_init () {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
     int width, bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
 

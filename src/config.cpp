@@ -18,10 +18,21 @@ config::config () {
 //		cfgFile TO EXIST
 //		PinPointFile TO EXIST
 config::config (string bench_path, string config_path, string out_dir) {
-    ifstream fin ("/home/milad/esc_project/svn/PARS/src/config/base.yaml");
+    string yaml_file = out_dir + "/base.yaml";
+    ifstream fin (yaml_file);
     YAML::Parser parser (fin);
     parser.GetNextDocument (_root);
 
+
+    _root["cpu"]["backend"]["rf"]["lrf"]["rf_lo"] >> _larf_lo;
+    _root["cpu"]["backend"]["rf"]["lrf"]["rf_hi"] >> _larf_hi;
+    _root["cpu"]["backend"]["rf"]["grf"]["a_lo"]  >> _garf_lo;
+    _root["cpu"]["backend"]["rf"]["grf"]["a_hi"]  >> _garf_hi;
+
+
+
+
+    /* =========== ============ */
     /* organzie this code  - hack */
     _warmed_up = false;
     _enable_warm_up = true;
@@ -397,5 +408,13 @@ void config::setWarmedUp () {_warmed_up = true;} /* TODO this bad hack - change 
 bool config::isWarmedUp () {return _warmed_up;}
 
 bool config::warmUpEn () {return _enable_warm_up;}
+
+AR config::getLARF_LO () {return _larf_lo;}
+
+AR config::getLARF_HI () {return _larf_hi;}
+
+AR config::getGARF_LO () {return _garf_lo;}
+
+AR config::getGARF_HI () {return _garf_hi;}
 
 config* g_cfg;

@@ -39,9 +39,9 @@ class o3_memory : protected stage {
         o3_rfManager* _RF_MGR;
         RAMtable<dynInstruction*> _mshr;
 
-        cache _L1;
-        cache _L2;
-        cache _L3;
+//        cache _L1;
+//        cache _L2;
+//        cache _L3;
 };
 
 #endif

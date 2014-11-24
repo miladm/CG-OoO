@@ -6,8 +6,8 @@
 #define _MEMORY_H
 
 #include "../unit/stage.h"
-#include "../cacheCtrl.h"
-#include "../cache.h"
+//#include "../cacheCtrl.h"
+//#include "../cache.h"
 #include "rfManager.h"
 #include <driver_simple.h>
 
@@ -40,9 +40,9 @@ class memory : protected stage {
         RAMtable<dynInstruction*> _mshr;
         FIFOtable<dynInstruction*> _st_buff;
 
-        cache _L1;
-        cache _L2;
-        cache _L3;
+//        cache _L1;
+//        cache _L2;
+//        cache _L3;
         Driver _cache;
 
         /* STAT OBJS */

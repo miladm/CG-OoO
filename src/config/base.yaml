@@ -74,42 +74,58 @@ cpu:
                e_ram: 0.33415725
 
        rf:
-           rf:
-               a_size:
-               a_hi:
-               a_lo:
-               p_size:
-               p_hi:
-               p_lo:
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
-               name:
-               cout: 1
-               e_cam: 0
-               e_ram: 9.037722
-           grf:
-               a_size:
-               a_hi:
-               a_lo:
-               p_size:
-               p_hi:
-               p_lo:
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
-               name:
-               cout: 1
-               e_cam: 0
-               e_ram: 8.3939885
            simple:
-               rf_size:
-               rf_hi:
-               rf_lo:
+               rf_size: 80
+               rf_lo: 117
+               rf_hi: 196
                rd_wire_cnt: 8
                wr_wire_cnt: 4
-               name:
+               name: SIMPLE_RF
+               cout: 1
+               e_cam: 0
+               e_ram: 0.581841
+           lrf:
+               rf_size: 17
+               rf_lo: 100
+               rf_hi: 116
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
+               name: LRF
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
                e_ram: 0.581841
+           grf:
+               a_size: 80
+               a_lo: 117
+               a_hi: 196
+               r_size: 40 # RENAME REGS
+               r_lo: 197
+               r_hi: 236
+               p_size: 120
+               p_lo: 1
+               p_hi: 120
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
+               name: GRF
+               cout: 1
+               e_cam: 0
+               e_ram: 8.3939885
+           rf:
+               a_size: 80
+               a_lo: 117
+               a_hi: 196
+               r_size: 120 # RENAME REGS
+               r_lo: 197
+               r_hi: 316
+               p_size: 200
+               p_lo: 1
+               p_hi: 200
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
+               name: RF
+               cout: 1
+               e_cam: 0
+               e_ram: 9.037722
            arst:
                e_cam: 0
                e_ram: 0.504776
@@ -212,8 +228,8 @@ cpu:
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 35
-                count: 16
+                size: 15
+                count: 12
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0

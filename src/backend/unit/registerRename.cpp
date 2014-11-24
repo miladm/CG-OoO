@@ -6,16 +6,21 @@
 
 o3_registerRename::o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk), 
-      _a_rf_size (GARF_HI - GARF_LO + 1), 
-      _a_rf_hi (GARF_HI), 
-      _a_rf_lo (GARF_LO), 
-      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
-      _p_rf_hi (GPRF_HI), 
-      _p_rf_lo (GPRF_LO), 
       _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
       _rd_port (READ,  clk, root, rf_name + ".rd_wire")
 {
     _cycle = START_CYCLE;
+
+    /* SETUP REGISTER DIMENSIONS */
+    root["a_size"] >> _a_rf_size;
+    root["a_lo"] >> _a_rf_lo;
+    root["a_hi"] >> _a_rf_hi;
+    root["p_size"] >> _p_rf_size;
+    root["p_lo"] >> _p_rf_lo;
+    root["p_hi"] >> _p_rf_hi;
+    root["r_size"] >> _r_rf_size;
+    root["r_lo"] >> _r_rf_lo;
+    root["r_hi"] >> _r_rf_hi;
 
     /*-- INITIALIZE ALL TABLES --*/
     PR PR_counter = _p_rf_lo;
@@ -37,58 +42,10 @@ o3_registerRename::o3_registerRename (sysClock* clk, const YAML::Node& root, str
         PR_counter++;
     }
 
-    Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structure initialization.");
-    Assert (_RF.size () == GPRF_SIZE && "Invalid Rename table structure initialization.");
-    Assert (_fRAT.size () == GARF_SIZE && "Invalid Rename table structure initialization.");
-    Assert (_cRAT.size () == GARF_SIZE && "Invalid Rename table structure initialization.");
-}
-
-o3_registerRename::o3_registerRename (AR a_rf_lo, 
-                                     AR a_rf_hi, 
-                                     sysClock* clk,
-                                     const YAML::Node& root, 
-                                     string rf_name) 
-    : unit (rf_name, clk),
-      _a_rf_size (a_rf_hi - a_rf_lo + 1), 
-      _a_rf_hi (a_rf_hi), 
-      _a_rf_lo (a_rf_lo), 
-      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
-      _p_rf_hi (GPRF_HI), 
-      _p_rf_lo (GPRF_LO), 
-      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
-      _rd_port (READ,  clk, root, rf_name + ".rd_wire")
-{
-    WIDTH rd_wire_cnt, wr_wire_cnt;
-    root["rd_wire_cnt"] >> rd_wire_cnt;
-    root["wr_wire_cnt"] >> wr_wire_cnt;
-
-    _cycle = START_CYCLE;
-
-	/*-- INITIALIZE ALL TABLES --*/
-	PR PR_counter = _p_rf_lo;
-
-	/*-- INITIALIZE ARCHITECTURAL REGISTER DOMAIN --*/
-	for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
-        o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
-		_fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
-		_cRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
-        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
-		PR_counter++;
-	}
-
-	/*-- INITIALIZE RENAME REGISTER DOMAIN --*/
-	while (PR_counter <= _p_rf_hi) {
-        o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
-		_availablePRset.push_back (p_reg);
-        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
-		PR_counter++;
-	}
-
-    Assert (rd_wire_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_wire_cnt && "Must have twice as many read wires than write wires.");
-	Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structure initialization.");
-	Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initialization.");
-	Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
-	Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
+    Assert (_availablePRset.size () == _r_rf_size && "Invalid Rename table structure initialization.");
+    Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initialization.");
+    Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
+    Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
 }
 
 o3_registerRename::~o3_registerRename () {
@@ -142,7 +99,7 @@ void o3_registerRename::setAsAvailablePR (PR p_reg) {
 	Assert (_RF.find (p_reg) != _RF.end () && "Physical reg not found!");
 	_availablePRset.push_back (_RF[p_reg]);
 	_RF[p_reg]->_prev_pr = NULL;
-	Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown too large (size violation).");
+	Assert (_availablePRset.size () <= _r_rf_size && "Rename table has grown too large (size violation).");
 }
 
 int o3_registerRename::getNumAvailablePR () {
@@ -182,7 +139,7 @@ void o3_registerRename::squashRenameReg () {
         p_obj->_prev_pr = NULL;
         _availablePRset.push_back (_RF[p_reg]);
     }
-    Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown too large (size violation).");
+    Assert (_availablePRset.size () <= _r_rf_size && "Rename table has grown too large (size violation).");
 }
 
 void o3_registerRename::updatePR (PR new_pr, PR prev_pr, REG_REN_STATE state) {

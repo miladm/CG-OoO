@@ -34,6 +34,7 @@ class config {
         CORE_TYPE getCoreType ();
         MEM_MODEL getMemModel ();
         BP_TYPE getBPtype ();
+        int getNumEu ();
         long double getMaxInsCnt ();
         bool isEnSquash ();
         bool isEnEuFwd ();
@@ -45,6 +46,12 @@ class config {
         void setWarmedUp ();
         bool isWarmedUp ();
         bool warmUpEn ();
+
+        /* REGISTRE FILE TYPES AND SIZE */
+        AR getLARF_LO ();
+        AR getLARF_HI ();
+        AR getGARF_LO ();
+        AR getGARF_HI ();
 
     private:
 		bool parsePinPointFiles ();
@@ -119,6 +126,8 @@ class config {
         bool _enable_warm_up;
         bool _warmed_up;
 
+        //REGISTER FILE PARAMS
+        AR _larf_lo, _larf_hi, _garf_lo, _garf_hi;
     public:
         YAML::Node _root;
 };

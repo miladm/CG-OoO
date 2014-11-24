@@ -9,7 +9,7 @@
 #include "sysCore.h"
 #include "../unit/sysClock.h"
 
-void inoBkEnd_init (int argc, char const * argv[]);
+void inoBkEnd_init ();
 void inoBkEndRun (FRONTEND_STATUS);
 void inoBkEnd_fini ();
 

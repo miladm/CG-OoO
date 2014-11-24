@@ -13,6 +13,9 @@ CFG_FILE=$1
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
+
 ## QSUB
 qsub -e $QSUB_OUT_PATH -o $OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N ts_gcc        $RUN_DIR/run.sh -b $CFG_PATH/403.gcc        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/403.gcc/403.gcc -C $BENCH_INPUT/403.gcc/test/input/cccp.i -o $OUT_PATH/out.o
 qsub -e $QSUB_OUT_PATH -o $OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N ts_mcf        $RUN_DIR/run.sh -b $CFG_PATH/429.mcf        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/test/input/inp.in

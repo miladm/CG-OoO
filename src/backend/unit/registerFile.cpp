@@ -4,16 +4,16 @@
 
 #include "registerFile.h"
 
-registerFile::registerFile (PR rf_begin_num, PR rf_size, 
-                            sysClock* clk, const YAML::Node& root,
-                            string rf_name)
+registerFile::registerFile (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _rf_size (rf_size),
-      _rf_begin_num (rf_begin_num),
-      _rf_end_num (rf_begin_num + rf_size - 1),
       _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
       _rd_port (READ, clk, root, rf_name + ".rd_wire")
 {
+    /* SETUP REGISTER DIMENSIONS */
+    root["rf_size"] >> _rf_size;
+    root["rf_lo"] >> _rf_begin_num;
+    root["rf_hi"] >> _rf_end_num;
+
     WIDTH rd_wire_cnt, wr_wire_cnt;
     root["rd_wire_cnt"] >> rd_wire_cnt;
     root["wr_wire_cnt"] >> wr_wire_cnt;

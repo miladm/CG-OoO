@@ -33,7 +33,6 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
     }
 
     if (p_rdReg_list->NumElements () == 0) {
-        _e_rf.ramAccess (ins->getTotNumRdAR ());
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /*-- all operands available --*/

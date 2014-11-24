@@ -22,6 +22,7 @@ static ScalarStat& s_dyn_lr_rd_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_rd_
 static ScalarStat& s_dyn_lr_wr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_wr_cnt", "Number of local register write operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_ins_with_lr_operand_cnt (g_stats.newScalarStat ("uOpGen", "ins_with_lr_operand_cnt", "Number of operations with local reg operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_ins_without_lr_operand_cnt (g_stats.newScalarStat ("uOpGen", "ins_without_lr_operand_cnt", "Number of operations without local reg operands", 0, NO_PRINT_ZERO));
+static ScalarStat& s_large_bb_cnt (g_stats.newScalarStat ("uOpGen", "large_bb_cnt", "Number of basicblocks > bbWindow size", 0, NO_PRINT_ZERO));
 
 /* ************************************* *
  * INS INSTRUMENTATIONS
@@ -150,6 +151,9 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
 
 /*-- DETECT IF A NEW BB BEGINS --*/
 void pin__detectBB (ADDRINT ins_addr) {
+    LENGTH bbWin_size;
+    g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["size"] >> bbWin_size;
+
     if (g__staticCode->hasStaticBB (ins_addr)) {
         BOOL is_tail_br = g__staticCode->bbHasBr (ins_addr);
         ADDRINT bb_br_addr = g__staticCode->getBBbr (ins_addr);
@@ -157,10 +161,11 @@ void pin__detectBB (ADDRINT ins_addr) {
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
         _bbHeadSet.insert (ins_addr);
-    } else if (g_var.getLastCacheBB ()->getBBsize () > 20  ||
-               g_var.getLastCacheBB ()->_insList.NumElements () > 20 ||
-               g_var.getLastCacheBB ()->_bbInsMap.size () > 20) { //TODO temp solution to break off large BB's
+    } else if (g_var.getLastCacheBB ()->getBBsize () > bbWin_size  ||
+               g_var.getLastCacheBB ()->_insList.NumElements () > bbWin_size ||
+               (LENGTH)g_var.getLastCacheBB ()->_bbInsMap.size () > bbWin_size) { //TODO temp solution to break off large BB's
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
+        s_large_bb_cnt++;
     }
     g_br_detected = false;
 }

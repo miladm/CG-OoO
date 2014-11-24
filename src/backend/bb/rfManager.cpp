@@ -15,7 +15,7 @@ bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, const YAML::Node& ro
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
         bbWin_id << i;
-        bb_lrfManager* LRF_MGR = new bb_lrfManager (i, _clk, root["simple"], "lrfManager_" + bbWin_id.str ());
+        bb_lrfManager* LRF_MGR = new bb_lrfManager (i, _clk, root["lrf"], "lrfManager_" + bbWin_id.str ());
         _LRF_MGRS.insert (pair<WIDTH, bb_lrfManager*>(i, LRF_MGR));
     }
 }
@@ -72,10 +72,15 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     if (!grf_ready) s_grf_not_ready_cnt++;
     if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
 
-    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        WIDTH bbWin_id = ins->getBBWinID ();
+        _LRF_MGRS[bbWin_id]->_e_table.ramAccess (ins->getTotNumRdLAR ());
+        _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ()); /* TODO this is convervation - not cnting FWD */
         return (grf_ready && lrf_ready);
-    else if (g_cfg->getRegAllocMode () == GLOBAL)
+    } else if (g_cfg->getRegAllocMode () == GLOBAL) {
+        _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ());
         return (grf_ready);
+    }
     Assert (true == false && "invalid register allocation model");
     return grf_ready; /* PLEACE HOLDER */
 }

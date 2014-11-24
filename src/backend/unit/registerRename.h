@@ -27,8 +27,6 @@ struct o3_regElem {
 class o3_registerRename : public unit {
 	public:
 		o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name);
-		o3_registerRename (AR a_rf_lo, AR a_rf_hi, 
-                           sysClock* clk, const YAML::Node& root, string rf_name);
 		~o3_registerRename ();
 
 		PR renameReg (AR a_reg);
@@ -60,13 +58,17 @@ class o3_registerRename : public unit {
 	private:
         CYCLE _cycle;
 
-        const PR _a_rf_size;
-        const PR _a_rf_hi;
-        const PR _a_rf_lo;
+        PR _a_rf_size;
+        PR _a_rf_hi;
+        PR _a_rf_lo;
 
-        const AR _p_rf_size;
-        const AR _p_rf_hi;
-        const AR _p_rf_lo;
+        AR _p_rf_size;
+        AR _p_rf_hi;
+        AR _p_rf_lo;
+
+        PR _r_rf_size;
+        PR _r_rf_hi;
+        PR _r_rf_lo;
 
         wires _wr_port;
         wires _rd_port;

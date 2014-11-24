@@ -28,7 +28,7 @@ struct registerElement {
 
 class registerFile : public unit {
 	public:
-		registerFile (PR, PR, sysClock*, const YAML::Node&, string rf_name);
+		registerFile (sysClock*, const YAML::Node&, string rf_name);
 		~registerFile ();
 		void updateReg (PR reg);
 		void reserveReg (PR reg);
@@ -44,9 +44,9 @@ class registerFile : public unit {
 	private:
 		map<PR, registerElement*> _RF;
         CYCLE _cycle;
-        const PR _rf_size;
-        const PR _rf_begin_num;
-        const PR _rf_end_num;
+        PR _rf_size;
+        PR _rf_begin_num;
+        PR _rf_end_num;
         wires _wr_port;
         wires _rd_port;
 };
