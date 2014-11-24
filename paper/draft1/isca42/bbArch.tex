@@ -15,6 +15,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{listings}
+\usepackage{courier}
 
 \begin{document}
 
@@ -31,13 +32,13 @@ Basic-block Architecture}
 
 The main factors contributing to the bulk of energy consumption in modern
 out-of-order processors are the speculative logic units, dynamic instruction
-scheduling modules, and on-chip data movement.  This work significantly reduces
+scheduling modules, and on-chip data movement.  This work reduces
 these energy overheads via introducing compiler-generated techniques that enable
 near in-order energy consumption while maintaining near out-of-order computation
 performance. Specifically, we introduce the notion of coarse-grain program
 execution; in this model, program basic-blocks are speculatively run
 out-of-order while instructions within each basic-block run in-order.
-Basic-block execution closes up to 90\% of the energy gap and 78\% of the
+Basic-block execution closes up to XX\% of the energy gap and XX\% of the
 performance gap between in-order and out-of-order.
 
 \end{abstract}
@@ -46,8 +47,10 @@ performance gap between in-order and out-of-order.
 \input{introduction}
 \input{related_work}
 \input{o3_energy_overhead}
+\input{coarse_grain}
+\input{code_gen}
 \input{architecture}
-\input{bb_energy_saving}
+%\input{bb_energy_saving}
 \input{simulation}
 \input{discussion}
 %\input{outline}

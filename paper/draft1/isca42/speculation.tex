@@ -1,21 +1,23 @@
-\subsection{Control Speculation}
+\subsection{Squash Handling}
 \label{sec:speculation}
 
-Mis-speculation handling is coarse grain, making it fast and energy efficient.
-Discussion on number of wasted instructions.
-Discussion on the changes in memory mis-speculation model.
+In BBE, squash events are handled at basic-block granularity. To avoid wasting
+{\it{useful}} instructions executed in a mis-speculated BB, the compiler uses
+profiling information to separate weakly biased branches form the rest of the BB
+into a single-instruction BB. Less than XX\% of useful instructions are wasted
+in BBE.
 
-%There are two kinds of speculation: memory and control.
-%
-%Control speculation: apart from the oldest basicblock in flight, all other
-%in-flight basicblocks are speculatively fetched and executed. The key elements
-%of speculation are: branch prediction, squash handling. Branch prediction is
-%done energy efficiently and more accurately as only H instructions access BP.
-%Squash handling is done coarse-grain meaning there is a chance that we lose
-%useful instructions (SPEC shows that the number useful instructions flushed is
-%small - I will add a figure to back it here). We also talk about how the number
-%of cycles to ramp down from a squash is shorter in BB  OoO.
-%
+The average number of BB's squashed per mis-prediction event is 6 where each
+basic-block has an average of 3 global write operands. BBE is able to invalidate
+register renaming entries within 5 cycles which is comparable to the number of
+cycles OoO takes to restore a checkpoint and restart the execution. This
+approach eliminates the need for both program checkpointing and a second
+register alias table.
+
+% how many cycles does it take to load a checkpoint?
+% how much energy is it to track checkpoints?
+
+
 %Memory mis-prediction is less likely in this model as each basicblock buffer
 %runs in-order (no chance of mis-speculation between load-stores within a
 %basicblock). We also say that mis-speculation handling is the same for
