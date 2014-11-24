@@ -4,13 +4,13 @@
 In BBE, squash events are handled at basic-block granularity. To avoid wasting
 {\it{useful}} instructions executed in a mis-speculated BB, the compiler uses
 profiling information to separate weakly biased branches form the rest of the BB
-into a single-instruction BB. Less than 0.01\% of useful instructions are wasted
+into a single-instruction BB. Less than XX\% of useful instructions are wasted
 in BBE.
 
 The average number of BB's squashed per mis-prediction event is 6 where each
 basic-block has an average of 3 global write operands. BBE is able to invalidate
-register renaming entries within 5 which is comparable to the number of cycles
-OoO takes to restore a checkpoint and start over the execution. Though, this
+register renaming entries within 5 cycles which is comparable to the number of
+cycles OoO takes to restore a checkpoint and restart the execution. This
 approach eliminates the need for both program checkpointing and a second
 register alias table.
 

@@ -4,7 +4,7 @@
 Dynamic instruction scheduling and speculative execution deliver high single
 threaded performance at the expense of keeping a large amount of instruction
 state data in various tables such as the reservation station, register rename,
-      load-store queue tables, etc. Overall uX\% of the overall CPU energy is
+      and load-store queue tables. Overall XX\% of the overall CPU energy is
       consumed maintaining these tables. In this section we discuss how various
       design choices in the OoO processor design lead to wasted energy, and in a
       later section we discuss solutions to address each of the problems
@@ -13,11 +13,12 @@ state data in various tables such as the reservation station, register rename,
 In modern OoO processors, the branch prediction unit (BPU) must be accessed
 before the corresponding fetch-group is decoded and instruction types are
 identified~\cite{ref:EV8}. As a result the BPU is accessed by all instruction,
-    creating excessive access traffic and mis-prediction due to aliasing
-    problems. Identifying branch instructions ahead of time and looking the BP
-    for them only is desirable as we find it can reduce the look up traffic by
-    XXX\% and reduce the number of BPU access ports by XX.
+    creating excessive access traffic and mis-prediction due to aliasing.
+    Identifying branch instructions ahead of time and looking up BPU for only
+    branch operations is desirable as it reduces the look up traffic by XX\% and
+    reduce the number of BPU to XX.
 
+[NOT SURE IF I WILL KEEP THIS PARAGRAPH YET]
 The number of architectural registers (AR) in the ISA define the number of bits
 required to represent a register operand, and the number of physical registers
 (PR) define the number of bits required to represent a physical register operand
@@ -25,22 +26,20 @@ after register renaming. These bits are XX\% and XX\% of the instruction binary
 in x86 and ARM ISA's~\cite{}. Energy is spent in carrying these bits through
 most of the pipeline stages until when they are used to access the register
 file. We observe, often times, in the program control flow nearby operations use
-the same AR and/or PR operands. A solution consolidates these operands so that
+the same AR and/or PR operands. A solution that consolidates these operands so that
 they are only carried through the micro-architecture once per cluster of
-neighboring instructions is favorable. An operand compression solution can
-increase the instruction fetch bandwidth without adding extra ports to the cache
+neighboring instructions is favorable. An operand compression solution 
+increases the instruction fetch bandwidth without adding extra ports to the cache
 or maintain the same fetch bandwidth with a narrower and more energy efficient
 fetch width. Also, compressed operand encoding can simplify the decoder stage as
-fewer bits are decoded.
+fewer bits are decoded. 
 
 We observe XX\% of AR's allocated in the compiler are simple DEF-USE pairs
 (without further reuse), and XX\% of the time both the DEF-USE operations belong
 to the same basic-block in the control flow. Allocating register rename
 resources to such cases is an energy and hardware overhead that, if avoided,
           reduces register rename table and physical register file sizes; it
-          also reduces the number of ports needed to these tables. This can be
-          accomplished if the CPU has register files with and without register
-          rename support.
+          also reduces the number of ports needed to these tables. 
 
 Modern OoO processors hold 128 instructions in the instruction window. Dynamic
 out-of-order instruction scheduling requires the entire table be parallel
@@ -50,45 +49,43 @@ result, the instruction window is designed as a content addressable memory (CAM)
     simple instruction window queue used in in-order processors consumes XpJ on
     average to access only the head of the queue. In a later section we discuss
     a new design solution that enables dynamic instruction scheduling while
-    eliminating the instruction window. This design significantly benefits from
-    the cheap instruction issue and update checks.
+    eliminating the instruction window. 
 
 % need a citation for next paragraph
-Data forward enables significant performance improvements by saving a cycle
-reading from the register file. While the OoO execution model benefits from
-instruction scheduling, there is no concrete model to explicitly leverage data
-forwarding on all nearby DEF-USE cases. Since the information to generate
-DEF-USE chains is available at compile time, a static scheduling model that
-exposes explicit forwarding improves performance and reduces the energy overhead
-of unnecessary reads to the register file.
+Data forwarding allows significant performance improvements by saving a cycle
+reading from the register file. While the OoO execution model benefits from data
+forwarding, there is no concrete model to explicitly schedule nearby DEF-USE
+operations. Since the information to generate DEF-USE chains is available at
+compile time, a static scheduling model that exposes explicit forwarding
+improves performance and reduces the energy overhead of unnecessary reads to the
+register file.
 
 % need a citation for the numbers here
 Speculative execution squash penalty for modern superscalar OoO processors is
-around 20 cycles. As the pipeline depth increases, squash penalty rises to a
-point where speculative execution degrades the performance rather than improving
-it. The bulk of the squash penalty is in committing instructions older than the
-instruction causing the mis-speculation.  The reason why in squash recovery, all
-older instruction must commit is for the program to reach a non-speculative
-register file state.  Program checkpointing has been proposed to eliminate the
-need for the re-order buffer (ROB) to avoid this problem~\cite{checkpoint}.
-While quite effective in reducing squash penalty cost, program checkpoints
-utilize additional tables to keep track of multiple program state snapshots.  On
-average, these tables consume XX\% extra energy compared to ROB-based designs.
-An energy efficient approach that supports fast squash recovery without paying
-the cost of checkpoint table structures is discussed later in this paper. This
-design will employs a technique that uses one register alias table (RAT) as
-opposed to conventional register renaming approaches that have two: fetch RAT
-and commit RAT.
+approximately 23 cycles. As the pipeline depth increases, squash penalty rises
+to a point where speculative execution degrades the performance rather than
+improving it. The bulk of the squash penalty is in committing instructions older
+than the instruction causing the mis-speculation.  The reason why in squash
+recovery, all older instruction must commit is for the program to reach a
+non-speculative register file state.  Program checkpointing has been proposed to
+eliminate the need for the re-order buffer (ROB) to avoid this
+problem~\cite{checkpoint}.  While quite effective in reducing squash penalty
+cost, program checkpoints utilizes additional tables to keep track of multiple
+program state snapshots.  On average, these tables consume XX\% extra energy
+compared to ROB-based designs.  An energy efficient approach that supports fast
+squash recovery without paying the cost of checkpoint table structures is
+discussed later in this paper. This design employs a renaming technique that
+uses a single register alias table (RAT) as opposed to multiple RAT's at
+different execution checkpoints.
 
 %Squash support in this model eliminates the need for a register rename commit
 %RAT only because on a squash the younger basicblocks can invalidate the faulty
 %entries (talk about it the solution later and give a teaser here)
 
-The OoO design choices discussed in this section introduce a level complexity
-that leads to deep pipelining in recent processors. Simplifying these choices in
-a way that the requirement for on-chip data movement and program context
-tracking is less leads to a design with fewer pipeline cycles at the same clock
-frequency.
+The OoO design choices discussed in this section introduce a degree of
+complexity that leads to deep pipelining in recent processors. Simplifying these
+complexities reduces on-chip data movement and program context tracking which in
+turn leads fewer pipeline cycles at the same clock frequency.
 
 %NO PLAN TO TALK ABOUT THIS FOR NOW:
 %LSQ: fewer mis-speculations because clos-by LS's can't conflict

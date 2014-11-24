@@ -27,16 +27,14 @@ basic-block is minimized.
 In the presence of unpredictable memory and control stalls, a fully static
 schedule cannot deliver the same code quality as a dynamic scheduler like the
 Tomosulo's algorithm~\cite{tomasulo}. To address the problem with unpredictable
-long latency operations, we propose a new approach in combining static and
-dynamic scheduling that leverages the ability of static scheduling in saving
-energy while delivering optimal code schedules for parts of the code that need
-dynamic scheduling and to leverage the ability of dynamic scheduling in hiding
-the latency of unpredictable long latency events such as cache misses. To do so,
-    we allow multiple speculative basic-blocks to be in-flight at the same time
-    to dynamically contend for resources.  Each basic-block is statically
-    scheduled and issues its instructions in-order.  As a result, when a load
-    operation in a basic-block misses in the L1, it stalls but other in-flight
-    basic-blocks issue instructions to hide its latency.
+long latency operations, we combine static and dynamic scheduling to leverage
+static scheduling for saving energy while delivering optimal code schedules, and
+to leverage dynamic scheduling only for hiding unpredictable long latency events
+such as cache misses. To do so, we allow multiple speculative basic-blocks to be
+in-flight at the same time to dynamically contend for resources.  Each
+basic-block is statically scheduled and issues its instructions in-order.  As a
+result, when a load operation in a basic-block misses in the L1, it stalls,
+    though other in-flight basic-blocks issue instructions to hide its latency.
     Figure~\ref{fig:coarse_grain_sch} illustrates four basic-blocks placed in
     four first-in-first-out (FIFO) instruction queues, contending to schedule
     their instructions on one of the available execution units (EU).
