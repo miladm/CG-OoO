@@ -13,11 +13,6 @@ Discussion of related papers that address above issues. items are:
 2) multi-scalar
 3) energy efficient computing (recent papers on this)
 
-Contributions of this paper: 
-1) coarse-grain execution model
-2) energy driven design
-3) performance aware design
-
 
 \begin{figure}[h]
 	\centering
@@ -35,20 +30,43 @@ Contributions of this paper:
 % The key sources of energy consumption in OoO processors is data-movement and XX
 % (back this up).
 % 
-% Dynamism and speculation enable significant single-threaded performance benefits
-% through effective latency hiding of unpredictable events such as cache miss and
-% control mis-speculation.  Despite their performance advantages, dynamism and
-% speculation cause a significant energy overhead for keeping track of instruction
-% states and on-chip data movement; this energy overhead can be acceptable when,
-% in fact, an unpredictable event stalls the execution flow; otherwise, a
-% statically scheduled program can perform at least as well as a
-% dynamically generated schedule.
-% 
-% The key contribution of this work is a scheduling model that combines static and
-% dynamic scheduling with the gaol of reducing the processor energy overhead while
-% maintaining near out-of-order (OoO) processor performance. Static scheduling provides
-% fine-grain, optimal instruction-level scheduling while dynamic scheduling
-% enables coarse grain, basicblock-level scheduling to dynamically hide
-% unpredictable latencies.  In this model, each basicblock executes its
-% instructions in-order while multiple basicblocks execute out of order with
-% respect to one another.
+Dynamic execution and program speculation enable significant single-threaded
+performance benefits through effective latency hiding of unpredictable events
+such as cache miss and control mis-speculation.  Despite their performance
+advantages, these execution models produce significant energy overhead for
+keeping track of instruction states and generate substantial on-chip data
+traffic; this energy overhead may be acceptable when, in fact, an unpredictable
+event stalls the execution flow; otherwise, a statically scheduled program can
+perform at least as well as a dynamically generated schedule.
+
+This paper makes the following contributions:
+\begin{itemize}
+    \item It evaluates the impact of dynamic / static hybrid instruction
+    scheduling on energy efficient and high-performance computing. To do so, it
+    evaluates coarse-grain execution as a tool to avoid program context tracking
+    at instruction granularity.
+    \item It evaluates an energy-aware set of compilation strategies including
+    local register renaming, block level instruction scheduling, ahead branch
+    prediction support.
+    \item It provides a new front-end model in which the branch prediction unit
+    is only accessed by branch instruction addresses without introducing fetch
+    stall bubbles in the pipeline.
+    \item It introduces coarse-grain squash with neither context checkpointing
+    nor re-order buffer drain support.
+    \item It evaluates the performance benefits of the register renaming
+    algorithm with one register alias table as a tool for fast program squash
+    support and energy efficient renaming.
+    \item It provides a 10x shorter re-order buffer model that tracks program
+    order at basic-block granularity, enabling bulk instruction commit and fast
+    squash restart.
+\end{itemize}
+
+Section~\ref{sec:rel_work} covers the related work,
+    section~\ref{sec:o3_overhead} discusses the major energy bottlenecks of the
+    OoO execution, section~\ref{sec:course_grain} describes our energy
+    efficiency vision behind coarse-grain execution, section~\ref{sec:code_gen}
+    discusses our energy-aware compilation methodology, section~\ref{sec:uarch}
+    provides the Bsaic-block execution model microarchitecture,
+    section~\ref{sec:simulation} has the simulation methodology,
+    section~\ref{sec:discussion} discusses the results achieved in this work,
+    and section~\ref{sec:conclusion} concludes the paper.
