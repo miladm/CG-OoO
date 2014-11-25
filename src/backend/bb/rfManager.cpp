@@ -73,12 +73,16 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
 
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
-        WIDTH bbWin_id = ins->getBBWinID ();
-        _LRF_MGRS[bbWin_id]->_e_table.ramAccess (ins->getTotNumRdLAR ());
-        _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ()); /* TODO this is convervation - not cnting FWD */
+        if (grf_ready && lrf_ready) {
+            WIDTH bbWin_id = ins->getBBWinID ();
+            _LRF_MGRS[bbWin_id]->_e_table.ramAccess (ins->getTotNumRdLAR ());
+            _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ()); /* TODO this is convervation - not cnting FWD */
+        }
         return (grf_ready && lrf_ready);
     } else if (g_cfg->getRegAllocMode () == GLOBAL) {
-        _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ());
+        if (grf_ready) {
+            _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ());
+        }
         return (grf_ready);
     }
     Assert (true == false && "invalid register allocation model");

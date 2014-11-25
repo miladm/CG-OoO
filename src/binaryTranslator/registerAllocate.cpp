@@ -339,6 +339,7 @@ void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &global
             }
             if (isAlreadyAssigned) return; //skip bb
         }
+//        bb->globalToLocalXform ();
         bb->setRegAllocated ();
         for (int i = 0; i < bb->getNumDescendents (); i++)
             set_arch_reg_for_all_ins (bb->getNthDescendent (i), globalIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
@@ -350,7 +351,8 @@ void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &global
 void allocate_register (List<basicblock*> *bbList, 
                         List<instruction*> *insList, 
                         map<ADDR,instruction*> *insAddrMap, 
-                        REG_ALLOC_MODE reg_alloc_mode) {
+                        REG_ALLOC_MODE reg_alloc_mode,
+                        SCH_MODE sch_mode) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
 	map<long int,interfNode*> locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
 
@@ -365,6 +367,21 @@ void allocate_register (List<basicblock*> *bbList,
 
 	printf ("\tFind Graph Entry Points\n");
 	findEntryPoints (bbList, interiorBB);
+
+
+	// PERFORM LIST SCHEDULING ON BB
+    if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+            basicblock* bb = bbList->Nth (i);
+            bb->brDependencyTableCheck ();
+        }
+        printf ("\tRun List Scheduling\n");
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+            basicblock* bb = bbList->Nth (i);
+            listSchedule (bb); //why does this affect BB structure?
+        }
+    }
+
 
 	//TODO is the block below okay? needed?
 	for (int i = 0; i < bbList->NumElements (); i++)

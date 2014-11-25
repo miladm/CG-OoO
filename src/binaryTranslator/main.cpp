@@ -92,7 +92,7 @@ int main (int argc, char* argv[])
 	printf ("- Build SSA -\n");
 	build_ssa_form (bbList, varList);
 	printf ("- Register Allocation -\n");
-	allocate_register (bbList, insList, &insAddrMap, reg_alloc_mode);
+	allocate_register (bbList, insList, &insAddrMap, reg_alloc_mode, sch_mode);
 	// printf ("- Make Phraesblocks -\n");
 	// phBBList = make_phraseblock (bbList, &brBiasMap, &bpAccuracyMap);
 	printf ("- Annotate Trace -\n");

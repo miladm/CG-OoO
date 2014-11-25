@@ -1,6 +1,10 @@
 #!/bin/sh
 
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref_medium_pipe/12_bb'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/bbWin_size/10_ins'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/bbWin_port/8_port'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out_ref_medium_pipe/32_bb'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/rf_size/100_pr'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/fu_size/fu_16'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'

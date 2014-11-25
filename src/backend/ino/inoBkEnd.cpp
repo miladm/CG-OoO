@@ -38,7 +38,7 @@ void inoBkEnd_init () {
             1, 50, 
             bpu_lat, 50, 
             dcd_lat - 1, 50, 
-            sch_lat, 50, 
+            1, 50,  //TODO sch_lat is replaced here - take care of it.
             1, 50, 
             exe_lat, 50, 
             1, 50, 

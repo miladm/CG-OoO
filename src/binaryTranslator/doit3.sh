@@ -1,7 +1,7 @@
 #!/bin/sh
 
-REG_ALLOC_MODE="global_reg"
-SCH_MODE="no_list_sch"
+REG_ALLOC_MODE="local_global_reg"
+SCH_MODE="list_sch"
 
 # ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE
 # ./PhraseFormer 445.gobmk $REG_ALLOC_MODE $SCH_MODE
@@ -13,7 +13,7 @@ SCH_MODE="no_list_sch"
 # ./PhraseFormer 458.sjeng $REG_ALLOC_MODE $SCH_MODE
  ./PhraseFormer 456.hmmer $REG_ALLOC_MODE $SCH_MODE
  ./PhraseFormer 429.mcf $REG_ALLOC_MODE $SCH_MODE
- ./PhraseFormer 401.bzip2 $REG_ALLOC_MODE $SCH_MODE
+# ./PhraseFormer 401.bzip2 $REG_ALLOC_MODE $SCH_MODE
  ./PhraseFormer 403.gcc $REG_ALLOC_MODE $SCH_MODE
 
 
