@@ -1,6 +1,13 @@
 \section{Coarse-grain Dynamic Execution}
 \label{sec:course_grain}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\columnwidth]{fig/coarse_grain_sch.pdf} 
+	\caption{Coarse-grain execution model}
+	\label{fig:coarse_grain_sch}
+\end{figure}
+
 In this work, we introduce the notion of coarse-grain execution where every
 cluster of instructions is a unit of execution that is statically scheduled to
 run optimally without further dynamic scheduling by the hardware. We call it the
@@ -16,13 +23,6 @@ basic-block is a single-entry, single-exit unit without any control stalls.
 Memory stalls are possible within a basic-block, but with effective static
 scheduling, their impact on stalling other independent instructions in the
 basic-block is minimized.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.5\columnwidth]{fig/coarse_grain_sch.pdf} 
-	\caption{Coarse-grain execution model}
-	\label{fig:coarse_grain_sch}
-\end{figure}
 
 In the presence of unpredictable memory and control stalls, a fully static
 schedule cannot deliver the same code quality as a dynamic scheduler like the

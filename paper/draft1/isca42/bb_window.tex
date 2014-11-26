@@ -34,8 +34,16 @@ negligible compared to an instruction window broadcast update.
 Head Buffer in Figure~\ref{fig:bb_window} holds the instruction(s) pending to be
 issued from the BB Window.
 
-Figure XX shows the average number of in-flight basicblocks for SPEC2006
-benchmark.
+Figure~\ref{fig:inflight_bb} shows the average number of in-flight basicblocks for SPEC2006
+benchmarks on two to sixteen-wide BBE configurations.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\columnwidth]{result/inflight_bb.pdf} 
+	\caption{Number of in-flight basic-blocks per cycle}
+	\label{fig:inflight_bb}
+\end{figure}
+
 
 %Instructions hold offset to the instruction rather than to actual register
 %address. This cuts back the register address by half (making the ISA shorter)

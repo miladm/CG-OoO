@@ -1,41 +1,6 @@
 \section{Simulation Methodology}
 \label{sec:simulation}
 
-We use our cycle accurate decoupled timing and functional simulator built on
-Pin~\cite{pin}. To faithfully model speculative program execution,  we model
-wrong-path code execution using Pintool Context Manipulation API. We assume 20
-cycles of branch mis-speculation penalty.
-
-For dynamic branch prediction, the $2Bc{-}gskew$ predictor designed for low
-prediction aliasing is used~\cite{ref:seznec1999aliased},~\cite{ref:EV8}.
-Similar to~\cite{ref:EV8}, the $e{-}gskew$ predictor consists of two global
-predictors (G0, G1) and a bimodal predictor (BIM) which is also used as a
-standalone predictor. A choice predictor (META) chooses between BIM and
-$e{-}gskew$. Global branch history (HIST) is used to hash into G0 and G1.
-
-To capture microarchitecture area and energy, we synthesize logical tables and
-wires in the 45 nm TSMC node. Our tool evaluates multi-ported SRAM cells
-designed as either content addressable memory (CAM) or random access memory
-(RAM) arrays.  It computes area and energy numbers for a single read / write
-access. These energy numbers are imported to our simulation framework to
-accurately track the energy characteristics of each logic unit.
-%more discussion on how each table energy is broken into CAM and RAM and modeled
-%separately.
-
-For evaluating system performance, we use SPCE2006 Integer benchmarks with ref
-inputs~\cite{spec}. All benchmarks are fast-forwarded by one billion
-instructions, warmed up for three million instructions, and evaluated for
-performance and energy consumption for twenty million instructions.
-
-Table~\ref{tab:params} and~\ref{tab:cores} provide the
-architectural detail we use for the in-order, out-of-order, and basic-block
-execution cores. The information provided in these tables assume a 4-wide
-superscalar processor for all CPU's. Our evaluation of 2-wide and 8-wide
-machines scale down / up all {\it{width}} factors by 2x.
-
-The information provided in Table
-
-
 \begin{table}[!htbp]
 \centering
 \begin{tabular}{ l|l }
@@ -87,3 +52,36 @@ Load/Store Queue        & 64 LQ entries, 32 SQ entries, CAM \\ \hline
 \caption{Core Parameters}
 \label{tab:cores}
 \end{table}
+
+We use our cycle accurate decoupled timing and functional simulator built on
+Pin~\cite{pin}. To faithfully model speculative program execution,  we model
+wrong-path code execution using Pintool Context Manipulation API. We assume 20
+cycles of branch mis-speculation penalty.
+
+For dynamic branch prediction, the $2Bc{-}gskew$ predictor designed for low
+prediction aliasing is used~\cite{ref:seznec1999aliased},~\cite{ref:EV8}.
+Similar to~\cite{ref:EV8}, the $e{-}gskew$ predictor consists of two global
+predictors (G0, G1) and a bimodal predictor (BIM) which is also used as a
+standalone predictor. A choice predictor (META) chooses between BIM and
+$e{-}gskew$. Global branch history (HIST) is used to hash into G0 and G1.
+
+To capture microarchitecture area and energy, we synthesize logical tables and
+wires in the 45 nm TSMC node. Our tool evaluates multi-ported SRAM cells
+designed as either content addressable memory (CAM) or random access memory
+(RAM) arrays.  It computes area and energy numbers for a single read / write
+access. These energy numbers are imported to our simulation framework to
+accurately track the energy characteristics of each logic unit.
+%more discussion on how each table energy is broken into CAM and RAM and modeled
+%separately.
+
+For evaluating system performance, we use SPCE2006 Integer benchmarks with ref
+inputs~\cite{spec}. All benchmarks are fast-forwarded by one billion
+instructions, warmed up for three million instructions, and evaluated for
+performance and energy consumption for twenty million instructions.
+
+Tables~\ref{tab:params} and~\ref{tab:cores} provide the architectural detail we
+use for the in-order, out-of-order, and basic-block execution cores. The
+information provided in these tables assume a 4-wide superscalar processor for
+all CPU's. Our evaluation of 2-wide and 8-wide machines scale down / up all
+{\it{width}} factors by 2x.
+

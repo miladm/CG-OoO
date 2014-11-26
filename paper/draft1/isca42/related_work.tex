@@ -1,29 +1,96 @@
 \section{Related Work}
 \label{sec:rel_work}
+In this section, we discuss the related work to Basic-block execution (BBE).
 
-Have a score table of related work.
+Braid~\cite{braid} focuses on static partitioning of instructions into based on
+the program data-flow graph to construct instruction clusters called Braids.
+Each braid runs as an independent cluster similar to how BBE dispatches
+instructions. BBE follows the same line of design methodology with the focus on
+evaluating energy saving opportunities of coarse-grain out-of-order scheduling.
+The static instruction scheduler schedules each basic-block as whole rather than
+fragmenting it into smaller pieces with the goal of minimizing dynamic bulk
+scheduling.
 
-Papers to talk about:
+Multiscalar~\cite{multiscalar} evaluates a multi-processing units capable of
+steering coarse grain code segments that are potentially larger than a
+basic-block to its functional units for computation. It uses replaced register
+files in each stage to enable communicating all live registers between two
+computation units. Multiscalar can be computation units are configurable to be
+OoO or InO. BBE solves the same line of problem through a much more energy
+efficient design.
 
-\begin{itemize}
-    \item \cite{multiscalar} multiscalar
-    \item \cite{widget} widget
-    \item \cite{complexity} Complexity-Effective
-    \item \cite{fundamental} Salverda \& Zilles
-    \item \cite{clp} CLP
-    \item \cite{rock} ROCK
-    \item \cite{icfp} iCFP
-    \item \cite{outrider} outrider
-    \item \cite{bolt} BOLT
-    \item \cite{edge} EDGE
-    \item \cite{cfp} CFP
-    \item \cite{trace} trace processors
-    \item \cite{ildp} ILDP
-    \item \cite{tls} TLS
-    \item \cite{braid} Braid
-    \item \cite{corefusion} Core fusino
-    \item \cite{complexity} complexity effective
-    \item \cite{morphcore} MorphCore
-    \item \cite{scalable_frontend} Scalable front-end architecture
-    \ldots
-\end{itemize}
+Complexity Effective~\cite{complexity} proposes a distributed instruction
+window that simplifies the wake-up logic, issue window, and the forwarding logic
+design. Unlike BBE, instruction scheduling / steering in Complexity Effective is
+done at instruction granularity.
+
+ILDP~\cite{ildp} proposes a architecture for distributed processing that
+consists of a hierarchical register file built for communication short lived
+registers locally and long lived registers globally similar to BBE. ILDP,
+          however, focuses on proposing design building blocks for
+          constructing distributed processing architectures. BBE utilizes this
+          design methodology to evaluate energy efficiency gains of coarse-grain
+          execution.
+
+WiDGET~\cite{widget} is a power proportional grid execution design consisting of
+decoupled thread context management and a large set of simple execution units.
+It has a static instruction steering protocol to effectively perform instruction
+scheduling at runtime.  WiDGET is an extension of teh work by Salverda and
+Zilles's\cite{fundamental} work on designing an instruction scheduling cost
+model. BBE is a bulk code scheduling solution allowing new energy saving
+opportunities.
+
+
+TRIPS / EDGE~\cite{edge}~\cite{trips} is a high-performance, grid-processing
+architecture that uses pure static instruction scheduling using hyperblocks to
+map instructions to the grid of computational units. Its primary focus is
+improving extracting ILP, TLP and DLP from the program rather than saving energy
+efficiency. Hyperblocks use branch predication to group basic-blocks that are
+connected connected together through weakly biased branches. While effective for
+improving instruction parallelism, hyperblock codes lead to energy inefficient
+mis-speculation recovery events that are not suitable for energy aware
+technologies.
+
+CLP~\cite{clp} addresses the processor power efficiency concern through a
+configurable clustering of simple execution units to build variable-issue
+computing units to exploit both thread-level parallelism and instruction level
+parallelism. Core Fusion~\cite{corefusion} has a similar design mentality,
+    proposing a configurable chip multiprocessor (CMP) architecture. BBE focuses
+    on designing an energy efficient and complexity effective single-threaded
+    processor.
+
+iCFP~\cite{icfp} is a variant of the CFP~\cite{cfp} design for in-order
+processors. It addresses the head-of-queue blocking problem in the InO processor
+by building an architecture that, on every cache miss, checkpoints the program
+context, steers miss-dependent instructions to a side buffer enabling
+miss-independent instruction to make forward progress. CFP enables the use of
+small register file and instruction window while keeping the while maintaining
+the same level of performance as conventional OoO processors.  BOLT~\cite{bolt}
+is a high ILP, high MLP, latency-tolerant (LT) architecture design for energy
+efficient out-of-order execution. It uses a slice buffer design that utilizes a
+minimal hardware resources. Unlike BBE, iCFP, CFP, and BOLT perform lightweight
+{\it{dynamic}} instruction scheduling to manage available instructions and hide
+LLC cache misses.
+
+Outrider~\cite{outrider} is a high-throughput architecture that decouples a
+single thread context into two parallel {\it{strands}} one for memory and
+another for other operations in order to allow LLC miss latency hiding by
+helping miss-independent instructions fast-forward through the execution
+pipeline. Its goal is to eliminate the herd-to-scale processor structures such
+as the instruction window and the OoO scheduling model. BBE is a single-threaded
+design focused on hiding LLC latency miss through issuing instructions form
+multiple energy efficient BB Window FIFO buffers.
+
+Trace Processors~\cite{trace} propose a similar register hierarchy and
+instruction flow design based on dynamic trace processing in the frontend. BBE
+is an energy efficient solution focused on offloading majority of instruction
+scheduling work to the compiler.
+
+MorphCore~\cite{morphcore} is an in-order, out-of-order processor hybrid
+designed to improve single-threaded energy efficiency. It uses {\{it{dynamic}}
+instruction scheduling and core-type detection. It achieves 22\% improvement in
+energy-delay product while BBE achieves 25\%.
+
+Sun ROCK~\cite{rock} is a dynamic chip multithreading processor with support for
+efficient program checkpointing. It is an out-of-order with dynamic instruction
+scheduling.

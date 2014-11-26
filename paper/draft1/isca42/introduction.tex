@@ -1,35 +1,16 @@
 \section{Introduction} 
 \label{sec:intro}
-Basic-block execution (BBE)
 
-Discussion on single-threaded computing
+McFarlin et al.~\cite{dyn_specul} show almost 88\% of OoO performance benefits
+are due to the well-provisioned speculation support for control and data
+speculation leaving the remaining 12\% to its superior ability to avoid
+head-of-line blocking and effective memory level parallelism. It shows without
+these features, achieving superior performance is practically impossible. In
+this paper we add that while speculation and dynamic execution are critical for
+high single-threaded performance, they can be applied to blocks of instructions
+rather than to every instruction, thereby maintaining near OoO performance while
+reducing energy cost through complexity effective logic.
 
-Energy behavior or O3 and its shortcomings
-
-Performance behavior of O3 and its benefits (speculation and dynamism)
-
-Discussion of related papers that address above issues. items are: 
-1) dynamism and speculation computing~\cite{dyn_specul},
-2) multi-scalar
-3) energy efficient computing (recent papers on this)
-
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1.0\columnwidth]{fig/energy_perf_insight.pdf} 
-	\caption{Energy-Performance trend of recent micro-architectures}
-	\label{fig:insight}
-\end{figure}
-
-
-% As described by~\cite{}, the exceptionally high
-% performance of out-of-order (OoO) processors is fundamentally due to two key
-% attributes: dynamism and speculation.  Lack of either feature can significantly
-% impact its performance. 
-% 
-% The key sources of energy consumption in OoO processors is data-movement and XX
-% (back this up).
-% 
 Dynamic execution and program speculation enable significant single-threaded
 performance benefits through effective latency hiding of unpredictable events
 such as cache miss and control mis-speculation.  Despite their performance
@@ -60,6 +41,15 @@ This paper makes the following contributions:
     order at basic-block granularity, enabling bulk instruction commit and fast
     squash restart.
 \end{itemize}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=1.0\columnwidth]{fig/energy_perf_insight.pdf} 
+    \caption{Energy-Performance trend of recent
+        micro-architectures~\cite{azizi2010energy}. The focus of this work is to
+            shift this curve towards the lower right corner.}
+	\label{fig:insight}
+\end{figure}
 
 Section~\ref{sec:rel_work} covers the related work,
     section~\ref{sec:o3_overhead} discusses the major energy bottlenecks of the

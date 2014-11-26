@@ -1,17 +1,6 @@
 \section{Microarchitecture}
 \label{sec:uarch}
 
-Coarse grain execution exposes energy saving opportunities in most pipeline
-stages. In this section we discuss the flow of basicblocks through different
-pipeline stages and elaborate on how energy is saved in each stage.
-
-Figure~\ref{fig:bb_arch} and~\ref{fig:pipeline} show the basic-block execution
-flow through the BBE pipeline and the BBE micro-architecture. The hardware units
-distinguishing BBE from OoO are the Basic-block Windows (BB Window), Local Register
-File (LRF), Basic-block Re-order Buffer (BB-ROB), the Register Rename bypass
-line, basic-block scheduler, and the branch Prediction lookup line coming 
-from the BB Scheduler rather than instruction fetch.
-
 \begin{figure*}
 	\centering
 	\includegraphics[width=\textwidth]{fig/pipeline.pdf} 
@@ -25,6 +14,17 @@ from the BB Scheduler rather than instruction fetch.
 	\caption{Basicblock execution microarchitecture}
 	\label{fig:bb_arch}
 \end{figure}
+
+Coarse grain execution exposes energy saving opportunities in most pipeline
+stages. In this section we discuss the flow of basicblocks through different
+pipeline stages and elaborate on how energy is saved in each stage.
+
+Figure~\ref{fig:bb_arch} and~\ref{fig:pipeline} show the basic-block execution
+flow through the BBE pipeline and the BBE micro-architecture. The hardware units
+distinguishing BBE from OoO are the Basic-block Windows (BB Window), Local Register
+File (LRF), Basic-block Re-order Buffer (BB-ROB), the Register Rename bypass
+line, basic-block scheduler, and the branch Prediction lookup line coming 
+from the BB Scheduler rather than instruction fetch.
 
 \input{cpu_frontend}
 
