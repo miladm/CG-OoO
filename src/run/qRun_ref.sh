@@ -6,7 +6,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbROB_size/64_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/wide_rf_ports'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/35_ins'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/wide_frontend'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/rf_size/100_pr'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/fu_size/fu_2'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
@@ -22,8 +23,8 @@ FILE=$OUT_PATH/README
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
-#echo "Copying the YAML config file to output dir"
-#cp $CFG_PATH/base.yaml $OUT_PATH/.
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE

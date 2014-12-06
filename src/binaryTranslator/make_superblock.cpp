@@ -1,12 +1,12 @@
 /*******************************************************************************
- *  make_basicblock.cpp
+ *  make_superblock.cpp
  ******************************************************************************/
 
-#include "make_basicblock.h"
+#include "make_superblock.h"
 #include "listSchedule.h"
 
 
-void make_basicblock  (List<instruction*> *insList,
+void make_superblock  (List<instruction*> *insList,
 		      		  List<basicblock*> *bbList,
 					  map<int,variable*> &varList, 
 		      		  set<ADDR> *brDstSet,
@@ -39,7 +39,7 @@ void make_basicblock  (List<instruction*> *insList,
 			newBB->addIns (ins, BR_DST);
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
 			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
-			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+			if  (ins->getType () == 'b' || ins->getType () == 'r' || 
                  ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			    basicblock *bb = bbList->Last ();
 				bb->setBBbrHeader (ins->getInsAddr ());
@@ -48,7 +48,7 @@ void make_basicblock  (List<instruction*> *insList,
 				bbList->Append (newBB);
 			}
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
-		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+		} else if  (ins->getType () == 'b' || ins->getType () == 'r' || 
                     ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			basicblock *bb = bbList->Last ();
 			bb->setBBbrHeader (ins->getInsAddr ());

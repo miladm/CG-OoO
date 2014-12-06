@@ -2,7 +2,7 @@
 
 REG_ALLOC_MODE="local_global_reg"
 SCH_MODE="list_sch"
-CLUSTER_MODE="bb"
+CLUSTER_MODE="sb"
 
  ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE $CLUSTER_MODE
 # ./PhraseFormer 445.gobmk $REG_ALLOC_MODE $SCH_MODE $CLUSTER_MODE

@@ -228,7 +228,7 @@ cpu:
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 200
+                size: 35
                 count: 16
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
