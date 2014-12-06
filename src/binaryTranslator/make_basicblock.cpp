@@ -11,8 +11,7 @@ void make_basicblock  (List<instruction*> *insList,
 					  map<int,variable*> &varList, 
 		      		  set<ADDR> *brDstSet,
 		      		  map<ADDR, basicblock*> *bbMap,
-					  map<ADDR,instruction*> *insAddrMap,
-                      SCH_MODE sch_mode) {
+					  map<ADDR,instruction*> *insAddrMap) {
 	// CONSTRUCT BB'S
 	set<long int> use_set, def_set, diff_set;
 	for  (int i = 0; i < insList->NumElements (); i++) {
@@ -40,7 +39,7 @@ void make_basicblock  (List<instruction*> *insList,
 			newBB->addIns (ins, BR_DST);
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
 			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
-			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+			if  (ins->getType () == 'b' || ins->getType () == 'r' || 
                  ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			    basicblock *bb = bbList->Last ();
 				bb->setBBbrHeader (ins->getInsAddr ());
@@ -49,7 +48,7 @@ void make_basicblock  (List<instruction*> *insList,
 				bbList->Append (newBB);
 			}
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
-		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
+		} else if  (ins->getType () == 'b' || ins->getType () == 'r' || 
                     ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
 			basicblock *bb = bbList->Last ();
 			bb->setBBbrHeader (ins->getInsAddr ());
@@ -186,18 +185,6 @@ void make_basicblock  (List<instruction*> *insList,
 			Assert  (0 && "WRONG INSTRUTION. Terminating...");
 		}
 	}
-	// PERFORM LIST SCHEDULING ON BB
-//    if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
-//        for  (int i = 0; i < bbList->NumElements (); i++) {
-//            basicblock* bb = bbList->Nth (i);
-//            bb->brDependencyTableCheck ();
-//        }
-//        printf ("\tRun List Scheduling\n");
-//        for  (int i = 0; i < bbList->NumElements (); i++) {
-//            basicblock* bb = bbList->Nth (i);
-//            listSchedule (bb); //why does this affect BB structure?
-//        }
-//    }
 	std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), def_set.end (), std::inserter (diff_set, diff_set.begin ()));
 	printf ("\tDiff Set: %d %d %d\n", def_set.size (), use_set.size (), diff_set.size ());
 }

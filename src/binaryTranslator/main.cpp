@@ -46,7 +46,7 @@ void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string
 
 int main (int argc, char* argv[])
 {
-	Assert (argc == 4 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_method> <scheduling_method>");
+	Assert (argc == 4 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_method> <scheduling_method> <blocking_model>");
 	long long unsigned t0 = clock (), t1;
 	//SETUP VARIABLES
 	List<instruction*>* insList = new List<instruction*>;
@@ -69,13 +69,20 @@ int main (int argc, char* argv[])
     cout << argv[2] << " " << argv[3] << endl;
     if (strcmp (argv[2], "global_reg") == 0) reg_alloc_mode = GLOBAL;
     else if (strcmp (argv[2], "local_global_reg") == 0) reg_alloc_mode = LOCAL_GLOBAL;
-    else Assert (true == false && "Wrong register allocation mode specified");
+    else Assert (0 && "Wrong register allocation mode specified");
 
     /*-- STATIC CODE SCHEDULING MODE --*/
     SCH_MODE sch_mode;
     if (strcmp (argv[3], "list_sch") == 0) sch_mode = LIST_SCH;
     else if (strcmp (argv[3], "no_list_sch") == 0) sch_mode = NO_LIST_SCH;
-    else Assert (true == false && "Wrong static code scheduling mode specified");
+    else Assert (0 && "Wrong static code scheduling mode specified");
+
+    /*-- CLUSTERING MODE --*/
+    CLUSTER_MODE cluster_mode;
+    if (strcmp (argv[3], "bb") == 0) cluster_mode = BASICBLOCK;
+    else if (strcmp (argv[3], "sb") == 0) cluster_mode = SUPERBLOCK;
+    else if (strcmp (argv[3], "pb") == 0) cluster_mode = PHRASEBLOCK;
+    else Assert (0 && "Wrong code clustering model");
 
 //    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
 
@@ -86,7 +93,7 @@ int main (int argc, char* argv[])
 	printf ("- Parse Instructions -\n");
 	parse_instruction (insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccuracyMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name);
 	printf ("- Make Basic Blocks -\n");
-	make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, sch_mode);
+	make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap);
 	printf ("- Build Dominance Frontier -\n");
 	setup_dominance_frontier (bbList);
 	printf ("- Build SSA -\n");

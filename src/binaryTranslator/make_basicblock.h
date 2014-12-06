@@ -18,7 +18,6 @@ void make_basicblock (List<instruction*> *insList,
 			  map<int,variable*> &varList, 
 		      std::set<ADDR> *brDstSet,
 		      std::map<ADDR, basicblock*> *bbMap,
-			  map<ADDR,instruction*> *insAddrMap,
-              SCH_MODE sch_mode);
+			  map<ADDR,instruction*> *insAddrMap);
 
 #endif
