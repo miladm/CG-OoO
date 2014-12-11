@@ -9,7 +9,7 @@
  * AFTER PHI-FUNCTION ELIMINATION YOU MUST NEVER POKE INTO THE END OF A BB
  * TO SEARCH FOR A BRANCH OF SOME SORT.
  */
-int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {
+static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {
 	int numInsInsertion = 0;
     ADDR phiAddrOffset = 0;
 	for (int i =0 ; i < bbList->NumElements (); i++) {
@@ -21,12 +21,12 @@ int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAdd
 /* RENAME FROM V_I FORMAT TO ABSOLUTE SSA FORMAT REBUILD THE DEF/USE SETS
  * ELIMINATE PHI-FUNCTIONS
  */
-void renameAndbuildDefUseSets (List<basicblock*> *bbList) {
+static void renameAndbuildDefUseSets (List<basicblock*> *bbList) {
 	for (int i =0 ; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->renameAllInsRegs ();
 }
 
-void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
+static void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {
 	for (int i = 0; i < bbList->NumElements (); i++) {	
 		basicblock* bb = bbList->Nth (i);
 		if (bb->getNumAncestors () == 0 || bb->numNonBackEdgeAncestors () == 0) {
@@ -36,7 +36,7 @@ void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) 
 }
 
 //TODO why would someone who doesn't write a variable insert itself as a bb writing into it?
-void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode) {
+static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode) {
 	bool change = true;
 	while (change == true) {
 		change = false;
@@ -54,7 +54,7 @@ void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode)
 //    }
 }
 
-void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, 
+static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, 
                              map<long int,interfNode*> &allIntfNodeMap) {
 	if (locallIntfNodeMap.size () == 0) return;
 	if (locallIntfNodeMap.size () > 0) {
@@ -109,7 +109,7 @@ void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap,
 	}
 }
 
-void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, 
+static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, 
                               map<long int,interfNode*> &globalIntfNodeMap, 
                               map<long int,interfNode*> &allIntfNodeMap) {
 	if (globalIntfNodeMap.size () == 0 && locallIntfNodeMap.size () == 0) return;
@@ -165,8 +165,8 @@ void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap,
 	}
 }
 
-int liveGlbMaxSize = 0, liveLclMaxSize = 0;
-void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
+static int liveGlbMaxSize = 0, liveLclMaxSize = 0;
+static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
     if (!bb->isVisited ()) {
         bb->setAsVisited ();
         List<instruction*>* insList = bb->getInsList ();
@@ -318,7 +318,7 @@ void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> 
     }
 }
 
-void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap) {
+static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap) {
     if (!bb->isRegAllocated ()) {
         // printf ("3 map size: %d\n", globalIntfNodeMap.size ());
         List<instruction*>* insList = bb->getInsList ();
@@ -371,6 +371,7 @@ void allocate_register (List<basicblock*> *bbList,
 
 	// PERFORM LIST SCHEDULING ON BB
     if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
+        Assert (0 && "reimplement");
         for  (int i = 0; i < bbList->NumElements (); i++) {
             basicblock* bb = bbList->Nth (i);
             bb->brDependencyTableCheck ();

@@ -1,6 +1,5 @@
 #include "make_instruction.h"
 #include "regFile.h"
-#include "dependencyTable.h"
 #include "config.h"
 
 // char* input_asm_file;
@@ -44,12 +43,12 @@ void parse_instruction (List<instruction*> *insList,
 			   		map<ADDR, double> *upldMap,
 			   		map<ADDR,set<ADDR> > &memRdAddrMap,
 			   		map<ADDR,set<ADDR> > &memWrAddrMap,
-			   		std::string *program_name) {
+			   		std::string *program_name,
+                    CLUSTER_MODE cluster_mode) {
 	char c[INS_STRING_SIZE], ins[INS_STRING_SIZE];
 	ADDR insAddr, insFallThru, insDst, brDst;
 	bool hasFallThru, hasDst;
 	FILE * input_assembly;
-	 dependencyTable* depTables = new dependencyTable; /* DISABLED */
 	// if ((input_assembly = fopen (input_asm_file, "r")) == NULL) {
     string input_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/input_files/";
 	if ((input_assembly = fopen ((input_path + (*program_name) + ".s").c_str (), "r")) == NULL) {
@@ -161,17 +160,18 @@ void parse_instruction (List<instruction*> *insList,
         if (hasDst) {if (fscanf (input_assembly, "%llx\n", &insDst) == EOF) break;}
 		newIns->setInsDstAddr (insDst, hasDst);
 
-		/* SETUP INSTRUCTION BRANCH DESTINATION/BIAS/ACCURACY INFORMATION */
-		if (newIns->getType () == 'j' || newIns->getType () == 'b' || 
-            newIns->getType () == 'c') {
-
+		/* SETUP INSTRUCTION BRANCH DESTINATION INFORMATION */
+		if (newIns->getType () == 'j' || newIns->getType () == 'b' || newIns->getType () == 'c') {
 			/* SETUP BB START SET */
 			if (newIns->hasDst ()) 
                 brDstSet->insert (newIns->getInsDstAddr ());
 			if (newIns->hasFallThru () && 
                 (newIns->getType () == 'b' || newIns->getType () == 'c')) 
                 brDstSet->insert (newIns->getInsFallThruAddr ());
+        }
 
+		/* SETUP INSTRUCTION BRANCH BIAS/ACCURACY INFORMATION */
+		if (newIns->getType () == 'j' || newIns->getType () == 'b' || newIns->getType () == 'c') {
 			/* SETUP BRANCH PREDICTION ACCURACY INFORMATION */
 			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
 				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
@@ -187,7 +187,9 @@ void parse_instruction (List<instruction*> *insList,
 				;// printf ("\t\tERROR: branch instruction bias not found! (%s, line: %d)\n" , __FILE__, __LINE__);
 				//exit (1);
 			}
-		} else if (newIns->getType () == 'M') {
+		}
+
+        if (newIns->getType () == 'M') {
 			if (memRdAddrMap.find (insAddr) != memRdAddrMap.end ()) {
 				newIns->setRdAddrSet (memRdAddrMap[insAddr]);
 			} 
@@ -206,7 +208,6 @@ void parse_instruction (List<instruction*> *insList,
 		// newIns->setOpCode (opCode); done somewhere else
 		insList->Append (newIns);
 		insAddrMap->insert (pair<ADDR, instruction*> (newIns->getInsAddr (), newIns));
-		newIns->dependencyTableCheck (depTables); /* DISABLED */
 	}
 
     

@@ -139,6 +139,13 @@ bool basicblock::isThisBBfallThru (basicblock* anc) {
 
 void basicblock::addMovIns (instruction* ins) {
     instruction* last_ins = _insList->Last ();
+
+    /* AVOID MISSING BB'S THAT END WITH A STUPID NOP */
+    if (_insList->NumElements () > 1 &&
+        last_ins->getType () == 'n' && 
+        _insList->Nth(_insList->NumElements() - 2)->getType() != 'n')
+        last_ins = _insList->Nth (_insList->NumElements() - 2);
+
     if (last_ins->getType () == 'r' || last_ins->getType () == 'c' || last_ins->getType () == 's' || 
         last_ins->getType () == 'j' || last_ins->getType () == 'b') {
         /* PUSH THE INS TO THE SECOND TO LAST SPOT IN INSLIST */
@@ -149,10 +156,16 @@ void basicblock::addMovIns (instruction* ins) {
         instruction* top_ins;
         if (_insList->NumElements () >= 3) {
             top_ins = _insList->Nth (_insList->NumElements () - 3);
-            Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
-            top_ins->resetInsFallThru ();
-            top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
-            top_ins->setInsFallThru (ins);
+//            Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+            if (top_ins->getType () == 'j') {
+                top_ins->resetInsDst ();
+                top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                top_ins->setInsDst (ins);
+            } else {
+                top_ins->resetInsFallThru ();
+                top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                top_ins->setInsFallThru (ins);
+            }
         } else {
             for (int i = 0; i < _ancestorBbList->NumElements (); i++) {
                 basicblock* anc = _ancestorBbList->Nth(i);
@@ -186,6 +199,7 @@ void basicblock::addMovIns (instruction* ins) {
         top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
         top_ins->setInsFallThru (ins);
     }
+	ins->setMy_BBorPB_id (getID ());
     _insAddrList.insert (ins->getInsAddr ());
 //    Assert (bbID != -1);
 //    ins->setMy_BBorPB_id (getID ()); TODO don't think this is necessary
@@ -244,14 +258,31 @@ int basicblock::getBbSize () {
 	return _insList->NumElements ();
 }
 
+void basicblock::resetFallThrough () { _fallThroughBB = NULL; }
+
+bool basicblock::hasFallThrough () { return (_fallThroughBB == NULL) ? false : true;
+}
+
 void basicblock::setFallThrough (basicblock* bb) {
 	Assert (_fallThroughBB == NULL);
 	_fallThroughBB = bb;
 }
 
+void basicblock::resetTakenTarget () { _takenTargetBB = NULL; }
+
+bool basicblock::hasTakenTarget () { return (_takenTargetBB == NULL) ? false : true; }
+
 void basicblock::setTakenTarget (basicblock* bb) {
 	Assert (_takenTargetBB == NULL);
 	_takenTargetBB = bb;
+}
+
+void basicblock::resetDescendents () {
+    for (int i = _descendantBbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* desc = _descendantBbList->Nth (i);
+        desc->resetAncestor (getID ());
+        _descendantBbList->RemoveAt (i);
+    }
 }
 
 void basicblock::setDescendent (basicblock* bb) {
@@ -261,6 +292,14 @@ void basicblock::setDescendent (basicblock* bb) {
 
 void basicblock::setAncestor (basicblock* bb) {
 	_ancestorBbList->Append (bb);
+}
+
+void basicblock::resetAncestor (ADDR bbID) {
+    for (int i = _ancestorBbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* anc = _ancestorBbList->Nth (i);
+        if (anc->getID () == bbID)
+            _ancestorBbList->RemoveAt (i);
+    }
 }
 
 ADDR basicblock::getID () {
@@ -894,4 +933,9 @@ void basicblock::setBBbrHeader (ADDR brAddr) {
 	Assert (brAddr >= 0);
 	_brHeaderAddr = brAddr;
 	_hasBrHeader = true;
+}
+
+void basicblock::resetBBbrHeader () {
+	_brHeaderAddr = 0;
+	_hasBrHeader = false;
 }

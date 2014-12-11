@@ -68,7 +68,6 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
 
     /*-- READ FROM INS WINDOW --*/
     LENGTH indx = 0;
-    cout << "cycle" << endl;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
         LENGTH readyInsInBBWinIndx;
@@ -148,7 +147,6 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &readyInsInBBWinIndx, LENGTH &ind
                 if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
                 dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                         "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
-                cout << "found in BB: " << bbWin_id << " indx: " << i << endl;
                 return true;
             }
         }

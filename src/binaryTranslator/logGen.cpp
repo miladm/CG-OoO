@@ -4,7 +4,7 @@
 
 #include "logGen.h"
 
-void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode) {
+void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {
     string reg_alloc_mode_s, sch_mode_s, cluster_mode_s;
     if (sch_mode == NO_LIST_SCH) sch_mode_s = "no_list_sch";
     else if (sch_mode == LIST_SCH) sch_mode_s = "list_sch";
@@ -21,7 +21,8 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
 
 	FILE* outFile;
     string out_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/";
-    string out_file_path = out_dir + reg_alloc_mode_s + "/" + cluster_mode_s + "/" + sch_mode_s + "/" + (*program_name) + "_obj.s";
+    char cluster_size_s [30]; sprintf (cluster_size_s, "%d", cluster_size);
+    string out_file_path = out_dir + cluster_mode_s + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + (*program_name) + "_" + cluster_size_s + "_bbSiz_obj.s";
 	if ((outFile  = fopen (out_file_path.c_str (), "w")) == NULL) 
 		Assert ("Unable to open the output file.");
     cout << "OUTPUT .s FILE: " << out_file_path << endl;

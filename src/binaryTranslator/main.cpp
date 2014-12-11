@@ -13,6 +13,7 @@
 #include <time.h>
 
 #include "registerAllocate.h"
+#include "registerAllocate_sb.h"
 #include "make_instruction.h"
 #include "make_basicblock.h"
 #include "make_superblock.h"
@@ -27,7 +28,7 @@
 #include "ssa.h"
 #include "dot.h"
 
-void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode) {
+void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {
 	/* STAT Generation Functions */
 	// printf ("FILE NAME: %s\n", (*program_name).c_str ());
 	StatBBSizeStat (bbList, program_name);
@@ -41,17 +42,18 @@ void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string
 	cfg.runDot (bbList);
 	dot cfg_phrase (1, program_name);
 	cfg_phrase.runDot (phBBList);
-	writeToFile (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode);
+	writeToFile (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
 	// writeToFile (pbList, program_name, sch_mode, reg_alloc_mode);
 }
 
 int main (int argc, char* argv[])
 {
-	Assert (argc == 5 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_method> <scheduling_method> <blocking_model>");
+	Assert (argc == 6 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_method> <scheduling_method> <blocking_model> <cluster_size>");
 	long long unsigned t0 = clock (), t1;
 	//SETUP VARIABLES
 	List<instruction*>* insList = new List<instruction*>;
 	List<basicblock*>* bbList   = new List<basicblock*>;
+//	List<basicblock*>* sbList = new List<basicblock*>;
 	List<basicblock*>* phBBList = new List<basicblock*>;
 	//Linst<phraseblock*> *phList = new List<phraseblock*>;
 	map<int,variable*> varList;
@@ -85,33 +87,48 @@ int main (int argc, char* argv[])
     else if (strcmp (argv[4], "pb") == 0) cluster_mode = PHRASEBLOCK;
     else Assert (0 && "Wrong code clustering model");
 
+    /*-- CLUSTERING SIZE --*/
+    LENGTH cluster_size = atol (argv[5]);
+    Assert (cluster_size > 0 && "Invalid cluster size");
+
 //    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
 
 	printf ("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name.c_str ());
 	//init (argc, argv);
 	printf ("- Configure Program -\n");
 	parse_config_file ();
+
 	printf ("- Parse Instructions -\n");
-	parse_instruction (insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccuracyMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name);
+	parse_instruction (insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccuracyMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name, cluster_mode);
+
     if (cluster_mode == BASICBLOCK) {
 	    printf ("- Make Basic Blocks -\n");
-	    make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap);
+	    make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, cluster_size);
     } else if (cluster_mode == SUPERBLOCK) {
 	    printf ("- Make Superblocks -\n");
-	    make_superblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap);
+	    make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, cluster_size);
     } else if (cluster_mode == PHRASEBLOCK) {
         Assert (0 && "this feature is unsupported for now");
 	    printf ("- Make Phraseblocks -\n");
-//	    make_phraesblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap);
-    }
+//	    make_phraesblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, cluster_size);
+    } else { Assert (0 && "unsupported option"); }
+
 	printf ("- Build Dominance Frontier -\n");
 	setup_dominance_frontier (bbList);
+
 	printf ("- Build SSA -\n");
 	build_ssa_form (bbList, varList);
+
 	printf ("- Register Allocation -\n");
-	allocate_register (bbList, insList, &insAddrMap, reg_alloc_mode, sch_mode);
+    if (cluster_mode == BASICBLOCK) {
+        allocate_register (bbList, insList, &insAddrMap, reg_alloc_mode, sch_mode);
+    } else if (cluster_mode == SUPERBLOCK) {
+        allocate_register_sb (bbList, insList, &insAddrMap, reg_alloc_mode);
+	    make_superblock (insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap, cluster_size, sch_mode);
+    } else { Assert (0 && "unsupported option"); }
 	// printf ("- Make Phraesblocks -\n");
 	// phBBList = make_phraseblock (bbList, &brBiasMap, &bpAccuracyMap);
+
 	printf ("- Annotate Trace -\n");
 	//annotateTrace_forBB (bbList, &insAddrMap, &program_name);
 	// annotateTrace_forPB (phBBList, &insAddrMap, &program_name);
@@ -134,7 +151,7 @@ int main (int argc, char* argv[])
 	// }
 	/* ---------------------*/
 	printf ("- Make Dot Files & Stat Data -\n");
-	finish (bbList, phBBList, &program_name, sch_mode, reg_alloc_mode, cluster_mode);
+	finish (bbList, phBBList, &program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
 	t1 = clock () - t0;
 	printf ("\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minutes)\n-------------\n", (double)(t1 / CLOCKS_PER_SEC) / 60.0);
 	return 0;

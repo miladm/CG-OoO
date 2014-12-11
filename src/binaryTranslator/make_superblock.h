@@ -12,12 +12,16 @@
 #include "basicblock.h"
 #include "variable.h"
 #include "global.h"
+#include "listSchedule.h"
+#include "dependencySetup.h"
 
 void make_superblock (List<instruction*> *insList,
         List<basicblock*> *bbList,
         map<int,variable*> &varList, 
         std::set<ADDR> *brDstSet,
         std::map<ADDR, basicblock*> *bbMap,
-        map<ADDR,instruction*> *insAddrMap);
+        map<ADDR,instruction*> *insAddrMap,
+        LENGTH cluster_size,
+        SCH_MODE);
 
 #endif

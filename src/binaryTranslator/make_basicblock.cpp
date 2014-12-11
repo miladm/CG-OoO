@@ -11,7 +11,8 @@ void make_basicblock  (List<instruction*> *insList,
 					  map<int,variable*> &varList, 
 		      		  set<ADDR> *brDstSet,
 		      		  map<ADDR, basicblock*> *bbMap,
-					  map<ADDR,instruction*> *insAddrMap) {
+					  map<ADDR,instruction*> *insAddrMap,
+                      LENGTH cluster_size) {
 	// CONSTRUCT BB'S
 	set<long int> use_set, def_set, diff_set;
 	for  (int i = 0; i < insList->NumElements (); i++) {
@@ -38,18 +39,25 @@ void make_basicblock  (List<instruction*> *insList,
 			}
 			newBB->addIns (ins, BR_DST);
 			bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
-			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB  (CLOSING BB)
+			//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB (CLOSING BB)
 			if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
-                 ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
+                 ins->getType () == 'c' || ins->getType () == 's') {
 			    basicblock *bb = bbList->Last ();
 				bb->setBBbrHeader (ins->getInsAddr ());
 				newBB = new basicblock;
 				newBB->setListIndx (bbList->NumElements ());
 				bbList->Append (newBB);
-			}
+            } else if ((!ins->hasFallThru () && !ins->hasDst ()) || (newBB->getBbSize () >= cluster_size)) {
+                newBB = new basicblock;
+                newBB->setListIndx (bbList->NumElements ());
+                bbList->Append (newBB);
+                if  (newBB->getBbSize () == 1) {
+                    bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
+                }
+            }
 			//printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getID ());
 		} else if  (ins->getType () == 'j' || ins->getType () == 'b' || ins->getType () == 'r' || 
-                    ins->getType () == 'c' || ins->getType () == 's' || (!ins->hasFallThru () && !ins->hasDst ())) {
+                    ins->getType () == 'c' || ins->getType () == 's') {
 			basicblock *bb = bbList->Last ();
 			bb->setBBbrHeader (ins->getInsAddr ());
 			bb->addIns (ins, NO_BR_DST);
@@ -59,6 +67,25 @@ void make_basicblock  (List<instruction*> *insList,
 			basicblock* newBB = new basicblock;
 			newBB->setListIndx (bbList->NumElements ());
 			bbList->Append (newBB);
+			//printf ("%llx\n", ins->getInsAddr ());
+		} else if (!ins->hasFallThru () && !ins->hasDst ()) {
+			basicblock *bb = bbList->Last ();
+			bb->addIns (ins, NO_BR_DST);
+			if  (bb->getBbSize () == 1) {
+				bbMap->insert (pair <ADDR, basicblock*> (bb->getID (), bb));
+			}
+			basicblock* newBB = new basicblock;
+			newBB->setListIndx (bbList->NumElements ());
+			bbList->Append (newBB);
+			//printf ("%llx\n", ins->getInsAddr ());
+		} else if (bbList->Last()->getBbSize () >= cluster_size) {
+			basicblock* newBB = new basicblock;
+			newBB->setListIndx (bbList->NumElements ());
+			bbList->Append (newBB);
+			newBB->addIns (ins, BR_DST);
+			if  (newBB->getBbSize () == 1) {
+				bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), newBB));
+			}
 			//printf ("%llx\n", ins->getInsAddr ());
 		} else {
 			basicblock *bb = bbList->Last ();
@@ -123,7 +150,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setTakenTarget (bbDst);
                 }
 			} else {
-				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb for jump, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -137,7 +164,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setFallThrough (bbFallThru);
                 }
 			} else {
-				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb for non-br op, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -151,7 +178,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setFallThrough (bbFallThru);
                 }
 			} else {
-				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find fall-thru bb for br, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -165,7 +192,7 @@ void make_basicblock  (List<instruction*> *insList,
                     bb->setTakenTarget (bbDst);
                 }
 			} else {
-				printf ("\t\tERROR: Didn't find destination bb, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+				printf ("\t\tERROR: Didn't find destination bb for br, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
 				//exit (1);
 				continue;
 			}
@@ -187,4 +214,8 @@ void make_basicblock  (List<instruction*> *insList,
 	}
 	std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), def_set.end (), std::inserter (diff_set, diff_set.begin ()));
 	printf ("\tDiff Set: %d %d %d\n", def_set.size (), use_set.size (), diff_set.size ());
+	for  (int i = 0; i < bbList->NumElements (); i++) {
+		basicblock* bb = bbList->Nth (i);
+        if (bb->getBbSize () > 30) cout << hex << bb->getID () << endl;
+    }
 }

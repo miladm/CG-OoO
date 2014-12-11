@@ -55,6 +55,7 @@ class instruction {
 		ADDR getInsDstAddr ();
 		ADDR getInsFallThruAddr ();
 		instruction* getInsFallThru ();
+		instruction* getInsDst ();
 		const char *getInsAsm ();
 		const char getType ();
 		double getBrTakenBias ();
@@ -111,6 +112,7 @@ class instruction {
 		void resetLongestPath ();
 		void setLongestPath (int longestPath);
 		void setMy_BBorPB_id (ADDR id);
+		void resetMy_BBorPB_id ();
 		ADDR getMy_BB_id ();
 		set<ADDR> getMy_PB_id ();
 		ADDR getMy_first_PB_id ();
