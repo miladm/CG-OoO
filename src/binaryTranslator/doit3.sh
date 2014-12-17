@@ -1,7 +1,7 @@
 #!/bin/sh
 
 REG_ALLOC_MODE="global_reg"
-SCH_MODE="list_sch"
+SCH_MODE="no_list_sch"
 CLUSTER_MODE="sb"
 CLUSTER_SIZE=50
 

@@ -173,8 +173,11 @@ void staticCodeParser::addBBheader (ADDRINT insAddr, ADDRINT bbAddr) {
 	#ifdef ASSERTION
 	Assert (bbAddr != 0 && insAddr != 0);
 	#endif
+
 	_bbMap[bbAddr]->bbHeader = insAddr;
 	_bbMap[bbAddr]->bbHasHeader = true;
+
+    /* ASSUMING THE LAST BR/JMP MATTERS */
     _bbMap[bbAddr]->hasBr = true;
     _bbMap[bbAddr]->brAddr = insAddr;
 }

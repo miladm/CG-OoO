@@ -28,7 +28,7 @@ static ScalarStat& s_large_bb_cnt (g_stats.newScalarStat ("uOpGen", "large_bb_cn
  * INS INSTRUMENTATIONS
  * ************************************ */
 VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, 
-        BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
+        BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJumpBr, BOOL isDirBrOrCallOrJmp, BOOL isJump) {
     if (g__staticCode->hasIns (ins_addr)) {
 //        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
@@ -36,13 +36,12 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
             if (insObj != NULL) {
-                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
             }
-            if (!(isJump && isDirBrOrCallOrJmp))
-                g_br_detected = true;
+            if (g__staticCode->getInsObj(ins_addr)->getBrType () != JMP) g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
-            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -262,6 +261,7 @@ void pin__getOp (INS ins) {
     BOOL is_call = INS_IsCall (ins) || INS_IsFarCall (ins);
     BOOL is_dir_br_jmp = INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins);
     BOOL is_br_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins));
+    BOOL is_dir_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins);
 
     if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
         INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
@@ -279,6 +279,7 @@ void pin__getOp (INS ins) {
                     IARG_BOOL, is_ret,
                     IARG_BOOL, is_br_jmp,
                     IARG_BOOL, is_dir_br_jmp,
+                    IARG_BOOL, is_dir_jmp,
                     IARG_END);
         }
         INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) pin__getBrIns,
@@ -291,6 +292,7 @@ void pin__getOp (INS ins) {
                 IARG_BOOL, is_ret,
                 IARG_BOOL, is_br_jmp,
                 IARG_BOOL, is_dir_br_jmp,
+                IARG_BOOL, is_dir_jmp,
                 IARG_END);
         /*
         //capture mem u-op
@@ -313,6 +315,7 @@ void pin__getOp (INS ins) {
                 IARG_BOOL, is_ret,
                 IARG_BOOL, is_br_jmp,
                 IARG_BOOL, is_dir_br_jmp,
+                IARG_BOOL, is_dir_jmp,
                 IARG_END);
     } else if (INS_IsMemoryRead (ins)) {
         bool isMemRead;
