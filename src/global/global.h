@@ -25,6 +25,8 @@ typedef int LENGTH;
 typedef int WIDTH;
 typedef int nMETER;
 typedef long double SCALAR;
+typedef long double FRACTION;
+typedef long int DIGIT;
 typedef long double PJ; /* PICO-JOULE */
 
 typedef char INS_STR;

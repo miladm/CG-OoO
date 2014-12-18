@@ -365,6 +365,11 @@ VOID pin__doFinish () {
 	g_msg.simStep ("BACKEND TERMINATED");
 
     /*-- DUMP STAT --*/
+    if (g_cfg->isEnProfiling ()) {
+        g_msg.simStep ("STORE PROFILING DATA");
+        g_prof.dump ();
+    }
+	g_msg.simStep ("STORE STAT");
     g_stats.dump ();
 
 	/*-- FINISH BACKEND --*/
@@ -808,6 +813,10 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
 	}
+
+    if (g_cfg->isEnProfiling ()) {
+        g_prof.update_br_profiler (__pc, taken);
+    }
 
     return  pred ? tgt : fthru;
 }

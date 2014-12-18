@@ -240,6 +240,8 @@ _sr	instruction.h	/^        List<long int> *_sr; \/\/SPECIAL REGISTER LIST$/;"	m
 _srt	instruction.h	/^        List<int> *_srt; \/\/SPECIAL REGISTER TYPE LIST$/;"	m	class:instruction
 _style	dot.h	/^		char* _style;$/;"	m	class:dot
 _takenTargetBB	basicblock.h	/^		basicblock* _takenTargetBB;$/;"	m	class:basicblock
+_upld_dep	instruction.h	/^        bool _upld_dep;$/;"	m	class:instruction
+_upld_ins	instruction.h	/^        bool _upld_ins;$/;"	m	class:instruction
 _useSet	basicblock.h	/^		std::set<long int> _useSet;$/;"	m	class:basicblock
 _useSet	instruction.h	/^		std::set<long int> _useSet;$/;"	m	class:instruction
 _var	variable.h	/^		long int _var;$/;"	m	class:variable
@@ -304,7 +306,7 @@ delReg	dependencyTable.cpp	/^void dependencyTable::delReg  (long int reg, instru
 delWr	dependencyTable.cpp	/^void dependencyTable::delWr  (instruction* ins){$/;"	f	class:dependencyTable
 depTables	dependencySetup.cpp	/^static dependencyTable* depTables;$/;"	v	file:
 dependency	dependencySetup.cpp	/^static void dependency (basicblock* bb) {$/;"	f	file:
-dependencySetup	dependencySetup.cpp	/^void dependencySetup (List<basicblock*>* bbList) {$/;"	f
+dependencySetup	dependencySetup.cpp	/^void dependencySetup (List<basicblock*>* bbList, List<instruction*>* insList) {$/;"	f
 dependencyTable	dependencyTable.cpp	/^dependencyTable::dependencyTable() {$/;"	f	class:dependencyTable
 dependencyTable	dependencyTable.h	/^class dependencyTable {$/;"	c
 dependencyTableCheck	instruction.cpp	/^void instruction::dependencyTableCheck (dependencyTable *depTables) {$/;"	f	class:instruction
@@ -477,6 +479,7 @@ isNotRepeated	annotateTrace.cpp	/^bool isNotRepeated(ADDR insAddr, List<instruct
 isRdMemType	instruction.cpp	/^bool instruction::isRdMemType () {$/;"	f	class:instruction
 isRegAllocated	basicblock.cpp	/^bool basicblock::isRegAllocated () {$/;"	f	class:basicblock
 isThisBBfallThru	basicblock.cpp	/^bool basicblock::isThisBBfallThru (basicblock* anc) {$/;"	f	class:basicblock
+isUPLDdep	instruction.cpp	/^bool instruction::isUPLDdep () {$/;"	f	class:instruction
 isVisited	basicblock.cpp	/^bool basicblock::isVisited () {$/;"	f	class:basicblock
 isWrMemType	instruction.cpp	/^bool instruction::isWrMemType () {$/;"	f	class:instruction
 itertools	parse_x86.py	/^import itertools$/;"	i
@@ -503,7 +506,7 @@ make_basicblock	make_basicblock.cpp	/^void make_basicblock  (List<instruction*> 
 make_interference_nodes_network	registerAllocate.cpp	/^static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
 make_interference_nodes_network	registerAllocate_sb.cpp	/^static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
 make_phraseblock	make_phraseblock.cpp	/^List<basicblock*>* make_phraseblock(List<basicblock*>* bbList,$/;"	f
-make_superblock	make_superblock.cpp	/^void make_superblock  (List<instruction*> *insList,$/;"	f
+make_superblock	make_superblock.cpp	/^void make_superblock (List<instruction*> *insList,$/;"	f
 markAsEntryPoint	basicblock.cpp	/^void basicblock::markAsEntryPoint () {$/;"	f	class:basicblock
 marshal	parse_x86.py	/^import marshal$/;"	i
 memReadList	dependencyTable.h	/^		std::map<ADDR,instruction*> memReadList;$/;"	m	class:dependencyTable
@@ -571,6 +574,7 @@ resetFallThrough	basicblock.cpp	/^void basicblock::resetFallThrough () { _fallTh
 resetInsDst	instruction.cpp	/^void instruction::resetInsDst () {$/;"	f	class:instruction
 resetInsFallThru	instruction.cpp	/^void instruction::resetInsFallThru () {$/;"	f	class:instruction
 resetLongestPath	instruction.cpp	/^void instruction::resetLongestPath () {$/;"	f	class:instruction
+resetMy_BBorPB_id	instruction.cpp	/^void instruction::resetMy_BBorPB_id () {$/;"	f	class:instruction
 resetTakenTarget	basicblock.cpp	/^void basicblock::resetTakenTarget () { _takenTargetBB = NULL; }$/;"	f	class:basicblock
 resetVisitBits	loop.cpp	/^void loop::resetVisitBits() {$/;"	f	class:loop
 resetVisitBits	make_phraseblock.cpp	/^void resetVisitBits(List<basicblock*> *bbList) {$/;"	f
@@ -616,6 +620,8 @@ setRegister	instruction.cpp	/^void instruction::setRegister (long int *r, int *r
 setSpecialRegister	instruction.cpp	/^void instruction::setSpecialRegister (long int *r, int *rt) {$/;"	f	class:instruction
 setTakenTarget	basicblock.cpp	/^void basicblock::setTakenTarget (basicblock* bb) {$/;"	f	class:basicblock
 setType	instruction.cpp	/^void instruction::setType (const char insType) {$/;"	f	class:instruction
+setUPLDdep	instruction.cpp	/^void instruction::setUPLDdep () {$/;"	f	class:instruction
+setUPLDins	instruction.cpp	/^void instruction::setUPLDins () {$/;"	f	class:instruction
 setWrAddrSet	instruction.cpp	/^void instruction::setWrAddrSet (set<ADDR> &addrSet) {$/;"	f	class:instruction
 setWrMemType	instruction.cpp	/^void instruction::setWrMemType () {$/;"	f	class:instruction
 setWriteVar	instruction.cpp	/^void instruction::setWriteVar (int var, int subscript) {$/;"	f	class:instruction
@@ -642,10 +648,12 @@ updateDefSet	basicblock.cpp	/^void basicblock::updateDefSet (long int reg) {$/;"
 updateDefSet	instruction.cpp	/^void instruction::updateDefSet (long int reg) {$/;"	f	class:instruction
 updateLocalRegSet	basicblock.cpp	/^void basicblock::updateLocalRegSet () {$/;"	f	class:basicblock
 updateLocalRegSet	instruction.cpp	/^void instruction::updateLocalRegSet () {$/;"	f	class:instruction
+updateUPLDbit	instruction.cpp	/^bool instruction::updateUPLDbit () {$/;"	f	class:instruction
 updateUseSet	basicblock.cpp	/^void basicblock::updateUseSet (long int reg) {$/;"	f	class:basicblock
 updateUseSet	instruction.cpp	/^void instruction::updateUseSet (long int reg) {$/;"	f	class:instruction
 update_InOutSet	basicblock.cpp	/^bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	class:basicblock
 update_InOutSet	instruction.cpp	/^bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> &bbDefSet, bool isLastInsInBB) {$/;"	f	class:instruction
+upld_annotation	dependencySetup.cpp	/^static void upld_annotation (List<instruction*>* insList) {$/;"	f	file:
 variable	variable.cpp	/^variable::variable (long int var) {$/;"	f	class:variable
 variable	variable.h	/^class variable {$/;"	c
 whichPred	ssa.cpp	/^int whichPred (basicblock* Y, basicblock* X) {$/;"	f

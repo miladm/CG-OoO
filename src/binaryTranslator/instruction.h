@@ -100,6 +100,12 @@ class instruction {
 		int getNumAncestors ();
 		int getNumDependents ();
 
+        /* UPLD DEPENDENCE */
+        bool isUPLDdep ();
+        void setUPLDdep ();
+        void setUPLDins ();
+        bool updateUPLDbit ();
+
 		/* REGISTER RENAMING */
 	    void renameWriteReg (int indx, long int reg);                                                                                                                       
 	    void renameReadReg (int indx, long int renReg);                                                                                                           
@@ -143,6 +149,8 @@ class instruction {
 		char _command[INS_STRING_SIZE];
 		set<ADDR> _myBBs;
 		ADDR _insAddr;
+        bool _upld_dep;
+        bool _upld_ins;
 
         /* REGS */
         List<long int> *_r; //SSA REGISTER LIST

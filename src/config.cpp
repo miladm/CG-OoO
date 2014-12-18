@@ -43,6 +43,7 @@ config::config (string bench_path, string config_path, string out_dir) {
     cout << config_path << endl;
     _config_path  = config_path + cfg_file_ext;
     _out_path = out_dir;
+    _profile_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/profile_files/ref"; //TODO tranfer to yaml
     cout << _config_path << endl;
     _bench_path   = bench_path + cfg_file_ext;
 	_f_sim_cfg    = fopen (_config_path.c_str (), "r");
@@ -381,6 +382,8 @@ char* config::getSfilePath () { return _s_file_root_path; }
 
 string config::getOutPath () { return _out_path; }
 
+string config::getProfilePath () { return _profile_path; }
+
 SCH_MODE config::getSchMode  () { return _sch_mode; }
 
 REG_ALLOC_MODE config::getRegAllocMode  () { return _reg_alloc_mode; }
@@ -402,6 +405,8 @@ bool config::isEnMemFwd () {return _enable_mem_fwd;}
 bool config::isEnFwd () {return _enable_mem_fwd || _enable_eu_fwd;}
 
 bool config::isEnLogStat () {return _enable_log_stat;}
+
+bool config::isEnProfiling () {return true;} //TODO put this to yaml
 
 void config::setWarmedUp () {_warmed_up = true;} /* TODO this bad hack - change it*/
 

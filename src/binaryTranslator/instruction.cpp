@@ -27,6 +27,8 @@ instruction::instruction () {
     _mem_sch_mode = LOAD_STORE_ORDER;
     _hasFallThru = false;
     _hasDst = false;
+    _upld_dep = false;
+    _upld_ins = false;
 
     /*-- OBJ INSTANTIATIONS --*/
 	_r_read  = new List<long int>;
@@ -861,3 +863,30 @@ void instruction::renameAllInsRegs () {
     }
 }
 
+void instruction::setUPLDins () {
+    _upld_ins = true;
+}
+
+void instruction::setUPLDdep () {
+    _upld_dep = true;
+}
+
+bool instruction::isUPLDdep () {
+    return _upld_dep;
+}
+
+bool instruction::updateUPLDbit () {
+    bool change = false;
+    if (_upld_ins || _upld_dep) {
+        for (int i = 0; i < _dependents->NumElements (); i++) {
+            instruction* dep = _dependents->Nth (i);
+            if (dep->getMy_BB_id () != -1 && getMy_BB_id () != -1 &&
+                dep->getMy_BB_id () == getMy_BB_id () && 
+                !dep->isUPLDdep ()) {
+                dep->setUPLDdep ();
+                change = true;
+            }
+        }
+    }
+    return change;
+}

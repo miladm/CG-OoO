@@ -12,6 +12,6 @@
 #include "instruction.h"
 #include "dependencyTable.h"
 
-void dependencySetup (List<basicblock*>*);
+void dependencySetup (List<basicblock*>*, List<instruction*>*);
 
 #endif

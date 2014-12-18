@@ -1,8 +1,8 @@
 #!/bin/sh
 
-REG_ALLOC_MODE="global_reg"
-SCH_MODE="no_list_sch"
-CLUSTER_MODE="sb"
+REG_ALLOC_MODE="local_global_reg"
+SCH_MODE="list_sch"
+CLUSTER_MODE="bb"
 CLUSTER_SIZE=50
 
  ./PhraseFormer 400.perlbench $REG_ALLOC_MODE $SCH_MODE $CLUSTER_MODE $CLUSTER_SIZE

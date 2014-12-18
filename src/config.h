@@ -29,6 +29,7 @@ class config {
 		char* getProgName ();
 		char* getSfilePath ();
         string getOutPath ();
+        string getProfilePath ();
         SCH_MODE getSchMode ();
         REG_ALLOC_MODE getRegAllocMode ();
         CORE_TYPE getCoreType ();
@@ -41,6 +42,7 @@ class config {
         bool isEnMemFwd ();
         bool isEnFwd ();
         bool isEnLogStat ();
+        bool isEnProfiling ();
         
         /* PROGRAM WARMUP */
         void setWarmedUp ();
@@ -70,6 +72,7 @@ class config {
         REG_ALLOC_MODE _reg_alloc_mode;
         string _config_path;
         string _out_path;
+        string _profile_path;
         string _bench_path;
         bool _enable_log_stat;
         long double _max_ins_cnt;

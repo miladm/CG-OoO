@@ -369,20 +369,16 @@ void allocate_register (List<basicblock*> *bbList,
 	findEntryPoints (bbList, interiorBB);
 
 
-	// PERFORM LIST SCHEDULING ON BB
-    if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
-        Assert (0 && "reimplement");
-        for  (int i = 0; i < bbList->NumElements (); i++) {
-            basicblock* bb = bbList->Nth (i);
-            bb->brDependencyTableCheck ();
-        }
+	/* PERFORM LIST SCHEDULING ON BB */
+    printf ("\tSetup Dependency Table\n");
+    dependencySetup (bbList, insList);
+    if (sch_mode == LIST_SCH) {
         printf ("\tRun List Scheduling\n");
         for  (int i = 0; i < bbList->NumElements (); i++) {
             basicblock* bb = bbList->Nth (i);
             listSchedule (bb); //why does this affect BB structure?
         }
     }
-
 
 	//TODO is the block below okay? needed?
 	for (int i = 0; i < bbList->NumElements (); i++)

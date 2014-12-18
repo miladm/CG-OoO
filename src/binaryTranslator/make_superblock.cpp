@@ -71,9 +71,9 @@ void make_superblock (List<instruction*> *insList,
     }
 
 	/* PERFORM LIST SCHEDULING ON BB */
+    printf ("\tSetup Dependency Table\n");
+    dependencySetup (bbList, insList);
     if (sch_mode == LIST_SCH) {
-        printf ("\tSetup Dependency Table\n");
-        dependencySetup (bbList);
         printf ("\tRun List Scheduling\n");
         for  (int i = 0; i < bbList->NumElements (); i++) {
             basicblock* bb = bbList->Nth (i);

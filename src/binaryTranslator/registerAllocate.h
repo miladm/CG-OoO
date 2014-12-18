@@ -13,6 +13,7 @@
 #include "basicblock.h"
 #include "instruction.h"
 #include "listSchedule.h"
+#include "dependencySetup.h"
 
 void allocate_register(List<basicblock*> *bbList, List<instruction*> *insList, map<ADDR,instruction*> *insAddrMap, REG_ALLOC_MODE reg_alloc_mode, SCH_MODE sch_mode);
 

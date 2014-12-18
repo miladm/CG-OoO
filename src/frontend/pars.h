@@ -31,6 +31,7 @@
 #include "../global/global.h"
 #include "../global/g_variable.h"
 #include "../lib/utility.h"
+#include "../lib/profiler.h"
 //#include "../lib/debug.h"
 #include "../lib/message.h"
 #include "../lib/statistic.h"

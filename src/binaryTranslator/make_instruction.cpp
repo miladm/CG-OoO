@@ -1,5 +1,6 @@
 #include "make_instruction.h"
 #include "regFile.h"
+#include "dependencyTable.h"
 #include "config.h"
 
 // char* input_asm_file;
@@ -49,54 +50,80 @@ void parse_instruction (List<instruction*> *insList,
 	ADDR insAddr, insFallThru, insDst, brDst;
 	bool hasFallThru, hasDst;
 	FILE * input_assembly;
+	FILE * input_brBias;
+	FILE * input_bpAccuracy;
+	FILE * input_upld;
+	FILE * input_mem;
+
 	// if ((input_assembly = fopen (input_asm_file, "r")) == NULL) {
+
     string input_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/input_files/";
+    string profile_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/profile_files/ref/";
+
+    /* ASSSEMBLY FILE FETCH */
 	if ((input_assembly = fopen ((input_path + (*program_name) + ".s").c_str (), "r")) == NULL) {
 		Assert ("Cannot open assembly file.");
 	}
-	FILE * input_brBias;
-	if ((input_brBias = fopen ((input_path + (*program_name) + "_bias.csv").c_str (), "r")) == NULL) {
-		Assert ("Cannot open branch bias file.");
+
+    /* BRANCH BIAS FILE FETCH */
+    ostringstream lo_wbb, hi_wbb;
+    lo_wbb << WBB_LOWER_BOUND;
+    hi_wbb << WBB_UPPER_BOUND;
+    string file_ext = "_wbb_" + lo_wbb.str () + "_" + hi_wbb.str () + ".csv";
+	if ((input_brBias = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
+		Assert ("Cannot open branch bias file.\n");
 	}
-	FILE * input_bpAccuracy;
-	if ((input_bpAccuracy = fopen ((input_path + (*program_name) + "_bpAccuracy.csv").c_str (), "r")) == NULL) {
-		Assert ("Cannot open branch prediction accuracy file.");
-	}
-	FILE * input_upld;
-	if ((input_upld = fopen ("input_files/input_upld.csv", "r")) == NULL) {
+
+    /* BRANCH ACCURACY FILE FETCH */
+//    ostringstream upld_thr;
+//    upld_thr << UPLD_THRESHOLD;
+//    file_ext = "_upld_" + upld_thr.str () + ".csv";
+//	if ((input_bpAccuracy = fopen ((input_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
+//		Assert ("Cannot open branch prediction accuracy file.");
+//	}
+
+    /* UPLD FILE FETCH */
+    ostringstream upld_thr;
+    upld_thr << UPLD_THRESHOLD;
+    file_ext = "_upld_" + upld_thr.str () + ".csv";
+	if ((input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
 		Assert ("Cannot open unpred load ops file.");
 	}
 
-	FILE * input_mem;
+    /* MEMORY TRACE FILE FETCH */
 	if ((input_mem = fopen ("frontend/mem_trace.csv", "r")) == NULL) {
 		Assert ("Cannot open mem addresses file.");
 	}
 
 	/* PARSE BRANCH BIAS NUMBERS */
-	printf ("\tRead branch bias profile file: %s\n", ("input_files/"+ (*program_name) + "_bias.csv").c_str ());
+	printf ("\tRead branch BIAS profile file");
 	while (1) {
 		ADDR addr;
 		double bias;
-		if (fscanf (input_brBias, "%lx, %lf\n", &addr, &bias) == EOF) break;
+        int taken, br;
+		if (fscanf (input_brBias, "%lx,%lf,%d,%d\n", &addr, &bias, &taken, &br) == EOF) break;
 		brBiasMap->insert (pair<ADDR, double> (addr,bias));
 	}
+
 	/* PARSE BRANCH PREDICTION NUMBERS */
-	printf ("\tRead branch prediction accuracy profile file: %s\n", ("input_files/"+ (*program_name) + "_bpAccuracy.csv").c_str ());
-	while (1) {
-		ADDR addr;
-		double accuracy;
-		if (fscanf (input_bpAccuracy, "%lx, %lf\n", &addr, &accuracy) == EOF) break;
-		bpAccuracyMap->insert (pair<ADDR, double> (addr,accuracy));
-	}
+//	printf ("\tRead branch prediction accuracy profile file\n");
+//	while (1) {
+//		ADDR addr;
+//		double accuracy;
+//		if (fscanf (input_bpAccuracy, "%lx, %lf\n", &addr, &accuracy) == EOF) break;
+//		bpAccuracyMap->insert (pair<ADDR, double> (addr,accuracy));
+//	}
+
 	/* PARSE UNPREDICTABLE LOAD NUMBERS */
-	printf ("\tRead UPLD profile file: input_files/input_upld.csv\n");
+	printf ("\tRead UPLD profile file\n");
 	while (1) {
 		ADDR addr;
 		double missRate;
-		if (fscanf (input_upld, " (%ld, %lf)\n", &addr, &missRate) == EOF) break;
-		upldMap->insert (pair<ADDR, double> (addr,missRate));
-		
+        int miss_ld, ld;
+		if (fscanf (input_upld, "%lx, %lf,%d,%d\n", &addr, &missRate, &miss_ld, &ld) == EOF) break;
+		upldMap->insert (pair<ADDR, double> (addr, missRate));
 	}
+
 	//Parse memory access addresses
 	// while (1) {
 	// 	ADDR insAddr, dataAddr;
@@ -173,12 +200,12 @@ void parse_instruction (List<instruction*> *insList,
 		/* SETUP INSTRUCTION BRANCH BIAS/ACCURACY INFORMATION */
 		if (newIns->getType () == 'j' || newIns->getType () == 'b' || newIns->getType () == 'c') {
 			/* SETUP BRANCH PREDICTION ACCURACY INFORMATION */
-			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
-				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
-			} else if (newIns->getType () == 'b') {
-				;// printf ("\t\tERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
-				//exit (1);
-			}
+//			if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end ()) {
+//				newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr]);
+//			} else if (newIns->getType () == 'b') {
+//				;// printf ("\t\tERROR: branch instruction prediction accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
+//				//exit (1);
+//			}
 
 			/* SETUP BRANCH BIAS INFORMATION */
 			if (brBiasMap->find (insAddr) != brBiasMap->end ()) {
@@ -201,6 +228,7 @@ void parse_instruction (List<instruction*> *insList,
 		/* SET MISS-RATE IF INSTRUCTION IS A UPLD */
 		if (upldMap->find (insAddr) != upldMap->end () && newIns->isRdMemType () == true) {
 			newIns->setLdMissRate ((*upldMap)[insAddr]);
+            newIns->setUPLDins ();
 		}
 
 		/* SET INSTRUCTION REGISTERS (READ & WRITE) */
@@ -258,7 +286,7 @@ void parse_instruction (List<instruction*> *insList,
 	/* CLOSE FILES */
 	fclose (input_assembly);
 	fclose (input_brBias);
-	fclose (input_bpAccuracy);
+//	fclose (input_bpAccuracy);
 	fclose (input_upld);
 	fclose (input_mem);
 }

@@ -147,12 +147,15 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
         s_st_to_ld_fwd_cnt++;
         s_st_to_ld_fwd_rat++;
         mem_ins->setLQstate (LQ_FWD_FROM_SQ);
-        return g_eu_lat._st_buff_lat;
+        CYCLE lat = g_eu_lat._st_buff_lat;
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->getInsAddr (), lat); }
+        return lat;
     //} else if () { /*TODO for MSHR */
     } else {
         if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         CYCLE lat = _cache.request ((uint64_t)mem_ins->getMemAddr (), false, REQUEST_READ);
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->getInsAddr (), lat); }
 //        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
 //                    mem_ins->getMemAddr (),
 //                    4,

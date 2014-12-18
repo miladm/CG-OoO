@@ -22,6 +22,7 @@
 #include "../../lib/list.h"
 #include "../../lib/debug.h"
 #include "../../lib/statistic.h"
+#include "../../lib/profiler.h"
 #include "../../energy/energy.h"
 #include "../../energy/wire_energy.h"
 #include "../../energy/table_energy.h"

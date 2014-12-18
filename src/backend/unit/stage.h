@@ -10,6 +10,7 @@
 #include "../../lib/timer.h"
 #include "../../lib/utility.h"
 #include "../../lib/list.h"
+#include "../../lib/profiler.h"
 #include "../../global/global.h"
 #include "../../global/g_variable.h"
 #include "../../global/g_objs.h"

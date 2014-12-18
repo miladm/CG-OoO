@@ -138,6 +138,7 @@ $(OBJDIR)lib/message$(OBJ_SUFFIX) \
 $(OBJDIR)lib/statistic$(OBJ_SUFFIX) \
 $(OBJDIR)lib/timer$(OBJ_SUFFIX) \
 $(OBJDIR)lib/debug$(OBJ_SUFFIX) \
+$(OBJDIR)lib/profiler$(OBJ_SUFFIX) \
 $(OBJDIR)lib/benchAddrRangeParser$(OBJ_SUFFIX) \
 $(OBJDIR)lib/bp_lib/sat_counter$(OBJ_SUFFIX) \
 $(OBJDIR)energy/energy$(OBJ_SUFFIX) \
