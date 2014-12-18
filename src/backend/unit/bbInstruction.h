@@ -40,6 +40,10 @@ class bbInstruction : public dynInstruction {
         List<AR>* getLARrdList ();
         List<AR>* getLARwrList ();
 
+        /*-- UPLD --*/
+        bool isUPLDdep ();
+        void setUPLDdep (bool);
+
         /*-- INS CONTROL --*/
         void resetWrongPath ();
         void resetStates ();
@@ -64,6 +68,7 @@ class bbInstruction : public dynInstruction {
         /*-- BB --*/
         dynBasicblock* _bb;
         WIDTH _bbWin_id;
+        bool _upld_dep;
 
         /*-- LOCAL REGS --*/
         List<AR> _l_rdReg;

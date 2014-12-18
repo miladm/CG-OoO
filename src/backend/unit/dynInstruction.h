@@ -55,6 +55,10 @@ class dynInstruction : public unit {
         List<PR>* getPRwrList ();
         bool isCacheAxes ();
 
+        /*-- UPLD --*/
+        bool isUPLDdep ();
+        void setUPLDdep (bool);
+
         /*-- INS CONTROL --*/
         void resetStates ();
         void printReg () {
@@ -76,6 +80,7 @@ class dynInstruction : public unit {
         ADDRS _ins_addr;
         INS_ID _seq_num;
         INS_TYPE _ins_type;
+        bool _upld_dep;
 
         /*-- BR --*/
         ADDRS _brTarget;

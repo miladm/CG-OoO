@@ -38,9 +38,9 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
 			instruction* ins = (sch_mode == LIST_SCH) ? bb->getInsList_ListSchedule ()->Nth (j) : bb->getInsList ()->Nth (j);
 			if (ins->getType () == 'M') {
 				if (ins->isWrMemType ()) {
-					fprintf (outFile, "W,%d,-memAddr-,%lx,%d,%s", ins->getInsAddr (), ins->isUPLDdep (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
+					fprintf (outFile, "W,%d,-memAddr-,%lx,%d,%s", ins->isUPLDdep (), ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
 				} else if (ins->isRdMemType ()) {
-					fprintf (outFile, "R,%d,-memAddr-,%lx,%d,%s", ins->getInsAddr (), ins->isUPLDdep (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
+					fprintf (outFile, "R,%d,-memAddr-,%lx,%d,%s", ins->isUPLDdep (), ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
 				} else {
 					Assert (true == false && "ERROR: A memory operation is either read or write");
 				}

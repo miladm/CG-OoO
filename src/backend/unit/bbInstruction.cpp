@@ -61,15 +61,7 @@ void bbInstruction::setAR (AR ar, AXES_TYPE type) {
 
 }
 
-REG_TYPE bbInstruction::getARtype (AR a_reg) {
-#ifdef ASSERTION
-    Assert (USE_LRF == true);
-#endif
-    if (a_reg >= g_cfg->getLARF_LO () && a_reg <= g_cfg->getLARF_HI () ) return LOCAL_REG;
-    else if (a_reg >= g_cfg->getGARF_LO () && a_reg <= g_cfg->getGARF_HI ()) return GLOBAL_REG;
-    else Assert (true == false && "Architectural register is neither LOCAL nor GLOBAL");
-    return LOCAL_REG; //Placeholder for compiler
-}
+void bbInstruction::setUPLDdep (bool upld_dep) { _upld_dep = upld_dep; }
 
 /* *********************** *
  * GET INS ATRIBUTES
@@ -105,6 +97,18 @@ List<PR>* bbInstruction::getPRwrList () {return &_p_wrReg;}
 List<AR>* bbInstruction::getLARrdList () {return &_l_rdReg_waitList;}
 
 List<AR>* bbInstruction::getLARwrList () {return &_l_wrReg;}
+
+bool bbInstruction::isUPLDdep () { return _upld_dep; }
+
+REG_TYPE bbInstruction::getARtype (AR a_reg) {
+#ifdef ASSERTION
+    Assert (USE_LRF == true);
+#endif
+    if (a_reg >= g_cfg->getLARF_LO () && a_reg <= g_cfg->getLARF_HI () ) return LOCAL_REG;
+    else if (a_reg >= g_cfg->getGARF_LO () && a_reg <= g_cfg->getGARF_HI ()) return GLOBAL_REG;
+    else Assert (true == false && "Architectural register is neither LOCAL nor GLOBAL");
+    return LOCAL_REG; //Placeholder for compiler
+}
 
 /* *********************** *
  * INS CONTROL

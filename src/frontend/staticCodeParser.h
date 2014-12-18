@@ -45,7 +45,7 @@ class staticCodeParser {
         void getRegisters (ADDRS, string);
 
         /*-- INS FUNCTIONS --*/
-        void makeNewIns (char, ADDRINT, ADDRINT, string, ADDRINT);
+        void makeNewIns (char, ADDRINT, ADDRINT, string, ADDRINT, bool);
 
         /*-- BB FUNCTIONS --*/
         void makeNewBB (ADDRINT);

@@ -22,8 +22,8 @@ staticCodeParser::staticCodeParser (config *g_cfg)
     else Assert ("invalid reg allocation mode");
 
     string in_dir (_g_cfg->getSfilePath ());
-    string in_file_path = in_dir + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_obj.s";
-//    string in_file_path = in_dir + "/sb/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_50_bbSiz_obj.s";
+//    string in_file_path = in_dir + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_obj.s";
+    string in_file_path = in_dir + "/bb/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_50_bbSiz_obj.s";
 	if ( (_inFile  = fopen (in_file_path.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << in_file_path.c_str () << endl;
@@ -47,6 +47,7 @@ staticCodeParser::~staticCodeParser () {
  --*/
 void staticCodeParser::parse () {
 	ADDRINT bbAddr = 0, insAddr = 0, brDest = 0;
+    int upld_dep = 0;
 	int memAccessSize = 0;
 	char insType = 'z';
 	char regs_dummy[100];
@@ -69,26 +70,26 @@ void staticCodeParser::parse () {
 			addBBheader (insAddr, bbAddr);
 		} else if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%lx,-brTaken-,%lx%s\n", &insAddr, &brDest, regs_dummy);
+			scanStatus = fscanf (_inFile, ",%d,%lx,-brTaken-,%lx%s\n", &upld_dep, &insAddr, &brDest, regs_dummy);
 			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
-			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize, (bool)upld_dep);
             getRegisters (insAddr, registers);
 			addToBB (insAddr, bbAddr, insType);
 		} else if (insType == 'R' || insType == 'W') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",-memAddr-,%lx,%d%s\n", &insAddr, &memAccessSize, regs_dummy);
+			scanStatus = fscanf (_inFile, ",%d,-memAddr-,%lx,%d%s\n", &upld_dep, &insAddr, &memAccessSize, regs_dummy);
 			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
-			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize, (bool)upld_dep);
             getRegisters (insAddr, registers);
 			addToBB (insAddr, bbAddr, insType);
 		} else if (insType == 'o' || insType == 'n' || insType == 's') {
 			Assert (scanStatus != EOF);
-			scanStatus = fscanf (_inFile, ",%lx%s\n", &insAddr, regs_dummy);
+			scanStatus = fscanf (_inFile, ",%d,%lx%s\n", &upld_dep, &insAddr, regs_dummy);
 			string registers (regs_dummy, 100);
 			Assert (scanStatus != EOF);
-			makeNewIns (insType, insAddr, brDest, registers, memAccessSize);
+			makeNewIns (insType, insAddr, brDest, registers, memAccessSize, (bool)upld_dep);
             getRegisters (insAddr, registers);
 			addToBB (insAddr, bbAddr, insType);
 		} else {
@@ -121,11 +122,12 @@ void staticCodeParser::getRegisters (ADDRS insAddr, string registers) {
  * ***************************** */
 
 /*-- Make a new static instruction and add it to instruction list --*/
-void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest, string registers, ADDRINT memAccessSize) {
+void staticCodeParser::makeNewIns (char insType, ADDRINT insAddr, ADDRINT brDest, string registers, ADDRINT memAccessSize, bool upld_dep) {
 	Assert (insType != 'z' && insAddr != 0);
 
     stInstruction* newInsObj = new stInstruction;
     newInsObj->setInsAddr (insAddr);
+    newInsObj->setUPLDdep (upld_dep);
     if (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's') {
         newInsObj->setInsType (BR);
         bool isJump = (insType == 'j' ? true : false);

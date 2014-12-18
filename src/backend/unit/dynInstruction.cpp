@@ -158,6 +158,8 @@ void dynInstruction::setCacheAxes () {
     _cache_axes = true;
 }
 
+void dynInstruction::setUPLDdep (bool upld_dep) { _upld_dep = upld_dep; }
+
 /* *********************** *
  * GET INS ATRIBUTES
  * *********************** */
@@ -210,6 +212,8 @@ List<PR>* dynInstruction::getPRrdList () {return &_p_rdReg_waitList;}
 List<PR>* dynInstruction::getPRwrList () {return &_p_wrReg;}
 
 bool dynInstruction::isCacheAxes () { Assert (getInsType () == MEM && getMemType () == LOAD); return _cache_axes;}
+
+bool dynInstruction::isUPLDdep () { return _upld_dep; }
 
 /* *********************** *
  * INS CONTROL
