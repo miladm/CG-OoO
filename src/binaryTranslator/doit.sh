@@ -1,6 +1,6 @@
 #!/bin/sh
 
-REG_ALLOC_MODE="local_global_reg"
+REG_ALLOC_MODE="global_reg"
 SCH_MODE="list_sch"
 CLUSTER_MODE="bb"
 CLUSTER_SIZE=50

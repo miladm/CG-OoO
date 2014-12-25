@@ -6,7 +6,8 @@
 
 bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     : unit ("bbWindow_" + bbWin_id, clk),
-      _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id), //TODO configure and more real numbers
+      _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id),
+      _win_side (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id),
       _id (atoi (bbWin_id.c_str ()))
 { 
     _cycle = START_CYCLE;
@@ -16,6 +17,7 @@ bbWindow::bbWindow (string bbWin_id, sysClock* clk)
 
 void bbWindow::regStat () {
     _win.regStat ();
+    _win_side.regStat ();
 }
 
 void bbWindow::issueInc () {

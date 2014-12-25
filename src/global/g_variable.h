@@ -14,7 +14,6 @@
 
 #include "global.h"
 #include "../lib/list.h"
-#include "../backend/basicblock.h"
 #include "../backend/unit/dynInstruction.h"
 #include "../backend/unit/dynBasicblock.h"
 #include "../backend/unit/bbInstruction.h"
@@ -107,7 +106,6 @@ struct g_variable {
     BOOL g_taken;
 
     //Instruction pipe between frontend and backend
-    List<basicblock*>* g_BBlist;
     List<string*>* g_insList;
     List<dynInstruction*>* g_codeCache;
     List<dynBasicblock*>* g_bbCache;
