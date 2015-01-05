@@ -78,22 +78,22 @@ cpu:
                rf_size: 80
                rf_lo: 117
                rf_hi: 196
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
                name: SIMPLE_RF
                cout: 1
                e_cam: 0
-               e_ram: 0.581841
+               e_ram: 7.785043
            lrf:
                rf_size: 17
                rf_lo: 100
                rf_hi: 116
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
                name: LRF
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
-               e_ram: 0.581841
+               e_ram: 0.619338
            grf:
                a_size: 80
                a_lo: 117
@@ -104,8 +104,8 @@ cpu:
                p_size: 120
                p_lo: 1
                p_hi: 120
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
                name: GRF
                cout: 1
                e_cam: 0
@@ -120,8 +120,8 @@ cpu:
                p_size: 200
                p_lo: 1
                p_hi: 200
-               rd_wire_cnt: 8
-               wr_wire_cnt: 4
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
                name: RF
                cout: 1
                e_cam: 0
@@ -184,17 +184,17 @@ cpu:
             inoROB: 
                 size: 50
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
                 name: ROB
                 type: RAM
             o3ROB: 
-                size: 100
+                size: 180
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496
                 name: ROB
@@ -202,8 +202,8 @@ cpu:
             LQ:
                 size: 64
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 2.204357
                 e_ram: 1.236428
                 name: LQ
@@ -211,8 +211,8 @@ cpu:
             SQ:
                 size: 32
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 1.315326
                 e_ram: 1.620642
                 name: SQ
@@ -220,16 +220,16 @@ cpu:
             resStn:
                 size: 120
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 4.08806
                 e_cam2: 1.184757
                 e_ram: 2.638897
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 15
-                count: 12
+                size: 200
+                count: 16
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
@@ -239,8 +239,8 @@ cpu:
             iWindow: #only for INO
                 size: 50
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 2.535452
                 name: iWindow
@@ -248,8 +248,8 @@ cpu:
             mshr:
                 size: 20
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0        #TODO develop this
                 e_ram: 0        #TODO develop this
                 name: MSHR
@@ -257,8 +257,8 @@ cpu:
             st_buff: #only for INO
                 size: 20
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0.763521
                 e_ram: 1.160567
                 name: st_buff
@@ -266,8 +266,8 @@ cpu:
             ras: 
                 size: 16
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.633863
                 name: RAS
@@ -275,8 +275,8 @@ cpu:
             BTB: 
                 size: 4096
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 1.238
                 e_ram: 0
                 name: BTB
@@ -306,11 +306,11 @@ cpu:
                latency: 1
                name: branchPred
            fetch:
-               width: 8
+               width: 4 #TODO Gets doubled in code - fix it
                latency: 3
                name: fetch
            decode:
-               width: 8
+               width: 4 #TODO Gets doubled in code - fix it
                latency: 4
                name: decode
            schedule:

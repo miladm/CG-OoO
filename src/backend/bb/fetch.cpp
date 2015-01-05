@@ -56,30 +56,24 @@ SIM_MODE bb_fetch::doFETCH (FRONTEND_STATUS frontend_status) {
 PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch", _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-    if (_fetch_state == FETCH_COMPLETE) {
-        if (isGoToFrontend (frontend_status)) { 
-            _switch_to_frontend = true; 
-            return pipe_stall; 
-        } else {
-            if (getNewBB () == EMPTY_BUFF) return pipe_stall;
-            dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                    "NEW BB:", _current_bb->getBBID (), _clk->now ());
-            _bbQUE->pushBack (_current_bb);
-            s_bb_size_avg += _current_bb->getBBsize ();
-            s_bb_cnt++;
-        }
-    }
-
+    if (!fetchBB (frontend_status)) return pipe_stall;
     Assert (_current_bb != NULL);
+
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
-        if (_current_bb->getBBstate () == EMPTY_BUFF) break; /* NO BACK-TO-BACK BB FETCH IN 1 CYCLE FOR NOW (TODO) */
         if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
+        if (_current_bb->getBBstate () == EMPTY_BUFF) {
+//            break; /* FOR NO BACK-TO-BACK BB FETCH IN 1 CYCLE */
+            if (!fetchBB (frontend_status)) break; /* COULD NOT FETCH A ANOTHER NEW BB */
+            Assert (_current_bb != NULL);
+        }
 
         /*-- FETCH INS --*/
         bbInstruction* ins = _current_bb->popFront ();
         ins->setPipeStage (FETCH);
         _fetch_to_decode_port->pushBack (ins);
+        updateBBfetchState ();
+
         dbg.print (DBG_FETCH, "%s: %s %llu %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                 "Fetch ins", ins->getInsID (), "from BB", ins->getBB()->getBBID (), _clk->now ());
 
@@ -88,9 +82,26 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
     }
-
     updateBBfetchState ();
+
     return pipe_stall;
+}
+
+bool bb_fetch::fetchBB (FRONTEND_STATUS frontend_status) {
+    if (_fetch_state == FETCH_COMPLETE) {
+        if (isGoToFrontend (frontend_status)) { 
+            _switch_to_frontend = true; 
+            return false; 
+        } else {
+            if (getNewBB () == EMPTY_BUFF) return false;
+            dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                    "NEW BB:", _current_bb->getBBID (), _clk->now ());
+            _bbQUE->pushBack (_current_bb);
+            s_bb_size_avg += _current_bb->getBBsize ();
+            s_bb_cnt++;
+        }
+    }
+    return true;
 }
 
 bool bb_fetch::isGoToFrontend (FRONTEND_STATUS frontend_status) {

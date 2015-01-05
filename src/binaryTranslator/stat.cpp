@@ -4,6 +4,8 @@
 
 #include "stat.h"
 
+static string stat_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/stat";
+
 void StatBBSizeStat(List<basicblock*> *bbList, string *program_name) {
 	map<int,int> bbSizeDensity;
 	int totalBBsize = 0;
@@ -16,22 +18,26 @@ void StatBBSizeStat(List<basicblock*> *bbList, string *program_name) {
 			bbSizeDensity[size] = 1;
 	}
 	FILE *statOutputFile;
-	if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_StatBBSizeCDF_stat.csv").c_str(), "w")) == NULL)
+    string file_name = stat_path + "/" + (*program_name) + "_StatBBSizeCDF_stat.csv";
+	if ((statOutputFile  = fopen(file_name.c_str(), "w")) == NULL)
 		Assert("Unable to open the statistics output file.");
 	float cdf = 0.0;
 	for (map<int,int>::iterator it = bbSizeDensity.begin(); it != bbSizeDensity.end(); it++) {
 		cdf += (float)it->second / (float)bbList->NumElements();
 		fprintf(statOutputFile, "%d, %f\n", it->first, cdf);
 	}
+    printf ("StatBBSizeCDF: %s\n", file_name.c_str ());
 }
 
 void DynBBSizeStat(map<int,int> &bbSizeHist, string *program_name) {
 	FILE *statOutputFile;
-	if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_DynBBSizeHist_stat.csv").c_str(), "w")) == NULL)
+    string file_name = stat_path + "/" + (*program_name) + "_DynBBSizeHist_stat.csv";
+	if ((statOutputFile  = fopen(file_name.c_str(), "w")) == NULL)
 		Assert("Unable to open the statistics output file.");
 	for (map<int,int>::iterator it = bbSizeHist.begin(); it != bbSizeHist.end(); it++) {
 		fprintf(statOutputFile, "%d, %d\n", it->first, it->second);
 	}
+    printf ("DynBBSizeHist: %s\n", file_name.c_str ());
 }
 
 void StatNum_interBB_and_intra_BB_regs(List<basicblock*> *bbList, string *program_name) {
@@ -53,7 +59,7 @@ void StatNum_interBB_and_intra_BB_regs(List<basicblock*> *bbList, string *progra
 			}
 		}
 	}
-	if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_inter_n_intra_BB_reg_stat.txt").c_str(), "w")) == NULL)
+	if ((statOutputFile  = fopen((stat_path + "/" + (*program_name) + "_inter_n_intra_BB_reg_stat.txt").c_str(), "w")) == NULL)
 		Assert("Unable to open the statistics output file.");
 
 	fprintf(statOutputFile, "Avg. Num INTRA-BB Regs: %f\n", (float)num_intraBB_regs/(float)bbList->NumElements());

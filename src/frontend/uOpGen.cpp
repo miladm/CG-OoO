@@ -38,7 +38,8 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             if (insObj != NULL) {
                 insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
             }
-            g_br_detected = true;
+            if (!(isJump && isDirBrOrCallOrJmp))
+                g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
             insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);

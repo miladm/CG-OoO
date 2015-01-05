@@ -36,7 +36,7 @@ void bbBkEnd_init () {
 
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
-            2*width, 2*width, 2*width, width, width, width, width, num_bbW,
+            8*width, 8*width, 8*width, width, width, width, width, num_bbW,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 

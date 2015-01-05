@@ -46,15 +46,22 @@ class basicblock {
 		int getBbSize_ListSch ();
 		ADDR getID ();
 		void setBBbrHeader (ADDR brAddr);
+		void resetBBbrHeader ();
 		ADDR getBBbrHeader ();
 		bool hasHeader ();
         ADDR getBBtail ();
 		
 		//POINTERS TO OTHER BB
-		void setFallThrough (basicblock* bb);
-		void setTakenTarget (basicblock* bb);
-		void setDescendent (basicblock* bb);
-		void setAncestor (basicblock* bb); //Do not use outside class!
+		bool hasFallThrough ();
+		void setFallThrough (basicblock*);
+		void resetFallThrough ();
+		bool hasTakenTarget ();
+		void setTakenTarget (basicblock*);
+		void resetTakenTarget ();
+		void setDescendent (basicblock*);
+        void resetDescendents ();
+		void setAncestor (basicblock*); //Do not use outside class!
+        void resetAncestor (ADDR);
 		basicblock* getNxtBB ();
 		basicblock* getFallThrough ();
 		basicblock* getTakenTarget ();

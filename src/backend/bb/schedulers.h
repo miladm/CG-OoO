@@ -35,7 +35,7 @@ class bb_scheduler : protected stage {
         void manageBusyBBWin (bbWindow*);
         void forwardFromCDB (bbInstruction* ins);
         void regStat ();
-        bool hasReadyInsInBBWins (LENGTH &readyInsIndx);
+        bool hasReadyInsInBBWins (LENGTH&, LENGTH&);
         void updateBBROB (dynBasicblock*);
         void setBBWisAvail (WIDTH bbWin_id);
         bbWindow* getAnAvailBBWin ();
@@ -60,6 +60,8 @@ class bb_scheduler : protected stage {
         List<bbWindow*>* _bbWindows;
         List<bbWindow*> _avail_bbWin;
         map<WIDTH, bbWindow*> _busy_bbWin;
+
+        WIDTH _bb_issue_per_cyc_cnt;
 
         /*-- STAT --*/
         ScalarStat& s_mem_g_fwd_cnt;

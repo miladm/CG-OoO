@@ -33,7 +33,7 @@ void oooBkEnd_init () {
 
     g_ooo_clk = new sysClock (1);
     _ooo_core = new o3_sysCore (g_ooo_clk, 
-            2*width, 2*width, 2*width, width, width, width, width,
+            8*width, 8*width, 8*width, width, width, width, width,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 

@@ -33,12 +33,12 @@ void inoBkEnd_init () {
 
     g_ino_clk = new sysClock (1);
     _core = new sysCore (g_ino_clk,
-            2*width, 2*width, 2*width, width, width, width, width,
+            8*width, 8*width, 8*width, width, width, width, width,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 
             dcd_lat - 1, 50, 
-            sch_lat, 50, 
+            1, 50,  //TODO sch_lat is replaced here - take care of it.
             1, 50, 
             exe_lat, 50, 
             1, 50, 

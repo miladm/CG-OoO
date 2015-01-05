@@ -7,12 +7,15 @@
 #include <map>
 
 typedef long long unsigned int ADDR;
+typedef long int LENGTH;
+
 typedef enum {none, READ, WRITE} memType;
 typedef enum {noType, ALU, MEM, FPU, BR} type;
 typedef enum {LRF, GRF} regKind;
 typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
 typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;
 typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
+typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;
 
 #define CFG_STRING_SIZE 400
 #define INS_STRING_SIZE 330
@@ -51,7 +54,7 @@ typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
 #define MEM_HIGHERARCHY 4
 
 //HARDWARE SPECIFICATIONS
-#define NUM_EU 1
+#define NUM_EU 4
 
 //RESGITER ALLOCATION
 #define LRF_SIZE 17

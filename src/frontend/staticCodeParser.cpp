@@ -22,7 +22,7 @@ staticCodeParser::staticCodeParser (config *g_cfg)
     else Assert ("invalid reg allocation mode");
 
     string in_dir (_g_cfg->getSfilePath ());
-    string in_file_path = in_dir + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_obj.s";
+    string in_file_path = in_dir + "/sb/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + string (bench_name) + "_50_bbSiz_obj.s";
 	if ( (_inFile  = fopen (in_file_path.c_str (), "r")) == NULL) 
 		Assert ("Unable to open the input static code file.");
 	if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << in_file_path.c_str () << endl;
@@ -175,6 +175,8 @@ void staticCodeParser::addBBheader (ADDRINT insAddr, ADDRINT bbAddr) {
 	#endif
 	_bbMap[bbAddr]->bbHeader = insAddr;
 	_bbMap[bbAddr]->bbHasHeader = true;
+    _bbMap[bbAddr]->hasBr = true;
+    _bbMap[bbAddr]->brAddr = insAddr;
 }
 
 void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr, char insType) {
@@ -182,14 +184,6 @@ void staticCodeParser::addToBB (ADDRINT insAddr, ADDRINT bbAddr, char insType) {
 	Assert (bbAddr != 0 && insAddr != 0);
 	#endif
 	_bbMap[bbAddr]->bbInsList.push_back (insAddr);
-    if (!_bbMap[bbAddr]->hasBr &&
-        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's')) {
-        _bbMap[bbAddr]->hasBr = true;
-        _bbMap[bbAddr]->brAddr = insAddr;
-    } else if (_bbMap[bbAddr]->hasBr &&
-        (insType == 'j' || insType == 'c' || insType == 'b' || insType == 'r' || insType == 's')) {
-        Assert (true == false && "A BB can only hold one branch / jump"); //TODO put this back when the reason is uncovered
-    }
 }
 
 BOOL staticCodeParser::isNewBB (ADDRINT insAddr) {

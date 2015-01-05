@@ -24,7 +24,7 @@ instruction::instruction () {
 	_bpAccuracy = -1.0; //Place holder
 	_missRate = 0.0;
 	_longestPath = -1;
-    _mem_sch_mode = STORE_ORDER;
+    _mem_sch_mode = LOAD_STORE_ORDER;
     _hasFallThru = false;
     _hasDst = false;
 
@@ -166,6 +166,11 @@ instruction* instruction::getInsFallThru () {
 	return _insFallThru;
 }
 
+instruction* instruction::getInsDst () {
+	Assert (_insDst != NULL && "insDst must not be NULL.");
+	return _insDst;
+}
+
 bool instruction::hasDst () {
     if ((getType () == 's' || getType () == 'o' || 
          getType () == 'n' || getType () == 'r') && _hasDst) {
@@ -177,8 +182,10 @@ bool instruction::hasDst () {
 
 bool instruction::hasFallThru () {
     if ((getType () == 's' || getType () == 'r' || 
-         getType () == 'j') && _hasFallThru)
+         getType () == 'j') && _hasFallThru) {
+        cout << "*** Instruction Address: " << hex << getInsAddr () << endl;
         Assert (0 && "A fall-through must not have existed");
+    }
 	return _hasFallThru;
 }
 
@@ -462,12 +469,12 @@ void instruction::setAsDependent (instruction* ins) {
 }
 
 void instruction::setAsAncestor (instruction* ins) {
-	if (ins->getInsAddr () > getInsAddr ()) printf ("\tAncestor Address %llx > Descendent Address %llx (%s, line: %d)\n", ins->getInsAddr (), getInsAddr (), __FILE__, __LINE__);
+//	if (ins->getInsAddr () > getInsAddr ()) printf ("\tAncestor Address %llx > Descendent Address %llx (%s, line: %d)\n", ins->getInsAddr (), getInsAddr (), __FILE__, __LINE__);
 	_ancestors->Append (ins);
 }
 
 void instruction::setAsRegAncestor (instruction* ins) {
-	if (ins->getInsAddr () > getInsAddr ()) printf ("\tAncestor Address %llx > Descendent Address %llx (%s, line: %d)\n", ins->getInsAddr (), getInsAddr (), __FILE__, __LINE__);
+//	if (ins->getInsAddr () > getInsAddr ()) printf ("\tAncestor Address %llx > Descendent Address %llx (%s, line: %d)\n", ins->getInsAddr (), getInsAddr (), __FILE__, __LINE__);
 	_regAncestors->Append (ins);
 }
 
@@ -588,12 +595,17 @@ int instruction::getLongestPath () {
 	return _longestPath;
 }
 
+void instruction::resetMy_BBorPB_id () {
+	_myBBs.clear ();
+}
+
 void instruction::setMy_BBorPB_id (ADDR id) {
 	Assert (id > 0 && "BB or PB id is invalid.");
 	_myBBs.insert (id);
 }
 
 ADDR instruction::getMy_BB_id () {
+    if (_myBBs.size () != 1) cout << _myBBs.size () << endl;
 	Assert (_myBBs.size () == 1 && "Instruction belongs to too many BB's.");
 	set<ADDR>::iterator it = _myBBs.begin ();
 	return *it;
@@ -746,14 +758,25 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
 //        cout << "- " << bbDefSet.size () << " " << _outSet.size () << endl;
         set<long int> temp, temp0, temp1, temp2, temp3;
         if (!isLastInsInBB) {
-            _localRegSet = _insFallThru->getLocalRegSet ();
-            std::set_union (_defSet.begin (), _defSet.end (), 
-                            bbDefSet.begin (), bbDefSet.end (), 
-                            std::inserter (temp, temp.begin ()));
-            std::set_intersection (_localRegSet.begin (), _localRegSet.end (), 
-                                   temp.begin (), temp.end (), 
-                                   std::inserter (temp0, temp0.begin ()));
-            _localRegSet = temp0;
+            if (hasFallThru ()) {
+                _localRegSet = _insFallThru->getLocalRegSet ();
+                std::set_union (_defSet.begin (), _defSet.end (), 
+                        bbDefSet.begin (), bbDefSet.end (), 
+                        std::inserter (temp, temp.begin ()));
+                std::set_intersection (_localRegSet.begin (), _localRegSet.end (), 
+                        temp.begin (), temp.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+                _localRegSet = temp0;
+            } else if (hasDst ()) {
+                _localRegSet = _insDst->getLocalRegSet ();
+                std::set_union (_defSet.begin (), _defSet.end (), 
+                        bbDefSet.begin (), bbDefSet.end (), 
+                        std::inserter (temp, temp.begin ()));
+                std::set_intersection (_localRegSet.begin (), _localRegSet.end (), 
+                        temp.begin (), temp.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+                _localRegSet = temp0;
+            }
         } else {
             _localRegSet.clear ();
         }

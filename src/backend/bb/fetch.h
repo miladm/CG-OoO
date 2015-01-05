@@ -32,6 +32,7 @@ class bb_fetch : protected stage {
         void updateBBfetchState ();
         bool isGoToFrontend (FRONTEND_STATUS);
         BUFF_STATE getNewBB ();
+        bool fetchBB (FRONTEND_STATUS);
 
 	private:
 		port<bbInstruction*>* _bp_to_fetch_port;

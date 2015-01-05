@@ -1,8 +1,8 @@
 /*******************************************************************************
- *  registerAllocate.cpp
+ *  registerAllocate_sb.cpp
  ******************************************************************************/
 
-#include "registerAllocate.h"
+#include "registerAllocate_sb.h"
 
 
 /* CAUTION: 
@@ -348,11 +348,10 @@ static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> 
     }
 }
 
-void allocate_register (List<basicblock*> *bbList, 
+void allocate_register_sb (List<basicblock*> *bbList, 
                         List<instruction*> *insList, 
                         map<ADDR,instruction*> *insAddrMap, 
-                        REG_ALLOC_MODE reg_alloc_mode,
-                        SCH_MODE sch_mode) {
+                        REG_ALLOC_MODE reg_alloc_mode) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
 	map<long int,interfNode*> locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
 
@@ -367,21 +366,6 @@ void allocate_register (List<basicblock*> *bbList,
 
 	printf ("\tFind Graph Entry Points\n");
 	findEntryPoints (bbList, interiorBB);
-
-
-	// PERFORM LIST SCHEDULING ON BB
-    if (sch_mode == LIST_SCH) { //TODO put this after local register allocation
-        Assert (0 && "reimplement");
-        for  (int i = 0; i < bbList->NumElements (); i++) {
-            basicblock* bb = bbList->Nth (i);
-            bb->brDependencyTableCheck ();
-        }
-        printf ("\tRun List Scheduling\n");
-        for  (int i = 0; i < bbList->NumElements (); i++) {
-            basicblock* bb = bbList->Nth (i);
-            listSchedule (bb); //why does this affect BB structure?
-        }
-    }
 
 
 	//TODO is the block below okay? needed?

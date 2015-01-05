@@ -19,6 +19,6 @@ void make_basicblock (List<instruction*> *insList,
 		      std::set<ADDR> *brDstSet,
 		      std::map<ADDR, basicblock*> *bbMap,
 			  map<ADDR,instruction*> *insAddrMap,
-              SCH_MODE sch_mode);
+              LENGTH cluster_size);
 
 #endif
