@@ -1,0 +1,50 @@
+# comment lines begin with a '#' 
+# comments and empty lines are ignored
+
+# Area and aspect ratios of blocks
+# Line Format: <unit-name>\t<area-in-m2>\t<min-aspect-ratio>\t<max-aspect-ratio>\t<rotable>
+
+#L1I     1 3 1
+#ITLB    1 5 1
+BP     0.024285e-6  1 5 1
+BTB    0.824705e-6  1 5 1
+RF     6.091616e-6 1 1 1
+WIN    0.012143e-6  1 3 1
+#DTLB    1 5 1
+#L1D     1 3 1
+#L2      1 3 1
+EU1    0.023e-6    1 3 1
+EU2    0.023e-6    1 3 1
+EU3    0.023e-6    1 3 1
+EU4    0.023e-6    1 3 1
+EU5    0.023e-6    1 3 1
+EU6    0.023e-6    1 3 1
+EU7    0.023e-6    1 3 1
+EU8    0.023e-6    1 3 1
+
+
+# Connectivity information
+# Line format <unit1-name>\t<unit2-name>\t<wire_density>
+
+#L1D L2      1
+#L1I L2      1
+#L1I ITLB    1
+BP  BTB     1
+#BTB ITLB    1
+#BTB L1I     1
+EU1 RF      1
+EU2 RF      1
+EU3 RF      1
+EU4 RF      1
+EU5 RF      1
+EU6 RF      1
+EU7 RF      1
+EU8 RF      1
+EU1 WIN     1
+EU2 WIN     1
+EU3 WIN     1
+EU4 WIN     1
+EU5 WIN     1
+EU6 WIN     1
+EU7 WIN     1
+EU8 WIN     1

@@ -8,15 +8,8 @@
 #ITLB    1 5 1
 BP     0.024285e-6  1 5 1
 BTB    0.824705e-6  1 5 1
-GRF    12.192154e-6 1 1 1
-WIN1   0.000774e-6  1 3 1
-WIN2   0.000774e-6  1 3 1
-WIN3   0.000774e-6  1 3 1
-WIN4   0.000774e-6  1 3 1
-WIN5   0.000774e-6  1 3 1
-WIN6   0.000774e-6  1 3 1
-WIN7   0.000774e-6  1 3 1
-WIN8   0.000774e-6  1 3 1
+RF     24.372412e-6 1 1 1
+RS     0.269615e-6  1 3 1
 LSQ    0.024626e-6  1 3 1
 #DTLB    1 5 1
 #L1D     1 3 1
@@ -30,15 +23,7 @@ EU5    0.023e-6    1 3 1
 EU6    0.023e-6    1 3 1
 EU7    0.023e-6    1 3 1
 EU8    0.023e-6    1 3 1
-LRF1   0.127373e-6 1 1 1
-LRF2   0.127373e-6 1 1 1
-LRF3   0.127373e-6 1 1 1
-LRF4   0.127373e-6 1 1 1
-LRF5   0.127373e-6 1 1 1
-LRF6   0.127373e-6 1 1 1
-LRF7   0.127373e-6 1 1 1
-LRF8   0.127373e-6 1 1 1
-ROB    0.000379e-6 1 3 1
+ROB    0.007682e-6 1 3 1
 
 
 # Connectivity information
@@ -50,30 +35,22 @@ ROB    0.000379e-6 1 3 1
 BP  BTB     1
 #BTB ITLB    1
 #BTB L1I     1
-EU1 GRF     1
-EU2 GRF     1
-EU3 GRF     1
-EU4 GRF     1
-EU5 GRF     1
-EU6 GRF     1
-EU7 GRF     1
-EU8 GRF     1
-EU1 WIN1    1
-EU2 WIN2    1
-EU3 WIN3    1
-EU4 WIN4    1
-EU5 WIN5    1
-EU6 WIN6    1
-EU7 WIN7    1
-EU8 WIN8    1
-EU1 LRF1    1
-EU2 LRF2    1
-EU3 LRF3    1
-EU4 LRF4    1
-EU5 LRF5    1
-EU6 LRF6    1
-EU7 LRF7    1
-EU8 LRF8    1
+EU1 RF      1
+EU2 RF      1
+EU3 RF      1
+EU4 RF      1
+EU5 RF      1
+EU6 RF      1
+EU7 RF      1
+EU8 RF      1
+EU1 RS      1
+EU2 RS      1
+EU3 RS      1
+EU4 RS      1
+EU5 RS      1
+EU6 RS      1
+EU7 RS      1
+EU8 RS      1
 EU1 ROB     1
 EU2 ROB     1
 EU3 ROB     1
