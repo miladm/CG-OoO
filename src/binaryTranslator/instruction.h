@@ -105,6 +105,9 @@ class instruction {
         void setUPLDdep ();
         void setUPLDins ();
         bool updateUPLDbit ();
+        bool isUPLD ();
+        void assignUPLDroot (ADDR);
+        set<ADDR> getUPLDroots ();
 
 		/* REGISTER RENAMING */
 	    void renameWriteReg (int indx, long int reg);                                                                                                                       
@@ -151,6 +154,7 @@ class instruction {
 		ADDR _insAddr;
         bool _upld_dep;
         bool _upld_ins;
+        set<ADDR> _upld_roots;
 
         /* REGS */
         List<long int> *_r; //SSA REGISTER LIST

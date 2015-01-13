@@ -8,6 +8,7 @@ wires::wires (AXES_TYPE axes_type, sysClock* clk, const YAML::Node& root, string
 	: unit (wire_name, clk),
       _axes_type (axes_type),
       _wire_len (10),
+      _e_wire (wire_name, root),
       s_unavailable_cnt (g_stats.newScalarStat (wire_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
 {
     if (_axes_type == READ) {
@@ -46,6 +47,7 @@ void wires::updateWireState () {
     } else if (_cycle == now) {
         _num_free_wire--;
     }
+    _e_wire.wireAccess ();
 }
 
 WIDTH wires::getNumFreeWires () {

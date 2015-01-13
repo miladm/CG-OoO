@@ -218,4 +218,12 @@ void make_basicblock  (List<instruction*> *insList,
 		basicblock* bb = bbList->Nth (i);
         if (bb->getBbSize () > 30) cout << hex << bb->getID () << endl;
     }
+
+    /* SETSUP BB STATS */
+    dependencySetup (bbList, insList);
+	for  (int i = 0; i < bbList->NumElements (); i++) {
+		basicblock* bb = bbList->Nth (i);
+//        bb->setsupStats ();
+//        bb->reportStats ();
+    }
 }

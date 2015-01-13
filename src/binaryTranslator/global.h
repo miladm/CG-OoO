@@ -8,6 +8,7 @@
 
 typedef long long unsigned int ADDR;
 typedef long int LENGTH;
+typedef int SUB_BLK_ID;
 
 typedef enum {none, READ, WRITE} memType;
 typedef enum {noType, ALU, MEM, FPU, BR} type;

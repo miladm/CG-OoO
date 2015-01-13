@@ -15,8 +15,18 @@
 #include "global.h"
 #include "instruction.h"
 #include "phrase.h"
+#include "stats.h"
 
 typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;
+
+class sub_block {
+    public:
+        sub_block () { _insList = new List<instruction*>; }
+        ~sub_block () { delete _insList; }
+        set<ADDR> _upld_set;
+        List<instruction*>* _insList;
+        SUB_BLK_ID _id;
+};
 
 class basicblock {
 	public:
@@ -133,7 +143,18 @@ class basicblock {
 		// List-Scheduling Functions
 		void addToBB_ListSchedule (instruction* ins);
 		List<instruction*>* getInsList_ListSchedule ();
+
+
+        // STATS
+        void setsupStats ();
+        void reportStats ();
 		
+        // UPLD
+        void findRootUPLD ();
+        void markUPLDroot (instruction*, ADDR);
+        void markUPLDroots ();
+        void makeSubBlocks ();
+
 		// DATA-FLOW ANALYSIS
     private:
 		void updateDefSet (long int reg);
@@ -150,6 +171,10 @@ class basicblock {
 		int getLiveVarSize () {
 			return _inSet.size ()+_defSet.size ();
 		}
+
+    private:
+        int _sub_blk_id;
+        map<SUB_BLK_ID, sub_block*> sub_blk_map;
 
 	private:
 		int _listIndx;
@@ -168,6 +193,7 @@ class basicblock {
 		List<instruction*>* _insListSchList;
 		List<instruction*>* _insList_orig;
 		List<instruction*>* _insList;
+        List<instruction*>* _upld_roots;
 		List<phrase*> *_phList;
 		List<ADDR>* _bbListForPhraseblock;
 		std::map<ADDR, basicblock*> _dominatorMap;
@@ -187,6 +213,8 @@ class basicblock {
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
+
+        block_stats _stats;
 };
 #endif
 

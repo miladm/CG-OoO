@@ -20,6 +20,7 @@ basicblock::basicblock () {
 	_backEdgeDest = -1;
 	_fallThroughBB = NULL;
 	_takenTargetBB = NULL;
+    _sub_blk_id = 0;
 	_bbListForPhraseblock = new List<ADDR>;
 	_phList				  = new List<phrase*>;
 	_insList              = new List<instruction*>;
@@ -28,6 +29,7 @@ basicblock::basicblock () {
 	_ancestorBbList       = new List<basicblock*>;
 	_descendantBbList     = new List<basicblock*>;
 	_backEdgeSourceBbList = new List<basicblock*>;
+    _upld_roots           = new List<instruction*>;
 }
 
 basicblock::~basicblock () {
@@ -39,6 +41,7 @@ basicblock::~basicblock () {
 	delete _descendantBbList;
 	delete _backEdgeSourceBbList;
 	delete _bbListForPhraseblock;
+    delete _upld_roots;
 }
 
 basicblock& basicblock::operator=  (const basicblock& bb) { //TODO: UPDATE THIS FUNCTION
@@ -938,4 +941,86 @@ void basicblock::setBBbrHeader (ADDR brAddr) {
 void basicblock::resetBBbrHeader () {
 	_brHeaderAddr = 0;
 	_hasBrHeader = false;
+}
+
+void basicblock::setsupStats () {
+    for (int i = 0; i < _insList_orig->NumElements (); i++) {
+        instruction* ins = _insList_orig->Nth (i);
+        if (ins->isUPLD ()) _stats.upld_cnt++;
+        if (ins->isUPLDdep ()) _stats.upld_dep_cnt++;
+        if (ins->isUPLDdep () && ins->isUPLD ()) _stats.upld_n_dep_cnt++;
+    }
+}
+
+void basicblock::reportStats () {
+    if (_stats.upld_cnt > 0) 
+        cout << hex << getID ()  << " " << dec 
+        << _stats.upld_cnt << " " 
+        << _stats.upld_dep_cnt << " " 
+        << _stats.upld_n_dep_cnt << " " 
+        << _insList_orig->NumElements () << " " 
+        << (double)_stats.upld_cnt / _insList_orig->NumElements () << " "
+        << (double)_stats.upld_dep_cnt / _insList_orig->NumElements () << " "
+        << (double)_stats.upld_n_dep_cnt / (_stats.upld_cnt-1)
+        << endl;
+}
+
+void basicblock::findRootUPLD () {
+    for (int i = 0; i < _insList_orig->NumElements (); i++) {
+        instruction* ins = _insList_orig->Nth (i);
+        if (ins->isUPLD () && !ins->isUPLDdep ()) 
+            _upld_roots->Append (ins);
+    }
+}
+
+void basicblock::markUPLDroot (instruction* ins, ADDR upld_id) {
+    List<instruction*>* dependents = ins->getDependents ();
+    for (int i = 0; i < dependents->NumElements (); i++) {
+        instruction* decs = dependents->Nth (i);
+        if (decs->getMy_BB_id () == getID ()) {
+            decs->assignUPLDroot (upld_id);
+            markUPLDroot (decs, upld_id);
+        }
+    }
+}
+
+void basicblock::markUPLDroots () {
+    for (int i = 0; i < _upld_roots->NumElements (); i++) {
+        instruction* upld = _upld_roots->Nth (i);
+        markUPLDroot (upld, upld->getInsAddr ());
+    }
+}
+
+void basicblock::makeSubBlocks () {
+    for (int i = 0; i < _insList_orig->NumElements (); i++) {
+        bool found_sub_blk = false;
+        instruction* ins = _insList_orig->Nth (i);
+        set<ADDR> upld_roots = ins->getUPLDroots ();
+        map<SUB_BLK_ID, sub_block*>::iterator it;
+        for (it = sub_blk_map.begin (); it != sub_blk_map.end (); it++) {
+	        set<SUB_BLK_ID> upld_diff1, upld_diff2;
+            set<ADDR> blk_upld_roots = it->second->_upld_set;
+	        std::set_difference (upld_roots.begin (), upld_roots.end (), 
+                    blk_upld_roots.begin (), blk_upld_roots.end (), 
+                    std::inserter (upld_diff1, upld_diff1.begin ()));
+	        std::set_difference (blk_upld_roots.begin (), blk_upld_roots.end (), 
+                    upld_roots.begin (), upld_roots.end (),
+                    std::inserter (upld_diff2, upld_diff2.begin ()));
+            if (upld_diff1.size () == 0 && upld_diff2.size () == 0) {
+                if (_upld_roots->NumElements () > 0) cout << "(" << it->first << ", " << hex << ins->getInsAddr ()  << dec << ") ";
+                it->second->_insList->Append (ins);
+                found_sub_blk = true;
+                break;
+            }
+        }
+        if (!found_sub_blk) {
+            sub_block* sub_blk = new sub_block;
+            sub_blk->_upld_set = upld_roots;
+            sub_blk->_insList->Append (ins);
+            sub_blk->_id = _sub_blk_id; //TODO initialize vaiable in constructor
+            sub_blk_map.insert (pair<SUB_BLK_ID, sub_block*>(_sub_blk_id++, sub_blk));
+            cout << _sub_blk_id - 1 << " ";
+            if (_upld_roots->NumElements () > 0) cout << "(" << _sub_blk_id - 1 << ", " << hex << ins->getInsAddr ()  << dec << ") ";
+        }
+    }
 }

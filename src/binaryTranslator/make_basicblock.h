@@ -12,6 +12,7 @@
 #include "basicblock.h"
 #include "variable.h"
 #include "global.h"
+#include "dependencySetup.h"
 
 void make_basicblock (List<instruction*> *insList,
 		      List<basicblock*> *bbList,

@@ -10,6 +10,7 @@
 #include "list.h"
 #include "basicblock.h"
 #include "instruction.h"
+#include "make_subblock.h"
 #include "dependencyTable.h"
 
 void dependencySetup (List<basicblock*>*, List<instruction*>*);

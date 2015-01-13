@@ -33,7 +33,6 @@ static void data_dependency (basicblock* bb) {
         instruction* ins  = insList->Nth (i);
         ins->dependencyTableCheck (depTables); /* DISABLED */
     }
-    bb->brDependencyTableCheck ();
     for (int i = 0; i < bb->getNumDescendents (); i++)
         data_dependency (bb->getNthDescendent (i));
     for (int i = 0; i < bb->getNumAncestors (); i++)
@@ -78,6 +77,8 @@ void dependencySetup (List<basicblock*>* bbList, List<instruction*>* insList) {
     /* ANNOTATION OF UPLD OPERATIONS */
 	printf ("\tAnnotate UPLD's\n");
 	upld_annotation (insList);
+	printf ("- Make Sub-Blocks -\n");
+    make_subblocks (bbList);
 
     /* DEPENDENCY TABLE SETUP */
 	printf ("\tSetup control dependency tables\n");

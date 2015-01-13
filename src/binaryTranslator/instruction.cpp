@@ -867,6 +867,10 @@ void instruction::setUPLDins () {
     _upld_ins = true;
 }
 
+bool instruction::isUPLD () {
+    return _upld_ins;
+}
+
 void instruction::setUPLDdep () {
     _upld_dep = true;
 }
@@ -889,4 +893,12 @@ bool instruction::updateUPLDbit () {
         }
     }
     return change;
+}
+
+void instruction::assignUPLDroot (ADDR upld_id) {
+    _upld_roots.insert (upld_id);
+}
+
+set<ADDR> instruction::getUPLDroots () {
+    return _upld_roots;
 }

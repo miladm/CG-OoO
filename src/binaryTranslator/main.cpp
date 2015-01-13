@@ -16,6 +16,7 @@
 #include "registerAllocate_sb.h"
 #include "make_instruction.h"
 #include "make_basicblock.h"
+#include "make_subblock.h"
 #include "make_superblock.h"
 #include "make_phraseblock.h"
 #include "annotateTrace.h"

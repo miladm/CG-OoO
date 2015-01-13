@@ -16,7 +16,6 @@ class bbWindow : public unit {
         bbWindow (string bbWin_id, sysClock* clk);
         void regStat ();
         CAMtable<bbInstruction*> _win;
-        CAMtable<bbInstruction*> _win_side;
         void issueInc ();
         WIDTH getNumIssued ();
 
