@@ -39,7 +39,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 6.346076e-2
+               e_wire: 2.247839e-1
                w_wire: 1
            g_share:
                globalPredictorSize: 8192
@@ -48,7 +48,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 6.346076e-2
+               e_wire: 2.247839e-1
                w_wire: 1
            tournament:
                localPredictorSize: 2048
@@ -63,7 +63,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 6.346076e-2
+               e_wire: 2.247839e-1
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
@@ -78,7 +78,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 6.346076e-2
+               e_wire: 2.247839e-1
                w_wire: 1
 
        rf:
@@ -122,7 +122,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 8.3939885
-               e_wire: 1.802965e-1
+               e_wire: 2.389336e-1
                w_wire: 64
            rf:
                a_size: 80
@@ -327,7 +327,7 @@ cpu:
        eu:
            alu:
                count: 16
-               count_per_blk: 1
+               count_per_blk: 16
                latency: 1
                e_eu: 1.040
            fpu:
@@ -364,7 +364,7 @@ cpu:
                latency: 2
                name: schedule
            execution:
-               width: 32
+               width: 16
                latency: 1 #TODO what does it mean for FPU?
                name: execution
            memory:

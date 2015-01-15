@@ -35,6 +35,7 @@ class bb_execution : protected stage {
         COMPLETE_STATUS completeIns ();
         void resetRF ();
         void forward (bbInstruction*, CYCLE);
+        WIDTH getEUindx (WIDTH, WIDTH);
 
 	private:
 		List<port<bbInstruction*>*>* _scheduler_to_execution_port;
@@ -48,6 +49,10 @@ class bb_execution : protected stage {
         /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;
         List<bbWindow*>* _bbWindows;
+
+        /*-- EU CONFIG --*/
+        WIDTH _blk_width;
+        WIDTH _num_ports;
 
         /*-- STATS --*/
         ScalarHistStat& s_pipe_state_hist;

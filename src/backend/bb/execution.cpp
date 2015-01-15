@@ -36,11 +36,14 @@ bb_execution::bb_execution (List<port<bbInstruction*>*>* scheduler_to_execution_
         exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU, root["eu"]["alu"]); //TODO make this config better with more EU types
         _aluExeUnits->Append (newEU);
     }
+    _num_ports = _scheduler_to_execution_port->NumElements ();
+    _blk_width = _stage_width / _num_ports;
     Assert (_stage_width >= _scheduler_to_execution_port->NumElements () &&
             _stage_width % _scheduler_to_execution_port->NumElements () == 0);
 
     _num_bbWin = num_bbWin;
     _bbWindows = bbWindows;
+
 }
 
 bb_execution::~bb_execution () {}
@@ -70,10 +73,13 @@ void bb_execution::doEXECUTION () {
     s_pipe_state_hist_rat[g_var.g_pipe_state]++;
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        exeUnit* EU = _aluExeUnits->Nth (i);
-        if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) 
-            s_eu_busy_state_hist[i]++;
+    for (WIDTH j = 0; j < _num_ports; j++) {
+        for (WIDTH i = 0; i < _blk_width; i++) {
+            WIDTH eu_indx = getEUindx (j, i);
+            exeUnit* EU = _aluExeUnits->Nth (eu_indx);
+            if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) 
+                s_eu_busy_state_hist[i]++;
+        }
     }
 }
 
@@ -85,72 +91,75 @@ COMPLETE_STATUS bb_execution::completeIns () {
     static INS_ID badInsID = 0; //i.e. FIRST_INS_ID - 1
     if (g_var.g_pipe_state == PIPE_NORMAL) badInsID = 0;
 
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        exeUnit* EU = _aluExeUnits->Nth (i);
-        bbInstruction* ins = (bbInstruction*) EU->getEUins ();
-        bbInstruction* violating_ld_ins = NULL;
+    for (WIDTH j = 0; j < _num_ports; j++) {
+        for (WIDTH i = 0; i < _blk_width; i++) {
+            WIDTH eu_indx = getEUindx (j, i);
+            exeUnit* EU = _aluExeUnits->Nth (eu_indx);
+            bbInstruction* ins = (bbInstruction*) EU->getEUins ();
+            bbInstruction* violating_ld_ins = NULL;
 
-        /*-- CHECKS --*/
-        if (g_var.g_pipe_state == PIPE_FLUSH) break;
-        if (ins == NULL) continue;
-        if (!(ins->getInsType () == MEM && 
-             ins->getMemType () == LOAD) &&
-            !_RF_MGR->hasFreeWire (WRITE, ins)) continue;
-        if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
+            /*-- CHECKS --*/
+            if (g_var.g_pipe_state == PIPE_FLUSH) break;
+            if (ins == NULL) continue;
+            if (!(ins->getInsType () == MEM && 
+                        ins->getMemType () == LOAD) &&
+                    !_RF_MGR->hasFreeWire (WRITE, ins)) continue;
+            if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
-        /*-- COMPLETE INS --*/
-        if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-            ins->setPipeStage (MEM_ACCESS);
-            _LSQ_MGR->memAddrReady (ins);
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                    _stage_name.c_str (), "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
-        } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-            ins->setPipeStage (COMPLETE);
-            ins->getBB()->incCompletedInsCntr ();
-            _LSQ_MGR->memAddrReady (ins);
-            _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases) - not counting its bbWindow energy
-            _RF_MGR->updateWireState (WRITE, ins);
-            pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
-            bool is_violation = p.first;
-            violating_ld_ins = p.second;
-            _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
-            /*-- SQUASH DETECTION --*/
-            if (is_violation) { 
-                violating_ld_ins->setMemViolation ();
-                violating_ld_ins->getBB()->setMemViolation ();
+            /*-- COMPLETE INS --*/
+            if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
+                ins->setPipeStage (MEM_ACCESS);
+                _LSQ_MGR->memAddrReady (ins);
+                dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                        _stage_name.c_str (), "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
+            } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
+                ins->setPipeStage (COMPLETE);
+                ins->getBB()->incCompletedInsCntr ();
+                _LSQ_MGR->memAddrReady (ins);
+                _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases) - not counting its bbWindow energy
+                _RF_MGR->updateWireState (WRITE, ins);
+                pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
+                bool is_violation = p.first;
+                violating_ld_ins = p.second;
+                _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
+                /*-- SQUASH DETECTION --*/
+                if (is_violation) { 
+                    violating_ld_ins->setMemViolation ();
+                    violating_ld_ins->getBB()->setMemViolation ();
+                }
+                dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                        _stage_name.c_str (), "Complete store addr calc - ins addr", ins->getInsID (), _clk->now ());
+            } else {
+                ins->setPipeStage (COMPLETE);
+                ins->getBB()->incCompletedInsCntr ();
+                _RF_MGR->completeRegs (ins);
+                _RF_MGR->updateWireState (WRITE, ins);
+                _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
+                dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                        _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
             }
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                    _stage_name.c_str (), "Complete store addr calc - ins addr", ins->getInsID (), _clk->now ());
-        } else {
-            ins->setPipeStage (COMPLETE);
-            ins->getBB()->incCompletedInsCntr ();
-            _RF_MGR->completeRegs (ins);
-            _RF_MGR->updateWireState (WRITE, ins);
-            _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
-            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                    _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
-        }
-        EU->resetEU ();
+            EU->resetEU ();
 
-        /*-- SQUASH DETECTION --*/
-        if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation () &&
-           (violating_ld_ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
-            badIns = violating_ld_ins;
-            badInsID = violating_ld_ins->getInsID ();
-            if (g_var.getSquashType () == BP_MISPRED) squashTypeChange = true;
-            g_var.setSquashType (MEM_MISPRED);
-            violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
-            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
-                    _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
-        } else if (ins->isMemOrBrViolation () &&
-                  (ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
-            badIns = ins;
-            badInsID = ins->getInsID ();
-            ins->getBB()->setNumWasteIns (ins->getInsID ());
-            if (g_var.getSquashType () == MEM_MISPRED) squashTypeChange = true;
-            g_var.setSquashType (BP_MISPRED);
-            dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
-                    _stage_name.c_str (), "BP_MISPRED", _clk->now ());
+            /*-- SQUASH DETECTION --*/
+            if (violating_ld_ins != NULL && violating_ld_ins->isMemOrBrViolation () &&
+                    (violating_ld_ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
+                badIns = violating_ld_ins;
+                badInsID = violating_ld_ins->getInsID ();
+                if (g_var.getSquashType () == BP_MISPRED) squashTypeChange = true;
+                g_var.setSquashType (MEM_MISPRED);
+                violating_ld_ins->getBB()->setNumWasteIns (violating_ld_ins->getInsID ());
+                dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                        _stage_name.c_str (), "MEM_MISPRED", _clk->now ());
+            } else if (ins->isMemOrBrViolation () &&
+                    (ins->getBB()->getBBheadID () < badInsID || badInsID == 0)) {
+                badIns = ins;
+                badInsID = ins->getInsID ();
+                ins->getBB()->setNumWasteIns (ins->getInsID ());
+                if (g_var.getSquashType () == MEM_MISPRED) squashTypeChange = true;
+                g_var.setSquashType (BP_MISPRED);
+                dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
+                        _stage_name.c_str (), "BP_MISPRED", _clk->now ());
+            }
         }
     }
 
@@ -193,16 +202,14 @@ COMPLETE_STATUS bb_execution::completeIns () {
 PIPE_ACTIVITY bb_execution::executionImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    WIDTH num_ports = _scheduler_to_execution_port->NumElements ();
-    WIDTH blk_width = _stage_width / num_ports;
-    for (WIDTH j = 0; j < num_ports; j++) {
-        for (WIDTH i = 0; i < blk_width; i++) {
+    for (WIDTH j = 0; j < _num_ports; j++) {
+        for (WIDTH i = 0; i < _blk_width; i++) {
             /*-- CHECKS --*/
             if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
             if (_scheduler_to_execution_port->Nth(j)->getBuffState () == EMPTY_BUFF) break;
             if (!_scheduler_to_execution_port->Nth(j)->isReady ()) break;
             bbInstruction* ins = _scheduler_to_execution_port->Nth(j)->getFront ();
-            WIDTH eu_indx = j * blk_width + i;
+            WIDTH eu_indx = getEUindx (j, i);
             exeUnit* EU = _aluExeUnits->Nth (eu_indx);
             if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
@@ -251,15 +258,21 @@ void bb_execution::squashCtrl () {
         g_var.resetSquashSN ();
         return;
     } else if (g_var.g_pipe_state == PIPE_WAIT_FLUSH) {
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            exeUnit* EU = _aluExeUnits->Nth (i);
-            if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) return;
+        for (WIDTH j = 0; j < _num_ports; j++) {
+            for (WIDTH i = 0; i < _blk_width; i++) {
+                WIDTH eu_indx = getEUindx (j, i);
+                exeUnit* EU = _aluExeUnits->Nth (eu_indx);
+                if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) return;
+            }
         }
         g_var.g_pipe_state = PIPE_FLUSH;
         state_switch =  "PIPE_WAIT_FLUSH -> PIPE_FLUSH";
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            exeUnit* EU = _aluExeUnits->Nth (i);
-            EU->resetEU ();
+        for (WIDTH j = 0; j < _num_ports; j++) {
+            for (WIDTH i = 0; i < _blk_width; i++) {
+                WIDTH eu_indx = getEUindx (j, i);
+                exeUnit* EU = _aluExeUnits->Nth (eu_indx);
+                EU->resetEU ();
+            }
         }
         squash ();
     } else if (g_var.g_pipe_state == PIPE_FLUSH) {
@@ -281,6 +294,10 @@ void bb_execution::squashCtrl () {
     }
     dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", 
             _stage_name.c_str (), state_switch.c_str (), _clk->now ());
+}
+
+WIDTH bb_execution::getEUindx (WIDTH blk_offset, WIDTH offset) {
+    return blk_offset * _blk_width + offset;
 }
 
 void bb_execution::squash () {
