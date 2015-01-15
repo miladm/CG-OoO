@@ -4,7 +4,7 @@
 
 #include "execution.h"
 
-bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port, 
+bb_execution::bb_execution (List<port<bbInstruction*>*>* scheduler_to_execution_port, 
                             port<bbInstruction*>& execution_to_scheduler_port, 
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
@@ -24,16 +24,21 @@ bb_execution::bb_execution (port<bbInstruction*>& scheduler_to_execution_port,
     /*-- CONFIG OBJS --*/
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
 
-    _scheduler_to_execution_port = &scheduler_to_execution_port;
+    _scheduler_to_execution_port = scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+
+    /*-- SETUP EXECUTION UNITS --*/
     _aluExeUnits = new List<exeUnit*>;
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU, root["eu"]["alu"]); //TODO make this config better with more EU types
         _aluExeUnits->Append (newEU);
     }
+    Assert (_stage_width >= _scheduler_to_execution_port->NumElements () &&
+            _stage_width % _scheduler_to_execution_port->NumElements () == 0);
+
     _num_bbWin = num_bbWin;
     _bbWindows = bbWindows;
 }
@@ -188,29 +193,34 @@ COMPLETE_STATUS bb_execution::completeIns () {
 PIPE_ACTIVITY bb_execution::executionImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /*-- CHECKS --*/
-        if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
-        if (_scheduler_to_execution_port->getBuffState () == EMPTY_BUFF) break;
-        if (!_scheduler_to_execution_port->isReady ()) break;
-        bbInstruction* ins = _scheduler_to_execution_port->getFront ();
-        exeUnit* EU = _aluExeUnits->Nth (i);
-        if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
+    WIDTH num_ports = _scheduler_to_execution_port->NumElements ();
+    WIDTH blk_width = _stage_width / num_ports;
+    for (WIDTH j = 0; j < num_ports; j++) {
+        for (WIDTH i = 0; i < blk_width; i++) {
+            /*-- CHECKS --*/
+            if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
+            if (_scheduler_to_execution_port->Nth(j)->getBuffState () == EMPTY_BUFF) break;
+            if (!_scheduler_to_execution_port->Nth(j)->isReady ()) break;
+            bbInstruction* ins = _scheduler_to_execution_port->Nth(j)->getFront ();
+            WIDTH eu_indx = j * blk_width + i;
+            exeUnit* EU = _aluExeUnits->Nth (eu_indx);
+            if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
-        /*-- EXE INS --*/
-        ins = _scheduler_to_execution_port->popFront ();
-        EU->_eu_timer.setNewTime (_clk->now ());
-        EU->setEUins ((dynInstruction*) ins);
-        EU->runEU ();
-        ins->setPipeStage (EXECUTE);
-        if (g_cfg->isEnEuFwd ()) forward (ins, EU->_eu_timer.getLatency ());
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
-                _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
+            /*-- EXE INS --*/
+            ins = _scheduler_to_execution_port->Nth(j)->popFront ();
+            EU->_eu_timer.setNewTime (_clk->now ());
+            EU->setEUins ((dynInstruction*) ins);
+            EU->runEU ();
+            ins->setPipeStage (EXECUTE);
+            if (g_cfg->isEnEuFwd ()) forward (ins, EU->_eu_timer.getLatency ());
+            dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
+                    _stage_name.c_str (), "Execute ins", ins->getInsID (), _clk->now ());
 
-        /*-- STAT --*/
-        s_ipc++;
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
+            /*-- STAT --*/
+            s_ipc++;
+            s_ins_cnt++;
+            pipe_stall = PIPE_BUSY;
+        }
     }
     return pipe_stall;
 }
@@ -282,5 +292,7 @@ void bb_execution::squash () {
 }
 
 void bb_execution::regStat () {
-    _scheduler_to_execution_port->regStat ();
+    for (WIDTH j = 0; j < _scheduler_to_execution_port->NumElements (); j++) {
+        _scheduler_to_execution_port->Nth(j)->regStat ();
+    }
 }

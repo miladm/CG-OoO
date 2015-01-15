@@ -326,19 +326,23 @@ cpu:
 
        eu:
            alu:
-               count: 4
+               count: 16
+               count_per_blk: 1
                latency: 1
                e_eu: 1.040
            fpu:
                count: 0
+               count_per_blk: 0
                latency: 5
                e_eu: 8.800
            memu:
                count: 0
+               count_per_blk: 0
                latency: 1
                e_eu: 1.040
            bru:
                count: 0
+               count_per_blk: 0
                latency: 4
                e_eu: 1.040
 
@@ -360,7 +364,7 @@ cpu:
                latency: 2
                name: schedule
            execution:
-               width: 4
+               width: 32
                latency: 1 #TODO what does it mean for FPU?
                name: execution
            memory:

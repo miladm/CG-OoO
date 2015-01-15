@@ -27,6 +27,8 @@ o3_execution::o3_execution (port<dynInstruction*>& scheduler_to_execution_port,
     _iROB = iROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+
+    /*-- SETUP EXECUTION UNITS --*/
     _aluExeUnits = new List<exeUnit*>;
     for (WIDTH i = 0; i < _stage_width; i++) {
         exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU, root["eu"]["alu"]); //TODO make this config better with more EU types

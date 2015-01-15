@@ -15,7 +15,7 @@ class bb_scheduler : protected stage {
 		bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                       port<bbInstruction*>& execution_to_scheduler_port,
                       port<bbInstruction*>& memory_to_scheduler_port,
-			          port<bbInstruction*>& scheduler_to_execution_port,
+			          List<port<bbInstruction*>*>* scheduler_to_execution_port,
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
                       CAMtable<dynBasicblock*>* bbROB,
@@ -42,12 +42,13 @@ class bb_scheduler : protected stage {
         bool hasAnAvailBBWin ();
         bool detectNewBB (bbInstruction*);
         void flushBBWindow (bbWindow*);
+        WIDTH getIssuePortIndx (WIDTH BBWinIndx);
 
 	private:
 		port<bbInstruction*>* _decode_to_scheduler_port;
 		port<bbInstruction*>* _execution_to_scheduler_port;
 		port<bbInstruction*>* _memory_to_scheduler_port;
-		port<bbInstruction*>* _scheduler_to_execution_port;
+		List<port<bbInstruction*>*>* _scheduler_to_execution_port;
         CAMtable<dynBasicblock*>* _bbROB;
 
         /*-- RF REGISTERS --*/
@@ -62,6 +63,7 @@ class bb_scheduler : protected stage {
         map<WIDTH, bbWindow*> _busy_bbWin;
 
         WIDTH _bb_issue_per_cyc_cnt;
+        WIDTH _blk_cluster_siz;
 
         /*-- STAT --*/
         ScalarStat& s_mem_g_fwd_cnt;

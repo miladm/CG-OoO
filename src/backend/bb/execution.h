@@ -14,7 +14,7 @@
 
 class bb_execution : protected stage {
 	public:
-		bb_execution (port<bbInstruction*>& scheduler_to_execution_port, 
+		bb_execution (List<port<bbInstruction*>*>* scheduler_to_execution_port, 
                       port<bbInstruction*>& execution_to_scheduler_port, 
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
@@ -37,7 +37,7 @@ class bb_execution : protected stage {
         void forward (bbInstruction*, CYCLE);
 
 	private:
-		port<bbInstruction*>* _scheduler_to_execution_port;
+		List<port<bbInstruction*>*>* _scheduler_to_execution_port;
         port<bbInstruction*>* _execution_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;

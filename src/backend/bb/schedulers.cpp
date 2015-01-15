@@ -7,7 +7,7 @@
 bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port, 
                             port<bbInstruction*>& execution_to_scheduler_port, 
                             port<bbInstruction*>& memory_to_scheduler_port, 
-			                port<bbInstruction*>& scheduler_to_execution_port, 
+			                List<port<bbInstruction*>*>* scheduler_to_execution_port, 
                             List<bbWindow*>* bbWindows,
                             WIDTH num_bbWin,
                             CAMtable<dynBasicblock*>* bbROB,
@@ -26,7 +26,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
-    _scheduler_to_execution_port  = &scheduler_to_execution_port;
+    _scheduler_to_execution_port = scheduler_to_execution_port;
     _bbROB = bbROB;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
@@ -38,6 +38,13 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
         bbWindow* bbWin = _bbWindows->Nth (i);
         _avail_bbWin.Append (bbWin);
     }
+
+    /*-- SETUP THE MATH TO FIND THE NUMBER OF BLOCK WINDOES SHARING THE SAME PORT --*/
+    WIDTH num_ports = _scheduler_to_execution_port->NumElements ();
+    _blk_cluster_siz = _num_bbWin / num_ports;
+    Assert (_num_bbWin >= num_ports && 
+            num_ports > 0 &&
+            _num_bbWin % num_ports == 0);
 }
 
 bb_scheduler::~bb_scheduler () { }
@@ -61,6 +68,10 @@ void bb_scheduler::doSCHEDULER () {
     map<WIDTH, bbWindow*>::iterator bbWinEntry;
 }
 
+WIDTH bb_scheduler::getIssuePortIndx (WIDTH BBWinIndx) {
+    return BBWinIndx / _blk_cluster_siz;
+}
+
 PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
@@ -72,7 +83,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         /*-- CHECKS --*/
         LENGTH readyInsInBBWinIndx;
         if (!hasReadyInsInBBWins (readyInsInBBWinIndx, indx)) break;
-        if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
+        if (_scheduler_to_execution_port->Nth(getIssuePortIndx(readyInsInBBWinIndx))->getBuffState () == FULL_BUFF) break;
         bbInstruction* ins = _busy_bbWin[readyInsInBBWinIndx]->_win.getNth_unsafe (indx); //TODO fix this with hasReadInsInBBWin
         if (!_RF_MGR->hasFreeWire (READ, ins)) {break;}
 
@@ -80,7 +91,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         _busy_bbWin[readyInsInBBWinIndx]->issueInc ();
         _RF_MGR->reserveRF (ins);
         ins = _busy_bbWin[readyInsInBBWinIndx]->_win.pullNth (indx);
-        _scheduler_to_execution_port->pushBack (ins);
+        _scheduler_to_execution_port->Nth(getIssuePortIndx(readyInsInBBWinIndx))->pushBack (ins);
         ins->setPipeStage (ISSUE);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
         //---------------------------------------
@@ -355,7 +366,9 @@ void bb_scheduler::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->searchNflushPort (squashSeqNum);
+    for (int i = 0; i < _scheduler_to_execution_port->NumElements (); i++) {
+        _scheduler_to_execution_port->Nth(i)->searchNflushPort (squashSeqNum);
+    }
     if (_bbWin_on_fetch != NULL) {
         flushBBWindow (_bbWin_on_fetch);
         if (_bbWin_on_fetch->_win.getTableState () == EMPTY_BUFF) { 

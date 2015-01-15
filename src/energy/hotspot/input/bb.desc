@@ -44,12 +44,15 @@ ROB    0.000379e-6 1 3 1
 # Connectivity information
 # Line format <unit1-name>\t<unit2-name>\t<wire_density>
 
+#NOTE: LRF, ALU, and WIN are all distributed and GRF is centralized
+
 #L1D L2      1
 #L1I L2      1
 #L1I ITLB    1
 BP  BTB     1
 #BTB ITLB    1
 #BTB L1I     1
+
 EU1 GRF     1
 EU2 GRF     1
 EU3 GRF     1
@@ -58,6 +61,7 @@ EU5 GRF     1
 EU6 GRF     1
 EU7 GRF     1
 EU8 GRF     1
+
 EU1 WIN1    1
 EU2 WIN2    1
 EU3 WIN3    1
@@ -66,6 +70,7 @@ EU5 WIN5    1
 EU6 WIN6    1
 EU7 WIN7    1
 EU8 WIN8    1
+
 EU1 LRF1    1
 EU2 LRF2    1
 EU3 LRF3    1
@@ -74,6 +79,7 @@ EU5 LRF5    1
 EU6 LRF6    1
 EU7 LRF7    1
 EU8 LRF8    1
+
 EU1 ROB     1
 EU2 ROB     1
 EU3 ROB     1
@@ -82,6 +88,7 @@ EU5 ROB     1
 EU6 ROB     1
 EU7 ROB     1
 EU8 ROB     1
+
 LSQ EU1     1
 LSQ EU2     1
 LSQ EU3     1
@@ -90,6 +97,7 @@ LSQ EU5     1
 LSQ EU6     1
 LSQ EU7     1
 LSQ EU8     1
+
 #LSQ L1D     1
 #LSQ DTLB    1
 LSQ ROB     1

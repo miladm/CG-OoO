@@ -33,10 +33,12 @@ void bbBkEnd_init () {
     exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
     cmt["latency"] >> cmt_lat;
     root["width"] >> width; bbWin["count"] >> num_bbW;
+    WIDTH eu_width;
+    root["eu"]["alu"]["count"] >> eu_width;
 
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
-            8*width, 8*width, 8*width, width, width, width, width, num_bbW,
+            8*width, 8*width, 8*width, width, eu_width, width, width, num_bbW,
             fch_lat, 100, 
             1, 100, 
             bpu_lat, 100, 
