@@ -114,8 +114,8 @@ void print_wire_energy(flp_t *flp, double frequency)
 				energy_i = wire_length2energy(get_manhattan_dist(flp, i, j), WIRE_INTER);
 				fprintf(stdout, "Power (W): \t%s\t%s\t%.3f\t%.3f\n", flp->units[i].name, flp->units[j].name, 
 						frequency * energy_g, frequency * energy_i);
-				fprintf(stdout, "Energy (J): \t%s\t%s\t%le\t%le\n", flp->units[i].name, flp->units[j].name, 
-						energy_g * 1e-12, energy_i * 1e-12);
+				fprintf(stdout, "Energy (pJ): \t%s\t%s\t%le\t%le\n", flp->units[i].name, flp->units[j].name, 
+						energy_g, energy_i);
 			}
 }
 
