@@ -107,7 +107,7 @@ class bb_sysCore : public unit {
         CAMtable<dynBasicblock*>* _bbROB;
         CAMtable<dynBasicblock*>* _bbQUE;
 
-        WIDTH _num_sch_to_exe_ports;
+        WIDTH _num_block_ports;
         WIDTH _alu_cnt;
         WIDTH _alu_cnt_per_blk;
 };

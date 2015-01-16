@@ -63,9 +63,9 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- SETUP SCHEDULER TO EXECUTION PORTS --*/
     root["eu"]["alu"]["count_per_blk"] >> _alu_cnt_per_blk;
     root["eu"]["alu"]["count"] >> _alu_cnt;
-    _num_sch_to_exe_ports = _alu_cnt / _alu_cnt_per_blk;
+    _num_block_ports = _alu_cnt / _alu_cnt_per_blk;
     _scheduler_to_execution_port = new List<port<bbInstruction*>*>;
-    for (int i = 0; i < _num_sch_to_exe_ports; i++) {
+    for (int i = 0; i < _num_block_ports; i++) {
         port<bbInstruction*>* scheduler_to_execution_port = new port<bbInstruction*>(scheduler_to_execution_buff_len, 
                                                                                      scheduler_to_execution_delay, 
                                                                                      _clk, "scheduler_to_execution_port");

@@ -39,7 +39,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.247839e-1
+               e_wire: 8.632028e-2
                w_wire: 1
            g_share:
                globalPredictorSize: 8192
@@ -48,7 +48,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.247839e-1
+               e_wire: 8.632028e-2
                w_wire: 1
            tournament:
                localPredictorSize: 2048
@@ -63,7 +63,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.247839e-1
+               e_wire: 8.632028e-2
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
@@ -78,7 +78,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.247839e-1
+               e_wire: 8.632028e-2
                w_wire: 1
 
        rf:
@@ -92,7 +92,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 7.785043
-               e_wire: 0
+               e_wire: 1.045157e-1
                w_wire: 64
            lrf:
                rf_size: 17
@@ -107,21 +107,22 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
+               segmnt_cnt: 16 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 80
                a_lo: 117
                a_hi: 196
-               r_size: 40 # RENAME REGS
+               r_size: 48 # RENAME REGS
                r_lo: 197
-               r_hi: 236
-               p_size: 120
+               r_hi: 244
+               p_size: 128
                p_lo: 1
-               p_hi: 120
+               p_hi: 128
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
                cout: 1
                e_cam: 0
-               e_ram: 8.3939885
+               e_ram: 0.5246242813
                e_wire: 2.389336e-1
                w_wire: 64
            rf:
@@ -140,7 +141,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 9.037722
-               e_wire: 0
+               e_wire: 2.259340e-1
                w_wire: 64
            arst:
                e_cam: 0
@@ -219,7 +220,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496
-                e_wire: 0
+                e_wire: 1.811005e-2
                 w_wire: 64
                 name: ROB
                 type: RAM
@@ -253,7 +254,7 @@ cpu:
                 e_cam: 4.08806
                 e_cam2: 1.184757
                 e_ram: 2.638897
-                e_wire: 0
+                e_wire: 5.579845e-2
                 w_wire: 64
                 name: resStn
                 type: FIFO
@@ -275,7 +276,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 2.535452
-                e_wire: 0
+                e_wire: 2.660543e-2
                 w_wire: 64
                 name: iWindow
                 type: FIFO

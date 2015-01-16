@@ -2,17 +2,17 @@
  * registerRename.h
  ******************************************************************************/
 
-#ifndef _O3_REGISTER_RENAME_H
-#define _O3_REGISTER_RENAME_H
+#ifndef _BB_REGISTER_RENAME_H
+#define _BB_REGISTER_RENAME_H
 
-#include "dynInstruction.h"
-#include "unit.h"
-#include "wires.h"
+#include "../unit/dynInstruction.h"
+#include "../unit/unit.h"
+#include "../unit/wires.h"
 
 #define RD_TO_WR_WIRE_CNT_RATIO 2
 
-struct o3_regElem {
-    o3_regElem (PR reg, REG_REN_STATE state) 
+struct bb_regElem {
+    bb_regElem (PR reg, REG_REN_STATE state) 
         : _reg (reg)
     {
         Assert (state == AVAILABLE || state == ARCH_REG);
@@ -21,13 +21,13 @@ struct o3_regElem {
     }
     const PR _reg;
     REG_REN_STATE _reg_state;
-    o3_regElem* _prev_pr;
+    bb_regElem* _prev_pr;
 };
 
-class o3_registerRename : public unit {
+class bb_registerRename : public unit {
 	public:
-		o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name);
-		~o3_registerRename ();
+		bb_registerRename (sysClock* clk, WIDTH, const YAML::Node& root, string rf_name);
+		~bb_registerRename ();
 
 		PR renameReg (AR a_reg);
         void squashRenameReg ();
@@ -37,10 +37,10 @@ class o3_registerRename : public unit {
 		void update_cRAT (AR a_reg, PR p_reg);
 
         /* AVAILABLE PR */
-		bool isAnyPRavailable ();
-		PR getAvailablePR ();
+		bool isAnyPRavailable (BB_ID);
+		PR getAvailablePR (BB_ID);
 		void setAsAvailablePR (PR p_reg);
-		int getNumAvailablePR ();
+		int getNumAvailablePR (BB_ID);
 		PR getPrevPR (PR p_reg);
 
         /* PR STATE */
@@ -54,6 +54,10 @@ class o3_registerRename : public unit {
         void updateWireState (AXES_TYPE);
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
+
+    private:
+        WIDTH blkIndx2APRindx (BB_ID);
+        WIDTH PR2APRindx (PR pr);
 
 	private:
         CYCLE _cycle;
@@ -73,10 +77,16 @@ class o3_registerRename : public unit {
         wires _wr_port;
         wires _rd_port;
 
-		map<AR, o3_regElem*> _fRAT;
-		map<AR, o3_regElem*> _cRAT;
-		map<PR, o3_regElem*> _RF;
-		vector<o3_regElem*> _availablePRset; /* FILO */
+		map<AR, bb_regElem*> _fRAT;
+		map<AR, bb_regElem*> _cRAT;
+		map<PR, bb_regElem*> _RF;
+		List<vector<bb_regElem*>*>* _availablePRset; /* FILO */
+
+        const WIDTH _blk_cnt;
+        AR _a_rf_segmnt_size;
+        PR _p_rf_segmnt_size;
+        WIDTH _grf_segmnt_cnt;
+        WIDTH _num_blk_per_segmnt;
 };
 
 #endif

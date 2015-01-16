@@ -4,9 +4,9 @@
 
 #include "grfManager.h"
 
-bb_grfManager::bb_grfManager (sysClock* clk, const YAML::Node& root, string rf_name)
+bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, root["grf"], "GlobalRegisterRename"),
+      _GRF (clk, blk_cnt, root["grf"], "GlobalRegisterRename"),
       _e_rf (rf_name + ".grf", root["grf"]),
       _e_rat (rf_name + ".grat", root["grat"]),
       _e_apr (rf_name + ".gapr", root["gapr"]),
@@ -44,9 +44,9 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
-bool bb_grfManager::canRename (bbInstruction* ins) {
+bool bb_grfManager::canRename (bbInstruction* ins, BB_ID bbWin_id) {
     List<AR>* ar_wr = ins->getARwrList ();
-    if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
+    if (_GRF.getNumAvailablePR (bbWin_id) < ar_wr->NumElements ()) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                 "Can NOT rename regisers for ins", ins->getInsID (), _clk->now ());
         s_cant_rename_cnt++;
@@ -63,7 +63,8 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
             "Rename regisers for ins", ins->getInsID (), _clk->now ());
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
-    Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
+    WIDTH grf_segmnt_indx = ins->getBBWinID ();
+    Assert (_GRF.getNumAvailablePR (grf_segmnt_indx) >= ar_wr->NumElements ());
 
     /*-- RENAME READ REFISTERS FIRST --*/
     for (int i = 0; i < ar_rd->NumElements (); i++) {
@@ -75,11 +76,11 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
-        Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have been available.");
+        Assert (_GRF.isAnyPRavailable (grf_segmnt_indx) == true && "A physical reg must have been available.");
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
         _e_rat.ramAccess ();
-        PR new_pr = _GRF.getAvailablePR ();
+        PR new_pr = _GRF.getAvailablePR (grf_segmnt_indx);
         _e_apr.ramAccess ();
         _GRF.update_fRAT (a_reg, new_pr);
         _e_rat.ramAccess ();

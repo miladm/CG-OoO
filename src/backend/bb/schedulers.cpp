@@ -183,8 +183,6 @@ void bb_scheduler::updatebbWindows () {
             if (_LSQ_MGR->getTableState (ST_QU) == FULL_BUFF) break;
             if (!_LSQ_MGR->hasFreeWire (ST_QU, WRITE)) break;
         }
-        if (!_RF_MGR->canRename (ins)) break;
-
         /*-- CHECK & UPDATE --*/
         if (detectNewBB (ins)) {
             if (!hasAnAvailBBWin ()) {
@@ -202,13 +200,15 @@ void bb_scheduler::updatebbWindows () {
         if (_bbWin_on_fetch->_win.getTableState () == FULL_BUFF) break;
 //        Assert (_bbWin_on_fetch->_win.getTableState () != FULL_BUFF); TODO put back when have fixed BB size & remove check above
 
+        if (!_RF_MGR->canRename (ins, _bbWin_on_fetch->_id)) break;
+
         /*-- WRITE INTO BB WIN --*/
+        _bbWin_on_fetch->_win.pushBack (ins);
+        ins->setBBWinID (_bbWin_on_fetch->_id);
         ins = _decode_to_scheduler_port->popFront ();
         _RF_MGR->renameRegs (ins);
         ins->setPipeStage (DISPATCH);
         if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
-        _bbWin_on_fetch->_win.pushBack (ins);
-        ins->setBBWinID (_bbWin_on_fetch->_id);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                 "Write bbWin ins", ins->getInsID (), _clk->now ());
 
