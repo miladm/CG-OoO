@@ -65,12 +65,13 @@ void bb_commit::doCOMMIT () {
         pipe_stall = commitImpl ();
     }
 
+    verifySim ();
+
     /*-- STAT --*/
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
     if (pipe_stall == PIPE_STALL && g_var.g_pipe_state != PIPE_NORMAL) 
         s_squash_stall_cycles++;
-    verifySim ();
 }
 
 /*-- COMMIT COMPLETE INS AT THE HEAD OF QUEUE --*/

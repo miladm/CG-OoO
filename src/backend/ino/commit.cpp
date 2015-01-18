@@ -38,6 +38,8 @@ void commit::doCOMMIT () {
         pipe_stall = commitImpl ();
     }
 
+    verifySim ();
+
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
 }
