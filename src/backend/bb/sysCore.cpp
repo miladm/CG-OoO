@@ -137,11 +137,11 @@ void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
 
         /*==========*
          * DEBUGGING
-         *==========*/ /*
-        if (_clk->now () >= 20000000) {
+         *==========*/ /**/
+        if (_clk->now () >= 600000) {
             debugDump ();
             exit (-1);
-        } */
+        } 
 	}
 }
 

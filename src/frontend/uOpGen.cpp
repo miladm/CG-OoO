@@ -161,6 +161,8 @@ void pin__detectBB (ADDRINT ins_addr) {
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
         _bbHeadSet.insert (ins_addr);
+    } else if (g_var.getLastCacheBB () == NULL) { /*-- THE CASE WHERE FIRST DYN INS IS NOT MAPPED --*/
+        pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
     } else if (g_var.getLastCacheBB ()->getBBsize () > bbWin_size  ||
                g_var.getLastCacheBB ()->_insList.NumElements () > bbWin_size ||
                (LENGTH)g_var.getLastCacheBB ()->_bbInsMap.size () > bbWin_size) { //TODO temp solution to break off large BB's

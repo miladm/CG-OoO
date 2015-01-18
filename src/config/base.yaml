@@ -39,7 +39,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 8.632028e-2
+               e_wire: 2.669986e-1
                w_wire: 1
            g_share:
                globalPredictorSize: 8192
@@ -48,7 +48,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 8.632028e-2
+               e_wire: 2.669986e-1
                w_wire: 1
            tournament:
                localPredictorSize: 2048
@@ -63,7 +63,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 8.632028e-2
+               e_wire: 2.669986e-1
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
@@ -78,7 +78,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 8.632028e-2
+               e_wire: 2.669986e-1
                w_wire: 1
 
        rf:
@@ -111,19 +111,19 @@ cpu:
                a_size: 80
                a_lo: 117
                a_hi: 196
-               r_size: 48 # RENAME REGS
+               r_size: 1600 # RENAME REGS
                r_lo: 197
-               r_hi: 244
-               p_size: 128
+               r_hi: 1796
+               p_size: 1680
                p_lo: 1
-               p_hi: 128
+               p_hi: 1680
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
                cout: 1
                e_cam: 0
                e_ram: 0.5246242813
-               e_wire: 2.389336e-1
+               e_wire: 1.135708e-1
                w_wire: 64
            rf:
                a_size: 80
@@ -259,7 +259,7 @@ cpu:
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 32
+                size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 16
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4

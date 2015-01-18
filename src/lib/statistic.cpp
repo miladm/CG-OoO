@@ -180,37 +180,37 @@ void stat::init (string class_name, string param_name, string description, SCALA
 
 /* PREFIX ++ OPERATOR */
 stat& stat::operator++ () {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat++;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat++;
     return *this;
 }
 
 /* POSTFIX ++ OPERATOR */
 stat stat::operator++ (int) {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat++;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat++;
     return *this;
 }
 
 /* PREFIX -- OPERATOR */
 stat& stat::operator-- () {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat--;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat--;
     return *this;
 }
 
 /* POSTFIX -- OPERATOR */
 stat stat::operator-- (int) {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat--;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat--;
     return *this;
 }
 
 /* += OPERATOR */
 stat stat::operator+= (SCALAR val) {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat += val;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat += val;
     return *this;
 }
 
 /* -= OPERATOR */
 stat stat::operator-= (SCALAR val) {
-    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat -= val;
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn () || true) _ScalarStat -= val;
     return *this;
 }
 

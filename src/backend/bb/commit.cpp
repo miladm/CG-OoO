@@ -275,4 +275,5 @@ void bb_commit::delIns (bbInstruction* ins) {
 
 void bb_commit::regStat () {
     _bbROB->regStat ();
+    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) s_ins_cnt.print ();
 }
