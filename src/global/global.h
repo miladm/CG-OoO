@@ -180,6 +180,8 @@ typedef enum {
 #define V_FRONTEND 0x1
 #define V_BACKEND 0x1
 
+#define SIM_STALL_THR 1000
+
 /*-- DEFINE --*/
 #ifndef DEFS
 #define PARSE_LEN 400

@@ -37,6 +37,9 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
     _RF_MGR = RF_MGR;
     _num_bbWin = num_bbWin;
     _bbWindows = bbWindows;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = START_CYCLE;
 }
 
 bb_commit::~bb_commit () {}
@@ -67,6 +70,7 @@ void bb_commit::doCOMMIT () {
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
     if (pipe_stall == PIPE_STALL && g_var.g_pipe_state != PIPE_NORMAL) 
         s_squash_stall_cycles++;
+    verifySim ();
 }
 
 /*-- COMMIT COMPLETE INS AT THE HEAD OF QUEUE --*/
@@ -276,4 +280,16 @@ void bb_commit::delIns (bbInstruction* ins) {
 void bb_commit::regStat () {
     _bbROB->regStat ();
     if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) s_ins_cnt.print ();
+}
+
+void bb_commit::verifySim () {
+    if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
+        cout << "current cycle: " << _clk->now () << endl;
+        cout << "last commit cycle: " << _prev_commit_cyc << endl;
+        Assert (false && "No commit for too long");
+    }
+    if (s_ins_cnt.getValue () > _prev_ins_cnt) {
+        _prev_ins_cnt = s_ins_cnt.getValue ();
+        _prev_commit_cyc = _clk->now ();
+    }
 }

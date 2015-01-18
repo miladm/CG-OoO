@@ -27,6 +27,9 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
     _iQUE = iQUE;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = START_CYCLE;
 }
 
 o3_commit::~o3_commit () {}
@@ -205,4 +208,16 @@ void o3_commit::delIns (dynInstruction* ins) {
 
 void o3_commit::regStat () {
     _iROB->regStat ();
+}
+
+void o3_commit::verifySim () {
+    if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
+        cout << "current cycle: " << _clk->now () << endl;
+        cout << "last commit cycle: " << _prev_commit_cyc << endl;
+        Assert (false && "No commit for too long");
+    }
+    if (s_ins_cnt.getValue () > _prev_ins_cnt) {
+        _prev_ins_cnt = s_ins_cnt.getValue ();
+        _prev_commit_cyc = _clk->now ();
+    }
 }
