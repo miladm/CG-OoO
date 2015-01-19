@@ -36,6 +36,7 @@ class bb_commit : protected stage {
         void delBB (dynBasicblock*);
         void delIns (bbInstruction*);
         void verifySim ();
+        void debugDump ();
 
 	private:
 		port<bbInstruction*>* _commit_to_bp_port;
