@@ -286,7 +286,22 @@ void bb_commit::regStat () {
 void bb_commit::verifySim () {
     if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
         cout << "current cycle: " << _clk->now () << endl;
-        cout << "last commit cycle: " << _prev_commit_cyc << endl;
+        cout << "last commit cycle: " << _prev_commit_cyc << endl << endl;
+        /*-- PRINT BBROB CONTENT --*/
+        for (int i = 0; i < _bbROB->getTableSize (); i++) {
+            dynBasicblock* bb = _bbROB->getNth(i);
+            List<bbInstruction*>* insList = bb->getBBinsList ();
+            for (int i = insList->NumElements () - 1; i >= 0; i--) {
+                bbInstruction* ins = insList->Nth (i);
+                cout << "stage: " << ins->getPipeStage () << 
+                    " ID: " << ins->getInsID () <<
+                    " wp: " << ins->isMemOrBrViolation () <<
+                    " type: " << ins->getInsType () <<
+                    " (bbID: " << ins->getBB()->getBBID () <<
+                    "  wp: " << ins->getBB()->isMemOrBrViolation () << ")" <<
+                    endl;
+            }
+        }
         Assert (false && "No commit for too long");
     }
     if (s_ins_cnt.getValue () > _prev_ins_cnt) {
