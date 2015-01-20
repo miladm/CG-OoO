@@ -25,7 +25,10 @@ sysClock::~sysClock () {}
 void sysClock::tick () {
 	_clk++;
     _clk_cycles++;
-    if (_clk % RUNTIME_REPORT_INTERVAL == 0) _clk_cycles.print ();
+    if (_clk % RUNTIME_REPORT_INTERVAL == 0) {
+        if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _clk_cycles.print ();
+        else cout << "Warmup cycle: " << _clk << endl;
+    }
 #ifdef ASSERTION
 	Assert(	_clk < std::numeric_limits<CYCLE>::max() &&
 		   	_clk > std::numeric_limits<CYCLE>::min() &&

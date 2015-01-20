@@ -298,6 +298,8 @@ void bb_commit::verifySim () {
             _prev_ins_cnt = s_ins_cnt.getValue ();
             _prev_commit_cyc = _clk->now ();
         }
+    } else {
+            _prev_commit_cyc = _clk->now ();
     }
 }
 

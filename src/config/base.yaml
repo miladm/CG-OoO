@@ -261,8 +261,8 @@ cpu:
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 16
-                runahead_issue_en: 0
-                runahead_issue_cnt: 4
+                runahead_issue_en: 1
+                runahead_issue_cnt: 2
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
@@ -329,8 +329,8 @@ cpu:
 
        eu:
            alu:
-               count: 4
-               count_per_blk: 4
+               count: 32
+               count_per_blk: 2
                latency: 1
                e_eu: 1.040
            fpu:
