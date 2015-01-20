@@ -87,6 +87,7 @@ class dynBasicblock : public unit {
         bool isMemOrBrViolation ();
         List<bbInstruction*>* getBBinsList ();
         bool isBBcomplete ();
+        bool isMemViolation ();
 
         void squash ();
         void reset ();
@@ -99,6 +100,10 @@ class dynBasicblock : public unit {
         void setNumWasteIns (INS_ID);
         void setDoneFetch ();
         bool isDoneFetch ();
+
+        //RUNAHEAD
+        void revokeRunaheadPermit ();
+        bool runaheadPermit ();
 
     private:
         void setBBheadID ();
@@ -128,6 +133,8 @@ class dynBasicblock : public unit {
         SCALAR _wasted_ins_cnt;
         
         SCHED_MODE _scheduling_mode;
+
+        bool _runahead_permit;
 };
 
 

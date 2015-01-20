@@ -168,8 +168,12 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                            "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, bbInstruction*> (true, ins);
             }
+            dbg.print (DBG_MEMORY, "%s: %s (%llu, %d) (cyc: %llu)\n", _c_name.c_str (), 
+                    "Unfinished LD in LQ (id, state): ", ins->getInsID (), ins->getLQstate (), now);
         }
+
         dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished LD ins.", "LQ Size:", table_size);
+
         return pair<bool, bbInstruction*> (false, NULL);
     } else {
         for (LENGTH i = 0; i < table_size; i++) {

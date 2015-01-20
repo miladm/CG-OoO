@@ -74,10 +74,14 @@ void bb_memManager::pushBack (bbInstruction *ins) {
         Assert (_LQ.getTableState () != FULL_BUFF);
         _LQ.pushBack (ins);
         ins->setLQstate (LQ_ADDR_WAIT);
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "Write LQ ins", ins->getInsID (), _clk->now ());
     } else {
         Assert (_SQ.getTableState () != FULL_BUFF);
         _SQ.pushBack (ins);
         ins->setSQstate (SQ_ADDR_WAIT);
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "Write SQ ins", ins->getInsID (), _clk->now ());
     }
 }
 

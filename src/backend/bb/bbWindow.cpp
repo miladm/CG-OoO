@@ -9,8 +9,10 @@ bbWindow::bbWindow (string bbWin_id, sysClock* clk)
       _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id), //TODO configure and more real numbers
       _id (atoi (bbWin_id.c_str ()))
 { 
-    _cycle = START_CYCLE;
+    _issue_cycle = START_CYCLE;
+    _bypass_cycle = START_CYCLE;
     _num_issues = 0;
+    _st_bypassed = false;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["rd_wire_cnt"] >> _rd_wire_cnt;
 }
 
@@ -24,12 +26,36 @@ void bbWindow::issueInc () {
 }
 
 WIDTH bbWindow::getNumIssued () {
-    CYCLE now = _clk->now ();
-    if (_cycle < now) {
-        _num_issues = 0;
-        _cycle = now;
-    }
+    resetIssueState ();
     return _num_issues;
+}
+
+void bbWindow::resetIssueState () {
+    CYCLE now = _clk->now ();
+    if (_issue_cycle < now) {
+        _num_issues = 0;
+        _issue_cycle = now;
+    }
+}
+
+/*--
+ * THESE MODULES AVOID RAW HAZARDS IN MEM UNITS - TO AVOID CONSISTENT MEMORY
+ * MIS-SPECULATION EVENTS HAPPENING BECAUSE A BB CONSISTENTLY MIS-SPECULATES
+ * AND SQUASHES AVOIDING THE PROGRAM TO MAKE FORWARD PROGRESS 
+ --*/
+void bbWindow::setStoreBypassed () { _st_bypassed = true; }
+
+bool bbWindow::isStoreBypassed () {
+    resetBypassState ();
+    return _st_bypassed;
+}
+
+void bbWindow::resetBypassState () {
+    CYCLE now = _clk->now ();
+    if (_bypass_cycle < now) {
+        _bypass_cycle = now;
+        _st_bypassed = false;
+    }
 }
 
 /* deploy the code for rfManager

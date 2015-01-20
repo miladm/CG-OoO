@@ -270,7 +270,8 @@ WIDTH bb_registerRename::PR2APRindx (PR pr) {
 #ifdef ASSERTION
     Assert (_p_rf_segmnt_size > 0);
 #endif
-    return (pr - 1) / _p_rf_segmnt_size;
+    WIDTH grf_segmnt_indx = (pr - 1) / _p_rf_segmnt_size;
+    return grf_segmnt_indx;
 }
 
 WIDTH bb_registerRename::blkIndx2APRindx (BB_ID blk_indx) {

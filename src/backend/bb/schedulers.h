@@ -42,7 +42,8 @@ class bb_scheduler : protected stage {
         bool hasAnAvailBBWin ();
         bool detectNewBB (bbInstruction*);
         void flushBBWindow (bbWindow*);
-        WIDTH getIssuePortIndx (WIDTH BBWinIndx);
+        WIDTH getIssuePortIndx (WIDTH);
+        bool runaheadPermit (bbInstruction*);
 
 	private:
 		port<bbInstruction*>* _decode_to_scheduler_port;
@@ -62,7 +63,10 @@ class bb_scheduler : protected stage {
         List<bbWindow*> _avail_bbWin;
         map<WIDTH, bbWindow*> _busy_bbWin;
 
-        WIDTH _bb_issue_per_cyc_cnt;
+        /*-- RUNAHEAD MODE PARAMS --*/
+        WIDTH _runahead_issue_cnt;
+        bool _runahead_issue_en;
+
         WIDTH _blk_cluster_siz;
 
         /*-- STAT --*/
@@ -70,6 +74,7 @@ class bb_scheduler : protected stage {
         ScalarStat& s_alu_g_fwd_cnt;
         ScalarStat& s_mem_l_fwd_cnt;
         ScalarStat& s_alu_l_fwd_cnt;
+        ScalarStat& s_no_ld_bypass;
         RatioStat& s_bbWin_inflight_rat;
 };
 

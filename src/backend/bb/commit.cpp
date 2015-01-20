@@ -181,7 +181,7 @@ void bb_commit::bpMispredSquash () {
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
+                               "(BR_MISPRED)(PUSH BACK BB) Squash bb ", bb->getBBID (), _clk->now ());
     }
 
     /* DELETE BB'S THAT ARE ON WRONG PATH */
@@ -193,8 +193,8 @@ void bb_commit::bpMispredSquash () {
         _bbQUE->removeNth_unsafe (i);
         s_wp_bb_cnt++;
         s_wp_ins_cnt += bb->getBBorigSize ();
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %ld)\n", _stage_name.c_str (), 
+                               "(BR_MISPRED)(DELETE BB) Squash bb ", bb->getBBID (), _clk->now ());
         delBB (bb);
     }
 }
@@ -218,6 +218,7 @@ void bb_commit::memMispredSquash () {
     }
 
     /*-- SQUASH BBQUE --*/
+    dynBasicblock* prev_bb = NULL;
     for (LENGTH i = _bbQUE->getTableSize () - 1; i >= 0; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
@@ -226,8 +227,10 @@ void bb_commit::memMispredSquash () {
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
+                               "(MEM_MISPRED)(PUSH BACK BB) Squash bb", bb->getBBID (), _clk->now ());
+        prev_bb = bb;
     }
+    if (prev_bb != NULL) prev_bb->revokeRunaheadPermit ();
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/

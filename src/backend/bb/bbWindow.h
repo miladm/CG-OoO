@@ -16,16 +16,24 @@ class bbWindow : public unit {
         bbWindow (string bbWin_id, sysClock* clk);
         void regStat ();
         CAMtable<bbInstruction*> _win;
+
         void issueInc ();
         WIDTH getNumIssued ();
+        void resetIssueState ();
+
+        void setStoreBypassed ();
+        bool isStoreBypassed ();
+        void resetBypassState ();
 
     public:
         const WIDTH _id;
 
     private:
-        CYCLE _cycle;
+        CYCLE _issue_cycle;
+        CYCLE _bypass_cycle;
         WIDTH _num_issues;
         WIDTH _rd_wire_cnt;
+        bool _st_bypassed;
 };
 
 #endif
