@@ -213,13 +213,15 @@ void o3_commit::regStat () {
 }
 
 void o3_commit::verifySim () {
-    if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
-        cout << "current cycle: " << _clk->now () << endl;
-        cout << "last commit cycle: " << _prev_commit_cyc << endl;
-        Assert (false && "No commit for too long");
-    }
-    if (s_ins_cnt.getValue () > _prev_ins_cnt) {
-        _prev_ins_cnt = s_ins_cnt.getValue ();
-        _prev_commit_cyc = _clk->now ();
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) {
+        if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
+            cout << "current cycle: " << _clk->now () << endl;
+            cout << "last commit cycle: " << _prev_commit_cyc << endl;
+            Assert (false && "No commit for too long");
+        }
+        if (s_ins_cnt.getValue () > _prev_ins_cnt) {
+            _prev_ins_cnt = s_ins_cnt.getValue ();
+            _prev_commit_cyc = _clk->now ();
+        }
     }
 }

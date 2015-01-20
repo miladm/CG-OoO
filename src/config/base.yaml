@@ -261,7 +261,7 @@ cpu:
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 16
-                runahead_issue_en: 1
+                runahead_issue_en: 0
                 runahead_issue_cnt: 4
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
