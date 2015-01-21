@@ -40,6 +40,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["runahead_issue_cnt"] >> _runahead_issue_cnt;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["runahead_issue_en"] >> temp;
     _runahead_issue_en = (bool)temp;
+    if (!_runahead_issue_en) _runahead_issue_cnt = 1;
     Assert (_runahead_issue_cnt > 0 && _runahead_issue_cnt <= rd_wire_cnt && 
             "Number of read ports does not support the runahead setup");
 
@@ -87,12 +88,12 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
     updatebbWindows ();
 
     /*-- READ FROM INS WINDOW --*/
-    LENGTH ready_ins_indx = 0;
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
         LENGTH ready_bbWin_indx;
-        if (!hasReadyInsInBBWins (ready_bbWin_indx, ready_ins_indx)) break;
+        if (!hasReadyInsInBBWins (ready_bbWin_indx)) break;
         if (_scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->getBuffState () == FULL_BUFF) break;
+        LENGTH ready_ins_indx = _busy_bbWin[ready_bbWin_indx]->getIssueIndx ();
         bbInstruction* ins = _busy_bbWin[ready_bbWin_indx]->_win.getNth_unsafe (ready_ins_indx); //TODO fix this with hasReadInsInBBWin
         if (!_RF_MGR->hasFreeWire (READ, ins)) {break;}
 
@@ -136,7 +137,7 @@ void bb_scheduler::manageBusyBBWin (bbWindow* bbWin) {
     }
 }
 
-bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx, LENGTH &ready_ins_indx) {
+bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
     map<WIDTH, bbWindow*>::iterator it;
     map<BB_ID,WIDTH> sorted_busy_bbWin;
 
@@ -155,21 +156,21 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx, LENGTH &ready_
         WIDTH bbWin_id = bbWinEntry->second;
         bbWindow* bbWin = _busy_bbWin[bbWin_id];
 //        if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
-        if (!bbWin->_win.hasFreeWire (READ)) {ready_ins_indx = 0; continue;}
-        if ((bbWin->getNumIssued () + ready_ins_indx) >= _runahead_issue_cnt) {ready_ins_indx = 0; continue;}
-        for (int i = ready_ins_indx; i < _runahead_issue_cnt; i++) {
+        if (!bbWin->_win.hasFreeWire (READ)) {continue;}
+        if ((bbWin->getNumIssued () + bbWin->getIssueIndx ()) >= _runahead_issue_cnt) {continue;}
+        for (int i = bbWin->getIssueIndx (); i < _runahead_issue_cnt; i++) {
             if (i >= bbWin->_win.getTableSize ()) break;
             bbInstruction* ins = bbWin->_win.getNth_unsafe (i);
             ready_bbWin_indx = bbWin_id;
             //        bbWin->_win.ramAccess (); //assume this step is free for now - TODO
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD && bbWin->isStoreBypassed ()) {/* MEM RAW AVOIDANCE IN BB */
-                if (runaheadPermit (ins)) ready_ins_indx = i + 1;
                 s_no_ld_bypass++;
-                continue;
+                if (runaheadPermit (ins)) bbWin->issueIndxInc ();
+                else break;
             } else if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
-                if (runaheadPermit (ins)) ready_ins_indx = i + 1;
-                continue;
+                if (runaheadPermit (ins)) bbWin->issueIndxInc ();
+                else break;
             } else {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
                 if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
@@ -178,7 +179,6 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx, LENGTH &ready_
                 return true;
             }
         }
-        ready_ins_indx = 0;
     }
 
     dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 

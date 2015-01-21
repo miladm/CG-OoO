@@ -17,6 +17,10 @@ class bbWindow : public unit {
         void regStat ();
         CAMtable<bbInstruction*> _win;
 
+        void issueIndxInc ();
+        LENGTH getIssueIndx ();
+        void resetIssueIndxState ();
+
         void issueInc ();
         WIDTH getNumIssued ();
         void resetIssueState ();
@@ -29,11 +33,17 @@ class bbWindow : public unit {
         const WIDTH _id;
 
     private:
-        CYCLE _issue_cycle;
-        CYCLE _bypass_cycle;
-        WIDTH _num_issues;
         WIDTH _rd_wire_cnt;
+        bool _runahead_issue_en;
+
+        CYCLE _issue_cycle;
+        WIDTH _num_issues;
+
+        CYCLE _bypass_cycle;
         bool _st_bypassed;
+
+        CYCLE _issue_indx_cycle;
+        LENGTH _issue_indx;
 };
 
 #endif
