@@ -30,7 +30,7 @@ void bbWindow::regStat () { _win.regStat (); }
  --*/
 void bbWindow::issueIndxInc () {
     _issue_indx++;
-    Assert (_issue_indx >= 0 && _issue_indx < _rd_wire_cnt);
+    Assert (_issue_indx >= 0 && _issue_indx <= _rd_wire_cnt);
 }
 
 LENGTH bbWindow::getIssueIndx () {
