@@ -29,6 +29,7 @@ void bbWindow::regStat () { _win.regStat (); }
  * AT 0
  --*/
 void bbWindow::issueIndxInc () {
+    Assert (_runahead_issue_en == true);
     _issue_indx++;
     Assert (_issue_indx >= 0 && _issue_indx <= _rd_wire_cnt);
 }
@@ -51,7 +52,6 @@ void bbWindow::resetIssueIndxState () {
  * UPDATED EVERY CYCLE
  --*/
 void bbWindow::issueInc () {
-    Assert (_runahead_issue_en == true);
     _num_issues++;
     Assert (_num_issues >= 0 && _num_issues <= _rd_wire_cnt);
 }
