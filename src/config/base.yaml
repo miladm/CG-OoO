@@ -21,6 +21,7 @@ cpu:
        sim_point: enable
        simpoint_file: 
        code_cache_size_thr: 100 #TODO be considerate of BB_NEAR_EMPTY_SIZE param
+       profiling: 0
 
     backend: 
        core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
@@ -181,10 +182,10 @@ cpu:
 
        table: 
             QUE:
-                size: 1000
+                size: 3000
                 count: 1
-                rd_wire_cnt: 1000
-                wr_wire_cnt: 1000
+                rd_wire_cnt: 3000
+                wr_wire_cnt: 3000
                 e_cam: 0
                 e_ram: 0
                 e_wire: 0

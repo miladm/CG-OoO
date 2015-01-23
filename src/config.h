@@ -131,6 +131,9 @@ class config {
 
         //REGISTER FILE PARAMS
         AR _larf_lo, _larf_hi, _garf_lo, _garf_hi;
+
+        //PROFILING
+        bool _enable_profile;
     public:
         YAML::Node _root;
 };
