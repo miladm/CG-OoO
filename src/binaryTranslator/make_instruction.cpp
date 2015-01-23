@@ -62,7 +62,7 @@ void parse_instruction (List<instruction*> *insList,
 
     /* ASSSEMBLY FILE FETCH */
 	if ((input_assembly = fopen ((input_path + (*program_name) + ".s").c_str (), "r")) == NULL) {
-		Assert ("Cannot open assembly file.");
+		Assert (0 && "Cannot open assembly file.");
 	}
 
     /* BRANCH BIAS FILE FETCH */
@@ -71,7 +71,7 @@ void parse_instruction (List<instruction*> *insList,
     hi_wbb << WBB_UPPER_BOUND;
     string file_ext = "_wbb_" + lo_wbb.str () + "_" + hi_wbb.str () + ".csv";
 	if ((input_brBias = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
-		Assert ("Cannot open branch bias file.\n");
+		Assert (0 && "Cannot open branch bias file.\n");
 	}
 
     /* BRANCH ACCURACY FILE FETCH */
@@ -79,7 +79,7 @@ void parse_instruction (List<instruction*> *insList,
 //    upld_thr << UPLD_THRESHOLD;
 //    file_ext = "_upld_" + upld_thr.str () + ".csv";
 //	if ((input_bpAccuracy = fopen ((input_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
-//		Assert ("Cannot open branch prediction accuracy file.");
+//		Assert (0 && "Cannot open branch prediction accuracy file.");
 //	}
 
     /* UPLD FILE FETCH */
@@ -89,12 +89,12 @@ void parse_instruction (List<instruction*> *insList,
     cout << file_ext << endl;
 	input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r");
 	if (input_upld == NULL) {
-		Assert ("Cannot open unpred load ops file.");
+		Assert (0 && "Cannot open unpred load ops file.");
 	}
 
     /* MEMORY TRACE FILE FETCH */
 	if ((input_mem = fopen ("frontend/mem_trace.csv", "r")) == NULL) {
-		Assert ("Cannot open mem addresses file.");
+		Assert (0 && "Cannot open mem addresses file.");
 	}
 
 	/* PARSE BRANCH BIAS NUMBERS */
@@ -136,7 +136,7 @@ void parse_instruction (List<instruction*> *insList,
 	// 	} else if (type == 'W') {
 	// 		memWrAddrMap[insAddr].insert (dataAddr);
 	// 	} else {
-	// 		Assert ("Invalid memory address access type.");
+	// 		Assert (0 && "Invalid memory address access type.");
 	// 	}
 	// }
 
