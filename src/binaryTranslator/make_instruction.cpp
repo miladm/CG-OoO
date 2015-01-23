@@ -86,7 +86,9 @@ void parse_instruction (List<instruction*> *insList,
     ostringstream upld_thr;
     upld_thr << UPLD_THRESHOLD;
     file_ext = "_upld_" + upld_thr.str () + ".csv";
-	if ((input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
+    cout << file_ext << endl;
+	input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r");
+	if (input_upld == NULL) {
 		Assert ("Cannot open unpred load ops file.");
 	}
 
