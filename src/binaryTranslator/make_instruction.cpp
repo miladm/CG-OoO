@@ -71,7 +71,8 @@ void parse_instruction (List<instruction*> *insList,
     hi_wbb << WBB_UPPER_BOUND;
     string file_ext = "_wbb_" + lo_wbb.str () + "_" + hi_wbb.str () + ".csv";
 	if ((input_brBias = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
-		Assert (0 && "Cannot open branch bias file.\n");
+		printf ("WARNING: Cannot open branch bias file.\n");
+//		Assert (0 && "Cannot open branch bias file.\n");
 	}
 
     /* BRANCH ACCURACY FILE FETCH */
@@ -89,7 +90,8 @@ void parse_instruction (List<instruction*> *insList,
     cout << file_ext << endl;
 	input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r");
 	if (input_upld == NULL) {
-		Assert (0 && "Cannot open unpred load ops file.");
+		printf ("WARNING: Cannot open UPLD ops file.\n");
+//		Assert (0 && "Cannot open UPLD ops file.");
 	}
 
     /* MEMORY TRACE FILE FETCH */
@@ -98,14 +100,18 @@ void parse_instruction (List<instruction*> *insList,
 	}
 
 	/* PARSE BRANCH BIAS NUMBERS */
-	printf ("\tRead branch BIAS profile file");
-	while (1) {
-		ADDR addr;
-		double bias;
-        int taken, br;
-		if (fscanf (input_brBias, "%lx,%lf,%d,%d\n", &addr, &bias, &taken, &br) == EOF) break;
-		brBiasMap->insert (pair<ADDR, double> (addr,bias));
-	}
+    if (input_brBias != NULL) {
+        printf ("\tRead branch BIAS profile file");
+        while (1) {
+            ADDR addr;
+            double bias;
+            int taken, br;
+            if (fscanf (input_brBias, "%lx,%lf,%d,%d\n", &addr, &bias, &taken, &br) == EOF) break;
+            brBiasMap->insert (pair<ADDR, double> (addr,bias));
+        }
+    } else {
+        printf ("\tWARNING: BIAS profile file NOT read.\n");
+    }
 
 	/* PARSE BRANCH PREDICTION NUMBERS */
 //	printf ("\tRead branch prediction accuracy profile file\n");
@@ -117,14 +123,18 @@ void parse_instruction (List<instruction*> *insList,
 //	}
 
 	/* PARSE UNPREDICTABLE LOAD NUMBERS */
-	printf ("\tRead UPLD profile file\n");
-	while (1) {
-		ADDR addr;
-		double missRate;
-        int miss_ld, ld;
-		if (fscanf (input_upld, "%lx, %lf,%d,%d\n", &addr, &missRate, &miss_ld, &ld) == EOF) break;
-		upldMap->insert (pair<ADDR, double> (addr, missRate));
-	}
+    if (input_upld != NULL) {
+        printf ("\tRead UPLD profile file\n");
+        while (1) {
+            ADDR addr;
+            double missRate;
+            int miss_ld, ld;
+            if (fscanf (input_upld, "%lx, %lf,%d,%d\n", &addr, &missRate, &miss_ld, &ld) == EOF) break;
+            upldMap->insert (pair<ADDR, double> (addr, missRate));
+        }
+    } else {
+        printf ("\tWARNING: UPLD profile file NOT read.\n");
+    }
 
 	//Parse memory access addresses
 	// while (1) {
@@ -289,6 +299,6 @@ void parse_instruction (List<instruction*> *insList,
 	fclose (input_assembly);
 	fclose (input_brBias);
 //	fclose (input_bpAccuracy);
-	fclose (input_upld);
+    if (input_upld != NULL) { fclose (input_upld); }
 	fclose (input_mem);
 }
