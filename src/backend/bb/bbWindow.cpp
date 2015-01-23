@@ -36,6 +36,8 @@ void bbWindow::issueIndxInc () {
 
 LENGTH bbWindow::getIssueIndx () {
     resetIssueIndxState ();
+    if (!_runahead_issue_en && _issue_indx > 0) 
+        Assert (false && "Invalid non-runahead mode BB index state");
     return _issue_indx;
 }
 
@@ -58,8 +60,6 @@ void bbWindow::issueInc () {
 
 WIDTH bbWindow::getNumIssued () {
     resetIssueState ();
-    if (!_runahead_issue_en && _num_issues > 0) 
-        Assert (false && "Invalid non-runahead mode BB index state");
     return _num_issues;
 }
 

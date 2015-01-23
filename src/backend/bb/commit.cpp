@@ -98,6 +98,9 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         bb = _bbROB->popFront ();
         dynBasicblock* bb_dual = _bbQUE->popFront ();
         Assert (bb->isDoneFetch () == true);
+        if (bb->getBBID () != bb_dual->getBBID ())
+            cout << bb->getBBID () << " " << bb_dual->getBBID () << " " 
+                 << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
         Assert (bb->getBBID () == bb_dual->getBBID ());
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Commit bb", bb->getBBID (), _clk->now ());
@@ -197,6 +200,15 @@ void bb_commit::bpMispredSquash () {
                                "(BR_MISPRED)(DELETE BB) Squash bb ", bb->getBBID (), _clk->now ());
         delBB (bb);
     }
+
+    if (_bbROB->getTableSize () > 0) {
+        dynBasicblock* bb1 = _bbROB->getNth_unsafe (0);
+        dynBasicblock* bb2 = _bbQUE->getNth_unsafe (0);
+        if (bb1->getBBID () != bb2->getBBID ())
+            cout << bb1->getBBID () << " " << bb2->getBBID () << " " 
+                << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+        Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
+    }
 }
 
 void bb_commit::memMispredSquash () {
@@ -230,6 +242,16 @@ void bb_commit::memMispredSquash () {
                                "(MEM_MISPRED)(PUSH BACK BB) Squash bb", bb->getBBID (), _clk->now ());
         prev_bb = bb;
     }
+
+    if (_bbROB->getTableSize () > 0) {
+        dynBasicblock* bb1 = _bbROB->getNth_unsafe (0);
+        dynBasicblock* bb2 = _bbQUE->getNth_unsafe (0);
+        if (bb1->getBBID () != bb2->getBBID ())
+            cout << bb1->getBBID () << " " << bb2->getBBID () << " " 
+                << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+        Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
+    }
+
     if (prev_bb != NULL) prev_bb->revokeRunaheadPermit ();
 }
 
