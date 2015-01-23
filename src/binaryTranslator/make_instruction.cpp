@@ -71,7 +71,7 @@ void parse_instruction (List<instruction*> *insList,
     hi_wbb << WBB_UPPER_BOUND;
     string file_ext = "_wbb_" + lo_wbb.str () + "_" + hi_wbb.str () + ".csv";
 	if ((input_brBias = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r")) == NULL) {
-		printf ("WARNING: Cannot open branch bias file.\n");
+		printf ("\tWARNING: Cannot open branch bias file.\n");
 //		Assert (0 && "Cannot open branch bias file.\n");
 	}
 
@@ -90,7 +90,7 @@ void parse_instruction (List<instruction*> *insList,
     cout << file_ext << endl;
 	input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (), "r");
 	if (input_upld == NULL) {
-		printf ("WARNING: Cannot open UPLD ops file.\n");
+		printf ("\tWARNING: Cannot open UPLD ops file.\n");
 //		Assert (0 && "Cannot open UPLD ops file.");
 	}
 
@@ -297,7 +297,7 @@ void parse_instruction (List<instruction*> *insList,
 
 	/* CLOSE FILES */
 	fclose (input_assembly);
-	fclose (input_brBias);
+    if (input_brBias != NULL) { fclose (input_brBias); }
 //	fclose (input_bpAccuracy);
     if (input_upld != NULL) { fclose (input_upld); }
 	fclose (input_mem);
