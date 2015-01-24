@@ -97,6 +97,7 @@ bool bb_fetch::fetchBB (FRONTEND_STATUS frontend_status) {
             dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                     "NEW BB:", _current_bb->getBBID (), _clk->now ());
             _bbQUE->pushBack (_current_bb);
+            Assert (_bbQUE->getTableState () != FULL_BUFF && "bbQUE must never become full");
             s_bb_size_avg += _current_bb->getBBsize ();
             s_bb_cnt++;
         }
