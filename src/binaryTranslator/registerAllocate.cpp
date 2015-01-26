@@ -67,11 +67,11 @@ static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap
             map<long int,interfNode*>::iterator it;
 			for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
 				// Remove redundant map elements
-					// if ((it->second)->getNeighborSize () == 0) {
-					// 	allIntfNodeMap.insert (pair<long int,interfNode*> (it->first,it->second));
-					// 	globalIntfNodeMap.erase (it);
-					// 	continue;
-					// }
+				// if ((it->second)->getNeighborSize () == 0) {
+				// 	allIntfNodeMap.insert (pair<long int,interfNode*> (it->first,it->second));
+				// 	globalIntfNodeMap.erase (it);
+				// 	continue;
+				// }
 				if ((it->second)->getNeighborSize () > neighborCount &&
 				    (it->second)->getNeighborSize () < LRF_SIZE) {
 						neighborCount =  (it->second)->getNeighborSize ();
@@ -92,19 +92,32 @@ static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap
 				locallIntfNodeMap.erase (candidateNodeIt);
 			} else {
                 map<long int,interfNode*>::iterator it;
-				for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
-					printf ("Remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
-				}
-				Assert (0 && "No candidate neighbors found.");
+                for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+                    printf ("Remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
+                    if ((it->second)->getNeighborSize () > neighborCount) {
+                        neighborCount = (it->second)->getNeighborSize ();
+                        candidateNodeIt = it;
+                    }
+                }
+                if (locallIntfNodeMap.size () == 0) {
+                    break;
+                } else if (neighborCount > -1) {
+                    interfNode* node = candidateNodeIt->second;
+                    node->removeFromGraph ();
+                    removedIntfNodeVector.push_back (node);
+                    allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
+                    locallIntfNodeMap.erase (candidateNodeIt);
+                }
 			}
 		}
 
 		// STEP 2: COLOR REGISTERS (REG ASSIGNMENT)
 		set<long int> LRFset;
 		for (int i = LRF_LO; i <= LRF_HI; i++) LRFset.insert (i);
-		for (int i = removedIntfNodeVector.size () - 1; i >= 0; i--) {
-			interfNode *node = removedIntfNodeVector.at (i);
+		while (removedIntfNodeVector.size () > 0) {
+			interfNode *node = removedIntfNodeVector.back ();
 			node->assignReg (LRFset);
+            removedIntfNodeVector.pop_back ();
 		}
 	}
 }
@@ -148,19 +161,32 @@ static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMa
 				globalIntfNodeMap.erase (candidateNodeIt);
 			} else {
                 map<long int,interfNode*>::iterator it;
-				for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-					printf ("Remaining global nodes size: %d\n", (it->second)->getNeighborSize ());
-				}
-				Assert (0 && "No candidate neighbors found.");
+                for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
+                    printf ("Remaining global nodes size: %d\n", (it->second)->getNeighborSize ());
+                    if ((it->second)->getNeighborSize () > neighborCount) {
+                        neighborCount = (it->second)->getNeighborSize ();
+                        candidateNodeIt = it;
+                    }
+                }
+                if (globalIntfNodeMap.size () == 0) {
+                    break;
+                } else if (neighborCount > -1) {
+                    interfNode* node = candidateNodeIt->second;
+                    node->removeFromGraph ();
+                    removedIntfNodeVector.push_back (node);
+                    allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
+                    globalIntfNodeMap.erase (candidateNodeIt);
+                }
 			}
 		}
 
 		// STEP 2: COLOR REGISTERS (REG ASSIGNMENT)
 		set<long int> GRFset;
 		for (int i = GRF_LO; i <= GRF_HI; i++) GRFset.insert (i);
-		for (int i = removedIntfNodeVector.size () - 1; i >= 0; i--) {
-			interfNode *node = removedIntfNodeVector.at (i);
+		while (removedIntfNodeVector.size () > 0) {
+			interfNode *node = removedIntfNodeVector.back ();
 			node->assignReg (GRFset);
+            removedIntfNodeVector.pop_back ();
 		}
 	}
 }

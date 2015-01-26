@@ -7,6 +7,7 @@
 
 #include <list>
 #include <set>
+#include <map>
 #include <vector>
 #include "global.h"
 #include "interfNode.h"
