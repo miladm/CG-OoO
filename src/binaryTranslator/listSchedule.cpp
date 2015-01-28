@@ -25,7 +25,7 @@ int findLongestPath(instruction* ins, basicblock* bb) {
 }
 
 
-/* List scheduling (Fragments only) */
+/* LIST SCHEDULING (FRAGMENTS ONLY) */
 void listSchedule(basicblock* bb) {
 	List<instruction*> *sortList      = new List<instruction*>;
 	List<instruction*> *listSchList   = new List<instruction*>;
@@ -33,21 +33,21 @@ void listSchedule(basicblock* bb) {
 	List<instruction*> *insList       = bb->getInsList();
 	set<ADDR> scheduledIns;
 	bool scheduleIt = false;
-	// Replicate the BB instruction list
+	// REPLICATE THE BB INSTRUCTION LIST
 	for (int i = 0; i < insList->NumElements(); i++) {
 		insList->Nth(i)->resetLongestPath(); //Added to alow Phraesblock listscheduling (not useful for BB-list scheduling)
 		sortList->Append(insList->Nth(i));
 	}
-	// Find the longest path for every instruction in BB
+	// FIND THE LONGEST PATH FOR EVERY INSTRUCTION IN BB
 	for (int i = sortList->NumElements()-1; i >= 0; i--) {
 		int lp = findLongestPath(sortList->Nth(i), bb);
 		sortList->Nth(i)->setLongestPath(lp);
 		// printf("lp for ins %llu: %d\n", sortList->Nth(i)->getInsAddr(), lp);
     }
 	// printf("\n");
-	// Sort instruction list based on critical path length (high to low)
+	// SORT INSTRUCTION LIST BASED ON CRITICAL PATH LENGTH (HIGH TO LOW)
 	quicksortLongestPath(sortList,0,sortList->NumElements()-1);
-	// List schedule instructions based on their data-dependency chains.
+	// LIST SCHEDULE INSTRUCTIONS BASED ON THEIR DATA-DEPENDENCY CHAINS.
 	while (sortList->NumElements() != scheduledIns.size()) {
 		int scheduleCounter = 0;
 	    for (int i = 0; i < sortList->NumElements() && scheduleCounter < NUM_EU; i++) {
@@ -76,7 +76,7 @@ void listSchedule(basicblock* bb) {
 			scheduledIns.insert(toBeSchedList->Nth(i)->getInsAddr());
 		toBeSchedList->RemoveAll();
 	}
-	// Store the list-scheduled list to BB class
+	// STORE THE LIST-SCHEDULED LIST TO BB CLASS
     for (int i = 0; i < listSchList->NumElements(); i++) {
 		bb->addToBB_ListSchedule(listSchList->Nth(i));
 		// printf("lp for ins %llu: %d\n", listSchList->Nth(i)->getInsAddr(), listSchList->Nth(i)->getLongestPath());

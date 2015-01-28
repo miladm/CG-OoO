@@ -277,28 +277,29 @@ void instruction::setWriteVar (int var, int subscript) {
 void instruction::setArchReg (long int r) {
 	if (! ((r <= GRF_HI && r >= GRF_LO) || (r <= LRF_HI && r >= LRF_LO))) printf ("invalid arch register value: %d\n",r);
 	Assert (((r <= GRF_HI && r >= GRF_LO) || (r <= LRF_HI && r >= LRF_LO)) && "Invalid architectural register assignment.");
-	Assert (_r_allocated->NumElements () <= _r->NumElements ());
+	Assert (_r_allocated->NumElements () <= getNumReg ());
 	_r_allocated->Append (r);
 }
 
 long int instruction::getNthArchReg (int indx) {
+	if (indx >= _r_allocated->NumElements ()) cout << getInsAddr () << " " << indx << " " << _r_allocated->NumElements () << " " << _r->NumElements () << endl;
 	Assert (indx < _r_allocated->NumElements () && indx >= 0 && "Out of range architectural register access.");
 	return _r_allocated->Nth (indx);
 }
 
 bool instruction::isAlreadyAssignedArcRegs () {
-	if (_r_allocated->NumElements () == _r->NumElements ()) return true;
+	if (_r_allocated->NumElements () == getNumReg ()) return true;
 	else return false;
 }
 
 void instruction::removeNthRegister (int i) { 
-    Assert (i < _r->NumElements () && i >= 0 && "Invalid index to access instruction registers");
+    Assert (i < getNumReg () && i >= 0 && "Invalid index to access instruction registers");
     _r->RemoveAt (i);
     _rt->RemoveAt (i);
 }
 
 long int instruction::getNthReg (int i) { 
-    Assert (i < _r->NumElements () && i >= 0);
+    Assert (i < getNumReg () && i >= 0);
     return _r->Nth (i);
 }
 
@@ -365,24 +366,29 @@ int instruction::getNumSpecialReg () {
     return _sr->NumElements ();
 }
 
-/* replace each register with its corresponding SSA value */ 
+/* REPLACE EACH REGISTER WITH ITS CORRESPONDING SSA VALUE */ 
 void instruction::makeUniqueRegs () {
-	for (int i = 0; i < _r->NumElements (); i++) {
-		long int reg = _r->Nth (i);
-		int regT = _rt->Nth (i);
+	for (int i = getNumReg () - 1; i >= 0; i--) {
+		long int reg = getNthReg (i);
+		int regT = getNthRegType (i);
 		long int ssa;
 		//printf ("%d,%d,%d,%llx\n",regT,_readVar.find (reg) != _readVar.end (),_writeVar.find (reg) != _writeVar.end (), getInsAddr ());
 		if (regT == READ) {
 			Assert (_readVar.find (reg) != _readVar.end ());
-			ssa = _readVar[reg]*100+reg;
+			ssa = _readVar[reg] * OFFSET_LARGER_THAN_X86_REG_CNT + reg;
 		} else if (regT == WRITE) {
 			Assert (_writeVar.find (reg) != _writeVar.end ());
-			ssa = _writeVar[reg]*100+reg;
+			ssa = _writeVar[reg] * OFFSET_LARGER_THAN_X86_REG_CNT + reg;
 		} else {
 			Assert ( 0 && "Invalid register type.");
 		}
+        if (getInsAddr () == 0x403424)
+            cout << i << " " << reg << " " << ssa << getNthReg (i) << " ";
 		_r->RemoveAt (i);
 		_r->InsertAt (ssa,i);
+        if (getInsAddr () == 0x403424)
+            cout << getNthReg (i) << endl;
+        
 	}
 }
 
@@ -491,25 +497,25 @@ bool instruction::isInsRepeated (instruction* ins, List<instruction*>*_ancestors
 
 void instruction::dependencyTableCheck (dependencyTable *depTables) {
 	//Register true dependency check for all instruction types
-	for (int i = 0; i < _r->NumElements (); i++) {
-		if (_rt->Nth (i) == READ) { //TODO Does this line make sense? (int vs. memType)
-			instruction *ins = depTables->regLookup (_r->Nth (i),REG_WRITE);//RAW
+	for (int i = 0; i < getNumReg (); i++) {
+		if (getNthRegType (i) == READ) { //TODO Does this line make sense? (int vs. memType)
+			instruction *ins = depTables->regLookup (getNthReg (i),REG_WRITE);//RAW
 			if (ins != NULL) {
 				if (isInsRepeated (ins,_ancestors)==false) {
 					ins->setAsDependent (this);
 					setAsAncestor (ins);
 					setAsRegAncestor (ins);
 				}
-//				long int renReg = temp->getRenamedReg (_r->Nth (i)); //TODO no longer necessary in a compiler I think
+//				long int renReg = temp->getRenamedReg (getNthReg (i)); //TODO no longer necessary in a compiler I think
 //				renameReadReg (i,renReg);
 			}
-		// } else if (_rt->Nth (i) == WRITE) {
-		// 	instruction *temp = depTables->regLookup (_r->Nth (i),REG_READ);//WAR
+		// } else if (getNthRegType (i) == WRITE) {
+		// 	instruction *temp = depTables->regLookup (getNthReg (i),REG_READ);//WAR
 		// 	if (temp != NULL && isInsRepeated (temp,_ancestors)==false) {
 		// 		temp->setAsDependent (this);
 		// 		setAsAncestor (temp);
 		// 	}
-		// 	temp = depTables->regLookup (_r->Nth (i),REG_WRITE);//WAW
+		// 	temp = depTables->regLookup (getNthReg (i),REG_WRITE);//WAW
 		// 	if (temp != NULL && isInsRepeated (temp,_ancestors)==false) {
 		// 		temp->setAsDependent (this);
 		// 		setAsAncestor (temp);
@@ -538,12 +544,12 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
 		depTables->addWr (this);
 	}
 	//Update write register table (must be done last to avoid deadlock/wrong dependency)
-	for (int i = 0; i < _r->NumElements (); i++) {
-		if (_rt->Nth (i) == WRITE) {
-			depTables->addReg (i, _r->Nth (i), this, REG_WRITE); //overwrites existing table entry for reg
-		// } else if (coreType == NO_CORE && _rt->Nth (i) == READ) { //TODO register renaming breaks this block of code
-		} else if (_rt->Nth (i) == READ) { //TODO register renaming breaks this block of code
-			depTables->addReg (i, _r->Nth (i), this, REG_READ); //overwrites existing table entry for reg
+	for (int i = 0; i < getNumReg (); i++) {
+		if (getNthRegType (i) == WRITE) {
+			depTables->addReg (i, getNthReg (i), this, REG_WRITE); //overwrites existing table entry for reg
+		// } else if (coreType == NO_CORE && getNthRegType (i) == READ) { //TODO register renaming breaks this block of code
+		} else if (getNthRegType (i) == READ) { //TODO register renaming breaks this block of code
+			depTables->addReg (i, getNthReg (i), this, REG_READ); //overwrites existing table entry for reg
 		}
 	}
 }
@@ -635,13 +641,13 @@ void instruction::renameWriteReg (int indx, long int reg) {
 }
 
 void instruction::renameReadReg (int indx, long int renReg) {
-    Assert (_rt->Nth (indx) == READ);
-    int num1 = _r->NumElements ();
+    Assert (getNthRegType (indx) == READ);
+    int num1 = getNumReg ();
     if (renReg != -1) {
         _r->RemoveAt (indx);
         _r->InsertAt (renReg,indx);
     }
-    int num2 = _r->NumElements ();
+    int num2 = getNumReg ();
     Assert (num1 == num2);
 }
 
@@ -704,6 +710,10 @@ set<long int> instruction::getInSet () {
 
 set<long int> instruction::getDefSet () {
 	return _defSet;
+}
+
+set<long int> instruction::getUseSet () {
+	return _useSet;
 }
 
 set<long int> instruction::getLocalRegSet () {
@@ -829,6 +839,144 @@ bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> 
     return change;
 }
 
+void instruction::setup_locGlbUseSet (set<long int> &bbUseSet) {
+    Assert (_bbUseSet.size () == 0);
+    _bbUseSet = bbUseSet;
+}
+
+void instruction::setup_locGlbDefSet (set<long int> &bbDefSet) {
+    Assert (_bbDefSet.size () == 0);
+    _bbDefSet = bbDefSet;
+}
+
+void instruction::update_locGlbSet (set<long int> &bbOutSet) {
+    set<long int> temp0, temp1, temp2;
+    set<long int> locGlbDefSet, locGlbUseSet, locGlbRegSet;
+
+    /* HANDLE DEF SET */
+    temp0.clear ();
+    temp1.clear ();
+    std::set_intersection (_defSet.begin (), _defSet.end (),
+                           bbOutSet.begin (), bbOutSet.end (),
+                           std::inserter (temp0, temp0.begin ()));
+    std::set_intersection (temp0.begin (), temp0.end (),
+                           _bbUseSet.begin (), _bbUseSet.end (), 
+                           std::inserter (temp1, temp1.begin ()));
+    locGlbDefSet = temp1;
+    for (set<long int>::iterator it = locGlbDefSet.begin (); it != locGlbDefSet.end (); it++) {
+        int reg_type = WRITE;
+        long int reg = (*it);
+        long int new_reg = reg * LARGE_NUMBER;
+        Assert (_localRegSet.find (reg) == _localRegSet.end ());
+        locGlbRegSet.insert (new_reg);
+        _r->Append (new_reg);
+        _rt->Append (reg_type);
+    }
+
+    /* HANDLE USE SET */
+    temp0.clear ();
+    temp1.clear ();
+    std::set_intersection (_useSet.begin (), _useSet.end (),
+                           bbOutSet.begin (), bbOutSet.end (),
+                           std::inserter (temp0, temp0.begin ()));
+    std::set_intersection (temp0.begin (), temp0.end (),
+                           _bbDefSet.begin (), _bbDefSet.end (), 
+                           std::inserter (temp1, temp1.begin ()));
+    locGlbUseSet = temp1;
+    for (set<long int>::iterator it = locGlbUseSet.begin (); it != locGlbUseSet.end (); it++) {
+        bool has_read = false;
+        int removed_reg = 0;
+        int reg_type = READ;
+        long int reg = (*it);
+        long int new_reg = reg * LARGE_NUMBER;
+        locGlbRegSet.insert (new_reg);
+        Assert (_localRegSet.find (reg) == _localRegSet.end ());
+        /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
+        for (int i = getNumReg () - 1; i >= 0; i--) {
+            cout << getNthReg(i) << "(" << getNthRegType (i) << ") ";
+            if (getNthReg (i) == reg && getNthRegType (i) == READ) {
+                removeNthRegister (i);
+                removed_reg++;
+            }
+        }
+        cout << endl << hex << getInsAddr () << dec << " " << reg << " " << new_reg << endl;
+        if (removed_reg == 0) cout << reg << " " << new_reg << endl;
+        Assert (removed_reg > 0);
+        for (int i = 0; i < removed_reg; i++) {
+            _r->Append (new_reg);
+            _rt->Append (reg_type);
+        }
+    }
+
+    /* UPDATE THE LOCAL REGISTER SET */
+    temp2.clear ();
+    std::set_union (locGlbRegSet.begin (), locGlbRegSet.end (),
+                    _localRegSet.begin (), _localRegSet.end (),
+                    std::inserter (temp2, temp2.begin ()));
+    _localRegSet = temp2;
+}
+
+set<long int> instruction::setup_locToGlbUseSet (set<long int> &bbUseSet, set<long int> &bbInSet) {
+    set<long int> temp0, temp1;
+    std::set_intersection (_useSet.begin (), _useSet.end (),
+                           bbUseSet.begin (), bbUseSet.end (), 
+                           std::inserter (temp0, temp0.begin ()));
+    std::set_intersection (temp0.begin (), temp0.end (),
+                           bbInSet.begin (), bbInSet.end (), 
+                           std::inserter (temp1, temp1.begin ()));
+    _insMultiUseSet = temp1;
+    return _insMultiUseSet;
+}
+
+set<long int> instruction::setup_locToGlbDefSet (set<long int> &bbMultiUseSet) {
+    set<long int> temp0;
+    std::set_intersection (bbMultiUseSet.begin (), bbMultiUseSet.end (),
+                           _useSet.begin (), _useSet.end (), 
+                           std::inserter (temp0, temp0.begin ()));
+    _insLocDefSet = temp0;
+    return _insLocDefSet;
+}
+
+void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
+    set<long int>::iterator it;
+
+    for (it = _insMultiUseSet.begin (); it != _insMultiUseSet.end (); it++) {
+        bool has_read = false;
+        int removed_reg = 0;
+        long int reg_type = READ;
+        long int reg = (*it);
+        long int new_reg = reg * LARGE_NUMBER;
+        Assert (_localRegSet.find (reg) == _localRegSet.end ());
+        Assert (bbLocDefSet.find (reg) == bbLocDefSet.end ());
+        /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
+        for (int i = getNumReg () - 1; i >= 0; i--) {
+            if (getNthReg (i) == reg && getNthRegType (i) == READ) {
+                removeNthRegister (i);
+                removed_reg++;
+            }
+        }
+        Assert (removed_reg > 0);
+        for (int i = 0; i < removed_reg; i++) {
+            _r->Append (new_reg);
+            _rt->Append (reg_type);
+        }
+        _localRegSet.insert (new_reg);
+        _r->Append (new_reg);
+        _rt->Append (reg_type);
+    }
+
+    for (it = _insLocDefSet.begin (); it != _insLocDefSet.end (); it++) {
+        long int reg_type = WRITE;
+        long int reg = (*it);
+        long int new_reg = reg * LARGE_NUMBER;
+        Assert (_localRegSet.find (reg) == _localRegSet.end ());
+
+        _localRegSet.insert (new_reg);
+        _r->Append (new_reg);
+        _rt->Append (reg_type);
+    }
+}
+
 /* CONSTRUCT DEF/USE SETS FROM X86 FORMAT OF REGISTERS */
 void instruction::setupDefUseSets () {
     for  (int j = 0; j < getNumReg (); j++) {
@@ -852,6 +1000,7 @@ void instruction::renameAllInsRegs () {
     //printf ("ins %llx\n",ins->getInsAddr ());
     for  (int j = 0; j < getNumReg (); j++) {
         long int reg = getNthReg (j);
+        if (getInsAddr () == 0x400470) cout << reg << " ";
         if  (getNthRegType (j) == READ) {
             //second condition avoids ud-chains within a BB from propagating
             updateUseSet (reg);
@@ -861,6 +1010,10 @@ void instruction::renameAllInsRegs () {
             Assert (0 && "Invalid register type");
         }
     }
+    if (getInsAddr () == 0x400470) 
+        cout << endl;
+    if (getInsAddr () == 0x403424) 
+        cout << "YEEEEES" << endl;
 }
 
 void instruction::setUPLDins () {

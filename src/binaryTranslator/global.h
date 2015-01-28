@@ -22,6 +22,8 @@ typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;
 #define INS_STRING_SIZE 330
 #define REG_STRING_SIZE 20
 #define OPCODE_STRING_SIZE 30
+#define LARGE_NUMBER 1000000000
+#define OFFSET_LARGER_THAN_X86_REG_CNT 100
 //Found using: awk ' { if ( length > x ) { x = length } }END{ print x }' x86_opcode.txt
 
 //PROFILING
@@ -58,7 +60,7 @@ typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;
 #define NUM_EU 4
 
 //RESGITER ALLOCATION
-#define LRF_SIZE 17
+#define LRF_SIZE 20
 #define GRF_SIZE 70
 #define SGRF_SIZE NUM_SPECIAL_REGISTERS
 

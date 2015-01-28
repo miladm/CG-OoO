@@ -832,10 +832,12 @@ bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {
         int ins_list_size = _insList->NumElements ();
 	    set<long int> bbDefSet, temp;
         for  (int i =  0; i < ins_list_size; i++) {
+            temp.clear ();
             instruction* ins = _insList->Nth (i);
             bool isLastInsInBB = (i == (ins_list_size - 1)) ? true : false;
             bool is_intra_bb_change = ins->update_InOutSet (reg_alloc_mode, bbDefSet, isLastInsInBB);
             if (is_intra_bb_change) intra_bb_change = true;
+            /* COMPUTE BB DEF SET SO FAR */
             set<long int> defSet = ins->getDefSet ();
 	        std::set_union (defSet.begin (), defSet.end (), 
                             bbDefSet.begin (), bbDefSet.end (), 
@@ -856,6 +858,100 @@ bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {
 		inter_bb_change = false;
     }
 	return inter_bb_change;
+}
+
+void basicblock::update_locGlbSet () {
+    set<long int> bbDefSet, bbUseSet, temp0;
+    int ins_list_size = _insList->NumElements ();
+
+    /* SETUP BBDEFSET FOR EACH INSTRUCTION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        temp0.clear ();
+        instruction* ins = _insList->Nth (i);
+        ins->setup_locGlbDefSet (bbDefSet);
+        set<long int> defSet = ins->getDefSet ();
+        std::set_union (defSet.begin (), defSet.end (),
+                        bbDefSet.begin (), bbDefSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbDefSet = temp0;
+    }
+
+    /* SETUP BBUSESET FOR EACH INSTRUCTION */
+    for  (int i = ins_list_size - 1; i >= 0; i--) {
+        temp0.clear ();
+        instruction* ins = _insList->Nth (i);
+        ins->setup_locGlbUseSet (bbUseSet);
+        set<long int> useSet = ins->getUseSet ();
+        std::set_union (useSet.begin (), useSet.end (), 
+                        bbUseSet.begin (), bbUseSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbUseSet = temp0;
+    }
+
+    /* UPDATE THE LOCALREGSET OF EACH INSTRUCTIONS BASED ON LOCGGLB INFORMATION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        ins->update_locGlbSet (_outSet);
+    }
+}
+
+int basicblock::update_locToGlb () {
+    set<long int> bbUseSet, bbMultiUseSet, temp0;
+    int ins_list_size = _insList->NumElements ();
+    int counter = 0;
+
+    /* SETUP BBUSESET FOR EACH INSTRUCTION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        set<long int> insMultiUseSet = ins->setup_locToGlbUseSet (bbUseSet, _inSet);
+        counter += insMultiUseSet.size ();
+
+        /* SETUP BBMULTIUSESET */
+        std::set_union (insMultiUseSet.begin (), insMultiUseSet.end (),
+                        bbMultiUseSet.begin (), bbMultiUseSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbMultiUseSet = temp0;
+        temp0.clear ();
+
+        /* SETUP BBUSESET */
+        set<long int> useSet = ins->getUseSet ();
+        std::set_union (useSet.begin (), useSet.end (),
+                        bbUseSet.begin (), bbUseSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbUseSet = temp0;
+        temp0.clear ();
+    }
+
+    /* SETUP BBDEFSET FOR EACH INSTRUCTION */
+    temp0.clear ();
+    set<long int> bbLocDefSet;
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        set<long int> insUseSet = ins->getUseSet ();
+        set<long int> insLocDefSet = ins->setup_locToGlbDefSet (bbMultiUseSet);
+
+        /* SETUP BBMULTIUSESET */
+        std::set_difference (bbMultiUseSet.begin (), bbMultiUseSet.end (),
+                              insUseSet.begin (), insUseSet.end (), 
+                              std::inserter (temp0, temp0.begin ()));
+        bbMultiUseSet = temp0;
+        temp0.clear ();
+
+        /* SETUP BBUSESET */
+        std::set_union (insLocDefSet.begin (), insLocDefSet.end (),
+                        bbLocDefSet.begin (), bbLocDefSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbLocDefSet = temp0;
+        temp0.clear ();
+    }
+
+    /* RENAME REGISTERS TO CREATE THE GLOBAL TO LOCAL ALLOCATION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        ins->update_locToGlbSet (bbLocDefSet);
+    }
+
+    return counter;
 }
 
 void basicblock::brDependencyTableCheck () {
@@ -901,7 +997,7 @@ void basicblock::setupDefUseSets () {
 void basicblock::renameAllInsRegs () {
 	_defSet.clear ();
 	_useSet.clear ();
-	for  (int i =0 ; i < _insList->NumElements (); i++) {
+	for  (int i = 0; i < _insList->NumElements (); i++) {
 		instruction* ins = _insList->Nth (i);
         ins->renameAllInsRegs ();
 		for  (int j = 0; j < ins->getNumReg (); j++) {

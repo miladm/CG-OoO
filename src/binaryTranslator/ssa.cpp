@@ -117,26 +117,30 @@ void search (basicblock* bb, map<int,variable*> &varList) {
     /* ASSIGN SSA REGISTERS TO REGULAR INSTRUCTIONS */
     for (int i = 0; i < insList->NumElements (); i++) {
         instruction *ins = insList->Nth (i);
-        for (int j = 0; j < ins->getNumReadReg (); j++) {
-            int var = ins->getNthReadReg (j);
-            Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
-            int v1 = varList[var]->_hackPushCount;
-            int subscript = varList[var]->getTopStack ();
-            if (varList[var]->_hackPushCount - v1 == 1) {
-                if (hackPushes.find (var) == hackPushes.end ()) 
-                    hackPushes.insert(pair<int, int> (var, 1));
-                else 
-                    hackPushes[var]++;
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == READ) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
+                int v1 = varList[var]->_hackPushCount;
+                int subscript = varList[var]->getTopStack ();
+                if (varList[var]->_hackPushCount - v1 == 1) {
+                    if (hackPushes.find (var) == hackPushes.end ()) 
+                        hackPushes.insert(pair<int, int> (var, 1));
+                    else 
+                        hackPushes[var]++;
+                }
+                ins->setReadVar (var, subscript);
             }
-            ins->setReadVar (var, subscript);
         }
-        for (int j = 0; j < ins->getNumWriteReg (); j++) {
-            int var = ins->getNthWriteReg (j);
-            Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
-            int k = varList[var]->getC ();
-            ins->setWriteVar (var, k);
-            varList[var]->pushToStack (k);
-            varList[var]->setC (k + 1);
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
+                int k = varList[var]->getC ();
+                ins->setWriteVar (var, k);
+                varList[var]->pushToStack (k);
+                varList[var]->setC (k + 1);
+            }
         }
     }
 
@@ -176,18 +180,22 @@ void search (basicblock* bb, map<int,variable*> &varList) {
     /* CLEAN THE STACKES THAT HAD A DEFINITION DONE BY this BB */
     for (int i = 0; i < insList->NumElements (); i++) {
         instruction *ins = insList->Nth (i);
-        for (int j = 0; j < ins->getNumWriteReg (); j++) {
-            int var = ins->getNthOldWriteReg (j);
-            Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
-            varList[var]->popFromStack ();
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value");
+                varList[var]->popFromStack ();
+            }
         }
         /* THIS IS ANOTHER PART OF THE STACK HACK */
-        for (int j = 0; j < ins->getNumReadReg (); j++) {
-            int var = ins->getNthReadReg (j);
-            Assert (varList.find (var) != varList.end ());
-            if (hackPushes.find (var) != hackPushes.end ()) {
-                varList[var]->popHackPushes (hackPushes[var]);
-                hackPushes.erase (var);
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == READ) {
+                int var = ins->getNthReg (j);
+                Assert (varList.find (var) != varList.end ());
+                if (hackPushes.find (var) != hackPushes.end ()) {
+                    varList[var]->popHackPushes (hackPushes[var]);
+                    hackPushes.erase (var);
+                }
             }
         }
     }

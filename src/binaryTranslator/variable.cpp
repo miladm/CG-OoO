@@ -33,11 +33,13 @@ int variable::getNumAssignedBB() {
 }
 
 int variable::getC() {
+    Assert (_c < LARGE_NUMBER && "SSA register conflict happens if larger than LARGE_NUMBER - consider increasing this number");
 	return _c;
 }
 
 void variable::setC(int c) {
 	Assert(c >= 0 && "Invalid c value inserted.");
+    Assert (_c < LARGE_NUMBER && "SSA register conflict happens if larger than LARGE_NUMBER - consider increasing this number");
 	_c = c;
 }
 

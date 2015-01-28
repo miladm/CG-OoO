@@ -135,17 +135,25 @@ class instruction {
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
 		void updateLocalRegSet ();
+
     public:
+        void setup_locGlbUseSet (set<long int>&);
+        void setup_locGlbDefSet (set<long int>&);
+        void update_locGlbSet (set<long int>&);
+        set<long int> setup_locToGlbUseSet (set<long int>&, set<long int>&);
+        set<long int> setup_locToGlbDefSet (set<long int>&);
+        void update_locToGlbSet (set<long int>&);
 		bool update_InOutSet (REG_ALLOC_MODE, set<long int>&, bool);
+        set<long int> update_locToGlb (set<long int>&, set<long int>&);
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();
 		set<long int> getOutSet ();
+		set<long int> getUseSet ();
 		set<long int> getDefSet ();
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
 		int getLiveVarSize () { return _inSet.size ()+_defSet.size (); }
-
 
 	private:
 		char _opCode[OPCODE_STRING_SIZE];
@@ -208,6 +216,10 @@ class instruction {
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
+		std::set<long int> _bbUseSet;
+		std::set<long int> _bbDefSet;
+		std::set<long int> _insLocDefSet;
+		std::set<long int> _insMultiUseSet;
 };
 
 #endif

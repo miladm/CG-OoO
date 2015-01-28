@@ -3,7 +3,6 @@
  ******************************************************************************/
 
 #include "make_basicblock.h"
-#include "listSchedule.h"
 
 
 void make_basicblock  (List<instruction*> *insList,

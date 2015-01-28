@@ -96,9 +96,9 @@ cpu:
                e_wire: 1.045157e-1
                w_wire: 64
            lrf:
-               rf_size: 17
+               rf_size: 20
                rf_lo: 100
-               rf_hi: 116
+               rf_hi: 119
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: LRF
@@ -108,16 +108,16 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
-               segmnt_cnt: 1 # Specify the number of GRF segments (1 is a unified GRF)
-               a_size: 80
-               a_lo: 117
-               a_hi: 196
-               r_size: 1600 # RENAME REGS
-               r_lo: 197
-               r_hi: 1796
-               p_size: 1680
+               segmnt_cnt: 16 # Specify the number of GRF segments (1 is a unified GRF)
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 166 # RENAME REGS
+               r_lo: 210
+               r_hi: 375
+               p_size: 256
                p_lo: 1
-               p_hi: 1680
+               p_hi: 256
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
@@ -182,10 +182,10 @@ cpu:
 
        table: 
             QUE:
-                size: 3000
+                size: 2000
                 count: 1
-                rd_wire_cnt: 3000
-                wr_wire_cnt: 3000
+                rd_wire_cnt: 2000
+                wr_wire_cnt: 2000
                 e_cam: 0
                 e_ram: 0
                 e_wire: 0
@@ -263,7 +263,7 @@ cpu:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 16
                 runahead_issue_en: 1
-                runahead_issue_cnt: 2
+                runahead_issue_cnt: 4
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
@@ -330,8 +330,8 @@ cpu:
 
        eu:
            alu:
-               count: 32
-               count_per_blk: 2
+               count: 16
+               count_per_blk: 4
                latency: 1
                e_eu: 1.040
            fpu:

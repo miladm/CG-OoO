@@ -140,7 +140,7 @@ class basicblock {
 		// PHRASE
 		void basicblockToPhrase ();
 		
-		// List-Scheduling Functions
+		// LIST-SCHEDULING FUNCTIONS
 		void addToBB_ListSchedule (instruction* ins);
 		List<instruction*>* getInsList_ListSchedule ();
 
@@ -161,16 +161,18 @@ class basicblock {
 		void updateUseSet (long int reg);
     public:
 		bool update_InOutSet (REG_ALLOC_MODE);
+        void update_locGlbSet ();
+        int update_locToGlb ();
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();
 		set<long int> getDefSet ();
+
+        // LOCAL REGISTERS
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
 		void updateLocalRegSet ();
-		int getLiveVarSize () {
-			return _inSet.size ()+_defSet.size ();
-		}
+		int getLiveVarSize () { return _inSet.size () + _defSet.size (); }
 
     private:
         int _sub_blk_id;
@@ -213,6 +215,7 @@ class basicblock {
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
+		std::set<long int> _bbLocGlbRegSet;
 
         block_stats _stats;
 };

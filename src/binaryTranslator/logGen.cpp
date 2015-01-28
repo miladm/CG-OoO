@@ -25,7 +25,7 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
     string out_file_path = out_dir + cluster_mode_s + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + (*program_name) + "_" + cluster_size_s + "_bbSiz_obj.s";
 	if ((outFile  = fopen (out_file_path.c_str (), "w")) == NULL) 
 		Assert ("Unable to open the output file.");
-    cout << "OUTPUT .s FILE: " << out_file_path << endl;
+    cout << "\t\tOUTPUT .s FILE: " << out_file_path << endl;
 
 	for (int i =  0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);

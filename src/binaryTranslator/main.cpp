@@ -29,9 +29,14 @@
 #include "ssa.h"
 #include "dot.h"
 
+void init () {
+    Assert (OFFSET_LARGER_THAN_X86_REG_CNT > X86_REG_HI);
+}
+
 void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {
 	/* STAT Generation Functions */
 	// printf ("FILE NAME: %s\n", (*program_name).c_str ());
+	printf ("\tGenerate Stat\n");
 	StatBBSizeStat (bbList, program_name);
 	StatNum_interBB_and_intra_BB_regs (bbList, program_name);
 	/* ------------------------- */
@@ -39,10 +44,12 @@ void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string
 		// printf ("BB Size: %d\n", bbList->Nth (i)->getBbSize ());
 		//bbList->Nth (i)->printBb ();
 	}
+	printf ("\tMake .dot Files\n");
 	dot cfg (0, program_name);
 	cfg.runDot (bbList);
 	dot cfg_phrase (1, program_name);
 	cfg_phrase.runDot (phBBList);
+	printf ("\tMake .s File\n");
 	writeToFile (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
 	// writeToFile (pbList, program_name, sch_mode, reg_alloc_mode);
 }
@@ -95,7 +102,7 @@ int main (int argc, char* argv[])
 //    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
 
 	printf ("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name.c_str ());
-	//init (argc, argv);
+	init ();
 	printf ("- Configure Program -\n");
 	parse_config_file ();
 

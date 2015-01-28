@@ -100,7 +100,7 @@ void parse_instruction (List<instruction*> *insList,
 
 	/* PARSE BRANCH BIAS NUMBERS */
     if (input_brBias != NULL) {
-        printf ("\tRead branch BIAS profile file");
+        printf ("\tRead branch BIAS profile file\n");
         while (1) {
             ADDR addr;
             double bias;

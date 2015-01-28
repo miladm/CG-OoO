@@ -4,6 +4,19 @@
 
 #include "registerAllocate.h"
 
+map<ADDR, basicblock*> validBBs;
+
+/*--
+ * SOME BASICBLOCKS HAVE BEEN ELIMINTED FROM THIS LIST, BUT ARE STILL PART OF
+ * THE CONTROL FLOW - THIS IS A WAY TO FILTER THEM OUT.
+ --*/
+static void setupValidBBs (List<basicblock*> *bbList) {
+	for (int i = 0; i < bbList->NumElements (); i++) {
+		ADDR bbID = bbList->Nth (i)->getID ();
+        basicblock* bb = bbList->Nth (i);
+        validBBs.insert (pair<ADDR, basicblock*> (bbID, bb));
+	}
+}
 
 /* CAUTION: 
  * AFTER PHI-FUNCTION ELIMINATION YOU MUST NEVER POKE INTO THE END OF A BB
@@ -12,7 +25,7 @@
 static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {
 	int numInsInsertion = 0;
     ADDR phiAddrOffset = 0;
-	for (int i =0 ; i < bbList->NumElements (); i++) {
+	for (int i = 0; i < bbList->NumElements (); i++) {
 		numInsInsertion += bbList->Nth (i)->elimPhiFuncs (phiAddrOffset, insAddrMap);
 	}
 	return numInsInsertion;
@@ -22,7 +35,7 @@ static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> 
  * ELIMINATE PHI-FUNCTIONS
  */
 static void renameAndbuildDefUseSets (List<basicblock*> *bbList) {
-	for (int i =0 ; i < bbList->NumElements (); i++)
+	for (int i = 0; i < bbList->NumElements (); i++)
 		bbList->Nth (i)->renameAllInsRegs ();
 }
 
@@ -47,6 +60,25 @@ static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_allo
 		}
 	}
 
+    /* LOCAL-GLOBAL REGISTER ALLOCATION SUPPORT */
+    if (reg_alloc_mode == LOCAL_GLOBAL) {
+        for (int i = 0; i < bbList->NumElements (); i++) {	
+            basicblock* bb = bbList->Nth (i);
+            bb->update_locGlbSet ();
+        }
+    }
+
+    /* LOCAL-GLOBAL REGISTER ALLOCATION SUPPORT */
+    long int var = 0;
+    if (reg_alloc_mode == LOCAL_GLOBAL) {
+        for (int i = 0; i < bbList->NumElements (); i++) {	
+            basicblock* bb = bbList->Nth (i);
+            var += bb->update_locToGlb ();
+        }
+    }
+    cout << "NUMBER OF GLB->LOC: " << var << endl;
+
+
 	// CREATE LOCAL SETS FOR IMPLEMENTING LRF REG. ALLCOATION
 //    if (reg_alloc_mode == LOCAL_GLOBAL) { TODO this should be fully removed.
 //        for (int i = 0; i < bbList->NumElements (); i++)
@@ -54,18 +86,18 @@ static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_allo
 //    }
 }
 
-static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, 
+static void assign_local_registers (map<long int,interfNode*> &localIntfNodeMap, 
                              map<long int,interfNode*> &allIntfNodeMap) {
-	if (locallIntfNodeMap.size () == 0) return;
-	if (locallIntfNodeMap.size () > 0) {
+	if (localIntfNodeMap.size () == 0) return;
+	if (localIntfNodeMap.size () > 0) {
 		vector<interfNode*> removedIntfNodeVector;
 
 		// STEP 1: ELIMINATE RESGISTERS FROM INTERFERENCE GRAPH
-		while (locallIntfNodeMap.size () > 0) {
+		while (localIntfNodeMap.size () > 0) {
 			int neighborCount = -1;
 			map<long int,interfNode*>::iterator candidateNodeIt;
             map<long int,interfNode*>::iterator it;
-			for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+			for (it = localIntfNodeMap.begin (); it != localIntfNodeMap.end (); it++) {
 				// Remove redundant map elements
 				// if ((it->second)->getNeighborSize () == 0) {
 				// 	allIntfNodeMap.insert (pair<long int,interfNode*> (it->first,it->second));
@@ -79,7 +111,7 @@ static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap
 				}
 			}
 
-			if (locallIntfNodeMap.size () == 0) {
+			if (localIntfNodeMap.size () == 0) {
 				break;
 			} else if (neighborCount > -1) {
 				interfNode* node = candidateNodeIt->second;
@@ -89,24 +121,24 @@ static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap
 //                printf ("adding to ALL: %d\n", candidateNodeIt->first);
 //				#endif
 				allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
-				locallIntfNodeMap.erase (candidateNodeIt);
+				localIntfNodeMap.erase (candidateNodeIt);
 			} else {
                 map<long int,interfNode*>::iterator it;
-                for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+                for (it = localIntfNodeMap.begin (); it != localIntfNodeMap.end (); it++) {
                     printf ("Remaining local nodes size: %d\n", (it->second)->getNeighborSize ());
                     if ((it->second)->getNeighborSize () > neighborCount) {
                         neighborCount = (it->second)->getNeighborSize ();
                         candidateNodeIt = it;
                     }
                 }
-                if (locallIntfNodeMap.size () == 0) {
+                if (localIntfNodeMap.size () == 0) {
                     break;
                 } else if (neighborCount > -1) {
                     interfNode* node = candidateNodeIt->second;
                     node->removeFromGraph ();
                     removedIntfNodeVector.push_back (node);
                     allIntfNodeMap.insert (pair<long int,interfNode*> (candidateNodeIt->first,candidateNodeIt->second));
-                    locallIntfNodeMap.erase (candidateNodeIt);
+                    localIntfNodeMap.erase (candidateNodeIt);
                 }
 			}
 		}
@@ -122,10 +154,10 @@ static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap
 	}
 }
 
-static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, 
+static void assign_global_registers (map<long int,interfNode*> &localIntfNodeMap, 
                               map<long int,interfNode*> &globalIntfNodeMap, 
                               map<long int,interfNode*> &allIntfNodeMap) {
-	if (globalIntfNodeMap.size () == 0 && locallIntfNodeMap.size () == 0) return;
+	if (globalIntfNodeMap.size () == 0 && localIntfNodeMap.size () == 0) return;
 	if (globalIntfNodeMap.size () > 0) {
 		vector<interfNode*> removedIntfNodeVector;
 
@@ -192,7 +224,7 @@ static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMa
 }
 
 static int liveGlbMaxSize = 0, liveLclMaxSize = 0;
-static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
+static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &localIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
     if (!bb->isVisited ()) {
         bb->setAsVisited ();
         List<instruction*>* insList = bb->getInsList ();
@@ -272,18 +304,18 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
                 if (liveLclMaxSize < localSet.size ()) liveLclMaxSize = liveSet.size ();
                 Assert (localSet.size () <= LRF_SIZE && "Local register allocation spilling in not supported");
                 for (set<long int>::iterator it = localSet.begin (); it != localSet.end (); it++) {
-                    if (locallIntfNodeMap.find (*it) == locallIntfNodeMap.end ()) {
+                    if (localIntfNodeMap.find (*it) == localIntfNodeMap.end ()) {
                         interfNode *IntfNd = new interfNode (*it);
-                        locallIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
+                        localIntfNodeMap.insert (pair<long int,interfNode*> (*it,IntfNd));
                     }
-                    interfNode *defNode = locallIntfNodeMap[*it];
+                    interfNode *defNode = localIntfNodeMap[*it];
                     for (set<long int>::iterator it_live = localSet.begin (); it_live != localSet.end (); it_live++) {
                         if (*it != *it_live) { /* AVOID EDGES TO SELF */
-                            if (locallIntfNodeMap.find (*it_live) == locallIntfNodeMap.end ()) {
+                            if (localIntfNodeMap.find (*it_live) == localIntfNodeMap.end ()) {
                                 interfNode *IntfNd = new interfNode (*it_live);
-                                locallIntfNodeMap.insert (pair<long int,interfNode*> (*it_live,IntfNd));
+                                localIntfNodeMap.insert (pair<long int,interfNode*> (*it_live,IntfNd));
                             }
-                            interfNode *node = locallIntfNodeMap[*it_live];
+                            interfNode *node = localIntfNodeMap[*it_live];
                             defNode->addEdge (node);
                         }
                     }
@@ -319,12 +351,12 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
         if (reg_alloc_mode == LOCAL_GLOBAL) {
             /* CHECK FOR CONFLICTS IN THE TWO INTEREFERENCE NETWORKS */
             map<long int,interfNode*>::iterator it;
-            for (it = locallIntfNodeMap.begin (); it != locallIntfNodeMap.end (); it++) {
+            for (it = localIntfNodeMap.begin (); it != localIntfNodeMap.end (); it++) {
                 if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
                     printf ("\t\tERROR: register conflict between local & global interference networks %d\n", it->first);
             }
             for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
-                if (locallIntfNodeMap.find (it->first) != locallIntfNodeMap.end ())
+                if (localIntfNodeMap.find (it->first) != localIntfNodeMap.end ())
                     printf ("\t\tERROR: register conflict between global & local interference networks %d\n", it->first);
             }
 
@@ -332,45 +364,55 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
              * DO REGISTER ALLOCATION FOR LOCAL REGISTERRS THIS MUST BE DONE HERE
              * TO AVOID EDGES BETWEEN LOCAL REGISTERS OF DIFFERNT BBs 
              */ 
-            assign_local_registers (locallIntfNodeMap,allIntfNodeMap);
-            locallIntfNodeMap.clear ();
+            assign_local_registers (localIntfNodeMap,allIntfNodeMap);
+            localIntfNodeMap.clear ();
         }
 
         /* CHECK DESCENDENTS AND ANCESTORS */
         for (int i = 0; i < bb->getNumDescendents (); i++)
-            make_interference_nodes_network (bb->getNthDescendent (i), globalIntfNodeMap, locallIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
+            make_interference_nodes_network (bb->getNthDescendent (i), globalIntfNodeMap, localIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
         for (int i = 0; i < bb->getNumAncestors (); i++)
-            make_interference_nodes_network (bb->getNthAncestor (i), globalIntfNodeMap, locallIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
+            make_interference_nodes_network (bb->getNthAncestor (i), globalIntfNodeMap, localIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
     }
 }
 
-static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap) {
+long int localRegCnt = 0, globalRegCnt = 0;
+void collectRegStat (long int reg) {
+    if (reg >= LRF_LO && reg <= LRF_HI) localRegCnt++;
+    else if (reg >= GRF_LO && reg <= GRF_HI) globalRegCnt++;
+    else Assert (0 && "Broken register allocation");
+}
+
+int num_bb_not_reg_allocated = 0;
+static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &allIntfNodeMap) {
     if (!bb->isRegAllocated ()) {
-        // printf ("3 map size: %d\n", globalIntfNodeMap.size ());
-        List<instruction*>* insList = bb->getInsList ();
-        for (int i = 0; i <  insList->NumElements (); i++) {
-            instruction* ins = insList->Nth (i);
-            bool isAlreadyAssigned = false;
-            for (int j = 0; j < ins->getNumReg (); j++) {
-                // printf (" (%llx) reg type: %d, %d, ", bb->getID (), ins->getNthRegType (j), ins->getNthReg (j));
-                isAlreadyAssigned = ins->isAlreadyAssignedArcRegs ();
-                if (isAlreadyAssigned) break;
-                if (globalIntfNodeMap.find (ins->getNthReg (j)) == globalIntfNodeMap.end ()) break; //TODO replace this with next line
-                // Assert (globalIntfNodeMap.find (ins->getNthReg (j)) != globalIntfNodeMap.end ());
-                long int reg = ((globalIntfNodeMap.find (ins->getNthReg (j)))->second)->getReg ();
-                // printf ("arch reg: %d\n", reg);
-                ins->setArchReg (reg);
-                //assign reg to proper instruction obj. if already assigned, break out of bb
-                //at dump time make sure no reg is left unassigned
+        // printf ("3 map size: %d\n", allIntfNodeMap.size ());
+        if (validBBs.find (bb->getID ()) != validBBs.end ()) {
+            List<instruction*>* insList = bb->getInsList ();
+            for (int i = 0; i <  insList->NumElements (); i++) {
+                instruction* ins = insList->Nth (i);
+                for (int j = 0; j < ins->getNumReg (); j++) {
+                    // printf (" (%llx) reg type: %d, %d, ", bb->getID (), ins->getNthRegType (j), ins->getNthReg (j));
+//                    if (isAlreadyAssigned) break;
+                    if (allIntfNodeMap.find (ins->getNthReg (j)) == allIntfNodeMap.end ()) 
+                        cout << hex << ins->getInsAddr () << " " << dec << ins->getNthReg(j) << endl;
+                    Assert (allIntfNodeMap.find (ins->getNthReg (j)) != allIntfNodeMap.end ());
+                    long int reg = ((allIntfNodeMap.find (ins->getNthReg (j)))->second)->getReg ();
+                    // printf ("arch reg: %d\n", reg);
+                    collectRegStat (reg);
+                    ins->setArchReg (reg);
+                    //assign reg to proper instruction obj. if already assigned, break out of bb
+                    //at dump time make sure no reg is left unassigned
+                }
+                Assert (ins->isAlreadyAssignedArcRegs ());
             }
-            if (isAlreadyAssigned) return; //skip bb
-        }
-//        bb->globalToLocalXform ();
+            //        bb->globalToLocalXform ();
+        } else { num_bb_not_reg_allocated++; }
         bb->setRegAllocated ();
         for (int i = 0; i < bb->getNumDescendents (); i++)
-            set_arch_reg_for_all_ins (bb->getNthDescendent (i), globalIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
+            set_arch_reg_for_all_ins (bb->getNthDescendent (i), allIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
         for (int i = 0; i < bb->getNumAncestors (); i++)
-            set_arch_reg_for_all_ins (bb->getNthAncestor (i), globalIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
+            set_arch_reg_for_all_ins (bb->getNthAncestor (i), allIntfNodeMap);//TODO should it not be a BFS instead of DFS? 
     }
 }
 
@@ -380,7 +422,9 @@ void allocate_register (List<basicblock*> *bbList,
                         REG_ALLOC_MODE reg_alloc_mode,
                         SCH_MODE sch_mode) {
 	List<basicblock*> *interiorBB = new List<basicblock*>;
-	map<long int,interfNode*> locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
+	map<long int,interfNode*> localIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
+
+    setupValidBBs (bbList);
 
 	printf ("\tPhi-Function Elimination\n");
 	int numInsInsertion = eliminatePhiFuncs (bbList, insAddrMap);
@@ -413,13 +457,14 @@ void allocate_register (List<basicblock*> *bbList,
 	printf ("\tBuild Interference Graph & Run Register Assignment\n");
 	for (int i = 0; i < interiorBB->NumElements (); i++) {
 		basicblock* bbHead = interiorBB->Nth (i);
-		locallIntfNodeMap.clear ();
+		localIntfNodeMap.clear ();
 		globalIntfNodeMap.clear ();
 		allIntfNodeMap.clear ();
-		make_interference_nodes_network (bbHead, globalIntfNodeMap, locallIntfNodeMap,allIntfNodeMap, reg_alloc_mode);
-		assign_global_registers (locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap);
+		make_interference_nodes_network (bbHead, globalIntfNodeMap, localIntfNodeMap,allIntfNodeMap, reg_alloc_mode);
+		assign_global_registers (localIntfNodeMap, globalIntfNodeMap, allIntfNodeMap);
 		set_arch_reg_for_all_ins (bbHead, allIntfNodeMap);
 	}
+    printf ("\tNumber of BB NOT register allocated: %d\n", num_bb_not_reg_allocated);
 
 	for (int i = 0; i < bbList->NumElements (); i++) {	
 		basicblock* bb = bbList->Nth (i);
@@ -429,6 +474,7 @@ void allocate_register (List<basicblock*> *bbList,
 
 	printf ("\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n", numInsInsertion, insList->NumElements ());
 	printf ("\tMAX number of global/local live variables: %d / %d\n", liveGlbMaxSize, liveLclMaxSize);
+	printf ("\tLocal Registers Allocated: %d | Global Registers Allocated: %d\n", localRegCnt, globalRegCnt);
 
 	delete interiorBB;
 }

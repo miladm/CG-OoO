@@ -77,7 +77,7 @@ void dependencySetup (List<basicblock*>* bbList, List<instruction*>* insList) {
     /* ANNOTATION OF UPLD OPERATIONS */
 	printf ("\tAnnotate UPLD's\n");
 	upld_annotation (insList);
-	printf ("- Make Sub-Blocks -\n");
+//	printf ("- Make Sub-Blocks -\n");
 //    make_subblocks (bbList);
 
     /* DEPENDENCY TABLE SETUP */
