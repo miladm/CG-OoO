@@ -871,6 +871,7 @@ void instruction::update_locGlbSet (set<long int> &bbOutSet) {
         locGlbRegSet.insert (new_reg);
         _r->Append (new_reg);
         _rt->Append (reg_type);
+        cout << endl << hex << getInsAddr () << dec << " " << reg << " " << new_reg << endl;
     }
 
     /* HANDLE USE SET */
@@ -918,6 +919,8 @@ void instruction::update_locGlbSet (set<long int> &bbOutSet) {
 
 set<long int> instruction::setup_locToGlbUseSet (set<long int> &bbUseSet, set<long int> &bbInSet) {
     set<long int> temp0, temp1;
+    temp0.clear ();
+    temp1.clear ();
     std::set_intersection (_useSet.begin (), _useSet.end (),
                            bbUseSet.begin (), bbUseSet.end (), 
                            std::inserter (temp0, temp0.begin ()));
@@ -947,7 +950,8 @@ void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
         long int reg = (*it);
         long int new_reg = reg * LARGE_NUMBER;
         Assert (_localRegSet.find (reg) == _localRegSet.end ());
-        Assert (bbLocDefSet.find (reg) == bbLocDefSet.end ());
+//        Assert (_localRegSet.find (new_reg) == _localRegSet.end ());
+        Assert (bbLocDefSet.find (reg) != bbLocDefSet.end ());
         /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
         for (int i = getNumReg () - 1; i >= 0; i--) {
             if (getNthReg (i) == reg && getNthRegType (i) == READ) {
@@ -955,14 +959,12 @@ void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
                 removed_reg++;
             }
         }
-        Assert (removed_reg > 0);
+//        Assert (removed_reg > 0);
         for (int i = 0; i < removed_reg; i++) {
             _r->Append (new_reg);
             _rt->Append (reg_type);
         }
         _localRegSet.insert (new_reg);
-        _r->Append (new_reg);
-        _rt->Append (reg_type);
     }
 
     for (it = _insLocDefSet.begin (); it != _insLocDefSet.end (); it++) {
@@ -970,7 +972,7 @@ void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
         long int reg = (*it);
         long int new_reg = reg * LARGE_NUMBER;
         Assert (_localRegSet.find (reg) == _localRegSet.end ());
-
+//        Assert (_localRegSet.find (new_reg) == _localRegSet.end ());
         _localRegSet.insert (new_reg);
         _r->Append (new_reg);
         _rt->Append (reg_type);
