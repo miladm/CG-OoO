@@ -28,6 +28,8 @@ static ScalarStat& s_pin_sig_recover_cnt (g_stats.newScalarStat ("pars", "pin_si
 static ScalarStat& s_pin_flush_cnt (g_stats.newScalarStat ("pars", "pin_flush_cnt", "Number of Pintool code cache flush events", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_trace_cnt (g_stats.newScalarStat ("pars", "pin_trace_cnt", "Number of Pintool code cache traces", 0, NO_PRINT_ZERO));
 static ScalarStat& s_bpu_lookup_cnt (g_stats.newScalarStat ("pars", "bpu_lookup_cnt", "Number of BPU lookups", 0, NO_PRINT_ZERO));
+static RatioStat&  s_wp_ins_cnt_avg1 (g_stats.newRatioStat (&s_pin_sig_recover_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_sig_recover_cnt)", 0, PRINT_ZERO));
+static RatioStat&  s_wp_ins_cnt_avg2 (g_stats.newRatioStat (&s_pin_wp_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_wp_cnt)", 0, PRINT_ZERO));
 
 /* ******************************************************************* *
  * GLOBAL VARIABLES
@@ -66,6 +68,8 @@ void recover ()
 	g_var.g_wrong_path = false;
 	g_var.g_was_wp = false;
 	g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
+	s_wp_ins_cnt_avg1 += g_var.g_wrong_path_count;
+	s_wp_ins_cnt_avg2 += g_var.g_wrong_path_count;
 	s_pin_sig_recover_cnt++;
 	if (g_var.g_debug_level & DBG_SPEC) {
 		cout << " *** recovering to correct path ***\n";
