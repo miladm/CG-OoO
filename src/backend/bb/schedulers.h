@@ -28,6 +28,7 @@ class bb_scheduler : protected stage {
 		void doSCHEDULER ();
 
     private:
+        bool isReady (bbInstruction*);
         void squash ();
         PIPE_ACTIVITY schedulerImpl ();
         void updatebbWindows ();

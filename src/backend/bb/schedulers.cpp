@@ -167,13 +167,12 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
                 s_no_ld_bypass++;
                 if (runaheadPermit (ins)) bbWin->issueIndxInc ();
                 else break;
-            } else if (!_RF_MGR->isReady (ins) || !_RF_MGR->canReserveRF (ins)) {
+            } else if (!isReady (ins) || !_RF_MGR->canReserveRF (ins)) {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
                 if (runaheadPermit (ins)) bbWin->issueIndxInc ();
                 else break;
             } else {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
-                if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
                 dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                         "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
                 return true;
@@ -184,6 +183,12 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
     dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
             "Found NO ready ins OR BBWindows are empty or out of ports.", _clk->now ());
     return false;
+}
+
+bool bb_scheduler::isReady (bbInstruction* ins) {
+    if (_RF_MGR->isReady (ins)) return true;
+    if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
+    return _RF_MGR->checkReadyAgain (ins);
 }
 
 bool bb_scheduler::runaheadPermit (bbInstruction* ins) {
@@ -306,27 +311,56 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
             fwd_list.Append (fwd_ins);
         }
         for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
+            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
             bbInstruction* fwd_ins = fwd_list.Nth (i);
             List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+            if (rd_reg_list->NumElements () != wr_reg_list->NumElements ()) continue;
+            bool fwd_now = true;
             for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                bool found_match = false;
                 PR rd_reg = rd_reg_list->Nth (j);
                 for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
                     PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                        s_alu_g_fwd_cnt++;
-                    }
+                    if (rd_reg == wr_reg) { found_match = true; break; }
                 }
+                if (!found_match) {fwd_now = false; break;}
             }
-            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) { //todo this needs fix
                 List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                if (rd_lreg_list->NumElements () != wr_lreg_list->NumElements ()) continue;
                 for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                    bool found_match = false;
                     PR rd_reg = rd_lreg_list->Nth (j);
                     for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
                         PR wr_reg = wr_lreg_list->Nth (k);
+                        if (rd_reg == wr_reg) { found_match = true; break; }
+                    }
+                    if (!found_match) {fwd_now = false; break;}
+                }
+            }
+
+            /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
+            if (fwd_now) {
+                for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_reg_list->Nth (j);
+                    for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_reg_list->Nth (k);
                         if (rd_reg == wr_reg) {
-                            rd_lreg_list->RemoveAt(j);
-                            s_alu_l_fwd_cnt++;
+                            rd_reg_list->RemoveAt (j);
+                            s_alu_g_fwd_cnt++;
+                        }
+                    }
+                }
+                if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+                    List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                    for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                        PR rd_reg = rd_lreg_list->Nth (j);
+                        for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
+                            PR wr_reg = wr_lreg_list->Nth (k);
+                            if (rd_reg == wr_reg) {
+                                rd_lreg_list->RemoveAt(j);
+                                s_alu_l_fwd_cnt++;
+                            }
                         }
                     }
                 }
@@ -346,27 +380,57 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
             fwd_list.Append (fwd_ins);
         }
         for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
+            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
             bbInstruction* fwd_ins = fwd_list.Nth (i);
             List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+            if (rd_reg_list->NumElements () != wr_reg_list->NumElements ()) continue;
+            bool fwd_now = true;
             for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                bool found_match = false;
                 PR rd_reg = rd_reg_list->Nth (j);
                 for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
                     PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                        s_mem_g_fwd_cnt++;
-                    }
+                    if (rd_reg == wr_reg) { found_match = true; break; }
                 }
+                if (!found_match) {fwd_now = false; break;}
             }
             if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
                 List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
                 for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                    bool found_match = false;
                     PR rd_reg = rd_lreg_list->Nth (j);
                     for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
                         PR wr_reg = wr_lreg_list->Nth (k);
+                        if (rd_reg == wr_reg) { found_match = true; break; }
+                    }
+                    if (!found_match) {fwd_now = false; break;}
+                }
+            }
+
+            /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
+            if (fwd_now) {
+                bbInstruction* fwd_ins = fwd_list.Nth (i);
+                List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+                for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_reg_list->Nth (j);
+                    for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_reg_list->Nth (k);
                         if (rd_reg == wr_reg) {
-                            rd_lreg_list->RemoveAt(j);
-                            s_mem_l_fwd_cnt++;
+                            rd_reg_list->RemoveAt(j);
+                            s_mem_g_fwd_cnt++;
+                        }
+                    }
+                }
+                if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+                    List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                    for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                        PR rd_reg = rd_lreg_list->Nth (j);
+                        for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
+                            PR wr_reg = wr_lreg_list->Nth (k);
+                            if (rd_reg == wr_reg) {
+                                rd_lreg_list->RemoveAt(j);
+                                s_mem_l_fwd_cnt++;
+                            }
                         }
                     }
                 }

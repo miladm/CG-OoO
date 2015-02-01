@@ -15,6 +15,7 @@ class bb_lrfManager : public unit {
 		~bb_lrfManager ();
         void resetRF ();
         bool isReady (bbInstruction* ins);
+        bool checkReadyAgain (bbInstruction* ins);
         void reserveRF (bbInstruction* ins);
         bool canReserveRF (bbInstruction* ins);
         void writeToRF (bbInstruction* ins);

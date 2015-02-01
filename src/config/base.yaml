@@ -85,9 +85,9 @@ cpu:
 
        rf:
            simple:
-               rf_size: 80
-               rf_lo: 117
-               rf_hi: 196
+               rf_size: 90
+               rf_lo: 120
+               rf_hi: 209
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: SIMPLE_RF
@@ -128,15 +128,15 @@ cpu:
                e_wire: 1.135708e-1
                w_wire: 64
            rf:
-               a_size: 80
-               a_lo: 117
-               a_hi: 196
-               r_size: 120 # RENAME REGS
-               r_lo: 197
-               r_hi: 316
-               p_size: 200
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 166 # RENAME REGS
+               r_lo: 210
+               r_hi: 375
+               p_size: 256
                p_lo: 1
-               p_hi: 200
+               p_hi: 256
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: RF

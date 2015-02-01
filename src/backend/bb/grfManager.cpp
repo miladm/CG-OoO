@@ -26,21 +26,43 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
         if (!_GRF.isPRvalid (reg)) {
             dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                     "Reg", reg, "is invlid", _clk->now ());
-            return false; /*-- operand not available --*/
+            return false; /*-- OPERAND NOT AVAILABLE --*/
         } else {
-            p_rdReg_list->RemoveAt (i); /*--optimization --*/
+            p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
 
     if (p_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
-        return true; /*-- all operands available --*/
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
     }
 
     dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
-    return false; /*-- not all operands available --*/
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
+}
+
+bool bb_grfManager::checkReadyAgain (bbInstruction* ins) {
+    List<AR>* p_rdReg_list = ins->getPRrdList ();
+    for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = p_rdReg_list->Nth (i);
+        if (!_GRF.isPRvalid (reg)) {
+            dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid", _clk->now ());
+            return false; /*-- OPERAND NOT AVAILABLE --*/
+        }
+    }
+
+    if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
+    }
+
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/

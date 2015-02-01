@@ -28,21 +28,43 @@ bool bb_lrfManager::isReady (bbInstruction* ins) {
         if (!_RF.isRegValidAndReady (reg)) {
             dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
                     "Reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
-            return false; /* operand not available */
+            return false; /* OPERAND NOT AVAILABLE */
         } else {
-            a_rdReg_list->RemoveAt (i); /*optimization */
+            a_rdReg_list->RemoveAt (i); /* OPTIMIZATION */
         }
     }
 
     if (a_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_L_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
-        return true; /* all operands available */
+        return true; /* ALL OPERANDS AVAILABLE */
     }
 
     dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
-    return false; /* not all operands available */
+    return false; /* NOT ALL OPERANDS AVAILABLE */
+}
+
+bool bb_lrfManager::checkReadyAgain (bbInstruction* ins) {
+    List<AR>* a_rdReg_list = ins->getLARrdList ();
+    for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = a_rdReg_list->Nth (i);
+        if (!_RF.isRegValidAndReady (reg)) {
+            dbg.print (DBG_L_REG_FILES, "%s: %s %d %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid in LRF", _lrf_id, _clk->now ());
+            return false; /* OPERAND NOT AVAILABLE */
+        }
+    }
+
+    if (a_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_L_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        return true; /* ALL OPERANDS AVAILABLE */
+    }
+
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Local operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /* NOT ALL OPERANDS AVAILABLE */
 }
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */

@@ -30,6 +30,7 @@ class bb_rfManager : public unit {
 
         //LRF & GRF
         bool isReady (bbInstruction*);
+        bool checkReadyAgain (bbInstruction*);
         void completeRegs (bbInstruction*);
         void squashRegs ();
 

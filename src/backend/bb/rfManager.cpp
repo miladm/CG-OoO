@@ -57,6 +57,28 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
     return result;
 }
 
+bool bb_rfManager::checkReadyAgain (bbInstruction* ins) {
+    bool lrf_ready = true;
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        WIDTH bbWin_id = ins->getBBWinID ();
+        lrf_ready = _LRF_MGRS[bbWin_id]->checkReadyAgain (ins);
+    }
+    bool grf_ready = _GRF_MGR.checkReadyAgain (ins);
+    dbg.print (DBG_REG_FILES, "%s: %s %d - %s %d - %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "LRF read ops are ready: ", ((lrf_ready)?"YES":"NO"), 
+            "GRF read ops are ready: ", ((grf_ready)?"YES":"NO"), 
+            "for ins: ", ins->getInsID (), _clk->now ());
+
+    /* ENERGY TRACKING */
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        return (grf_ready && lrf_ready);
+    } else if (g_cfg->getRegAllocMode () == GLOBAL) {
+        return (grf_ready);
+    }
+    Assert (0 && "invalid register allocation model");
+    return grf_ready; /* PLEACE HOLDER */
+}
+
 bool bb_rfManager::isReady (bbInstruction* ins) {
     bool lrf_ready = true;
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
@@ -72,6 +94,7 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     if (!grf_ready) s_grf_not_ready_cnt++;
     if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
 
+    /* ENERGY TRACKING */
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
         if (grf_ready && lrf_ready) {
             WIDTH bbWin_id = ins->getBBWinID ();
@@ -85,7 +108,7 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
         }
         return (grf_ready);
     }
-    Assert (true == false && "invalid register allocation model");
+    Assert (0 && "invalid register allocation model");
     return grf_ready; /* PLEACE HOLDER */
 }
 

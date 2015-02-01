@@ -14,7 +14,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb1'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/runahead'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/glbToLoc_n_locGlb_reg_alloc'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_20'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_20'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/forwarding_test/no_fwd'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
@@ -67,4 +68,4 @@ qsub -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_p
 
 cd "$BENCH_INPUT/471.omnetpp/ref/input/"
 echo "$BENCH_INPUT/471.omnetpp/ref/input/"
-qsub -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_omnetpp    $RUN_DIR/run.sh -b $CFG_PATH/400.perlbench  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/471.omnetpp/471.omnetpp -d omnetpp.ini
+qsub -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_omnetpp    $RUN_DIR/run.sh -b $CFG_PATH/471.omnetpp  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/471.omnetpp/471.omnetpp -d omnetpp.ini
