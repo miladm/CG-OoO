@@ -24,13 +24,16 @@ config::config (string bench_path, string config_path, string out_dir) {
     parser.GetNextDocument (_root);
 
 
-    int prof_temp;
+    int prof_temp, wp_temp;
     _root["cpu"]["frontend"]["profiling"] >> prof_temp;
     _root["cpu"]["backend"]["rf"]["lrf"]["rf_lo"] >> _larf_lo;
     _root["cpu"]["backend"]["rf"]["lrf"]["rf_hi"] >> _larf_hi;
     _root["cpu"]["backend"]["rf"]["grf"]["a_lo"]  >> _garf_lo;
     _root["cpu"]["backend"]["rf"]["grf"]["a_hi"]  >> _garf_hi;
     _enable_profile = (bool)prof_temp;
+    _root["cpu"]["frontend"]["wrong_path"] >> wp_temp;
+    _enable_wp = (bool)wp_temp;
+    _root["cpu"]["frontend"]["br_misspred_delay"] >> _br_misspred_delay;
 
 
     /* =========== ============ */
@@ -422,5 +425,9 @@ AR config::getLARF_HI () {return _larf_hi;}
 AR config::getGARF_LO () {return _garf_lo;}
 
 AR config::getGARF_HI () {return _garf_hi;}
+
+unsigned config::brMisspredDelay () {Assert (_enable_wp); return _br_misspred_delay;}
+
+bool config::isWrongPath () {return _enable_wp;}
 
 config* g_cfg;

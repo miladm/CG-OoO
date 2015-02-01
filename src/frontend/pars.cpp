@@ -134,7 +134,7 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
         g_var.g_wrong_path_count++;
         if (__is_call) g_var.g_context_call_depth++;
         if (g_var.g_debug_level & DBG_SPEC) cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
-        if ((g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
+        if ((g_var.g_wrong_path_count >= g_cfg->brMisspredDelay ()) ||
            ((g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();

@@ -27,7 +27,6 @@ struct g_variable {
         g_icount = 0;
         g_debug_level = 0; //DBG_EXEC|DBG_UOP; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
-        g_branch_mispredict_delay = 4; //NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
         g_wrong_path_count = 0;
         g_total_wrong_path_count = 0;
         g_app_signal_count = 0;
@@ -35,7 +34,7 @@ struct g_variable {
         g_recovery_count = 0;
         g_pintool_signal_count = 0; //TODO delete this - not used - move other signal vars to stat first
         g_context_call_depth = 0;
-        g_wrong_path = false;
+        g_wrong_path = false; /* ONLY THE INTIAL VALUE */
         g_was_wp = false;
         g_spec_syscall = false;
         g_appEnd = false;
@@ -70,7 +69,6 @@ struct g_variable {
     unsigned long long g_icount; // correct path
     unsigned g_debug_level;
     unsigned g_verbose_level;
-    unsigned g_branch_mispredict_delay;
     unsigned g_wrong_path_count;
     unsigned g_total_wrong_path_count;
     unsigned g_app_signal_count;

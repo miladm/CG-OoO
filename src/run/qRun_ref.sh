@@ -13,7 +13,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out1'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb1'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/runahead'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/locGlb_reg_alloc'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/glbToLoc_n_locGlb_reg_alloc'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_20'
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files/'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'
@@ -27,8 +28,8 @@ FILE=$OUT_PATH/README
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
-#echo "Copying the YAML config file to output dir"
-#cp $CFG_PATH/base.yaml $OUT_PATH/.
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE

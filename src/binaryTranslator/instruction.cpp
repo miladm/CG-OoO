@@ -239,6 +239,20 @@ void instruction::setRegister (long int *r, int *rt) {
 	}
 }
 
+void instruction::setSSAregister (long int *r, int *rt) {
+    long int tempR = *r;
+    int tempRT = *rt; 
+    Assert (tempRT == READ || tempRT == WRITE);
+    (_r)->Append (tempR);
+    (_rt)->Append (tempRT);
+	if (tempRT == READ) {
+		 (_r_read)->Append (tempR);
+	} else if (tempRT == WRITE) {
+		 (_r_write)->Append (tempR);
+		 (_r_write_old)->Append (tempR);
+	}
+}
+
 void instruction::setSpecialRegister (long int *r, int *rt) {
     long int tempR = *r;
     int tempRT = *rt; 
@@ -564,29 +578,17 @@ void instruction::setWrAddrSet (set<ADDR> &addrSet) {
 	printf ("debug: write set of ins %llx: %d\n", getInsAddr (), _memWrAddr.size ());
 }
 
-int instruction::getNumAncestors () {
-	return _ancestors->NumElements ();
-}
+int instruction::getNumAncestors () { return _ancestors->NumElements (); }
 
-int instruction::getNumDependents () {
-	return _dependents->NumElements ();
-}
+int instruction::getNumDependents () { return _dependents->NumElements (); }
 
-List<instruction*>* instruction::getDependents () {
-	return _dependents;
-}
+List<instruction*>* instruction::getDependents () { return _dependents; }
 
-List<instruction*>* instruction::getAncestors () {
-	return _ancestors;
-}
+List<instruction*>* instruction::getAncestors () { return _ancestors; }
 
-List<instruction*>* instruction::getRegAncestors () {
-	return _regAncestors;
-}
+List<instruction*>* instruction::getRegAncestors () { return _regAncestors; }
 
-void instruction::resetLongestPath () {
-	_longestPath = -1;
-}
+void instruction::resetLongestPath () { _longestPath = -1; }
 
 void instruction::setLongestPath (int longestPath) {
 	Assert (_longestPath == -1 && longestPath > 0 && "Invalid longest path value.");
@@ -603,9 +605,7 @@ int instruction::getLongestPath () {
 	return _longestPath;
 }
 
-void instruction::resetMy_BBorPB_id () {
-	_myBBs.clear ();
-}
+void instruction::resetMy_BBorPB_id () { _myBBs.clear (); }
 
 void instruction::setMy_BBorPB_id (ADDR id) {
 	Assert (id > 0 && "BB or PB id is invalid.");
@@ -849,7 +849,7 @@ void instruction::setup_locGlbDefSet (set<long int> &bbDefSet) {
     _bbDefSet = bbDefSet;
 }
 
-void instruction::update_locGlbSet (set<long int> &bbOutSet) {
+void instruction::update_locGlbSet (set<long int> &bbOutSet, std::map<int, long int> &movOpSrcRegs, std::map<int, long int> &movOpDstRegs, int indx) {
     set<long int> temp0, temp1, temp2;
     set<long int> locGlbDefSet, locGlbUseSet, locGlbRegSet;
 
@@ -864,14 +864,27 @@ void instruction::update_locGlbSet (set<long int> &bbOutSet) {
                            std::inserter (temp1, temp1.begin ()));
     locGlbDefSet = temp1;
     for (set<long int>::iterator it = locGlbDefSet.begin (); it != locGlbDefSet.end (); it++) {
+        bool removed_reg = false;
         int reg_type = WRITE;
         long int reg = (*it);
         long int new_reg = reg * LARGE_NUMBER;
         Assert (_localRegSet.find (reg) == _localRegSet.end ());
         locGlbRegSet.insert (new_reg);
+        /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
+        for (int i = getNumReg () - 1; i >= 0; i--) {
+            if (getNthReg (i) == reg && getNthRegType (i) == WRITE) {
+                removeNthRegister (i);
+                removed_reg = true;
+                break;
+            }
+        }
+        Assert (removed_reg == true);
         _r->Append (new_reg);
         _rt->Append (reg_type);
-        cout << endl << hex << getInsAddr () << dec << " " << reg << " " << new_reg << endl;
+        replaceDefSetElem (reg, new_reg);
+        int next_indx = indx + 1;
+        movOpSrcRegs.insert (pair<int, long int> (next_indx, new_reg));
+        movOpDstRegs.insert (pair<int, long int> (next_indx, reg));
     }
 
     /* HANDLE USE SET */
@@ -885,7 +898,6 @@ void instruction::update_locGlbSet (set<long int> &bbOutSet) {
                            std::inserter (temp1, temp1.begin ()));
     locGlbUseSet = temp1;
     for (set<long int>::iterator it = locGlbUseSet.begin (); it != locGlbUseSet.end (); it++) {
-        bool has_read = false;
         int removed_reg = 0;
         int reg_type = READ;
         long int reg = (*it);
@@ -894,19 +906,20 @@ void instruction::update_locGlbSet (set<long int> &bbOutSet) {
         Assert (_localRegSet.find (reg) == _localRegSet.end ());
         /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
         for (int i = getNumReg () - 1; i >= 0; i--) {
-            cout << getNthReg(i) << "(" << getNthRegType (i) << ") ";
+//            cout << getNthReg(i) << "(" << getNthRegType (i) << ") ";
             if (getNthReg (i) == reg && getNthRegType (i) == READ) {
                 removeNthRegister (i);
                 removed_reg++;
             }
         }
-        cout << endl << hex << getInsAddr () << dec << " " << reg << " " << new_reg << endl;
+//        cout << endl << hex << getInsAddr () << dec << " " << reg << " " << new_reg << endl;
         if (removed_reg == 0) cout << reg << " " << new_reg << endl;
         Assert (removed_reg > 0);
         for (int i = 0; i < removed_reg; i++) {
             _r->Append (new_reg);
             _rt->Append (reg_type);
         }
+        replaceUseSetElem (reg, new_reg);
     }
 
     /* UPDATE THE LOCAL REGISTER SET */
@@ -940,11 +953,10 @@ set<long int> instruction::setup_locToGlbDefSet (set<long int> &bbMultiUseSet) {
     return _insLocDefSet;
 }
 
-void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
+void instruction::update_locToGlbSet (set<long int> &bbLocDefSet, std::map<int, long int> &movOpSrcRegs, std::map<int, long int> &movOpDstRegs, int indx) {
     set<long int>::iterator it;
 
     for (it = _insMultiUseSet.begin (); it != _insMultiUseSet.end (); it++) {
-        bool has_read = false;
         int removed_reg = 0;
         long int reg_type = READ;
         long int reg = (*it);
@@ -965,18 +977,66 @@ void instruction::update_locToGlbSet (set<long int> &bbLocDefSet) {
             _rt->Append (reg_type);
         }
         _localRegSet.insert (new_reg);
+        replaceUseSetElem (reg, new_reg);
     }
 
     for (it = _insLocDefSet.begin (); it != _insLocDefSet.end (); it++) {
-        long int reg_type = WRITE;
+        int removed_reg = 0;
+        long int reg_type = READ;
         long int reg = (*it);
         long int new_reg = reg * LARGE_NUMBER;
         Assert (_localRegSet.find (reg) == _localRegSet.end ());
 //        Assert (_localRegSet.find (new_reg) == _localRegSet.end ());
+        /* REMOVE THE OTHER READ REGISTER CORRESPONDING TO THE SAME OPERAND */
+        for (int i = getNumReg () - 1; i >= 0; i--) {
+            if (getNthReg (i) == reg && getNthRegType (i) == READ) {
+                removeNthRegister (i);
+                removed_reg++;
+            }
+        }
+//        Assert (removed_reg > 0);
+        for (int i = 0; i < removed_reg; i++) {
+            _r->Append (new_reg);
+            _rt->Append (reg_type);
+        }
         _localRegSet.insert (new_reg);
         _r->Append (new_reg);
         _rt->Append (reg_type);
+        movOpSrcRegs.insert (pair<int, long int> (indx, reg));
+        movOpDstRegs.insert (pair<int, long int> (indx, new_reg));
+        replaceUseSetElem (reg, new_reg);
     }
+}
+
+void instruction::setupLocSet (PUSH_LOCATION push_location) {
+    if (push_location == PUSH_TO_TOP) {
+        for  (int j = 0; j < getNumReg (); j++) {
+            if  (getNthRegType (j) == WRITE) {
+                _localRegSet.insert (getNthReg (j));
+            }
+        }
+    } else if (push_location == PUSH_TO_BOTTOM) {
+        for  (int j = 0; j < getNumReg (); j++) {
+            if  (getNthRegType (j) == READ) {
+                _localRegSet.insert (getNthReg (j));
+            }
+        }
+    } else {
+        Assert (0 && "invalid push location specified");
+    }
+     
+}
+
+void instruction::replaceUseSetElem (long int old_reg, long int new_reg) {
+    Assert (_useSet.find (old_reg) != _useSet.end ());
+    _useSet.erase (old_reg);
+    _useSet.insert (new_reg);
+}
+
+void instruction::replaceDefSetElem (long int old_reg, long int new_reg) {
+    Assert (_defSet.find (old_reg) != _defSet.end ());
+    _defSet.erase (old_reg);
+    _defSet.insert (new_reg);
 }
 
 /* CONSTRUCT DEF/USE SETS FROM X86 FORMAT OF REGISTERS */
@@ -992,6 +1052,16 @@ void instruction::setupDefUseSets () {
             Assert (0 && "Invalid register type");
         }
     }
+}
+
+void instruction::resetSets () {
+    _outSet.clear ();
+    _inSet.clear ();
+    _localRegSet.clear ();
+    _bbUseSet.clear ();
+    _bbDefSet.clear ();
+    _insLocDefSet.clear ();
+    _insMultiUseSet.clear ();
 }
 
 /* RE-CONSTRUCT DEF/USE SETS FROM SSA FORMAT OF REGISTERS */

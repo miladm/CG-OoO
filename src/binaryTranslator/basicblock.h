@@ -39,7 +39,7 @@ class basicblock {
 		void addIns (instruction*, REACHING_TYPE);
 		void addIns (instruction*, ADDR);
         void forceAssignBBID ();
-		void addMovIns (instruction*);
+        void updateBBID ();
         bool isThisBBfallThru (basicblock*);
 		ADDR getLastInsDst ();
 		ADDR getLastInsFallThru ();
@@ -120,12 +120,13 @@ class basicblock {
 		void setAllasDominators (bool domSetIsAll);
 		
 		//SSA / PHI-FUNCTION
-		void insertPhiFunc (long int var);
+		void insertPhiFunc (long int);
 		map<long int, vector<long int> > getPhiFuncs ();
-		void replaceNthPhiOperand (long int var, int indx, long int subscript);
-		void setPhiWriteVar (long int var, long int subscript);
+		void replaceNthPhiOperand (long int, int, long int);
+		void setPhiWriteVar (long int, long int);
 		int elimPhiFuncs (ADDR&, map<ADDR,instruction*>*);
-		void insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs, ADDR insAddr);
+		void insertMOVop (long int, long int, long int, long int, ADDR);
+		void addMovIns (instruction*);
 	
 		//PROFILE
 		float getTakenBias ();
@@ -155,18 +156,24 @@ class basicblock {
         void markUPLDroots ();
         void makeSubBlocks ();
 
+        // ADDING MOV OPS
+        void insertMOVop (map<ADDR,instruction*>*, long int, long int, ADDR&, int, PUSH_LOCATION);
+        void addMovIns (instruction*, int, PUSH_LOCATION);
+
 		// DATA-FLOW ANALYSIS
     private:
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
     public:
 		bool update_InOutSet (REG_ALLOC_MODE);
-        void update_locGlbSet ();
-        int update_locToGlb ();
+        void update_locGlbSet (ADDR&, map<ADDR,instruction*>*);
+        int update_locToGlb (ADDR&, map<ADDR,instruction*>*);
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();
 		set<long int> getDefSet ();
+        void resetSets ();
+        void setupMOVop (ADDR&, std::map<ADDR,instruction*>*, std::map<int, long int>&, std::map<int, long int>&, PUSH_LOCATION);
 
         // LOCAL REGISTERS
 		set<long int> getLocalRegSet ();
@@ -215,7 +222,6 @@ class basicblock {
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
-		std::set<long int> _bbLocGlbRegSet;
 
         block_stats _stats;
 };

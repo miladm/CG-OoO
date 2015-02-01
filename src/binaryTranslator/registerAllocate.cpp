@@ -5,12 +5,14 @@
 #include "registerAllocate.h"
 
 map<ADDR, basicblock*> validBBs;
+ADDR newAddrOffset = 0;
 
 /*--
  * SOME BASICBLOCKS HAVE BEEN ELIMINTED FROM THIS LIST, BUT ARE STILL PART OF
  * THE CONTROL FLOW - THIS IS A WAY TO FILTER THEM OUT.
  --*/
 static void setupValidBBs (List<basicblock*> *bbList) {
+    validBBs.clear ();
 	for (int i = 0; i < bbList->NumElements (); i++) {
 		ADDR bbID = bbList->Nth (i)->getID ();
         basicblock* bb = bbList->Nth (i);
@@ -24,9 +26,8 @@ static void setupValidBBs (List<basicblock*> *bbList) {
  */
 static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {
 	int numInsInsertion = 0;
-    ADDR phiAddrOffset = 0;
 	for (int i = 0; i < bbList->NumElements (); i++) {
-		numInsInsertion += bbList->Nth (i)->elimPhiFuncs (phiAddrOffset, insAddrMap);
+		numInsInsertion += bbList->Nth (i)->elimPhiFuncs (newAddrOffset, insAddrMap);
 	}
 	return numInsInsertion;
 }
@@ -49,7 +50,7 @@ static void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *inter
 }
 
 //TODO why would someone who doesn't write a variable insert itself as a bb writing into it?
-static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode) {
+static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode, map<ADDR,instruction*> *insAddrMap) {
 	bool change = true;
 	while (change == true) {
 		change = false;
@@ -61,22 +62,36 @@ static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_allo
 	}
 
     /* LOCAL-GLOBAL REGISTER ALLOCATION SUPPORT */
-    if (reg_alloc_mode == LOCAL_GLOBAL) {
-        for (int i = 0; i < bbList->NumElements (); i++) {	
-            basicblock* bb = bbList->Nth (i);
-            bb->update_locGlbSet ();
-        }
-    }
-
-    /* LOCAL-GLOBAL REGISTER ALLOCATION SUPPORT */
-    long int var = 0;
-    if (reg_alloc_mode == LOCAL_GLOBAL) {
-        for (int i = 0; i < bbList->NumElements (); i++) {	
-            basicblock* bb = bbList->Nth (i);
-            var += bb->update_locToGlb ();
-        }
-    }
-    cout << "NUMBER OF GLB->LOC: " << var << endl;
+//    if (reg_alloc_mode == LOCAL_GLOBAL) {
+//        printf("\tReg allocate local users of a global write operand\n");
+//        for (int i = 0; i < bbList->NumElements (); i++) {	
+//            basicblock* bb = bbList->Nth (i);
+//            bb->update_locGlbSet (newAddrOffset, insAddrMap);
+//        }
+//
+//        long int var = 0;
+//        for (int i = 0; i < bbList->NumElements (); i++) {	
+//            basicblock* bb = bbList->Nth (i);
+//            var += bb->update_locToGlb (newAddrOffset, insAddrMap);
+//        }
+//
+//        /* RESET ALL SETS */
+//        for (int i = 0; i < bbList->NumElements (); i++) {
+//            basicblock* bb = bbList->Nth (i);
+//            bb->resetSets ();
+//        }
+//
+//        /* REDO THIS PIECE TO MAKE SURE THE NEW MOV OPS ARE UPDATED */
+//        change = true;
+//        while (change == true) {
+//            change = false;
+//            for (int i = bbList->NumElements () - 1; i >= 0; i--) {	
+//                basicblock* bb = bbList->Nth (i);
+//                if (bb->update_InOutSet (reg_alloc_mode) == true)
+//                    change = true;
+//            }
+//        }
+//    }
 
 
 	// CREATE LOCAL SETS FOR IMPLEMENTING LRF REG. ALLCOATION
@@ -353,11 +368,11 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
             map<long int,interfNode*>::iterator it;
             for (it = localIntfNodeMap.begin (); it != localIntfNodeMap.end (); it++) {
                 if (globalIntfNodeMap.find (it->first) != globalIntfNodeMap.end ())
-                    printf ("\t\tERROR: register conflict between local & global interference networks %d\n", it->first);
+                    printf ("\t\tERROR: register conflict between local & global interference networks %ld\n", it->first);
             }
             for (it = globalIntfNodeMap.begin (); it != globalIntfNodeMap.end (); it++) {
                 if (localIntfNodeMap.find (it->first) != localIntfNodeMap.end ())
-                    printf ("\t\tERROR: register conflict between global & local interference networks %d\n", it->first);
+                    printf ("\t\tERROR: register conflict between global & local interference networks %ld\n", it->first);
             }
 
             /*
@@ -433,7 +448,9 @@ void allocate_register (List<basicblock*> *bbList,
 	renameAndbuildDefUseSets (bbList); //TODO: make sure this step does not impact next step
 
 	printf ("\tLiveness Analysis\n");
-	livenessAnalysis (bbList, reg_alloc_mode);
+	livenessAnalysis (bbList, reg_alloc_mode, insAddrMap);
+
+    setupValidBBs (bbList);
 
 	printf ("\tFind Graph Entry Points\n");
 	findEntryPoints (bbList, interiorBB);

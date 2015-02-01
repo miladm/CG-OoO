@@ -102,6 +102,11 @@ void basicblock::forceAssignBBID () {
 	}
 }
 
+void basicblock::updateBBID () {
+    bbID = _insList->Nth (0)->getInsAddr ();
+    Assert (bbID > 0 && "Invalid basicblock ID assigned.");
+}
+
 void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
 	_insList->Append (ins);
 	_insList_orig->Append (ins);
@@ -132,12 +137,81 @@ void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
 /* FIND IF THIS BB THE FALL-THROUGH OR DESTINATION OF ITS ANCESTOR BB */
 bool basicblock::isThisBBfallThru (basicblock* anc) {
     instruction* last_ins = anc->getLastIns ();
-    if (last_ins->hasFallThru () && anc->getLastInsFallThru () == getID ())
-        return true;
-    else if (last_ins->hasDst () && anc->getLastInsDst () == getID ())
-        return false;
-    else
-        Assert (0 && "This BB is falsely not present as the fallthru or dst of its ancestor");
+    if (last_ins->hasFallThru () && anc->getLastInsFallThru () == getID ()) { return true; }
+    else if (last_ins->hasDst () && anc->getLastInsDst () == getID ()) { return false; }
+    else {
+//        Assert (0 && "This BB is falsely not present as the fallthru or dst of its ancestor");
+        printf ("\tWARNING: This BB is falsely not present as the fallthru or dst of its ancestor - hack-fixing it for now\n");
+        /* TODO - THE CODE BELOW IS JUST A HACK TO GET THINGS RUNNING - THIS CONDUTION MUST NEVER HAPPEN */
+        if (last_ins->hasFallThru () && anc->getLastInsFallThru () != getID ()) {
+            instruction* ins = anc->getLastIns (); /* a hack */
+            ins->setInsFallThruAddr (getID (), true);
+            return true;
+        } else if (last_ins->hasDst () && anc->getLastInsDst () != getID ()) {
+            instruction* ins = anc->getLastIns (); /* a hack */
+            ins->setInsDstAddr (getID (), true);
+            return false;
+        }
+    }
+}
+
+void basicblock::addMovIns (instruction* ins, int indx, PUSH_LOCATION push_location) {
+    instruction* last_ins = _insList->Last ();
+
+    Assert (ins->getType () != 'r' && ins->getType () != 'c' && 
+            ins->getType () != 's' && ins->getType () != 'j' && ins->getType () != 'b');
+    Assert (_insList->NumElements () >= 2);
+    Assert (indx < _insList->NumElements ());
+
+    /* CONNECT UP INSTRUCTIONS */
+    if (push_location == PUSH_TO_TOP) {
+        Assert (indx >= 0);
+        if (indx == 0) {
+            for (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                basicblock* anc = _ancestorBbList->Nth(i);
+                instruction* top_ins = anc->getLastIns ();
+                if (isThisBBfallThru (anc)) {
+                    top_ins->resetInsFallThru ();
+                    top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                    top_ins->setInsFallThru (ins);
+                } else {
+                    top_ins->resetInsDst ();
+                    top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                    top_ins->setInsDst (ins);
+                }
+            }
+            updateBBID ();
+        } else {
+            instruction* top_ins = _insList->Nth (indx - 1);
+            top_ins->resetInsFallThru ();
+            top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+            top_ins->setInsFallThru (ins);
+        }
+        instruction* bottom_ins = _insList->Nth(indx)->getInsFallThru ();
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+    } else if (push_location == PUSH_TO_BOTTOM) {
+        Assert (indx > 0);
+        instruction* top_ins = _insList->Nth (indx - 1);
+        instruction* bottom_ins = _insList->Nth(indx - 1)->getInsFallThru ();
+        Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+        top_ins->resetInsFallThru ();
+        top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+        top_ins->setInsFallThru (ins);
+    } else {
+        Assert (0 && "Invalid insetion relative location");
+    }
+
+    /* PUSH THE INS TO THE LAST SPOT IN INSLIST */
+    _insList->InsertAt (ins, indx);
+    _insList_orig->InsertAt (ins, indx);
+
+    if (push_location == PUSH_TO_TOP && indx == 0) { updateBBID (); }
+
+    ins->setMy_BBorPB_id (getID ());
+    _insAddrList.insert (ins->getInsAddr ());
 }
 
 void basicblock::addMovIns (instruction* ins) {
@@ -183,6 +257,7 @@ void basicblock::addMovIns (instruction* ins) {
                     top_ins->setInsDst (ins);
                 }
             }
+            updateBBID ();
         }
         instruction* bottom_ins = _insList->Nth (_insList->NumElements () - 1);
         ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
@@ -437,10 +512,8 @@ void basicblock::buildImmediateDominators () {
 }
 
 bool basicblock::isASDominator (ADDR nodeID) {
-	if  (_sDominatorMap.find (nodeID) == _sDominatorMap.end ())
-		return false;
-	else
-		return true;
+	if  (_sDominatorMap.find (nodeID) == _sDominatorMap.end ()) return false;
+	else return true;
 }
 
 int basicblock::getSDominatorSize () {
@@ -471,10 +544,8 @@ map<ADDR,basicblock*> basicblock::getChildren () {
 }
 
 bool basicblock::isInIDom (ADDR nodeID) {
-	if  (_idomSet.find (nodeID) == _idomSet.end ())
-		return false;
-	else
-		return true;
+	if  (_idomSet.find (nodeID) == _idomSet.end ()) return false;
+	else return true;
 }
 
 void basicblock::addToDFset (basicblock *node) {
@@ -596,6 +667,7 @@ int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAd
             ADDR insAddr = PHI_INS_ADDR + phiAddrOffset++;
             Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins address already exists.");
 			NthAncestor->insertMOVop (var, renameToSub, var, subscript, insAddr);
+//			NthAncestor->genMOVop (var, renameToSub, var, subscript, phiAddrOffset);
 			indx++;
 		}
 		temp = phiVector.size ();
@@ -603,6 +675,30 @@ int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAd
 
 	/* REPORT THE NUMBER OF MOV ISNTRUCTIONS INSERTED */
 	return temp*_phiFuncMap.size ();
+}
+
+
+void basicblock::insertMOVop (map<ADDR,instruction*>* insAddrMap, long int dst_reg, long int src_reg, ADDR& addrOffset, int indx, PUSH_LOCATION push_location) {
+    ADDR insAddr = PHI_INS_ADDR + addrOffset++;
+    Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins address already exists.");
+
+    /* GENERATE AND INSERT THE MOV OP */
+	instruction* newIns = new instruction;
+	newIns->setType ('o');
+	newIns->setOpCode ("#MOV\n");
+	newIns->setInsAddr (insAddr);
+	int type = READ;
+	newIns->setSSAregister (&src_reg, &type);
+	type = WRITE;
+	newIns->setSSAregister (&dst_reg, &type);
+    newIns->setupDefUseSets ();
+    newIns->setupLocSet (push_location);
+    for  (int j = 0; j < newIns->getNumReg (); j++) {
+        if  (newIns->getNthRegType (j) == WRITE) {
+            updateDefSet (newIns->getNthReg (j));
+        }
+    }
+    addMovIns (newIns, indx, push_location);
 }
 
 /*
@@ -727,11 +823,8 @@ void basicblock::setListIndx (int listIndx) {
 }
 
 bool basicblock::isAPhraseblock () {
-	if  (_bbListForPhraseblock->NumElements () == 0) {
-		return false;
-	} else {
-		return true;
-	}
+	if  (_bbListForPhraseblock->NumElements () == 0) { return false;
+	} else { return true; }
 }
 
 void basicblock::addBBtoPBList (ADDR bbID) {
@@ -860,7 +953,9 @@ bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {
 	return inter_bb_change;
 }
 
-void basicblock::update_locGlbSet () {
+/* THE CASE WHERE AN INSTRUCTION GEENRATES GLOBAL OPERANDS THAT ARE ALSO USED
+ * IN THE SAME BB */
+void basicblock::update_locGlbSet (ADDR& addrOffset, map<ADDR,instruction*>* insAddrMap) {
     set<long int> bbDefSet, bbUseSet, temp0;
     int ins_list_size = _insList->NumElements ();
 
@@ -871,8 +966,8 @@ void basicblock::update_locGlbSet () {
         ins->setup_locGlbDefSet (bbDefSet);
         set<long int> defSet = ins->getDefSet ();
         std::set_union (defSet.begin (), defSet.end (),
-                        bbDefSet.begin (), bbDefSet.end (), 
-                        std::inserter (temp0, temp0.begin ()));
+                bbDefSet.begin (), bbDefSet.end (), 
+                std::inserter (temp0, temp0.begin ()));
         bbDefSet = temp0;
     }
 
@@ -883,19 +978,23 @@ void basicblock::update_locGlbSet () {
         ins->setup_locGlbUseSet (bbUseSet);
         set<long int> useSet = ins->getUseSet ();
         std::set_union (useSet.begin (), useSet.end (), 
-                        bbUseSet.begin (), bbUseSet.end (), 
-                        std::inserter (temp0, temp0.begin ()));
+                bbUseSet.begin (), bbUseSet.end (), 
+                std::inserter (temp0, temp0.begin ()));
         bbUseSet = temp0;
     }
 
     /* UPDATE THE LOCALREGSET OF EACH INSTRUCTIONS BASED ON LOCGGLB INFORMATION */
+    map<int, long int> movOpSrcRegs, movOpDstRegs;
     for  (int i = 0; i < ins_list_size; i++) {
         instruction* ins = _insList->Nth (i);
-        ins->update_locGlbSet (_outSet);
+        ins->update_locGlbSet (_outSet, movOpSrcRegs, movOpDstRegs, i);
+        cout << " " << hex << ins->getInsAddr () << dec << endl;
     }
+    setupMOVop (addrOffset, insAddrMap, movOpSrcRegs, movOpDstRegs, PUSH_TO_BOTTOM);
 }
 
-int basicblock::update_locToGlb () {
+/* THE CASE WHERE A GLOBAL OPERAND IS READ MORE THAN ONCE IN A BB */
+int basicblock::update_locToGlb (ADDR& addrOffset, map<ADDR,instruction*>* insAddrMap) {
     set<long int> bbUseSet, bbMultiUseSet, temp0;
     int ins_list_size = _insList->NumElements ();
     int counter = 0;
@@ -946,12 +1045,27 @@ int basicblock::update_locToGlb () {
     }
 
     /* RENAME REGISTERS TO CREATE THE GLOBAL TO LOCAL ALLOCATION */
+    std::map<int, long int> movOpSrcRegs, movOpDstRegs;
     for  (int i = 0; i < ins_list_size; i++) {
         instruction* ins = _insList->Nth (i);
-        ins->update_locToGlbSet (bbLocDefSet);
+        ins->update_locToGlbSet (bbLocDefSet, movOpSrcRegs, movOpDstRegs, i);
+        cout << hex << ins->getInsAddr () << dec << endl;
     }
-
+    setupMOVop (addrOffset, insAddrMap, movOpSrcRegs, movOpDstRegs, PUSH_TO_TOP);
     return counter;
+}
+
+void basicblock::setupMOVop (ADDR& addrOffset, std::map<ADDR,instruction*>* insAddrMap, std::map<int, long int>& srcRegs, std::map<int, long int>& dstRegs, PUSH_LOCATION push_location) {
+    Assert (dstRegs.size () == srcRegs.size ());
+    std::map<int, long int>::reverse_iterator it;
+    for (it = srcRegs.rbegin (); it != srcRegs.rend (); ++it) {
+        int indx = it->first;
+        Assert (srcRegs.find (indx) != srcRegs.end ());
+        Assert (dstRegs.find (indx) != dstRegs.end ());
+        long int src_reg = it->second;
+        long int dst_reg = dstRegs[indx];
+        insertMOVop (insAddrMap, dst_reg, src_reg, addrOffset, indx, push_location);
+    }
 }
 
 void basicblock::brDependencyTableCheck () {
@@ -992,6 +1106,19 @@ void basicblock::setupDefUseSets () {
 		}
 	}
 }
+
+void basicblock::resetSets () {
+	_defSet.clear ();
+	_useSet.clear ();
+    _outSet.clear ();
+    _inSet.clear ();
+    _localRegSet.clear ();
+	for  (int i = 0; i < _insList->NumElements (); i++) {
+		instruction* ins = _insList->Nth (i);
+        ins->resetSets ();
+    }
+}
+
 
 /* RE-CONSTRUCT DEF/USE SETS FROM SSA FORMAT OF REGISTERS */
 void basicblock::renameAllInsRegs () {

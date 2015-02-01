@@ -40,6 +40,7 @@ class instruction {
 		void setBPaccuracy (double bpAccuracy);
 		void setLdMissRate (double missRate);
 		void setRegister (long int *r, int *rt);
+		void setSSAregister (long int *r, int *rt);
 		void setSpecialRegister (long int *r, int *rt);
 		void setReadVar (int var, int subscript);
 		void setWriteVar (int var, int subscript);
@@ -132,6 +133,8 @@ class instruction {
 		
 		/* DATA-FLOW ANALYSIS */
     private:
+		void replaceDefSetElem (long int, long int);
+		void replaceUseSetElem (long int, long int);
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
 		void updateLocalRegSet ();
@@ -139,12 +142,14 @@ class instruction {
     public:
         void setup_locGlbUseSet (set<long int>&);
         void setup_locGlbDefSet (set<long int>&);
-        void update_locGlbSet (set<long int>&);
+        void update_locGlbSet (set<long int>&, std::map<int, long int>&, std::map<int, long int>&, int);
         set<long int> setup_locToGlbUseSet (set<long int>&, set<long int>&);
         set<long int> setup_locToGlbDefSet (set<long int>&);
-        void update_locToGlbSet (set<long int>&);
+        void update_locToGlbSet (set<long int>&, std::map<int, long int>&, std::map<int, long int>&, int);
+        void setupLocSet (PUSH_LOCATION);
 		bool update_InOutSet (REG_ALLOC_MODE, set<long int>&, bool);
         set<long int> update_locToGlb (set<long int>&, set<long int>&);
+        void resetSets ();
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();

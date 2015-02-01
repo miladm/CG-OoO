@@ -55,6 +55,10 @@ class config {
         AR getGARF_LO ();
         AR getGARF_HI ();
 
+        /* WRONG PATH */
+        unsigned brMisspredDelay ();
+        bool isWrongPath ();
+
     private:
 		bool parsePinPointFiles ();
 		void verifyConfig ();
@@ -112,6 +116,10 @@ class config {
 		int _complete_delay;
 		int _wb_delay;
 		int _fwd_delay;
+
+        // WRONG PATH (WP)
+        bool _enable_wp;
+        unsigned _br_misspred_delay;
 
 		//UNIT WIDTHS
 		int _bp_width;
