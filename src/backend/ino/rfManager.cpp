@@ -115,4 +115,7 @@ void rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
+void rfManager::getStat () {
+}
+
 rfManager* g_RF_MGR;

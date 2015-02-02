@@ -19,6 +19,7 @@ class rfManager : public unit {
         void reserveRF (dynInstruction* ins);
         bool canReserveRF (dynInstruction* ins);
         void writeToRF (dynInstruction* ins);
+        void getStat ();
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);

@@ -245,4 +245,5 @@ void scheduler::regStat () {
     _execution_to_scheduler_port->regStat ();
     _memory_to_scheduler_port->regStat ();
     _iWindow.regStat ();
+    g_RF_MGR->getStat ();
 }
