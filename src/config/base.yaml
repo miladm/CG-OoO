@@ -113,12 +113,12 @@ cpu:
                a_size: 90
                a_lo: 120
                a_hi: 209
-               r_size: 170 # RENAME REGS
+               r_size: 1210 # RENAME REGS
                r_lo: 210
-               r_hi: 379
-               p_size: 260
+               r_hi: 1419
+               p_size: 1300
                p_lo: 1
-               p_hi: 260
+               p_hi: 1300
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF

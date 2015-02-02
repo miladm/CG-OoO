@@ -30,10 +30,12 @@ void oooBkEnd_init () {
     exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
     cmt["latency"] >> cmt_lat;
     root["width"] >> width;
+    WIDTH eu_width;
+    root["eu"]["alu"]["count"] >> eu_width;
 
     g_ooo_clk = new sysClock (1);
     _ooo_core = new o3_sysCore (g_ooo_clk, 
-            8*width, 8*width, 8*width, width, width, width, width,
+            8*width, 8*width, 8*width, width, eu_width, width, width,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 
