@@ -57,9 +57,8 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
         _iWindow.ramAccess ();
-        if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
         if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break; /*-- INO SCHEDULING --*/
-        if (!g_RF_MGR->isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
+        if (!isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
 
         /* READ INS WIN */
         g_RF_MGR->reserveRF (ins);
@@ -79,6 +78,19 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
     }
 
     return pipe_stall;
+}
+
+bool scheduler::isReady (dynInstruction* ins) {
+    if (g_cfg->isEnFwd ()) {
+        if (g_RF_MGR->isReady (ins)) return true;
+        bool done_any_fwd = forwardFromCDB (ins);
+        bool is_ready = g_RF_MGR->checkReadyAgain (ins);
+        Assert ((is_ready && done_any_fwd) || (!is_ready && !done_any_fwd));
+        return is_ready;
+    } else {
+        if (g_RF_MGR->isReady (ins)) return true;
+        else return false;
+    }
 }
 
 /* WRITE INTO INS WINDOW */
@@ -105,65 +117,104 @@ void scheduler::updateInsWin () {
     }
 }
 
-/* FORWARD OPERANDS 
- * NOTE: this function forwards even if the ins would not execute at the same
- * cycle because of waiting for another operand that is still in flight (see
- * the calling function(s)). This is okay because at a later cycle the ins will
- * have been given the cycle time needed to access the RF anyway. This means
- * the number of accesses to RF is scewed by this function even though the time
- * model is correct (i.e. maybe more RF accesses happen than what we see in
- * this design).
- */
-void scheduler::forwardFromCDB (dynInstruction* ins) {
-    { /* FWD FROM EXE STAGE */
-        if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
-        List<AR>* rd_reg_list = ins->getARrdList ();
-        List<dynInstruction*> fwd_list;
+/* FORWARD OPERANDS */
+bool scheduler::forwardFromCDB (dynInstruction* ins) {
+    List<PR>* rd_reg_list = ins->getPRrdList ();
+    int num_global_match = rd_reg_list->NumElements ();
+    bool en_global_fwd = false;
+    bool done_any_fwd = false;
+    List<dynInstruction*> alu_fwd_list, mem_fwd_list;
+
+    { /*-- FWD FROM EXE STAGE --*/
+        if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
             if (!_execution_to_scheduler_port->isReadyNow ()) break;
             dynInstruction* fwd_ins = _execution_to_scheduler_port->popFront ();
-            fwd_list.Append (fwd_ins);
+            alu_fwd_list.Append (fwd_ins);
         }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
-            dynInstruction* fwd_ins = fwd_list.Nth (i);
-            List<AR>* wr_reg_list = fwd_ins->getARwrList ();
+        for (WIDTH i = 0; i < alu_fwd_list.NumElements (); i++) {
+            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
+            dynInstruction* fwd_ins = alu_fwd_list.Nth (i);
+            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
             for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                AR rd_reg = rd_reg_list->Nth (j);
+                PR rd_reg = rd_reg_list->Nth (j);
                 for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
-                    AR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                        s_alu_fwd_cnt++;
+                    PR wr_reg = wr_reg_list->Nth (k);
+                    if (rd_reg == wr_reg) { num_global_match--; break; }
+                }
+            }
+            if (num_global_match == 0) {en_global_fwd = true;}
+        }
+    }
+
+    mem_fwd:
+    { /*-- FWD FROM MEM STAGE --*/
+        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto done_point;
+        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
+            if (!_memory_to_scheduler_port->hasReadyNow ()) break;
+            dynInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow ();
+            mem_fwd_list.Append (fwd_ins);
+        }
+        for (WIDTH i = 0; i < mem_fwd_list.NumElements (); i++) {
+            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
+            dynInstruction* fwd_ins = mem_fwd_list.Nth (i);
+            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                PR rd_reg = rd_reg_list->Nth (j);
+                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                    PR wr_reg = wr_reg_list->Nth (k);
+                    if (rd_reg == wr_reg) { num_global_match--; break; }
+                }
+            }
+            if (num_global_match == 0) {en_global_fwd = true;}
+        }
+    }
+
+    /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
+    if (en_global_fwd) {
+        { /*-- FWD FROM EXE STAGE --*/
+            for (WIDTH i = 0; i < alu_fwd_list.NumElements (); i++) {
+                /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
+                dynInstruction* fwd_ins = alu_fwd_list.Nth (i);
+                List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+                for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_reg_list->Nth (j);
+                    for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_reg_list->Nth (k);
+                        if (rd_reg == wr_reg) {
+                            rd_reg_list->RemoveAt (j);
+                            s_alu_fwd_cnt++;
+                            done_any_fwd = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        { /*-- FWD FROM MEM STAGE --*/
+            for (WIDTH i = 0; i < mem_fwd_list.NumElements (); i++) {
+                dynInstruction* fwd_ins = mem_fwd_list.Nth (i);
+                List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+                for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_reg_list->Nth (j);
+                    for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_reg_list->Nth (k);
+                        if (rd_reg == wr_reg) {
+                            rd_reg_list->RemoveAt(j);
+                            s_mem_fwd_cnt++;
+                            done_any_fwd = true;
+                            break;
+                        }
                     }
                 }
             }
         }
     }
 
-    { /* FWD FROM MEM STAGE */
-        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
-        List<AR>* rd_reg_list = ins->getARrdList ();
-        List<dynInstruction*> fwd_list;
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (!_memory_to_scheduler_port->hasReadyNow ()) break;
-            dynInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow ();
-            fwd_list.Append (fwd_ins);
-        }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
-            dynInstruction* fwd_ins = fwd_list.Nth (i);
-            List<AR>* wr_reg_list = fwd_ins->getARwrList ();
-            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                AR rd_reg = rd_reg_list->Nth (j);
-                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
-                    AR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                        s_mem_fwd_cnt++;
-                    }
-                }
-            }
-        }
-    }
+    done_point:
+    Assert (num_global_match >= 0);
+    return done_any_fwd;
 }
 
 /* MANAGE COMMON DATA BUS (CDB) */

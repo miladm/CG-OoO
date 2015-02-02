@@ -25,6 +25,8 @@ bool rfManager::isReady (dynInstruction* ins) {
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
         if (!_RF.isRegValidAndReady (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid in RF", _clk->now ());
             s_rf_not_ready_cnt++;
             return false; /* operand not available */
         } else {
@@ -34,11 +36,37 @@ bool rfManager::isReady (dynInstruction* ins) {
 
     if (a_rdReg_list->NumElements () == 0) {
         _e_table.ramAccess (ins->getTotNumRdAR ());
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /* all operands available */
     }
 
     s_rf_not_ready_cnt++;
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
     return false; /* not all operands available */
+}
+
+bool rfManager::checkReadyAgain (dynInstruction* ins) {
+    List<AR>* a_rdReg_list = ins->getARrdList ();
+    for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = a_rdReg_list->Nth (i);
+        if (!_RF.isRegValidAndReady (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid in RF", _clk->now ());
+            return false; /* OPERAND NOT AVAILABLE */
+        }
+    }
+
+    if (a_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        return true; /* ALL OPERANDS AVAILABLE */
+    }
+
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /* NOT ALL OPERANDS AVAILABLE */
 }
 
 /* RESERVE REGISTER FILE ENTRIES FOR WRITE */
