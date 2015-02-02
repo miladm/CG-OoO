@@ -25,6 +25,8 @@ class bb_grfManager : public unit {
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
         void updateWireState (AXES_TYPE, WIDTH);
+    
+        void getStat ();
 
 	private:
         bb_registerRename _GRF;

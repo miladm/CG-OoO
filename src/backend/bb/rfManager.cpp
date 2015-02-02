@@ -57,6 +57,8 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
     return result;
 }
 
+/* IN ORDER TO SUUPORT FORWARDING, WE SHOULD DO A SECOND CHECK FOR THE
+ * READINESS OF THE INSTRUCTIONS FORWARDED */
 bool bb_rfManager::checkReadyAgain (bbInstruction* ins) {
     bool lrf_ready = true;
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
@@ -159,4 +161,13 @@ void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
     _GRF_MGR.updateWireState (axes_type, num_g_reg);
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
         _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
+}
+
+void bb_rfManager::getStat () {
+    _GRF_MGR.getStat ();
+    map<WIDTH, bb_lrfManager*>::iterator it;
+    for (it = _LRF_MGRS.begin (); it != _LRF_MGRS.end (); it++) {
+        bb_lrfManager* lrf_mgr = it->second;
+        lrf_mgr->getStat ();
+    }
 }

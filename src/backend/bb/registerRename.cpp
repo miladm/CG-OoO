@@ -8,7 +8,9 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
     : unit (rf_name, clk), 
       _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
       _rd_port (READ,  clk, root, rf_name + ".rd_wire"),
-      _blk_cnt (blk_cnt)
+      _blk_cnt (blk_cnt),
+      s_availablePRset_empty_cnt (g_stats.newScalarStat (rf_name, "availablePRset_empty_cnt", "Number of cycles availablePRset is empty", 0, PRINT_ZERO)),
+      s_availablePRset_avg (g_stats.newRatioStat (clk->getStatObj (), rf_name, "availablePRset_avg", "Average size of availablePRset / cycle ", 0, PRINT_ZERO))
 {
     _cycle = START_CYCLE;
 
@@ -281,4 +283,12 @@ WIDTH bb_registerRename::blkIndx2APRindx (BB_ID blk_indx) {
     Assert (grf_segmnt_indx < _grf_segmnt_cnt);
 #endif
     return grf_segmnt_indx;
+}
+
+void bb_registerRename::getStat () {
+    for (int i = 0; i < _grf_segmnt_cnt; i++) {
+        if (_availablePRset->Nth (i)->size () == 0) 
+            s_availablePRset_empty_cnt++;
+        s_availablePRset_avg += _availablePRset->Nth (i)->size ();
+    }
 }

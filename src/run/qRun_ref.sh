@@ -29,8 +29,8 @@ FILE=$OUT_PATH/README
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
-echo "Copying the YAML config file to output dir"
-cp $CFG_PATH/base.yaml $OUT_PATH/.
+#echo "Copying the YAML config file to output dir"
+#cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE

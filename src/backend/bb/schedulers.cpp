@@ -186,9 +186,16 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
 }
 
 bool bb_scheduler::isReady (bbInstruction* ins) {
-    if (_RF_MGR->isReady (ins)) return true;
-    if (g_cfg->isEnFwd ()) forwardFromCDB (ins);
-    return _RF_MGR->checkReadyAgain (ins);
+    if (g_cfg->isEnFwd ()) {
+        if (_RF_MGR->isReady (ins)) return true;
+        bool done_any_fwd = forwardFromCDB (ins);
+        bool is_ready = _RF_MGR->checkReadyAgain (ins);
+        Assert ((is_ready && done_any_fwd) || (!is_ready && !done_any_fwd));
+        return is_ready;
+    } else {
+        if (_RF_MGR->isReady (ins)) return true;
+        else return false;
+    }
 }
 
 bool bb_scheduler::runaheadPermit (bbInstruction* ins) {
@@ -299,7 +306,8 @@ bool bb_scheduler::detectNewBB (bbInstruction* ins) {
  * model is correct (i.e. maybe more RF accesses happen than what we see in
  * this design).
  --*/
-void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
+bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
+    bool done_any_fwd = false;
     { /*-- FWD FROM EXE STAGE --*/
         if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
         List<PR>* rd_reg_list = ins->getPRrdList ();
@@ -348,6 +356,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                         if (rd_reg == wr_reg) {
                             rd_reg_list->RemoveAt (j);
                             s_alu_g_fwd_cnt++;
+                            done_any_fwd = true;
                         }
                     }
                 }
@@ -360,6 +369,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                             if (rd_reg == wr_reg) {
                                 rd_lreg_list->RemoveAt(j);
                                 s_alu_l_fwd_cnt++;
+                                done_any_fwd = true;
                             }
                         }
                     }
@@ -370,7 +380,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
 
     mem_fwd:
     { /*-- FWD FROM MEM STAGE --*/
-        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) return;
+        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto done_point;
         List<PR>* rd_reg_list = ins->getPRrdList ();
         List<PR>* rd_lreg_list = ins->getLARrdList ();
         List<bbInstruction*> fwd_list;
@@ -418,6 +428,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                         if (rd_reg == wr_reg) {
                             rd_reg_list->RemoveAt(j);
                             s_mem_g_fwd_cnt++;
+                            done_any_fwd = true;
                         }
                     }
                 }
@@ -430,6 +441,7 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                             if (rd_reg == wr_reg) {
                                 rd_lreg_list->RemoveAt(j);
                                 s_mem_l_fwd_cnt++;
+                                done_any_fwd = true;
                             }
                         }
                     }
@@ -437,6 +449,9 @@ void bb_scheduler::forwardFromCDB (bbInstruction* ins) {
             }
         }
     }
+
+    done_point:
+    return done_any_fwd;
 }
 
 /*-- MANAGE COMMON DATA BUS (CDB) 
@@ -490,4 +505,5 @@ void bb_scheduler::regStat () {
         _bbWindows->Nth(j)->regStat ();
     }
     s_bbWin_inflight_rat += _busy_bbWin.size ();
+    _RF_MGR->getStat ();
 }

@@ -123,3 +123,6 @@ void bb_lrfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
         _RF.updateWireState (axes_type);
     }
 }
+
+void bb_lrfManager::getStat () {
+}

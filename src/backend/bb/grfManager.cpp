@@ -165,3 +165,7 @@ void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
         _GRF.updateWireState (axes_type);
     }
 }
+
+void bb_grfManager::getStat () {
+    _GRF.getStat ();
+}

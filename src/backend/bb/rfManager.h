@@ -38,6 +38,8 @@ class bb_rfManager : public unit {
         bool hasFreeWire (AXES_TYPE, bbInstruction*);
         void updateWireState (AXES_TYPE, bbInstruction*);
 
+        void getStat ();
+
 	private:
         bb_grfManager _GRF_MGR;
         map<WIDTH, bb_lrfManager*> _LRF_MGRS;

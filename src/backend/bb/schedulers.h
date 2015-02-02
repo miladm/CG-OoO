@@ -34,7 +34,7 @@ class bb_scheduler : protected stage {
         void updatebbWindows ();
         void manageCDB ();
         void manageBusyBBWin (bbWindow*);
-        void forwardFromCDB (bbInstruction* ins);
+        bool forwardFromCDB (bbInstruction* ins);
         void regStat ();
         bool hasReadyInsInBBWins (LENGTH&);
         void updateBBROB (dynBasicblock*);

@@ -25,6 +25,8 @@ class bb_lrfManager : public unit {
         bool hasFreeWire (AXES_TYPE, WIDTH);
         void updateWireState (AXES_TYPE, WIDTH);
 
+        void getStat ();
+
 	private:
         registerFile _RF;
         WIDTH _lrf_id;

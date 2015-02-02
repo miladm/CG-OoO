@@ -7,7 +7,9 @@
 o3_registerRename::o3_registerRename (sysClock* clk, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk), 
       _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
-      _rd_port (READ,  clk, root, rf_name + ".rd_wire")
+      _rd_port (READ,  clk, root, rf_name + ".rd_wire"),
+      s_availablePRset_empty_cnt (g_stats.newScalarStat (rf_name, "availablePRset_empty_cnt", "Number of cycles availablePRset is empty", 0, PRINT_ZERO)),
+      s_availablePRset_avg (g_stats.newRatioStat (clk->getStatObj (), rf_name, "availablePRset_avg", "Average size of availablePRset / cycle ", 0, PRINT_ZERO))
 {
     _cycle = START_CYCLE;
 
@@ -210,4 +212,10 @@ WIDTH o3_registerRename::getNumFreeWires (AXES_TYPE axes_type) {
         return _rd_port.getNumFreeWires ();
     else
         return _wr_port.getNumFreeWires ();
+}
+
+void o3_registerRename::getStat () {
+    if (_availablePRset.size () == 0) 
+        s_availablePRset_empty_cnt++;
+    s_availablePRset_avg += _availablePRset.size ();
 }

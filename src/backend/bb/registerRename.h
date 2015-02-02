@@ -55,6 +55,8 @@ class bb_registerRename : public unit {
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
 
+        void getStat ();
+
     private:
         WIDTH blkIndx2APRindx (BB_ID);
         WIDTH PR2APRindx (PR pr);
@@ -87,6 +89,10 @@ class bb_registerRename : public unit {
         PR _p_rf_segmnt_size;
         WIDTH _grf_segmnt_cnt;
         WIDTH _num_blk_per_segmnt;
+
+        /*-- STAT --*/
+        ScalarStat& s_availablePRset_empty_cnt;
+        RatioStat& s_availablePRset_avg;
 };
 
 #endif

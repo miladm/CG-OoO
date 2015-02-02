@@ -102,8 +102,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
             if (g_var.g_pipe_state == PIPE_FLUSH) break;
             if (ins == NULL) continue;
             if (!(ins->getInsType () == MEM && 
-                        ins->getMemType () == LOAD) &&
-                    !_RF_MGR->hasFreeWire (WRITE, ins)) continue;
+                  ins->getMemType () == LOAD) &&
+                  !_RF_MGR->hasFreeWire (WRITE, ins)) continue;
             if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
             /*-- COMPLETE INS --*/
