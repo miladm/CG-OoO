@@ -35,7 +35,7 @@ void inoBkEnd_init () {
 
     g_ino_clk = new sysClock (1);
     _core = new sysCore (g_ino_clk,
-            8*width, 8*width, 8*width, width, eu_width, width, width,
+            8*width, 8*width, 8*width, eu_width, eu_width, width, width,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 

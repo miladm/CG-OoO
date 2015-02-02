@@ -116,6 +116,14 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
     }
 }
 
+VOID getUnInstrumentedMOV (ADDRINT ins_addr) {
+    if (g__staticCode->hasIns (ins_addr)) {
+        pin__makeNewBBIns (ins_addr, ALU);
+    } else {
+        s_missing_ins_in_stat_code_cnt++;
+    }
+}
+
 /*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3--*/
 dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     dynInstruction* insObj = g_var.getNewCodeCacheIns ();
@@ -194,6 +202,15 @@ void pin__genInsStat (dynBasicblock* bb) {
 
 }
 
+void handleUnInstrumentedCode (dynBasicblock* bb) {
+    list<ADDRS> unInstrumentedList = bb->getUnInstrumentedIns ();
+    list<ADDRS>::iterator it;
+    for (it = unInstrumentedList.begin (); it != unInstrumentedList.end (); it++) {
+        ADDRS ins_addr = *it;
+        getUnInstrumentedMOV (ins_addr);
+    }
+}
+
 /*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
 void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
@@ -202,6 +219,7 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
     dynBasicblock* lastBB = g_var.getLastCacheBB ();
     if (lastBB != NULL) {
+//        handleUnInstrumentedCode (lastBB);
         if (g_var.scheduling_mode == STATIC_SCH) {
             lastBB->rescheduleInsList (&g_var.g_seq_num);
         }

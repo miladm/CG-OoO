@@ -36,8 +36,12 @@ void Failure(const char *format, ...);
  *       ptr != NULL
  */ 
 
+#ifdef ASSERTION
 #define Assert(expr)  \
   ((expr) ? (void)0 : Failure("Assertion Failed: %s, line %d:\n    %s", __FILE__, __LINE__, #expr))
+#else
+#define Assert(expr) ((void)sizeof(expr))
+#endif
 
 /**
  * Function: PrintDebug()

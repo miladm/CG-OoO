@@ -110,6 +110,17 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
     }
 }
 
+list<ADDRS> dynBasicblock::getUnInstrumentedIns () {
+    list<ADDRS>::iterator it;
+    for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
+        ADDRS ins_addr = *it;
+        if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) {
+            _unInstrumentedList.push_back (ins_addr);
+        }
+    }
+    return _unInstrumentedList;
+}
+
 /* 
  * PRE: 
  * THIS STAGE MUST NECESSARILY COME AFTER RESCHEDULEINSLIST () FOR STATIC_SCH MODE 

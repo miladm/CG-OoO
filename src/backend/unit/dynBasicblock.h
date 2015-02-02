@@ -105,6 +105,9 @@ class dynBasicblock : public unit {
         void revokeRunaheadPermit ();
         bool runaheadPermit ();
 
+        //UNINSTRUMENTED CODE
+        list<ADDRS> getUnInstrumentedIns ();
+
     private:
         void setBBheadID ();
         void setWrongPath ();
@@ -113,6 +116,8 @@ class dynBasicblock : public unit {
     private:
         bbHead _head;
         list<ADDRS> _staticBBinsList;
+        list<ADDRS> _unInstrumentedList;
+
     public: //TODO get rid of this
         map <ADDRS, bbInstruction*> _bbInsMap;
         List<bbInstruction*> _insList;

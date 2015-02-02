@@ -21,6 +21,7 @@ class o3_rfManager : public unit {
         void completeRegs (dynInstruction* ins);
         void commitRegs (dynInstruction* ins);
         void squashRenameReg ();
+        void regStat ();
 
         /*-- WIRES CTRL --*/
         bool hasFreeWire (AXES_TYPE, WIDTH);

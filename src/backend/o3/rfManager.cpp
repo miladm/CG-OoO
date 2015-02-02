@@ -165,4 +165,7 @@ void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
+void o3_rfManager::regStat () {
+    _GRF.getStat ();
+}
 o3_rfManager* g_GRF_MGR;

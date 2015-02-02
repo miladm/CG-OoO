@@ -295,4 +295,5 @@ void o3_scheduler::regStat () {
     for (WIDTH j = 0; j < _num_res_stns; j++) {
         _ResStns.Nth(j)->regStat ();
     }
+    _RF_MGR->regStat ();
 }
