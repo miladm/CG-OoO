@@ -307,48 +307,91 @@ bool bb_scheduler::detectNewBB (bbInstruction* ins) {
  * this design).
  --*/
 bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
+    List<PR>* rd_reg_list = ins->getPRrdList ();
+    List<PR>* rd_lreg_list = ins->getLARrdList ();
+    int num_global_match = rd_reg_list->NumElements ();
+    int num_local_match = rd_lreg_list->NumElements ();
+    bool en_global_fwd = false;
+    bool en_local_fwd = false;
     bool done_any_fwd = false;
+    List<bbInstruction*> alu_fwd_list, mem_fwd_list;
+
+//    cout << "x: " << num_global_match << " " << num_local_match << endl;
     { /*-- FWD FROM EXE STAGE --*/
         if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
-        List<PR>* rd_reg_list = ins->getPRrdList ();
-        List<PR>* rd_lreg_list = ins->getLARrdList ();
-        List<bbInstruction*> fwd_list;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
             if (!_execution_to_scheduler_port->isReadyNow ()) break;
             bbInstruction* fwd_ins = _execution_to_scheduler_port->popFront ();
-            fwd_list.Append (fwd_ins);
+            alu_fwd_list.Append (fwd_ins);
         }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
+        for (WIDTH i = 0; i < alu_fwd_list.NumElements (); i++) {
             /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
-            bbInstruction* fwd_ins = fwd_list.Nth (i);
+            bbInstruction* fwd_ins = alu_fwd_list.Nth (i);
             List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
-            if (rd_reg_list->NumElements () != wr_reg_list->NumElements ()) continue;
-            bool fwd_now = true;
             for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                bool found_match = false;
                 PR rd_reg = rd_reg_list->Nth (j);
                 for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
                     PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) { found_match = true; break; }
+                    if (rd_reg == wr_reg) { num_global_match--; break; }
                 }
-                if (!found_match) {fwd_now = false; break;}
             }
+            if (num_global_match == 0) {en_global_fwd = true;}
             if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) { //todo this needs fix
                 List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
-                if (rd_lreg_list->NumElements () != wr_lreg_list->NumElements ()) continue;
                 for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
-                    bool found_match = false;
                     PR rd_reg = rd_lreg_list->Nth (j);
                     for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
                         PR wr_reg = wr_lreg_list->Nth (k);
-                        if (rd_reg == wr_reg) { found_match = true; break; }
+                        if (rd_reg == wr_reg) { num_local_match--; break; }
                     }
-                    if (!found_match) {fwd_now = false; break;}
+                }
+                if (num_local_match == 0) {en_local_fwd = true;}
+            }
+        }
+    }
+
+    mem_fwd:
+    { /*-- FWD FROM MEM STAGE --*/
+        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto done_point;
+        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
+            if (!_memory_to_scheduler_port->hasReadyNow ()) break;
+            bbInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow ();
+            mem_fwd_list.Append (fwd_ins);
+        }
+        for (WIDTH i = 0; i < mem_fwd_list.NumElements (); i++) {
+            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
+            bbInstruction* fwd_ins = mem_fwd_list.Nth (i);
+            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
+            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
+                PR rd_reg = rd_reg_list->Nth (j);
+                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
+                    PR wr_reg = wr_reg_list->Nth (k);
+                    if (rd_reg == wr_reg) { num_global_match--; break; }
                 }
             }
+            if (num_global_match == 0) {en_global_fwd = true;}
+            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
+                List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
+                for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
+                    PR rd_reg = rd_lreg_list->Nth (j);
+                    for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
+                        PR wr_reg = wr_lreg_list->Nth (k);
+                        if (rd_reg == wr_reg) { num_local_match--; break; }
+                    }
+                }
+                if (num_local_match == 0) {en_local_fwd = true;}
+            }
+        }
+    }
 
-            /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
-            if (fwd_now) {
+//    cout << "y: " << num_global_match << " " << num_local_match << endl;
+    /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
+    if ((en_local_fwd || !USE_LRF) && en_global_fwd) {
+        { /*-- FWD FROM EXE STAGE --*/
+            for (WIDTH i = 0; i < alu_fwd_list.NumElements (); i++) {
+                /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
+                bbInstruction* fwd_ins = alu_fwd_list.Nth (i);
+                List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
                 for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
                     PR rd_reg = rd_reg_list->Nth (j);
                     for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
@@ -357,6 +400,7 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                             rd_reg_list->RemoveAt (j);
                             s_alu_g_fwd_cnt++;
                             done_any_fwd = true;
+                            break;
                         }
                     }
                 }
@@ -370,56 +414,17 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                                 rd_lreg_list->RemoveAt(j);
                                 s_alu_l_fwd_cnt++;
                                 done_any_fwd = true;
+                                break;
                             }
                         }
                     }
                 }
             }
         }
-    }
 
-    mem_fwd:
-    { /*-- FWD FROM MEM STAGE --*/
-        if (_memory_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto done_point;
-        List<PR>* rd_reg_list = ins->getPRrdList ();
-        List<PR>* rd_lreg_list = ins->getLARrdList ();
-        List<bbInstruction*> fwd_list;
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
-            if (!_memory_to_scheduler_port->hasReadyNow ()) break;
-            bbInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow ();
-            fwd_list.Append (fwd_ins);
-        }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
-            /* CHECK IF INS WILL BECOME READY ONCE THE FORWARDING TAKES PLACE */
-            bbInstruction* fwd_ins = fwd_list.Nth (i);
-            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
-            if (rd_reg_list->NumElements () != wr_reg_list->NumElements ()) continue;
-            bool fwd_now = true;
-            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                bool found_match = false;
-                PR rd_reg = rd_reg_list->Nth (j);
-                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
-                    PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) { found_match = true; break; }
-                }
-                if (!found_match) {fwd_now = false; break;}
-            }
-            if (USE_LRF && fwd_ins->getBBWinID () == ins->getBBWinID ()) {
-                List<PR>* wr_lreg_list = fwd_ins->getLARwrList ();
-                for (int j = rd_lreg_list->NumElements () - 1; j >= 0; j--) {
-                    bool found_match = false;
-                    PR rd_reg = rd_lreg_list->Nth (j);
-                    for (int k = wr_lreg_list->NumElements () - 1; k >= 0; k--) {
-                        PR wr_reg = wr_lreg_list->Nth (k);
-                        if (rd_reg == wr_reg) { found_match = true; break; }
-                    }
-                    if (!found_match) {fwd_now = false; break;}
-                }
-            }
-
-            /* DO FORWARDING NOW THAT CONFIDENT ABOUT IT */
-            if (fwd_now) {
-                bbInstruction* fwd_ins = fwd_list.Nth (i);
+        { /*-- FWD FROM MEM STAGE --*/
+            for (WIDTH i = 0; i < mem_fwd_list.NumElements (); i++) {
+                bbInstruction* fwd_ins = mem_fwd_list.Nth (i);
                 List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
                 for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
                     PR rd_reg = rd_reg_list->Nth (j);
@@ -429,6 +434,7 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                             rd_reg_list->RemoveAt(j);
                             s_mem_g_fwd_cnt++;
                             done_any_fwd = true;
+                            break;
                         }
                     }
                 }
@@ -442,6 +448,7 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
                                 rd_lreg_list->RemoveAt(j);
                                 s_mem_l_fwd_cnt++;
                                 done_any_fwd = true;
+                                break;
                             }
                         }
                     }
@@ -451,6 +458,7 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     }
 
     done_point:
+    Assert (num_global_match >= 0); Assert (num_local_match >= 0);
     return done_any_fwd;
 }
 
