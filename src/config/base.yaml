@@ -109,16 +109,16 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
-               segmnt_cnt: 1 # Specify the number of GRF segments (1 is a unified GRF)
+               segmnt_cnt: 10 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 90
                a_lo: 120
                a_hi: 209
-               r_size: 166 # RENAME REGS
+               r_size: 170 # RENAME REGS
                r_lo: 210
-               r_hi: 375
-               p_size: 256
+               r_hi: 379
+               p_size: 260
                p_lo: 1
-               p_hi: 256
+               p_hi: 260
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
@@ -262,7 +262,7 @@ cpu:
                 type: FIFO
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 16
+                count: 10
                 runahead_issue_en: 1
                 runahead_issue_cnt: 4
                 rd_wire_cnt: 4
@@ -331,7 +331,7 @@ cpu:
 
        eu:
            alu:
-               count: 16
+               count: 40
                count_per_blk: 4
                latency: 1
                e_eu: 1.040

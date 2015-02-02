@@ -316,7 +316,6 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     bool done_any_fwd = false;
     List<bbInstruction*> alu_fwd_list, mem_fwd_list;
 
-//    cout << "x: " << num_global_match << " " << num_local_match << endl;
     { /*-- FWD FROM EXE STAGE --*/
         if (_execution_to_scheduler_port->getBuffState () == EMPTY_BUFF) goto mem_fwd;
         for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with exe_num_EU
