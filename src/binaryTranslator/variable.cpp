@@ -7,8 +7,8 @@
 variable::variable (long int var) {
 	Assert(var >= X86_REG_LO && var <= X86_REG_HI && "invalid x86 variable.");
 	_var = var;
-	_c = 0;
-	_hackPushCount = 0;
+	_c = 1;
+	_hackPushCount = 1;
 	bbList = new List<basicblock*>;
 }
 
@@ -38,7 +38,7 @@ int variable::getC() {
 }
 
 void variable::setC(int c) {
-	Assert(c >= 0 && "Invalid c value inserted.");
+	Assert(c > 0 && "Invalid c value inserted.");
     Assert (_c < LARGE_NUMBER && "SSA register conflict happens if larger than LARGE_NUMBER - consider increasing this number");
 	_c = c;
 }
@@ -50,7 +50,7 @@ void variable::popFromStack() {
 
 void variable::pushToStack(int s) {
 	// printf("pushing to stack %d_%d\n", _var, s);
-	Assert(s >= 0 && "Invalid s value inserted.");
+	Assert(s > 0 && "Invalid s value inserted.");
 	_s.push_back(s);
 }
 

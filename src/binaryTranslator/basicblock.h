@@ -8,9 +8,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <set>
+#include <list>
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include "list.h"
 #include "global.h"
 #include "instruction.h"
@@ -159,6 +161,11 @@ class basicblock {
         // ADDING MOV OPS
         void insertMOVop (map<ADDR,instruction*>*, long int, long int, ADDR&, int, PUSH_LOCATION);
         void addMovIns (instruction*, int, PUSH_LOCATION);
+
+        // REDUNDANCY ELIMINATION
+        int redundantMovOpElim (SCH_MODE);
+        int deadMovOpElim (SCH_MODE);
+        int overwrittenMovOpElim (SCH_MODE);
 
 		// DATA-FLOW ANALYSIS
     private:

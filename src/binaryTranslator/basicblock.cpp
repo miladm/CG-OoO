@@ -2,10 +2,6 @@
  *  basicblock.cpp
  ******************************************************************************/
 
-#include <set>
-#include <vector>
-#include <algorithm>
-#include <iostream>
 #include "basicblock.h"
 
 basicblock::basicblock () {
@@ -687,6 +683,7 @@ void basicblock::insertMOVop (map<ADDR,instruction*>* insAddrMap, long int dst_r
 	newIns->setType ('o');
 	newIns->setOpCode ("#MOV\n");
 	newIns->setInsAddr (insAddr);
+    newIns->setInsertedMovOp ();
 	int type = READ;
 	newIns->setSSAregister (&src_reg, &type);
 	type = WRITE;
@@ -713,6 +710,7 @@ void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_
 	newIns->setType ('o');
 	newIns->setOpCode ("#MOV\n");
 	newIns->setInsAddr (insAddr);
+    newIns->setInsertedMovOp ();
 	int type = READ;
 	newIns->setRegister (&src_var, &type);
 	newIns->setReadVar (src_var,src_subs);
@@ -1167,8 +1165,8 @@ void basicblock::resetBBbrHeader () {
 }
 
 void basicblock::setsupStats () {
-    for (int i = 0; i < _insList_orig->NumElements (); i++) {
-        instruction* ins = _insList_orig->Nth (i);
+    for (int i = 0; i < _insList->NumElements (); i++) {
+        instruction* ins = _insList->Nth (i);
         if (ins->isUPLD ()) _stats.upld_cnt++;
         if (ins->isUPLDdep ()) _stats.upld_dep_cnt++;
         if (ins->isUPLDdep () && ins->isUPLD ()) _stats.upld_n_dep_cnt++;
@@ -1181,16 +1179,16 @@ void basicblock::reportStats () {
         << _stats.upld_cnt << " " 
         << _stats.upld_dep_cnt << " " 
         << _stats.upld_n_dep_cnt << " " 
-        << _insList_orig->NumElements () << " " 
-        << (double)_stats.upld_cnt / _insList_orig->NumElements () << " "
-        << (double)_stats.upld_dep_cnt / _insList_orig->NumElements () << " "
+        << _insList->NumElements () << " " 
+        << (double)_stats.upld_cnt / _insList->NumElements () << " "
+        << (double)_stats.upld_dep_cnt / _insList->NumElements () << " "
         << (double)_stats.upld_n_dep_cnt / (_stats.upld_cnt-1)
         << endl;
 }
 
 void basicblock::findRootUPLD () {
-    for (int i = 0; i < _insList_orig->NumElements (); i++) {
-        instruction* ins = _insList_orig->Nth (i);
+    for (int i = 0; i < _insList->NumElements (); i++) {
+        instruction* ins = _insList->Nth (i);
         if (ins->isUPLD () && !ins->isUPLDdep ()) 
             _upld_roots->Append (ins);
     }
@@ -1215,9 +1213,9 @@ void basicblock::markUPLDroots () {
 }
 
 void basicblock::makeSubBlocks () {
-    for (int i = 0; i < _insList_orig->NumElements (); i++) {
+    for (int i = 0; i < _insList->NumElements (); i++) {
         bool found_sub_blk = false;
-        instruction* ins = _insList_orig->Nth (i);
+        instruction* ins = _insList->Nth (i);
         set<ADDR> upld_roots = ins->getUPLDroots ();
         map<SUB_BLK_ID, sub_block*>::iterator it;
         for (it = sub_blk_map.begin (); it != sub_blk_map.end (); it++) {
@@ -1246,4 +1244,146 @@ void basicblock::makeSubBlocks () {
             if (_upld_roots->NumElements () > 0) cout << "(" << _sub_blk_id - 1 << ", " << hex << ins->getInsAddr ()  << dec << ") ";
         }
     }
+}
+
+/* THE INSTRUCTION CORRESPONDING TO THE bbID MAY BE DELETED HERE WITHOUT
+ * UPDATING THE bbID 
+ *
+ * IN THIS OPTIMIZATION, LIST-SCHEDULED AND NON-LIST-SCHEDULED CODE CAN USE THE
+ * SAME LIST
+ */
+int basicblock::redundantMovOpElim (SCH_MODE sch_mode) {
+    /* PICK THE RIGHT LIST TO PROCESS */
+    List<instruction*>* insList = NULL;
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    int remove_cnt = 0;
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        if (ins->isInsertedMovOp ()) {
+            Assert (ins->getNumReg () == 2 && "The MOV instruction must have two regiters");
+            if (ins->getNthArchReg (0) == ins->getNthArchReg (1)) {
+                delete insList->Nth (i);
+                insList->RemoveAt (i);
+                remove_cnt++;
+            }
+        }
+    }
+    return remove_cnt;
+}
+
+/* PRE: MUST BE DONE AT THE END OF REGISTER ALLOCATION */
+int basicblock::overwrittenMovOpElim (SCH_MODE sch_mode) {
+    List<instruction*>* insList = NULL;
+    map<long int, instruction*> producers;
+    int remove_cnt = 0;
+
+    /* PICK THE RIGHT LIST TO PROCESS */
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        if (ins->isInsertedMovOp ()) {
+            for (int j = 0; j < ins->getNumReg (); j++) {
+                if (ins->getNthRegType (j) == WRITE) {
+                    long int reg = ins->getNthArchReg (j);
+                    if (producers.find (reg) == producers.end ()) {
+                        producers.insert (pair<long int, instruction*>(reg, ins));
+                        break; //assuming one write operand
+                    } else {
+                        delete ins;
+                        insList->RemoveAt (i);
+                        remove_cnt++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return remove_cnt;
+}
+
+/* PRE: MUST BE DONE AT THE END OF REGISTER ALLOCATION 
+ *      IF AN INSTRUCTION ADDRESS IS REPEATED IN A BLOCK, THIS CODE FAILS - insIndx
+ */     
+int basicblock::deadMovOpElim (SCH_MODE sch_mode) {
+    List<instruction*>* insList = NULL;
+    map<long int, instruction*> producers;
+    map<long int, list<instruction*> > consumers;
+    map<ADDR, instruction*> removeList;
+    map<ADDR, int> insIndx;
+    int remove_cnt = 0;
+
+    /* PICK THE RIGHT LIST TO PROCESS */
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        insIndx[ins->getInsAddr ()] = i;
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                producers[ins->getNthArchReg(j)] = ins;
+            } else if (ins->getNthRegType (j) == READ) {
+                consumers[ins->getNthArchReg(j)].push_back (ins);
+            }
+        }
+    }
+
+    /* MARK THE INSTRUCTIONS TO BE REMOVED */
+    map<long int, list<instruction*> >::iterator it;
+    for (it = consumers.begin (); it != consumers.end (); it++) {
+        long int use_reg = it->first;
+        instruction* front_ins = it->second.front ();
+        if (it->second.size () == 1 &&
+            front_ins->isInsertedMovOp () &&
+            producers.find (use_reg) != producers.end () &&
+            insIndx[front_ins->getInsAddr ()] > insIndx[producers[use_reg]->getInsAddr ()])
+        {
+            removeList.insert (pair<ADDR, instruction*> (front_ins->getInsAddr (), front_ins));
+        }
+    }
+
+    /* REMOVE REDUNDANT INSTRUCTIONS */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        ADDR ins_addr = ins->getInsAddr ();
+        if (removeList.find (ins_addr) != removeList.end ()) {
+            Assert (ins->isInsertedMovOp ());
+            long int wr_reg = -1, rd_reg = -1;
+            for (int j = 0; j < ins->getNumReg (); j++) {
+                if (ins->getNthRegType (j) == WRITE) wr_reg = ins->getNthArchReg (j);
+                else if (ins->getNthRegType (j) == READ) rd_reg = ins->getNthArchReg (j);
+            }
+            Assert (wr_reg > 0 && rd_reg > 0);
+            Assert (producers.find (rd_reg) != producers.end ());
+            instruction* def_ins = producers[rd_reg];
+            def_ins->replaceWriteArchReg (rd_reg, wr_reg);
+            delete ins;
+            insList->RemoveAt (i);
+            remove_cnt++;
+        }
+    }
+
+    return remove_cnt;
 }

@@ -14,6 +14,7 @@ static set<ADDRINT> _bbHeadSet;
 static ScalarStat& s_pin_missing_static_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_missing_static_bb_cnt", "Number of dynamic BB's with no static counterpart.", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_bb_cnt", "Number of basicblocks instrumented in frontend", 0, NO_PRINT_ZERO));
 static ScalarStat& s_missing_ins_in_stat_code_cnt (g_stats.newScalarStat ("uOpGen", "missing_ins_in_stat_code_cnt", "Number of dynamic instructions not found in static code", 0, NO_PRINT_ZERO));
+static ScalarStat& s_mov_insertion_cnt (g_stats.newScalarStat ("uOpGen", "mov_insertion_cnt", "Number of MOV instructions inserted in dynamic sequence", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_gr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_cnt", "Number of global register operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_lr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_cnt", "Number of local register operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_gr_rd_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_rd_cnt", "Number of global register read operands", 0, NO_PRINT_ZERO));
@@ -119,6 +120,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
 VOID getUnInstrumentedMOV (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
         pin__makeNewBBIns (ins_addr, ALU);
+        s_mov_insertion_cnt++;
     } else {
         s_missing_ins_in_stat_code_cnt++;
     }
@@ -219,7 +221,7 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
     dynBasicblock* lastBB = g_var.getLastCacheBB ();
     if (lastBB != NULL) {
-//        handleUnInstrumentedCode (lastBB);
+        handleUnInstrumentedCode (lastBB);
         if (g_var.scheduling_mode == STATIC_SCH) {
             lastBB->rescheduleInsList (&g_var.g_seq_num);
         }

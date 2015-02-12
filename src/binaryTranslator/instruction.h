@@ -67,6 +67,7 @@ class instruction {
 		int getNthSpecialRegType (int i);
 		long int getNthReg (int i);
 		long int getNthSpecialReg (int i);
+        void replaceWriteArchReg (long int, long int);
 		long int getNthArchReg (int indx);
 		long int getNthOldWriteReg (int i);
 		long int getNthReadReg (int i);
@@ -159,6 +160,9 @@ class instruction {
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
 		int getLiveVarSize () { return _inSet.size ()+_defSet.size (); }
+        void setInsertedMovOp ();
+        bool isInsertedMovOp ();
+
 
 	private:
 		char _opCode[OPCODE_STRING_SIZE];
@@ -214,6 +218,9 @@ class instruction {
 		double _bpAccuracy;
 		double _missRate;
         MEM_SCH_MODE _mem_sch_mode;
+
+        /* INSETED MOV BY THIS COMPILER */
+        bool _is_inserted_mov_op;
 
         /* LIVENESS */
 		std::set<long int> _useSet;

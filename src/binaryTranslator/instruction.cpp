@@ -29,6 +29,7 @@ instruction::instruction () {
     _hasDst = false;
     _upld_dep = false;
     _upld_ins = false;
+    _is_inserted_mov_op = false;
 
     /*-- OBJ INSTANTIATIONS --*/
 	_r_read  = new List<long int>;
@@ -363,6 +364,20 @@ int instruction::getNthSpecialRegType (int i) {
     return _srt->Nth (i);
 }
 
+void instruction::replaceWriteArchReg (long int old_reg, long int new_reg) {
+	Assert (getNumReg () == _r_allocated->NumElements () && "Out of range architectural register access.");
+    bool replaced = false;
+    for (int i = 0; i < getNumReg (); i++) {
+        if (getNthRegType (i) == WRITE && getNthArchReg (i) == old_reg) {
+            _r_allocated->RemoveAt (i);
+            _r_allocated->InsertAt (new_reg, i);
+            replaced = true;
+            break; /* ASSUMING ONE WIRTE TO EACH REG / INS */
+        }
+    }
+    Assert (replaced == true);
+}
+
 int instruction::getNumReg () {
     Assert (_r->NumElements () == _rt->NumElements () && "Number of registers and reg-types don't match");
     return _r->NumElements ();
@@ -540,13 +555,13 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
     if (_mem_sch_mode == LOAD_STORE_ORDER) {
 	    /*-- MEMORY DEPENDENCY (NO MEMORY DISAMBIGUATION) --*/
         if (getType () == 'M' && stList->NumElements () > 0) {
-            instruction *storeOp = stList->Nth (stList->NumElements ()-1);
+            instruction *storeOp = stList->Last ();
             storeOp->setAsDependent (this);
             setAsAncestor (storeOp);
         }
     } else if (_mem_sch_mode == STORE_ORDER) {
         if (getType () == 'M' && isWrMemType () && stList->NumElements () > 0) {
-            instruction *storeOp = stList->Nth (stList->NumElements ()-1);
+            instruction *storeOp = stList->Last ();
             storeOp->setAsDependent (this);
             setAsAncestor (storeOp);
         }
@@ -1072,7 +1087,6 @@ void instruction::renameAllInsRegs () {
     //printf ("ins %llx\n",ins->getInsAddr ());
     for  (int j = 0; j < getNumReg (); j++) {
         long int reg = getNthReg (j);
-        if (getInsAddr () == 0x400470) cout << reg << " ";
         if  (getNthRegType (j) == READ) {
             //second condition avoids ud-chains within a BB from propagating
             updateUseSet (reg);
@@ -1082,10 +1096,6 @@ void instruction::renameAllInsRegs () {
             Assert (0 && "Invalid register type");
         }
     }
-    if (getInsAddr () == 0x400470) 
-        cout << endl;
-    if (getInsAddr () == 0x403424) 
-        cout << "YEEEEES" << endl;
 }
 
 void instruction::setUPLDins () {
@@ -1126,4 +1136,13 @@ void instruction::assignUPLDroot (ADDR upld_id) {
 
 set<ADDR> instruction::getUPLDroots () {
     return _upld_roots;
+}
+
+void instruction::setInsertedMovOp () {
+    Assert (_is_inserted_mov_op == false);
+    _is_inserted_mov_op = true;
+}
+
+bool instruction::isInsertedMovOp () {
+    return _is_inserted_mov_op;
 }

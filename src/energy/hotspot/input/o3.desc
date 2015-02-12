@@ -4,17 +4,18 @@
 # Area and aspect ratios of blocks
 # Line Format: <unit-name>\t<area-in-m2>\t<min-aspect-ratio>\t<max-aspect-ratio>\t<rotable>
 
-#L1I     1 3 1
-#ITLB    1 5 1
+L1I    0.824705e-6 1 3 1
+ITLB   0.039649e-6 1 3 1
 BP     0.024285e-6  1 5 1
 BTB    0.824705e-6  1 5 1
-RF     24.372412e-6 1 1 1
+RF     1.52607e-6 1 1 1
 RS     0.269615e-6  1 3 1
 LSQ    0.024626e-6  1 3 1
-#DTLB    1 5 1
-#L1D     1 3 1
-#L2      1 3 1
-RR     0.063e-6    1 3 1
+DTLB   0.039649e-6 1 3 1
+L1D    0.824705e-6 1 3 1
+L2     6.597640e-6 1 3 1
+L3     105.562243e-6 1 3 1
+RR     0.346041e-6   1 3 1
 EU1    0.023e-6    1 3 1
 EU2    0.023e-6    1 3 1
 EU3    0.023e-6    1 3 1
@@ -29,44 +30,47 @@ ROB    0.007682e-6 1 3 1
 # Connectivity information
 # Line format <unit1-name>\t<unit2-name>\t<wire_density>
 
-#L1D L2      1
-#L1I L2      1
-#L1I ITLB    1
-BP  BTB     1
-#BTB ITLB    1
-#BTB L1I     1
-EU1 RF      1
-EU2 RF      1
-EU3 RF      1
-EU4 RF      1
-EU5 RF      1
-EU6 RF      1
-EU7 RF      1
-EU8 RF      1
-EU1 RS      1
-EU2 RS      1
-EU3 RS      1
-EU4 RS      1
-EU5 RS      1
-EU6 RS      1
-EU7 RS      1
-EU8 RS      1
-EU1 ROB     1
-EU2 ROB     1
-EU3 ROB     1
-EU4 ROB     1
-EU5 ROB     1
-EU6 ROB     1
-EU7 ROB     1
-EU8 ROB     1
-LSQ EU1     1
-LSQ EU2     1
-LSQ EU3     1
-LSQ EU4     1
-LSQ EU5     1
-LSQ EU6     1
-LSQ EU7     1
-LSQ EU8     1
-#LSQ L1D     1
-#LSQ DTLB    1
-LSQ ROB     1
+ITLB L1I    64      # assuming fetch-width = 1 (multiply by the fetch width)
+BP  BTB     64
+BTB ITLB    64
+BP  ITLB    64
+L1I RR      7       # for ONE instruction sending ONE AR operand desginator to the RR
+RR  RS      7       # for one wire read - multiply for more read/write registers
+RR  ROB     7       # for one wire read - multiply for more read/write registers
+RS  EU1     7       # wakeup RS with the LOAD instruction write operand designator
+RS  EU2     7
+RS  EU3     7
+RS  EU4     7
+RS  EU5     7
+RS  EU6     7
+RS  EU7     7
+RS  EU8     7
+EU1 RF      192     # two read and oen write operand per EU execution
+EU2 RF      192
+EU3 RF      192
+EU4 RF      192
+EU5 RF      192
+EU6 RF      192
+EU7 RF      192
+EU8 RF      192
+EU1 ROB     64      # check the address of the designated entry to update ins state
+EU2 ROB     64
+EU3 ROB     64
+EU4 ROB     64
+EU5 ROB     64
+EU6 ROB     64
+EU7 ROB     64
+EU8 ROB     64
+LSQ EU1     64      # EU writing ADDR or DATA into the LSQ (done once for LOAD & twice for STORE)
+LSQ EU2     64
+LSQ EU3     64
+LSQ EU4     64
+LSQ EU5     64
+LSQ EU6     64
+LSQ EU7     64
+LSQ EU8     64
+LSQ ROB     64      # check the address of the designated entry to update ins state
+LSQ RF      64      # one write operand per LOAD oepration
+LSQ RS      7       # wakeup RS with the LOAD instruction write operand designator
+LSQ L1D     64      # assuming one write or read operation - each LOAD and STORE must increment this
+L1D DTLB    64      # every LOAD / STORE to the cache will automatically compute this too
