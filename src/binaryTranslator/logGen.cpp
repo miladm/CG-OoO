@@ -29,7 +29,7 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
 
 	for (int i =  0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
-		fprintf (outFile, "{,%lx\n", bb->getID ());
+		fprintf (outFile, "{,%lx\n", bb->getAddr ());
 		if (bb->hasHeader ()) {
 			fprintf (outFile, "H,%lx\n", bb->getBBbrHeader ());
 		}

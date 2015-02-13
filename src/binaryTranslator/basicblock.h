@@ -57,6 +57,7 @@ class basicblock {
 		int getBbSize ();
 		int getBbSize_ListSch ();
 		ADDR getID ();
+		ADDR getAddr ();
 		void setBBbrHeader (ADDR brAddr);
 		void resetBBbrHeader ();
 		ADDR getBBbrHeader ();
@@ -201,6 +202,7 @@ class basicblock {
 		bool _hasBrHeader;
 		ADDR _brHeaderAddr;
 		ADDR bbID;
+		ADDR _bbAddr; /* SUPPOSED TO BE SET ONCE AND USED IN LOGGEN */
 		basicblock* _fallThroughBB;
 		basicblock* _takenTargetBB;
 		List<basicblock*>* _ancestorBbList;

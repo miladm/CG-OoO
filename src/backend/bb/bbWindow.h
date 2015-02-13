@@ -51,6 +51,10 @@ class bbWindow : public unit {
 
         CYCLE _stall_cycle;
         set<PR> _stallRdRegSet;
+
+        /* STAT */
+        ScalarStat& s_stall_war_hazard_cnt;
+        RatioStat& s_stall_war_hazard_rat;
 };
 
 #endif

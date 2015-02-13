@@ -6,6 +6,7 @@
 
 basicblock::basicblock () {
 	bbID = -1; // PLACE HOLDER
+    _bbAddr = -1; // PLACE HOLDER
 	_listIndx = -1; // PLACE HOLDER
 	_visited = false;
 	_regAllocated = false;
@@ -42,6 +43,7 @@ basicblock::~basicblock () {
 
 basicblock& basicblock::operator=  (const basicblock& bb) { //TODO: UPDATE THIS FUNCTION
 	bbID = bb.bbID;
+	_bbAddr = bb._bbAddr;
 	_listIndx = bb._listIndx;
 	_visited = bb._visited;
 	_regAllocated = bb._regAllocated;
@@ -94,6 +96,7 @@ void basicblock::transferPointersToNewList (List<basicblock*>* bbList) {
 void basicblock::forceAssignBBID () {
 	if  (bbID == -1 && _insList->NumElements () > 0) {
 		bbID = _insList->Nth (0)->getInsAddr ();
+		_bbAddr = bbID;
 		Assert (bbID > 0 && "Invalid basicblock ID assigned.");
 	}
 }
@@ -111,6 +114,7 @@ void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {
          (reach_type == BR_DST || 
           ins->getType () != 'n')) {
 		bbID = ins->getInsAddr ();
+		_bbAddr = bbID;
 		Assert (bbID > 0 && "Invalid basicblock ID assigned.");
 	}
 	ins->setMy_BBorPB_id (getID ());
@@ -298,6 +302,7 @@ void basicblock::addIns (instruction* ins, ADDR ID) {
 	_insAddrList.insert (ins->getInsAddr ());
 	if  (_insList->NumElements () == 1) {
 		bbID = ID;
+        _bbAddr = bbID;
 		Assert (bbID > 0 && "Invalid basicblock ID assigned.");
 	}
 	ins->setMy_BBorPB_id (getID ());
@@ -379,6 +384,11 @@ void basicblock::resetAncestor (ADDR bbID) {
 ADDR basicblock::getID () {
 	Assert (bbID > 0 && "bbID must be larger than zero.");
 	return bbID;
+}
+
+ADDR basicblock::getAddr () {
+	Assert (_bbAddr > 0 && "_bbAddr must be larger than zero.");
+    return _bbAddr;
 }
 
 ADDR basicblock::getLastInsFallThru () {

@@ -7,7 +7,9 @@
 bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     : unit ("bbWindow_" + bbWin_id, clk),
       _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id), //TODO configure and more real numbers
-      _id (atoi (bbWin_id.c_str ()))
+      _id (atoi (bbWin_id.c_str ())),
+      s_stall_war_hazard_cnt (g_stats.newScalarStat ("bbWindow_" + bbWin_id, "stall_war_hazard_cnt", "Number of times instruction is not issued due to WAR hazard in LRF", 0, PRINT_ZERO)),
+      s_stall_war_hazard_rat (g_stats.newRatioStat (clk->getStatObj (), "bbWindow_" + bbWin_id, "stall_war_hazard_rat", "Ratio of instruction is not issued due to WAR hazard in LRF / cycle", 0, PRINT_ZERO))
 { 
     int temp;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["rd_wire_cnt"] >> _rd_wire_cnt;
@@ -110,8 +112,11 @@ bool bbWindow::conflictStallRdReg (bbInstruction* ins) {
     List<AR>* wr_regs = ins->getLARwrList ();
     for (int i = 0; i < ins->getNumWrLAR (); i++) { 
         AR loc_reg = wr_regs->Nth (i);
-        if (_stallRdRegSet.find (loc_reg) != _stallRdRegSet.end ()) 
+        if (_stallRdRegSet.find (loc_reg) != _stallRdRegSet.end ()) {
+            s_stall_war_hazard_cnt++;
+            s_stall_war_hazard_rat++;
             return true;
+        }
     }
     return false; /* NO CONCLICTING READ REG */
 }
