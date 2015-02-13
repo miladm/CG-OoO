@@ -19,6 +19,8 @@ bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     _st_bypassed = false;
     _issue_indx_cycle = START_CYCLE;
     _issue_indx = 0;
+    _stall_cycle = START_CYCLE;
+    _stallRdRegSet.clear ();
 }
 
 void bbWindow::regStat () { _win.regStat (); }
@@ -88,6 +90,37 @@ void bbWindow::resetBypassState () {
     if (_bypass_cycle < now) {
         _st_bypassed = false;
         _bypass_cycle = now;
+    }
+}
+
+/*--
+ * KEEP TRACK OF LOCAL READ REGISTERS OF STALLING OPERATIONS EVERY CYCLE TO
+ * AVOID WAR HAZARDS
+ --*/
+void bbWindow::recordStallRdReg (bbInstruction* ins) {
+    List<AR>* rd_regs = ins->getLARrdList ();
+    for (int i = 0; i < ins->getNumRdLAR (); i++) { 
+        AR loc_reg = rd_regs->Nth (i);
+        _stallRdRegSet.insert (loc_reg);
+    }
+}
+
+bool bbWindow::conflictStallRdReg (bbInstruction* ins) {
+    resetStallState ();
+    List<AR>* wr_regs = ins->getLARwrList ();
+    for (int i = 0; i < ins->getNumWrLAR (); i++) { 
+        AR loc_reg = wr_regs->Nth (i);
+        if (_stallRdRegSet.find (loc_reg) != _stallRdRegSet.end ()) 
+            return true;
+    }
+    return false; /* NO CONCLICTING READ REG */
+}
+
+void bbWindow::resetStallState () {
+    CYCLE now = _clk->now ();
+    if (_stall_cycle < now) {
+        _stallRdRegSet.clear ();
+        _stall_cycle = now;
     }
 }
 

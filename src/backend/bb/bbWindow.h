@@ -29,6 +29,10 @@ class bbWindow : public unit {
         bool isStoreBypassed ();
         void resetBypassState ();
 
+        void recordStallRdReg (bbInstruction*);
+        bool conflictStallRdReg (bbInstruction*);
+        void resetStallState ();
+
     public:
         const WIDTH _id;
 
@@ -44,6 +48,9 @@ class bbWindow : public unit {
 
         CYCLE _issue_indx_cycle;
         LENGTH _issue_indx;
+
+        CYCLE _stall_cycle;
+        set<PR> _stallRdRegSet;
 };
 
 #endif

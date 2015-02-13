@@ -165,11 +165,17 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
             //        bbWin->_win.ramAccess (); //assume this step is free for now - TODO
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD && bbWin->isStoreBypassed ()) {/* MEM RAW AVOIDANCE IN BB */
                 s_no_ld_bypass++;
-                if (runaheadPermit (ins)) bbWin->issueIndxInc ();
+                if (runaheadPermit (ins)) {
+                    bbWin->issueIndxInc ();
+                    bbWin->recordStallRdReg (ins);
+                }
                 else break;
-            } else if (!isReady (ins) || !_RF_MGR->canReserveRF (ins)) {
+            } else if (!isReady (ins) || !_RF_MGR->canReserveRF (ins) || bbWin->conflictStallRdReg (ins)) {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
-                if (runaheadPermit (ins)) bbWin->issueIndxInc ();
+                if (runaheadPermit (ins)) {
+                    bbWin->issueIndxInc ();
+                    bbWin->recordStallRdReg (ins);
+                }
                 else break;
             } else {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();

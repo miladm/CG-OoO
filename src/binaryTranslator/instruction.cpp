@@ -524,6 +524,7 @@ bool instruction::isInsRepeated (instruction* ins, List<instruction*>*_ancestors
 	return false;
 }
 
+/* PRE: THIS MUST BE DONE ON THE SSA CODE */
 void instruction::dependencyTableCheck (dependencyTable *depTables) {
 	//Register true dependency check for all instruction types
 	for (int i = 0; i < getNumReg (); i++) {
@@ -538,6 +539,8 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
 //				long int renReg = temp->getRenamedReg (getNthReg (i)); //TODO no longer necessary in a compiler I think
 //				renameReadReg (i,renReg);
 			}
+        /* ----------------------------------- */
+        /* THE CODE BELOW IS NOT NEEDED ON SSA */
 		// } else if (getNthRegType (i) == WRITE) {
 		// 	instruction *temp = depTables->regLookup (getNthReg (i),REG_READ);//WAR
 		// 	if (temp != NULL && isInsRepeated (temp,_ancestors)==false) {
@@ -549,6 +552,7 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
 		// 		temp->setAsDependent (this);
 		// 		setAsAncestor (temp);
 		// 	}
+        /* ----------------------------------- */
 		}
 	}
 	List<instruction*>* stList = depTables->wrLookup ();
@@ -565,9 +569,7 @@ void instruction::dependencyTableCheck (dependencyTable *depTables) {
             storeOp->setAsDependent (this);
             setAsAncestor (storeOp);
         }
-    } else {
-        Assert (0 && "Invalid memory scheduling options");
-    }
+    } else { Assert (0 && "Invalid memory scheduling options"); }
 
 	if (getType () == 'M' && isWrMemType ()) {
 		depTables->addWr (this);

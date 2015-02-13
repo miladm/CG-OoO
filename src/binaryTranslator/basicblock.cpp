@@ -1246,11 +1246,9 @@ void basicblock::makeSubBlocks () {
     }
 }
 
-/* THE INSTRUCTION CORRESPONDING TO THE bbID MAY BE DELETED HERE WITHOUT
+/* 
+ * THE INSTRUCTION CORRESPONDING TO THE bbID MAY BE DELETED HERE WITHOUT
  * UPDATING THE bbID 
- *
- * IN THIS OPTIMIZATION, LIST-SCHEDULED AND NON-LIST-SCHEDULED CODE CAN USE THE
- * SAME LIST
  */
 int basicblock::redundantMovOpElim (SCH_MODE sch_mode) {
     /* PICK THE RIGHT LIST TO PROCESS */
@@ -1317,7 +1315,8 @@ int basicblock::overwrittenMovOpElim (SCH_MODE sch_mode) {
     return remove_cnt;
 }
 
-/* PRE: MUST BE DONE AT THE END OF REGISTER ALLOCATION 
+/* PRE: 
+ *      MUST BE DONE AT THE END OF REGISTER ALLOCATION 
  *      IF AN INSTRUCTION ADDRESS IS REPEATED IN A BLOCK, THIS CODE FAILS - insIndx
  */     
 int basicblock::deadMovOpElim (SCH_MODE sch_mode) {

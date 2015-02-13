@@ -170,8 +170,8 @@ static void assign_local_registers (map<long int,interfNode*> &localIntfNodeMap,
 }
 
 static void assign_global_registers (map<long int,interfNode*> &localIntfNodeMap, 
-                              map<long int,interfNode*> &globalIntfNodeMap, 
-                              map<long int,interfNode*> &allIntfNodeMap) {
+                                    map<long int,interfNode*> &globalIntfNodeMap, 
+                                    map<long int,interfNode*> &allIntfNodeMap) {
 	if (globalIntfNodeMap.size () == 0 && localIntfNodeMap.size () == 0) return;
 	if (globalIntfNodeMap.size () > 0) {
 		vector<interfNode*> removedIntfNodeVector;
@@ -239,10 +239,15 @@ static void assign_global_registers (map<long int,interfNode*> &localIntfNodeMap
 }
 
 static int liveGlbMaxSize = 0, liveLclMaxSize = 0;
-static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &localIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {
+static void make_interference_nodes_network (basicblock* bb, 
+                                            map<long int,interfNode*> &globalIntfNodeMap, 
+                                            map<long int,interfNode*> &localIntfNodeMap, 
+                                            map<long int,interfNode*> &allIntfNodeMap, 
+                                            REG_ALLOC_MODE reg_alloc_mode) {
     if (!bb->isVisited ()) {
         bb->setAsVisited ();
         List<instruction*>* insList = bb->getInsList ();
+        set<long int> bbLocalSet;
         for (int i = 0; i <  insList->NumElements (); i++) {
             instruction* ins = insList->Nth (i);
             set<long int> inSet = ins->getInSet ();
@@ -262,6 +267,13 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
                 set_difference (outSet.begin (), outSet.end (), 
                                 localSet.begin (), localSet.end (), 
                                 std::inserter (liveSet, liveSet.begin ()));
+                /* experimental */
+                set<long int> t;
+                set_union (bbLocalSet.begin (), bbLocalSet.end (), 
+                           localSet.begin (), localSet.end (), 
+                           std::inserter (t, t.begin ()));
+                bbLocalSet.clear ();
+                bbLocalSet = t;
             } else {
                 liveSet = ins->getOutSet ();
             }
@@ -388,6 +400,7 @@ static void make_interference_nodes_network (basicblock* bb, map<long int,interf
             make_interference_nodes_network (bb->getNthDescendent (i), globalIntfNodeMap, localIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
         for (int i = 0; i < bb->getNumAncestors (); i++)
             make_interference_nodes_network (bb->getNthAncestor (i), globalIntfNodeMap, localIntfNodeMap, allIntfNodeMap, reg_alloc_mode);//TODO should it not be a BFS instead of DFS? 
+        cout << bb->getID () << " local set: " << bbLocalSet.size () << " " << (bbLocalSet.size () > LRF_SIZE ? "YES" : "NO") << endl;
     }
 }
 
