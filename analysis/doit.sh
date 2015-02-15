@@ -1,0 +1,11 @@
+ ./run.sh 2 2 4
+#./run.sh 2 3 4
+#./run.sh 2 4 4
+#./run.sh 2 5 4
+#./run.sh 0 2 4
+#./run.sh 1 2 4
+#./run.sh 3 2 4
+#./run.sh 4 2 4
+#./run.sh 2 2 8
+#./run.sh 2 2 2
+##./run.sh 2 1 4
