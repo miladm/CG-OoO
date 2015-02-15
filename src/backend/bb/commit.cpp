@@ -321,7 +321,10 @@ void bb_commit::delIns (bbInstruction* ins) {
 
 void bb_commit::regStat () {
     _bbROB->regStat ();
-    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) s_ins_cnt.print ();
+    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) {
+        g_msg.simEvent ("* g_simInsCnt - pin: %lu\n", g_var.g_simpInsCnt);
+        s_ins_cnt.print ();
+    }
 }
 
 void bb_commit::verifySim () {
