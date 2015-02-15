@@ -56,7 +56,9 @@ void bb_memory::completeIns () {
         pair<bool, bbInstruction*> p = _LSQ_MGR->hasFinishedIns (LD_QU);
         if (!p.first) break;
         bbInstruction* finished_ld_ins = p.second;
+#ifdef ASSERTION
         Assert (finished_ld_ins != NULL);
+#endif
         if (!_RF_MGR->hasFreeWire (WRITE, finished_ld_ins)) break;
 
         /*-- COMPLETE INS --*/
@@ -134,7 +136,9 @@ void bb_memory::manageSTbuffer () {
 
 void bb_memory::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Ports Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
+#endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _LSQ_MGR->squash (squashSeqNum);

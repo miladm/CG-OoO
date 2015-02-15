@@ -55,16 +55,18 @@ class o3_registerRename : public unit {
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
 
+        void getStat ();
+
 	private:
         CYCLE _cycle;
 
-        PR _a_rf_size;
-        PR _a_rf_hi;
-        PR _a_rf_lo;
+        AR _a_rf_size;
+        AR _a_rf_hi;
+        AR _a_rf_lo;
 
-        AR _p_rf_size;
-        AR _p_rf_hi;
-        AR _p_rf_lo;
+        PR _p_rf_size;
+        PR _p_rf_hi;
+        PR _p_rf_lo;
 
         PR _r_rf_size;
         PR _r_rf_hi;
@@ -77,6 +79,10 @@ class o3_registerRename : public unit {
 		map<AR, o3_regElem*> _cRAT;
 		map<PR, o3_regElem*> _RF;
 		vector<o3_regElem*> _availablePRset; /* FILO */
+
+        /*-- STAT --*/
+        ScalarStat& s_availablePRset_empty_cnt;
+        RatioStat& s_availablePRset_avg;
 };
 
 #endif

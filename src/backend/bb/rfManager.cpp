@@ -6,7 +6,7 @@
 
 bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, const YAML::Node& root, string rfm_name)
     : unit (rfm_name, clk),
-      _GRF_MGR (_clk, root, "grfManager"),
+      _GRF_MGR (_clk, num_bbWin, root, "grfManager"),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF read operand-not-ready events", 0, PRINT_ZERO)),
       s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF read operand-not-ready events", 0, PRINT_ZERO)),
@@ -28,8 +28,8 @@ bb_rfManager::~bb_rfManager () {
     }
 }
 
-bool bb_rfManager::canRename (bbInstruction* ins) {
-    return _GRF_MGR.canRename (ins);
+bool bb_rfManager::canRename (bbInstruction* ins, BB_ID bbWin_id) {
+    return _GRF_MGR.canRename (ins, bbWin_id);
 }
 
 void bb_rfManager::renameRegs (bbInstruction* ins) {
@@ -57,6 +57,32 @@ bool bb_rfManager::canReserveRF (bbInstruction* ins) {
     return result;
 }
 
+/* IN ORDER TO SUUPORT FORWARDING, WE SHOULD DO A SECOND CHECK FOR THE
+ * READINESS OF THE INSTRUCTIONS FORWARDED */
+bool bb_rfManager::checkReadyAgain (bbInstruction* ins) {
+    bool lrf_ready = true;
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        WIDTH bbWin_id = ins->getBBWinID ();
+        lrf_ready = _LRF_MGRS[bbWin_id]->checkReadyAgain (ins);
+    }
+    bool grf_ready = _GRF_MGR.checkReadyAgain (ins);
+    dbg.print (DBG_REG_FILES, "%s: %s %d - %s %d - %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "LRF read ops are ready: ", ((lrf_ready)?"YES":"NO"), 
+            "GRF read ops are ready: ", ((grf_ready)?"YES":"NO"), 
+            "for ins: ", ins->getInsID (), _clk->now ());
+
+    /* ENERGY TRACKING */
+    if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
+        return (grf_ready && lrf_ready);
+    } else if (g_cfg->getRegAllocMode () == GLOBAL) {
+        return (grf_ready);
+    }
+#ifdef ASSERTION
+    Assert (0 && "invalid register allocation model");
+#endif
+    return grf_ready; /* PLEACE HOLDER */
+}
+
 bool bb_rfManager::isReady (bbInstruction* ins) {
     bool lrf_ready = true;
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
@@ -72,6 +98,7 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
     if (!grf_ready) s_grf_not_ready_cnt++;
     if (!grf_ready || !lrf_ready) s_rf_not_ready_cnt++;
 
+    /* ENERGY TRACKING */
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL) {
         if (grf_ready && lrf_ready) {
             WIDTH bbWin_id = ins->getBBWinID ();
@@ -85,7 +112,9 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
         }
         return (grf_ready);
     }
-    Assert (true == false && "invalid register allocation model");
+#ifdef ASSERTION
+    Assert (0 && "invalid register allocation model");
+#endif
     return grf_ready; /* PLEACE HOLDER */
 }
 
@@ -125,7 +154,9 @@ bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, bbInstruction* ins) {
     } else if (g_cfg->getRegAllocMode () == GLOBAL) {
         return (grf_has_free_wire);
     }
+#ifdef ASSERTION
     Assert (true == false && "invalid register allocation model");
+#endif
     return (grf_has_free_wire); /* PLEACE HOLDER */
 }
 
@@ -136,4 +167,13 @@ void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
     _GRF_MGR.updateWireState (axes_type, num_g_reg);
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
         _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
+}
+
+void bb_rfManager::getStat () {
+    _GRF_MGR.getStat ();
+    map<WIDTH, bb_lrfManager*>::iterator it;
+    for (it = _LRF_MGRS.begin (); it != _LRF_MGRS.end (); it++) {
+        bb_lrfManager* lrf_mgr = it->second;
+        lrf_mgr->getStat ();
+    }
 }

@@ -20,8 +20,6 @@
 #include "../config.h"
 
 typedef enum {NO_PRINT_ZERO, PRINT_ZERO} PRINT_ON_ZERO;
-typedef long int DIGIT;
-typedef long double FRACTION;
 
 /* **************************** *
  * STAT

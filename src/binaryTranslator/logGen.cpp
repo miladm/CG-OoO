@@ -25,11 +25,11 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
     string out_file_path = out_dir + cluster_mode_s + "/" + reg_alloc_mode_s + "/" + sch_mode_s + "/" + (*program_name) + "_" + cluster_size_s + "_bbSiz_obj.s";
 	if ((outFile  = fopen (out_file_path.c_str (), "w")) == NULL) 
 		Assert ("Unable to open the output file.");
-    cout << "OUTPUT .s FILE: " << out_file_path << endl;
+    cout << "\t\tOUTPUT .s FILE: " << out_file_path << endl;
 
 	for (int i =  0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
-		fprintf (outFile, "{,%lx\n", bb->getID ());
+		fprintf (outFile, "{,%lx\n", bb->getAddr ());
 		if (bb->hasHeader ()) {
 			fprintf (outFile, "H,%lx\n", bb->getBBbrHeader ());
 		}
@@ -38,16 +38,16 @@ void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_
 			instruction* ins = (sch_mode == LIST_SCH) ? bb->getInsList_ListSchedule ()->Nth (j) : bb->getInsList ()->Nth (j);
 			if (ins->getType () == 'M') {
 				if (ins->isWrMemType ()) {
-					fprintf (outFile, "W,-memAddr-,%lx,%d,%s", ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
+					fprintf (outFile, "W,%d,-memAddr-,%lx,%d,%s", ins->isUPLDdep (), ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
 				} else if (ins->isRdMemType ()) {
-					fprintf (outFile, "R,-memAddr-,%lx,%d,%s", ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
+					fprintf (outFile, "R,%d,-memAddr-,%lx,%d,%s", ins->isUPLDdep (), ins->getInsAddr (), ins->getMemAccessSize (), ins->getArchRegisterStr ().c_str ());
 				} else {
 					Assert (true == false && "ERROR: A memory operation is either read or write");
 				}
 			} else if (ins->getType () == 'j' || ins->getType () == 'c' || ins->getType () == 'b' || ins->getType () == 'r') {
-				fprintf (outFile, "%c,%lx,-brTaken-,%lx,%s", ins->getType (), ins->getInsAddr (), ins->getInsDstAddr (), ins->getArchRegisterStr ().c_str ());
+				fprintf (outFile, "%c,%d,%lx,-brTaken-,%lx,%s", ins->getType (), ins->isUPLDdep (), ins->getInsAddr (), ins->getInsDstAddr (), ins->getArchRegisterStr ().c_str ());
 			} else if (ins->getType () == 'o' || ins->getType () == 'n' || ins->getType () == 's') { /*-- A, D, F, N for ins->getType () --*/
-				fprintf (outFile, "%c,%lx,%s", ins->getType (), ins->getInsAddr (), ins->getArchRegisterStr ().c_str ());
+				fprintf (outFile, "%c,%d,%lx,%s", ins->getType (), ins->isUPLDdep (), ins->getInsAddr (), ins->getArchRegisterStr ().c_str ());
 			} else {
 				Assert (true == false && "Unrecognized instruction type");
 			}

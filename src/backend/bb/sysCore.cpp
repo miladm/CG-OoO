@@ -50,15 +50,27 @@ bb_sysCore::bb_sysCore (sysClock* clk,
       _fetch_to_bp_port (fetch_to_bp_buff_len, fetch_to_bp_delay, _clk, "fetch_to_bp_port"),
       _fetch_to_decode_port (fetch_to_decode_buff_len, fetch_to_decode_delay, _clk, "fetch_to_decode_port"),
       _decode_to_scheduler_port (decode_to_scheduler_buff_len, decode_to_scheduler_delay, _clk, "decode_to_scheduler_port"),
-      _scheduler_to_execution_port (scheduler_to_execution_buff_len, scheduler_to_execution_delay, _clk, "scheduler_to_execution_port"),
       _execution_to_scheduler_port (execution_to_scheduler_buff_len, execution_to_scheduler_delay, _clk, "execution_to_scheduler_port"),
       _execution_to_memory_port (execution_to_memory_buff_len, execution_to_memory_delay, _clk, "execution_to_memory_port"),
       _memory_to_scheduler_port (memory_to_scheduler_buff_len, memory_to_scheduler_delay, _clk, "memory_to_scheduler_port"),
       _commit_to_bp_port (commit_to_bp_buff_len, commit_to_bp_delay, _clk, "commit_to_bp_port"),
       _commit_to_scheduler_port (commit_to_scheduler_buff_len, commit_to_scheduler_delay, _clk, "commit_to_scheduler_port")
 {
+    
     /*-- CONFIG OBJS --*/
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+
+    /*-- SETUP SCHEDULER TO EXECUTION PORTS --*/
+    root["eu"]["alu"]["count_per_blk"] >> _alu_cnt_per_blk;
+    root["eu"]["alu"]["count"] >> _alu_cnt;
+    _num_block_ports = _alu_cnt / _alu_cnt_per_blk;
+    _scheduler_to_execution_port = new List<port<bbInstruction*>*>;
+    for (int i = 0; i < _num_block_ports; i++) {
+        port<bbInstruction*>* scheduler_to_execution_port = new port<bbInstruction*>(scheduler_to_execution_buff_len, 
+                                                                                     scheduler_to_execution_delay, 
+                                                                                     _clk, "scheduler_to_execution_port");
+        _scheduler_to_execution_port->Append (scheduler_to_execution_port);
+    }
 
     /*-- INIT UNITS --*/
     _RF_MGR = new bb_rfManager (num_bbWin, _clk, root["rf"], "rfManager");
@@ -98,6 +110,10 @@ bb_sysCore::~bb_sysCore () {
         delete _bbWindows.Nth (0);
         _bbWindows.RemoveAt (0);
     }
+    for (int i = 0; i < 1; i++) {
+        delete _scheduler_to_execution_port->Nth (i);
+    }
+    delete _scheduler_to_execution_port;
 }
 
 void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
@@ -122,7 +138,7 @@ void bb_sysCore::runCore (FRONTEND_STATUS frontend_status) {
         /*==========*
          * DEBUGGING
          *==========*/ /*
-        if (_clk->now () >= 20000000) {
+        if (_clk->now () >= 600000) {
             debugDump ();
             exit (-1);
         } */

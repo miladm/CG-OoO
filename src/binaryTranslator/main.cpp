@@ -16,9 +16,11 @@
 #include "registerAllocate_sb.h"
 #include "make_instruction.h"
 #include "make_basicblock.h"
+#include "make_subblock.h"
 #include "make_superblock.h"
 #include "make_phraseblock.h"
 #include "annotateTrace.h"
+#include "redundancy_elim.h"
 #include "dominator.h"
 #include "config.h"
 #include "global.h"
@@ -28,9 +30,17 @@
 #include "ssa.h"
 #include "dot.h"
 
-void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {
+void init () {
+    Assert (OFFSET_LARGER_THAN_X86_REG_CNT > X86_REG_HI);
+}
+
+void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, 
+             std::string *program_name, 
+             SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, 
+             CLUSTER_MODE cluster_mode, LENGTH cluster_size) {
 	/* STAT Generation Functions */
 	// printf ("FILE NAME: %s\n", (*program_name).c_str ());
+	printf ("\tGenerate Stat\n");
 	StatBBSizeStat (bbList, program_name);
 	StatNum_interBB_and_intra_BB_regs (bbList, program_name);
 	/* ------------------------- */
@@ -38,10 +48,12 @@ void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string
 		// printf ("BB Size: %d\n", bbList->Nth (i)->getBbSize ());
 		//bbList->Nth (i)->printBb ();
 	}
+	printf ("\tMake .dot Files\n");
 	dot cfg (0, program_name);
 	cfg.runDot (bbList);
 	dot cfg_phrase (1, program_name);
 	cfg_phrase.runDot (phBBList);
+	printf ("\tMake .s File\n");
 	writeToFile (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
 	// writeToFile (pbList, program_name, sch_mode, reg_alloc_mode);
 }
@@ -94,7 +106,7 @@ int main (int argc, char* argv[])
 //    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/
 
 	printf ("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name.c_str ());
-	//init (argc, argv);
+	init ();
 	printf ("- Configure Program -\n");
 	parse_config_file ();
 
@@ -150,6 +162,8 @@ int main (int argc, char* argv[])
 	// 	printf ("\n");
 	// }
 	/* ---------------------*/
+	printf ("- Redundant MOV Op Elimination -\n");
+    movOpElimination (bbList, sch_mode);
 	printf ("- Make Dot Files & Stat Data -\n");
 	finish (bbList, phBBList, &program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
 	t1 = clock () - t0;

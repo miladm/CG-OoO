@@ -19,6 +19,30 @@ o3_rfManager::o3_rfManager (sysClock* clk, const YAML::Node& root, string rf_nam
 
 o3_rfManager::~o3_rfManager () { }
 
+/* IN ORDER TO SUUPORT FORWARDING, WE SHOULD DO A SECOND CHECK FOR THE
+ * READINESS OF THE INSTRUCTIONS FORWARDED */
+bool o3_rfManager::checkReadyAgain (dynInstruction* ins) {
+    List<AR>* p_rdReg_list = ins->getPRrdList ();
+    for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = p_rdReg_list->Nth (i);
+        if (!_GRF.isPRvalid (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                    "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->now ());
+            return false; /*-- OPERAND NOT AVAILABLE --*/
+        }
+    }
+
+    if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
+    }
+
+    dbg.print (DBG_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
+}
+
 /*-- ARE ALL READ OPERANDS READY? --*/
 bool o3_rfManager::isReady (dynInstruction* ins) {
     List<AR>* p_rdReg_list = ins->getPRrdList ();
@@ -28,21 +52,21 @@ bool o3_rfManager::isReady (dynInstruction* ins) {
             s_rf_not_ready_cnt++;
             dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                     "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->now ());
-            return false; /*-- operand not available --*/
+            return false; /*-- OPERAND NOT AVAILABLE --*/
         } else {
-            p_rdReg_list->RemoveAt (i); /*--optimization --*/
+            p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
     if (p_rdReg_list->NumElements () == 0) {
         _e_rf.ramAccess (ins->getTotNumRdAR ());
         dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                 "RF read ops are ready: YES", "for ins: ", ins->getInsID (), _clk->now ());
-        return true; /*-- all operands available --*/
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
     }
     dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
             "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->now ());
     s_rf_not_ready_cnt++;
-    return false; /*-- not all operands available --*/
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
@@ -141,4 +165,7 @@ void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
+void o3_rfManager::regStat () {
+    _GRF.getStat ();
+}
 o3_rfManager* g_GRF_MGR;

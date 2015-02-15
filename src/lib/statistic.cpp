@@ -133,8 +133,8 @@ void statistic::dump () {
         }
 
         /*-- REPORT TOTAL ENERGY --*/
-        cout << "* TOTAL: " << total_energy << "\t\t\t # Toal processor energu (PJ)" << endl;
-        _out_file << "* TOTAL:" << total_energy << "\t\t\t # Toal processor energu (PJ)" << endl;
+        cout << "* TOTAL Energy: " << total_energy << "\t\t\t # Toal processor energy (PJ)" << endl;
+        _out_file << "* TOTAL Energy: " << total_energy << "\t\t\t # Toal processor energy (PJ)" << endl;
 
         _out_file << endl;
         cout << endl;

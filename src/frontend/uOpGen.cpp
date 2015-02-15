@@ -14,6 +14,7 @@ static set<ADDRINT> _bbHeadSet;
 static ScalarStat& s_pin_missing_static_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_missing_static_bb_cnt", "Number of dynamic BB's with no static counterpart.", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_bb_cnt", "Number of basicblocks instrumented in frontend", 0, NO_PRINT_ZERO));
 static ScalarStat& s_missing_ins_in_stat_code_cnt (g_stats.newScalarStat ("uOpGen", "missing_ins_in_stat_code_cnt", "Number of dynamic instructions not found in static code", 0, NO_PRINT_ZERO));
+static ScalarStat& s_mov_insertion_cnt (g_stats.newScalarStat ("uOpGen", "mov_insertion_cnt", "Number of MOV instructions inserted in dynamic sequence", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_gr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_cnt", "Number of global register operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_lr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_lr_cnt", "Number of local register operands", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_gr_rd_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_rd_cnt", "Number of global register read operands", 0, NO_PRINT_ZERO));
@@ -28,7 +29,7 @@ static ScalarStat& s_large_bb_cnt (g_stats.newScalarStat ("uOpGen", "large_bb_cn
  * INS INSTRUMENTATIONS
  * ************************************ */
 VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, 
-        BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJump, BOOL isDirBrOrCallOrJmp) {
+        BOOL isTaken, BOOL isCall, BOOL isRet, BOOL isJumpBr, BOOL isDirBrOrCallOrJmp, BOOL isJump) {
     if (g__staticCode->hasIns (ins_addr)) {
 //        g_var.stat.matchIns++;
         if (g_var.g_core_type == BASICBLOCK) {
@@ -36,13 +37,12 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             pin__detectBB (ins_addr);
             dynInstruction* insObj = pin__makeNewBBIns (ins_addr, BR);
             if (insObj != NULL) {
-                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
             }
-            if (!(isJump && isDirBrOrCallOrJmp))
-                g_br_detected = true;
+            if (g__staticCode->getInsObj(ins_addr)->getBrType () != JMP) g_br_detected = true;
         } else { /* INO & O3 */
             dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
-            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJump, isDirBrOrCallOrJmp);
+            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -117,6 +117,15 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
     }
 }
 
+VOID getUnInstrumentedMOV (ADDRINT ins_addr) {
+    if (g__staticCode->hasIns (ins_addr)) {
+        pin__makeNewBBIns (ins_addr, ALU);
+        s_mov_insertion_cnt++;
+    } else {
+        s_missing_ins_in_stat_code_cnt++;
+    }
+}
+
 /*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3--*/
 dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     dynInstruction* insObj = g_var.getNewCodeCacheIns ();
@@ -162,6 +171,8 @@ void pin__detectBB (ADDRINT ins_addr) {
     } else if (g_br_detected) {
         pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
         _bbHeadSet.insert (ins_addr);
+    } else if (g_var.getLastCacheBB () == NULL) { /*-- THE CASE WHERE FIRST DYN INS IS NOT MAPPED --*/
+        pin__getBBhead (ins_addr, 0, false); //TODO fix this - not valid
     } else if (g_var.getLastCacheBB ()->getBBsize () > bbWin_size  ||
                g_var.getLastCacheBB ()->_insList.NumElements () > bbWin_size ||
                (LENGTH)g_var.getLastCacheBB ()->_bbInsMap.size () > bbWin_size) { //TODO temp solution to break off large BB's
@@ -193,22 +204,19 @@ void pin__genInsStat (dynBasicblock* bb) {
 
 }
 
-/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
-void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
+void handleUnInstrumentedCode (dynBasicblock* bb) {
+    list<ADDRS> unInstrumentedList = bb->getUnInstrumentedIns ();
+    list<ADDRS>::iterator it;
+    for (it = unInstrumentedList.begin (); it != unInstrumentedList.end (); it++) {
+        ADDRS ins_addr = *it;
+        getUnInstrumentedMOV (ins_addr);
+    }
+}
+
+/*-- MAKE A NEW BASIC-BLOCK --*/
+void pin__makeNewBB (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
         std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << hex << g_var.g_bb_seq_num << std::endl;
-
-    /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
-    dynBasicblock* lastBB = g_var.getLastCacheBB ();
-    if (lastBB != NULL) {
-        if (g_var.scheduling_mode == STATIC_SCH) {
-            lastBB->rescheduleInsList (&g_var.g_seq_num);
-        }
-        lastBB->wrongPathCheck ();
-
-        /* GENERATE SOME STATISTICS */
-        pin__genInsStat (lastBB);
-    }
 
     /* MAKE THE NEXT BASICBLOCK */
     dynBasicblock* bbObj = g_var.getNewCacheBB ();
@@ -221,6 +229,23 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
             s_pin_missing_static_bb_cnt++;
     }
     s_pin_bb_cnt++;
+}
+
+/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
+void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
+    /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
+    dynBasicblock* lastBB = g_var.getLastCacheBB ();
+    if (lastBB != NULL) {
+        handleUnInstrumentedCode (lastBB);
+        if (g_var.scheduling_mode == STATIC_SCH) {
+            lastBB->rescheduleInsList (&g_var.g_seq_num);
+        }
+        lastBB->wrongPathCheck ();
+
+        /* GENERATE SOME STATISTICS */
+        pin__genInsStat (lastBB);
+    }
+    pin__makeNewBB (bb_addr, bb_br_addr, is_tail_br);
 }
 
 //void pin__get_bb_header (ADDRINT bb_addr, INS bb_tail_ins) {
@@ -262,6 +287,7 @@ void pin__getOp (INS ins) {
     BOOL is_call = INS_IsCall (ins) || INS_IsFarCall (ins);
     BOOL is_dir_br_jmp = INS_IsDirectFarJump (ins) || INS_IsDirectBranchOrCall (ins);
     BOOL is_br_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) || (INS_IsBranch (ins) && INS_HasFallThrough (ins));
+    BOOL is_dir_jmp = INS_IsDirectFarJump (ins) || INS_IsFarJump (ins);
 
     if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
         INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
@@ -279,6 +305,7 @@ void pin__getOp (INS ins) {
                     IARG_BOOL, is_ret,
                     IARG_BOOL, is_br_jmp,
                     IARG_BOOL, is_dir_br_jmp,
+                    IARG_BOOL, is_dir_jmp,
                     IARG_END);
         }
         INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) pin__getBrIns,
@@ -291,6 +318,7 @@ void pin__getOp (INS ins) {
                 IARG_BOOL, is_ret,
                 IARG_BOOL, is_br_jmp,
                 IARG_BOOL, is_dir_br_jmp,
+                IARG_BOOL, is_dir_jmp,
                 IARG_END);
         /*
         //capture mem u-op
@@ -313,6 +341,7 @@ void pin__getOp (INS ins) {
                 IARG_BOOL, is_ret,
                 IARG_BOOL, is_br_jmp,
                 IARG_BOOL, is_dir_br_jmp,
+                IARG_BOOL, is_dir_jmp,
                 IARG_END);
     } else if (INS_IsMemoryRead (ins)) {
         bool isMemRead;

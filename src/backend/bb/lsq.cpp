@@ -49,11 +49,15 @@ void bb_lsqCAM::setTimer (bbInstruction* elem, CYCLE axes_lat) {
             dbg.print (DBG_MEMORY, "%s: %s %llu (lat: %d)\n", _c_name.c_str (), 
                        "Set mem access lat. for ins:", ins->getInsID (), axes_lat);
             _table.Nth(i)->_delay.setNewTime (now, axes_lat);
+#ifdef ASSERTION
             Assert (_table.Nth(i)->_delay.isValidStopTime () == true);
+#endif
             return;
         }
     }
+#ifdef ASSERTION
     Assert (true == false && "The LSQ enetry not found.");
+#endif
 }
 
 void bb_lsqCAM::squash (INS_ID ins_seq_num) {
@@ -75,7 +79,9 @@ void bb_lsqCAM::delFinishedMemAxes () {
     for (LENGTH i = 0; i < table_size; i++) {
         if (_table.Nth(i)->_delay.isValidStopTime () &&
             _table.Nth(i)->_delay.getStopTime () <= now) {
+#ifdef ASSERTION
             Assert (getNth_unsafe (i)->getSQstate () == SQ_CACHE_DISPATCH);
+#endif
             bbInstruction* ins = pullNth (i);
             dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), 
                        "Found a finished ST ins: ", ins->getInsID ());
@@ -168,8 +174,12 @@ pair<bool, bbInstruction*> bb_lsqCAM::hasFinishedIns (LSQ_ID lsq_id) {
                            "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
                 return pair<bool, bbInstruction*> (true, ins);
             }
+            dbg.print (DBG_MEMORY, "%s: %s (%llu, %d) (cyc: %llu)\n", _c_name.c_str (), 
+                    "Unfinished LD in LQ (id, state): ", ins->getInsID (), ins->getLQstate (), now);
         }
+
         dbg.print (DBG_MEMORY, "%s: %s %s %d\n", _c_name.c_str (), "No finished LD ins.", "LQ Size:", table_size);
+
         return pair<bool, bbInstruction*> (false, NULL);
     } else {
         for (LENGTH i = 0; i < table_size; i++) {

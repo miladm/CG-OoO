@@ -5,108 +5,94 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ADDR	global.h	/^typedef long long unsigned int ADDR;$/;"	t
-ALU	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon4
-ALU_LATENCY	global.h	46;"	d
+ALU	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon5
+ALU_LATENCY	global.h	49;"	d
 Append	list.h	/^    void Append (const Element &elem)$/;"	f	class:List
 Assert	utility.h	39;"	d
-BASICBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon9
-BR	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon4
+BASICBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon10
+BR	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon5
 BR_DST	basicblock.h	/^typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;$/;"	e	enum:__anon1
-BR_LATENCY	global.h	48;"	d
-BufferSize	utility.cc	/^static const int BufferSize = 2048;$/;"	v	file:
-CC	Makefile	/^CC=g++ -ggdb -O3 -Wl,--hash-style=sysv -shared$/;"	m
-CFG_STRING_SIZE	global.h	20;"	d
-CFLAGS	Makefile	/^CFLAGS= -O3 -I.\/ -ggdb$/;"	m
-CLUSTER_MODE	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	t	typeref:enum:__anon9
-CXX	Makefile	/^CXX = $(CC)$/;"	m
-Counter	parse_x86.py	/^from collections import Counter$/;"	i
-DEBUG_BB	global.h	34;"	d
-DEBUG_INS	global.h	33;"	d
-DEBUG_MAIN	global.h	32;"	d
-DEBUG_PB	global.h	35;"	d
-DEBUG_RA	global.h	36;"	d
-DEPS	Makefile	/^DEPS = instruction.h basicblock.h phraseblock.h global.h list.h utility.h basicblock.h phraseblock.h dot.h make_instruction.h make_basicblock.h make_superblock.h make_phraseblock.h loop.h dependencyTable.h regfile.h phrase.h logGen.h annotateTrace.h config.h stat.h listSchedule.h quickSort.h registerAllocate.h registerAllocate_sb.h interfNode.h dominator.h ssa.h variable.h dependencySetup.h$/;"	m
-DynBBSizeStat	stat.cpp	/^void DynBBSizeStat(map<int,int> &bbSizeHist, string *program_name) {$/;"	f
-FPU	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon4
-FPU_LATENCY	global.h	47;"	d
-Failure	utility.cc	/^void Failure(const char *format, ...) {$/;"	f
-GLOBAL	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	e	enum:__anon6
-GRF	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	e	enum:__anon5
-GRF_HI	global.h	68;"	d
-GRF_LO	global.h	67;"	d
-GRF_SIZE	global.h	61;"	d
-INIT_RENAME_REG_NUM	global.h	43;"	d
-INS_STRING_SIZE	global.h	21;"	d
-INVALID_REG	global.h	78;"	d
-IndexOf	utility.cc	/^int IndexOf(const char *key) {$/;"	f
+BR_LATENCY	global.h	51;"	d
+CFG_STRING_SIZE	global.h	21;"	d
+CLUSTER_MODE	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	t	typeref:enum:__anon10
+DEBUG_BB	global.h	37;"	d
+DEBUG_INS	global.h	36;"	d
+DEBUG_MAIN	global.h	35;"	d
+DEBUG_PB	global.h	38;"	d
+DEBUG_RA	global.h	39;"	d
+FPU	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon5
+FPU_LATENCY	global.h	50;"	d
+GLOBAL	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	e	enum:__anon7
+GRF	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	e	enum:__anon6
+GRF_HI	global.h	71;"	d
+GRF_LO	global.h	70;"	d
+GRF_SIZE	global.h	64;"	d
+INIT_RENAME_REG_NUM	global.h	46;"	d
+INS_STRING_SIZE	global.h	22;"	d
+INVALID_REG	global.h	81;"	d
 InsertAt	list.h	/^    void InsertAt (const Element &elem, int index)$/;"	f	class:List
-IsDebugOn	utility.cc	/^bool IsDebugOn(const char *key) {$/;"	f
-L1_LATENCY	global.h	49;"	d
-L2_LATENCY	global.h	50;"	d
-L3_LATENCY	global.h	51;"	d
-LDFLAGS	Makefile	/^LDFLAGS = -lstdc++ -lm$/;"	m
+L1_LATENCY	global.h	52;"	d
+L2_LATENCY	global.h	53;"	d
+L3_LATENCY	global.h	54;"	d
+LARGE_NUMBER	global.h	25;"	d
 LENGTH	global.h	/^typedef long int LENGTH;$/;"	t
-LIST_SCH	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	e	enum:__anon7
-LOAD_STORE_ORDER	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	e	enum:__anon8
-LOCAL_GLOBAL	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	e	enum:__anon6
-LRF	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	e	enum:__anon5
-LRF_HI	global.h	65;"	d
-LRF_LO	global.h	64;"	d
-LRF_SIZE	global.h	60;"	d
+LIST_SCH	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	e	enum:__anon8
+LOAD_STORE_ORDER	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	e	enum:__anon9
+LOCAL_GLOBAL	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	e	enum:__anon7
+LRF	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	e	enum:__anon6
+LRF_HI	global.h	68;"	d
+LRF_LO	global.h	67;"	d
+LRF_SIZE	global.h	63;"	d
 Last	list.h	/^    Element Last () const$/;"	f	class:List
 List	list.h	/^    List () {}$/;"	f	class:List
 List	list.h	/^template<class Element> class List {$/;"	c
-MEM	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon4
-MEM_HIGHERARCHY	global.h	54;"	d
-MEM_LATENCY	global.h	53;"	d
-MEM_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon2
-MEM_SCH_MODE	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	t	typeref:enum:__anon8
-MEM_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon2
+MEM	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon5
+MEM_HIGHERARCHY	global.h	57;"	d
+MEM_LATENCY	global.h	56;"	d
+MEM_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon3
+MEM_SCH_MODE	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	t	typeref:enum:__anon9
+MEM_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon3
 NO_BR_DST	basicblock.h	/^typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;$/;"	e	enum:__anon1
-NO_LIST_SCH	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	e	enum:__anon7
-NUM_EU	global.h	57;"	d
-NUM_REGISTERS	global.h	41;"	d
-NUM_SPECIAL_REGISTERS	global.h	42;"	d
+NO_LIST_SCH	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	e	enum:__anon8
+NUM_EU	global.h	60;"	d
+NUM_REGISTERS	global.h	44;"	d
+NUM_SPECIAL_REGISTERS	global.h	45;"	d
 Nth	list.h	/^    Element Nth (int index) const$/;"	f	class:List
 NumElements	list.h	/^    int NumElements () const$/;"	f	class:List
-OBJ	Makefile	/^OBJ = main.o instruction.o basicblock.o phraseblock.o basicblock.o phraseblock.o dot.o make_instruction.o make_basicblock.o make_superblock.o make_phraseblock.o loop.o utility.o dependencyTable.o regFile.o phrase.o logGen.o annotateTrace.o config.o stat.o listSchedule.o quickSort.o registerAllocate.o registerAllocate_sb.o interfNode.o dominator.o ssa.o variable.o dependencySetup.o$/;"	m
-OPCODE_STRING_SIZE	global.h	23;"	d
-OpCodeDic	parse_x86.py	/^OpCodeDic = []$/;"	v
-PHI_INS_ADDR	global.h	81;"	d
-PHRASEBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon9
-ParseCommandLine	utility.cc	/^void ParseCommandLine(int argc, char *argv[]) {$/;"	f
-PhraseblockToBB	phraseblock.cpp	/^void phraseblock::PhraseblockToBB (List<basicblock*>* bbList_new, loop* lp, ADDR* phID) {$/;"	f	class:phraseblock
-PrintDebug	utility.cc	/^void PrintDebug(const char *key, const char *format, ...) {$/;"	f
+OFFSET_LARGER_THAN_X86_REG_CNT	global.h	26;"	d
+OPCODE_STRING_SIZE	global.h	24;"	d
+PHI_INS_ADDR	global.h	84;"	d
+PHRASEBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon10
+PUSH_AT_BOTTOM	basicblock.h	/^typedef enum {PUSH_AT_BOTTOM, PUSH_ON_TOP} PUSH_LOCATION;$/;"	e	enum:__anon2
+PUSH_LOCATION	basicblock.h	/^typedef enum {PUSH_AT_BOTTOM, PUSH_ON_TOP} PUSH_LOCATION;$/;"	t	typeref:enum:__anon2
+PUSH_ON_TOP	basicblock.h	/^typedef enum {PUSH_AT_BOTTOM, PUSH_ON_TOP} PUSH_LOCATION;$/;"	e	enum:__anon2
 REACHING_TYPE	basicblock.h	/^typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;$/;"	t	typeref:enum:__anon1
-READ	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon3
-REG_ALLOC_MODE	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	t	typeref:enum:__anon6
-REG_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon2
-REG_STRING_SIZE	global.h	22;"	d
-REG_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon2
+READ	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon4
+REG_ALLOC_MODE	global.h	/^typedef enum {GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;$/;"	t	typeref:enum:__anon7
+REG_READ	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon3
+REG_STRING_SIZE	global.h	23;"	d
+REG_WRITE	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	e	enum:__anon3
 RF	regFile.h	/^		std::map<std::string,long int> RF; \/* REGISTER FILE *\/$/;"	m	class:regFile
 RemoveAll	list.h	/^	void RemoveAll ()$/;"	f	class:List
 RemoveAt	list.h	/^    void RemoveAt (int index)$/;"	f	class:List
-SCH_MODE	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	t	typeref:enum:__anon7
-SGRF_HI	global.h	71;"	d
-SGRF_LO	global.h	70;"	d
-SGRF_SIZE	global.h	62;"	d
+SCH_MODE	global.h	/^typedef enum {NO_LIST_SCH, LIST_SCH} SCH_MODE;$/;"	t	typeref:enum:__anon8
+SGRF_HI	global.h	74;"	d
+SGRF_LO	global.h	73;"	d
+SGRF_SIZE	global.h	65;"	d
 SRF	regFile.h	/^		std::map<std::string,long int> SRF; \/* SPECIAL REGISTER FILE *\/$/;"	m	class:regFile
-STORE_ORDER	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	e	enum:__anon8
-ST_LATENCY	global.h	52;"	d
-SUPERBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon9
-SetDebugForKey	utility.cc	/^void SetDebugForKey(const char *key, bool value) {$/;"	f
+STORE_ORDER	global.h	/^typedef enum {STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;$/;"	e	enum:__anon9
+ST_LATENCY	global.h	55;"	d
+SUB_BLK_ID	global.h	/^typedef int SUB_BLK_ID;$/;"	t
+SUPERBLOCK	global.h	/^typedef enum {BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;$/;"	e	enum:__anon10
 SetParentAll	list.h	/^    void SetParentAll (Node *p)$/;"	f	class:List
-StatBBSizeStat	stat.cpp	/^void StatBBSizeStat(List<basicblock*> *bbList, string *program_name) {$/;"	f
-StatNum_interBB_and_intra_BB_regs	stat.cpp	/^void StatNum_interBB_and_intra_BB_regs(List<basicblock*> *bbList, string *program_name) {$/;"	f
-UPLD_THRESHOLD	global.h	27;"	d
-WBB_LOWER_BOUND	global.h	28;"	d
-WBB_UPPER_BOUND	global.h	29;"	d
-WRITE	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon3
-X86_REG_HI	global.h	76;"	d
-X86_REG_LO	global.h	75;"	d
-X86_SPECIAL_REG_HI	global.h	74;"	d
-X86_SPECIAL_REG_LO	global.h	73;"	d
-ZERO_ITER	ssa.cpp	7;"	d	file:
+UPLD_THRESHOLD	global.h	30;"	d
+WBB_LOWER_BOUND	global.h	31;"	d
+WBB_UPPER_BOUND	global.h	32;"	d
+WRITE	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon4
+X86_REG_HI	global.h	79;"	d
+X86_REG_LO	global.h	78;"	d
+X86_SPECIAL_REG_HI	global.h	77;"	d
+X86_SPECIAL_REG_LO	global.h	76;"	d
 _ANNOTATE_TRACE_H	annotateTrace.h	6;"	d
 _BASICBLOCK_H	basicblock.h	6;"	d
 _CONFIG_H	config.h	6;"	d
@@ -126,6 +112,7 @@ _LOOP_H	loop.h	6;"	d
 _MAKE_BASICBLOCK_H	make_basicblock.h	6;"	d
 _MAKE_INSTRUCTION_H	make_instruction.h	6;"	d
 _MAKE_PHRASEBLOCK_H	make_phraseblock.h	6;"	d
+_MAKE_SUBBLOCK_H	make_subblock.h	6;"	d
 _MAKE_SUPERBLOCK_H	make_superblock.h	6;"	d
 _PHRASEBLOCK_H	phraseblock.h	6;"	d
 _PHRASE_H	phrase.h	6;"	d
@@ -135,6 +122,7 @@ _REGISTER_ALLOCATE_H	registerAllocate.h	6;"	d
 _REGISTER_ALLOCATE_SB_H	registerAllocate_sb.h	6;"	d
 _RF_H	regFile.h	6;"	d
 _SSA_H	ssa.h	6;"	d
+_STATS_H	stats.h	6;"	d
 _STAT_H	stat.h	6;"	d
 _VARIABLE_H	variable.h	6;"	d
 _ancestorBbList	basicblock.h	/^		List<basicblock*>* _ancestorBbList;$/;"	m	class:basicblock
@@ -145,7 +133,10 @@ _bBLists	phraseblock.h	/^		List<basicblock*> **_bBLists;$/;"	m	class:phraseblock
 _bBlist	dot.h	/^		List<basicblock*>* _bBlist;$/;"	m	class:dot
 _backEdgeDest	basicblock.h	/^		ADDR _backEdgeDest;$/;"	m	class:basicblock
 _backEdgeSourceBbList	basicblock.h	/^		List<basicblock*>* _backEdgeSourceBbList;$/;"	m	class:basicblock
+_bbDefSet	instruction.h	/^		std::set<long int> _bbDefSet;$/;"	m	class:instruction
 _bbListForPhraseblock	basicblock.h	/^		List<ADDR>* _bbListForPhraseblock;$/;"	m	class:basicblock
+_bbLocGlbRegSet	basicblock.h	/^		std::set<long int> _bbLocGlbRegSet;$/;"	m	class:basicblock
+_bbUseSet	instruction.h	/^		std::set<long int> _bbUseSet;$/;"	m	class:instruction
 _bpAccuracy	instruction.h	/^		double _bpAccuracy;$/;"	m	class:instruction
 _brBias	instruction.h	/^		double _brBias;$/;"	m	class:instruction
 _brHeaderAddr	basicblock.h	/^		ADDR _brHeaderAddr;$/;"	m	class:basicblock
@@ -173,6 +164,7 @@ _hackPushCount	variable.h	/^		int _hackPushCount;$/;"	m	class:variable
 _hasBrHeader	basicblock.h	/^		bool _hasBrHeader;$/;"	m	class:basicblock
 _hasDst	instruction.h	/^		bool _hasDst;$/;"	m	class:instruction
 _hasFallThru	instruction.h	/^		bool _hasFallThru;$/;"	m	class:instruction
+_id	basicblock.h	/^        SUB_BLK_ID _id;$/;"	m	class:sub_block
 _idomSet	basicblock.h	/^		std::set<ADDR> _idomSet;$/;"	m	class:basicblock
 _inSet	basicblock.h	/^		std::set<long int> _inSet;$/;"	m	class:basicblock
 _inSet	instruction.h	/^		std::set<long int> _inSet;$/;"	m	class:instruction
@@ -184,10 +176,13 @@ _insDstAddr	instruction.h	/^		ADDR _insDstAddr;$/;"	m	class:instruction
 _insFallThru	instruction.h	/^		instruction* _insFallThru;$/;"	m	class:instruction
 _insFallThruAddr	instruction.h	/^		ADDR _insFallThruAddr;$/;"	m	class:instruction
 _insList	basicblock.h	/^		List<instruction*>* _insList;$/;"	m	class:basicblock
+_insList	basicblock.h	/^        List<instruction*>* _insList;$/;"	m	class:sub_block
 _insList	dot.h	/^		List<instruction*>* _insList;$/;"	m	class:dot
 _insList	phrase.h	/^		List<instruction*> *_insList;$/;"	m	class:phrase
 _insListSchList	basicblock.h	/^		List<instruction*>* _insListSchList;$/;"	m	class:basicblock
 _insList_orig	basicblock.h	/^		List<instruction*>* _insList_orig;$/;"	m	class:basicblock
+_insLocDefSet	instruction.h	/^		std::set<long int> _insLocDefSet;$/;"	m	class:instruction
+_insMultiUseSet	instruction.h	/^		std::set<long int> _insMultiUseSet;$/;"	m	class:instruction
 _insType	instruction.h	/^		char _insType;$/;"	m	class:instruction
 _interiorBB	dot.h	/^        List<basicblock*>* _interiorBB;$/;"	m	class:dot
 _label	dot.h	/^		char* _label;$/;"	m	class:dot
@@ -238,428 +233,59 @@ _s	variable.h	/^		vector<long int> _s; \/\/the index for var_i is kept here$/;"	
 _sDominatorMap	basicblock.h	/^		std::map<ADDR, basicblock*> _sDominatorMap;$/;"	m	class:basicblock
 _sr	instruction.h	/^        List<long int> *_sr; \/\/SPECIAL REGISTER LIST$/;"	m	class:instruction
 _srt	instruction.h	/^        List<int> *_srt; \/\/SPECIAL REGISTER TYPE LIST$/;"	m	class:instruction
+_stats	basicblock.h	/^        block_stats _stats;$/;"	m	class:basicblock
 _style	dot.h	/^		char* _style;$/;"	m	class:dot
+_sub_blk_id	basicblock.h	/^        int _sub_blk_id;$/;"	m	class:basicblock
 _takenTargetBB	basicblock.h	/^		basicblock* _takenTargetBB;$/;"	m	class:basicblock
+_upld_dep	instruction.h	/^        bool _upld_dep;$/;"	m	class:instruction
+_upld_ins	instruction.h	/^        bool _upld_ins;$/;"	m	class:instruction
+_upld_roots	basicblock.h	/^        List<instruction*>* _upld_roots;$/;"	m	class:basicblock
+_upld_roots	instruction.h	/^        set<ADDR> _upld_roots;$/;"	m	class:instruction
+_upld_set	basicblock.h	/^        set<ADDR> _upld_set;$/;"	m	class:sub_block
 _useSet	basicblock.h	/^		std::set<long int> _useSet;$/;"	m	class:basicblock
 _useSet	instruction.h	/^		std::set<long int> _useSet;$/;"	m	class:instruction
 _var	variable.h	/^		long int _var;$/;"	m	class:variable
 _visited	basicblock.h	/^		bool _visited;$/;"	m	class:basicblock
 _writeVar	instruction.h	/^		map<int,int> _writeVar;$/;"	m	class:instruction
-addAddr	dependencyTable.cpp	/^void dependencyTable::addAddr (long int addr, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
-addBB	loop.cpp	/^void loop::addBB (basicblock* bb) {$/;"	f	class:loop
-addBB	variable.cpp	/^void variable::addBB(basicblock* bb) {$/;"	f	class:variable
-addBBtoPBList	basicblock.cpp	/^void basicblock::addBBtoPBList (ADDR bbID) {$/;"	f	class:basicblock
-addBr	dependencyTable.cpp	/^void dependencyTable::addBr  (instruction* ins) {$/;"	f	class:dependencyTable
-addChild	basicblock.cpp	/^void basicblock::addChild (basicblock *child) {$/;"	f	class:basicblock
-addEdge	interfNode.cpp	/^void interfNode::addEdge (interfNode* node) {$/;"	f	class:interfNode
-addIns	basicblock.cpp	/^void basicblock::addIns (instruction* ins, ADDR ID) {$/;"	f	class:basicblock
-addIns	basicblock.cpp	/^void basicblock::addIns (instruction* ins, REACHING_TYPE reach_type) {$/;"	f	class:basicblock
-addIns	phrase.cpp	/^void phrase::addIns(instruction* ins) {$/;"	f	class:phrase
-addMovIns	basicblock.cpp	/^void basicblock::addMovIns (instruction* ins) {$/;"	f	class:basicblock
-addReg	dependencyTable.cpp	/^void dependencyTable::addReg  (int indx, long int reg, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
-addToBB_ListSchedule	basicblock.cpp	/^void basicblock::addToBB_ListSchedule (instruction* ins) {$/;"	f	class:basicblock
-addToDFset	basicblock.cpp	/^void basicblock::addToDFset (basicblock *node) {$/;"	f	class:basicblock
-addWr	dependencyTable.cpp	/^void dependencyTable::addWr  (instruction* ins) {$/;"	f	class:dependencyTable
-addrLookup	dependencyTable.cpp	/^instruction* dependencyTable::addrLookup (long int addr, tableType table) {$/;"	f	class:dependencyTable
-allocate_register	registerAllocate.cpp	/^void allocate_register (List<basicblock*> *bbList, $/;"	f
-allocate_register_sb	registerAllocate_sb.cpp	/^void allocate_register_sb (List<basicblock*> *bbList, $/;"	f
-allocatedRegister	instruction.cpp	/^void instruction::allocatedRegister (long int r_allocated, regKind rk) {$/;"	f	class:instruction
-annotateTrace_forBB	annotateTrace.cpp	/^void annotateTrace_forBB (List<basicblock*>* bbList, map<ADDR,instruction*> *insAddrMap, string *program_name) {$/;"	f
-annotateTrace_forPB	annotateTrace.cpp	/^void annotateTrace_forPB (List<basicblock*>* pbList, map<ADDR,instruction*> *insAddrMap, string *program_name) {$/;"	f
-assignReg	interfNode.cpp	/^void interfNode::assignReg (set<long int> &RFset) {$/;"	f	class:interfNode
-assign_global_registers	registerAllocate.cpp	/^static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, $/;"	f	file:
-assign_global_registers	registerAllocate_sb.cpp	/^static void assign_global_registers (map<long int,interfNode*> &locallIntfNodeMap, $/;"	f	file:
-assign_local_registers	registerAllocate.cpp	/^static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, $/;"	f	file:
-assign_local_registers	registerAllocate_sb.cpp	/^static void assign_local_registers (map<long int,interfNode*> &locallIntfNodeMap, $/;"	f	file:
-basicblock	basicblock.cpp	/^basicblock::basicblock () {$/;"	f	class:basicblock
 basicblock	basicblock.h	/^class basicblock {$/;"	c
-basicblockToPhrase	basicblock.cpp	/^void basicblock::basicblockToPhrase () {$/;"	f	class:basicblock
 bbID	basicblock.h	/^		ADDR bbID;$/;"	m	class:basicblock
 bbList	variable.h	/^		List<basicblock*>* bbList;$/;"	m	class:variable
-brDependencyTableCheck	basicblock.cpp	/^void basicblock::brDependencyTableCheck () {$/;"	f	class:basicblock
-brLookup	dependencyTable.cpp	/^List<instruction*>* dependencyTable::brLookup () {$/;"	f	class:dependencyTable
+block_stats	stats.h	/^struct block_stats {$/;"	s
 branchList	dependencyTable.h	/^		List<instruction*>* branchList;$/;"	m	class:dependencyTable
-buildDefUseSets	ssa.cpp	/^void buildDefUseSets (List<basicblock*> *bbList) {$/;"	f
-buildDomTree	basicblock.cpp	/^void basicblock::buildDomTree () {$/;"	f	class:basicblock
-buildImmediateDominators	basicblock.cpp	/^void basicblock::buildImmediateDominators () {$/;"	f	class:basicblock
-buildSDominators	basicblock.cpp	/^void basicblock::buildSDominators () {$/;"	f	class:basicblock
-buildVarList	ssa.cpp	/^void buildVarList (List<basicblock*>* bbList, map<int,variable*> &varList) {$/;"	f
-build_dominance_frontier	dominator.cpp	/^void build_dominance_frontier (List<basicblock*>* bbList) {$/;"	f
-build_dominator_tree	dominator.cpp	/^void build_dominator_tree (List<basicblock*>* bbList) {$/;"	f
-build_dominators	dominator.cpp	/^void build_dominators (List<basicblock*>* bbList) {$/;"	f
-build_idom	dominator.cpp	/^void build_idom (List<basicblock*>* bbList) {$/;"	f
-build_ssa_form	ssa.cpp	/^void build_ssa_form (List<basicblock*> *bbList, map<int,variable*> &varList) {$/;"	f
-build_strict_dominators	dominator.cpp	/^void build_strict_dominators (List<basicblock*>* bbList) {$/;"	f
-cfg	parse_x86.py	/^def cfg():$/;"	f
-closeBlock	dot.cpp	/^void dot::closeBlock (FILE* outFile) {$/;"	f	class:dot
-createCFG	dot.cpp	/^void dot::createCFG (FILE* outFile) {$/;"	f	class:dot
-createDT	dot.cpp	/^void dot::createDT (FILE* outFile) {$/;"	f	class:dot
-createSubGraph	dot.cpp	/^void dot::createSubGraph (int subGraphID, FILE* outFile) {$/;"	f	class:dot
-datetime	parse_x86.py	/^from datetime import datetime$/;"	i
-debugKeys	utility.cc	/^static vector<const char*> debugKeys;$/;"	v	file:
-defn	dot.cpp	/^void dot::defn (FILE* outFile) {$/;"	f	class:dot
-delAddr	dependencyTable.cpp	/^void dependencyTable::delAddr (long int addr, instruction* ins, tableType table) {$/;"	f	class:dependencyTable
-delBr	dependencyTable.cpp	/^void dependencyTable::delBr  (instruction* ins){$/;"	f	class:dependencyTable
-delReg	dependencyTable.cpp	/^void dependencyTable::delReg  (long int reg, instruction* ins, tableType table){$/;"	f	class:dependencyTable
-delWr	dependencyTable.cpp	/^void dependencyTable::delWr  (instruction* ins){$/;"	f	class:dependencyTable
-depTables	dependencySetup.cpp	/^static dependencyTable* depTables;$/;"	v	file:
-dependency	dependencySetup.cpp	/^static void dependency (basicblock* bb) {$/;"	f	file:
-dependencySetup	dependencySetup.cpp	/^void dependencySetup (List<basicblock*>* bbList) {$/;"	f
-dependencyTable	dependencyTable.cpp	/^dependencyTable::dependencyTable() {$/;"	f	class:dependencyTable
 dependencyTable	dependencyTable.h	/^class dependencyTable {$/;"	c
-dependencyTableCheck	instruction.cpp	/^void instruction::dependencyTableCheck (dependencyTable *depTables) {$/;"	f	class:instruction
-dfs	dfs.cpp	/^void dfs(List<basicblock*>* bbList, ADDR bbID_seed) {$/;"	f
-division	parse_x86.py	/^from __future__ import division$/;"	i
-dot	dot.cpp	/^dot::dot (int mode, string *program_name) {$/;"	f	class:dot
 dot	dot.h	/^class dot {$/;"	c
-dumpBB	annotateTrace.cpp	/^void dumpBB (List<basicblock*>* bbList, List<instruction*>* insList, map<ADDR, basicblock*> &bbHeaders) {$/;"	f
 elems	list.h	/^    vector<Element> elems;$/;"	m	class:List
-elimPhiFuncs	basicblock.cpp	/^int basicblock::elimPhiFuncs (ADDR& phiAddrOffset, map<ADDR,instruction*>* insAddrMap) {$/;"	f	class:basicblock
-eliminatePhiFuncs	registerAllocate.cpp	/^static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {$/;"	f	file:
-eliminatePhiFuncs	registerAllocate_sb.cpp	/^static int eliminatePhiFuncs (List<basicblock*> *bbList, map<ADDR,instruction*> *insAddrMap) {$/;"	f	file:
 fileName	dot.h	/^		string fileName;$/;"	m	class:dot
-fileName	parse_x86.py	/^    fileName = sys.argv[3]$/;"	v
-fileName	parse_x86.py	/^fileName = 'bzip2.s'$/;"	v
-findBB	annotateTrace.cpp	/^long int findBB(ADDR bbHead, List<map<ADDR,string> > *dynBBList) {$/;"	f
-findBB	dfs.cpp	/^basicblock* findBB(List<basicblock*>* bbList, ADDR addr) {$/;"	f
-findDF	dominator.cpp	/^void findDF (basicblock* bb) {$/;"	f
-findDomEntryPoints	dominator.cpp	/^static void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {$/;"	f	file:
-findDomEntryPoints	ssa.cpp	/^static void findDomEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {$/;"	f	file:
 findElement	list.h	/^	int findElement (const Element &elem) const$/;"	f	class:List
-findEntryPoints	dependencySetup.cpp	/^static void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {$/;"	f	file:
-findEntryPoints	registerAllocate.cpp	/^static void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {$/;"	f	file:
-findEntryPoints	registerAllocate_sb.cpp	/^static void findEntryPoints (List<basicblock*> *bbList, List<basicblock*> *interiorBB) {$/;"	f	file:
-findFallThroughBBs	loop.cpp	/^void loop::findFallThroughBBs() {$/;"	f	class:loop
-findLongestPath	listSchedule.cpp	/^int findLongestPath(instruction* ins, basicblock* bb) {$/;"	f
-findLoop	make_phraseblock.cpp	/^void findLoop(basicblock* bb, loop* lp, map<ADDR,basicblock*> &domList, ADDR startLoopID, ADDR endLoopID) {$/;"	f
-findOp	parse_x86.py	/^def findOp (line, insAddr):$/;"	f
-findPath	dfs.cpp	/^void findPath(basicblock* bb, ADDR loopEntryID) {$/;"	f
-finish	dot.cpp	/^void dot::finish (FILE* outFile) {$/;"	f	class:dot
-finish	main.cpp	/^void finish (List<basicblock*> *bbList, List<basicblock*> *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {$/;"	f
-finishBox	dot.cpp	/^void dot::finishBox (FILE* outFile) {$/;"	f	class:dot
-forceAssignBBID	basicblock.cpp	/^void basicblock::forceAssignBBID () {$/;"	f	class:basicblock
-form_superblock	make_superblock.cpp	/^basicblock* form_superblock (basicblock* bb, basicblock* dst_bb) {$/;"	f
-getAllasDominators	basicblock.cpp	/^bool basicblock::getAllasDominators () {$/;"	f	class:basicblock
-getAncestorList	basicblock.cpp	/^List<basicblock*>* basicblock::getAncestorList () {$/;"	f	class:basicblock
-getAncestors	instruction.cpp	/^List<instruction*>* instruction::getAncestors () {$/;"	f	class:instruction
-getArchRegisterStr	instruction.cpp	/^std::string instruction::getArchRegisterStr () {$/;"	f	class:instruction
-getBBListForPB	basicblock.cpp	/^List<ADDR>* basicblock::getBBListForPB () {$/;"	f	class:basicblock
-getBBbrHeader	basicblock.cpp	/^ADDR basicblock::getBBbrHeader () {$/;"	f	class:basicblock
-getBBtail	basicblock.cpp	/^ADDR basicblock::getBBtail  () {$/;"	f	class:basicblock
-getBPaccuracy	instruction.cpp	/^double instruction::getBPaccuracy () {$/;"	f	class:instruction
-getBackEdgeDest	basicblock.cpp	/^ADDR basicblock::getBackEdgeDest () {$/;"	f	class:basicblock
-getBackEdgeSourceList	basicblock.cpp	/^List<basicblock*>* basicblock::getBackEdgeSourceList () {$/;"	f	class:basicblock
-getBbSize	basicblock.cpp	/^int basicblock::getBbSize () {$/;"	f	class:basicblock
-getBbSize_ListSch	basicblock.cpp	/^int basicblock::getBbSize_ListSch () {$/;"	f	class:basicblock
-getBrTakenBias	instruction.cpp	/^double instruction::getBrTakenBias () {$/;"	f	class:instruction
-getC	variable.cpp	/^int variable::getC() {$/;"	f	class:variable
-getChildren	basicblock.cpp	/^map<ADDR,basicblock*> basicblock::getChildren () {$/;"	f	class:basicblock
-getChildrenSize	basicblock.cpp	/^int basicblock::getChildrenSize () {$/;"	f	class:basicblock
-getDF	basicblock.cpp	/^map<ADDR,basicblock*> basicblock::getDF () {$/;"	f	class:basicblock
-getDefSet	basicblock.cpp	/^set<long int> basicblock::getDefSet () {$/;"	f	class:basicblock
-getDefSet	instruction.cpp	/^set<long int> instruction::getDefSet () {$/;"	f	class:instruction
-getDependents	instruction.cpp	/^List<instruction*>* instruction::getDependents () {$/;"	f	class:instruction
-getDescendentList	basicblock.cpp	/^List<basicblock*>* basicblock::getDescendentList () {$/;"	f	class:basicblock
-getDominators	basicblock.cpp	/^map<ADDR,basicblock*>  basicblock::getDominators () {$/;"	f	class:basicblock
-getEdgeList	interfNode.cpp	/^List<interfNode*>* interfNode::getEdgeList () {$/;"	f	class:interfNode
-getFallThrough	basicblock.cpp	/^basicblock* basicblock::getFallThrough () {$/;"	f	class:basicblock
-getFallThroughBBs	loop.cpp	/^List<basicblock*>* loop::getFallThroughBBs() {$/;"	f	class:loop
-getID	basicblock.cpp	/^ADDR basicblock::getID () {$/;"	f	class:basicblock
-getID	variable.cpp	/^long int variable::getID() {$/;"	f	class:variable
-getInSet	basicblock.cpp	/^set<long int> basicblock::getInSet () {$/;"	f	class:basicblock
-getInSet	instruction.cpp	/^set<long int> instruction::getInSet () {$/;"	f	class:instruction
-getInsAddr	instruction.cpp	/^ADDR instruction::getInsAddr () {$/;"	f	class:instruction
-getInsAsm	instruction.cpp	/^const char *instruction::getInsAsm () {return _command;}$/;"	f	class:instruction
-getInsDst	instruction.cpp	/^instruction* instruction::getInsDst () {$/;"	f	class:instruction
-getInsDstAddr	instruction.cpp	/^ADDR instruction::getInsDstAddr () {$/;"	f	class:instruction
-getInsFallThru	instruction.cpp	/^instruction* instruction::getInsFallThru () {$/;"	f	class:instruction
-getInsFallThruAddr	instruction.cpp	/^ADDR instruction::getInsFallThruAddr () {$/;"	f	class:instruction
-getInsList	basicblock.cpp	/^List<instruction*>* basicblock::getInsList () {$/;"	f	class:basicblock
-getInsList_ListSchedule	basicblock.cpp	/^List<instruction*>* basicblock::getInsList_ListSchedule () {$/;"	f	class:basicblock
-getInteriorBB	dot.cpp	/^void dot::getInteriorBB () {$/;"	f	class:dot
-getLastIns	basicblock.cpp	/^instruction* basicblock::getLastIns () {$/;"	f	class:basicblock
-getLastInsDst	basicblock.cpp	/^ADDR basicblock::getLastInsDst () {$/;"	f	class:basicblock
-getLastInsFallThru	basicblock.cpp	/^ADDR basicblock::getLastInsFallThru () {$/;"	f	class:basicblock
-getLatency	instruction.cpp	/^int instruction::getLatency () {$/;"	f	class:instruction
-getLdMissRate	instruction.cpp	/^double instruction::getLdMissRate () {$/;"	f	class:instruction
-getListIndx	basicblock.cpp	/^int basicblock::getListIndx () {$/;"	f	class:basicblock
-getLiveVarSize	basicblock.h	/^		int getLiveVarSize () {$/;"	f	class:basicblock
+getLiveVarSize	basicblock.h	/^		int getLiveVarSize () { return _inSet.size () + _defSet.size (); }$/;"	f	class:basicblock
 getLiveVarSize	instruction.h	/^		int getLiveVarSize () { return _inSet.size ()+_defSet.size (); }$/;"	f	class:instruction
-getLocalRegSet	basicblock.cpp	/^set<long int> basicblock::getLocalRegSet () {$/;"	f	class:basicblock
-getLocalRegSet	instruction.cpp	/^set<long int> instruction::getLocalRegSet () {$/;"	f	class:instruction
-getLongestPath	instruction.cpp	/^int instruction::getLongestPath () {$/;"	f	class:instruction
-getLoop	loop.cpp	/^List<basicblock*>* loop::getLoop() {$/;"	f	class:loop
-getLoopEntry	loop.cpp	/^basicblock* loop::getLoopEntry() {$/;"	f	class:loop
-getLoopEntryID	loop.cpp	/^ADDR loop::getLoopEntryID() {$/;"	f	class:loop
-getMemAccessSize	instruction.cpp	/^int instruction::getMemAccessSize () { \/\/in bytes$/;"	f	class:instruction
-getMy_BB_id	instruction.cpp	/^ADDR instruction::getMy_BB_id () {$/;"	f	class:instruction
-getMy_PB_id	instruction.cpp	/^set<ADDR> instruction::getMy_PB_id () {$/;"	f	class:instruction
-getMy_first_PB_id	instruction.cpp	/^ADDR instruction::getMy_first_PB_id () {$/;"	f	class:instruction
-getNeighborSize	interfNode.cpp	/^int interfNode::getNeighborSize () {$/;"	f	class:interfNode
-getNthAncestor	basicblock.cpp	/^basicblock* basicblock::getNthAncestor (int indx) {$/;"	f	class:basicblock
-getNthArchReg	instruction.cpp	/^long int instruction::getNthArchReg (int indx) {$/;"	f	class:instruction
-getNthAssignedBB	variable.cpp	/^basicblock* variable::getNthAssignedBB(int indx) {$/;"	f	class:variable
-getNthBB	loop.cpp	/^basicblock* loop::getNthBB(int indx) {$/;"	f	class:loop
-getNthBackEdgeSource	basicblock.cpp	/^basicblock* basicblock::getNthBackEdgeSource (int i) {$/;"	f	class:basicblock
-getNthDescendent	basicblock.cpp	/^basicblock* basicblock::getNthDescendent (int indx) {$/;"	f	class:basicblock
-getNthOldWriteReg	instruction.cpp	/^long int instruction::getNthOldWriteReg (int i) {$/;"	f	class:instruction
-getNthReadReg	instruction.cpp	/^long int instruction::getNthReadReg (int i) { $/;"	f	class:instruction
-getNthReg	instruction.cpp	/^long int instruction::getNthReg (int i) { $/;"	f	class:instruction
-getNthRegType	instruction.cpp	/^int instruction::getNthRegType (int i) { $/;"	f	class:instruction
-getNthSpecialReg	instruction.cpp	/^long int instruction::getNthSpecialReg (int i) { $/;"	f	class:instruction
-getNthSpecialRegType	instruction.cpp	/^int instruction::getNthSpecialRegType (int i) { $/;"	f	class:instruction
-getNthWriteReg	instruction.cpp	/^long int instruction::getNthWriteReg (int i) { $/;"	f	class:instruction
-getNumAncestors	basicblock.cpp	/^int basicblock::getNumAncestors () {$/;"	f	class:basicblock
-getNumAncestors	instruction.cpp	/^int instruction::getNumAncestors () {$/;"	f	class:instruction
-getNumAssignedBB	variable.cpp	/^int variable::getNumAssignedBB() {$/;"	f	class:variable
-getNumBB	loop.cpp	/^int loop::getNumBB() {$/;"	f	class:loop
-getNumBackEdgeSource	basicblock.cpp	/^int basicblock::getNumBackEdgeSource () {$/;"	f	class:basicblock
-getNumDependents	instruction.cpp	/^int instruction::getNumDependents () {$/;"	f	class:instruction
-getNumDescendents	basicblock.cpp	/^int basicblock::getNumDescendents () {$/;"	f	class:basicblock
-getNumReadReg	instruction.cpp	/^int instruction::getNumReadReg () {$/;"	f	class:instruction
-getNumReg	instruction.cpp	/^int instruction::getNumReg () {$/;"	f	class:instruction
-getNumSpecialReg	instruction.cpp	/^int instruction::getNumSpecialReg () {$/;"	f	class:instruction
-getNumWriteReg	instruction.cpp	/^int instruction::getNumWriteReg () {$/;"	f	class:instruction
-getNxtBB	basicblock.cpp	/^basicblock* basicblock::getNxtBB () {$/;"	f	class:basicblock
-getOpCode	instruction.cpp	/^const char *instruction::getOpCode () {return _opCode;}$/;"	f	class:instruction
-getOutSet	instruction.cpp	/^set<long int> instruction::getOutSet () {$/;"	f	class:instruction
-getPhiFuncs	basicblock.cpp	/^map<long int, vector<long int> > basicblock::getPhiFuncs () {$/;"	f	class:basicblock
-getPsudoReg	interfNode.cpp	/^long int interfNode::getPsudoReg () {$/;"	f	class:interfNode
-getReadRegSubscript	instruction.cpp	/^long int instruction::getReadRegSubscript (long int var) { $/;"	f	class:instruction
-getReg	interfNode.cpp	/^long int interfNode::getReg () {$/;"	f	class:interfNode
-getRegAncestors	instruction.cpp	/^List<instruction*>* instruction::getRegAncestors () {$/;"	f	class:instruction
-getRegNum	regFile.cpp	/^long int regFile::getRegNum (const char* regName) {$/;"	f	class:regFile
-getRegisterStr	instruction.cpp	/^std::string instruction::getRegisterStr () {$/;"	f	class:instruction
-getRenamedReg	instruction.cpp	/^long int instruction::getRenamedReg (long int reg) {$/;"	f	class:instruction
-getRenamedReg	registerRename.cpp	/^long int getRenamedReg(long int reg) {$/;"	f
-getSDominatorSize	basicblock.cpp	/^int basicblock::getSDominatorSize () {$/;"	f	class:basicblock
-getSpecialRegNum	regFile.cpp	/^long int regFile::getSpecialRegNum (const char* regName) {$/;"	f	class:regFile
-getTakenBias	basicblock.cpp	/^float basicblock::getTakenBias () {$/;"	f	class:basicblock
-getTakenTarget	basicblock.cpp	/^basicblock* basicblock::getTakenTarget () {$/;"	f	class:basicblock
-getTopStack	variable.cpp	/^int variable::getTopStack() {$/;"	f	class:variable
-getType	instruction.cpp	/^const char instruction::getType () {$/;"	f	class:instruction
-getWriteRegSubscript	instruction.cpp	/^long int instruction::getWriteRegSubscript (long int var) { $/;"	f	class:instruction
-gzip	parse_x86.py	/^import gzip$/;"	i
-hasDst	instruction.cpp	/^bool instruction::hasDst () {$/;"	f	class:instruction
-hasFallThrough	basicblock.cpp	/^bool basicblock::hasFallThrough () { return (_fallThroughBB == NULL) ? false : true;$/;"	f	class:basicblock
-hasFallThru	instruction.cpp	/^bool instruction::hasFallThru () {$/;"	f	class:instruction
-hasHeader	basicblock.cpp	/^bool basicblock::hasHeader () {$/;"	f	class:basicblock
-hasTakenTarget	basicblock.cpp	/^bool basicblock::hasTakenTarget () { return (_takenTargetBB == NULL) ? false : true; }$/;"	f	class:basicblock
-iglob	parse_x86.py	/^from glob import iglob$/;"	i
-inAddrLib	parse_x86.py	/^inAddrLib = []$/;"	v
-init	dot.cpp	/^void dot::init () {$/;"	f	class:dot
-init_x86_lib	parse_x86.py	/^def init_x86_lib():$/;"	f
-insertMOVop	basicblock.cpp	/^void basicblock::insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs, ADDR insAddr) {$/;"	f	class:basicblock
-insertPhiFunc	basicblock.cpp	/^void basicblock::insertPhiFunc (long int var) {$/;"	f	class:basicblock
-instruction	instruction.cpp	/^instruction::instruction () {$/;"	f	class:instruction
 instruction	instruction.h	/^class instruction {$/;"	c
-interfNode	interfNode.cpp	/^interfNode::interfNode (long int psudoReg) {$/;"	f	class:interfNode
 interfNode	interfNode.h	/^class interfNode {$/;"	c
-ioPath	parse_x86.py	/^  ioPath = sys.argv[2]$/;"	v
-ioPath	parse_x86.py	/^ioPath = 'input_files\/'$/;"	v
-isAPhraseblock	basicblock.cpp	/^bool basicblock::isAPhraseblock () {$/;"	f	class:basicblock
-isASDominator	basicblock.cpp	/^bool basicblock::isASDominator (ADDR nodeID) {$/;"	f	class:basicblock
-isAlreadyAssignedArcRegs	instruction.cpp	/^bool instruction::isAlreadyAssignedArcRegs () {$/;"	f	class:instruction
-isAnOpCode	parse_x86.py	/^def isAnOpCode(word):$/;"	f
-isAregister	parse_x86.py	/^def isAregister(word):$/;"	f
-isBackEdge	basicblock.cpp	/^bool basicblock::isBackEdge () {$/;"	f	class:basicblock
-isBbFallThrough	loop.cpp	/^bool loop::isBbFallThrough(ADDR bbID) {$/;"	f	class:loop
-isBbInLoop	loop.cpp	/^bool loop::isBbInLoop(ADDR bbID) {$/;"	f	class:loop
-isEntryPoint	basicblock.cpp	/^bool basicblock::isEntryPoint () {$/;"	f	class:basicblock
-isInIDom	basicblock.cpp	/^bool basicblock::isInIDom (ADDR nodeID) {$/;"	f	class:basicblock
-isInLocalRegSet	basicblock.cpp	/^bool basicblock::isInLocalRegSet (long int reg) {$/;"	f	class:basicblock
-isInLocalRegSet	instruction.cpp	/^bool instruction::isInLocalRegSet (long int reg) {$/;"	f	class:instruction
-isInnerLoop	loop.cpp	/^bool loop::isInnerLoop(loop* lp) {$/;"	f	class:loop
-isInsAddrInBB	basicblock.cpp	/^bool basicblock::isInsAddrInBB (ADDR insAddr) {$/;"	f	class:basicblock
-isInsRepeated	instruction.cpp	/^bool instruction::isInsRepeated (instruction* ins, List<instruction*>*_ancestors) {$/;"	f	class:instruction
-isLongestPathSet	instruction.cpp	/^bool instruction::isLongestPathSet () {$/;"	f	class:instruction
-isNotRepeated	annotateTrace.cpp	/^bool isNotRepeated(ADDR insAddr, List<instruction*>* insList) {$/;"	f
-isRdMemType	instruction.cpp	/^bool instruction::isRdMemType () {$/;"	f	class:instruction
-isRegAllocated	basicblock.cpp	/^bool basicblock::isRegAllocated () {$/;"	f	class:basicblock
-isThisBBfallThru	basicblock.cpp	/^bool basicblock::isThisBBfallThru (basicblock* anc) {$/;"	f	class:basicblock
-isVisited	basicblock.cpp	/^bool basicblock::isVisited () {$/;"	f	class:basicblock
-isWrMemType	instruction.cpp	/^bool instruction::isWrMemType () {$/;"	f	class:instruction
-itertools	parse_x86.py	/^import itertools$/;"	i
-jmpDstLib	parse_x86.py	/^jmpDstLib = []$/;"	v
-jmpOpLib	parse_x86.py	/^jmpOpLib  = []$/;"	v
-linecache	parse_x86.py	/^import linecache$/;"	i
-listSchedule	listSchedule.cpp	/^void listSchedule(basicblock* bb) {$/;"	f
-listSchedule_phraseblock	make_phraseblock.cpp	/^void listSchedule_phraseblock(List<basicblock*> *pbList) {$/;"	f
-liveGlbMaxSize	registerAllocate.cpp	/^static int liveGlbMaxSize = 0, liveLclMaxSize = 0;$/;"	v	file:
-liveGlbMaxSize	registerAllocate_sb.cpp	/^static int liveGlbMaxSize = 0, liveLclMaxSize = 0;$/;"	v	file:
-liveLclMaxSize	registerAllocate.cpp	/^static int liveGlbMaxSize = 0, liveLclMaxSize = 0;$/;"	v	file:
-liveLclMaxSize	registerAllocate_sb.cpp	/^static int liveGlbMaxSize = 0, liveLclMaxSize = 0;$/;"	v	file:
-livenessAnalysis	registerAllocate.cpp	/^static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
-livenessAnalysis	registerAllocate_sb.cpp	/^static void livenessAnalysis (List<basicblock*> *bbList, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
-loop	loop.cpp	/^loop::loop(ADDR loopEntryID, ADDR loopExitID) : basicblock() {$/;"	f	class:loop
+length	stats.h	/^        int length;$/;"	m	struct:block_stats
 loop	loop.h	/^class loop : public basicblock {$/;"	c
-loopToPhraseblock	phraseblock.cpp	/^void phraseblock::loopToPhraseblock(loop *lp) {$/;"	f	class:phraseblock
-main	main.cpp	/^int main (int argc, char* argv[])$/;"	f
-makeLink	dot.cpp	/^void dot::makeLink (basicblock* bb, FILE* outFile) {$/;"	f	class:dot
-makeLoopNests	make_phraseblock.cpp	/^void makeLoopNests(List<loop*> *loopList, set<ADDR> &loopHeaders) {$/;"	f
-makeNaturalLoops	make_phraseblock.cpp	/^void makeNaturalLoops(List<basicblock*>* bbList, List<loop*>* loopList, set<ADDR> &loopHeaders) {$/;"	f
-makeUniqueRegs	instruction.cpp	/^void instruction::makeUniqueRegs () {$/;"	f	class:instruction
-make_basicblock	make_basicblock.cpp	/^void make_basicblock  (List<instruction*> *insList,$/;"	f
-make_interference_nodes_network	registerAllocate.cpp	/^static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
-make_interference_nodes_network	registerAllocate_sb.cpp	/^static void make_interference_nodes_network (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap, map<long int,interfNode*> &locallIntfNodeMap, map<long int,interfNode*> &allIntfNodeMap, REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	file:
-make_phraseblock	make_phraseblock.cpp	/^List<basicblock*>* make_phraseblock(List<basicblock*>* bbList,$/;"	f
-make_superblock	make_superblock.cpp	/^void make_superblock  (List<instruction*> *insList,$/;"	f
-markAsEntryPoint	basicblock.cpp	/^void basicblock::markAsEntryPoint () {$/;"	f	class:basicblock
-marshal	parse_x86.py	/^import marshal$/;"	i
 memReadList	dependencyTable.h	/^		std::map<ADDR,instruction*> memReadList;$/;"	m	class:dependencyTable
-memType	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	t	typeref:enum:__anon3
+memType	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	t	typeref:enum:__anon4
 memWriteList	dependencyTable.h	/^		std::map<ADDR,instruction*> memWriteList;$/;"	m	class:dependencyTable
 memWrites	dependencyTable.h	/^		List<instruction*>* memWrites;$/;"	m	class:dependencyTable
-mk_phrase	make_phraseblock.cpp	/^void mk_phrase(List<basicblock*>* newBbList) {$/;"	f
-mk_phraseblock	make_phraseblock.cpp	/^void mk_phraseblock(List<phraseblock*>* pbList, List<loop*> *loopList, set<ADDR> &loopHeaders, List<basicblock*>* newBbList) {$/;"	f
-nextRenReg	instruction.cpp	/^long int nextRenReg = INIT_RENAME_REG_NUM;$/;"	v
-nextRenReg	registerRename.cpp	/^long int nextRenReg = INIT_RENAME_REG_NUM;$/;"	v
-noType	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon4
-none	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon3
-numNonBackEdgeAncestors	basicblock.cpp	/^int basicblock::numNonBackEdgeAncestors () {$/;"	f	class:basicblock
-opCodeLib	parse_x86.py	/^opCodeLib = {}$/;"	v
-operator =	basicblock.cpp	/^basicblock& basicblock::operator=  (const basicblock& bb) { \/\/TODO: UPDATE THIS FUNCTION$/;"	f	class:basicblock
-os	parse_x86.py	/^import os.path$/;"	i
-parseRegisters	make_instruction.cpp	/^void parseRegisters (instruction* newIns, FILE* input_assembly) {$/;"	f
-parse_config_file	config.cpp	/^void parse_config_file() {$/;"	f
-parse_instruction	make_instruction.cpp	/^void parse_instruction (List<instruction*> *insList, $/;"	f
-partitionLongestPath	quickSort.cpp	/^int partitionLongestPath(List<instruction*> *list, int left, int right) {$/;"	f
-path	parse_x86.py	/^import os.path$/;"	i
-path_visit_set	dfs.cpp	/^set<ADDR> path_visit_set;$/;"	v
-phSize	phrase.cpp	/^int phrase::phSize() {$/;"	f	class:phrase
-phi_func_placement	ssa.cpp	/^void phi_func_placement (List<basicblock*> *bbList, map<int,variable*> &varList) {$/;"	f
-phrase	phrase.cpp	/^phrase::phrase() {$/;"	f	class:phrase
+noType	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	e	enum:__anon5
+none	global.h	/^typedef enum {none, READ, WRITE} memType;$/;"	e	enum:__anon4
 phrase	phrase.h	/^class phrase {$/;"	c
-phraseblock	phraseblock.cpp	/^phraseblock::phraseblock() : basicblock() {$/;"	f	class:phraseblock
 phraseblock	phraseblock.h	/^class phraseblock : public basicblock {$/;"	c
-popFromStack	variable.cpp	/^void variable::popFromStack() {$/;"	f	class:variable
-popHackPushes	variable.cpp	/^void variable::popHackPushes(int counter) {$/;"	f	class:variable
-printBb	basicblock.cpp	/^void basicblock::printBb () {$/;"	f	class:basicblock
-pushToStack	variable.cpp	/^void variable::pushToStack(int s) {$/;"	f	class:variable
-quicksortLongestPath	quickSort.cpp	/^void quicksortLongestPath(List<instruction*> *list, int left, int right)$/;"	f
-random	parse_x86.py	/^import random$/;"	i
-re	parse_x86.py	/^import re$/;"	i
 readRegRenMap	instruction.h	/^	    map<long int,long int> readRegRenMap;$/;"	m	class:instruction
-readRegRenMap	registerRename.cpp	/^map<long int,long int> readRegRenMap;$/;"	v
-regDic	parse_x86.py	/^regDic    = []$/;"	v
-regFile	regFile.cpp	/^regFile::regFile () {$/;"	f	class:regFile
 regFile	regFile.h	/^class regFile {$/;"	c
-regKind	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	t	typeref:enum:__anon5
-regLookup	dependencyTable.cpp	/^instruction* dependencyTable::regLookup (long int reg, tableType table) {$/;"	f	class:dependencyTable
+regKind	global.h	/^typedef enum {LRF, GRF} regKind;$/;"	t	typeref:enum:__anon6
 regReadList	dependencyTable.h	/^		std::map<ADDR,instruction*> regReadList;$/;"	m	class:dependencyTable
 regWriteList	dependencyTable.h	/^		std::map<ADDR,instruction*> regWriteList;$/;"	m	class:dependencyTable
-removeAneighbor	interfNode.cpp	/^void interfNode::removeAneighbor (interfNode* node) {$/;"	f	class:interfNode
-removeBB	annotateTrace.cpp	/^void removeBB(ADDR bbHead, List<map<ADDR,string> > *dynBBList) {$/;"	f
-removeFromGraph	interfNode.cpp	/^void interfNode::removeFromGraph () {$/;"	f	class:interfNode
-removeNthRegister	instruction.cpp	/^void instruction::removeNthRegister (int i) { $/;"	f	class:instruction
-renameAllInsRegs	basicblock.cpp	/^void basicblock::renameAllInsRegs () {$/;"	f	class:basicblock
-renameAllInsRegs	instruction.cpp	/^void instruction::renameAllInsRegs () {$/;"	f	class:instruction
-renameAndbuildDefUseSets	registerAllocate.cpp	/^static void renameAndbuildDefUseSets (List<basicblock*> *bbList) {$/;"	f	file:
-renameAndbuildDefUseSets	registerAllocate_sb.cpp	/^static void renameAndbuildDefUseSets (List<basicblock*> *bbList) {$/;"	f	file:
-renameReadReg	instruction.cpp	/^void instruction::renameReadReg (int indx, long int renReg) {$/;"	f	class:instruction
-renameReadReg	registerRename.cpp	/^void renameReadReg(int indx, long int renReg) {$/;"	f
-renameWriteReg	instruction.cpp	/^void instruction::renameWriteReg (int indx, long int reg) {$/;"	f	class:instruction
-renameWriteReg	registerRename.cpp	/^long int renameWriteReg(long int reg) {$/;"	f
-replaceNthPhiOperand	basicblock.cpp	/^void basicblock::replaceNthPhiOperand (long int var, int indx, long int subscript) {$/;"	f	class:basicblock
-replicateBBList	make_phraseblock.cpp	/^void replicateBBList(List<basicblock*>* bbList, List<basicblock*>* newBbList) {$/;"	f
-reschedule	dependencyTable.cpp	/^bool reschedule;$/;"	v
-resetAncestor	basicblock.cpp	/^void basicblock::resetAncestor (ADDR bbID) {$/;"	f	class:basicblock
-resetBBbrHeader	basicblock.cpp	/^void basicblock::resetBBbrHeader () {$/;"	f	class:basicblock
-resetDF	basicblock.cpp	/^void basicblock::resetDF () {$/;"	f	class:basicblock
-resetDescendents	basicblock.cpp	/^void basicblock::resetDescendents () {$/;"	f	class:basicblock
-resetFallThrough	basicblock.cpp	/^void basicblock::resetFallThrough () { _fallThroughBB = NULL; }$/;"	f	class:basicblock
-resetInsDst	instruction.cpp	/^void instruction::resetInsDst () {$/;"	f	class:instruction
-resetInsFallThru	instruction.cpp	/^void instruction::resetInsFallThru () {$/;"	f	class:instruction
-resetLongestPath	instruction.cpp	/^void instruction::resetLongestPath () {$/;"	f	class:instruction
-resetTakenTarget	basicblock.cpp	/^void basicblock::resetTakenTarget () { _takenTargetBB = NULL; }$/;"	f	class:basicblock
-resetVisitBits	loop.cpp	/^void loop::resetVisitBits() {$/;"	f	class:loop
-resetVisitBits	make_phraseblock.cpp	/^void resetVisitBits(List<basicblock*> *bbList) {$/;"	f
-runDot	dot.cpp	/^void dot::runDot (List<basicblock*>* list) {$/;"	f	class:dot
-search	ssa.cpp	/^void search (basicblock* bb, map<int,variable*> &varList) {$/;"	f
-setAllasDominators	basicblock.cpp	/^void basicblock::setAllasDominators (bool domSetIsAll) {$/;"	f	class:basicblock
-setAncestor	basicblock.cpp	/^void basicblock::setAncestor (basicblock* bb) {$/;"	f	class:basicblock
-setArchReg	instruction.cpp	/^void instruction::setArchReg (long int r) {$/;"	f	class:instruction
-setAsAncestor	instruction.cpp	/^void instruction::setAsAncestor (instruction* ins) {$/;"	f	class:instruction
-setAsBackEdgeSource	basicblock.cpp	/^void basicblock::setAsBackEdgeSource (basicblock* bb) {$/;"	f	class:basicblock
-setAsDependent	instruction.cpp	/^void instruction::setAsDependent (instruction* ins) {$/;"	f	class:instruction
-setAsRegAncestor	instruction.cpp	/^void instruction::setAsRegAncestor (instruction* ins) {$/;"	f	class:instruction
-setAsUnvisited	basicblock.cpp	/^void basicblock::setAsUnvisited () {$/;"	f	class:basicblock
-setAsVisited	basicblock.cpp	/^void basicblock::setAsVisited () {$/;"	f	class:basicblock
-setBBbrHeader	basicblock.cpp	/^void basicblock::setBBbrHeader (ADDR brAddr) {$/;"	f	class:basicblock
-setBPaccuracy	instruction.cpp	/^void instruction::setBPaccuracy (double bpAccuracy) {$/;"	f	class:instruction
-setBrTakenBias	instruction.cpp	/^void instruction::setBrTakenBias (double brBias) {$/;"	f	class:instruction
-setC	variable.cpp	/^void variable::setC(int c) {$/;"	f	class:variable
-setDescendent	basicblock.cpp	/^void basicblock::setDescendent (basicblock* bb) {$/;"	f	class:basicblock
-setDominators	basicblock.cpp	/^bool basicblock::setDominators () {$/;"	f	class:basicblock
-setDominators	basicblock.cpp	/^bool basicblock::setDominators (List<basicblock*>* bbList) {$/;"	f	class:basicblock
-setDominators	basicblock.cpp	/^bool basicblock::setDominators (map<ADDR,basicblock*> &intersection) {$/;"	f	class:basicblock
-setFallThrough	basicblock.cpp	/^void basicblock::setFallThrough (basicblock* bb) {$/;"	f	class:basicblock
-setInsAddr	instruction.cpp	/^void instruction::setInsAddr (ADDR insAddr) {$/;"	f	class:instruction
-setInsAsm	instruction.cpp	/^void instruction::setInsAsm (const char *command) {strcpy (_command, command);}$/;"	f	class:instruction
-setInsDst	instruction.cpp	/^void instruction::setInsDst (instruction* insDst) {$/;"	f	class:instruction
-setInsDstAddr	instruction.cpp	/^void instruction::setInsDstAddr (ADDR insDstAddr, bool hasDst) {$/;"	f	class:instruction
-setInsFallThru	instruction.cpp	/^void instruction::setInsFallThru (instruction* insFallThru) {$/;"	f	class:instruction
-setInsFallThruAddr	instruction.cpp	/^void instruction::setInsFallThruAddr (ADDR insFallThruAddr, bool hasFallThru) {$/;"	f	class:instruction
-setLdMissRate	instruction.cpp	/^void instruction::setLdMissRate (double missRate) {$/;"	f	class:instruction
-setListIndx	basicblock.cpp	/^void basicblock::setListIndx (int listIndx) {$/;"	f	class:basicblock
-setLongestPath	instruction.cpp	/^void instruction::setLongestPath (int longestPath) {$/;"	f	class:instruction
-setMemAccessSize	instruction.cpp	/^void instruction::setMemAccessSize (int memSize) { \/\/in bytes$/;"	f	class:instruction
-setMy_BBorPB_id	instruction.cpp	/^void instruction::setMy_BBorPB_id (ADDR id) {$/;"	f	class:instruction
-setOpCode	instruction.cpp	/^void instruction::setOpCode (const char *opCode) {strcpy (_opCode, opCode);}$/;"	f	class:instruction
-setOuterLoop	loop.cpp	/^void loop::setOuterLoop(loop* lp) {$/;"	f	class:loop
-setPhiWriteVar	basicblock.cpp	/^void basicblock::setPhiWriteVar (long int var, long int subscript) {$/;"	f	class:basicblock
-setRdAddrSet	instruction.cpp	/^void instruction::setRdAddrSet (set<ADDR> &addrSet) {$/;"	f	class:instruction
-setRdMemType	instruction.cpp	/^void instruction::setRdMemType () {$/;"	f	class:instruction
-setReadVar	instruction.cpp	/^void instruction::setReadVar (int var, int subscript) {$/;"	f	class:instruction
-setRegAllocated	basicblock.cpp	/^void basicblock::setRegAllocated () {$/;"	f	class:basicblock
-setRegister	instruction.cpp	/^void instruction::setRegister (long int *r, int *rt) {$/;"	f	class:instruction
-setSpecialRegister	instruction.cpp	/^void instruction::setSpecialRegister (long int *r, int *rt) {$/;"	f	class:instruction
-setTakenTarget	basicblock.cpp	/^void basicblock::setTakenTarget (basicblock* bb) {$/;"	f	class:basicblock
-setType	instruction.cpp	/^void instruction::setType (const char insType) {$/;"	f	class:instruction
-setWrAddrSet	instruction.cpp	/^void instruction::setWrAddrSet (set<ADDR> &addrSet) {$/;"	f	class:instruction
-setWrMemType	instruction.cpp	/^void instruction::setWrMemType () {$/;"	f	class:instruction
-setWriteVar	instruction.cpp	/^void instruction::setWriteVar (int var, int subscript) {$/;"	f	class:instruction
-set_arch_reg_for_all_ins	registerAllocate.cpp	/^static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap) {$/;"	f	file:
-set_arch_reg_for_all_ins	registerAllocate_sb.cpp	/^static void set_arch_reg_for_all_ins (basicblock* bb, map<long int,interfNode*> &globalIntfNodeMap) {$/;"	f	file:
-setupBackEdge	basicblock.cpp	/^void basicblock::setupBackEdge () {$/;"	f	class:basicblock
-setupBox	dot.cpp	/^void dot::setupBox (string color, FILE* outFile) {$/;"	f	class:dot
-setupDefUseSets	basicblock.cpp	/^void basicblock::setupDefUseSets () {$/;"	f	class:basicblock
-setupDefUseSets	instruction.cpp	/^void instruction::setupDefUseSets () {$/;"	f	class:instruction
-setupRegFile	regFile.cpp	/^void regFile::setupRegFile () {$/;"	f	class:regFile
-setupSpecialRegFile	regFile.cpp	/^void regFile::setupSpecialRegFile () {$/;"	f	class:regFile
-setup_dominance_frontier	dominator.cpp	/^void setup_dominance_frontier (List<basicblock*>* bbList) {$/;"	f
-ssa_renaming	ssa.cpp	/^void ssa_renaming (List<basicblock*> *bbList, map<int,variable*> &varList) {$/;"	f
-stat_path	stat.cpp	/^static string stat_path = "\/home\/milad\/esc_project\/svn\/PARS\/src\/binaryTranslator\/stat";$/;"	v	file:
-storeToFile	annotateTrace.cpp	/^long int storeToFile(bool brFound, ADDR brAddr, basicblock* bb, map<ADDR, string> &dynBBMap, FILE* traceFileOutput) {$/;"	f
-storeToFile	annotateTrace.cpp	/^void storeToFile(map<ADDR,bool> &brFoundMap, map<ADDR,ADDR> &brAddrMap, basicblock* bb, map<ADDR, map<ADDR,string> > &dynBBListMap, FILE* traceFileOutput) {$/;"	f
-swap	quickSort.cpp	/^void swap(List<instruction*> *list, int x, int y) {$/;"	f
-sys	parse_x86.py	/^import sys$/;"	i
-tableType	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	t	typeref:enum:__anon2
-trace	parse_x86.py	/^def trace():$/;"	f
-transferPointersToNewList	basicblock.cpp	/^void basicblock::transferPointersToNewList (List<basicblock*>* bbList) {$/;"	f	class:basicblock
-type	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	t	typeref:enum:__anon4
-updateDefSet	basicblock.cpp	/^void basicblock::updateDefSet (long int reg) {$/;"	f	class:basicblock
-updateDefSet	instruction.cpp	/^void instruction::updateDefSet (long int reg) {$/;"	f	class:instruction
-updateLocalRegSet	basicblock.cpp	/^void basicblock::updateLocalRegSet () {$/;"	f	class:basicblock
-updateLocalRegSet	instruction.cpp	/^void instruction::updateLocalRegSet () {$/;"	f	class:instruction
-updateUseSet	basicblock.cpp	/^void basicblock::updateUseSet (long int reg) {$/;"	f	class:basicblock
-updateUseSet	instruction.cpp	/^void instruction::updateUseSet (long int reg) {$/;"	f	class:instruction
-update_InOutSet	basicblock.cpp	/^bool basicblock::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode) {$/;"	f	class:basicblock
-update_InOutSet	instruction.cpp	/^bool instruction::update_InOutSet (REG_ALLOC_MODE reg_alloc_mode, set<long int> &bbDefSet, bool isLastInsInBB) {$/;"	f	class:instruction
-variable	variable.cpp	/^variable::variable (long int var) {$/;"	f	class:variable
+sub_blk_map	basicblock.h	/^        map<SUB_BLK_ID, sub_block*> sub_blk_map;$/;"	m	class:basicblock
+sub_block	basicblock.h	/^        sub_block () { _insList = new List<instruction*>; }$/;"	f	class:sub_block
+sub_block	basicblock.h	/^class sub_block {$/;"	c
+tableType	dependencyTable.h	/^typedef enum {MEM_READ, MEM_WRITE, REG_WRITE, REG_READ} tableType;$/;"	t	typeref:enum:__anon3
+type	global.h	/^typedef enum {noType, ALU, MEM, FPU, BR} type;$/;"	t	typeref:enum:__anon5
+upld_cnt	stats.h	/^        int upld_cnt;$/;"	m	struct:block_stats
+upld_dep_cnt	stats.h	/^        int upld_dep_cnt;$/;"	m	struct:block_stats
+upld_n_dep_cnt	stats.h	/^        int upld_n_dep_cnt;$/;"	m	struct:block_stats
 variable	variable.h	/^class variable {$/;"	c
-whichPred	ssa.cpp	/^int whichPred (basicblock* Y, basicblock* X) {$/;"	f
-wrLookup	dependencyTable.cpp	/^List<instruction*>* dependencyTable::wrLookup () {$/;"	f	class:dependencyTable
+width	stats.h	/^        int width;$/;"	m	struct:block_stats
 writeRegRenMap	instruction.h	/^		map<long int,long int> writeRegRenMap;$/;"	m	class:instruction
-writeRegRenMap	registerRename.cpp	/^map<long int,long int> writeRegRenMap;$/;"	v
-writeToFile	logGen.cpp	/^void writeToFile (List<basicblock*> *bbList, string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size) {$/;"	f
-~basicblock	basicblock.cpp	/^basicblock::~basicblock () {$/;"	f	class:basicblock
-~dependencyTable	dependencyTable.cpp	/^dependencyTable::~dependencyTable() {$/;"	f	class:dependencyTable
-~dot	dot.cpp	/^dot::~dot () {$/;"	f	class:dot
-~instruction	instruction.cpp	/^instruction::~instruction () {$/;"	f	class:instruction
-~interfNode	interfNode.cpp	/^interfNode::~interfNode () {$/;"	f	class:interfNode
-~loop	loop.cpp	/^loop::~loop() {$/;"	f	class:loop
-~phrase	phrase.cpp	/^phrase::~phrase() {$/;"	f	class:phrase
-~phraseblock	phraseblock.cpp	/^phraseblock::~phraseblock() {$/;"	f	class:phraseblock
 ~regFile	regFile.h	/^		~regFile (){}$/;"	f	class:regFile
-~variable	variable.cpp	/^variable::~variable() {$/;"	f	class:variable
+~sub_block	basicblock.h	/^        ~sub_block () { delete _insList; }$/;"	f	class:sub_block

@@ -57,7 +57,9 @@ PIPE_ACTIVITY bb_decode::decodeImpl () {
 
 void bb_decode::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Decode Ports Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
+#endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _decode_to_scheduler_port->flushPort (squashSeqNum);
 }

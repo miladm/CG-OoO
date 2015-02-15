@@ -100,6 +100,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
                        "Add to st_buff ins", mem_ins->getInsID (), _clk->now ());
         } else {
             axes_lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_READ);
+            if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->getInsAddr (), axes_lat); }
 //            axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
 //                                           mem_ins->getMemAddr (),
 //                                           mem_ins->getMemAxesSize(),

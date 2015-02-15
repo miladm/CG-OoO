@@ -17,6 +17,7 @@ dynBasicblock::dynBasicblock (SCHED_MODE scheduling_mode, string class_name)
     _wasted_ins_cnt = 0;
     _scheduling_mode = scheduling_mode;
     _done_fetch = false;
+    _runahead_permit = true;
 }
 
 dynBasicblock::~dynBasicblock () {
@@ -107,6 +108,17 @@ void dynBasicblock::rescheduleInsList (INS_ID* seq_num) {
         //        }
         //        cout << endl;
     }
+}
+
+list<ADDRS> dynBasicblock::getUnInstrumentedIns () {
+    list<ADDRS>::iterator it;
+    for (it = _staticBBinsList.begin (); it != _staticBBinsList.end (); it++) {
+        ADDRS ins_addr = *it;
+        if (_bbInsMap.find (ins_addr) == _bbInsMap.end()) {
+            _unInstrumentedList.push_back (ins_addr);
+        }
+    }
+    return _unInstrumentedList;
 }
 
 /* 
@@ -230,6 +242,8 @@ PR dynBasicblock::getGPR (AR a_reg, AXES_TYPE axes_type) {
 
 bool dynBasicblock::isMemOrBrViolation () {return (_bb_has_mem_violation || _bb_on_wrong_path);}
 
+bool dynBasicblock::isMemViolation () {return _bb_has_mem_violation;}
+
 /*-- THIS FUNCTION ENABLES DISTROYING THE ONLY LASTING COPY OF INS-LIST - USE IT WITH CAUTION --*/
 List<bbInstruction*>* dynBasicblock::getBBinsList () {return &_schedInsList;}
 
@@ -310,3 +324,10 @@ void dynBasicblock::setDoneFetch () {
 bool dynBasicblock::isDoneFetch () {
     return _done_fetch;
 }
+
+void dynBasicblock::revokeRunaheadPermit () {
+    Assert (_runahead_permit == true);
+    _runahead_permit = false;
+}
+
+bool dynBasicblock::runaheadPermit () { return _runahead_permit; }

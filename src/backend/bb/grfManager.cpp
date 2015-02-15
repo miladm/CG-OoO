@@ -4,9 +4,9 @@
 
 #include "grfManager.h"
 
-bb_grfManager::bb_grfManager (sysClock* clk, const YAML::Node& root, string rf_name)
+bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& root, string rf_name)
     : unit (rf_name, clk),
-      _GRF (clk, root["grf"], "GlobalRegisterRename"),
+      _GRF (clk, blk_cnt, root["grf"], "GlobalRegisterRename"),
       _e_rf (rf_name + ".grf", root["grf"]),
       _e_rat (rf_name + ".grat", root["grat"]),
       _e_apr (rf_name + ".gapr", root["gapr"]),
@@ -26,27 +26,49 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
         if (!_GRF.isPRvalid (reg)) {
             dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                     "Reg", reg, "is invlid", _clk->now ());
-            return false; /*-- operand not available --*/
+            return false; /*-- OPERAND NOT AVAILABLE --*/
         } else {
-            p_rdReg_list->RemoveAt (i); /*--optimization --*/
+            p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
 
     if (p_rdReg_list->NumElements () == 0) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
-        return true; /*-- all operands available --*/
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
     }
 
     dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
-    return false; /*-- not all operands available --*/
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
+}
+
+bool bb_grfManager::checkReadyAgain (bbInstruction* ins) {
+    List<AR>* p_rdReg_list = ins->getPRrdList ();
+    for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = p_rdReg_list->Nth (i);
+        if (!_GRF.isPRvalid (reg)) {
+            dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                    "Reg", reg, "is invlid", _clk->now ());
+            return false; /*-- OPERAND NOT AVAILABLE --*/
+        }
+    }
+
+    if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
+    }
+
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
 }
 
 /*-- CHECK IS NO OTHER OBJ IS WRITING INTO WRITE REGS --*/
-bool bb_grfManager::canRename (bbInstruction* ins) {
+bool bb_grfManager::canRename (bbInstruction* ins, BB_ID bbWin_id) {
     List<AR>* ar_wr = ins->getARwrList ();
-    if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
+    if (_GRF.getNumAvailablePR (bbWin_id) < ar_wr->NumElements ()) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
                 "Can NOT rename regisers for ins", ins->getInsID (), _clk->now ());
         s_cant_rename_cnt++;
@@ -63,7 +85,10 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
             "Rename regisers for ins", ins->getInsID (), _clk->now ());
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
-    Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
+    WIDTH grf_segmnt_indx = ins->getBBWinID ();
+#ifdef ASSERTION
+    Assert (_GRF.getNumAvailablePR (grf_segmnt_indx) >= ar_wr->NumElements ());
+#endif
 
     /*-- RENAME READ REFISTERS FIRST --*/
     for (int i = 0; i < ar_rd->NumElements (); i++) {
@@ -75,11 +100,13 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
-        Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have been available.");
+#ifdef ASSERTION
+        Assert (_GRF.isAnyPRavailable (grf_segmnt_indx) == true && "A physical reg must have been available.");
+#endif
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
         _e_rat.ramAccess ();
-        PR new_pr = _GRF.getAvailablePR ();
+        PR new_pr = _GRF.getAvailablePR (grf_segmnt_indx);
         _e_apr.ramAccess ();
         _GRF.update_fRAT (a_reg, new_pr);
         _e_rat.ramAccess ();
@@ -107,7 +134,9 @@ void bb_grfManager::commitRegs (bbInstruction* ins) {
             "Commit regisers for ins", ins->getInsID (), _clk->now ());
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();
+#ifdef ASSERTION
     Assert (_ar->NumElements () == _pr->NumElements ());
+#endif
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
         AR a_reg = _ar->Nth (i);
@@ -141,4 +170,8 @@ void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
     for (WIDTH i = 0; i < numRegWires; i++) {
         _GRF.updateWireState (axes_type);
     }
+}
+
+void bb_grfManager::getStat () {
+    _GRF.getStat ();
 }

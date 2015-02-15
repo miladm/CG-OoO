@@ -35,6 +35,8 @@ class bb_commit : protected stage {
         void commitBB (dynBasicblock*);
         void delBB (dynBasicblock*);
         void delIns (bbInstruction*);
+        void verifySim ();
+        void debugDump ();
 
 	private:
 		port<bbInstruction*>* _commit_to_bp_port;
@@ -43,6 +45,10 @@ class bb_commit : protected stage {
         CAMtable<dynBasicblock*>* _bbQUE;
         bb_memManager* _LSQ_MGR;
         bb_rfManager* _RF_MGR;
+
+        /*-- SIMULATION STALL VERIFICATION --*/
+        SCALAR _prev_ins_cnt;
+        CYCLE _prev_commit_cyc;
 
         /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;

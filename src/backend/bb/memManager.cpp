@@ -69,15 +69,25 @@ void bb_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
 }
 
 void bb_memManager::pushBack (bbInstruction *ins) {
+#ifdef ASSERTION
     Assert (ins->getInsType () == MEM);
+#endif
     if (ins->getMemType () == LOAD) {
+#ifdef ASSERTION
         Assert (_LQ.getTableState () != FULL_BUFF);
+#endif
         _LQ.pushBack (ins);
         ins->setLQstate (LQ_ADDR_WAIT);
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "Write LQ ins", ins->getInsID (), _clk->now ());
     } else {
+#ifdef ASSERTION
         Assert (_SQ.getTableState () != FULL_BUFF);
+#endif
         _SQ.pushBack (ins);
         ins->setSQstate (SQ_ADDR_WAIT);
+        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "Write SQ ins", ins->getInsID (), _clk->now ());
     }
 }
 
@@ -117,7 +127,9 @@ bool bb_memManager::issueToMem (LSQ_ID lsq_id) {
     } else { /* ST_QU */
         mem_ins = _SQ.findPendingMemIns (ST_QU);
         _SQ.ramAccess (); /* GET THE OUTSTANDING COMMITED ST OP */
+#ifdef ASSERTION
         if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false);
+#endif
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
         axes_lat = _cache.request ((uint64_t)mem_ins->getMemAddr (), false, REQUEST_WRITE);
@@ -147,12 +159,15 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
         s_st_to_ld_fwd_cnt++;
         s_st_to_ld_fwd_rat++;
         mem_ins->setLQstate (LQ_FWD_FROM_SQ);
-        return g_eu_lat._st_buff_lat;
+        CYCLE lat = g_eu_lat._st_buff_lat;
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->getInsAddr (), lat); }
+        return lat;
     //} else if () { /*TODO for MSHR */
     } else {
         if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
         mem_ins->setLQstate (LQ_CACHE_WAIT);
         CYCLE lat = _cache.request ((uint64_t)mem_ins->getMemAddr (), false, REQUEST_READ);
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->getInsAddr (), lat); }
 //        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix this line
 //                    mem_ins->getMemAddr (),
 //                    4,
@@ -166,7 +181,9 @@ CYCLE bb_memManager::getAxesLatency (bbInstruction* mem_ins) {
 }
 
 bool bb_memManager::commit (bbInstruction* ins) {
+#ifdef ASSERTION
     Assert (ins->getInsType () == MEM);
+#endif
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
 //        if (!_LQ.hasFreeWire (READ)) return false; TODO put this back when multi-cycle BB commit is enabled - should it?
@@ -178,7 +195,9 @@ bool bb_memManager::commit (bbInstruction* ins) {
 //        _LQ.updateWireState (READ); TODO put it back too if you decided to go for this. same goes for SQ?
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:", ins->getInsID ());
     } else { /*-- STORE --*/
+#ifdef ASSERTION
         Assert (ins->getSQstate () == SQ_COMPLETE);
+#endif
         ins->setSQstate (SQ_COMMIT);
         _SQ.camAccess (); /* MUST FIND THE COMMITTING ST OPs */
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:", ins->getInsID ());
@@ -268,7 +287,9 @@ void bb_memManager::forward (bbInstruction* ins, CYCLE mem_latency) {
 #endif
     if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     CYCLE cdb_ready_latency = mem_latency - 1;
+#ifdef ASSERTION
     Assert (cdb_ready_latency >= 0);
+#endif
     _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
     dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
                "Forward wr ops of ins", ins->getInsID (), _clk->now ());

@@ -30,6 +30,7 @@ class o3_commit : protected stage {
         void bpMispredSquash ();
         void memMispredSquash ();
         void delIns (dynInstruction* ins);
+        void verifySim ();
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
@@ -38,6 +39,10 @@ class o3_commit : protected stage {
         CAMtable<dynInstruction*>* _iQUE;
         o3_memManager* _LSQ_MGR;
         o3_rfManager* _RF_MGR;
+
+        /*-- SIMULATION STALL VERIFICATION --*/
+        SCALAR _prev_ins_cnt;
+        CYCLE _prev_commit_cyc;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;

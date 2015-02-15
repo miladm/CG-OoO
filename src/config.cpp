@@ -24,12 +24,16 @@ config::config (string bench_path, string config_path, string out_dir) {
     parser.GetNextDocument (_root);
 
 
+    int prof_temp, wp_temp;
+    _root["cpu"]["frontend"]["profiling"] >> prof_temp;
     _root["cpu"]["backend"]["rf"]["lrf"]["rf_lo"] >> _larf_lo;
     _root["cpu"]["backend"]["rf"]["lrf"]["rf_hi"] >> _larf_hi;
     _root["cpu"]["backend"]["rf"]["grf"]["a_lo"]  >> _garf_lo;
     _root["cpu"]["backend"]["rf"]["grf"]["a_hi"]  >> _garf_hi;
-
-
+    _enable_profile = (bool)prof_temp;
+    _root["cpu"]["frontend"]["wrong_path"] >> wp_temp;
+    _enable_wp = (bool)wp_temp;
+    _root["cpu"]["frontend"]["br_misspred_delay"] >> _br_misspred_delay;
 
 
     /* =========== ============ */
@@ -43,6 +47,7 @@ config::config (string bench_path, string config_path, string out_dir) {
     cout << config_path << endl;
     _config_path  = config_path + cfg_file_ext;
     _out_path = out_dir;
+    _profile_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/profile_files/ref"; //TODO tranfer to yaml
     cout << _config_path << endl;
     _bench_path   = bench_path + cfg_file_ext;
 	_f_sim_cfg    = fopen (_config_path.c_str (), "r");
@@ -381,6 +386,8 @@ char* config::getSfilePath () { return _s_file_root_path; }
 
 string config::getOutPath () { return _out_path; }
 
+string config::getProfilePath () { return _profile_path; }
+
 SCH_MODE config::getSchMode  () { return _sch_mode; }
 
 REG_ALLOC_MODE config::getRegAllocMode  () { return _reg_alloc_mode; }
@@ -403,6 +410,8 @@ bool config::isEnFwd () {return _enable_mem_fwd || _enable_eu_fwd;}
 
 bool config::isEnLogStat () {return _enable_log_stat;}
 
+bool config::isEnProfiling () {return _enable_profile;} //TODO put this to yaml
+
 void config::setWarmedUp () {_warmed_up = true;} /* TODO this bad hack - change it*/
 
 bool config::isWarmedUp () {return _warmed_up;}
@@ -416,5 +425,9 @@ AR config::getLARF_HI () {return _larf_hi;}
 AR config::getGARF_LO () {return _garf_lo;}
 
 AR config::getGARF_HI () {return _garf_hi;}
+
+unsigned config::brMisspredDelay () {Assert (_enable_wp); return _br_misspred_delay;}
+
+bool config::isWrongPath () {return _enable_wp;}
 
 config* g_cfg;

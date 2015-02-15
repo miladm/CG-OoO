@@ -29,6 +29,7 @@ class config {
 		char* getProgName ();
 		char* getSfilePath ();
         string getOutPath ();
+        string getProfilePath ();
         SCH_MODE getSchMode ();
         REG_ALLOC_MODE getRegAllocMode ();
         CORE_TYPE getCoreType ();
@@ -41,6 +42,7 @@ class config {
         bool isEnMemFwd ();
         bool isEnFwd ();
         bool isEnLogStat ();
+        bool isEnProfiling ();
         
         /* PROGRAM WARMUP */
         void setWarmedUp ();
@@ -52,6 +54,10 @@ class config {
         AR getLARF_HI ();
         AR getGARF_LO ();
         AR getGARF_HI ();
+
+        /* WRONG PATH */
+        unsigned brMisspredDelay ();
+        bool isWrongPath ();
 
     private:
 		bool parsePinPointFiles ();
@@ -70,6 +76,7 @@ class config {
         REG_ALLOC_MODE _reg_alloc_mode;
         string _config_path;
         string _out_path;
+        string _profile_path;
         string _bench_path;
         bool _enable_log_stat;
         long double _max_ins_cnt;
@@ -110,6 +117,10 @@ class config {
 		int _wb_delay;
 		int _fwd_delay;
 
+        // WRONG PATH (WP)
+        bool _enable_wp;
+        unsigned _br_misspred_delay;
+
 		//UNIT WIDTHS
 		int _bp_width;
 		int _decode_width;
@@ -128,6 +139,9 @@ class config {
 
         //REGISTER FILE PARAMS
         AR _larf_lo, _larf_hi, _garf_lo, _garf_hi;
+
+        //PROFILING
+        bool _enable_profile;
     public:
         YAML::Node _root;
 };

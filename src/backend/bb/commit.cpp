@@ -37,6 +37,9 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
     _RF_MGR = RF_MGR;
     _num_bbWin = num_bbWin;
     _bbWindows = bbWindows;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = START_CYCLE;
 }
 
 bb_commit::~bb_commit () {}
@@ -61,6 +64,8 @@ void bb_commit::doCOMMIT () {
     if (! (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = commitImpl ();
     }
+
+    verifySim ();
 
     /*-- STAT --*/
     if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
@@ -92,8 +97,15 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
         dynBasicblock* bb_dual = _bbQUE->popFront ();
+#ifdef ASSERTION
         Assert (bb->isDoneFetch () == true);
+#endif
+        if (bb->getBBID () != bb_dual->getBBID ())
+            cout << bb->getBBID () << " " << bb_dual->getBBID () << " " 
+                 << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+#ifdef ASSERTION
         Assert (bb->getBBID () == bb_dual->getBBID ());
+#endif
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Commit bb", bb->getBBID (), _clk->now ());
         s_bb_size_avg += bb->getBBorigSize ();
@@ -111,7 +123,9 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
 
 void bb_commit::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
+#endif
     if (_bbROB->getTableSize () == 0) return;
 
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
@@ -146,12 +160,16 @@ void bb_commit::bpMispredSquash () {
         bb = _bbQUE->getNth_unsafe (i);
         if (bb->getBBheadID () == squashSeqNum) {
             start_indx = i;
+#ifdef ASSERTION
             Assert (bb->isOnWrongPath () == true);
+#endif
         } else if (bb->getBBheadID () > squashSeqNum) {
             if (!bb->isMemOrBrViolation () || 
                 bb->hasCorrectPathIns ()) { // BOTH CONDITIONS SHOULD AGREE - A PRECAUTION
                 stop_indx = i - 1;
+#ifdef ASSERTION
                 Assert (i > start_indx);
+#endif
                 break;
             }
         }
@@ -166,7 +184,9 @@ void bb_commit::bpMispredSquash () {
 //        }
 //    }
     /* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */
+#ifdef ASSERTION
     Assert (_bbQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+#endif
 
     /* PUSH BACK BB'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _bbQUE->getTableSize () - 1; i > stop_indx; i--) {
@@ -176,21 +196,34 @@ void bb_commit::bpMispredSquash () {
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(BR_MISPRED)Squash bb", bb->getBBID (), _clk->now ());
+                               "(BR_MISPRED)(PUSH BACK BB) Squash bb ", bb->getBBID (), _clk->now ());
     }
 
     /* DELETE BB'S THAT ARE ON WRONG PATH */
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
+#ifdef ASSERTION
         Assert (bb->isMemOrBrViolation () == true);
         Assert (bb->getBBheadID () >= squashSeqNum);
+#endif
         _bbQUE->removeNth_unsafe (i);
         s_wp_bb_cnt++;
         s_wp_ins_cnt += bb->getBBorigSize ();
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(BR_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %ld)\n", _stage_name.c_str (), 
+                               "(BR_MISPRED)(DELETE BB) Squash bb ", bb->getBBID (), _clk->now ());
         delBB (bb);
+    }
+
+    if (_bbROB->getTableSize () > 0) {
+        dynBasicblock* bb1 = _bbROB->getNth_unsafe (0);
+        dynBasicblock* bb2 = _bbQUE->getNth_unsafe (0);
+        if (bb1->getBBID () != bb2->getBBID ())
+            cout << bb1->getBBID () << " " << bb2->getBBID () << " " 
+                << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+#ifdef ASSERTION
+        Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
+#endif
     }
 }
 
@@ -213,6 +246,7 @@ void bb_commit::memMispredSquash () {
     }
 
     /*-- SQUASH BBQUE --*/
+    dynBasicblock* prev_bb = NULL;
     for (LENGTH i = _bbQUE->getTableSize () - 1; i >= 0; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
@@ -221,8 +255,20 @@ void bb_commit::memMispredSquash () {
         g_var.insertFrontBBcache (bb);
         _bbQUE->removeNth_unsafe (i);
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
-                               "(MEM_MISPRED) Squash bb", bb->getBBID (), _clk->now ());
+                               "(MEM_MISPRED)(PUSH BACK BB) Squash bb", bb->getBBID (), _clk->now ());
+        prev_bb = bb;
     }
+
+    if (_bbROB->getTableSize () > 0) {
+        dynBasicblock* bb1 = _bbROB->getNth_unsafe (0);
+        dynBasicblock* bb2 = _bbQUE->getNth_unsafe (0);
+        if (bb1->getBBID () != bb2->getBBID ())
+            cout << bb1->getBBID () << " " << bb2->getBBID () << " " 
+                << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+        Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
+    }
+
+    if (prev_bb != NULL) prev_bb->revokeRunaheadPermit ();
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
@@ -275,4 +321,43 @@ void bb_commit::delIns (bbInstruction* ins) {
 
 void bb_commit::regStat () {
     _bbROB->regStat ();
+    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) {
+        g_msg.simEvent ("* g_simInsCnt - pin: %lu\n", g_var.g_simpInsCnt);
+        s_ins_cnt.print ();
+    }
+}
+
+void bb_commit::verifySim () {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) {
+        if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
+            cout << "current cycle: " << _clk->now () << endl;
+            cout << "last commit cycle: " << _prev_commit_cyc << endl << endl;
+            debugDump ();
+            Assert (false && "No commit for too long");
+        }
+        if (s_ins_cnt.getValue () > _prev_ins_cnt) {
+            _prev_ins_cnt = s_ins_cnt.getValue ();
+            _prev_commit_cyc = _clk->now ();
+        }
+    } else {
+            _prev_commit_cyc = _clk->now ();
+    }
+}
+
+/* DEBUG CODE TO GET A SUMMARY OF PROGRAM STATE AT TERMINATION */
+void bb_commit::debugDump () {
+    for (int i = 0; i < _bbROB->getTableSize (); i++) {
+        dynBasicblock* bb = _bbROB->getNth(i);
+        List<bbInstruction*>* insList = bb->getBBinsList ();
+        for (int i = insList->NumElements () - 1; i >= 0; i--) {
+            bbInstruction* ins = insList->Nth (i);
+            cout << "stage: " << ins->getPipeStage () << 
+                " ID: " << ins->getInsID () <<
+                " wp: " << ins->isMemOrBrViolation () <<
+                " type: " << ins->getInsType () <<
+                " (bbID: " << ins->getBB()->getBBID () <<
+                "  wp: " << ins->getBB()->isMemOrBrViolation () << ")" <<
+                endl;
+        }
+    }
 }

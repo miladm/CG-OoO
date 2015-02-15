@@ -23,6 +23,9 @@ class wires : public unit
         const nMETER _wire_len;
         WIDTH _wire_cnt;
 
+        /* ENERGY */
+        wire_energy _e_wire;
+
         /* STAT OBJS */
         ScalarStat& s_unavailable_cnt;
 };

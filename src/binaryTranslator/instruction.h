@@ -40,6 +40,7 @@ class instruction {
 		void setBPaccuracy (double bpAccuracy);
 		void setLdMissRate (double missRate);
 		void setRegister (long int *r, int *rt);
+		void setSSAregister (long int *r, int *rt);
 		void setSpecialRegister (long int *r, int *rt);
 		void setReadVar (int var, int subscript);
 		void setWriteVar (int var, int subscript);
@@ -66,6 +67,7 @@ class instruction {
 		int getNthSpecialRegType (int i);
 		long int getNthReg (int i);
 		long int getNthSpecialReg (int i);
+        void replaceWriteArchReg (long int, long int);
 		long int getNthArchReg (int indx);
 		long int getNthOldWriteReg (int i);
 		long int getNthReadReg (int i);
@@ -100,6 +102,15 @@ class instruction {
 		int getNumAncestors ();
 		int getNumDependents ();
 
+        /* UPLD DEPENDENCE */
+        bool isUPLDdep ();
+        void setUPLDdep ();
+        void setUPLDins ();
+        bool updateUPLDbit ();
+        bool isUPLD ();
+        void assignUPLDroot (ADDR);
+        set<ADDR> getUPLDroots ();
+
 		/* REGISTER RENAMING */
 	    void renameWriteReg (int indx, long int reg);                                                                                                                       
 	    void renameReadReg (int indx, long int renReg);                                                                                                           
@@ -123,19 +134,34 @@ class instruction {
 		
 		/* DATA-FLOW ANALYSIS */
     private:
+		void replaceDefSetElem (long int, long int);
+		void replaceUseSetElem (long int, long int);
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
 		void updateLocalRegSet ();
+
     public:
+        void setup_locGlbUseSet (set<long int>&);
+        void setup_locGlbDefSet (set<long int>&);
+        void update_locGlbSet (set<long int>&, std::map<int, long int>&, std::map<int, long int>&, int);
+        set<long int> setup_locToGlbUseSet (set<long int>&, set<long int>&);
+        set<long int> setup_locToGlbDefSet (set<long int>&);
+        void update_locToGlbSet (set<long int>&, std::map<int, long int>&, std::map<int, long int>&, int);
+        void setupLocSet (PUSH_LOCATION);
 		bool update_InOutSet (REG_ALLOC_MODE, set<long int>&, bool);
+        set<long int> update_locToGlb (set<long int>&, set<long int>&);
+        void resetSets ();
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();
 		set<long int> getOutSet ();
+		set<long int> getUseSet ();
 		set<long int> getDefSet ();
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
 		int getLiveVarSize () { return _inSet.size ()+_defSet.size (); }
+        void setInsertedMovOp ();
+        bool isInsertedMovOp ();
 
 
 	private:
@@ -143,6 +169,9 @@ class instruction {
 		char _command[INS_STRING_SIZE];
 		set<ADDR> _myBBs;
 		ADDR _insAddr;
+        bool _upld_dep;
+        bool _upld_ins;
+        set<ADDR> _upld_roots;
 
         /* REGS */
         List<long int> *_r; //SSA REGISTER LIST
@@ -190,12 +219,19 @@ class instruction {
 		double _missRate;
         MEM_SCH_MODE _mem_sch_mode;
 
+        /* INSETED MOV BY THIS COMPILER */
+        bool _is_inserted_mov_op;
+
         /* LIVENESS */
 		std::set<long int> _useSet;
 		std::set<long int> _defSet;
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
+		std::set<long int> _bbUseSet;
+		std::set<long int> _bbDefSet;
+		std::set<long int> _insLocDefSet;
+		std::set<long int> _insMultiUseSet;
 };
 
 #endif

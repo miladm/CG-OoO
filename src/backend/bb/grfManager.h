@@ -7,26 +7,29 @@
 
 #include "../unit/unit.h"
 #include "../unit/bbInstruction.h"
-#include "../unit/registerRename.h"
+#include "registerRename.h"
 
 class bb_grfManager : public unit {
 	public:
-		bb_grfManager (sysClock*, const YAML::Node&, string rf_name = "bb_grfManager");
+		bb_grfManager (sysClock*, WIDTH, const YAML::Node&, string rf_name = "bb_grfManager");
 		~bb_grfManager ();
 
-        bool canRename (bbInstruction* ins);
-        void renameRegs (bbInstruction* ins);
-        bool isReady (bbInstruction* ins);
-        void completeRegs (bbInstruction* ins);
-        void commitRegs (bbInstruction* ins);
+        bool canRename (bbInstruction*, BB_ID);
+        void renameRegs (bbInstruction*);
+        bool isReady (bbInstruction*);
+        bool checkReadyAgain (bbInstruction*);
+        void completeRegs (bbInstruction*);
+        void commitRegs (bbInstruction*);
         void squashRenameReg ();
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
         void updateWireState (AXES_TYPE, WIDTH);
+    
+        void getStat ();
 
 	private:
-        o3_registerRename _GRF;
+        bb_registerRename _GRF;
 
         /*-- ENERGY --*/
     public:

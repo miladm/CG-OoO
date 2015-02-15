@@ -25,6 +25,8 @@ typedef int LENGTH;
 typedef int WIDTH;
 typedef int nMETER;
 typedef long double SCALAR;
+typedef long double FRACTION;
+typedef long int DIGIT;
 typedef long double PJ; /* PICO-JOULE */
 
 typedef char INS_STR;
@@ -177,6 +179,8 @@ typedef enum {
 
 #define V_FRONTEND 0x1
 #define V_BACKEND 0x1
+
+#define SIM_STALL_THR 5000
 
 /*-- DEFINE --*/
 #ifndef DEFS

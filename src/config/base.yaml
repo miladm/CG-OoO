@@ -16,11 +16,13 @@ cpu:
 
     frontend: 
        gen_uop: enable
-       wrong_path: enable
        instrumentation: enable
        sim_point: enable
        simpoint_file: 
        code_cache_size_thr: 100 #TODO be considerate of BB_NEAR_EMPTY_SIZE param
+       profiling: 0
+       wrong_path: 1
+       br_misspred_delay: 20     #NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
 
     backend: 
        core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
@@ -39,6 +41,8 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_wire: 2.669986e-1
+               w_wire: 1
            g_share:
                globalPredictorSize: 8192
                globalHistoryBits: 13
@@ -46,6 +50,8 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_wire: 2.669986e-1
+               w_wire: 1
            tournament:
                localPredictorSize: 2048
                localCtrBits: 2
@@ -59,6 +65,8 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_wire: 2.669986e-1
+               w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
                localCtrBits: 2
@@ -72,60 +80,71 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_wire: 2.669986e-1
+               w_wire: 1
 
        rf:
            simple:
-               rf_size: 80
-               rf_lo: 117
-               rf_hi: 196
+               rf_size: 90
+               rf_lo: 120
+               rf_hi: 209
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: SIMPLE_RF
                cout: 1
                e_cam: 0
                e_ram: 7.785043
+               e_wire: 1.045157e-1
+               w_wire: 64
            lrf:
-               rf_size: 17
+               rf_size: 20
                rf_lo: 100
-               rf_hi: 116
+               rf_hi: 119
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: LRF
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
                e_ram: 0.619338
+               e_wire: 5.064818e-2
+               w_wire: 64
            grf:
-               a_size: 80
-               a_lo: 117
-               a_hi: 196
-               r_size: 40 # RENAME REGS
-               r_lo: 197
-               r_hi: 236
-               p_size: 120
+               segmnt_cnt: 10 # Specify the number of GRF segments (1 is a unified GRF)
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 1210 # RENAME REGS
+               r_lo: 210
+               r_hi: 1419
+               p_size: 1300
                p_lo: 1
-               p_hi: 120
+               p_hi: 1300
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
                cout: 1
                e_cam: 0
-               e_ram: 8.3939885
+               e_ram: 0.5246242813
+               e_wire: 1.135708e-1
+               w_wire: 64
            rf:
-               a_size: 80
-               a_lo: 117
-               a_hi: 196
-               r_size: 120 # RENAME REGS
-               r_lo: 197
-               r_hi: 316
-               p_size: 200
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 166 # RENAME REGS
+               r_lo: 210
+               r_hi: 375
+               p_size: 256
                p_lo: 1
-               p_hi: 200
+               p_hi: 256
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: RF
                cout: 1
                e_cam: 0
                e_ram: 9.037722
+               e_wire: 2.259340e-1
+               w_wire: 64
            arst:
                e_cam: 0
                e_ram: 0.504776
@@ -164,12 +183,14 @@ cpu:
 
        table: 
             QUE:
-                size: 1000
+                size: 2000
                 count: 1
-                rd_wire_cnt: 1000
-                wr_wire_cnt: 1000
+                rd_wire_cnt: 2000
+                wr_wire_cnt: 2000
                 e_cam: 0
                 e_ram: 0
+                e_wire: 0
+                w_wire: 0
                 name: bbQUE
                 type: FIFO
             bbROB: 
@@ -179,6 +200,8 @@ cpu:
                 wr_wire_cnt: 100
                 e_cam: 0
                 e_ram: 0.112165
+                e_wire: 1.820614e-2
+                w_wire: 64
                 name: bbROB
                 type: RAM
             inoROB: 
@@ -188,6 +211,8 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
+                e_wire: 0
+                w_wire: 64
                 name: ROB
                 type: RAM
             o3ROB: 
@@ -197,24 +222,30 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496
+                e_wire: 1.811005e-2
+                w_wire: 64
                 name: ROB
                 type: RAM
             LQ:
-                size: 64
+                size: 200
                 count: 1
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
                 e_cam: 2.204357
                 e_ram: 1.236428
+                e_wire: 2.127423e-2
+                w_wire: 64
                 name: LQ
                 type: CAM
             SQ:
-                size: 32
+                size: 200
                 count: 1
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
                 e_cam: 1.315326
                 e_ram: 1.620642
+                e_wire: 2.127423e-2
+                w_wire: 64
                 name: SQ
                 type: CAM
             resStn:
@@ -225,15 +256,21 @@ cpu:
                 e_cam: 4.08806
                 e_cam2: 1.184757
                 e_ram: 2.638897
+                e_wire: 5.579845e-2
+                w_wire: 64
                 name: resStn
                 type: FIFO
             bbWindow:
-                size: 200
-                count: 16
+                size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
+                count: 10
+                runahead_issue_en: 1
+                runahead_issue_cnt: 4
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.439745
+                e_wire: 4.176818e-2
+                w_wire: 64
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
             iWindow: #only for INO
@@ -243,6 +280,8 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 2.535452
+                e_wire: 2.660543e-2
+                w_wire: 64
                 name: iWindow
                 type: FIFO
             mshr:
@@ -252,6 +291,8 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0        #TODO develop this
                 e_ram: 0        #TODO develop this
+                e_wire: 0       # for now
+                w_wire: 64
                 name: MSHR
                 type: RAM
             st_buff: #only for INO
@@ -261,6 +302,8 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0.763521
                 e_ram: 1.160567
+                e_wire: 0       # for now
+                w_wire: 64
                 name: st_buff
                 type: FIFO
             ras: 
@@ -270,6 +313,8 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.633863
+                e_wire: 0       # for now
+                w_wire: 64
                 name: RAS
                 type: RAM
             BTB: 
@@ -279,24 +324,30 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 1.238
                 e_ram: 0
+                e_wire: 0   # TODO already counted in BP?
+                w_wire: 64
                 name: BTB
                 type: CAM
 
        eu:
            alu:
-               count: 4
+               count: 40
+               count_per_blk: 4
                latency: 1
                e_eu: 1.040
            fpu:
                count: 0
+               count_per_blk: 0
                latency: 5
                e_eu: 8.800
            memu:
                count: 0
+               count_per_blk: 0
                latency: 1
                e_eu: 1.040
            bru:
                count: 0
+               count_per_blk: 0
                latency: 4
                e_eu: 1.040
 
@@ -318,7 +369,7 @@ cpu:
                latency: 2
                name: schedule
            execution:
-               width: 4
+               width: 16
                latency: 1 #TODO what does it mean for FPU?
                name: execution
            memory:
@@ -380,15 +431,21 @@ cpu:
            itlb:
                e_ram: 0
                e_cam: 2.341
+               e_wire: 0    # TODO for now
+               w_wire: 64
            dtlb:
                e_ram: 0
                e_cam: 2.133
+               e_wire: 0    # TODO for now
+               w_wire: 64
            L1:
                sa: 1 # Set Associativity
                size: 32768
                line_size: 64
                latency: 3
                num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
                name: L1
            L2:
                sa: 1 # Set Associativity
@@ -396,6 +453,8 @@ cpu:
                line_size: 64
                latency: 12
                num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
                name: L2
            L3:
                sa: 1 # Set Associativity
@@ -403,6 +462,8 @@ cpu:
                line_size: 64
                latency: 20
                num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
                name: L3
            MEM:
                sa: 1 # Set Associativity
@@ -410,6 +471,8 @@ cpu:
                line_size: 64
                latency: 100
                num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
                name: MEM
 
 compiler:

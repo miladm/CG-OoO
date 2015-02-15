@@ -30,10 +30,12 @@ void inoBkEnd_init () {
     exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
     cmt["latency"] >> cmt_lat;
     root["width"] >> width;
+    WIDTH eu_width;
+    root["eu"]["alu"]["count"] >> eu_width;
 
     g_ino_clk = new sysClock (1);
     _core = new sysCore (g_ino_clk,
-            8*width, 8*width, 8*width, width, width, width, width,
+            8*width, 8*width, 8*width, eu_width, eu_width, width, width,
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 

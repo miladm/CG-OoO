@@ -23,12 +23,17 @@ class commit : protected stage {
     private:
 		PIPE_ACTIVITY commitImpl ();
         void regStat ();
+        void verifySim ();
 
 	private:
 		port<dynInstruction*>* _commit_to_bp_port;
 		port<dynInstruction*>* _commit_to_scheduler_port;
         CAMtable<dynInstruction*>* _iROB;
         CAMtable<dynInstruction*>* _iQUE;
+
+        /*-- SIMULATION STALL VERIFICATION --*/
+        SCALAR _prev_ins_cnt;
+        CYCLE _prev_commit_cyc;
 
         /* STAT VARS */
         ScalarStat& s_squash_ins_cnt;

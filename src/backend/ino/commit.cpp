@@ -21,6 +21,9 @@ commit::commit (port<dynInstruction*>& commit_to_bp_port,
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
     _iQUE = iQUE;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = START_CYCLE;
 }
 
 commit::~commit () {}
@@ -34,6 +37,8 @@ void commit::doCOMMIT () {
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) {
         pipe_stall = commitImpl ();
     }
+
+    verifySim ();
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -138,4 +143,20 @@ void commit::squash () {
 
 void commit::regStat () {
     _iROB->regStat ();
+}
+
+void commit::verifySim () {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) {
+        if ((_clk->now () - _prev_commit_cyc) >= SIM_STALL_THR) {
+            cout << "current cycle: " << _clk->now () << endl;
+            cout << "last commit cycle: " << _prev_commit_cyc << endl;
+            Assert (false && "No commit for too long");
+        }
+        if (s_ins_cnt.getValue () > _prev_ins_cnt) {
+            _prev_ins_cnt = s_ins_cnt.getValue ();
+            _prev_commit_cyc = _clk->now ();
+        }
+    } else {
+            _prev_commit_cyc = _clk->now ();
+    }
 }

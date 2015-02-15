@@ -10,6 +10,10 @@
 #include <set>
 #include <map>
 #include <string.h>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iostream>
 #include "instruction.h"
 #include "config.h"
 

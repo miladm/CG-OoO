@@ -16,10 +16,12 @@ class o3_rfManager : public unit {
 
         bool canRename (dynInstruction* ins);
         bool renameRegs (dynInstruction* ins);
+        bool checkReadyAgain (dynInstruction* ins);
         bool isReady (dynInstruction* ins);
         void completeRegs (dynInstruction* ins);
         void commitRegs (dynInstruction* ins);
         void squashRenameReg ();
+        void regStat ();
 
         /*-- WIRES CTRL --*/
         bool hasFreeWire (AXES_TYPE, WIDTH);

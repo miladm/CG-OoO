@@ -3,7 +3,7 @@
  *******************************************************************************/
 
 #define INS_CNT_THR 10000
-#define BB_CNT_THR 80000 + BB_NEAR_EMPTY_SIZE
+#define BB_CNT_THR 500 + BB_NEAR_EMPTY_SIZE
 #define G_I_INFO_EN 1
 
 #include "pars.h"
@@ -28,6 +28,8 @@ static ScalarStat& s_pin_sig_recover_cnt (g_stats.newScalarStat ("pars", "pin_si
 static ScalarStat& s_pin_flush_cnt (g_stats.newScalarStat ("pars", "pin_flush_cnt", "Number of Pintool code cache flush events", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_trace_cnt (g_stats.newScalarStat ("pars", "pin_trace_cnt", "Number of Pintool code cache traces", 0, NO_PRINT_ZERO));
 static ScalarStat& s_bpu_lookup_cnt (g_stats.newScalarStat ("pars", "bpu_lookup_cnt", "Number of BPU lookups", 0, NO_PRINT_ZERO));
+static RatioStat&  s_wp_ins_cnt_avg1 (g_stats.newRatioStat (&s_pin_sig_recover_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_sig_recover_cnt)", 0, PRINT_ZERO));
+static RatioStat&  s_wp_ins_cnt_avg2 (g_stats.newRatioStat (&s_pin_wp_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_wp_cnt)", 0, PRINT_ZERO));
 
 /* ******************************************************************* *
  * GLOBAL VARIABLES
@@ -66,6 +68,8 @@ void recover ()
 	g_var.g_wrong_path = false;
 	g_var.g_was_wp = false;
 	g_var.g_total_wrong_path_count += g_var.g_wrong_path_count;
+	s_wp_ins_cnt_avg1 += g_var.g_wrong_path_count;
+	s_wp_ins_cnt_avg2 += g_var.g_wrong_path_count;
 	s_pin_sig_recover_cnt++;
 	if (g_var.g_debug_level & DBG_SPEC) {
 		cout << " *** recovering to correct path ***\n";
@@ -134,7 +138,7 @@ VOID HandleInst (UINT32 uid, BOOL __is_call, BOOL __is_ret, BOOL __is_far_ret)
         g_var.g_wrong_path_count++;
         if (__is_call) g_var.g_context_call_depth++;
         if (g_var.g_debug_level & DBG_SPEC) cout << " *** wrong path *** count = " << dec << g_var.g_wrong_path_count << "\n";
-        if ((g_var.g_wrong_path_count >= g_var.g_branch_mispredict_delay) ||
+        if ((g_var.g_wrong_path_count >= g_cfg->brMisspredDelay ()) ||
            ((g_var.g_context_call_depth==0) && __is_ret) ||
                 g_var.g_invalid_size || g_var.g_invalid_addr || g_var.g_spec_syscall || __is_far_ret || __is_call || __is_ret) {
             recover ();
@@ -311,7 +315,6 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
-	g_var.g_BBlist = new List<basicblock*>;
     g_var.g_core_type = g_cfg->getCoreType ();
     g_var.g_mem_model = g_cfg->getMemModel ();
 	g_staticCode = new staticCodeParser (g_cfg);
@@ -365,6 +368,11 @@ VOID pin__doFinish () {
 	g_msg.simStep ("BACKEND TERMINATED");
 
     /*-- DUMP STAT --*/
+    if (g_cfg->isEnProfiling ()) {
+        g_msg.simStep ("STORE PROFILING DATA");
+        g_prof.dump ();
+    }
+	g_msg.simStep ("STORE STAT");
     g_stats.dump ();
 
 	/*-- FINISH BACKEND --*/
@@ -376,7 +384,6 @@ VOID pin__doFinish () {
 	delete g_var.g_insList;
 	delete g_var.g_codeCache;
 	delete g_var.g_bbCache;
-	delete g_var.g_BBlist;
 	delete g_tournament_bp;
 	delete g_staticCode;
     delete g_bbStat;
@@ -808,6 +815,10 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
 	}
+
+    if (g_cfg->isEnProfiling ()) {
+        g_prof.update_br_profiler (__pc, taken);
+    }
 
     return  pred ? tgt : fthru;
 }

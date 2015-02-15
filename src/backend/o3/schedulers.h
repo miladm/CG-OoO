@@ -29,7 +29,8 @@ class o3_scheduler : protected stage {
         PIPE_ACTIVITY schedulerImpl ();
         void updateResStns ();
         void manageCDB ();
-        void forwardFromCDB (dynInstruction* ins);
+        bool forwardFromCDB (dynInstruction*);
+        bool isReady (dynInstruction*);
         void regStat ();
         bool hasReadyInsInResStn (WIDTH resStnId, LENGTH &readyInsIndx);
 

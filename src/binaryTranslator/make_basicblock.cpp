@@ -3,7 +3,6 @@
  ******************************************************************************/
 
 #include "make_basicblock.h"
-#include "listSchedule.h"
 
 
 void make_basicblock  (List<instruction*> *insList,
@@ -214,8 +213,18 @@ void make_basicblock  (List<instruction*> *insList,
 	}
 	std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), def_set.end (), std::inserter (diff_set, diff_set.begin ()));
 	printf ("\tDiff Set: %d %d %d\n", def_set.size (), use_set.size (), diff_set.size ());
+
+    /* PRINT THE NUMBER OF "LARGE" BB'S */
+//	for  (int i = 0; i < bbList->NumElements (); i++) {
+//		basicblock* bb = bbList->Nth (i);
+//        if (bb->getBbSize () > 30) cout << "LARGE BB ID: " << hex << bb->getID () << endl;
+//    }
+
+    /* SETSUP BB STATS */
+    dependencySetup (bbList, insList);
 	for  (int i = 0; i < bbList->NumElements (); i++) {
 		basicblock* bb = bbList->Nth (i);
-        if (bb->getBbSize () > 30) cout << hex << bb->getID () << endl;
+//        bb->setsupStats ();
+//        bb->reportStats ();
     }
 }

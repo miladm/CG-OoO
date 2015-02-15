@@ -14,7 +14,7 @@
 
 class bb_execution : protected stage {
 	public:
-		bb_execution (port<bbInstruction*>& scheduler_to_execution_port, 
+		bb_execution (List<port<bbInstruction*>*>* scheduler_to_execution_port, 
                       port<bbInstruction*>& execution_to_scheduler_port, 
                       List<bbWindow*>* bbWindows,
                       WIDTH num_bbWin,
@@ -35,9 +35,10 @@ class bb_execution : protected stage {
         COMPLETE_STATUS completeIns ();
         void resetRF ();
         void forward (bbInstruction*, CYCLE);
+        WIDTH getEUindx (WIDTH, WIDTH);
 
 	private:
-		port<bbInstruction*>* _scheduler_to_execution_port;
+		List<port<bbInstruction*>*>* _scheduler_to_execution_port;
         port<bbInstruction*>* _execution_to_scheduler_port;
         CAMtable<dynBasicblock*>* _bbROB;
         bb_memManager* _LSQ_MGR;
@@ -48,6 +49,10 @@ class bb_execution : protected stage {
         /*-- BB WIN STRUCTURES --*/
         WIDTH _num_bbWin;
         List<bbWindow*>* _bbWindows;
+
+        /*-- EU CONFIG --*/
+        WIDTH _blk_width;
+        WIDTH _num_ports;
 
         /*-- STATS --*/
         ScalarHistStat& s_pipe_state_hist;

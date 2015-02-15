@@ -26,7 +26,7 @@ void StatBBSizeStat(List<basicblock*> *bbList, string *program_name) {
 		cdf += (float)it->second / (float)bbList->NumElements();
 		fprintf(statOutputFile, "%d, %f\n", it->first, cdf);
 	}
-    printf ("StatBBSizeCDF: %s\n", file_name.c_str ());
+    printf ("\t\tStatBBSizeCDF: %s\n", file_name.c_str ());
 }
 
 void DynBBSizeStat(map<int,int> &bbSizeHist, string *program_name) {
@@ -37,7 +37,7 @@ void DynBBSizeStat(map<int,int> &bbSizeHist, string *program_name) {
 	for (map<int,int>::iterator it = bbSizeHist.begin(); it != bbSizeHist.end(); it++) {
 		fprintf(statOutputFile, "%d, %d\n", it->first, it->second);
 	}
-    printf ("DynBBSizeHist: %s\n", file_name.c_str ());
+    printf ("\t\tDynBBSizeHist: %s\n", file_name.c_str ());
 }
 
 void StatNum_interBB_and_intra_BB_regs(List<basicblock*> *bbList, string *program_name) {

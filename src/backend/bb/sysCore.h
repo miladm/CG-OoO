@@ -80,12 +80,12 @@ class bb_sysCore : public unit {
 		port<bbInstruction*> _fetch_to_bp_port;
 		port<bbInstruction*> _fetch_to_decode_port;
 		port<bbInstruction*> _decode_to_scheduler_port;
-		port<bbInstruction*> _scheduler_to_execution_port;
         port<bbInstruction*> _execution_to_scheduler_port;
 		port<bbInstruction*> _execution_to_memory_port;
         port<bbInstruction*> _memory_to_scheduler_port;
         port<bbInstruction*> _commit_to_bp_port;
         port<bbInstruction*> _commit_to_scheduler_port;
+		List<port<bbInstruction*>*>* _scheduler_to_execution_port;
 
 		// STAGES
 		bb_branchPred* _bp;
@@ -103,10 +103,13 @@ class bb_sysCore : public unit {
         // BB Windows
         List<bbWindow*> _bbWindows;
 
-
         // MISC
         CAMtable<dynBasicblock*>* _bbROB;
         CAMtable<dynBasicblock*>* _bbQUE;
+
+        WIDTH _num_block_ports;
+        WIDTH _alu_cnt;
+        WIDTH _alu_cnt_per_blk;
 };
 
 #endif

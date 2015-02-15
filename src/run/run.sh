@@ -5,9 +5,7 @@
 #$ -e output
 #./main
 #mkdir /state/partition1/milad/traceResults
-echo Args: $@
-echo Arg 1: $1
-echo Arg 2: $3
+echo "Args: $@"
 
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'
 PIN_ROOT='/home/milad/esc_project/svn/pin-2.12'

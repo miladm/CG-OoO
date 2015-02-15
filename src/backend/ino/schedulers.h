@@ -26,7 +26,8 @@ class scheduler : protected stage {
         PIPE_ACTIVITY schedulerImpl ();
         void updateInsWin ();
         void manageCDB ();
-        void forwardFromCDB (dynInstruction* ins);
+        bool isReady (dynInstruction*);
+        bool forwardFromCDB (dynInstruction*);
         void regStat ();
 
 	private:

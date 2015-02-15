@@ -18,24 +18,27 @@ class bb_rfManager : public unit {
         // GRF ONLY
 //        void completeRegs (bbInstruction* ins);
 //        void squashRenameReg ();
-        bool canRename (bbInstruction* ins);
-        void renameRegs (bbInstruction* ins);
-        void commitRegs (bbInstruction* ins);
+        bool canRename (bbInstruction*, BB_ID);
+        void renameRegs (bbInstruction*);
+        void commitRegs (bbInstruction*);
 
         //LRF ONLY
 //        void resetRF ();
 //        void writeToRF (bbInstruction* ins);
-        void reserveRF (bbInstruction* ins);
-        bool canReserveRF (bbInstruction* ins);
+        void reserveRF (bbInstruction*);
+        bool canReserveRF (bbInstruction*);
 
         //LRF & GRF
-        bool isReady (bbInstruction* ins);
-        void completeRegs (bbInstruction* ins);
+        bool isReady (bbInstruction*);
+        bool checkReadyAgain (bbInstruction*);
+        void completeRegs (bbInstruction*);
         void squashRegs ();
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, bbInstruction*);
         void updateWireState (AXES_TYPE, bbInstruction*);
+
+        void getStat ();
 
 	private:
         bb_grfManager _GRF_MGR;

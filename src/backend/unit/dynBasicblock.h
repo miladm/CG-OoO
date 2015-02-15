@@ -87,6 +87,7 @@ class dynBasicblock : public unit {
         bool isMemOrBrViolation ();
         List<bbInstruction*>* getBBinsList ();
         bool isBBcomplete ();
+        bool isMemViolation ();
 
         void squash ();
         void reset ();
@@ -100,6 +101,13 @@ class dynBasicblock : public unit {
         void setDoneFetch ();
         bool isDoneFetch ();
 
+        //RUNAHEAD
+        void revokeRunaheadPermit ();
+        bool runaheadPermit ();
+
+        //UNINSTRUMENTED CODE
+        list<ADDRS> getUnInstrumentedIns ();
+
     private:
         void setBBheadID ();
         void setWrongPath ();
@@ -108,6 +116,8 @@ class dynBasicblock : public unit {
     private:
         bbHead _head;
         list<ADDRS> _staticBBinsList;
+        list<ADDRS> _unInstrumentedList;
+
     public: //TODO get rid of this
         map <ADDRS, bbInstruction*> _bbInsMap;
         List<bbInstruction*> _insList;
@@ -128,6 +138,8 @@ class dynBasicblock : public unit {
         SCALAR _wasted_ins_cnt;
         
         SCHED_MODE _scheduling_mode;
+
+        bool _runahead_permit;
 };
 
 

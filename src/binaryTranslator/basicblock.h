@@ -8,15 +8,27 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <set>
+#include <list>
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include "list.h"
 #include "global.h"
 #include "instruction.h"
 #include "phrase.h"
+#include "stats.h"
 
 typedef enum {BR_DST, NO_BR_DST} REACHING_TYPE;
+
+class sub_block {
+    public:
+        sub_block () { _insList = new List<instruction*>; }
+        ~sub_block () { delete _insList; }
+        set<ADDR> _upld_set;
+        List<instruction*>* _insList;
+        SUB_BLK_ID _id;
+};
 
 class basicblock {
 	public:
@@ -29,7 +41,7 @@ class basicblock {
 		void addIns (instruction*, REACHING_TYPE);
 		void addIns (instruction*, ADDR);
         void forceAssignBBID ();
-		void addMovIns (instruction*);
+        void updateBBID ();
         bool isThisBBfallThru (basicblock*);
 		ADDR getLastInsDst ();
 		ADDR getLastInsFallThru ();
@@ -45,6 +57,7 @@ class basicblock {
 		int getBbSize ();
 		int getBbSize_ListSch ();
 		ADDR getID ();
+		ADDR getAddr ();
 		void setBBbrHeader (ADDR brAddr);
 		void resetBBbrHeader ();
 		ADDR getBBbrHeader ();
@@ -110,12 +123,13 @@ class basicblock {
 		void setAllasDominators (bool domSetIsAll);
 		
 		//SSA / PHI-FUNCTION
-		void insertPhiFunc (long int var);
+		void insertPhiFunc (long int);
 		map<long int, vector<long int> > getPhiFuncs ();
-		void replaceNthPhiOperand (long int var, int indx, long int subscript);
-		void setPhiWriteVar (long int var, long int subscript);
+		void replaceNthPhiOperand (long int, int, long int);
+		void setPhiWriteVar (long int, long int);
 		int elimPhiFuncs (ADDR&, map<ADDR,instruction*>*);
-		void insertMOVop (long int dst_var, long int dst_subs, long int src_var, long int src_subs, ADDR insAddr);
+		void insertMOVop (long int, long int, long int, long int, ADDR);
+		void addMovIns (instruction*);
 	
 		//PROFILE
 		float getTakenBias ();
@@ -130,26 +144,54 @@ class basicblock {
 		// PHRASE
 		void basicblockToPhrase ();
 		
-		// List-Scheduling Functions
+		// LIST-SCHEDULING FUNCTIONS
 		void addToBB_ListSchedule (instruction* ins);
 		List<instruction*>* getInsList_ListSchedule ();
+
+
+        // STATS
+        void setsupStats ();
+        void reportStats ();
 		
+        // UPLD
+        void findRootUPLD ();
+        void markUPLDroot (instruction*, ADDR);
+        void markUPLDroots ();
+        void makeSubBlocks ();
+
+        // ADDING MOV OPS
+        void insertMOVop (map<ADDR,instruction*>*, long int, long int, ADDR&, int, PUSH_LOCATION);
+        void addMovIns (instruction*, int, PUSH_LOCATION);
+
+        // REDUNDANCY ELIMINATION
+        int redundantMovOpElim (SCH_MODE);
+        int deadMovOpElim (SCH_MODE);
+        int overwrittenMovOpElim (SCH_MODE);
+
 		// DATA-FLOW ANALYSIS
     private:
 		void updateDefSet (long int reg);
 		void updateUseSet (long int reg);
     public:
 		bool update_InOutSet (REG_ALLOC_MODE);
+        void update_locGlbSet (ADDR&, map<ADDR,instruction*>*);
+        int update_locToGlb (ADDR&, map<ADDR,instruction*>*);
 		void setupDefUseSets ();
 		void renameAllInsRegs ();
 		set<long int> getInSet ();
 		set<long int> getDefSet ();
+        void resetSets ();
+        void setupMOVop (ADDR&, std::map<ADDR,instruction*>*, std::map<int, long int>&, std::map<int, long int>&, PUSH_LOCATION);
+
+        // LOCAL REGISTERS
 		set<long int> getLocalRegSet ();
 		bool isInLocalRegSet (long int reg);
 		void updateLocalRegSet ();
-		int getLiveVarSize () {
-			return _inSet.size ()+_defSet.size ();
-		}
+		int getLiveVarSize () { return _inSet.size () + _defSet.size (); }
+
+    private:
+        int _sub_blk_id;
+        map<SUB_BLK_ID, sub_block*> sub_blk_map;
 
 	private:
 		int _listIndx;
@@ -160,6 +202,7 @@ class basicblock {
 		bool _hasBrHeader;
 		ADDR _brHeaderAddr;
 		ADDR bbID;
+		ADDR _bbAddr; /* SUPPOSED TO BE SET ONCE AND USED IN LOGGEN */
 		basicblock* _fallThroughBB;
 		basicblock* _takenTargetBB;
 		List<basicblock*>* _ancestorBbList;
@@ -168,6 +211,7 @@ class basicblock {
 		List<instruction*>* _insListSchList;
 		List<instruction*>* _insList_orig;
 		List<instruction*>* _insList;
+        List<instruction*>* _upld_roots;
 		List<phrase*> *_phList;
 		List<ADDR>* _bbListForPhraseblock;
 		std::map<ADDR, basicblock*> _dominatorMap;
@@ -187,6 +231,8 @@ class basicblock {
 		std::set<long int> _inSet;
 		std::set<long int> _outSet;
 		std::set<long int> _localRegSet;
+
+        block_stats _stats;
 };
 #endif
 
