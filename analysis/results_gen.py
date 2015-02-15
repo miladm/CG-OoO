@@ -7,13 +7,11 @@ import os, glob, os.path
 import sys
 import re
 import os
-
-#GLOBAL VARIABLES
-result_map={}
+import results_verif
 
 # INITIALIZE THE BENCHMARKS
 def init_bench (results_table):
-  b_names = ["400.perlbench", "401.bzip", "403.gcc", "429.mcf", \
+  b_names = ["400.perlbench", "401.bzip2", "403.gcc", "429.mcf", \
              "445.gobmk", "456.hmmer", "458.sjeng", "462.libquantum", \
              "464.h264ref", "471.omnetpp", "473.astar", "483.xalancbmk"]
   for b_name in b_names:
@@ -31,15 +29,6 @@ def init_files (b_names, mode, result_in_dir):
     in_path = result_in_dir + '/' + f_name
     in_paths.append (in_path)
   return in_paths
-
-# INITIALIZE THE MAP BETWEEN ENERGY AND PERFORMANCE PARAMTERS
-def init_params ():
-  # FOR ENERGY MEASUREMENT
-  result_map['TOTAL'] = 0.0
-  result_map['EU.e_eu'] = 0.0
-
-  # FOR PERFORMANCE MEASUREMENT
-  result_map['commit.ipc'] = 0.0
 
 # PRINT THE OUTPUT HEADER
 def print_headers (result_out_dir, results_table):
@@ -70,26 +59,42 @@ def print_results_table (result_out_dir, results_table, mode):
     pF_out.close ()
     print out_path
 
+# INITIALIZE THE MAP BETWEEN ENERGY AND PERFORMANCE PARAMTERS
+def init_params (result_map):
+  # FOR ENERGY MEASUREMENT
+  result_map['TOTAL'] = 0.0
+  result_map['EU.e_eu'] = 0.0
+
+  # FOR PERFORMANCE MEASUREMENT
+  result_map['commit.ipc'] = 0.0
+
 # INSERT ELEMENTS IN THE RESULTS TABLE
-def update_results_table (results_table):
+def update_results_table (results_table, result_map):
   for result_param in result_map:
     result_val = result_map[result_param]
     results_table[result_param].append (result_val)
 
-# READ THE SIMPOINTPOINT FILE AND ITS WEIGHTS
-def parseSimpointFiles (in_paths, results_table):
-  for in_path in in_paths:
-    init_params () # RESET ALL VALUES
+# UPDATE RESULT MAP FOR EACH INDIVIDUAL BENCHMARK
+def update_result_map (result_param, result_value, result_map):
+  if result_param in result_map:
+    result_map[result_param] += float(result_value)
 
+# READ THE SIMPOINTPOINT FILE AND ITS WEIGHTS
+def parseSimpointFiles (in_paths, results_table, result_map):
+  for in_path in in_paths:
+    init_params (result_map) # RESET ALL VALUES
+
+    # OPEN FILE
     try:
       pF_in = open (in_path, 'r')
       if os.path.getsize (in_path) == 0 or not os.path.isfile (in_path):
         print "File " + str (in_path) + " is empty. Continuing to the next file"
     except IOError:
-      print 'WARNING: Failed to open file ' + in_path
-      update_results_table (results_table) # MISSING RESULT
+      print '\tWARNING: Failed to open file ' + in_path
+      update_results_table (results_table, result_map) # MISSING RESULT
       continue
 
+    # COLLECT AND ANALYSE RESULTS
     tokens = []
     for line in pF_in.readlines ():
       tokens = line.strip ().split ()
@@ -97,10 +102,11 @@ def parseSimpointFiles (in_paths, results_table):
         result_param = tokens[1]
         result_param = result_param[:-1]
         result_value = tokens[2]
-        if result_param in result_map:
-          result_map[result_param] += float(result_value)
+        update_result_map (result_param, result_value, result_map)
+        results_verif.ins_cnt_verif (result_param, result_value, in_path)
 
-    update_results_table (results_table)
+    # AGGREGATE RESULTS
+    update_results_table (results_table, result_map)
 
 ################
 ##### MAIN #####
@@ -120,10 +126,11 @@ if __name__ == "__main__":
     result_out_dir = sys.argv[3]
 
   results_table = defaultdict(list)
+  result_map = {}
 
   b_names = init_bench (results_table)
   in_paths = init_files (b_names, mode, result_in_dir)
-  parseSimpointFiles (in_paths, results_table)
+  parseSimpointFiles (in_paths, results_table, result_map)
   print_headers (result_out_dir, results_table)
   print_results_table (result_out_dir, results_table, mode)
 
