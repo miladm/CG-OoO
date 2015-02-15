@@ -97,11 +97,15 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
         dynBasicblock* bb_dual = _bbQUE->popFront ();
+#ifdef ASSERTION
         Assert (bb->isDoneFetch () == true);
+#endif
         if (bb->getBBID () != bb_dual->getBBID ())
             cout << bb->getBBID () << " " << bb_dual->getBBID () << " " 
                  << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+#ifdef ASSERTION
         Assert (bb->getBBID () == bb_dual->getBBID ());
+#endif
         dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                                "Commit bb", bb->getBBID (), _clk->now ());
         s_bb_size_avg += bb->getBBorigSize ();
@@ -119,7 +123,9 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
 
 void bb_commit::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
+#endif
     if (_bbROB->getTableSize () == 0) return;
 
     PIPE_SQUASH_TYPE squash_type = g_var.getSquashType ();
@@ -154,12 +160,16 @@ void bb_commit::bpMispredSquash () {
         bb = _bbQUE->getNth_unsafe (i);
         if (bb->getBBheadID () == squashSeqNum) {
             start_indx = i;
+#ifdef ASSERTION
             Assert (bb->isOnWrongPath () == true);
+#endif
         } else if (bb->getBBheadID () > squashSeqNum) {
             if (!bb->isMemOrBrViolation () || 
                 bb->hasCorrectPathIns ()) { // BOTH CONDITIONS SHOULD AGREE - A PRECAUTION
                 stop_indx = i - 1;
+#ifdef ASSERTION
                 Assert (i > start_indx);
+#endif
                 break;
             }
         }
@@ -174,7 +184,9 @@ void bb_commit::bpMispredSquash () {
 //        }
 //    }
     /* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */
+#ifdef ASSERTION
     Assert (_bbQUE->getTableSize () > stop_indx && stop_indx >= start_indx && start_indx >= 0);
+#endif
 
     /* PUSH BACK BB'S THAT ARE NOT ON WRONG PATH */
     for (LENGTH i = _bbQUE->getTableSize () - 1; i > stop_indx; i--) {
@@ -191,8 +203,10 @@ void bb_commit::bpMispredSquash () {
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
         if (_bbQUE->getTableSize () == 0) break;
         bb = _bbQUE->getNth_unsafe (i);
+#ifdef ASSERTION
         Assert (bb->isMemOrBrViolation () == true);
         Assert (bb->getBBheadID () >= squashSeqNum);
+#endif
         _bbQUE->removeNth_unsafe (i);
         s_wp_bb_cnt++;
         s_wp_ins_cnt += bb->getBBorigSize ();
@@ -207,7 +221,9 @@ void bb_commit::bpMispredSquash () {
         if (bb1->getBBID () != bb2->getBBID ())
             cout << bb1->getBBID () << " " << bb2->getBBID () << " " 
                 << _bbROB->getTableSize () << " " << _bbQUE->getTableSize () << endl;
+#ifdef ASSERTION
         Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
+#endif
     }
 }
 

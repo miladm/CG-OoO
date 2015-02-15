@@ -33,15 +33,21 @@ void bbWindow::regStat () { _win.regStat (); }
  * AT 0
  --*/
 void bbWindow::issueIndxInc () {
+#ifdef ASSERTION
     Assert (_runahead_issue_en == true);
+#endif
     _issue_indx++;
+#ifdef ASSERTION
     Assert (_issue_indx >= 0 && _issue_indx <= _rd_wire_cnt);
+#endif
 }
 
 LENGTH bbWindow::getIssueIndx () {
     resetIssueIndxState ();
+#ifdef ASSERTION
     if (!_runahead_issue_en && _issue_indx > 0) 
         Assert (false && "Invalid non-runahead mode BB index state");
+#endif
     return _issue_indx;
 }
 
@@ -59,7 +65,9 @@ void bbWindow::resetIssueIndxState () {
  --*/
 void bbWindow::issueInc () {
     _num_issues++;
+#ifdef ASSERTION
     Assert (_num_issues >= 0 && _num_issues <= _rd_wire_cnt);
+#endif
 }
 
 WIDTH bbWindow::getNumIssued () {

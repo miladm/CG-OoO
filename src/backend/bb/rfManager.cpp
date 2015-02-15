@@ -77,7 +77,9 @@ bool bb_rfManager::checkReadyAgain (bbInstruction* ins) {
     } else if (g_cfg->getRegAllocMode () == GLOBAL) {
         return (grf_ready);
     }
+#ifdef ASSERTION
     Assert (0 && "invalid register allocation model");
+#endif
     return grf_ready; /* PLEACE HOLDER */
 }
 
@@ -110,7 +112,9 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
         }
         return (grf_ready);
     }
+#ifdef ASSERTION
     Assert (0 && "invalid register allocation model");
+#endif
     return grf_ready; /* PLEACE HOLDER */
 }
 
@@ -150,7 +154,9 @@ bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, bbInstruction* ins) {
     } else if (g_cfg->getRegAllocMode () == GLOBAL) {
         return (grf_has_free_wire);
     }
+#ifdef ASSERTION
     Assert (true == false && "invalid register allocation model");
+#endif
     return (grf_has_free_wire); /* PLEACE HOLDER */
 }
 

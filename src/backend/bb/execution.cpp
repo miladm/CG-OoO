@@ -38,8 +38,10 @@ bb_execution::bb_execution (List<port<bbInstruction*>*>* scheduler_to_execution_
     }
     _num_ports = _scheduler_to_execution_port->NumElements ();
     _blk_width = _stage_width / _num_ports;
+#ifdef ASSERTION
     Assert (_stage_width >= _scheduler_to_execution_port->NumElements () &&
             _stage_width % _scheduler_to_execution_port->NumElements () == 0);
+#endif
 
     _num_bbWin = num_bbWin;
     _bbWindows = bbWindows;
@@ -236,7 +238,9 @@ void bb_execution::forward (bbInstruction* ins, CYCLE eu_latency) {
     if (_execution_to_scheduler_port->getBuffState () == FULL_BUFF) return;
     if (ins->getInsType () != MEM) {
         CYCLE cdb_ready_latency = eu_latency - 1;
+#ifdef ASSERTION
         Assert (cdb_ready_latency >= 0);
+#endif
         _execution_to_scheduler_port->pushBack (ins, cdb_ready_latency);
         dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                 _stage_name.c_str (), "Forward wr ops of ins", ins->getInsID (), _clk->now ());
@@ -303,7 +307,9 @@ WIDTH bb_execution::getEUindx (WIDTH blk_offset, WIDTH offset) {
 void bb_execution::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", 
             _stage_name.c_str (), "bb_execution Ports Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
+#endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _execution_to_scheduler_port->searchNflushPort (squashSeqNum);
 }

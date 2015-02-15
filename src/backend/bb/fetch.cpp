@@ -57,7 +57,9 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch", _clk->now ());
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
     if (!fetchBB (frontend_status)) return pipe_stall;
+#ifdef ASSERTION
     Assert (_current_bb != NULL);
+#endif
 
     for (WIDTH i = 0; i < _stage_width; i++) {
         /*-- CHECKS --*/
@@ -65,7 +67,9 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         if (_current_bb->getBBstate () == EMPTY_BUFF) {
 //            break; /* FOR NO BACK-TO-BACK BB FETCH IN 1 CYCLE */
             if (!fetchBB (frontend_status)) break; /* COULD NOT FETCH A ANOTHER NEW BB */
+#ifdef ASSERTION
             Assert (_current_bb != NULL);
+#endif
         }
 
         /*-- FETCH INS --*/
@@ -97,7 +101,9 @@ bool bb_fetch::fetchBB (FRONTEND_STATUS frontend_status) {
             dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                     "NEW BB:", _current_bb->getBBID (), _clk->now ());
             _bbQUE->pushBack (_current_bb);
+#ifdef ASSERTION
             Assert (_bbQUE->getTableState () != FULL_BUFF && "bbQUE must never become full");
+#endif
             s_bb_size_avg += _current_bb->getBBsize ();
             s_bb_cnt++;
         }
@@ -143,7 +149,9 @@ void bb_fetch::updateBBfetchState () {
 
 void bb_fetch::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Port Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
+#endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _fetch_to_decode_port->flushPort (squashSeqNum);
     _fetch_to_bp_port->flushPort (squashSeqNum);

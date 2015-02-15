@@ -31,11 +31,15 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
 
     /*-- SETUP THE AVAILABLE PR SET LIST --*/
     root["segmnt_cnt"] >> _grf_segmnt_cnt;
+#ifdef ASSERTION
     Assert (_grf_segmnt_cnt > 0 && 
             _grf_segmnt_cnt <= _blk_cnt && 
             _blk_cnt % _grf_segmnt_cnt == 0);
+#endif
     _num_blk_per_segmnt = _blk_cnt / _grf_segmnt_cnt;
+#ifdef ASSERTION
     Assert (_num_blk_per_segmnt > 0);
+#endif
     _availablePRset = new List<vector<bb_regElem*>*>;
     for (int i = 0; i < _grf_segmnt_cnt; i++) {
         vector<bb_regElem*>* elem = new vector<bb_regElem*>;
@@ -43,11 +47,15 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
     }
 
     /*-- INITIALIZE ARCHITECTURAL REGISTER DOMAIN --*/
+#ifdef ASSERTION
     Assert (_a_rf_size % _grf_segmnt_cnt == 0);
     Assert (_p_rf_size % _grf_segmnt_cnt == 0);
+#endif
     _a_rf_segmnt_size = _a_rf_size / _grf_segmnt_cnt;
     _p_rf_segmnt_size = _p_rf_size / _grf_segmnt_cnt;
+#ifdef ASSERTION
     Assert (_a_rf_segmnt_size < _p_rf_segmnt_size);
+#endif
     PR PR_counter = 0;
     for (WIDTH i = 0; i < _grf_segmnt_cnt; i++) {
         AR a_rf_segmnt_lo = _a_rf_lo + i * _a_rf_segmnt_size;
@@ -55,8 +63,10 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
         PR_counter = _p_rf_lo + i * _p_rf_segmnt_size;
         PR p_rf_segmnt_hi = _p_rf_lo + (i + 1) * _p_rf_segmnt_size;
         cout << PR_counter << " " << p_rf_segmnt_hi << endl;
+#ifdef ASSERTION
         Assert (PR_counter < p_rf_segmnt_hi);
         Assert (a_rf_segmnt_hi <= _a_rf_hi);
+#endif
         for (AR a_reg = a_rf_segmnt_lo; a_reg < a_rf_segmnt_hi; a_reg++) {
             bb_regElem* p_reg = new bb_regElem (PR_counter, ARCH_REG);
             _fRAT.insert (pair<AR, bb_regElem*> (a_reg, p_reg));
@@ -71,7 +81,9 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
     for (WIDTH i = 0; i < _grf_segmnt_cnt; i++) {
         PR p_rf_segmnt_hi = _p_rf_lo + (i + 1) * _p_rf_segmnt_size;
         PR_counter = _p_rf_lo + i * _p_rf_segmnt_size + _a_rf_segmnt_size;
+#ifdef ASSERTION
         Assert (PR_counter < p_rf_segmnt_hi);
+#endif
         cout << PR_counter << " " << p_rf_segmnt_hi << endl;
         while (PR_counter < p_rf_segmnt_hi) {
             bb_regElem* p_reg = new bb_regElem (PR_counter, AVAILABLE);
@@ -83,12 +95,17 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
 
     for (int i = 0; i < _grf_segmnt_cnt; i++) {
         cout << _grf_segmnt_cnt << " " << _availablePRset->Nth(i)->size () << " " << _r_rf_size << " " << _r_rf_size / _grf_segmnt_cnt << endl;
+#ifdef ASSERTION
         Assert (_availablePRset->Nth(i)->size () == (_r_rf_size / _grf_segmnt_cnt) && 
                 "Invalid Rename table structure initialization.");
+#endif
     }
+
+#ifdef ASSERTION
     Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initialization.");
     Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
     Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure initialization.");
+#endif
 }
 
 bb_registerRename::~bb_registerRename () {

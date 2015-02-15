@@ -213,23 +213,10 @@ void handleUnInstrumentedCode (dynBasicblock* bb) {
     }
 }
 
-/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
-void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
+/*-- MAKE A NEW BASIC-BLOCK --*/
+void pin__makeNewBB (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     if (g_var.g_debug_level & DBG_UOP) 
         std::cout << "NEW BB: " << (g_var.g_wrong_path?"*":" ") << hex << g_var.g_bb_seq_num << std::endl;
-
-    /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
-    dynBasicblock* lastBB = g_var.getLastCacheBB ();
-    if (lastBB != NULL) {
-        handleUnInstrumentedCode (lastBB);
-        if (g_var.scheduling_mode == STATIC_SCH) {
-            lastBB->rescheduleInsList (&g_var.g_seq_num);
-        }
-        lastBB->wrongPathCheck ();
-
-        /* GENERATE SOME STATISTICS */
-        pin__genInsStat (lastBB);
-    }
 
     /* MAKE THE NEXT BASICBLOCK */
     dynBasicblock* bbObj = g_var.getNewCacheBB ();
@@ -242,6 +229,23 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
             s_pin_missing_static_bb_cnt++;
     }
     s_pin_bb_cnt++;
+}
+
+/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
+void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
+    /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
+    dynBasicblock* lastBB = g_var.getLastCacheBB ();
+    if (lastBB != NULL) {
+        handleUnInstrumentedCode (lastBB);
+        if (g_var.scheduling_mode == STATIC_SCH) {
+            lastBB->rescheduleInsList (&g_var.g_seq_num);
+        }
+        lastBB->wrongPathCheck ();
+
+        /* GENERATE SOME STATISTICS */
+        pin__genInsStat (lastBB);
+    }
+    pin__makeNewBB (bb_addr, bb_br_addr, is_tail_br);
 }
 
 //void pin__get_bb_header (ADDRINT bb_addr, INS bb_tail_ins) {

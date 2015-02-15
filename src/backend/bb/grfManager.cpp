@@ -86,7 +86,9 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
     List<AR>* ar_rd = ins->getARrdList ();
     List<AR>* ar_wr = ins->getARwrList ();
     WIDTH grf_segmnt_indx = ins->getBBWinID ();
+#ifdef ASSERTION
     Assert (_GRF.getNumAvailablePR (grf_segmnt_indx) >= ar_wr->NumElements ());
+#endif
 
     /*-- RENAME READ REFISTERS FIRST --*/
     for (int i = 0; i < ar_rd->NumElements (); i++) {
@@ -98,7 +100,9 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
+#ifdef ASSERTION
         Assert (_GRF.isAnyPRavailable (grf_segmnt_indx) == true && "A physical reg must have been available.");
+#endif
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
         _e_rat.ramAccess ();
@@ -130,7 +134,9 @@ void bb_grfManager::commitRegs (bbInstruction* ins) {
             "Commit regisers for ins", ins->getInsID (), _clk->now ());
     List<PR>* _pr = ins->getPRwrList ();
     List<PR>* _ar = ins->getARwrList ();
+#ifdef ASSERTION
     Assert (_ar->NumElements () == _pr->NumElements ());
+#endif
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
         AR a_reg = _ar->Nth (i);

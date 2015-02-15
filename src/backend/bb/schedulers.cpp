@@ -41,8 +41,10 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["runahead_issue_en"] >> temp;
     _runahead_issue_en = (bool)temp;
     if (!_runahead_issue_en) _runahead_issue_cnt = 1;
+#ifdef ASSERTION
     Assert (_runahead_issue_cnt > 0 && _runahead_issue_cnt <= rd_wire_cnt && 
             "Number of read ports does not support the runahead setup");
+#endif
 
     for (WIDTH i = 0; i < _num_bbWin; i++) {
         bbWindow* bbWin = _bbWindows->Nth (i);
@@ -52,9 +54,11 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     /*-- SETUP THE MATH TO FIND THE NUMBER OF BLOCK WINDOES SHARING THE SAME PORT --*/
     WIDTH num_ports = _scheduler_to_execution_port->NumElements ();
     _blk_cluster_siz = _num_bbWin / num_ports;
+#ifdef ASSERTION
     Assert (_num_bbWin >= num_ports && 
             num_ports > 0 &&
             _num_bbWin % num_ports == 0);
+#endif
 }
 
 bb_scheduler::~bb_scheduler () { }
@@ -196,7 +200,9 @@ bool bb_scheduler::isReady (bbInstruction* ins) {
         if (_RF_MGR->isReady (ins)) return true;
         bool done_any_fwd = forwardFromCDB (ins);
         bool is_ready = _RF_MGR->checkReadyAgain (ins);
+#ifdef ASSERTION
         Assert ((is_ready && done_any_fwd) || (!is_ready && !done_any_fwd));
+#endif
         return is_ready;
     } else {
         if (_RF_MGR->isReady (ins)) return true;
@@ -234,7 +240,9 @@ void bb_scheduler::updatebbWindows () {
                 _bbROB->updateWireState (WRITE);
             }
         }
+#ifdef ASSERTION
         Assert (_bbWin_on_fetch != NULL);
+#endif
         if (!_bbWin_on_fetch->_win.hasFreeWire (WRITE)) break;
         if (_bbWin_on_fetch->_win.getTableState () == FULL_BUFF) break;
 //        Assert (_bbWin_on_fetch->_win.getTableState () != FULL_BUFF); TODO put back when have fixed BB size & remove check above
@@ -268,7 +276,9 @@ void bb_scheduler::updateBBROB (dynBasicblock* bb) {
         _bbROB->pushBack (bb);
     } else {
         dynBasicblock* rob_tail_bb = _bbROB->getLast ();
+#ifdef ASSERTION
         Assert (bb->getBBID () >= rob_tail_bb->getBBID ());
+#endif
         if (bb->getBBID () > rob_tail_bb->getBBID ()) {
             dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
                     "Adding new BB to BBROB", _clk->now ());
@@ -278,9 +288,13 @@ void bb_scheduler::updateBBROB (dynBasicblock* bb) {
 }
 
 void bb_scheduler::setBBWisAvail (WIDTH bbWin_id) {
+#ifdef ASSERTION
     Assert (_busy_bbWin.size () > 0);
+#endif
     bbWindow* bbWin = _busy_bbWin[bbWin_id];
+#ifdef ASSERTION
     Assert (bbWin->_win.getTableState () == EMPTY_BUFF);
+#endif
     _avail_bbWin.Append (bbWin);
     _busy_bbWin.erase (bbWin_id);
 }
@@ -290,7 +304,9 @@ bool bb_scheduler::hasAnAvailBBWin () {
 }
 
 bbWindow* bb_scheduler::getAnAvailBBWin () {
+#ifdef ASSERTION
     Assert (_avail_bbWin.NumElements () > 0);
+#endif
     bbWindow* bbWin = _avail_bbWin.Nth (0);
     _avail_bbWin.RemoveAt (0);
     _busy_bbWin.insert (pair<WIDTH, bbWindow*> (bbWin->_id, bbWin));
@@ -299,7 +315,9 @@ bbWindow* bb_scheduler::getAnAvailBBWin () {
 
 bool bb_scheduler::detectNewBB (bbInstruction* ins) {
     if (_bbROB->getTableState () == EMPTY_BUFF) return true;
+#ifdef ASSERTION
     Assert (ins->getBB()->getBBID () >= _bbROB->getLast()->getBBID ());
+#endif
     return (ins->getBB()->getBBID () > _bbROB->getLast()->getBBID ()) ? true : false;
 }
 
@@ -463,7 +481,9 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     }
 
     done_point:
+#ifdef ASSERTION
     Assert (num_global_match >= 0); Assert (num_local_match >= 0);
+#endif
     return done_any_fwd;
 }
 
@@ -477,7 +497,9 @@ void bb_scheduler::manageCDB () {
 
 void bb_scheduler::squash () {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler Ports Flush", _clk->now ());
+#ifdef ASSERTION
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
+#endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     for (int i = 0; i < _scheduler_to_execution_port->NumElements (); i++) {
         _scheduler_to_execution_port->Nth(i)->searchNflushPort (squashSeqNum);
