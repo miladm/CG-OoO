@@ -110,7 +110,7 @@ if __name__ == "__main__":
   thr2=-1.0
   thr2_mode='DY'
   if len (sys.argv) != 4:
-    print "\n** This tool generates results tables for all SPECInt Benchmarks **"
+    print "\n** This tool generates results tables for all SPECInt benchmarks **"
     print "USAGE: ./results_gen.py <MODE> <INPUT_DIR> <OUTPUT_DIR>"
     print "        [MODE: c?_s?_r?_m?]"
     sys.exit (0)
@@ -127,5 +127,5 @@ if __name__ == "__main__":
   print_headers (result_out_dir, results_table)
   print_results_table (result_out_dir, results_table, mode)
 
-  print "\n*** DONE ***"
+  print "*** DONE ***\n"
 ################
