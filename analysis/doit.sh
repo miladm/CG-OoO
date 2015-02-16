@@ -1,6 +1,6 @@
 RESULTS_DIR=/scratch/milad/qsub_outputs/perf_sim_test
 
-# REMOVE LOG FILE
+# REMOVE OLD LOG FILE
 rm log.out
 
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/backend_cfg/bb1
