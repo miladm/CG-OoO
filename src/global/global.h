@@ -13,7 +13,7 @@ typedef long long unsigned int ADDRS;
 typedef long long unsigned int INS_ADDR;
 typedef long long unsigned int MEM_ADDR;
 typedef long long unsigned int INS_ID;
-typedef long long unsigned int BB_ID;
+typedef long long int BB_ID;
 typedef unsigned AR; //Archiectural Register
 typedef unsigned PR; //Physical Register
 typedef bool VALID; //Valid bit
@@ -190,7 +190,7 @@ typedef enum {
 #define START_CYCLE 0
 #define SIMP_WINDOW_SIZE 3 * MILLION
 #define SIM_WINDOW_SIZE 20 * MILLION
-#define FAST_FWD_WINDOW_SIZE BILLION
+#define FAST_FWD_WINDOW_SIZE 2 * BILLION
 #define INIT_WINDOW_SIZE 10 * MILLION
 #endif
 

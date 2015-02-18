@@ -100,9 +100,6 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
 
     /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
-#ifdef ASSERTION
-        Assert (_GRF.isAnyPRavailable (grf_segmnt_indx) == true && "A physical reg must have been available.");
-#endif
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
         _e_rat.ramAccess ();

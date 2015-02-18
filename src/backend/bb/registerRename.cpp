@@ -9,6 +9,8 @@ bb_registerRename::bb_registerRename (sysClock* clk, WIDTH blk_cnt, const YAML::
       _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
       _rd_port (READ,  clk, root, rf_name + ".rd_wire"),
       _blk_cnt (blk_cnt),
+      s_far_segmnt_alloc_cnt (g_stats.newScalarStat (rf_name, "far_segmnt_alloc_cnt", "Number of times an available register is selected from a differnet segment", 0, PRINT_ZERO)),
+      s_loc_segmnt_alloc_cnt (g_stats.newScalarStat (rf_name, "loc_segmnt_alloc_cnt", "Number of times an available register is selected from the block's local segment", 0, PRINT_ZERO)),
       s_availablePRset_empty_cnt (g_stats.newScalarStat (rf_name, "availablePRset_empty_cnt", "Number of cycles availablePRset is empty", 0, PRINT_ZERO)),
       s_availablePRset_avg (g_stats.newRatioStat (clk->getStatObj (), rf_name, "availablePRset_avg", "Average size of availablePRset / cycle ", 0, PRINT_ZERO))
 {
@@ -113,6 +115,11 @@ bb_registerRename::~bb_registerRename () {
     for (it = _RF.begin (); it != _RF.end (); it++) {
         delete it->second;
     }
+    for (int i = _grf_segmnt_cnt - 1; i >= 0; i--) {
+        delete _availablePRset->Nth (i);
+        _availablePRset->RemoveAt (i);
+    }
+    delete _availablePRset;
 }
 
 PR bb_registerRename::renameReg (AR a_reg) {
@@ -141,20 +148,26 @@ void bb_registerRename::update_cRAT (AR a_reg, PR p_reg) {
 	_cRAT.insert (pair<AR, bb_regElem*> (a_reg, _RF[p_reg]));
 }
 
-bool bb_registerRename::isAnyPRavailable (BB_ID blk_indx) {
-    WIDTH grf_segmnt_indx = blkIndx2APRindx (blk_indx);
-    return (_availablePRset->Nth(grf_segmnt_indx)->size () == 0) ? false : true;
-}
-
 PR bb_registerRename::getAvailablePR (BB_ID blk_indx) {
     WIDTH grf_segmnt_indx = blkIndx2APRindx (blk_indx);
-	Assert (_availablePRset->Nth(grf_segmnt_indx)->size () > 0 && "Invalid use-set size.");
-	bb_regElem* p_reg = _availablePRset->Nth(grf_segmnt_indx)->back ();
-	Assert (p_reg->_reg_state == AVAILABLE && "Register State is Invalid - Register must be in Available State");
-	_availablePRset->Nth(grf_segmnt_indx)->pop_back ();
-    PR pr = p_reg->_reg;
-    Assert (pr >= _p_rf_lo && pr <= _p_rf_hi);
-	return pr;
+    BB_ID local_grf_segmnt_indx = grf_segmnt_indx;
+    while (true) {
+        if (_availablePRset->Nth(grf_segmnt_indx)->size () == 0) {
+            grf_segmnt_indx++;
+            grf_segmnt_indx %= _grf_segmnt_cnt;
+            if (grf_segmnt_indx == local_grf_segmnt_indx) 
+                Assert (0 && "An available PR must have been found");
+        } else {
+            bb_regElem* p_reg = _availablePRset->Nth(grf_segmnt_indx)->back ();
+            Assert (p_reg->_reg_state == AVAILABLE && "Register State is Invalid - Register must be in Available State");
+            _availablePRset->Nth(grf_segmnt_indx)->pop_back ();
+            PR pr = p_reg->_reg;
+            Assert (pr >= _p_rf_lo && pr <= _p_rf_hi);
+            if (grf_segmnt_indx == local_grf_segmnt_indx) s_loc_segmnt_alloc_cnt++;
+            else s_far_segmnt_alloc_cnt++;
+            return pr;
+        }
+    }
 }
 
 void bb_registerRename::setAsAvailablePR (PR p_reg) {
@@ -166,9 +179,15 @@ void bb_registerRename::setAsAvailablePR (PR p_reg) {
             "Rename table has grown too large (size violation).");
 }
 
+/* GET THE TOTAL NUMBER OF AVAILABLE PHYSICAL REGISTERS - NOT ONLY THE
+ * INDIVIDUAL SEGMENT AVAILABLE REGISTERS */
 int bb_registerRename::getNumAvailablePR (BB_ID blk_indx) {
-    WIDTH grf_segmnt_indx = blkIndx2APRindx (blk_indx);
-	return _availablePRset->Nth(grf_segmnt_indx)->size ();
+//    WIDTH grf_segmnt_indx = blkIndx2APRindx (blk_indx);
+    int num_available_pr = 0;
+    for (int i = 0; i < _grf_segmnt_cnt; i++) {
+        num_available_pr += _availablePRset->Nth(i)->size ();
+    }
+	return num_available_pr;
 }
 
 PR bb_registerRename::getPrevPR (PR p_reg) {
@@ -307,5 +326,10 @@ void bb_registerRename::getStat () {
         if (_availablePRset->Nth (i)->size () == 0) 
             s_availablePRset_empty_cnt++;
         s_availablePRset_avg += _availablePRset->Nth (i)->size ();
+    }
+    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) {
+        s_availablePRset_empty_cnt.print ();
+        s_far_segmnt_alloc_cnt.print ();
+        s_loc_segmnt_alloc_cnt.print ();
     }
 }

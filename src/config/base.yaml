@@ -85,9 +85,9 @@ cpu:
 
        rf:
            simple:
-               rf_size: 90
-               rf_lo: 120
-               rf_hi: 209
+               rf_size: 80
+               rf_lo: 117
+               rf_hi: 196
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: SIMPLE_RF
@@ -109,16 +109,16 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
-               segmnt_cnt: 10 # Specify the number of GRF segments (1 is a unified GRF)
+               segmnt_cnt: 1 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 90
                a_lo: 120
                a_hi: 209
-               r_size: 1210 # RENAME REGS
+               r_size: 210 # RENAME REGS
                r_lo: 210
-               r_hi: 1419
-               p_size: 1300
+               r_hi: 419
+               p_size: 300
                p_lo: 1
-               p_hi: 1300
+               p_hi: 300
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: GRF
@@ -128,15 +128,15 @@ cpu:
                e_wire: 1.135708e-1
                w_wire: 64
            rf:
-               a_size: 90
-               a_lo: 120
-               a_hi: 209
-               r_size: 166 # RENAME REGS
-               r_lo: 210
-               r_hi: 375
-               p_size: 256
+               a_size: 80
+               a_lo: 117
+               a_hi: 196
+               r_size: 120 # RENAME REGS
+               r_lo: 197
+               r_hi: 316
+               p_size: 200
                p_lo: 1
-               p_hi: 256
+               p_hi: 200
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: RF
@@ -331,7 +331,7 @@ cpu:
 
        eu:
            alu:
-               count: 40
+               count: 10
                count_per_blk: 4
                latency: 1
                e_eu: 1.040

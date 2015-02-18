@@ -37,7 +37,6 @@ class bb_registerRename : public unit {
 		void update_cRAT (AR a_reg, PR p_reg);
 
         /* AVAILABLE PR */
-		bool isAnyPRavailable (BB_ID);
 		PR getAvailablePR (BB_ID);
 		void setAsAvailablePR (PR p_reg);
 		int getNumAvailablePR (BB_ID);
@@ -55,6 +54,7 @@ class bb_registerRename : public unit {
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
 
+        /* STAT */
         void getStat ();
 
     private:
@@ -91,6 +91,8 @@ class bb_registerRename : public unit {
         WIDTH _num_blk_per_segmnt;
 
         /*-- STAT --*/
+        ScalarStat& s_far_segmnt_alloc_cnt;
+        ScalarStat& s_loc_segmnt_alloc_cnt;
         ScalarStat& s_availablePRset_empty_cnt;
         RatioStat& s_availablePRset_avg;
 };
