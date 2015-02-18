@@ -63,6 +63,7 @@ bb_sysCore::bb_sysCore (sysClock* clk,
     /*-- SETUP SCHEDULER TO EXECUTION PORTS --*/
     root["eu"]["alu"]["count_per_blk"] >> _alu_cnt_per_blk;
     root["eu"]["alu"]["count"] >> _alu_cnt;
+    Assert (_alu_cnt % _alu_cnt_per_blk == 0 && "Invalid ALU configuration");
     _num_block_ports = _alu_cnt / _alu_cnt_per_blk;
     _scheduler_to_execution_port = new List<port<bbInstruction*>*>;
     for (int i = 0; i < _num_block_ports; i++) {

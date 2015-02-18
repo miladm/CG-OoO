@@ -152,7 +152,7 @@ PR bb_registerRename::getAvailablePR (BB_ID blk_indx) {
     WIDTH grf_segmnt_indx = blkIndx2APRindx (blk_indx);
     BB_ID local_grf_segmnt_indx = grf_segmnt_indx;
     while (true) {
-        if (_availablePRset->Nth(grf_segmnt_indx)->size () == 0) {
+        if (_availablePRset->Nth(grf_segmnt_indx)->size () == 0) { /* MOVE TO THE NEXT AVAILABLE SET */
             grf_segmnt_indx++;
             grf_segmnt_indx %= _grf_segmnt_cnt;
             if (grf_segmnt_indx == local_grf_segmnt_indx) 
@@ -326,10 +326,5 @@ void bb_registerRename::getStat () {
         if (_availablePRset->Nth (i)->size () == 0) 
             s_availablePRset_empty_cnt++;
         s_availablePRset_avg += _availablePRset->Nth (i)->size ();
-    }
-    if (_clk->now () % RUNTIME_REPORT_INTERVAL == 0) {
-        s_availablePRset_empty_cnt.print ();
-        s_far_segmnt_alloc_cnt.print ();
-        s_loc_segmnt_alloc_cnt.print ();
     }
 }
