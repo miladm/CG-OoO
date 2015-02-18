@@ -109,7 +109,7 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
-               segmnt_cnt: 1 # Specify the number of GRF segments (1 is a unified GRF)
+               segmnt_cnt: 10 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 90
                a_lo: 120
                a_hi: 209
