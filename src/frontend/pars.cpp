@@ -10,6 +10,7 @@
 #include "../global/g_info.h"
 #include "../backend/bp/tournament.h"
 #include "../backend/bp/hybrid_skew.h"
+#include "../backend/bp/btb.h"
 #include <bp_lib/types.hh>
 #include <bp_lib/intmath.hh>
 #include "utilities.h"
@@ -30,6 +31,8 @@ static ScalarStat& s_pin_trace_cnt (g_stats.newScalarStat ("pars", "pin_trace_cn
 static ScalarStat& s_bpu_lookup_cnt (g_stats.newScalarStat ("pars", "bpu_lookup_cnt", "Number of BPU lookups", 0, NO_PRINT_ZERO));
 static RatioStat&  s_wp_ins_cnt_avg1 (g_stats.newRatioStat (&s_pin_sig_recover_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_sig_recover_cnt)", 0, PRINT_ZERO));
 static RatioStat&  s_wp_ins_cnt_avg2 (g_stats.newRatioStat (&s_pin_wp_cnt, "pars", "wp_ins_cnt_avg", "Wrong path instruction cnt average (wrt pin_wp_cnt)", 0, PRINT_ZERO));
+static ScalarStat& s_bp_misspred_cnt (g_stats.newScalarStat ("pars", "bp_misspred_cnt", "Number of BP mispredictions", 0, PRINT_ZERO));
+static ScalarStat& s_btb_misspred_cnt (g_stats.newScalarStat ("pars", "btb_misspred_cnt", "Number of BTB mispredictions", 0, PRINT_ZERO));
 
 /* ******************************************************************* *
  * GLOBAL VARIABLES
@@ -44,6 +47,7 @@ map<unsigned,i_info> g_i_info;
 clock_t start_pars, stop_pars;
 TournamentBP *g_tournament_bp = NULL;
 HybridBPskew *g_2bcgskew_bp = NULL;
+BTB *btb = NULL;
 PIN_SEMAPHORE semaphore0, semaphore1; // semaphore that serializes access to global vars
 void * rootThreadArg = (void *)0xABBA;
 PIN_THREAD_UID rootThreadUid;
@@ -300,6 +304,7 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
 	PIN_SemaphoreInit (&semaphore1);
 	PIN_SemaphoreClear (&semaphore0);
 	PIN_SemaphoreClear (&semaphore1);
+    btb = new BTB (4096, 16, 2);
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
@@ -373,8 +378,10 @@ VOID pin__doFinish () {
 	delete g_var.g_bbCache;
 	delete g_var.g_blockCache;
 	delete g_tournament_bp;
+    delete g_2bcgskew_bp;
 	delete g_staticCode;
     delete g_bbStat;
+    delete btb;
 
 	g_msg.simStep ("END OF SIMULATION");
 }
@@ -778,32 +785,36 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     }
 
     /*-- BTB LOOKUP --*/
+    ADDRS pred_tgt = 0;
     if (pred) {
-        if (BTB.valid (pc)) {
-            ADDRS target = BTB.lookup (pc);
+        if (btb->valid (pc)) {
+            pred_tgt = btb->lookup (pc);
         } else {
             if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
                 g_tournament_bp->BTBUpdate (pc, bp_hist);
             } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
                 g_2bcgskew_bp->BTBUpdate (pc, bp_hist);
-                pred = false;
             }
+            pred = false;
+            pred_tgt = 0;
         }
+        _e_btb->camAccess (num_lookup);
     }
-    if (pred) {_e_btb->camAccess (num_lookup);}
 
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
     if (!g_var.g_wrong_path) {
         if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : ";
 
-        if (pred != taken || (taken && tgt != pred_tgt)) {
+        if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
-            if (taken) { /* ACTUALLY TAKEN */
-                ADDRS target = BTB.update (pc, tgt);
-                _e_btb->camAccess (num_lookup);
-            }
+            s_bp_misspred_cnt++;
+        } else if (taken && tgt != pred_tgt) {
+            g_var.g_wrong_path = true;
+            btb->update (pc, tgt);
+            _e_btb->camAccess (1);
+            s_btb_misspred_cnt++;
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }
