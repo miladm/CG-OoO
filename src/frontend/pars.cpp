@@ -776,6 +776,20 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         pred = g_2bcgskew_bp->lookup (pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
         _e_table2->ramAccess (4*num_lookup);
     }
+
+    /*-- BTB LOOKUP --*/
+    if (pred) {
+        if (BTB.valid (pc)) {
+            ADDRS target = BTB.lookup (pc);
+        } else {
+            if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+                g_tournament_bp->BTBUpdate (pc, bp_hist);
+            } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+                g_2bcgskew_bp->BTBUpdate (pc, bp_hist);
+                pred = false;
+            }
+        }
+    }
     if (pred) {_e_btb->camAccess (num_lookup);}
 
     /*-- BP UPDATE --*/
@@ -783,12 +797,13 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     if (!g_var.g_wrong_path) {
         if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : ";
 
-        if (pred != taken) {
+        if (pred != taken || (taken && tgt != pred_tgt)) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
-            //printf ("\nSTART OF WRONG PATH\n");
-            //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
-            if (taken) {_e_btb->camAccess (num_lookup);}
+            if (taken) { /* ACTUALLY TAKEN */
+                ADDRS target = BTB.update (pc, tgt);
+                _e_btb->camAccess (num_lookup);
+            }
         } else {
             if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
         }
