@@ -752,7 +752,7 @@ VOID pin__instruction (TRACE trace, VOID * val)
 }
 
 /* ****************************************************************** *
- * BRANCH PREDICTOR
+ * BRANCH PREDICTOR                                                   *
  * ****************************************************************** */
 ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru, UINT32 _bbInsCnt)
 {
@@ -773,7 +773,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
         pred = g_tournament_bp->lookup (pc, bp_hist);
         _e_table1->ramAccess (3*num_lookup);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
-        pred = g_2bcgskew_bp->lookup(pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
+        pred = g_2bcgskew_bp->lookup (pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
         _e_table2->ramAccess (4*num_lookup);
     }
     if (pred) {_e_btb->camAccess (num_lookup);}
@@ -781,7 +781,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
     /*-- BP UPDATE --*/
     if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N");
     if (!g_var.g_wrong_path) {
-        if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : "; 
+        if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N") << " : ";
 
         if (pred != taken) {
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
@@ -798,6 +798,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             _e_table1->ramAccess (2*num_lookup);
         } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
             g_2bcgskew_bp->update (pc, taken, bp_hist, false);
+            g_2bcgskew_bp->histUpdate (pc, taken, bp_hist, false);
             _e_table2->ramAccess (2*num_lookup);
         }
     } else {

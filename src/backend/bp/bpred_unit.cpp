@@ -41,7 +41,7 @@
 #include <stdio.h>
 
 template<class Impl>
-BPredUnit<Impl>::BPredUnit (DerivO3CPUParams *params)
+BPredUnit::BPredUnit (DerivO3CPUParams *params)
     : _name (params->name + ".BPredUnit"),
       BTB (params->BTBEntries,
           params->BTBTagSize,
@@ -83,98 +83,17 @@ BPredUnit<Impl>::BPredUnit (DerivO3CPUParams *params)
         RAS[i].init (params->RASSize);
 	
 	fetchWidth = params->fetchWidth;
-	onDemand = params->onDemand;
-	std::cout << "ODBP flag = " << params->onDemand << "\n";
-
 	instShiftAmt = params->instShiftAmt;
 	totalInstShiftAmt = instShiftAmt + (unsigned)log2 (fetchWidth);
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::regStats ()
-{
-    lookups
-        .name (name () + ".lookups")
-        .desc ("Number of BP lookups only")
-        ;
+BPredUnit::regStats () { }
 
-    lookup_and_updates
-        .name (name () + ".lookup_and_updates")
-        .desc ("Number of BP lookups (read and update when \"squash\" or \"update\")")
-        ;
 
-    condPredicted
-        .name (name () + ".condPredicted")
-        .desc ("Number of conditional branches predicted")
-        ;
-
-    condIncorrect
-        .name (name () + ".condIncorrect")
-        .desc ("Number of conditional branches incorrect")
-        ;
-
-    BTBLookups
-        .name (name () + ".BTBLookups")
-        .desc ("Number of BTB lookups (read and update when squash)")
-        ;
-
-    BTBHits
-        .name (name () + ".BTBHits")
-        .desc ("Number of BTB hits")
-        ;
-
-    BTBCorrect
-        .name (name () + ".BTBCorrect")
-        .desc ("Number of correct BTB predictions (this stat may not "
-              "work properly.")
-        ;
-
-    usedRAS
-        .name (name () + ".usedRAS")
-        .desc ("Number of times the RAS was used to get a target.")
-        ;
-
-    RASIncorrect
-        .name (name () + ".RASInCorrect")
-        .desc ("Number of incorrect RAS predictions.")
-        ;
-
-    DY_treated_SN
-        .name (name () + ".DY_treated_SN")
-        .desc ("Number of DY annotations turned into SN - ODBP")
-        ;
-
-    ST_treated_SN
-        .name (name () + ".ST_treated_SN")
-        .desc ("Number of DY annotations turned into SN - ODBP")
-        ;
-
-    DY_ST_treated_SN
-        .name (name () + ".DY_ST_treated_SN")
-        .desc ("Number of DY annotations turned into SN - ODBP")
-        ;
-	DY_ST_treated_SN = ST_treated_SN + DY_treated_SN;
-
-  //localBrPredCnt
-  //    .name (name () + ".localBrPredCnt")
-  //    .desc ("Local BP Lookup")
-  //    ;
-
-  //globalBrPredCnt
-  //    .name (name () + ".globalBrPredCnt")
-  //    .desc ("Global BP Lookup")
-  //    ;
-  //bpIndxHist
-	//	.init (0)
-	//	.name (name () + ".bpIndxHist")
-	//	.desc ("bpIndxHist")
-	//	.prereq (bpIndxHist);
-}
-
-template <class Impl>
 void
-BPredUnit<Impl>::switchOut ()
+BPredUnit::switchOut ()
 {
     // Clear any state upon switch out.
     for (int i = 0; i < Impl::MaxThreads; ++i) {
@@ -182,9 +101,9 @@ BPredUnit<Impl>::switchOut ()
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::takeOverFrom ()
+BPredUnit::takeOverFrom ()
 {
     // Can reset all predictor state, but it's not necessarily better
     // than leaving it be.
@@ -196,29 +115,29 @@ BPredUnit<Impl>::takeOverFrom ()
     BTB.reset ();
 */
 }
-template <class Impl>
+
 void
-BPredUnit<Impl>::increase_BP_lookup (int lookupCnt)
+BPredUnit::increase_BP_lookup (int lookupCnt)
 {
   lookups += lookupCnt;
 }
-template <class Impl>
+
 void
-BPredUnit<Impl>::increase_BP_lookup_and_update (int lookupCnt)
+BPredUnit::increase_BP_lookup_and_update (int lookupCnt)
 {
   lookup_and_updates += lookupCnt;
 }
-template <class Impl>
+
 void
-BPredUnit<Impl>::increase_BTB_lookup ()
+BPredUnit::increase_BTB_lookup ()
 {
   BTBLookups++;
   usedRAS++;
 }
 
-template <class Impl>
+
 bool
-BPredUnit<Impl>::predict (DynInstPtr &inst, TheISA::PCState &pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &allPredStatic, int oracleBP, bool onlyLP)
+BPredUnit::predict (DynInstPtr &inst, TheISA::PCState &pc, bool predTaken, int positionInFetchGroup, int positionInLine, bool &allPredStatic, int oracleBP, bool onlyLP)
 {
     // See if branch predictor predicts taken.
     // If so, get its target addr either from the BTB or the RAS.
@@ -229,89 +148,43 @@ BPredUnit<Impl>::predict (DynInstPtr &inst, TheISA::PCState &pc, ThreadID tid, b
     TheISA::PCState target = pc;
 
     void *bp_history = NULL;
-	static bool firstDY = true;
-	if (onDemand && positionInFetchGroup == 0)
-		firstDY = true;
+    static bool firstDY = true;
+    if (positionInFetchGroup == 0)
+        firstDY = true;
 
     //if (inst->isUncondCtrl ())
     //{
-    //    DPRINTF (Fetch, "BranchPred: [tid:%i]: Unconditional control.\n", tid);
+    //    dbg.print (BRANCH_PRED, "BranchPred: Unconditional control.\n", tid);
     //    pred_taken = true;
     //    // Tell the BP there was an unconditional branch.
     //    BPUncond (bp_history);
     //}
     //else
     //{
-      ++condPredicted;
-		bool choicePred;
-        if (!onDemand) { //BASEBP
-			//Addr indx = ((pc.instAddr ()>>4)<<2)+positionInLine;
-			//if (bpIndxHist.find (indx) != bpIndxHist.end ()) { bpIndxHist[indx]++;
-			//} else { bpIndxHist[indx] = 1; }
-			pred_taken = BPLookup (pc.instAddr (), bp_history, positionInLine, onDemand, choicePred, onlyLP);
-			DPRINTF (Fetch, "BranchPred: [tid:%i]: Branch predictor predicted %i for PC %s\n", tid, pred_taken, inst->pcState ());
-			if (positionInFetchGroup == 0) {
-				increase_BP_lookup (fetchWidth);
-				increase_BP_lookup_and_update (fetchWidth);
-				BTBLookups+=fetchWidth;
-			}
-			//inst->setWasBPlookup (true); TODO put this back
-			inst->setDyPredUsed (choicePred);
-        } else { //ODBP
-			if (odbpStatic)
-			{
-			    pred_taken = predTaken;
-				if (pred_taken) {
-					//hybridbp->updateGlobalHistTaken ();
-					BTBLookups++;
-				//} else {
-					//Addr tempPC = ((pc.instAddr ()>>totalInstShiftAmt)<<totalInstShiftAmt)+ ((Addr)pow (instShiftAmt,2))* (fetchWidth-1); //Create the addr of last ins in cacheline
-					//if (pc.instAddr () == tempPC)
-					//hybridbp->updateGlobalHistNotTaken ();
-				}
-				noBPLookup (pc.instAddr (), bp_history, positionInLine);
-				inst->setWasBPlookup (false);
-			}
-			else if (!odbpStatic)
-			{
-				//Addr indx = ((pc.instAddr ()>>4)<<2)+positionInLine;
-				//if (bpIndxHist.find (indx) != bpIndxHist.end ()) { bpIndxHist[indx]++;
-				//} else { bpIndxHist[indx] = 1; }
-			    pred_taken = BPLookup (pc.instAddr (), bp_history, positionInLine, onDemand, choicePred, onlyLP);
-				allPredStatic = false; //had at least one DY in fetch group
-			    DPRINTF (Fetch, "BranchPred: [tid:%i]: Branch predictor predicted %i for PC %s\n", tid, pred_taken, inst->pcState ());
-				if (firstDY) {
-					increase_BP_lookup (fetchWidth);
-					increase_BP_lookup_and_update (fetchWidth);
-					firstDY=false;
-				}
-				BTBLookups++;
-				inst->setWasBPlookup (true);
-				inst->setDyPredUsed (choicePred);
-			} else {
-				assert (true && "this should have never run");
-			    pred_taken = false; //Turn DY or ST into SN - no update of PHT here
-				noBPLookup (pc.instAddr (), bp_history, positionInLine);
-				if (odbpStatic && predTaken)	ST_treated_SN++;
-				else if (!odbpStatic)			DY_treated_SN++;
-				inst->setWasBPlookup (false);
-			}
-        }
+    ++condPredicted;
+    bool choicePred;
+    //Addr indx = ((pc.instAddr ()>>4)<<2)+positionInLine;
+    //if (bpIndxHist.find (indx) != bpIndxHist.end ()) { bpIndxHist[indx]++;
+    //} else { bpIndxHist[indx] = 1; }
+    pred_taken = BPLookup (pc.instAddr (), bp_history, positionInLine, choicePred, onlyLP);
+    dbg.print (BRANCH_PRED, "BranchPred: Branch predictor predicted %i for PC %s\n", pred_taken, inst->pcState ());
+    if (positionInFetchGroup == 0) {
+        increase_BP_lookup (fetchWidth);
+        increase_BP_lookup_and_update (fetchWidth);
+        BTBLookups+=fetchWidth;
+    }
+    //inst->setWasBPlookup (true); TODO put this back
+    inst->setDyPredUsed (choicePred);
     //}
 
-    DPRINTF (Fetch, "BranchPred: [tid:%i]: [sn:%i] Creating prediction history "
-                "for PC %s\n",
-            tid, inst->seqNum, inst->pcState ());
+    dbg.print (BRANCH_PRED, "BranchPred: [sn:%i] Creating prediction history "
+            "for PC %s\n",
+            inst->seqNum, inst->pcState ());
 
     PredictorHistory predict_record (inst->seqNum, pc.instAddr (),
-                                    pred_taken, bp_history, tid);
-	if (onDemand) {
-		predict_record.wasControl = inst->isControl ();
-		predict_record.wasStatic = odbpStatic;
-		predict_record.wasST = predTaken; //This is the "original" static prediction
-	}
+            pred_taken, bp_history, tid);
 
-    // Now lookup in the BTB or RAS.
+    // NOW LOOKUP IN THE BTB OR RAS.
     if (pred_taken)
     {
         ++usedRAS; //RAS read or write
@@ -320,34 +193,34 @@ BPredUnit<Impl>::predict (DynInstPtr &inst, TheISA::PCState &pc, ThreadID tid, b
             predict_record.wasReturn = true;
             // If it's a function return call, then look up the address
             // in the RAS.
-            TheISA::PCState rasTop = RAS[tid].top ();
+            TheISA::PCState rasTop = RAS.top ();
             target = TheISA::buildRetPC (pc, rasTop);
 
             // Record the top entry of the RAS, and its index.
             predict_record.usedRAS = true;
-            predict_record.RASIndex = RAS[tid].topIdx ();
+            predict_record.RASIndex = RAS.topIdx ();
             predict_record.RASTarget = rasTop;
 
             assert (predict_record.RASIndex < 16);
 
-            RAS[tid].pop ();
+            RAS.pop ();
 
-            DPRINTF (Fetch, "BranchPred: [tid:%i]: Instruction %s is a return, "
+            dbg.print (BRANCH_PRED, "BranchPred: Instruction %s is a return, "
                     "RAS predicted target: %s, RAS index: %i.\n",
-                    tid, inst->pcState (), target, predict_record.RASIndex);
+                    inst->pcState (), target, predict_record.RASIndex);
         }
         else //Look up BTB
         {
             if (inst->isCall ()) {
-                RAS[tid].push (pc);
+                RAS.push (pc);
 
                 // Record that it was a call so that the top RAS entry can
                 // be popped off if the speculation is incorrect.
                 predict_record.wasCall = true;
 
-                DPRINTF (Fetch, "BranchPred: [tid:%i]: Instruction %s was a "
+                dbg.print (BRANCH_PRED, "BranchPred: Instruction %s was a "
                         "call, adding %s to the RAS index: %i.\n",
-                        tid, inst->pcState (), pc, RAS[tid].topIdx ());
+                        inst->pcState (), pc, RAS.topIdx ());
             }
 
             if (BTB.valid (pc.instAddr (), tid)) {
@@ -357,120 +230,114 @@ BPredUnit<Impl>::predict (DynInstPtr &inst, TheISA::PCState &pc, ThreadID tid, b
                 // If it's not a return, use the BTB to get the target addr.
                 target = BTB.lookup (pc.instAddr (), tid);
 
-                DPRINTF (Fetch, "BranchPred: [tid:%i]: Instruction %s predicted"
-                        " target is %s.\n", tid, inst->pcState (), target);
+                dbg.print (BRANCH_PRED, "BranchPred: Instruction %s predicted"
+                        " target is %s.\n", inst->pcState (), target);
 
             } else { //missed in RAS and BTB
-                DPRINTF (Fetch, "BranchPred: [tid:%i]: BTB doesn't have a "
+                dbg.print (BRANCH_PRED, "BranchPred: BTB doesn't have a "
                         "valid entry.\n",tid);
                 pred_taken = false;
                 // The Direction of the branch predictor is altered because the
                 // BTB did not have an entry
                 // The predictor needs to be updated accordingly
-              //if (!inst->isCall () && !inst->isReturn ()) {
-                      BPBTBUpdate (pc.instAddr (), bp_history);
-                      DPRINTF (Fetch, "BranchPred: [tid:%i]:[sn:%i] BPBTBUpdate"
-                              " called for %s\n",
-                              tid, inst->seqNum, inst->pcState ());
-              //} else if (inst->isCall () && !inst->isUncondCtrl ()) {
-              //      RAS[tid].pop ();
-              //}
+                //if (!inst->isCall () && !inst->isReturn ()) {
+                BPBTBUpdate (pc.instAddr (), bp_history);
+                dbg.print (BRANCH_PRED, "BranchPred: [tid:%i]:[sn:%i] BPBTBUpdate"
+                        " called for %s\n",
+                        inst->seqNum, inst->pcState ());
+                //} else if (inst->isCall () && !inst->isUncondCtrl ()) {
+                //      RAS.pop ();
+                //}
                 TheISA::advancePC (target, inst->staticInst);
             }
 
         }
     } else { //predict not taken
         if (inst->isReturn ()) {
-           predict_record.wasReturn = true;
+            predict_record.wasReturn = true;
         }
         TheISA::advancePC (target, inst->staticInst);
     }
 
-	predict_record.predTaken = pred_taken;
+    predict_record.predTaken = pred_taken;
     pc = target;
 
-    predHist[tid].push_front (predict_record);
+    predHist.push_front (predict_record);
 
-    DPRINTF (Fetch, "BranchPred: [tid:%i]: [sn:%i]: History entry added."
-            "predHist.size (): %i\n", tid, inst->seqNum, predHist[tid].size ());
+    dbg.print (BRANCH_PRED, "BranchPred: [sn:%i]: History entry added."
+            "predHist.size (): %i\n", inst->seqNum, predHist.size ());
 
     return pred_taken;
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::update (const InstSeqNum &done_sn, ThreadID tid)
+BPredUnit::update (const InstSeqNum &done_sn)
 {
-    DPRINTF (Fetch, "BranchPred: [tid:%i]: Committing branches until "
-            "[sn:%lli].\n", tid, done_sn);
+    dbg.print (BRANCH_PRED, "BranchPred: Committing branches until "
+            "[sn:%lli].\n", done_sn);
 
-    while (!predHist[tid].empty () &&
-           predHist[tid].back ().seqNum <= done_sn) {
+    while (!predHist.empty () &&
+            predHist.back ().seqNum <= done_sn) {
         // Update the branch predictor with the correct results.
-		DPRINTF (Fetch, "BranchPred: [tid:%i]: Committing branch "
-		        "[sn:%lli].\n", tid, predHist[tid].back ().seqNum);
-        if (!onDemand || 
-	        (onDemand && 
-	    	 !predHist[tid].back ().wasStatic &&
-	    	 predHist[tid].back ().wasControl)) {
-	    	BPUpdate (predHist[tid].back ().pc,
-        	         predHist[tid].back ().predTaken,
-        	         predHist[tid].back ().bpHistory, false);
-	    }
-		BPHistUpdate (predHist[tid].back ().pc, //should not do anything
-    	         predHist[tid].back ().predTaken,
-    	         predHist[tid].back ().bpHistory, false);
+        dbg.print (BRANCH_PRED, "BranchPred: Committing branch "
+                "[sn:%lli].\n", predHist.back ().seqNum);
+        BPUpdate (predHist.back ().pc,
+                predHist.back ().predTaken,
+                predHist.back ().bpHistory, false);
+        BPHistUpdate (predHist.back ().pc, //should not do anything
+                predHist.back ().predTaken,
+                predHist.back ().bpHistory, false);
 
-        predHist[tid].pop_back ();
+        predHist.pop_back ();
     }
-    DPRINTF (Fetch, "BranchPred: [tid:%i]: Done Committing branches\n", tid);
+    dbg.print (BRANCH_PRED, "BranchPred: Done Committing branches\n", tid);
 
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::squash (const InstSeqNum &squashed_sn, ThreadID tid)
+BPredUnit::squash (const InstSeqNum &squashed_sn)
 {
-    History &pred_hist = predHist[tid];
+    History &pred_hist = predHist;
 
     while (!pred_hist.empty () &&
-           pred_hist.front ().seqNum > squashed_sn) {
+            pred_hist.front ().seqNum > squashed_sn) {
         if (pred_hist.front ().usedRAS) {
-            DPRINTF (Fetch, "BranchPred: [tid:%i]: Restoring top of RAS to: %i,"
-                    " target: %s.\n", tid,
+            dbg.print (BRANCH_PRED, "BranchPred: Restoring top of RAS to: %i,"
+                    " target: %s.\n", 
                     pred_hist.front ().RASIndex, pred_hist.front ().RASTarget);
 
-            RAS[tid].restore (pred_hist.front ().RASIndex,
-                             pred_hist.front ().RASTarget);
+            RAS.restore (pred_hist.front ().RASIndex,
+                    pred_hist.front ().RASTarget);
         } else if (pred_hist.front ().wasCall && pred_hist.front ().validBTB) {
             // Was a call but predicated false. Pop RAS here
-            DPRINTF (Fetch, "BranchPred: [tid: %i] Squashing"
-                    "  Call [sn:%i] PC: %s Popping RAS\n", tid,
+            dbg.print (BRANCH_PRED, "BranchPred: Squashing"
+                    "  Call [sn:%i] PC: %s Popping RAS\n", 
                     pred_hist.front ().seqNum, pred_hist.front ().pc);
-            RAS[tid].pop ();
+            RAS.pop ();
         }
 
         // This call should delete the bpHistory.
         BPSquash (pred_hist.front ().bpHistory);
 
-        DPRINTF (Fetch, "BranchPred: [tid:%i]: Removing history for [sn:%i] "
-                "PC %s.\n", tid, pred_hist.front ().seqNum,
+        dbg.print (BRANCH_PRED, "BranchPred: Removing history for [sn:%i] "
+                "PC %s.\n", pred_hist.front ().seqNum,
                 pred_hist.front ().pc);
 
         pred_hist.pop_front ();
 
-        DPRINTF (Fetch, "[tid:%i]: predHist.size (): %i\n",
-                tid, predHist[tid].size ());
+        dbg.print (BRANCH_PRED, "predHist.size (): %i\n",
+                predHist.size ());
     }
 
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::squash (const InstSeqNum &squashed_sn,
+BPredUnit::squash (const InstSeqNum &squashed_sn,
                         const TheISA::PCState &corrTarget,
-                        bool actually_taken,
-                        ThreadID tid)
+                        bool actually_taken)
 {
     // Now that we know that a branch was mispredicted, we need to undo
     // all the branches that have been seen up until this branch and
@@ -483,16 +350,16 @@ BPredUnit<Impl>::squash (const InstSeqNum &squashed_sn,
     //     PC-relative, branch was predicted incorrectly. If so, a signal
     //     to the fetch stage is sent to squash history after the mispredict
 
-    History &pred_hist = predHist[tid];
+    History &pred_hist = predHist;
 
     ++condIncorrect;
 
-    DPRINTF (Fetch, "BranchPred: [tid:%i]: Squashing from sequence number %i, "
+    dbg.print (BRANCH_PRED, "BranchPred: Squashing from sequence number %i, "
             "setting target to %s.\n",
-            tid, squashed_sn, corrTarget);
+            squashed_sn, corrTarget);
 
     // Squash All Branches AFTER this mispredicted branch
-    squash (squashed_sn, tid);
+    squash (squashed_sn);
 
     // If there's a squash due to a syscall, there may not be an entry
     // corresponding to the squash.  In that case, don't bother trying to
@@ -505,7 +372,7 @@ BPredUnit<Impl>::squash (const InstSeqNum &squashed_sn,
 
         //assert (hist_it != pred_hist.end ());
         if (pred_hist.front ().seqNum != squashed_sn) {
-            DPRINTF (Fetch, "Front sn %i != Squash sn %i\n",
+            dbg.print (BRANCH_PRED, "Front sn %i != Squash sn %i\n",
                     pred_hist.front ().seqNum, squashed_sn);
 
             assert (pred_hist.front ().seqNum == squashed_sn);
@@ -515,69 +382,60 @@ BPredUnit<Impl>::squash (const InstSeqNum &squashed_sn,
             ++RASIncorrect;
         }
 
-		if (!onDemand || 
-		    (onDemand && 
-			 !pred_hist.front ().wasStatic &&
-			 pred_hist.front ().wasControl)) {
-			BPUpdate ((*hist_it).pc, actually_taken,
-			         pred_hist.front ().bpHistory, true);
-		}
+        BPUpdate ((*hist_it).pc, actually_taken,
+                pred_hist.front ().bpHistory, true);
 
-		BPHistUpdate ((*hist_it).pc, actually_taken,
-					pred_hist.front ().bpHistory, true);
+        BPHistUpdate ((*hist_it).pc, actually_taken,
+                pred_hist.front ().bpHistory, true);
 
         if (actually_taken) {
             if (hist_it->wasReturn && !hist_it->usedRAS) {
-                 DPRINTF (Fetch, "BranchPred: [tid: %i] Incorrectly predicted"
-                           "  return [sn:%i] PC: %s\n", tid, hist_it->seqNum,
-                            hist_it->pc);
-                 RAS[tid].pop ();
+                dbg.print (BRANCH_PRED, "BranchPred: Incorrectly predicted"
+                        "  return [sn:%i] PC: %s\n", hist_it->seqNum,
+                        hist_it->pc);
+                RAS.pop ();
             }
         } else {
-           //Actually not Taken
-           if (hist_it->usedRAS) {
-                DPRINTF (Fetch,"BranchPred: [tid: %i] Incorrectly predicted"
-                           "  return [sn:%i] PC: %s Restoring RAS\n", tid,
-                           hist_it->seqNum, hist_it->pc);
-                DPRINTF (Fetch, "BranchPred: [tid:%i]: Restoring top of RAS"
-                               " to: %i, target: %s.\n", tid,
-                              hist_it->RASIndex, hist_it->RASTarget);
-                RAS[tid].restore (hist_it->RASIndex, hist_it->RASTarget);
+            //Actually not Taken
+            if (hist_it->usedRAS) {
+                dbg.print (BRANCH_PRED,"BranchPred: Incorrectly predicted"
+                        "  return [sn:%i] PC: %s Restoring RAS\n", 
+                        hist_it->seqNum, hist_it->pc);
+                dbg.print (BRANCH_PRED, "BranchPred: Restoring top of RAS"
+                        " to: %i, target: %s.\n", 
+                        hist_it->RASIndex, hist_it->RASTarget);
+                RAS.restore (hist_it->RASIndex, hist_it->RASTarget);
 
-           } else if (hist_it->wasCall && hist_it->validBTB) {
-                 //Was a Call but predicated false. Pop RAS here
-                 DPRINTF (Fetch, "BranchPred: [tid: %i] Incorrectly predicted"
-                           "  Call [sn:%i] PC: %s Popping RAS\n", tid,
-                           hist_it->seqNum, hist_it->pc);
-                 RAS[tid].pop ();
-           }
+            } else if (hist_it->wasCall && hist_it->validBTB) {
+                //Was a Call but predicated false. Pop RAS here
+                dbg.print (BRANCH_PRED, "BranchPred: Incorrectly predicted"
+                        "  Call [sn:%i] PC: %s Popping RAS\n", 
+                        hist_it->seqNum, hist_it->pc);
+                RAS.pop ();
+            }
         }
-		if (onDemand && 
-		    (pred_hist.front ().wasST || !pred_hist.front ().wasStatic) && 
-			!pred_hist.front ().wasControl) {
-			BTB.invalidate ((*hist_it).pc);
-		} else  if (actually_taken) {
-			DPRINTF (Fetch,"BranchPred: [tid: %i] BTB Update called for [sn:%i]"
-                          " PC: %s\n", tid,hist_it->seqNum, hist_it->pc);
-			BTB.update ((*hist_it).pc, corrTarget, tid);
-			BTBLookups++;
-            DPRINTF (Fetch,"BranchPred: [tid: %i] BTB Update called for [sn:%i]"
-                            " PC: %s\n", tid,hist_it->seqNum, hist_it->pc);
-		}
+        if (actually_taken) {
+            dbg.print (BRANCH_PRED,"BranchPred: BTB Update called for [sn:%i]"
+                    " PC: %s\n", hist_it->seqNum, hist_it->pc);
+            BTB.update ((*hist_it).pc, corrTarget, tid);
+            BTBLookups++;
+            dbg.print (BRANCH_PRED,"BranchPred: BTB Update called for [sn:%i]"
+                    " PC: %s\n", hist_it->seqNum, hist_it->pc);
+        }
 
-        DPRINTF (Fetch, "BranchPred: [tid:%i]: Removing history for [sn:%i]"
-                       " PC %s  Actually Taken: %i\n", tid, hist_it->seqNum,
-                       hist_it->pc, actually_taken);
+        dbg.print (BRANCH_PRED, "BranchPred: Removing history for [sn:%i]"
+                " PC %s  Actually Taken: %i\n", hist_it->seqNum,
+                hist_it->pc, actually_taken);
 
         pred_hist.erase (hist_it);
 
-        DPRINTF (Fetch, "[tid:%i]: predHist.size (): %i\n", tid, predHist[tid].size ());
+        dbg.print (BRANCH_PRED, "predHist.size (): %i\n", predHist.size ());
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::BPUncond (void * &bp_history)
+BPredUnit::BPUncond (void * &bp_history)
 {
     // Only the hybrid predictor cares about unconditional branches.
     if (predictor == Hybrid) {
@@ -587,9 +445,9 @@ BPredUnit<Impl>::BPUncond (void * &bp_history)
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::BPSquash (void *bp_history)
+BPredUnit::BPSquash (void *bp_history)
 {
     if (predictor == Local) {
         localBP->squash (bp_history);
@@ -602,26 +460,26 @@ BPredUnit<Impl>::BPSquash (void *bp_history)
     }
 }
 
-template <class Impl>
+
 bool
-BPredUnit<Impl>::BPLookup (Addr instPC, void * &bp_history, int positionInLine, bool onDemand, bool &choicePred, bool onlyLP)
+BPredUnit::BPLookup (Addr instPC, void * &bp_history, int positionInLine, bool &choicePred, bool onlyLP)
 {
     if (predictor == Local) {
         return localBP->lookup (instPC, bp_history);
     } else if (predictor == Hybrid) {
-        bool prediction = hybridbp->lookup (instPC, bp_history, (unsigned)positionInLine, onDemand, choicePred);
+        bool prediction = hybridbp->lookup (instPC, bp_history, (unsigned)positionInLine, choicePred);
         return prediction;
     } else if (predictor == HybridSkew) {
-        bool prediction = hybridSkewbp->lookup (instPC, bp_history, (unsigned)positionInLine, onDemand, choicePred, onlyLP);
+        bool prediction = hybridSkewbp->lookup (instPC, bp_history, (unsigned)positionInLine, choicePred, onlyLP);
         return prediction;
     } else {
         panic ("Predictor type is unexpected value!");
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::BPBTBUpdate (Addr instPC, void * &bp_history)
+BPredUnit::BPBTBUpdate (Addr instPC, void * &bp_history)
 {
     if (predictor == Local) {
         return localBP->BTBUpdate (instPC, bp_history);
@@ -634,26 +492,8 @@ BPredUnit<Impl>::BPBTBUpdate (Addr instPC, void * &bp_history)
     }
 }
 
-template <class Impl>
 void
-BPredUnit<Impl>::noBPLookup (Addr instPC, void * &bp_history, int positionInLine)
-{
-	assert (onDemand);
-    if (predictor == Local) {
-        assert (false && "this function is not supported for loacl prediction - (see Milad!)");
-    } else if (predictor == Hybrid) {
-        return hybridbp->onDemandBr (instPC, bp_history, (unsigned)positionInLine);
-    } else if (predictor == HybridSkew) {
-        return hybridSkewbp->onDemandBr (instPC, bp_history, (unsigned)positionInLine);
-    } else {
-        panic ("Predictor type is unexpected value!");
-    }
-}
-
-template <class Impl>
-void
-BPredUnit<Impl>::BPUpdate (Addr instPC, bool taken, void *bp_history,
-                 bool squashed)
+BPredUnit::BPUpdate (Addr instPC, bool taken, void *bp_history, bool squashed)
 {
     if (predictor == Local) {
         localBP->update (instPC, taken, bp_history);
@@ -667,10 +507,9 @@ BPredUnit<Impl>::BPUpdate (Addr instPC, bool taken, void *bp_history,
 	increase_BP_lookup_and_update (1);
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::BPHistUpdate (Addr instPC, bool taken, void *bp_history,
-                 bool squashed)
+BPredUnit::BPHistUpdate (Addr instPC, bool taken, void *bp_history, bool squashed)
 {
     if (predictor == Local) {
         assert (false && "this function is not supported for loacl prediction - (see Milad!)");
@@ -683,9 +522,9 @@ BPredUnit<Impl>::BPHistUpdate (Addr instPC, bool taken, void *bp_history,
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::BPHistGarbageCollect (void *bp_history)
+BPredUnit::BPHistGarbageCollect (void *bp_history)
 {
     if (predictor == Local) {
         assert (false && "this function is not supported for loacl prediction - (see Milad!)");
@@ -698,9 +537,9 @@ BPredUnit<Impl>::BPHistGarbageCollect (void *bp_history)
     }
 }
 
-template <class Impl>
+
 void
-BPredUnit<Impl>::dump ()
+BPredUnit::dump ()
 {
     HistoryIt pred_hist_it;
 
@@ -714,7 +553,7 @@ BPredUnit<Impl>::dump ()
                 cprintf ("[sn:%lli], PC:%#x, tid:%i, predTaken:%i, "
                         "bpHistory:%#x\n",
                         pred_hist_it->seqNum, pred_hist_it->pc,
-                        pred_hist_it->tid, pred_hist_it->predTaken,
+                        pred_hist_it->pred_hist_it->predTaken,
                         pred_hist_it->bpHistory);
                 pred_hist_it++;
             }

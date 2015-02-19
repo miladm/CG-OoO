@@ -18,7 +18,7 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_8'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/forwarding_test/fwd2_wide'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion/redundancy_elim_o3_ino'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion/redundancy_elim_o3_ino_8wide'
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'

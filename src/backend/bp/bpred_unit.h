@@ -45,10 +45,10 @@
 struct DerivO3CPUParams;
 
 /**
- * Basically a wrapper class to hold both the branch predictor
- * and the BTB.
+ * BASICALLY A WRAPPER CLASS TO HOLD BOTH THE BRANCH PREDICTOR
+ * AND THE BTB.
  */
-template<class Impl>
+
 class BPredUnit
 {
   private:
