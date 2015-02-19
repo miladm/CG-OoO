@@ -50,8 +50,6 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
                 insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
             }
             if (g__staticCode->getInsObj(ins_addr)->getBrType () != JMP) g_br_detected = true;
-//            dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
-//            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -82,10 +80,6 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
                 MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
                 insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
             }
-
-//            dynInstruction* insObj = pin__makeNewIns (ins_addr, MEM);
-//            MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-//            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -107,8 +101,6 @@ VOID pin__getIns (ADDRINT ins_addr) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBlk (ins_addr);
             pin__makeNewBlkIns (ins_addr, ALU);
-
-//            pin__makeNewIns (ins_addr, ALU);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -130,8 +122,6 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBlk (ins_addr);
             pin__makeNewBlkIns (ins_addr, NOP);
-
-//            pin__makeNewIns (ins_addr, NOP);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -161,6 +151,7 @@ VOID getUnInstrumentedMOV_BLK (ADDRINT ins_addr) {
     }
 }
 
+
 /*-- 
  * BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3
  *
@@ -178,7 +169,7 @@ VOID getUnInstrumentedMOV_BLK (ADDRINT ins_addr) {
 //}
 
 /* ************************************* *
- * BLOCK INSTRUMENTATIONS
+ * BLOCK INSTRUMENTATIONS - USED FOR O3 and INO
  * ************************************ */
 /*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3--*/
 dynInstruction* pin__makeNewBlkIns (ADDRINT ins_addr, INS_TYPE ins_type) {
@@ -245,8 +236,7 @@ void pin__getBlkHead (ADDRINT blk_addr) {
         if (g_var.scheduling_mode == STATIC_SCH) {
             lastBlk->rescheduleInsList (&g_var.g_seq_num);
         }
-
-        /* PUSH INSTRUCTIONS INTO THE INSTRUCTION CACHE */
+        /* PUSH INSTRUCTIONS INTO CODE CACHE */
         g_var.pushInsToCodeCache ();
         g_var.removeLastBlock ();
     }
