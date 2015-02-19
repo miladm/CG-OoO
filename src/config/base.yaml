@@ -331,7 +331,7 @@ cpu:
 
        eu:
            alu:
-               count: 24
+               count: 4
                count_per_blk: 4
                latency: 1
                e_eu: 1.040

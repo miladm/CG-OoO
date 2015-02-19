@@ -12,7 +12,9 @@ static set<ADDRINT> _bbHeadSet;
  * STAT GLOBAL VARIABLES
  * ******************************************************************* */
 static ScalarStat& s_pin_missing_static_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_missing_static_bb_cnt", "Number of dynamic BB's with no static counterpart.", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_missing_static_blk_cnt (g_stats.newScalarStat ("uOpGen", "pin_missing_static_blk_cnt", "Number of dynamic BLK's with no static counterpart.", 0, NO_PRINT_ZERO));
 static ScalarStat& s_pin_bb_cnt (g_stats.newScalarStat ("uOpGen", "pin_bb_cnt", "Number of basicblocks instrumented in frontend", 0, NO_PRINT_ZERO));
+static ScalarStat& s_pin_blk_cnt (g_stats.newScalarStat ("uOpGen", "pin_blk_cnt", "Number of blocks instrumented in frontend", 0, NO_PRINT_ZERO));
 static ScalarStat& s_missing_ins_in_stat_code_cnt (g_stats.newScalarStat ("uOpGen", "missing_ins_in_stat_code_cnt", "Number of dynamic instructions not found in static code", 0, NO_PRINT_ZERO));
 static ScalarStat& s_mov_insertion_cnt (g_stats.newScalarStat ("uOpGen", "mov_insertion_cnt", "Number of MOV instructions inserted in dynamic sequence", 0, NO_PRINT_ZERO));
 static ScalarStat& s_dyn_gr_cnt (g_stats.newScalarStat ("uOpGen", "dyn_gr_cnt", "Number of global register operands", 0, NO_PRINT_ZERO));
@@ -41,8 +43,15 @@ VOID pin__getBrIns (ADDRINT ins_addr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr
             }
             if (g__staticCode->getInsObj(ins_addr)->getBrType () != JMP) g_br_detected = true;
         } else { /* INO & O3 */
-            dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
-            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
+            pin__detectBlk (ins_addr);
+            dynInstruction* insObj = pin__makeNewBlkIns (ins_addr, BR);
+            if (insObj != NULL) {
+                insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
+            }
+            if (g__staticCode->getInsObj(ins_addr)->getBrType () != JMP) g_br_detected = true;
+//            dynInstruction* insObj = pin__makeNewIns (ins_addr, BR);
+//            insObj->setBrAtr (tgAddr, ftAddr, hasFT, isTaken, isCall, isRet, isJumpBr, isDirBrOrCallOrJmp);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW BR: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -66,9 +75,17 @@ VOID pin__getMemIns (ADDRINT ins_addr, ADDRINT memAccessSize, ADDRINT memAddr,
                 insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
             }
         } else { /* INO & O3 */
-            dynInstruction* insObj = pin__makeNewIns (ins_addr, MEM);
-            MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
-            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
+            pin__detectBlk (ins_addr);
+            dynInstruction* insObj = pin__makeNewBlkIns (ins_addr, MEM);
+            if (insObj != NULL) {
+                MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
+                insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
+            }
+
+//            dynInstruction* insObj = pin__makeNewIns (ins_addr, MEM);
+//            MEM_TYPE mType = (isMemRead == true ? LOAD : STORE);
+//            insObj->setMemAtr (mType, memAddr, memAccessSize, isStackRd, isStackWr);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW MEM: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -87,7 +104,11 @@ VOID pin__getIns (ADDRINT ins_addr) {
             pin__detectBB (ins_addr);
             pin__makeNewBBIns (ins_addr, ALU);
         } else { /* INO & O3 */
-            pin__makeNewIns (ins_addr, ALU);
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
+            pin__detectBlk (ins_addr);
+            pin__makeNewBlkIns (ins_addr, ALU);
+
+//            pin__makeNewIns (ins_addr, ALU);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW INS: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -104,9 +125,13 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
         if (g_var.g_core_type == BASICBLOCK) {
             if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
             pin__detectBB (ins_addr);
-            pin__makeNewBBIns (ins_addr, ALU);
+            pin__makeNewBBIns (ins_addr, NOP);
         } else { /* INO & O3 */
-            pin__makeNewIns (ins_addr, NOP);
+            if (_bbHeadSet.find (ins_addr) != _bbHeadSet.end ()) g_br_detected = true;
+            pin__detectBlk (ins_addr);
+            pin__makeNewBlkIns (ins_addr, NOP);
+
+//            pin__makeNewIns (ins_addr, NOP);
         }
         if (g_var.g_debug_level & DBG_UOP) 
             std::cout << "NEW NOP: " << (g_var.g_wrong_path?"*":" ") << hex << ins_addr << 
@@ -117,7 +142,7 @@ VOID pin__getNopIns (ADDRINT ins_addr) {
     }
 }
 
-VOID getUnInstrumentedMOV (ADDRINT ins_addr) {
+VOID getUnInstrumentedMOV_BB (ADDRINT ins_addr) {
     if (g__staticCode->hasIns (ins_addr)) {
         pin__makeNewBBIns (ins_addr, ALU);
         s_mov_insertion_cnt++;
@@ -126,24 +151,119 @@ VOID getUnInstrumentedMOV (ADDRINT ins_addr) {
     }
 }
 
+VOID getUnInstrumentedMOV_BLK (ADDRINT ins_addr) {
+    if (g__staticCode->hasIns (ins_addr)) {
+        dynInstruction* insObj = pin__makeNewBlkIns (ins_addr, ALU);
+        Assert (insObj != NULL);
+        s_mov_insertion_cnt++;
+    } else {
+        s_missing_ins_in_stat_code_cnt++;
+    }
+}
+
+/*-- 
+ * BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3
+ *
+ * NOTE: THIS BLOCK IS CURRENTLY OBSOLETE - MAY BRING IS BACK FOR DYNAMIC_SCH
+ --*/
+//dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
+//    dynInstruction* insObj = g_var.getNewCodeCacheIns ();
+//    stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
+//    staticIns->copyRegsTo (insObj);
+//    insObj->setInsType (ins_type);
+//    insObj->setInsAddr (ins_addr);
+//    insObj->setInsID (g_var.g_seq_num++);
+//    insObj->setWrongPath (g_var.g_wrong_path);
+//    return insObj;
+//}
+
+/* ************************************* *
+ * BLOCK INSTRUMENTATIONS
+ * ************************************ */
 /*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR INO & O3--*/
-dynInstruction* pin__makeNewIns (ADDRINT ins_addr, INS_TYPE ins_type) {
-    dynInstruction* insObj = g_var.getNewCodeCacheIns ();
+dynInstruction* pin__makeNewBlkIns (ADDRINT ins_addr, INS_TYPE ins_type) {
+    block * blkObj = g_var.getLastCacheBlk ();
+    Assert (blkObj != NULL);
+    if (g_var.scheduling_mode == STATIC_SCH && blkObj->isInInsMap (ins_addr)) return NULL;
+    dynInstruction* insObj = g_var.getNewBlkIns ();
     stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
     staticIns->copyRegsTo (insObj);
     insObj->setInsType (ins_type);
     insObj->setInsAddr (ins_addr);
-    insObj->setInsID (g_var.g_seq_num++);
+    if (g_var.scheduling_mode == DYNAMIC_SCH) { insObj->setInsID (g_var.g_seq_num++); }
     insObj->setWrongPath (g_var.g_wrong_path);
+    blkObj->insertIns (insObj);
     return insObj;
 }
 
+
+/*-- DETECT IF A NEW BB BEGINS --*/
+void pin__detectBlk (ADDRINT ins_addr) {
+    if (g__staticCode->hasStaticBB (ins_addr)) {
+        pin__getBlkHead (ins_addr);
+    } else if (g_br_detected) {
+        pin__getBlkHead (ins_addr);
+        _bbHeadSet.insert (ins_addr);
+    } else if (g_var.getLastCacheBlk () == NULL) {
+        /* THE CASE WHERE FIRST DYN INS IS NOT MAPPED */
+        pin__getBlkHead (ins_addr);
+    }
+    g_br_detected = false;
+}
+
+void handleUnInstrumentedCode_blk (block* blk) {
+    list<ADDRS> unInstrumentedList = blk->getUnInstrumentedIns ();
+    list<ADDRS>::iterator it;
+    for (it = unInstrumentedList.begin (); it != unInstrumentedList.end (); it++) {
+        ADDRS ins_addr = *it;
+        getUnInstrumentedMOV_BLK (ins_addr);
+    }
+}
+
+/*-- MAKE A NEW BASIC-BLOCK --*/
+void pin__makeNewBlk (ADDRINT blk_addr) {
+    if (g_var.g_debug_level & DBG_UOP) 
+        std::cout << "NEW BLK: " << (g_var.g_wrong_path?"*":" ") << std::endl;
+
+    /* MAKE THE NEXT BASICBLOCK */
+    block* blkObj = g_var.getNewCacheBlk ();
+    if (g_var.scheduling_mode == STATIC_SCH) {
+        if (g__staticCode->hasStaticBB (blk_addr))
+            blkObj->setBBstaticInsList (g__staticCode->getBBinsList (blk_addr));
+        else
+            s_pin_missing_static_blk_cnt++;
+    }
+    s_pin_blk_cnt++;
+}
+
+/*-- POST PROCESS THE LATEST BB AND MAKE A NEW BB OBJECT --*/
+void pin__getBlkHead (ADDRINT blk_addr) {
+    /* FINAL PASSES ON THE CLOSING BLK - SCHEDULING, ETC. */
+    block* lastBlk = g_var.getLastCacheBlk ();
+    if (lastBlk != NULL) {
+        handleUnInstrumentedCode_blk (lastBlk);
+        if (g_var.scheduling_mode == STATIC_SCH) {
+            lastBlk->rescheduleInsList (&g_var.g_seq_num);
+        }
+
+        /* PUSH INSTRUCTIONS INTO THE INSTRUCTION CACHE */
+        g_var.pushInsToCodeCache ();
+        g_var.removeLastBlock ();
+    }
+
+    /* MAKE A NEW BLOCK */
+    pin__makeNewBlk (blk_addr);
+}
+
+/* ************************************* *
+ * BB INSTRUMENTATIONS
+ * ************************************ */
 /*-- BASIC COMMANDS TO MAKE AN INSTRUCTION FOR BB --*/
 bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     dynBasicblock* bbObj = g_var.getLastCacheBB ();
     if (bbObj == NULL) return NULL;
     if (g_var.scheduling_mode == STATIC_SCH && bbObj->isInInsMap (ins_addr)) return NULL;
-    bbInstruction* insObj = g_var.getNewIns ();
+    bbInstruction* insObj = g_var.getNewBBins ();
     stInstruction* staticIns = g__staticCode->getInsObj (ins_addr);
     staticIns->copyRegsTo (insObj);
     insObj->setInsType (ins_type);
@@ -154,10 +274,6 @@ bbInstruction* pin__makeNewBBIns (ADDRINT ins_addr, INS_TYPE ins_type) {
     insObj->setBB (bbObj);
     return insObj;
 }
-
-/* ************************************* *
- * BB INSTRUMENTATIONS
- * ************************************ */
 
 /*-- DETECT IF A NEW BB BEGINS --*/
 void pin__detectBB (ADDRINT ins_addr) {
@@ -182,7 +298,7 @@ void pin__detectBB (ADDRINT ins_addr) {
     g_br_detected = false;
 }
 
-void pin__genInsStat (dynBasicblock* bb) {
+void pin__genBBinsStat (dynBasicblock* bb) {
     List<bbInstruction*>* insList = bb->getBBinsList ();
     LENGTH bb_size = bb->getBBsize ();
     for (LENGTH i = 0; i < bb_size; i++) {
@@ -201,15 +317,14 @@ void pin__genInsStat (dynBasicblock* bb) {
         else
             s_ins_with_lr_operand_cnt++;
     }
-
 }
 
-void handleUnInstrumentedCode (dynBasicblock* bb) {
+void handleUnInstrumentedCode_bb (dynBasicblock* bb) {
     list<ADDRS> unInstrumentedList = bb->getUnInstrumentedIns ();
     list<ADDRS>::iterator it;
     for (it = unInstrumentedList.begin (); it != unInstrumentedList.end (); it++) {
         ADDRS ins_addr = *it;
-        getUnInstrumentedMOV (ins_addr);
+        getUnInstrumentedMOV_BB (ins_addr);
     }
 }
 
@@ -236,14 +351,14 @@ void pin__getBBhead (ADDRINT bb_addr, ADDRINT bb_br_addr, BOOL is_tail_br) {
     /* FINAL PASSES ON THE CLOSING BASICBLOCK - SCHEDULING, WRONGPATH, ETC. */
     dynBasicblock* lastBB = g_var.getLastCacheBB ();
     if (lastBB != NULL) {
-        handleUnInstrumentedCode (lastBB);
+        handleUnInstrumentedCode_bb (lastBB);
         if (g_var.scheduling_mode == STATIC_SCH) {
             lastBB->rescheduleInsList (&g_var.g_seq_num);
         }
         lastBB->wrongPathCheck ();
 
         /* GENERATE SOME STATISTICS */
-        pin__genInsStat (lastBB);
+        pin__genBBinsStat (lastBB);
     }
     pin__makeNewBB (bb_addr, bb_br_addr, is_tail_br);
 }

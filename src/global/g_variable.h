@@ -6,6 +6,7 @@
 #define _G_VARIABLE_EN
 
 #define BB_NEAR_EMPTY_SIZE 50
+#define BLK_NEAR_EMPTY_SIZE 5
 
 #include <setjmp.h>
 #include <set>
@@ -18,6 +19,7 @@
 #include "../backend/unit/dynBasicblock.h"
 #include "../backend/unit/bbInstruction.h"
 #include "../backend/unit/stInstruction.h"
+#include "../backend/unit/block.h"
 
 struct g_variable {
     g_variable() {
@@ -25,7 +27,7 @@ struct g_variable {
         g_bb_seq_num = FIRST_BB_ID;
         g_seqnum = 1;
         g_icount = 0;
-        g_debug_level = 0; //DBG_EXEC|DBG_UOP; //DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
+        g_debug_level = 0; //DBG_EXEC|DBG_UOP|DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
         g_wrong_path_count = 0;
         g_total_wrong_path_count = 0;
@@ -107,6 +109,7 @@ struct g_variable {
     List<string*>* g_insList;
     List<dynInstruction*>* g_codeCache;
     List<dynBasicblock*>* g_bbCache;
+    List<block*>* g_blockCache;
     int g_insList_indx;
     int g_BBlist_indx;
     string g_ins;
@@ -154,9 +157,12 @@ struct g_variable {
         return g_squash_type;
     }
 
-    /*****************************/
+    /******************************/
     /* CODE CACHE MANAGER ROUTINS */
-    /*****************************/
+    /******************************/
+
+    /*----------------------------*/
+    /*-- BASIC-BLOCK CODE CACHE --*/
     dynBasicblock* getNewCacheBB () {
         while (g_bbCache->NumElements () > 0 &&
                g_bbCache->Last()->getBBsize () == 0) {
@@ -171,9 +177,62 @@ struct g_variable {
         if (g_bbCache->NumElements () == 0) { return NULL;}
         else {return g_bbCache->Last ();}
     }
-    bbInstruction* getNewIns () {
+    void insertFrontBBcache (dynBasicblock* bb) { g_bbCache->InsertAt (bb, 0); }
+    dynBasicblock* popBBcache () {
+        dynBasicblock* bb = g_bbCache->Nth (0); 
+        g_bbCache->RemoveAt (0); 
+        return bb;
+    }
+    bool isBBcacheNearEmpty () { return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
+    bool isBBcacheEmpty () { return (g_bbCache->NumElements () == 0) ? true : false; }
+    bbInstruction* getNewBBins () {
         bbInstruction* newIns = new bbInstruction;
         return newIns;
+    }
+
+    /*----------------------*/
+    /*-- BLOCK CODE CACHE --*/
+    block* getNewCacheBlk () {
+        while (g_blockCache->NumElements () > 0 &&
+               g_blockCache->Last()->getBlockSize () == 0) {
+            delete g_blockCache->Last();
+            g_blockCache->RemoveAt (g_blockCache->NumElements () - 1);
+        }
+        block* newBB = new block (scheduling_mode, "block");
+        g_blockCache->Append (newBB);
+        Assert (g_blockCache->NumElements () == 1);
+        return newBB;
+    }
+    block* getLastCacheBlk () {
+        if (g_blockCache->NumElements () == 0) {return NULL;}
+        else {return g_blockCache->Last ();}
+    }
+    void removeLastBlock () {
+        Assert (g_blockCache->NumElements () == 1);
+        delete g_blockCache->Nth (0); 
+        g_blockCache->RemoveAt (0); 
+        Assert (g_blockCache->NumElements () == 0);
+    }
+    void pushInsToCodeCache () {
+        Assert (g_blockCache->Last () != NULL);
+        block* blk = g_blockCache->Last ();
+        Assert (blk->getBlockSize () > 0);
+        while (blk->getBlockSize () > 0) {
+            insertToCodeCache (blk->popFront ());
+        }
+    }
+    bool isBlkCacheNearEmpty () { return (g_blockCache->NumElements () <= BLK_NEAR_EMPTY_SIZE) ? true : false; }
+    bool isBlkCacheEmpty () { return (g_blockCache->NumElements () == 0) ? true : false; }
+    dynInstruction* getNewBlkIns () {
+        dynInstruction* newIns = new dynInstruction;
+        return newIns;
+    }
+
+    /*----------------------------*/
+    /*-- INSTRUCTION CODE CACHE --*/
+    void insertToCodeCache (dynInstruction* newIns) { 
+        Assert (newIns != NULL); 
+        g_codeCache->Append (newIns);
     }
     dynInstruction* getNewCodeCacheIns () {
         dynInstruction* newIns = new dynInstruction;
@@ -181,20 +240,12 @@ struct g_variable {
         return newIns;
     }
     void insertFrontCodeCache (dynInstruction* ins) { g_codeCache->InsertAt (ins, 0); }
-    void insertFrontBBcache (dynBasicblock* bb) { g_bbCache->InsertAt (bb, 0); }
     void remFromCodeCache () {
         Assert (g_codeCache->NumElements () > 0);
         g_codeCache->RemoveAt (0);
     }
     dynInstruction* popCodeCache () { return g_codeCache->Nth (0); } //TODO inconsistent with pop of BB - fix
-    dynBasicblock* popBBcache () {
-            dynBasicblock* bb = g_bbCache->Nth (0); 
-            g_bbCache->RemoveAt (0); 
-            return bb;
-    }
     bool isCodeCacheEmpty () { return (g_codeCache->NumElements () == 0) ? true : false; }
-    bool isBBcacheNearEmpty () { return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
-    bool isBBcacheEmpty () { return (g_bbCache->NumElements () == 0) ? true : false; }
 };
 
 extern g_variable g_var;

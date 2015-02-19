@@ -195,6 +195,7 @@ $(OBJDIR)backend/unit/bbInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/stInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynInstruction$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/dynBasicblock$(OBJ_SUFFIX) \
+$(OBJDIR)backend/unit/block$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/table$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/exeUnit$(OBJ_SUFFIX) \
 $(OBJDIR)backend/unit/wires$(OBJ_SUFFIX) \

@@ -315,6 +315,7 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
 	g_var.g_insList = new List<string*>;
 	g_var.g_codeCache = new List<dynInstruction*>;
 	g_var.g_bbCache = new List<dynBasicblock*>;
+	g_var.g_blockCache = new List<block*>;
     g_var.g_core_type = g_cfg->getCoreType ();
     g_var.g_mem_model = g_cfg->getMemModel ();
 	g_staticCode = new staticCodeParser (g_cfg);
@@ -384,6 +385,7 @@ VOID pin__doFinish () {
 	delete g_var.g_insList;
 	delete g_var.g_codeCache;
 	delete g_var.g_bbCache;
+	delete g_var.g_blockCache;
 	delete g_tournament_bp;
 	delete g_staticCode;
     delete g_bbStat;
