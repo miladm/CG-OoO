@@ -17,6 +17,7 @@
 #include <math.h>
 #include <signal.h>
 #include <setjmp.h>
+#include <math.h>
 
 #include "pin.H"
 #include "pin_isa.H"

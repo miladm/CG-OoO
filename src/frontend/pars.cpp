@@ -770,18 +770,26 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
 
     /* THIS IS A HACK - TODO REMOVE IT */
     int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
-    int num_lookup = (int)(_bbInsCnt / width);
+    int num_lookup = (int)ceil((float)(_bbInsCnt / width));
     if (num_lookup == 0) num_lookup = 1;
 
     s_bpu_lookup_cnt += num_lookup;
 
     /*-- BP LOOKUP --*/
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        int num_tables = 3;
         pred = g_tournament_bp->lookup (pc, bp_hist);
-        _e_table1->ramAccess (3*num_lookup);
+        if (g_var.g_core_type == BASICBLOCK)
+            _e_table1->ramAccess (num_tables * 1);
+        else /* INO or O3 */
+            _e_table1->ramAccess (num_tables * num_lookup);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+        int num_tables = 4;
         pred = g_2bcgskew_bp->lookup (pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
-        _e_table2->ramAccess (4*num_lookup);
+        if (g_var.g_core_type == BASICBLOCK)
+            _e_table2->ramAccess (num_tables * 1);
+        else /* INO or O3 */
+            _e_table2->ramAccess (num_tables * num_lookup);
     }
 
     /*-- BTB LOOKUP --*/
@@ -798,7 +806,7 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             pred = false;
             pred_tgt = 0;
         }
-        _e_btb->camAccess (num_lookup);
+        _e_btb->camAccess (1); /* ASSUMING SEQUENTIAL BP->BTB ACCESS */
     }
 
     /*-- BP UPDATE --*/
@@ -810,6 +818,12 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
             if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
             g_var.g_wrong_path = true;
             s_bp_misspred_cnt++;
+            if (taken && tgt != pred_tgt) {
+                /* ALSO UPDATE BTB  ON TAKEN */
+                btb->update (pc, tgt);
+                _e_btb->camAccess (1);
+                s_btb_misspred_cnt++;
+            }
         } else if (taken && tgt != pred_tgt) {
             g_var.g_wrong_path = true;
             btb->update (pc, tgt);
@@ -821,11 +835,19 @@ ADDRINT PredictAndUpdate (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthr
 
         if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
             g_tournament_bp->update (pc, taken, bp_hist, false);
-            _e_table1->ramAccess (2*num_lookup);
+            int num_tables = 2;
+            if (g_var.g_core_type == BASICBLOCK)
+                _e_table1->ramAccess (num_tables * 1);
+            else /* INO or O3 */
+                _e_table1->ramAccess (num_tables * num_lookup);
         } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
             g_2bcgskew_bp->update (pc, taken, bp_hist, false);
             g_2bcgskew_bp->histUpdate (pc, taken, bp_hist, false);
-            _e_table2->ramAccess (2*num_lookup);
+            int num_tables = 2;
+            if (g_var.g_core_type == BASICBLOCK)
+                _e_table2->ramAccess (num_tables * 1);
+            else /* INO or O3 */
+                _e_table2->ramAccess (num_tables * num_lookup);
         }
     } else {
 		if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
