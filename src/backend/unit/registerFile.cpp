@@ -48,6 +48,8 @@ void registerFile::updateReg (PR reg) {
 void registerFile::reserveReg (PR reg) {
 #ifdef ASSERTION
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+    if (!(_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == NO_VAL_REG)) 
+        cout << _RF[reg]->_reg_state;
     Assert (_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == NO_VAL_REG);
 #endif
     _RF[reg]->_reg_state = WAIT_ON_WRITE_REG;

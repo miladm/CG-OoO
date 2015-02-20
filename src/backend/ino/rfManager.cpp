@@ -85,7 +85,7 @@ bool rfManager::canReserveRF (dynInstruction* ins) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
             s_lrf_busy_cnt++;
-            return false; /* operand not available for write */
+            return false; /* OPERAND NOT AVAILABLE FOR WRITE */
         }
     }
     return true;
