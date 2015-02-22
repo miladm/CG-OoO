@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_size/10_ins'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_size/15_ins'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_port/8_port'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_cnt/16_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbROB_size/64_bb'
@@ -11,14 +11,16 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/rf_size/100_pr'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/fu_size/fu_2'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out1'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb3_4eu_share3'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb1'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/very_large_pys_reg'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/runahead_RAWsupport'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/glbToLoc_n_locGlb_reg_alloc'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_8'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/forwarding_test/fwd2_wide'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/252_pr/bb'
+
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'
 PARS_ROOT='/home/milad/esc_project/svn/PARS/src'

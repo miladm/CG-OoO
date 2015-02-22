@@ -605,7 +605,7 @@ VOID HandleSyscall (UINT32 uid, CONTEXT *c)
 
 VOID doBBcount (UINT32 ins_cnt)
 {
-    s_pin_ins_cnt += ins_cnt; /*total ins count: wrong and right path*/
+    s_pin_ins_cnt += (SCALAR)ins_cnt; /*total ins count: wrong and right path*/
     bool finished_last_simpoint = doCount (s_pin_ins_cnt, s_pin_trace_cnt, 
                                            s_pin_wp_cnt, s_pin_sig_cnt, 
                                            s_pin_flush_cnt, s_pin_sig_recover_cnt, 

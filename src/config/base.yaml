@@ -41,7 +41,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.669986e-1
+               e_wire: 6.346076e-2
                w_wire: 1
            g_share:
                globalPredictorSize: 8192
@@ -50,7 +50,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.669986e-1
+               e_wire: 6.346076e-2
                w_wire: 1
            tournament:
                localPredictorSize: 2048
@@ -65,7 +65,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.669986e-1
+               e_wire: 6.346076e-2
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
@@ -80,14 +80,14 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
-               e_wire: 2.669986e-1
+               e_wire: 6.346076e-2
                w_wire: 1
 
        rf:
            simple:
                rf_size: 90
                rf_lo: 120
-               rf_hi: 209
+               rf_hi: 109
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: SIMPLE_RF
@@ -109,7 +109,7 @@ cpu:
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
-               segmnt_cnt: 18 # Specify the number of GRF segments (1 is a unified GRF)
+               segmnt_cnt: 1 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 90
                a_lo: 120
                a_hi: 209
@@ -124,7 +124,7 @@ cpu:
                name: GRF
                cout: 1
                e_cam: 0
-               e_ram: 0.5246242813
+               e_ram: 8.3939885
                e_wire: 1.135708e-1
                w_wire: 64
            rf:
@@ -143,7 +143,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 9.037722
-               e_wire: 2.259340e-1
+               e_wire: 0
                w_wire: 64
            arst:
                e_cam: 0
@@ -262,9 +262,9 @@ cpu:
                 type: FIFO
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 18
+                count: 16
                 runahead_issue_en: 1
-                runahead_issue_cnt: 4
+                runahead_issue_cnt: 2
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
@@ -331,8 +331,8 @@ cpu:
 
        eu:
            alu:
-               count: 4
-               count_per_blk: 4
+               count: 32
+               count_per_blk: 2
                latency: 1
                e_eu: 1.040
            fpu:

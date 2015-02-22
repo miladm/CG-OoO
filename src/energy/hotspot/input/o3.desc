@@ -25,11 +25,13 @@ EU6    0.023e-6    1 3 1
 EU7    0.023e-6    1 3 1
 EU8    0.023e-6    1 3 1
 ROB    0.007682e-6 1 3 1
+#L3     105.5622e-6 1 3 1
 
 
 # Connectivity information
 # Line format <unit1-name>\t<unit2-name>\t<wire_density>
 
+#L2  L3      64
 ITLB L1I    64      # assuming fetch-width = 1 (multiply by the fetch width)
 BP  BTB     64
 BTB ITLB    64
@@ -45,14 +47,14 @@ RS  EU5     7
 RS  EU6     7
 RS  EU7     7
 RS  EU8     7
-EU1 RF      192     # two read and oen write operand per EU execution
-EU2 RF      192
-EU3 RF      192
-EU4 RF      192
-EU5 RF      192
-EU6 RF      192
-EU7 RF      192
-EU8 RF      192
+EU1 RF      64     # oen write/read operand per EU execution
+EU2 RF      64
+EU3 RF      64
+EU4 RF      64
+EU5 RF      64
+EU6 RF      64
+EU7 RF      64
+EU8 RF      64
 EU1 ROB     64      # check the address of the designated entry to update ins state
 EU2 ROB     64
 EU3 ROB     64
@@ -72,5 +74,6 @@ LSQ EU8     64
 LSQ ROB     64      # check the address of the designated entry to update ins state
 LSQ RF      64      # one write operand per LOAD oepration
 LSQ RS      7       # wakeup RS with the LOAD instruction write operand designator
-LSQ L1D     64      # assuming one write or read operation - each LOAD and STORE must increment this
-L1D DTLB    64      # every LOAD / STORE to the cache will automatically compute this too
+LSQ DTLB    64      # assuming one write or read operation - each LOAD and STORE must increment this
+DTLB L1D    64      # every LOAD / STORE to the cache will automatically compute this too
+L1D  L2     64      # every LOAD / STORE to the cache will automatically compute this too
