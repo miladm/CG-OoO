@@ -1,0 +1,268 @@
+# comment lines begin with a '#' 
+# comments and empty lines are ignored
+
+# Area and aspect ratios of blocks
+# Line Format: <unit-name>\t<area-in-m2>\t<min-aspect-ratio>\t<max-aspect-ratio>\t<rotable>
+
+# DESCRIPTION:
+# 2EU / BLK
+# 16 BLK
+# 256 PR
+
+L1I    0.824705e-6  1 3 1
+ITLB   0.039649e-6  1 5 1
+BP     0.024285e-6  1 5 1
+BTB    0.824705e-6  1 5 1
+GRF    12.192154e-6 1 1 1
+WIN1   0.000774e-6  1 3 1
+WIN2   0.000774e-6  1 3 1
+WIN3   0.000774e-6  1 3 1
+WIN4   0.000774e-6  1 3 1
+WIN5   0.000774e-6  1 3 1
+WIN6   0.000774e-6  1 3 1
+WIN7   0.000774e-6  1 3 1
+WIN8   0.000774e-6  1 3 1
+WIN9   0.000774e-6  1 3 1
+WIN10  0.000774e-6  1 3 1
+WIN11  0.000774e-6  1 3 1
+WIN12  0.000774e-6  1 3 1
+WIN13  0.000774e-6  1 3 1
+WIN14  0.000774e-6  1 3 1
+WIN15  0.000774e-6  1 3 1
+WIN16  0.000774e-6  1 3 1
+LSQ    0.055478e-6  1 3 1
+DTLB   0.039649e-6  1 5 1
+L1D    0.824705e-6  1 3 1
+L2     6.597640e-6  1 3 1
+RR     0.063e-6     1 3 1
+EU1    0.023e-6     1 3 1
+EU2    0.023e-6     1 3 1
+EU3    0.023e-6     1 3 1
+EU4    0.023e-6     1 3 1
+EU5    0.023e-6     1 3 1
+EU6    0.023e-6     1 3 1
+EU7    0.023e-6     1 3 1
+EU8    0.023e-6     1 3 1
+EU9    0.023e-6     1 3 1
+EU10   0.023e-6     1 3 1
+EU11   0.023e-6     1 3 1
+EU12   0.023e-6     1 3 1
+EU13   0.023e-6     1 3 1
+EU14   0.023e-6     1 3 1
+EU15   0.023e-6     1 3 1
+EU16   0.023e-6     1 3 1
+EU17   0.023e-6     1 3 1
+EU18   0.023e-6     1 3 1
+EU19   0.023e-6     1 3 1
+EU20   0.023e-6     1 3 1
+EU21   0.023e-6     1 3 1
+EU22   0.023e-6     1 3 1
+EU23   0.023e-6     1 3 1
+EU24   0.023e-6     1 3 1
+EU25   0.023e-6     1 3 1
+EU26   0.023e-6     1 3 1
+EU27   0.023e-6     1 3 1
+EU28   0.023e-6     1 3 1
+EU29   0.023e-6     1 3 1
+EU30   0.023e-6     1 3 1
+EU31   0.023e-6     1 3 1
+EU32   0.023e-6     1 3 1
+LRF1   0.1314e-6    1 1 1
+LRF2   0.1314e-6    1 1 1
+LRF3   0.1314e-6    1 1 1
+LRF4   0.1314e-6    1 1 1
+LRF5   0.1314e-6    1 1 1
+LRF6   0.1314e-6    1 1 1
+LRF7   0.1314e-6    1 1 1
+LRF8   0.1314e-6    1 1 1
+LRF9   0.1314e-6    1 1 1
+LRF10  0.1314e-6    1 1 1
+LRF11  0.1314e-6    1 1 1
+LRF12  0.1314e-6    1 1 1
+LRF13  0.1314e-6    1 1 1
+LRF14  0.1314e-6    1 1 1
+LRF15  0.1314e-6    1 1 1
+LRF16  0.1314e-6    1 1 1
+ROB    0.000519e-6  1 3 1
+
+
+# Connectivity information
+# Line format <unit1-name>\t<unit2-name>\t<wire_density>
+
+#NOTE: LRF, ALU, and WIN are all distributed and GRF is centralized
+
+#L1D L2      1
+#L1I L2      1
+#L1I ITLB    1
+BP  BTB      1
+#BTB ITLB    1
+#BTB L1I     1
+
+EU1  GRF     1
+EU2  GRF     1
+EU3  GRF     1
+EU4  GRF     1
+EU5  GRF     1
+EU6  GRF     1
+EU7  GRF     1
+EU8  GRF     1
+EU9  GRF     1
+EU10 GRF     1
+EU11 GRF     1
+EU12 GRF     1
+EU13 GRF     1
+EU14 GRF     1
+EU15 GRF     1
+EU16 GRF     1
+EU17 GRF     1
+EU18 GRF     1
+EU19 GRF     1
+EU20 GRF     1
+EU21 GRF     1
+EU22 GRF     1
+EU23 GRF     1
+EU24 GRF     1
+EU25 GRF     1
+EU26 GRF     1
+EU27 GRF     1
+EU28 GRF     1
+EU29 GRF     1
+EU30 GRF     1
+EU31 GRF     1
+EU32 GRF     1
+
+EU1  WIN1    1
+EU2  WIN2    1
+EU3  WIN3    1
+EU4  WIN4    1
+EU5  WIN5    1
+EU6  WIN6    1
+EU7  WIN7    1
+EU8  WIN8    1
+EU9  WIN9    1
+EU10 WIN10   1
+EU11 WIN11   1
+EU12 WIN12   1
+EU13 WIN13   1
+EU14 WIN14   1
+EU15 WIN15   1
+EU16 WIN16   1
+EU17 WIN1    1
+EU18 WIN2    1
+EU19 WIN3    1
+EU20 WIN4    1
+EU21 WIN5    1
+EU22 WIN6    1
+EU23 WIN7    1
+EU24 WIN8    1
+EU25 WIN9    1
+EU26 WIN10   1
+EU27 WIN11   1
+EU28 WIN12   1
+EU29 WIN13   1
+EU30 WIN14   1
+EU31 WIN15   1
+EU32 WIN16   1
+
+EU1  LRF1    1
+EU2  LRF2    1
+EU3  LRF3    1
+EU4  LRF4    1
+EU5  LRF5    1
+EU6  LRF6    1
+EU7  LRF7    1
+EU8  LRF8    1
+EU9  LRF9    1
+EU10 LRF10   1
+EU11 LRF11   1
+EU12 LRF12   1
+EU13 LRF13   1
+EU14 LRF14   1
+EU15 LRF15   1
+EU16 LRF16   1
+EU17 LRF1    1
+EU18 LRF2    1
+EU19 LRF3    1
+EU20 LRF4    1
+EU21 LRF5    1
+EU22 LRF6    1
+EU23 LRF7    1
+EU24 LRF8    1
+EU25 LRF9    1
+EU26 LRF10   1
+EU27 LRF11   1
+EU28 LRF12   1
+EU29 LRF13   1
+EU30 LRF14   1
+EU31 LRF15   1
+EU32 LRF16   1
+
+EU1  ROB     1
+EU2  ROB     1
+EU3  ROB     1
+EU4  ROB     1
+EU5  ROB     1
+EU6  ROB     1
+EU7  ROB     1
+EU8  ROB     1
+EU9  ROB     1
+EU10 ROB     1
+EU11 ROB     1
+EU12 ROB     1
+EU13 ROB     1
+EU14 ROB     1
+EU15 ROB     1
+EU16 ROB     1
+EU17 ROB     1
+EU18 ROB     1
+EU19 ROB     1
+EU20 ROB     1
+EU21 ROB     1
+EU22 ROB     1
+EU23 ROB     1
+EU24 ROB     1
+EU25 ROB     1
+EU26 ROB     1
+EU27 ROB     1
+EU28 ROB     1
+EU29 ROB     1
+EU30 ROB     1
+EU31 ROB     1
+EU32 ROB     1
+
+LSQ EU1      1
+LSQ EU2      1
+LSQ EU3      1
+LSQ EU4      1
+LSQ EU5      1
+LSQ EU6      1
+LSQ EU7      1
+LSQ EU8      1
+LSQ EU9      1
+LSQ EU10     1
+LSQ EU11     1
+LSQ EU12     1
+LSQ EU13     1
+LSQ EU14     1
+LSQ EU15     1
+LSQ EU16     1
+LSQ EU17     1
+LSQ EU18     1
+LSQ EU19     1
+LSQ EU20     1
+LSQ EU21     1
+LSQ EU22     1
+LSQ EU23     1
+LSQ EU24     1
+LSQ EU25     1
+LSQ EU26     1
+LSQ EU27     1
+LSQ EU28     1
+LSQ EU29     1
+LSQ EU30     1
+LSQ EU31     1
+LSQ EU32     1
+
+#LSQ L1D     1
+#LSQ DTLB    1
+LSQ ROB     1
