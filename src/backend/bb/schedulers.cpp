@@ -96,7 +96,6 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         /*-- CHECKS --*/
         LENGTH ready_bbWin_indx;
         if (!hasReadyInsInBBWins (ready_bbWin_indx)) break;
-        if (_scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->getBuffState () == FULL_BUFF) break;
         LENGTH ready_ins_indx = _busy_bbWin[ready_bbWin_indx]->getIssueIndx ();
         bbInstruction* ins = _busy_bbWin[ready_bbWin_indx]->_win.getNth_unsafe (ready_ins_indx); //TODO fix this with hasReadInsInBBWin
         if (!_RF_MGR->hasFreeWire (READ, ins)) {break;}
@@ -162,6 +161,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
 //        if (bbWin->_win.getTableState () == EMPTY_BUFF) { manageBusyBBWin (bbWin); continue; }
         if (!bbWin->_win.hasFreeWire (READ)) {continue;}
         if ((bbWin->getNumIssued () + bbWin->getIssueIndx ()) >= _runahead_issue_cnt) {continue;}
+        if (_scheduler_to_execution_port->Nth(getIssuePortIndx(bbWin_id))->getBuffState () == FULL_BUFF) { continue; }
         for (int i = bbWin->getIssueIndx (); i < _runahead_issue_cnt; i++) {
             if (i >= bbWin->_win.getTableSize ()) break;
             bbInstruction* ins = bbWin->_win.getNth_unsafe (i);
