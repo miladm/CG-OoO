@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_size/15_ins'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_size/15_ins'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_port/8_port'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_cnt/16_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbROB_size/64_bb'
@@ -20,6 +20,7 @@ OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_size/15
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/252_pr/bb'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_8/bb'
 
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'

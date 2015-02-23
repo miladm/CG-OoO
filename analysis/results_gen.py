@@ -62,8 +62,59 @@ def print_results_table (result_out_dir, results_table, mode):
 # INITIALIZE THE MAP BETWEEN ENERGY AND PERFORMANCE PARAMTERS
 def init_params (result_map):
   # FOR ENERGY MEASUREMENT
-  result_map['TOTAL'] = 0.0
+  result_map['Energy'] = 0.0
   result_map['EU.e_eu'] = 0.0
+  result_map['stBuff.e_ram'] = 0.0
+  result_map['iWindow.e_ram'] = 0.0
+  result_map['iWindow.rd_wire.e_wire'] = 0.0
+  result_map['iWindow.wr_wire.e_wire'] = 0.0
+  result_map['iROB.e_ram'] = 0.0
+  result_map['iROB.rd_wire.e_wire'] = 0.0
+  result_map['iROB.wr_wire.e_wire'] = 0.0
+  result_map['rfManager.e_ram'] = 0.0
+  result_map['registerFile.rd_wire.e_wire'] = 0.0
+  result_map['registerFile.wr_wire.e_wire'] = 0.0
+  result_map['BTB.e_cam'] = 0.0
+  result_map['2bc_gskew.e_ram'] = 0.0
+  result_map['registerRename.wr_wire.e_wire'] = 0.0
+  result_map['registerRename.rd_wire.e_wire'] = 0.0
+  result_map['rfManager.rf.e_ram'] = 0.0
+  result_map['rfManager.rat.e_ram'] = 0.0
+  result_map['rfManager.apr.e_ram'] = 0.0
+  result_map['rfManager.arst.e_ram'] = 0.0
+  result_map['SQ.wr_wire.e_wire'] = 0.0
+  result_map['SQ.rd_wire.e_wire'] = 0.0
+  result_map['SQ.e_cam'] = 0.0
+  result_map['SQ.e_ram'] = 0.0
+  result_map['LQ.wr_wire.e_wire'] = 0.0
+  result_map['LQ.rd_wire.e_wire'] = 0.0
+  result_map['LQ.e_cam'] = 0.0
+  result_map['LQ.e_ram'] = 0.0
+  result_map['dtlb.e_cam'] = 0.0
+  result_map['iROB.wr_wire.e_wire'] = 0.0
+  result_map['iROB.rd_wire.e_wire'] = 0.0
+  result_map['iROB.e_ram'] = 0.0
+  result_map['ResStn_0.wr_wire.e_wire'] = 0.0
+  result_map['ResStn_0.rd_wire.e_wire'] = 0.0
+  result_map['ResStn_0.e_cam'] = 0.0
+  result_map['ResStn_0.e_cam2'] = 0.0
+  result_map['ResStn_0.e_ram'] = 0.0
+  result_map['GlobalRegisterRename.wr_wire.e_wire'] = 0.0
+  result_map['GlobalRegisterRename.rd_wire.e_wire'] = 0.0
+  result_map['grfManager.grf.e_ram'] = 0.0
+  result_map['grfManager.grat.e_ram'] = 0.0
+  result_map['grfManager.gapr.e_ram'] = 0.0
+  result_map['grfManager.garst.e_ram'] = 0.0
+  result_map['bbROB.wr_wire.e_wire'] = 0.0
+  result_map['bbROB.rd_wire.e_wire'] = 0.0
+  result_map['bbROB.e_ram'] = 0.0
+  result_map['bbWindow.wr_wire.e_wire'] = 0.0
+  result_map['bbWindow.rd_wire.e_wire'] = 0.0
+  result_map['bbWindow.e_cam'] = 0.0
+  result_map['bbWindow.e_ram'] = 0.0
+  result_map['lrfManager.e_ram'] = 0.0
+  result_map['LocalRegisterFile.wr_wire.e_wire'] = 0.0
+  result_map['LocalRegisterFile.rd_wire.e_wire'] = 0.0
 
   # FOR PERFORMANCE MEASUREMENT
   result_map['commit.ipc'] = 0.0
@@ -100,8 +151,19 @@ def parseSimpointFiles (in_paths, results_table, result_map):
       tokens = line.strip ().split ()
       if len (tokens) > 2:
         result_param = tokens[1]
-        result_param = result_param[:-1]
-        result_value = tokens[2]
+        result_value = 0
+        if result_param.startswith ( 'bbWindow' ): # SOME POST-PROCESSING
+          result_param = 'bbWindow' + result_param[11:]
+        elif result_param.startswith ( 'lrfManager' ): # SOME POST-PROCESSING
+          result_param = 'lrfManager' + result_param[13:]
+          print result_param
+        if result_param[-1] != ':':
+          result_param = tokens[2]
+          result_param = result_param[:-1]
+          result_value = tokens[3]
+        else:
+          result_param = result_param[:-1]
+          result_value = tokens[2]
         update_result_map (result_param, result_value, result_map)
         results_verif.ins_cnt_verif (result_param, result_value, in_path)
 
