@@ -22,8 +22,8 @@ rm log.out
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrd_test/252_pr/bb
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrd_test/252_pr/o3_ino
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/bb
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/o3_ino
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/bb
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/o3_ino
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/o3_ino
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/o3_ino
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/bb
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/o3_ino
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/o3_ino

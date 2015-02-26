@@ -9,6 +9,8 @@
 #include "rfManager.h"
 #include "memManager.h"
 
+#define MAX_INS_SEQ_LEN 200
+
 class o3_scheduler : protected stage {
 	public:
 		o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port, 
@@ -49,6 +51,7 @@ class o3_scheduler : protected stage {
         ScalarStat& s_mem_fwd_cnt;
         ScalarStat& s_alu_fwd_cnt;
         ScalarStat& s_rf_struct_hazrd_cnt;
+        ScalarHistStat& s_ins_cluster_hist;
 };
 
 #endif

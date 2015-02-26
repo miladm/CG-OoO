@@ -46,7 +46,7 @@ inline BOOL simpointMode (UINT32 bb_ins_cnt)
 			if (g_var.g_insCountRightPath >= next_simp) { /* ENTER SIMPOINT */
 	            g_msg.simEvent ("\nIN SIMPOINT #%d: %lu\n", ++simp_count, g_var.g_insCountRightPath);
 				g_var.g_inSimpoint = true;
-				g_var.g_enable_wp = true;
+				if (g_cfg->isWrongPath ()) g_var.g_enable_wp = true;
 				g_var.g_simpInsCnt = 0;
                 simp_ins_cnt_with_wp = 0;
 				PIN_RemoveInstrumentation ();
@@ -107,7 +107,7 @@ inline BOOL simpleMode (UINT32 bb_ins_cnt)
                 if (g_var.g_insCountRightPath >= (FAST_FWD_WINDOW_SIZE - 2 * MILLION)) { /* WARMUP SIM */
                     g_msg.simEvent ("\nSIM WARMUP\n");
                     warmUpEn = true;
-                    g_var.g_enable_wp = true;
+				    if (g_cfg->isWrongPath ()) g_var.g_enable_wp = true;
                     g_var.g_simpInsCnt = 0;
                     sim_ins_cnt_with_wp = 0;
                     PIN_RemoveInstrumentation ();
@@ -118,7 +118,7 @@ inline BOOL simpleMode (UINT32 bb_ins_cnt)
                 if (g_var.g_insCountRightPath >= FAST_FWD_WINDOW_SIZE) { /* ENTER SIM */
                     g_msg.simEvent ("\nIN SIM WINDOW\n");
                     g_var.g_inSimpoint = true;
-                    g_var.g_enable_wp = true;
+				    if (g_cfg->isWrongPath ()) g_var.g_enable_wp = true;
                     g_var.g_simpInsCnt = 0;
                     sim_ins_cnt_with_wp = 0;
                     PIN_RemoveInstrumentation ();

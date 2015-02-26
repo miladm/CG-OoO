@@ -17,7 +17,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
 	: stage (scheduler_width, stage_name, clk),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
-      s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO))
+      s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),
+      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, stage_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -61,6 +62,8 @@ void o3_scheduler::doSCHEDULER () {
 
 PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
+    LENGTH sequence_length = 0;
+    INS_ID prev_ins_sn = 0;
 
     updateResStns ();
 
@@ -91,6 +94,16 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             s_ipc++;
             s_ins_cnt++;
             pipe_stall = PIPE_BUSY;
+            if (prev_ins_sn == 0) {
+                sequence_length++;
+            } else if (prev_ins_sn + 1 == ins->getInsID ()) {
+                sequence_length++;
+            } else {
+                Assert (sequence_length < MAX_INS_SEQ_LEN);
+                s_ins_cluster_hist[sequence_length]++;
+                sequence_length = 1;
+            }
+            prev_ins_sn = ins->getInsID ();
         }
     }
 
