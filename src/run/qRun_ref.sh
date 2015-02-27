@@ -4,7 +4,7 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_port/8_port'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_cnt/16_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbROB_size/64_bb'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem/o3_ino_w1'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem/o3_ino_w1'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem_br/o3_ino'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/superblock'
@@ -21,7 +21,7 @@ OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem/o
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/252_pr/bb'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4/o3_ino'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_1/o3_ino'
 
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'

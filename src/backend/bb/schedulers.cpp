@@ -171,14 +171,14 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
                 s_no_ld_bypass++;
                 if (runaheadPermit (ins)) {
                     bbWin->issueIndxInc ();
-                    bbWin->recordStallRdReg (ins);
+                    bbWin->recordStallRdWrReg (ins);
                 }
                 else break;
-            } else if (!isReady (ins) || !_RF_MGR->canReserveRF (ins) || bbWin->conflictStallRdReg (ins)) {
+            } else if (!isReady (ins) || !_RF_MGR->canReserveRF (ins) || bbWin->conflictStallRdWrReg (ins)) {
                 if (ins->getInsType () == MEM && ins->getMemType () == STORE) bbWin->setStoreBypassed ();
                 if (runaheadPermit (ins)) {
                     bbWin->issueIndxInc ();
-                    bbWin->recordStallRdReg (ins);
+                    bbWin->recordStallRdWrReg (ins);
                 }
                 else break;
             } else {

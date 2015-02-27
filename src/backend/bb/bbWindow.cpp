@@ -9,7 +9,9 @@ bbWindow::bbWindow (string bbWin_id, sysClock* clk)
       _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id), //TODO configure and more real numbers
       _id (atoi (bbWin_id.c_str ())),
       s_stall_war_hazard_cnt (g_stats.newScalarStat ("bbWindow_" + bbWin_id, "stall_war_hazard_cnt", "Number of times instruction is not issued due to WAR hazard in LRF", 0, PRINT_ZERO)),
-      s_stall_war_hazard_rat (g_stats.newRatioStat (clk->getStatObj (), "bbWindow_" + bbWin_id, "stall_war_hazard_rat", "Ratio of instruction is not issued due to WAR hazard in LRF / cycle", 0, PRINT_ZERO))
+      s_stall_war_hazard_rat (g_stats.newRatioStat (clk->getStatObj (), "bbWindow_" + bbWin_id, "stall_war_hazard_rat", "Ratio of instruction is not issued due to WAR hazard in LRF / cycle", 0, PRINT_ZERO)),
+      s_stall_raw_hazard_cnt (g_stats.newScalarStat ("bbWindow_" + bbWin_id, "stall_raw_hazard_cnt", "Number of times instruction is not issued due to RAW hazard in LRF", 0, PRINT_ZERO)),
+      s_stall_raw_hazard_rat (g_stats.newRatioStat (clk->getStatObj (), "bbWindow_" + bbWin_id, "stall_raw_hazard_rat", "Ratio of instruction is not issued due to RAW hazard in LRF / cycle", 0, PRINT_ZERO))
 { 
     int temp;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["rd_wire_cnt"] >> _rd_wire_cnt;
@@ -107,22 +109,39 @@ void bbWindow::resetBypassState () {
  * KEEP TRACK OF LOCAL READ REGISTERS OF STALLING OPERATIONS EVERY CYCLE TO
  * AVOID WAR HAZARDS
  --*/
-void bbWindow::recordStallRdReg (bbInstruction* ins) {
+void bbWindow::recordStallRdWrReg (bbInstruction* ins) {
     List<AR>* rd_regs = ins->getLARrdList ();
     for (int i = 0; i < ins->getNumRdLAR (); i++) { 
         AR loc_reg = rd_regs->Nth (i);
         _stallRdRegSet.insert (loc_reg);
     }
+
+    List<AR>* wr_regs = ins->getLARwrList ();
+    for (int i = 0; i < ins->getNumWrLAR (); i++) { 
+        AR loc_reg = wr_regs->Nth (i);
+        _stallWrRegSet.insert (loc_reg);
+    }
 }
 
-bool bbWindow::conflictStallRdReg (bbInstruction* ins) {
+bool bbWindow::conflictStallRdWrReg (bbInstruction* ins) {
     resetStallState ();
+    /* WAR CONFLICT */
     List<AR>* wr_regs = ins->getLARwrList ();
     for (int i = 0; i < ins->getNumWrLAR (); i++) { 
         AR loc_reg = wr_regs->Nth (i);
         if (_stallRdRegSet.find (loc_reg) != _stallRdRegSet.end ()) {
             s_stall_war_hazard_cnt++;
             s_stall_war_hazard_rat++;
+            return true;
+        }
+    }
+    /* RAW CONFLICT */
+    List<AR>* rd_regs = ins->getLARrdList ();
+    for (int i = 0; i < ins->getNumRdLAR (); i++) { 
+        AR loc_reg = rd_regs->Nth (i);
+        if (_stallWrRegSet.find (loc_reg) != _stallWrRegSet.end ()) {
+            s_stall_raw_hazard_cnt++;
+            s_stall_raw_hazard_rat++;
             return true;
         }
     }
@@ -133,6 +152,7 @@ void bbWindow::resetStallState () {
     CYCLE now = _clk->now ();
     if (_stall_cycle < now) {
         _stallRdRegSet.clear ();
+        _stallWrRegSet.clear ();
         _stall_cycle = now;
     }
 }

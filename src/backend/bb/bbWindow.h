@@ -29,8 +29,8 @@ class bbWindow : public unit {
         bool isStoreBypassed ();
         void resetBypassState ();
 
-        void recordStallRdReg (bbInstruction*);
-        bool conflictStallRdReg (bbInstruction*);
+        void recordStallRdWrReg (bbInstruction*);
+        bool conflictStallRdWrReg (bbInstruction*);
         void resetStallState ();
 
     public:
@@ -51,10 +51,13 @@ class bbWindow : public unit {
 
         CYCLE _stall_cycle;
         set<PR> _stallRdRegSet;
+        set<PR> _stallWrRegSet;
 
         /* STAT */
         ScalarStat& s_stall_war_hazard_cnt;
         RatioStat& s_stall_war_hazard_rat;
+        ScalarStat& s_stall_raw_hazard_cnt;
+        RatioStat& s_stall_raw_hazard_rat;
 };
 
 #endif
