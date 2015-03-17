@@ -25,13 +25,6 @@ void SimpleCacheController::AccessAction::execute() {
              */
             a = new HitAction(ctrl, e, line);
 
-            /**
-             * register this hit
-             */
-            ctrl->hits.value++;
-            if(e->type != REQUEST_UPDATE)
-                ctrl->demand_hits.value++;
-
         } else {
             /**
              * register a miss action which handles the miss
@@ -109,6 +102,21 @@ static void init_line_state(CacheLine *line, QueueEntry *e) {
 
 void SimpleCacheController::HitAction::execute() {
     update_line_state(line, e);
+
+    /**
+     * register this hit
+     */
+    ctrl->hits.value++;
+    if(e->type != REQUEST_UPDATE)
+        ctrl->demand_hits.value++;
+
+    /**
+     * access energy accounting
+     */
+    if(e->type == REQUEST_READ)
+        ctrl->count_read_energy();
+    else
+        ctrl->count_write_energy();
 
     /**
      * reply back to this request
@@ -213,6 +221,11 @@ void SimpleCacheController::InsertAction::execute() {
          */
         ctrl->inserts.value++;
 
+        /**
+         * insertion energy accounting
+         */
+        ctrl->count_write_energy();
+
     } else {
 
         Action *retry = new InsertAction(ctrl, e);
@@ -229,4 +242,9 @@ void SimpleCacheController::EvictAction::execute() {
     ctrl->schedule(send, 0);
 
     ctrl->writebacks.value++;
+
+    /**
+     * have to read before doing writeback
+     */
+    ctrl->count_read_energy();
 }

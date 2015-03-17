@@ -19,7 +19,7 @@ controllers:
         assoc: 8
         linesize: 64
         latency: 3
-        energy: 0.096767
+        e_ram: 0.096767
       lower: l2_0
       interconn: interconn_0
 
@@ -30,7 +30,7 @@ controllers:
         assoc: 8
         linesize: 64
         latency: 3
-        energy: 0.096767
+        e_ram: 0.096767
       lower: l2_0
       interconn: interconn_0
 
@@ -41,7 +41,7 @@ controllers:
         assoc: 16
         linesize: 64
         latency: 11
-        energy: 0.321491
+        e_ram: 0.321491
       lower: l3_0
       interconn: interconn_0
 
@@ -52,7 +52,7 @@ controllers:
         assoc: 16
         linesize: 64
         latency: 19
-        energy: 1.054820
+        e_ram: 1.054820
       lower: dram_0
       interconn: interconn_0
 
