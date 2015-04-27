@@ -18,6 +18,7 @@ class stage_energy : public energy
 
         PJ _ff_energy_per_access; 
         SCALAR _ff_stage_cnt; /* EACH STAGE CAN CONSIST OF MUTIPLE PIPELIE STAGES */
+        SCALAR _ff_stage_width;
 };
 
 #endif

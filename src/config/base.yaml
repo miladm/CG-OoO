@@ -41,6 +41,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_leak: 7.356e-3
                e_wire: 2.669986e-1
                w_wire: 1
            g_share:
@@ -50,6 +51,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_leak: 7.356e-3
                e_wire: 2.669986e-1
                w_wire: 1
            tournament:
@@ -65,6 +67,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_leak: 7.356e-3
                e_wire: 2.669986e-1
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
@@ -80,6 +83,7 @@ cpu:
                instShiftAmt: 0
                e_cam: 0
                e_ram: 0.33415725
+               e_leak: 7.356e-3
                e_wire: 2.669986e-1
                w_wire: 1
 
@@ -94,6 +98,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 7.785043
+               e_leak: 4.939e-3
                e_wire: 1.045157e-1
                w_wire: 64
            lrf:
@@ -106,6 +111,7 @@ cpu:
                cout: 16 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
                e_ram: 0.619338
+               e_leak: 1.098e-3
                e_wire: 5.064818e-2
                w_wire: 64
            grf:
@@ -125,6 +131,7 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 0.5246242813
+               e_leak: 1.476e-2
                e_wire: 1.135708e-1
                w_wire: 64
            rf:
@@ -143,26 +150,33 @@ cpu:
                cout: 1
                e_cam: 0
                e_ram: 9.037722
+               e_leak: 1.476e-2
                e_wire: 2.259340e-1
                w_wire: 64
            arst:
                e_cam: 0
-               e_ram: 0.504776
+               e_ram: 0
+               e_leak: 0
            apr:
                e_cam: 0
                e_ram: 0.677302
+               e_leak: 1.098e-3
            rat:
                e_cam: 0
                e_ram: 1.170876
+               e_leak: 5.703e-4
            garst:
                e_cam: 0
-               e_ram: 0.602778
+               e_ram: 0
+               e_leak: 0
            gapr:
                e_cam: 0
                e_ram: 0.402384
+               e_leak: 1.098e-3
            grat:
                e_cam: 0
                e_ram: 1.069866
+               e_leak: 5.703e-4
  
        space:
             global_arch:
@@ -189,6 +203,7 @@ cpu:
                 wr_wire_cnt: 2000
                 e_cam: 0
                 e_ram: 0
+                e_leak: 0
                 e_wire: 0
                 w_wire: 0
                 name: bbQUE
@@ -200,6 +215,7 @@ cpu:
                 wr_wire_cnt: 100
                 e_cam: 0
                 e_ram: 0.112165
+                e_leak: 4.718e-5
                 e_wire: 1.820614e-2
                 w_wire: 64
                 name: bbROB
@@ -211,6 +227,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
+                e_leak: 4.718e-5
                 e_wire: 0
                 w_wire: 64
                 name: ROB
@@ -222,6 +239,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.608496
+                e_leak: 1.764e-3
                 e_wire: 1.811005e-2
                 w_wire: 64
                 name: ROB
@@ -233,6 +251,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 2.204357
                 e_ram: 1.236428
+                e_leak: 1.0861E-2
                 e_wire: 2.127423e-2
                 w_wire: 64
                 name: LQ
@@ -244,6 +263,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 1.315326
                 e_ram: 1.620642
+                e_leak: 7.786E-3
                 e_wire: 2.127423e-2
                 w_wire: 64
                 name: SQ
@@ -256,6 +276,7 @@ cpu:
                 e_cam: 4.08806
                 e_cam2: 1.184757
                 e_ram: 2.638897
+                e_leak: 6.606E-1    # combination of RAM/CAM tables
                 e_wire: 5.579845e-2
                 w_wire: 64
                 name: resStn
@@ -269,6 +290,7 @@ cpu:
                 wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.439745
+                e_leak: 6.983e-4
                 e_wire: 4.176818e-2
                 w_wire: 64
                 name: bbWindow_ #TODO get rid of _
@@ -280,6 +302,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 2.535452
+                e_leak: 4.392e-3
                 e_wire: 2.660543e-2
                 w_wire: 64
                 name: iWindow
@@ -291,6 +314,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0        #TODO develop this
                 e_ram: 0        #TODO develop this
+                e_leak: 0       #TODO
                 e_wire: 0       # for now
                 w_wire: 64
                 name: MSHR
@@ -302,6 +326,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0.763521
                 e_ram: 1.160567
+                e_leak: 0       #TODO
                 e_wire: 0       # for now
                 w_wire: 64
                 name: st_buff
@@ -313,6 +338,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 0.633863
+                e_leak: 0       #TODO
                 e_wire: 0       # for now
                 w_wire: 64
                 name: RAS
@@ -324,6 +350,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 1.238
                 e_ram: 0
+                e_leak: 0 #TODO
                 e_wire: 0   # TODO already counted in BP?
                 w_wire: 64
                 name: BTB
@@ -335,21 +362,25 @@ cpu:
                count_per_blk: 1
                latency: 1
                e_eu: 1.040
+               e_leak: 0 #TODO
            fpu:
                count: 0
                count_per_blk: 0
                latency: 5
                e_eu: 8.800
+               e_leak: 0 #TODO
            memu:
                count: 0
                count_per_blk: 0
                latency: 1
                e_eu: 1.040
+               e_leak: 0 #TODO
            bru:
                count: 0
                count_per_blk: 0
                latency: 4
                e_eu: 1.040
+               e_leak: 0 #TODO
 
        pipe:
            bp:
@@ -357,36 +388,43 @@ cpu:
                latency: 1
                name: branchPred
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            fetch:
                width: 4 #TODO Gets doubled in code - fix it
                latency: 3
                name: fetch
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            decode:
                width: 4 #TODO Gets doubled in code - fix it
                latency: 4
                name: decode
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            schedule:
                width: 4
                latency: 2
                name: schedule
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            execution:
                width: 4
                latency: 1 #TODO what does it mean for FPU?
                name: execution
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            memory:
                width: 1
                latency: 1
                name: memory
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
            commit:
                width: 4
                latency: 1
                name: commit
                e_ff: 5.864e-1
+               e_leak: 5.864e-2
        
        port:
            fetch_to_decode:

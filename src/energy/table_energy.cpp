@@ -28,6 +28,9 @@ table_energy::table_energy (string class_name, const YAML::Node& root)
         } else if (key.compare ("e_ram") == 0) {
             root["e_ram"] >> _ram_energy_per_access;
             e_ram.setEnergyPerAccess (_ram_energy_per_access);
+        } else if (key.compare ("e_leak") == 0) {
+            root["e_leak"] >> _leakage_energy_per_access;
+            e_leak.setEnergyPerAccess (_leakage_energy_per_access);
         }
     }
 }

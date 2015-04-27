@@ -12,6 +12,7 @@ wire_energy::wire_energy (string class_name, const YAML::Node& root)
     root["w_wire"] >> _num_wires;
     PJ energy_per_access = _num_wires * _wire_energy_per_access;
     e_wire.setEnergyPerAccess (energy_per_access);
+    e_leak.setEnergyPerAccess (_leakage_energy_per_access); /* MUST PASS ZERO */
 }
 
 wire_energy::~wire_energy () {}

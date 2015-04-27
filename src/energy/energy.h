@@ -14,6 +14,8 @@ class energy
  		~energy ();
     protected:
         LeakageEnergyStat& e_leak;
+
+        PJ _leakage_energy_per_access;
 };
 
 #endif

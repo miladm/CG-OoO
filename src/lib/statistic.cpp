@@ -362,7 +362,7 @@ LeakageEnergyStat::LeakageEnergyStat (string class_name, string param_name, stri
 {}
 
 void LeakageEnergyStat::print (ofstream* _out_file, map<string, stat*> &statMap) {
-    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+    if (!(_print_if_zero == NO_PRINT_ZERO)) {
         cout << "* " << _name << ": " << getEnergyValue (statMap) << "\t\t\t # " << _description << endl;
         if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << getEnergyValue (statMap) << "\t\t\t # " << _description << endl;
     }
