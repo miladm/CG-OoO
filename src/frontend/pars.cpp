@@ -290,9 +290,6 @@ VOID pin__parseConfig (string bench_path, string config_path, string out_dir) {
 VOID pin__init (string bench_path, string config_path, string out_dir) {
 	pin__parseConfig (bench_path, config_path, out_dir);
 
-    /* TODO - TEMPERARY LOCATIONS */
-    _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
-    _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
     _e_btb = new table_energy("BTB", g_cfg->_root["cpu"]["backend"]["table"]["BTB"]);
 
 	g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
@@ -306,9 +303,11 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
 	PIN_SemaphoreClear (&semaphore1);
     btb = new BTB (4096, 16, 2);
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
         g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
         int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+        _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
         g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, width);
     } else {
         Assert (0 && "Invalid BP type chosen");
