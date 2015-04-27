@@ -146,6 +146,7 @@ $(OBJDIR)energy/energy$(OBJ_SUFFIX) \
 $(OBJDIR)energy/table_energy$(OBJ_SUFFIX) \
 $(OBJDIR)energy/wire_energy$(OBJ_SUFFIX) \
 $(OBJDIR)energy/eu_energy$(OBJ_SUFFIX) \
+$(OBJDIR)energy/stage_energy$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bp/tournament$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bp/hybrid_skew$(OBJ_SUFFIX) \
 $(OBJDIR)backend/bp/btb$(OBJ_SUFFIX) \

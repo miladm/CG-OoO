@@ -6,16 +6,16 @@
 
 L1I    0.824705e-6 1 3 1
 ITLB   0.039649e-6 1 3 1
-BP     0.024285e-6  1 5 1
-BTB    0.824705e-6  1 5 1
+BP     0.024285e-6  1 3 1
+BTB    0.824705e-6  1 3 1
 RF     1.52607e-6 1 1 1
 RS     0.269615e-6  1 3 1
-LSQ    0.024626e-6  1 3 1
+LSQ    0.055478e-6  1 3 1
 DTLB   0.039649e-6 1 3 1
 L1D    0.824705e-6 1 3 1
 L2     6.597640e-6 1 3 1
-L3     105.562243e-6 1 3 1
-RR     0.346041e-6   1 3 1
+# L3     105.562243e-6 1 3 1
+RR     0.063e-6     1 3 1
 EU1    0.023e-6    1 3 1
 EU2    0.023e-6    1 3 1
 EU3    0.023e-6    1 3 1
@@ -31,14 +31,17 @@ ROB    0.007682e-6 1 3 1
 # Connectivity information
 # Line format <unit1-name>\t<unit2-name>\t<wire_density>
 
-#L2  L3      64
-ITLB L1I    64      # assuming fetch-width = 1 (multiply by the fetch width)
-BP  BTB     64
-BTB ITLB    64
-BP  ITLB    64
+L1D L2       64
+L1I L2       64
+L1I ITLB     64
+L1D DTLB     64
+BP  BTB      64
+BP  ITLB     64
+BTB ITLB     64
 L1I RR      7       # for ONE instruction sending ONE AR operand desginator to the RR
 RR  RS      7       # for one wire read - multiply for more read/write registers
-RR  ROB     7       # for one wire read - multiply for more read/write registers
+RR  ROB     16       # for one wire read - multiply for more read/write registers
+RR  LSQ     8
 RS  EU1     7       # wakeup RS with the LOAD instruction write operand designator
 RS  EU2     7
 RS  EU3     7

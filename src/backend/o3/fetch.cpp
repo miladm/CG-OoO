@@ -13,7 +13,8 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-	: stage(fetch_width, stage_name, clk)
+    : stage(fetch_width, stage_name, clk),
+	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["fetch"])
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
@@ -59,10 +60,12 @@ PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
 
         /*-- FETCH INS --*/
         dynInstruction* ins = g_var.popCodeCache();
+        _e_stage.ffAccess ();
         ins->setPipeStage(FETCH);
         g_var.remFromCodeCache ();
         _iQUE->pushBack (ins);
 		_fetch_to_decode_port->pushBack(ins);
+        _e_stage.ffAccess ();
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Fetch ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
@@ -92,6 +95,7 @@ void o3_fetch::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN();
     _fetch_to_decode_port->flushPort (squashSeqNum);
     _fetch_to_bp_port->flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void o3_fetch::regStat () {

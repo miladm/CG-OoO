@@ -18,7 +18,8 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),
-      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, stage_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO))
+      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, stage_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO)),
+	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"])
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -28,6 +29,9 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
     _num_res_stns = 1;
     _LSQ_MGR = LSQ_MGR;
     _RF_MGR = RF_MGR;
+
+    _prev_ins_sn = 0;
+    _sequence_length = 0;
 
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
@@ -62,8 +66,6 @@ void o3_scheduler::doSCHEDULER () {
 
 PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-    LENGTH sequence_length = 0;
-    INS_ID prev_ins_sn = 0;
 
     updateResStns ();
 
@@ -94,16 +96,21 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             s_ipc++;
             s_ins_cnt++;
             pipe_stall = PIPE_BUSY;
-            if (prev_ins_sn == 0) {
-                sequence_length++;
-            } else if (prev_ins_sn + 1 == ins->getInsID ()) {
-                sequence_length++;
-            } else {
-                Assert (sequence_length < MAX_INS_SEQ_LEN);
-                s_ins_cluster_hist[sequence_length]++;
-                sequence_length = 1;
-            }
-            prev_ins_sn = ins->getInsID ();
+//            if (_prev_ins_sn == 0) {
+//                _sequence_length++;
+//            } else if (_prev_ins_sn + 1 == ins->getInsID ()) {
+//                _sequence_length++;
+//            } else {
+//                if (_sequence_length >= MAX_INS_SEQ_LEN) {
+//                    s_ins_cluster_hist[MAX_INS_SEQ_LEN - 1]++; /* A HACK */
+//                } else {
+//                    s_ins_cluster_hist[_sequence_length]++;
+//                }
+//                _sequence_length = 1;
+//            }
+            INS_ID sn_diff = abs ((long long int)(ins->getInsID () - _prev_ins_sn));
+            s_ins_cluster_hist[sn_diff]++;
+            _prev_ins_sn = ins->getInsID ();
         }
     }
 
@@ -159,11 +166,13 @@ void o3_scheduler::updateResStns () {
             /*-- WRITE INTO RES STN --*/
             dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", _clk->now ());
             ins = _decode_to_scheduler_port->popFront ();
+            _e_stage.ffAccess ();
             _RF_MGR->renameRegs (ins);
             ins->setPipeStage (DISPATCH);
             if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
             _ResStns.Nth(j)->pushBack (ins);
             _iROB->pushBack (ins);
+            _e_stage.ffAccess ();
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
             /*-- UPDATE WIRES --*/
@@ -299,6 +308,7 @@ void o3_scheduler::squash () {
             }
         }
     }
+    _e_stage.ffAccess (_stage_width);
 }
 
 void o3_scheduler::regStat () {

@@ -5,23 +5,23 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbWin_cnt/16_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/bbROB_size/64_bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem/o3_ino_w1'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem_br/o3_ino'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/perfect_mem_br/width_1/o3_ino'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/superblock'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/wide_frontend'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/rf_size/100_pr'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/fu_size/fu_2'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/out1'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb1'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/backend_cfg/bb3_4eu_share8'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/very_large_pys_reg'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/runahead_RAWsupport'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/multi_pass_issue/runahead_RAW_WARsupport'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/glbToLoc_n_locGlb_reg_alloc'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/wrong_path/delay_8'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/forwarding_test/fwd2_wide'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
-#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/252_pr/bb'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_1/o3_ino'
+#OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/198_pr/bb'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_8/o3_ino'
 
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'
@@ -41,7 +41,7 @@ mkdir $QSUB_OUT_PATH
 #cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
- ADDING README FILE
+# ADDING README FILE
 ###########################################
  NOW=$(date +"%Y_%m_%d")
  if [ -f $FILE ];

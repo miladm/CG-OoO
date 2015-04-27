@@ -9,7 +9,7 @@
 #include "rfManager.h"
 #include "memManager.h"
 
-#define MAX_INS_SEQ_LEN 200
+#define MAX_INS_SEQ_LEN 1000
 
 class o3_scheduler : protected stage {
 	public:
@@ -47,11 +47,17 @@ class o3_scheduler : protected stage {
         List<CAMtable<dynInstruction*>* > _ResStns;
         WIDTH _num_res_stns;
 
+        INS_ID _prev_ins_sn;
+        LENGTH _sequence_length;
+
         /*-- STAT --*/
         ScalarStat& s_mem_fwd_cnt;
         ScalarStat& s_alu_fwd_cnt;
         ScalarStat& s_rf_struct_hazrd_cnt;
         ScalarHistStat& s_ins_cluster_hist;
+
+        /* ENERGY */
+        stage_energy _e_stage;
 };
 
 #endif

@@ -19,7 +19,8 @@ o3_commit::o3_commit (port<dynInstruction*>& commit_to_bp_port,
       s_squash_mem_cnt (g_stats.newScalarStat ( _stage_name, "squash_mem_cnt", "Number of squashed memory instructions", 0, PRINT_ZERO)),
       s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of wrong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
       s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_name, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),
-      s_mem_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_MEM_TYPE, stage_name, "mem_type_cnt", "Committed memory instruction type distribution", 0, PRINT_ZERO))
+      s_mem_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_MEM_TYPE, stage_name, "mem_type_cnt", "Committed memory instruction type distribution", 0, PRINT_ZERO)),
+	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["commit"])
 {
 	_commit_to_bp_port  = &commit_to_bp_port;
 	_commit_to_scheduler_port = &commit_to_scheduler_port;
@@ -88,6 +89,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
                        "Commit ins", ins->getInsID (), _clk->now ());
             delIns (ins);
         }
+        _e_stage.ffAccess (); /* READ PREV STAGE(S) */
 
         /*-- UPDATE WIRES --*/
         _iROB->updateWireState (READ);
@@ -110,6 +112,7 @@ void o3_commit::squash () {
     else if (squash_type == MEM_MISPRED) memMispredSquash ();
     else Assert (true == false && "Invalid squash type.");
     g_var.resetSquashType ();
+    _e_stage.ffAccess (_stage_width);
 }
 
 void o3_commit::bpMispredSquash () {

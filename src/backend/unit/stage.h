@@ -15,6 +15,7 @@
 #include "../../global/g_variable.h"
 #include "../../global/g_objs.h"
 #include "../../lib/debug.h"
+#include "../../energy/stage_energy.h"
 #include <yaml/yaml.h>
 #include "sysClock.h"
 #include "port.h"

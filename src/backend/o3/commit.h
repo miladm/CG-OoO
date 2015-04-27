@@ -51,6 +51,9 @@ class o3_commit : protected stage {
         ScalarStat& s_wp_ins_cnt;
         ScalarHistStat& s_ins_type_hist;
         ScalarHistStat& s_mem_type_hist;
+
+        /* ENERGY */
+        stage_energy _e_stage;
 };
 
 #endif

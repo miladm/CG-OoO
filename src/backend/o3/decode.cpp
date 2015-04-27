@@ -9,7 +9,8 @@ o3_decode::o3_decode (port<dynInstruction*>& fetch_to_decode_port,
 	    		WIDTH decode_width,
                 sysClock* clk,
 	    		string stage_name) 
-	: stage (decode_width, stage_name, clk)
+	: stage (decode_width, stage_name, clk),
+	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["decode"])
 	  
 {
     _fetch_to_decode_port = &fetch_to_decode_port;

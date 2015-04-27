@@ -22,6 +22,9 @@ class o3_branchPred : protected stage {
 	private:
 		port<dynInstruction*>* _fetch_to_bp_port;
 		port<dynInstruction*>* _bp_to_fetch_port;
+
+        /* ENERGY */
+        stage_energy _e_stage;
 };
 
 #endif

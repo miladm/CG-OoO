@@ -8,9 +8,9 @@
 #./run/qRun_ref.sh 13.0.0.2 $@
 #./run/qRun_ref.sh 13.0.0.0 $@
 #./run/qRun_ref.sh 1.0.0.0 $@ 
-#./run/qRun_ref.sh 2.0.0.2 $@ 
-#./run/qRun_ref.sh 2.0.0.0 $@ 
-./run/qRun_ref.sh 1.1.0.0 $@ 
+./run/qRun_ref.sh 2.0.0.2 $@ 
+./run/qRun_ref.sh 2.0.0.0 $@ 
+#./run/qRun_ref.sh 1.1.0.0 $@ 
 ./run/qRun_ref.sh 2.1.0.2 $@ 
 ./run/qRun_ref.sh 2.1.0.0 $@ 
 

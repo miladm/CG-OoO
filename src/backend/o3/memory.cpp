@@ -13,7 +13,8 @@ o3_memory::o3_memory (port<dynInstruction*>& execution_to_memory_port,
                       sysClock* clk,
 	    	          string stage_name) 
 	: stage (memory_width, stage_name, clk),
-      _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR")
+      _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR"),
+	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"])
 {
     _execution_to_memory_port = &execution_to_memory_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
@@ -66,6 +67,8 @@ void o3_memory::completeIns () {
         /*-- UPDATE WIRES --*/
         _LSQ_MGR->updateWireState (LD_QU, READ);
         _RF_MGR->updateWireState (WRITE, finished_ld_ins->getNumWrPR ());
+
+        _e_stage.ffAccess ();
     }
 }
 
@@ -88,6 +91,7 @@ PIPE_ACTIVITY o3_memory::memoryImpl () {
         _mshr.updateWireState (WRITE);
 
         /*-- STAT --*/
+        _e_stage.ffAccess ();
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
@@ -133,6 +137,7 @@ void o3_memory::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _LSQ_MGR->squash (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void o3_memory::regStat () {

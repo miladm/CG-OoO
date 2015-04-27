@@ -48,6 +48,9 @@ class o3_execution : protected stage {
         RatioHistStat& s_pipe_state_hist_rat;
         ScalarStat& s_br_mispred_cnt;
         ScalarStat& s_mem_mispred_cnt;
+
+        /* ENERGY */
+        stage_energy _e_stage;
 };
 
 #endif

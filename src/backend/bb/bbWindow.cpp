@@ -25,6 +25,7 @@ bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     _issue_indx = 0;
     _stall_cycle = START_CYCLE;
     _stallRdRegSet.clear ();
+    _stallWrRegSet.clear ();
 }
 
 void bbWindow::regStat () { _win.regStat (); }
