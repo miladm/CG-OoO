@@ -12,6 +12,8 @@ class energy
  	public:
  		energy (string, const YAML::Node& root);
  		~energy ();
+    protected:
+        LeakageEnergyStat& e_leak;
 };
 
 #endif

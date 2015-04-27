@@ -63,30 +63,42 @@ void statistic::setupOutFile () {
 ScalarHistStat& statistic::newScalarHistStat (LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     ScalarHistStat* cnt = new ScalarHistStat (histogram_size, class_name, param_name, _description, init_val, print_if_zero);
     _ScalarHistStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 
 RatioHistStat& statistic::newRatioHistStat (ScalarStat* divisor, LENGTH histogram_size, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     RatioHistStat* cnt = new RatioHistStat (divisor, histogram_size, class_name, param_name, _description, init_val, print_if_zero);
     _RatioHistStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 
 ScalarStat& statistic::newScalarStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     ScalarStat* cnt = new ScalarStat (class_name, param_name, _description, init_val, print_if_zero);
     _ScalarStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 
 RatioStat& statistic::newRatioStat (ScalarStat* divisor, string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     RatioStat* cnt = new RatioStat (divisor, class_name, param_name, _description, init_val, print_if_zero);
     _RatioStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 
 EnergyStat& statistic::newEnergyStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
     EnergyStat* cnt = new EnergyStat (class_name, param_name, _description, init_val, print_if_zero);
     _EnergyStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+
+LeakageEnergyStat& statistic::newLeakageEnergyStat (string class_name, string param_name, string _description, SCALAR init_val, PRINT_ON_ZERO print_if_zero) {
+    LeakageEnergyStat* cnt = new LeakageEnergyStat (class_name, param_name, _description, init_val, print_if_zero);
+    _LeakageEnergyStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 
@@ -124,12 +136,21 @@ void statistic::dump () {
         _out_file << endl;
         cout << endl;
     }
+    PJ total_energy = 0;
     {
         list<EnergyStat*>::iterator it;
-        PJ total_energy = 0;
         for (it = _EnergyStats.begin (); it != _EnergyStats.end (); it++) {
             (*it)->print (&_out_file);
             total_energy += (*it)->getEnergyValue ();
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+    {
+        list<LeakageEnergyStat*>::iterator it;
+        for (it = _LeakageEnergyStats.begin (); it != _LeakageEnergyStats.end (); it++) {
+            (*it)->print (&_out_file, _statMap);
+            total_energy += (*it)->getEnergyValue (_statMap);
         }
 
         /*-- REPORT TOTAL ENERGY --*/
@@ -152,6 +173,11 @@ void statistic::dumpSummary () {
         cout << endl;
     }
 //    _enable_log_stat = true;
+}
+
+void statistic::updateStatMap (string class_name, string param_name, stat* statObj) {
+    string name = (class_name + ".") + param_name;
+    _statMap.insert (pair<string, stat*>(name, statObj));
 }
 
 /* **************************** *
@@ -321,13 +347,29 @@ void EnergyStat::setEnergyPerAccess (PJ energy_per_access) {
 
 void EnergyStat::print (ofstream* _out_file) {
     if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
-        cout << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
-        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << _ScalarStat * _energy_per_access << "\t\t\t # " << _description << endl;
+        cout << "* " << _name << ": " << getEnergyValue () << "\t\t\t # " << _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << getEnergyValue () << "\t\t\t # " << _description << endl;
     }
 }
 
 PJ EnergyStat::getEnergyValue () {
     return _ScalarStat * _energy_per_access;
+}
+
+
+LeakageEnergyStat::LeakageEnergyStat (string class_name, string param_name, string description, SCALAR init_val, PRINT_ON_ZERO print_if_zero)
+    : EnergyStat (class_name, param_name, description, init_val, print_if_zero)
+{}
+
+void LeakageEnergyStat::print (ofstream* _out_file, map<string, stat*> &statMap) {
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+        cout << "* " << _name << ": " << getEnergyValue (statMap) << "\t\t\t # " << _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << getEnergyValue (statMap) << "\t\t\t # " << _description << endl;
+    }
+}
+
+PJ LeakageEnergyStat::getEnergyValue (map<string, stat*> &statMap) {
+    return statMap["sysClock.clk_cycles"]->getValue () * _energy_per_access;
 }
 
 statistic g_stats;

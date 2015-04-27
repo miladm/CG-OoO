@@ -114,8 +114,16 @@ class EnergyStat : public ScalarStat {
         void print (ofstream*);
         PJ getEnergyValue ();
 
-    private:
+    protected:
         PJ _energy_per_access;
+};
+
+class LeakageEnergyStat : public EnergyStat {
+    public:
+        LeakageEnergyStat (string, string, string, SCALAR init_val = 0, PRINT_ON_ZERO print_if_zero = PRINT_ZERO);
+        ~LeakageEnergyStat () {}
+        void print (ofstream*, map<string, stat*>&);
+        PJ getEnergyValue (map<string, stat*>&);
 };
 
 /* **************************** *
@@ -132,6 +140,8 @@ class statistic {
         ScalarStat& newScalarStat (string, string, string, SCALAR, PRINT_ON_ZERO);
         RatioStat& newRatioStat (ScalarStat*, string, string, string, SCALAR, PRINT_ON_ZERO);
         EnergyStat& newEnergyStat (string, string, string, SCALAR, PRINT_ON_ZERO);
+        LeakageEnergyStat& newLeakageEnergyStat (string, string, string, SCALAR, PRINT_ON_ZERO);
+        void updateStatMap (string, string, stat*);
 
     private:
         void setupOutFile ();
@@ -142,7 +152,9 @@ class statistic {
         list<ScalarStat*> _ScalarStats;
         list<RatioStat*> _RatioStats;
         list<EnergyStat*> _EnergyStats;
+        list<LeakageEnergyStat*> _LeakageEnergyStats;
         ofstream _out_file;
+        map<string, stat*> _statMap;
 };
 
 extern statistic g_stats;
