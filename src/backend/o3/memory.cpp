@@ -12,9 +12,8 @@ o3_memory::o3_memory (port<dynInstruction*>& execution_to_memory_port,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (memory_width, stage_name, clk),
-      _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR"),
-	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"])
+	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"], clk),
+      _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR")
 {
     _execution_to_memory_port = &execution_to_memory_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;

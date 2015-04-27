@@ -11,7 +11,7 @@ execution::execution (port<dynInstruction*>& scheduler_to_execution_port,
 	    	          WIDTH execution_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (execution_width, stage_name, clk),
+	: stage (execution_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["execution"], clk),
       s_pipe_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
       s_eu_busy_state_hist (g_stats.newScalarHistStat ((LENGTH) execution_width, stage_name, "eu_busy_state_hist", "Number of cycles execution unit is busy", 0, PRINT_ZERO)),
       s_pipe_state_hist_rat (g_stats.newRatioHistStat (clk->getStatObj (), (LENGTH) NUM_PIPE_STATE, stage_name, "pipe_state_hist_rat", "Ratio of cycles in each squash stage / total cycles", 0, PRINT_ZERO)),
@@ -139,6 +139,8 @@ PIPE_ACTIVITY execution::executionImpl () {
 
         /* EXE INS */
         ins = _scheduler_to_execution_port->popFront ();
+        _e_stage.ffAccess (); //READ FROM PREV STAGE
+        _e_stage.ffAccess (); //WRITE TO NEXT STAGE
         EU->_eu_timer.setNewTime (_clk->now ());
         EU->setEUins (ins);
         EU->runEU ();
@@ -210,6 +212,7 @@ void execution::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _execution_to_scheduler_port->searchNflushPort (squashSeqNum);
     _execution_to_memory_port->flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void execution::regStat () {

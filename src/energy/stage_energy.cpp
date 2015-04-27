@@ -9,7 +9,6 @@ stage_energy::stage_energy (string class_name, const YAML::Node& root)
 	  e_ff (g_stats.newEnergyStat (class_name, "e_ff", "Stage Energy (pJ) consumped in " + class_name, 0, NO_PRINT_ZERO))
 {
     _ff_energy_per_access = 0;
-    _ff_stage_width = 1;
     _ff_stage_cnt = 1;
 
     YAML::Iterator it;

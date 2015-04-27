@@ -31,7 +31,7 @@ typedef enum {FRONT_END, BACK_END} SIM_MODE;
 
 class stage {
 	public:
-		stage(WIDTH, string, sysClock*);
+		stage(WIDTH, string, const YAML::Node& root, sysClock*);
 		~stage();
 
 	protected:
@@ -45,6 +45,9 @@ class stage {
         ScalarStat& s_squash_cycles;
         ScalarStat& s_squash_stall_cycles;
         RatioStat& s_ipc;
+
+        /* ENERGY */
+        stage_energy _e_stage;
 };
 
 #endif

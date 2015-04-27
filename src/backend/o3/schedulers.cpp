@@ -14,12 +14,11 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (scheduler_width, stage_name, clk),
+	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"], clk),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),
-      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, stage_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO)),
-	  _e_stage (stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"])
+      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, stage_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO))
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
@@ -84,6 +83,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             /*-- READ INS WIN --*/
             ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
             _scheduler_to_execution_port->pushBack (ins);
+            _e_stage.ffAccess ();
             ins->setPipeStage (ISSUE);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
             _ResStns.Nth(j)->camAccess (); //TODO: this is for the update (move to right place); - wakeup logic
@@ -172,7 +172,6 @@ void o3_scheduler::updateResStns () {
             if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
             _ResStns.Nth(j)->pushBack (ins);
             _iROB->pushBack (ins);
-            _e_stage.ffAccess ();
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
             /*-- UPDATE WIRES --*/

@@ -9,7 +9,7 @@ bb_decode::bb_decode (port<bbInstruction*>& fetch_to_decode_port,
 	    	          WIDTH decode_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (decode_width, stage_name, clk)
+	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["decode"], clk)
 {
     _fetch_to_decode_port     = &fetch_to_decode_port;
 	_decode_to_scheduler_port  = &decode_to_scheduler_port;
@@ -43,8 +43,10 @@ PIPE_ACTIVITY bb_decode::decodeImpl () {
 
         /*-- DECODE INS --*/
         bbInstruction* ins = _fetch_to_decode_port->popFront ();
+        _e_stage.ffAccess ();
         ins->setPipeStage (DECODE);
         _decode_to_scheduler_port->pushBack (ins);
+        _e_stage.ffAccess ();
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
 
         /*-- STAT --*/
@@ -62,6 +64,7 @@ void bb_decode::squash () {
 #endif
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _decode_to_scheduler_port->flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void bb_decode::regStat () {

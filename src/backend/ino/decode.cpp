@@ -9,7 +9,7 @@ decode::decode (port<dynInstruction*>& fetch_to_decode_port,
 	    		WIDTH decode_width,
                 sysClock* clk,
 	    		string stage_name) 
-	: stage (decode_width, stage_name, clk)
+	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["decode"], clk)
 {
     _fetch_to_decode_port = &fetch_to_decode_port;
 	_decode_to_schedule_port  = &decode_to_schedule_port;
@@ -43,8 +43,10 @@ PIPE_ACTIVITY decode::decodeImpl () {
 
         /* DECODE INS */
         dynInstruction* ins = _fetch_to_decode_port->popFront ();
+        _e_stage.ffAccess ();
         ins->setPipeStage (DECODE);
         _decode_to_schedule_port->pushBack (ins);
+        _e_stage.ffAccess ();
         dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Decode ins", ins->getInsID (), _clk->now ());
 
         /* STAT */
@@ -60,6 +62,7 @@ void decode::squash () {
     Assert (g_var.g_pipe_state == PIPE_FLUSH);
     INS_ID squashSeqNum = g_var.getSquashSN();
     _decode_to_schedule_port->flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void decode::regStat () {

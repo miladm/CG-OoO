@@ -9,10 +9,10 @@ scheduler::scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       port<dynInstruction*>& memory_to_scheduler_port, 
 			          port<dynInstruction*>& scheduler_to_execution_port, 
                       CAMtable<dynInstruction*>* iROB,
-	    	          WIDTH issue_width,
+	    	          WIDTH scheduler_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (issue_width, stage_name, clk),
+	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"], clk),
       //_iWindow (iWin_length, CAM_ARRAY, iWin_rd_port, iWin_wr_port, "iWindow") - TODO fix this
       _iWindow (clk, g_cfg->_root["cpu"]["backend"]["table"]["iWindow"], "iWindow"),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events"+stage_name, 0, PRINT_ZERO)),
@@ -65,6 +65,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         ins = _iWindow.popFront ();
         ins->setPipeStage (ISSUE);
         _scheduler_to_execution_port->pushBack (ins);
+        _e_stage.ffAccess ();
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */
@@ -106,6 +107,7 @@ void scheduler::updateInsWin () {
 
         /* WRITE INS WIN */
         dynInstruction* ins = _decode_to_scheduler_port->popFront ();
+        _e_stage.ffAccess ();
         ins->setPipeStage (DISPATCH);
         _iWindow.pushBack (ins);
         _iROB->pushBack (ins);
@@ -238,6 +240,7 @@ void scheduler::squash () {
             _iWindow.removeNth_unsafe (i);
         }
     }
+    _e_stage.ffAccess (_stage_width);
 }
 
 void scheduler::regStat () {

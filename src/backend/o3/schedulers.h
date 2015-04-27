@@ -55,9 +55,6 @@ class o3_scheduler : protected stage {
         ScalarStat& s_alu_fwd_cnt;
         ScalarStat& s_rf_struct_hazrd_cnt;
         ScalarHistStat& s_ins_cluster_hist;
-
-        /* ENERGY */
-        stage_energy _e_stage;
 };
 
 #endif

@@ -10,7 +10,7 @@ memory::memory (port<dynInstruction*>& execution_to_memory_port,
 	    	    WIDTH memory_width,
                 sysClock* clk,
 	    	    string stage_name) 
-	: stage (memory_width, stage_name, clk),
+	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"], clk),
       _mem_buff (20, 1, clk, "mem_buff"),
       _mshr (clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR"),
       _st_buff (clk, g_cfg->_root["cpu"]["backend"]["table"]["st_buff"], "stBuff"),
@@ -69,6 +69,8 @@ void memory::completeIns () {
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "Write Complete mem ins", mem_ins->getInsID (), _clk->now ());
     }
+
+    _e_stage.ffAccess ();
 }
 
 PIPE_ACTIVITY memory::memoryImpl () {
@@ -122,6 +124,7 @@ PIPE_ACTIVITY memory::memoryImpl () {
         _mshr.updateWireState (WRITE);
 
         /* STAT */
+        _e_stage.ffAccess ();
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
@@ -180,6 +183,7 @@ void memory::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _mem_buff.flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
     //_st_buff.flushTable ();
 }
 

@@ -25,9 +25,6 @@ class o3_decode : protected stage {
 	private:
 		port<dynInstruction*>* _fetch_to_decode_port;
 		port<dynInstruction*>* _decode_to_schedule_port;
-
-        /* ENERGY */
-        stage_energy _e_stage;
 };
 
 #endif

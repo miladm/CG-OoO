@@ -14,7 +14,7 @@ bb_memory::bb_memory (port<bbInstruction*>& execution_to_memory_port,
                       bb_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (memory_width, stage_name, clk),
+	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"], clk),
       _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR")
 {
     _execution_to_memory_port = &execution_to_memory_port;
@@ -73,6 +73,8 @@ void bb_memory::completeIns () {
         /*-- UPDATE WIRES --*/
         _LSQ_MGR->updateWireState (LD_QU, READ);
         _RF_MGR->updateWireState (WRITE, finished_ld_ins);
+
+        _e_stage.ffAccess ();
     }
 }
 
@@ -95,6 +97,7 @@ PIPE_ACTIVITY bb_memory::memoryImpl () {
         _mshr.updateWireState (WRITE);
 
         /*-- STAT --*/
+        _e_stage.ffAccess ();
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
@@ -142,6 +145,7 @@ void bb_memory::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _memory_to_scheduler_port->searchNflushPort (squashSeqNum);
     _LSQ_MGR->squash (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void bb_memory::regStat () {

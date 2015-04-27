@@ -15,7 +15,7 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
                       bb_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name)
-	: stage (commit_width, stage_name, clk),
+	: stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["commit"], clk),
       s_squash_ins_cnt (g_stats.newScalarStat (stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
       s_squash_br_cnt (g_stats.newScalarStat (stage_name, "squash_br_cnt", "Number of squashed branch instructions", 0, PRINT_ZERO)),
       s_squash_mem_cnt (g_stats.newScalarStat (stage_name, "squash_mem_cnt", "Number of squashed memory instructions", 0, PRINT_ZERO)),
@@ -111,6 +111,8 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
         s_bb_size_avg += bb->getBBorigSize ();
         commitBB (bb);
 
+        _e_stage.ffAccess (); /* READ PREV STAGE(S) */
+
         /*-- UPDATE WIRES --*/
         _bbROB->updateWireState (READ);
 
@@ -133,6 +135,7 @@ void bb_commit::squash () {
     else if (squash_type == MEM_MISPRED) memMispredSquash ();
     else {Assert (0 && "Invalid squash type.");}
     g_var.resetSquashType ();
+    _e_stage.ffAccess (_stage_width);
 }
 
 void bb_commit::bpMispredSquash () {

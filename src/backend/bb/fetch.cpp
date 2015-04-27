@@ -13,7 +13,7 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-	: stage (fetch_width, stage_name, clk),
+    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["fetch"], clk),
       s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of basicblocks in " + stage_name, 0, PRINT_ZERO)),
       s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "average basicblock size in " + stage_name, 0, PRINT_ZERO))
 {
@@ -66,7 +66,8 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
         if (_current_bb->getBBstate () == EMPTY_BUFF) {
 //            break; /* FOR NO BACK-TO-BACK BB FETCH IN 1 CYCLE */
-            if (!fetchBB (frontend_status)) break; /* COULD NOT FETCH A ANOTHER NEW BB */
+            if (!fetchBB (frontend_status)) break; /* COULD NOT FETCH ANOTHER NEW BB */
+            _e_stage.ffAccess (); /* FOR BB HEADER */
 #ifdef ASSERTION
             Assert (_current_bb != NULL);
 #endif
@@ -74,8 +75,10 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
 
         /*-- FETCH INS --*/
         bbInstruction* ins = _current_bb->popFront ();
+        _e_stage.ffAccess ();
         ins->setPipeStage (FETCH);
         _fetch_to_decode_port->pushBack (ins);
+        _e_stage.ffAccess ();
         updateBBfetchState ();
 
         dbg.print (DBG_FETCH, "%s: %s %llu %s %llu (cyc: %d)\n", _stage_name.c_str (), 
@@ -155,6 +158,7 @@ void bb_fetch::squash () {
     INS_ID squashSeqNum = g_var.getSquashSN ();
     _fetch_to_decode_port->flushPort (squashSeqNum);
     _fetch_to_bp_port->flushPort (squashSeqNum);
+    _e_stage.ffAccess (_stage_width);
 }
 
 void bb_fetch::squashCurrentBB () {

@@ -16,7 +16,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
-	: stage (scheduler_width, stage_name, clk),
+	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"], clk),
       s_mem_g_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_g_fwd_cnt", "Number of global memory forwarding events", 0, NO_PRINT_ZERO)),
       s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, NO_PRINT_ZERO)),
       s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, NO_PRINT_ZERO)),
@@ -106,6 +106,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         ins = _busy_bbWin[ready_bbWin_indx]->_win.pullNth (ready_ins_indx);
         _scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->pushBack (ins);
         ins->setPipeStage (ISSUE);
+        _e_stage.ffAccess ();
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
         //---------------------------------------
         //TODO put this code where it belongs 
@@ -253,6 +254,7 @@ void bb_scheduler::updatebbWindows () {
         _bbWin_on_fetch->_win.pushBack (ins);
         ins->setBBWinID (_bbWin_on_fetch->_id);
         ins = _decode_to_scheduler_port->popFront ();
+        _e_stage.ffAccess ();
         _RF_MGR->renameRegs (ins);
         ins->setPipeStage (DISPATCH);
         if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
@@ -520,6 +522,7 @@ void bb_scheduler::squash () {
             _busy_bbWin.erase (bbWinEntry++);
         } else { ++bbWinEntry; }
     }
+    _e_stage.ffAccess (_stage_width);
 }
 
 void bb_scheduler::flushBBWindow (bbWindow* bbWin) {
