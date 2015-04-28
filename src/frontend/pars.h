@@ -38,6 +38,7 @@
 #include "../lib/statistic.h"
 #include "../lib/benchAddrRangeParser.h"
 #include "../energy/table_energy.h"
+#include "../energy/wire_energy.h"
 //#include "../backend/bkEnd.h"
 //#include "../backend/basicblock.h"
 #include "../backend/ino/inoBkEnd.h"

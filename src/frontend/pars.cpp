@@ -56,7 +56,9 @@ benchAddrRangeParser* bench_addr_space;
 
 /* TODO - TEMPERARY LOCATIONS */
 table_energy* _e_table1;
+wire_energy* _e_wire1;
 table_energy* _e_table2;
+wire_energy* _e_wire2;
 table_energy* _e_btb;
 
 
@@ -304,10 +306,12 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
     btb = new BTB (4096, 16, 2);
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
+        _e_wire1 = new wire_energy("tournament.wire", g_cfg->_root["cpu"]["backend"]["bp"]["tournament"]);
         g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
         int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
         _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
+        _e_wire2 = new wire_energy("2bc_gskew.wire", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
         g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, width);
     } else {
         Assert (0 && "Invalid BP type chosen");
@@ -776,15 +780,25 @@ ADDRINT PredictAndUpdate (const ADDRINT __pc, const INT32 __taken,
     s_bpu_lookup_cnt += num_lookup;
     Assert (num_lookup > 0);
 
+    /*-- WIRE ACCESSES --*/
+    list<string> wires;
+    for (int i = 0; i < num_lookup; i++) {
+        if (g_var.g_core_type == IN_ORDER) wires.push_back ("e_w_bp2cache_ino");
+        else if (g_var.g_core_type == OUT_OF_ORDER) wires.push_back ("e_w_bp2cache_o3");
+        else if (g_var.g_core_type == BASICBLOCK) wires.push_back ("e_w_bp2cache_bb");
+    }
+
     /*-- BP LOOKUP --*/
     if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
         int num_tables = 3;
         pred = g_tournament_bp->lookup (pc, bp_hist);
         _e_table1->ramAccess (num_tables * num_lookup);
+        _e_wire1->wireAccess (wires);
     } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
         int num_tables = 4;
         pred = g_2bcgskew_bp->lookup (pc, bp_hist, (unsigned)0); //TODO the last element MUST NOT be 0
         _e_table2->ramAccess (num_tables * num_lookup);
+        _e_wire2->wireAccess (wires);
     } else {
         Assert (0 && "Unsupported BP model");
     }

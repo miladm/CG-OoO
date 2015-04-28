@@ -37,7 +37,7 @@ class registerFile : public unit {
         void resetRF ();
 
         /* WIRE CTRL */
-        void updateWireState (AXES_TYPE);
+        void updateWireState (AXES_TYPE, list<string> wire_name = list<string>(), bool update_wire = false);
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
 

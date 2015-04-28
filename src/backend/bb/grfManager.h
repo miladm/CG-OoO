@@ -24,7 +24,7 @@ class bb_grfManager : public unit {
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE, WIDTH, list<string> wire_name = list<string>(), bool update_wire = false);
     
         void getStat ();
 
@@ -38,6 +38,7 @@ class bb_grfManager : public unit {
         table_energy _e_rat;
         table_energy _e_apr; /* AVIALBLE PR LIST */
         table_energy _e_arst;
+        wire_energy _e_w_rr;
 
         /*-- STAT OBJS --*/
         ScalarStat& s_cant_rename_cnt;

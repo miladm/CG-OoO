@@ -108,18 +108,30 @@ COMPLETE_STATUS bb_execution::completeIns () {
                   !_RF_MGR->hasFreeWire (WRITE, ins)) continue;
             if (EU->getEUstate (_clk->now (), true) != COMPLETE_EU) continue;
 
+            /*-- WIRE ENERGY SUPPORT --*/
+            list<string> wires;
+            wires.push_back ("e_w_eu2brob"); 
+
             /*-- COMPLETE INS --*/
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
                 ins->setPipeStage (MEM_ACCESS);
+                list<string> ld_wires;
+                ld_wires.push_back ("e_w_eu2lsq_bb"); 
                 _LSQ_MGR->memAddrReady (ins);
+                _LSQ_MGR->updateWireState (LD_QU, WRITE, ld_wires, true);
                 dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                         _stage_name.c_str (), "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
                 ins->setPipeStage (COMPLETE);
                 ins->getBB()->incCompletedInsCntr ();
                 _LSQ_MGR->memAddrReady (ins);
+                list<string> st_wires;
+                st_wires.push_back ("e_w_lsq2brob"); 
+                st_wires.push_back ("e_w_eu2lsq_bb"); 
+                _LSQ_MGR->updateWireState (ST_QU, WRITE, st_wires, true);
                 _RF_MGR->completeRegs (ins); //TODO this sould not normally exist. problem with no support for u-ops (create support for both cases) - not counting its bbWindow energy
-                _RF_MGR->updateWireState (WRITE, ins);
+                _RF_MGR->updateWireState (WRITE, ins, true);
+                _bbROB->updateWireState (WRITE, wires, true);
                 pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
                 bool is_violation = p.first;
                 violating_ld_ins = p.second;
@@ -135,7 +147,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 ins->setPipeStage (COMPLETE);
                 ins->getBB()->incCompletedInsCntr ();
                 _RF_MGR->completeRegs (ins);
-                _RF_MGR->updateWireState (WRITE, ins);
+                _RF_MGR->updateWireState (WRITE, ins, true);
+                _bbROB->updateWireState (WRITE, wires, true);
                 _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
                 dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                         _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());

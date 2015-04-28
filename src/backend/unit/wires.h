@@ -13,7 +13,7 @@ class wires : public unit
  		wires (AXES_TYPE, sysClock*, const YAML::Node&, string wire_name = "wire");
  		~wires ();
         bool hasFreeWire ();
-        void updateWireState ();
+        void updateWireState (list<string> wire_name = list<string>(), bool update_wire = false);
         WIDTH getNumFreeWires ();
 
  	private: //variables

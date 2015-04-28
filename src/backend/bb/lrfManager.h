@@ -23,7 +23,7 @@ class bb_lrfManager : public unit {
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE, WIDTH, list<string> wire_name = list<string>(), bool update_wire = false);
 
         void getStat ();
 

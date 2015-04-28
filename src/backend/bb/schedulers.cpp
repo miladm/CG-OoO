@@ -117,7 +117,9 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         //---------------------------------------
 
         /*-- UPDATE RESOURCES --*/
-        _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ);
+        list<string> wires;
+        wires.push_back ("e_w_iq2eu");
+        _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ, wires, true);
         _RF_MGR->updateWireState (READ, ins);
         _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (); //assume this step is not free for now - TODO
 
@@ -238,7 +240,9 @@ void bb_scheduler::updatebbWindows () {
                 if (!_bbROB->hasFreeWire (WRITE)) break;
                 updateBBROB (ins->getBB ());
                 _bbWin_on_fetch = getAnAvailBBWin ();
-                _bbROB->updateWireState (WRITE);
+                list<string> wires;
+                wires.push_back ("e_w_rr2brob");
+                _bbROB->updateWireState (WRITE, wires, true);
             }
         }
 #ifdef ASSERTION
@@ -262,11 +266,16 @@ void bb_scheduler::updatebbWindows () {
                 "Write bbWin ins", ins->getInsID (), _clk->now ());
 
         /*-- UPDATE WIRES --*/
-        _bbWin_on_fetch->_win.updateWireState (WRITE);
-        if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-            _LSQ_MGR->updateWireState (LD_QU, WRITE);
-        } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-            _LSQ_MGR->updateWireState (ST_QU, WRITE);
+        {
+            list<string> wires;
+            wires.push_back ("e_w_rr2iq");
+            _bbWin_on_fetch->_win.updateWireState (WRITE, wires, true);
+            wires.push_back ("e_w_rr2lsq_bb");
+            if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
+                _LSQ_MGR->updateWireState (LD_QU, WRITE, wires, true);
+            } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
+                _LSQ_MGR->updateWireState (ST_QU, WRITE, wires, true);
+            }
         }
     }
 }

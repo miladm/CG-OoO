@@ -193,17 +193,17 @@ bool o3_registerRename::hasFreeWire (AXES_TYPE axes_type) {
         return _wr_port.hasFreeWire ();
 }
 
-void o3_registerRename::updateWireState (AXES_TYPE axes_type) {
+void o3_registerRename::updateWireState (AXES_TYPE axes_type, list<string> wire_name, bool update_wire) {
     CYCLE now = _clk->now ();
     if (_cycle < now) {
-        _wr_port.updateWireState ();
-        _rd_port.updateWireState ();
+        _wr_port.updateWireState (wire_name, axes_type == WRITE ? update_wire : false);
+        _rd_port.updateWireState (wire_name, axes_type == READ ? update_wire : false);
         _cycle = now;
     } else if (_cycle == now) {
         if (axes_type == READ)
-            _rd_port.updateWireState ();
+            _rd_port.updateWireState (wire_name, update_wire);
         else
-            _wr_port.updateWireState ();
+            _wr_port.updateWireState (wire_name, update_wire);
     }
 }
 

@@ -57,11 +57,7 @@ void wire_energy::getWires (const YAML::Node& root) {
         }
 
         /* O3 */
-        if (key.compare ("e_w_rs2lsq") == 0) {
-            string name = "e_w_rs2lsq";
-            root[name] >> energy_val;
-            addWireComponent (energy_val, num_wires, name);
-        } else if (key.compare ("e_w_cache2lsq_o3") == 0) {
+        if (key.compare ("e_w_cache2lsq_o3") == 0) {
             string name = "e_w_cache2lsq_o3";
             root[name] >> energy_val;
             addWireComponent (energy_val, num_wires, name);
@@ -108,11 +104,7 @@ void wire_energy::getWires (const YAML::Node& root) {
         }
 
         /* BB */
-        if (key.compare ("e_w_iq2lsq") == 0) {
-            string name = "e_w_iq2lsq";
-            root[name] >> energy_val;
-            addWireComponent (energy_val, num_wires, name);
-        } else if (key.compare ("e_w_cache2lsq_bb") == 0) {
+        if (key.compare ("e_w_cache2lsq_bb") == 0) {
             string name = "e_w_cache2lsq_bb";
             root[name] >> energy_val;
             addWireComponent (energy_val, num_wires, name);
@@ -182,7 +174,11 @@ wire_energy::~wire_energy () {
     }
 }
 
-void wire_energy::wireAccess (string wire_name) { 
-    if (_wires.find (wire_name) != _wires.end ()) 
-        (*_wires[wire_name])++;
+void wire_energy::wireAccess (list<string> w_names) { 
+    list<string>::iterator it;
+    for (it = w_names.begin (); it != w_names.end (); it++) {
+        string wire_name = *it;
+        if (_wires.find (wire_name) != _wires.end ()) 
+            (*_wires[wire_name])++;
+    }
 }

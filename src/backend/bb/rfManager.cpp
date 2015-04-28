@@ -160,13 +160,28 @@ bool bb_rfManager::hasFreeWire (AXES_TYPE axes_type, bbInstruction* ins) {
     return (grf_has_free_wire); /* PLEACE HOLDER */
 }
 
-void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins) {
+void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins, bool update_wire) {
+    list<string> local_wires, global_wires;
+    if (update_wire) {
+        if (axes_type == READ) {
+            for (int i = 0; i < ins->getNumRdLAR (); i++)
+                local_wires.push_back ("e_w_eu2lrf");
+            for (int i = 0; i < ins->getNumRdAR (); i++)
+                global_wires.push_back ("e_w_eu2grf");
+        } else if (axes_type == WRITE) {
+            for (int i = 0; i < ins->getNumWrLAR (); i++)
+                local_wires.push_back ("e_w_eu2lrf");
+            for (int i = 0; i < ins->getNumWrAR (); i++)
+                global_wires.push_back ("e_w_eu2grf");
+        }
+    }
+
     WIDTH num_g_reg = (axes_type == READ) ? ins->getNumRdPR () : ins->getNumWrPR ();
     WIDTH num_l_reg = (axes_type == READ) ? ins->getNumRdLAR () : ins->getNumWrLAR ();
     WIDTH bbWin_id = ins->getBBWinID ();
-    _GRF_MGR.updateWireState (axes_type, num_g_reg);
+    _GRF_MGR.updateWireState (axes_type, num_g_reg, global_wires, update_wire);
     if (g_cfg->getRegAllocMode () == LOCAL_GLOBAL)
-        _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg);
+        _LRF_MGRS[bbWin_id]->updateWireState (axes_type, num_l_reg, local_wires, update_wire);
 }
 
 void bb_rfManager::getStat () {

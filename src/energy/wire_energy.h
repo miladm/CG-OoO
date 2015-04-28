@@ -11,7 +11,7 @@ class wire_energy : public energy
  	public:
  		wire_energy (string, const YAML::Node& root);
  		~wire_energy ();
-        void wireAccess (string);
+        void wireAccess (list<string>);
 
     private:
         void getWires (const YAML::Node& root);

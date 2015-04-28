@@ -38,7 +38,7 @@ bool wires::hasFreeWire () {
     return false;
 }
 
-void wires::updateWireState () {
+void wires::updateWireState (list<string> wire_name, bool update_wire) {
     CYCLE now = _clk->now ();
     if (_cycle < now) {
         _num_free_wire = _wire_cnt - 1; /*-- 1 for having used the wire once already --*/
@@ -47,7 +47,8 @@ void wires::updateWireState () {
     } else if (_cycle == now) {
         _num_free_wire--;
     }
-    _e_wire.wireAccess ();
+    if (update_wire) 
+        _e_wire.wireAccess (wire_name);
 }
 
 WIDTH wires::getNumFreeWires () {

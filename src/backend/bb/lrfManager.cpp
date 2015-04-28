@@ -118,9 +118,9 @@ bool bb_lrfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
-void bb_lrfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+void bb_lrfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, list<string> wire_name, bool update_wire) {
     for (WIDTH i = 0; i < numRegWires; i++) {
-        _RF.updateWireState (axes_type);
+        _RF.updateWireState (axes_type, wire_name, update_wire);
     }
 }
 

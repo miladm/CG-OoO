@@ -71,7 +71,14 @@ void bb_memory::completeIns () {
                 _stage_name.c_str (), "Write Complete mem LD ins", finished_ld_ins->getInsID (), _clk->now ());
 
         /*-- UPDATE WIRES --*/
-        _LSQ_MGR->updateWireState (LD_QU, READ);
+        list<string> wires;
+        wires.push_back ("e_w_lsq2brob"); 
+        wires.push_back ("e_w_cache2lsq_bb"); 
+        for (int i = 0; i < finished_ld_ins->getNumWrLAR (); i++)
+            wires.push_back ("e_w_lsq2lrf");
+        for (int i = 0; i < finished_ld_ins->getNumWrAR (); i++)
+            wires.push_back ("e_w_lsq2grf");
+        _LSQ_MGR->updateWireState (LD_QU, READ, wires, true);
         _RF_MGR->updateWireState (WRITE, finished_ld_ins);
 
         _e_stage.ffAccess ();
@@ -121,7 +128,9 @@ void bb_memory::manageSTbuffer () {
         if (!_LSQ_MGR->issueToMem (ST_QU)) break;
 
         /*-- UPDATE WIRES --*/
-        _LSQ_MGR->updateWireState (ST_QU, READ);
+        list<string> wires;
+        wires.push_back ("e_w_cache2lsq_bb"); 
+        _LSQ_MGR->updateWireState (ST_QU, READ, wires, true);
     }
 
     for (WIDTH i = 0; i < _stage_width; i++) {

@@ -11,6 +11,7 @@ bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& ro
       _e_rat (rf_name + ".grat", root["grat"]),
       _e_apr (rf_name + ".gapr", root["gapr"]),
       _e_arst (rf_name + ".garst", root["garst"]),
+      _e_w_rr (rf_name + ".rr.wire", root["grat"]),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
@@ -111,6 +112,15 @@ void bb_grfManager::renameRegs (bbInstruction* ins) {
         _e_arst.ramAccess ();
         ins->setPR (new_pr, WRITE);
     }
+
+    /*-- WIRE ENERGY HANDLING --*/
+    list<string> wires;
+    WIDTH num_elements = 1; //opcode
+    num_elements += (ins->getNumRdAR () + ins->getNumRdLAR () + ins->getNumWrAR () + ins->getNumWrLAR ());
+    for (int i = 0; i < num_elements; i++) {
+        wires.push_back ("e_w_cache2rr");
+    }
+    _e_w_rr.wireAccess (wires);
 }
 
 /*-- PROCESS WRITE REGISTERS @COMPLETE --*/
@@ -163,9 +173,9 @@ bool bb_grfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
-void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, list<string> wire_name, bool update_wire) {
     for (WIDTH i = 0; i < numRegWires; i++) {
-        _GRF.updateWireState (axes_type);
+        _GRF.updateWireState (axes_type, wire_name, update_wire);
     }
 }
 

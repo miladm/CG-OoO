@@ -47,7 +47,7 @@ class table : public unit {
         void regStat ();
 
         /* WIRES CTRL */
-        void updateWireState (AXES_TYPE);
+        void updateWireState (AXES_TYPE, list<string> wire_name = list<string>(), bool update_wire = false);
         bool hasFreeWire (AXES_TYPE);
 
         /* ENERGY FUNCTIONS */

@@ -36,7 +36,7 @@ class bb_rfManager : public unit {
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, bbInstruction*);
-        void updateWireState (AXES_TYPE, bbInstruction*);
+        void updateWireState (AXES_TYPE, bbInstruction*, bool update_wire = false);
 
         void getStat ();
 

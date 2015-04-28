@@ -310,7 +310,6 @@ cpu:
                 e_cam2: 1.184757
                 e_ram: 2.638897
                 e_leak: 6.606E-1    # combination of RAM/CAM tables
-                e_w_rs2lsq: 9.58e-2
                 e_w_rs2eu: 6.99e-2
                 e_w_rr2rs: 1.27e-1
                 w_wire: 64
@@ -326,8 +325,7 @@ cpu:
                 e_cam: 0
                 e_ram: 0.439745
                 e_leak: 6.983e-4
-                e_w_iq2lsq: 1.79e-2
-                e_w_iq2eu: 2.00e-2
+                e_w_iq2eu: 5e-3
                 e_w_rr2iq: 7.37e-2
                 w_wire: 64
                 name: bbWindow_ #TODO get rid of _
