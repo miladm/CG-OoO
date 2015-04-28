@@ -42,7 +42,9 @@ cpu:
                e_cam: 0
                e_ram: 0.33415725
                e_leak: 7.356e-3
-               e_wire: 2.669986e-1
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
                w_wire: 1
            g_share:
                globalPredictorSize: 8192
@@ -52,7 +54,9 @@ cpu:
                e_cam: 0
                e_ram: 0.33415725
                e_leak: 7.356e-3
-               e_wire: 2.669986e-1
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
                w_wire: 1
            tournament:
                localPredictorSize: 2048
@@ -68,7 +72,9 @@ cpu:
                e_cam: 0
                e_ram: 0.33415725
                e_leak: 7.356e-3
-               e_wire: 2.669986e-1
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
                w_wire: 1
            bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
                localPredictorSize: 2048
@@ -84,7 +90,9 @@ cpu:
                e_cam: 0
                e_ram: 0.33415725
                e_leak: 7.356e-3
-               e_wire: 2.669986e-1
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
                w_wire: 1
 
        rf:
@@ -99,7 +107,8 @@ cpu:
                e_cam: 0
                e_ram: 7.785043
                e_leak: 4.939e-3
-               e_wire: 1.045157e-1
+               e_w_eu2simplerf: 1.22e-1
+               e_w_cache2rf: 2.38E-01
                w_wire: 64
            lrf:
                rf_size: 20
@@ -112,7 +121,7 @@ cpu:
                e_cam: 0
                e_ram: 0.619338
                e_leak: 1.098e-3
-               e_wire: 5.064818e-2
+               e_w_eu2lrf: 3.85e-2
                w_wire: 64
            grf:
                segmnt_cnt: 18 # Specify the number of GRF segments (1 is a unified GRF)
@@ -132,7 +141,7 @@ cpu:
                e_cam: 0
                e_ram: 0.5246242813
                e_leak: 1.476e-2
-               e_wire: 1.135708e-1
+               e_w_eu2grf: 8.90e-2
                w_wire: 64
            rf:
                a_size: 90
@@ -151,7 +160,7 @@ cpu:
                e_cam: 0
                e_ram: 9.037722
                e_leak: 1.476e-2
-               e_wire: 2.259340e-1
+               e_w_eu2rf: 1.02e-1
                w_wire: 64
            arst:
                e_cam: 0
@@ -165,6 +174,7 @@ cpu:
                e_cam: 0
                e_ram: 1.170876
                e_leak: 5.703e-4
+               e_w_cache2rr: 8.42e-2
            garst:
                e_cam: 0
                e_ram: 0
@@ -177,6 +187,7 @@ cpu:
                e_cam: 0
                e_ram: 1.069866
                e_leak: 5.703e-4
+               e_w_cache2rr: 2.43e-1
  
        space:
             global_arch:
@@ -216,7 +227,8 @@ cpu:
                 e_cam: 0
                 e_ram: 0.112165
                 e_leak: 4.718e-5
-                e_wire: 1.820614e-2
+                e_w_eu2brob: 1.18e-2
+                e_w_rr2brob: 5.58e-2
                 w_wire: 64
                 name: bbROB
                 type: RAM
@@ -240,7 +252,8 @@ cpu:
                 e_cam: 0
                 e_ram: 0.608496
                 e_leak: 1.764e-3
-                e_wire: 1.811005e-2
+                e_w_eu2rob: 2.02e-2
+                e_w_rr2rob: 6.05e-2
                 w_wire: 64
                 name: ROB
                 type: RAM
@@ -252,7 +265,17 @@ cpu:
                 e_cam: 2.204357
                 e_ram: 1.236428
                 e_leak: 1.0861E-2
-                e_wire: 2.127423e-2
+                e_w_rr2lsq_o3: 3.10e-2
+                e_w_rr2lsq_bb: 6.86e-2
+                e_w_lsq2rf: 9.68e-2
+                e_w_lsq2rob: 2.95e-2
+                e_w_lsq2lrf: 5.70e-2
+                e_w_lsq2grf: 6.88e-2
+                e_w_lsq2brob: 3.02e-2
+                e_w_eu2lsq_o3: 3.63e-2
+                e_w_eu2lsq_bb: 2.90e-2
+                e_w_cache2lsq_o3: 1.06e-1
+                e_w_cache2lsq_bb: 1.77e-1
                 w_wire: 64
                 name: LQ
                 type: CAM
@@ -264,7 +287,17 @@ cpu:
                 e_cam: 1.315326
                 e_ram: 1.620642
                 e_leak: 7.786E-3
-                e_wire: 2.127423e-2
+                e_w_rr2lsq_o3: 3.10e-2
+                e_w_rr2lsq_bb: 6.86e-2
+                e_w_lsq2rf: 9.68e-2
+                e_w_lsq2rob: 2.95e-2
+                e_w_lsq2lrf: 5.70e-2
+                e_w_lsq2grf: 6.88e-2
+                e_w_lsq2brob: 3.02e-2
+                e_w_eu2lsq_o3: 3.63e-2
+                e_w_eu2lsq_bb: 2.90e-2
+                e_w_cache2lsq_o3: 1.06e-1
+                e_w_cache2lsq_bb: 1.77e-1
                 w_wire: 64
                 name: SQ
                 type: CAM
@@ -277,7 +310,9 @@ cpu:
                 e_cam2: 1.184757
                 e_ram: 2.638897
                 e_leak: 6.606E-1    # combination of RAM/CAM tables
-                e_wire: 5.579845e-2
+                e_w_rs2lsq: 9.58e-2
+                e_w_rs2eu: 6.99e-2
+                e_w_rr2rs: 1.27e-1
                 w_wire: 64
                 name: resStn
                 type: FIFO
@@ -291,7 +326,9 @@ cpu:
                 e_cam: 0
                 e_ram: 0.439745
                 e_leak: 6.983e-4
-                e_wire: 4.176818e-2
+                e_w_iq2lsq: 1.79e-2
+                e_w_iq2eu: 2.00e-2
+                e_w_rr2iq: 7.37e-2
                 w_wire: 64
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
@@ -303,7 +340,8 @@ cpu:
                 e_cam: 0
                 e_ram: 2.535452
                 e_leak: 4.392e-3
-                e_wire: 2.660543e-2
+                e_w_cache2win: 1.11e-1
+                e_w_win2eu: 6.85e-2
                 w_wire: 64
                 name: iWindow
                 type: FIFO
