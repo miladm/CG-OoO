@@ -120,7 +120,7 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         list<string> wires;
         wires.push_back ("e_w_iq2eu");
         _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ, wires, true);
-        _RF_MGR->updateWireState (READ, ins);
+        _RF_MGR->updateWireState (READ, ins, true);
         _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (); //assume this step is not free for now - TODO
 
         /*-- STAT --*/

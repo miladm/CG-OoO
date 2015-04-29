@@ -92,7 +92,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             list<string> wires;
             wires.push_back ("e_w_rs2eu");
             _ResStns.Nth(j)->updateWireState (READ, wires, true);
-            _RF_MGR->updateWireState (READ, ins->getNumRdPR ());
+            _RF_MGR->updateWireState (READ, ins->getNumRdPR (), true);
 
             /*-- STAT --*/
             s_ipc++;
