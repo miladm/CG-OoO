@@ -19,7 +19,7 @@ void bbBkEnd_init () {
 
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
     const YAML::Node& bbWin = root["table"]["bbWindow"];
-    const YAML::Node& pipe = root["pipe"];
+    const YAML::Node& pipe = root["bb_pipe"];
     const YAML::Node& bpu = pipe["bp"];
     const YAML::Node& fch = pipe["fetch"];
     const YAML::Node& dcd = pipe["decode"];
@@ -43,7 +43,7 @@ void bbBkEnd_init () {
             fch_lat, 500, 
             1, 500, 
             bpu_lat, 500, 
-            dcd_lat - 1, 500, 
+            dcd_lat, 500, 
             sch_lat, eu_per_blk,
             1, 500, 
             exe_lat, 500, 

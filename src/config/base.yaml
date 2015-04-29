@@ -105,7 +105,7 @@ cpu:
                name: SIMPLE_RF
                cout: 1
                e_cam: 0
-               e_ram: 7.785043
+               e_ram: 7.405786
                e_leak: 4.939e-3
                e_w_eu2simplerf: 1.22e-1
                e_w_cache2rf: 2.38E-01
@@ -139,7 +139,7 @@ cpu:
                name: GRF
                cout: 1
                e_cam: 0
-               e_ram: 0.5246242813
+               e_ram: 7.11882
                e_leak: 1.476e-2
                e_w_eu2grf: 8.90e-2
                w_wire: 1
@@ -240,7 +240,7 @@ cpu:
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
                 e_cam: 0
-                e_ram: 0.608496 #TODO this is the energy I got from ROB - upgrade it
+                e_ram: 8.7344e-2
                 e_leak: 4.718e-5
                 e_wire: 0
                 w_wire: 64
@@ -338,8 +338,8 @@ cpu:
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
                 e_cam: 0
-                e_ram: 2.535452
-                e_leak: 4.392e-3
+                e_ram: 9.58076e-1
+                e_leak: 2.536e-3
                 e_w_cache2win: 1.11e-1
                 e_w_win2eu: 6.85e-2
                 w_wire: 1
@@ -396,8 +396,8 @@ cpu:
 
        eu:
            alu:
-               count: 1
-               count_per_blk: 1
+               count: 48
+               count_per_blk: 8
                latency: 1
                e_eu: 1.040
                e_leak: 0 #TODO
@@ -420,7 +420,51 @@ cpu:
                e_eu: 1.040
                e_leak: 0 #TODO
 
-       pipe:
+       ino_pipe:
+           bp:
+               width: 1
+               latency: 1
+               name: branchPred
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           fetch:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 1
+               name: fetch
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           decode:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 1
+               name: decode
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           schedule:
+               width: 4
+               latency: 1
+               name: schedule
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           execution:
+               width: 4
+               latency: 1 #TODO what does it mean for FPU?
+               name: execution
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           memory:
+               width: 1
+               latency: 1
+               name: memory
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           commit:
+               width: 4
+               latency: 1
+               name: commit
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+       
+       o3_pipe:
            bp:
                width: 1
                latency: 1
@@ -435,7 +479,51 @@ cpu:
                e_leak: 5.864e-2
            decode:
                width: 4 #TODO Gets doubled in code - fix it
-               latency: 4
+               latency: 3
+               name: decode
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           schedule:
+               width: 4
+               latency: 2
+               name: schedule
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           execution:
+               width: 4
+               latency: 1 #TODO what does it mean for FPU?
+               name: execution
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           memory:
+               width: 1
+               latency: 1
+               name: memory
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           commit:
+               width: 4
+               latency: 1
+               name: commit
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+       
+       bb_pipe:
+           bp:
+               width: 1
+               latency: 1
+               name: branchPred
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           fetch:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
+               name: fetch
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           decode:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
                name: decode
                e_ff: 5.864e-1
                e_leak: 5.864e-2

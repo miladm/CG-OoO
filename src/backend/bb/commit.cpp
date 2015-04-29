@@ -15,7 +15,7 @@ bb_commit::bb_commit (port<bbInstruction*>& commit_to_bp_port,
                       bb_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name)
-	: stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["commit"], clk),
+	: stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["commit"], clk),
       s_squash_ins_cnt (g_stats.newScalarStat (stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
       s_squash_br_cnt (g_stats.newScalarStat (stage_name, "squash_br_cnt", "Number of squashed branch instructions", 0, PRINT_ZERO)),
       s_squash_mem_cnt (g_stats.newScalarStat (stage_name, "squash_mem_cnt", "Number of squashed memory instructions", 0, PRINT_ZERO)),

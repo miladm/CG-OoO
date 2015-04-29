@@ -14,6 +14,8 @@ table_energy::table_energy (string class_name, const YAML::Node& root)
     _cam2_energy_per_access = 0;
     _ram_energy_per_access = 0;
 
+    WIDTH segmnt_cnt = 0;
+
     YAML::Iterator it;
     for(it = root.begin(); it != root.end(); ++it) {
         std::string key,value;
@@ -32,6 +34,16 @@ table_energy::table_energy (string class_name, const YAML::Node& root)
             root["e_leak"] >> _leakage_energy_per_access;
             e_leak.setEnergyPerAccess (_leakage_energy_per_access);
         }
+
+        if (key.compare ("segmnt_cnt") == 0) {
+            root["segmnt_cnt"] >> segmnt_cnt;
+        }
+    }
+
+    /*-- SPECIAL HANDLING FOR SGRF --*/
+    if (segmnt_cnt > 0) {
+        PJ ram_energy_per_access = _ram_energy_per_access / segmnt_cnt;
+        e_ram.setEnergyPerAccess (ram_energy_per_access);
     }
 }
 

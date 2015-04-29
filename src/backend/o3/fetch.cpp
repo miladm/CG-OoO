@@ -13,7 +13,7 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["fetch"], clk)
+    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pipe"]["fetch"], clk)
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;

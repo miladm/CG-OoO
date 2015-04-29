@@ -9,7 +9,7 @@ bb_decode::bb_decode (port<bbInstruction*>& fetch_to_decode_port,
 	    	          WIDTH decode_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["decode"], clk)
+	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["decode"], clk)
 {
     _fetch_to_decode_port     = &fetch_to_decode_port;
 	_decode_to_scheduler_port  = &decode_to_scheduler_port;

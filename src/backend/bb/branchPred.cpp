@@ -9,7 +9,7 @@ bb_branchPred::bb_branchPred (port<bbInstruction*>& fetch_to_bp_port,
 	    				WIDTH bp_width,
                         sysClock* clk,
 	    				string stage_name) 
-	: stage (bp_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["bp"], clk)
+	: stage (bp_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["bp"], clk)
 { 
     _fetch_to_bp_port = &fetch_to_bp_port;
     _bp_to_fetch_port = &bp_to_fetch_port;

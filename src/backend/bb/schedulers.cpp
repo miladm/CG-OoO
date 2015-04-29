@@ -16,7 +16,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
                             bb_rfManager* RF_MGR,
                             sysClock* clk,
 	    	                string stage_name) 
-	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"], clk),
+	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["schedule"], clk),
       s_mem_g_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_g_fwd_cnt", "Number of global memory forwarding events", 0, NO_PRINT_ZERO)),
       s_alu_g_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_g_fwd_cnt", "Number of global ALU forwarding events", 0, NO_PRINT_ZERO)),
       s_mem_l_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_l_fwd_cnt", "Number of local memory forwarding events", 0, NO_PRINT_ZERO)),

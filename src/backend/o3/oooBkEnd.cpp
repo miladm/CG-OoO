@@ -16,7 +16,7 @@ void oooBkEnd_init () {
     int width, bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
 
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
-    const YAML::Node& pipe = root["pipe"];
+    const YAML::Node& pipe = root["o3_pipe"];
     const YAML::Node& bpu = pipe["bp"];
     const YAML::Node& fch = pipe["fetch"];
     const YAML::Node& dcd = pipe["decode"];
@@ -39,7 +39,7 @@ void oooBkEnd_init () {
             fch_lat, 50, 
             1, 50, 
             bpu_lat, 50, 
-            dcd_lat - 1, 50, 
+            dcd_lat, 50, 
             sch_lat, eu_width, 
             1, 50, 
             exe_lat, 50, 

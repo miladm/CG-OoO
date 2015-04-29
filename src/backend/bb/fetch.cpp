@@ -13,7 +13,7 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["fetch"], clk),
+    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["fetch"], clk),
       s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of basicblocks in " + stage_name, 0, PRINT_ZERO)),
       s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "average basicblock size in " + stage_name, 0, PRINT_ZERO))
 {

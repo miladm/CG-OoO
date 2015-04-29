@@ -9,7 +9,7 @@ o3_branchPred::o3_branchPred (port<dynInstruction*>& fetch_to_bp_port,
 	    				WIDTH bp_width,
                         sysClock* clk,
 	    				string stage_name) 
-	: stage (bp_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["bp"], clk)
+	: stage (bp_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pipe"]["bp"], clk)
 { 
     _fetch_to_bp_port = &fetch_to_bp_port;
     _bp_to_fetch_port = &bp_to_fetch_port;

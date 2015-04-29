@@ -10,7 +10,7 @@ memory::memory (port<dynInstruction*>& execution_to_memory_port,
 	    	    WIDTH memory_width,
                 sysClock* clk,
 	    	    string stage_name) 
-	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"], clk),
+	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["memory"], clk),
       _mem_buff (20, 1, clk, "mem_buff"),
       _mshr (clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR"),
       _st_buff (clk, g_cfg->_root["cpu"]["backend"]["table"]["st_buff"], "stBuff"),

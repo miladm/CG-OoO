@@ -14,7 +14,7 @@ o3_scheduler::o3_scheduler (port<dynInstruction*>& decode_to_scheduler_port,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["schedule"], clk),
+	: stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pipe"]["schedule"], clk),
       s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
       s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),

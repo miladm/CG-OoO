@@ -11,7 +11,7 @@ commit::commit (port<dynInstruction*>& commit_to_bp_port,
 	    	    WIDTH commit_width,
                 sysClock* clk,
 	    	    string stage_name)
-	: stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["commit"], clk),
+	: stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["commit"], clk),
       s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "Number of squashed instructions", 0, PRINT_ZERO)),
       s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of wrong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
       s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_name, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),

@@ -9,7 +9,7 @@ decode::decode (port<dynInstruction*>& fetch_to_decode_port,
 	    		WIDTH decode_width,
                 sysClock* clk,
 	    		string stage_name) 
-	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["decode"], clk)
+	: stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["decode"], clk)
 {
     _fetch_to_decode_port = &fetch_to_decode_port;
 	_decode_to_schedule_port  = &decode_to_schedule_port;

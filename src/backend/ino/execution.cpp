@@ -11,7 +11,7 @@ execution::execution (port<dynInstruction*>& scheduler_to_execution_port,
 	    	          WIDTH execution_width,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (execution_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["execution"], clk),
+	: stage (execution_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["execution"], clk),
       s_pipe_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
       s_eu_busy_state_hist (g_stats.newScalarHistStat ((LENGTH) execution_width, stage_name, "eu_busy_state_hist", "Number of cycles execution unit is busy", 0, PRINT_ZERO)),
       s_pipe_state_hist_rat (g_stats.newRatioHistStat (clk->getStatObj (), (LENGTH) NUM_PIPE_STATE, stage_name, "pipe_state_hist_rat", "Ratio of cycles in each squash stage / total cycles", 0, PRINT_ZERO)),

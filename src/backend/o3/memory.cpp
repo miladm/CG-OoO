@@ -12,7 +12,7 @@ o3_memory::o3_memory (port<dynInstruction*>& execution_to_memory_port,
                       o3_rfManager* RF_MGR,
                       sysClock* clk,
 	    	          string stage_name) 
-	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["pipe"]["memory"], clk),
+	: stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pipe"]["memory"], clk),
       _mshr(clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR")
 {
     _execution_to_memory_port = &execution_to_memory_port;
