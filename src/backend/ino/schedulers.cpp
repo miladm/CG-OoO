@@ -118,6 +118,7 @@ void scheduler::updateInsWin () {
             list<string> wires;
             wires.push_back ("e_w_cache2win");
             wires.push_back ("e_w_win2eu");
+            wires.push_back ("e_w_win2eu"); /* FOR WAKEUP OF WRITE OPERAND */
             _iWindow.updateWireState (WRITE, wires, true);
             _iROB->updateWireState (WRITE);
         }

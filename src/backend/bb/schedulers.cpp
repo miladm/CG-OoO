@@ -119,6 +119,12 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         /*-- UPDATE RESOURCES --*/
         list<string> wires;
         wires.push_back ("e_w_iq2eu");
+        if (ins->getNumWrLAR () > 0) {
+            wires.push_back ("e_w_iq2eu"); /* FOR WAKEUP OF WRITE OPERAND */
+        } else {
+            for (int i = 0; i < getNumBusyWin (); i++) 
+                wires.push_back ("e_w_iq2eu"); /* FOR WAKEUP OF WRITE OPERAND */
+        }
         _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ, wires, true);
         _RF_MGR->updateWireState (READ, ins, true);
         _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (); //assume this step is not free for now - TODO
@@ -322,6 +328,10 @@ bbWindow* bb_scheduler::getAnAvailBBWin () {
     _avail_bbWin.RemoveAt (0);
     _busy_bbWin.insert (pair<WIDTH, bbWindow*> (bbWin->_id, bbWin));
     return bbWin;
+}
+
+SCALAR bb_scheduler::getNumBusyWin () {
+    return (_num_bbWin - _avail_bbWin.NumElements ());
 }
 
 bool bb_scheduler::detectNewBB (bbInstruction* ins) {

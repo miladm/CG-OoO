@@ -91,6 +91,7 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             /*-- UPDATE WIRES --*/
             list<string> wires;
             wires.push_back ("e_w_rs2eu");
+            wires.push_back ("e_w_rs2eu"); /* FOR WAKEUP OF WRITE OPERAND */
             _ResStns.Nth(j)->updateWireState (READ, wires, true);
             _RF_MGR->updateWireState (READ, ins->getNumRdPR (), true);
 

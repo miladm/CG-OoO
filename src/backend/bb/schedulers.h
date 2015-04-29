@@ -45,6 +45,7 @@ class bb_scheduler : protected stage {
         void flushBBWindow (bbWindow*);
         WIDTH getIssuePortIndx (WIDTH);
         bool runaheadPermit (bbInstruction*);
+        SCALAR getNumBusyWin ();
 
 	private:
 		port<bbInstruction*>* _decode_to_scheduler_port;
