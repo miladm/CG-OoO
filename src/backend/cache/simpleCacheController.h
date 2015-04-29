@@ -15,7 +15,7 @@
 #include <vector>
 #include <map>
 
-#include "../../table_energy.h"
+#include "../../energy/table_energy.h"
 
 namespace Memory {
 
