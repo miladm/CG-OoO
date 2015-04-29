@@ -137,21 +137,36 @@ void statistic::dump () {
         cout << endl;
     }
     PJ total_energy = 0;
-    {
+    { /* DYNAMIC ENERGY */
+        PJ dynamic_energy = 0;
         list<EnergyStat*>::iterator it;
         for (it = _EnergyStats.begin (); it != _EnergyStats.end (); it++) {
             (*it)->print (&_out_file);
-            total_energy += (*it)->getEnergyValue ();
+            PJ elem_energy = (*it)->getEnergyValue ();
+            dynamic_energy += elem_energy;
+            total_energy += elem_energy;
         }
+
+        /*-- REPORT TOTAL ENERGY --*/
+        cout << "* DYNAMIC Energy: " << dynamic_energy << "\t\t\t # Dynamic processor energy (PJ)" << endl;
+        _out_file << "* DYNAMIC Energy: " << dynamic_energy << "\t\t\t # Dynamic processor energy (PJ)" << endl;
+
         _out_file << endl;
         cout << endl;
     }
-    {
+    { /* LEAKAGE ENERGY */
+        PJ static_energy = 0;
         list<LeakageEnergyStat*>::iterator it;
         for (it = _LeakageEnergyStats.begin (); it != _LeakageEnergyStats.end (); it++) {
             (*it)->print (&_out_file, _statMap);
-            total_energy += (*it)->getEnergyValue (_statMap);
+            PJ elem_energy = (*it)->getEnergyValue (_statMap);
+            static_energy += elem_energy;
+            total_energy += elem_energy;
         }
+
+        /*-- REPORT TOTAL ENERGY --*/
+        cout << "* STATIC Energy: " << static_energy << "\t\t\t # Static processor energy (PJ)" << endl;
+        _out_file << "* STATIC Energy: " << static_energy << "\t\t\t # Static processor energy (PJ)" << endl;
 
         /*-- REPORT TOTAL ENERGY --*/
         cout << "* TOTAL Energy: " << total_energy << "\t\t\t # Toal processor energy (PJ)" << endl;
