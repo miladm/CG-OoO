@@ -108,6 +108,11 @@ void SimpleCacheController::init(const YAML::Node &root) {
     reuse_distances.init("reuse_distances", this, 32);
 
     timestamp = 0;
+
+    // initialize energy stats
+    std::string name;
+    root["name"] >> name;
+    energy_stats = new table_energy(name, cachenode);
 }
 
 void SimpleCacheController::dump_stats(FILE *fp) {

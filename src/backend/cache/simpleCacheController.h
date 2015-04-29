@@ -15,12 +15,16 @@
 #include <vector>
 #include <map>
 
+#include "../../table_energy.h"
+
 namespace Memory {
 
 class SimpleCacheController : public CacheController, public YAMLInitable {
     private:
-        BaseCache* cacheLines_;
+        BaseCache *cacheLines_;
         Controller *lower_level;
+
+        table_energy *energy_stats;
 
         typedef std::list<QueueEntry*> DependencyList;
         std::map<uint64_t, DependencyList> per_entry_deps;
@@ -66,6 +70,14 @@ class SimpleCacheController : public CacheController, public YAMLInitable {
 
         BaseCache *get_cache() {
             return cacheLines_;
+        }
+
+        void count_read_energy() {
+            energy_stats->ramAccess();
+        }
+
+        void count_write_energy() {
+            energy_stats->ramAccess();
         }
 
         virtual std::string print_summary() {
