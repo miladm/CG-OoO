@@ -25,7 +25,7 @@ class o3_rfManager : public unit {
 
         /*-- WIRES CTRL --*/
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE, WIDTH, bool update_wire = false);
 
 	private:
         o3_registerRename _GRF;
@@ -35,6 +35,7 @@ class o3_rfManager : public unit {
         table_energy _e_rat;
         table_energy _e_apr; /* AVIALBLE PR LIST */
         table_energy _e_arst;
+        wire_energy _e_w_rr;
 
         /*-- STAT --*/
         ScalarStat& s_rf_not_ready_cnt;

@@ -89,7 +89,9 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             _ResStns.Nth(j)->camAccess (); //TODO: this is for the update (move to right place); - wakeup logic
 
             /*-- UPDATE WIRES --*/
-            _ResStns.Nth(j)->updateWireState (READ);
+            list<string> wires;
+            wires.push_back ("e_w_rs2eu");
+            _ResStns.Nth(j)->updateWireState (READ, wires, true);
             _RF_MGR->updateWireState (READ, ins->getNumRdPR ());
 
             /*-- STAT --*/
@@ -175,12 +177,18 @@ void o3_scheduler::updateResStns () {
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
             /*-- UPDATE WIRES --*/
-            _iROB->updateWireState (WRITE);
-            _ResStns.Nth(j)->updateWireState (WRITE);
-            if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                _LSQ_MGR->updateWireState (LD_QU, WRITE);
-            } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-                _LSQ_MGR->updateWireState (ST_QU, WRITE);
+            {
+                list<string> wires;
+                wires.push_back ("e_w_rr2rob");
+                _iROB->updateWireState (WRITE, wires, true);
+                wires.clear (); wires.push_back ("e_w_rr2rs");
+                _ResStns.Nth(j)->updateWireState (WRITE, wires, true);
+                wires.clear (); wires.push_back ("e_w_rr2lsq_o3");
+                if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
+                    _LSQ_MGR->updateWireState (LD_QU, WRITE, wires, true);
+                } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
+                    _LSQ_MGR->updateWireState (ST_QU, WRITE, wires, true);
+                }
             }
         }
     }

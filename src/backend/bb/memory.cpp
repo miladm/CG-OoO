@@ -79,7 +79,7 @@ void bb_memory::completeIns () {
         for (int i = 0; i < finished_ld_ins->getNumWrAR (); i++)
             wires.push_back ("e_w_lsq2grf");
         _LSQ_MGR->updateWireState (LD_QU, READ, wires, true);
-        _RF_MGR->updateWireState (WRITE, finished_ld_ins);
+        _RF_MGR->updateWireState (WRITE, finished_ld_ins, false); /* NO REG UPDATE HERE */
 
         _e_stage.ffAccess ();
     }

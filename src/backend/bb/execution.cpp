@@ -117,8 +117,8 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 ins->setPipeStage (MEM_ACCESS);
                 list<string> ld_wires;
                 ld_wires.push_back ("e_w_eu2lsq_bb"); 
-                _LSQ_MGR->memAddrReady (ins);
                 _LSQ_MGR->updateWireState (LD_QU, WRITE, ld_wires, true);
+                _LSQ_MGR->memAddrReady (ins);
                 dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                         _stage_name.c_str (), "Complete load addr calc - ins addr", ins->getInsID (), _clk->now ());
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {

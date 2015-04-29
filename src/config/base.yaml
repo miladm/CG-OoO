@@ -109,7 +109,7 @@ cpu:
                e_leak: 4.939e-3
                e_w_eu2simplerf: 1.22e-1
                e_w_cache2rf: 2.38E-01
-               w_wire: 64
+               w_wire: 1
            lrf:
                rf_size: 20
                rf_lo: 100
@@ -122,7 +122,7 @@ cpu:
                e_ram: 0.619338
                e_leak: 1.098e-3
                e_w_eu2lrf: 3.85e-2
-               w_wire: 64
+               w_wire: 1
            grf:
                segmnt_cnt: 18 # Specify the number of GRF segments (1 is a unified GRF)
                a_size: 90
@@ -142,7 +142,7 @@ cpu:
                e_ram: 0.5246242813
                e_leak: 1.476e-2
                e_w_eu2grf: 8.90e-2
-               w_wire: 64
+               w_wire: 1
            rf:
                a_size: 90
                a_lo: 120
@@ -161,7 +161,7 @@ cpu:
                e_ram: 9.037722
                e_leak: 1.476e-2
                e_w_eu2rf: 1.02e-1
-               w_wire: 64
+               w_wire: 1
            arst:
                e_cam: 0
                e_ram: 0
@@ -175,6 +175,7 @@ cpu:
                e_ram: 1.170876
                e_leak: 5.703e-4
                e_w_cache2rr: 8.42e-2
+               w_wire: 1
            garst:
                e_cam: 0
                e_ram: 0
@@ -188,6 +189,7 @@ cpu:
                e_ram: 1.069866
                e_leak: 5.703e-4
                e_w_cache2rr: 2.43e-1
+               w_wire: 1
  
        space:
             global_arch:
@@ -229,7 +231,7 @@ cpu:
                 e_leak: 4.718e-5
                 e_w_eu2brob: 1.18e-2
                 e_w_rr2brob: 5.58e-2
-                w_wire: 64
+                w_wire: 1
                 name: bbROB
                 type: RAM
             inoROB: 
@@ -254,7 +256,7 @@ cpu:
                 e_leak: 1.764e-3
                 e_w_eu2rob: 2.02e-2
                 e_w_rr2rob: 6.05e-2
-                w_wire: 64
+                w_wire: 1
                 name: ROB
                 type: RAM
             LQ:
@@ -276,7 +278,7 @@ cpu:
                 e_w_eu2lsq_bb: 2.90e-2
                 e_w_cache2lsq_o3: 1.06e-1
                 e_w_cache2lsq_bb: 1.77e-1
-                w_wire: 64
+                w_wire: 1
                 name: LQ
                 type: CAM
             SQ:
@@ -298,7 +300,7 @@ cpu:
                 e_w_eu2lsq_bb: 2.90e-2
                 e_w_cache2lsq_o3: 1.06e-1
                 e_w_cache2lsq_bb: 1.77e-1
-                w_wire: 64
+                w_wire: 1
                 name: SQ
                 type: CAM
             resStn:
@@ -312,7 +314,7 @@ cpu:
                 e_leak: 6.606E-1    # combination of RAM/CAM tables
                 e_w_rs2eu: 6.99e-2
                 e_w_rr2rs: 1.27e-1
-                w_wire: 64
+                w_wire: 1
                 name: resStn
                 type: FIFO
             bbWindow:
@@ -327,7 +329,7 @@ cpu:
                 e_leak: 6.983e-4
                 e_w_iq2eu: 5e-3
                 e_w_rr2iq: 7.37e-2
-                w_wire: 64
+                w_wire: 1
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
             iWindow: #only for INO
@@ -340,7 +342,7 @@ cpu:
                 e_leak: 4.392e-3
                 e_w_cache2win: 1.11e-1
                 e_w_win2eu: 6.85e-2
-                w_wire: 64
+                w_wire: 1
                 name: iWindow
                 type: FIFO
             mshr:

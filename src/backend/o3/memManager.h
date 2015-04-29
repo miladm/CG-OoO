@@ -30,7 +30,7 @@ class o3_memManager : public unit {
         /* LSQ CONTROL */
         BUFF_STATE getTableState (LSQ_ID);
         bool hasFreeWire (LSQ_ID, AXES_TYPE);
-        void updateWireState (LSQ_ID, AXES_TYPE);
+        void updateWireState (LSQ_ID, AXES_TYPE, list<string> wire_name = list<string>(), bool update_wire = false);
         void pushBack (dynInstruction*);
         void memAddrReady (dynInstruction*);
         bool issueToMem (LSQ_ID);

@@ -64,8 +64,13 @@ void o3_memory::completeIns () {
                    "Write Complete mem LD ins", finished_ld_ins->getInsID (), _clk->now ());
 
         /*-- UPDATE WIRES --*/
-        _LSQ_MGR->updateWireState (LD_QU, READ);
-        _RF_MGR->updateWireState (WRITE, finished_ld_ins->getNumWrPR ());
+        list<string> wires;
+        wires.push_back ("e_w_lsq2rob"); 
+        wires.push_back ("e_w_cache2lsq_o3"); 
+        for (int i = 0; i < finished_ld_ins->getNumWrAR (); i++)
+            wires.push_back ("e_w_lsq2rf");
+        _LSQ_MGR->updateWireState (LD_QU, READ, wires, true);
+        _RF_MGR->updateWireState (WRITE, finished_ld_ins->getNumWrPR (), false); /* NO REG UPDATE HERE */
 
         _e_stage.ffAccess ();
     }
@@ -115,6 +120,11 @@ void o3_memory::manageSTbuffer () {
 
         /*-- UPDATE WIRES --*/
         _LSQ_MGR->updateWireState (ST_QU, READ);
+
+        /*-- UPDATE WIRES --*/
+        list<string> wires;
+        wires.push_back ("e_w_cache2lsq_o3"); 
+        _LSQ_MGR->updateWireState (ST_QU, READ, wires, true);
     }
 
     for (WIDTH i = 0; i < _stage_width; i++) {

@@ -164,15 +164,11 @@ void bb_rfManager::updateWireState (AXES_TYPE axes_type, bbInstruction* ins, boo
     list<string> local_wires, global_wires;
     if (update_wire) {
         if (axes_type == READ) {
-            for (int i = 0; i < ins->getNumRdLAR (); i++)
-                local_wires.push_back ("e_w_eu2lrf");
-            for (int i = 0; i < ins->getNumRdAR (); i++)
-                global_wires.push_back ("e_w_eu2grf");
+            local_wires.push_back ("e_w_eu2lrf");
+            global_wires.push_back ("e_w_eu2grf");
         } else if (axes_type == WRITE) {
-            for (int i = 0; i < ins->getNumWrLAR (); i++)
-                local_wires.push_back ("e_w_eu2lrf");
-            for (int i = 0; i < ins->getNumWrAR (); i++)
-                global_wires.push_back ("e_w_eu2grf");
+            local_wires.push_back ("e_w_eu2lrf");
+            global_wires.push_back ("e_w_eu2grf");
         }
     }
 

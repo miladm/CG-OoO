@@ -11,6 +11,7 @@ o3_rfManager::o3_rfManager (sysClock* clk, const YAML::Node& root, string rf_nam
       _e_rat (rf_name + ".rat", root["rat"]),
       _e_apr (rf_name + ".apr", root["apr"]),
       _e_arst (rf_name + ".arst" , root["arst"]),
+      _e_w_rr (rf_name + ".rr.wire", root["rat"]),
       s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
@@ -107,6 +108,16 @@ bool o3_rfManager::renameRegs (dynInstruction* ins) {
         _e_arst.ramAccess ();
         ins->setPR (new_pr, WRITE);
     }
+
+    /*-- WIRE ENERGY HANDLING --*/
+    list<string> wires;
+    WIDTH num_elements = 1; //opcode
+    num_elements += (ins->getNumRdAR () + ins->getNumWrAR ());
+    for (int i = 0; i < num_elements; i++) {
+        wires.push_back ("e_w_cache2rr");
+    }
+    _e_w_rr.wireAccess (wires);
+
     return false; /*-- DON'T STALL FETCH --*/
 }
 
@@ -159,9 +170,18 @@ bool o3_rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
-void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+void o3_rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, bool update_wire) {
+    list<string> wires;
+    if (update_wire) {
+        if (axes_type == READ) {
+            wires.push_back ("e_w_eu2rf");
+        } else if (axes_type == WRITE) {
+            wires.push_back ("e_w_eu2rf");
+        }
+    }
+
     for (WIDTH i = 0; i < numRegWires; i++) {
-        _GRF.updateWireState (axes_type);
+        _GRF.updateWireState (axes_type, wires, update_wire);
     }
 }
 

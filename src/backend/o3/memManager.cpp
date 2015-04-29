@@ -60,11 +60,11 @@ bool o3_memManager::hasFreeWire (LSQ_ID lsq_id, AXES_TYPE axes_type) {
     }
 }
 
-void o3_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type) {
+void o3_memManager::updateWireState (LSQ_ID lsq_id, AXES_TYPE axes_type, list<string> wire_name, bool update_wire) {
     if (lsq_id == LD_QU) {
-        _LQ.updateWireState (axes_type);
+        _LQ.updateWireState (axes_type, wire_name, update_wire);
     } else {
-        _SQ.updateWireState (axes_type);
+        _SQ.updateWireState (axes_type, wire_name, update_wire);
     }
 }
 

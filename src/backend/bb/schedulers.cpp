@@ -270,7 +270,7 @@ void bb_scheduler::updatebbWindows () {
             list<string> wires;
             wires.push_back ("e_w_rr2iq");
             _bbWin_on_fetch->_win.updateWireState (WRITE, wires, true);
-            wires.push_back ("e_w_rr2lsq_bb");
+            wires.clear (); wires.push_back ("e_w_rr2lsq_bb");
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
                 _LSQ_MGR->updateWireState (LD_QU, WRITE, wires, true);
             } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
