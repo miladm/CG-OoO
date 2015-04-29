@@ -89,11 +89,13 @@ COMPLETE_STATUS execution::completeIns () {
         if (ins->getInsType () == MEM) {
             _execution_to_memory_port->pushBack (ins);
             ins->setPipeStage (MEM_ACCESS);
+            if (ins->getMemType () == STORE) 
+                g_RF_MGR->updateWireState (WRITE, ins->getNumWrAR (), true);
             //TODO handle writeRF for STORE ins here (like O3 & BB)
         } else {
             ins->setPipeStage (COMPLETE);
             g_RF_MGR->writeToRF (ins);
-            g_RF_MGR->updateWireState (WRITE, ins->getNumWrAR ());
+            g_RF_MGR->updateWireState (WRITE, ins->getNumWrAR (), true);
             _iROB->ramAccess (); /* NOTIFY THE INSTRUCTION IS COMPLETE */
         }
         EU->resetEU ();

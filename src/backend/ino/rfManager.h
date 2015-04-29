@@ -23,7 +23,7 @@ class rfManager : public unit {
 
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
-        void updateWireState (AXES_TYPE, WIDTH);
+        void updateWireState (AXES_TYPE, WIDTH, bool = false, bool = false);
 
 	private:
         registerFile _RF;

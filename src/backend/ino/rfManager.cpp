@@ -109,9 +109,21 @@ bool rfManager::hasFreeWire (AXES_TYPE axes_type, WIDTH numRegWires) {
     }
 }
 
-void rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires) {
+void rfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, bool update_wire, bool cache_access) {
+    list<string> wires;
+    if (update_wire) {
+        if (axes_type == READ) {
+            wires.push_back ("e_w_eu2simplerf");
+        } else if (axes_type == WRITE) {
+            wires.push_back ("e_w_eu2simplerf");
+        }
+        if (cache_access) {
+            wires.push_back ("e_w_cache2rf");
+        }
+    }
+
     for (WIDTH i = 0; i < numRegWires; i++) {
-        _RF.updateWireState (axes_type);
+        _RF.updateWireState (axes_type, wires, update_wire);
     }
 }
 

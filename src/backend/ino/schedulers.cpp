@@ -70,7 +70,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
 
         /* UPDATE WIRES */
         _iWindow.updateWireState (READ);
-        g_RF_MGR->updateWireState (READ, ins->getNumRdAR ());
+        g_RF_MGR->updateWireState (READ, ins->getNumRdAR (), true);
 
         /* STAT */
         s_ipc++;
@@ -114,8 +114,13 @@ void scheduler::updateInsWin () {
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
         /* UPDATE WIRES */
-        _iWindow.updateWireState (WRITE);
-        _iROB->updateWireState (WRITE);
+        {
+            list<string> wires;
+            wires.push_back ("e_w_cache2win");
+            wires.push_back ("e_w_win2eu");
+            _iWindow.updateWireState (WRITE, wires, true);
+            _iROB->updateWireState (WRITE);
+        }
     }
 }
 
