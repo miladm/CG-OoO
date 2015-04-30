@@ -37,6 +37,9 @@ class o3_fetch : protected stage {
         CAMtable<dynInstruction*>* _iROB;
         int _insListIndx;
         bool _switch_to_frontend;
+
+        /*-- ENERGY --*/
+        table_energy _e_icache;
 };
 
 #endif

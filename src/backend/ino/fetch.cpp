@@ -13,7 +13,8 @@ fetch::fetch (port<dynInstruction*>& bp_to_fetch_port,
               sysClock* clk,
 			  string stage_name
 			 )
-    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["fetch"], clk)
+    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["fetch"], clk),
+      _e_icache ("l1_i_0", g_cfg->_root["cpu"]["backend"]["mem"]["l1_i_0"])
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
@@ -57,6 +58,8 @@ PIPE_ACTIVITY fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         if (isGoToFrontend (frontend_status)) { _switch_to_frontend = true; break;}
         if (g_var.isCodeCacheEmpty ()) {break;}
 		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
+        if (i == 0)
+            _e_icache.ramAccess ();
 
         /* FETCH INS */
         dynInstruction* ins = g_var.popCodeCache();

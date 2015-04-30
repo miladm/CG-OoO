@@ -48,6 +48,9 @@ class bb_fetch : protected stage {
         /*-- STAT --*/
         ScalarStat& s_bb_cnt;
         RatioStat& s_bb_size_avg;
+
+        /*-- ENERGY --*/
+        table_energy _e_icache;
 };
 
 #endif

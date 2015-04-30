@@ -609,6 +609,17 @@ cpu:
                e_cam: 2.133
                e_wire: 0    # TODO for now
                w_wire: 64
+           l1_i_0:
+               sa: 1 # Set Associativity
+               size: 32768
+               line_size: 64
+               latency: 3
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 1
+               e_ram: 0.042957e3
+               e_leak: 2.13505E-1 #current the sum of i-cache and itlb
+               name: L1
            L1:
                sa: 1 # Set Associativity
                size: 32768

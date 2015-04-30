@@ -15,7 +15,8 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
 			 )
     : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["bb_pipe"]["fetch"], clk),
       s_bb_cnt (g_stats.newScalarStat (stage_name, "bb_cnt", "Number of basicblocks in " + stage_name, 0, PRINT_ZERO)),
-      s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "average basicblock size in " + stage_name, 0, PRINT_ZERO))
+      s_bb_size_avg (g_stats.newRatioStat (&s_bb_cnt, stage_name, "bb_size_avg", "average basicblock size in " + stage_name, 0, PRINT_ZERO)),
+      _e_icache ("l1_i_0", g_cfg->_root["cpu"]["backend"]["mem"]["l1_i_0"])
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
@@ -72,6 +73,8 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
             Assert (_current_bb != NULL);
 #endif
         }
+        if (i == 0)
+            _e_icache.ramAccess ();
 
         /*-- FETCH INS --*/
         bbInstruction* ins = _current_bb->popFront ();
