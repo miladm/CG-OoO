@@ -364,7 +364,7 @@ cpu:
                 wr_wire_cnt: 16
                 e_cam: 0.763521
                 e_ram: 1.160567
-                e_leak: 0       #TODO
+                e_leak: 1.098e-3
                 e_wire: 0       # for now
                 w_wire: 64
                 name: st_buff
