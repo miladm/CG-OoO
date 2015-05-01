@@ -20,7 +20,6 @@ controllers:
         linesize: 64
         latency: 3
         e_ram: 0.042957e3
-        e_leak: 2.13505E-1
       lower: l2_0
       interconn: interconn_0
 

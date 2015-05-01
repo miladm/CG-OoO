@@ -16,6 +16,7 @@ void bbBkEnd_init () {
 
     WIDTH width, num_bbW;
     CYCLE bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
+    WIDTH bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_width;
 
     const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
     const YAML::Node& bbWin = root["table"]["bbWindow"];
@@ -32,6 +33,11 @@ void bbBkEnd_init () {
     dcd["latency"] >> dcd_lat; sch["latency"] >> sch_lat;
     exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
     cmt["latency"] >> cmt_lat;
+
+    bpu["width"] >> bpu_width; fch["width"] >> fch_width;
+    dcd["width"] >> dcd_width; sch["width"] >> sch_width;
+    exe["width"] >> exe_width; mem["width"] >> mem_width;
+    cmt["width"] >> cmt_width;
     root["width"] >> width; bbWin["count"] >> num_bbW;
     WIDTH eu_width, eu_per_blk;
     root["eu"]["alu"]["count"] >> eu_width;
@@ -39,7 +45,7 @@ void bbBkEnd_init () {
 
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
-            width, width, width, eu_width, eu_width, width, width, num_bbW,
+            bpu_width, fch_width, dcd_width, eu_width, eu_width, mem_width, cmt_width, num_bbW,
             fch_lat, 500, 
             1, 500, 
             bpu_lat, 500, 
