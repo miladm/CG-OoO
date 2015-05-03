@@ -610,7 +610,9 @@ def parseSimpointFiles (in_paths, results_table, result_map):
       if len (tokens) > 2:
         result_param = tokens[1]
         result_value = 0
-        if result_param.startswith ( 'bbWindow' ): # SOME POST-PROCESSING
+        if result_param.startswith ( 'bbWinBuf' ): # SOME POST-PROCESSING
+          result_param = 'bbWinBuf' + result_param[11:]
+        elif result_param.startswith ( 'bbWindow' ): # SOME POST-PROCESSING
           result_param = 'bbWindow' + result_param[11:]
         elif result_param.startswith ( 'lrfManager' ): # SOME POST-PROCESSING
           result_param = 'lrfManager' + result_param[13:]

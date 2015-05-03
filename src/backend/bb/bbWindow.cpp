@@ -7,6 +7,7 @@
 bbWindow::bbWindow (string bbWin_id, sysClock* clk)
     : unit ("bbWindow_" + bbWin_id, clk),
       _win (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"], "bbWindow_" + bbWin_id), //TODO configure and more real numbers
+      _win_buf (clk, g_cfg->_root["cpu"]["backend"]["table"]["bbWinBuf"], "bbWinBuf_" + bbWin_id), //TODO configure and more real numbers
       _id (atoi (bbWin_id.c_str ())),
       s_stall_war_hazard_cnt (g_stats.newScalarStat ("bbWindow_" + bbWin_id, "stall_war_hazard_cnt", "Number of times instruction is not issued due to WAR hazard in LRF", 0, PRINT_ZERO)),
       s_stall_war_hazard_rat (g_stats.newRatioStat (clk->getStatObj (), "bbWindow_" + bbWin_id, "stall_war_hazard_rat", "Ratio of instruction is not issued due to WAR hazard in LRF / cycle", 0, PRINT_ZERO)),

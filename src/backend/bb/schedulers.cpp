@@ -111,10 +111,10 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
         //---------------------------------------
         //TODO put this code where it belongs 
-        WIDTH num_glb_update = ins->getNumWrPR () * _num_bbWin; //TODO mus replace with a loop thru all BBWin's - wake up logic
+        WIDTH num_glb_update = ins->getNumWrPR () * getNumBusyWin (); //TODO mus replace with a loop thru all BBWin's - wake up logic
         WIDTH num_loc_update = ins->getNumWrLAR ();
-        _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (num_glb_update);
-        _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (num_loc_update);
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_glb_update);
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_loc_update);
         //---------------------------------------
 
         /*-- UPDATE RESOURCES --*/
@@ -131,6 +131,8 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ, wires, true);
         _RF_MGR->updateWireState (READ, ins, true);
         _busy_bbWin[ready_bbWin_indx]->_win.ramAccess (); //assume this step is not free for now - TODO
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.ramAccess (); // write into HB
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.ramAccess (); // read from HB
 
         /*-- STAT --*/
         s_ipc++;

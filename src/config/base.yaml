@@ -332,6 +332,17 @@ cpu:
                 w_wire: 1
                 name: bbWindow_ #TODO get rid of _
                 type: FIFO
+            bbWinBuf:
+                size: 4    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
+                count: 9    #NOTE equal to the number of BBWINDOWS
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
+                e_cam: 4.713e-2
+                e_ram: 6.0493e-1
+                e_leak: 1.47944E-3
+                w_wire: 1
+                name: bbWinBuf_ #TODO get rid of _
+                type: CAM
             iWindow: #only for INO
                 size: 50
                 count: 1
