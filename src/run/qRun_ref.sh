@@ -23,8 +23,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/198_pr/bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4/o3_ino'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
-#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/18_bb'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/1bw_skipahead'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/3_bb'
+#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead/'
 
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'
