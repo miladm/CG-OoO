@@ -1,0 +1,142 @@
+# comment lines begin with a '#' 
+# comments and empty lines are ignored
+
+# Area and aspect ratios of blocks
+# Line Format: <unit-name>\t<area-in-m2>\t<min-aspect-ratio>\t<max-aspect-ratio>\t<rotable>
+
+#NOTE: LRF, GRF-segment, ALU, and WIN are clustered together to minimize wiring.
+
+L1I    0.824705e-6  1 3 1
+ITLB   0.039649e-6  1 3 1
+BP     0.024285e-6  1 3 1
+BTB    0.824705e-6  1 3 1
+GRF1   0.381517e-6  1 3 1
+GRF2   0.381517e-6  1 3 1
+GRF3   0.381517e-6  1 3 1
+GRF4   0.381517e-6  1 3 1
+WIN1   0.000774e-6  1 3 1
+WIN2   0.000774e-6  1 3 1
+WIN3   0.000774e-6  1 3 1
+WIN4   0.000774e-6  1 3 1
+LSQ    0.055478e-6  1 3 1
+DTLB   0.039649e-6  1 3 1
+L1D    0.824705e-6  1 3 1
+L2     6.597640e-6  1 3 1
+RR     0.063e-6     1 3 1
+EU1    0.023e-6     1 1 1
+EU2    0.023e-6     1 1 1
+EU3    0.023e-6     1 1 1
+EU4    0.023e-6     1 1 1
+LRF1   0.1314e-6    1 3 1
+LRF2   0.1314e-6    1 3 1
+LRF3   0.1314e-6    1 3 1
+LRF4   0.1314e-6    1 3 1
+ROB    0.000379e-6  1 3 1
+
+
+# Connectivity information
+# Line format <unit1-name>\t<unit2-name>\t<wire_density>
+
+L1D L2       64
+L1I L2       64
+L1I ITLB     64
+L1D DTLB     64
+BP  BTB      64
+BP  ITLB     64
+BTB ITLB     64
+L1I RR       7
+RR  WIN1     7
+RR  WIN2     7
+RR  WIN3     7
+RR  WIN4     7
+RR  ROB      8
+RR  LSQ      8
+
+EU1 GRF1     64
+EU1 GRF2     64
+EU1 GRF3     64
+EU1 GRF4     64
+
+EU2 GRF1     64
+EU2 GRF2     64
+EU2 GRF3     64
+EU2 GRF4     64
+
+EU3 GRF1     64
+EU3 GRF2     64
+EU3 GRF3     64
+EU3 GRF4     64
+
+EU4 GRF1     64
+EU4 GRF2     64
+EU4 GRF3     64
+EU4 GRF4     64
+
+WIN1 EU1     64
+WIN1 EU2     64
+WIN1 EU3     64
+WIN1 EU4     64
+
+WIN2 EU1     64
+WIN2 EU2     64
+WIN2 EU3     64
+WIN2 EU4     64
+
+WIN3 EU1     64
+WIN3 EU2     64
+WIN3 EU3     64
+WIN3 EU4     64
+
+WIN4 EU1     64
+WIN4 EU2     64
+WIN4 EU3     64
+WIN4 EU4     64
+
+LRF1 EU1    64
+LRF1 EU2    64
+LRF1 EU3    64
+LRF1 EU4    64
+
+LRF2 EU1    64
+LRF2 EU2    64
+LRF2 EU3    64
+LRF2 EU4    64
+
+LRF3 EU1    64
+LRF3 EU2    64
+LRF3 EU3    64
+LRF3 EU4    64
+
+LRF4 EU1    64
+LRF4 EU2    64
+LRF4 EU3    64
+LRF4 EU4    64
+
+EU1  ROB     64
+EU2  ROB     64
+EU3  ROB     64
+EU4  ROB     64
+
+LSQ EU1      64
+LSQ EU2      64
+LSQ EU3      64
+LSQ EU4      64
+
+LSQ LRF1     64
+LSQ LRF2     64
+LSQ LRF3     64
+LSQ LRF4     64
+
+LSQ GRF1     64
+LSQ GRF2     64
+LSQ GRF3     64
+LSQ GRF4     64
+
+LSQ WIN1     64
+LSQ WIN2     64
+LSQ WIN3     64
+LSQ WIN4     64
+
+LSQ ROB      64
+LSQ DTLB     64
+L1D L2       64

@@ -1,0 +1,26 @@
+name1   name2   global  intermediate
+Energy (pJ):    L1I     ITLB    6.684039e-02    6.684039e-02
+Energy (pJ):    L1I     WIN     4.459065e-02    4.459065e-02
+Energy (pJ):    L1I     L2      2.582174e-01    2.582174e-01
+Energy (pJ):    ITLB    BP      1.294601e-02    1.294601e-02
+Energy (pJ):    ITLB    BTB     6.862803e-02    6.862803e-02
+Energy (pJ):    BP      BTB     5.568202e-02    5.568202e-02
+Energy (pJ):    RF      L1D     1.939611e-01    1.939611e-01
+Energy (pJ):    RF      EU1     1.228431e-01    1.228431e-01
+Energy (pJ):    RF      EU2     1.201625e-01    1.201625e-01
+Energy (pJ):    RF      EU3     1.307384e-01    1.307384e-01
+Energy (pJ):    RF      EU4     1.368629e-01    1.368629e-01
+Energy (pJ):    RF      EU5     1.234504e-01    1.234504e-01
+Energy (pJ):    RF      EU6     1.297337e-01    1.297337e-01
+Energy (pJ):    RF      EU7     1.035675e-01    1.035675e-01
+Energy (pJ):    RF      EU8     1.105722e-01    1.105722e-01
+Energy (pJ):    WIN     EU1     6.217614e-02    6.217614e-02
+Energy (pJ):    WIN     EU2     8.898569e-02    8.898569e-02
+Energy (pJ):    WIN     EU3     9.956161e-02    9.956161e-02
+Energy (pJ):    WIN     EU4     4.341945e-02    4.341945e-02
+Energy (pJ):    WIN     EU5     5.683193e-02    5.683193e-02
+Energy (pJ):    WIN     EU6     5.054866e-02    5.054866e-02
+Energy (pJ):    WIN     EU7     7.671483e-02    7.671483e-02
+Energy (pJ):    WIN     EU8     6.971007e-02    6.971007e-02
+Energy (pJ):    DTLB    L1D     4.379970e-02    4.379970e-02
+Energy (pJ):    L1D     L2      1.778161e-01    1.778161e-01
