@@ -320,7 +320,7 @@ cpu:
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 9
-                runahead_issue_en: 1
+                runahead_issue_en: 0
                 runahead_issue_cnt: 4
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
@@ -539,8 +539,8 @@ cpu:
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            schedule:
-               width: 4
-               latency: 48
+               width: 48
+               latency: 2
                name: schedule
                e_ff: 5.864e-1
                e_leak: 5.864e-2

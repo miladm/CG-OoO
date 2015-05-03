@@ -144,6 +144,9 @@ def init_params (result_map):
   result_map['bbWindow.e_cam'] = 0.0
   result_map['bbWindow.e_ram'] = 0.0
   result_map['bbWindow.e_leak'] = 0.0
+  result_map['bbWinBuf.e_cam'] = 0.0
+  result_map['bbWinBuf.e_ram'] = 0.0
+  result_map['bbWinBuf.e_leak'] = 0.0
   result_map['lrfManager.e_leak'] = 0.0
   result_map['lrfManager.e_ram'] = 0.0
   result_map['LocalRegisterFile.wr_wire.e_w_eu2lrf'] = 0.0
