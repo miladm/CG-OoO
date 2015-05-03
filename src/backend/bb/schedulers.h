@@ -70,6 +70,7 @@ class bb_scheduler : protected stage {
         bool _runahead_issue_en;
 
         WIDTH _blk_cluster_siz;
+        WIDTH _num_cluster;
 
         /*-- STAT --*/
         ScalarStat& s_mem_g_fwd_cnt;

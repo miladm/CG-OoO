@@ -54,6 +54,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     /*-- SETUP THE MATH TO FIND THE NUMBER OF BLOCK WINDOES SHARING THE SAME PORT --*/
     WIDTH num_ports = _scheduler_to_execution_port->NumElements ();
     _blk_cluster_siz = _num_bbWin / num_ports;
+    _num_cluster = num_ports;
 #ifdef ASSERTION
     Assert (_num_bbWin >= num_ports && 
             num_ports > 0 &&
@@ -120,9 +121,11 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         list<string> wires;
         wires.push_back ("e_w_iq2eu");
         if (ins->getNumWrLAR () > 0) {
-            wires.push_back ("e_w_iq2eu"); /* FOR WAKEUP OF WRITE OPERAND */
+            for (int i = 0; i < _num_cluster; i++) 
+                wires.push_back ("e_w_iq2eu"); /* FOR WAKEUP OF WRITE OPERAND */
         } else {
-            for (int i = 0; i < getNumBusyWin (); i++) 
+            WIDTH scalaed_numWin = _num_cluster * getNumBusyWin ();
+            for (int i = 0; i < scalaed_numWin; i++) 
                 wires.push_back ("e_w_iq2eu"); /* FOR WAKEUP OF WRITE OPERAND */
         }
         _busy_bbWin[ready_bbWin_indx]->_win.updateWireState (READ, wires, true);

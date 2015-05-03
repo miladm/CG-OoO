@@ -27,7 +27,7 @@ rm log.out
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/o3_ino
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/bb
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/o3_ino
-#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/o3_ino
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/perfect_mem_br/bb
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/perfect_mem_br/o3_ino
