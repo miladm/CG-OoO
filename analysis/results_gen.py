@@ -43,9 +43,18 @@ def print_headers (result_out_dir, results_table):
     pF_out.write (' ' + ', ')
     for value in bench_names:
       pF_out.write (str (value) + ', ')
-    pF_out.write ('\n')
+    pF_out.write ("mean, \n")
     pF_out.close ()
     print out_path
+
+# COMPUTE HARMONIC MEAN
+def get_harm_mean (result_values):
+    inv_result_values = []
+    for i in range(len(result_values)):
+        result_values[i] += 1.0e-20 #Avoid None
+        inv_result_values.append (1. / result_values[i])
+    h_mean = len(result_values) / float(sum(inv_result_values))
+    return h_mean
 
 # PRINT THE RESULTS 
 def print_results_table (result_out_dir, results_table, mode):
@@ -57,7 +66,8 @@ def print_results_table (result_out_dir, results_table, mode):
     pF_out.write (mode + ', ')
     for value in result_values:
       pF_out.write (str (value) + ', ')
-    pF_out.write ('\n')
+    harm_mean = get_harm_mean (result_values)
+    pF_out.write (str (harm_mean) + ", \n")
     pF_out.close ()
     print out_path
 
@@ -122,6 +132,7 @@ def post_process_stat (result_map):
   cr.stages (result_map)
   cr.wire_energy (result_map)
   cr.stage_energy (result_map)
+  cr.core_energy (result_map)
 
   cr.ed (result_map)
   cr.ed2 (result_map)

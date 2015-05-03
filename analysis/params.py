@@ -166,6 +166,7 @@ def init_params (result_map):
   result_map['bp-accuracy'] = 0.0
   result_map['mem-accuracy'] = 0.0
   result_map['wasted_ins_rat'] = 0.0
+  result_map['core.Energy'] = 0.0
   # AREA
   result_map['area'] = 0.0
 

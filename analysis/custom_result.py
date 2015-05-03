@@ -244,6 +244,23 @@ def stage_energy (result_map):
 
     result_map['stage-reg'] = energy
 
+# CORE ENERGY WITHOUT CACHE
+def core_energy (result_map):
+    energy = 0
+
+    energy += result_map['TOTAL.Energy']
+    energy -= result_map['l1_d_0.e_ram']
+    energy -= result_map['l1_d_0.e_leak']
+    energy -= result_map['l1_i_0.e_ram']
+    energy -= result_map['l1_i_0.e_leak']
+    energy -= result_map['l2_0.e_ram']
+    energy -= result_map['l2_0.e_leak']
+    energy -= result_map['l3_0.e_ram']
+    energy -= result_map['l3_0.e_leak']
+
+    result_map['core.Energy'] = energy
+
+
 # ENERGY DELAY ANALYSIS
 def ed (result_map):
     ed = 0.0

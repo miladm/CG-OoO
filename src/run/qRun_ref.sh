@@ -26,7 +26,7 @@
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/9_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/1bw_ino_multi_issue'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/multi_pass_issue/runahead_3'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bw_per_cluster/4_bw/1_eu'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bw_per_cluster/6_bw/1_eu'
 
 
 QSUB_OUT_PATH=$OUT_PATH/'qsub_files'
