@@ -148,6 +148,7 @@ def post_process_stat (result_map):
   cr.mem_accuracy (result_map)
 
   cr.wasted_ins_rat (result_map)
+  cr.cache_miss (result_map)
 
 
 ################

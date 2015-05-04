@@ -148,6 +148,10 @@ def init_params (result_map):
   result_map['SQ.size_rat'] = 0.0
   result_map['pars.wp_ins_cnt_avg'] = 0.0
   result_map['commit.num_waste_ins'] = 0.0
+  result_map['lsqManager.cache_miss_cnt'] = 0.0
+  result_map['lsqManager.cache_hit_cnt'] = 0.0
+  result_map['memory.cache_miss_cnt'] = 0.0
+  result_map['memory.cache_hit_cnt'] = 0.0
   # AGGREGATE MEASUREMENTS
   result_map['fetch'] = 0.0
   result_map['decode-rename'] = 0.0
@@ -160,13 +164,15 @@ def init_params (result_map):
   result_map['wire'] = 0.0
   result_map['stage-reg'] = 0.0
   result_map['ED'] = 0.0
+  result_map['ED2'] = 0.0
   result_map['no-compute'] = 0.0
   result_map['alu-compute'] = 0.0
   result_map['mem-compute'] = 0.0
-  result_map['bp-accuracy'] = 0.0
+  result_map['bpu-accuracy'] = 0.0
   result_map['mem-accuracy'] = 0.0
   result_map['wasted_ins_rat'] = 0.0
   result_map['core.Energy'] = 0.0
+  result_map['cache_miss_rat'] = 0.0
   # AREA
   result_map['area'] = 0.0
 

@@ -10,6 +10,7 @@ import os
 
 # VERIFY THE NUMBER OF EXE INSTRUCTIONS IS SUFFICIENTLY LARGE
 def stages (result_map):
+    bp_energy (result_map)
     fetch_energy (result_map)
     decode_rr_energy (result_map)
     issue_energy (result_map)
@@ -19,7 +20,7 @@ def stages (result_map):
     l2_l3_energy (result_map)
     commit_energy (result_map)
 
-def fetch_energy (result_map):
+def bp_energy (result_map):
     energy = 0
 
     energy += result_map['2bc_gskew.e_ram']
@@ -29,10 +30,16 @@ def fetch_energy (result_map):
     energy += result_map['2bc_gskew.wire.e_w_bp2cache_bb']
     energy += result_map['BTB.e_cam']
     energy += result_map['BTB.e_leak']
-    energy += result_map['fetch.e_ff']
-    energy += result_map['fetch.e_leak']
     energy += result_map['branchPred.e_ff']
     energy += result_map['branchPred.e_leak']
+
+    result_map['bpu'] = energy
+
+def fetch_energy (result_map):
+    energy = 0
+
+    energy += result_map['fetch.e_ff']
+    energy += result_map['fetch.e_leak']
     energy += result_map['l1_i_0.e_ram']
     energy += result_map['l1_i_0.e_leak']
     energy += result_map['itlb.e_cam']
@@ -269,7 +276,8 @@ def core_energy (result_map):
 def ed (result_map):
     ed = 0.0
     cycle_time = 0.5e-9
-    energy = result_map['TOTAL.Energy']
+    jouls = 1.0e-12
+    energy = result_map['TOTAL.Energy'] * jouls
     delay = result_map['sysClock.clk_cycles'] * cycle_time
     ed = energy * delay
 
@@ -277,8 +285,9 @@ def ed (result_map):
 
 def ed2 (result_map):
     ed2 = 0.0
-    cycle_time = 0.5e-9
-    energy = result_map['TOTAL.Energy']
+    cycle_time = 0.5e-9 # second
+    jouls = 1.0e-12 #pJ -> J
+    energy = result_map['TOTAL.Energy'] * jouls
     delay = result_map['sysClock.clk_cycles'] * cycle_time
     ed2 = energy * delay * delay
 
@@ -332,3 +341,16 @@ def wasted_ins_rat (result_map):
     rat_per_1k = rat * 1000
 
     result_map['wasted_ins_rat'] = rat_per_1k
+
+# MEMORY
+def cache_miss (result_map):
+    cache_miss = result_map['lsqManager.cache_miss_cnt']
+    cache_hit = result_map['lsqManager.cache_hit_cnt']
+    if cache_miss == 0 or cache_hit == 0:
+      cache_miss = result_map['memory.cache_miss_cnt']
+      cache_hit = result_map['memory.cache_hit_cnt']
+    cache_axes = cache_miss + cache_hit
+
+    miss_rate = float(cache_miss) / cache_axes
+
+    result_map['cache_miss_rat'] = miss_rate
