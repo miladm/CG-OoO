@@ -12,6 +12,9 @@ import results_verif
 import custom_result as cr
 
 # INITIALIZE THE BENCHMARKS
+b_names_fancy = ["Perl", "Bzip2", "Gcc", "Mcf", \
+             "Gobmk", "Hmmer", "Sjeng", "Libquantum", \
+             "H264ref", "Omnetpp", "Astar", "Xalancbmk"]
 def init_bench (results_table):
   b_names = ["400.perlbench", "401.bzip2", "403.gcc", "429.mcf", \
              "445.gobmk", "456.hmmer", "458.sjeng", "462.libquantum", \
@@ -36,14 +39,14 @@ def init_files (b_names, mode, result_in_dir):
 def print_headers (result_out_dir, results_table):
   for result_param in results_table:
     if result_param == 'bench_names': continue
-    bench_names = results_table['bench_names']
+    bench_names = b_names_fancy
     out_path = result_out_dir + '/' + result_param + '.csv'
     if os.path.isfile (out_path): break
     pF_out = open (out_path, 'a')
     pF_out.write (' ' + ', ')
     for value in bench_names:
       pF_out.write (str (value) + ', ')
-    pF_out.write ("mean, \n")
+    pF_out.write ("Hearm. Mean, \n")
     pF_out.close ()
     print out_path
 

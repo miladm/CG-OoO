@@ -42,10 +42,16 @@ def fetch_energy (result_map):
 def decode_rr_energy (result_map):
     energy = 0
 
-    energy += result_map['grfManager.rr.wire.e_w_cache2rr']
-    energy += result_map['registerFile.rr.wire.e_w_cache2rr']
-    energy += result_map['registerRename.rd_wire.e_wire']
     energy += result_map['GlobalRegisterRename.rd_wire.e_wire']
+    energy += result_map['registerRename.rd_wire.e_wire']
+    energy += result_map['registerFile.rr.wire.e_w_cache2rr']
+    energy += result_map['grfManager.rr.wire.e_w_cache2rr']
+    energy += result_map['grfManager.grat.e_ram']
+    energy += result_map['grfManager.gapr.e_ram']
+    energy += result_map['grfManager.garst.e_ram']
+    energy += result_map['rfManager.rat.e_ram']
+    energy += result_map['rfManager.apr.e_ram']
+    energy += result_map['rfManager.arst.e_ram']
     energy += result_map['decode.e_ff']
     energy += result_map['decode.e_leak']
 
@@ -154,6 +160,14 @@ def commit_energy (result_map):
 def rf_energy (result_map):
     energy = 0
 
+    energy += result_map['registerFile.rd_wire.e_wire']
+    energy += result_map['registerFile.wr_wire.e_wire']
+    energy += result_map['registerFile.wr_wire.e_w_cache2rf']
+    energy += result_map['registerFile.wr_wire.e_w_eu2simplerf']
+    energy += result_map['rfManager.rf.e_leak']
+    energy += result_map['rfManager.rf.e_ram']
+    energy += result_map['grfManager.grf.e_leak']
+    energy += result_map['grfManager.grf.e_ram']
     energy += result_map['lrfManager.e_leak']
     energy += result_map['lrfManager.e_ram']
     energy += result_map['registerRename.wr_wire.e_w_eu2rf']
@@ -162,16 +176,6 @@ def rf_energy (result_map):
     energy += result_map['LocalRegisterFile.rd_wire.e_wire']
     energy += result_map['LQ.rd_wire.e_w_lsq2lrf']
     energy += result_map['LQ.rd_wire.e_w_lsq2grf']
-    energy += result_map['rfManager.e_ram']
-    energy += result_map['registerFile.rd_wire.e_wire']
-    energy += result_map['registerFile.wr_wire.e_wire']
-    energy += result_map['registerFile.wr_wire.e_w_cache2rf']
-    energy += result_map['registerFile.wr_wire.e_w_eu2simplerf']
-    energy += result_map['grfManager.grf.e_leak']
-    energy += result_map['grfManager.grf.e_ram']
-    energy += result_map['grfManager.grat.e_ram']
-    energy += result_map['grfManager.gapr.e_ram']
-    energy += result_map['grfManager.garst.e_ram']
 
     result_map['rf'] = energy
 
