@@ -75,8 +75,6 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
             Assert (_current_bb != NULL);
 #endif
         }
-        if (i == 0)
-            _e_icache.ramAccess ();
 
         /*-- FETCH INS --*/
         bbInstruction* ins = _current_bb->popFront ();
