@@ -95,6 +95,7 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         pipe_stall = PIPE_BUSY;
 
         /*-- ENERGY --*/
+        _fetched_so_far++;
         if (_fetched_so_far % _stage_width == 0) { 
             _e_icache.ramAccess ();
             _fetched_so_far = 0;

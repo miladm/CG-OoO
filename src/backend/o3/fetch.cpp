@@ -73,9 +73,9 @@ PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
-        _fetched_so_far++;
 
         /*-- ENERGY --*/
+        _fetched_so_far++;
         if (_fetched_so_far % _stage_width == 0) { 
             _e_icache.ramAccess ();
             _fetched_so_far = 0;

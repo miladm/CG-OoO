@@ -21,7 +21,7 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/mov_insertion'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/btb_test/bb'
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/sgrd_test/198_pr/bb'
-OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4/o3_ino'
+OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4/bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_9'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/18_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/1bw_skipahead'
