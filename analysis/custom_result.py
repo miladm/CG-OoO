@@ -64,6 +64,20 @@ def decode_rr_energy (result_map):
 
     result_map['decode-rename'] = energy
 
+def rename_energy (result_map):
+    energy = 0
+
+    energy += result_map['grfManager.rr.wire.e_w_cache2rr']
+    energy += result_map['grfManager.grat.e_ram']
+    energy += result_map['grfManager.gapr.e_ram']
+    energy += result_map['grfManager.garst.e_ram']
+
+    energy += result_map['rfManager.rat.e_ram']
+    energy += result_map['rfManager.apr.e_ram']
+    energy += result_map['rfManager.arst.e_ram']
+
+    result_map['rename.Energy'] = energy
+
 def issue_energy (result_map):
     energy = 0
 
@@ -135,6 +149,26 @@ def memory_energy (result_map):
 
     result_map['memory'] = energy
 
+def lsq_energy (result_map):
+    energy = 0
+
+    energy += result_map['stBuff.e_ram']
+    energy += result_map['stBuff.e_leak']
+
+    energy += result_map['SQ.e_cam']
+    energy += result_map['SQ.e_ram']
+    energy += result_map['SQ.e_leak']
+
+    energy += result_map['LQ.e_cam']
+    energy += result_map['LQ.e_ram']
+    energy += result_map['LQ.e_leak']
+
+    ins_cnt = result_map['memory.ins_cnt']
+
+    energy /= float(ins_cnt)
+
+    result_map['lsq.Energy'] = energy
+
 def l2_l3_energy (result_map):
     energy = 0
 
@@ -167,16 +201,19 @@ def commit_energy (result_map):
 def rf_energy (result_map):
     energy = 0
 
-    energy += result_map['registerFile.rd_wire.e_wire']
-    energy += result_map['registerFile.wr_wire.e_wire']
-    energy += result_map['registerFile.wr_wire.e_w_cache2rf']
-    energy += result_map['registerFile.wr_wire.e_w_eu2simplerf']
+    energy += result_map['rfManager.e_leak']
+    energy += result_map['rfManager.e_ram']
     energy += result_map['rfManager.rf.e_leak']
     energy += result_map['rfManager.rf.e_ram']
     energy += result_map['grfManager.grf.e_leak']
     energy += result_map['grfManager.grf.e_ram']
     energy += result_map['lrfManager.e_leak']
     energy += result_map['lrfManager.e_ram']
+
+    energy += result_map['registerFile.wr_wire.e_w_cache2rf']
+    energy += result_map['registerFile.wr_wire.e_w_eu2simplerf']
+    energy += result_map['registerFile.rd_wire.e_wire']
+    energy += result_map['registerFile.wr_wire.e_wire']
     energy += result_map['registerRename.wr_wire.e_w_eu2rf']
     energy += result_map['GlobalRegisterRename.wr_wire.e_w_eu2grf']
     energy += result_map['LocalRegisterFile.wr_wire.e_w_eu2lrf']
@@ -271,6 +308,29 @@ def core_energy (result_map):
 
     result_map['core.Energy'] = energy
 
+# LRF / GRF
+def lrf_energy (result_map):
+    lrf_energy = 0
+
+    lrf_energy += result_map['lrfManager.e_leak']
+    lrf_energy += result_map['lrfManager.e_ram']
+
+    result_map['lrf.Energy'] = lrf_energy
+
+def grf_energy (result_map):
+    grf_energy = 0
+
+    grf_energy += result_map['grfManager.grf.e_leak']
+    grf_energy += result_map['grfManager.grf.e_ram']
+
+    grf_energy += result_map['rfManager.rf.e_leak']
+    grf_energy += result_map['rfManager.rf.e_ram']
+
+    grf_energy += result_map['rfManager.e_leak']
+    grf_energy += result_map['rfManager.e_ram']
+
+    result_map['grf.Energy'] = grf_energy
+
 
 # ENERGY DELAY ANALYSIS
 def ed (result_map):
@@ -292,6 +352,15 @@ def ed2 (result_map):
     ed2 = energy * delay * delay
 
     result_map['ED2'] = ed2
+
+def joul_per_op (result_map):
+    jpop = 0.0
+    jouls = 1.0e-12 #pJ -> J
+    energy = result_map['TOTAL.Energy'] * jouls
+    all_ops = result_map['commit.ins_cnt']
+    jpop = energy / float(all_ops)
+
+    result_map['JPOp'] = jpop
 
 # EU BUSY BREAKDOWN
 def no_compute (result_map):

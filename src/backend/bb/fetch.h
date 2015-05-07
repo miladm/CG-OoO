@@ -44,6 +44,7 @@ class bb_fetch : protected stage {
         bool _switch_to_frontend;
         BB_FETCH_STATE _fetch_state;
         dynBasicblock* _current_bb;
+        WIDTH _fetched_so_far;
 
         /*-- STAT --*/
         ScalarStat& s_bb_cnt;

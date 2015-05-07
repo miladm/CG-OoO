@@ -94,6 +94,11 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
             break;
         }
 
+        /*-- ENERGY --*/
+        int blk_size = bb->getBBorigSize ();
+        for (int i = 0; i < blk_size; i++)
+            _e_stage.ffAccess (); /* READ PREV STAGE(S) */
+
         /*-- COMMIT BB --*/
         bb = _bbROB->popFront ();
         dynBasicblock* bb_dual = _bbQUE->popFront ();
@@ -110,8 +115,6 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
                                "Commit bb", bb->getBBID (), _clk->now ());
         s_bb_size_avg += bb->getBBorigSize ();
         commitBB (bb);
-
-        _e_stage.ffAccess (); /* READ PREV STAGE(S) */
 
         /*-- UPDATE WIRES --*/
         _bbROB->updateWireState (READ);

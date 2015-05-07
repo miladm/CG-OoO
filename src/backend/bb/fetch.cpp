@@ -27,6 +27,7 @@ bb_fetch::bb_fetch (port<bbInstruction*>& bp_to_fetch_port,
     _switch_to_frontend = false;
     _fetch_state = FETCH_COMPLETE;
     _current_bb = NULL;
+    _fetched_so_far = 0;
 }
 
 bb_fetch::~bb_fetch () {}
@@ -68,7 +69,8 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         if (_current_bb->getBBstate () == EMPTY_BUFF) {
 //            break; /* FOR NO BACK-TO-BACK BB FETCH IN 1 CYCLE */
             if (!fetchBB (frontend_status)) break; /* COULD NOT FETCH ANOTHER NEW BB */
-            _e_stage.ffAccess (); /* FOR BB HEADER */
+            _e_stage.ffAccess (); /* FOR BB HEADER READ */
+            _e_stage.ffAccess (); /* FOR BB HEADER WRITE */
 #ifdef ASSERTION
             Assert (_current_bb != NULL);
 #endif
@@ -91,6 +93,12 @@ PIPE_ACTIVITY bb_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
+
+        /*-- ENERGY --*/
+        if (_fetched_so_far % _stage_width == 0) { 
+            _e_icache.ramAccess ();
+            _fetched_so_far = 0;
+        }
     }
     updateBBfetchState ();
 

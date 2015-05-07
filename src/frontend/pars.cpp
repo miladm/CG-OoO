@@ -312,7 +312,7 @@ VOID pin__init (string bench_path, string config_path, string out_dir) {
         int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
         _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
         _e_wire2 = new wire_energy("2bc_gskew.wire", g_cfg->_root["cpu"]["backend"]["bp"]["bc_gskew"]);
-        g_2bcgskew_bp   = new HybridBPskew (2048, 2, 8192, 13, 2, 8192, 2, 0, width);
+        g_2bcgskew_bp   = new HybridBPskew (8192, 2, 8192, 13, 2, 8192, 2, 0, width);
     } else {
         Assert (0 && "Invalid BP type chosen");
     }
@@ -776,6 +776,9 @@ ADDRINT PredictAndUpdate (const ADDRINT __pc, const INT32 __taken,
     /* ESTIMATE THE NUMBER OF LOOKUPS BY EACH BLOCK OF CODE - THIS WON'T WORK
      * FOR THE CASE WHERE MORE THAN ONE BRANCH/CALL/JUMP/REG ARE IN THE BLOC */
     int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+    if (g_var.g_core_type == IN_ORDER) g_cfg->_root["cpu"]["backend"]["ino_pipe"]["fetch"]["width"] >> width;
+    else if (g_var.g_core_type == OUT_OF_ORDER) g_cfg->_root["cpu"]["backend"]["o3_pipe"]["fetch"]["width"] >> width;
+    else if (g_var.g_core_type == BASICBLOCK) width = 1;
     int num_lookup = int(ceil(float(_blkInsCnt) / width));
     s_bpu_lookup_cnt += num_lookup;
     Assert (num_lookup > 0);
@@ -805,7 +808,7 @@ ADDRINT PredictAndUpdate (const ADDRINT __pc, const INT32 __taken,
 
     /*-- BTB LOOKUP --*/
     ADDRS pred_tgt = 0;
-    if (pred) {
+    {
         if (btb->valid (pc)) {
             pred_tgt = btb->lookup (pc);
         } else {
@@ -817,7 +820,7 @@ ADDRINT PredictAndUpdate (const ADDRINT __pc, const INT32 __taken,
             pred = false;
             pred_tgt = 0;
         }
-        _e_btb->camAccess (1); /* ASSUMING SEQUENTIAL BP->BTB ACCESS */
+        _e_btb->camAccess (num_lookup); /* ASSUMING SEQUENTIAL BP->BTB ACCESS */
     }
 
     /*-- BP UPDATE --*/

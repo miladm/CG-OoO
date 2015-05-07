@@ -40,8 +40,8 @@ cpu:
                localHistoryBits: 11
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 0.33415725
-               e_leak: 7.356e-3
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
                e_w_bp2cache_ino: 1.37e-1
                e_w_bp2cache_o3: 3.75e-1
                e_w_bp2cache_bb: 3.28e-1
@@ -52,8 +52,8 @@ cpu:
                globalCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 0.33415725
-               e_leak: 7.356e-3
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
                e_w_bp2cache_ino: 1.37e-1
                e_w_bp2cache_o3: 3.75e-1
                e_w_bp2cache_bb: 3.28e-1
@@ -70,8 +70,8 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 0.33415725
-               e_leak: 7.356e-3
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
                e_w_bp2cache_ino: 1.37e-1
                e_w_bp2cache_o3: 3.75e-1
                e_w_bp2cache_bb: 3.28e-1
@@ -88,8 +88,8 @@ cpu:
                choiceCtrBits: 2
                instShiftAmt: 0
                e_cam: 0
-               e_ram: 0.33415725
-               e_leak: 7.356e-3
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
                e_w_bp2cache_ino: 1.37e-1
                e_w_bp2cache_o3: 3.75e-1
                e_w_bp2cache_bb: 3.28e-1
@@ -105,7 +105,7 @@ cpu:
                name: SIMPLE_RF
                cout: 1
                e_cam: 0
-               e_ram: 7.405786
+               e_ram: 2.534607
                e_leak: 4.939e-3
                e_w_eu2simplerf: 1.22e-1
                e_w_cache2rf: 2.38E-01
@@ -119,7 +119,7 @@ cpu:
                name: LRF
                cout: 9 #NOTE equal to the number of BBWINDOWS
                e_cam: 0
-               e_ram: 0.619338
+               e_ram: 3.10289e-1
                e_leak: 1.098e-3
                e_w_eu2lrf: 3.85e-2
                w_wire: 1
@@ -139,7 +139,7 @@ cpu:
                name: GRF
                cout: 1
                e_cam: 0
-               e_ram: 7.11882
+               e_ram: 7.649056
                e_leak: 1.476e-2
                e_w_eu2grf: 8.90e-2
                w_wire: 1
@@ -158,7 +158,7 @@ cpu:
                name: RF
                cout: 1
                e_cam: 0
-               e_ram: 9.037722
+               e_ram: 7.649056
                e_leak: 1.476e-2
                e_w_eu2rf: 1.02e-1
                w_wire: 1
@@ -308,10 +308,10 @@ cpu:
                 count: 1
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
-                e_cam: 4.08806
+                e_cam: 3.210155
                 e_cam2: 1.184757
-                e_ram: 2.638897
-                e_leak: 6.606E-1    # combination of RAM/CAM tables
+                e_ram: 6.923552
+                e_leak: 1.9794E-2    # combination of RAM/CAM tables
                 e_w_rs2eu: 6.99e-2
                 e_w_rr2rs: 1.27e-1
                 w_wire: 1
@@ -320,7 +320,7 @@ cpu:
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 9
-                runahead_issue_en: 0
+                runahead_issue_en: 1
                 runahead_issue_cnt: 4
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
@@ -397,9 +397,9 @@ cpu:
                 count: 1
                 rd_wire_cnt: 16
                 wr_wire_cnt: 16
-                e_cam: 1.238
+                e_cam: 0.087126e3
                 e_ram: 0
-                e_leak: 1.963e-2
+                e_leak: 4.514E-2
                 e_wire: 0   # TODO already counted in BP?
                 w_wire: 64
                 name: BTB
@@ -539,13 +539,13 @@ cpu:
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            schedule:
-               width: 48
+               width: 12
                latency: 2
                name: schedule
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            execution:
-               width: 48
+               width: 12
                latency: 1 #TODO what does it mean for FPU?
                name: execution
                e_ff: 5.864e-1

@@ -42,16 +42,16 @@ void inoBkEnd_init () {
     g_ino_clk = new sysClock (1);
     _core = new sysCore (g_ino_clk,
             bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_width,
-            fch_lat, 50, 
-            1, 50, 
-            bpu_lat, 50, 
-            dcd_lat, 50, 
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
             1, eu_width,  //TODO sch_lat is replaced here - take care of it.
-            1, 50, 
-            exe_lat, 50, 
-            1, 50, 
-            1, 50, 
-            1, 50);
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 
 void inoBkEnd_fini () {

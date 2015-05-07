@@ -35,6 +35,7 @@ class fetch : protected stage {
         CAMtable<dynInstruction*>* _iROB;
         int _insListIndx;
         bool _switch_to_frontend;
+        WIDTH _fetched_so_far;
 
         /*-- ENERGY --*/
         table_energy _e_icache;

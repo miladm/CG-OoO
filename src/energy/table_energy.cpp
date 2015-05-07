@@ -42,7 +42,7 @@ table_energy::table_energy (string class_name, const YAML::Node& root)
 
     /*-- SPECIAL HANDLING FOR SGRF --*/
     if (segmnt_cnt > 0) {
-        PJ ram_energy_per_access = _ram_energy_per_access / segmnt_cnt;
+        PJ ram_energy_per_access = _ram_energy_per_access / (segmnt_cnt * 2); //THE 2 COMES FROM MY SPICE SIMULATION TRENDS
         e_ram.setEnergyPerAccess (ram_energy_per_access);
     }
 }

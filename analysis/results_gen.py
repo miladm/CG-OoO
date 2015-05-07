@@ -46,7 +46,7 @@ def print_headers (result_out_dir, results_table):
     pF_out.write (' ' + ', ')
     for value in bench_names:
       pF_out.write (str (value) + ', ')
-    pF_out.write ("Hearm. Mean, \n")
+    pF_out.write ("Harm. Mean, \n")
     pF_out.close ()
     print out_path
 
@@ -86,6 +86,8 @@ def update_results_table (results_table, result_map):
 def update_result_map (result_param, result_value, result_map):
   if result_param in result_map:
     result_map[result_param] += float(result_value)
+  else:
+    print "ERROR: Unknown result paramter:", result_param
 
 # READ THE SIMPOINTPOINT FILE AND ITS WEIGHTS
 def parseSimpointFiles (in_paths, results_table, result_map):
@@ -109,12 +111,13 @@ def parseSimpointFiles (in_paths, results_table, result_map):
       if len (tokens) > 2:
         result_param = tokens[1]
         result_value = 0
+        flag = False
         if result_param.startswith ( 'bbWinBuf' ): # SOME POST-PROCESSING
-          result_param = 'bbWinBuf' + result_param[11:]
+          result_param = 'bbWinBuf' + '.' + result_param[11:]
         elif result_param.startswith ( 'bbWindow' ): # SOME POST-PROCESSING
-          result_param = 'bbWindow' + result_param[11:]
+          result_param = 'bbWindow' + '.' + result_param[11:]
         elif result_param.startswith ( 'lrfManager' ): # SOME POST-PROCESSING
-          result_param = 'lrfManager' + result_param[13:]
+          result_param = 'lrfManager' + '.' + result_param[13:]
         if result_param[-1] != ':':
           result_param = tokens[2]
           result_param = tokens[1]+'.'+result_param[:-1]
@@ -137,8 +140,14 @@ def post_process_stat (result_map):
   cr.stage_energy (result_map)
   cr.core_energy (result_map)
 
+  cr.rename_energy (result_map)
+  cr.lsq_energy (result_map)
+  cr.grf_energy (result_map)
+  cr.lrf_energy (result_map)
+
   cr.ed (result_map)
   cr.ed2 (result_map)
+  cr.joul_per_op (result_map)
 
   cr.no_compute (result_map)
   cr.alu_compute (result_map)

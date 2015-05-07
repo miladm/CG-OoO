@@ -27,6 +27,7 @@ def init_params (result_map):
   result_map['iROB.e_ram'] = 0.0
   result_map['iROB.e_leak'] = 0.0
   result_map['rfManager.e_ram'] = 0.0
+  result_map['rfManager.e_leak'] = 0.0
   result_map['registerFile.rd_wire.e_wire'] = 0.0
   result_map['registerFile.wr_wire.e_wire'] = 0.0
   result_map['registerFile.rr.wire.e_w_cache2rr'] = 0.0
@@ -163,16 +164,22 @@ def init_params (result_map):
   result_map['rf'] = 0.0
   result_map['wire'] = 0.0
   result_map['stage-reg'] = 0.0
+  result_map['JPOp'] = 0.0
   result_map['ED'] = 0.0
   result_map['ED2'] = 0.0
   result_map['no-compute'] = 0.0
   result_map['alu-compute'] = 0.0
   result_map['mem-compute'] = 0.0
   result_map['bpu-accuracy'] = 0.0
+  result_map['bpu'] = 0.0
   result_map['mem-accuracy'] = 0.0
   result_map['wasted_ins_rat'] = 0.0
   result_map['core.Energy'] = 0.0
   result_map['cache_miss_rat'] = 0.0
+  result_map['lrf.Energy'] = 0.0
+  result_map['grf.Energy'] = 0.0
+  result_map['rename.Energy'] = 0.0
+  result_map['lsq.Energy'] = 0.0
   # AREA
   result_map['area'] = 0.0
 
