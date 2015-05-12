@@ -1,14 +1,19 @@
 SERVER="milad@snooki.stanford.edu"
-RESULTS_DIR="/scratch/milad/qsub_outputs/perf_sim_test/"
 EXT=".csv"
 
-#EXP="multi_bb_fetch/width_size/width_1/o3_ino"
-#EXP="multi_bb_fetch/width_size/width_1/bb"
-EXP='multi_bb_fetch/perfect_mem/o3_ino_w1'
+RESULTS_DIR="/scratch/milad/qsub_outputs/perf_sim_test"
+TARGET_DIR="/multi_bb_fetch/width_size/width_4"
 
+SUB=o3_ino
+rm -rf $SUB
+mkdir $SUB
+EXP=$TARGET_DIR/$SUB
+scp $SERVER:$RESULTS_DIR/$EXP/analysis/* ./$SUB/.
+echo $SERVER:$RESULTS_DIR/$EXP/analysis/
 
-FILE="commit.ipc"
-scp $SERVER:$RESULTS_DIR/$EXP/analysis/$FILE$EXT .
-
-FILE='Energy'
-scp "$SERVER:$RESULTS_DIR/$EXP/analysis/$FILE$EXT" .
+SUB=bb
+rm -rf $SUB
+mkdir $SUB
+EXP=$TARGET_DIR/$SUB
+scp $SERVER:$RESULTS_DIR/$EXP/analysis/* ./$SUB/.
+echo $SERVER:$RESULTS_DIR/$EXP/analysis/
