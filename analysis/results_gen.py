@@ -10,6 +10,7 @@ import os
 import params
 import results_verif
 import custom_result as cr
+import math
 
 # INITIALIZE THE BENCHMARKS
 b_names_fancy = ["Perl", "Bzip2", "Gcc", "Mcf", \
@@ -85,7 +86,9 @@ def update_results_table (results_table, result_map):
 # UPDATE RESULT MAP FOR EACH INDIVIDUAL BENCHMARK
 def update_result_map (result_param, result_value, result_map):
   if result_param in result_map:
-    result_map[result_param] += float(result_value)
+    value = float(result_value)
+    if not math.isnan(value) and not math.isinf(value):
+        result_map[result_param] += value
   else:
     print "ERROR: Unknown result paramter:", result_param
 
@@ -140,6 +143,10 @@ def post_process_stat (result_map):
   cr.stage_energy (result_map)
   cr.core_energy (result_map)
 
+  cr.core_power (result_map)
+  cr.total_power (result_map)
+  cr.bipsqw (result_map)
+
   cr.rename_energy (result_map)
   cr.lsq_energy (result_map)
   cr.grf_energy (result_map)
@@ -158,6 +165,7 @@ def post_process_stat (result_map):
 
   cr.wasted_ins_rat (result_map)
   cr.cache_miss (result_map)
+  cr.window_size (result_map)
 
 
 ################

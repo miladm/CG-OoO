@@ -58,7 +58,6 @@ void bbInstruction::setAR (AR ar, AXES_TYPE type) {
             Assert (true == false && "wrong instruction type");
         }
     }
-
 }
 
 void bbInstruction::setUPLDdep (bool upld_dep) { _upld_dep = upld_dep; }

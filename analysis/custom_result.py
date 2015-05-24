@@ -17,7 +17,7 @@ def stages (result_map):
     execute_energy (result_map)
     memory_energy (result_map)
     rf_energy (result_map)
-    l2_l3_energy (result_map)
+#    l2_l3_energy (result_map)
     commit_energy (result_map)
 
 def bp_energy (result_map):
@@ -81,30 +81,57 @@ def rename_energy (result_map):
 def issue_energy (result_map):
     energy = 0
 
+    energy += issue_energy_cam (result_map)
+    energy += issue_energy_ram (result_map)
+    energy += issue_energy_rest (result_map)
+
+    result_map['issue'] = energy
+
+def issue_energy_cam (result_map):
+    energy = 0.0
+
+    energy += result_map['bbWinBuf.e_cam']
+    energy += result_map['bbWindow.e_cam']
+    energy += result_map['ResStn_0.e_cam']
+    energy += result_map['ResStn_0.e_cam2']
+
+    result_map['issue_cam'] = energy
+
+    return energy
+    
+def issue_energy_ram (result_map):
+    energy = 0.0
+
+    energy += result_map['iWindow.e_ram']
+    energy += result_map['ResStn_0.e_ram']
+    energy += result_map['bbWindow.e_ram']
+    energy += result_map['bbWinBuf.e_ram']
+
+    result_map['issue_ram'] = energy
+
+    return energy
+    
+def issue_energy_rest (result_map):
+    energy = 0.0
+
     energy += result_map['iWindow.wr_wire.e_w_cache2win']
     energy += result_map['schedule.e_ff']
     energy += result_map['schedule.e_leak']
     energy += result_map['iWindow.e_leak']
-    energy += result_map['iWindow.e_ram']
     energy += result_map['iWindow.rd_wire.e_wire']
     energy += result_map['iWindow.wr_wire.e_w_win2eu']
     energy += result_map['ResStn_0.wr_wire.e_w_rr2rs']
     energy += result_map['ResStn_0.rd_wire.e_w_rs2eu']
     energy += result_map['ResStn_0.e_leak']
-    energy += result_map['ResStn_0.e_cam']
-    energy += result_map['ResStn_0.e_cam2']
-    energy += result_map['ResStn_0.e_ram']
     energy += result_map['bbWindow.wr_wire.e_w_rr2iq']
     energy += result_map['bbWindow.rd_wire.e_w_iq2eu']
-    energy += result_map['bbWindow.e_cam']
-    energy += result_map['bbWindow.e_ram']
     energy += result_map['bbWindow.e_leak']
-    energy += result_map['bbWinBuf.e_cam']
-    energy += result_map['bbWinBuf.e_ram']
     energy += result_map['bbWinBuf.e_leak']
 
-    result_map['issue'] = energy
+    result_map['issue_rest'] = energy
 
+    return energy
+    
 def execute_energy (result_map):
     energy = 0
 
@@ -146,6 +173,12 @@ def memory_energy (result_map):
     energy += result_map['memory.e_leak']
     energy += result_map['l1_d_0.e_ram']
     energy += result_map['l1_d_0.e_leak']
+
+    # for now, combine L2 and L3 into memory
+    energy += result_map['l2_0.e_ram']
+    energy += result_map['l2_0.e_leak']
+    energy += result_map['l3_0.e_ram']
+    energy += result_map['l3_0.e_leak']
 
     result_map['memory'] = energy
 
@@ -308,6 +341,35 @@ def core_energy (result_map):
 
     result_map['core.Energy'] = energy
 
+# POWER
+def core_power (result_map):
+    energy = 0
+    cycle_time = 0.5e-9 #second
+    delay = result_map['sysClock.clk_cycles'] * cycle_time
+
+    energy += result_map['TOTAL.Energy']
+    energy -= result_map['l1_d_0.e_ram']
+    energy -= result_map['l1_d_0.e_leak']
+    energy -= result_map['l1_i_0.e_ram']
+    energy -= result_map['l1_i_0.e_leak']
+    energy -= result_map['l2_0.e_ram']
+    energy -= result_map['l2_0.e_leak']
+    energy -= result_map['l3_0.e_ram']
+    energy -= result_map['l3_0.e_leak']
+
+    power = energy / delay
+    result_map['core.Power'] = power
+
+def total_power (result_map):
+    energy = 0
+    cycle_time = 0.5e-9 #second
+    delay = result_map['sysClock.clk_cycles'] * cycle_time
+
+    energy += result_map['TOTAL.Energy']
+
+    power = energy / delay
+    result_map['TOTAL.Power'] = power
+
 # LRF / GRF
 def lrf_energy (result_map):
     lrf_energy = 0
@@ -352,6 +414,28 @@ def ed2 (result_map):
     ed2 = energy * delay * delay
 
     result_map['ED2'] = ed2
+
+def bipsqw (result_map):
+    bi = 0.0
+    bips = 0.0
+    bipsqw = 0.0
+    billion = 1.0e9
+
+    cycle_time = 0.5e-9 #second
+    delay = result_map['sysClock.clk_cycles'] * cycle_time
+
+    all_ops = result_map['commit.ins_cnt']
+    bi = float(all_ops) / billion
+    bips = float(bi) / delay
+    bipsq = bips * bips * bips
+
+    jouls = 1.0e-12 #pJ -> J
+    energy = result_map['TOTAL.Energy'] * jouls
+    power = energy / delay
+
+    bipsqw = bipsq / power
+
+    result_map['bipsqw'] = bipsqw
 
 def joul_per_op (result_map):
     jpop = 0.0
@@ -423,3 +507,14 @@ def cache_miss (result_map):
     miss_rate = float(cache_miss) / cache_axes
 
     result_map['cache_miss_rat'] = miss_rate
+
+def window_size (result_map):
+    win_size = 0.0
+    avg_bb_cnt = result_map['commit.bb_size_avg']
+    avg_bb_size = result_map['schedule.bbWin_inflight_rat']
+    res_stn_size = result_map['ResStn_0.size_rat']
+
+    win_size = avg_bb_cnt * avg_bb_size + res_stn_size
+
+    result_map['window_avg_aize'] = win_size
+    
