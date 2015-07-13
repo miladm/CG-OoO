@@ -4,67 +4,130 @@
 }
 {\ttfamily \#include $<$stdint.h$>$}\par
 {\ttfamily \#include \char`\"{}sysCore.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../unit/sysClock.h\char`\"{}}\par
 Include dependency graph for inoBkEnd.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}{inoBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+void \hyperlink{inoBkEnd_8h_a8881313a01355484010fedbf942197ac}{inoBkEnd\_\-init} ()
 \item 
-void \hyperlink{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}{inoBkEndRun} ()
+void \hyperlink{inoBkEnd_8h_aee9170028b273f191a7fc575a9a90102}{inoBkEndRun} (\hyperlink{global_2global_8h_afd483fa40f0fa2b1ac067845b91f0c6e}{FRONTEND\_\-STATUS})
+\item 
+void \hyperlink{inoBkEnd_8h_a829925fbee4765360b2c6e01d3cbbd33}{inoBkEnd\_\-fini} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}{
-\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEnd\_\-init@{inoBkEnd\_\-init}}
-\index{inoBkEnd\_\-init@{inoBkEnd\_\-init}!inoBkEnd.h@{inoBkEnd.h}}
-\subsubsection[{inoBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEnd\_\-init (
-\begin{DoxyParamCaption}
-\item[{int}]{argc, }
-\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
-\end{DoxyParamCaption}
-)}}
-\label{inoBkEnd_8h_a008e3b2924f46240427e1efb7f79dfa9}
-
-\begin{DoxyCode}
-                                                   {
-    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
-    _core = new sysCore (1, 4, 4, 4, 4, 4, 4, 4,
-                         2, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-\hypertarget{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}{
-\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEndRun@{inoBkEndRun}}
-\index{inoBkEndRun@{inoBkEndRun}!inoBkEnd.h@{inoBkEnd.h}}
-\subsubsection[{inoBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEndRun (
+\hypertarget{inoBkEnd_8h_a829925fbee4765360b2c6e01d3cbbd33}{
+\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEnd\_\-fini@{inoBkEnd\_\-fini}}
+\index{inoBkEnd\_\-fini@{inoBkEnd\_\-fini}!inoBkEnd.h@{inoBkEnd.h}}
+\subsubsection[{inoBkEnd\_\-fini}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEnd\_\-fini (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{inoBkEnd_8h_a7f7897adf2514facd31db95c4b90314d}
+\label{inoBkEnd_8h_a829925fbee4765360b2c6e01d3cbbd33}
 
 \begin{DoxyCode}
-                   {
-    _core->runCore();
+                      {
+    delete _core;
+    delete g_ino_clk;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{inoBkEnd_8h_a8881313a01355484010fedbf942197ac}{
+\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEnd\_\-init@{inoBkEnd\_\-init}}
+\index{inoBkEnd\_\-init@{inoBkEnd\_\-init}!inoBkEnd.h@{inoBkEnd.h}}
+\subsubsection[{inoBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEnd\_\-init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8h_a8881313a01355484010fedbf942197ac}
+
+\begin{DoxyCode}
+                      {
+    dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
+    int width, bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
+    WIDTH bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_w
+      idth;
+
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+    const YAML::Node& pipe = root["ino_pipe"];
+    const YAML::Node& bpu = pipe["bp"];
+    const YAML::Node& fch = pipe["fetch"];
+    const YAML::Node& dcd = pipe["decode"];
+    const YAML::Node& sch = pipe["schedule"];
+    const YAML::Node& exe = pipe["execution"];
+    const YAML::Node& mem = pipe["memory"];
+    const YAML::Node& cmt = pipe["commit"];
+
+    bpu["latency"] >> bpu_lat; fch["latency"] >> fch_lat;
+    dcd["latency"] >> dcd_lat; sch["latency"] >> sch_lat;
+    exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
+    cmt["latency"] >> cmt_lat;
+
+    bpu["width"] >> bpu_width; fch["width"] >> fch_width;
+    dcd["width"] >> dcd_width; sch["width"] >> sch_width;
+    exe["width"] >> exe_width; mem["width"] >> mem_width;
+    cmt["width"] >> cmt_width;
+    root["width"] >> width;
+    WIDTH eu_width;
+    root["eu"]["alu"]["count"] >> eu_width;
+
+    g_ino_clk = new sysClock (1);
+    _core = new sysCore (g_ino_clk,
+            bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt
+      _width,
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
+            1, eu_width,  //TODO sch_lat is replaced here - take care of it.
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{inoBkEnd_8h_aee9170028b273f191a7fc575a9a90102}{
+\index{inoBkEnd.h@{inoBkEnd.h}!inoBkEndRun@{inoBkEndRun}}
+\index{inoBkEndRun@{inoBkEndRun}!inoBkEnd.h@{inoBkEnd.h}}
+\subsubsection[{inoBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void inoBkEndRun (
+\begin{DoxyParamCaption}
+\item[{{\bf FRONTEND\_\-STATUS}}]{}
+\end{DoxyParamCaption}
+)}}
+\label{inoBkEnd_8h_aee9170028b273f191a7fc575a9a90102}
+
+\begin{DoxyCode}
+                                                  {
+    _core->runCore(frontend_status);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
 
 

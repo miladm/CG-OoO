@@ -5,7 +5,14 @@ digraph G
   rankdir=LR;
   Node1 [label="listSchedule",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="listSchedule_phraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#a65aeab967a815a10deb65ad6d6ce5116"];
+  Node2 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#a89206e9b97c233cca9ffa40229a32a77"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="make_phraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#af5aea5750e9482dfe18f886b91b680b4"];
+  Node3 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="listSchedule_phraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#a65aeab967a815a10deb65ad6d6ce5116"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="make_phraseblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__phraseblock_8cpp.html#af5aea5750e9482dfe18f886b91b680b4"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="make_superblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__superblock_8cpp.html#a499b98fa166ddd7c784aca2c8a2c68b1"];
+  Node6 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

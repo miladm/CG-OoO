@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/bbROB.h Source File</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/bbROB.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,40 +58,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/backend/bbROB.h</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/bbROB.h</div>  </div>
 </div>
 <div class="contents">
-<a href="bbROB_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
-<a name="l00002"></a>00002 <span class="comment"> * bbROB.h</span>
-<a name="l00003"></a>00003 <span class="comment"> ******************************************************************************/</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#ifndef _BBROB_H</span>
-<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#define _BBROB_H</span>
-<a name="l00006"></a>00006 <span class="preprocessor"></span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;../lib/list.h&quot;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="bbROB_8h.html#aabdb90cc76fc428554ca74121227c8c4">00010</a> <span class="preprocessor">#define BBROB_LATENCY 1</span>
-<a name="l00011"></a><a class="code" href="bbROB_8h.html#a3fe273e91ed4f889df2196ef8fb4bebc">00011</a> <span class="preprocessor"></span><span class="preprocessor">#define READ_PORT 1</span>
-<a name="l00012"></a><a class="code" href="bbROB_8h.html#a26859958660cd9650456a82d89c10e10">00012</a> <span class="preprocessor"></span><span class="preprocessor">#define WRITE_PORT 1</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a><a class="code" href="bbROB_8h.html#a72ca002612eadcf93bfe5422db2db47f">00014</a> <span class="preprocessor">#define BBID_SIZ 5  //assume 32 BB in flight at most</span>
-<a name="l00015"></a><a class="code" href="bbROB_8h.html#a5a576ddbe688dfb27084150e14b6c4ca">00015</a> <span class="preprocessor"></span><span class="preprocessor">#define wGRF_SIZ 32 //a 32-bit ins</span>
-<a name="l00016"></a><a class="code" href="bbROB_8h.html#a58acc90aa1fd44209e2820565a716fa4">00016</a> <span class="preprocessor"></span><span class="preprocessor">#define rGRF_SIZ 32 //a 32-bit ins</span>
-<a name="l00017"></a><a class="code" href="bbROB_8h.html#af44e56b5c5a5e8a221acedfce4767bd9">00017</a> <span class="preprocessor"></span><span class="preprocessor">#define bbINSCNT 5  //Assume 32 ins per BB</span>
-<a name="l00018"></a><a class="code" href="bbROB_8h.html#ae16c597dc33076522e48eab8609c2300">00018</a> <span class="preprocessor"></span><span class="preprocessor">#define BBROB_ROW_SIZ BBID_SIZ+wGRF_SIZ+rGRF_SIZ+bbINSCNT</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>
-<a name="l00020"></a><a class="code" href="classbbROB.html">00020</a> <span class="keyword">class </span><a class="code" href="classbbROB.html">bbROB</a> : <span class="keyword">private</span> <a class="code" href="classunit.html">unit</a> {
-<a name="l00021"></a>00021         <span class="keyword">public</span>:
-<a name="l00022"></a>00022                 <a class="code" href="classbbROB.html#a76ac4539a3c9831412c228d7983547a8">bbROB</a>();
-<a name="l00023"></a>00023                 <a class="code" href="classbbROB.html#aacfe02dd4954453834bce4612c233952">~bbROB</a>();
-<a name="l00024"></a>00024                 <span class="keywordtype">void</span> <a class="code" href="classbbROB.html#a429d00755302da6c15acd707d93647d5">insert</a>(<a class="code" href="classbasicblock.html">basicblock</a>* bb);
-<a name="l00025"></a>00025                 <span class="keywordtype">bool</span> <a class="code" href="classbbROB.html#a3ab745ba2eac9a90c9dc580cb5724dee">commitBB</a>(<span class="keywordtype">int</span> num);
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027         <span class="keyword">private</span>:
-<a name="l00028"></a>00028                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a> * <a class="code" href="classbbROB.html#a76ac4539a3c9831412c228d7983547a8">bbROB</a>;
-<a name="l00029"></a>00029 };
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <span class="preprocessor">#endif </span><span class="comment">/*_BBROB_H*/</span>
+<a href="bbROB_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001                      
+<a name="l00002"></a>00002      Â          ∂         µ         }             ç         ¡      
+<a name="l00003"></a>00003   µ         ±        ≠   ÄDEV  …   ÄINO  —   ÄSYN  Ÿ   ÄSV~  <a class="code" href="ino_2_8AppleDouble_2sysClock_8cpp.html#aeae2238f68c18f90893e28db0bcb893f">·</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ‰dT‰dTÄ   ‰dT                                                                 üÇ<span class="stringliteral">&quot;               </span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -99,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -108,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

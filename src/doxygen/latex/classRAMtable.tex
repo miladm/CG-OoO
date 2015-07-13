@@ -15,7 +15,7 @@ Collaboration diagram for RAMtable$<$ tableType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classRAMtable_ac55186de99f6f9330182bb2c54327468}{RAMtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\hyperlink{classRAMtable_aedaaa4cfaa5e313536bc635915324763}{RAMtable} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string)
 \item 
 \hyperlink{classRAMtable_af78b491a54d6846af06058d803beda1a}{$\sim$RAMtable} ()
 \end{DoxyCompactItemize}
@@ -24,22 +24,20 @@ Collaboration diagram for RAMtable$<$ tableType\_\-T $>$:
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classRAMtable_ac55186de99f6f9330182bb2c54327468}{
+\hypertarget{classRAMtable_aedaaa4cfaa5e313536bc635915324763}{
 \index{RAMtable@{RAMtable}!RAMtable@{RAMtable}}
 \index{RAMtable@{RAMtable}!RAMtable@{RAMtable}}
 \subsubsection[{RAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf RAMtable}$<$ tableType\_\-T $>$::{\bf RAMtable} (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{table\_\-name = {\ttfamily \char`\"{}RAMtable$<$~tableType\_\-T~$>$\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classRAMtable_ac55186de99f6f9330182bb2c54327468}
+\label{classRAMtable_aedaaa4cfaa5e313536bc635915324763}
 
 \begin{DoxyCode}
-    : table<tableType_T> (len, RAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+    : table<tableType_T> (RAM_ARRAY, clk, root, table_name)
 {}
 \end{DoxyCode}
 \hypertarget{classRAMtable_af78b491a54d6846af06058d803beda1a}{

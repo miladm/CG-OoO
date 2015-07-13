@@ -6,12 +6,6 @@ digraph G
   Node1 [label="registerFile::reserveReg",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="rfManager::reserveRF",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classrfManager.html#ab38c1244739ba189161c3026361464ec"];
-  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="execution::executionImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classexecution.html#adc2d24703f3425df6107514535fea88b"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="execution::doEXECUTION",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classexecution.html#a972207b1dde6a4bb8731c3fc0908bac6"];
-  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="sysCore::runCore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classsysCore.html#a329e1539dcc7da668fb0d6237368922f"];
-  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="inoBkEndRun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$inoBkEnd_8h.html#a7f7897adf2514facd31db95c4b90314d"];
+  Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="bb_lrfManager::reserveRF",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbb__lrfManager.html#a660f06c81c3b829069e93d79512ca525"];
 }

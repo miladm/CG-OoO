@@ -87,15 +87,12 @@ Collaboration diagram for o3_fetch:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a891511bce60bdcd499b599da711d62e2">o3_fetch</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;bp_to_fetch_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_decode_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_bp_port, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> fetch_width, string stage_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a713761200dad2eb94986cb1ae90de6bf">o3_fetch</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;bp_to_fetch_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_decode_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_bp_port, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *iQUE, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *iROB, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> fetch_width, <a class="el" href="classsysClock.html">sysClock</a> *<a class="el" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>, string stage_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#ab7a66f1ecf6c3a82af1d7f0a4dc6a819">~o3_fetch</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="unit_2stage_8h.html#ac68af0001af4b7049b2435ded74c4e5e">SIM_MODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a504eff13df91f086a8db237a6b98c9e7">doFETCH</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a87124ad19a418d931aff507eaacfb60f">fetchImpl</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a90a02763ec511000d70d4c2a5d2774bf">squash</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#af499f0a4a59dbb59dc8de189058032a5">regStat</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stage_8h.html#ac68af0001af4b7049b2435ded74c4e5e">SIM_MODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__fetch.html#a3ce8bb4391ab7aa8e8c73e389e8a6493">doFETCH</a> (<a class="el" href="global_2global_8h.html#afd483fa40f0fa2b1ac067845b91f0c6e">FRONTEND_STATUS</a>)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a891511bce60bdcd499b599da711d62e2"></a><!-- doxytag: member="o3_fetch::o3_fetch" ref="a891511bce60bdcd499b599da711d62e2" args="(port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, port&lt; dynInstruction * &gt; &amp;fetch_to_decode_port, port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, WIDTH fetch_width, string stage_name)" -->
+<a class="anchor" id="a713761200dad2eb94986cb1ae90de6bf"></a><!-- doxytag: member="o3_fetch::o3_fetch" ref="a713761200dad2eb94986cb1ae90de6bf" args="(port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, port&lt; dynInstruction * &gt; &amp;fetch_to_decode_port, port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, CAMtable&lt; dynInstruction * &gt; *iQUE, CAMtable&lt; dynInstruction * &gt; *iROB, WIDTH fetch_width, sysClock *clk, string stage_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -120,8 +117,26 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>iQUE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>iROB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
           <td class="paramname"><em>fetch_width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -137,13 +152,17 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a>(fetch_width, stage_name)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a>(fetch_width, stage_name, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;o3_pipe&quot;</span>][<span class="stringliteral">&quot;fetch&quot;</span>], clk),
+      _e_icache (<span class="stringliteral">&quot;l1_i_0&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;mem&quot;</span>][<span class="stringliteral">&quot;l1_i_0&quot;</span>])
 {
     _bp_to_fetch_port = &amp;bp_to_fetch_port;
     _fetch_to_bp_port = &amp;fetch_to_bp_port;
     _fetch_to_decode_port = &amp;fetch_to_decode_port;
+    _iQUE = iQUE;
+    _iROB = iROB;
     _insListIndx = 0;
     _switch_to_frontend = <span class="keyword">false</span>;
+    _fetched_so_far = 0;
 }
 </pre></div>
 </div>
@@ -166,47 +185,47 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a504eff13df91f086a8db237a6b98c9e7"></a><!-- doxytag: member="o3_fetch::doFETCH" ref="a504eff13df91f086a8db237a6b98c9e7" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a3ce8bb4391ab7aa8e8c73e389e8a6493"></a><!-- doxytag: member="o3_fetch::doFETCH" ref="a3ce8bb4391ab7aa8e8c73e389e8a6493" args="(FRONTEND_STATUS)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="unit_2stage_8h.html#ac68af0001af4b7049b2435ded74c4e5e">SIM_MODE</a> o3_fetch::doFETCH </td>
+          <td class="memname"><a class="el" href="stage_8h.html#ac68af0001af4b7049b2435ded74c4e5e">SIM_MODE</a> o3_fetch::doFETCH </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#afd483fa40f0fa2b1ac067845b91f0c6e">FRONTEND_STATUS</a>&#160;</td>
+          <td class="paramname"><em>frontend_status</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
-    <span class="comment">/* STAT + DEBUG */</span>
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eaa5c272fe468fd8b77ee5bfc4a8776034">DBG_FETCH</a>, <span class="stringliteral">&quot;** %s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="classo3__fetch.html#af499f0a4a59dbb59dc8de189058032a5">regStat</a> (clk);
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
+<div class="fragment"><pre class="fragment">                                                           {
+    <span class="comment">/*-- STAT + DEBUG --*/</span>
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eaa5c272fe468fd8b77ee5bfc4a8776034">DBG_FETCH</a>, <span class="stringliteral">&quot;** %s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+    regStat ();
+    <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
 
-    <span class="comment">/* SQUASH HANDLING */</span>
-    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>) { <a class="code" href="classo3__fetch.html#a90a02763ec511000d70d4c2a5d2774bf">squash</a> (clk); }
+    <span class="comment">/*-- SQUASH HANDLING --*/</span>
+    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>) { squash (); }
     <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0a3f4651dbe8c459716c979ae0d7b3c07e">PIPE_NORMAL</a>) {
-        pipe_stall = <a class="code" href="classo3__fetch.html#a87124ad19a418d931aff507eaacfb60f">fetchImpl</a> (clk);
+        pipe_stall = fetchImpl (frontend_status);
     }
 
-    <span class="comment">/* STAT */</span>
-    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
+    <span class="comment">/*-- STAT --*/</span>
+    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 
     <span class="keywordflow">if</span> (_switch_to_frontend) {
         _switch_to_frontend = <span class="keyword">false</span>;
-        <span class="keywordflow">return</span> <a class="code" href="unit_2stage_8h.html#ac68af0001af4b7049b2435ded74c4e5ea27243d6e9e7fcb64aabcb7b540edcf9d">FRONT_END</a>;
+        <span class="keywordflow">return</span> <a class="code" href="stage_8h.html#ac68af0001af4b7049b2435ded74c4e5ea27243d6e9e7fcb64aabcb7b540edcf9d">FRONT_END</a>;
     }
-        <span class="keywordflow">return</span> <a class="code" href="unit_2stage_8h.html#ac68af0001af4b7049b2435ded74c4e5ea6f52bab3ca5250db57817b0a7b27fa1c">BACK_END</a>;
+        <span class="keywordflow">return</span> <a class="code" href="stage_8h.html#ac68af0001af4b7049b2435ded74c4e5ea6f52bab3ca5250db57817b0a7b27fa1c">BACK_END</a>;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_cgraph.png" border="0" usemap="#classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_cgraph" alt=""/></div>
-<map name="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_cgraph" id="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_cgraph">
+<div class="center"><img src="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_cgraph.png" border="0" usemap="#classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_cgraph" alt=""/></div>
+<map name="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_cgraph" id="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_cgraph">
 </map>
 </div>
 </p>
@@ -214,143 +233,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_icgraph.png" border="0" usemap="#classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_icgraph" alt=""/></div>
-<map name="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_icgraph" id="classo3__fetch_a504eff13df91f086a8db237a6b98c9e7_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a87124ad19a418d931aff507eaacfb60f"></a><!-- doxytag: member="o3_fetch::fetchImpl" ref="a87124ad19a418d931aff507eaacfb60f" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> o3_fetch::fetchImpl </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                {
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
-        <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-                <span class="comment">/* CHECKS */</span>
-        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a4b5f6627f388c34df7af5168a119778d">isCodeCacheEmpty</a>()) { _switch_to_frontend = <span class="keyword">true</span>; <span class="keywordflow">break</span>; }
-                <span class="keywordflow">if</span> (_fetch_to_decode_port-&gt;<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ()) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">break</span>;
-
-        <span class="comment">/* FETCH INS */</span>
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#abb078ae60bb65db485a0cc2382bd4457">popCodeCache</a>();
-        ins-&gt;<a class="code" href="classdynInstruction.html#a0cb15d906e84b2efc8986b74edaf5adf">setPipeStage</a>(<a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a3431726ea599b45a86b0849ca2a303ff">FETCH</a>);
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#ab351194ce2a3de088813ae861c7e3d10">remFromCodeCache</a> ();
-                _fetch_to_decode_port-&gt;<a class="code" href="classport.html#a52ad1c5223f028930491b024f26467fa">pushBack</a>(ins, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a>());
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eaa5c272fe468fd8b77ee5bfc4a8776034">DBG_FETCH</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Fetch ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-
-        <span class="comment">/* STAT */</span>
-        <a class="code" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a>++;
-        pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b">PIPE_BUSY</a>;
-        }
-    <span class="keywordflow">return</span> pipe_stall;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_cgraph.png" border="0" usemap="#classo3__fetch_a87124ad19a418d931aff507eaacfb60f_cgraph" alt=""/></div>
-<map name="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_cgraph" id="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_icgraph.png" border="0" usemap="#classo3__fetch_a87124ad19a418d931aff507eaacfb60f_icgraph" alt=""/></div>
-<map name="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_icgraph" id="classo3__fetch_a87124ad19a418d931aff507eaacfb60f_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="af499f0a4a59dbb59dc8de189058032a5"></a><!-- doxytag: member="o3_fetch::regStat" ref="af499f0a4a59dbb59dc8de189058032a5" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_fetch::regStat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                     {
-    _bp_to_fetch_port-&gt;<a class="code" href="classport.html#a966cfeb3b369ec22e8081275481abe32">regStat</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_cgraph.png" border="0" usemap="#classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_cgraph" alt=""/></div>
-<map name="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_cgraph" id="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_icgraph.png" border="0" usemap="#classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_icgraph" alt=""/></div>
-<map name="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_icgraph" id="classo3__fetch_af499f0a4a59dbb59dc8de189058032a5_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a90a02763ec511000d70d4c2a5d2774bf"></a><!-- doxytag: member="o3_fetch::squash" ref="a90a02763ec511000d70d4c2a5d2774bf" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_fetch::squash </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea10182b8b2c6536a067d6600a73931d55">DBG_SQUASH</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Fetch Port Flush&quot;</span>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>);
-    <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> squashSeqNum = <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a366fb213b96fa81e166dbe60a16c3e4f">getSquashSN</a>();
-    _fetch_to_decode_port-&gt;<a class="code" href="classport.html#a58991733cd9bb95beb7303826b9b3d3f">flushPort</a> (squashSeqNum, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    _fetch_to_bp_port-&gt;<a class="code" href="classport.html#a58991733cd9bb95beb7303826b9b3d3f">flushPort</a> (squashSeqNum, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_cgraph.png" border="0" usemap="#classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_cgraph" alt=""/></div>
-<map name="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_cgraph" id="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_icgraph.png" border="0" usemap="#classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_icgraph" alt=""/></div>
-<map name="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_icgraph" id="classo3__fetch_a90a02763ec511000d70d4c2a5d2774bf_icgraph">
+<div class="center"><img src="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_icgraph.png" border="0" usemap="#classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_icgraph" alt=""/></div>
+<map name="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_icgraph" id="classo3__fetch_a3ce8bb4391ab7aa8e8c73e389e8a6493_icgraph">
 </map>
 </div>
 </p>
@@ -367,7 +251,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -376,7 +260,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

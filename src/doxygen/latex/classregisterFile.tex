@@ -15,7 +15,7 @@ Collaboration diagram for registerFile:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}{registerFile} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} rf\_\-begin\_\-num=1, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} rf\_\-size=LARF\_\-SIZE+GARF\_\-SIZE, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} rd\_\-port\_\-cnt=8, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} wr\_\-port\_\-cnt=4, string rf\_\-name=\char`\"{}registerFile\char`\"{})
+\hyperlink{classregisterFile_a61390ea0709a40a1e48dac5133242c9d}{registerFile} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string rf\_\-name)
 \item 
 \hyperlink{classregisterFile_a51d44388ce9baf55f5d0fc108198d915}{$\sim$registerFile} ()
 \item 
@@ -23,49 +23,55 @@ void \hyperlink{classregisterFile_a57aa14508810da286ee60ef6cd033d6b}{updateReg} 
 \item 
 void \hyperlink{classregisterFile_a2731695462957c3ac0a8888e7fce3bd3}{reserveReg} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
 \item 
-bool \hyperlink{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}{isRegValid} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+bool \hyperlink{classregisterFile_a6b9481a788749aabdc8488f60adb5cf7}{isRegValidAndReady} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
 \item 
 bool \hyperlink{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}{isRegBusy} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} regNum)
 \item 
 void \hyperlink{classregisterFile_a9e487acbcecb5a905a4ee1c80adf48e4}{resetRF} ()
 \item 
-bool \hyperlink{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
+void \hyperlink{classregisterFile_a47232ba732ea081d78cd43d0564e60a1}{updateWireState} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, list$<$ string $>$ wire\_\-name=list$<$ string $>$(), bool update\_\-wire=false)
 \item 
-bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+bool \hyperlink{classregisterFile_a218ab11def5221efa38b4fb84817c4a6}{hasFreeWire} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0}{getNumFreeWires} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}{
+\hypertarget{classregisterFile_a61390ea0709a40a1e48dac5133242c9d}{
 \index{registerFile@{registerFile}!registerFile@{registerFile}}
 \index{registerFile@{registerFile}!registerFile@{registerFile}}
 \subsubsection[{registerFile}]{\setlength{\rightskip}{0pt plus 5cm}registerFile::registerFile (
 \begin{DoxyParamCaption}
-\item[{{\bf PR}}]{rf\_\-begin\_\-num = {\ttfamily 1}, }
-\item[{{\bf PR}}]{rf\_\-size = {\ttfamily LARF\_\-SIZE+GARF\_\-SIZE}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 8}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 4}, }
-\item[{string}]{rf\_\-name = {\ttfamily \char`\"{}registerFile\char`\"{}}}
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
+\item[{string}]{rf\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classregisterFile_aa9071035e97a10e7e76990c9b5e126fb}
+\label{classregisterFile_a61390ea0709a40a1e48dac5133242c9d}
 
 \begin{DoxyCode}
-    : unit (rf_name),
-      _rf_size (rf_size),
-      _rf_begin_num (rf_begin_num),
-      _rf_end_num (rf_begin_num+rf_size-1),
-      _wr_port_cnt (wr_port_cnt),
-      _rd_port_cnt (rd_port_cnt)
+    : unit (rf_name, clk),
+      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
+      _rd_port (READ, clk, root, rf_name + ".rd_wire")
 {
+    /* SETUP REGISTER DIMENSIONS */
+    root["rf_size"] >> _rf_size;
+    root["rf_lo"] >> _rf_begin_num;
+    root["rf_hi"] >> _rf_end_num;
+
+    WIDTH rd_wire_cnt, wr_wire_cnt;
+    root["rd_wire_cnt"] >> rd_wire_cnt;
+    root["wr_wire_cnt"] >> wr_wire_cnt;
+
     Assert (_rf_size > 0);
+    Assert (rd_wire_cnt == RD_TO_WR_WIRE_CNT_RATIO * wr_wire_cnt && 
+            "Must have twice as many read ports than write ports.");
     for (PR i = _rf_begin_num; i < _rf_end_num; i++) {
         registerElement* reg = new registerElement (i);
         _RF.insert (pair<PR, registerElement*> (i, reg));
     }
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 }
 \end{DoxyCode}
 \hypertarget{classregisterFile_a51d44388ce9baf55f5d0fc108198d915}{
@@ -89,71 +95,55 @@ bool \hyperlink{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{hasFreeWrPo
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}{
-\index{registerFile@{registerFile}!hasFreeRdPort@{hasFreeRdPort}}
-\index{hasFreeRdPort@{hasFreeRdPort}!registerFile@{registerFile}}
-\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::hasFreeRdPort (
+\hypertarget{classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0}{
+\index{registerFile@{registerFile}!getNumFreeWires@{getNumFreeWires}}
+\index{getNumFreeWires@{getNumFreeWires}!registerFile@{registerFile}}
+\subsubsection[{getNumFreeWires}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} registerFile::getNumFreeWires (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now, }
-\item[{{\bf WIDTH}}]{numRegRdPorts}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
 \end{DoxyParamCaption}
 )}}
-\label{classregisterFile_a2f83eaee77e90587c8fabff35b6255c3}
+\label{classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0}
 
 \begin{DoxyCode}
-                                                                {
-    Assert (_rd_port_cnt >= numRegRdPorts);
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_rd_port -= numRegRdPorts;
-        if (_num_free_rd_port >= 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+                                                        {
+    if (axes_type == READ)
+        return _rd_port.getNumFreeWires ();
+    else
+        return _wr_port.getNumFreeWires ();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
 
 
-\hypertarget{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}{
-\index{registerFile@{registerFile}!hasFreeWrPort@{hasFreeWrPort}}
-\index{hasFreeWrPort@{hasFreeWrPort}!registerFile@{registerFile}}
-\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::hasFreeWrPort (
+\hypertarget{classregisterFile_a218ab11def5221efa38b4fb84817c4a6}{
+\index{registerFile@{registerFile}!hasFreeWire@{hasFreeWire}}
+\index{hasFreeWire@{hasFreeWire}!registerFile@{registerFile}}
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::hasFreeWire (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
 \end{DoxyParamCaption}
 )}}
-\label{classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db}
+\label{classregisterFile_a218ab11def5221efa38b4fb84817c4a6}
 
 \begin{DoxyCode}
-                                           {
-    if (_cycle < now) {
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_wr_port--;
-        if (_num_free_wr_port > 0) {
-            return true;
-        } else {
-            //Assert (true == false && "this feature may not work -look into it")
-      ;
-            return false;
-        }
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+                                                   {
+    if (axes_type == READ)
+        return _rd_port.hasFreeWire ();
+    else
+        return _wr_port.hasFreeWire ();
 }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{classregisterFile_af4bc17e8db0bd9a07fec85814e1d607f}{
@@ -180,22 +170,22 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}{
-\index{registerFile@{registerFile}!isRegValid@{isRegValid}}
-\index{isRegValid@{isRegValid}!registerFile@{registerFile}}
-\subsubsection[{isRegValid}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::isRegValid (
+\hypertarget{classregisterFile_a6b9481a788749aabdc8488f60adb5cf7}{
+\index{registerFile@{registerFile}!isRegValidAndReady@{isRegValidAndReady}}
+\index{isRegValidAndReady@{isRegValidAndReady}!registerFile@{registerFile}}
+\subsubsection[{isRegValidAndReady}]{\setlength{\rightskip}{0pt plus 5cm}bool registerFile::isRegValidAndReady (
 \begin{DoxyParamCaption}
 \item[{{\bf PR}}]{reg}
 \end{DoxyParamCaption}
 )}}
-\label{classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb}
+\label{classregisterFile_a6b9481a788749aabdc8488f60adb5cf7}
 
 
 NOTE: only works for INO 
 
 
 \begin{DoxyCode}
-                                     {
+                                             {
 #ifdef ASSERTION
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
 #endif
@@ -232,6 +222,9 @@ Here is the caller graph for this function:
                                      {
 #ifdef ASSERTION
     Assert (reg >= _rf_begin_num && reg <= _rf_end_num);
+    if (!(_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == 
+      NO_VAL_REG)) 
+        cout << _RF[reg]->_reg_state;
     Assert (_RF[reg]->_reg_state == DONE_WRITE_REG || _RF[reg]->_reg_state == 
       NO_VAL_REG);
 #endif
@@ -290,9 +283,49 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classregisterFile_a47232ba732ea081d78cd43d0564e60a1}{
+\index{registerFile@{registerFile}!updateWireState@{updateWireState}}
+\index{updateWireState@{updateWireState}!registerFile@{registerFile}}
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void registerFile::updateWireState (
+\begin{DoxyParamCaption}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{list$<$ string $>$}]{wire\_\-name = {\ttfamily list$<$string$>$()}, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}
+\label{classregisterFile_a47232ba732ea081d78cd43d0564e60a1}
+
+\begin{DoxyCode}
+                                                                                 
+                      {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        _wr_port.updateWireState (wire_name, axes_type == WRITE ? update_wire : f
+      alse);
+        _rd_port.updateWireState (wire_name, axes_type == READ ? update_wire : fa
+      lse);
+        _cycle = now;
+    } else if (_cycle == now) {
+        if (axes_type == READ)
+            _rd_port.updateWireState (wire_name, update_wire);
+        else
+            _wr_port.updateWireState (wire_name, update_wire);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{registerFile_8h}{registerFile.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{registerFile_8cpp}{registerFile.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{registerFile_8h}{registerFile.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{registerFile_8cpp}{registerFile.cpp}\end{DoxyCompactItemize}

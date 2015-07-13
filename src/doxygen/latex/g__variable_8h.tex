@@ -8,10 +8,11 @@
 {\ttfamily \#include \char`\"{}pin\_\-isa.H\char`\"{}}\par
 {\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}../lib/list.h\char`\"{}}\par
-{\ttfamily \#include \char`\"{}../lib/message.h\char`\"{}}\par
-{\ttfamily \#include \char`\"{}../lib/statistic.h\char`\"{}}\par
-{\ttfamily \#include \char`\"{}../backend/basicblock.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}../backend/unit/dynInstruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/dynBasicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/bbInstruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/stInstruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/block.h\char`\"{}}\par
 Include dependency graph for g\_\-variable.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Classes}
@@ -19,11 +20,31 @@ This graph shows which files directly or indirectly include this file:
 \item 
 struct \hyperlink{structg__variable}{g\_\-variable}
 \end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{g__variable_8h_ae717611eed2e2152fece17389263d33d}{BB\_\-NEAR\_\-EMPTY\_\-SIZE}~50
+\item 
+\#define \hyperlink{g__variable_8h_af51dd0aa0f6fa95f1af790d7a5d88188}{BLK\_\-NEAR\_\-EMPTY\_\-SIZE}~5
+\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{structg__variable}{g\_\-variable} \hyperlink{g__variable_8h_adfd3dddc03cc8a61d5ba0f266d7caeaa}{g\_\-var}
 \end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\hypertarget{g__variable_8h_ae717611eed2e2152fece17389263d33d}{
+\index{g\_\-variable.h@{g\_\-variable.h}!BB\_\-NEAR\_\-EMPTY\_\-SIZE@{BB\_\-NEAR\_\-EMPTY\_\-SIZE}}
+\index{BB\_\-NEAR\_\-EMPTY\_\-SIZE@{BB\_\-NEAR\_\-EMPTY\_\-SIZE}!g_variable.h@{g\_\-variable.h}}
+\subsubsection[{BB\_\-NEAR\_\-EMPTY\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define BB\_\-NEAR\_\-EMPTY\_\-SIZE~50}}
+\label{g__variable_8h_ae717611eed2e2152fece17389263d33d}
+\hypertarget{g__variable_8h_af51dd0aa0f6fa95f1af790d7a5d88188}{
+\index{g\_\-variable.h@{g\_\-variable.h}!BLK\_\-NEAR\_\-EMPTY\_\-SIZE@{BLK\_\-NEAR\_\-EMPTY\_\-SIZE}}
+\index{BLK\_\-NEAR\_\-EMPTY\_\-SIZE@{BLK\_\-NEAR\_\-EMPTY\_\-SIZE}!g_variable.h@{g\_\-variable.h}}
+\subsubsection[{BLK\_\-NEAR\_\-EMPTY\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define BLK\_\-NEAR\_\-EMPTY\_\-SIZE~5}}
+\label{g__variable_8h_af51dd0aa0f6fa95f1af790d7a5d88188}
 
 
 \subsection{Variable Documentation}

@@ -104,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a9011bcc9143d2396dfec49828484a645">takeOverFrom</a>();
 <a name="l00050"></a>00050 
-<a name="l00059"></a>00059     <span class="keywordtype">bool</span> <a class="code" href="classBPredUnit.html#add836c4a521ed2bd12eca4d1dee13620">predict</a>(DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, <span class="keywordtype">bool</span> odbpStatic, <span class="keywordtype">bool</span> predTaken, <span class="keywordtype">int</span> positionInFetchGroup, <span class="keywordtype">int</span> positionInLine, <span class="keywordtype">bool</span> &amp;allPredStatic, <span class="keywordtype">int</span> oracleBP);
+<a name="l00059"></a>00059     <span class="keywordtype">bool</span> <a class="code" href="classBPredUnit.html#ad37b550622b7ed76b55d80cc28700699">predict</a>(DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, <span class="keywordtype">bool</span> odbpStatic, <span class="keywordtype">bool</span> predTaken, <span class="keywordtype">int</span> positionInFetchGroup, <span class="keywordtype">int</span> positionInLine, <span class="keywordtype">bool</span> &amp;allPredStatic, <span class="keywordtype">int</span> oracleBP);
 <a name="l00060"></a>00060     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a89690e897bb5661ee868f659a06515c9">increase_BP_lookup</a>(<span class="keywordtype">int</span>);
 <a name="l00061"></a>00061     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a471a1acb994d07a6d57b2f39ce56e6a4">increase_BP_lookup_and_update</a>(<span class="keywordtype">int</span>);
 <a name="l00062"></a>00062     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a41ecb08c99f45538eaf1de4e184905b4">increase_BTB_lookup</a>();
@@ -127,23 +127,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00100"></a>00100 
 <a name="l00105"></a>00105     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a14a43c5f5bc8c64c07a075ce1608f9c3">BPSquash</a>(<span class="keywordtype">void</span> *bp_history);
 <a name="l00106"></a>00106 
-<a name="l00114"></a>00114     <span class="keywordtype">bool</span> <a class="code" href="classBPredUnit.html#aafefe8c8d85f49d118e825fa0c1c0176">BPLookup</a>(Addr instPC, <span class="keywordtype">void</span> * &amp;bp_history, <span class="keywordtype">int</span> positionInFetchGroup, <span class="keywordtype">bool</span> onDemand, <span class="keywordtype">bool</span> &amp;choicePred);
+<a name="l00114"></a>00114     <span class="keywordtype">bool</span> <a class="code" href="classBPredUnit.html#af381979dadd608af5d4d5a235050f335">BPLookup</a>(Addr instPC, <span class="keywordtype">void</span> * &amp;bp_history, <span class="keywordtype">int</span> positionInFetchGroup, <span class="keywordtype">bool</span> onDemand, <span class="keywordtype">bool</span> &amp;choicePred);
 <a name="l00115"></a>00115     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#af5b3e6db0cf1f00dee290e16765f28f8">noBPLookup</a>(Addr instPC, <span class="keywordtype">void</span> * &amp;bp_history, <span class="keywordtype">int</span> positionInLine);
 <a name="l00116"></a>00116 
 <a name="l00125"></a>00125     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a55a6608f958c4e70360c34bd48c57032">BPBTBUpdate</a>(Addr instPC, <span class="keywordtype">void</span> * &amp;bp_history);
 <a name="l00126"></a>00126 
 <a name="l00132"></a><a class="code" href="classBPredUnit.html#a66a1f6f9cdd28b38b005a666a9976ed7">00132</a>     <span class="keywordtype">bool</span> <a class="code" href="classBPredUnit.html#a66a1f6f9cdd28b38b005a666a9976ed7">BTBValid</a>(Addr instPC)
-<a name="l00133"></a>00133     { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>(instPC, 0); }
+<a name="l00133"></a>00133     { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a>(instPC, 0); }
 <a name="l00134"></a>00134 
 <a name="l00140"></a><a class="code" href="classBPredUnit.html#a31024f2d92bfd7e778a790f4c6f61498">00140</a>     TheISA::PCState <a class="code" href="classBPredUnit.html#a31024f2d92bfd7e778a790f4c6f61498">BTBLookup</a>(Addr instPC)
-<a name="l00141"></a>00141     { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#ad21521b111945ccf058a3687ef720339">lookup</a>(instPC, 0); }
+<a name="l00141"></a>00141     { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#adada120072dd6a1a33fcc9dcab69ebad">lookup</a>(instPC, 0); }
 <a name="l00142"></a>00142 
 <a name="l00153"></a>00153     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a35c57ae0661f1d5dd2169e919741d47b">BPUpdate</a>(Addr instPC, <span class="keywordtype">bool</span> taken, <span class="keywordtype">void</span> *bp_history, <span class="keywordtype">bool</span> squashed);
 <a name="l00154"></a>00154     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a16de9793a28ee07dcf26d89c03328555">BPHistUpdate</a>(Addr instPC, <span class="keywordtype">bool</span> taken, <span class="keywordtype">void</span> *bp_history, <span class="keywordtype">bool</span> squashed);
 <a name="l00155"></a>00155         <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a9268abcbddfdfd6e6a076ecd343a3de5">BPHistGarbageCollect</a>(<span class="keywordtype">void</span> *bp_history);
 <a name="l00156"></a>00156 
 <a name="l00162"></a><a class="code" href="classBPredUnit.html#a5afe025cde23c608d745e8daca63e8a6">00162</a>     <span class="keywordtype">void</span> <a class="code" href="classBPredUnit.html#a5afe025cde23c608d745e8daca63e8a6">BTBUpdate</a>(Addr instPC, <span class="keyword">const</span> TheISA::PCState &amp;target)
-<a name="l00163"></a>00163     { BTB.<a class="code" href="classDefaultBTB.html#a554c0af23b92df168310e4edaf627c51">update</a>(instPC, target, 0); }
+<a name="l00163"></a>00163     { <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a>(instPC, target, 0); }
 <a name="l00164"></a>00164 
 <a name="l00165"></a>00165   <span class="keyword">private</span>:
 <a name="l00166"></a>00166     <span class="keyword">struct </span>PredictorHistory {
@@ -197,7 +197,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00242"></a>00242     <a class="code" href="classHybridBP.html">HybridBP</a> *hybridbp;
 <a name="l00243"></a>00243     <a class="code" href="classHybridBPskew.html">HybridBPskew</a> *hybridSkewbp;
 <a name="l00244"></a>00244 
-<a name="l00246"></a>00246     <a class="code" href="classDefaultBTB.html">DefaultBTB</a> BTB;
+<a name="l00246"></a>00246     <a class="code" href="classDefaultBTB.html">DefaultBTB</a> <a class="code" href="classBTB.html">BTB</a>;
 <a name="l00247"></a>00247 
 <a name="l00249"></a>00249     <a class="code" href="classReturnAddrStack.html">ReturnAddrStack</a> RAS[Impl::MaxThreads];
 <a name="l00250"></a>00250 
@@ -237,7 +237,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -246,7 +246,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

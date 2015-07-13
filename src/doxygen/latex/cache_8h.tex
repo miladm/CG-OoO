@@ -1,15 +1,40 @@
 \hypertarget{cache_8h}{
-\section{/home/milad/esc\_\-project/svn/PARS/src/backend/cache.h File Reference}
-\label{cache_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/cache.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/cache.h}}
+\section{/home/milad/esc\_\-project/svn/PARS/src/backend/cache/cache.h File Reference}
+\label{cache_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/backend/cache/cache.h@{/home/milad/esc\_\-project/svn/PARS/src/backend/cache/cache.h}}
 }
-{\ttfamily \#include $<$stdint.h$>$}\par
-{\ttfamily \#include $<$stdlib.h$>$}\par
-{\ttfamily \#include \char`\"{}cacheLine.h\char`\"{}}\par
-{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
+{\ttfamily \#include $<$cstdio$>$}\par
+{\ttfamily \#include $<$cstdlib$>$}\par
+{\ttfamily \#include $<$inttypes.h$>$}\par
+{\ttfamily \#include $<$cstring$>$}\par
+{\ttfamily \#include $<$cassert$>$}\par
+{\ttfamily \#include $<$optype.h$>$}\par
+{\ttfamily \#include $<$cacheline.h$>$}\par
 Include dependency graph for cache.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classcache}{cache}
+class \hyperlink{classMemory_1_1NRU}{Memory::NRU}
+\item 
+class \hyperlink{classMemory_1_1RandomRepl}{Memory::RandomRepl}
+\item 
+class \hyperlink{classMemory_1_1Set}{Memory::Set$<$ REPL $>$}
+\item 
+class \hyperlink{classMemory_1_1DefaultIndex}{Memory::DefaultIndex}
+\item 
+class \hyperlink{classMemory_1_1BaseCache}{Memory::BaseCache}
+\item 
+class \hyperlink{classMemory_1_1GeneralCache}{Memory::GeneralCache$<$ REPL, INDEX $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \hyperlink{namespaceMemory}{Memory}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Cache$<$ NRU $>$ \hyperlink{namespaceMemory_a7b1e60f464ab7fbd94045c5d3a9505f2}{Memory::NRUCache}
+\item 
+typedef Cache$<$ RandomRepl $>$ \hyperlink{namespaceMemory_a734edbf3df9e4cd834589aa6ba423ce6}{Memory::RandomCache}
 \end{DoxyCompactItemize}

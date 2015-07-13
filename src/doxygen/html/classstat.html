@@ -61,18 +61,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">stat Class Reference</div>  </div>
 </div>
 <div class="contents">
 <!-- doxytag: class="stat" -->
-<p><code>#include &lt;<a class="el" href="backend_2stat_8h_source.html">stat.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="statistic_8h_source.html">statistic.h</a>&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for stat:</div>
+Inheritance diagram for stat:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstat__coll__graph.png" border="0" usemap="#stat_coll__map" alt="Collaboration graph"/></div>
-<map name="stat_coll__map" id="stat_coll__map">
+<div class="center"><img src="classstat__inherit__graph.png" border="0" usemap="#stat_inherit__map" alt="Inheritance graph"/></div>
+<map name="stat_inherit__map" id="stat_inherit__map">
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
@@ -81,22 +82,24 @@ Collaboration diagram for stat:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ab89727a4198ffd032e194917596e156b">stat</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#abe66f5d22b8d2da86c0dd0dded862189">stat</a> (string, string, string, <a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val=0, <a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero=PRINT_ZERO)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#aacfea127fcaab87cfb226e132ba4b23a">init</a> (string, string, string, <a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val=0, <a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero=PRINT_ZERO)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#adb268824871b2f69d7b11003abf2fe6b">~stat</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#acaa589d5c6e90c0d7fe55ea5a80c39cd">setMemAddr</a> (uint64_t memAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a534c0aacb73143316373470a70aece20">setRegister</a> (int *r, int *rt)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#aac993b5bfa99506a46b3bd02382613ed">setType</a> (<a class="el" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> insType)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ac78f327016771d7189a0dd9e7709d7ce">setStatus</a> (<a class="el" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959">status</a> insStatus, int <a class="el" href="vliwScheduler_8cpp.html#a1f4871d45089b039d95d3832dd123827">cycle</a>, int latency)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ae3663029f693d0bd7279007a96b61fd1">setMemType</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a> readORwrite)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ad6c243f8915182cc7f3af301714cf6b2">getType</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959">status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#af85423f8423fc110dc995e0da6d56f58">getStatus</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a404f63a716c9853ebe824b2103ac6dbb">getLatency</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#adac51f4d495bd7bbfccd1f5c616a2a83">getCompleteCycle</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#aca46365b8adad2b91b5626f51e85e22a">getIssueCycle</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a2edaa23547adbe0aaedc0e16cc1cf080">getMyReg</a> (int i)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a2e1a144e384d03f66d2ace6e2aa8fe00">getNumReg</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a6d940fc0fc3e5e81c4dbf30b788b2d82">getMemAddr</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a2060522133fb74689cb730a13d83efb2">getMyRegType</a> (int i)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a471c26c51591a16712ce553b56047484">getMemType</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a466c0cff1754602817a62517d74a1d07">getValue</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#af4666e7a7eac1259a222685465e086be">getName</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ad4b4362a2144dd4510f927a2a4243314">operator++</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a685468cc920d73914ee5f319ab61bdc5">operator++</a> (int)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ae2fd50f98dab5561bd987bcca24aa0fa">operator--</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a8c5a7ec08fb94918564dee66a3ecb260">operator--</a> (int)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ae5697e9246673d121c5d5f190582ec6a">operator+=</a> (<a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstat.html">stat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#abfceb9f1f9d7dd4405dae4d7856aa3a0">operator-=</a> (<a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>)</td></tr>
+<tr><td colspan="2"><h2><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">_enable_log_stat</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab89727a4198ffd032e194917596e156b"></a><!-- doxytag: member="stat::stat" ref="ab89727a4198ffd032e194917596e156b" args="()" -->
@@ -112,7 +115,60 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{ }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="abe66f5d22b8d2da86c0dd0dded862189"></a><!-- doxytag: member="stat::stat" ref="abe66f5d22b8d2da86c0dd0dded862189" args="(string, string, string, SCALAR init_val=0, PRINT_ON_ZERO print_if_zero=PRINT_ZERO)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">stat::stat </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>class_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>param_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td>
+          <td class="paramname"><em>init_val</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>&#160;</td>
+          <td class="paramname"><em>print_if_zero</em> = <code>PRINT_ZERO</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a> = (class_name + <span class="stringliteral">&quot;.&quot;</span>) + param_name;
+    <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a> = description;
+    <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> = init_val;
+    <a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a> = print_if_zero;
+    <a class="code" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">_enable_log_stat</a> = <span class="keyword">true</span>;
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="adb268824871b2f69d7b11003abf2fe6b"></a><!-- doxytag: member="stat::~stat" ref="adb268824871b2f69d7b11003abf2fe6b" args="()" -->
@@ -123,22 +179,22 @@ Public Member Functions</h2></td></tr>
           <td class="memname">stat::~stat </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{<span class="comment">/*nothing for now*/</span>}
+<div class="fragment"><pre class="fragment">{ }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="adac51f4d495bd7bbfccd1f5c616a2a83"></a><!-- doxytag: member="stat::getCompleteCycle" ref="adac51f4d495bd7bbfccd1f5c616a2a83" args="()" -->
+<a class="anchor" id="af4666e7a7eac1259a222685465e086be"></a><!-- doxytag: member="stat::getName" ref="af4666e7a7eac1259a222685465e086be" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int stat::getCompleteCycle </td>
+          <td class="memname">string stat::getName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -146,208 +202,82 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aca46365b8adad2b91b5626f51e85e22a"></a><!-- doxytag: member="stat::getIssueCycle" ref="aca46365b8adad2b91b5626f51e85e22a" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stat::getIssueCycle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a404f63a716c9853ebe824b2103ac6dbb"></a><!-- doxytag: member="stat::getLatency" ref="a404f63a716c9853ebe824b2103ac6dbb" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stat::getLatency </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a6d940fc0fc3e5e81c4dbf30b788b2d82"></a><!-- doxytag: member="stat::getMemAddr" ref="a6d940fc0fc3e5e81c4dbf30b788b2d82" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t stat::getMemAddr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a471c26c51591a16712ce553b56047484"></a><!-- doxytag: member="stat::getMemType" ref="a471c26c51591a16712ce553b56047484" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a> stat::getMemType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2edaa23547adbe0aaedc0e16cc1cf080"></a><!-- doxytag: member="stat::getMyReg" ref="a2edaa23547adbe0aaedc0e16cc1cf080" args="(int i)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stat::getMyReg </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2060522133fb74689cb730a13d83efb2"></a><!-- doxytag: member="stat::getMyRegType" ref="a2060522133fb74689cb730a13d83efb2" args="(int i)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stat::getMyRegType </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2e1a144e384d03f66d2ace6e2aa8fe00"></a><!-- doxytag: member="stat::getNumReg" ref="a2e1a144e384d03f66d2ace6e2aa8fe00" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int stat::getNumReg </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af85423f8423fc110dc995e0da6d56f58"></a><!-- doxytag: member="stat::getStatus" ref="af85423f8423fc110dc995e0da6d56f58" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959">status</a> stat::getStatus </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad6c243f8915182cc7f3af301714cf6b2"></a><!-- doxytag: member="stat::getType" ref="ad6c243f8915182cc7f3af301714cf6b2" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> stat::getType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="acaa589d5c6e90c0d7fe55ea5a80c39cd"></a><!-- doxytag: member="stat::setMemAddr" ref="acaa589d5c6e90c0d7fe55ea5a80c39cd" args="(uint64_t memAddr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void instruction::setMemAddr </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t&#160;</td>
-          <td class="paramname"><em>memAddr</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                             {
-        _memAddr = memAddr;
-        <span class="comment">//if (debug) printf(&quot;addr = %lx\n&quot;, _memAddr);</span>
+<div class="fragment"><pre class="fragment">                      {
+    <span class="keywordflow">return</span> <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_af4666e7a7eac1259a222685465e086be_icgraph.png" border="0" usemap="#classstat_af4666e7a7eac1259a222685465e086be_icgraph" alt=""/></div>
+<map name="classstat_af4666e7a7eac1259a222685465e086be_icgraph" id="classstat_af4666e7a7eac1259a222685465e086be_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="ae3663029f693d0bd7279007a96b61fd1"></a><!-- doxytag: member="stat::setMemType" ref="ae3663029f693d0bd7279007a96b61fd1" args="(memType readORwrite)" -->
+<a class="anchor" id="a466c0cff1754602817a62517d74a1d07"></a><!-- doxytag: member="stat::getValue" ref="a466c0cff1754602817a62517d74a1d07" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void stat::setMemType </td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> stat::getValue </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a>&#160;</td>
-          <td class="paramname"><em>readORwrite</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                       {
+    <span class="keywordflow">return</span> <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_a466c0cff1754602817a62517d74a1d07_icgraph.png" border="0" usemap="#classstat_a466c0cff1754602817a62517d74a1d07_icgraph" alt=""/></div>
+<map name="classstat_a466c0cff1754602817a62517d74a1d07_icgraph" id="classstat_a466c0cff1754602817a62517d74a1d07_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="a534c0aacb73143316373470a70aece20"></a><!-- doxytag: member="stat::setRegister" ref="a534c0aacb73143316373470a70aece20" args="(int *r, int *rt)" -->
+<a class="anchor" id="aacfea127fcaab87cfb226e132ba4b23a"></a><!-- doxytag: member="stat::init" ref="aacfea127fcaab87cfb226e132ba4b23a" args="(string, string, string, SCALAR init_val=0, PRINT_ON_ZERO print_if_zero=PRINT_ZERO)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void stat::setRegister </td>
+          <td class="memname">void stat::init </td>
           <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>class_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>rt</em>&#160;</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>param_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td>
+          <td class="paramname"><em>init_val</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>&#160;</td>
+          <td class="paramname"><em>print_if_zero</em> = <code>PRINT_ZERO</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -357,61 +287,261 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a> = (class_name + <span class="stringliteral">&quot;.&quot;</span>) + param_name;
+    <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a> = description;
+    <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> = init_val;
+    <a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a> = print_if_zero;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_aacfea127fcaab87cfb226e132ba4b23a_icgraph.png" border="0" usemap="#classstat_aacfea127fcaab87cfb226e132ba4b23a_icgraph" alt=""/></div>
+<map name="classstat_aacfea127fcaab87cfb226e132ba4b23a_icgraph" id="classstat_aacfea127fcaab87cfb226e132ba4b23a_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="ac78f327016771d7189a0dd9e7709d7ce"></a><!-- doxytag: member="stat::setStatus" ref="ac78f327016771d7189a0dd9e7709d7ce" args="(status insStatus, int cycle, int latency)" -->
+<a class="anchor" id="ad4b4362a2144dd4510f927a2a4243314"></a><!-- doxytag: member="stat::operator++" ref="ad4b4362a2144dd4510f927a2a4243314" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void instruction::setStatus </td>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> &amp; stat::operator++ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959">status</a>&#160;</td>
-          <td class="paramname"><em>insStatus</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cycle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>latency</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
-        <span class="comment">//Assert(insStatus != NULL);</span>
-        _insStatus = insStatus;
-        <span class="keywordflow">if</span> (_insStatus == issue) {
-                _issueCycle  = <a class="code" href="bkEnd_8cpp.html#a24ddb63d7b594cb1489ae68dfa66e584">cycle</a>;
-                _latency     = latency;
-                _completeCycle = <a class="code" href="bkEnd_8cpp.html#a24ddb63d7b594cb1489ae68dfa66e584">cycle</a> + latency;
-        }
+<div class="fragment"><pre class="fragment">                        {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>++;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_ad4b4362a2144dd4510f927a2a4243314_cgraph.png" border="0" usemap="#classstat_ad4b4362a2144dd4510f927a2a4243314_cgraph" alt=""/></div>
+<map name="classstat_ad4b4362a2144dd4510f927a2a4243314_cgraph" id="classstat_ad4b4362a2144dd4510f927a2a4243314_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="aac993b5bfa99506a46b3bd02382613ed"></a><!-- doxytag: member="stat::setType" ref="aac993b5bfa99506a46b3bd02382613ed" args="(type insType)" -->
+<a class="anchor" id="a685468cc920d73914ee5f319ab61bdc5"></a><!-- doxytag: member="stat::operator++" ref="a685468cc920d73914ee5f319ab61bdc5" args="(int)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void stat::setType </td>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> stat::operator++ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a>&#160;</td>
-          <td class="paramname"><em>insType</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                          {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>++;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_a685468cc920d73914ee5f319ab61bdc5_cgraph.png" border="0" usemap="#classstat_a685468cc920d73914ee5f319ab61bdc5_cgraph" alt=""/></div>
+<map name="classstat_a685468cc920d73914ee5f319ab61bdc5_cgraph" id="classstat_a685468cc920d73914ee5f319ab61bdc5_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5697e9246673d121c5d5f190582ec6a"></a><!-- doxytag: member="stat::operator+=" ref="ae5697e9246673d121c5d5f190582ec6a" args="(SCALAR)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> stat::operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                 {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> += val;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_ae5697e9246673d121c5d5f190582ec6a_cgraph.png" border="0" usemap="#classstat_ae5697e9246673d121c5d5f190582ec6a_cgraph" alt=""/></div>
+<map name="classstat_ae5697e9246673d121c5d5f190582ec6a_cgraph" id="classstat_ae5697e9246673d121c5d5f190582ec6a_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c5a7ec08fb94918564dee66a3ecb260"></a><!-- doxytag: member="stat::operator&#45;&#45;" ref="a8c5a7ec08fb94918564dee66a3ecb260" args="(int)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> stat::operator-- </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                          {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>--;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_a8c5a7ec08fb94918564dee66a3ecb260_cgraph.png" border="0" usemap="#classstat_a8c5a7ec08fb94918564dee66a3ecb260_cgraph" alt=""/></div>
+<map name="classstat_a8c5a7ec08fb94918564dee66a3ecb260_cgraph" id="classstat_a8c5a7ec08fb94918564dee66a3ecb260_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae2fd50f98dab5561bd987bcca24aa0fa"></a><!-- doxytag: member="stat::operator&#45;&#45;" ref="ae2fd50f98dab5561bd987bcca24aa0fa" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> &amp; stat::operator-- </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                        {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>--;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_ae2fd50f98dab5561bd987bcca24aa0fa_cgraph.png" border="0" usemap="#classstat_ae2fd50f98dab5561bd987bcca24aa0fa_cgraph" alt=""/></div>
+<map name="classstat_ae2fd50f98dab5561bd987bcca24aa0fa_cgraph" id="classstat_ae2fd50f98dab5561bd987bcca24aa0fa_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="abfceb9f1f9d7dd4405dae4d7856aa3a0"></a><!-- doxytag: member="stat::operator&#45;=" ref="abfceb9f1f9d7dd4405dae4d7856aa3a0" args="(SCALAR)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classstat.html">stat</a> stat::operator-= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                 {
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> -= val;
+    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0_cgraph.png" border="0" usemap="#classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0_cgraph" alt=""/></div>
+<map name="classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0_cgraph" id="classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="ac9613e6f886704c8582aa6d3ef82890c"></a><!-- doxytag: member="stat::_description" ref="ac9613e6f886704c8582aa6d3ef82890c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">stat::_description</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab9551cc95cb38f1e068f76383e082374"></a><!-- doxytag: member="stat::_enable_log_stat" ref="ab9551cc95cb38f1e068f76383e082374" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">stat::_enable_log_stat</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51eae1107b5388fb7823b00954228053"></a><!-- doxytag: member="stat::_name" ref="a51eae1107b5388fb7823b00954228053" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classstat.html#a51eae1107b5388fb7823b00954228053">stat::_name</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a29dc267b4bc24e2013069ca1164edfbf"></a><!-- doxytag: member="stat::_print_if_zero" ref="a29dc267b4bc24e2013069ca1164edfbf" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> <a class="el" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">stat::_print_if_zero</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9ac5680b65cf0f05de0494efcd7b1371"></a><!-- doxytag: member="stat::_ScalarStat" ref="a9ac5680b65cf0f05de0494efcd7b1371" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> <a class="el" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">stat::_ScalarStat</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -420,8 +550,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2stat_8h_source.html">stat.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2stat_8cpp.html">stat.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/<a class="el" href="statistic_8h_source.html">statistic.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/<a class="el" href="statistic_8cpp.html">statistic.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -429,7 +559,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -438,7 +568,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

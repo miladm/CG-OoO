@@ -15,13 +15,7 @@ Collaboration diagram for stage:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classstage_abc77b1bb1d0891e47dfaffe9b0203e8d}{stage} ()
-\item 
-\hyperlink{classstage_a680eded15b373eaba43a71a68c97bb73}{$\sim$stage} ()
-\item 
-\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{classstage_a362592f44e2c66fee59e39258380c285}{tick} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle})
-\item 
-\hyperlink{classstage_ae8812f533c2c07facb960002aedcb6ab}{stage} (\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} stage\_\-width, string \hyperlink{classstage_ad8500743b9a08a7d3b7a16e2c9ee7bca}{\_\-stage\_\-name})
+\hyperlink{classstage_af7798f81a3204e4415a4c8e546f2e25b}{stage} (\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&root, \hyperlink{classsysClock}{sysClock} $\ast$)
 \item 
 \hyperlink{classstage_a680eded15b373eaba43a71a68c97bb73}{$\sim$stage} ()
 \end{DoxyCompactItemize}
@@ -32,63 +26,52 @@ const string \hyperlink{classstage_ad8500743b9a08a7d3b7a16e2c9ee7bca}{\_\-stage\
 \item 
 const \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classstage_a758da5ef14d0eca96290d4feaad91302}{\_\-stage\_\-width}
 \item 
+\hyperlink{classsysClock}{sysClock} $\ast$ \hyperlink{classstage_a2a24f2b2bce75ee75d7d03962eb0cd23}{\_\-clk}
+\item 
 \hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstage_a41c52c3b31e0cd1729c3665bbacb4f5d}{s\_\-ins\_\-cnt}
 \item 
 \hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstage_a257d798bacbed096d4e9879d4d47c207}{s\_\-stall\_\-cycles}
 \item 
 \hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstage_a8936cf4c32fa9d9f27ca8d3306468cc8}{s\_\-squash\_\-cycles}
+\item 
+\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstage_ac8c48351ea5ff2ad92e097f1ab3684e0}{s\_\-squash\_\-stall\_\-cycles}
+\item 
+\hyperlink{classRatioStat}{RatioStat} \& \hyperlink{classstage_a31614935ce5336305af2d3dfc6fd85b6}{s\_\-ipc}
+\item 
+\hyperlink{classstage__energy}{stage\_\-energy} \hyperlink{classstage_abb5082df431c2858839d3b54ef049ff9}{\_\-e\_\-stage}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classstage_abc77b1bb1d0891e47dfaffe9b0203e8d}{
-\index{stage@{stage}!stage@{stage}}
-\index{stage@{stage}!stage@{stage}}
-\subsubsection[{stage}]{\setlength{\rightskip}{0pt plus 5cm}stage::stage (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstage_abc77b1bb1d0891e47dfaffe9b0203e8d}
-
-\begin{DoxyCode}
-             {
-        _latency = 1; //default
-}
-\end{DoxyCode}
-\hypertarget{classstage_a680eded15b373eaba43a71a68c97bb73}{
-\index{stage@{stage}!$\sim$stage@{$\sim$stage}}
-\index{$\sim$stage@{$\sim$stage}!stage@{stage}}
-\subsubsection[{$\sim$stage}]{\setlength{\rightskip}{0pt plus 5cm}stage::$\sim$stage (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstage_a680eded15b373eaba43a71a68c97bb73}
-
-\begin{DoxyCode}
-{}
-\end{DoxyCode}
-\hypertarget{classstage_ae8812f533c2c07facb960002aedcb6ab}{
+\hypertarget{classstage_af7798f81a3204e4415a4c8e546f2e25b}{
 \index{stage@{stage}!stage@{stage}}
 \index{stage@{stage}!stage@{stage}}
 \subsubsection[{stage}]{\setlength{\rightskip}{0pt plus 5cm}stage::stage (
 \begin{DoxyParamCaption}
 \item[{{\bf WIDTH}}]{stage\_\-width, }
-\item[{string}]{\_\-stage\_\-name}
+\item[{string}]{stage\_\-name, }
+\item[{const {\bf YAML::Node} \&}]{root, }
+\item[{{\bf sysClock} $\ast$}]{clk}
 \end{DoxyParamCaption}
 )}}
-\label{classstage_ae8812f533c2c07facb960002aedcb6ab}
+\label{classstage_af7798f81a3204e4415a4c8e546f2e25b}
 
 \begin{DoxyCode}
         : _stage_name(stage_name),
-        _stage_width(stage_width),
-    s_ins_cnt (g_stats.newScalarStat (stage_name, "ins_cnt", "Number of dynamic i
-      nstructions in "+stage_name, 0, PRINT_ZERO)),
-    s_stall_cycles (g_stats.newScalarStat (stage_name, "stall_cycles", "Number of
-       stall cycles in "+stage_name, 0, PRINT_ZERO)),
-    s_squash_cycles (g_stats.newScalarStat (stage_name, "squash_cycles", "Number 
-      of squash cycles in "+stage_name, 0, NO_PRINT_ZERO))
+      _stage_width(stage_width),
+      _clk (clk),
+      s_ins_cnt (g_stats.newScalarStat (stage_name, "ins_cnt", "Number of dynamic
+       instructions in " + stage_name, 0, PRINT_ZERO)),
+      s_stall_cycles (g_stats.newScalarStat (stage_name, "stall_cycles", "Number 
+      of stall cycles in " + stage_name, 0, PRINT_ZERO)),
+      s_squash_cycles (g_stats.newScalarStat (stage_name, "squash_cycles", "Numbe
+      r of squash cycles in " + stage_name, 0, NO_PRINT_ZERO)),
+      s_squash_stall_cycles (g_stats.newScalarStat (stage_name, "squash_stall_cyc
+      les", "Number of stall cycles in squash" + stage_name, 0, NO_PRINT_ZERO)),
+      s_ipc  (g_stats.newRatioStat (clk->getStatObj (), stage_name, "ipc", "Instr
+      uctions per cycle of " +stage_name, 0, NO_PRINT_ZERO)),
+          _e_stage (stage_name, root)
+
 {
         Assert(!_stage_name.empty() && _stage_width > 0);
 }
@@ -103,26 +86,22 @@ const \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hy
 )}}
 \label{classstage_a680eded15b373eaba43a71a68c97bb73}
 
-
-\subsection{Member Function Documentation}
-\hypertarget{classstage_a362592f44e2c66fee59e39258380c285}{
-\index{stage@{stage}!tick@{tick}}
-\index{tick@{tick}!stage@{stage}}
-\subsubsection[{tick}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CYCLE} stage::tick (
-\begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{cycle}
-\end{DoxyParamCaption}
-)}}
-\label{classstage_a362592f44e2c66fee59e39258380c285}
-
 \begin{DoxyCode}
-                       {
-        return cycle+latency;
-}
+{}
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
+\hypertarget{classstage_a2a24f2b2bce75ee75d7d03962eb0cd23}{
+\index{stage@{stage}!\_\-clk@{\_\-clk}}
+\index{\_\-clk@{\_\-clk}!stage@{stage}}
+\subsubsection[{\_\-clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sysClock}$\ast$ {\bf stage::\_\-clk}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstage_a2a24f2b2bce75ee75d7d03962eb0cd23}
+\hypertarget{classstage_abb5082df431c2858839d3b54ef049ff9}{
+\index{stage@{stage}!\_\-e\_\-stage@{\_\-e\_\-stage}}
+\index{\_\-e\_\-stage@{\_\-e\_\-stage}!stage@{stage}}
+\subsubsection[{\_\-e\_\-stage}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stage\_\-energy} {\bf stage::\_\-e\_\-stage}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstage_abb5082df431c2858839d3b54ef049ff9}
 \hypertarget{classstage_ad8500743b9a08a7d3b7a16e2c9ee7bca}{
 \index{stage@{stage}!\_\-stage\_\-name@{\_\-stage\_\-name}}
 \index{\_\-stage\_\-name@{\_\-stage\_\-name}!stage@{stage}}
@@ -138,11 +117,21 @@ const \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hy
 \index{s\_\-ins\_\-cnt@{s\_\-ins\_\-cnt}!stage@{stage}}
 \subsubsection[{s\_\-ins\_\-cnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat}\& {\bf stage::s\_\-ins\_\-cnt}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
 \label{classstage_a41c52c3b31e0cd1729c3665bbacb4f5d}
+\hypertarget{classstage_a31614935ce5336305af2d3dfc6fd85b6}{
+\index{stage@{stage}!s\_\-ipc@{s\_\-ipc}}
+\index{s\_\-ipc@{s\_\-ipc}!stage@{stage}}
+\subsubsection[{s\_\-ipc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RatioStat}\& {\bf stage::s\_\-ipc}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstage_a31614935ce5336305af2d3dfc6fd85b6}
 \hypertarget{classstage_a8936cf4c32fa9d9f27ca8d3306468cc8}{
 \index{stage@{stage}!s\_\-squash\_\-cycles@{s\_\-squash\_\-cycles}}
 \index{s\_\-squash\_\-cycles@{s\_\-squash\_\-cycles}!stage@{stage}}
 \subsubsection[{s\_\-squash\_\-cycles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat}\& {\bf stage::s\_\-squash\_\-cycles}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
 \label{classstage_a8936cf4c32fa9d9f27ca8d3306468cc8}
+\hypertarget{classstage_ac8c48351ea5ff2ad92e097f1ab3684e0}{
+\index{stage@{stage}!s\_\-squash\_\-stall\_\-cycles@{s\_\-squash\_\-stall\_\-cycles}}
+\index{s\_\-squash\_\-stall\_\-cycles@{s\_\-squash\_\-stall\_\-cycles}!stage@{stage}}
+\subsubsection[{s\_\-squash\_\-stall\_\-cycles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat}\& {\bf stage::s\_\-squash\_\-stall\_\-cycles}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstage_ac8c48351ea5ff2ad92e097f1ab3684e0}
 \hypertarget{classstage_a257d798bacbed096d4e9879d4d47c207}{
 \index{stage@{stage}!s\_\-stall\_\-cycles@{s\_\-stall\_\-cycles}}
 \index{s\_\-stall\_\-cycles@{s\_\-stall\_\-cycles}!stage@{stage}}
@@ -152,7 +141,5 @@ const \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hy
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{stage_8h}{stage.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2stage_8h}{stage.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{stage_8cpp}{stage.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2stage_8cpp}{stage.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{stage_8h}{stage.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{stage_8cpp}{stage.cpp}\end{DoxyCompactItemize}

@@ -15,41 +15,41 @@ Collaboration diagram for CAMtable$<$ tableType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}{CAMtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\hyperlink{classCAMtable_a11e9beacdac67a01e521e468f38ced59}{CAMtable} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string)
 \item 
 \hyperlink{classCAMtable_a5d8003f0fb86c270c65674efa53b1172}{$\sim$CAMtable} ()
 \item 
-tableType\_\-T \hyperlink{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}{pullNextReady} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH})
+tableType\_\-T \hyperlink{classCAMtable_a07cd94cd88b502e5b0e2699b8762f560}{pullNextReady} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH})
 \item 
-tableType\_\-T \hyperlink{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{getNth} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} indx)
+tableType\_\-T \hyperlink{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{getNth} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} indx)
 \item 
-tableType\_\-T \hyperlink{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{pullNth} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} indx)
+tableType\_\-T \hyperlink{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{pullNth} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} indx)
 \item 
 tableType\_\-T \hyperlink{classCAMtable_a1111b552094db836302ac5ce0671794a}{getFront} ()
 \item 
 tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFront} ()
+\item 
+tableType\_\-T \hyperlink{classCAMtable_a0bc1956b7e4c93f753232e42241162e5}{getLast} ()
 \end{DoxyCompactItemize}
 \subsubsection*{template$<$typename tableType\_\-T$>$ class CAMtable$<$ tableType\_\-T $>$}
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}{
+\hypertarget{classCAMtable_a11e9beacdac67a01e521e468f38ced59}{
 \index{CAMtable@{CAMtable}!CAMtable@{CAMtable}}
 \index{CAMtable@{CAMtable}!CAMtable@{CAMtable}}
 \subsubsection[{CAMtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf CAMtable}$<$ tableType\_\-T $>$::{\bf CAMtable} (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{table\_\-name = {\ttfamily \char`\"{}CAMtable$<$~tableType\_\-T~$>$\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classCAMtable_a45eb83cb39ff8272d50612a1f5f6f85b}
+\label{classCAMtable_a11e9beacdac67a01e521e468f38ced59}
 
 \begin{DoxyCode}
-    : table<tableType_T> (len, CAM_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+    : table<tableType_T> (CAM_ARRAY, clk, root, table_name)
 {}
 \end{DoxyCode}
 \hypertarget{classCAMtable_a5d8003f0fb86c270c65674efa53b1172}{
@@ -82,15 +82,43 @@ tableType\_\-T \hyperlink{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{popFr
                                              {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
-       checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have ch
+      ecked the available ports count first");
 #endif
-     return table<tableType_T>::_table.Nth (0)->_element;
+    table<tableType_T>::_e_table.ramAccess ();
+    return table<tableType_T>::_table.Nth (0)->_element;
 }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
+
+
+\hypertarget{classCAMtable_a0bc1956b7e4c93f753232e42241162e5}{
+\index{CAMtable@{CAMtable}!getLast@{getLast}}
+\index{getLast@{getLast}!CAMtable@{CAMtable}}
+\subsubsection[{getLast}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf CAMtable}$<$ tableType\_\-T $>$::getLast (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classCAMtable_a0bc1956b7e4c93f753232e42241162e5}
+
+\begin{DoxyCode}
+                                            {
+#ifdef ASSERTION
+    Assert (table<tableType_T>::_table.NumElements () > 0);
+    Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have che
+      cked the available ports count first"); //TODO - don't think this is needed, is i
+      t?
+#endif
+    table<tableType_T>::_e_table.ramAccess ();
+    return table<tableType_T>::_table.Last()->_element;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classCAMtable_abef54f1e30ed42845d48c98917de32e1}{
@@ -107,12 +135,18 @@ Here is the caller graph for this function:
                                                       {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert (table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have 
-      checked the available ports count first");
+    Assert (table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have che
+      cked the available ports count first");
 #endif
-     return table<tableType_T>::_table.Nth (indx)->_element;
+    table<tableType_T>::_e_table.camAccess ();
+    return table<tableType_T>::_table.Nth (indx)->_element;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classCAMtable_a5e19b284c54893d488fb7eae5f84aa13}{
 \index{CAMtable@{CAMtable}!popFront@{popFront}}
 \index{popFront@{popFront}!CAMtable@{CAMtable}}
@@ -127,15 +161,21 @@ Here is the caller graph for this function:
                                              {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
-       checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have ch
+      ecked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
+    table<tableType_T>::_e_table.ramAccess ();
     return dyIns;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -156,12 +196,13 @@ Here is the caller graph for this function:
     tableType_T obj = table<tableType_T>::_table.Nth (next_ins_indx)->_element;
     delete table<tableType_T>::_table.Nth (next_ins_indx);
     table<tableType_T>::_table.RemoveAt (next_ins_indx);
+    table<tableType_T>::_e_table.ramAccess ();
     return obj;
 }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{classCAMtable_a9644548c43e912d1cd1d0431fc5179e9}{
@@ -178,14 +219,21 @@ Here is the caller graph for this function:
                                                        {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
-       checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have ch
+      ecked the available ports count first");
 #endif
-     tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
-     table<tableType_T>::_table.RemoveAt (indx);
-     return elem;
+    tableType_T elem = table<tableType_T>::_table.Nth(indx)->_element;
+    delete table<tableType_T>::_table.Nth (indx);
+    table<tableType_T>::_table.RemoveAt (indx);
+    table<tableType_T>::_e_table.camAccess ();
+    return elem;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

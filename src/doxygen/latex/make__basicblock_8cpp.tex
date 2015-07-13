@@ -3,17 +3,16 @@
 \label{make__basicblock_8cpp}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/make\_\-basicblock.cpp@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/make\_\-basicblock.cpp}}
 }
 {\ttfamily \#include \char`\"{}make\_\-basicblock.h\char`\"{}}\par
-{\ttfamily \#include \char`\"{}listSchedule.h\char`\"{}}\par
 Include dependency graph for make\_\-basicblock.cpp:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca}{make\_\-basicblock} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $\ast$brDstSet, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap)
+void \hyperlink{make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849}{make\_\-basicblock} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $\ast$brDstSet, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, \hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} cluster\_\-size)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca}{
+\hypertarget{make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849}{
 \index{make\_\-basicblock.cpp@{make\_\-basicblock.cpp}!make\_\-basicblock@{make\_\-basicblock}}
 \index{make\_\-basicblock@{make\_\-basicblock}!make_basicblock.cpp@{make\_\-basicblock.cpp}}
 \subsubsection[{make\_\-basicblock}]{\setlength{\rightskip}{0pt plus 5cm}void make\_\-basicblock (
@@ -23,174 +22,254 @@ void \hyperlink{make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca}{make\_\
 \item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList, }
 \item[{set$<$ {\bf ADDR} $>$ $\ast$}]{brDstSet, }
 \item[{map$<$ {\bf ADDR}, {\bf basicblock} $\ast$ $>$ $\ast$}]{bbMap, }
-\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap}
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{{\bf LENGTH}}]{cluster\_\-size}
 \end{DoxyParamCaption}
 )}}
-\label{make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca}
+\label{make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849}
 
 \begin{DoxyCode}
-                                                                              {
-        // Construct BB's
+                                           {
+        // CONSTRUCT BB'S
         set<long int> use_set, def_set, diff_set;
-        for (int i = 0; i < insList->NumElements(); i++) {
-                instruction* ins = insList->Nth(i);
-                //Construct the destination instruction address set (stat info)
-                for (int j = 0; j < ins->getNumReg(); j++) {
-                        if (ins->getNthRegType(j) == READ)
-                                use_set.insert(ins->getNthReg(j));
-                        else if (ins->getNthRegType(j) == WRITE)
-                                def_set.insert(ins->getNthReg(j));
+        for  (int i = 0; i < insList->NumElements (); i++) {
+                instruction* ins = insList->Nth (i);
+                //CONSTRUCT THE DESTINATION INSTRUCTION ADDRESS SET  (STAT INFO)
+                for  (int j = 0; j < ins->getNumReg (); j++) {
+                        if  (ins->getNthRegType (j) == READ)
+                                use_set.insert (ins->getNthReg (j));
+                        else if  (ins->getNthRegType (j) == WRITE)
+                                def_set.insert (ins->getNthReg (j));
                 }
-                //Construct new Basicblock or add ins to an existing one 
-                //printf("Type: %c\n", insList->Nth(i)->getType());
-                if (i == 0 ||
-                    brDstSet->find(ins->getInsAddr()) != brDstSet->end()) {
+                //CONSTRUCT NEW BASICBLOCK OR ADD INS TO AN EXISTING ONE 
+                //printf ("Type: %c\n", insList->Nth (i)->getType ());
+                if  (i == 0 ||
+                    brDstSet->find (ins->getInsAddr ()) != brDstSet->end ()) {
                         basicblock* newBB;
-                        if (i == 0 || bbList->Nth(bbList->NumElements()-1)->getBb
-      Size() > 0) {
+                        if  (i == 0 || bbList->Last ()->getBbSize () > 0) {
                                 newBB = new basicblock;
-                                newBB->setListIndx(bbList->NumElements());
-                                bbList->Append(newBB);
+                                newBB->setListIndx (bbList->NumElements ());
+                                bbList->Append (newBB);
                         } else {
-                                //avoid making empty BB's
-                                newBB = bbList->Nth(bbList->NumElements()-1);
+                                //AVOID MAKING EMPTY BB'S
+                                newBB = bbList->Last ();
                         }
-                        newBB->addIns(ins);
-                        bbMap->insert(pair <ADDR, basicblock*>(newBB->getID(), ne
-      wBB));
-                        //The case with a single branch/jump/call instruction in 
-      BB (closing BB)
-                        if (ins->getType() == 'j' || ins->getType() == 'b' || ins
-      ->getType() == 'r') {
-                                bbList->Nth(bbList->NumElements()-1)->setBBbrHead
-      er(ins->getInsAddr());
+                        newBB->addIns (ins, BR_DST);
+                        bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (),
+       newBB));
+                        //THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN 
+      BB (CLOSING BB)
+                        if  (ins->getType () == 'j' || ins->getType () == 'b' || 
+      ins->getType () == 'r' || 
+                 ins->getType () == 'c' || ins->getType () == 's') {
+                            basicblock *bb = bbList->Last ();
+                                bb->setBBbrHeader (ins->getInsAddr ());
                                 newBB = new basicblock;
-                                newBB->setListIndx(bbList->NumElements());
-                                bbList->Append(newBB);
+                                newBB->setListIndx (bbList->NumElements ());
+                                bbList->Append (newBB);
+            } else if ((!ins->hasFallThru () && !ins->hasDst ()) || (newBB->
+      getBbSize () >= cluster_size)) {
+                newBB = new basicblock;
+                newBB->setListIndx (bbList->NumElements ());
+                bbList->Append (newBB);
+                if  (newBB->getBbSize () == 1) {
+                    bbMap->insert (pair <ADDR, basicblock*> (newBB->getID (), new
+      BB));
+                }
+            }
+                        //printf ("%llx, %llx\n", ins->getInsAddr (), newBB->getI
+      D ());
+                } else if  (ins->getType () == 'j' || ins->getType () == 'b' || i
+      ns->getType () == 'r' || 
+                    ins->getType () == 'c' || ins->getType () == 's') {
+                        basicblock *bb = bbList->Last ();
+                        bb->setBBbrHeader (ins->getInsAddr ());
+                        bb->addIns (ins, NO_BR_DST);
+                        if  (bb->getBbSize () == 1) {
+                                bbMap->insert (pair <ADDR, basicblock*> (bb->
+      getID (), bb));
                         }
-                        //printf("%llx, %llx\n", ins->getInsAddr(), newBB->getID(
-      ));
-                } else if (ins->getType() == 'j' || ins->getType() == 'b' || ins-
-      >getType() == 'r') {
-                        bbList->Nth(bbList->NumElements()-1)->setBBbrHeader(ins->
-      getInsAddr());
-                        bbList->Nth(bbList->NumElements()-1)->addIns(ins);
                         basicblock* newBB = new basicblock;
-                        newBB->setListIndx(bbList->NumElements());
-                        bbList->Append(newBB);
-                        //printf("%llx\n", ins->getInsAddr());
+                        newBB->setListIndx (bbList->NumElements ());
+                        bbList->Append (newBB);
+                        //printf ("%llx\n", ins->getInsAddr ());
+                } else if (!ins->hasFallThru () && !ins->hasDst ()) {
+                        basicblock *bb = bbList->Last ();
+                        bb->addIns (ins, NO_BR_DST);
+                        if  (bb->getBbSize () == 1) {
+                                bbMap->insert (pair <ADDR, basicblock*> (bb->
+      getID (), bb));
+                        }
+                        basicblock* newBB = new basicblock;
+                        newBB->setListIndx (bbList->NumElements ());
+                        bbList->Append (newBB);
+                        //printf ("%llx\n", ins->getInsAddr ());
+                } else if (bbList->Last()->getBbSize () >= cluster_size) {
+                        basicblock* newBB = new basicblock;
+                        newBB->setListIndx (bbList->NumElements ());
+                        bbList->Append (newBB);
+                        newBB->addIns (ins, BR_DST);
+                        if  (newBB->getBbSize () == 1) {
+                                bbMap->insert (pair <ADDR, basicblock*> (newBB->
+      getID (), newBB));
+                        }
+                        //printf ("%llx\n", ins->getInsAddr ());
                 } else {
-                        basicblock *bb = bbList->Nth(bbList->NumElements()-1);
-                        bb->addIns(ins);
-                        if (bb->getBbSize() == 1) {
-                                bbMap->insert(pair <ADDR, basicblock*>(bb->getID(
-      ), bb));
-                                //printf("%llx, %llx\n", ins->getInsAddr(), bb->g
-      etID());
+                        basicblock *bb = bbList->Last ();
+                        bb->addIns (ins, NO_BR_DST);
+                        if  (bb->getBbSize () == 1) {
+                                bbMap->insert (pair <ADDR, basicblock*> (bb->
+      getID (), bb));
+                                //printf ("%llx, %llx\n", ins->getInsAddr (), bb-
+      >getID ());
                         } //else
-                                //printf("%llx\n", ins->getInsAddr());
+                                //printf ("%llx\n", ins->getInsAddr ());
                 }
         }
-        printf("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements())
-      ;
-        //get rid of empty basicblocks (shouldn't find any empty ones - just prec
-      aution)
+
+        /* GET RID OF EMPTY BASICBLOCKS  (SHOULDN'T FIND ANY EMPTY ONES - JUST PR
+      ECAUTION) */
+        printf ("\tNum BB before Dead BB Elimination: %d\n",bbList->NumElements (
+      ));
         set<ADDR> toRemoveInsSet;
-        for (int i = bbList->NumElements()-1; i >= 0; i--) {
-                if (bbList->Nth(i)->getBbSize() == 0) {
-                        // delete bbList->Nth(i);
-                        bbList->RemoveAt(i);
-                } else if (bbList->Nth(i)->getBbSize() == 1) {
-                        instruction* ins = bbList->Nth(i)->getLastIns();
-                        string str(ins->getOpCode());
-                        if (str.compare("#NOP\n") == 0) {
-                                toRemoveInsSet.insert(ins->getInsAddr());
-                                // delete bbList->Nth(i);
-                                bbList->RemoveAt(i);
+        for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* bb = bbList->Nth (i);
+                if  (bb->getBbSize () == 0) {
+                        // delete bbList->Nth (i);
+                        bbList->RemoveAt (i);
+                } else if  (bb->getBbSize () == 1) {
+                        instruction* ins = bb->getLastIns ();
+                        string str (ins->getOpCode ());
+                        if  (str.compare ("#NOP\n") == 0) {
+                                toRemoveInsSet.insert (ins->getInsAddr ());
+                                // delete bbList->Nth (i);
+                                bbList->RemoveAt (i);
                         }
                 }
         }
-        printf("\tNum BB after Dead BB Elimination: %d\n",bbList->NumElements());
-      
-        //Remove NOP instructions from insList
-        for (int i = insList->NumElements()-1; i >= 0; i--) {
-                instruction* ins = insList->Nth(i);
-                if (toRemoveInsSet.find(ins->getInsAddr()) != toRemoveInsSet.end(
-      )) {
-                        // delete insList->Nth(i);
-                        insList->RemoveAt(i);
-                        insAddrMap->erase(ins->getInsAddr());
+        printf ("\tNum BB after Dead BB Elimination: %d\n",bbList->NumElements ()
+      );
+
+        /* IF A BB DOES NOT YET HAVE AN ID, ASSIGN IT AN ID */
+        for  (int i = bbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* bb = bbList->Nth (i);
+        bb->forceAssignBBID ();
+    }
+
+        /* REMOVE DEAD NOP INSTRUCTIONS FROM INSLIST */
+        for  (int i = insList->NumElements () - 1; i >= 0; i--) {
+                instruction* ins = insList->Nth (i);
+                if  (toRemoveInsSet.find (ins->getInsAddr ()) != toRemoveInsSet.e
+      nd ()) {
+                        insList->RemoveAt (i);
+                        insAddrMap->erase (ins->getInsAddr ());
+            // delete ins;
                 }
         }
-        // Setup BB Dependencies
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                basicblock* bb = bbList->Nth(i);
-                Assert(bb->getBbSize() > 0 && "Invalid BB Size.");
-                instruction* ins = bb->getLastIns();
-                char type = ins->getType();
-                if (type == 'j') { //unconditional jump 
-                        ADDR insDst = bb->getLastInsDst();
+
+        /* SETUP BB DEPENDENCIES */
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+                basicblock* bb = bbList->Nth (i);
+                Assert (bb->getBbSize () > 0 && "Invalid BB Size.");
+                instruction* ins = bb->getLastIns ();
+                char type = ins->getType ();
+                if  (type == 'j') { //unconditional jump 
+                        ADDR insDst = bb->getLastInsDst ();
                         basicblock* bbDst;
-                        if (bbMap->find(insDst) != bbMap->end()) {
-                                bbDst = (*bbMap)[insDst];
-                                bb->setDescendent(bbDst);
-                                bb->setTakenTarget(bbDst);
+                        if  (bbMap->find (insDst) != bbMap->end ()) {
+                if (ins->hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb->setDescendent (bbDst);
+                    bb->setTakenTarget (bbDst);
+                }
                         } else {
-                                printf("\tERROR: Didn't find destination bb, %llx
-       (%s, line: %d)\n", insDst , __FILE__, __LINE__);
-                                //exit(1);
+                                printf ("\t\tERROR: Didn't find destination bb fo
+      r jump, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+                                //exit (1);
                                 continue;
                         }
-                } else if (type == 'o' || type == 'M') { //non-jump
-                        if (i+1 < bbList->NumElements()) {                              
-                                bb->setDescendent(bbList->Nth(i+1));
-                                bb->setFallThrough(bbList->Nth(i+1));
-                        }
-                } else if (type == 'b') { //conditional jump
-                        if (i+1 < bbList->NumElements()) {
-                                bb->setDescendent(bbList->Nth(i+1));
-                                bb->setFallThrough(bbList->Nth(i+1));
-                        }
-                        ADDR insDst = bb->getLastInsDst();
-                        basicblock* bbDst;
-                        if (bbMap->find(insDst) != bbMap->end()) {
-                                bbDst = (*bbMap)[insDst];
-                                bb->setDescendent(bbDst);
-                                bb->setTakenTarget(bbDst);
+                } else if (type == 'n' || type == 'o' || type == 'M' || type == '
+      c') {
+                        ADDR insFallThru = bb->getLastInsFallThru ();
+                        basicblock* bbFallThru;
+                        if  (bbMap->find (insFallThru) != bbMap->end ()) {
+                if (ins->hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb->setDescendent (bbFallThru);
+                    bb->setFallThrough (bbFallThru);
+                }
                         } else {
-                                printf("\tERROR: Didn't find destination bb, %llx
-       (%s, line: %d)\n", insDst , __FILE__, __LINE__);
-                                //exit(1);
+                                printf ("\t\tERROR: Didn't find destination bb fo
+      r non-br op, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+                                //exit (1);
                                 continue;
                         }
-                } else if (type == 'c') { //func call
-                        // Assumptions on function calls 
-                        // Call does not terminate BB's
-                        // The CFG links to function called is not established
-                        // Call does not disturb the CFG flow and dependency b/w 
-      BB's
-                        if (i+1 < bbList->NumElements()) {                              
-                                bb->setDescendent(bbList->Nth(i+1));
-                                bb->setFallThrough(bbList->Nth(i+1));
+                } else if  (type == 'b') { //conditional jump
+                        ADDR insFallThru = bb->getLastInsFallThru ();
+                        basicblock* bbFallThru;
+                        if  (bbMap->find (insFallThru) != bbMap->end ()) {
+                if (ins->hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb->setDescendent (bbFallThru);
+                    bb->setFallThrough (bbFallThru);
+                }
+                        } else {
+                                printf ("\t\tERROR: Didn't find fall-thru bb for 
+      br, %llx  (%s, line: %d)\n", insFallThru, __FILE__, __LINE__);
+                                //exit (1);
+                                continue;
                         }
-                } else if (type == 'r') { //func return
-                        ;//do nothing on return. must have been the end of functi
-      on
+
+                        ADDR insDst = bb->getLastInsDst ();
+                        basicblock* bbDst;
+                        if  (bbMap->find (insDst) != bbMap->end ()) {
+                if (ins->hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb->setDescendent (bbDst);
+                    bb->setTakenTarget (bbDst);
+                }
+                        } else {
+                                printf ("\t\tERROR: Didn't find destination bb fo
+      r br, %llx  (%s, line: %d)\n", insDst , __FILE__, __LINE__);
+                                //exit (1);
+                                continue;
+                        }
+//        } else if  (type == 'c') { //func call - TODO this block should be usel
+      ess - check and remove if possible
+//            // Assumptions on function calls 
+//            // Call does not terminate BB's
+//            // The CFG links to function called is not established
+//            // Call does not disturb the CFG flow and dependency b/w BB's
+//            if  (i+1 < bbList->NumElements ()) {                              
+//                bb->setDescendent (bbList->Nth (i+1));
+//                bb->setFallThrough (bbList->Nth (i+1));
+//            }
+        } else if  (type == 's' || type == 'r') {
+                        ;//do nothing on syscall - no fthru, no destination
                 } else {
-                        printf("Wrong Ins Type: %c\n", type);
-                        Assert (true == false && "WRONG INSTRUTION. Terminating..
-      .");
+                        printf ("Wrong Ins Type: %c\n", type);
+                        Assert  (0 && "WRONG INSTRUTION. Terminating...");
                 }
-        }       
-        // Perform List Scheduling on BB
-        /*for (int i = 0; i < bbList->NumElements(); i++) {
-                basicblock* bb = bbList->Nth(i);
-                listSchedule(bb); //why does this affect BB structure?
-        }*/
-        std::set_difference(use_set.begin(), use_set.end(), def_set.begin(), def_
-      set.end(), std::inserter(diff_set, diff_set.begin()));
-        printf("\tDiff Set: %d %d %d\n", def_set.size(), use_set.size(), diff_set
-      .size());
+        }
+        std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), 
+      def_set.end (), std::inserter (diff_set, diff_set.begin ()));
+        printf ("\tDiff Set: %d %d %d\n", def_set.size (), use_set.size (), diff_
+      set.size ());
+
+    /* PRINT THE NUMBER OF "LARGE" BB'S */
+//      for  (int i = 0; i < bbList->NumElements (); i++) {
+//              basicblock* bb = bbList->Nth (i);
+//        if (bb->getBbSize () > 30) cout << "LARGE BB ID: " << hex << bb->getID 
+      () << endl;
+//    }
+
+    /* SETSUP BB STATS */
+    dependencySetup (bbList, insList);
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+                basicblock* bb = bbList->Nth (i);
+//        bb->setsupStats ();
+//        bb->reportStats ();
+    }
 }
 \end{DoxyCode}
 

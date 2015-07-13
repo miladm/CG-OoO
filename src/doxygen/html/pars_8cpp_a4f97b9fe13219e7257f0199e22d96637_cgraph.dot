@@ -5,5 +5,7 @@ digraph G
   rankdir=LR;
   Node1 [label="HandleInst",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="recover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$memlog__ctr_8h.html#a505f360905b4ad0fa6e18f19405539ea"];
+  Node2 [label="config::brMisspredDelay",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classconfig.html#acfdbc61d57ab979c3bc2e3a45d3f88ad"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="recover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$memlog__ctr_8h.html#a505f360905b4ad0fa6e18f19405539ea"];
 }

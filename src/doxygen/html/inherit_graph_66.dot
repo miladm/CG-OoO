@@ -3,5 +3,5 @@ digraph G
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir=LR;
-  Node1 [label="timer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtimer.html"];
+  Node1 [label="ff_array::Array",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classff__array_1_1Array.html"];
 }

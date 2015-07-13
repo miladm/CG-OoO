@@ -3,6 +3,25 @@ digraph G
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="stage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
-  Node2 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_ins_cnt\ns_stall_cycles\ns_squash_cycles"];
+  Node2 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_ins_cnt\ns_stall_cycles\ns_squash_cycles\ns_squash_stall_cycles"];
   Node2 [label="ScalarStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScalarStat.html"];
+  Node3 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="stat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstat.html"];
+  Node4 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_ipc"];
+  Node4 [label="RatioStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRatioStat.html"];
+  Node2 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node2 -> Node4 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_divisor"];
+  Node5 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_clk"];
+  Node5 [label="sysClock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classsysClock.html"];
+  Node2 -> Node5 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_clk_cycles"];
+  Node6 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_e_stage"];
+  Node6 [label="stage_energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstage__energy.html"];
+  Node7 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classenergy.html"];
+  Node8 -> Node7 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="e_leak"];
+  Node8 [label="LeakageEnergyStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classLeakageEnergyStat.html"];
+  Node9 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="EnergyStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEnergyStat.html"];
+  Node2 -> Node9 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node6 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="e_ff"];
 }

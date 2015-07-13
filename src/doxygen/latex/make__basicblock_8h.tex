@@ -9,17 +9,18 @@
 {\ttfamily \#include \char`\"{}basicblock.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}variable.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}dependencySetup.h\char`\"{}}\par
 Include dependency graph for make\_\-basicblock.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{make__basicblock_8h_ae13071ca805363d17217ae5518d560c8}{make\_\-basicblock} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList, std::set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $\ast$brDstSet, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap)
+void \hyperlink{make__basicblock_8h_af8ef1a810423c3bd471888a5e3a6d97c}{make\_\-basicblock} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList, std::set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $\ast$brDstSet, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, \hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} cluster\_\-size)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{make__basicblock_8h_ae13071ca805363d17217ae5518d560c8}{
+\hypertarget{make__basicblock_8h_af8ef1a810423c3bd471888a5e3a6d97c}{
 \index{make\_\-basicblock.h@{make\_\-basicblock.h}!make\_\-basicblock@{make\_\-basicblock}}
 \index{make\_\-basicblock@{make\_\-basicblock}!make_basicblock.h@{make\_\-basicblock.h}}
 \subsubsection[{make\_\-basicblock}]{\setlength{\rightskip}{0pt plus 5cm}void make\_\-basicblock (
@@ -29,7 +30,8 @@ void \hyperlink{make__basicblock_8h_ae13071ca805363d17217ae5518d560c8}{make\_\-b
 \item[{map$<$ int, {\bf variable} $\ast$ $>$ \&}]{varList, }
 \item[{std::set$<$ {\bf ADDR} $>$ $\ast$}]{brDstSet, }
 \item[{std::map$<$ {\bf ADDR}, {\bf basicblock} $\ast$ $>$ $\ast$}]{bbMap, }
-\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap}
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{{\bf LENGTH}}]{cluster\_\-size}
 \end{DoxyParamCaption}
 )}}
-\label{make__basicblock_8h_ae13071ca805363d17217ae5518d560c8}
+\label{make__basicblock_8h_af8ef1a810423c3bd471888a5e3a6d97c}

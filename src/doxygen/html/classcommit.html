@@ -87,15 +87,13 @@ Collaboration diagram for commit:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a41ac90052f6ff381357d12a0b30583a8">commit</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;commit_to_bp_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;commit_to_scheduler_port, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *<a class="el" href="backend_2parser_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> commit_width, string stage_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a0dfedb170a782a4e32b587ed0afd0285">commit</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;commit_to_bp_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;commit_to_scheduler_port, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *iROB, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *iQUE, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> commit_width, <a class="el" href="classsysClock.html">sysClock</a> *<a class="el" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>, string stage_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a56b8656334cc14f0f7c9f8f0d7021417">~commit</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a9eb2bb492ac2b103102be4ef7d018e8b">doCOMMIT</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a50f823d551a57bbaccde41c32737b737">commitImpl</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#afb05caa27f671bb59e3462e161c2c2f1">squash</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a207fab9b88bbf27cae6f6388aa6ef6ad">regStat</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a29f74b9268950cc7c7b7f259793502d6">doCOMMIT</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommit.html#a5b183f343dbf7da45d795df16ef4b7bb">squash</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a41ac90052f6ff381357d12a0b30583a8"></a><!-- doxytag: member="commit::commit" ref="a41ac90052f6ff381357d12a0b30583a8" args="(port&lt; dynInstruction * &gt; &amp;commit_to_bp_port, port&lt; dynInstruction * &gt; &amp;commit_to_scheduler_port, CAMtable&lt; dynInstruction * &gt; *iROB, WIDTH commit_width, string stage_name)" -->
+<a class="anchor" id="a0dfedb170a782a4e32b587ed0afd0285"></a><!-- doxytag: member="commit::commit" ref="a0dfedb170a782a4e32b587ed0afd0285" args="(port&lt; dynInstruction * &gt; &amp;commit_to_bp_port, port&lt; dynInstruction * &gt; &amp;commit_to_scheduler_port, CAMtable&lt; dynInstruction * &gt; *iROB, CAMtable&lt; dynInstruction * &gt; *iQUE, WIDTH commit_width, sysClock *clk, string stage_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -120,8 +118,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>iQUE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
           <td class="paramname"><em>commit_width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -137,12 +147,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a> (commit_width, stage_name),
-      s_squash_ins_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> ( <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>, <span class="stringliteral">&quot;squash_ins_cnt&quot;</span>, <span class="stringliteral">&quot;Number of squashed instructions&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a> (commit_width, stage_name, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;ino_pipe&quot;</span>][<span class="stringliteral">&quot;commit&quot;</span>], clk),
+      s_squash_ins_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> ( <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>, <span class="stringliteral">&quot;squash_ins_cnt&quot;</span>, <span class="stringliteral">&quot;Number of squashed instructions&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_wp_ins_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;wp_ins_cnt&quot;</span>, <span class="stringliteral">&quot;Number of wrong-path dynamic instructions in &quot;</span>+stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_ins_type_hist (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#ad4d85ebb5f4446c66911f0c141e11f1a">newScalarHistStat</a> ((<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>) <a class="code" href="global_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da066c60cffedc27405d047aee3d767ef3">NUM_INS_TYPE</a>, stage_name, <span class="stringliteral">&quot;ins_type_cnt&quot;</span>, <span class="stringliteral">&quot;Committed instruction type distribution&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_mem_type_hist (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#ad4d85ebb5f4446c66911f0c141e11f1a">newScalarHistStat</a> ((<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>) <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9cad00fbd131a5ac035481c03a127f222de">NUM_MEM_TYPE</a>, stage_name, <span class="stringliteral">&quot;mem_type_cnt&quot;</span>, <span class="stringliteral">&quot;Committed memory instruction type distribution&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
 {
         _commit_to_bp_port  = &amp;commit_to_bp_port;
         _commit_to_scheduler_port = &amp;commit_to_scheduler_port;
-    _iROB = <a class="code" href="bkEnd_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>;
+    _iROB = iROB;
+    _iQUE = iQUE;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>;
 }
 </pre></div>
 </div>
@@ -165,193 +182,119 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a50f823d551a57bbaccde41c32737b737"></a><!-- doxytag: member="commit::commitImpl" ref="a50f823d551a57bbaccde41c32737b737" args="(sysClock &amp;)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> commit::commitImpl </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                               {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea84e38d4c1dc98fae69e84c239385f163">DBG_COMMIT</a>, <span class="stringliteral">&quot;%s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-        <span class="comment">/* CHECKS */</span>
-        <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!_iROB-&gt;<a class="code" href="classtable.html#ade9af281ee70b0cf544060c478ffbfe1">hasFreeWire</a> (clk, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)) <span class="keywordflow">break</span>;
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _iROB-&gt;<a class="code" href="classCAMtable.html#a1111b552094db836302ac5ce0671794a">getFront</a> ();
-        <span class="comment">//Assert (ins-&gt;getNumRegRd () == 0 &amp;&amp; &quot;instruction must have been ready long ago!&quot;);</span>
-        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> ()) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () != <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a00a900c9df90c74f75004b3dc04f173d">COMPLETE</a>) <span class="keywordflow">break</span>;
-
-        <span class="comment">/* COMMIT INS */</span>
-        ins = _iROB-&gt;<a class="code" href="classCAMtable.html#a5e19b284c54893d488fb7eae5f84aa13">popFront</a>();
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea84e38d4c1dc98fae69e84c239385f163">DBG_COMMIT</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Commit ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-        <span class="keyword">delete</span> ins;
-
-        <span class="comment">/* STAT */</span>
-        <a class="code" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a>++;
-        pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b">PIPE_BUSY</a>;
-    }
-    <span class="keywordflow">return</span> pipe_stall;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph.png" border="0" usemap="#classcommit_a50f823d551a57bbaccde41c32737b737_cgraph" alt=""/></div>
-<map name="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph" id="classcommit_a50f823d551a57bbaccde41c32737b737_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph.png" border="0" usemap="#classcommit_a50f823d551a57bbaccde41c32737b737_icgraph" alt=""/></div>
-<map name="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph" id="classcommit_a50f823d551a57bbaccde41c32737b737_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a9eb2bb492ac2b103102be4ef7d018e8b"></a><!-- doxytag: member="commit::doCOMMIT" ref="a9eb2bb492ac2b103102be4ef7d018e8b" args="(sysClock &amp;)" -->
+<a class="anchor" id="a29f74b9268950cc7c7b7f259793502d6"></a><!-- doxytag: member="commit::doCOMMIT" ref="a29f74b9268950cc7c7b7f259793502d6" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void commit::doCOMMIT </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
+<div class="fragment"><pre class="fragment">                       {
     <span class="comment">/* STAT */</span>
-    <a class="code" href="classcommit.html#a207fab9b88bbf27cae6f6388aa6ef6ad">regStat</a> (clk);
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
+    regStat ();
+    <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
 
     <span class="comment">/* SQUASH HANDLING */</span>
     <span class="keywordflow">if</span> (!(<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0a814aaf6dc5ef64dbb1f222a55f2fd345">PIPE_WAIT_FLUSH</a> || <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>)) {
-        pipe_stall = <a class="code" href="classcommit.html#a50f823d551a57bbaccde41c32737b737">commitImpl</a> (clk);
+        pipe_stall = commitImpl ();
     }
 
+    verifySim ();
+
     <span class="comment">/* STAT */</span>
-    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph.png" border="0" usemap="#classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph" alt=""/></div>
-<map name="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph" id="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph.png" border="0" usemap="#classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph" alt=""/></div>
-<map name="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph" id="classcommit_a9eb2bb492ac2b103102be4ef7d018e8b_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a207fab9b88bbf27cae6f6388aa6ef6ad"></a><!-- doxytag: member="commit::regStat" ref="a207fab9b88bbf27cae6f6388aa6ef6ad" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void commit::regStat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                   {
-    <span class="comment">//_iROB-&gt;regStat (); TODO - fix this</span>
+    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph.png" border="0" usemap="#classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph" alt=""/></div>
-<map name="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph" id="classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad_icgraph">
+<div class="center"><img src="classcommit_a29f74b9268950cc7c7b7f259793502d6_icgraph.png" border="0" usemap="#classcommit_a29f74b9268950cc7c7b7f259793502d6_icgraph" alt=""/></div>
+<map name="classcommit_a29f74b9268950cc7c7b7f259793502d6_icgraph" id="classcommit_a29f74b9268950cc7c7b7f259793502d6_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="afb05caa27f671bb59e3462e161c2c2f1"></a><!-- doxytag: member="commit::squash" ref="afb05caa27f671bb59e3462e161c2c2f1" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a5b183f343dbf7da45d795df16ef4b7bb"></a><!-- doxytag: member="commit::squash" ref="a5b183f343dbf7da45d795df16ef4b7bb" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void commit::squash </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                  {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea10182b8b2c6536a067d6600a73931d55">DBG_SQUASH</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;ROB Flush&quot;</span>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0a9ed2cff935c08c225b96d288a0249a45">PIPE_SQUASH_ROB</a>);
+<div class="fragment"><pre class="fragment">                     {
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea10182b8b2c6536a067d6600a73931d55">DBG_SQUASH</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;ROB Flush&quot;</span>, <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0a9ed2cff935c08c225b96d288a0249a45">PIPE_SQUASH_ROB</a>);
     <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">return</span>;
     <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> squashSeqNum = <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a366fb213b96fa81e166dbe60a16c3e4f">getSquashSN</a> ();
     <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = NULL;
-    <a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> start_indx = 0, stop_indx = _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1;
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = 0; i &lt; _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>(); i++) {
-        <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
+    <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> start_indx = 0, stop_indx = _iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1;
+    <a class="code" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a>.<a class="code" href="classstage__energy.html#a2fbc25d661f43c5877c8d89da6b17655">ffAccess</a> (<a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>);
+
+    <span class="comment">/*-- SQUASH iROB --*/</span>
+<span class="comment">//    _iROB-&gt;ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */</span>
+    <span class="keywordflow">for</span> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> i = _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () - 1; i &gt;= 0; i--) {
+        <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () == 0) <span class="keywordflow">break</span>;
         ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () != <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a887d2cbfd9131de5cc3745731421b34b">EXECUTE</a>);<span class="comment">// &amp;&amp; ins-&gt;getPipeStage () != MEM_ACCESS);</span>
+        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &lt; squashSeqNum) <span class="keywordflow">break</span>;
+        _iROB-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
+<span class="comment">//        _iROB-&gt;ramAccess ();</span>
+        s_squash_ins_cnt++;
+    }
+
+    <span class="comment">/*-- SQUASH iQUE --*/</span>
+    <span class="keywordflow">for</span> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> i = 0; i &lt; _iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>(); i++) {
+        <span class="keywordflow">if</span> (_iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
+        ins = _iQUE-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#aeb07269dfde7d142e72e13cda8060c29">getPipeStage</a> () != <a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a887d2cbfd9131de5cc3745731421b34b">EXECUTE</a>);<span class="comment">// &amp;&amp; ins-&gt;getPipeStage () != MEM_ACCESS);</span>
         <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () == squashSeqNum) {
             start_indx = i;
-            <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> () == <span class="keyword">true</span>);
+            <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> () == <span class="keyword">true</span>);
         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &gt; squashSeqNum) {
             <span class="keywordflow">if</span> (!ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> ()) {
                 stop_indx = i - 1;
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (i &gt; start_indx);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (i &gt; start_indx);
                 <span class="keywordflow">break</span>;
             }
         }
     }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() &gt; stop_indx &amp;&amp; stop_indx &gt;= start_indx &amp;&amp; start_indx &gt;= 0);
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = _iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1; i &gt; stop_indx; i--) {
-        <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-        ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
+    <span class="comment">/* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */</span>
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a> () &gt; stop_indx &amp;&amp; stop_indx &gt;= start_indx &amp;&amp; start_indx &gt;= 0);
+
+    <span class="comment">/* PUSH BACK INS&#39;S THAT ARE NOT ON WRONG PATH */</span>
+    <span class="keywordflow">for</span> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> i = _iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() - 1; i &gt; stop_indx; i--) {
+        <span class="keywordflow">if</span> (_iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
+        ins = _iQUE-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
         ins-&gt;<a class="code" href="classdynInstruction.html#a9d4e4bce20dd4c1fd4d85270d828550e">resetStates</a> ();
         <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#ac6cd30370c34c5a0862aa9a4c56049db">insertFrontCodeCache</a>(ins);
-        _iROB-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
-        s_squash_ins_cnt++;
+        _iQUE-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea84e38d4c1dc98fae69e84c239385f163">DBG_COMMIT</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), 
+                <span class="stringliteral">&quot;Squash ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
     }
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> i = stop_indx; i &gt;= start_indx; i--) {
-        <span class="keywordflow">if</span> (_iROB-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
-        ins = _iROB-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> () == <span class="keyword">true</span>);
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &gt;= squashSeqNum);
-        _iROB-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
-        s_squash_ins_cnt++;
+
+    <span class="comment">/* DELETE INS THAT ARE ON WRONG PATH */</span>
+    <span class="keywordflow">for</span> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> i = stop_indx; i &gt;= start_indx; i--) {
+        <span class="keywordflow">if</span> (_iQUE-&gt;<a class="code" href="classtable.html#af9c07419ae48bd029f03a9e7ca29c43f">getTableSize</a>() == 0) <span class="keywordflow">break</span>;
+        ins = _iQUE-&gt;<a class="code" href="classtable.html#a20191b8e05f6882b38655c5fffb42389">getNth_unsafe</a> (i);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a9e5d4f7401d24394fcc9b77d818798b6">isOnWrongPath</a> () == <span class="keyword">true</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () &gt;= squashSeqNum);
+        _iQUE-&gt;<a class="code" href="classtable.html#ae5c57c137b681a823a1bb0d830520e82">removeNth_unsafe</a> (i);
+        s_wp_ins_cnt++;
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea84e38d4c1dc98fae69e84c239385f163">DBG_COMMIT</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), 
+                <span class="stringliteral">&quot;Squash ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
         <span class="keyword">delete</span> ins;
     }
 }
@@ -359,8 +302,8 @@ Here is the caller graph for this function:</div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph.png" border="0" usemap="#classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph" alt=""/></div>
-<map name="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph" id="classcommit_afb05caa27f671bb59e3462e161c2c2f1_cgraph">
+<div class="center"><img src="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_cgraph.png" border="0" usemap="#classcommit_a5b183f343dbf7da45d795df16ef4b7bb_cgraph" alt=""/></div>
+<map name="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_cgraph" id="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_cgraph">
 </map>
 </div>
 </p>
@@ -368,8 +311,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph.png" border="0" usemap="#classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph" alt=""/></div>
-<map name="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph" id="classcommit_afb05caa27f671bb59e3462e161c2c2f1_icgraph">
+<div class="center"><img src="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_icgraph.png" border="0" usemap="#classcommit_a5b183f343dbf7da45d795df16ef4b7bb_icgraph" alt=""/></div>
+<map name="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_icgraph" id="classcommit_a5b183f343dbf7da45d795df16ef4b7bb_icgraph">
 </map>
 </div>
 </p>
@@ -386,7 +329,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -395,7 +338,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

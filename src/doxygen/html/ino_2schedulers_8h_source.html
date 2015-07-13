@@ -73,32 +73,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 
 <a name="l00011"></a><a class="code" href="classscheduler.html">00011</a> <span class="keyword">class </span><a class="code" href="classscheduler.html">scheduler</a> : <span class="keyword">protected</span> <a class="code" href="classstage.html">stage</a> {
 <a name="l00012"></a>00012         <span class="keyword">public</span>:
-<a name="l00013"></a>00013                 <a class="code" href="classscheduler.html#af495f5702c947e355eb2c54561ff069d">scheduler</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; decode_to_scheduler_port, 
+<a name="l00013"></a>00013                 <a class="code" href="classscheduler.html#a68dfbdb71ea0d6ede1229f20536a5485">scheduler</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; decode_to_scheduler_port, 
 <a name="l00014"></a>00014                    <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; execution_to_scheduler_port, 
 <a name="l00015"></a>00015                    <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; memory_to_scheduler_port, 
 <a name="l00016"></a>00016                                <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; scheduler_to_execution_port, 
-<a name="l00017"></a>00017                    <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* <a class="code" href="bkEnd_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>,
+<a name="l00017"></a>00017                    <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* iROB,
 <a name="l00018"></a>00018                                <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> scheduler_width,
-<a name="l00019"></a>00019                                <span class="keywordtype">string</span> stage_name);
-<a name="l00020"></a>00020                 <a class="code" href="classscheduler.html#a4a0e4c12027ab0a23d8aa9e6d9e87ae0">~scheduler</a> ();
-<a name="l00021"></a>00021                 <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#a3253fffac337ef94b41e8dcef59dbd74">doSCHEDULER</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#aa2248008ac06d971f08807593b9a09c2">squash</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00023"></a>00023         <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> <a class="code" href="classscheduler.html#a22fd96ca05e81346965e87c0e46b9cca">schedulerImpl</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#a16ab416645e159625f83cf53bfa408cc">updateInsWin</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00025"></a>00025         <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#ad2cdc34a3fc36cf56755e73842a47d49">manageCDB</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00026"></a>00026         <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#a50c4d8d6c754c342adbd0750eacd7a64">forwardFromCDB</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins, <a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#ab1cdff1168591f0166016829d460928a">regStat</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029         <span class="keyword">private</span>:
-<a name="l00030"></a>00030                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _decode_to_scheduler_port;
-<a name="l00031"></a>00031                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _execution_to_scheduler_port;
-<a name="l00032"></a>00032                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _memory_to_scheduler_port;
-<a name="l00033"></a>00033                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _scheduler_to_execution_port;
-<a name="l00034"></a>00034         <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* _iROB;
-<a name="l00035"></a>00035         <a class="code" href="classFIFOtable.html">FIFOtable&lt;dynInstruction*&gt;</a> _iWindow;
-<a name="l00036"></a>00036 };
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="preprocessor">#endif</span>
+<a name="l00019"></a>00019                    <a class="code" href="classsysClock.html">sysClock</a>* <a class="code" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>,
+<a name="l00020"></a>00020                                <span class="keywordtype">string</span> stage_name);
+<a name="l00021"></a>00021                 <a class="code" href="classscheduler.html#a4a0e4c12027ab0a23d8aa9e6d9e87ae0">~scheduler</a> ();
+<a name="l00022"></a>00022                 <span class="keywordtype">void</span> <a class="code" href="classscheduler.html#a9d66babacf114134d5511492c5cbdc18">doSCHEDULER</a> ();
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024     <span class="keyword">private</span>:
+<a name="l00025"></a>00025         <span class="keywordtype">void</span> squash ();
+<a name="l00026"></a>00026         <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> schedulerImpl ();
+<a name="l00027"></a>00027         <span class="keywordtype">void</span> updateInsWin ();
+<a name="l00028"></a>00028         <span class="keywordtype">void</span> manageCDB ();
+<a name="l00029"></a>00029         <span class="keywordtype">bool</span> isReady (<a class="code" href="classdynInstruction.html">dynInstruction</a>*);
+<a name="l00030"></a>00030         <span class="keywordtype">bool</span> forwardFromCDB (<a class="code" href="classdynInstruction.html">dynInstruction</a>*);
+<a name="l00031"></a>00031         <span class="keywordtype">void</span> regStat ();
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033         <span class="keyword">private</span>:
+<a name="l00034"></a>00034                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _decode_to_scheduler_port;
+<a name="l00035"></a>00035                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _execution_to_scheduler_port;
+<a name="l00036"></a>00036                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _memory_to_scheduler_port;
+<a name="l00037"></a>00037                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _scheduler_to_execution_port;
+<a name="l00038"></a>00038         <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* _iROB;
+<a name="l00039"></a>00039         <a class="code" href="classFIFOtable.html">FIFOtable&lt;dynInstruction*&gt;</a> _iWindow;
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041         <span class="comment">/*-- STAT --*/</span>
+<a name="l00042"></a>00042         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_mem_fwd_cnt;
+<a name="l00043"></a>00043         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_alu_fwd_cnt;
+<a name="l00044"></a>00044 };
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -106,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -115,7 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

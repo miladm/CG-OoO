@@ -5,18 +5,5 @@ digraph G
   rankdir=LR;
   Node1 [label="dynInstruction::getNumRdAR",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="memory::manageSTbuffer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmemory.html#a43b452151bf034cd654a711b21078097"];
-  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="memory::memoryImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmemory.html#a3c2b4025c057acb762cc6630f324d3dc"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="memory::doMEMORY",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmemory.html#ae667b5ac087faff10a52913146d6b627"];
-  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="sysCore::runCore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classsysCore.html#a329e1539dcc7da668fb0d6237368922f"];
-  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="inoBkEndRun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$inoBkEnd_8h.html#a7f7897adf2514facd31db95c4b90314d"];
-  Node1 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="scheduler::schedulerImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classscheduler.html#a22fd96ca05e81346965e87c0e46b9cca"];
-  Node7 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="scheduler::doSCHEDULER",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classscheduler.html#a3253fffac337ef94b41e8dcef59dbd74"];
-  Node8 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="o3_rfManager::renameRegs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__rfManager.html#a702dcade81b3d2ccba4bae0ef8d7de30"];
 }

@@ -4,5 +4,5 @@ digraph G
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node1 [label="/home/milad/esc_project/svn/PARS/src/global/g_info.cpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="g_info.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node2 [label="g_info.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$g__info_8h.html"];
 }

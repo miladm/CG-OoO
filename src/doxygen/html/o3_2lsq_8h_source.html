@@ -71,30 +71,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define _O3_LSQ_H </span>
 <a name="l00009"></a>00009 <span class="preprocessor"></span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &quot;../unit/table.h&quot;</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a><a class="code" href="o3_2lsq_8h.html#a0b70db1c813a7c9e54a37742af005c18">00012</a> <span class="preprocessor">#define SQ_SIZE 36</span>
-<a name="l00013"></a><a class="code" href="o3_2lsq_8h.html#aae3b0f5aecc2e3aef03fd39ef9aa46ff">00013</a> <span class="preprocessor"></span><span class="preprocessor">#define LQ_SIZE 64</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;../../global/g_variable.h&quot;</span>
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="o3_2lsq_8h.html#a100015517f592a0768b17882a5ac3ec1">00013</a> <span class="preprocessor">#define NO_WAW_ST_INS 0</span>
 <a name="l00014"></a>00014 <span class="preprocessor"></span>
-<a name="l00015"></a><a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">00015</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>} <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>;
-<a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="classo3__lsqCAM.html">00017</a> <span class="keyword">class </span><a class="code" href="classo3__lsqCAM.html">o3_lsqCAM</a> : <span class="keyword">public</span> <a class="code" href="classCAMtable.html">CAMtable</a>&lt;dynInstruction*&gt; {
-<a name="l00018"></a>00018         <span class="keyword">public</span>:
-<a name="l00019"></a>00019                 <a class="code" href="classo3__lsqCAM.html#a834f3e822c9d236ae72c40316f43b693">o3_lsqCAM</a> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> len = 1, 
-<a name="l00020"></a>00020                    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> rd_port_cnt = 1, 
-<a name="l00021"></a>00021                    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> wr_port_cnt = 1,
-<a name="l00022"></a>00022                    <span class="keywordtype">string</span> table_name = <span class="stringliteral">&quot;LSQtable&quot;</span>);
-<a name="l00023"></a>00023                 <a class="code" href="classo3__lsqCAM.html#a5bc53f5f972f4d902325bc702efe8491">~o3_lsqCAM</a> ();
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025         <a class="code" href="classdynInstruction.html">dynInstruction</a>* <a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>);
-<a name="l00026"></a>00026         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#a12159149dc0b13cda6edfb1213ce6197">setTimer</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>*, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>);
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#a95e286b95f3651e40d57206eb2a41308">squash</a> (<a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>);
-<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#a2aa5dc2ccb76d85e0c8df59a8dfe47f2">delFinishedMemAxes</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>);
-<a name="l00029"></a>00029         <span class="keywordtype">bool</span> <a class="code" href="classo3__lsqCAM.html#ad3d6f79a7377317fc859080d337d428a">hasCommit</a> ();
-<a name="l00030"></a>00030         <span class="keywordtype">bool</span> <a class="code" href="classo3__lsqCAM.html#ac3fca99875017c6639bfeccafe904c83">hasAnyCompleteLdFromAddr</a> (<a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>, <a class="code" href="classdynInstruction.html">dynInstruction</a>*);
-<a name="l00031"></a>00031         pair&lt;bool, dynInstruction*&gt; <a class="code" href="classo3__lsqCAM.html#aad5ca9d9f84c657635d39de62e1ec32a">hasFinishedIns</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>);
-<a name="l00032"></a>00032 };
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="preprocessor">#endif</span>
+<a name="l00015"></a><a class="code" href="classo3__lsqCAM.html">00015</a> <span class="keyword">class </span><a class="code" href="classo3__lsqCAM.html">o3_lsqCAM</a> : <span class="keyword">public</span> <a class="code" href="classCAMtable.html">CAMtable</a>&lt;dynInstruction*&gt; {
+<a name="l00016"></a>00016         <span class="keyword">public</span>:
+<a name="l00017"></a>00017                 <a class="code" href="classo3__lsqCAM.html#a1ad55f822a48b91004a5081e88952362">o3_lsqCAM</a> (<a class="code" href="classsysClock.html">sysClock</a>*, <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp;, <span class="keywordtype">string</span>);
+<a name="l00018"></a>00018                 <a class="code" href="classo3__lsqCAM.html#a5bc53f5f972f4d902325bc702efe8491">~o3_lsqCAM</a> ();
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020         <a class="code" href="classdynInstruction.html">dynInstruction</a>* <a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>);
+<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#a25372198cf9ceb3037dd0d027006eb08">setTimer</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>*, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>);
+<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#a95e286b95f3651e40d57206eb2a41308">squash</a> (<a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>);
+<a name="l00023"></a>00023         <span class="keywordtype">void</span> <a class="code" href="classo3__lsqCAM.html#aa7fdfa8e6591d754e194c7052e7e17d3">delFinishedMemAxes</a> ();
+<a name="l00024"></a>00024         <span class="keywordtype">bool</span> <a class="code" href="classo3__lsqCAM.html#ad3d6f79a7377317fc859080d337d428a">hasCommit</a> ();
+<a name="l00025"></a>00025         <span class="keywordtype">bool</span> <a class="code" href="classo3__lsqCAM.html#ac52c64978b8fbe0569bb67f0d77e2ec9">hasMemAddr</a> (<a class="code" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>, <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>);
+<a name="l00026"></a>00026         <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> <a class="code" href="classo3__lsqCAM.html#ad0ef7ab14e36284321707f52bfe32d9f">hasAnyCompleteStFromAddr</a> (<a class="code" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>, <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>);
+<a name="l00027"></a>00027         pair&lt;bool, dynInstruction*&gt; <a class="code" href="classo3__lsqCAM.html#a603e22c5cb8d5049e843de830158b4e4">hasAnyCompleteLdFromAddr</a> (<a class="code" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>, <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>, <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>);
+<a name="l00028"></a>00028         pair&lt;bool, dynInstruction*&gt; <a class="code" href="classo3__lsqCAM.html#a08fc977c038420904ea7186c55515ae8">hasFinishedIns</a> (<a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>);
+<a name="l00029"></a>00029 };
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -102,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -64,7 +64,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/milad/esc_project/svn/PARS/src/frontend/pars.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../global/g_variable.h&quot;</code><br/>
+<div class="textblock"><code>#include &lt;map&gt;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;time.h&gt;</code><br/>
+<code>#include &lt;iostream&gt;</code><br/>
+<code>#include &lt;signal.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;cassert&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;math.h&gt;</code><br/>
+<code>#include &lt;setjmp.h&gt;</code><br/>
+<code>#include &quot;pin.H&quot;</code><br/>
+<code>#include &quot;pin_isa.H&quot;</code><br/>
+<code>#include &quot;instlib.H&quot;</code><br/>
+<code>#include &lt;bp_lib/types.hh&gt;</code><br/>
+<code>#include &quot;../config.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="memlog_8h_source.html">memlog.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="uOpGen_8h_source.html">uOpGen.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="simpointTracker_8h_source.html">simpointTracker.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="staticCodeParser_8h_source.html">staticCodeParser.h</a>&quot;</code><br/>
+<code>#include &quot;../global/global.h&quot;</code><br/>
+<code>#include &quot;../global/g_variable.h&quot;</code><br/>
+<code>#include &quot;../lib/utility.h&quot;</code><br/>
+<code>#include &quot;../lib/profiler.h&quot;</code><br/>
+<code>#include &quot;../lib/message.h&quot;</code><br/>
+<code>#include &quot;../lib/statistic.h&quot;</code><br/>
+<code>#include &quot;../lib/benchAddrRangeParser.h&quot;</code><br/>
+<code>#include &quot;../energy/table_energy.h&quot;</code><br/>
+<code>#include &quot;../energy/wire_energy.h&quot;</code><br/>
+<code>#include &quot;../backend/ino/inoBkEnd.h&quot;</code><br/>
+<code>#include &quot;../backend/o3/oooBkEnd.h&quot;</code><br/>
+<code>#include &quot;../backend/bb/bbBkEnd.h&quot;</code><br/>
+<code>#include &quot;../backend/unit/dynInstruction.h&quot;</code><br/>
+<code>#include &quot;../backend/unit/dynBasicblock.h&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for pars.h:</div>
 <div class="dyncontent">
@@ -84,20 +117,20 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ad31ce66601d158b499245c36353b1aef">runPARS</a> (char *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ac35d667fe7c066f63c862a9fbdfbdf73">Init</a> (char *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ac0513a33ea062ab0b1e64a39b995f034">Fini</a> (INT32, VOID *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a4254ddc7317164f6cb03afabf4b11770">Instruction</a> (TRACE trace, VOID *val)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">ADDRINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a6c563e02c0b7b634beaaf53ada126817">PredictAndUpdate</a> (ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ac9a2219044a9e8492ef4697ce24877b9">parseConfig</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a259638d20398dedc6dff32e11ad87f89">pin__parseConfig</a> (string, string, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a8bb213f2097111821bc9c5bd823a888b">pin__init</a> (string, string, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ace0fa7dabd943b7f226518d8f2eceef8">pin__runPARS</a> (string, string, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a2975f88798b289232059994fbfb05926">pin__fini</a> (INT32, VOID *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#ab0a8272b1f7008f664454551f542fd63">pin__instruction</a> (TRACE, VOID *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ADDRINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pars_8h.html#a7a15f2a86ce80d2408aa5418bae869d4">PredictAndUpdate</a> (ADDRINT, INT32, ADDRINT, ADDRINT, UINT32)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ac0513a33ea062ab0b1e64a39b995f034"></a><!-- doxytag: member="pars.h::Fini" ref="ac0513a33ea062ab0b1e64a39b995f034" args="(INT32, VOID *)" -->
+<a class="anchor" id="a2975f88798b289232059994fbfb05926"></a><!-- doxytag: member="pars.h::pin__fini" ref="a2975f88798b289232059994fbfb05926" args="(INT32, VOID *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOID Fini </td>
+          <td class="memname">VOID pin__fini </td>
           <td>(</td>
           <td class="paramtype">INT32&#160;</td>
           <td class="paramname">, </td>
@@ -117,14 +150,14 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
-    fclose(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>);
+    <a class="code" href="pars_8cpp.html#a6f5943fb0a6ecd3d79a70a0ccfb72a91">pin__doFinish</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_cgraph.png" border="0" usemap="#pars_8h_ac0513a33ea062ab0b1e64a39b995f034_cgraph" alt=""/></div>
-<map name="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_cgraph" id="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_cgraph">
+<div class="center"><img src="pars_8h_a2975f88798b289232059994fbfb05926_cgraph.png" border="0" usemap="#pars_8h_a2975f88798b289232059994fbfb05926_cgraph" alt=""/></div>
+<map name="pars_8h_a2975f88798b289232059994fbfb05926_cgraph" id="pars_8h_a2975f88798b289232059994fbfb05926_cgraph">
 </map>
 </div>
 </p>
@@ -132,64 +165,104 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_icgraph.png" border="0" usemap="#pars_8h_ac0513a33ea062ab0b1e64a39b995f034_icgraph" alt=""/></div>
-<map name="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_icgraph" id="pars_8h_ac0513a33ea062ab0b1e64a39b995f034_icgraph">
+<div class="center"><img src="pars_8h_a2975f88798b289232059994fbfb05926_icgraph.png" border="0" usemap="#pars_8h_a2975f88798b289232059994fbfb05926_icgraph" alt=""/></div>
+<map name="pars_8h_a2975f88798b289232059994fbfb05926_icgraph" id="pars_8h_a2975f88798b289232059994fbfb05926_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ac35d667fe7c066f63c862a9fbdfbdf73"></a><!-- doxytag: member="pars.h::Init" ref="ac35d667fe7c066f63c862a9fbdfbdf73" args="(char *)" -->
+<a class="anchor" id="a8bb213f2097111821bc9c5bd823a888b"></a><!-- doxytag: member="pars.h::pin__init" ref="a8bb213f2097111821bc9c5bd823a888b" args="(string, string, string)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOID Init </td>
+          <td class="memname">VOID pin__init </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-        <a class="code" href="pars_8cpp.html#a0269e469bbd12d528db5073402dd6c4e">parseConfig</a> (cfgFile);
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;SIMULATOR FRONTEND INITIALIZATION&quot;</span>);
+<div class="fragment"><pre class="fragment">                                                                       {
+        <a class="code" href="pars_8cpp.html#af75ae1f1ce75a8d6b4c83920963399ef">pin__parseConfig</a> (bench_path, config_path, out_dir);
+
+    <a class="code" href="pars_8cpp.html#a3400e8124ea1d142f61c9ee6e82ff0c3">_e_btb</a> = <span class="keyword">new</span> <a class="code" href="classtable__energy.html">table_energy</a>(<span class="stringliteral">&quot;BTB&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;table&quot;</span>][<span class="stringliteral">&quot;BTB&quot;</span>]);
+
+        <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;SETUP BENCHMARK ADDRESS SPACE&quot;</span>);
+    <span class="keywordtype">string</span> bench_name = <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a9530da432f14dc0e96f794e13475e4be">getProgName</a> ();
+    <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a> = <span class="keyword">new</span> <a class="code" href="classbenchAddrRangeParser.html">benchAddrRangeParser</a> (bench_name);
+
+        <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;SIMULATOR FRONTEND INITIALIZATION&quot;</span>);
         PIN_SemaphoreInit (&amp;<a class="code" href="pars_8cpp.html#a3780f840dcb4b8cfe00bde4a6cd55d16">semaphore0</a>);
         PIN_SemaphoreInit (&amp;<a class="code" href="pars_8cpp.html#ad27290b1818ecaa97935c4d181a158f0">semaphore1</a>);
         PIN_SemaphoreClear (&amp;<a class="code" href="pars_8cpp.html#a3780f840dcb4b8cfe00bde4a6cd55d16">semaphore0</a>);
         PIN_SemaphoreClear (&amp;<a class="code" href="pars_8cpp.html#ad27290b1818ecaa97935c4d181a158f0">semaphore1</a>);
-    <a class="code" href="pars_8cpp.html#a773762181364482488166d354460bc98">g_predictor</a>  = <span class="keyword">new</span> <a class="code" href="classTournamentBP.html">TournamentBP</a> (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;PARS COMPILED CODE&quot;</span>);
-        <a class="code" href="pars_8cpp.html#ae1f49acdc02bc860091a9c0826042e9a">g_staticCode</a> = <span class="keyword">new</span> <a class="code" href="classstaticCodeParser.html">staticCodeParser</a> (&amp;<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>, <a class="code" href="pars_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>);
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a> = <span class="keyword">new</span> <a class="code" href="classBTB.html">BTB</a> (4096, 16, 2);
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8af9075747ce78c1fcafb16dcb0e4cd32e">GSHARE_LOCAL_BP</a>) {
+        <a class="code" href="pars_8cpp.html#a45d0afedcd6ed9bf3d004d95b175b77f">_e_table1</a> = <span class="keyword">new</span> <a class="code" href="classtable__energy.html">table_energy</a>(<span class="stringliteral">&quot;tournament&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;bp&quot;</span>][<span class="stringliteral">&quot;tournament&quot;</span>]);
+        <a class="code" href="pars_8cpp.html#a37bce466ede0008f1fc7788ca04a16ce">_e_wire1</a> = <span class="keyword">new</span> <a class="code" href="classwire__energy.html">wire_energy</a>(<span class="stringliteral">&quot;tournament.wire&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;bp&quot;</span>][<span class="stringliteral">&quot;tournament&quot;</span>]);
+        <a class="code" href="pars_8cpp.html#a4837669c7790ce1a19610a935ffe7383">g_tournament_bp</a> = <span class="keyword">new</span> <a class="code" href="classTournamentBP.html">TournamentBP</a> (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8a8091925ec8097250a323b00719022bb1">BCG_SKEW_BP</a>) {
+        <span class="keywordtype">int</span> width; <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; width;
+        <a class="code" href="pars_8cpp.html#acad1e9b9ecb9c6b88ac37de527662852">_e_table2</a> = <span class="keyword">new</span> <a class="code" href="classtable__energy.html">table_energy</a>(<span class="stringliteral">&quot;2bc_gskew&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;bp&quot;</span>][<span class="stringliteral">&quot;bc_gskew&quot;</span>]);
+        <a class="code" href="pars_8cpp.html#ac9068594a93808f864502caa4a718fb7">_e_wire2</a> = <span class="keyword">new</span> <a class="code" href="classwire__energy.html">wire_energy</a>(<span class="stringliteral">&quot;2bc_gskew.wire&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;bp&quot;</span>][<span class="stringliteral">&quot;bc_gskew&quot;</span>]);
+        <a class="code" href="pars_8cpp.html#a62e59cbd1759ceca29472f8ed1cfda43">g_2bcgskew_bp</a>   = <span class="keyword">new</span> <a class="code" href="classHybridBPskew.html">HybridBPskew</a> (8192, 2, 8192, 13, 2, 8192, 2, 0, width);
+    } <span class="keywordflow">else</span> {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Invalid BP type chosen&quot;</span>);
+    }
 
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;SIMULATOR BACKEND INITIALIZATION&quot;</span>);
-        <span class="keywordtype">char</span> <span class="keyword">const</span> * dummy_argv[] = {<span class="stringliteral">&quot;TraceSim&quot;</span>, 
-                                 <span class="stringliteral">&quot;-o&quot;</span>, <span class="stringliteral">&quot;/scratch/tracesim/specint2006/results/ooo_listSch_dynBP_manyCache/401.bzip2.txt&quot;</span>, 
-                                 <span class="stringliteral">&quot;-i&quot;</span>, <span class="stringliteral">&quot;/scratch/tracesim/specint2006/bb_trace_archReg/401.bzip2.trace&quot;</span>, 
-                                 <span class="stringliteral">&quot;-c&quot;</span>, <span class="stringliteral">&quot;1&quot;</span>, <span class="stringliteral">&quot;-n&quot;</span>, <span class="stringliteral">&quot;4&quot;</span>, <span class="stringliteral">&quot;-s&quot;</span>, <span class="stringliteral">&quot;1&quot;</span>, <span class="stringliteral">&quot;-y&quot;</span>, <span class="stringliteral">&quot;1&quot;</span>, <span class="stringliteral">&quot;-j&quot;</span>, <span class="stringliteral">&quot;1&quot;</span>, <span class="stringliteral">&quot;-w&quot;</span>, <span class="stringliteral">&quot;160&quot;</span>, 
-                                 <span class="stringliteral">&quot;-x&quot;</span>, <span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv&quot;</span>, 
-                                 <span class="stringliteral">&quot;-e&quot;</span>, <span class="stringliteral">&quot;num_wbb_bypassed_in_scheduling_each_ins&quot;</span>, 
-                                 <span class="stringliteral">&quot;-z&quot;</span>, <span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/results/bzip2/branch_exe_count_map.csv&quot;</span>, 
-                                 NULL};
-        <span class="keywordtype">int</span> dummy_argc = <span class="keyword">sizeof</span> (dummy_argv) / <span class="keyword">sizeof</span> (<span class="keywordtype">char</span>*) - 1;
+        <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;PARS COMPILED CODE&quot;</span>);
+    <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a> = <a class="code" href="global_2global_8h.html#a22f16908f3dc0da817d3473222229453a7a6daca46a8487bd8718ede9dc9f7fbb">STATIC_SCH</a>;<span class="comment">//DYNAMIC_SCH;</span>
         <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a527a8f416e63493c83e0f6e50a6bdc79">g_insList</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;string*&gt;</a>;
         <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;dynInstruction*&gt;</a>;
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a1664c2b31146ab2b5f77464cd93f2cc8">g_BBlist</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
-        <a class="code" href="bkEnd_8cpp.html#a2610cc7850729dad55450e26627d78ae">bkEnd_init</a> (dummy_argc, dummy_argv, <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>); <span class="comment">//TODO fix this line</span>
-        <a class="code" href="bkEnd_8cpp.html#aa41656fd1e95e4bdc43191b18dfd8102">bkEnd_heading</a> (dummy_argc, dummy_argv); <span class="comment">//TODO fix this line</span>
-        <span class="comment">//inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line</span>
-        <a class="code" href="oooBkEnd_8cpp.html#a310255971234b2af81175fcc914422d5">oooBkEnd_init</a> (dummy_argc, dummy_argv); <span class="comment">//TODO fix this line</span>
-        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;START OF SIMULATION&quot;</span>);
+        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;dynBasicblock*&gt;</a>;
+        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;block*&gt;</a>;
+    <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> = <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a70f8fcc3a60527665fb2491e5d0b61c0">getCoreType</a> ();
+    <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#af6a9403dc67f85282a59c6fac85d5d6f">g_mem_model</a> = <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#ab46ed06bcb9d53d8c45b0f327dd1b07a">getMemModel</a> ();
+        <a class="code" href="pars_8cpp.html#ae1f49acdc02bc860091a9c0826042e9a">g_staticCode</a> = <span class="keyword">new</span> <a class="code" href="classstaticCodeParser.html">staticCodeParser</a> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>);
+    <a class="code" href="bbStat_8cpp.html#ae62278cc26780c1df5b8b2cb681cbe94">g_bbStat</a> = <span class="keyword">new</span> <a class="code" href="classbbStat.html">bbStat</a>;
+
+        <a class="code" href="uOpGen_8cpp.html#a323d0ee9b7cbd821eca2a7fe46ead7bc">pin__uOpGenInit</a> (*<a class="code" href="pars_8cpp.html#ae1f49acdc02bc860091a9c0826042e9a">g_staticCode</a>);
+
+    <span class="comment">/* TODO take care of these cout&#39;s*/</span>
+    cout &lt;&lt; <span class="stringliteral">&quot;CORE: &quot;</span> &lt;&lt; <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> &lt;&lt; endl;
+    cout &lt;&lt; <span class="stringliteral">&quot;MEM MODEL: &quot;</span> &lt;&lt; <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#af6a9403dc67f85282a59c6fac85d5d6f">g_mem_model</a> &lt;&lt; endl;
+    cout &lt;&lt; <span class="stringliteral">&quot;SCHEDULING MODE: &quot;</span> &lt;&lt; <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a> &lt;&lt; endl;
+    cout &lt;&lt; <span class="stringliteral">&quot;BENCH: &quot;</span> &lt;&lt; <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a9530da432f14dc0e96f794e13475e4be">getProgName</a> () &lt;&lt; endl;
+
+        <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;SIMULATOR BACKEND INITIALIZATION&quot;</span>);
+    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a92fd24d722540f1113b09ef251a43c93">OUT_OF_ORDER</a>) <a class="code" href="oooBkEnd_8cpp.html#a1875dbec487b44c836dd7a93b545104f">oooBkEnd_init</a> ();
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a689aa9fa926510a42fc190e81c65e794">IN_ORDER</a>) <a class="code" href="inoBkEnd_8cpp.html#a8881313a01355484010fedbf942197ac">inoBkEnd_init</a> ();
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) <a class="code" href="bb_2bbBkEnd_8cpp.html#aff6acc3a251b9ccf8279e1db9c39477c">bbBkEnd_init</a> ();
+
+        <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;START OF SIMULATION&quot;</span>);
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_cgraph.png" border="0" usemap="#pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_cgraph" alt=""/></div>
-<map name="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_cgraph" id="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_cgraph">
+<div class="center"><img src="pars_8h_a8bb213f2097111821bc9c5bd823a888b_cgraph.png" border="0" usemap="#pars_8h_a8bb213f2097111821bc9c5bd823a888b_cgraph" alt=""/></div>
+<map name="pars_8h_a8bb213f2097111821bc9c5bd823a888b_cgraph" id="pars_8h_a8bb213f2097111821bc9c5bd823a888b_cgraph">
 </map>
 </div>
 </p>
@@ -197,29 +270,29 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_icgraph.png" border="0" usemap="#pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_icgraph" alt=""/></div>
-<map name="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_icgraph" id="pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73_icgraph">
+<div class="center"><img src="pars_8h_a8bb213f2097111821bc9c5bd823a888b_icgraph.png" border="0" usemap="#pars_8h_a8bb213f2097111821bc9c5bd823a888b_icgraph" alt=""/></div>
+<map name="pars_8h_a8bb213f2097111821bc9c5bd823a888b_icgraph" id="pars_8h_a8bb213f2097111821bc9c5bd823a888b_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a4254ddc7317164f6cb03afabf4b11770"></a><!-- doxytag: member="pars.h::Instruction" ref="a4254ddc7317164f6cb03afabf4b11770" args="(TRACE trace, VOID *val)" -->
+<a class="anchor" id="ab0a8272b1f7008f664454551f542fd63"></a><!-- doxytag: member="pars.h::pin__instruction" ref="ab0a8272b1f7008f664454551f542fd63" args="(TRACE, VOID *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOID Instruction </td>
+          <td class="memname">VOID pin__instruction </td>
           <td>(</td>
           <td class="paramtype">TRACE&#160;</td>
-          <td class="paramname"><em>trace</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">VOID *&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,50 +303,51 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
-        <span class="keywordflow">if</span> (!<a class="code" href="pars_8cpp.html#aa415b778ddffd669c113279e23602671">filter</a>.SelectTrace (<a class="code" href="namespaceparse__x86.html#a25693017cff430882e0561015d7cc616">trace</a>)) {
-                printf (<span class="stringliteral">&quot;NOTE: SKIPPING TRACE\n&quot;</span>);
-                <span class="keywordflow">return</span>;
-        }
+    <span class="keywordflow">if</span> (!<a class="code" href="pars_8cpp.html#aa415b778ddffd669c113279e23602671">filter</a>.SelectTrace (<a class="code" href="namespaceparse__x86.html#a25693017cff430882e0561015d7cc616">trace</a>)) {
+        printf (<span class="stringliteral">&quot;NOTE: SKIPPING TRACE\n&quot;</span>);
+        <span class="keywordflow">return</span>;
+    }
 
-        <span class="keywordflow">for</span> (BBL bbl = TRACE_BblHead (<a class="code" href="namespaceparse__x86.html#a25693017cff430882e0561015d7cc616">trace</a>); BBL_Valid (bbl); bbl = BBL_Next (bbl))
+    <span class="comment">//    bool first_bb = true;</span>
+    <span class="keywordflow">for</span> (BBL bbl = TRACE_BblHead (<a class="code" href="namespaceparse__x86.html#a25693017cff430882e0561015d7cc616">trace</a>); BBL_Valid (bbl); bbl = BBL_Next (bbl))
+    {
+        <span class="comment">//        if (g_var.g_enable_bkEnd) {</span>
+        <span class="comment">//            ADDRINT bb_addr = BBL_Address (bbl);</span>
+        <span class="comment">//            if (g_var.g_core_type == BASICBLOCK) {</span>
+        <span class="comment">//                if (first_bb) {</span>
+        <span class="comment">//                    first_bb = false;</span>
+        <span class="comment">//                    INS bb_head = BBL_InsHead (bbl);</span>
+        <span class="comment">//                    pin__get_bb_header (bb_addr, bb_head);</span>
+        <span class="comment">//                }</span>
+        <span class="comment">//                INS bb_tail = BBL_InsTail (bbl);</span>
+        <span class="comment">//                pin__get_bb_header (bb_addr, bb_tail);</span>
+        <span class="comment">//            } //TODO simpoint commands do not apply here - fix if put back</span>
+        <span class="comment">//        }</span>
+
+        BBL_InsertCall (bbl, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#a7c6b63b21bc5971968616e3f621da22f">doBBcount</a>, IARG_UINT32, BBL_NumIns(bbl), IARG_END);
+
+        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a24cc6242b0cf003080328df4b4e3ddca">g_enable_instrumentation</a>) 
         {
-                <span class="keywordflow">for</span> (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
-        {
-            ADDRINT pc = INS_Address (ins);
-            <span class="keywordtype">string</span> diss =  INS_Disassemble (ins);
-            <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> uid=0;
-            ++uid;
+            <span class="keywordflow">for</span> (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))
+            {
+                <span class="comment">/* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */</span>
+                <span class="keywordflow">if</span> (!(INS_Address (ins) &gt;= <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a>-&gt;<a class="code" href="classbenchAddrRangeParser.html#a8199272dc46c90af9da56765c4902926">getStartAddr</a> () &amp;&amp; 
+                      INS_Address (ins) &lt;= <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a>-&gt;<a class="code" href="classbenchAddrRangeParser.html#ade3cc31638e192a39a0bc8e42c94e43b">getEndAddr</a> ())) <span class="keywordflow">continue</span>;
+
+                ADDRINT pc = INS_Address (ins);
+                <span class="keywordtype">string</span> diss =  INS_Disassemble (ins);
+                <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> uid=0;
+                ++uid;
 <span class="preprocessor">#ifdef G_I_INFO_EN</span>
-<span class="preprocessor"></span>            OPCODE opcode = INS_Opcode (ins);
-            <span class="keywordtype">bool</span> is_call = INS_IsCall (ins);
-            <span class="keywordtype">bool</span> is_ret = INS_IsRet (ins);
-            <span class="keywordtype">bool</span> has_ft = INS_HasFallThrough (ins);
-            <a class="code" href="pars_8cpp.html#aab998b67eb0b3b2e5a85862cd87c17db">g_i_info</a>[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
-            <span class="keywordflow">if</span> (uid==0) <a class="code" href="pars_8cpp.html#aab998b67eb0b3b2e5a85862cd87c17db">g_i_info</a>[0] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+<span class="preprocessor"></span>                OPCODE opcode = INS_Opcode (ins);
+                <span class="keywordtype">bool</span> is_call = INS_IsCall (ins);
+                <span class="keywordtype">bool</span> is_ret = INS_IsRet (ins);
+                <span class="keywordtype">bool</span> has_ft = INS_HasFallThrough (ins);
+                <a class="code" href="pars_8cpp.html#aab998b67eb0b3b2e5a85862cd87c17db">g_i_info</a>[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+                <span class="keywordflow">if</span> (uid==0) <a class="code" href="pars_8cpp.html#aab998b67eb0b3b2e5a85862cd87c17db">g_i_info</a>[0] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#a6ab1b8fff0431951e74418ae02cf556e">doCount</a>,
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#a7566704c3c3d79d0673aa11d846feac0">doImpMemCount_</a>,
-                    IARG_UINT32, INS_MemoryOperandCount (ins),
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#a5f99a19752c6653593d32acd1c5708bd">doImpCallCount_</a>,
-                    IARG_BOOL, INS_IsCall (ins),
-                    IARG_END);
-
-            <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a24cc6242b0cf003080328df4b4e3ddca">g_enable_instrumentation</a>) {
-                <span class="comment">//cout &lt;&lt; g_var.g_insCountRightPath &lt;&lt; &quot; instrumentation enabled\n&quot;;</span>
-                <a class="code" href="uop__gen_8cpp.html#a6b129244e191a3f59375a31842557abd">get_uop</a> (ins);
-                <span class="comment">//if (g_cfg-&gt;coreType == PHRASEBLOCK)</span>
-                <span class="comment">//      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuff,</span>
-                <span class="comment">//              IARG_ADDRINT, INS_Address (ins),</span>
-                <span class="comment">//              IARG_END);</span>
-                <span class="comment">//else {</span>
-                <span class="comment">//      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageInsBuff,</span>
-                <span class="comment">//              IARG_ADDRINT, INS_Address (ins),</span>
-                <span class="comment">//              IARG_END);</span>
-                <span class="comment">//}</span>
-                <span class="keywordflow">if</span> (INS_IsMemoryWrite (ins)) {
-                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a9378fa18b551e89ce0f1850452ea5b6a">DBG_INS</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;INS  &quot;</span> &lt;&lt; hex &lt;&lt; pc &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss &lt;&lt; <span class="stringliteral">&quot; [mem write]\n&quot;</span>;
+<span class="preprocessor"></span>                <span class="keywordflow">if</span> (INS_IsMemoryWrite (ins)) {
+                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a9378fa18b551e89ce0f1850452ea5b6a">DBG_INS</a>) cout &lt;&lt; <span class="stringliteral">&quot;INS  &quot;</span> &lt;&lt; hex &lt;&lt; pc &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss &lt;&lt; <span class="stringliteral">&quot; [mem write]\n&quot;</span>;
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#acb954ff3c5105a038d6722b6debb2056">GetMemWriteOrigValue</a>,
                             IARG_UINT32, uid,
                             IARG_CONTEXT,
@@ -296,7 +370,7 @@ Here is the caller graph for this function:</div>
                 }
                 <span class="comment">/*</span>
 <span class="comment">                   if (INS_IsMemoryRead (ins)) {</span>
-<span class="comment">                   if (g_var.g_debug_level &amp; DBG_INS) std::cout &lt;&lt; &quot;INS  &quot; &lt;&lt; hex &lt;&lt; pc &lt;&lt; &quot; &quot; &lt;&lt; diss &lt;&lt; &quot; [mem read]\n&quot;;</span>
+<span class="comment">                   if (g_var.g_debug_level &amp; DBG_INS) cout &lt;&lt; &quot;INS  &quot; &lt;&lt; hex &lt;&lt; pc &lt;&lt; &quot; &quot; &lt;&lt; diss &lt;&lt; &quot; [mem read]\n&quot;;</span>
 <span class="comment">                   INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemReadBypass,</span>
 <span class="comment">                   IARG_UINT32, uid,</span>
 <span class="comment">                   IARG_CONTEXT,</span>
@@ -306,16 +380,31 @@ Here is the caller graph for this function:</div>
 <span class="comment">                   }</span>
 <span class="comment">                   */</span>
 
-                <span class="keywordflow">if</span> (INS_IsBranchOrCall (ins)) {
-                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a9378fa18b551e89ce0f1850452ea5b6a">DBG_INS</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;INS  &quot;</span> &lt;&lt; hex &lt;&lt; pc &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss &lt;&lt; <span class="stringliteral">&quot; [branch]\n&quot;</span>;
-                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) <a class="code" href="pars_8cpp.html#af775f76dfe3a4c23693437b0bd126acf">HandleBranch</a>,
+                <span class="keywordflow">if</span> (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a9378fa18b551e89ce0f1850452ea5b6a">DBG_INS</a>) cout &lt;&lt; <span class="stringliteral">&quot;INS  &quot;</span> &lt;&lt; hex &lt;&lt; pc &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss &lt;&lt; <span class="stringliteral">&quot; [branch]\n&quot;</span>;
+                    <span class="keywordflow">if</span> (INS_HasFallThrough (ins)) {
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) <a class="code" href="pars_8cpp.html#af53ac0627b1cf2178bbce73ab6edbe09">HandleBranch</a>,
+                                IARG_UINT32, uid,
+                                IARG_BRANCH_TAKEN,
+                                IARG_BRANCH_TARGET_ADDR, 
+                                IARG_FALLTHROUGH_ADDR,
+                                IARG_ADDRINT, INS_Address (ins),
+                                IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_UINT32, BBL_NumIns(bbl),
+                                IARG_END);
+                    }
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBranch,
                             IARG_UINT32, uid,
-                            IARG_CONTEXT,
                             IARG_BRANCH_TAKEN,
                             IARG_BRANCH_TARGET_ADDR, 
                             IARG_FALLTHROUGH_ADDR,
                             IARG_ADDRINT, INS_Address (ins),
                             IARG_BOOL, INS_HasFallThrough (ins),
+                            IARG_UINT32, BBL_NumIns(bbl),
                             IARG_END);
                 }
 
@@ -326,6 +415,21 @@ Here is the caller graph for this function:</div>
                             IARG_END);
                 }
 
+                <span class="comment">/* CREARE OPERATION OBJECTS FOR TEH BACKEWND */</span>
+                <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a5e3f674b76f6bccf4c537dda6184a9be">g_enable_bkEnd</a>) <a class="code" href="uOpGen_8cpp.html#addc0a35b28c62687a04509279a5f7cec">pin__getOp</a> (ins);
+
+                <span class="comment">/* HANDLE CHANGE OF CONTEXT */</span>
+                <span class="keywordflow">if</span> (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (ins) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedureCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a9378fa18b551e89ce0f1850452ea5b6a">DBG_INS</a>) cout &lt;&lt; <span class="stringliteral">&quot;INS  &quot;</span> &lt;&lt; hex &lt;&lt; pc &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; diss &lt;&lt; <span class="stringliteral">&quot; [branch]\n&quot;</span>;
+                    <span class="keywordflow">if</span> (INS_HasFallThrough (ins))
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) <a class="code" href="pars_8cpp.html#a2f963499b00d63afb51fc73afb703ef3">HandleContext</a>, IARG_CONTEXT, IARG_END);
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) <a class="code" href="pars_8cpp.html#a2f963499b00d63afb51fc73afb703ef3">HandleContext</a>, IARG_CONTEXT, IARG_END);
+                }
+
                 INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) <a class="code" href="pars_8cpp.html#a4f97b9fe13219e7257f0199e22d96637">HandleInst</a>,
                         IARG_UINT32, uid,
                         IARG_BOOL, INS_IsCall (ins),
@@ -334,14 +438,14 @@ Here is the caller graph for this function:</div>
                         IARG_END);
             }
         }
-        }
+    }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_a4254ddc7317164f6cb03afabf4b11770_cgraph.png" border="0" usemap="#pars_8h_a4254ddc7317164f6cb03afabf4b11770_cgraph" alt=""/></div>
-<map name="pars_8h_a4254ddc7317164f6cb03afabf4b11770_cgraph" id="pars_8h_a4254ddc7317164f6cb03afabf4b11770_cgraph">
+<div class="center"><img src="pars_8h_ab0a8272b1f7008f664454551f542fd63_cgraph.png" border="0" usemap="#pars_8h_ab0a8272b1f7008f664454551f542fd63_cgraph" alt=""/></div>
+<map name="pars_8h_ab0a8272b1f7008f664454551f542fd63_cgraph" id="pars_8h_ab0a8272b1f7008f664454551f542fd63_cgraph">
 </map>
 </div>
 </p>
@@ -349,31 +453,144 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_a4254ddc7317164f6cb03afabf4b11770_icgraph.png" border="0" usemap="#pars_8h_a4254ddc7317164f6cb03afabf4b11770_icgraph" alt=""/></div>
-<map name="pars_8h_a4254ddc7317164f6cb03afabf4b11770_icgraph" id="pars_8h_a4254ddc7317164f6cb03afabf4b11770_icgraph">
+<div class="center"><img src="pars_8h_ab0a8272b1f7008f664454551f542fd63_icgraph.png" border="0" usemap="#pars_8h_ab0a8272b1f7008f664454551f542fd63_icgraph" alt=""/></div>
+<map name="pars_8h_ab0a8272b1f7008f664454551f542fd63_icgraph" id="pars_8h_ab0a8272b1f7008f664454551f542fd63_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ac9a2219044a9e8492ef4697ce24877b9"></a><!-- doxytag: member="pars.h::parseConfig" ref="ac9a2219044a9e8492ef4697ce24877b9" args="()" -->
+<a class="anchor" id="a259638d20398dedc6dff32e11ad87f89"></a><!-- doxytag: member="pars.h::pin__parseConfig" ref="a259638d20398dedc6dff32e11ad87f89" args="(string, string, string)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOID parseConfig </td>
+          <td class="memname">VOID pin__parseConfig </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                              {
+        <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a> = <span class="keyword">new</span> <a class="code" href="classconfig.html">config</a> (bench_path, config_path, out_dir);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pars_8h_a259638d20398dedc6dff32e11ad87f89_icgraph.png" border="0" usemap="#pars_8h_a259638d20398dedc6dff32e11ad87f89_icgraph" alt=""/></div>
+<map name="pars_8h_a259638d20398dedc6dff32e11ad87f89_icgraph" id="pars_8h_a259638d20398dedc6dff32e11ad87f89_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="a6c563e02c0b7b634beaaf53ada126817"></a><!-- doxytag: member="pars.h::PredictAndUpdate" ref="a6c563e02c0b7b634beaaf53ada126817" args="(ADDRINT __pc, INT32 __taken, ADDRINT tgt, ADDRINT fthru)" -->
+<a class="anchor" id="ace0fa7dabd943b7f226518d8f2eceef8"></a><!-- doxytag: member="pars.h::pin__runPARS" ref="ace0fa7dabd943b7f226518d8f2eceef8" args="(string, string, string)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID pin__runPARS </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <a class="code" href="pars_8cpp.html#a6a2bb09a97d90cc11d502199ce1a432d">pin__init</a> (bench_path, config_path, out_dir);
+
+        <span class="comment">// REGISTER A ROUTINE THAT GETS CALLED EVERY TIME THE TRACE IS INSERTED</span>
+    CODECACHE_AddTraceInsertedFunction (<a class="code" href="pars_8cpp.html#a2648ea029809fc0d174d8b1021b99523">countTrace</a>, 0);
+        <span class="comment">// REGISTER A ROUTINE THAT GETS CALLED EVERY TIME THE CACHE IS FULL</span>
+        CODECACHE_AddFullCacheFunction (<a class="code" href="pars_8cpp.html#ad357c3e6fd5bfcbcdfafb58d203f464c">FlushOnFull</a>, 0); 
+
+        <span class="comment">//Handle pin-generated exceptions</span>
+        PIN_AddInternalExceptionHandler (<a class="code" href="pars_8cpp.html#a14053986557d22a3e7d5d06d3f3b5bee">handlePinException</a>,NULL);
+        <span class="comment">//HANDLE APPLICATION-GENERATED EXCEPTIONS</span>
+        PIN_InterceptSignal (SIGTRAP,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGTRAP,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+        PIN_InterceptSignal (SIGILL,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGILL,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+        PIN_InterceptSignal (SIGSEGV,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGSEGV,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+        PIN_InterceptSignal (SIGFPE,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGFPE,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+        PIN_InterceptSignal (SIGBUS,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGBUS,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+        PIN_InterceptSignal (SIGABRT,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
+        PIN_UnblockSignal (SIGABRT,<a class="code" href="util_8h.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);
+
+    TRACE_AddInstrumentFunction (<a class="code" href="pars_8cpp.html#a357d7e4914ba9327454143adda33f0f8">pin__instruction</a>, 0);
+    PIN_AddFiniFunction (<a class="code" href="pars_8cpp.html#a691cde548f8aff0f0cf3e992b3b79d26">pin__fini</a>, 0);
+
+    PIN_SpawnInternalThread (<a class="code" href="pars_8cpp.html#af45c42930cc9f7fbe74c2469301fa5f6">backEnd</a>, <a class="code" href="pars_8cpp.html#a1e853eca8d9b1c61c314eed5b83b538a">rootThreadArg</a>, 0, &amp;<a class="code" href="pars_8cpp.html#a5b351a9cd233c0a893b976831dce607c">rootThreadUid</a>);
+
+        <a class="code" href="pars_8cpp.html#aa415b778ddffd669c113279e23602671">filter</a>.Activate ();
+
+        <a class="code" href="pars_8cpp.html#a0161597891c90043c55ef8ecc6855e49">start_pars</a> = clock ();
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_cgraph.png" border="0" usemap="#pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_cgraph" alt=""/></div>
+<map name="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_cgraph" id="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_icgraph.png" border="0" usemap="#pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_icgraph" alt=""/></div>
+<map name="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_icgraph" id="pars_8h_ace0fa7dabd943b7f226518d8f2eceef8_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a7a15f2a86ce80d2408aa5418bae869d4"></a><!-- doxytag: member="pars.h::PredictAndUpdate" ref="a7a15f2a86ce80d2408aa5418bae869d4" args="(ADDRINT, INT32, ADDRINT, ADDRINT, UINT32)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -381,25 +598,31 @@ Here is the caller graph for this function:</div>
           <td class="memname">ADDRINT PredictAndUpdate </td>
           <td>(</td>
           <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>__pc</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">INT32&#160;</td>
-          <td class="paramname"><em>__taken</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>tgt</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>fthru</em>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UINT32&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -413,91 +636,110 @@ Here is the caller graph for this function:</div>
     <span class="keywordtype">bool</span> taken = __taken;
     ADDRINT pc = __pc;
     <span class="keywordtype">void</span> *bp_hist = NULL;
-    <span class="keywordtype">bool</span> pred = <a class="code" href="pars_8cpp.html#a773762181364482488166d354460bc98">g_predictor</a>-&gt;<a class="code" href="classTournamentBP.html#a493edbed2253cdfcda936f4dcda80df0">lookup</a> (pc, bp_hist);
-    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;  prediction = &quot;</span> &lt;&lt; (pred?<span class="stringliteral">&quot;T&quot;</span>:<span class="stringliteral">&quot;N&quot;</span>);
-        <span class="keywordflow">if</span> (!<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a>) {
-                <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;, actual = &quot;</span> &lt;&lt; (taken?<span class="stringliteral">&quot;T&quot;</span>:<span class="stringliteral">&quot;N&quot;</span>) &lt;&lt; <span class="stringliteral">&quot; : &quot;</span>; 
-                <span class="keywordflow">if</span> (pred != taken) {
-                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;mispredicted!\n&quot;</span>;
-                        <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a> = <span class="keyword">true</span>;
-                        <span class="comment">//printf (&quot;\nSTART OF WRONG PATH\n&quot;);</span>
-                        <span class="comment">//fprintf (__outFile, &quot;\nSTART OF WRONG PATH\n&quot;);</span>
-                } <span class="keywordflow">else</span> {
-                    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;correct prediction\n&quot;</span>;
-                }
-                <a class="code" href="pars_8cpp.html#a773762181364482488166d354460bc98">g_predictor</a>-&gt;<a class="code" href="classTournamentBP.html#a3c4515cdaf3778811b03b74bf381a3f8">update</a> (pc, taken, bp_hist, <span class="keyword">false</span>);
+    <span class="keywordtype">bool</span> pred = taken;
+
+    <span class="comment">/* ESTIMATE THE NUMBER OF LOOKUPS BY EACH BLOCK OF CODE - THIS WON&#39;T WORK</span>
+<span class="comment">     * FOR THE CASE WHERE MORE THAN ONE BRANCH/CALL/JUMP/REG ARE IN THE BLOC */</span>
+    <span class="keywordtype">int</span> width; <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; width;
+    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a689aa9fa926510a42fc190e81c65e794">IN_ORDER</a>) <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;ino_pipe&quot;</span>][<span class="stringliteral">&quot;fetch&quot;</span>][<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; width;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a92fd24d722540f1113b09ef251a43c93">OUT_OF_ORDER</a>) <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;o3_pipe&quot;</span>][<span class="stringliteral">&quot;fetch&quot;</span>][<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; width;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) width = 1;
+    <span class="keywordtype">int</span> num_lookup = int(ceil(<span class="keywordtype">float</span>(_blkInsCnt) / width));
+    s_bpu_lookup_cnt += num_lookup;
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (num_lookup &gt; 0);
+
+    <span class="comment">/*-- WIRE ACCESSES --*/</span>
+    list&lt;string&gt; <a class="code" href="classwires.html">wires</a>;
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_lookup; i++) {
+        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a689aa9fa926510a42fc190e81c65e794">IN_ORDER</a>) wires.push_back (<span class="stringliteral">&quot;e_w_bp2cache_ino&quot;</span>);
+        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a92fd24d722540f1113b09ef251a43c93">OUT_OF_ORDER</a>) wires.push_back (<span class="stringliteral">&quot;e_w_bp2cache_o3&quot;</span>);
+        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) wires.push_back (<span class="stringliteral">&quot;e_w_bp2cache_bb&quot;</span>);
+    }
+
+    <span class="comment">/*-- BP LOOKUP --*/</span>
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8af9075747ce78c1fcafb16dcb0e4cd32e">GSHARE_LOCAL_BP</a>) {
+        <span class="keywordtype">int</span> num_tables = 3;
+        pred = <a class="code" href="pars_8cpp.html#a4837669c7790ce1a19610a935ffe7383">g_tournament_bp</a>-&gt;<a class="code" href="classTournamentBP.html#a458ef4efb74ebe35efed4ea8933097db">lookup</a> (pc, bp_hist);
+        <a class="code" href="pars_8cpp.html#a45d0afedcd6ed9bf3d004d95b175b77f">_e_table1</a>-&gt;<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> (num_tables * num_lookup);
+        <a class="code" href="pars_8cpp.html#a37bce466ede0008f1fc7788ca04a16ce">_e_wire1</a>-&gt;<a class="code" href="classwire__energy.html#a44e92ccd312adf5dbce4641e5e3ea362">wireAccess</a> (wires);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8a8091925ec8097250a323b00719022bb1">BCG_SKEW_BP</a>) {
+        <span class="keywordtype">int</span> num_tables = 4;
+        pred = <a class="code" href="pars_8cpp.html#a62e59cbd1759ceca29472f8ed1cfda43">g_2bcgskew_bp</a>-&gt;<a class="code" href="classHybridBPskew.html#a27e2268df7da826fefe75f1a490bce11">lookup</a> (pc, bp_hist, (<span class="keywordtype">unsigned</span>)0); <span class="comment">//TODO the last element MUST NOT be 0</span>
+        <a class="code" href="pars_8cpp.html#acad1e9b9ecb9c6b88ac37de527662852">_e_table2</a>-&gt;<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> (num_tables * num_lookup);
+        <a class="code" href="pars_8cpp.html#ac9068594a93808f864502caa4a718fb7">_e_wire2</a>-&gt;<a class="code" href="classwire__energy.html#a44e92ccd312adf5dbce4641e5e3ea362">wireAccess</a> (wires);
+    } <span class="keywordflow">else</span> {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Unsupported BP model&quot;</span>);
+    }
+
+    <span class="comment">/*-- BTB LOOKUP --*/</span>
+    <a class="code" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a> pred_tgt = 0;
+    {
+        <span class="keywordflow">if</span> (<a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>-&gt;<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a> (pc)) {
+            pred_tgt = <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>-&gt;<a class="code" href="classBTB.html#adada120072dd6a1a33fcc9dcab69ebad">lookup</a> (pc);
         } <span class="keywordflow">else</span> {
-                <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) std::cout &lt;&lt; <span class="stringliteral">&quot; on wrong path\n&quot;</span>;
+            <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8af9075747ce78c1fcafb16dcb0e4cd32e">GSHARE_LOCAL_BP</a>) {
+                <a class="code" href="pars_8cpp.html#a4837669c7790ce1a19610a935ffe7383">g_tournament_bp</a>-&gt;<a class="code" href="classTournamentBP.html#a6574e8378e0e4b8dddb438d5d35e9c16">BTBUpdate</a> (pc, bp_hist);
+            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8a8091925ec8097250a323b00719022bb1">BCG_SKEW_BP</a>) {
+                <a class="code" href="pars_8cpp.html#a62e59cbd1759ceca29472f8ed1cfda43">g_2bcgskew_bp</a>-&gt;<a class="code" href="classHybridBPskew.html#a5ceeff1b2e0cc39822346b1cd8fbab80">BTBUpdate</a> (pc, bp_hist);
+            }
+            pred = <span class="keyword">false</span>;
+            pred_tgt = 0;
         }
+        <a class="code" href="pars_8cpp.html#a3400e8124ea1d142f61c9ee6e82ff0c3">_e_btb</a>-&gt;<a class="code" href="classtable__energy.html#ad63a5a1f55aaa6486553f955a80477bf">camAccess</a> (num_lookup); <span class="comment">/* ASSUMING SEQUENTIAL BP-&gt;BTB ACCESS */</span>
+    }
+
+    <span class="comment">/*-- BP UPDATE --*/</span>
+    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) cout &lt;&lt; <span class="stringliteral">&quot;  prediction = &quot;</span> &lt;&lt; (pred?<span class="stringliteral">&quot;T&quot;</span>:<span class="stringliteral">&quot;N&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a>) {
+        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) cout &lt;&lt; <span class="stringliteral">&quot;, actual = &quot;</span> &lt;&lt; (taken?<span class="stringliteral">&quot;T&quot;</span>:<span class="stringliteral">&quot;N&quot;</span>) &lt;&lt; <span class="stringliteral">&quot; : &quot;</span>;
+
+        <span class="keywordflow">if</span> (pred != taken) { <span class="comment">/* BP MISPRED */</span>
+            <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) cout &lt;&lt; <span class="stringliteral">&quot;mispredicted!\n&quot;</span>;
+            <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a> = <span class="keyword">true</span>;
+            s_bp_misspred_cnt++;
+            <span class="keywordflow">if</span> (taken &amp;&amp; tgt != pred_tgt) {
+                <span class="comment">/* ALSO UPDATE BTB  ON TAKEN */</span>
+                <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>-&gt;<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a> (pc, tgt);
+                <a class="code" href="pars_8cpp.html#a3400e8124ea1d142f61c9ee6e82ff0c3">_e_btb</a>-&gt;<a class="code" href="classtable__energy.html#ad63a5a1f55aaa6486553f955a80477bf">camAccess</a> (1);
+                s_btb_misspred_cnt++;
+            }
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (taken &amp;&amp; tgt != pred_tgt) { <span class="comment">/* BTB MISPRED */</span>
+            <span class="keywordflow">if</span> (pred_tgt != 0) { <span class="comment">/* AVOID STUPID ADDRESSES */</span>
+                tgt = pred_tgt;
+                <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a> = <span class="keyword">true</span>;
+            }
+            <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>-&gt;<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a> (pc, tgt);
+            <a class="code" href="pars_8cpp.html#a3400e8124ea1d142f61c9ee6e82ff0c3">_e_btb</a>-&gt;<a class="code" href="classtable__energy.html#ad63a5a1f55aaa6486553f955a80477bf">camAccess</a> (1);
+            s_btb_misspred_cnt++;
+        } <span class="keywordflow">else</span> {
+            <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) cout &lt;&lt; <span class="stringliteral">&quot;correct prediction\n&quot;</span>;
+        }
+
+        <span class="keywordtype">int</span> num_tables = 2;
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8af9075747ce78c1fcafb16dcb0e4cd32e">GSHARE_LOCAL_BP</a>) {
+            <a class="code" href="pars_8cpp.html#a4837669c7790ce1a19610a935ffe7383">g_tournament_bp</a>-&gt;<a class="code" href="classTournamentBP.html#a799799c18338ad678eb26519fb1dc80e">update</a> (pc, taken, bp_hist, <span class="keyword">false</span>);
+            <a class="code" href="pars_8cpp.html#a45d0afedcd6ed9bf3d004d95b175b77f">_e_table1</a>-&gt;<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> (num_tables * num_lookup);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a590b78c2b19952195de93fb8ccda10cc">getBPtype</a> () == <a class="code" href="global_2global_8h.html#a66f26a0131462195055f25dc2fe952f8a8091925ec8097250a323b00719022bb1">BCG_SKEW_BP</a>) {
+            <a class="code" href="pars_8cpp.html#a62e59cbd1759ceca29472f8ed1cfda43">g_2bcgskew_bp</a>-&gt;<a class="code" href="classHybridBPskew.html#a4fb73465bf70ab821401f3d47e44fc91">update</a> (pc, taken, bp_hist, <span class="keyword">false</span>);
+            <a class="code" href="pars_8cpp.html#a62e59cbd1759ceca29472f8ed1cfda43">g_2bcgskew_bp</a>-&gt;<a class="code" href="classHybridBPskew.html#a5e73e9324e87d820712789f33100e5f4">histUpdate</a> (pc, taken, bp_hist, <span class="keyword">false</span>);
+            <a class="code" href="pars_8cpp.html#acad1e9b9ecb9c6b88ac37de527662852">_e_table2</a>-&gt;<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> (num_tables * num_lookup);
+        }
+    } <span class="keywordflow">else</span> {
+        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> &amp; <a class="code" href="global_2global_8h.html#a2d9a4e0d1611615c0cba0140d8af93bf">DBG_BP</a>) cout &lt;&lt; <span class="stringliteral">&quot; on wrong path\n&quot;</span>;
+    }
+
+    <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a14a41780de0d5bc586fd79a202eca047">isEnProfiling</a> ()) {
+        <a class="code" href="profiler_8cpp.html#a820091dd16db99faf5767e72b8d627d3">g_prof</a>.<a class="code" href="classprofiler.html#a22c1540259cefaef0423e650c4c5f035">update_br_profiler</a> (__pc, taken);
+    }
+
     <span class="keywordflow">return</span>  pred ? tgt : fthru;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_a6c563e02c0b7b634beaaf53ada126817_cgraph.png" border="0" usemap="#pars_8h_a6c563e02c0b7b634beaaf53ada126817_cgraph" alt=""/></div>
-<map name="pars_8h_a6c563e02c0b7b634beaaf53ada126817_cgraph" id="pars_8h_a6c563e02c0b7b634beaaf53ada126817_cgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ad31ce66601d158b499245c36353b1aef"></a><!-- doxytag: member="pars.h::runPARS" ref="ad31ce66601d158b499245c36353b1aef" args="(char *)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VOID runPARS </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="pars_8cpp.html#a96e565b2ab0bebcb0ffa565e9b7a4c9f">Init</a> (cfgFile);
-
-        <span class="comment">// Register a routine that gets called every time the trace is inserted</span>
-    CODECACHE_AddTraceInsertedFunction (<a class="code" href="pars_8cpp.html#a2648ea029809fc0d174d8b1021b99523">countTrace</a>, 0);
-        <span class="comment">// Register a routine that gets called every time the cache is full</span>
-        CODECACHE_AddFullCacheFunction (<a class="code" href="pars_8cpp.html#ad357c3e6fd5bfcbcdfafb58d203f464c">FlushOnFull</a>, 0); 
-
-        <span class="comment">//Handle pin-generated exceptions</span>
-        PIN_AddInternalExceptionHandler (<a class="code" href="pars_8cpp.html#a14053986557d22a3e7d5d06d3f3b5bee">handlePinException</a>,NULL);
-        <span class="comment">//Handle application-generated exceptions</span>
-        PIN_InterceptSignal (SIGTRAP,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGTRAP,TRUE);
-        PIN_InterceptSignal (SIGILL,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGILL,TRUE);
-        PIN_InterceptSignal (SIGSEGV,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGSEGV,TRUE);
-        PIN_InterceptSignal (SIGFPE,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGFPE,TRUE);
-        PIN_InterceptSignal (SIGBUS,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGBUS,TRUE);
-        PIN_InterceptSignal (SIGABRT,<a class="code" href="pars_8cpp.html#a5f145c9581fdc13b0459253871f0338a">signal_handler</a>,NULL);
-        PIN_UnblockSignal (SIGABRT,TRUE);
-
-        <a class="code" href="pars_8cpp.html#a675aead22d8ea8c089cc7cfc1720bed1">__outFile</a> = fopen (<span class="stringliteral">&quot;junky&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>);
-        <a class="code" href="uop__gen_8cpp.html#a6e258f8f019fd3f67349d3288677d2b3">uop_gen</a> (<a class="code" href="pars_8cpp.html#a675aead22d8ea8c089cc7cfc1720bed1">__outFile</a>, *<a class="code" href="pars_8cpp.html#ae1f49acdc02bc860091a9c0826042e9a">g_staticCode</a>);
-    TRACE_AddInstrumentFunction (<a class="code" href="pars_8cpp.html#a4254ddc7317164f6cb03afabf4b11770">Instruction</a>, 0);
-    PIN_AddFiniFunction (<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa61669c70de306a0ba47bf5878b9f806">Fini</a>, 0);
-
-    PIN_SpawnInternalThread (backEnd, <a class="code" href="pars_8cpp.html#a1e853eca8d9b1c61c314eed5b83b538a">rootThreadArg</a>, 0, &amp;<a class="code" href="pars_8cpp.html#a5b351a9cd233c0a893b976831dce607c">rootThreadUid</a>);
-
-        <a class="code" href="pars_8cpp.html#aa415b778ddffd669c113279e23602671">filter</a>.Activate ();
-
-        <a class="code" href="pars_8cpp.html#a0161597891c90043c55ef8ecc6855e49">start_pars</a> = clock ();
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="pars_8h_ad31ce66601d158b499245c36353b1aef_cgraph.png" border="0" usemap="#pars_8h_ad31ce66601d158b499245c36353b1aef_cgraph" alt=""/></div>
-<map name="pars_8h_ad31ce66601d158b499245c36353b1aef_cgraph" id="pars_8h_ad31ce66601d158b499245c36353b1aef_cgraph">
+<div class="center"><img src="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_cgraph.png" border="0" usemap="#pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_cgraph" alt=""/></div>
+<map name="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_cgraph" id="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_cgraph">
 </map>
 </div>
 </p>
@@ -505,8 +747,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="pars_8h_ad31ce66601d158b499245c36353b1aef_icgraph.png" border="0" usemap="#pars_8h_ad31ce66601d158b499245c36353b1aef_icgraph" alt=""/></div>
-<map name="pars_8h_ad31ce66601d158b499245c36353b1aef_icgraph" id="pars_8h_ad31ce66601d158b499245c36353b1aef_icgraph">
+<div class="center"><img src="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_icgraph.png" border="0" usemap="#pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_icgraph" alt=""/></div>
+<map name="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_icgraph" id="pars_8h_a7a15f2a86ce80d2408aa5418bae869d4_icgraph">
 </map>
 </div>
 </p>
@@ -519,7 +761,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -528,7 +770,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

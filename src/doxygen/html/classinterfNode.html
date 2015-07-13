@@ -106,7 +106,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                        {
+<div class="fragment"><pre class="fragment">                                         {
         _reg = -1;
         _psudoReg = psudoReg;
         _edgeList_static  = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;interfNode*&gt;</a>;
@@ -128,7 +128,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                        {
+<div class="fragment"><pre class="fragment">                         {
         <span class="keyword">delete</span> _edgeList_static;
         <span class="keyword">delete</span> _edgeList_dynamic;
 }
@@ -150,12 +150,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
-        <span class="keywordflow">if</span> (_neighborSet.find(node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a>()) == _neighborSet.end()) {
-                _neighborSet.insert(node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a>());
-                _edgeList_static-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(node);
-                _edgeList_dynamic-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(node);
-                node-&gt;<a class="code" href="classinterfNode.html#ad6ed82efebee0dd2b0334aec5a7c0059">addEdge</a>(<span class="keyword">this</span>);
+<div class="fragment"><pre class="fragment">                                          {
+        <span class="keywordflow">if</span> (_neighborSet.find (node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a> ()) == _neighborSet.end ()) {
+                _neighborSet.insert (node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a> ());
+                _edgeList_static-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (node);
+                _edgeList_dynamic-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (node);
+                node-&gt;<a class="code" href="classinterfNode.html#ad6ed82efebee0dd2b0334aec5a7c0059">addEdge</a> (<span class="keyword">this</span>);
         }
 }
 </pre></div>
@@ -193,17 +193,24 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                               {
+<div class="fragment"><pre class="fragment">                                                {
         set&lt;long int&gt; usedRegSet, unusedRegSet;
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _edgeList_static-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classinterfNode.html">interfNode</a> *node = _edgeList_static-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <span class="keywordtype">long</span> <span class="keywordtype">int</span> nodeReg = node-&gt;<a class="code" href="classinterfNode.html#a5c117c01d84f8323e7d304722bcac8fe">getReg</a>();
-                <span class="keywordflow">if</span> (nodeReg != -1) usedRegSet.insert(nodeReg);
+
+    <span class="comment">/* FIND THE REGISTRE NAME NOT USED BY THE INTERFERING NODES */</span>
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _edgeList_static-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classinterfNode.html">interfNode</a> *node = _edgeList_static-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <span class="keywordtype">long</span> <span class="keywordtype">int</span> nodeReg = node-&gt;<a class="code" href="classinterfNode.html#a5c117c01d84f8323e7d304722bcac8fe">getReg</a> ();
+                <span class="keywordflow">if</span> (nodeReg != -1) usedRegSet.insert (nodeReg);
         }
-        std::set_difference(RFset.begin(), RFset.end(), usedRegSet.begin(), usedRegSet.end(), std::inserter(unusedRegSet, unusedRegSet.begin()));
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(unusedRegSet.size() &gt; 0 &amp;&amp; <span class="stringliteral">&quot;No register value found to assign.&quot;</span>);
-        _reg = *(unusedRegSet.begin());
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(((_reg &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ac186716323578541a08e522a11236335">GRF_LO</a> &amp;&amp; _reg &lt;= <a class="code" href="binaryTranslator_2global_8h.html#a993553a4b5cc46fbb5c9e17fdb375289">GRF_HI</a>) || (_reg &gt;= <a class="code" href="binaryTranslator_2global_8h.html#a0df157b433ce2c25de636f833235ff67">LRF_LO</a> &amp;&amp; _reg &lt;= <a class="code" href="binaryTranslator_2global_8h.html#a8841809ce71f9f83fa05932902f582de">LRF_HI</a>)) &amp;&amp; <span class="stringliteral">&quot;Invalid Register Value&quot;</span>);
+
+        std::set_difference (RFset.begin (), RFset.end (), 
+                         usedRegSet.begin (), usedRegSet.end (), 
+                         std::inserter (unusedRegSet, unusedRegSet.begin ()));
+
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (unusedRegSet.size () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;No register value found to assign.&quot;</span>);
+        _reg = * (unusedRegSet.begin ());
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (((_reg &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ac186716323578541a08e522a11236335">GRF_LO</a> &amp;&amp; _reg &lt;= <a class="code" href="binaryTranslator_2global_8h.html#a993553a4b5cc46fbb5c9e17fdb375289">GRF_HI</a>) || 
+             (_reg &gt;= <a class="code" href="binaryTranslator_2global_8h.html#a0df157b433ce2c25de636f833235ff67">LRF_LO</a> &amp;&amp; _reg &lt;= <a class="code" href="binaryTranslator_2global_8h.html#a8841809ce71f9f83fa05932902f582de">LRF_HI</a>)) &amp;&amp; <span class="stringliteral">&quot;Invalid Register Value&quot;</span>);
 }
 </pre></div>
 <p><div class="dynheader">
@@ -211,15 +218,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_cgraph.png" border="0" usemap="#classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_cgraph" alt=""/></div>
 <map name="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_cgraph" id="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_icgraph.png" border="0" usemap="#classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_icgraph" alt=""/></div>
-<map name="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_icgraph" id="classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d_icgraph">
 </map>
 </div>
 </p>
@@ -239,7 +237,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                           {
+<div class="fragment"><pre class="fragment">                                            {
         <span class="keywordflow">return</span> _edgeList_dynamic;
 }
 </pre></div>
@@ -258,8 +256,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                {
-        <span class="keywordflow">return</span> _neighborSet.size();
+<div class="fragment"><pre class="fragment">                                 {
+        <span class="keywordflow">return</span> _neighborSet.size ();
 }
 </pre></div>
 </div>
@@ -277,7 +275,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                 {
+<div class="fragment"><pre class="fragment">                                  {
         <span class="keywordflow">return</span> _psudoReg;
 }
 </pre></div>
@@ -305,9 +303,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                            {
+<div class="fragment"><pre class="fragment">                             {
         <span class="keywordflow">return</span> _reg;
-}</pre></div>
+}
+</pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -333,12 +332,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                 {
-        <span class="keywordtype">long</span> <span class="keywordtype">int</span> nodePsudoReg = node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a>();
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <span class="keywordflow">if</span> (nodePsudoReg == _edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a>()) {
-                        _neighborSet.erase(nodePsudoReg);
-                        _edgeList_dynamic-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i);
+<div class="fragment"><pre class="fragment">                                                  {
+        <span class="keywordtype">long</span> <span class="keywordtype">int</span> nodePsudoReg = node-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a> ();
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <span class="keywordflow">if</span> (nodePsudoReg == _edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a> ()) {
+                        _neighborSet.erase (nodePsudoReg);
+                        _edgeList_dynamic-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i);
                         <span class="keywordflow">break</span>;
                 }
         }
@@ -377,12 +376,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                 {
-        <span class="keywordtype">int</span> neighborSize = _edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
-        <span class="keywordflow">while</span> (_edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() &gt; 0) {
-                _edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinterfNode.html#a28de448897ec0c075e14f34c9aec4938">removeAneighbor</a>(<span class="keyword">this</span>);
-                _neighborSet.erase(_edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a>());
-                _edgeList_dynamic-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(0);
+<div class="fragment"><pre class="fragment">                                  {
+        <span class="keywordtype">int</span> neighborSize = _edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ();
+        <span class="keywordflow">while</span> (_edgeList_dynamic-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &gt; 0) {
+                _edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (0)-&gt;<a class="code" href="classinterfNode.html#a28de448897ec0c075e14f34c9aec4938">removeAneighbor</a> (<span class="keyword">this</span>);
+                _neighborSet.erase (_edgeList_dynamic-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (0)-&gt;<a class="code" href="classinterfNode.html#a139d1365e2b0eb15797c61f0f4d61464">getPsudoReg</a> ());
+                _edgeList_dynamic-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (0);
         }
 }
 </pre></div>
@@ -391,15 +390,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classinterfNode_a73af59beda246607573abffaf434c232_cgraph.png" border="0" usemap="#classinterfNode_a73af59beda246607573abffaf434c232_cgraph" alt=""/></div>
 <map name="classinterfNode_a73af59beda246607573abffaf434c232_cgraph" id="classinterfNode_a73af59beda246607573abffaf434c232_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classinterfNode_a73af59beda246607573abffaf434c232_icgraph.png" border="0" usemap="#classinterfNode_a73af59beda246607573abffaf434c232_icgraph" alt=""/></div>
-<map name="classinterfNode_a73af59beda246607573abffaf434c232_icgraph" id="classinterfNode_a73af59beda246607573abffaf434c232_icgraph">
 </map>
 </div>
 </p>
@@ -416,7 +406,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -425,7 +415,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

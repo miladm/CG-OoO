@@ -72,29 +72,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00009"></a>00009 
 <a name="l00010"></a><a class="code" href="classcommit.html">00010</a> <span class="keyword">class </span><a class="code" href="classcommit.html">commit</a> : <span class="keyword">protected</span> <a class="code" href="classstage.html">stage</a> {
 <a name="l00011"></a>00011         <span class="keyword">public</span>:
-<a name="l00012"></a>00012                 <a class="code" href="classcommit.html#a41ac90052f6ff381357d12a0b30583a8">commit</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; commit_to_bp_port, 
+<a name="l00012"></a>00012                 <a class="code" href="classcommit.html#a0dfedb170a782a4e32b587ed0afd0285">commit</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; commit_to_bp_port, 
 <a name="l00013"></a>00013                             <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; commit_to_scheduler_port, 
-<a name="l00014"></a>00014                 <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* <a class="code" href="bkEnd_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>,
-<a name="l00015"></a>00015                             <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> commit_width,
-<a name="l00016"></a>00016                             <span class="keywordtype">string</span> stage_name);
-<a name="l00017"></a>00017                 <a class="code" href="classcommit.html#a56b8656334cc14f0f7c9f8f0d7021417">~commit</a> ();
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019                 <span class="keywordtype">void</span> <a class="code" href="classcommit.html#a9eb2bb492ac2b103102be4ef7d018e8b">doCOMMIT</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp;);
-<a name="l00020"></a>00020                 <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> <a class="code" href="classcommit.html#a50f823d551a57bbaccde41c32737b737">commitImpl</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp;);
-<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classcommit.html#afb05caa27f671bb59e3462e161c2c2f1">squash</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classcommit.html#a207fab9b88bbf27cae6f6388aa6ef6ad">regStat</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024         <span class="keyword">private</span>:
-<a name="l00025"></a>00025                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _commit_to_bp_port;
-<a name="l00026"></a>00026                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _commit_to_scheduler_port;
-<a name="l00027"></a>00027         <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* _iROB;
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029         <span class="comment">/* STAT VARS */</span>
-<a name="l00030"></a>00030         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_squash_ins_cnt;
-<a name="l00031"></a>00031 };
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="preprocessor">#endif</span>
-<a name="l00034"></a>00034 <span class="preprocessor"></span>
+<a name="l00014"></a>00014                 <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* iROB,
+<a name="l00015"></a>00015                 <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* iQUE,
+<a name="l00016"></a>00016                             <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> commit_width,
+<a name="l00017"></a>00017                 <a class="code" href="classsysClock.html">sysClock</a>* <a class="code" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>,
+<a name="l00018"></a>00018                             <span class="keywordtype">string</span> stage_name);
+<a name="l00019"></a>00019                 <a class="code" href="classcommit.html#a56b8656334cc14f0f7c9f8f0d7021417">~commit</a> ();
+<a name="l00020"></a>00020                 <span class="keywordtype">void</span> <a class="code" href="classcommit.html#a29f74b9268950cc7c7b7f259793502d6">doCOMMIT</a> ();
+<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classcommit.html#a5b183f343dbf7da45d795df16ef4b7bb">squash</a> ();
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023     <span class="keyword">private</span>:
+<a name="l00024"></a>00024                 <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> commitImpl ();
+<a name="l00025"></a>00025         <span class="keywordtype">void</span> regStat ();
+<a name="l00026"></a>00026         <span class="keywordtype">void</span> verifySim ();
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028         <span class="keyword">private</span>:
+<a name="l00029"></a>00029                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _commit_to_bp_port;
+<a name="l00030"></a>00030                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _commit_to_scheduler_port;
+<a name="l00031"></a>00031         <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* _iROB;
+<a name="l00032"></a>00032         <a class="code" href="classCAMtable.html">CAMtable&lt;dynInstruction*&gt;</a>* _iQUE;
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034         <span class="comment">/*-- SIMULATION STALL VERIFICATION --*/</span>
+<a name="l00035"></a>00035         <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> _prev_ins_cnt;
+<a name="l00036"></a>00036         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> _prev_commit_cyc;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038         <span class="comment">/* STAT VARS */</span>
+<a name="l00039"></a>00039         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_squash_ins_cnt;
+<a name="l00040"></a>00040         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_wp_ins_cnt;
+<a name="l00041"></a>00041         <a class="code" href="classScalarHistStat.html">ScalarHistStat</a>&amp; s_ins_type_hist;
+<a name="l00042"></a>00042         <a class="code" href="classScalarHistStat.html">ScalarHistStat</a>&amp; s_mem_type_hist;
+<a name="l00043"></a>00043 };
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -102,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -111,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -15,56 +15,16 @@ Collaboration diagram for fetch:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classfetch_ac35d86b42890d4facb56666a58548a8d}{fetch} ()
+\hyperlink{classfetch_a26e2014f97a0e55197156504b5bbcbf5}{fetch} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iQUE, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iROB, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} fetch\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}{$\sim$fetch} ()
 \item 
-\hyperlink{classfetch_ad7f7cc7347c967a7843194684f3c3b21}{fetch} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} fetch\_\-width, string stage\_\-name)
-\item 
-\hyperlink{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}{$\sim$fetch} ()
-\item 
-\hyperlink{unit_2stage_8h_ac68af0001af4b7049b2435ded74c4e5e}{SIM\_\-MODE} \hyperlink{classfetch_abe2124748be0ac8b2e2b516203f9b194}{doFETCH} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classfetch_af1aaa5a5c78172ec27dae140c7dc3ab3}{fetchImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classfetch_a39b22ed50d3b51ebe311be86343fed2a}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classfetch_afd8c8e8e16f0f288d1090d59a85c2281}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+\hyperlink{stage_8h_ac68af0001af4b7049b2435ded74c4e5e}{SIM\_\-MODE} \hyperlink{classfetch_af54aeae9d6168f3c25ce11b8c2f60d2a}{doFETCH} (\hyperlink{global_2global_8h_afd483fa40f0fa2b1ac067845b91f0c6e}{FRONTEND\_\-STATUS})
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classfetch_ac35d86b42890d4facb56666a58548a8d}{
-\index{fetch@{fetch}!fetch@{fetch}}
-\index{fetch@{fetch}!fetch@{fetch}}
-\subsubsection[{fetch}]{\setlength{\rightskip}{0pt plus 5cm}fetch::fetch (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classfetch_ac35d86b42890d4facb56666a58548a8d}
-
-\begin{DoxyCode}
-             {
-        _insBuff = new List<instruction*>;
-}
-\end{DoxyCode}
-\hypertarget{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}{
-\index{fetch@{fetch}!$\sim$fetch@{$\sim$fetch}}
-\index{$\sim$fetch@{$\sim$fetch}!fetch@{fetch}}
-\subsubsection[{$\sim$fetch}]{\setlength{\rightskip}{0pt plus 5cm}fetch::$\sim$fetch (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}
-
-\begin{DoxyCode}
-              {
-        delete _insBuff;
-}
-\end{DoxyCode}
-\hypertarget{classfetch_ad7f7cc7347c967a7843194684f3c3b21}{
+\hypertarget{classfetch_a26e2014f97a0e55197156504b5bbcbf5}{
 \index{fetch@{fetch}!fetch@{fetch}}
 \index{fetch@{fetch}!fetch@{fetch}}
 \subsubsection[{fetch}]{\setlength{\rightskip}{0pt plus 5cm}fetch::fetch (
@@ -72,20 +32,28 @@ void \hyperlink{classfetch_afd8c8e8e16f0f288d1090d59a85c2281}{regStat} (\hyperli
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{bp\_\-to\_\-fetch\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-decode\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-bp\_\-port, }
+\item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iQUE, }
+\item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
 \item[{{\bf WIDTH}}]{fetch\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classfetch_ad7f7cc7347c967a7843194684f3c3b21}
+\label{classfetch_a26e2014f97a0e55197156504b5bbcbf5}
 
 \begin{DoxyCode}
-        : stage(fetch_width, stage_name)
+    : stage(fetch_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pipe"]["
+      fetch"], clk),
+      _e_icache ("l1_i_0", g_cfg->_root["cpu"]["backend"]["mem"]["l1_i_0"])
 {
     _bp_to_fetch_port = &bp_to_fetch_port;
     _fetch_to_bp_port = &fetch_to_bp_port;
     _fetch_to_decode_port = &fetch_to_decode_port;
+    _iQUE = iQUE;
+    _iROB = iROB;
     _insListIndx = 0;
     _switch_to_frontend = false;
+    _fetched_so_far = 0;
 }
 \end{DoxyCode}
 \hypertarget{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}{
@@ -98,29 +66,34 @@ void \hyperlink{classfetch_afd8c8e8e16f0f288d1090d59a85c2281}{regStat} (\hyperli
 )}}
 \label{classfetch_a7bb4278b048d48d4225cb44b6553b3d6}
 
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
 
 \subsection{Member Function Documentation}
-\hypertarget{classfetch_abe2124748be0ac8b2e2b516203f9b194}{
+\hypertarget{classfetch_af54aeae9d6168f3c25ce11b8c2f60d2a}{
 \index{fetch@{fetch}!doFETCH@{doFETCH}}
 \index{doFETCH@{doFETCH}!fetch@{fetch}}
 \subsubsection[{doFETCH}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SIM\_\-MODE} fetch::doFETCH (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+\item[{{\bf FRONTEND\_\-STATUS}}]{frontend\_\-status}
 \end{DoxyParamCaption}
 )}}
-\label{classfetch_abe2124748be0ac8b2e2b516203f9b194}
+\label{classfetch_af54aeae9d6168f3c25ce11b8c2f60d2a}
 
 \begin{DoxyCode}
-                                      {
-    dbg.print (DBG_FETCH, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
+                                                        {
+    dbg.print (DBG_FETCH, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ());
+      
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (g_var.g_pipe_state == PIPE_NORMAL) {
-        pipe_stall = fetchImpl (clk);
+        pipe_stall = fetchImpl (frontend_status);
     }
 
     /* STAT */
@@ -143,110 +116,9 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classfetch_af1aaa5a5c78172ec27dae140c7dc3ab3}{
-\index{fetch@{fetch}!fetchImpl@{fetchImpl}}
-\index{fetchImpl@{fetchImpl}!fetch@{fetch}}
-\subsubsection[{fetchImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} fetch::fetchImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classfetch_af1aaa5a5c78172ec27dae140c7dc3ab3}
-
-\begin{DoxyCode}
-                                             {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-        for (WIDTH i = 0; i < _stage_width; i++) {
-                /* CHECKS */
-        if (g_var.isCodeCacheEmpty()) { _switch_to_frontend = true; break; }
-                if (_fetch_to_decode_port->getBuffState (clk.now ()) == 
-      FULL_BUFF) break;
-
-        /* FETCH INS */
-        dynInstruction* ins = g_var.popCodeCache();
-        ins->setPipeStage(FETCH);
-        g_var.remFromCodeCache ();
-                _fetch_to_decode_port->pushBack(ins, clk.now());
-        dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "F
-      etch ins", ins->getInsID (), clk.now ());
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-        }
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classfetch_afd8c8e8e16f0f288d1090d59a85c2281}{
-\index{fetch@{fetch}!regStat@{regStat}}
-\index{regStat@{regStat}!fetch@{fetch}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void fetch::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classfetch_afd8c8e8e16f0f288d1090d59a85c2281}
-
-\begin{DoxyCode}
-                                  {
-    _bp_to_fetch_port->regStat (clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classfetch_a39b22ed50d3b51ebe311be86343fed2a}{
-\index{fetch@{fetch}!squash@{squash}}
-\index{squash@{squash}!fetch@{fetch}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void fetch::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classfetch_a39b22ed50d3b51ebe311be86343fed2a}
-
-\begin{DoxyCode}
-                                 {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Fetch Por
-      t Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN();
-    _fetch_to_decode_port->flushPort (squashSeqNum, clk.now ());
-    _fetch_to_bp_port->flushPort (squashSeqNum, clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{fetch_8h}{fetch.h}\item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2fetch_8h}{fetch.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{fetch_8cpp}{fetch.cpp}\item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/ino/\hyperlink{ino_2fetch_8cpp}{fetch.cpp}\end{DoxyCompactItemize}

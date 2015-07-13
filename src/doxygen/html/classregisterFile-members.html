@@ -65,16 +65,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="classregisterFile.html">registerFile</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a2f83eaee77e90587c8fabff35b6255c3">hasFreeRdPort</a>(CYCLE, WIDTH)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a5c361b0e1c0ec3e6f08990b63ffae8db">hasFreeWrPort</a>(CYCLE)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classregisterFile.html#ad2643ae67021e5dc1a2218b19093bdd0">getNumFreeWires</a>(AXES_TYPE)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a218ab11def5221efa38b4fb84817c4a6">hasFreeWire</a>(AXES_TYPE)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classregisterFile.html#af4bc17e8db0bd9a07fec85814e1d607f">isRegBusy</a>(PR regNum)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a67c6a74ba45a273b0c57e29fe9cfc4eb">isRegValid</a>(PR reg)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classregisterFile.html#aa9071035e97a10e7e76990c9b5e126fb">registerFile</a>(PR rf_begin_num=1, PR rf_size=LARF_SIZE+GARF_SIZE, WIDTH rd_port_cnt=8, WIDTH wr_port_cnt=4, string rf_name=&quot;registerFile&quot;)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a6b9481a788749aabdc8488f60adb5cf7">isRegValidAndReady</a>(PR reg)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a61390ea0709a40a1e48dac5133242c9d">registerFile</a>(sysClock *, const YAML::Node &amp;, string rf_name)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classregisterFile.html#a2731695462957c3ac0a8888e7fce3bd3">reserveReg</a>(PR reg)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classregisterFile.html#a9e487acbcecb5a905a4ee1c80adf48e4">resetRF</a>()</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a>(string class_name)</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a>(string class_name, sysClock *clk=NULL)</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b">updateReg</a>(PR reg)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classregisterFile.html#a47232ba732ea081d78cd43d0564e60a1">updateWireState</a>(AXES_TYPE, list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classregisterFile.html#a51d44388ce9baf55f5d0fc108198d915">~registerFile</a>()</td><td><a class="el" href="classregisterFile.html">registerFile</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classunit.html#a77adf9984db5764e2948b4c3184f2982">~unit</a>()</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
 </table></div>
@@ -83,7 +85,7 @@ This is the complete list of members for <a class="el" href="classregisterFile.h
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -92,7 +94,7 @@ This is the complete list of members for <a class="el" href="classregisterFile.h
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

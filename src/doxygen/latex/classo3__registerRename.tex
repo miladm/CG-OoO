@@ -15,19 +15,13 @@ Collaboration diagram for o3\_\-registerRename:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}{o3\_\-registerRename} (string rf\_\-name)
-\item 
-\hyperlink{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}{o3\_\-registerRename} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-rf\_\-lo, \hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-rf\_\-hi, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} rd\_\-port\_\-cnt, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} wr\_\-port\_\-cnt, string rf\_\-name)
+\hyperlink{classo3__registerRename_aa3a055c1f55180203cf49d3907bb7bde}{o3\_\-registerRename} (\hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&root, string rf\_\-name)
 \item 
 \hyperlink{classo3__registerRename_ad8e4b3165b84c89ba73d622c58f8b65f}{$\sim$o3\_\-registerRename} ()
 \item 
 \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} \hyperlink{classo3__registerRename_a1e65eca8eb066cf294a056d015469992}{renameReg} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-reg)
 \item 
 void \hyperlink{classo3__registerRename_a72f6bb205743c3bbbe41c47584208c90}{squashRenameReg} ()
-\item 
-bool \hyperlink{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
-\item 
-bool \hyperlink{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
 \item 
 void \hyperlink{classo3__registerRename_ac29d3ca88b64d065d8f52b4384895c4b}{update\_\-fRAT} (\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} a\_\-reg, \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
 \item 
@@ -52,39 +46,56 @@ void \hyperlink{classo3__registerRename_a6e6c35b5b477597e3eafed6def8c574b}{updat
 void \hyperlink{classo3__registerRename_aebbf6e056ef5e4c50081db9dc1817a2b}{squashPRstate} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} new\_\-pr)
 \item 
 bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRvalid} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} p\_\-reg)
+\item 
+void \hyperlink{classo3__registerRename_a6baada285270ffebab40fd8ad7afdac7}{updateWireState} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, list$<$ string $>$ wire\_\-name=list$<$ string $>$(), bool update\_\-wire=false)
+\item 
+bool \hyperlink{classo3__registerRename_ad542e96684b7c2179bbf5fc6a87ab50c}{hasFreeWire} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classo3__registerRename_a0161dbd03732a138dbc3ed48f385392c}{getNumFreeWires} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+\item 
+void \hyperlink{classo3__registerRename_ae797fc0baafbdbfb57d5b4d3b1095c17}{getStat} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}{
+\hypertarget{classo3__registerRename_aa3a055c1f55180203cf49d3907bb7bde}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!o3\_\-registerRename@{o3\_\-registerRename}}
 \index{o3\_\-registerRename@{o3\_\-registerRename}!o3_registerRename@{o3\_\-registerRename}}
 \subsubsection[{o3\_\-registerRename}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-registerRename::o3\_\-registerRename (
 \begin{DoxyParamCaption}
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{rf\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__registerRename_afc40fa21233d279d229970c3a982a9b8}
+\label{classo3__registerRename_aa3a055c1f55180203cf49d3907bb7bde}
 
 \begin{DoxyCode}
-    : unit (rf_name), 
-      _a_rf_size (GARF_HI - GARF_LO + 1), 
-      _a_rf_hi (GARF_HI), 
-      _a_rf_lo (GARF_LO), 
-      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
-      _p_rf_hi (GPRF_HI), 
-      _p_rf_lo (GPRF_LO), 
-      _wr_port_cnt (4), 
-      _rd_port_cnt (8)
+    : unit (rf_name, clk), 
+      _wr_port (WRITE, clk, root, rf_name + ".wr_wire"),
+      _rd_port (READ,  clk, root, rf_name + ".rd_wire"),
+      s_availablePRset_empty_cnt (g_stats.newScalarStat (rf_name, "availablePRset
+      _empty_cnt", "Number of cycles availablePRset is empty", 0, PRINT_ZERO)),
+      s_availablePRset_avg (g_stats.newRatioStat (clk->getStatObj (), rf_name, "a
+      vailablePRset_avg", "Average size of availablePRset / cycle ", 0, PRINT_ZERO))
 {
     _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 
-    /* INITIALIZE ALL TABLES */
+    /* SETUP REGISTER DIMENSIONS */
+    root["a_size"] >> _a_rf_size;
+    root["a_lo"] >> _a_rf_lo;
+    root["a_hi"] >> _a_rf_hi;
+    root["p_size"] >> _p_rf_size;
+    root["p_lo"] >> _p_rf_lo;
+    root["p_hi"] >> _p_rf_hi;
+    root["r_size"] >> _r_rf_size;
+    root["r_lo"] >> _r_rf_lo;
+    root["r_hi"] >> _r_rf_hi;
+
+    /*-- INITIALIZE ALL TABLES --*/
     PR PR_counter = _p_rf_lo;
 
-    /* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
+    /*-- INITIALIZE ARCHITECTURAL REGISTER DOMAIN --*/
     for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
         _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
@@ -93,7 +104,7 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         PR_counter++;
     }
 
-    /* INITIALIZE RENAME REGISTER DOMAIN */
+    /*-- INITIALIZE RENAME REGISTER DOMAIN --*/
     while (PR_counter <= _p_rf_hi) {
         o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
         _availablePRset.push_back (p_reg);
@@ -101,77 +112,14 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         PR_counter++;
     }
 
-    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read por
-      ts than write ports.");
-    Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table structu
-      re initialization.");
-    Assert (_RF.size () == GPRF_SIZE && "Invalid Rename table structure initializ
-      ation.");
-    Assert (_fRAT.size () == GARF_SIZE && "Invalid Rename table structure initial
-      ization.");
-    Assert (_cRAT.size () == GARF_SIZE && "Invalid Rename table structure initial
-      ization.");
-}
-\end{DoxyCode}
-\hypertarget{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}{
-\index{o3\_\-registerRename@{o3\_\-registerRename}!o3\_\-registerRename@{o3\_\-registerRename}}
-\index{o3\_\-registerRename@{o3\_\-registerRename}!o3_registerRename@{o3\_\-registerRename}}
-\subsubsection[{o3\_\-registerRename}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-registerRename::o3\_\-registerRename (
-\begin{DoxyParamCaption}
-\item[{{\bf AR}}]{a\_\-rf\_\-lo, }
-\item[{{\bf AR}}]{a\_\-rf\_\-hi, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt, }
-\item[{string}]{rf\_\-name}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__registerRename_a177992bb922a67442166f5cc0a1c09fe}
-
-\begin{DoxyCode}
-    : unit (rf_name), 
-      _a_rf_size (a_rf_hi - a_rf_lo + 1), 
-      _a_rf_hi (a_rf_hi), 
-      _a_rf_lo (a_rf_lo), 
-      _p_rf_size (GPRF_HI - GPRF_LO + 1), 
-      _p_rf_hi (GPRF_HI), 
-      _p_rf_lo (GPRF_LO), 
-      _wr_port_cnt (wr_port_cnt), 
-      _rd_port_cnt (rd_port_cnt)
-{
-    _cycle = START_CYCLE;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
-
-        /* INITIALIZE ALL TABLES */
-        PR PR_counter = _p_rf_lo;
-
-        /* INITIALIZE ARCHITECTURAL REGISTER DOMAIN */
-        for (AR a_reg = _a_rf_lo; a_reg <= _a_rf_hi; a_reg++) {
-        o3_regElem* p_reg = new o3_regElem (PR_counter, ARCH_REG);
-                _fRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
-                _cRAT.insert (pair<AR, o3_regElem*> (a_reg, p_reg));
-        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
-                PR_counter++;
-        }
-
-        /* INITIALIZE RENAME REGISTER DOMAIN */
-        while (PR_counter <= _p_rf_hi) {
-        o3_regElem* p_reg = new o3_regElem (PR_counter, AVAILABLE);
-                _availablePRset.push_back (p_reg);
-        _RF.insert (pair<PR, o3_regElem*> (PR_counter, p_reg));
-                PR_counter++;
-        }
-
-    Assert (_rd_port_cnt == 2 * _wr_port_cnt && "Must have twice as many read por
-      ts than write ports.");
-        Assert (_availablePRset.size () == GRRF_SIZE && "Invalid Rename table str
-      ucture initialization.");
-        Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure init
-      ialization.");
-        Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure in
-      itialization.");
-        Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure in
-      itialization.");
+    Assert (_availablePRset.size () == _r_rf_size && "Invalid Rename table struct
+      ure initialization.");
+    Assert (_RF.size () == _p_rf_size && "Invalid Rename table structure initiali
+      zation.");
+    Assert (_fRAT.size () == _a_rf_size && "Invalid Rename table structure initia
+      lization.");
+    Assert (_cRAT.size () == _a_rf_size && "Invalid Rename table structure initia
+      lization.");
 }
 \end{DoxyCode}
 \hypertarget{classo3__registerRename_ad8e4b3165b84c89ba73d622c58f8b65f}{
@@ -212,7 +160,9 @@ bool \hyperlink{classo3__registerRename_a66e4f1bfb4aef291e88933aad6c46ce6}{isPRv
         Assert (p_reg->_reg_state == AVAILABLE && "Register State is Invalid - Re
       gister must be in Available State");
         _availablePRset.pop_back ();
-        return p_reg->_reg;
+    PR pr = p_reg->_reg;
+    Assert (pr >= _p_rf_lo && pr <= _p_rf_hi);
+        return pr;
 }
 \end{DoxyCode}
 
@@ -235,6 +185,34 @@ Here is the caller graph for this function:
         return _availablePRset.size ();
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classo3__registerRename_a0161dbd03732a138dbc3ed48f385392c}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getNumFreeWires@{getNumFreeWires}}
+\index{getNumFreeWires@{getNumFreeWires}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getNumFreeWires}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} o3\_\-registerRename::getNumFreeWires (
+\begin{DoxyParamCaption}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a0161dbd03732a138dbc3ed48f385392c}
+
+\begin{DoxyCode}
+                                                             {
+    if (axes_type == READ)
+        return _rd_port.getNumFreeWires ();
+    else
+        return _wr_port.getNumFreeWires ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -279,32 +257,21 @@ Here is the caller graph for this function:
         return _RF[p_reg]->_reg_state;
 }
 \end{DoxyCode}
-\hypertarget{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}{
-\index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeRdPort@{hasFreeRdPort}}
-\index{hasFreeRdPort@{hasFreeRdPort}!o3_registerRename@{o3\_\-registerRename}}
-\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::hasFreeRdPort (
+\hypertarget{classo3__registerRename_ae797fc0baafbdbfb57d5b4d3b1095c17}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!getStat@{getStat}}
+\index{getStat@{getStat}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{getStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::getStat (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now, }
-\item[{{\bf WIDTH}}]{numRegRdPorts}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__registerRename_a641c81a3e668177ef756fbeaa7c0998f}
+\label{classo3__registerRename_ae797fc0baafbdbfb57d5b4d3b1095c17}
 
 \begin{DoxyCode}
-                                                                     {
-    Assert (_rd_port_cnt >= numRegRdPorts);
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_rd_port -= numRegRdPorts;
-        if (_num_free_rd_port >= 0) return true;
-        else return false;
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+                                 {
+    if (_availablePRset.size () == 0) 
+        s_availablePRset_empty_cnt++;
+    s_availablePRset_avg += _availablePRset.size ();
 }
 \end{DoxyCode}
 
@@ -312,37 +279,29 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}{
-\index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeWrPort@{hasFreeWrPort}}
-\index{hasFreeWrPort@{hasFreeWrPort}!o3_registerRename@{o3\_\-registerRename}}
-\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::hasFreeWrPort (
+\hypertarget{classo3__registerRename_ad542e96684b7c2179bbf5fc6a87ab50c}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!hasFreeWire@{hasFreeWire}}
+\index{hasFreeWire@{hasFreeWire}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-registerRename::hasFreeWire (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__registerRename_aad6b322839a5349fd6895944f3907ff2}
+\label{classo3__registerRename_ad542e96684b7c2179bbf5fc6a87ab50c}
 
 \begin{DoxyCode}
-                                                {
-    if (_cycle < now) {
-        _num_free_rd_port = _rd_port_cnt;
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        return true;
-    } else if (_cycle == now) {
-        _num_free_wr_port--;
-        if (_num_free_wr_port > 0) {
-            return true;
-        } else {
-            //Assert (true == false && "this feature may not work -look into it")
-      ; (TODO)
-            return false;
-        }
-    }
-    Assert (true == false && "should not have gotten here");
-    return false;
+                                                        {
+    if (axes_type == READ)
+        return _rd_port.hasFreeWire ();
+    else
+        return _wr_port.hasFreeWire ();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classo3__registerRename_a500dec17b068c33a1813786cb6727273}{
 \index{o3\_\-registerRename@{o3\_\-registerRename}!isAnyPRavailable@{isAnyPRavailable}}
 \index{isAnyPRavailable@{isAnyPRavailable}!o3_registerRename@{o3\_\-registerRename}}
@@ -376,6 +335,8 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
                                            {
 #ifdef ASSERTION
+    if (!(p_reg >= _p_rf_lo && p_reg <= _p_rf_hi)) {cout << "shitty reg valu: " <
+      < p_reg << endl;}
     Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);
     Assert (_RF[p_reg]->_reg_state != AVAILABLE && 
             "Register must hold data to read from - call updateReg () first");
@@ -403,7 +364,9 @@ Here is the caller graph for this function:
                                          {
         Assert (_fRAT.find (a_reg) != _fRAT.end () && "The arch. reg was not foun
       d in Fetch-RAT!");
-        return _fRAT[a_reg]->_reg;
+    PR p_reg = _fRAT[a_reg]->_reg;
+    Assert (p_reg >= _p_rf_lo && p_reg <= _p_rf_hi);
+        return p_reg;
 }
 \end{DoxyCode}
 
@@ -426,8 +389,8 @@ Here is the caller graph for this function:
         Assert (_RF.find (p_reg) != _RF.end () && "Physical reg not found!");
         _availablePRset.push_back (_RF[p_reg]);
         _RF[p_reg]->_prev_pr = NULL;
-        Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown t
-      oo large (size violation).");
+        Assert (_availablePRset.size () <= _r_rf_size && "Rename table has grown 
+      too large (size violation).");
 }
 \end{DoxyCode}
 
@@ -492,8 +455,8 @@ Here is the caller graph for this function:
         p_obj->_prev_pr = NULL;
         _availablePRset.push_back (_RF[p_reg]);
     }
-    Assert (_availablePRset.size () <= GRRF_SIZE && "Rename table has grown too l
-      arge (size violation).");
+    Assert (_availablePRset.size () <= _r_rf_size && "Rename table has grown too 
+      large (size violation).");
 }
 \end{DoxyCode}
 
@@ -614,9 +577,49 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classo3__registerRename_a6baada285270ffebab40fd8ad7afdac7}{
+\index{o3\_\-registerRename@{o3\_\-registerRename}!updateWireState@{updateWireState}}
+\index{updateWireState@{updateWireState}!o3_registerRename@{o3\_\-registerRename}}
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-registerRename::updateWireState (
+\begin{DoxyParamCaption}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{list$<$ string $>$}]{wire\_\-name = {\ttfamily list$<$string$>$()}, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__registerRename_a6baada285270ffebab40fd8ad7afdac7}
+
+\begin{DoxyCode}
+                                                                                 
+                           {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        _wr_port.updateWireState (wire_name, axes_type == WRITE ? update_wire : f
+      alse);
+        _rd_port.updateWireState (wire_name, axes_type == READ ? update_wire : fa
+      lse);
+        _cycle = now;
+    } else if (_cycle == now) {
+        if (axes_type == READ)
+            _rd_port.updateWireState (wire_name, update_wire);
+        else
+            _wr_port.updateWireState (wire_name, update_wire);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{backend_2o3_2registerRename_8h}{registerRename.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{backend_2o3_2registerRename_8cpp}{registerRename.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{backend_2unit_2registerRename_8h}{registerRename.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{backend_2unit_2registerRename_8cpp}{registerRename.cpp}\end{DoxyCompactItemize}

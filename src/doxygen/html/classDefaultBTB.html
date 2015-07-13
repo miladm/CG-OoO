@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="DefaultBTB" -->
-<p><code>#include &lt;<a class="el" href="btb_8h_source.html">btb.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="forLater_2pred_2btb_8h_source.html">btb.h</a>&gt;</code></p>
 
 <p><a href="classDefaultBTB-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -115,11 +115,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Creates a BTB with the given number of entries, number of bits per tag, and instruction offset amount. </p>
+<p>Creates a <a class="el" href="classBTB.html">BTB</a> with the given number of entries, number of bits per tag, and instruction offset amount. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">numEntries</td><td>Number of entries for the BTB. </td></tr>
-    <tr><td class="paramname">tagBits</td><td>Number of bits for each tag in the BTB. </td></tr>
+    <tr><td class="paramname">numEntries</td><td>Number of entries for the <a class="el" href="classBTB.html">BTB</a>. </td></tr>
+    <tr><td class="paramname">tagBits</td><td>Number of bits for each tag in the <a class="el" href="classBTB.html">BTB</a>. </td></tr>
     <tr><td class="paramname">instShiftAmt</td><td>Offset amount for instructions to ignore alignment. </td></tr>
   </table>
   </dd>
@@ -130,23 +130,32 @@ Public Member Functions</h2></td></tr>
 {
     DPRINTF(Fetch, <span class="stringliteral">&quot;BTB: Creating BTB object.\n&quot;</span>);
 
-    <span class="keywordflow">if</span> (!isPowerOf2(numEntries)) {
-        fatal(<span class="stringliteral">&quot;BTB entries is not a power of 2!&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(numEntries)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;BTB entries is not a power of 2!&quot;</span>);
     }
 
-    btb.resize(numEntries);
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>.resize(numEntries);
 
     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; numEntries; ++i) {
-        btb[i].valid = <span class="keyword">false</span>;
+        <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[i].<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a> = <span class="keyword">false</span>;
     }
 
     idxMask = numEntries - 1;
 
     tagMask = (1 &lt;&lt; tagBits) - 1;
 
-    tagShiftAmt = instShiftAmt + floorLog2(numEntries);
+    tagShiftAmt = instShiftAmt + <a class="code" href="intmath_8h.html#ad61f5307b84292529da332fee695614e">floorLog2</a>(numEntries);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60_cgraph.png" border="0" usemap="#classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60_cgraph" alt=""/></div>
+<map name="classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60_cgraph" id="classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -164,13 +173,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Invalidate a BTB entry </p>
+<p>Invalidate a <a class="el" href="classBTB.html">BTB</a> entry </p>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordtype">unsigned</span> btb_idx = getIndex(instPC);
 
     assert(btb_idx &lt; numEntries);
 
-    btb[btb_idx].valid = <span class="keyword">false</span>;
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a> = <span class="keyword">false</span>;
 }
 </pre></div>
 </div>
@@ -199,7 +208,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Looks up an address in the BTB. Must call <a class="el" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid()</a> first on the address. </p>
+<p>Looks up an address in the <a class="el" href="classBTB.html">BTB</a>. Must call <a class="el" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid()</a> first on the address. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The address of the branch to look up. </td></tr>
@@ -215,10 +224,10 @@ Public Member Functions</h2></td></tr>
 
     assert(btb_idx &lt; numEntries);
 
-    <span class="keywordflow">if</span> (btb[btb_idx].<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>
-        &amp;&amp; inst_tag == btb[btb_idx].tag
-        &amp;&amp; btb[btb_idx].tid == tid) {
-        <span class="keywordflow">return</span> btb[btb_idx].target;
+    <span class="keywordflow">if</span> (<a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>
+        &amp;&amp; inst_tag == <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tag
+        &amp;&amp; <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tid == tid) {
+        <span class="keywordflow">return</span> <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].target;
     } <span class="keywordflow">else</span> {
         <span class="keywordflow">return</span> 0;
     }
@@ -229,15 +238,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDefaultBTB_ad21521b111945ccf058a3687ef720339_cgraph.png" border="0" usemap="#classDefaultBTB_ad21521b111945ccf058a3687ef720339_cgraph" alt=""/></div>
 <map name="classDefaultBTB_ad21521b111945ccf058a3687ef720339_cgraph" id="classDefaultBTB_ad21521b111945ccf058a3687ef720339_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classDefaultBTB_ad21521b111945ccf058a3687ef720339_icgraph.png" border="0" usemap="#classDefaultBTB_ad21521b111945ccf058a3687ef720339_icgraph" alt=""/></div>
-<map name="classDefaultBTB_ad21521b111945ccf058a3687ef720339_icgraph" id="classDefaultBTB_ad21521b111945ccf058a3687ef720339_icgraph">
 </map>
 </div>
 </p>
@@ -259,7 +259,7 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; numEntries; ++i) {
-        btb[i].valid = <span class="keyword">false</span>;
+        <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[i].<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a> = <span class="keyword">false</span>;
     }
 }
 </pre></div>
@@ -295,7 +295,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Updates the BTB with the target of a branch. </p>
+<p>Updates the <a class="el" href="classBTB.html">BTB</a> with the target of a branch. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The address of the branch being updated. </td></tr>
@@ -309,21 +309,12 @@ Here is the caller graph for this function:</div>
 
     assert(btb_idx &lt; numEntries);
 
-    btb[btb_idx].tid = tid;
-    btb[btb_idx].valid = <span class="keyword">true</span>;
-    btb[btb_idx].target = target;
-    btb[btb_idx].tag = getTag(instPC);
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tid = tid;
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a> = <span class="keyword">true</span>;
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].target = target;
+    <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tag = getTag(instPC);
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classDefaultBTB_a554c0af23b92df168310e4edaf627c51_icgraph.png" border="0" usemap="#classDefaultBTB_a554c0af23b92df168310e4edaf627c51_icgraph" alt=""/></div>
-<map name="classDefaultBTB_a554c0af23b92df168310e4edaf627c51_icgraph" id="classDefaultBTB_a554c0af23b92df168310e4edaf627c51_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="aaa68fd09a8bfbce33ad7be0d5b872953"></a><!-- doxytag: member="DefaultBTB::valid" ref="aaa68fd09a8bfbce33ad7be0d5b872953" args="(Addr instPC, ThreadID tid)" -->
@@ -350,7 +341,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Checks if a branch is in the BTB. </p>
+<p>Checks if a branch is in the <a class="el" href="classBTB.html">BTB</a>. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The address of the branch to look up. </td></tr>
@@ -358,7 +349,7 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Whether or not the branch exists in the BTB. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Whether or not the branch exists in the <a class="el" href="classBTB.html">BTB</a>. </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordtype">unsigned</span> btb_idx = getIndex(instPC);
 
@@ -366,9 +357,9 @@ Here is the caller graph for this function:</div>
 
     assert(btb_idx &lt; numEntries);
 
-    <span class="keywordflow">if</span> (btb[btb_idx].<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>
-        &amp;&amp; inst_tag == btb[btb_idx].tag
-        &amp;&amp; btb[btb_idx].tid == tid) {
+    <span class="keywordflow">if</span> (<a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>
+        &amp;&amp; inst_tag == <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tag
+        &amp;&amp; <a class="code" href="pars_8cpp.html#a1de8d6b3a152ca4ca2dec4a1f6d0df9e">btb</a>[btb_idx].tid == tid) {
         <span class="keywordflow">return</span> <span class="keyword">true</span>;
     } <span class="keywordflow">else</span> {
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -387,10 +378,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/forLater/pred/<a class="el" href="btb_8h_source.html">btb.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="cache__halfSA_8cpp.html">cache_halfSA.cpp</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="cache__singleWord_8cpp.html">cache_singleWord.cpp</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/forLater/pred/<a class="el" href="btb_8cpp.html">btb.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/forLater/pred/<a class="el" href="forLater_2pred_2btb_8h_source.html">btb.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/forLater/pred/<a class="el" href="forLater_2pred_2btb_8cpp.html">btb.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -398,7 +387,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -407,7 +396,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

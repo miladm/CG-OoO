@@ -11,4 +11,9 @@ digraph G
   Node4 [label="/home/milad/esc_project/svn/PARS/src/binaryTranslator/main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html"];
   Node3 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
   Node5 [label="/home/milad/esc_project/svn/PARS/src/binaryTranslator/registerAllocate.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="/home/milad/esc_project/svn/PARS/src/binaryTranslator/registerAllocate_sb.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate__sb_8h.html"];
+  Node6 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="/home/milad/esc_project/svn/PARS/src/binaryTranslator/registerAllocate_sb.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate__sb_8cpp.html"];
 }

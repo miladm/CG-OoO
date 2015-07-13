@@ -67,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="port" --><!-- doxytag: inherits="unit" -->
-<p><code>#include &lt;<a class="el" href="unit_2port_8h_source.html">port.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="port_8h_source.html">port.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for port&lt; queType_T &gt;:</div>
 <div class="dyncontent">
@@ -87,31 +87,32 @@ Collaboration diagram for port&lt; queType_T &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#aa397f17dedc41b12c65d9cfce47d5f5c">port</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, string port_name=&quot;port&quot;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#abcad2f2fb15e1d6b426f455d4e2d053d">port</a> (<a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, <a class="el" href="classsysClock.html">sysClock</a> *, string port_name=&quot;port&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a51a6e901a1eac3a1c3fd35a140fecbfb">~port</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a52ad1c5223f028930491b024f26467fa">pushBack</a> (queType_T ins, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a7c709a92ed8525cf8a310b294e606267">pushBack</a> (queType_T ins, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> lat)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a95bf81afb2a6c03ac2272b3708322b74">popFront</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#acf2f0e0dfd7a375c2c87780d4eaacc99">popNextReady</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#ac1c1b53525c4c69eba7c28e59275e45f">popNextReadyNow</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#aec1749eb1d434806670ba00b669bad78">delOldReady</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a4c80b61961d7df8f30f5dc42bacd25e9">pushBack</a> (queType_T ins)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a8660727a8dbc674388195c7abd543045">pushBack</a> (queType_T ins, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> lat)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a4fc45954f3836ec5d9d1808bdd8acff3">popFront</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a4593f9dfb524f8d7958e03ab4a27cb4f">popNextReady</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a7645b2e6cc4f44937e8047fecd853c95">popNextReadyNow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a9fe248323f061226103808bac3cb5118">delOldReady</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#afe64047b4e7df87d4a031097ea159852">getFront</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a53d30f96ac41c4f3a60174cd66b1656e">getBack</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">queType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#aa102d5f7c3e925382f62a37d220888ff">popBack</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a57a6cc5a8388feaf7fd09bd9616f0ee7">isReady</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#ae59766c24fe4a05ba31cc6d2dc2eff42">isReadyNow</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a8930ed8cec58814709f4515a33d62141">hasReady</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#af03e53249eff9bb17c76531d3a72880f">hasReadyNow</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a58991733cd9bb95beb7303826b9b3d3f">flushPort</a> (<a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a966cfeb3b369ec22e8081275481abe32">regStat</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a28fc31d645ff4b03848e13ff5c912e94">isReady</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#aec7f88ae88183433edf77dd4523865e6">isReadyNow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a630281eec6c2a2b588a42216bc809208">hasReady</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a6dc3713582d95197b5074d2d875e8f1d">hasReadyNow</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a8e8a09c748bf2e1b13e3f14c8629945f">flushPort</a> (<a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a538ad968a8d02b2c673fb627094ef8bc">searchNflushPort</a> (<a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classport.html#a1f3feb96d4c1b9a7935ced227dba2a79">regStat</a> ()</td></tr>
 </table>
 <h3>template&lt;typename queType_T&gt;<br/>
  class port&lt; queType_T &gt;</h3>
 
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa397f17dedc41b12c65d9cfce47d5f5c"></a><!-- doxytag: member="port::port" ref="aa397f17dedc41b12c65d9cfce47d5f5c" args="(LENGTH, CYCLE, string port_name=&quot;port&quot;)" -->
+<a class="anchor" id="abcad2f2fb15e1d6b426f455d4e2d053d"></a><!-- doxytag: member="port::port" ref="abcad2f2fb15e1d6b426f455d4e2d053d" args="(LENGTH, CYCLE, sysClock *, string port_name=&quot;port&quot;)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -120,14 +121,20 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classport.html">port</a>&lt; queType_T &gt;::<a class="el" href="classport.html">port</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
-          <td class="paramname"><em>len</em> = <code>1</code>, </td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>wire_delay</em> = <code>1</code>, </td>
+          <td class="paramname"><em>wire_delay</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -143,13 +150,14 @@ template&lt;typename queType_T &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (port_name),
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a> (port_name, clk),
       _buff_len (len),
           _wire_delay (wire_delay),
       s_port_empty_cyc (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (port_name, <span class="stringliteral">&quot;port_empty_cyc&quot;</span>, <span class="stringliteral">&quot;Number of cycles with port empty&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
-      s_port_full_cyc  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (port_name, <span class="stringliteral">&quot;port_full_cyc&quot;</span>, <span class="stringliteral">&quot;Number of cycles with port full&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
+      s_port_full_cyc (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (port_name, <span class="stringliteral">&quot;port_full_cyc&quot;</span>, <span class="stringliteral">&quot;Number of cycles with port full&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+      s_port_size_avg (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (clk-&gt;<a class="code" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> (), port_name, <span class="stringliteral">&quot;port_size_avg&quot;</span>, <span class="stringliteral">&quot;Average port size/length&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
 {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_buff_len &gt; 0 &amp;&amp; _wire_delay &gt; 0);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_buff_len &gt; 0 &amp;&amp; _wire_delay &gt; 0);
 }
 </pre></div>
 </div>
@@ -174,7 +182,7 @@ template&lt;typename queType_T &gt; </div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aec1749eb1d434806670ba00b669bad78"></a><!-- doxytag: member="port::delOldReady" ref="aec1749eb1d434806670ba00b669bad78" args="(CYCLE now)" -->
+<a class="anchor" id="a9fe248323f061226103808bac3cb5118"></a><!-- doxytag: member="port::delOldReady" ref="a9fe248323f061226103808bac3cb5118" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -183,35 +191,26 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::delOldReady </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                            {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0) <span class="keywordflow">return</span>;
-    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it;
-    <span class="keywordflow">for</span> (it = _buff.begin (); it != _buff.end (); it++) {
-        <span class="keywordflow">if</span> ((*it)._delay.getStopTime () &lt; now) {
-            _buff.erase(it);
-        }
+<div class="fragment"><pre class="fragment">                                   {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+<span class="comment">//    if (getBuffSize () == 0) return;</span>
+    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it = _buff.begin ();
+    <span class="keywordflow">while</span> (it != _buff.end ()) {
+        <span class="keywordflow">if</span> ( (*it)._delay.getStopTime () &lt; now) {
+            _buff.erase (it++);
+        } <span class="keywordflow">else</span> { ++it; }
     }
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_aec1749eb1d434806670ba00b669bad78_icgraph.png" border="0" usemap="#classport_aec1749eb1d434806670ba00b669bad78_icgraph" alt=""/></div>
-<map name="classport_aec1749eb1d434806670ba00b669bad78_icgraph" id="classport_aec1749eb1d434806670ba00b669bad78_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a58991733cd9bb95beb7303826b9b3d3f"></a><!-- doxytag: member="port::flushPort" ref="a58991733cd9bb95beb7303826b9b3d3f" args="(INS_ID, CYCLE)" -->
+<a class="anchor" id="a8e8a09c748bf2e1b13e3f14c8629945f"></a><!-- doxytag: member="port::flushPort" ref="a8e8a09c748bf2e1b13e3f14c8629945f" args="(INS_ID)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -221,49 +220,30 @@ template&lt;typename queType_T &gt; </div>
           <td class="memname">void <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::flushPort </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td>
-          <td class="paramname"><em>elemSeqNum</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>elemSeqNum</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                             {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a>() == 0) <span class="keywordflow">return</span>;
-    queType_T elem = <a class="code" href="classport.html#a53d30f96ac41c4f3a60174cd66b1656e">getBack</a>();
+<div class="fragment"><pre class="fragment">                                                  {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () == 0) <span class="keywordflow">return</span>;
+    queType_T elem = <a class="code" href="classport.html#a53d30f96ac41c4f3a60174cd66b1656e">getBack</a> ();
     <span class="keywordflow">while</span> (elem-&gt;getInsID () &gt;= elemSeqNum) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s %llu %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), 
-                                                                <span class="stringliteral">&quot;POP ins&quot;</span>, elem-&gt;getInsID (), 
-                                                                <span class="stringliteral">&quot;FOR&quot;</span>, elemSeqNum, now);
-        <a class="code" href="classport.html#aa102d5f7c3e925382f62a37d220888ff">popBack</a>();
-        <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a>() == 0) <span class="keywordflow">break</span>;
-        elem = <a class="code" href="classport.html#a53d30f96ac41c4f3a60174cd66b1656e">getBack</a>();
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s %llu %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                <span class="stringliteral">&quot;POP ins&quot;</span>, elem-&gt;getInsID (), <span class="stringliteral">&quot;FOR&quot;</span>, elemSeqNum, now);
+        <a class="code" href="classport.html#aa102d5f7c3e925382f62a37d220888ff">popBack</a> ();
+        <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () == 0) <span class="keywordflow">break</span>;
+        elem = <a class="code" href="classport.html#a53d30f96ac41c4f3a60174cd66b1656e">getBack</a> ();
     }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a58991733cd9bb95beb7303826b9b3d3f_cgraph.png" border="0" usemap="#classport_a58991733cd9bb95beb7303826b9b3d3f_cgraph" alt=""/></div>
-<map name="classport_a58991733cd9bb95beb7303826b9b3d3f_cgraph" id="classport_a58991733cd9bb95beb7303826b9b3d3f_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_a58991733cd9bb95beb7303826b9b3d3f_icgraph.png" border="0" usemap="#classport_a58991733cd9bb95beb7303826b9b3d3f_icgraph" alt=""/></div>
-<map name="classport_a58991733cd9bb95beb7303826b9b3d3f_icgraph" id="classport_a58991733cd9bb95beb7303826b9b3d3f_icgraph">
+<div class="center"><img src="classport_a8e8a09c748bf2e1b13e3f14c8629945f_cgraph.png" border="0" usemap="#classport_a8e8a09c748bf2e1b13e3f14c8629945f_cgraph" alt=""/></div>
+<map name="classport_a8e8a09c748bf2e1b13e3f14c8629945f_cgraph" id="classport_a8e8a09c748bf2e1b13e3f14c8629945f_cgraph">
 </map>
 </div>
 </p>
@@ -286,7 +266,7 @@ template&lt;typename queType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                    {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0);
         <span class="keywordflow">return</span> (_buff.back ())._dynIns;
 }
 </pre></div>
@@ -299,7 +279,7 @@ template&lt;typename queType_T &gt; </div>
 template&lt;typename queType_T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::getBuffSize </td>
+          <td class="memname"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::getBuffSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -308,12 +288,12 @@ template&lt;typename queType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                     {
-        <span class="keywordflow">return</span> (<a class="code" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>) _buff.size ();
+        <span class="keywordflow">return</span> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>) _buff.size ();
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="abf9be02812c2503eee69704a01b14145"></a><!-- doxytag: member="port::getBuffState" ref="abf9be02812c2503eee69704a01b14145" args="(CYCLE now)" -->
+<a class="anchor" id="a5ac9e7510e381b2c7fbd8e855648e58b"></a><!-- doxytag: member="port::getBuffState" ref="a5ac9e7510e381b2c7fbd8e855648e58b" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -322,30 +302,29 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a> <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::getBuffState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                   {
-        <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt;= _buff_len) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
+<div class="fragment"><pre class="fragment">                                          {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &lt;= _buff_len);
+        <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () == _buff_len) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>;
-    }
-        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () == 0) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () == 0) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>;
-    }
-        <span class="keywordflow">else</span> {<span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489ca0d232b6772b997898322e695ec19c831">AVAILABLE_BUFF</a>;}
+    } <span class="keywordflow">else</span> {<span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489ca0d232b6772b997898322e695ec19c831">AVAILABLE_BUFF</a>;}
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_abf9be02812c2503eee69704a01b14145_cgraph.png" border="0" usemap="#classport_abf9be02812c2503eee69704a01b14145_cgraph" alt=""/></div>
-<map name="classport_abf9be02812c2503eee69704a01b14145_cgraph" id="classport_abf9be02812c2503eee69704a01b14145_cgraph">
+<div class="center"><img src="classport_a5ac9e7510e381b2c7fbd8e855648e58b_cgraph.png" border="0" usemap="#classport_a5ac9e7510e381b2c7fbd8e855648e58b_cgraph" alt=""/></div>
+<map name="classport_a5ac9e7510e381b2c7fbd8e855648e58b_cgraph" id="classport_a5ac9e7510e381b2c7fbd8e855648e58b_cgraph">
 </map>
 </div>
 </p>
@@ -353,8 +332,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_abf9be02812c2503eee69704a01b14145_icgraph.png" border="0" usemap="#classport_abf9be02812c2503eee69704a01b14145_icgraph" alt=""/></div>
-<map name="classport_abf9be02812c2503eee69704a01b14145_icgraph" id="classport_abf9be02812c2503eee69704a01b14145_icgraph">
+<div class="center"><img src="classport_a5ac9e7510e381b2c7fbd8e855648e58b_icgraph.png" border="0" usemap="#classport_a5ac9e7510e381b2c7fbd8e855648e58b_icgraph" alt=""/></div>
+<map name="classport_a5ac9e7510e381b2c7fbd8e855648e58b_icgraph" id="classport_a5ac9e7510e381b2c7fbd8e855648e58b_icgraph">
 </map>
 </div>
 </p>
@@ -377,22 +356,13 @@ template&lt;typename queType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                     {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0);
         <span class="keywordflow">return</span> (_buff.front ())._dynIns;
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_afe64047b4e7df87d4a031097ea159852_icgraph.png" border="0" usemap="#classport_afe64047b4e7df87d4a031097ea159852_icgraph" alt=""/></div>
-<map name="classport_afe64047b4e7df87d4a031097ea159852_icgraph" id="classport_afe64047b4e7df87d4a031097ea159852_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a8930ed8cec58814709f4515a33d62141"></a><!-- doxytag: member="port::hasReady" ref="a8930ed8cec58814709f4515a33d62141" args="(CYCLE now)" -->
+<a class="anchor" id="a630281eec6c2a2b588a42216bc809208"></a><!-- doxytag: member="port::hasReady" ref="a630281eec6c2a2b588a42216bc809208" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -401,22 +371,21 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::hasReady </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
+<div class="fragment"><pre class="fragment">                                {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
     <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it;
     <span class="keywordflow">for</span> (it = _buff.begin (); it != _buff.end (); it++) {
-        <span class="keywordflow">if</span> ((*it)._delay.getStopTime () &lt;= now)
-            <span class="keywordflow">return</span> <span class="keyword">true</span>;
+        <span class="keywordflow">if</span> ( (*it)._delay.getStopTime () &lt;= now) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
     }
     <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
@@ -424,15 +393,15 @@ template&lt;typename queType_T &gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a8930ed8cec58814709f4515a33d62141_cgraph.png" border="0" usemap="#classport_a8930ed8cec58814709f4515a33d62141_cgraph" alt=""/></div>
-<map name="classport_a8930ed8cec58814709f4515a33d62141_cgraph" id="classport_a8930ed8cec58814709f4515a33d62141_cgraph">
+<div class="center"><img src="classport_a630281eec6c2a2b588a42216bc809208_cgraph.png" border="0" usemap="#classport_a630281eec6c2a2b588a42216bc809208_cgraph" alt=""/></div>
+<map name="classport_a630281eec6c2a2b588a42216bc809208_cgraph" id="classport_a630281eec6c2a2b588a42216bc809208_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="af03e53249eff9bb17c76531d3a72880f"></a><!-- doxytag: member="port::hasReadyNow" ref="af03e53249eff9bb17c76531d3a72880f" args="(CYCLE now)" -->
+<a class="anchor" id="a6dc3713582d95197b5074d2d875e8f1d"></a><!-- doxytag: member="port::hasReadyNow" ref="a6dc3713582d95197b5074d2d875e8f1d" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -441,21 +410,21 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::hasReadyNow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                            {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
+<div class="fragment"><pre class="fragment">                                   {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
     <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it;
     <span class="keywordflow">for</span> (it = _buff.begin (); it != _buff.end (); it++) {
-        <span class="keywordflow">if</span> ((*it)._delay.getStopTime () == now)
+        <span class="keywordflow">if</span> ( (*it)._delay.getStopTime () == now)
             <span class="keywordflow">return</span> <span class="keyword">true</span>;
     }
     <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -464,24 +433,15 @@ template&lt;typename queType_T &gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_af03e53249eff9bb17c76531d3a72880f_cgraph.png" border="0" usemap="#classport_af03e53249eff9bb17c76531d3a72880f_cgraph" alt=""/></div>
-<map name="classport_af03e53249eff9bb17c76531d3a72880f_cgraph" id="classport_af03e53249eff9bb17c76531d3a72880f_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_af03e53249eff9bb17c76531d3a72880f_icgraph.png" border="0" usemap="#classport_af03e53249eff9bb17c76531d3a72880f_icgraph" alt=""/></div>
-<map name="classport_af03e53249eff9bb17c76531d3a72880f_icgraph" id="classport_af03e53249eff9bb17c76531d3a72880f_icgraph">
+<div class="center"><img src="classport_a6dc3713582d95197b5074d2d875e8f1d_cgraph.png" border="0" usemap="#classport_a6dc3713582d95197b5074d2d875e8f1d_cgraph" alt=""/></div>
+<map name="classport_a6dc3713582d95197b5074d2d875e8f1d_cgraph" id="classport_a6dc3713582d95197b5074d2d875e8f1d_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a57a6cc5a8388feaf7fd09bd9616f0ee7"></a><!-- doxytag: member="port::isReady" ref="a57a6cc5a8388feaf7fd09bd9616f0ee7" args="(CYCLE now)" -->
+<a class="anchor" id="a28fc31d645ff4b03848e13ff5c912e94"></a><!-- doxytag: member="port::isReady" ref="a28fc31d645ff4b03848e13ff5c912e94" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -490,18 +450,19 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::isReady </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                        {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
+<div class="fragment"><pre class="fragment">                               {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s %d %d (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;isReady -&quot;</span>, _buff.front ()._delay.getStopTime (), <a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> (), now);
         <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> frontBuff = _buff.front ();
         <span class="keywordflow">if</span> (frontBuff.<a class="code" href="structBuffElement.html#ada387ae6cbadda86ba737303ee0efb65">_delay</a>.<a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> () &lt;= now)
         <span class="keywordflow">return</span> <span class="keyword">true</span>;
@@ -511,24 +472,15 @@ template&lt;typename queType_T &gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_cgraph.png" border="0" usemap="#classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_cgraph" alt=""/></div>
-<map name="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_cgraph" id="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_icgraph.png" border="0" usemap="#classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_icgraph" alt=""/></div>
-<map name="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_icgraph" id="classport_a57a6cc5a8388feaf7fd09bd9616f0ee7_icgraph">
+<div class="center"><img src="classport_a28fc31d645ff4b03848e13ff5c912e94_cgraph.png" border="0" usemap="#classport_a28fc31d645ff4b03848e13ff5c912e94_cgraph" alt=""/></div>
+<map name="classport_a28fc31d645ff4b03848e13ff5c912e94_cgraph" id="classport_a28fc31d645ff4b03848e13ff5c912e94_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ae59766c24fe4a05ba31cc6d2dc2eff42"></a><!-- doxytag: member="port::isReadyNow" ref="ae59766c24fe4a05ba31cc6d2dc2eff42" args="(CYCLE now)" -->
+<a class="anchor" id="aec7f88ae88183433edf77dd4523865e6"></a><!-- doxytag: member="port::isReadyNow" ref="aec7f88ae88183433edf77dd4523865e6" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -537,16 +489,16 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::isReadyNow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                           {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
+<div class="fragment"><pre class="fragment">                                  {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is EMPTY&quot;</span>, now);
         <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
         <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> frontBuff = _buff.front ();
@@ -558,17 +510,8 @@ template&lt;typename queType_T &gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_cgraph.png" border="0" usemap="#classport_ae59766c24fe4a05ba31cc6d2dc2eff42_cgraph" alt=""/></div>
-<map name="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_cgraph" id="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_icgraph.png" border="0" usemap="#classport_ae59766c24fe4a05ba31cc6d2dc2eff42_icgraph" alt=""/></div>
-<map name="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_icgraph" id="classport_ae59766c24fe4a05ba31cc6d2dc2eff42_icgraph">
+<div class="center"><img src="classport_aec7f88ae88183433edf77dd4523865e6_cgraph.png" border="0" usemap="#classport_aec7f88ae88183433edf77dd4523865e6_cgraph" alt=""/></div>
+<map name="classport_aec7f88ae88183433edf77dd4523865e6_cgraph" id="classport_aec7f88ae88183433edf77dd4523865e6_cgraph">
 </map>
 </div>
 </p>
@@ -591,15 +534,15 @@ template&lt;typename queType_T &gt; </div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                    {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popFront () must not be used without isReady ()&quot;</span>);
-        queType_T dynIns = (_buff.back ())._dynIns;
-        _buff.pop_back ();
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popBack () must not be used without isReady ()&quot;</span>);
+    queType_T dynIns = (_buff.back ())._dynIns;
+    _buff.pop_back ();
     <span class="keywordflow">return</span> dynIns;
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a95bf81afb2a6c03ac2272b3708322b74"></a><!-- doxytag: member="port::popFront" ref="a95bf81afb2a6c03ac2272b3708322b74" args="(CYCLE now)" -->
+<a class="anchor" id="a4fc45954f3836ec5d9d1808bdd8acff3"></a><!-- doxytag: member="port::popFront" ref="a4fc45954f3836ec5d9d1808bdd8acff3" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -608,43 +551,39 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">queType_T <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::popFront </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                              {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popFront () must not be used without isReady ()&quot;</span>);
-        <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> frontBuff = _buff.front ();
-        <span class="keywordflow">if</span> (frontBuff.<a class="code" href="structBuffElement.html#ada387ae6cbadda86ba737303ee0efb65">_delay</a>.<a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> () &lt;= now)
-                <span class="keywordflow">return</span> popFront ();
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popFront () must not be used without isReady ()&quot;</span>);
-        <span class="keywordflow">return</span> <a class="code" href="classport.html#a95bf81afb2a6c03ac2272b3708322b74">popFront</a> (); <span class="comment">//place holder</span>
+<div class="fragment"><pre class="fragment">                                     {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popFront () must not be used without isReady ()&quot;</span>);
+    <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> frontBuff = _buff.front ();
+    <span class="keywordflow">if</span> (frontBuff.<a class="code" href="structBuffElement.html#ada387ae6cbadda86ba737303ee0efb65">_delay</a>.<a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> () &lt;= now) {
+        queType_T dynIns = (_buff.front ())._dynIns;
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                <span class="stringliteral">&quot;POP ins&quot;</span>, dynIns-&gt;getInsID (), now);
+        _buff.pop_front ();
+        <span class="keywordflow">return</span> dynIns;
+    }
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popFront () must not be used without isReady ()&quot;</span>);
+    <span class="keywordflow">return</span> <a class="code" href="classport.html#a4fc45954f3836ec5d9d1808bdd8acff3">popFront</a> (); <span class="comment">//place holder</span>
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a95bf81afb2a6c03ac2272b3708322b74_cgraph.png" border="0" usemap="#classport_a95bf81afb2a6c03ac2272b3708322b74_cgraph" alt=""/></div>
-<map name="classport_a95bf81afb2a6c03ac2272b3708322b74_cgraph" id="classport_a95bf81afb2a6c03ac2272b3708322b74_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_a95bf81afb2a6c03ac2272b3708322b74_icgraph.png" border="0" usemap="#classport_a95bf81afb2a6c03ac2272b3708322b74_icgraph" alt=""/></div>
-<map name="classport_a95bf81afb2a6c03ac2272b3708322b74_icgraph" id="classport_a95bf81afb2a6c03ac2272b3708322b74_icgraph">
+<div class="center"><img src="classport_a4fc45954f3836ec5d9d1808bdd8acff3_cgraph.png" border="0" usemap="#classport_a4fc45954f3836ec5d9d1808bdd8acff3_cgraph" alt=""/></div>
+<map name="classport_a4fc45954f3836ec5d9d1808bdd8acff3_cgraph" id="classport_a4fc45954f3836ec5d9d1808bdd8acff3_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="acf2f0e0dfd7a375c2c87780d4eaacc99"></a><!-- doxytag: member="port::popNextReady" ref="acf2f0e0dfd7a375c2c87780d4eaacc99" args="(CYCLE now)" -->
+<a class="anchor" id="a4593f9dfb524f8d7958e03ab4a27cb4f"></a><!-- doxytag: member="port::popNextReady" ref="a4593f9dfb524f8d7958e03ab4a27cb4f" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -653,30 +592,30 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">queType_T <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::popNextReady </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                  {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
-    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it;
-    <span class="keywordflow">for</span> (it = _buff.begin (); it != _buff.end (); it++) {
-        <span class="keywordflow">if</span> ((*it)._delay.getStopTime () &lt;= now) {
+<div class="fragment"><pre class="fragment">                                         {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
+    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it = _buff.begin ();
+    <span class="keywordflow">while</span> (it != _buff.end ()) {
+        <span class="keywordflow">if</span> ( (*it)._delay.getStopTime () &lt;= now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             <span class="keywordflow">return</span> dynIns;
-        }
+        } <span class="keywordflow">else</span> { ++it; }
     }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
-        <span class="keywordflow">return</span> <a class="code" href="classport.html#a95bf81afb2a6c03ac2272b3708322b74">popFront</a> (); <span class="comment">//place holder</span>
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
+        <span class="keywordflow">return</span> <a class="code" href="classport.html#a4fc45954f3836ec5d9d1808bdd8acff3">popFront</a> (); <span class="comment">//place holder</span>
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ac1c1b53525c4c69eba7c28e59275e45f"></a><!-- doxytag: member="port::popNextReadyNow" ref="ac1c1b53525c4c69eba7c28e59275e45f" args="(CYCLE now)" -->
+<a class="anchor" id="a7645b2e6cc4f44937e8047fecd853c95"></a><!-- doxytag: member="port::popNextReadyNow" ref="a7645b2e6cc4f44937e8047fecd853c95" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -685,39 +624,30 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">queType_T <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::popNextReadyNow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                     {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
-    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it;
-    <span class="keywordflow">for</span> (it = _buff.begin (); it != _buff.end (); it++) {
-        <span class="keywordflow">if</span> ((*it)._delay.getStopTime () == now) {
+<div class="fragment"><pre class="fragment">                                            {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
+    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it = _buff.begin ();
+    <span class="keywordflow">while</span> (it != _buff.end ()) {
+        <span class="keywordflow">if</span> ( (*it)._delay.getStopTime () == now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             <span class="keywordflow">return</span> dynIns;
-        }
+        } <span class="keywordflow">else</span> { ++it; }
     }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
-        <span class="keywordflow">return</span> <a class="code" href="classport.html#a95bf81afb2a6c03ac2272b3708322b74">popFront</a> (); <span class="comment">//place holder</span>
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span>  &amp;&amp; <span class="stringliteral">&quot;popNextReady () must not be used without hasReady ()&quot;</span>);
+        <span class="keywordflow">return</span> <a class="code" href="classport.html#a4fc45954f3836ec5d9d1808bdd8acff3">popFront</a> (); <span class="comment">//place holder</span>
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classport_ac1c1b53525c4c69eba7c28e59275e45f_icgraph.png" border="0" usemap="#classport_ac1c1b53525c4c69eba7c28e59275e45f_icgraph" alt=""/></div>
-<map name="classport_ac1c1b53525c4c69eba7c28e59275e45f_icgraph" id="classport_ac1c1b53525c4c69eba7c28e59275e45f_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a52ad1c5223f028930491b024f26467fa"></a><!-- doxytag: member="port::pushBack" ref="a52ad1c5223f028930491b024f26467fa" args="(queType_T ins, CYCLE now)" -->
+<a class="anchor" id="a4c80b61961d7df8f30f5dc42bacd25e9"></a><!-- doxytag: member="port::pushBack" ref="a4c80b61961d7df8f30f5dc42bacd25e9" args="(queType_T ins)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -727,25 +657,16 @@ template&lt;typename queType_T&gt; </div>
           <td class="memname"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a> <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::pushBack </td>
           <td>(</td>
           <td class="paramtype">queType_T&#160;</td>
-          <td class="paramname"><em>ins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>ins</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                              {
+<div class="fragment"><pre class="fragment">                                                   {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
         <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt;= _buff_len) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>;
     }
         <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> newBuff (_wire_delay, now, ins);
@@ -756,8 +677,8 @@ template&lt;typename queType_T&gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a52ad1c5223f028930491b024f26467fa_cgraph.png" border="0" usemap="#classport_a52ad1c5223f028930491b024f26467fa_cgraph" alt=""/></div>
-<map name="classport_a52ad1c5223f028930491b024f26467fa_cgraph" id="classport_a52ad1c5223f028930491b024f26467fa_cgraph">
+<div class="center"><img src="classport_a4c80b61961d7df8f30f5dc42bacd25e9_cgraph.png" border="0" usemap="#classport_a4c80b61961d7df8f30f5dc42bacd25e9_cgraph" alt=""/></div>
+<map name="classport_a4c80b61961d7df8f30f5dc42bacd25e9_cgraph" id="classport_a4c80b61961d7df8f30f5dc42bacd25e9_cgraph">
 </map>
 </div>
 </p>
@@ -765,15 +686,15 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a52ad1c5223f028930491b024f26467fa_icgraph.png" border="0" usemap="#classport_a52ad1c5223f028930491b024f26467fa_icgraph" alt=""/></div>
-<map name="classport_a52ad1c5223f028930491b024f26467fa_icgraph" id="classport_a52ad1c5223f028930491b024f26467fa_icgraph">
+<div class="center"><img src="classport_a4c80b61961d7df8f30f5dc42bacd25e9_icgraph.png" border="0" usemap="#classport_a4c80b61961d7df8f30f5dc42bacd25e9_icgraph" alt=""/></div>
+<map name="classport_a4c80b61961d7df8f30f5dc42bacd25e9_icgraph" id="classport_a4c80b61961d7df8f30f5dc42bacd25e9_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a7c709a92ed8525cf8a310b294e606267"></a><!-- doxytag: member="port::pushBack" ref="a7c709a92ed8525cf8a310b294e606267" args="(queType_T ins, CYCLE now, CYCLE lat)" -->
+<a class="anchor" id="a8660727a8dbc674388195c7abd543045"></a><!-- doxytag: member="port::pushBack" ref="a8660727a8dbc674388195c7abd543045" args="(queType_T ins, CYCLE lat)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -784,12 +705,6 @@ template&lt;typename queType_T&gt; </div>
           <td>(</td>
           <td class="paramtype">queType_T&#160;</td>
           <td class="paramname"><em>ins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -805,9 +720,10 @@ template&lt;typename queType_T&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                         {
+<div class="fragment"><pre class="fragment">                                                              {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
         <span class="keywordflow">if</span> (<a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> () &gt;= _buff_len) {
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;is FULL&quot;</span>, now);
         <span class="keywordflow">return</span> <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>;
     }
         <a class="code" href="structBuffElement.html">BuffElement&lt;queType_T&gt;</a> newBuff (lat, now, ins);
@@ -818,15 +734,15 @@ template&lt;typename queType_T&gt; </div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a7c709a92ed8525cf8a310b294e606267_cgraph.png" border="0" usemap="#classport_a7c709a92ed8525cf8a310b294e606267_cgraph" alt=""/></div>
-<map name="classport_a7c709a92ed8525cf8a310b294e606267_cgraph" id="classport_a7c709a92ed8525cf8a310b294e606267_cgraph">
+<div class="center"><img src="classport_a8660727a8dbc674388195c7abd543045_cgraph.png" border="0" usemap="#classport_a8660727a8dbc674388195c7abd543045_cgraph" alt=""/></div>
+<map name="classport_a8660727a8dbc674388195c7abd543045_cgraph" id="classport_a8660727a8dbc674388195c7abd543045_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a966cfeb3b369ec22e8081275481abe32"></a><!-- doxytag: member="port::regStat" ref="a966cfeb3b369ec22e8081275481abe32" args="(CYCLE)" -->
+<a class="anchor" id="a1f3feb96d4c1b9a7935ced227dba2a79"></a><!-- doxytag: member="port::regStat" ref="a1f3feb96d4c1b9a7935ced227dba2a79" args="()" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -835,26 +751,66 @@ template&lt;typename queType_T &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::regStat </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                        {
-    <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
+<div class="fragment"><pre class="fragment">                               {
+    <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) {
         s_port_empty_cyc++;
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (now) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) {
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) {
         s_port_full_cyc++;
     }
+    s_port_size_avg += <a class="code" href="classport.html#a7276424a4d3b305c198159f2ed6b7dab">getBuffSize</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classport_a966cfeb3b369ec22e8081275481abe32_icgraph.png" border="0" usemap="#classport_a966cfeb3b369ec22e8081275481abe32_icgraph" alt=""/></div>
-<map name="classport_a966cfeb3b369ec22e8081275481abe32_icgraph" id="classport_a966cfeb3b369ec22e8081275481abe32_icgraph">
+<div class="center"><img src="classport_a1f3feb96d4c1b9a7935ced227dba2a79_icgraph.png" border="0" usemap="#classport_a1f3feb96d4c1b9a7935ced227dba2a79_icgraph" alt=""/></div>
+<map name="classport_a1f3feb96d4c1b9a7935ced227dba2a79_icgraph" id="classport_a1f3feb96d4c1b9a7935ced227dba2a79_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a538ad968a8d02b2c673fb627094ef8bc"></a><!-- doxytag: member="port::searchNflushPort" ref="a538ad968a8d02b2c673fb627094ef8bc" args="(INS_ID)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename queType_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classport.html">port</a>&lt; queType_T &gt;::searchNflushPort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td>
+          <td class="paramname"><em>elemSeqNum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                         {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keyword">typename</span> list&lt;BuffElement&lt;queType_T&gt; &gt;::iterator it = _buff.begin ();
+    <span class="keywordflow">while</span> (it != _buff.end ()) {
+        queType_T dynIns = (*it)._dynIns;
+        <span class="keywordflow">if</span> (dynIns-&gt;getInsID () &gt;= elemSeqNum) {
+            <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab20eec26885f88f63fe85374bee4f984">DBG_PORT</a>, <span class="stringliteral">&quot;%s: %s %llu %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                    <span class="stringliteral">&quot;POP ins&quot;</span>, dynIns-&gt;getInsID (), <span class="stringliteral">&quot;FOR&quot;</span>, elemSeqNum, now);
+            _buff.erase (it++);
+        } <span class="keywordflow">else</span> { ++it; }
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classport_a538ad968a8d02b2c673fb627094ef8bc_cgraph.png" border="0" usemap="#classport_a538ad968a8d02b2c673fb627094ef8bc_cgraph" alt=""/></div>
+<map name="classport_a538ad968a8d02b2c673fb627094ef8bc_cgraph" id="classport_a538ad968a8d02b2c673fb627094ef8bc_cgraph">
 </map>
 </div>
 </p>
@@ -862,8 +818,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2port_8h_source.html">port.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2port_8cpp.html">port.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="port_8h_source.html">port.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="port_8cpp.html">port.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -871,7 +827,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -880,7 +836,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

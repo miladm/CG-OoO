@@ -9,7 +9,7 @@ digraph G
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="basicblock::getLastIns",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a99fb16d14456bb07b0033a0489ced872"];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node4 [label="List::Last",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a6d48ac6d8dc07d30d726298dd60b5b03"];
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
 }

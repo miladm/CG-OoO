@@ -61,7 +61,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">variable Class Reference</div>  </div>
 </div>
@@ -87,12 +88,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a53fb79e20c7ca14c872830461025c11c">getNumAssignedBB</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbasicblock.html">basicblock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a651a5439b34d9eae8ceacca7ecbfc3e8">getNthAssignedBB</a> (int indx)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a57838c6bf0ac170ee02a0e3a099aec35">getC</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#ac570372e439e2d75875b8b2253069ce6">setC</a> (int <a class="el" href="_8AppleDouble_2sat__counter_8cpp.html#aa41808e37ba1ecae7ee6bde4a5c62f82">c</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#ac570372e439e2d75875b8b2253069ce6">setC</a> (int c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a0d0cee61944333e78fecef0365d35cbe">popFromStack</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#ae0d9d0c11701ccb08719cb5f27fa75e4">pushToStack</a> (int s)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a3f153f4bceb60929467548bd8885d61e">getTopStack</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbasicblock.html">basicblock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a3c88482acd58a7f9f38b5467d6edcff7">getTopBbStack</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a8004cca5263b1d3a296e4c5481b6db2a">popHackPushes</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#aefa98b50d2a3135fe1141621f6f5d995">popHackPushes</a> (int)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a0eaf13bf7764096058482fc8573673bb"></a><!-- doxytag: member="variable::variable" ref="a0eaf13bf7764096058482fc8573673bb" args="(long int var)" -->
@@ -110,10 +114,10 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; var &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a> &amp;&amp; <span class="stringliteral">&quot;invalid x86 variable.&quot;</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; var &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a> &amp;&amp; <span class="stringliteral">&quot;invalid x86 variable.&quot;</span>);
         _var = var;
-        _c = 0;
-        _hackPushCount = 0;
+        _c = 1;
+        <a class="code" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a> = 1;
         bbList = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
 }
 </pre></div>
@@ -182,6 +186,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                   {
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_c &lt; <a class="code" href="binaryTranslator_2global_8h.html#a72e1d1d4b3243f4e7ec115f199298e34">LARGE_NUMBER</a> &amp;&amp; <span class="stringliteral">&quot;SSA register conflict happens if larger than LARGE_NUMBER - consider increasing this number&quot;</span>);
         <span class="keywordflow">return</span> _c;
 }
 </pre></div>
@@ -337,8 +342,8 @@ Here is the caller graph for this function:</div>
         <span class="keywordflow">if</span> (_s.size() == 0) {
                 <span class="keywordtype">int</span> k = <a class="code" href="classvariable.html#a57838c6bf0ac170ee02a0e3a099aec35">getC</a>();
                 _s.push_back(k);
-                <a class="code" href="classvariable.html#ac570372e439e2d75875b8b2253069ce6">setC</a>(k+1);
-                _hackPushCount++;
+                <a class="code" href="classvariable.html#ac570372e439e2d75875b8b2253069ce6">setC</a>(k + 1);
+                <a class="code" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a>++;
         } <span class="comment">//means don&#39;t assign anything</span>
         <span class="comment">// if (_s.size() == 0) { printf(&quot;read stack: %d_-2\n&quot;, _var); return -2; }</span>
         <span class="comment">// printf(&quot;read stack: %d_%d\n&quot;, _var, _s.back());</span>
@@ -377,25 +382,29 @@ Here is the call graph for this function:</div>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a8004cca5263b1d3a296e4c5481b6db2a"></a><!-- doxytag: member="variable::popHackPushes" ref="a8004cca5263b1d3a296e4c5481b6db2a" args="()" -->
+<a class="anchor" id="aefa98b50d2a3135fe1141621f6f5d995"></a><!-- doxytag: member="variable::popHackPushes" ref="aefa98b50d2a3135fe1141621f6f5d995" args="(int)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void variable::popHackPushes </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>counter</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                             {
-        <span class="keywordflow">while</span> (_hackPushCount &gt; 0) {
-                _hackPushCount--;
+<div class="fragment"><pre class="fragment">                                        {
+        <span class="keywordflow">while</span> (counter &gt; 0) {
+        counter--;
+                <a class="code" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a>--;
                 _s.pop_back();
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a> &gt;= 0);
         }
-}</pre></div>
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="ae0d9d0c11701ccb08719cb5f27fa75e4"></a><!-- doxytag: member="variable::pushToStack" ref="ae0d9d0c11701ccb08719cb5f27fa75e4" args="(int s)" -->
@@ -414,7 +423,7 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                {
         <span class="comment">// printf(&quot;pushing to stack %d_%d\n&quot;, _var, s);</span>
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(s &gt;= 0 &amp;&amp; <span class="stringliteral">&quot;Invalid s value inserted.&quot;</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(s &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Invalid s value inserted.&quot;</span>);
         _s.push_back(s);
 }
 </pre></div>
@@ -435,8 +444,9 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                         {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="_8AppleDouble_2sat__counter_8cpp.html#aa41808e37ba1ecae7ee6bde4a5c62f82">c</a> &gt;= 0 &amp;&amp; <span class="stringliteral">&quot;Invalid c value inserted.&quot;</span>);
-        _c = <a class="code" href="_8AppleDouble_2sat__counter_8cpp.html#aa41808e37ba1ecae7ee6bde4a5c62f82">c</a>;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(c &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Invalid c value inserted.&quot;</span>);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_c &lt; <a class="code" href="binaryTranslator_2global_8h.html#a72e1d1d4b3243f4e7ec115f199298e34">LARGE_NUMBER</a> &amp;&amp; <span class="stringliteral">&quot;SSA register conflict happens if larger than LARGE_NUMBER - consider increasing this number&quot;</span>);
+        _c = c;
 }
 </pre></div>
 <p><div class="dynheader">
@@ -450,6 +460,20 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a2d93d3b2fd7553f65c931b13aabe5504"></a><!-- doxytag: member="variable::_hackPushCount" ref="a2d93d3b2fd7553f65c931b13aabe5504" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">variable::_hackPushCount</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="variable_8h_source.html">variable.h</a></li>
 <li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="variable_8cpp.html">variable.cpp</a></li>
@@ -460,7 +484,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -469,7 +493,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

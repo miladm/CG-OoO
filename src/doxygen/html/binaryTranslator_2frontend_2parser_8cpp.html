@@ -66,10 +66,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <div class="textblock"><code>#include &quot;pin.H&quot;</code><br/>
+<code>#include &quot;instlib.H&quot;</code><br/>
+<code>#include &quot;portability.H&quot;</code><br/>
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;fstream&gt;</code><br/>
 <code>#include &lt;string.h&gt;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
+<code>#include &quot;stInstruction.h&quot;</code><br/>
+<code>#include &quot;../../lib/benchAddrRangeParser.h&quot;</code><br/>
+<code>#include &quot;../../lib/message.h&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for parser.cpp:</div>
 <div class="dyncontent">
@@ -80,12 +85,13 @@ Include dependency graph for parser.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aac584d3205df6f221fb0ccee5214a89d">trace_info</a> (ADDRINT ins_addr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">KNOB&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a96d7d48ed562cf919945d14a3feda762">KnobBenchName</a> (KNOB_MODE_WRITEONCE,&quot;pintool&quot;,&quot;b&quot;,&quot;bench&quot;,&quot;specify input benchmark <a class="el" href="classconfig.html">config</a> file name&quot;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a222f3d3ed6c8963f32c2c581aebfd429">setFallThrough</a> (INS ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a59f80b574c4a14e0fbf9703442582f49">setDestination</a> (INS ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#af3289249552a1470203b0101341ecc73">setType</a> (INS ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#afece89e0bb8014ad8f7748c1c1256f76">setReg</a> (INS ins)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aaefa9db5f3089af4df258e9e747979a2">RecordMemRead</a> (VOID *ip, VOID *addr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a80aa3565dcda02616e32bd9b83a56257">RecordMemWrite</a> (VOID *ip, VOID *addr)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aa89073dbc41968bdf1c71da9badeb209">dumpIns</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a37f9b9ca0fb71c0e48095eada9decfdb">makeNewIns</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a781d53cb9e89bf1aba9c52d094c4ead8">ImageLoad</a> (IMG img, VOID *v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aa61669c70de306a0ba47bf5878b9f806">Fini</a> (INT32 code, VOID *v)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">INT32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a9c89b15666dec97b4af91ba247b6a230">Usage</a> ()</td></tr>
@@ -95,8 +101,53 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a7ed1bcdb23803dfda2895ff76f785d1a">mem_trace</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#a42bc6696a6158fb473715316f0902236">insAddrs</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classstInstruction.html">stInstruction</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbenchAddrRangeParser.html">benchAddrRangeParser</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="aa89073dbc41968bdf1c71da9badeb209"></a><!-- doxytag: member="parser.cpp::dumpIns" ref="aa89073dbc41968bdf1c71da9badeb209" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dumpIns </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                {
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;NumElements () &lt;= 2);
+    <span class="keywordflow">if</span> (<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;NumElements () == 2) {
+        <a class="code" href="classstInstruction.html">stInstruction</a>* st_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Nth (0);
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a8c37afc823738a1e5a98126ed5a3e096">dump</a> ();
+        <span class="keyword">delete</span> <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Nth (0);
+        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;RemoveAt (0);
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_cgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_cgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_cgraph" id="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_icgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_aa89073dbc41968bdf1c71da9badeb209_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="aa61669c70de306a0ba47bf5878b9f806"></a><!-- doxytag: member="parser.cpp::Fini" ref="aa61669c70de306a0ba47bf5878b9f806" args="(INT32 code, VOID *v)" -->
 <div class="memitem">
 <div class="memproto">
@@ -161,6 +212,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
+<span class="comment">//    for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))</span>
     <span class="keywordflow">for</span> (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec))
     {
         <span class="keywordflow">for</span> (RTN rtn = SEC_RtnHead(sec); RTN_Valid(rtn); rtn = RTN_Next(rtn))
@@ -168,38 +220,22 @@ Here is the caller graph for this function:</div>
             <span class="comment">// Open the RTN.</span>
             RTN_Open( rtn );            
             <span class="comment">// Examine each instruction in the routine.</span>
+<span class="comment">//            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (ins))</span>
             <span class="keywordflow">for</span>( INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins) )
             {
-                                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#af3289249552a1470203b0101341ecc73">setType</a>(ins);
-                                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;#%s\n&quot;</span>, INS_Mnemonic(ins).c_str());
-                                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%s\n&quot;</span>, INS_Disassemble(ins).c_str());
-                                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%lx\n&quot;</span>, INS_Address(ins));
-                                <span class="comment">//fprintf(insAddrs, &quot;%lx\n&quot;, INS_Address(ins)); //for debugging address space</span>
-                                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a59f80b574c4a14e0fbf9703442582f49">setDestination</a>(ins);
-                                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#afece89e0bb8014ad8f7748c1c1256f76">setReg</a>(ins);
-                                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;---\n&quot;</span>);
-                                <span class="comment">// Instruments memory accesses using a predicated call</span>
-                            UINT32 memOperands = INS_MemoryOperandCount(ins);
-                            <span class="comment">// Iterate over each memory operand of the instruction.</span>
-                            <span class="keywordflow">for</span> (UINT32 <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a> = 0; <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a> &lt; memOperands; <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a>++)
-                            {
-                                <span class="keywordflow">if</span> (INS_MemoryOperandIsRead(ins, <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a>))
-                                {
-                                    INS_InsertPredicatedCall(
-                                        ins, IPOINT_BEFORE, (AFUNPTR)<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aaefa9db5f3089af4df258e9e747979a2">RecordMemRead</a>,
-                                        IARG_INST_PTR,
-                                        IARG_MEMORYOP_EA, <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a>,
-                                        IARG_END);
-                                }
-                                <span class="keywordflow">if</span> (INS_MemoryOperandIsWritten(ins, <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a>))
-                                {
-                                    INS_InsertPredicatedCall(
-                                        ins, IPOINT_BEFORE, (AFUNPTR)<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a80aa3565dcda02616e32bd9b83a56257">RecordMemWrite</a>,
-                                        IARG_INST_PTR,
-                                        IARG_MEMORYOP_EA, <a class="code" href="uop__gen_8cpp.html#aa546155cf4ec601e43e20ead17e983d1">memOp</a>,
-                                        IARG_END);
-                                }
-                            }
+                <span class="comment">/* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */</span>
+                <span class="keywordflow">if</span> (!(INS_Address (ins) &gt;= <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a>-&gt;<a class="code" href="classbenchAddrRangeParser.html#a8199272dc46c90af9da56765c4902926">getStartAddr</a> () &amp;&amp; 
+                      INS_Address (ins) &lt;= <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a>-&gt;<a class="code" href="classbenchAddrRangeParser.html#ade3cc31638e192a39a0bc8e42c94e43b">getEndAddr</a> ())) <span class="keywordflow">continue</span>;
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a37f9b9ca0fb71c0e48095eada9decfdb">makeNewIns</a> ();
+                <a class="code" href="classstInstruction.html">stInstruction</a>* st_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Last ();
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#af3289249552a1470203b0101341ecc73">setType</a> (ins);
+                st_ins-&gt;<a class="code" href="classstInstruction.html#a3caa849e975d97f5b650367ea4c9d9af">_mnemonic</a> = INS_Mnemonic (ins);
+                st_ins-&gt;<a class="code" href="classstInstruction.html#af5cc656f719dda37b4dd7ca02bbe69a0">_disassemble</a> = INS_Disassemble (ins);
+                st_ins-&gt;<a class="code" href="classstInstruction.html#a1d049883327b46f6df4826e80dd44af1">_addr</a> = INS_Address (ins);
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a222f3d3ed6c8963f32c2c581aebfd429">setFallThrough</a> (ins);
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a59f80b574c4a14e0fbf9703442582f49">setDestination</a> (ins);
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#afece89e0bb8014ad8f7748c1c1256f76">setReg</a> (ins);
+                <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa89073dbc41968bdf1c71da9badeb209">dumpIns</a> ();
             }
             <span class="comment">// Close the RTN.</span>
             RTN_Close( rtn );
@@ -221,6 +257,60 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8_icgraph" alt=""/></div>
 <map name="binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a96d7d48ed562cf919945d14a3feda762"></a><!-- doxytag: member="parser.cpp::KnobBenchName" ref="a96d7d48ed562cf919945d14a3feda762" args="(KNOB_MODE_WRITEONCE,&quot;pintool&quot;,&quot;b&quot;,&quot;bench&quot;,&quot;specify input benchmark config file name&quot;)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">KNOB&lt;string&gt; KnobBenchName </td>
+          <td>(</td>
+          <td class="paramtype">KNOB_MODE_WRITEONCE&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;pintool&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;b&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;bench&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;specify input benchmark <a class="el" href="classconfig.html">config</a> file name&quot;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a96d7d48ed562cf919945d14a3feda762_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a96d7d48ed562cf919945d14a3feda762_icgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_a96d7d48ed562cf919945d14a3feda762_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a96d7d48ed562cf919945d14a3feda762_icgraph">
 </map>
 </div>
 </p>
@@ -252,17 +342,25 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
-        <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="namespaceparse__x86.html#ab11d9d1a0626bdc175b6c2ee03df263e">ioPath</a> = <span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/frontend/&quot;</span>; <span class="comment">//argv[argc-2];</span>
-        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a> = fopen((ioPath+<span class="stringliteral">&quot;/static_trace.s&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>);  
-        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a7ed1bcdb23803dfda2895ff76f785d1a">mem_trace</a>    = fopen(<span class="stringliteral">&quot;/scratch/tracesim/specint2006/mem_trace.csv&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>);  
-        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a42bc6696a6158fb473715316f0902236">insAddrs</a>     = fopen(<span class="stringliteral">&quot;/scratch/tracesim/specint2006/ins_addrs.csv&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>);  
-
+    <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;INITIALIZE STATIC CODE PARSER&quot;</span>);
     <span class="comment">// Initialize pin &amp; symbol manager</span>
     <span class="keywordflow">if</span> (PIN_Init(argc, argv)) <span class="keywordflow">return</span> <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a9c89b15666dec97b4af91ba247b6a230">Usage</a>();
     PIN_InitSymbols();
 
+        <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code" href="namespaceparse__x86.html#ab11d9d1a0626bdc175b6c2ee03df263e">ioPath</a> = <span class="stringliteral">&quot;/home/milad/esc_project/svn/PARS/src/binaryTranslator/frontend/&quot;</span>; <span class="comment">//argv[argc-2];</span>
+        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a> = fopen((ioPath+<span class="stringliteral">&quot;/static_trace.s&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>);  
+        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a7ed1bcdb23803dfda2895ff76f785d1a">mem_trace</a>    = fopen(<span class="stringliteral">&quot;/scratch/tracesim/specint2006/mem_trace.csv&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>);  
+        <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a42bc6696a6158fb473715316f0902236">insAddrs</a>     = fopen(<span class="stringliteral">&quot;/scratch/tracesim/specint2006/ins_addrs.csv&quot;</span>, <span class="stringliteral">&quot;w&quot;</span>);  
+    <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a> = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;stInstruction*&gt;</a>;
+    <span class="keywordtype">string</span> benchmark = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a96d7d48ed562cf919945d14a3feda762">KnobBenchName</a>.Value ();
+    <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a8a9e32e26d42eb7a2a17e091d0d1cb29">simEvent</a> ((<span class="stringliteral">&quot;BENCHMARK: &quot;</span> + benchmark).c_str ());
+    <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a> = <span class="keyword">new</span> <a class="code" href="classbenchAddrRangeParser.html">benchAddrRangeParser</a> (benchmark);
+    <a class="code" href="lib_2message_8cpp.html#a546b7fbf80dca541af1ab7adae5a6797">g_msg</a>.<a class="code" href="classmessage.html#a39109936b8ee8b1fd569cf1212c15aeb">simStep</a> (<span class="stringliteral">&quot;START OF CODE GENERATION&quot;</span>);
+
+
     <span class="comment">// Register ImageLoad to be called to instrument instructions</span>
     IMG_AddInstrumentFunction(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#a781d53cb9e89bf1aba9c52d094c4ead8">ImageLoad</a>, 0);
+<span class="comment">//    TRACE_AddInstrumentFunction (ImageLoad, 0);</span>
     PIN_AddFiniFunction(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa61669c70de306a0ba47bf5878b9f806">Fini</a>, 0);
     
     <span class="comment">// Start the program, never returns</span>
@@ -282,78 +380,29 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="aaefa9db5f3089af4df258e9e747979a2"></a><!-- doxytag: member="parser.cpp::RecordMemRead" ref="aaefa9db5f3089af4df258e9e747979a2" args="(VOID *ip, VOID *addr)" -->
+<a class="anchor" id="a37f9b9ca0fb71c0e48095eada9decfdb"></a><!-- doxytag: member="parser.cpp::makeNewIns" ref="a37f9b9ca0fb71c0e48095eada9decfdb" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">VOID RecordMemRead </td>
+          <td class="memname">void makeNewIns </td>
           <td>(</td>
-          <td class="paramtype">VOID *&#160;</td>
-          <td class="paramname"><em>ip</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">VOID *&#160;</td>
-          <td class="paramname"><em>addr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-        <span class="comment">//fprintf(mem_trace,&quot;%lx: R %lx\n&quot;, ip, addr);</span>
+<div class="fragment"><pre class="fragment">                   {
+    <a class="code" href="classstInstruction.html">stInstruction</a>* st_ins = <span class="keyword">new</span> <a class="code" href="classstInstruction.html">stInstruction</a> (<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>);
+    <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Append (st_ins);
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2_icgraph" alt=""/></div>
-<map name="binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_aaefa9db5f3089af4df258e9e747979a2_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a80aa3565dcda02616e32bd9b83a56257"></a><!-- doxytag: member="parser.cpp::RecordMemWrite" ref="a80aa3565dcda02616e32bd9b83a56257" args="(VOID *ip, VOID *addr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VOID RecordMemWrite </td>
-          <td>(</td>
-          <td class="paramtype">VOID *&#160;</td>
-          <td class="paramname"><em>ip</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">VOID *&#160;</td>
-          <td class="paramname"><em>addr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="comment">//fprintf(mem_trace,&quot;%lx: W %lx\n&quot;, ip, addr);</span>
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257_icgraph" alt=""/></div>
-<map name="binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a80aa3565dcda02616e32bd9b83a56257_icgraph">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a37f9b9ca0fb71c0e48095eada9decfdb_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a37f9b9ca0fb71c0e48095eada9decfdb_icgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_a37f9b9ca0fb71c0e48095eada9decfdb_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a37f9b9ca0fb71c0e48095eada9decfdb_icgraph">
 </map>
 </div>
 </p>
@@ -375,9 +424,11 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                              {
-        <span class="keywordflow">if</span> (INS_IsDirectBranchOrCall(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%lx\n&quot;</span>, INS_DirectBranchOrCallTargetAddress(ins));
-        }
+    <a class="code" href="classstInstruction.html">stInstruction</a>* cur_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Last ();
+        <span class="keywordflow">if</span> (cur_ins-&gt;<a class="code" href="classstInstruction.html#a9512329bfa1cecdf343df7ec56353afe">_has_destination</a> == <span class="keyword">false</span> &amp;&amp; INS_IsDirectBranchOrCall (ins)) {
+                cur_ins-&gt;<a class="code" href="classstInstruction.html#a9512329bfa1cecdf343df7ec56353afe">_has_destination</a> = <span class="keyword">true</span>;
+        cur_ins-&gt;<a class="code" href="classstInstruction.html#a6018aea17993487a7c613f78f8c2ec80">_destination</a> = INS_DirectBranchOrCallTargetAddress(ins);
+    }
 }
 </pre></div>
 <p><div class="dynheader">
@@ -385,6 +436,50 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49_icgraph" alt=""/></div>
 <map name="binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a59f80b574c4a14e0fbf9703442582f49_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a222f3d3ed6c8963f32c2c581aebfd429"></a><!-- doxytag: member="parser.cpp::setFallThrough" ref="a222f3d3ed6c8963f32c2c581aebfd429" args="(INS ins)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID setFallThrough </td>
+          <td>(</td>
+          <td class="paramtype">INS&#160;</td>
+          <td class="paramname"><em>ins</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                              {
+    <a class="code" href="classstInstruction.html">stInstruction</a>* cur_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Last ();
+    <span class="keywordflow">if</span> (INS_HasFallThrough (ins)) {
+        cur_ins-&gt;<a class="code" href="classstInstruction.html#a97a96446f5f2a53d535a151a4b72d738">_has_fall_through</a> = <span class="keyword">true</span>; 
+        cur_ins-&gt;<a class="code" href="classstInstruction.html#a8f7f7f0e2c771e1b089089449609fd80">_fall_through</a> = INS_NextAddress (ins);
+    }
+
+    <span class="keywordflow">if</span> (<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;NumElements () != 2) <span class="keywordflow">return</span>;
+    <a class="code" href="classstInstruction.html">stInstruction</a>* prv_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Nth (0);
+
+    <span class="comment">/*-- </span>
+<span class="comment">     * CALL FUNCTINOS NEED SPECIAL TREATMENT FOR FINDING THEIR FALL-THROUGH </span>
+<span class="comment">     * --*/</span>
+    <span class="keywordflow">if</span> (prv_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> == <span class="charliteral">&#39;c&#39;</span> &amp;&amp; prv_ins-&gt;<a class="code" href="classstInstruction.html#a97a96446f5f2a53d535a151a4b72d738">_has_fall_through</a> == <span class="keyword">false</span>) {
+        prv_ins-&gt;<a class="code" href="classstInstruction.html#a97a96446f5f2a53d535a151a4b72d738">_has_fall_through</a> = <span class="keyword">true</span>;
+        prv_ins-&gt;<a class="code" href="classstInstruction.html#a8f7f7f0e2c771e1b089089449609fd80">_fall_through</a> = INS_Address (ins);
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_a222f3d3ed6c8963f32c2c581aebfd429_icgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_a222f3d3ed6c8963f32c2c581aebfd429_icgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_a222f3d3ed6c8963f32c2c581aebfd429_icgraph" id="binaryTranslator_2frontend_2parser_8cpp_a222f3d3ed6c8963f32c2c581aebfd429_icgraph">
 </map>
 </div>
 </p>
@@ -406,19 +501,31 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                      {
+    <a class="code" href="classstInstruction.html">stInstruction</a>* st_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Last ();
         <span class="comment">// UINT32 operandCount = INS_MaxNumRRegs(ins)+INS_MaxNumWRegs(ins);</span>
         <span class="keywordflow">if</span> (INS_MaxNumRRegs(ins) &gt; 0) {
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; INS_MaxNumRRegs(ins); i++) {
-                        fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>,<span class="stringliteral">&quot;%s\n%d\n&quot;</span>, REG_StringShort(INS_RegR(ins,i)).c_str(), 1);
+                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)INS_MaxNumRRegs(ins); i++) {
+                        st_ins-&gt;<a class="code" href="classstInstruction.html#aabb29cb7e0f6aea3b0ed96c9e1d4e1ed">_regs</a>.<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (REG_StringShort(REG_FullRegName(INS_RegR(ins,i))));
+                        st_ins-&gt;<a class="code" href="classstInstruction.html#a492e82b7766af3d6c681521eca94ab82">_reg_types</a>.<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (<a class="code" href="dependencyTable_8h.html#ab390e08ed69004340ece1f911f48fd1ba88ed4f74ead97517ca477c942617f8f8">REG_READ</a>);
                 }
         }
         <span class="keywordflow">if</span> (INS_MaxNumWRegs(ins) &gt; 0) {
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; INS_MaxNumWRegs(ins); i++) {
-                        fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>,<span class="stringliteral">&quot;%s\n%d\n&quot;</span>, REG_StringShort(INS_RegW(ins,i)).c_str(), 2);
+                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)INS_MaxNumWRegs(ins); i++) {
+                        st_ins-&gt;<a class="code" href="classstInstruction.html#aabb29cb7e0f6aea3b0ed96c9e1d4e1ed">_regs</a>.<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (REG_StringShort(REG_FullRegName(INS_RegW(ins,i))));
+                        st_ins-&gt;<a class="code" href="classstInstruction.html#a492e82b7766af3d6c681521eca94ab82">_reg_types</a>.<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (<a class="code" href="dependencyTable_8h.html#ab390e08ed69004340ece1f911f48fd1ba32293503277d119911f6b3cae49510e3">REG_WRITE</a>);
                 }
-        }               
+        }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76_cgraph.png" border="0" usemap="#binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76_cgraph" alt=""/></div>
+<map name="binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76_cgraph" id="binaryTranslator_2frontend_2parser_8cpp_afece89e0bb8014ad8f7748c1c1256f76_cgraph">
+</map>
+</div>
+</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -445,29 +552,36 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                       {
+    <a class="code" href="classstInstruction.html">stInstruction</a>* st_ins = <a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a>-&gt;Last ();
         <span class="keywordtype">bool</span> <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c">noType</a> = <span class="keyword">true</span>;
-        <span class="keywordflow">if</span> (INS_IsCall(ins) || INS_IsSyscall(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;c\n&quot;</span>);
+        <span class="keywordflow">if</span> (INS_IsSyscall(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;s&#39;</span>;
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (INS_IsRet(ins) || INS_IsSysret(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;r\n&quot;</span>);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsCall(ins) || INS_IsProcedureCall (ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;c&#39;</span>;
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (INS_IsBranch(ins) &amp;&amp; INS_HasFallThrough(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;b\n&quot;</span>);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsRet(ins) || INS_IsSysret(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;r&#39;</span>;
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (INS_IsBranch(ins) &amp;&amp; !INS_HasFallThrough(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;j\n&quot;</span>);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsBranch(ins) &amp;&amp; INS_HasFallThrough(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;b&#39;</span>;
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (INS_IsMemoryRead(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;R\n&quot;</span>);
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%d\n&quot;</span>, INS_MemoryReadSize(ins)); <span class="comment">//size in bytes</span>
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsBranch(ins) &amp;&amp; !INS_HasFallThrough(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;j&#39;</span>;
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (INS_IsMemoryWrite(ins)) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;W\n&quot;</span>);
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%d\n&quot;</span>, INS_MemoryWriteSize(ins)); <span class="comment">//size in bytes</span>
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsMemoryRead(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;R&#39;</span>;
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2b173f5b9bb25c939ef6e5d7a01d8ba5">_mem_r_size</a> = INS_MemoryReadSize(ins);
                 noType = <span class="keyword">false</span>;
-        } <span class="keywordflow">if</span> (noType == <span class="keyword">true</span>) {
-                fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;o\n&quot;</span>);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsMemoryWrite(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;W&#39;</span>;
+        st_ins-&gt;<a class="code" href="classstInstruction.html#af397d147b9dcfa6e67e8dbe5c86d46fb">_mem_w_size</a> = INS_MemoryWriteSize(ins);
+                noType = <span class="keyword">false</span>;
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(INS_IsNop(ins)) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;n&#39;</span>;
+                noType = <span class="keyword">false</span>;
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(noType == <span class="keyword">true</span>) {
+        st_ins-&gt;<a class="code" href="classstInstruction.html#a2c538afc6db5d24d18aa1ed8623d5718">_type</a> = <span class="charliteral">&#39;o&#39;</span>;
         }
 }
 </pre></div>
@@ -480,26 +594,6 @@ Here is the caller graph for this function:</div>
 </div>
 </p>
 
-</div>
-</div>
-<a class="anchor" id="aac584d3205df6f221fb0ccee5214a89d"></a><!-- doxytag: member="parser.cpp::trace_info" ref="aac584d3205df6f221fb0ccee5214a89d" args="(ADDRINT ins_addr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VOID trace_info </td>
-          <td>(</td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>ins_addr</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                  {
-    fprintf(<a class="code" href="binaryTranslator_2frontend_2parser_8cpp.html#acaa45cdca33f92d94cf63e2e4498487a">trace_static</a>, <span class="stringliteral">&quot;%lld\n&quot;</span>, ins_addr);  
-}
-</pre></div>
 </div>
 </div>
 <a class="anchor" id="a9c89b15666dec97b4af91ba247b6a230"></a><!-- doxytag: member="parser.cpp::Usage" ref="a9c89b15666dec97b4af91ba247b6a230" args="()" -->
@@ -533,6 +627,32 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/><h2>Variable Documentation</h2>
+<a class="anchor" id="ab8497513f9992352953a905ed69eea4c"></a><!-- doxytag: member="parser.cpp::bench_addr_space" ref="ab8497513f9992352953a905ed69eea4c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classbenchAddrRangeParser.html">benchAddrRangeParser</a>* <a class="el" href="pars_8cpp.html#ab8497513f9992352953a905ed69eea4c">bench_addr_space</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa5ff4561ccfebb496d58f803932018e5"></a><!-- doxytag: member="parser.cpp::g_ins_list" ref="aa5ff4561ccfebb496d58f803932018e5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classList.html">List</a>&lt;<a class="el" href="classstInstruction.html">stInstruction</a>*&gt;* <a class="el" href="binaryTranslator_2frontend_2parser_8cpp.html#aa5ff4561ccfebb496d58f803932018e5">g_ins_list</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a42bc6696a6158fb473715316f0902236"></a><!-- doxytag: member="parser.cpp::insAddrs" ref="a42bc6696a6158fb473715316f0902236" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -578,7 +698,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -587,7 +707,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

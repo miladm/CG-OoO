@@ -2,19 +2,24 @@ digraph G
 {
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  rankdir=LR;
   Node1 [label="basicblock",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_takenTargetBB\n_fallThroughBB"];
-  Node2 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_insListSchList\n_o_insList\n_insList"];
+  Node2 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_insListSchList\n_upld_roots\n_insList\n_insList_orig"];
   Node2 [label="List\< instruction * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
-  Node3 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_s_insList"];
-  Node3 [label="List\< string * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node3 -> Node2 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="elems"];
+  Node3 [label="vector\< instruction * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node4 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_bbListForPhraseblock"];
   Node4 [label="List\< ADDR \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
-  Node5 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_phList"];
-  Node5 [label="List\< phrase * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
-  Node6 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_insAddrList"];
-  Node6 [label="List\< ADDRS \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
-  Node7 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_descendantBbList\n_backEdgeSourceBbList\n_ancestorBbList"];
-  Node7 [label="List\< basicblock * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node5 -> Node4 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="elems"];
+  Node5 [label="vector\< ADDR \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node6 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_phList"];
+  Node6 [label="List\< phrase * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node7 -> Node6 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="elems"];
+  Node7 [label="vector\< phrase * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node8 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_descendantBbList\n_backEdgeSourceBbList\n_ancestorBbList"];
+  Node8 [label="List\< basicblock * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node9 -> Node8 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="elems"];
+  Node9 [label="vector\< basicblock * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node10 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_stats"];
+  Node10 [label="block_stats",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structblock__stats.html"];
 }

@@ -134,14 +134,14 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                              {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(_rt-&gt;Nth(indx) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(_rt-&gt;Nth(indx) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>);
     <span class="keywordtype">int</span> num1 = _r-&gt;NumElements();
     <span class="keywordflow">if</span> (renReg != -1) {
         _r-&gt;RemoveAt(indx);
         _r-&gt;InsertAt(renReg,indx);
     }
     <span class="keywordtype">int</span> num2 = _r-&gt;NumElements();
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (num1 == num2);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (num1 == num2);
 }
 </pre></div>
 </div>
@@ -161,10 +161,10 @@ Variables</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                      {
-        <a class="code" href="backend_2instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a>++;
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(reg &lt; <a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">NUM_REGISTERS</a> &amp;&amp; <span class="stringliteral">&quot;Invalid Register Number&quot;</span>);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="backend_2instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a> &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">INIT_RENAME_REG_NUM</a> &amp;&amp; <span class="stringliteral">&quot;Invalid Rename Register Number&quot;</span>);
-    <a class="code" href="binaryTranslator_2registerRename_8cpp.html#adc8eebbac04834b333e93049a6691f9a">writeRegRenMap</a>.insert(pair&lt;long int,long int&gt;(reg,<a class="code" href="backend_2instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a>));
+        <a class="code" href="instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a>++;
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(reg &lt; <a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">NUM_REGISTERS</a> &amp;&amp; <span class="stringliteral">&quot;Invalid Register Number&quot;</span>);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a> &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">INIT_RENAME_REG_NUM</a> &amp;&amp; <span class="stringliteral">&quot;Invalid Rename Register Number&quot;</span>);
+    <a class="code" href="binaryTranslator_2registerRename_8cpp.html#adc8eebbac04834b333e93049a6691f9a">writeRegRenMap</a>.insert(pair&lt;long int,long int&gt;(reg,<a class="code" href="instruction_8cpp.html#a480aae9e5345069158f49509a4e385da">nextRenReg</a>));
 }
 </pre></div>
 </div>
@@ -215,7 +215,7 @@ Variables</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -224,7 +224,7 @@ Variables</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -192,64 +192,39 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
-    size_type _size = vec.size();
-    Result _total = 0.0;
-
-    <span class="keywordflow">if</span> (<a class="code" href="structStats_1_1SparseHistPrint.html#a7d6cd92b10d6e566b1cb5602179ae7be">flags</a>.isSet(pdf | cdf)) {
-        <span class="keywordflow">for</span> (off_type i = 0; i &lt; _size; ++i) {
-            _total += vec[i];
-        }
-    }
-
     <span class="keywordtype">string</span> base = <a class="code" href="structStats_1_1SparseHistPrint.html#ab767d5886007c432b86a42171f7e1206">name</a> + <a class="code" href="structStats_1_1SparseHistPrint.html#a72260b9f02d5395232d733329fc6c427">separatorString</a>;
 
     ScalarPrint print;
-    print.name = <a class="code" href="structStats_1_1SparseHistPrint.html#ab767d5886007c432b86a42171f7e1206">name</a>;
-    print.desc = <a class="code" href="structStats_1_1SparseHistPrint.html#a8760dfb52afeeef275a09d0cce044a47">desc</a>;
     print.precision = <a class="code" href="structStats_1_1SparseHistPrint.html#a3d11c791cb60284686ed2458773cc52f">precision</a>;
-    print.descriptions = <a class="code" href="structStats_1_1SparseHistPrint.html#ab0ff8d6cc914db901ad23dc01738b772">descriptions</a>;
     print.flags = <a class="code" href="structStats_1_1SparseHistPrint.html#a7d6cd92b10d6e566b1cb5602179ae7be">flags</a>;
-    print.pdf = _total ? 0.0 : <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
-    print.cdf = _total ? 0.0 : <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
+    print.descriptions = <a class="code" href="structStats_1_1SparseHistPrint.html#ab0ff8d6cc914db901ad23dc01738b772">descriptions</a>;
+    print.desc = <a class="code" href="structStats_1_1SparseHistPrint.html#a8760dfb52afeeef275a09d0cce044a47">desc</a>;
+    print.pdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
+    print.cdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
 
-    <span class="keywordtype">bool</span> havesub = !subnames.empty();
+    print.name = base + <span class="stringliteral">&quot;samples&quot;</span>;
+    print.value = <a class="code" href="structStats_1_1SparseHistPrint.html#acc3e076566384cb5a9532b679cfe8a6c">data</a>.samples;
+    print(stream);
 
-    <span class="keywordflow">if</span> (_size == 1) {
-        print.value = vec[0];
-        print(stream);
-        <span class="keywordflow">return</span>;
-    }
+    MCounter::const_iterator it;
+    <span class="keywordflow">for</span> (it = <a class="code" href="structStats_1_1SparseHistPrint.html#acc3e076566384cb5a9532b679cfe8a6c">data</a>.cmap.begin(); it != <a class="code" href="structStats_1_1SparseHistPrint.html#acc3e076566384cb5a9532b679cfe8a6c">data</a>.cmap.end(); it++) {
+        stringstream namestr;
+        namestr &lt;&lt; base;
 
-    <span class="keywordflow">for</span> (off_type i = 0; i &lt; _size; ++i) {
-        <span class="keywordflow">if</span> (havesub &amp;&amp; (i &gt;= subnames.size() || subnames[i].empty()))
-            <span class="keywordflow">continue</span>;
-
-        print.name = base + (havesub ? subnames[i] : to_string(i));
-        print.desc = subdescs.empty() ? <a class="code" href="structStats_1_1SparseHistPrint.html#a8760dfb52afeeef275a09d0cce044a47">desc</a> : subdescs[i];
-
-        print.update(vec[i], _total);
+        namestr &lt;&lt;(*it).first;
+        print.name = namestr.str();
+        print.value = (*it).second;
         print(stream);
     }
 
-    <span class="keywordflow">if</span> (<a class="code" href="structStats_1_1SparseHistPrint.html#a7d6cd92b10d6e566b1cb5602179ae7be">flags</a>.isSet(::Stats::total)) {
-        print.pdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
-        print.cdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
-        print.name = base + <span class="stringliteral">&quot;total&quot;</span>;
-        print.desc = <a class="code" href="structStats_1_1SparseHistPrint.html#a8760dfb52afeeef275a09d0cce044a47">desc</a>;
-        print.value = total;
-        print(stream);
-    }
+    print.pdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
+    print.cdf = <a class="code" href="text_8cc.html#a8abfcc76130f3f991d124dd22d7e69bc">NAN</a>;
+
+    print.name = base + <span class="stringliteral">&quot;total&quot;</span>;
+    print.value = total;
+    print(stream);
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef_cgraph.png" border="0" usemap="#structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef_cgraph" alt=""/></div>
-<map name="structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef_cgraph" id="structStats_1_1SparseHistPrint_ad86b4f53f3cade0f530d537bd121a6ef_cgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -345,7 +320,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/frontend/lib/bp_lib/stats/<a class="el" href="text_8cc.html">text.cc</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/bp_lib/stats/<a class="el" href="text_8cc.html">text.cc</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -353,7 +328,7 @@ Here is the call graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -362,7 +337,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

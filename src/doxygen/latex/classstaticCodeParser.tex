@@ -13,64 +13,80 @@ Collaboration diagram for staticCodeParser:
 \begin{DoxyCompactItemize}
 \item 
 struct {\bfseries bbObj}
-\item 
-struct {\bfseries insObj}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef}{staticCodeParser} (\hyperlink{structg__variable}{g\_\-variable} $\ast$\hyperlink{g__variable_8h_adfd3dddc03cc8a61d5ba0f266d7caeaa}{g\_\-var}, \hyperlink{classconfig}{config} $\ast$\hyperlink{pars_8cpp_ac300c5dd1553141a19aac3739ab59c78}{g\_\-cfg})
+\hyperlink{classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7}{staticCodeParser} (\hyperlink{classconfig}{config} $\ast$)
 \item 
 \hyperlink{classstaticCodeParser_a21c3a8c803545fe616cf63879ed6e6df}{$\sim$staticCodeParser} ()
 \item 
-bool \hyperlink{classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756}{isNewBB} (ADDRINT insAddr)
+BOOL \hyperlink{classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09}{hasIns} (ADDRINT)
 \item 
-std::string \hyperlink{classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd}{getBrIns} (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken)
+\hyperlink{classstInstruction}{stInstruction} $\ast$ \hyperlink{classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc}{getInsObj} (ADDRINT)
 \item 
-std::string \hyperlink{classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b}{getMemIns} (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr)
+BOOL \hyperlink{classstaticCodeParser_a4a3dc378e8a2c4cb40217fd8a8bcd06c}{isNewBB} (ADDRINT)
 \item 
-std::string \hyperlink{classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518}{getIns} (ADDRINT insAddr)
+BOOL \hyperlink{classstaticCodeParser_a0d7e885fd3f9057bac42935d738dfaff}{BBhasHeader} (ADDRINT)
 \item 
-std::string \hyperlink{classstaticCodeParser_a9041ba47fb240605dbffac8546931d19}{getBBheader} (ADDRINT bbAddr)
+string \hyperlink{classstaticCodeParser_a04ea5c52890f4896030198b971849dff}{getBB\_\-top} (ADDRINT)
 \item 
-BOOL \hyperlink{classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee}{BBhasHeader} (ADDRINT bbAddr)
+string \hyperlink{classstaticCodeParser_a5d0490c503b1b8dfd8f99c7776af44fe}{getBBheader} (ADDRINT)
 \item 
-std::string \hyperlink{classstaticCodeParser_aea51c05ad3592ff1a56eb560c27ac9c5}{getBB\_\-top} (ADDRINT bbAddr)
+string \hyperlink{classstaticCodeParser_ace820cefde65b7acbb5364a2318407d8}{getBB\_\-bottom} ()
 \item 
-std::string \hyperlink{classstaticCodeParser_a4f97fe1c21b37d063ae129b5895f63c1}{getBB\_\-bottom} ()
+list$<$ \hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} $>$ \& \hyperlink{classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18}{getBBinsList} (ADDRINT)
 \item 
-bool \hyperlink{classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92}{isInsIn\_\-insMap} (ADDRINT insAddr)
+bool \hyperlink{classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52}{hasStaticBB} (ADDRINT)
 \item 
-\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c}{getInsObj} (ADDRINT insAddr)
+BOOL \hyperlink{classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03}{bbHasBr} (ADDRINT)
 \item 
-void \hyperlink{classstaticCodeParser_ad5a50456d0150c4ef57d7f3c946c6d8a}{getRegisters} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} insAddr, string registers)
+ADDRINT \hyperlink{classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985}{getBBbr} (ADDRINT)
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef}{
+\hypertarget{classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7}{
 \index{staticCodeParser@{staticCodeParser}!staticCodeParser@{staticCodeParser}}
 \index{staticCodeParser@{staticCodeParser}!staticCodeParser@{staticCodeParser}}
 \subsubsection[{staticCodeParser}]{\setlength{\rightskip}{0pt plus 5cm}staticCodeParser::staticCodeParser (
 \begin{DoxyParamCaption}
-\item[{{\bf g\_\-variable} $\ast$}]{g\_\-var, }
 \item[{{\bf config} $\ast$}]{g\_\-cfg}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef}
+\label{classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7}
 
 \begin{DoxyCode}
-                                                                   {
-        _g_var = g_var;
+    : s_missing_static_bb_cnt (g_stats.newScalarStat ("staticCodeParser", "s_miss
+      ing_static_bb_cnt", "Number of times static version of a BB not existed.", 0, 
+      NO_PRINT_ZERO))
+{
         _g_cfg = g_cfg;
-        char *program_name = _g_cfg->getProgName();
-        string file = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/outp
-      ut_files/"+string(program_name)+"_obj.s";
-        if ((_inFile  = fopen(file.c_str(), "r")) == NULL) 
-                Assert("Unable to open the input static code file.");
-        if (g_var->g_verbose_level & V_FRONTEND) std::cout << "STATIC CODE FILE: 
-      " << file.c_str() << std::endl;
-        parse();
+    string reg_alloc_mode_s, sch_mode_s;
+        string bench_name = _g_cfg->getProgName ();
+    SCH_MODE sch_mode = _g_cfg->getSchMode ();
+    REG_ALLOC_MODE reg_alloc_mode = _g_cfg->getRegAllocMode ();
+
+    if (sch_mode == NO_LIST_SCH) sch_mode_s = "no_list_sch";
+    else if (sch_mode == LIST_SCH) sch_mode_s = "list_sch";
+    else Assert ("invalid scheduling mode");
+
+    if (reg_alloc_mode == GLOBAL) reg_alloc_mode_s = "global_reg";
+    else if (reg_alloc_mode == LOCAL_GLOBAL) reg_alloc_mode_s = "local_global_reg
+      ";
+    else Assert ("invalid reg allocation mode");
+
+    string in_dir (_g_cfg->getSfilePath ());
+//    string in_file_path = in_dir + "/" + reg_alloc_mode_s + "/" + sch_mode_s + 
+      "/" + string (bench_name) + "_obj.s";
+    string in_file_path = in_dir + "/bb/" + reg_alloc_mode_s + "/" + sch_mode_s +
+       "/" + string (bench_name) + "_50_bbSiz_obj.s";
+        if ( (_inFile  = fopen (in_file_path.c_str (), "r")) == NULL) 
+                Assert ("Unable to open the input static code file.");
+        if (g_var.g_verbose_level & V_FRONTEND) cout << "STATIC CODE FILE: " << i
+      n_file_path.c_str () << endl;
+
+        parse ();
 }
 \end{DoxyCode}
 
@@ -89,14 +105,40 @@ Here is the call graph for this function:
 \label{classstaticCodeParser_a21c3a8c803545fe616cf63879ed6e6df}
 
 \begin{DoxyCode}
-                                    {
-        ;//TODO iterate through the maps and delete objects
+                                     {
+    map<ADDRINT, stInstruction*>::iterator st_ins_it;
+    map<ADDRINT, bbObj*>::iterator bb_it;
+    for (st_ins_it = _insObjMap.begin (); st_ins_it != _insObjMap.end (); st_ins_
+      it++)
+        delete st_ins_it->second;
+    for (bb_it = _bbMap.begin (); bb_it != _bbMap.end (); bb_it++)
+        delete bb_it->second;
 }
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee}{
+\hypertarget{classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03}{
+\index{staticCodeParser@{staticCodeParser}!bbHasBr@{bbHasBr}}
+\index{bbHasBr@{bbHasBr}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{bbHasBr}]{\setlength{\rightskip}{0pt plus 5cm}BOOL staticCodeParser::bbHasBr (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03}
+
+\begin{DoxyCode}
+                                              {
+    return _bbMap[bbAddr]->hasBr;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstaticCodeParser_a0d7e885fd3f9057bac42935d738dfaff}{
 \index{staticCodeParser@{staticCodeParser}!BBhasHeader@{BBhasHeader}}
 \index{BBhasHeader@{BBhasHeader}!staticCodeParser@{staticCodeParser}}
 \subsubsection[{BBhasHeader}]{\setlength{\rightskip}{0pt plus 5cm}BOOL staticCodeParser::BBhasHeader (
@@ -104,155 +146,65 @@ Here is the call graph for this function:
 \item[{ADDRINT}]{bbAddr}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee}
+\label{classstaticCodeParser_a0d7e885fd3f9057bac42935d738dfaff}
 
 \begin{DoxyCode}
-                                                 {
-        Assert(bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first 
-      instruction in BB");
+                                                  {
+        Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first
+       instruction in BB");
         return _bbMap[bbAddr]->bbHasHeader;
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classstaticCodeParser_a4f97fe1c21b37d063ae129b5895f63c1}{
+\hypertarget{classstaticCodeParser_ace820cefde65b7acbb5364a2318407d8}{
 \index{staticCodeParser@{staticCodeParser}!getBB\_\-bottom@{getBB\_\-bottom}}
 \index{getBB\_\-bottom@{getBB\_\-bottom}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getBB\_\-bottom}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getBB\_\-bottom (
+\subsubsection[{getBB\_\-bottom}]{\setlength{\rightskip}{0pt plus 5cm}string staticCodeParser::getBB\_\-bottom (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_a4f97fe1c21b37d063ae129b5895f63c1}
+\label{classstaticCodeParser_ace820cefde65b7acbb5364a2318407d8}
 
 \begin{DoxyCode}
-                                         {
-        string strg = (string("}\n"));
+                                       {
+        string strg = (string ("}\n"));
         return strg;
 }
 \end{DoxyCode}
-\hypertarget{classstaticCodeParser_aea51c05ad3592ff1a56eb560c27ac9c5}{
+\hypertarget{classstaticCodeParser_a04ea5c52890f4896030198b971849dff}{
 \index{staticCodeParser@{staticCodeParser}!getBB\_\-top@{getBB\_\-top}}
 \index{getBB\_\-top@{getBB\_\-top}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getBB\_\-top}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getBB\_\-top (
+\subsubsection[{getBB\_\-top}]{\setlength{\rightskip}{0pt plus 5cm}string staticCodeParser::getBB\_\-top (
 \begin{DoxyParamCaption}
 \item[{ADDRINT}]{bbAddr}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_aea51c05ad3592ff1a56eb560c27ac9c5}
-
-\begin{DoxyCode}
-                                                    {
-        Assert(bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first 
-      instruction in BB");
-        std::stringstream ss;
-        ss << bbAddr;
-        string strg = (string("{,") + ss.str() + string(",\n")); //TODO add a com
-      ma at the end of line
-        return strg;
-}
-\end{DoxyCode}
-\hypertarget{classstaticCodeParser_a9041ba47fb240605dbffac8546931d19}{
-\index{staticCodeParser@{staticCodeParser}!getBBheader@{getBBheader}}
-\index{getBBheader@{getBBheader}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getBBheader}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getBBheader (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{bbAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_a9041ba47fb240605dbffac8546931d19}
-
-\begin{DoxyCode}
-                                                      {
-        Assert(bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first 
-      instruction in BB");
-        std::stringstream ss;
-        ss << _bbMap[bbAddr]->bbHeader;
-        string strg = (string("H,") + ss.str() + string(",\n"));
-        return strg;
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd}{
-\index{staticCodeParser@{staticCodeParser}!getBrIns@{getBrIns}}
-\index{getBrIns@{getBrIns}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getBrIns}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getBrIns (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{insAddr, }
-\item[{BOOL}]{hasFT, }
-\item[{ADDRINT}]{tgAddr, }
-\item[{ADDRINT}]{ftAddr, }
-\item[{BOOL}]{isTaken}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd}
-
-\begin{DoxyCode}
-                                                                                 
-                                   {
-        Assert(insAddr != 0);
-        std::stringstream ss;
-        if (_insMap.find(insAddr) != _insMap.end()) {
-                char insType = _insMap[insAddr]->insType[0];
-                if (insType == 'j' || insType == 'c' || insType == 'b' || insType
-       == 'r') {
-                        Assert(tgAddr != 0 && "invalid branch dst address value."
-      );
-                        ss << "B" << "," << insAddr << "," << isTaken  << "," << 
-      tgAddr << "," << _insMap[insAddr]->registers;
-                } else {
-                        //Assert(true == false && "Unrecognized instruction type 
-      - expecting a branch instruction");
-                        ss << "MILAD";
-                }
-        } else {
-                Assert(true == false && "Didn't find the instruction stream");
-        }
-        string ins_str = (ss.str() + string("\n"));
-        return ins_str;
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518}{
-\index{staticCodeParser@{staticCodeParser}!getIns@{getIns}}
-\index{getIns@{getIns}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getIns}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getIns (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{insAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518}
+\label{classstaticCodeParser_a04ea5c52890f4896030198b971849dff}
 
 \begin{DoxyCode}
                                                   {
-        Assert(insAddr != 0);
-        std::stringstream ss;
-        if (_insMap.find(insAddr) != _insMap.end()) {
-                char insType = _insMap[insAddr]->insType[0];
-                if (insType == 'o') { //A, D, F for ins->getType()
-                        ss << "A" << "," << insAddr << "," << _insMap[insAddr]->r
-      egisters;
-                } else {
-                        //Assert(true == false && "Unrecognized instruction type 
-      - expecting a ALU instruction");
-                        ss << "MILAD";
-                }
-        } else {
-                Assert(true == false && "Didn't find the instruction stream");
-        }
-        string ins_str = (ss.str() + string("\n"));
-        return ins_str;
+        Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first
+       instruction in BB");
+        stringstream ss;
+        ss << bbAddr;
+        string strg = (string ("{,") + ss.str () + string (",\n")); //TODO add a 
+      comma at the end of line
+        return strg;
+}
+\end{DoxyCode}
+\hypertarget{classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985}{
+\index{staticCodeParser@{staticCodeParser}!getBBbr@{getBBbr}}
+\index{getBBbr@{getBBbr}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{getBBbr}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT staticCodeParser::getBBbr (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985}
+
+\begin{DoxyCode}
+                                                 {
+    return _bbMap[bbAddr]->brAddr;
 }
 \end{DoxyCode}
 
@@ -260,19 +212,62 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c}{
+\hypertarget{classstaticCodeParser_a5d0490c503b1b8dfd8f99c7776af44fe}{
+\index{staticCodeParser@{staticCodeParser}!getBBheader@{getBBheader}}
+\index{getBBheader@{getBBheader}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{getBBheader}]{\setlength{\rightskip}{0pt plus 5cm}string staticCodeParser::getBBheader (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_a5d0490c503b1b8dfd8f99c7776af44fe}
+
+\begin{DoxyCode}
+                                                    {
+        Assert (bbAddr == _bbMap[bbAddr]->bbAddr && "Instruction is not the first
+       instruction in BB");
+        stringstream ss;
+        ss << _bbMap[bbAddr]->bbHeader;
+        string strg = (string ("H,") + ss.str () + string (",\n"));
+        return strg;
+}
+\end{DoxyCode}
+\hypertarget{classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18}{
+\index{staticCodeParser@{staticCodeParser}!getBBinsList@{getBBinsList}}
+\index{getBBinsList@{getBBinsList}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{getBBinsList}]{\setlength{\rightskip}{0pt plus 5cm}list$<$ {\bf ADDRS} $>$ \& staticCodeParser::getBBinsList (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbID}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18}
+
+\begin{DoxyCode}
+                                                         {
+    if (_bbMap.find(bbID) == _bbMap.end()) {
+        s_missing_static_bb_cnt++;
+    }
+    return _bbMap[bbID]->bbInsList;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc}{
 \index{staticCodeParser@{staticCodeParser}!getInsObj@{getInsObj}}
 \index{getInsObj@{getInsObj}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getInsObj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction} $\ast$ staticCodeParser::getInsObj (
+\subsubsection[{getInsObj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stInstruction} $\ast$ staticCodeParser::getInsObj (
 \begin{DoxyParamCaption}
 \item[{ADDRINT}]{insAddr}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c}
+\label{classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc}
 
 \begin{DoxyCode}
                                                            {
-    Assert(_insObjMap.find(insAddr) != _insObjMap.end());
+    Assert (_insObjMap.find (insAddr) != _insObjMap.end ());
         return _insObjMap[insAddr];
 }
 \end{DoxyCode}
@@ -281,117 +276,20 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b}{
-\index{staticCodeParser@{staticCodeParser}!getMemIns@{getMemIns}}
-\index{getMemIns@{getMemIns}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getMemIns}]{\setlength{\rightskip}{0pt plus 5cm}std::string staticCodeParser::getMemIns (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{insAddr, }
-\item[{ADDRINT}]{memAccessSize, }
-\item[{ADDRINT}]{memAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b}
-
-\begin{DoxyCode}
-                                                                                 
-                  {
-        Assert(insAddr != 0);
-        std::stringstream ss;
-        if (_insMap.find(insAddr) != _insMap.end()) {
-                char insType = _insMap[insAddr]->insType[0];
-                //if (insType == 'W' || insType == 'R') {
-                        Assert(memAddr != 0 && "invalid memory address value.");
-                        //Assert(_insMap[insAddr]->memAccessSize == memAccessSize
-       && "Unexpected memory access size");
-                        ss << insType << "," << memAddr << "," << insAddr << "," 
-      << memAccessSize << "," << _insMap[insAddr]->registers;
-                //} else {
-                        //Assert(true == false && "Unrecognized instruction type 
-      - expecting a memory instruction");
-                        ss << "MILAD";
-                //}
-        } else {
-                Assert(true == false && "Didn't find the instruction stream");
-        }
-        string ins_str = (ss.str() + string("\n"));
-        return ins_str;
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classstaticCodeParser_ad5a50456d0150c4ef57d7f3c946c6d8a}{
-\index{staticCodeParser@{staticCodeParser}!getRegisters@{getRegisters}}
-\index{getRegisters@{getRegisters}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{getRegisters}]{\setlength{\rightskip}{0pt plus 5cm}void staticCodeParser::getRegisters (
-\begin{DoxyParamCaption}
-\item[{{\bf ADDRS}}]{insAddr, }
-\item[{string}]{registers}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_ad5a50456d0150c4ef57d7f3c946c6d8a}
-
-\begin{DoxyCode}
-                                                                   {
-    Assert (_insObjMap.find(insAddr) != _insObjMap.end());
-    dynInstruction* ins = _insObjMap[insAddr];
-    int scanStatus;
-    while (true) {
-        AR reg;
-        int typeTemp;
-        char s[100];
-        scanStatus = sscanf (registers.c_str(), "%u#%d,%s", &reg, &typeTemp, s);
-        if (scanStatus != 3) break;
-        Assert(typeTemp == 1 || typeTemp == 2);
-        registers = string(s);
-        AXES_TYPE reg_axes_type = (typeTemp == 1 ? READ : WRITE);
-        ins->setAR (reg, reg_axes_type);
-    }
-}
-\end{DoxyCode}
-\hypertarget{classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92}{
-\index{staticCodeParser@{staticCodeParser}!isInsIn\_\-insMap@{isInsIn\_\-insMap}}
-\index{isInsIn\_\-insMap@{isInsIn\_\-insMap}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{isInsIn\_\-insMap}]{\setlength{\rightskip}{0pt plus 5cm}bool staticCodeParser::isInsIn\_\-insMap (
+\hypertarget{classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09}{
+\index{staticCodeParser@{staticCodeParser}!hasIns@{hasIns}}
+\index{hasIns@{hasIns}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{hasIns}]{\setlength{\rightskip}{0pt plus 5cm}BOOL staticCodeParser::hasIns (
 \begin{DoxyParamCaption}
 \item[{ADDRINT}]{insAddr}
 \end{DoxyParamCaption}
 )}}
-\label{classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92}
-
-\begin{DoxyCode}
-                                                     {
-        Assert(insAddr != 0);
-        std::stringstream ss;
-        if (_insMap.find(insAddr) != _insMap.end()) {
-                return true;
-        } else {
-                return false;
-        }
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756}{
-\index{staticCodeParser@{staticCodeParser}!isNewBB@{isNewBB}}
-\index{isNewBB@{isNewBB}!staticCodeParser@{staticCodeParser}}
-\subsubsection[{isNewBB}]{\setlength{\rightskip}{0pt plus 5cm}bool staticCodeParser::isNewBB (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{insAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756}
+\label{classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09}
 
 \begin{DoxyCode}
                                               {
-        bool newBB = (_bbMap.find(insAddr) != _bbMap.end() ? true : false);
-        return newBB;
+        Assert (insAddr != 0);
+        return (_insObjMap.find (insAddr) != _insObjMap.end ()) ? true : false;
 }
 \end{DoxyCode}
 
@@ -399,6 +297,42 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52}{
+\index{staticCodeParser@{staticCodeParser}!hasStaticBB@{hasStaticBB}}
+\index{hasStaticBB@{hasStaticBB}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{hasStaticBB}]{\setlength{\rightskip}{0pt plus 5cm}bool staticCodeParser::hasStaticBB (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{bbID}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52}
+
+\begin{DoxyCode}
+                                                {
+    return (_bbMap.find(bbID) != _bbMap.end());
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstaticCodeParser_a4a3dc378e8a2c4cb40217fd8a8bcd06c}{
+\index{staticCodeParser@{staticCodeParser}!isNewBB@{isNewBB}}
+\index{isNewBB@{isNewBB}!staticCodeParser@{staticCodeParser}}
+\subsubsection[{isNewBB}]{\setlength{\rightskip}{0pt plus 5cm}BOOL staticCodeParser::isNewBB (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{insAddr}
+\end{DoxyParamCaption}
+)}}
+\label{classstaticCodeParser_a4a3dc378e8a2c4cb40217fd8a8bcd06c}
+
+\begin{DoxyCode}
+                                               {
+        bool newBB = (_bbMap.find (insAddr) != _bbMap.end () ? true : false);
+        return newBB;
+}
+\end{DoxyCode}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

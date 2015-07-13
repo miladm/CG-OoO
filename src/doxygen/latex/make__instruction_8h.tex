@@ -7,6 +7,10 @@
 {\ttfamily \#include $<$set$>$}\par
 {\ttfamily \#include $<$map$>$}\par
 {\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$sstream$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
 {\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}config.h\char`\"{}}\par
 Include dependency graph for make\_\-instruction.h:
@@ -14,25 +18,26 @@ This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{make__instruction_8h_a309ed69a3b3366fd30619da2256d05ea}{parse\_\-instruction} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, std::set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $\ast$brDstSet, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$brBiasMap, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$bpAccuracyMap, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$upldMap, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $>$ \&memRdAddrMap, std::map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $>$ \&memWrAddrMap, std::string $\ast$program\_\-name)
+void \hyperlink{make__instruction_8h_ade9ced15fecee85a6283b189233a895b}{parse\_\-instruction} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$, std::set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $\ast$, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $>$ \&, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $>$ \&, std::string $\ast$, \hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}{CLUSTER\_\-MODE})
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{make__instruction_8h_a309ed69a3b3366fd30619da2256d05ea}{
+\hypertarget{make__instruction_8h_ade9ced15fecee85a6283b189233a895b}{
 \index{make\_\-instruction.h@{make\_\-instruction.h}!parse\_\-instruction@{parse\_\-instruction}}
 \index{parse\_\-instruction@{parse\_\-instruction}!make_instruction.h@{make\_\-instruction.h}}
 \subsubsection[{parse\_\-instruction}]{\setlength{\rightskip}{0pt plus 5cm}void parse\_\-instruction (
 \begin{DoxyParamCaption}
-\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{insList, }
-\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
-\item[{std::set$<$ {\bf ADDR} $>$ $\ast$}]{brDstSet, }
-\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{brBiasMap, }
-\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{bpAccuracyMap, }
-\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{upldMap, }
-\item[{std::map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{memRdAddrMap, }
-\item[{std::map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{memWrAddrMap, }
-\item[{std::string $\ast$}]{program\_\-name}
+\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{, }
+\item[{std::set$<$ {\bf ADDR} $>$ $\ast$}]{, }
+\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{, }
+\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{, }
+\item[{std::map$<$ {\bf ADDR}, double $>$ $\ast$}]{, }
+\item[{std::map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{, }
+\item[{std::map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{, }
+\item[{std::string $\ast$}]{, }
+\item[{{\bf CLUSTER\_\-MODE}}]{}
 \end{DoxyParamCaption}
 )}}
-\label{make__instruction_8h_a309ed69a3b3366fd30619da2256d05ea}
+\label{make__instruction_8h_ade9ced15fecee85a6283b189233a895b}

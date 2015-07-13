@@ -64,8 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/make_basicblock.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;make_basicblock.h&quot;</code><br/>
-<code>#include &quot;listSchedule.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="make__basicblock_8h_source.html">make_basicblock.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for make_basicblock.cpp:</div>
 <div class="dyncontent">
@@ -76,10 +75,10 @@ Include dependency graph for make_basicblock.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__basicblock_8cpp.html#a765669fc41b8885a39c1ec0df0df96ca">make_basicblock</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *brDstSet, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__basicblock_8cpp.html#adfa5d9160d675203db3e663d1f2f3849">make_basicblock</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *brDstSet, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, <a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> cluster_size)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a765669fc41b8885a39c1ec0df0df96ca"></a><!-- doxytag: member="make_basicblock.cpp::make_basicblock" ref="a765669fc41b8885a39c1ec0df0df96ca" args="(List&lt; instruction * &gt; *insList, List&lt; basicblock * &gt; *bbList, map&lt; int, variable * &gt; &amp;varList, set&lt; ADDR &gt; *brDstSet, map&lt; ADDR, basicblock * &gt; *bbMap, map&lt; ADDR, instruction * &gt; *insAddrMap)" -->
+<a class="anchor" id="adfa5d9160d675203db3e663d1f2f3849"></a><!-- doxytag: member="make_basicblock.cpp::make_basicblock" ref="adfa5d9160d675203db3e663d1f2f3849" args="(List&lt; instruction * &gt; *insList, List&lt; basicblock * &gt; *bbList, map&lt; int, variable * &gt; &amp;varList, set&lt; ADDR &gt; *brDstSet, map&lt; ADDR, basicblock * &gt; *bbMap, map&lt; ADDR, instruction * &gt; *insAddrMap, LENGTH cluster_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -104,20 +103,26 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *&#160;</td>
+          <td class="paramtype">set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *&#160;</td>
           <td class="paramname"><em>brDstSet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
           <td class="paramname"><em>bbMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>insAddrMap</em>&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>insAddrMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
+          <td class="paramname"><em>cluster_size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -127,154 +132,229 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                              {
-        <span class="comment">// Construct BB&#39;s</span>
+<div class="fragment"><pre class="fragment">                                           {
+        <span class="comment">// CONSTRUCT BB&#39;S</span>
         set&lt;long int&gt; use_set, def_set, diff_set;
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classinstruction.html">instruction</a>* ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <span class="comment">//Construct the destination instruction address set (stat info)</span>
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
-                                use_set.insert(ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>));
-                        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>)
-                                def_set.insert(ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>));
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classinstruction.html">instruction</a>* ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <span class="comment">//CONSTRUCT THE DESTINATION INSTRUCTION ADDRESS SET  (STAT INFO)</span>
+                <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> (); j++) {
+                        <span class="keywordflow">if</span>  (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+                                use_set.insert (ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j));
+                        <span class="keywordflow">else</span> <span class="keywordflow">if</span>  (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>)
+                                def_set.insert (ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j));
                 }
-                <span class="comment">//Construct new Basicblock or add ins to an existing one </span>
-                <span class="comment">//printf(&quot;Type: %c\n&quot;, insList-&gt;Nth(i)-&gt;getType());</span>
-                <span class="keywordflow">if</span> (i == 0 ||
-                    brDstSet-&gt;find(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) != brDstSet-&gt;end()) {
+                <span class="comment">//CONSTRUCT NEW BASICBLOCK OR ADD INS TO AN EXISTING ONE </span>
+                <span class="comment">//printf (&quot;Type: %c\n&quot;, insList-&gt;Nth (i)-&gt;getType ());</span>
+                <span class="keywordflow">if</span>  (i == 0 ||
+                    brDstSet-&gt;find (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ()) != brDstSet-&gt;end ()) {
                         <a class="code" href="classbasicblock.html">basicblock</a>* newBB;
-                        <span class="keywordflow">if</span> (i == 0 || bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1)-&gt;getBbSize() &gt; 0) {
+                        <span class="keywordflow">if</span>  (i == 0 || bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ()-&gt;getBbSize () &gt; 0) {
                                 newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
-                                newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-                                bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(newBB);
+                                newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                                bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
                         } <span class="keywordflow">else</span> {
-                                <span class="comment">//avoid making empty BB&#39;s</span>
-                                newBB = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1);
+                                <span class="comment">//AVOID MAKING EMPTY BB&#39;S</span>
+                                newBB = bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
                         }
-                        newBB-&gt;<a class="code" href="classbasicblock.html#a17a204547c41f4ba744ac49b1f375477">addIns</a>(ins);
-                        bbMap-&gt;insert(pair &lt;ADDR, basicblock*&gt;(newBB-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>(), newBB));
-                        <span class="comment">//The case with a single branch/jump/call instruction in BB (closing BB)</span>
-                        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;r&#39;</span>) {
-                                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1)-&gt;setBBbrHeader(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>());
+                        newBB-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a> (ins, <a class="code" href="basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0">BR_DST</a>);
+                        bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (newBB-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), newBB));
+                        <span class="comment">//THE CASE WITH A SINGLE BRANCH/JUMP/CALL INSTRUCTION IN BB (CLOSING BB)</span>
+                        <span class="keywordflow">if</span>  (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;r&#39;</span> || 
+                 ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;c&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;s&#39;</span>) {
+                            <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
+                                bb-&gt;<a class="code" href="classbasicblock.html#a08a435779d5c69e560f81d76511033f8">setBBbrHeader</a> (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ());
                                 newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
-                                newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-                                bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(newBB);
+                                newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                                bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((!ins-&gt;<a class="code" href="classinstruction.html#a2d7b01a0443263782d84906eb8c35ccc">hasFallThru</a> () &amp;&amp; !ins-&gt;<a class="code" href="classinstruction.html#ac0f0a724c1207fd9c2aad8897f3c9842">hasDst</a> ()) || (newBB-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () &gt;= cluster_size)) {
+                newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
+                newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+                <span class="keywordflow">if</span>  (newBB-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                    bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (newBB-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), newBB));
+                }
+            }
+                        <span class="comment">//printf (&quot;%llx, %llx\n&quot;, ins-&gt;getInsAddr (), newBB-&gt;getID ());</span>
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span>  (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;r&#39;</span> || 
+                    ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;c&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;s&#39;</span>) {
+                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
+                        bb-&gt;<a class="code" href="classbasicblock.html#a08a435779d5c69e560f81d76511033f8">setBBbrHeader</a> (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ());
+                        bb-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a> (ins, <a class="code" href="basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0">NO_BR_DST</a>);
+                        <span class="keywordflow">if</span>  (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                                bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), bb));
                         }
-                        <span class="comment">//printf(&quot;%llx, %llx\n&quot;, ins-&gt;getInsAddr(), newBB-&gt;getID());</span>
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;r&#39;</span>) {
-                        bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1)-&gt;setBBbrHeader(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>());
-                        bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1)-&gt;<a class="code" href="bkEnd_8cpp.html#a699e911f02cc068558e37f3496d086ce">addIns</a>(ins);
                         <a class="code" href="classbasicblock.html">basicblock</a>* newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
-                        newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-                        bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(newBB);
-                        <span class="comment">//printf(&quot;%llx\n&quot;, ins-&gt;getInsAddr());</span>
+                        newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                        bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+                        <span class="comment">//printf (&quot;%llx\n&quot;, ins-&gt;getInsAddr ());</span>
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!ins-&gt;<a class="code" href="classinstruction.html#a2d7b01a0443263782d84906eb8c35ccc">hasFallThru</a> () &amp;&amp; !ins-&gt;<a class="code" href="classinstruction.html#ac0f0a724c1207fd9c2aad8897f3c9842">hasDst</a> ()) {
+                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
+                        bb-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a> (ins, <a class="code" href="basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0">NO_BR_DST</a>);
+                        <span class="keywordflow">if</span>  (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                                bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), bb));
+                        }
+                        <a class="code" href="classbasicblock.html">basicblock</a>* newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
+                        newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                        bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+                        <span class="comment">//printf (&quot;%llx\n&quot;, ins-&gt;getInsAddr ());</span>
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a>()-&gt;getBbSize () &gt;= cluster_size) {
+                        <a class="code" href="classbasicblock.html">basicblock</a>* newBB = <span class="keyword">new</span> <a class="code" href="classbasicblock.html">basicblock</a>;
+                        newBB-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a> (bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+                        bbList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+                        newBB-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a> (ins, <a class="code" href="basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0">BR_DST</a>);
+                        <span class="keywordflow">if</span>  (newBB-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                                bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (newBB-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), newBB));
+                        }
+                        <span class="comment">//printf (&quot;%llx\n&quot;, ins-&gt;getInsAddr ());</span>
                 } <span class="keywordflow">else</span> {
-                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1);
-                        bb-&gt;<a class="code" href="classbasicblock.html#a17a204547c41f4ba744ac49b1f375477">addIns</a>(ins);
-                        <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a>() == 1) {
-                                bbMap-&gt;insert(pair &lt;ADDR, basicblock*&gt;(bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>(), bb));
-                                <span class="comment">//printf(&quot;%llx, %llx\n&quot;, ins-&gt;getInsAddr(), bb-&gt;getID());</span>
+                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
+                        bb-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a> (ins, <a class="code" href="basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0">NO_BR_DST</a>);
+                        <span class="keywordflow">if</span>  (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                                bbMap-&gt;insert (pair &lt;ADDR, basicblock*&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (), bb));
+                                <span class="comment">//printf (&quot;%llx, %llx\n&quot;, ins-&gt;getInsAddr (), bb-&gt;getID ());</span>
                         } <span class="comment">//else</span>
-                                <span class="comment">//printf(&quot;%llx\n&quot;, ins-&gt;getInsAddr());</span>
+                                <span class="comment">//printf (&quot;%llx\n&quot;, ins-&gt;getInsAddr ());</span>
                 }
         }
-        printf(<span class="stringliteral">&quot;\tNum BB before Dead BB Elimination: %d\n&quot;</span>,bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-        <span class="comment">//get rid of empty basicblocks (shouldn&#39;t find any empty ones - just precaution)</span>
+
+        <span class="comment">/* GET RID OF EMPTY BASICBLOCKS  (SHOULDN&#39;T FIND ANY EMPTY ONES - JUST PRECAUTION) */</span>
+        printf (<span class="stringliteral">&quot;\tNum BB before Dead BB Elimination: %d\n&quot;</span>,bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
         set&lt;ADDR&gt; toRemoveInsSet;
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1; i &gt;= 0; i--) {
-                <span class="keywordflow">if</span> (bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getBbSize() == 0) {
-                        <span class="comment">// delete bbList-&gt;Nth(i);</span>
-                        bbList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i);
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getBbSize() == 1) {
-                        <a class="code" href="classinstruction.html">instruction</a>* ins = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getLastIns();
-                        <span class="keywordtype">string</span> str(ins-&gt;<a class="code" href="classinstruction.html#a47d6ca18417d4f185495eb9be2844f07">getOpCode</a>());
-                        <span class="keywordflow">if</span> (str.compare(<span class="stringliteral">&quot;#NOP\n&quot;</span>) == 0) {
-                                toRemoveInsSet.insert(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>());
-                                <span class="comment">// delete bbList-&gt;Nth(i);</span>
-                                bbList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i);
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1; i &gt;= 0; i--) {
+        <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <span class="keywordflow">if</span>  (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 0) {
+                        <span class="comment">// delete bbList-&gt;Nth (i);</span>
+                        bbList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i);
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span>  (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () == 1) {
+                        <a class="code" href="classinstruction.html">instruction</a>* ins = bb-&gt;<a class="code" href="classbasicblock.html#a99fb16d14456bb07b0033a0489ced872">getLastIns</a> ();
+                        <span class="keywordtype">string</span> str (ins-&gt;<a class="code" href="classinstruction.html#a47d6ca18417d4f185495eb9be2844f07">getOpCode</a> ());
+                        <span class="keywordflow">if</span>  (str.compare (<span class="stringliteral">&quot;#NOP\n&quot;</span>) == 0) {
+                                toRemoveInsSet.insert (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ());
+                                <span class="comment">// delete bbList-&gt;Nth (i);</span>
+                                bbList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i);
                         }
                 }
         }
-        printf(<span class="stringliteral">&quot;\tNum BB after Dead BB Elimination: %d\n&quot;</span>,bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-        <span class="comment">//Remove NOP instructions from insList</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1; i &gt;= 0; i--) {
-                <a class="code" href="classinstruction.html">instruction</a>* ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <span class="keywordflow">if</span> (toRemoveInsSet.find(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) != toRemoveInsSet.end()) {
-                        <span class="comment">// delete insList-&gt;Nth(i);</span>
-                        insList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i);
-                        insAddrMap-&gt;erase(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>());
+        printf (<span class="stringliteral">&quot;\tNum BB after Dead BB Elimination: %d\n&quot;</span>,bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+
+        <span class="comment">/* IF A BB DOES NOT YET HAVE AN ID, ASSIGN IT AN ID */</span>
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1; i &gt;= 0; i--) {
+        <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+        bb-&gt;<a class="code" href="classbasicblock.html#ae4243cd796c3c03447b58d6fdd2743a5">forceAssignBBID</a> ();
+    }
+
+        <span class="comment">/* REMOVE DEAD NOP INSTRUCTIONS FROM INSLIST */</span>
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1; i &gt;= 0; i--) {
+                <a class="code" href="classinstruction.html">instruction</a>* ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <span class="keywordflow">if</span>  (toRemoveInsSet.find (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ()) != toRemoveInsSet.end ()) {
+                        insList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i);
+                        insAddrMap-&gt;erase (ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ());
+            <span class="comment">// delete ins;</span>
                 }
         }
-        <span class="comment">// Setup BB Dependencies</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a>() &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Invalid BB Size.&quot;</span>);
-                <a class="code" href="classinstruction.html">instruction</a>* ins = bb-&gt;<a class="code" href="classbasicblock.html#a99fb16d14456bb07b0033a0489ced872">getLastIns</a>();
-                <span class="keywordtype">char</span> <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> = ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>();
-                <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;j&#39;</span>) { <span class="comment">//unconditional jump </span>
-                        <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> insDst = bb-&gt;<a class="code" href="classbasicblock.html#a5c04fc7ec170aa4d395928b7c4ca0392">getLastInsDst</a>();
+
+        <span class="comment">/* SETUP BB DEPENDENCIES */</span>
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Invalid BB Size.&quot;</span>);
+                <a class="code" href="classinstruction.html">instruction</a>* ins = bb-&gt;<a class="code" href="classbasicblock.html#a99fb16d14456bb07b0033a0489ced872">getLastIns</a> ();
+                <span class="keywordtype">char</span> <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a> = ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> ();
+                <span class="keywordflow">if</span>  (type == <span class="charliteral">&#39;j&#39;</span>) { <span class="comment">//unconditional jump </span>
+                        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insDst = bb-&gt;<a class="code" href="classbasicblock.html#a5c04fc7ec170aa4d395928b7c4ca0392">getLastInsDst</a> ();
                         <a class="code" href="classbasicblock.html">basicblock</a>* bbDst;
-                        <span class="keywordflow">if</span> (bbMap-&gt;find(insDst) != bbMap-&gt;end()) {
-                                bbDst = (*bbMap)[insDst];
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(bbDst);
-                                bb-&gt;<a class="code" href="classbasicblock.html#af0d0269f9c9a3b52062170c667f436b2">setTakenTarget</a>(bbDst);
+                        <span class="keywordflow">if</span>  (bbMap-&gt;find (insDst) != bbMap-&gt;end ()) {
+                <span class="keywordflow">if</span> (ins-&gt;hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a> (bbDst);
+                    bb-&gt;<a class="code" href="classbasicblock.html#a0fba29b7f9e057f174698cfb0564873e">setTakenTarget</a> (bbDst);
+                }
                         } <span class="keywordflow">else</span> {
-                                printf(<span class="stringliteral">&quot;\tERROR: Didn&#39;t find destination bb, %llx (%s, line: %d)\n&quot;</span>, insDst , __FILE__, __LINE__);
-                                <span class="comment">//exit(1);</span>
+                                printf (<span class="stringliteral">&quot;\t\tERROR: Didn&#39;t find destination bb for jump, %llx  (%s, line: %d)\n&quot;</span>, insDst , __FILE__, __LINE__);
+                                <span class="comment">//exit (1);</span>
                                 <span class="keywordflow">continue</span>;
                         }
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;o&#39;</span> || type == <span class="charliteral">&#39;M&#39;</span>) { <span class="comment">//non-jump</span>
-                        <span class="keywordflow">if</span> (i+1 &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()) {                              
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
-                                bb-&gt;<a class="code" href="classbasicblock.html#ad97dd41248a01abbf1baa313845ff526">setFallThrough</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
-                        }
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;b&#39;</span>) { <span class="comment">//conditional jump</span>
-                        <span class="keywordflow">if</span> (i+1 &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()) {
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
-                                bb-&gt;<a class="code" href="classbasicblock.html#ad97dd41248a01abbf1baa313845ff526">setFallThrough</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
-                        }
-                        <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> insDst = bb-&gt;<a class="code" href="classbasicblock.html#a5c04fc7ec170aa4d395928b7c4ca0392">getLastInsDst</a>();
-                        <a class="code" href="classbasicblock.html">basicblock</a>* bbDst;
-                        <span class="keywordflow">if</span> (bbMap-&gt;find(insDst) != bbMap-&gt;end()) {
-                                bbDst = (*bbMap)[insDst];
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(bbDst);
-                                bb-&gt;<a class="code" href="classbasicblock.html#af0d0269f9c9a3b52062170c667f436b2">setTakenTarget</a>(bbDst);
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;n&#39;</span> || type == <span class="charliteral">&#39;o&#39;</span> || type == <span class="charliteral">&#39;M&#39;</span> || type == <span class="charliteral">&#39;c&#39;</span>) {
+                        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insFallThru = bb-&gt;<a class="code" href="classbasicblock.html#afe5fbc2aaf3764ecffed166a014a9016">getLastInsFallThru</a> ();
+                        <a class="code" href="classbasicblock.html">basicblock</a>* bbFallThru;
+                        <span class="keywordflow">if</span>  (bbMap-&gt;find (insFallThru) != bbMap-&gt;end ()) {
+                <span class="keywordflow">if</span> (ins-&gt;hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a> (bbFallThru);
+                    bb-&gt;<a class="code" href="classbasicblock.html#acf97e4fe55cfcd74ac0b0d6532e2e291">setFallThrough</a> (bbFallThru);
+                }
                         } <span class="keywordflow">else</span> {
-                                printf(<span class="stringliteral">&quot;\tERROR: Didn&#39;t find destination bb, %llx (%s, line: %d)\n&quot;</span>, insDst , __FILE__, __LINE__);
-                                <span class="comment">//exit(1);</span>
+                                printf (<span class="stringliteral">&quot;\t\tERROR: Didn&#39;t find destination bb for non-br op, %llx  (%s, line: %d)\n&quot;</span>, insFallThru, __FILE__, __LINE__);
+                                <span class="comment">//exit (1);</span>
                                 <span class="keywordflow">continue</span>;
                         }
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;c&#39;</span>) { <span class="comment">//func call</span>
-                        <span class="comment">// Assumptions on function calls </span>
-                        <span class="comment">// Call does not terminate BB&#39;s</span>
-                        <span class="comment">// The CFG links to function called is not established</span>
-                        <span class="comment">// Call does not disturb the CFG flow and dependency b/w BB&#39;s</span>
-                        <span class="keywordflow">if</span> (i+1 &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()) {                              
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
-                                bb-&gt;<a class="code" href="classbasicblock.html#ad97dd41248a01abbf1baa313845ff526">setFallThrough</a>(bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1));
+                } <span class="keywordflow">else</span> <span class="keywordflow">if</span>  (type == <span class="charliteral">&#39;b&#39;</span>) { <span class="comment">//conditional jump</span>
+                        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insFallThru = bb-&gt;<a class="code" href="classbasicblock.html#afe5fbc2aaf3764ecffed166a014a9016">getLastInsFallThru</a> ();
+                        <a class="code" href="classbasicblock.html">basicblock</a>* bbFallThru;
+                        <span class="keywordflow">if</span>  (bbMap-&gt;find (insFallThru) != bbMap-&gt;end ()) {
+                <span class="keywordflow">if</span> (ins-&gt;hasFallThru ()) {
+                    bbFallThru =  (*bbMap)[insFallThru];
+                    bb-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a> (bbFallThru);
+                    bb-&gt;<a class="code" href="classbasicblock.html#acf97e4fe55cfcd74ac0b0d6532e2e291">setFallThrough</a> (bbFallThru);
+                }
+                        } <span class="keywordflow">else</span> {
+                                printf (<span class="stringliteral">&quot;\t\tERROR: Didn&#39;t find fall-thru bb for br, %llx  (%s, line: %d)\n&quot;</span>, insFallThru, __FILE__, __LINE__);
+                                <span class="comment">//exit (1);</span>
+                                <span class="keywordflow">continue</span>;
                         }
-                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="charliteral">&#39;r&#39;</span>) { <span class="comment">//func return</span>
-                        ;<span class="comment">//do nothing on return. must have been the end of function</span>
+
+                        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insDst = bb-&gt;<a class="code" href="classbasicblock.html#a5c04fc7ec170aa4d395928b7c4ca0392">getLastInsDst</a> ();
+                        <a class="code" href="classbasicblock.html">basicblock</a>* bbDst;
+                        <span class="keywordflow">if</span>  (bbMap-&gt;find (insDst) != bbMap-&gt;end ()) {
+                <span class="keywordflow">if</span> (ins-&gt;hasDst ()) {
+                    bbDst =  (*bbMap)[insDst];
+                    bb-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a> (bbDst);
+                    bb-&gt;<a class="code" href="classbasicblock.html#a0fba29b7f9e057f174698cfb0564873e">setTakenTarget</a> (bbDst);
+                }
+                        } <span class="keywordflow">else</span> {
+                                printf (<span class="stringliteral">&quot;\t\tERROR: Didn&#39;t find destination bb for br, %llx  (%s, line: %d)\n&quot;</span>, insDst , __FILE__, __LINE__);
+                                <span class="comment">//exit (1);</span>
+                                <span class="keywordflow">continue</span>;
+                        }
+<span class="comment">//        } else if  (type == &#39;c&#39;) { //func call - TODO this block should be useless - check and remove if possible</span>
+<span class="comment">//            // Assumptions on function calls </span>
+<span class="comment">//            // Call does not terminate BB&#39;s</span>
+<span class="comment">//            // The CFG links to function called is not established</span>
+<span class="comment">//            // Call does not disturb the CFG flow and dependency b/w BB&#39;s</span>
+<span class="comment">//            if  (i+1 &lt; bbList-&gt;NumElements ()) {                              </span>
+<span class="comment">//                bb-&gt;setDescendent (bbList-&gt;Nth (i+1));</span>
+<span class="comment">//                bb-&gt;setFallThrough (bbList-&gt;Nth (i+1));</span>
+<span class="comment">//            }</span>
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>  (type == <span class="charliteral">&#39;s&#39;</span> || type == <span class="charliteral">&#39;r&#39;</span>) {
+                        ;<span class="comment">//do nothing on syscall - no fthru, no destination</span>
                 } <span class="keywordflow">else</span> {
-                        printf(<span class="stringliteral">&quot;Wrong Ins Type: %c\n&quot;</span>, type);
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;WRONG INSTRUTION. Terminating...&quot;</span>);
+                        printf (<span class="stringliteral">&quot;Wrong Ins Type: %c\n&quot;</span>, type);
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>  (0 &amp;&amp; <span class="stringliteral">&quot;WRONG INSTRUTION. Terminating...&quot;</span>);
                 }
-        }       
-        <span class="comment">// Perform List Scheduling on BB</span>
-        <span class="comment">/*for (int i = 0; i &lt; bbList-&gt;NumElements(); i++) {</span>
-<span class="comment">                basicblock* bb = bbList-&gt;Nth(i);</span>
-<span class="comment">                listSchedule(bb); //why does this affect BB structure?</span>
-<span class="comment">        }*/</span>
-        std::set_difference(use_set.begin(), use_set.end(), def_set.begin(), def_set.end(), std::inserter(diff_set, diff_set.begin()));
-        printf(<span class="stringliteral">&quot;\tDiff Set: %d %d %d\n&quot;</span>, def_set.size(), use_set.size(), diff_set.size());
+        }
+        std::set_difference (use_set.begin (), use_set.end (), def_set.begin (), def_set.end (), std::inserter (diff_set, diff_set.begin ()));
+        printf (<span class="stringliteral">&quot;\tDiff Set: %d %d %d\n&quot;</span>, def_set.size (), use_set.size (), diff_set.size ());
+
+    <span class="comment">/* PRINT THE NUMBER OF &quot;LARGE&quot; BB&#39;S */</span>
+<span class="comment">//      for  (int i = 0; i &lt; bbList-&gt;NumElements (); i++) {</span>
+<span class="comment">//              basicblock* bb = bbList-&gt;Nth (i);</span>
+<span class="comment">//        if (bb-&gt;getBbSize () &gt; 30) cout &lt;&lt; &quot;LARGE BB ID: &quot; &lt;&lt; hex &lt;&lt; bb-&gt;getID () &lt;&lt; endl;</span>
+<span class="comment">//    }</span>
+
+    <span class="comment">/* SETSUP BB STATS */</span>
+    <a class="code" href="dependencySetup_8cpp.html#a7c05c8220cddb4275f92c359277516d2">dependencySetup</a> (bbList, insList);
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+<span class="comment">//        bb-&gt;setsupStats ();</span>
+<span class="comment">//        bb-&gt;reportStats ();</span>
+    }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_cgraph.png" border="0" usemap="#make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_cgraph" alt=""/></div>
-<map name="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_cgraph" id="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_cgraph">
+<div class="center"><img src="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_cgraph.png" border="0" usemap="#make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_cgraph" alt=""/></div>
+<map name="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_cgraph" id="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_cgraph">
 </map>
 </div>
 </p>
@@ -282,8 +362,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_icgraph.png" border="0" usemap="#make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_icgraph" alt=""/></div>
-<map name="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_icgraph" id="make__basicblock_8cpp_a765669fc41b8885a39c1ec0df0df96ca_icgraph">
+<div class="center"><img src="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_icgraph.png" border="0" usemap="#make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_icgraph" alt=""/></div>
+<map name="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_icgraph" id="make__basicblock_8cpp_adfa5d9160d675203db3e663d1f2f3849_icgraph">
 </map>
 </div>
 </p>
@@ -296,7 +376,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -305,7 +385,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/frontend/harness_tournament.cc File Reference</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/bp/harness_tournament.cc File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -61,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/frontend/harness_tournament.cc File Reference</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/bp/harness_tournament.cc File Reference</div>  </div>
 </div>
 <div class="contents">
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br/>
@@ -71,8 +71,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for harness_tournament.cc:</div>
 <div class="dyncontent">
-<div class="center"><img src="harness__tournament_8cc__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2frontend_2harness__tournament_8cc" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2frontend_2harness__tournament_8cc" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2frontend_2harness__tournament_8cc">
+<div class="center"><img src="harness__tournament_8cc__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2bp_2harness__tournament_8cc" alt=""/></div>
+<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2bp_2harness__tournament_8cc" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2bp_2harness__tournament_8cc">
 </map>
 </div>
 </div><table class="memberdecls">
@@ -95,17 +95,17 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">           {
-    <a class="code" href="classTournamentBP.html">TournamentBP</a> *<a class="code" href="bkEnd_8cpp.html#a00d2c11cba3a3f23cf4967a1e481ff7c">predictor</a>;
+    <a class="code" href="classTournamentBP.html">TournamentBP</a> *predictor;
     predictor = <span class="keyword">new</span> <a class="code" href="classTournamentBP.html">TournamentBP</a>(2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 256; i++) {
         <span class="keywordtype">void</span> *bp_hist = NULL;
         Addr addr = 0x21;
-        <span class="keywordtype">bool</span> prediction = predictor-&gt;<a class="code" href="classTournamentBP.html#a493edbed2253cdfcda936f4dcda80df0">lookup</a>(addr, bp_hist);
+        <span class="keywordtype">bool</span> prediction = predictor-&gt;<a class="code" href="classTournamentBP.html#a458ef4efb74ebe35efed4ea8933097db">lookup</a>(addr, bp_hist);
         std::cout &lt;&lt; hex &lt;&lt; <span class="stringliteral">&quot;0x&quot;</span> &lt;&lt; addr &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; prediction &lt;&lt; endl;
         <span class="keywordflow">if</span>(!prediction)
-            predictor-&gt;<a class="code" href="classTournamentBP.html#a3c4515cdaf3778811b03b74bf381a3f8">update</a>(addr, <span class="keyword">true</span>, bp_hist, 1);
+            predictor-&gt;<a class="code" href="classTournamentBP.html#a799799c18338ad678eb26519fb1dc80e">update</a>(addr, <span class="keyword">true</span>, bp_hist, 1);
         <span class="keywordflow">else</span>
-            predictor-&gt;<a class="code" href="classTournamentBP.html#a3c4515cdaf3778811b03b74bf381a3f8">update</a>(addr, <span class="keyword">true</span>, bp_hist, 0);
+            predictor-&gt;<a class="code" href="classTournamentBP.html#a799799c18338ad678eb26519fb1dc80e">update</a>(addr, <span class="keyword">true</span>, bp_hist, 0);
     }
 }
 </pre></div>
@@ -126,7 +126,7 @@ Here is the call graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -135,7 +135,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

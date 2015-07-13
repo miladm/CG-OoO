@@ -15,17 +15,15 @@ Collaboration diagram for o3\_\-rfManager:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}{o3\_\-rfManager} (string rf\_\-name=\char`\"{}o3\_\-rfManager\char`\"{})
+\hyperlink{classo3__rfManager_aeacfb1db7844c9f204b5b75ce38d671d}{o3\_\-rfManager} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string rf\_\-name=\char`\"{}o3\_\-rfManager\char`\"{})
 \item 
 \hyperlink{classo3__rfManager_a42a66fc34794ca6c7209f743557a2b3a}{$\sim$o3\_\-rfManager} ()
-\item 
-bool \hyperlink{classo3__rfManager_a95bfea851bf8107f208e550839749063}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
-\item 
-bool \hyperlink{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} numRegRdPorts)
 \item 
 bool \hyperlink{classo3__rfManager_a023f3671f90123fe8749ff13606f273c}{canRename} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
 bool \hyperlink{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}{renameRegs} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
+bool \hyperlink{classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568}{checkReadyAgain} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
 bool \hyperlink{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}{isReady} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
@@ -34,23 +32,44 @@ void \hyperlink{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}{completeRe
 void \hyperlink{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}{commitRegs} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
 void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRenameReg} ()
+\item 
+void \hyperlink{classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365}{regStat} ()
+\item 
+bool \hyperlink{classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817}{hasFreeWire} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
+\item 
+void \hyperlink{classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546}{updateWireState} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, bool update\_\-wire=false)
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}{
+\hypertarget{classo3__rfManager_aeacfb1db7844c9f204b5b75ce38d671d}{
 \index{o3\_\-rfManager@{o3\_\-rfManager}!o3\_\-rfManager@{o3\_\-rfManager}}
 \index{o3\_\-rfManager@{o3\_\-rfManager}!o3_rfManager@{o3\_\-rfManager}}
 \subsubsection[{o3\_\-rfManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-rfManager::o3\_\-rfManager (
 \begin{DoxyParamCaption}
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{rf\_\-name = {\ttfamily \char`\"{}o3\_\-rfManager\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__rfManager_a0abe0df5acbb3b9d1514b62d38647cff}
+\label{classo3__rfManager_aeacfb1db7844c9f204b5b75ce38d671d}
 
 \begin{DoxyCode}
-    : unit (rf_name),
-      _GRF ("registerRename")
+    : unit (rf_name, clk),
+      _GRF (clk, root["rf"], "registerRename"),
+      _e_rf (rf_name + ".rf", root["rf"]),
+      _e_rat (rf_name + ".rat", root["rat"]),
+      _e_apr (rf_name + ".apr", root["apr"]),
+      _e_arst (rf_name + ".arst" , root["arst"]),
+      _e_w_rr (rf_name + ".rr.wire", root["rat"]),
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Nu
+      mber of RF operand-not-ready events", 0, PRINT_ZERO)),
+      s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Numb
+      er of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
+      s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number
+       of success reg. rename attempts", 0, NO_PRINT_ZERO)),
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Numb
+      er of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 \end{DoxyCode}
 \hypertarget{classo3__rfManager_a42a66fc34794ca6c7209f743557a2b3a}{
@@ -83,8 +102,10 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
                                                  {
     List<AR>* ar_wr = ins->getARwrList ();
     if (_GRF.getNumAvailablePR () < ar_wr->NumElements ()) {
-        return false; /* STALL FETCH */
+        s_cant_rename_cnt++;
+        return false; /*-- STALL FETCH --*/
     }
+    s_can_rename_cnt++;
     return true;
 }
 \end{DoxyCode}
@@ -93,9 +114,45 @@ void \hyperlink{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{squashRena
 Here is the call graph for this function:
 
 
+\hypertarget{classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!checkReadyAgain@{checkReadyAgain}}
+\index{checkReadyAgain@{checkReadyAgain}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{checkReadyAgain}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::checkReadyAgain (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568}
+
+\begin{DoxyCode}
+                                                       {
+    List<AR>* p_rdReg_list = ins->getPRrdList ();
+    for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = p_rdReg_list->Nth (i);
+        if (!_GRF.isPRvalid (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+      
+                    "RF read ops are ready: NO", "for ins: ", ins->getInsID (), 
+      _clk->now ());
+            return false; /*-- OPERAND NOT AVAILABLE --*/
+        }
+    }
+
+    if (p_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ())
+      ;
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
+    }
+
+    dbg.print (DBG_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
+}
+\end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb}{
@@ -117,21 +174,19 @@ Here is the caller graph for this function:
         PR p_reg = _pr->Nth (i);
         AR a_reg = _ar->Nth (i);
         PR prev_pr = _GRF.getPrevPR (p_reg);
+        _e_arst.ramAccess ();
         _GRF.updatePRstate (p_reg,ARCH_REG);
         _GRF.updatePRstate (prev_pr,AVAILABLE);
         _GRF.update_cRAT (a_reg,p_reg);
+        _e_rat.ramAccess ();
         _GRF.setAsAvailablePR (prev_pr);
+        _e_apr.ramAccess ();
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a}{
@@ -149,7 +204,8 @@ Here is the caller graph for this function:
     List<PR>* _pr = ins->getPRwrList ();
     for (int i = 0; i < _pr->NumElements (); i++) {
         PR p_reg = _pr->Nth (i);
-        _GRF.updatePRstate (p_reg,RENAMED_VALID);
+        _GRF.updatePRstate (p_reg, RENAMED_VALID);
+        _e_rf.ramAccess ();
     }
 }
 \end{DoxyCode}
@@ -158,64 +214,30 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}{
-\index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeRdPort@{hasFreeRdPort}}
-\index{hasFreeRdPort@{hasFreeRdPort}!o3_rfManager@{o3\_\-rfManager}}
-\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::hasFreeRdPort (
+\hypertarget{classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeWire@{hasFreeWire}}
+\index{hasFreeWire@{hasFreeWire}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::hasFreeWire (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now, }
-\item[{{\bf WIDTH}}]{numRegRdPorts}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{{\bf WIDTH}}]{numRegWires}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab}
+\label{classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817}
 
 \begin{DoxyCode}
-                                                                {
-    return _GRF.hasFreeRdPort (now, numRegRdPorts);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__rfManager_a95bfea851bf8107f208e550839749063}{
-\index{o3\_\-rfManager@{o3\_\-rfManager}!hasFreeWrPort@{hasFreeWrPort}}
-\index{hasFreeWrPort@{hasFreeWrPort}!o3_rfManager@{o3\_\-rfManager}}
-\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-rfManager::hasFreeWrPort (
-\begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__rfManager_a95bfea851bf8107f208e550839749063}
-
-\begin{DoxyCode}
-                                                               {
-    if (lsq_id == LD_QU) {
-        return _LQ.hasFreeWire (clk, WRITE); //TODO set state to LQ_ADDR_WAIT
+                                                                      {
+    if (_GRF.getNumFreeWires (axes_type) >= numRegWires) {
+        return true;
     } else {
-        return _SQ.hasFreeWire (clk, WRITE); //TODO set state to LQ_ADDR_WAIT
+        s_unavailable_cnt++;
+        return false;
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7}{
@@ -234,15 +256,28 @@ Here is the caller graph for this function:
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
         if (!_GRF.isPRvalid (reg)) {
-            return false; /* operand not available */
+            s_rf_not_ready_cnt++;
+            dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+      
+                    "RF read ops are ready: NO", "for ins: ", ins->getInsID (), 
+      _clk->now ());
+            return false; /*-- OPERAND NOT AVAILABLE --*/
         } else {
-            p_rdReg_list->RemoveAt (i); /*optimization */
+            p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
     if (p_rdReg_list->NumElements () == 0) {
-        return true; /* all operands available */
+        _e_rf.ramAccess (ins->getTotNumRdAR ());
+        dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+                "RF read ops are ready: YES", "for ins: ", ins->getInsID (), 
+      _clk->now ());
+        return true; /*-- ALL OPERANDS AVAILABLE --*/
     }
-    return false; /* not all operands available */
+    dbg.print (DBG_REG_FILES, "%s: %s %d (cyc: %d)\n", _c_name.c_str (), 
+            "RF read ops are ready: NO", "for ins: ", ins->getInsID (), _clk->
+      now ());
+    s_rf_not_ready_cnt++;
+    return false; /*-- NOT ALL OPERANDS AVAILABLE --*/
 }
 \end{DoxyCode}
 
@@ -250,9 +285,24 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
+\hypertarget{classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!regStat@{regStat}}
+\index{regStat@{regStat}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-rfManager::regStat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365}
+
+\begin{DoxyCode}
+                            {
+    _GRF.getStat ();
+}
+\end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30}{
@@ -271,35 +321,45 @@ Here is the caller graph for this function:
     List<AR>* ar_wr = ins->getARwrList ();
     Assert (_GRF.getNumAvailablePR () >= ar_wr->NumElements ());
 
-    /* RENAME READ REFISTERS FIRST */
+    /*-- RENAME READ REFISTERS FIRST --*/
     for (int i = 0; i < ar_rd->NumElements (); i++) {
         AR a_reg = ar_rd->Nth (i);
         PR p_reg = _GRF.renameReg (a_reg);
         ins->setPR (p_reg, READ);
+        _e_rat.ramAccess ();
     }
 
-    /* RENAME WRITE REFISTERS SECOND */
+    /*-- RENAME WRITE REFISTERS SECOND --*/
     for (int i = 0; i < ar_wr->NumElements (); i++) {
         Assert (_GRF.isAnyPRavailable () == true && "A physical reg must have bee
       n available.");
         AR a_reg = ar_wr->Nth (i);
         PR prev_pr = _GRF.renameReg (a_reg);
+        _e_rat.ramAccess ();
         PR new_pr = _GRF.getAvailablePR ();
+        _e_apr.ramAccess ();
         _GRF.update_fRAT (a_reg, new_pr);
+        _e_rat.ramAccess ();
         _GRF.updatePR (new_pr, prev_pr, RENAMED_INVALID);
+        _e_arst.ramAccess ();
         ins->setPR (new_pr, WRITE);
     }
-    return false; /* DON'T STALL FETCH */
+
+    /*-- WIRE ENERGY HANDLING --*/
+    list<string> wires;
+    WIDTH num_elements = 1; //opcode
+    num_elements += (ins->getNumRdAR () + ins->getNumWrAR ());
+    for (int i = 0; i < num_elements; i++) {
+        wires.push_back ("e_w_cache2rr");
+    }
+    _e_w_rr.wireAccess (wires);
+
+    return false; /*-- DON'T STALL FETCH --*/
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__rfManager_ac8199decc9c7a881b2099a68711cced7}{
@@ -317,6 +377,41 @@ Here is the caller graph for this function:
     dbg.print (DBG_TEST, "** %s: %s (cyc:)\n", _c_name.c_str (), "in squash for R
       R");
     _GRF.squashRenameReg ();
+    /* TODO model the ARST and APR table energies for squash */
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546}{
+\index{o3\_\-rfManager@{o3\_\-rfManager}!updateWireState@{updateWireState}}
+\index{updateWireState@{updateWireState}!o3_rfManager@{o3\_\-rfManager}}
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-rfManager::updateWireState (
+\begin{DoxyParamCaption}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{{\bf WIDTH}}]{numRegWires, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546}
+
+\begin{DoxyCode}
+                                                                                 
+                 {
+    list<string> wires;
+    if (update_wire) {
+        if (axes_type == READ) {
+            wires.push_back ("e_w_eu2rf");
+        } else if (axes_type == WRITE) {
+            wires.push_back ("e_w_eu2rf");
+        }
+    }
+
+    for (WIDTH i = 0; i < numRegWires; i++) {
+        _GRF.updateWireState (axes_type, wires, update_wire);
+    }
 }
 \end{DoxyCode}
 
@@ -326,13 +421,7 @@ Here is the call graph for this function:
 
 
 
-Here is the caller graph for this function:
-
-
-
-
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8h}{rfManager.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8cpp}{memManager.cpp}\item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2rfManager_8cpp}{rfManager.cpp}\end{DoxyCompactItemize}

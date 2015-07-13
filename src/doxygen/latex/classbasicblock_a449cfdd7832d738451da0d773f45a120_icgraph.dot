@@ -5,14 +5,11 @@ digraph G
   rankdir=LR;
   Node1 [label="basicblock::getInSet",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="make_interference_nodes_network",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a44ba610b0d634eb37dc4a1228f9fe6d7"];
+  Node2 [label="dot::defn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#af56f68484dcec4b943a6a77d261080a6"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662"];
+  Node3 [label="dot::runDot",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#a613147e95e44f245a63a5b08418c95f9"];
   Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
-  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node5 [label="basicblock::update_InOutSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#af543b2aba60aec6408825fe513736a8d"];
-  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node6 [label="livenessAnalysis",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a890d083ac7d418402e1acbcda4930e1b"];
-  Node6 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="finish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
 }

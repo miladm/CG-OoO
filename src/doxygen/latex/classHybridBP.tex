@@ -126,6 +126,11 @@ Default branch predictor constructor.
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{classHybridBP_a89edda03644e8f68ff703b4452569186}{
 \index{HybridBP@{HybridBP}!BTBUpdate@{BTBUpdate}}
@@ -137,7 +142,7 @@ Default branch predictor constructor.
 \end{DoxyParamCaption}
 )}}
 \label{classHybridBP_a89edda03644e8f68ff703b4452569186}
-Updates the branch predictor to Not Taken if a BTB entry is invalid or not found. 
+Updates the branch predictor to Not Taken if a \hyperlink{classBTB}{BTB} entry is invalid or not found. 
 \begin{DoxyParams}{Parameters}
 {\em branch\_\-addr} & The address of the branch to look up. \\
 \hline
@@ -154,6 +159,11 @@ Whether or not the branch is taken.
     globalHistory = globalHistory & (globalHistoryMask - 1);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBP_a198dcbee6554ca9471fba00734e31319}{
 \index{HybridBP@{HybridBP}!computeChoiceIndex@{computeChoiceIndex}}
 \index{computeChoiceIndex@{computeChoiceIndex}!HybridBP@{HybridBP}}
@@ -242,6 +252,11 @@ Here is the caller graph for this function:
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBP_a057bdd611cf2f46e8465df5376a72efb}{
 \index{HybridBP@{HybridBP}!histUpdate@{histUpdate}}
 \index{histUpdate@{histUpdate}!HybridBP@{HybridBP}}
@@ -276,6 +291,11 @@ Here is the caller graph for this function:
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBP_a6aef367656e0d8c3b964bfb4e69858fa}{
 \index{HybridBP@{HybridBP}!lookup@{lookup}}
 \index{lookup@{lookup}!HybridBP@{HybridBP}}
@@ -442,6 +462,11 @@ Restores the global branch history on a squash.
     delete history;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBP_a298bbbcf380b81292e158a5d880073d4}{
 \index{HybridBP@{HybridBP}!uncondBr@{uncondBr}}
 \index{uncondBr@{uncondBr}!HybridBP@{HybridBP}}
@@ -479,6 +504,11 @@ Records that there was an unconditional branch, and modifies the bp history to p
 
 
 Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
 
 
 \hypertarget{classHybridBP_a61c2bdd85d221b11539524613e2f4ca5}{
@@ -574,6 +604,11 @@ Updates the branch predictor with the actual result of a branch.
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBP_aa5cd12f887d1f51947dc37cdad283124}{
 \index{HybridBP@{HybridBP}!updateGlobalHistNotTaken@{updateGlobalHistNotTaken}}
 \index{updateGlobalHistNotTaken@{updateGlobalHistNotTaken}!HybridBP@{HybridBP}}

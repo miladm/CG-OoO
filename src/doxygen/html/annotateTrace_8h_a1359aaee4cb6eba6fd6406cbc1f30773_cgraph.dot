@@ -5,7 +5,7 @@ digraph G
   rankdir=LR;
   Node1 [label="annotateTrace_forBB",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="DynBBSizeStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$binaryTranslator_2stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48"];
+  Node2 [label="DynBBSizeStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48"];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="basicblock::getBbSize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29"];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -16,16 +16,21 @@ digraph G
   Node6 [label="basicblock::getInsList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#adc40d816c82feedc1f7027fc29470d90"];
   Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 [label="instruction::getNthArchReg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a7d49a66c0f3b426f1cf8fd335a5f3b6a"];
+  Node7 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
+  Node7 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node9 [label="instruction::getNthRegType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a9701f53aafaf1b2298378665059cef33"];
   Node9 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 [label="instruction::isAlreadyAssignedArcRegs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#ab5e9dd71fbc48781b528341a9a371a95"];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="instruction::getNumReg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#af64e1265e882da7e152bd47cb7794c3b"];
+  Node11 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 [label="basicblock::isInsAddrInBB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#afd299af5d08655c4fbd10221f5edb556"];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="basicblock::isInsAddrInBB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#afd299af5d08655c4fbd10221f5edb556"];
   Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

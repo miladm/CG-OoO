@@ -67,30 +67,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00004"></a>00004 <span class="comment"> * the class to track the simulation cycles</span>
 <a name="l00005"></a>00005 <span class="comment"> ******************************************************************************/</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#ifndef _SYSClock_H</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define _SYSClock_H</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#ifndef _SYSCLOCK_H</span>
+<a name="l00008"></a>00008 <span class="preprocessor"></span><span class="preprocessor">#define _SYSCLOCK_H</span>
 <a name="l00009"></a>00009 <span class="preprocessor"></span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;limits&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;unit.h&quot;</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a><a class="code" href="classsysClock.html">00013</a> <span class="keyword">class </span><a class="code" href="classsysClock.html">sysClock</a> : <span class="keyword">public</span> <a class="code" href="classunit.html">unit</a> {
-<a name="l00014"></a>00014         <span class="keyword">public</span>:
-<a name="l00015"></a>00015                 <a class="code" href="classsysClock.html#a03e1b7e12614ce9fba007f0a76849664">sysClock</a> ();
-<a name="l00016"></a>00016                 <a class="code" href="classsysClock.html#a03e1b7e12614ce9fba007f0a76849664">sysClock</a> (<a class="code" href="global_2global_8h.html#a32516e1b668a88eb546e9b6ee2e3345d">GHz</a> _frequency);
-<a name="l00017"></a>00017                 <a class="code" href="classsysClock.html#a47d002f5ab53ea1cbe8f74f1569363ac">~sysClock</a> ();
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019                 <span class="keywordtype">void</span> <a class="code" href="classsysClock.html#a1b83f5cc141338e61f66028ef040c242">tick</a> ();
-<a name="l00020"></a>00020                 <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;../../global/global.h&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;../../lib/statistic.h&quot;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="unit_2sysClock_8h.html#a694c28564a59cc3a24a07d91c70c0cfc">00014</a> <span class="preprocessor">#define RUNTIME_REPORT_INTERVAL 200000</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span>
+<a name="l00016"></a><a class="code" href="classsysClock.html">00016</a> <span class="keyword">class </span><a class="code" href="classsysClock.html">sysClock</a> {
+<a name="l00017"></a>00017         <span class="keyword">public</span>:
+<a name="l00018"></a>00018                 <a class="code" href="classsysClock.html#a03e1b7e12614ce9fba007f0a76849664">sysClock</a> ();
+<a name="l00019"></a>00019                 <a class="code" href="classsysClock.html#a03e1b7e12614ce9fba007f0a76849664">sysClock</a> (<a class="code" href="global_2global_8h.html#a32516e1b668a88eb546e9b6ee2e3345d">GHz</a> _frequency);
+<a name="l00020"></a>00020                 <a class="code" href="classsysClock.html#a47d002f5ab53ea1cbe8f74f1569363ac">~sysClock</a> ();
 <a name="l00021"></a>00021 
-<a name="l00022"></a>00022         <span class="keyword">private</span>:
-<a name="l00023"></a>00023                 <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> _clk;
-<a name="l00024"></a>00024                 <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a32516e1b668a88eb546e9b6ee2e3345d">GHz</a> _frequency;
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026         <span class="comment">/* STAT VARS */</span>
-<a name="l00027"></a>00027         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; _clk_cycles;
-<a name="l00028"></a>00028 };
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="preprocessor">#endif</span>
+<a name="l00022"></a>00022                 <span class="keywordtype">void</span> <a class="code" href="classsysClock.html#a1b83f5cc141338e61f66028ef040c242">tick</a> ();
+<a name="l00023"></a>00023                 <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+<a name="l00024"></a>00024         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="classsysClock.html#aae0f5778f4fece04609d6ece57f28870">getValue</a> ();
+<a name="l00025"></a>00025         <a class="code" href="classScalarStat.html">ScalarStat</a>* <a class="code" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> ();
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027         <span class="keyword">private</span>:
+<a name="l00028"></a>00028                 <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> _clk;
+<a name="l00029"></a>00029                 <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a32516e1b668a88eb546e9b6ee2e3345d">GHz</a> _frequency;
+<a name="l00030"></a>00030         <span class="keyword">const</span> <span class="keywordtype">string</span> _c_name;
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032         <span class="comment">/* STAT VARS */</span>
+<a name="l00033"></a>00033         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; _clk_cycles;
+<a name="l00034"></a>00034 };
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -98,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -107,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -8,4 +8,6 @@ digraph G
   Node2 [label="HybridBP::lookup",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#a6aef367656e0d8c3b964bfb4e69858fa"];
   Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="HybridBP::uncondBr",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classHybridBP.html#a298bbbcf380b81292e158a5d880073d4"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="BPredUnit::BPUncond",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classBPredUnit.html#a24bfe00e5e8c2a318930a6474ed60173"];
 }

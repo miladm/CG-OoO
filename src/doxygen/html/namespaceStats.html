@@ -140,11 +140,29 @@ Variables</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (<a class="code" href="namespaceStats.html#ae793c31e3372c51a4996ce57cc219a54">_enabled</a>)
-        fatal(<span class="stringliteral">&quot;Stats are already enabled&quot;</span>);
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Stats are already enabled&quot;</span>);
 
     <a class="code" href="namespaceStats.html#ae793c31e3372c51a4996ce57cc219a54">_enabled</a> = <span class="keyword">true</span>;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_cgraph.png" border="0" usemap="#namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_cgraph" alt=""/></div>
+<map name="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_cgraph" id="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_icgraph.png" border="0" usemap="#namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_icgraph" alt=""/></div>
+<map name="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_icgraph" id="namespaceStats_a03d2f1935a0ef6250fa5df657a82310b_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ae5a14285f2510051bae7923aa2612d96"></a><!-- doxytag: member="Stats::enabled" ref="ae5a14285f2510051bae7923aa2612d96" args="()" -->
@@ -334,7 +352,7 @@ Variables</h2></td></tr>
         <span class="keywordflow">if</span> (item-&gt;empty())
             <span class="keywordflow">return</span> <span class="keyword">false</span>;
 
-        string::const_iterator <a class="code" href="_8AppleDouble_2sat__counter_8cpp.html#aa41808e37ba1ecae7ee6bde4a5c62f82">c</a> = item-&gt;begin();
+        string::const_iterator c = item-&gt;begin();
 
         <span class="comment">// The first character is different</span>
         <span class="keywordflow">if</span> (!isalpha(*c) &amp;&amp; *c != <span class="charliteral">&#39;_&#39;</span>)
@@ -476,7 +494,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -485,7 +503,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

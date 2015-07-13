@@ -126,14 +126,14 @@ Public Member Functions</h2></td></tr>
       localCtrBits(_localCtrBits),
       instShiftAmt(_instShiftAmt)
 {
-    <span class="keywordflow">if</span> (!isPowerOf2(localPredictorSize)) {
-        fatal(<span class="stringliteral">&quot;Invalid local predictor size!\n&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(localPredictorSize)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Invalid local predictor size!\n&quot;</span>);
     }
 
     localPredictorSets = localPredictorSize / localCtrBits;
 
-    <span class="keywordflow">if</span> (!isPowerOf2(localPredictorSets)) {
-        fatal(<span class="stringliteral">&quot;Invalid number of local predictor sets! Check localCtrBits.\n&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(localPredictorSets)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Invalid number of local predictor sets! Check localCtrBits.\n&quot;</span>);
     }
 
     <span class="comment">// Setup the index mask.</span>
@@ -156,6 +156,15 @@ Public Member Functions</h2></td></tr>
             instShiftAmt);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classLocalBP_a4912c10c3c6e1ca0da87938af3f1c222_cgraph.png" border="0" usemap="#classLocalBP_a4912c10c3c6e1ca0da87938af3f1c222_cgraph" alt=""/></div>
+<map name="classLocalBP_a4912c10c3c6e1ca0da87938af3f1c222_cgraph" id="classLocalBP_a4912c10c3c6e1ca0da87938af3f1c222_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -183,7 +192,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Updates the branch predictor to Not Taken if a BTB entry is invalid or not found. </p>
+<p>Updates the branch predictor to Not Taken if a <a class="el" href="classBTB.html">BTB</a> entry is invalid or not found. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">branch_addr</td><td>The address of the branch to look up. </td></tr>
@@ -197,6 +206,15 @@ Public Member Functions</h2></td></tr>
 <span class="comment">// a BTB entry is invalid or not found.</span>
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1_icgraph.png" border="0" usemap="#classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1_icgraph" alt=""/></div>
+<map name="classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1_icgraph" id="classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ab884d4daf328f3284fe92c0ef3f5a37b"></a><!-- doxytag: member="LocalBP::lookup" ref="ab884d4daf328f3284fe92c0ef3f5a37b" args="(Addr &amp;branch_addr, void *&amp;bp_history)" -->
@@ -300,6 +318,15 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">    { assert(bp_history == NULL); }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classLocalBP_a19ff947a742878b0a27e23b72b867ff7_icgraph.png" border="0" usemap="#classLocalBP_a19ff947a742878b0a27e23b72b867ff7_icgraph" alt=""/></div>
+<map name="classLocalBP_a19ff947a742878b0a27e23b72b867ff7_icgraph" id="classLocalBP_a19ff947a742878b0a27e23b72b867ff7_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a4d29b367b9ab3f0ab7250d1cce4b032b"></a><!-- doxytag: member="LocalBP::update" ref="a4d29b367b9ab3f0ab7250d1cce4b032b" args="(Addr &amp;branch_addr, bool taken, void *bp_history)" -->
@@ -359,6 +386,15 @@ Public Member Functions</h2></td></tr>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classLocalBP_a4d29b367b9ab3f0ab7250d1cce4b032b_icgraph.png" border="0" usemap="#classLocalBP_a4d29b367b9ab3f0ab7250d1cce4b032b_icgraph" alt=""/></div>
+<map name="classLocalBP_a4d29b367b9ab3f0ab7250d1cce4b032b_icgraph" id="classLocalBP_a4d29b367b9ab3f0ab7250d1cce4b032b_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -371,7 +407,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -380,7 +416,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

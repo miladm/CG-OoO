@@ -49,7 +49,7 @@ Macro: \hyperlink{binaryTranslator_2utility_8h_aab1e54dcc40192f9704e8b252635450f
 \end{DoxyParamCaption}
 )}}
 \label{binaryTranslator_2utility_8h_af9857b7ce67739b0c36e49ad70c1befa}
-Function: \hyperlink{backend_2utility_8cpp_af9857b7ce67739b0c36e49ad70c1befa}{Failure()} Usage: Failure(\char`\"{}Out of memory!\char`\"{}); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Reports an error and exits the program immediately. You should not need to call this since you should always try to continue parsing, even after an error is encountered. Some of the provided code calls this in unrecoverable error situations (cannot allocate memory, etc.) Failure accepts printf-\/style arguments in the message to be printed. 
+Function: \hyperlink{binaryTranslator_2frontend_2utility_8cpp_af9857b7ce67739b0c36e49ad70c1befa}{Failure()} Usage: Failure(\char`\"{}Out of memory!\char`\"{}); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Reports an error and exits the program immediately. You should not need to call this since you should always try to continue parsing, even after an error is encountered. Some of the provided code calls this in unrecoverable error situations (cannot allocate memory, etc.) Failure accepts printf-\/style arguments in the message to be printed. 
 \begin{DoxyCode}
                                       {
   va_list args;
@@ -72,7 +72,7 @@ Function: \hyperlink{backend_2utility_8cpp_af9857b7ce67739b0c36e49ad70c1befa}{Fa
 \end{DoxyParamCaption}
 )}}
 \label{binaryTranslator_2utility_8h_a07f87be0a7c65a41d29ddfca31d0cb89}
-Function: \hyperlink{backend_2utility_8cpp_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn()} Usage: if (IsDebugOn(\char`\"{}scope\char`\"{})) ... -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Return true/false based on whether this key is currently on for debug printing. 
+Function: \hyperlink{binaryTranslator_2frontend_2utility_8cpp_a07f87be0a7c65a41d29ddfca31d0cb89}{IsDebugOn()} Usage: if (IsDebugOn(\char`\"{}scope\char`\"{})) ... -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Return true/false based on whether this key is currently on for debug printing. 
 \begin{DoxyCode}
                                 {
   return (IndexOf(key) != -1);
@@ -117,7 +117,7 @@ Function: ParseCommandLine -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\
 \end{DoxyParamCaption}
 )}}
 \label{binaryTranslator_2utility_8h_a792c588e9321d93476dec66f6cdd53a3}
-Function: \hyperlink{backend_2utility_8cpp_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug()} Usage: PrintDebug(\char`\"{}parser\char`\"{}, \char`\"{}found ident \%s$\backslash$n\char`\"{}, ident); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Print a message if we have turned debugging messages on for the given key. For example, the usage line shown above will only print a message if the call is preceded by a call to SetDebugForKey(\char`\"{}parser\char`\"{},true). The function accepts printf arguments. The provided main.cc parses the command line to turn on debug flags. 
+Function: \hyperlink{binaryTranslator_2frontend_2utility_8cpp_a792c588e9321d93476dec66f6cdd53a3}{PrintDebug()} Usage: PrintDebug(\char`\"{}parser\char`\"{}, \char`\"{}found ident \%s$\backslash$n\char`\"{}, ident); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Print a message if we have turned debugging messages on for the given key. For example, the usage line shown above will only print a message if the call is preceded by a call to SetDebugForKey(\char`\"{}parser\char`\"{},true). The function accepts printf arguments. The provided main.cc parses the command line to turn on debug flags. 
 \begin{DoxyCode}
                                                           {
   va_list args;
@@ -142,7 +142,7 @@ Function: \hyperlink{backend_2utility_8cpp_a792c588e9321d93476dec66f6cdd53a3}{Pr
 \end{DoxyParamCaption}
 )}}
 \label{binaryTranslator_2utility_8h_a5adfde7c853956a87b33ff8f2b3effc2}
-Function: \hyperlink{backend_2utility_8cpp_a34c8948d2a64f846bb064b02016ec243}{SetDebugForKey()} Usage: SetDebugForKey(\char`\"{}scope\char`\"{}, true); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on debugging messages for the given key. See PrintDebug for an example. Can be called manually when desired and will be called from the provided main for flags passed with -\/d. 
+Function: \hyperlink{binaryTranslator_2frontend_2utility_8cpp_a34c8948d2a64f846bb064b02016ec243}{SetDebugForKey()} Usage: SetDebugForKey(\char`\"{}scope\char`\"{}, true); -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Turn on debugging messages for the given key. See PrintDebug for an example. Can be called manually when desired and will be called from the provided main for flags passed with -\/d. 
 \begin{DoxyCode}
                                                  {
   int k = IndexOf(key);

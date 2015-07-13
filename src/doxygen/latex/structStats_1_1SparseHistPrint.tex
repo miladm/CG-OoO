@@ -94,60 +94,39 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
 {
-    size_type _size = vec.size();
-    Result _total = 0.0;
-
-    if (flags.isSet(pdf | cdf)) {
-        for (off_type i = 0; i < _size; ++i) {
-            _total += vec[i];
-        }
-    }
-
     string base = name + separatorString;
 
     ScalarPrint print;
-    print.name = name;
-    print.desc = desc;
     print.precision = precision;
-    print.descriptions = descriptions;
     print.flags = flags;
-    print.pdf = _total ? 0.0 : NAN;
-    print.cdf = _total ? 0.0 : NAN;
+    print.descriptions = descriptions;
+    print.desc = desc;
+    print.pdf = NAN;
+    print.cdf = NAN;
 
-    bool havesub = !subnames.empty();
+    print.name = base + "samples";
+    print.value = data.samples;
+    print(stream);
 
-    if (_size == 1) {
-        print.value = vec[0];
-        print(stream);
-        return;
-    }
+    MCounter::const_iterator it;
+    for (it = data.cmap.begin(); it != data.cmap.end(); it++) {
+        stringstream namestr;
+        namestr << base;
 
-    for (off_type i = 0; i < _size; ++i) {
-        if (havesub && (i >= subnames.size() || subnames[i].empty()))
-            continue;
-
-        print.name = base + (havesub ? subnames[i] : to_string(i));
-        print.desc = subdescs.empty() ? desc : subdescs[i];
-
-        print.update(vec[i], _total);
+        namestr <<(*it).first;
+        print.name = namestr.str();
+        print.value = (*it).second;
         print(stream);
     }
 
-    if (flags.isSet(::Stats::total)) {
-        print.pdf = NAN;
-        print.cdf = NAN;
-        print.name = base + "total";
-        print.desc = desc;
-        print.value = total;
-        print(stream);
-    }
+    print.pdf = NAN;
+    print.cdf = NAN;
+
+    print.name = base + "total";
+    print.value = total;
+    print(stream);
 }
 \end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
 
 
 \subsection{Member Data Documentation}
@@ -190,4 +169,4 @@ Here is the call graph for this function:
 
 The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/stats/\hyperlink{text_8cc}{text.cc}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/lib/bp\_\-lib/stats/\hyperlink{text_8cc}{text.cc}\end{DoxyCompactItemize}

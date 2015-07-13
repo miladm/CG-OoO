@@ -8,17 +8,5 @@ digraph G
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="rfManager.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="memManager.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$memManager_8h.html"];
-  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="../unit/dynInstruction.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="../unit/unit.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node4 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="../cacheCtrl.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node4 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="../cache.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node4 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="lsq.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node4 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node10 [label="../unit/sysClock.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 [label="memManager.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
 }

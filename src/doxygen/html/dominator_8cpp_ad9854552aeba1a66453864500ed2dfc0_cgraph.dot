@@ -26,13 +26,8 @@ digraph G
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 [label="basicblock::numNonBackEdgeAncestors",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ad05a1a1f24dfb10d2c637065eaea2835"];
-  Node11 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node11 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="basicblock::setAllasDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a11c8e9c8e6e38864552bafcd041e7a08"];
   Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node12 [label="basicblock::setAllasDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a11c8e9c8e6e38864552bafcd041e7a08"];
-  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node13 [label="basicblock::setDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#aae21234b7ccd801b037a3a26a11d44e7"];
-  Node13 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="basicblock::setDominators",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#aae21234b7ccd801b037a3a26a11d44e7"];
+  Node12 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

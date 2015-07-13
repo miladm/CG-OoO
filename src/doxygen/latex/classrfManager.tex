@@ -15,7 +15,7 @@ Collaboration diagram for rfManager:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classrfManager_a3aba0353412141b854b902f87918d760}{rfManager} (string rf\_\-name=\char`\"{}rfManager\char`\"{})
+\hyperlink{classrfManager_ae3bf65fd10a88642a5599e9dc1f99a43}{rfManager} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string rf\_\-name=\char`\"{}rfManager\char`\"{})
 \item 
 \hyperlink{classrfManager_adc5fb894c52570de06137128a65256e3}{$\sim$rfManager} ()
 \item 
@@ -23,33 +23,45 @@ void \hyperlink{classrfManager_aca3886ea56db6dd13b096be05adee188}{resetRF} ()
 \item 
 bool \hyperlink{classrfManager_ab5c5242744de56fd2f46c11ac3d9472b}{isReady} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
+bool \hyperlink{classrfManager_a4d9ef9cb740f57a058efe2ffe3eb9554}{checkReadyAgain} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+\item 
 void \hyperlink{classrfManager_ab38c1244739ba189161c3026361464ec}{reserveRF} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
 bool \hyperlink{classrfManager_a487ae2b2c425f4a15a6ee49fe37d5afd}{canReserveRF} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
 void \hyperlink{classrfManager_ae5dc11fc5a35d9985601f94e0176d32d}{writeToRF} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
 \item 
-bool \hyperlink{classrfManager_a9aad410daccdc0876c0c13cedbbc7855}{hasFreeWrPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+void \hyperlink{classrfManager_ab33692b15e37a769b418bb528473ce2f}{getStat} ()
 \item 
-bool \hyperlink{classrfManager_a4297b24b6ce9533206fe5b50554ffa13}{hasFreeRdPort} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} numRegRdPorts)
+bool \hyperlink{classrfManager_a77cd0079b7bfe9be500a308e7464682e}{hasFreeWire} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH})
 \item 
-void \hyperlink{classrfManager_a1817bd1f92e1d3c3e35d941722a5e5c3}{updateReg} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} reg)
+void \hyperlink{classrfManager_a9f6656aaab40c1eade70613096ca66f0}{updateWireState} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, bool=false, bool=false)
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classrfManager_a3aba0353412141b854b902f87918d760}{
+\hypertarget{classrfManager_ae3bf65fd10a88642a5599e9dc1f99a43}{
 \index{rfManager@{rfManager}!rfManager@{rfManager}}
 \index{rfManager@{rfManager}!rfManager@{rfManager}}
 \subsubsection[{rfManager}]{\setlength{\rightskip}{0pt plus 5cm}rfManager::rfManager (
 \begin{DoxyParamCaption}
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{rf\_\-name = {\ttfamily \char`\"{}rfManager\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classrfManager_a3aba0353412141b854b902f87918d760}
+\label{classrfManager_ae3bf65fd10a88642a5599e9dc1f99a43}
 
 \begin{DoxyCode}
-    : unit (rf_name)
+    : unit (rf_name, clk),
+      _RF (clk, root, "registerFile"),
+      _e_table (rf_name, root),
+      s_rf_not_ready_cnt (g_stats.newScalarStat (rf_name, "rf_not_ready_cnt", "Nu
+      mber of RF operand-not-ready events", 0, PRINT_ZERO)),
+      s_lrf_busy_cnt (g_stats.newScalarStat (rf_name, "rf_busy_cnt", "Number of L
+      RF write operand-not-ready events", 0, PRINT_ZERO)),
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Numb
+      er of unavailable wire accesses", 0, NO_PRINT_ZERO))
 { }
 \end{DoxyCode}
 \hypertarget{classrfManager_adc5fb894c52570de06137128a65256e3}{
@@ -80,11 +92,12 @@ void \hyperlink{classrfManager_a1817bd1f92e1d3c3e35d941722a5e5c3}{updateReg} (\h
 
 \begin{DoxyCode}
                                                  {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         if (_RF.isRegBusy (reg)) {
-            return false; /* operand not available for write */
+            s_lrf_busy_cnt++;
+            return false; /* OPERAND NOT AVAILABLE FOR WRITE */
         }
     }
     return true;
@@ -95,25 +108,39 @@ void \hyperlink{classrfManager_a1817bd1f92e1d3c3e35d941722a5e5c3}{updateReg} (\h
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classrfManager_a4297b24b6ce9533206fe5b50554ffa13}{
-\index{rfManager@{rfManager}!hasFreeRdPort@{hasFreeRdPort}}
-\index{hasFreeRdPort@{hasFreeRdPort}!rfManager@{rfManager}}
-\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool rfManager::hasFreeRdPort (
+\hypertarget{classrfManager_a4d9ef9cb740f57a058efe2ffe3eb9554}{
+\index{rfManager@{rfManager}!checkReadyAgain@{checkReadyAgain}}
+\index{checkReadyAgain@{checkReadyAgain}!rfManager@{rfManager}}
+\subsubsection[{checkReadyAgain}]{\setlength{\rightskip}{0pt plus 5cm}bool rfManager::checkReadyAgain (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now, }
-\item[{{\bf WIDTH}}]{numRegRdPorts}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
 \end{DoxyParamCaption}
 )}}
-\label{classrfManager_a4297b24b6ce9533206fe5b50554ffa13}
+\label{classrfManager_a4d9ef9cb740f57a058efe2ffe3eb9554}
 
 \begin{DoxyCode}
-                                                             {
-    return _RF.hasFreeRdPort (now, numRegRdPorts);
+                                                    {
+    List<AR>* a_rdReg_list = ins->getARrdList ();
+    for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
+        AR reg = a_rdReg_list->Nth (i);
+        if (!_RF.isRegValidAndReady (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (
+      ), 
+                    "Reg", reg, "is invlid in RF", _clk->now ());
+            return false; /* OPERAND NOT AVAILABLE */
+        }
+    }
+
+    if (a_rdReg_list->NumElements () == 0) {
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ())
+      ;
+        return true; /* ALL OPERANDS AVAILABLE */
+    }
+
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
+    return false; /* NOT ALL OPERANDS AVAILABLE */
 }
 \end{DoxyCode}
 
@@ -121,34 +148,44 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classrfManager_a9aad410daccdc0876c0c13cedbbc7855}{
-\index{rfManager@{rfManager}!hasFreeWrPort@{hasFreeWrPort}}
-\index{hasFreeWrPort@{hasFreeWrPort}!rfManager@{rfManager}}
-\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool rfManager::hasFreeWrPort (
+\hypertarget{classrfManager_ab33692b15e37a769b418bb528473ce2f}{
+\index{rfManager@{rfManager}!getStat@{getStat}}
+\index{getStat@{getStat}!rfManager@{rfManager}}
+\subsubsection[{getStat}]{\setlength{\rightskip}{0pt plus 5cm}void rfManager::getStat (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classrfManager_a9aad410daccdc0876c0c13cedbbc7855}
+\label{classrfManager_ab33692b15e37a769b418bb528473ce2f}
 
 \begin{DoxyCode}
-                                        {
-    return _RF.hasFreeWrPort (now);
+                         {
+}
+\end{DoxyCode}
+\hypertarget{classrfManager_a77cd0079b7bfe9be500a308e7464682e}{
+\index{rfManager@{rfManager}!hasFreeWire@{hasFreeWire}}
+\index{hasFreeWire@{hasFreeWire}!rfManager@{rfManager}}
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool rfManager::hasFreeWire (
+\begin{DoxyParamCaption}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{{\bf WIDTH}}]{numRegWires}
+\end{DoxyParamCaption}
+)}}
+\label{classrfManager_a77cd0079b7bfe9be500a308e7464682e}
+
+\begin{DoxyCode}
+                                                                   {
+    if (_RF.getNumFreeWires (axes_type) >= numRegWires) {
+        return true;
+    } else {
+        s_unavailable_cnt++;
+        return false;
+    }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classrfManager_ab5c5242744de56fd2f46c11ac3d9472b}{
@@ -166,26 +203,34 @@ Here is the caller graph for this function:
     List<AR>* a_rdReg_list = ins->getARrdList ();
     for (int i = a_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = a_rdReg_list->Nth (i);
-        if (!_RF.isRegValid (reg)) {
+        if (!_RF.isRegValidAndReady (reg)) {
+            dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (
+      ), 
+                    "Reg", reg, "is invlid in RF", _clk->now ());
+            s_rf_not_ready_cnt++;
             return false; /* operand not available */
         } else {
             a_rdReg_list->RemoveAt (i); /*optimization */
         }
     }
+
     if (a_rdReg_list->NumElements () == 0) {
+        _e_table.ramAccess (ins->getTotNumRdAR ());
+        dbg.print (DBG_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
+                "RF operand of ins", ins->getInsID (), "are ready", _clk->now ())
+      ;
         return true; /* all operands available */
     }
+
+    s_rf_not_ready_cnt++;
+    dbg.print (DBG_L_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "RF operand of ins", ins->getInsID (), "are ready", _clk->now ());
     return false; /* not all operands available */
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classrfManager_ab38c1244739ba189161c3026361464ec}{
@@ -200,7 +245,7 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                               {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.reserveReg (reg);
@@ -210,11 +255,6 @@ Here is the caller graph for this function:
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classrfManager_aca3886ea56db6dd13b096be05adee188}{
@@ -237,24 +277,37 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classrfManager_a1817bd1f92e1d3c3e35d941722a5e5c3}{
-\index{rfManager@{rfManager}!updateReg@{updateReg}}
-\index{updateReg@{updateReg}!rfManager@{rfManager}}
-\subsubsection[{updateReg}]{\setlength{\rightskip}{0pt plus 5cm}void rfManager::updateReg (
+\hypertarget{classrfManager_a9f6656aaab40c1eade70613096ca66f0}{
+\index{rfManager@{rfManager}!updateWireState@{updateWireState}}
+\index{updateWireState@{updateWireState}!rfManager@{rfManager}}
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void rfManager::updateWireState (
 \begin{DoxyParamCaption}
-\item[{{\bf PR}}]{reg}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{{\bf WIDTH}}]{numRegWires, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}, }
+\item[{bool}]{cache\_\-access = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}}
-\label{classrfManager_a1817bd1f92e1d3c3e35d941722a5e5c3}
+\label{classrfManager_a9f6656aaab40c1eade70613096ca66f0}
 
 \begin{DoxyCode}
+                                                                                 
                                  {
-    _RF.updateReg(reg);
+    list<string> wires;
+    if (update_wire) {
+        if (axes_type == READ) {
+            wires.push_back ("e_w_eu2simplerf");
+        } else if (axes_type == WRITE) {
+            wires.push_back ("e_w_eu2simplerf");
+        }
+        if (cache_access) {
+            wires.push_back ("e_w_cache2rf");
+        }
+    }
+
+    for (WIDTH i = 0; i < numRegWires; i++) {
+        _RF.updateWireState (axes_type, wires, update_wire);
+    }
 }
 \end{DoxyCode}
 
@@ -274,21 +327,17 @@ Here is the call graph for this function:
 
 \begin{DoxyCode}
                                               {
-    List<AR>* a_wrReg_list = ins->getARrdList ();
+    List<AR>* a_wrReg_list = ins->getARwrList ();
     for (int i = 0; i < a_wrReg_list->NumElements (); i++) {
         AR reg = a_wrReg_list->Nth (i);
         _RF.updateReg (reg);
+        _e_table.ramAccess ();
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 

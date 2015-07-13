@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="BPredUnit" -->
-<p><code>#include &lt;<a class="el" href="backend_2bpred__unit_8h_source.html">bpred_unit.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="backend_2bp_2bpred__unit_8h_source.html">bpred_unit.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for BPredUnit&lt; Impl &gt;:</div>
 <div class="dyncontent">
@@ -84,11 +84,12 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>PredictorHistory</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a4d632a2a34745803315809aedf2ce9b1">BPredUnit</a> (DerivO3CPUParams *params)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#aeaaeb15f110f0ed58cc3161d6f6ace22">name</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a0cffcea165538b2e7fd554a92b8d9b85">regStats</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#ac33c3d29c7b6aca9578fc416eb34e60e">switchOut</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a9011bcc9143d2396dfec49828484a645">takeOverFrom</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#add836c4a521ed2bd12eca4d1dee13620">predict</a> (DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &amp;allPredStatic, int oracleBP)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#ad37b550622b7ed76b55d80cc28700699">predict</a> (DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &amp;allPredStatic, int oracleBP, bool onlyLP)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a89690e897bb5661ee868f659a06515c9">increase_BP_lookup</a> (int)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a471a1acb994d07a6d57b2f39ce56e6a4">increase_BP_lookup_and_update</a> (int)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a41ecb08c99f45538eaf1de4e184905b4">increase_BTB_lookup</a> ()</td></tr>
@@ -98,7 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a94a04b4bdf8f6b9b3cf33882bc16067b">squash</a> (const InstSeqNum &amp;squashed_sn, ThreadID tid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a78e6f48f8a11db90daab850527d48aa7">squash</a> (const InstSeqNum &amp;squashed_sn, const TheISA::PCState &amp;corr_target, bool actually_taken, ThreadID tid)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a14a43c5f5bc8c64c07a075ce1608f9c3">BPSquash</a> (void *bp_history)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#aafefe8c8d85f49d118e825fa0c1c0176">BPLookup</a> (Addr instPC, void *&amp;bp_history, int positionInFetchGroup, bool onDemand, bool &amp;choicePred)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#af381979dadd608af5d4d5a235050f335">BPLookup</a> (Addr instPC, void *&amp;bp_history, int positionInFetchGroup, bool onDemand, bool &amp;choicePred, bool onlyLP)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#af5b3e6db0cf1f00dee290e16765f28f8">noBPLookup</a> (Addr instPC, void *&amp;bp_history, int positionInLine)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a55a6608f958c4e70360c34bd48c57032">BPBTBUpdate</a> (Addr instPC, void *&amp;bp_history)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a66a1f6f9cdd28b38b005a666a9976ed7">BTBValid</a> (Addr instPC)</td></tr>
@@ -107,6 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a16de9793a28ee07dcf26d89c03328555">BPHistUpdate</a> (Addr instPC, bool taken, void *bp_history, bool squashed)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a9268abcbddfdfd6e6a076ecd343a3de5">BPHistGarbageCollect</a> (void *bp_history)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a5afe025cde23c608d745e8daca63e8a6">BTBUpdate</a> (Addr instPC, const TheISA::PCState &amp;target)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a6b7b489094d02552a2e1a81aab1ed280">dump</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#aeaaeb15f110f0ed58cc3161d6f6ace22">name</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#a0cffcea165538b2e7fd554a92b8d9b85">regStats</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBPredUnit.html#ac33c3d29c7b6aca9578fc416eb34e60e">switchOut</a> ()</td></tr>
@@ -135,8 +137,88 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;class Impl&gt;<br/>
 class BPredUnit&lt; Impl &gt;</h3>
 
-<p>Basically a wrapper class to hold both the branch predictor and the BTB. </p>
-</div><hr/><h2>Member Function Documentation</h2>
+<p>BASICALLY A WRAPPER CLASS TO HOLD BOTH THE BRANCH PREDICTOR AND THE <a class="el" href="classBTB.html">BTB</a>.</p>
+<p>Basically a wrapper class to hold both the branch predictor and the <a class="el" href="classBTB.html">BTB</a>. </p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a4d632a2a34745803315809aedf2ce9b1"></a><!-- doxytag: member="BPredUnit::BPredUnit" ref="a4d632a2a34745803315809aedf2ce9b1" args="(DerivO3CPUParams *params)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::<a class="el" href="classBPredUnit.html">BPredUnit</a> </td>
+          <td>(</td>
+          <td class="paramtype">DerivO3CPUParams *&#160;</td>
+          <td class="paramname"><em>params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">params</td><td>The params object, that has the size of the BP and <a class="el" href="classBTB.html">BTB</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><pre class="fragment">    : _name (params-&gt;name + <span class="stringliteral">&quot;.BPredUnit&quot;</span>),
+      <a class="code" href="classBTB.html">BTB</a> (params-&gt;BTBEntries,
+          params-&gt;BTBTagSize,
+          params-&gt;instShiftAmt)
+{
+    <span class="comment">// Setup the selected predictor.</span>
+    <span class="keywordflow">if</span> (params-&gt;predType == <span class="stringliteral">&quot;local&quot;</span>) {
+        localBP = <span class="keyword">new</span> <a class="code" href="classLocalBP.html">LocalBP</a> (params-&gt;localPredictorSize,
+                              params-&gt;localCtrBits,
+                              params-&gt;instShiftAmt);
+        predictor = Local;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (params-&gt;predType == <span class="stringliteral">&quot;hybrid&quot;</span>) {
+        hybridbp = <span class="keyword">new</span> <a class="code" href="classHybridBP.html">HybridBP</a> (params-&gt;localPredictorSize,
+                                        params-&gt;localCtrBits,
+                                        params-&gt;globalPredictorSize,
+                                        params-&gt;globalHistoryBits,
+                                        params-&gt;globalCtrBits,
+                                        params-&gt;choicePredictorSize,
+                                        params-&gt;choiceCtrBits,
+                                        params-&gt;instShiftAmt,
+                                                                                params-&gt;fetchWidth);
+        predictor = Hybrid;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (params-&gt;predType == <span class="stringliteral">&quot;hybrid_skew&quot;</span>) {
+        hybridSkewbp = <span class="keyword">new</span> <a class="code" href="classHybridBPskew.html">HybridBPskew</a> (params-&gt;localPredictorSize,
+                                        params-&gt;localCtrBits,
+                                        params-&gt;globalPredictorSize,
+                                        params-&gt;globalHistoryBits,
+                                        params-&gt;globalCtrBits,
+                                        params-&gt;choicePredictorSize,
+                                        params-&gt;choiceCtrBits,
+                                        params-&gt;instShiftAmt,
+                                                                                params-&gt;fetchWidth);
+        predictor = HybridSkew;
+    } <span class="keywordflow">else</span> {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a> (<span class="stringliteral">&quot;Invalid BP selected!&quot;</span>);
+    }
+
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i &lt; Impl::MaxThreads; i++)
+        RAS[i].<a class="code" href="main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> (params-&gt;RASSize);
+        
+        fetchWidth = params-&gt;fetchWidth;
+        instShiftAmt = params-&gt;instShiftAmt;
+        totalInstShiftAmt = instShiftAmt + (unsigned)<a class="code" href="namespacearray.html#a4da2c69671f9dc2be88b1b8fdf0bf3b8">log2</a> (fetchWidth);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a4d632a2a34745803315809aedf2ce9b1_cgraph.png" border="0" usemap="#classBPredUnit_a4d632a2a34745803315809aedf2ce9b1_cgraph" alt=""/></div>
+<map name="classBPredUnit_a4d632a2a34745803315809aedf2ce9b1_cgraph" id="classBPredUnit_a4d632a2a34745803315809aedf2ce9b1_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a282f0c689c4cedfb52221c1ce96b4084"></a><!-- doxytag: member="BPredUnit::BP_onDemand" ref="a282f0c689c4cedfb52221c1ce96b4084" args="(void *&amp;bp_history, bool taken)" -->
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +303,7 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>If a branch is not taken, because the BTB address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. </p>
+<p>If a branch is not taken, because the <a class="el" href="classBTB.html">BTB</a> address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up the local predictor. </td></tr>
@@ -231,16 +313,25 @@ template&lt;class Impl &gt; </div>
 </dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (predictor == Local) {
-        <span class="keywordflow">return</span> localBP-&gt;<a class="code" href="classLocalBP.html#a6efe84f10a9141f20a9abeeaa1a76de1">BTBUpdate</a>(instPC, bp_history);
+        <span class="keywordflow">return</span> localBP-&gt;<a class="code" href="classLocalBP.html#a6efe84f10a9141f20a9abeeaa1a76de1">BTBUpdate</a> (instPC, bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        <span class="keywordflow">return</span> hybridbp-&gt;<a class="code" href="classHybridBP.html#a89edda03644e8f68ff703b4452569186">BTBUpdate</a>(instPC, bp_history);
+        <span class="keywordflow">return</span> hybridbp-&gt;<a class="code" href="classHybridBP.html#a89edda03644e8f68ff703b4452569186">BTBUpdate</a> (instPC, bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        <span class="keywordflow">return</span> hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a5ceeff1b2e0cc39822346b1cd8fbab80">BTBUpdate</a>(instPC, bp_history);
+        <span class="keywordflow">return</span> hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a5ceeff1b2e0cc39822346b1cd8fbab80">BTBUpdate</a> (instPC, bp_history);
     } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+        panic (<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a55a6608f958c4e70360c34bd48c57032_cgraph.png" border="0" usemap="#classBPredUnit_a55a6608f958c4e70360c34bd48c57032_cgraph" alt=""/></div>
+<map name="classBPredUnit_a55a6608f958c4e70360c34bd48c57032_cgraph" id="classBPredUnit_a55a6608f958c4e70360c34bd48c57032_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a55a6608f958c4e70360c34bd48c57032"></a><!-- doxytag: member="BPredUnit::BPBTBUpdate" ref="a55a6608f958c4e70360c34bd48c57032" args="(Addr instPC, void *&amp;bp_history)" -->
@@ -269,7 +360,7 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>If a branch is not taken, because the BTB address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. </p>
+<p>If a branch is not taken, because the <a class="el" href="classBTB.html">BTB</a> address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up the local predictor. </td></tr>
@@ -298,16 +389,25 @@ template&lt;class Impl &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (predictor == Local) {
-        assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
+        assert (<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        hybridbp-&gt;<a class="code" href="classHybridBP.html#a42988126b43e89e1ec5fb5a1985a0a36">histGarbageCollect</a>(bp_history);
+        hybridbp-&gt;<a class="code" href="classHybridBP.html#a42988126b43e89e1ec5fb5a1985a0a36">histGarbageCollect</a> (bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a4c3aa89615af200ad553461f20de8315">histGarbageCollect</a>(bp_history);
+        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a4c3aa89615af200ad553461f20de8315">histGarbageCollect</a> (bp_history);
     } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+        panic (<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5_cgraph.png" border="0" usemap="#classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5_cgraph" alt=""/></div>
+<map name="classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5_cgraph" id="classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a9268abcbddfdfd6e6a076ecd343a3de5"></a><!-- doxytag: member="BPredUnit::BPHistGarbageCollect" ref="a9268abcbddfdfd6e6a076ecd343a3de5" args="(void *bp_history)" -->
@@ -410,71 +510,24 @@ template&lt;class Impl &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (predictor == Local) {
-        assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
+        assert (<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        hybridbp-&gt;<a class="code" href="classHybridBP.html#a057bdd611cf2f46e8465df5376a72efb">histUpdate</a>(instPC, taken, bp_history, squashed);
+        hybridbp-&gt;<a class="code" href="classHybridBP.html#a057bdd611cf2f46e8465df5376a72efb">histUpdate</a> (instPC, taken, bp_history, squashed);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a5e73e9324e87d820712789f33100e5f4">histUpdate</a>(instPC, taken, bp_history, squashed);
+        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a5e73e9324e87d820712789f33100e5f4">histUpdate</a> (instPC, taken, bp_history, squashed);
     } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+        panic (<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a16de9793a28ee07dcf26d89c03328555_cgraph.png" border="0" usemap="#classBPredUnit_a16de9793a28ee07dcf26d89c03328555_cgraph" alt=""/></div>
+<map name="classBPredUnit_a16de9793a28ee07dcf26d89c03328555_cgraph" id="classBPredUnit_a16de9793a28ee07dcf26d89c03328555_cgraph">
+</map>
 </div>
-</div>
-<a class="anchor" id="aafefe8c8d85f49d118e825fa0c1c0176"></a><!-- doxytag: member="BPredUnit::BPLookup" ref="aafefe8c8d85f49d118e825fa0c1c0176" args="(Addr instPC, void *&amp;bp_history, int positionInFetchGroup, bool onDemand, bool &amp;choicePred)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Impl &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::BPLookup </td>
-          <td>(</td>
-          <td class="paramtype">Addr&#160;</td>
-          <td class="paramname"><em>instPC</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&amp;&#160;</td>
-          <td class="paramname"><em>bp_history</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>positionInFetchGroup</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>onDemand</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>choicePred</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Looks up a given PC in the BP to see if it is taken or not taken. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
-    <tr><td class="paramname">bp_history</td><td>Pointer that will be set to an object that has the branch predictor state associated with the lookup. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the branch is taken or not taken. </dd></dl>
+</p>
 
 </div>
 </div>
@@ -538,13 +591,75 @@ template&lt;class Impl &gt; </div>
         <span class="keywordtype">bool</span> prediction = hybridbp-&gt;<a class="code" href="classHybridBP.html#a6aef367656e0d8c3b964bfb4e69858fa">lookup</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine, onDemand, choicePred);
         <span class="keywordflow">return</span> prediction;
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        <span class="keywordtype">bool</span> prediction = hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a582ad543f9fc90c933eb2c740de572ec">lookup</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine, onDemand, choicePred);
+        <span class="keywordtype">bool</span> prediction = hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a27e2268df7da826fefe75f1a490bce11">lookup</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine, onDemand, choicePred);
         <span class="keywordflow">return</span> prediction;
     } <span class="keywordflow">else</span> {
         panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
 }
 </pre></div>
+</div>
+</div>
+<a class="anchor" id="af381979dadd608af5d4d5a235050f335"></a><!-- doxytag: member="BPredUnit::BPLookup" ref="af381979dadd608af5d4d5a235050f335" args="(Addr instPC, void *&amp;bp_history, int positionInFetchGroup, bool onDemand, bool &amp;choicePred, bool onlyLP)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::BPLookup </td>
+          <td>(</td>
+          <td class="paramtype">Addr&#160;</td>
+          <td class="paramname"><em>instPC</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&amp;&#160;</td>
+          <td class="paramname"><em>bp_history</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>positionInFetchGroup</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>onDemand</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>choicePred</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>onlyLP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Looks up a given PC in the BP to see if it is taken or not taken. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
+    <tr><td class="paramname">bp_history</td><td>Pointer that will be set to an object that has the branch predictor state associated with the lookup. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the branch is taken or not taken. </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a14a43c5f5bc8c64c07a075ce1608f9c3"></a><!-- doxytag: member="BPredUnit::BPSquash" ref="a14a43c5f5bc8c64c07a075ce1608f9c3" args="(void *bp_history)" -->
@@ -596,16 +711,25 @@ template&lt;class Impl &gt; </div>
 </dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (predictor == Local) {
-        localBP-&gt;<a class="code" href="classLocalBP.html#a19ff947a742878b0a27e23b72b867ff7">squash</a>(bp_history);
+        localBP-&gt;<a class="code" href="classLocalBP.html#a19ff947a742878b0a27e23b72b867ff7">squash</a> (bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        hybridbp-&gt;<a class="code" href="classHybridBP.html#aa69f90a513749a5ef74eb9e1bc2582a5">squash</a>(bp_history);
+        hybridbp-&gt;<a class="code" href="classHybridBP.html#aa69f90a513749a5ef74eb9e1bc2582a5">squash</a> (bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a44db53115e8b3ccff2d9b7785c96f380">squash</a>(bp_history);
+        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a44db53115e8b3ccff2d9b7785c96f380">squash</a> (bp_history);
     } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+        panic (<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3_cgraph.png" border="0" usemap="#classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3_cgraph" alt=""/></div>
+<map name="classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3_cgraph" id="classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a24bfe00e5e8c2a318930a6474ed60173"></a><!-- doxytag: member="BPredUnit::BPUncond" ref="a24bfe00e5e8c2a318930a6474ed60173" args="(void *&amp;bp_history)" -->
@@ -627,12 +751,21 @@ template&lt;class Impl &gt; </div>
 <div class="fragment"><pre class="fragment">{
     <span class="comment">// Only the hybrid predictor cares about unconditional branches.</span>
     <span class="keywordflow">if</span> (predictor == Hybrid) {
-        hybridbp-&gt;<a class="code" href="classHybridBP.html#a298bbbcf380b81292e158a5d880073d4">uncondBr</a>(bp_history);
+        hybridbp-&gt;<a class="code" href="classHybridBP.html#a298bbbcf380b81292e158a5d880073d4">uncondBr</a> (bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a1dbffb30d1d0f0c4c8e6a8f1084e68e4">uncondBr</a>(bp_history);
+        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a1dbffb30d1d0f0c4c8e6a8f1084e68e4">uncondBr</a> (bp_history);
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173_cgraph.png" border="0" usemap="#classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173_cgraph" alt=""/></div>
+<map name="classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173_cgraph" id="classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a24bfe00e5e8c2a318930a6474ed60173"></a><!-- doxytag: member="BPredUnit::BPUncond" ref="a24bfe00e5e8c2a318930a6474ed60173" args="(void *&amp;bp_history)" -->
@@ -705,17 +838,26 @@ template&lt;class Impl &gt; </div>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Make this update flexible enough to handle a global predictor. </dd></dl>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (predictor == Local) {
-        localBP-&gt;<a class="code" href="classLocalBP.html#a4d29b367b9ab3f0ab7250d1cce4b032b">update</a>(instPC, taken, bp_history);
+        localBP-&gt;<a class="code" href="classLocalBP.html#a4d29b367b9ab3f0ab7250d1cce4b032b">update</a> (instPC, taken, bp_history);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        hybridbp-&gt;<a class="code" href="classHybridBP.html#a61c2bdd85d221b11539524613e2f4ca5">update</a>(instPC, taken, bp_history, squashed);
+        hybridbp-&gt;<a class="code" href="classHybridBP.html#a61c2bdd85d221b11539524613e2f4ca5">update</a> (instPC, taken, bp_history, squashed);
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a4fb73465bf70ab821401f3d47e44fc91">update</a>(instPC, taken, bp_history, squashed);
+        hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#a4fb73465bf70ab821401f3d47e44fc91">update</a> (instPC, taken, bp_history, squashed);
     } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+        panic (<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
     }
-        <a class="code" href="classBPredUnit.html#a471a1acb994d07a6d57b2f39ce56e6a4">increase_BP_lookup_and_update</a>(1);
+        <a class="code" href="classBPredUnit.html#a471a1acb994d07a6d57b2f39ce56e6a4">increase_BP_lookup_and_update</a> (1);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a35c57ae0661f1d5dd2169e919741d47b_cgraph.png" border="0" usemap="#classBPredUnit_a35c57ae0661f1d5dd2169e919741d47b_cgraph" alt=""/></div>
+<map name="classBPredUnit_a35c57ae0661f1d5dd2169e919741d47b_cgraph" id="classBPredUnit_a35c57ae0661f1d5dd2169e919741d47b_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a35c57ae0661f1d5dd2169e919741d47b"></a><!-- doxytag: member="BPredUnit::BPUpdate" ref="a35c57ae0661f1d5dd2169e919741d47b" args="(Addr instPC, bool taken, void *bp_history, bool squashed)" -->
@@ -766,7 +908,7 @@ template&lt;class Impl &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Make this update flexible enough to handle a global predictor. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Make this update flexible enough to handle a global predictor. </dd></dl>
 
 </div>
 </div>
@@ -786,7 +928,7 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Looks up a given PC in the BTB to get the predicted target. </p>
+<p>Looks up a given PC in the <a class="el" href="classBTB.html">BTB</a> to get the predicted target. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
@@ -794,7 +936,7 @@ template&lt;class Impl &gt; </div>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The address of the target of the branch. </dd></dl>
-<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#ad21521b111945ccf058a3687ef720339">lookup</a>(instPC, 0); }
+<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#adada120072dd6a1a33fcc9dcab69ebad">lookup</a>(instPC, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -823,7 +965,7 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Looks up a given PC in the BTB to get the predicted target. </p>
+<p>Looks up a given PC in the <a class="el" href="classBTB.html">BTB</a> to get the predicted target. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
@@ -831,7 +973,7 @@ template&lt;class Impl &gt; </div>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The address of the target of the branch. </dd></dl>
-<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#ad21521b111945ccf058a3687ef720339">lookup</a>(instPC, 0); }
+<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#adada120072dd6a1a33fcc9dcab69ebad">lookup</a>(instPC, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -870,15 +1012,15 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Updates the BTB with the target of a branch. </p>
+<p>Updates the <a class="el" href="classBTB.html">BTB</a> with the target of a branch. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The branch's PC that will be updated. </td></tr>
-    <tr><td class="paramname">target_PC</td><td>The branch's target that will be added to the BTB. </td></tr>
+    <tr><td class="paramname">target_PC</td><td>The branch's target that will be added to the <a class="el" href="classBTB.html">BTB</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><pre class="fragment">    { BTB.<a class="code" href="classDefaultBTB.html#a554c0af23b92df168310e4edaf627c51">update</a>(instPC, target, 0); }
+<div class="fragment"><pre class="fragment">    { <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a>(instPC, target, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -917,15 +1059,15 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Updates the BTB with the target of a branch. </p>
+<p>Updates the <a class="el" href="classBTB.html">BTB</a> with the target of a branch. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The branch's PC that will be updated. </td></tr>
-    <tr><td class="paramname">target_PC</td><td>The branch's target that will be added to the BTB. </td></tr>
+    <tr><td class="paramname">target_PC</td><td>The branch's target that will be added to the <a class="el" href="classBTB.html">BTB</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><pre class="fragment">    { BTB.<a class="code" href="classDefaultBTB.html#a554c0af23b92df168310e4edaf627c51">update</a>(instPC, target, 0); }
+<div class="fragment"><pre class="fragment">    { <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a>(instPC, target, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -954,15 +1096,15 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Looks up a given PC in the BTB to see if a matching entry exists. </p>
+<p>Looks up a given PC in the <a class="el" href="classBTB.html">BTB</a> to see if a matching entry exists. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the BTB contains the given PC. </dd></dl>
-<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>(instPC, 0); }
+<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the <a class="el" href="classBTB.html">BTB</a> contains the given PC. </dd></dl>
+<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a>(instPC, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -991,15 +1133,15 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>Looks up a given PC in the BTB to see if a matching entry exists. </p>
+<p>Looks up a given PC in the <a class="el" href="classBTB.html">BTB</a> to see if a matching entry exists. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">inst_PC</td><td>The PC to look up. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the BTB contains the given PC. </dd></dl>
-<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> BTB.<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>(instPC, 0); }
+<dl class="return"><dt><b>Returns:</b></dt><dd>Whether the <a class="el" href="classBTB.html">BTB</a> contains the given PC. </dd></dl>
+<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a>(instPC, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1010,6 +1152,45 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a6b7b489094d02552a2e1a81aab1ed280"></a><!-- doxytag: member="BPredUnit::dump" ref="a6b7b489094d02552a2e1a81aab1ed280" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::dump </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    HistoryIt pred_hist_it;
+
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Impl::MaxThreads; ++i) {
+        <span class="keywordflow">if</span> (!predHist[i].empty ()) {
+            pred_hist_it = predHist[i].begin ();
+
+            cprintf (<span class="stringliteral">&quot;predHist[%i].size (): %i\n&quot;</span>, i, predHist[i].size ());
+
+            <span class="keywordflow">while</span> (pred_hist_it != predHist[i].end ()) {
+                cprintf (<span class="stringliteral">&quot;[sn:%lli], PC:%#x, tid:%i, predTaken:%i, &quot;</span>
+                        <span class="stringliteral">&quot;bpHistory:%#x\n&quot;</span>,
+                        pred_hist_it-&gt;seqNum, pred_hist_it-&gt;pc,
+                        pred_hist_it-&gt;pred_hist_it-&gt;predTaken,
+                        pred_hist_it-&gt;bpHistory);
+                pred_hist_it++;
+            }
+            cprintf (<span class="stringliteral">&quot;\n&quot;</span>);
+        }
+    }
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a89690e897bb5661ee868f659a06515c9"></a><!-- doxytag: member="BPredUnit::increase_BP_lookup" ref="a89690e897bb5661ee868f659a06515c9" args="(int)" -->
@@ -1092,6 +1273,15 @@ template&lt;class Impl &gt; </div>
   lookup_and_updates += lookupCnt;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a471a1acb994d07a6d57b2f39ce56e6a4_icgraph.png" border="0" usemap="#classBPredUnit_a471a1acb994d07a6d57b2f39ce56e6a4_icgraph" alt=""/></div>
+<map name="classBPredUnit_a471a1acb994d07a6d57b2f39ce56e6a4_icgraph" id="classBPredUnit_a471a1acb994d07a6d57b2f39ce56e6a4_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a41ecb08c99f45538eaf1de4e184905b4"></a><!-- doxytag: member="BPredUnit::increase_BTB_lookup" ref="a41ecb08c99f45538eaf1de4e184905b4" args="()" -->
@@ -1204,7 +1394,19 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{
+        assert(onDemand);
+    <span class="keywordflow">if</span> (predictor == Local) {
+        assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
+        <span class="keywordflow">return</span> hybridbp-&gt;<a class="code" href="classHybridBP.html#aa54c3620546c026eb4d593007adc5baf">onDemandBr</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
+        <span class="keywordflow">return</span> hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#ab10e5603326fd6eae8d8cdd106a625ef">onDemandBr</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine);
+    } <span class="keywordflow">else</span> {
+        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
+    }
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="af5b3e6db0cf1f00dee290e16765f28f8"></a><!-- doxytag: member="BPredUnit::noBPLookup" ref="af5b3e6db0cf1f00dee290e16765f28f8" args="(Addr instPC, void *&amp;bp_history, int positionInLine)" -->
@@ -1239,19 +1441,7 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-        assert(onDemand);
-    <span class="keywordflow">if</span> (predictor == Local) {
-        assert(<span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;this function is not supported for loacl prediction - (see Milad!)&quot;</span>);
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == Hybrid) {
-        <span class="keywordflow">return</span> hybridbp-&gt;<a class="code" href="classHybridBP.html#aa54c3620546c026eb4d593007adc5baf">onDemandBr</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine);
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (predictor == HybridSkew) {
-        <span class="keywordflow">return</span> hybridSkewbp-&gt;<a class="code" href="classHybridBPskew.html#ab10e5603326fd6eae8d8cdd106a625ef">onDemandBr</a>(instPC, bp_history, (<span class="keywordtype">unsigned</span>)positionInLine);
-    } <span class="keywordflow">else</span> {
-        panic(<span class="stringliteral">&quot;Predictor type is unexpected value!&quot;</span>);
-    }
-}
-</pre></div>
+
 </div>
 </div>
 <a class="anchor" id="add836c4a521ed2bd12eca4d1dee13620"></a><!-- doxytag: member="BPredUnit::predict" ref="add836c4a521ed2bd12eca4d1dee13620" args="(DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &amp;allPredStatic, int oracleBP)" -->
@@ -1361,7 +1551,7 @@ template&lt;class Impl &gt; </div>
                         <span class="comment">//Addr indx = ((pc.instAddr()&gt;&gt;4)&lt;&lt;2)+positionInLine;</span>
                         <span class="comment">//if (bpIndxHist.find(indx) != bpIndxHist.end()) { bpIndxHist[indx]++;</span>
                         <span class="comment">//} else { bpIndxHist[indx] = 1; }</span>
-                        pred_taken = <a class="code" href="classBPredUnit.html#aafefe8c8d85f49d118e825fa0c1c0176">BPLookup</a>(pc.instAddr(), bp_history, positionInLine, onDemand, choicePred);
+                        pred_taken = <a class="code" href="classBPredUnit.html#af381979dadd608af5d4d5a235050f335">BPLookup</a>(pc.instAddr(), bp_history, positionInLine, onDemand, choicePred);
                         DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Branch predictor predicted %i for PC %s\n&quot;</span>, tid, pred_taken, inst-&gt;pcState());
                         <span class="keywordflow">if</span> (positionInFetchGroup == 0) {
                                 <a class="code" href="classBPredUnit.html#a89690e897bb5661ee868f659a06515c9">increase_BP_lookup</a>(fetchWidth);
@@ -1390,7 +1580,7 @@ template&lt;class Impl &gt; </div>
                                 <span class="comment">//Addr indx = ((pc.instAddr()&gt;&gt;4)&lt;&lt;2)+positionInLine;</span>
                                 <span class="comment">//if (bpIndxHist.find(indx) != bpIndxHist.end()) { bpIndxHist[indx]++;</span>
                                 <span class="comment">//} else { bpIndxHist[indx] = 1; }</span>
-                            pred_taken = <a class="code" href="classBPredUnit.html#aafefe8c8d85f49d118e825fa0c1c0176">BPLookup</a>(pc.instAddr(), bp_history, positionInLine, onDemand, choicePred);
+                            pred_taken = <a class="code" href="classBPredUnit.html#af381979dadd608af5d4d5a235050f335">BPLookup</a>(pc.instAddr(), bp_history, positionInLine, onDemand, choicePred);
                                 allPredStatic = <span class="keyword">false</span>; <span class="comment">//had at least one DY in fetch group</span>
                             DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Branch predictor predicted %i for PC %s\n&quot;</span>, tid, pred_taken, inst-&gt;pcState());
                                 <span class="keywordflow">if</span> (firstDY) {
@@ -1463,12 +1653,12 @@ template&lt;class Impl &gt; </div>
                         tid, inst-&gt;pcState(), pc, RAS[tid].<a class="code" href="classReturnAddrStack.html#a95a293e5b01511ae5363fa9cf69d47f0">topIdx</a>());
             }
 
-            <span class="keywordflow">if</span> (BTB.<a class="code" href="classDefaultBTB.html#aaa68fd09a8bfbce33ad7be0d5b872953">valid</a>(pc.instAddr(), tid)) {
+            <span class="keywordflow">if</span> (<a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a9675b08c643f69fdc9a7b4527c135d72">valid</a>(pc.instAddr(), tid)) {
                 ++BTBHits;
                 predict_record.validBTB = <span class="keyword">true</span>;
 
                 <span class="comment">// If it&#39;s not a return, use the BTB to get the target addr.</span>
-                target = BTB.<a class="code" href="classDefaultBTB.html#ad21521b111945ccf058a3687ef720339">lookup</a>(pc.instAddr(), tid);
+                target = <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#adada120072dd6a1a33fcc9dcab69ebad">lookup</a>(pc.instAddr(), tid);
 
                 DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Instruction %s predicted&quot;</span>
                         <span class="stringliteral">&quot; target is %s.\n&quot;</span>, tid, inst-&gt;pcState(), target);
@@ -1510,9 +1700,18 @@ template&lt;class Impl &gt; </div>
     <span class="keywordflow">return</span> pred_taken;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_add836c4a521ed2bd12eca4d1dee13620_cgraph.png" border="0" usemap="#classBPredUnit_add836c4a521ed2bd12eca4d1dee13620_cgraph" alt=""/></div>
+<map name="classBPredUnit_add836c4a521ed2bd12eca4d1dee13620_cgraph" id="classBPredUnit_add836c4a521ed2bd12eca4d1dee13620_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
-<a class="anchor" id="add836c4a521ed2bd12eca4d1dee13620"></a><!-- doxytag: member="BPredUnit::predict" ref="add836c4a521ed2bd12eca4d1dee13620" args="(DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &amp;allPredStatic, int oracleBP)" -->
+<a class="anchor" id="ad37b550622b7ed76b55d80cc28700699"></a><!-- doxytag: member="BPredUnit::predict" ref="ad37b550622b7ed76b55d80cc28700699" args="(DynInstPtr &amp;inst, TheISA::PCState &amp;pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool &amp;allPredStatic, int oracleBP, bool onlyLP)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -1570,7 +1769,13 @@ template&lt;class Impl &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>oracleBP</em>&#160;</td>
+          <td class="paramname"><em>oracleBP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>onlyLP</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1609,7 +1814,8 @@ template&lt;class Impl &gt; </div>
 </div>
 <div class="memdoc">
 <p>Registers statistics. </p>
-
+<div class="fragment"><pre class="fragment">{ }
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a0cffcea165538b2e7fd554a92b8d9b85"></a><!-- doxytag: member="BPredUnit::regStats" ref="a0cffcea165538b2e7fd554a92b8d9b85" args="()" -->
@@ -1628,128 +1834,6 @@ template&lt;class Impl &gt; </div>
 </div>
 <div class="memdoc">
 <p>Registers statistics. </p>
-
-</div>
-</div>
-<a class="anchor" id="a94a04b4bdf8f6b9b3cf33882bc16067b"></a><!-- doxytag: member="BPredUnit::squash" ref="a94a04b4bdf8f6b9b3cf33882bc16067b" args="(const InstSeqNum &amp;squashed_sn, ThreadID tid)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Impl &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::squash </td>
-          <td>(</td>
-          <td class="paramtype">const InstSeqNum &amp;&#160;</td>
-          <td class="paramname"><em>squashed_sn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ThreadID&#160;</td>
-          <td class="paramname"><em>tid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Squashes all outstanding updates until a given sequence number. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">squashed_sn</td><td>The sequence number to squash any younger updates up until. </td></tr>
-    <tr><td class="paramname">tid</td><td>The thread id. </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><pre class="fragment">{
-    History &amp;pred_hist = predHist[tid];
-
-    <span class="keywordflow">while</span> (!pred_hist.empty() &amp;&amp;
-           pred_hist.front().seqNum &gt; squashed_sn) {
-        <span class="keywordflow">if</span> (pred_hist.front().usedRAS) {
-            DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Restoring top of RAS to: %i,&quot;</span>
-                    <span class="stringliteral">&quot; target: %s.\n&quot;</span>, tid,
-                    pred_hist.front().RASIndex, pred_hist.front().RASTarget);
-
-            RAS[tid].<a class="code" href="classReturnAddrStack.html#a2ceaaf5c1223ef4a262ccf835dee7b08">restore</a>(pred_hist.front().RASIndex,
-                             pred_hist.front().RASTarget);
-        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(pred_hist.front().wasCall &amp;&amp; pred_hist.front().validBTB) {
-            <span class="comment">// Was a call but predicated false. Pop RAS here</span>
-            DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid: %i] Squashing&quot;</span>
-                    <span class="stringliteral">&quot;  Call [sn:%i] PC: %s Popping RAS\n&quot;</span>, tid,
-                    pred_hist.front().seqNum, pred_hist.front().pc);
-            RAS[tid].<a class="code" href="classReturnAddrStack.html#a9d2396f6b3f90a54b178db4efc002a78">pop</a>();
-        }
-
-        <span class="comment">// This call should delete the bpHistory.</span>
-        <a class="code" href="classBPredUnit.html#a14a43c5f5bc8c64c07a075ce1608f9c3">BPSquash</a>(pred_hist.front().bpHistory);
-
-        DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Removing history for [sn:%i] &quot;</span>
-                <span class="stringliteral">&quot;PC %s.\n&quot;</span>, tid, pred_hist.front().seqNum,
-                pred_hist.front().pc);
-
-        pred_hist.pop_front();
-
-        DPRINTF(Fetch, <span class="stringliteral">&quot;[tid:%i]: predHist.size(): %i\n&quot;</span>,
-                tid, predHist[tid].size());
-    }
-
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a78e6f48f8a11db90daab850527d48aa7"></a><!-- doxytag: member="BPredUnit::squash" ref="a78e6f48f8a11db90daab850527d48aa7" args="(const InstSeqNum &amp;squashed_sn, const TheISA::PCState &amp;corr_target, bool actually_taken, ThreadID tid)" -->
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Impl &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::squash </td>
-          <td>(</td>
-          <td class="paramtype">const InstSeqNum &amp;&#160;</td>
-          <td class="paramname"><em>squashed_sn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const TheISA::PCState &amp;&#160;</td>
-          <td class="paramname"><em>corr_target</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>actually_taken</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ThreadID&#160;</td>
-          <td class="paramname"><em>tid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Squashes all outstanding updates until a given sequence number, and corrects that sn's update with the proper address and taken/not taken. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">squashed_sn</td><td>The sequence number to squash any younger updates up until. </td></tr>
-    <tr><td class="paramname">corr_target</td><td>The correct branch target. </td></tr>
-    <tr><td class="paramname">actually_taken</td><td>The correct branch direction. </td></tr>
-    <tr><td class="paramname">tid</td><td>The thread id. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -1885,11 +1969,11 @@ template&lt;class Impl &gt; </div>
                 <span class="keywordflow">if</span> (onDemand &amp;&amp; 
                     (pred_hist.front().wasST || !pred_hist.front().wasStatic) &amp;&amp; 
                         !pred_hist.front().wasControl) {
-                        BTB.<a class="code" href="classDefaultBTB.html#a113bbc10686e3620f0f43ad1f5ba21b0">invalidate</a>((*hist_it).pc);
+                        <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#aa5c83affce9a681214af9f078d79736f">invalidate</a>((*hist_it).pc);
                 } <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (actually_taken) {
                         DPRINTF(Fetch,<span class="stringliteral">&quot;BranchPred: [tid: %i] BTB Update called for [sn:%i]&quot;</span>
                           <span class="stringliteral">&quot; PC: %s\n&quot;</span>, tid,hist_it-&gt;seqNum, hist_it-&gt;pc);
-                        BTB.<a class="code" href="classDefaultBTB.html#a554c0af23b92df168310e4edaf627c51">update</a>((*hist_it).pc, corrTarget, tid);
+                        <a class="code" href="classBTB.html">BTB</a>.<a class="code" href="classBTB.html#a3b219a528353ed5cc381b783d40a72fd">update</a>((*hist_it).pc, corrTarget, tid);
                         BTBLookups++;
             DPRINTF(Fetch,<span class="stringliteral">&quot;BranchPred: [tid: %i] BTB Update called for [sn:%i]&quot;</span>
                             <span class="stringliteral">&quot; PC: %s\n&quot;</span>, tid,hist_it-&gt;seqNum, hist_it-&gt;pc);
@@ -1913,6 +1997,137 @@ Here is the call graph for this function:</div>
 </map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a94a04b4bdf8f6b9b3cf33882bc16067b"></a><!-- doxytag: member="BPredUnit::squash" ref="a94a04b4bdf8f6b9b3cf33882bc16067b" args="(const InstSeqNum &amp;squashed_sn, ThreadID tid)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::squash </td>
+          <td>(</td>
+          <td class="paramtype">const InstSeqNum &amp;&#160;</td>
+          <td class="paramname"><em>squashed_sn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ThreadID&#160;</td>
+          <td class="paramname"><em>tid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Squashes all outstanding updates until a given sequence number. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">squashed_sn</td><td>The sequence number to squash any younger updates up until. </td></tr>
+    <tr><td class="paramname">tid</td><td>The thread id. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><pre class="fragment">{
+    History &amp;pred_hist = predHist[tid];
+
+    <span class="keywordflow">while</span> (!pred_hist.empty() &amp;&amp;
+           pred_hist.front().seqNum &gt; squashed_sn) {
+        <span class="keywordflow">if</span> (pred_hist.front().usedRAS) {
+            DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Restoring top of RAS to: %i,&quot;</span>
+                    <span class="stringliteral">&quot; target: %s.\n&quot;</span>, tid,
+                    pred_hist.front().RASIndex, pred_hist.front().RASTarget);
+
+            RAS[tid].<a class="code" href="classReturnAddrStack.html#a2ceaaf5c1223ef4a262ccf835dee7b08">restore</a>(pred_hist.front().RASIndex,
+                             pred_hist.front().RASTarget);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(pred_hist.front().wasCall &amp;&amp; pred_hist.front().validBTB) {
+            <span class="comment">// Was a call but predicated false. Pop RAS here</span>
+            DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid: %i] Squashing&quot;</span>
+                    <span class="stringliteral">&quot;  Call [sn:%i] PC: %s Popping RAS\n&quot;</span>, tid,
+                    pred_hist.front().seqNum, pred_hist.front().pc);
+            RAS[tid].<a class="code" href="classReturnAddrStack.html#a9d2396f6b3f90a54b178db4efc002a78">pop</a>();
+        }
+
+        <span class="comment">// This call should delete the bpHistory.</span>
+        <a class="code" href="classBPredUnit.html#a14a43c5f5bc8c64c07a075ce1608f9c3">BPSquash</a>(pred_hist.front().bpHistory);
+
+        DPRINTF(Fetch, <span class="stringliteral">&quot;BranchPred: [tid:%i]: Removing history for [sn:%i] &quot;</span>
+                <span class="stringliteral">&quot;PC %s.\n&quot;</span>, tid, pred_hist.front().seqNum,
+                pred_hist.front().pc);
+
+        pred_hist.pop_front();
+
+        DPRINTF(Fetch, <span class="stringliteral">&quot;[tid:%i]: predHist.size(): %i\n&quot;</span>,
+                tid, predHist[tid].size());
+    }
+
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b_icgraph.png" border="0" usemap="#classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b_icgraph" alt=""/></div>
+<map name="classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b_icgraph" id="classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a78e6f48f8a11db90daab850527d48aa7"></a><!-- doxytag: member="BPredUnit::squash" ref="a78e6f48f8a11db90daab850527d48aa7" args="(const InstSeqNum &amp;squashed_sn, const TheISA::PCState &amp;corr_target, bool actually_taken, ThreadID tid)" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Impl &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classBPredUnit.html">BPredUnit</a>&lt; Impl &gt;::squash </td>
+          <td>(</td>
+          <td class="paramtype">const InstSeqNum &amp;&#160;</td>
+          <td class="paramname"><em>squashed_sn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const TheISA::PCState &amp;&#160;</td>
+          <td class="paramname"><em>corr_target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>actually_taken</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ThreadID&#160;</td>
+          <td class="paramname"><em>tid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Squashes all outstanding updates until a given sequence number, and corrects that sn's update with the proper address and taken/not taken. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">squashed_sn</td><td>The sequence number to squash any younger updates up until. </td></tr>
+    <tr><td class="paramname">corr_target</td><td>The correct branch target. </td></tr>
+    <tr><td class="paramname">actually_taken</td><td>The correct branch direction. </td></tr>
+    <tr><td class="paramname">tid</td><td>The thread id. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1986,6 +2201,21 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <span class="comment">// Clear any state upon switch out.</span>
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Impl::MaxThreads; ++i) {
+        <a class="code" href="classBPredUnit.html#a94a04b4bdf8f6b9b3cf33882bc16067b">squash</a> (0, i);
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e_cgraph.png" border="0" usemap="#classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e_cgraph" alt=""/></div>
+<map name="classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e_cgraph" id="classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e_cgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -2022,7 +2252,18 @@ template&lt;class Impl &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{
+    <span class="comment">// Can reset all predictor state, but it&#39;s not necessarily better</span>
+    <span class="comment">// than leaving it be.</span>
+<span class="comment">/*</span>
+<span class="comment">    for (int i = 0; i &lt; Impl::MaxThreads; ++i)</span>
+<span class="comment">        RAS[i].reset ();</span>
+<span class="comment"></span>
+<span class="comment">    BP.reset ();</span>
+<span class="comment">    BTB.reset ();</span>
+<span class="comment">*/</span>
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="aa154b29fbf52ad49d89a046e94b53ac9"></a><!-- doxytag: member="BPredUnit::update" ref="aa154b29fbf52ad49d89a046e94b53ac9" args="(const InstSeqNum &amp;done_sn, ThreadID tid)" -->
@@ -2126,10 +2367,10 @@ template&lt;class Impl &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2bpred__unit_8h_source.html">bpred_unit.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/bp/<a class="el" href="backend_2bp_2bpred__unit_8h_source.html">bpred_unit.h</a></li>
 <li>/home/milad/esc_project/svn/PARS/src/forLater/<a class="el" href="forLater_2bpred__unit_8h_source.html">bpred_unit.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2bpred__unit__ctr_8h_source.html">bpred_unit_ctr.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/forLater/<a class="el" href="forLater_2bpred__unit__ctr_8h_source.html">bpred_unit_ctr.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/bp/<a class="el" href="backend_2bp_2bpred__unit_8cpp.html">bpred_unit.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/forLater/<a class="el" href="bpred__unit__ctr_8h_source.html">bpred_unit_ctr.h</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -2137,7 +2378,7 @@ template&lt;class Impl &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -2146,7 +2387,7 @@ template&lt;class Impl &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

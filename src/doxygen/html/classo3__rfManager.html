@@ -87,34 +87,61 @@ Collaboration diagram for o3_rfManager:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a0abe0df5acbb3b9d1514b62d38647cff">o3_rfManager</a> (string rf_name=&quot;o3_rfManager&quot;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#aeacfb1db7844c9f204b5b75ce38d671d">o3_rfManager</a> (<a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string rf_name=&quot;o3_rfManager&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a42a66fc34794ca6c7209f743557a2b3a">~o3_rfManager</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a95bfea851bf8107f208e550839749063">hasFreeWrPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a0883b605da49fe18bf7a1a04219307ab">hasFreeRdPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> numRegRdPorts)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a023f3671f90123fe8749ff13606f273c">canRename</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a702dcade81b3d2ccba4bae0ef8d7de30">renameRegs</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a785b7804c89faffdaee23e25c2cc3568">checkReadyAgain</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7">isReady</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a06b8854ab37feb6b44166a8565dc447a">completeRegs</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a7d3aa6c1316bac1153b24b7764d301fb">commitRegs</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#ac8199decc9c7a881b2099a68711cced7">squashRenameReg</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a55bbc6fec2cb3736926e27bf112d7365">regStat</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#a7cfd1869c23bd1c4d6a5dc994ee29817">hasFreeWire</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__rfManager.html#aeaf7e17c11cc6c75a342c3c32b25c546">updateWireState</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, bool update_wire=false)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a0abe0df5acbb3b9d1514b62d38647cff"></a><!-- doxytag: member="o3_rfManager::o3_rfManager" ref="a0abe0df5acbb3b9d1514b62d38647cff" args="(string rf_name=&quot;o3_rfManager&quot;)" -->
+<a class="anchor" id="aeacfb1db7844c9f204b5b75ce38d671d"></a><!-- doxytag: member="o3_rfManager::o3_rfManager" ref="aeacfb1db7844c9f204b5b75ce38d671d" args="(sysClock *, const YAML::Node &amp;, string rf_name=&quot;o3_rfManager&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">o3_rfManager::o3_rfManager </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>rf_name</em> = <code>&quot;o3_rfManager&quot;</code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>rf_name</em> = <code>&quot;o3_rfManager&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (rf_name),
-      _GRF (<span class="stringliteral">&quot;registerRename&quot;</span>)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a> (rf_name, clk),
+      _GRF (clk, root[<span class="stringliteral">&quot;rf&quot;</span>], <span class="stringliteral">&quot;registerRename&quot;</span>),
+      _e_rf (rf_name + <span class="stringliteral">&quot;.rf&quot;</span>, root[<span class="stringliteral">&quot;rf&quot;</span>]),
+      _e_rat (rf_name + <span class="stringliteral">&quot;.rat&quot;</span>, root[<span class="stringliteral">&quot;rat&quot;</span>]),
+      _e_apr (rf_name + <span class="stringliteral">&quot;.apr&quot;</span>, root[<span class="stringliteral">&quot;apr&quot;</span>]),
+      _e_arst (rf_name + <span class="stringliteral">&quot;.arst&quot;</span> , root[<span class="stringliteral">&quot;arst&quot;</span>]),
+      _e_w_rr (rf_name + <span class="stringliteral">&quot;.rr.wire&quot;</span>, root[<span class="stringliteral">&quot;rat&quot;</span>]),
+      s_rf_not_ready_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (rf_name, <span class="stringliteral">&quot;rf_not_ready_cnt&quot;</span>, <span class="stringliteral">&quot;Number of RF operand-not-ready events&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_cant_rename_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (rf_name, <span class="stringliteral">&quot;cant_rename_cnt&quot;</span>, <span class="stringliteral">&quot;Number of failed reg. rename attempts&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+      s_can_rename_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (rf_name, <span class="stringliteral">&quot;can_rename_cnt&quot;</span>, <span class="stringliteral">&quot;Number of success reg. rename attempts&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+      s_unavailable_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (rf_name, <span class="stringliteral">&quot;unavailable_cnt&quot;</span>, <span class="stringliteral">&quot;Number of unavailable wire accesses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
 { }
 </pre></div>
 </div>
@@ -154,8 +181,10 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                                 {
     <a class="code" href="classList.html">List&lt;AR&gt;</a>* ar_wr = ins-&gt;<a class="code" href="classdynInstruction.html#aeba50fabf115b7f60ce7201df044201c">getARwrList</a> ();
     <span class="keywordflow">if</span> (_GRF.<a class="code" href="classo3__registerRename.html#af3dacac6db9095e6aa73da550e2c71bc">getNumAvailablePR</a> () &lt; ar_wr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ()) {
-        <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* STALL FETCH */</span>
+        s_cant_rename_cnt++;
+        <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- STALL FETCH --*/</span>
     }
+    s_can_rename_cnt++;
     <span class="keywordflow">return</span> <span class="keyword">true</span>;
 }
 </pre></div>
@@ -168,11 +197,49 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a785b7804c89faffdaee23e25c2cc3568"></a><!-- doxytag: member="o3_rfManager::checkReadyAgain" ref="a785b7804c89faffdaee23e25c2cc3568" args="(dynInstruction *ins)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool o3_rfManager::checkReadyAgain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
+          <td class="paramname"><em>ins</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                       {
+    <a class="code" href="classList.html">List&lt;AR&gt;</a>* p_rdReg_list = ins-&gt;<a class="code" href="classdynInstruction.html#a82afd5173ddfd7a7654f28565263f1a2">getPRrdList</a> ();
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = p_rdReg_list-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1; i &gt;= 0; i--) {
+        <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> reg = p_rdReg_list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+        <span class="keywordflow">if</span> (!_GRF.<a class="code" href="classo3__registerRename.html#a66e4f1bfb4aef291e88933aad6c46ce6">isPRvalid</a> (reg)) {
+            <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                    <span class="stringliteral">&quot;RF read ops are ready: NO&quot;</span>, <span class="stringliteral">&quot;for ins: &quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+            <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- OPERAND NOT AVAILABLE --*/</span>
+        }
+    }
+
+    <span class="keywordflow">if</span> (p_rdReg_list-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) {
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d %s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                <span class="stringliteral">&quot;RF operand of ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <span class="stringliteral">&quot;are ready&quot;</span>, <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+        <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">/*-- ALL OPERANDS AVAILABLE --*/</span>
+    }
+
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d s (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+            <span class="stringliteral">&quot;RF operand of ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <span class="stringliteral">&quot;are ready&quot;</span>, <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- NOT ALL OPERANDS AVAILABLE --*/</span>
+}
+</pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a023f3671f90123fe8749ff13606f273c_icgraph.png" border="0" usemap="#classo3__rfManager_a023f3671f90123fe8749ff13606f273c_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a023f3671f90123fe8749ff13606f273c_icgraph" id="classo3__rfManager_a023f3671f90123fe8749ff13606f273c_icgraph">
+<div class="center"><img src="classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568_cgraph.png" border="0" usemap="#classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568_cgraph" alt=""/></div>
+<map name="classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568_cgraph" id="classo3__rfManager_a785b7804c89faffdaee23e25c2cc3568_cgraph">
 </map>
 </div>
 </p>
@@ -196,15 +263,18 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><pre class="fragment">                                                  {
     <a class="code" href="classList.html">List&lt;PR&gt;</a>* _pr = ins-&gt;<a class="code" href="classdynInstruction.html#a40d9f8a39500558a4dea5d41ce5d6442">getPRwrList</a> ();
     <a class="code" href="classList.html">List&lt;PR&gt;</a>* _ar = ins-&gt;<a class="code" href="classdynInstruction.html#aeba50fabf115b7f60ce7201df044201c">getARwrList</a> ();
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_ar-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == _pr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_ar-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == _pr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _pr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> p_reg = _pr-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
         <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> a_reg = _ar-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> prev_pr = _GRF.<a class="code" href="classo3__registerRename.html#ab76f162d8e2a6228404670bda2bad322">getPrevPR</a> (p_reg);
+        _e_arst.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         _GRF.<a class="code" href="classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b">updatePRstate</a> (p_reg,<a class="code" href="global_2global_8h.html#aa58e77d5a6caaeed4d4bd6f5b30f3ee7ac5d2dfed9104091a5093c9ec600c6811">ARCH_REG</a>);
         _GRF.<a class="code" href="classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b">updatePRstate</a> (prev_pr,<a class="code" href="global_2global_8h.html#aa58e77d5a6caaeed4d4bd6f5b30f3ee7a1e229ccb8b53a57de4ebb11c2d15272e">AVAILABLE</a>);
         _GRF.<a class="code" href="classo3__registerRename.html#af8f4e3c178f20fbee9a17d5781cd8f84">update_cRAT</a> (a_reg,p_reg);
+        _e_rat.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         _GRF.<a class="code" href="classo3__registerRename.html#aae9d93d826236d42ba090d1d53ba62af">setAsAvailablePR</a> (prev_pr);
+        _e_apr.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
     }
 }
 </pre></div>
@@ -213,15 +283,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_cgraph.png" border="0" usemap="#classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_cgraph" alt=""/></div>
 <map name="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_cgraph" id="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_icgraph.png" border="0" usemap="#classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_icgraph" id="classo3__rfManager_a7d3aa6c1316bac1153b24b7764d301fb_icgraph">
 </map>
 </div>
 </p>
@@ -246,7 +307,8 @@ Here is the caller graph for this function:</div>
     <a class="code" href="classList.html">List&lt;PR&gt;</a>* _pr = ins-&gt;<a class="code" href="classdynInstruction.html#a40d9f8a39500558a4dea5d41ce5d6442">getPRwrList</a> ();
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _pr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> p_reg = _pr-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
-        _GRF.<a class="code" href="classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b">updatePRstate</a> (p_reg,<a class="code" href="global_2global_8h.html#aa58e77d5a6caaeed4d4bd6f5b30f3ee7a71fcb7c3b8b1496853fd0ba43f0f082c">RENAMED_VALID</a>);
+        _GRF.<a class="code" href="classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b">updatePRstate</a> (p_reg, <a class="code" href="global_2global_8h.html#aa58e77d5a6caaeed4d4bd6f5b30f3ee7a71fcb7c3b8b1496853fd0ba43f0f082c">RENAMED_VALID</a>);
+        _e_rf.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
     }
 }
 </pre></div>
@@ -259,32 +321,23 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a_icgraph.png" border="0" usemap="#classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a_icgraph" id="classo3__rfManager_a06b8854ab37feb6b44166a8565dc447a_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a0883b605da49fe18bf7a1a04219307ab"></a><!-- doxytag: member="o3_rfManager::hasFreeRdPort" ref="a0883b605da49fe18bf7a1a04219307ab" args="(CYCLE now, WIDTH numRegRdPorts)" -->
+<a class="anchor" id="a7cfd1869c23bd1c4d6a5dc994ee29817"></a><!-- doxytag: member="o3_rfManager::hasFreeWire" ref="a7cfd1869c23bd1c4d6a5dc994ee29817" args="(AXES_TYPE, WIDTH)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool o3_rfManager::hasFreeRdPort </td>
+          <td class="memname">bool o3_rfManager::hasFreeWire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>, </td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>numRegRdPorts</em>&#160;</td>
+          <td class="paramname"><em>numRegWires</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -294,66 +347,20 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                {
-    <span class="keywordflow">return</span> _GRF.<a class="code" href="classo3__registerRename.html#a641c81a3e668177ef756fbeaa7c0998f">hasFreeRdPort</a> (now, numRegRdPorts);
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_cgraph.png" border="0" usemap="#classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_cgraph" alt=""/></div>
-<map name="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_cgraph" id="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_icgraph.png" border="0" usemap="#classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_icgraph" id="classo3__rfManager_a0883b605da49fe18bf7a1a04219307ab_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a95bfea851bf8107f208e550839749063"></a><!-- doxytag: member="o3_rfManager::hasFreeWrPort" ref="a95bfea851bf8107f208e550839749063" args="(CYCLE now)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool o3_rfManager::hasFreeWrPort </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                               {
-    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
-        <span class="keywordflow">return</span> _LQ.hasFreeWire (clk, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+<div class="fragment"><pre class="fragment">                                                                      {
+    <span class="keywordflow">if</span> (_GRF.<a class="code" href="classo3__registerRename.html#a0161dbd03732a138dbc3ed48f385392c">getNumFreeWires</a> (axes_type) &gt;= numRegWires) {
+        <span class="keywordflow">return</span> <span class="keyword">true</span>;
     } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> _SQ.hasFreeWire (clk, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+        s_unavailable_cnt++;
+        <span class="keywordflow">return</span> <span class="keyword">false</span>;
     }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a95bfea851bf8107f208e550839749063_cgraph.png" border="0" usemap="#classo3__rfManager_a95bfea851bf8107f208e550839749063_cgraph" alt=""/></div>
-<map name="classo3__rfManager_a95bfea851bf8107f208e550839749063_cgraph" id="classo3__rfManager_a95bfea851bf8107f208e550839749063_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a95bfea851bf8107f208e550839749063_icgraph.png" border="0" usemap="#classo3__rfManager_a95bfea851bf8107f208e550839749063_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a95bfea851bf8107f208e550839749063_icgraph" id="classo3__rfManager_a95bfea851bf8107f208e550839749063_icgraph">
+<div class="center"><img src="classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817_cgraph.png" border="0" usemap="#classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817_cgraph" alt=""/></div>
+<map name="classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817_cgraph" id="classo3__rfManager_a7cfd1869c23bd1c4d6a5dc994ee29817_cgraph">
 </map>
 </div>
 </p>
@@ -379,15 +386,24 @@ Here is the caller graph for this function:</div>
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = p_rdReg_list-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1; i &gt;= 0; i--) {
         <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> reg = p_rdReg_list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
         <span class="keywordflow">if</span> (!_GRF.<a class="code" href="classo3__registerRename.html#a66e4f1bfb4aef291e88933aad6c46ce6">isPRvalid</a> (reg)) {
-            <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* operand not available */</span>
+            s_rf_not_ready_cnt++;
+            <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                    <span class="stringliteral">&quot;RF read ops are ready: NO&quot;</span>, <span class="stringliteral">&quot;for ins: &quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+            <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- OPERAND NOT AVAILABLE --*/</span>
         } <span class="keywordflow">else</span> {
-            p_rdReg_list-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i); <span class="comment">/*optimization */</span>
+            p_rdReg_list-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (i); <span class="comment">/*-- OPTIMIZATION --*/</span>
         }
     }
     <span class="keywordflow">if</span> (p_rdReg_list-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) {
-        <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">/* all operands available */</span>
+        _e_rf.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> (ins-&gt;<a class="code" href="classdynInstruction.html#ac98229ee284df3ac8cb1e5e8d5ffaf94">getTotNumRdAR</a> ());
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+                <span class="stringliteral">&quot;RF read ops are ready: YES&quot;</span>, <span class="stringliteral">&quot;for ins: &quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+        <span class="keywordflow">return</span> <span class="keyword">true</span>; <span class="comment">/*-- ALL OPERANDS AVAILABLE --*/</span>
     }
-    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* not all operands available */</span>
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5eab5f11a05fa9d0811b7a3c86d8d1d2dcc">DBG_REG_FILES</a>, <span class="stringliteral">&quot;%s: %s %d (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+            <span class="stringliteral">&quot;RF read ops are ready: NO&quot;</span>, <span class="stringliteral">&quot;for ins: &quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+    s_rf_not_ready_cnt++;
+    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- NOT ALL OPERANDS AVAILABLE --*/</span>
 }
 </pre></div>
 <p><div class="dynheader">
@@ -399,11 +415,30 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a55bbc6fec2cb3736926e27bf112d7365"></a><!-- doxytag: member="o3_rfManager::regStat" ref="a55bbc6fec2cb3736926e27bf112d7365" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void o3_rfManager::regStat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                            {
+    _GRF.<a class="code" href="classo3__registerRename.html#ae797fc0baafbdbfb57d5b4d3b1095c17">getStat</a> ();
+}
+</pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7_icgraph.png" border="0" usemap="#classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7_icgraph" id="classo3__rfManager_a9b85902c553b147228d0bb3b57280ca7_icgraph">
+<div class="center"><img src="classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365_cgraph.png" border="0" usemap="#classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365_cgraph" alt=""/></div>
+<map name="classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365_cgraph" id="classo3__rfManager_a55bbc6fec2cb3736926e27bf112d7365_cgraph">
 </map>
 </div>
 </p>
@@ -427,26 +462,41 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><pre class="fragment">                                                  {
     <a class="code" href="classList.html">List&lt;AR&gt;</a>* ar_rd = ins-&gt;<a class="code" href="classdynInstruction.html#abdbaf4c07e390bbdaaed41a983774538">getARrdList</a> ();
     <a class="code" href="classList.html">List&lt;AR&gt;</a>* ar_wr = ins-&gt;<a class="code" href="classdynInstruction.html#aeba50fabf115b7f60ce7201df044201c">getARwrList</a> ();
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_GRF.<a class="code" href="classo3__registerRename.html#af3dacac6db9095e6aa73da550e2c71bc">getNumAvailablePR</a> () &gt;= ar_wr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_GRF.<a class="code" href="classo3__registerRename.html#af3dacac6db9095e6aa73da550e2c71bc">getNumAvailablePR</a> () &gt;= ar_wr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
 
-    <span class="comment">/* RENAME READ REFISTERS FIRST */</span>
+    <span class="comment">/*-- RENAME READ REFISTERS FIRST --*/</span>
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; ar_rd-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
         <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> a_reg = ar_rd-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> p_reg = _GRF.<a class="code" href="classo3__registerRename.html#a1e65eca8eb066cf294a056d015469992">renameReg</a> (a_reg);
         ins-&gt;<a class="code" href="classdynInstruction.html#a86ac41fe463dde2aee30a22d8bc243ad">setPR</a> (p_reg, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>);
+        _e_rat.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
     }
 
-    <span class="comment">/* RENAME WRITE REFISTERS SECOND */</span>
+    <span class="comment">/*-- RENAME WRITE REFISTERS SECOND --*/</span>
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; ar_wr-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_GRF.<a class="code" href="classo3__registerRename.html#a500dec17b068c33a1813786cb6727273">isAnyPRavailable</a> () == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;A physical reg must have been available.&quot;</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_GRF.<a class="code" href="classo3__registerRename.html#a500dec17b068c33a1813786cb6727273">isAnyPRavailable</a> () == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;A physical reg must have been available.&quot;</span>);
         <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> a_reg = ar_wr-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> prev_pr = _GRF.<a class="code" href="classo3__registerRename.html#a1e65eca8eb066cf294a056d015469992">renameReg</a> (a_reg);
+        _e_rat.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> new_pr = _GRF.<a class="code" href="classo3__registerRename.html#a314a54fa930b7fa3de55c8b66e46061b">getAvailablePR</a> ();
+        _e_apr.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         _GRF.<a class="code" href="classo3__registerRename.html#ac29d3ca88b64d065d8f52b4384895c4b">update_fRAT</a> (a_reg, new_pr);
+        _e_rat.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         _GRF.<a class="code" href="classo3__registerRename.html#a6e6d2444676ba95b85d0a84908f6e5fe">updatePR</a> (new_pr, prev_pr, <a class="code" href="global_2global_8h.html#aa58e77d5a6caaeed4d4bd6f5b30f3ee7a58657869764abad0bbad0845689c4184">RENAMED_INVALID</a>);
+        _e_arst.<a class="code" href="classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c">ramAccess</a> ();
         ins-&gt;<a class="code" href="classdynInstruction.html#a86ac41fe463dde2aee30a22d8bc243ad">setPR</a> (new_pr, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>);
     }
-    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* DON&#39;T STALL FETCH */</span>
+
+    <span class="comment">/*-- WIRE ENERGY HANDLING --*/</span>
+    list&lt;string&gt; <a class="code" href="classwires.html">wires</a>;
+    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> num_elements = 1; <span class="comment">//opcode</span>
+    num_elements += (ins-&gt;<a class="code" href="classdynInstruction.html#a73d8b75f5c68a4cb2a7f434d4b8d4143">getNumRdAR</a> () + ins-&gt;<a class="code" href="classdynInstruction.html#a5a78c835af15909f0639408024aba2c7">getNumWrAR</a> ());
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_elements; i++) {
+        wires.push_back (<span class="stringliteral">&quot;e_w_cache2rr&quot;</span>);
+    }
+    _e_w_rr.<a class="code" href="classwire__energy.html#a44e92ccd312adf5dbce4641e5e3ea362">wireAccess</a> (wires);
+
+    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/*-- DON&#39;T STALL FETCH --*/</span>
 }
 </pre></div>
 <p><div class="dynheader">
@@ -454,15 +504,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_cgraph.png" border="0" usemap="#classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_cgraph" alt=""/></div>
 <map name="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_cgraph" id="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_icgraph.png" border="0" usemap="#classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_icgraph" alt=""/></div>
-<map name="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_icgraph" id="classo3__rfManager_a702dcade81b3d2ccba4bae0ef8d7de30_icgraph">
 </map>
 </div>
 </p>
@@ -483,8 +524,9 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                    {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea33f7bd8ad1104a843bb6223ac41336f4">DBG_TEST</a>, <span class="stringliteral">&quot;** %s: %s (cyc:)\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;in squash for RR&quot;</span>);
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea33f7bd8ad1104a843bb6223ac41336f4">DBG_TEST</a>, <span class="stringliteral">&quot;** %s: %s (cyc:)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;in squash for RR&quot;</span>);
     _GRF.<a class="code" href="classo3__registerRename.html#a72f6bb205743c3bbbe41c47584208c90">squashRenameReg</a> ();
+    <span class="comment">/* TODO model the ARST and APR table energies for squash */</span>
 }
 </pre></div>
 <p><div class="dynheader">
@@ -496,11 +538,58 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="aeaf7e17c11cc6c75a342c3c32b25c546"></a><!-- doxytag: member="o3_rfManager::updateWireState" ref="aeaf7e17c11cc6c75a342c3c32b25c546" args="(AXES_TYPE, WIDTH, bool update_wire=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void o3_rfManager::updateWireState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
+          <td class="paramname"><em>numRegWires</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_wire</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                                            {
+    list&lt;string&gt; <a class="code" href="classwires.html">wires</a>;
+    <span class="keywordflow">if</span> (update_wire) {
+        <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>) {
+            wires.push_back (<span class="stringliteral">&quot;e_w_eu2rf&quot;</span>);
+        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>) {
+            wires.push_back (<span class="stringliteral">&quot;e_w_eu2rf&quot;</span>);
+        }
+    }
+
+    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; numRegWires; i++) {
+        _GRF.<a class="code" href="classo3__registerRename.html#a6baada285270ffebab40fd8ad7afdac7">updateWireState</a> (axes_type, wires, update_wire);
+    }
+}
+</pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__rfManager_ac8199decc9c7a881b2099a68711cced7_icgraph.png" border="0" usemap="#classo3__rfManager_ac8199decc9c7a881b2099a68711cced7_icgraph" alt=""/></div>
-<map name="classo3__rfManager_ac8199decc9c7a881b2099a68711cced7_icgraph" id="classo3__rfManager_ac8199decc9c7a881b2099a68711cced7_icgraph">
+<div class="center"><img src="classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546_cgraph.png" border="0" usemap="#classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546_cgraph" alt=""/></div>
+<map name="classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546_cgraph" id="classo3__rfManager_aeaf7e17c11cc6c75a342c3c32b25c546_cgraph">
 </map>
 </div>
 </p>
@@ -509,7 +598,6 @@ Here is the caller graph for this function:</div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="o3_2rfManager_8h_source.html">rfManager.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="memManager_8cpp.html">memManager.cpp</a></li>
 <li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="o3_2rfManager_8cpp.html">rfManager.cpp</a></li>
 </ul>
 </div>
@@ -518,7 +606,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -527,7 +615,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

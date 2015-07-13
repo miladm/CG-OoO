@@ -88,35 +88,69 @@ Collaboration diagram for stage:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a680eded15b373eaba43a71a68c97bb73">~stage</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a362592f44e2c66fee59e39258380c285">tick</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="el" href="vliwScheduler_8cpp.html#a1f4871d45089b039d95d3832dd123827">cycle</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#ae8812f533c2c07facb960002aedcb6ab">stage</a> (<a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> stage_width, string <a class="el" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a> (<a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, string, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;root, <a class="el" href="classsysClock.html">sysClock</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a680eded15b373eaba43a71a68c97bb73">~stage</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a8936cf4c32fa9d9f27ca8d3306468cc8">s_squash_cycles</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#ac8c48351ea5ff2ad92e097f1ab3684e0">s_squash_stall_cycles</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRatioStat.html">RatioStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#a31614935ce5336305af2d3dfc6fd85b6">s_ipc</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstage__energy.html">stage_energy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="abc77b1bb1d0891e47dfaffe9b0203e8d"></a><!-- doxytag: member="stage::stage" ref="abc77b1bb1d0891e47dfaffe9b0203e8d" args="()" -->
+<a class="anchor" id="af7798f81a3204e4415a4c8e546f2e25b"></a><!-- doxytag: member="stage::stage" ref="af7798f81a3204e4415a4c8e546f2e25b" args="(WIDTH, string, const YAML::Node &amp;root, sysClock *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">stage::stage </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
+          <td class="paramname"><em>stage_width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>stage_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">             {
-        _latency = 1; <span class="comment">//default</span>
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>(stage_name),
+      <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>(stage_width),
+      <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a> (clk),
+      <a class="code" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;ins_cnt&quot;</span>, <span class="stringliteral">&quot;Number of dynamic instructions in &quot;</span> + stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;stall_cycles&quot;</span>, <span class="stringliteral">&quot;Number of stall cycles in &quot;</span> + stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      <a class="code" href="classstage.html#a8936cf4c32fa9d9f27ca8d3306468cc8">s_squash_cycles</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;squash_cycles&quot;</span>, <span class="stringliteral">&quot;Number of squash cycles in &quot;</span> + stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+      <a class="code" href="classstage.html#ac8c48351ea5ff2ad92e097f1ab3684e0">s_squash_stall_cycles</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;squash_stall_cycles&quot;</span>, <span class="stringliteral">&quot;Number of stall cycles in squash&quot;</span> + stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+      <a class="code" href="classstage.html#a31614935ce5336305af2d3dfc6fd85b6">s_ipc</a>  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (clk-&gt;<a class="code" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> (), stage_name, <span class="stringliteral">&quot;ipc&quot;</span>, <span class="stringliteral">&quot;Instructions per cycle of &quot;</span> +stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)),
+          <a class="code" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a> (stage_name, root)
+
+{
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(!<a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.empty() &amp;&amp; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a> &gt; 0);
 }
 </pre></div>
 </div>
@@ -138,50 +172,13 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ae8812f533c2c07facb960002aedcb6ab"></a><!-- doxytag: member="stage::stage" ref="ae8812f533c2c07facb960002aedcb6ab" args="(WIDTH stage_width, string _stage_name)" -->
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a2a24f2b2bce75ee75d7d03962eb0cd23"></a><!-- doxytag: member="stage::_clk" ref="a2a24f2b2bce75ee75d7d03962eb0cd23" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">stage::stage </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>stage_width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>_stage_name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>(stage_name),
-        <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>(stage_width),
-    <a class="code" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;ins_cnt&quot;</span>, <span class="stringliteral">&quot;Number of dynamic instructions in &quot;</span>+stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-    <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;stall_cycles&quot;</span>, <span class="stringliteral">&quot;Number of stall cycles in &quot;</span>+stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-    <a class="code" href="classstage.html#a8936cf4c32fa9d9f27ca8d3306468cc8">s_squash_cycles</a> (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;squash_cycles&quot;</span>, <span class="stringliteral">&quot;Number of squash cycles in &quot;</span>+stage_name, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
-{
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(!<a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.empty() &amp;&amp; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a> &gt; 0);
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a680eded15b373eaba43a71a68c97bb73"></a><!-- doxytag: member="stage::~stage" ref="a680eded15b373eaba43a71a68c97bb73" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">stage::~stage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="classsysClock.html">sysClock</a>* <a class="el" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">stage::_clk</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -189,28 +186,19 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a362592f44e2c66fee59e39258380c285"></a><!-- doxytag: member="stage::tick" ref="a362592f44e2c66fee59e39258380c285" args="(CYCLE cycle)" -->
+<a class="anchor" id="abb5082df431c2858839d3b54ef049ff9"></a><!-- doxytag: member="stage::_e_stage" ref="abb5082df431c2858839d3b54ef049ff9" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> stage::tick </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>cycle</em></td><td>)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="classstage__energy.html">stage_energy</a> <a class="el" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">stage::_e_stage</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                       {
-        <span class="keywordflow">return</span> <a class="code" href="bkEnd_8cpp.html#a24ddb63d7b594cb1489ae68dfa66e584">cycle</a>+latency;
-}
-</pre></div>
+
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="ad8500743b9a08a7d3b7a16e2c9ee7bca"></a><!-- doxytag: member="stage::_stage_name" ref="ad8500743b9a08a7d3b7a16e2c9ee7bca" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -250,12 +238,38 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a31614935ce5336305af2d3dfc6fd85b6"></a><!-- doxytag: member="stage::s_ipc" ref="a31614935ce5336305af2d3dfc6fd85b6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRatioStat.html">RatioStat</a>&amp; <a class="el" href="classstage.html#a31614935ce5336305af2d3dfc6fd85b6">stage::s_ipc</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8936cf4c32fa9d9f27ca8d3306468cc8"></a><!-- doxytag: member="stage::s_squash_cycles" ref="a8936cf4c32fa9d9f27ca8d3306468cc8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a>&amp; <a class="el" href="classstage.html#a8936cf4c32fa9d9f27ca8d3306468cc8">stage::s_squash_cycles</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac8c48351ea5ff2ad92e097f1ab3684e0"></a><!-- doxytag: member="stage::s_squash_stall_cycles" ref="ac8c48351ea5ff2ad92e097f1ab3684e0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a>&amp; <a class="el" href="classstage.html#ac8c48351ea5ff2ad92e097f1ab3684e0">stage::s_squash_stall_cycles</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -277,10 +291,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="stage_8h_source.html">stage.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2stage_8h_source.html">stage.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="stage_8cpp.html">stage.cpp</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2stage_8cpp.html">stage.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="stage_8h_source.html">stage.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="stage_8cpp.html">stage.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -288,7 +300,7 @@ Protected Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -297,7 +309,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

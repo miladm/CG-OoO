@@ -65,23 +65,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="classfetch.html">fetch</a>, including all inherited members.<table>
+  <tr class="memlist"><td><a class="el" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#abe2124748be0ac8b2e2b516203f9b194">doFETCH</a>(sysClock &amp;clk)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#ac35d86b42890d4facb56666a58548a8d">fetch</a>()</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#ad7f7cc7347c967a7843194684f3c3b21">fetch</a>(port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, port&lt; dynInstruction * &gt; &amp;fetch_to_decode_port, port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, WIDTH fetch_width, string stage_name)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#af1aaa5a5c78172ec27dae140c7dc3ab3">fetchImpl</a>(sysClock &amp;clk)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#afd8c8e8e16f0f288d1090d59a85c2281">regStat</a>(sysClock &amp;clk)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classfetch.html#af54aeae9d6168f3c25ce11b8c2f60d2a">doFETCH</a>(FRONTEND_STATUS)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classfetch.html#a26e2014f97a0e55197156504b5bbcbf5">fetch</a>(port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, port&lt; dynInstruction * &gt; &amp;fetch_to_decode_port, port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, CAMtable&lt; dynInstruction * &gt; *iQUE, CAMtable&lt; dynInstruction * &gt; *iROB, WIDTH fetch_width, sysClock *clk, string stage_name)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstage.html#a31614935ce5336305af2d3dfc6fd85b6">s_ipc</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#a8936cf4c32fa9d9f27ca8d3306468cc8">s_squash_cycles</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstage.html#ac8c48351ea5ff2ad92e097f1ab3684e0">s_squash_stall_cycles</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a></td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#a39b22ed50d3b51ebe311be86343fed2a">squash</a>(sysClock &amp;clk)</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a>()</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstage.html#ae8812f533c2c07facb960002aedcb6ab">stage</a>(WIDTH stage_width, string _stage_name)</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstage.html#a362592f44e2c66fee59e39258380c285">tick</a>(CYCLE cycle)</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a>(WIDTH, string, const YAML::Node &amp;root, sysClock *)</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classfetch.html#a7bb4278b048d48d4225cb44b6553b3d6">~fetch</a>()</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classfetch.html#a7bb4278b048d48d4225cb44b6553b3d6">~fetch</a>()</td><td><a class="el" href="classfetch.html">fetch</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstage.html#a680eded15b373eaba43a71a68c97bb73">~stage</a>()</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classstage.html#a680eded15b373eaba43a71a68c97bb73">~stage</a>()</td><td><a class="el" href="classstage.html">stage</a></td><td><code> [protected]</code></td></tr>
 </table></div>
 <!-- window showing the filter options -->
@@ -89,7 +85,7 @@ This is the complete list of members for <a class="el" href="classfetch.html">fe
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -98,7 +94,7 @@ This is the complete list of members for <a class="el" href="classfetch.html">fe
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -15,30 +15,57 @@ Collaboration diagram for wires:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classwires_a83cbfcb51f8312d7f7ba6de2aaf4bd2d}{wires} (\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, string wire\_\-name=\char`\"{}wire\char`\"{})
+\hyperlink{classwires_a9f5bf25511e6a09362ee3e90c8ce2b08}{wires} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, \hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string wire\_\-name=\char`\"{}wire\char`\"{})
 \item 
 \hyperlink{classwires_a9ab869c88f82f1b3176c3c24bcf003f8}{$\sim$wires} ()
 \item 
-bool \hyperlink{classwires_a771fb9276284f0780918b49484a66abf}{hasFreeWire} (\hyperlink{classsysClock}{sysClock} \&)
+bool \hyperlink{classwires_a7fdda3374000eee688b3f9ea128dcc3a}{hasFreeWire} ()
 \item 
-void \hyperlink{classwires_ace9558373a8974248bf4d126574f0758}{updateWireState} (\hyperlink{classsysClock}{sysClock} \&)
+void \hyperlink{classwires_a647e11b30c29284d122ad2813d2dbe31}{updateWireState} (list$<$ string $>$ wire\_\-name=list$<$ string $>$(), bool update\_\-wire=false)
 \item 
-\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classwires_a464c90345006d2077ba1023ba77b59f1}{getNumFreeWire} (\hyperlink{classsysClock}{sysClock} \&)
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classwires_a6da822d9a831e60702cc74f43306e48a}{getNumFreeWires} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classwires_a83cbfcb51f8312d7f7ba6de2aaf4bd2d}{
+\hypertarget{classwires_a9f5bf25511e6a09362ee3e90c8ce2b08}{
 \index{wires@{wires}!wires@{wires}}
 \index{wires@{wires}!wires@{wires}}
 \subsubsection[{wires}]{\setlength{\rightskip}{0pt plus 5cm}wires::wires (
 \begin{DoxyParamCaption}
-\item[{{\bf WIDTH}}]{, }
-\item[{{\bf AXES\_\-TYPE}}]{, }
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{wire\_\-name = {\ttfamily \char`\"{}wire\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classwires_a83cbfcb51f8312d7f7ba6de2aaf4bd2d}
+\label{classwires_a9f5bf25511e6a09362ee3e90c8ce2b08}
+
+\begin{DoxyCode}
+        : unit (wire_name, clk),
+      _axes_type (axes_type),
+      _wire_len (10),
+      _e_wire (wire_name, root),
+      s_unavailable_cnt (g_stats.newScalarStat (wire_name, "unavailable_cnt", "Nu
+      mber of unavailable wire accesses", 0, NO_PRINT_ZERO))
+{
+    if (_axes_type == READ) {
+        root["rd_wire_cnt"] >> _wire_cnt;
+    } else if (_axes_type == WRITE) {
+        root["wr_wire_cnt"] >> _wire_cnt;
+    } else {
+        Assert (0 && "Invalid wire type");
+    }
+    Assert (_wire_cnt > 0);
+
+    _cycle = _clk->now ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classwires_a9ab869c88f82f1b3176c3c24bcf003f8}{
 \index{wires@{wires}!$\sim$wires@{$\sim$wires}}
 \index{$\sim$wires@{$\sim$wires}!wires@{wires}}
@@ -49,37 +76,117 @@ void \hyperlink{classwires_ace9558373a8974248bf4d126574f0758}{updateWireState} (
 )}}
 \label{classwires_a9ab869c88f82f1b3176c3c24bcf003f8}
 
+\begin{DoxyCode}
+{}
+\end{DoxyCode}
+
 
 \subsection{Member Function Documentation}
-\hypertarget{classwires_a464c90345006d2077ba1023ba77b59f1}{
-\index{wires@{wires}!getNumFreeWire@{getNumFreeWire}}
-\index{getNumFreeWire@{getNumFreeWire}!wires@{wires}}
-\subsubsection[{getNumFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} wires::getNumFreeWire (
+\hypertarget{classwires_a6da822d9a831e60702cc74f43306e48a}{
+\index{wires@{wires}!getNumFreeWires@{getNumFreeWires}}
+\index{getNumFreeWires@{getNumFreeWires}!wires@{wires}}
+\subsubsection[{getNumFreeWires}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} wires::getNumFreeWires (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classwires_a464c90345006d2077ba1023ba77b59f1}
-\hypertarget{classwires_a771fb9276284f0780918b49484a66abf}{
+\label{classwires_a6da822d9a831e60702cc74f43306e48a}
+
+\begin{DoxyCode}
+                              {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        return _wire_cnt;
+    } else if (_cycle == now) {
+        return _num_free_wire;
+    }
+    Assert (true == false && "should not have gotten here");
+    return _wire_cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classwires_a7fdda3374000eee688b3f9ea128dcc3a}{
 \index{wires@{wires}!hasFreeWire@{hasFreeWire}}
 \index{hasFreeWire@{hasFreeWire}!wires@{wires}}
 \subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool wires::hasFreeWire (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classwires_a771fb9276284f0780918b49484a66abf}
-\hypertarget{classwires_ace9558373a8974248bf4d126574f0758}{
+\label{classwires_a7fdda3374000eee688b3f9ea128dcc3a}
+
+\begin{DoxyCode}
+                         {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        return true;
+    } else if (_cycle == now) {
+        bool result = (_num_free_wire > 0) ? true : false;
+        if (!result) s_unavailable_cnt++;
+        return result;
+    }
+    Assert (true == false && "should not have gotten here");
+    return false;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classwires_a647e11b30c29284d122ad2813d2dbe31}{
 \index{wires@{wires}!updateWireState@{updateWireState}}
 \index{updateWireState@{updateWireState}!wires@{wires}}
 \subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void wires::updateWireState (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{}
+\item[{list$<$ string $>$}]{wire\_\-name = {\ttfamily list$<$string$>$()}, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}}
-\label{classwires_ace9558373a8974248bf4d126574f0758}
+\label{classwires_a647e11b30c29284d122ad2813d2dbe31}
+
+\begin{DoxyCode}
+                                                                     {
+    CYCLE now = _clk->now ();
+    if (_cycle < now) {
+        _num_free_wire = _wire_cnt - 1; /*-- 1 for having used the wire once alre
+      ady --*/
+        _cycle = now;
+        Assert (_num_free_wire >= 0);
+    } else if (_cycle == now) {
+        _num_free_wire--;
+    }
+    if (update_wire) 
+        _e_wire.wireAccess (wire_name);
+}
+\end{DoxyCode}
 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{wires_8h}{wires.h}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{wires_8h}{wires.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{wires_8cpp}{wires.cpp}\end{DoxyCompactItemize}

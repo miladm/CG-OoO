@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>SatCounter Class Reference</title>
+<title>PhArS: SatCounter Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -14,10 +14,22 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 --></script>
 <div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhArS&#160;<span id="projectnumber">1</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -42,6 +54,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -54,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="SatCounter" -->
-<p><code>#include &lt;<a class="el" href="sat__counter_8hh_source.html">sat_counter.hh</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="sat__counter_8h_source.html">sat_counter.h</a>&gt;</code></p>
 
 <p><a href="classSatCounter-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -64,15 +77,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#a2c0ac2c5012c1003209255380b7a5a0e">SatCounter</a> (unsigned bits)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#a0e27317742410f9657cfb7e57b2fab8f">SatCounter</a> (unsigned bits, uint8_t initial_val)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#a461a4ab53df59a441c959f69208c1e06">setBits</a> (unsigned bits)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5715710c5257b3f72f6b43de6b9ae41"></a><!-- doxytag: member="SatCounter::reset" ref="ac5715710c5257b3f72f6b43de6b9ae41" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#ac5715710c5257b3f72f6b43de6b9ae41">reset</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#ac41f1f2dc6429c4fd9c76cf2f4d967a7">increment</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#a7fdca9f03329a0214e3eacc683db2af6">decrement</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSatCounter.html#a14b2762bcf8d51e8653c6eb26b3fbcf9">read</a> () const </td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Private counter class for the internal saturating counters. Implements an n bit saturating counter and provides methods to increment, decrement, and read it. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Consider making this something that more closely mimics a built in class so you can use ++ or --. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>Consider making this something that more closely mimics a built in class so you can use ++ or --. </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6b62758b12f44e12c95bf54db63f8e74"></a><!-- doxytag: member="SatCounter::SatCounter" ref="a6b62758b12f44e12c95bf54db63f8e74" args="()" -->
 <div class="memitem">
@@ -88,7 +100,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </div>
 <div class="memdoc">
 <p>Constructor for the counter. </p>
-
+<div class="fragment"><pre class="fragment">    : initialVal(0), counter(0)
+{
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a2c0ac2c5012c1003209255380b7a5a0e"></a><!-- doxytag: member="SatCounter::SatCounter" ref="a2c0ac2c5012c1003209255380b7a5a0e" args="(unsigned bits)" -->
@@ -112,7 +127,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><pre class="fragment">    : initialVal(0), maxVal((1 &lt;&lt; bits) - 1), counter(0)
+{
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a0e27317742410f9657cfb7e57b2fab8f"></a><!-- doxytag: member="SatCounter::SatCounter" ref="a0e27317742410f9657cfb7e57b2fab8f" args="(unsigned bits, uint8_t initial_val)" -->
@@ -147,7 +165,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><pre class="fragment">    : initialVal(0), maxVal((1 &lt;&lt; bits) - 1), counter(initial_val)
+{
+    <span class="comment">// Check to make sure initial value doesn&#39;t exceed the max counter value.</span>
+    <span class="keywordflow">if</span> (initial_val &gt; maxVal) {
+        std::cerr &lt;&lt; <span class="stringliteral">&quot;BP: Initial counter value exceeds max size.&quot;</span>;
+    }
+}
+</pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -165,7 +190,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </div>
 <div class="memdoc">
 <p>Decrements the counter's current value. </p>
-
+<div class="fragment"><pre class="fragment">    {
+        <span class="keywordflow">if</span> (counter &gt; 0) {
+            --counter;
+        }
+    }
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="ac41f1f2dc6429c4fd9c76cf2f4d967a7"></a><!-- doxytag: member="SatCounter::increment" ref="ac41f1f2dc6429c4fd9c76cf2f4d967a7" args="()" -->
@@ -182,7 +212,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </div>
 <div class="memdoc">
 <p>Increments the counter's current value. </p>
-
+<div class="fragment"><pre class="fragment">    {
+        <span class="keywordflow">if</span> (counter &lt; maxVal) {
+            ++counter;
+        }
+    }
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a14b2762bcf8d51e8653c6eb26b3fbcf9"></a><!-- doxytag: member="SatCounter::read" ref="a14b2762bcf8d51e8653c6eb26b3fbcf9" args="() const " -->
@@ -199,7 +234,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </div>
 <div class="memdoc">
 <p>Read the counter's value. </p>
-
+<div class="fragment"><pre class="fragment">    { <span class="keywordflow">return</span> counter; }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ac5715710c5257b3f72f6b43de6b9ae41"></a><!-- doxytag: member="SatCounter::reset" ref="ac5715710c5257b3f72f6b43de6b9ae41" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SatCounter::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ counter = initialVal; }
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a461a4ab53df59a441c959f69208c1e06"></a><!-- doxytag: member="SatCounter::setBits" ref="a461a4ab53df59a441c959f69208c1e06" args="(unsigned bits)" -->
@@ -217,12 +270,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </div>
 <div class="memdoc">
 <p>Sets the number of bits. </p>
-
+<div class="fragment"><pre class="fragment">{
+    maxVal = (1 &lt;&lt; bits) - 1;
+}
+</pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="sat__counter_8hh_source.html">sat_counter.hh</a></li>
-<li>sat_counter.cpp</li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/bp_lib/<a class="el" href="sat__counter_8h_source.html">sat_counter.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/bp_lib/<a class="el" href="sat__counter_8cpp.html">sat_counter.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -230,7 +286,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -239,7 +295,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 30 2014 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

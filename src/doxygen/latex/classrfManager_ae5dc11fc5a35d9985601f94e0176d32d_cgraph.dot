@@ -5,11 +5,13 @@ digraph G
   rankdir=LR;
   Node1 [label="rfManager::writeToRF",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="dynInstruction::getARrdList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#abdbaf4c07e390bbdaaed41a983774538"];
+  Node2 [label="dynInstruction::getARwrList",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#aeba50fabf115b7f60ce7201df044201c"];
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
   Node3 [label="List::Nth",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#a5eb964816de33c85e1d46658ddf8c6c4"];
   Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
   Node4 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
   Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
-  Node5 [label="registerFile::updateReg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b"];
+  Node5 [label="table_energy::ramAccess",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="registerFile::updateReg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b"];
 }

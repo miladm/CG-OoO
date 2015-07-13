@@ -67,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="o3_memManager" --><!-- doxytag: inherits="unit" -->
-<p><code>#include &lt;<a class="el" href="memManager_8h_source.html">memManager.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="o3_2memManager_8h_source.html">memManager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for o3_memManager:</div>
 <div class="dyncontent">
@@ -87,43 +87,83 @@ Collaboration diagram for o3_memManager:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#ac2f65f772f531fa8c4a01fe6ef344bdf">o3_memManager</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#adafcb2964b462304f79aa5b2e1992998">o3_memManager</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;memory_to_scheduler_port, <a class="el" href="classsysClock.html">sysClock</a> *<a class="el" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>, string lsq_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a2e67f82384e5ee8a753332a347eac62f">~o3_memManager</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#af32030ab25dd729e0aa65a15e60ad562">hasFreeWrPort</a> (<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a71127b3f6545996a55cfa87735cb433f">hasFreeRdPort</a> (<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a4b60f17893db95011c3ff8e6ac4f1724">regStat</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a65290b7cff22c1fd282d3279f955e41c">hasFreeWire</a> (<a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a3481a9cf94186793deb95874d4d25e3d">updateWireState</a> (<a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a7bfed5553c2212750ee610da67bc43e7">pushBack</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a401c114902989a9296444795c28cd5fb">memAddrReady</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a9e44a6173a6b099fa6e7644960aac5cf">issueToMem</a> (<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a3a7d3249d284d0ebb297167b47ad8ce2">commit</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *, <a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a124d7a6a84cf5cbc75a171a773784fbb">issueToMem</a> (<a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#ae95cfddde7894d5cd3a865c857faba54">commit</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#afdb4d5b4146efa960976f66c3ccd358e">squash</a> (<a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">pair&lt; bool, <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#abf1656aba29cd17f3c223f0c2ee9ba16">hasFinishedIns</a> (<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">pair&lt; bool, <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a8be15f63b5d876cb3ab99b7eec4c643c">hasFinishedIns</a> (<a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#aeef4a4447f1777bb2a4c63920796c1a4">getAxesLatency</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a408c667a491a930d66fd1a0f7e8e9ec6">hasCommitSt</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#ac7d368eb5062860954125ce0fbd3c3b9">delAfinishedSt</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#ace575a2ddcf90ab36e6aa8399e5cd923">isLQviolation</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *, <a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a7d75c416d7ce73b8b1bb2203b8ebdb4e">delAfinishedSt</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#afcbdb28a588d6b0990761dfe751cb07d">hasStToAddr</a> (<a class="el" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>, <a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">pair&lt; bool, <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#afdb19a44895888ec99fb6495dccc1dcc">isLQviolation</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#aa2bb5f372b197474b76c8f6ae3531698">completeLd</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memManager.html#a9ccbaf680579ad2517f01a92dbe147e5">forward</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac2f65f772f531fa8c4a01fe6ef344bdf"></a><!-- doxytag: member="o3_memManager::o3_memManager" ref="ac2f65f772f531fa8c4a01fe6ef344bdf" args="()" -->
+<a class="anchor" id="adafcb2964b462304f79aa5b2e1992998"></a><!-- doxytag: member="o3_memManager::o3_memManager" ref="adafcb2964b462304f79aa5b2e1992998" args="(port&lt; dynInstruction * &gt; &amp;memory_to_scheduler_port, sysClock *clk, string lsq_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">o3_memManager::o3_memManager </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>memory_to_scheduler_port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>lsq_name</em> = <code>&quot;o3_memManager&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (<span class="stringliteral">&quot;lsqManager&quot;</span>),
-      _L1 (1, 64, 32768),
-      _L2 (1, 64, 2097152),
-      _L3 (1, 64, 8388608),
-      _LQ (<a class="code" href="lsq_8h.html#aae3b0f5aecc2e3aef03fd39ef9aa46ff">LQ_SIZE</a>, 8, 4, <span class="stringliteral">&quot;LQtable&quot;</span>),
-      _SQ (<a class="code" href="lsq_8h.html#a0b70db1c813a7c9e54a37742af005c18">SQ_SIZE</a>, 8, 4, <span class="stringliteral">&quot;SQtable&quot;</span>)
-{ }
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a> (lsq_name, clk),
+<span class="comment">//      _L1 (1, 64, 32768),</span>
+<span class="comment">//      _L2 (1, 64, 2097152),</span>
+<span class="comment">//      _L3 (1, 64, 8388608),</span>
+      _cache (<span class="stringliteral">&quot;/home/milad/esc_project/svn/PARS/src/config/simple.yaml&quot;</span>),
+      _LQ (clk, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;table&quot;</span>][<span class="stringliteral">&quot;LQ&quot;</span>], <span class="stringliteral">&quot;LQ&quot;</span>),
+      _SQ (clk, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;table&quot;</span>][<span class="stringliteral">&quot;SQ&quot;</span>], <span class="stringliteral">&quot;SQ&quot;</span>),
+      _e_dtlb (<span class="stringliteral">&quot;dtlb&quot;</span>, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;mem&quot;</span>][<span class="stringliteral">&quot;dtlb&quot;</span>]),
+      s_ld_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;ld_cnt&quot;</span>, <span class="stringliteral">&quot;Number of load ops&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_cache_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;cache_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of cache hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_cache_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;cache_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of cache misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_cache_access_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;cache_access&quot;</span>, <span class="stringliteral">&quot;Number of cache accesses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_ld_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;ld_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of load hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_ld_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;ld_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of load misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_st_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;st_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of store misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_st_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;st_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of store hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_cache_to_ld_fwd_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;cache_to_ld_fwd_cnt&quot;</span>, <span class="stringliteral">&quot;Number of cache accesses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_st_to_ld_fwd_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (lsq_name, <span class="stringliteral">&quot;st_to_ld_fwd_cnt&quot;</span>, <span class="stringliteral">&quot;Number of SQ -&gt; LQ forwarding events&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_st_to_ld_fwd_rat (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (&amp;s_ld_cnt, lsq_name, <span class="stringliteral">&quot;st_to_ld_fwd_rat&quot;</span>, <span class="stringliteral">&quot;Rate of SQ -&gt; LQ forwarding events / all load ops&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_ld_miss_rat (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (&amp;s_cache_to_ld_fwd_cnt, lsq_name, <span class="stringliteral">&quot;ld_miss_rat&quot;</span>, <span class="stringliteral">&quot;Load op miss rate&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_mem_miss_rat (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (&amp;s_cache_access_cnt, lsq_name, <span class="stringliteral">&quot;mem_miss_rat&quot;</span>, <span class="stringliteral">&quot;Memory miss rate&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_inflight_ld_rat (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (clk-&gt;<a class="code" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> (), lsq_name, <span class="stringliteral">&quot;inflight_ld_rat&quot;</span>, <span class="stringliteral">&quot;Number of in-flight LOAD instructions&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
+      s_inflight_cache_ld_rat (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (clk-&gt;<a class="code" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> (), lsq_name, <span class="stringliteral">&quot;inflight_cache_ld_rat&quot;</span>, <span class="stringliteral">&quot;Number of in-flight LOAD instructions in CACHES&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
+{ 
+    _memory_to_scheduler_port = &amp;memory_to_scheduler_port;
+}
 </pre></div>
 </div>
 </div>
@@ -145,7 +185,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a3a7d3249d284d0ebb297167b47ad8ce2"></a><!-- doxytag: member="o3_memManager::commit" ref="a3a7d3249d284d0ebb297167b47ad8ce2" args="(dynInstruction *, sysClock &amp;)" -->
+<a class="anchor" id="ae95cfddde7894d5cd3a865c857faba54"></a><!-- doxytag: member="o3_memManager::commit" ref="ae95cfddde7894d5cd3a865c857faba54" args="(dynInstruction *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -153,40 +193,29 @@ Public Member Functions</h2></td></tr>
           <td class="memname">bool o3_memManager::commit </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
-          <td class="paramname"><em>ins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>ins</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                              {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>);
+<div class="fragment"><pre class="fragment">                                               {
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>);
     <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>) {
         <span class="keywordflow">if</span> (_LQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-        <span class="keywordflow">if</span> (!_LQ.hasFreeRdPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">return</span> <span class="keyword">false</span>;
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a2bcce72017d6960ec6f79e6d8afb1af4">LQ_COMPLETE</a>);
-        <span class="comment">//Assert (ins-&gt;getInsID () == _LQ.getFront()-&gt;getInsID ());</span>
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Commiting LD:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
+        <span class="keywordflow">if</span> (!_LQ.<a class="code" href="classtable.html#aa04af14b4eceb2ac2653364d1c1217b6">hasFreeWire</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)) <span class="keywordflow">return</span> <span class="keyword">false</span>;
         <a class="code" href="classdynInstruction.html">dynInstruction</a>* ld_ins = _LQ.<a class="code" href="classCAMtable.html#a5e19b284c54893d488fb7eae5f84aa13">popFront</a> ();
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ld_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () == ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
+<span class="preprocessor">#ifdef ASSERTION</span>
+<span class="preprocessor"></span>        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> () == <a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a2bcce72017d6960ec6f79e6d8afb1af4">LQ_COMPLETE</a>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ld_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> () == ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>        _LQ.<a class="code" href="classtable.html#a03164f903a848e731e1b934a533896b4">updateWireState</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>);
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Commiting LD:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
     } <span class="keywordflow">else</span> {
-        <span class="comment">//TODO apply hardware costraints here</span>
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49babc5569a448b98e5296b677e0919b931c">SQ_COMPLETE</a>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49babc5569a448b98e5296b677e0919b931c">SQ_COMPLETE</a>);
         ins-&gt;<a class="code" href="classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088">setSQstate</a> (<a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba158f60bba8d7e9e98a8a261d750796fb">SQ_COMMIT</a>);
-        <span class="comment">//Assert (ins-&gt;getInsID () == _SQ.getFront()-&gt;getInsID ());</span>
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Commiting ST:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
-        <span class="comment">//dynInstruction* st_ins = _SQ.popFront (); //TODO should it be in order? don&#39;t think so</span>
-        <span class="comment">//Assert (st_ins-&gt;getInsID () == ins-&gt;getInsID ());</span>
+        _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> (); <span class="comment">/* MUST FIND THE COMMITTING ST OPs */</span>
+        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;Commiting ST:&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
     }
     <span class="keywordflow">return</span> <span class="keyword">true</span>;
 }
@@ -194,17 +223,8 @@ Public Member Functions</h2></td></tr>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_cgraph.png" border="0" usemap="#classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_cgraph" alt=""/></div>
-<map name="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_cgraph" id="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_icgraph.png" border="0" usemap="#classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_icgraph" alt=""/></div>
-<map name="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_icgraph" id="classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2_icgraph">
+<div class="center"><img src="classo3__memManager_ae95cfddde7894d5cd3a865c857faba54_cgraph.png" border="0" usemap="#classo3__memManager_ae95cfddde7894d5cd3a865c857faba54_cgraph" alt=""/></div>
+<map name="classo3__memManager_ae95cfddde7894d5cd3a865c857faba54_cgraph" id="classo3__memManager_ae95cfddde7894d5cd3a865c857faba54_cgraph">
 </map>
 </div>
 </p>
@@ -226,6 +246,9 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                   {
+    <span class="comment">/* NO ENERGY TRACKING HERE - HASFINISHEDINS () WILL COVER IT */</span>
+    <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a500260c0b3b35828bd0c678c4d5eb16a">getLQstate</a> ()) s_inflight_cache_ld_rat--;
+    s_inflight_ld_rat--;
     ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a2bcce72017d6960ec6f79e6d8afb1af4">LQ_COMPLETE</a>);
 }
 </pre></div>
@@ -238,40 +261,78 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698_icgraph.png" border="0" usemap="#classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698_icgraph" alt=""/></div>
-<map name="classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698_icgraph" id="classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="ac7d368eb5062860954125ce0fbd3c3b9"></a><!-- doxytag: member="o3_memManager::delAfinishedSt" ref="ac7d368eb5062860954125ce0fbd3c3b9" args="(CYCLE)" -->
+<a class="anchor" id="a7d75c416d7ce73b8b1bb2203b8ebdb4e"></a><!-- doxytag: member="o3_memManager::delAfinishedSt" ref="a7d75c416d7ce73b8b1bb2203b8ebdb4e" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void o3_memManager::delAfinishedSt </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                             {
-    _SQ.<a class="code" href="classo3__lsqCAM.html#a2aa5dc2ccb76d85e0c8df59a8dfe47f2">delFinishedMemAxes</a> (now);
+<div class="fragment"><pre class="fragment">                                    {
+    <span class="comment">/* ENERGY OF THIS STEP IS ACCOUNTED FOR IN table CLASS */</span>
+    _SQ.<a class="code" href="classo3__lsqCAM.html#aa7fdfa8e6591d754e194c7052e7e17d3">delFinishedMemAxes</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_cgraph.png" border="0" usemap="#classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_cgraph" alt=""/></div>
-<map name="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_cgraph" id="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_cgraph">
+<div class="center"><img src="classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e_cgraph.png" border="0" usemap="#classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e_cgraph" alt=""/></div>
+<map name="classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e_cgraph" id="classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a9ccbaf680579ad2517f01a92dbe147e5"></a><!-- doxytag: member="o3_memManager::forward" ref="a9ccbaf680579ad2517f01a92dbe147e5" args="(dynInstruction *, CYCLE)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void o3_memManager::forward </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
+          <td class="paramname"><em>ins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
+          <td class="paramname"><em>mem_latency</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                   {
+<span class="preprocessor">#ifdef ASSERTION</span>
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a> &amp;&amp; ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a>() == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>);
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>    <span class="keywordflow">if</span> (_memory_to_scheduler_port-&gt;<a class="code" href="classport.html#a5ac9e7510e381b2c7fbd8e855648e58b">getBuffState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">return</span>;
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> cdb_ready_latency = mem_latency - 1;
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (cdb_ready_latency &gt;= 0);
+    _memory_to_scheduler_port-&gt;<a class="code" href="classport.html#a4c80b61961d7df8f30f5dc42bacd25e9">pushBack</a> (ins, cdb_ready_latency);
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), 
+               <span class="stringliteral">&quot;Forward wr ops of ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_cgraph.png" border="0" usemap="#classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_cgraph" alt=""/></div>
+<map name="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_cgraph" id="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_cgraph">
 </map>
 </div>
 </p>
@@ -279,8 +340,67 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_icgraph.png" border="0" usemap="#classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_icgraph" alt=""/></div>
-<map name="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_icgraph" id="classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9_icgraph">
+<div class="center"><img src="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_icgraph.png" border="0" usemap="#classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_icgraph" alt=""/></div>
+<map name="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_icgraph" id="classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aeef4a4447f1777bb2a4c63920796c1a4"></a><!-- doxytag: member="o3_memManager::getAxesLatency" ref="aeef4a4447f1777bb2a4c63920796c1a4" args="(dynInstruction *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> o3_memManager::getAxesLatency </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
+          <td class="paramname"><em>mem_ins</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                            {
+    <span class="keywordflow">if</span> (<a class="code" href="classo3__memManager.html#afcbdb28a588d6b0990761dfe751cb07d">hasStToAddr</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), mem_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ())) {
+        s_st_to_ld_fwd_cnt++;
+        s_st_to_ld_fwd_rat++;
+        mem_ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a9dc631d745576cd4fce2a568381077e8">LQ_FWD_FROM_SQ</a>);
+        <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> lat = <a class="code" href="exeUnit_8cpp.html#a02b52478da6151a364f54791e40fb6a4">g_eu_lat</a>.<a class="code" href="structexeUnitLat.html#a2e0a0b29c7d4cd40492fe25740302c72">_st_buff_lat</a>;
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a14a41780de0d5bc586fd79a202eca047">isEnProfiling</a> ()) { <a class="code" href="profiler_8cpp.html#a820091dd16db99faf5767e72b8d627d3">g_prof</a>.<a class="code" href="classprofiler.html#ac02bbb621f4a3658f9b5869b955995fc">update_ld_profiler</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a464da2601438384a3c00e85a814c3964">getInsAddr</a> (), lat); }
+        <span class="keywordflow">return</span> lat;
+    <span class="comment">//} else if () { /*TODO for MSHR */</span>
+    } <span class="keywordflow">else</span> {
+        <span class="keywordflow">if</span> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>) mem_ins-&gt;<a class="code" href="classdynInstruction.html#a3426a2abaef02c82f0c959143319586a">setCacheAxes</a> ();
+        mem_ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205acffbcdda4562e66debce12525459be46">LQ_CACHE_WAIT</a>);
+        <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> lat = _cache.<a class="code" href="structDriver.html#afce55142e962e9d808bfdcc137a3a731">request</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), <span class="keyword">false</span>, <a class="code" href="namespaceMemory.html#ac7898867cbac007055c0cf53e233e1b2a4fcd43b9df53b5ac1fb2167fad24359c">REQUEST_READ</a>);
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a14a41780de0d5bc586fd79a202eca047">isEnProfiling</a> ()) { <a class="code" href="profiler_8cpp.html#a820091dd16db99faf5767e72b8d627d3">g_prof</a>.<a class="code" href="classprofiler.html#ac02bbb621f4a3658f9b5869b955995fc">update_ld_profiler</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a464da2601438384a3c00e85a814c3964">getInsAddr</a> (), lat); }
+<span class="comment">//        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns-&gt;getMemType (), TODO fix this line</span>
+<span class="comment">//                    mem_ins-&gt;getMemAddr (),</span>
+<span class="comment">//                    mem_ins-&gt;getMemAxesSize(),</span>
+<span class="comment">//                    &amp;_L1, &amp;_L2, &amp;_L3);</span>
+        s_cache_to_ld_fwd_cnt++;
+        s_inflight_cache_ld_rat += lat;
+        s_cache_access_cnt++;
+        <span class="keywordflow">return</span> lat;
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_cgraph.png" border="0" usemap="#classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_cgraph" alt=""/></div>
+<map name="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_cgraph" id="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_icgraph.png" border="0" usemap="#classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_icgraph" alt=""/></div>
+<map name="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_icgraph" id="classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4_icgraph">
 </map>
 </div>
 </p>
@@ -294,7 +414,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname"><a class="el" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489c">BUFF_STATE</a> o3_memManager::getTableState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
           <td class="paramname"><em>lsq_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -302,10 +422,10 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                      {
-    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
-        <span class="keywordflow">return</span> _LQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> (); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
+        <span class="keywordflow">return</span> _LQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> ();
     } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> _SQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> (); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+        <span class="keywordflow">return</span> _SQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> ();
     }
 }
 </pre></div>
@@ -314,15 +434,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_cgraph.png" border="0" usemap="#classo3__memManager_a19302a13552a70cda08814dcfc0daa30_cgraph" alt=""/></div>
 <map name="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_cgraph" id="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_icgraph.png" border="0" usemap="#classo3__memManager_a19302a13552a70cda08814dcfc0daa30_icgraph" alt=""/></div>
-<map name="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_icgraph" id="classo3__memManager_a19302a13552a70cda08814dcfc0daa30_icgraph">
 </map>
 </div>
 </p>
@@ -343,6 +454,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                 {
+    <span class="comment">/* NO CAM ENERGY CONSUMED - ASSUMING HEAD OF QUE IS ALWAYS THE RESULT IF ANY */</span>
     <span class="keywordflow">return</span> _SQ.<a class="code" href="classo3__lsqCAM.html#ad3d6f79a7377317fc859080d337d428a">hasCommit</a> ();
 }
 </pre></div>
@@ -355,84 +467,58 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6_icgraph.png" border="0" usemap="#classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6_icgraph" alt=""/></div>
-<map name="classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6_icgraph" id="classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="abf1656aba29cd17f3c223f0c2ee9ba16"></a><!-- doxytag: member="o3_memManager::hasFinishedIns" ref="abf1656aba29cd17f3c223f0c2ee9ba16" args="(LSQ_ID, CYCLE)" -->
+<a class="anchor" id="a8be15f63b5d876cb3ab99b7eec4c643c"></a><!-- doxytag: member="o3_memManager::hasFinishedIns" ref="a8be15f63b5d876cb3ab99b7eec4c643c" args="(LSQ_ID)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">pair&lt; bool, <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; o3_memManager::hasFinishedIns </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
-          <td class="paramname"><em>lsq_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
+          <td class="paramname"><em>lsq_id</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                   {
-    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
-        <span class="keywordflow">return</span> _LQ.<a class="code" href="classo3__lsqCAM.html#aad5ca9d9f84c657635d39de62e1ec32a">hasFinishedIns</a> (lsq_id, now);
+<div class="fragment"><pre class="fragment">                                                                        {
+    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
+        _LQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+        <span class="keywordflow">return</span> _LQ.<a class="code" href="classo3__lsqCAM.html#a08fc977c038420904ea7186c55515ae8">hasFinishedIns</a> (lsq_id);
     } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> _SQ.<a class="code" href="classo3__lsqCAM.html#aad5ca9d9f84c657635d39de62e1ec32a">hasFinishedIns</a> (lsq_id, now);
+        _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+        <span class="keywordflow">return</span> _SQ.<a class="code" href="classo3__lsqCAM.html#a08fc977c038420904ea7186c55515ae8">hasFinishedIns</a> (lsq_id);
     }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_cgraph.png" border="0" usemap="#classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_cgraph" alt=""/></div>
-<map name="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_cgraph" id="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_icgraph.png" border="0" usemap="#classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_icgraph" alt=""/></div>
-<map name="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_icgraph" id="classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16_icgraph">
+<div class="center"><img src="classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c_cgraph.png" border="0" usemap="#classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c_cgraph" alt=""/></div>
+<map name="classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c_cgraph" id="classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a71127b3f6545996a55cfa87735cb433f"></a><!-- doxytag: member="o3_memManager::hasFreeRdPort" ref="a71127b3f6545996a55cfa87735cb433f" args="(LSQ_ID, CYCLE)" -->
+<a class="anchor" id="a65290b7cff22c1fd282d3279f955e41c"></a><!-- doxytag: member="o3_memManager::hasFreeWire" ref="a65290b7cff22c1fd282d3279f955e41c" args="(LSQ_ID, AXES_TYPE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool o3_memManager::hasFreeRdPort </td>
+          <td class="memname">bool o3_memManager::hasFreeWire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
           <td class="paramname"><em>lsq_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -442,40 +528,40 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                           {
-    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
-        <span class="keywordflow">return</span> _LQ.hasFreeRdPort (now); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+<div class="fragment"><pre class="fragment">                                                                   {
+    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
+        <span class="keywordflow">return</span> _LQ.<a class="code" href="classtable.html#aa04af14b4eceb2ac2653364d1c1217b6">hasFreeWire</a> (axes_type);
     } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> _SQ.hasFreeRdPort (now); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+        <span class="keywordflow">return</span> _SQ.<a class="code" href="classtable.html#aa04af14b4eceb2ac2653364d1c1217b6">hasFreeWire</a> (axes_type);
     }
 }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a71127b3f6545996a55cfa87735cb433f_icgraph.png" border="0" usemap="#classo3__memManager_a71127b3f6545996a55cfa87735cb433f_icgraph" alt=""/></div>
-<map name="classo3__memManager_a71127b3f6545996a55cfa87735cb433f_icgraph" id="classo3__memManager_a71127b3f6545996a55cfa87735cb433f_icgraph">
+<div class="center"><img src="classo3__memManager_a65290b7cff22c1fd282d3279f955e41c_cgraph.png" border="0" usemap="#classo3__memManager_a65290b7cff22c1fd282d3279f955e41c_cgraph" alt=""/></div>
+<map name="classo3__memManager_a65290b7cff22c1fd282d3279f955e41c_cgraph" id="classo3__memManager_a65290b7cff22c1fd282d3279f955e41c_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="af32030ab25dd729e0aa65a15e60ad562"></a><!-- doxytag: member="o3_memManager::hasFreeWrPort" ref="af32030ab25dd729e0aa65a15e60ad562" args="(LSQ_ID, CYCLE)" -->
+<a class="anchor" id="afcbdb28a588d6b0990761dfe751cb07d"></a><!-- doxytag: member="o3_memManager::hasStToAddr" ref="afcbdb28a588d6b0990761dfe751cb07d" args="(ADDRS, INS_ID)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool o3_memManager::hasFreeWrPort </td>
+          <td class="memname">bool o3_memManager::hasStToAddr </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>&#160;</td>
+          <td class="paramname"><em>mem_addr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td>
+          <td class="paramname"><em>ins_seq_num</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -485,131 +571,136 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                   {
+    _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> (); <span class="comment">/* FIND ADDRESS ENERGY */</span>
+    <span class="keywordflow">return</span> _SQ.<a class="code" href="classo3__lsqCAM.html#ac52c64978b8fbe0569bb67f0d77e2ec9">hasMemAddr</a> (mem_addr, ins_seq_num);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_cgraph.png" border="0" usemap="#classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_cgraph" alt=""/></div>
+<map name="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_cgraph" id="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_cgraph">
+</map>
+</div>
+</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_af32030ab25dd729e0aa65a15e60ad562_icgraph.png" border="0" usemap="#classo3__memManager_af32030ab25dd729e0aa65a15e60ad562_icgraph" alt=""/></div>
-<map name="classo3__memManager_af32030ab25dd729e0aa65a15e60ad562_icgraph" id="classo3__memManager_af32030ab25dd729e0aa65a15e60ad562_icgraph">
+<div class="center"><img src="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_icgraph.png" border="0" usemap="#classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_icgraph" alt=""/></div>
+<map name="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_icgraph" id="classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="ace575a2ddcf90ab36e6aa8399e5cd923"></a><!-- doxytag: member="o3_memManager::isLQviolation" ref="ace575a2ddcf90ab36e6aa8399e5cd923" args="(dynInstruction *, dynInstruction *)" -->
+<a class="anchor" id="afdb19a44895888ec99fb6495dccc1dcc"></a><!-- doxytag: member="o3_memManager::isLQviolation" ref="afdb19a44895888ec99fb6495dccc1dcc" args="(dynInstruction *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool o3_memManager::isLQviolation </td>
+          <td class="memname">pair&lt; bool, <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; o3_memManager::isLQviolation </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
-          <td class="paramname"><em>st_ins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>st_ins</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
-          <td class="paramname"><em>ld_ins</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                 {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9cafeb01cb4572ba190cd7932e49446c480">STORE</a>);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49babc5569a448b98e5296b677e0919b931c">SQ_COMPLETE</a>);
-    <span class="keywordtype">bool</span> violation = _LQ.<a class="code" href="classo3__lsqCAM.html#ac3fca99875017c6639bfeccafe904c83">hasAnyCompleteLdFromAddr</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), ld_ins);
-    <span class="keywordflow">if</span> (violation) <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ld_ins != NULL);
-    <span class="keywordflow">else</span> <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ld_ins == NULL);
+<div class="fragment"><pre class="fragment">                                                                                {
+<span class="preprocessor">#ifdef ASSERTION</span>
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9cafeb01cb4572ba190cd7932e49446c480">STORE</a>);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a6160b96ca670a4c15a3fa81b0d54dcd4">getSQstate</a> () == <a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49babc5569a448b98e5296b677e0919b931c">SQ_COMPLETE</a>);
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>
+    <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> WAW_st_ins_sn = _SQ.<a class="code" href="classo3__lsqCAM.html#ad0ef7ab14e36284321707f52bfe32d9f">hasAnyCompleteStFromAddr</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), st_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> ());
+    _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+    pair&lt;bool, dynInstruction*&gt; violation = _LQ.<a class="code" href="classo3__lsqCAM.html#a603e22c5cb8d5049e843de830158b4e4">hasAnyCompleteLdFromAddr</a> (st_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), st_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), WAW_st_ins_sn);
+    _LQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+
+<span class="preprocessor">#ifdef ASSERTION</span>
+<span class="preprocessor"></span>    <span class="keywordflow">if</span> (violation.first) <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (violation.second != NULL);
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (violation.second == NULL);
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>
     <span class="keywordflow">return</span> violation;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923_cgraph.png" border="0" usemap="#classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923_cgraph" alt=""/></div>
-<map name="classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923_cgraph" id="classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923_cgraph">
+<div class="center"><img src="classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc_cgraph.png" border="0" usemap="#classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc_cgraph" alt=""/></div>
+<map name="classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc_cgraph" id="classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc_cgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a9e44a6173a6b099fa6e7644960aac5cf"></a><!-- doxytag: member="o3_memManager::issueToMem" ref="a9e44a6173a6b099fa6e7644960aac5cf" args="(LSQ_ID, CYCLE)" -->
+<a class="anchor" id="a124d7a6a84cf5cbc75a171a773784fbb"></a><!-- doxytag: member="o3_memManager::issueToMem" ref="a124d7a6a84cf5cbc75a171a773784fbb" args="(LSQ_ID)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool o3_memManager::issueToMem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
-          <td class="paramname"><em>lsq_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
+          <td class="paramname"><em>lsq_id</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                        {
-    <span class="comment">//TODO take all this block to lsqManager.cpp</span>
+<div class="fragment"><pre class="fragment">                                             {
     <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> axes_lat;
     <a class="code" href="classdynInstruction.html">dynInstruction</a>* mem_ins;
-    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
-        mem_ins = _LQ.<a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>);
+    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
+        mem_ins = _LQ.<a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>);
+        _LQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
         <span class="keywordflow">if</span> (mem_ins == NULL) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* NOTHING ISSUED */</span>
-        mem_ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205acffbcdda4562e66debce12525459be46">LQ_CACHE_WAIT</a>);
-        axes_lat = (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>) <a class="code" href="cacheCtrl_8cpp.html#a647b95d4a9cb0f09d95d2adfaf25e1d7">cacheCtrl</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>,  <span class="comment">//stIns-&gt;getMemType (), TODO fix this line</span>
-                mem_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (),
-                mem_ins-&gt;<a class="code" href="classdynInstruction.html#aee508d76a2e13461fce2299234894688">getMemAxesSize</a>(),
-                &amp;_L1, &amp;_L2, &amp;_L3);
-        _LQ.<a class="code" href="classo3__lsqCAM.html#a12159149dc0b13cda6edfb1213ce6197">setTimer</a> (mem_ins, axes_lat, now); <span class="comment">//TODO good API?</span>
+        axes_lat = <a class="code" href="classo3__memManager.html#aeef4a4447f1777bb2a4c63920796c1a4">getAxesLatency</a> (mem_ins);
+        _LQ.<a class="code" href="classo3__lsqCAM.html#a25372198cf9ceb3037dd0d027006eb08">setTimer</a> (mem_ins, axes_lat);
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a12202da8711bd354d5b1a98693c0efa8">isEnMemFwd</a> ()) <a class="code" href="classo3__memManager.html#a9ccbaf680579ad2517f01a92dbe147e5">forward</a> (mem_ins, axes_lat);
+        <span class="keywordflow">if</span> (axes_lat &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad8c37508452198256fb620a3e34b1839">L1_LATENCY</a>) { 
+            s_ld_miss_cnt++; 
+            s_ld_miss_rat++;
+            s_mem_miss_rat++;
+        } <span class="keywordflow">else</span> { s_ld_hit_cnt++; }
+        s_inflight_ld_rat += axes_lat;
+        s_ld_cnt++;
     } <span class="keywordflow">else</span> {
-        mem_ins = _SQ.<a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>);
+        mem_ins = _SQ.<a class="code" href="classo3__lsqCAM.html#a7db68789c8d9af13bbc9ec485b4972bc">findPendingMemIns</a> (<a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>);
+        _SQ.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> (); <span class="comment">/* GET THE OUTSTANDING COMMITED ST OP */</span>
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a92554ae5ad4d8db473c1894f2bd119fc">isEnSquash</a> ()) <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#afe7f52780e92b78708201166c98f40c2">isMemOrBrViolation</a>() == <span class="keyword">false</span>);
         <span class="keywordflow">if</span> (mem_ins == NULL) <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">/* NOTHING ISSUED */</span>
         mem_ins-&gt;<a class="code" href="classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088">setSQstate</a> (<a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba857bfc5150ca03a3587a5714ac06ed89">SQ_CACHE_DISPATCH</a>);
-        axes_lat = (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>) <a class="code" href="cacheCtrl_8cpp.html#a647b95d4a9cb0f09d95d2adfaf25e1d7">cacheCtrl</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>,  <span class="comment">//stIns-&gt;getMemType (), TODO fix this line</span>
-                mem_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (),
-                mem_ins-&gt;<a class="code" href="classdynInstruction.html#aee508d76a2e13461fce2299234894688">getMemAxesSize</a>(),
-                &amp;_L1, &amp;_L2, &amp;_L3);
-        _SQ.<a class="code" href="classo3__lsqCAM.html#a12159149dc0b13cda6edfb1213ce6197">setTimer</a> (mem_ins, axes_lat, now);
+        axes_lat = _cache.<a class="code" href="structDriver.html#afce55142e962e9d808bfdcc137a3a731">request</a> (mem_ins-&gt;<a class="code" href="classdynInstruction.html#a611e3f3619160361cf317e05d2034288">getMemAddr</a> (), <span class="keyword">false</span>, <a class="code" href="namespaceMemory.html#ac7898867cbac007055c0cf53e233e1b2addc8e6ee1a859200f79f5ecc8c30a1d8">REQUEST_WRITE</a>);
+<span class="comment">//        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns-&gt;getMemType (), TODO fix this line</span>
+<span class="comment">//                mem_ins-&gt;getMemAddr (),</span>
+<span class="comment">//                mem_ins-&gt;getMemAxesSize(),</span>
+<span class="comment">//                &amp;_L1, &amp;_L2, &amp;_L3);</span>
+        _SQ.<a class="code" href="classo3__lsqCAM.html#a25372198cf9ceb3037dd0d027006eb08">setTimer</a> (mem_ins, axes_lat);
+        <span class="keywordflow">if</span> (axes_lat &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad8c37508452198256fb620a3e34b1839">L1_LATENCY</a>) {
+            s_st_miss_cnt++;
+            s_mem_miss_rat++;
+        } <span class="keywordflow">else</span> { s_st_hit_cnt++; }
+        s_cache_access_cnt++;
     }
+    (axes_lat &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad8c37508452198256fb620a3e34b1839">L1_LATENCY</a>) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(axes_lat &gt; 0);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(axes_lat &gt; 0);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>    <span class="comment">//(axes_lat &gt; L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++; TODO put them back</span>
-    <span class="comment">//(axes_lat &gt; L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;</span>
-    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<span class="preprocessor"></span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_cgraph.png" border="0" usemap="#classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_cgraph" alt=""/></div>
-<map name="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_cgraph" id="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_icgraph.png" border="0" usemap="#classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_icgraph" alt=""/></div>
-<map name="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_icgraph" id="classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf_icgraph">
+<div class="center"><img src="classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb_cgraph.png" border="0" usemap="#classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb_cgraph" alt=""/></div>
+<map name="classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb_cgraph" id="classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb_cgraph">
 </map>
 </div>
 </p>
@@ -633,8 +724,14 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><pre class="fragment">                                                     {
     <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>) {
         ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a34b43e9f7edc49a637ff52bd2774d377">LQ_PENDING_CACHE_DISPATCH</a>);
+        _LQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> (); <span class="comment">/* FIND ADDRESS ENERGY */</span>
+        _LQ.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> (); <span class="comment">/* ADDRESS WRITE ENERGY */</span>
+        _e_dtlb.<a class="code" href="classtable__energy.html#ad63a5a1f55aaa6486553f955a80477bf">camAccess</a> ();
     } <span class="keywordflow">else</span> {
         ins-&gt;<a class="code" href="classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088">setSQstate</a> (<a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49babc5569a448b98e5296b677e0919b931c">SQ_COMPLETE</a>);
+        _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> (); <span class="comment">/* FIND ADDRESS ENERGY */</span>
+        _SQ.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> (); <span class="comment">/* ADDRESS WRITE ENERGY */</span>
+        _e_dtlb.<a class="code" href="classtable__energy.html#ad63a5a1f55aaa6486553f955a80477bf">camAccess</a> ();
     }
 }
 </pre></div>
@@ -643,15 +740,6 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classo3__memManager_a401c114902989a9296444795c28cd5fb_cgraph.png" border="0" usemap="#classo3__memManager_a401c114902989a9296444795c28cd5fb_cgraph" alt=""/></div>
 <map name="classo3__memManager_a401c114902989a9296444795c28cd5fb_cgraph" id="classo3__memManager_a401c114902989a9296444795c28cd5fb_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a401c114902989a9296444795c28cd5fb_icgraph.png" border="0" usemap="#classo3__memManager_a401c114902989a9296444795c28cd5fb_icgraph" alt=""/></div>
-<map name="classo3__memManager_a401c114902989a9296444795c28cd5fb_icgraph" id="classo3__memManager_a401c114902989a9296444795c28cd5fb_icgraph">
 </map>
 </div>
 </p>
@@ -673,14 +761,14 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                 {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>);
     <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a> () == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>) {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_LQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () != <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>);
-        _LQ.<a class="code" href="classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6">pushBack</a> (ins); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_LQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () != <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>);
+        _LQ.<a class="code" href="classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6">pushBack</a> (ins);
         ins-&gt;<a class="code" href="classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c">setLQstate</a> (<a class="code" href="global_2global_8h.html#a49734aedeaf1d3f1c93c4778b3b62205a0e0978bfd32b69403091ed324404115a">LQ_ADDR_WAIT</a>);
     } <span class="keywordflow">else</span> {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_SQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () != <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>);
-        _SQ.<a class="code" href="classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6">pushBack</a> (ins); <span class="comment">//TODO set state to LQ_ADDR_WAIT</span>
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_SQ.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () != <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>);
+        _SQ.<a class="code" href="classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6">pushBack</a> (ins);
         ins-&gt;<a class="code" href="classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088">setSQstate</a> (<a class="code" href="global_2global_8h.html#af9e953470c71a91625fe1fc66f2dc49ba32813e10716654af56793bd858be9824">SQ_ADDR_WAIT</a>);
     }
 }
@@ -694,11 +782,31 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a4b60f17893db95011c3ff8e6ac4f1724"></a><!-- doxytag: member="o3_memManager::regStat" ref="a4b60f17893db95011c3ff8e6ac4f1724" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void o3_memManager::regStat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                             {
+    _LQ.<a class="code" href="classtable.html#af252520f4025cbc80e7bff8d9b811ba7">regStat</a> ();
+    _SQ.<a class="code" href="classtable.html#af252520f4025cbc80e7bff8d9b811ba7">regStat</a> ();
+}
+</pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_a7bfed5553c2212750ee610da67bc43e7_icgraph.png" border="0" usemap="#classo3__memManager_a7bfed5553c2212750ee610da67bc43e7_icgraph" alt=""/></div>
-<map name="classo3__memManager_a7bfed5553c2212750ee610da67bc43e7_icgraph" id="classo3__memManager_a7bfed5553c2212750ee610da67bc43e7_icgraph">
+<div class="center"><img src="classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724_cgraph.png" border="0" usemap="#classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724_cgraph" alt=""/></div>
+<map name="classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724_cgraph" id="classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724_cgraph">
 </map>
 </div>
 </p>
@@ -720,8 +828,11 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                 {
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;LQ SQUASH&quot;</span>);
     _LQ.<a class="code" href="classo3__lsqCAM.html#a95e286b95f3651e40d57206eb2a41308">squash</a> (squash_seq_num);
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s\n&quot;</span>, <a class="code" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a>.c_str (), <span class="stringliteral">&quot;SQ SQUASH&quot;</span>);
     _SQ.<a class="code" href="classo3__lsqCAM.html#a95e286b95f3651e40d57206eb2a41308">squash</a> (squash_seq_num);
+    _SQ.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> (); <span class="comment">/* FIND INS ADDRESSES &gt; SQUASH SN */</span>
 }
 </pre></div>
 <p><div class="dynheader">
@@ -733,11 +844,57 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a3481a9cf94186793deb95874d4d25e3d"></a><!-- doxytag: member="o3_memManager::updateWireState" ref="a3481a9cf94186793deb95874d4d25e3d" args="(LSQ_ID, AXES_TYPE, list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void o3_memManager::updateWireState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>&#160;</td>
+          <td class="paramname"><em>lsq_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; string &gt;&#160;</td>
+          <td class="paramname"><em>wire_name</em> = <code>list&lt;string&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_wire</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                                                                 {
+    <span class="keywordflow">if</span> (lsq_id == <a class="code" href="global_2global_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) {
+        _LQ.<a class="code" href="classtable.html#a03164f903a848e731e1b934a533896b4">updateWireState</a> (axes_type, wire_name, update_wire);
+    } <span class="keywordflow">else</span> {
+        _SQ.<a class="code" href="classtable.html#a03164f903a848e731e1b934a533896b4">updateWireState</a> (axes_type, wire_name, update_wire);
+    }
+}
+</pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e_icgraph.png" border="0" usemap="#classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e_icgraph" alt=""/></div>
-<map name="classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e_icgraph" id="classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e_icgraph">
+<div class="center"><img src="classo3__memManager_a3481a9cf94186793deb95874d4d25e3d_cgraph.png" border="0" usemap="#classo3__memManager_a3481a9cf94186793deb95874d4d25e3d_cgraph" alt=""/></div>
+<map name="classo3__memManager_a3481a9cf94186793deb95874d4d25e3d_cgraph" id="classo3__memManager_a3481a9cf94186793deb95874d4d25e3d_cgraph">
 </map>
 </div>
 </p>
@@ -745,8 +902,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="memManager_8h_source.html">memManager.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="memManager_8cpp.html">memManager.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="o3_2memManager_8h_source.html">memManager.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/o3/<a class="el" href="o3_2memManager_8cpp.html">memManager.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -754,7 +911,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -763,7 +920,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

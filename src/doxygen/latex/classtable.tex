@@ -12,10 +12,15 @@ Inheritance diagram for table$<$ tableType\_\-T $>$:
 
 
 Collaboration diagram for table$<$ tableType\_\-T $>$:
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classtable_1_1Array}{Array}
+\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classtable_a5b99bb95a41d31c95bcf2c91c784f981}{table} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{table_8h_ae42c42cf2da8a8d43c157d91ad4f3158}{TABLE\_\-TYPE}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\hyperlink{classtable_ac3da89bda078a7aa2c6805866bb4399c}{table} (\hyperlink{table_8h_ae42c42cf2da8a8d43c157d91ad4f3158}{TABLE\_\-TYPE}, \hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string)
 \item 
 \hyperlink{classtable_a2d08b3fd77985dc4dc610de35946a293}{$\sim$table} ()
 \item 
@@ -27,17 +32,25 @@ tableType\_\-T \hyperlink{classtable_a9a0482a7594596a539e815bbe9c6aa7b}{getBack}
 \item 
 \hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classtable_abab8f70b8b32bb7342f5107edb328d18}{getTableState} ()
 \item 
-\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} \hyperlink{classtable_af9c07419ae48bd029f03a9e7ca29c43f}{getTableSize} ()
+\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} \hyperlink{classtable_af9c07419ae48bd029f03a9e7ca29c43f}{getTableSize} ()
 \item 
-tableType\_\-T \hyperlink{classtable_a20191b8e05f6882b38655c5fffb42389}{getNth\_\-unsafe} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH})
+tableType\_\-T \hyperlink{classtable_a20191b8e05f6882b38655c5fffb42389}{getNth\_\-unsafe} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH})
 \item 
-void \hyperlink{classtable_ae5c57c137b681a823a1bb0d830520e82}{removeNth\_\-unsafe} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH})
+void \hyperlink{classtable_ae5c57c137b681a823a1bb0d830520e82}{removeNth\_\-unsafe} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH})
 \item 
 void \hyperlink{classtable_af252520f4025cbc80e7bff8d9b811ba7}{regStat} ()
 \item 
-void \hyperlink{classtable_aafcfb08640fda68a1a09b81afc3c1dd7}{updateWireState} (\hyperlink{classsysClock}{sysClock} \&, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+void \hyperlink{classtable_a03164f903a848e731e1b934a533896b4}{updateWireState} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, list$<$ string $>$ wire\_\-name=list$<$ string $>$(), bool update\_\-wire=false)
 \item 
-tableType\_\-T \hyperlink{classtable_ade9af281ee70b0cf544060c478ffbfe1}{hasFreeWire} (\hyperlink{classsysClock}{sysClock} \&, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+bool \hyperlink{classtable_aa04af14b4eceb2ac2653364d1c1217b6}{hasFreeWire} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+\item 
+void \hyperlink{classtable_a5f6cd1dbedfb060cf94410b8cd3ecb0f}{camAccess} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} num\_\-access=1)
+\item 
+void \hyperlink{classtable_a2721191334bf94a8bcb0f7b390395d93}{cam2Access} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} num\_\-access=1)
+\item 
+void \hyperlink{classtable_a8ea206be96142eafa4eb46fe4a910292}{ramAccess} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} num\_\-access=1)
+\item 
+void \hyperlink{classtable_a8bb35d49306464551659d08e8495527f}{fifoAccess} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} num\_\-access=1)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -50,43 +63,125 @@ tableType\_\-T \hyperlink{classtable_ade9af281ee70b0cf544060c478ffbfe1}{hasFreeW
 \item 
 \hyperlink{classwires}{wires} \hyperlink{classtable_a55194c16991775949c0bc2e2ce0dd1de}{\_\-rd\_\-port}
 \item 
-const \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} \hyperlink{classtable_a812d699882bfa6230532dad66a5004bd}{\_\-table\_\-size}
+\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} \hyperlink{classtable_a7bb72e9a56072266491b5a125b41ef87}{\_\-table\_\-size}
 \item 
 const \hyperlink{table_8h_ae42c42cf2da8a8d43c157d91ad4f3158}{TABLE\_\-TYPE} \hyperlink{classtable_ae804042049b8e94591efe22ae05c0371}{\_\-table\_\-type}
+\item 
+\hyperlink{classtable__energy}{table\_\-energy} \hyperlink{classtable_ad581f47c3a5858efcc8ea5377fe6c77a}{\_\-e\_\-table}
+\item 
+\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classtable_a55b2044ce2664c572a3ad3bd658dcbfe}{s\_\-table\_\-empty\_\-cyc}
+\item 
+\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classtable_ab2e2f8d83bb377b91a283abcb90a36a7}{s\_\-table\_\-full\_\-cyc}
+\item 
+\hyperlink{classRatioStat}{RatioStat} \& \hyperlink{classtable_a9535b93bb57e405b922fb45afdb75ad0}{s\_\-table\_\-size\_\-rat}
+\item 
+tuple \hyperlink{classtable_af711f0fa04be7ff6e233884b184cb339}{yaml\_\-config\_\-file} = open(sys.argv\mbox{[}1\mbox{]})
+\item 
+tuple \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc} = yaml.load(\hyperlink{classtable_af711f0fa04be7ff6e233884b184cb339}{yaml\_\-config\_\-file})
+\item 
+dictionary \hyperlink{classtable_affb2ec85d44634a9b5e4791b756489ca}{cell\_\-model\_\-params}
+\item 
+list \hyperlink{classtable_a252e7ab94c46dafbdab734b5ceedc267}{cell\_\-model\_\-params} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}cell\_\-model\char`\"{}\mbox{]}
+\item 
+tuple \hyperlink{classtable_af189382302593d719e7099c7ba0170c9}{cell\_\-model} = \hyperlink{classmodels_1_1CellModel}{models.CellModel}($\ast$$\ast$\hyperlink{classtable_affb2ec85d44634a9b5e4791b756489ca}{cell\_\-model\_\-params})
+\item 
+list \hyperlink{classtable_ac52d431b62e008aea842db9c5a74c826}{l} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}technology\char`\"{}\mbox{]}
+\item 
+float \hyperlink{classtable_a1a42a6604769284e9187575b0abc876d}{l} = 0.022e-\/6
+\item 
+dictionary \hyperlink{classtable_aebf2e2c6c4d0ec6026901ca8e6679a5d}{wire\_\-model\_\-params}
+\item 
+list \hyperlink{classtable_a26f8b3354769a96a7c51206b89d2a95e}{wire\_\-model\_\-params} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}wire\_\-model\char`\"{}\mbox{]}
+\item 
+tuple \hyperlink{classtable_aa789a61b22c94a65f51a3505311b03fc}{default\_\-wire\_\-model} = \hyperlink{classmodels_1_1WireModel}{models.WireModel}($\ast$$\ast$\hyperlink{classtable_aebf2e2c6c4d0ec6026901ca8e6679a5d}{wire\_\-model\_\-params})
+\item 
+int \hyperlink{classtable_a815376b65b49c50ba7ed9c5ced5ca4a4}{wordline\_\-pitch} = 1
+\item 
+tuple \hyperlink{classtable_a5c3be16096865c6c55cfb6eebaad2cee}{wordline\_\-wire\_\-model}
+\item 
+dictionary \hyperlink{classtable_afa4455260ca054710631a16d93ad1848}{global\_\-wire\_\-params}
+\item 
+list \hyperlink{classtable_a9dce6b1c97baf3ee2ce1c6fe2e90cf78}{global\_\-wire\_\-params} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}global\_\-wire\_\-model\char`\"{}\mbox{]}
+\item 
+tuple \hyperlink{classtable_a2c6d189f908ac28d316ae1afa2a18324}{global\_\-wire\_\-model} = \hyperlink{classglobal__wire_1_1GlobalWire}{global\_\-wire.GlobalWire}($\ast$$\ast$\hyperlink{classtable_afa4455260ca054710631a16d93ad1848}{global\_\-wire\_\-params})
+\item 
+dictionary \hyperlink{classtable_af4623354d0c8319c4cb046c7b3e17ddb}{tech\_\-params} = \{\}
+\item 
+list \hyperlink{classtable_a14f0e7c4dcb9436645bd912ac804c094}{num\_\-arrays} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}arrays\char`\"{}\mbox{]}
+\item 
+list \hyperlink{classtable_a1e48c66312066107052dac253aaedf6d}{num\_\-words} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}
+\item 
+list \hyperlink{classtable_aceb89bcee9f344f99b75379e82506882}{word\_\-width} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}
+\item 
+list \hyperlink{classtable_a38126dcd841a7cbcb52c1884827b131e}{num\_\-cols} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}
+\item 
+list \hyperlink{classtable_aa31878a72f24f17c2100bc7e9acd96d0}{num\_\-rows} = \hyperlink{classtable_a068029d2d6ede2fab66a603c83626ed1}{yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}
+\item 
+\hyperlink{classtable_a64c900658131e38359a1f39fe0f2d489}{num\_\-words} = \hyperlink{classtable_aa31878a72f24f17c2100bc7e9acd96d0}{num\_\-rows}
+\item 
+\hyperlink{classtable_a82c0fbf4821eb05c66c0624547812497}{word\_\-width} = \hyperlink{classtable_a38126dcd841a7cbcb52c1884827b131e}{num\_\-cols}
+\item 
+\hyperlink{classtable_a965f2c5991540ea4e34dc5e9ece75b3f}{total\_\-bits} = \hyperlink{classtable_a1e48c66312066107052dac253aaedf6d}{num\_\-words}$\ast$\hyperlink{classtable_aceb89bcee9f344f99b75379e82506882}{word\_\-width}
+\item 
+\hyperlink{classtable_a628b981914a21493ea597a94f86d6a4e}{height} = \hyperlink{classtable_aa31878a72f24f17c2100bc7e9acd96d0}{num\_\-rows}
+\item 
+tuple \hyperlink{classtable_aaf6197846462252e233815256c59795a}{height} = floor\_\-sqrt\_\-pwr2(\hyperlink{classtable_a965f2c5991540ea4e34dc5e9ece75b3f}{total\_\-bits})
+\item 
+tuple \hyperlink{classtable_a605882d69786546555960d11c3b4ffb0}{Ba} = log2(\hyperlink{classtable_a1e48c66312066107052dac253aaedf6d}{num\_\-words})
+\item 
+tuple \hyperlink{classtable_afe0f82947b2ec532e47c5ce352fdfc7b}{Bp} = log2(\hyperlink{classtable_a628b981914a21493ea597a94f86d6a4e}{height})
+\item 
+\hyperlink{classtable_a2a737b75a5ba5091935134df082e2c39}{Nl} = \hyperlink{classtable_aceb89bcee9f344f99b75379e82506882}{word\_\-width}
+\item 
+tuple \hyperlink{classtable_ad970704c6940da68266a55b39ae55528}{array} = \hyperlink{classtable_1_1Array}{Array}($\ast$$\ast$\hyperlink{classtable_af4623354d0c8319c4cb046c7b3e17ddb}{tech\_\-params})
+\item 
+tuple \hyperlink{classtable_a1e6eebfecef9fda79cddfa1d45c2e8fa}{energy} = array.get\_\-energy()
+\item 
+int \hyperlink{classtable_a794bcbed0154faed6ad430ef6e563ace}{freq} = 2
+\item 
+\hyperlink{classtable_a1ea493d4d5072b1d255e0d25d10f9cab}{power} = \hyperlink{classenergy}{energy}$\ast$\hyperlink{classtable_a794bcbed0154faed6ad430ef6e563ace}{freq}
+\item 
+int \hyperlink{classtable_ac8cec3dd028135d3f662c9497f7ad53a}{area} = 1
 \end{DoxyCompactItemize}
 \subsubsection*{template$<$typename tableType\_\-T$>$ class table$<$ tableType\_\-T $>$}
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classtable_a5b99bb95a41d31c95bcf2c91c784f981}{
+\hypertarget{classtable_ac3da89bda078a7aa2c6805866bb4399c}{
 \index{table@{table}!table@{table}}
 \index{table@{table}!table@{table}}
 \subsubsection[{table}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf table}$<$ tableType\_\-T $>$::{\bf table} (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf TABLE\_\-TYPE}}]{table\_\-type = {\ttfamily RAM\_\-ARRAY}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf TABLE\_\-TYPE}}]{table\_\-type, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{table\_\-name = {\ttfamily \char`\"{}table$<$~tableType\_\-T~$>$\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classtable_a5b99bb95a41d31c95bcf2c91c784f981}
+\label{classtable_ac3da89bda078a7aa2c6805866bb4399c}
 
 \begin{DoxyCode}
-    : unit (table_name),
-      //s_table_empty_cyc (g_stats.newScalarStat (table_name, "table_empty_cyc", 
-      "Number of cycles with table empty", 0, NO_PRINT_ZERO)),
-      //s_table_full_cyc  (g_stats.newScalarStat (table_name, "table_full_cyc", "
-      Number of cycles with table full", 0, NO_PRINT_ZERO)),
-      _wr_port (wr_port_cnt, WRITE, table_name + ".wr_wire"),
-      _rd_port (rd_port_cnt, READ,  table_name + ".rd_wire"),
-      _table_size (len),
+    : unit (table_name, clk),
+      _wr_port (WRITE, clk, root, table_name + ".wr_wire"),
+      _rd_port (READ,  clk, root, table_name + ".rd_wire"),
       _table_type (table_type),
+      _e_table (table_name, root),
+      s_table_empty_cyc (g_stats.newScalarStat (table_name, "empty_cyc", "Number 
+      of cycles with table empty", 0, NO_PRINT_ZERO)),
+      s_table_full_cyc  (g_stats.newScalarStat (table_name, "full_cyc", "Number o
+      f cycles with table full", 0, NO_PRINT_ZERO)),
+      s_table_size_rat  (g_stats.newRatioStat (clk->getStatObj (), table_name, "s
+      ize_rat", "Average table size", 0, NO_PRINT_ZERO))
 {
+    WIDTH rd_wire_cnt, wr_wire_cnt;
+    root["rd_wire_cnt"] >> rd_wire_cnt;
+    root["wr_wire_cnt"] >> wr_wire_cnt; 
+    root["size"] >> _table_size;
+
         Assert (_table_size > 0 && 
-            rd_port_cnt > 0 && rd_port_cnt <= _table_size &&
-            wr_port_cnt > 0 && wr_port_cnt <= _table_size);
+            rd_wire_cnt > 0 && rd_wire_cnt <= _table_size &&
+            wr_wire_cnt > 0 && wr_wire_cnt <= _table_size);
     _cycle = START_CYCLE;
 }
 \end{DoxyCode}
@@ -106,6 +201,81 @@ const \hyperlink{table_8h_ae42c42cf2da8a8d43c157d91ad4f3158}{TABLE\_\-TYPE} \hyp
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classtable_a2721191334bf94a8bcb0f7b390395d93}{
+\index{table@{table}!cam2Access@{cam2Access}}
+\index{cam2Access@{cam2Access}!table@{table}}
+\subsubsection[{cam2Access}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ void {\bf table}$<$ tableType\_\-T $>$::cam2Access (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{num\_\-access = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}
+\label{classtable_a2721191334bf94a8bcb0f7b390395d93}
+
+\begin{DoxyCode}
+                                                      {
+    table<tableType_T>::_e_table.cam2Access (num_access);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classtable_a5f6cd1dbedfb060cf94410b8cd3ecb0f}{
+\index{table@{table}!camAccess@{camAccess}}
+\index{camAccess@{camAccess}!table@{table}}
+\subsubsection[{camAccess}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ void {\bf table}$<$ tableType\_\-T $>$::camAccess (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{num\_\-access = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}
+\label{classtable_a5f6cd1dbedfb060cf94410b8cd3ecb0f}
+
+\begin{DoxyCode}
+                                                     {
+    table<tableType_T>::_e_table.camAccess (num_access);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classtable_a8bb35d49306464551659d08e8495527f}{
+\index{table@{table}!fifoAccess@{fifoAccess}}
+\index{fifoAccess@{fifoAccess}!table@{table}}
+\subsubsection[{fifoAccess}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ void {\bf table}$<$ tableType\_\-T $>$::fifoAccess (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{num\_\-access = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}
+\label{classtable_a8bb35d49306464551659d08e8495527f}
+
+\begin{DoxyCode}
+                                                      {
+    table<tableType_T>::_e_table.fifoAccess (num_access);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classtable_a9a0482a7594596a539e815bbe9c6aa7b}{
 \index{table@{table}!getBack@{getBack}}
 \index{getBack@{getBack}!table@{table}}
@@ -118,9 +288,10 @@ const \hyperlink{table_8h_ae42c42cf2da8a8d43c157d91ad4f3158}{TABLE\_\-TYPE} \hyp
 
 \begin{DoxyCode}
                                          {
-    Assert (_wr_port->getNumFreeWire (clk) > 0 && "must have checked the availabl
-      e ports count first");
+    Assert (_wr_port.getNumFreeWires () > 0 && "must have checked the available p
+      orts count first");
     Assert (getTableSize () > 0);
+    _e_table.ramAccess ();
         return table<tableType_T>::_table.Last ()->_element;
 }
 \end{DoxyCode}
@@ -179,7 +350,8 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                               {
-        if (getTableSize () >= _table_size) {
+    Assert (getTableSize () <= _table_size);
+        if (getTableSize () == _table_size) {
         dbg.print (DBG_PORT, "%s: %s (cyc: )\n", _c_name.c_str (), "is FULL");
         return FULL_BUFF;
     } else if (getTableSize () == 0) {
@@ -198,23 +370,23 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classtable_ade9af281ee70b0cf544060c478ffbfe1}{
+\hypertarget{classtable_aa04af14b4eceb2ac2653364d1c1217b6}{
 \index{table@{table}!hasFreeWire@{hasFreeWire}}
 \index{hasFreeWire@{hasFreeWire}!table@{table}}
-\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf table}$<$ tableType\_\-T $>$::hasFreeWire (
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ bool {\bf table}$<$ tableType\_\-T $>$::hasFreeWire (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk, }
 \item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
 \end{DoxyParamCaption}
 )}}
-\label{classtable_ade9af281ee70b0cf544060c478ffbfe1}
+\label{classtable_aa04af14b4eceb2ac2653364d1c1217b6}
 
 \begin{DoxyCode}
-                                                                               {
-    if (axes_type == READ)
-        return _rd_port->hasFreeWire (clk);
-    else
-        return _wr_port->hasFreeWire (clk);
+                                                         {
+    if (axes_type == READ) {
+        return _rd_port.hasFreeWire ();
+    } else {
+        return _wr_port.hasFreeWire ();
+    }
 }
 \end{DoxyCode}
 
@@ -234,15 +406,21 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                          {
-    Assert (_wr_port->getNumFreeWire (clk) > 0 && "must have checked the availabl
-      e ports count first");
+    Assert (_wr_port.getNumFreeWires () > 0 && "must have checked the available p
+      orts count first");
     Assert (getTableSize () > 0);
         tableType_T elem = table<tableType_T>::_table.Last ()->_element;
         delete table<tableType_T>::_table.Nth (getTableSize () - 1);
         table<tableType_T>::_table.RemoveAt (getTableSize () - 1);
+    _e_table.ramAccess ();
         return elem;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classtable_a8810ab4eeba365c36687d4c6c02fe1f6}{
 \index{table@{table}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!table@{table}}
@@ -255,8 +433,8 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                                         {
-    Assert (_wr_port->getNumFreeWire (clk) > 0 && "must have checked the availabl
-      e ports count first");
+    Assert (_wr_port.getNumFreeWires () > 0 && "must have checked the available p
+      orts count first");
         if (getTableSize () >= _table_size) {
         dbg.print (DBG_PORT, "%s: %s (cyc: )\n", _c_name.c_str (), "is FULL");
         return FULL_BUFF;
@@ -264,7 +442,33 @@ Here is the caller graph for this function:
         TableElement<tableType_T>* newEntry = new TableElement<tableType_T> (obj)
       ;
         table<tableType_T>::_table.Append (newEntry);
+    _e_table.ramAccess ();
         return AVAILABLE_BUFF;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classtable_a8ea206be96142eafa4eb46fe4a910292}{
+\index{table@{table}!ramAccess@{ramAccess}}
+\index{ramAccess@{ramAccess}!table@{table}}
+\subsubsection[{ramAccess}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ void {\bf table}$<$ tableType\_\-T $>$::ramAccess (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{num\_\-access = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}
+\label{classtable_a8ea206be96142eafa4eb46fe4a910292}
+
+\begin{DoxyCode}
+                                                     {
+    table<tableType_T>::_e_table.ramAccess (num_access);
 }
 \end{DoxyCode}
 
@@ -290,10 +494,11 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
                                   {
     if (getTableState () == EMPTY_BUFF) {
-        //s_table_empty_cyc++;
+        s_table_empty_cyc++;
     } else if (getTableState () == FULL_BUFF) {
-        //s_table_full_cyc++;
+        s_table_full_cyc++;
     }
+    s_table_size_rat += getTableSize ();
 }
 \end{DoxyCode}
 
@@ -325,38 +530,36 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classtable_aafcfb08640fda68a1a09b81afc3c1dd7}{
+\hypertarget{classtable_a03164f903a848e731e1b934a533896b4}{
 \index{table@{table}!updateWireState@{updateWireState}}
 \index{updateWireState@{updateWireState}!table@{table}}
-\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ tableType\_\-T {\bf table}$<$ tableType\_\-T $>$::updateWireState (
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ void {\bf table}$<$ tableType\_\-T $>$::updateWireState (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk, }
-\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{list$<$ string $>$}]{wire\_\-name = {\ttfamily list$<$string$>$()}, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}}
-\label{classtable_aafcfb08640fda68a1a09b81afc3c1dd7}
+\label{classtable_a03164f903a848e731e1b934a533896b4}
 
 \begin{DoxyCode}
                                                                                  
-        {
-    CYCLE now = clk.now ();
+                            {
+    CYCLE now = _clk->now ();
     if (_cycle < now) {
-        _wr_port->updateWireState (clk);
-        _rd_port->updateWireState (clk);
+        _wr_port.updateWireState (wire_name, axes_type == WRITE ? update_wire : f
+      alse);
+        _rd_port.updateWireState (wire_name, axes_type == READ ? update_wire : fa
+      lse);
         _cycle = now;
     } else if (_cycle == now) {
         if (axes_type == READ)
-            _rd_port->updateWireState (clk);
+            _rd_port.updateWireState (wire_name, update_wire);
         else
-            _wr_port->updateWireState (clk);
+            _wr_port.updateWireState (wire_name, update_wire);
     }
 }
 \end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
 
 
 Here is the caller graph for this function:
@@ -370,6 +573,11 @@ Here is the caller graph for this function:
 \index{\_\-cycle@{\_\-cycle}!table@{table}}
 \subsubsection[{\_\-cycle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf CYCLE} {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-cycle}}}
 \label{classtable_a64d740f2c6bbb938aac4a89bcbd76674}
+\hypertarget{classtable_ad581f47c3a5858efcc8ea5377fe6c77a}{
+\index{table@{table}!\_\-e\_\-table@{\_\-e\_\-table}}
+\index{\_\-e\_\-table@{\_\-e\_\-table}!table@{table}}
+\subsubsection[{\_\-e\_\-table}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table\_\-energy} {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-e\_\-table}}}
+\label{classtable_ad581f47c3a5858efcc8ea5377fe6c77a}
 \hypertarget{classtable_a55194c16991775949c0bc2e2ce0dd1de}{
 \index{table@{table}!\_\-rd\_\-port@{\_\-rd\_\-port}}
 \index{\_\-rd\_\-port@{\_\-rd\_\-port}!table@{table}}
@@ -380,11 +588,11 @@ Here is the caller graph for this function:
 \index{\_\-table@{\_\-table}!table@{table}}
 \subsubsection[{\_\-table}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf List}$<${\bf TableElement}$<$tableType\_\-T$>$$\ast$ $>$ {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-table}}}
 \label{classtable_aea78e74d4f44c1879df0c44e69d7bc26}
-\hypertarget{classtable_a812d699882bfa6230532dad66a5004bd}{
+\hypertarget{classtable_a7bb72e9a56072266491b5a125b41ef87}{
 \index{table@{table}!\_\-table\_\-size@{\_\-table\_\-size}}
 \index{\_\-table\_\-size@{\_\-table\_\-size}!table@{table}}
-\subsubsection[{\_\-table\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ const {\bf LENGTH} {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-table\_\-size}}}
-\label{classtable_a812d699882bfa6230532dad66a5004bd}
+\subsubsection[{\_\-table\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf LENGTH} {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-table\_\-size}}}
+\label{classtable_a7bb72e9a56072266491b5a125b41ef87}
 \hypertarget{classtable_ae804042049b8e94591efe22ae05c0371}{
 \index{table@{table}!\_\-table\_\-type@{\_\-table\_\-type}}
 \index{\_\-table\_\-type@{\_\-table\_\-type}!table@{table}}
@@ -395,9 +603,223 @@ Here is the caller graph for this function:
 \index{\_\-wr\_\-port@{\_\-wr\_\-port}!table@{table}}
 \subsubsection[{\_\-wr\_\-port}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf wires} {\bf table}$<$ tableType\_\-T $>$::{\bf \_\-wr\_\-port}}}
 \label{classtable_a7c068dc525606b03270d704ea3494f91}
+\hypertarget{classtable_ac8cec3dd028135d3f662c9497f7ad53a}{
+\index{table@{table}!area@{area}}
+\index{area@{area}!table@{table}}
+\subsubsection[{area}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ int {\bf table}$<$ tableType\_\-T $>$::{\bf area} = 1}}
+\label{classtable_ac8cec3dd028135d3f662c9497f7ad53a}
+\hypertarget{classtable_ad970704c6940da68266a55b39ae55528}{
+\index{table@{table}!array@{array}}
+\index{array@{array}!table@{table}}
+\subsubsection[{array}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf array} = {\bf Array}($\ast$$\ast${\bf tech\_\-params})}}
+\label{classtable_ad970704c6940da68266a55b39ae55528}
+\hypertarget{classtable_a605882d69786546555960d11c3b4ffb0}{
+\index{table@{table}!Ba@{Ba}}
+\index{Ba@{Ba}!table@{table}}
+\subsubsection[{Ba}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf Ba} = log2({\bf num\_\-words})}}
+\label{classtable_a605882d69786546555960d11c3b4ffb0}
+\hypertarget{classtable_afe0f82947b2ec532e47c5ce352fdfc7b}{
+\index{table@{table}!Bp@{Bp}}
+\index{Bp@{Bp}!table@{table}}
+\subsubsection[{Bp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf Bp} = log2({\bf height})}}
+\label{classtable_afe0f82947b2ec532e47c5ce352fdfc7b}
+\hypertarget{classtable_af189382302593d719e7099c7ba0170c9}{
+\index{table@{table}!cell\_\-model@{cell\_\-model}}
+\index{cell\_\-model@{cell\_\-model}!table@{table}}
+\subsubsection[{cell\_\-model}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf cell\_\-model} = {\bf models.CellModel}($\ast$$\ast${\bf cell\_\-model\_\-params})}}
+\label{classtable_af189382302593d719e7099c7ba0170c9}
+\hypertarget{classtable_affb2ec85d44634a9b5e4791b756489ca}{
+\index{table@{table}!cell\_\-model\_\-params@{cell\_\-model\_\-params}}
+\index{cell\_\-model\_\-params@{cell\_\-model\_\-params}!table@{table}}
+\subsubsection[{cell\_\-model\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ dictionary {\bf table}$<$ tableType\_\-T $>$::{\bf cell\_\-model\_\-params}}}
+\label{classtable_affb2ec85d44634a9b5e4791b756489ca}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+{"cin": 8,
+                         "w": 16,
+                         "h": 40}
+\end{DoxyCode}
+\hypertarget{classtable_a252e7ab94c46dafbdab734b5ceedc267}{
+\index{table@{table}!cell\_\-model\_\-params@{cell\_\-model\_\-params}}
+\index{cell\_\-model\_\-params@{cell\_\-model\_\-params}!table@{table}}
+\subsubsection[{cell\_\-model\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf cell\_\-model\_\-params} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}cell\_\-model\char`\"{}\mbox{]}}}
+\label{classtable_a252e7ab94c46dafbdab734b5ceedc267}
+\hypertarget{classtable_aa789a61b22c94a65f51a3505311b03fc}{
+\index{table@{table}!default\_\-wire\_\-model@{default\_\-wire\_\-model}}
+\index{default\_\-wire\_\-model@{default\_\-wire\_\-model}!table@{table}}
+\subsubsection[{default\_\-wire\_\-model}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf default\_\-wire\_\-model} = {\bf models.WireModel}($\ast$$\ast${\bf wire\_\-model\_\-params})}}
+\label{classtable_aa789a61b22c94a65f51a3505311b03fc}
+\hypertarget{classtable_a1e6eebfecef9fda79cddfa1d45c2e8fa}{
+\index{table@{table}!energy@{energy}}
+\index{energy@{energy}!table@{table}}
+\subsubsection[{energy}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf energy} = array.get\_\-energy()}}
+\label{classtable_a1e6eebfecef9fda79cddfa1d45c2e8fa}
+\hypertarget{classtable_a794bcbed0154faed6ad430ef6e563ace}{
+\index{table@{table}!freq@{freq}}
+\index{freq@{freq}!table@{table}}
+\subsubsection[{freq}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ int {\bf table}$<$ tableType\_\-T $>$::{\bf freq} = 2}}
+\label{classtable_a794bcbed0154faed6ad430ef6e563ace}
+\hypertarget{classtable_a2c6d189f908ac28d316ae1afa2a18324}{
+\index{table@{table}!global\_\-wire\_\-model@{global\_\-wire\_\-model}}
+\index{global\_\-wire\_\-model@{global\_\-wire\_\-model}!table@{table}}
+\subsubsection[{global\_\-wire\_\-model}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf global\_\-wire\_\-model} = {\bf global\_\-wire.GlobalWire}($\ast$$\ast${\bf global\_\-wire\_\-params})}}
+\label{classtable_a2c6d189f908ac28d316ae1afa2a18324}
+\hypertarget{classtable_afa4455260ca054710631a16d93ad1848}{
+\index{table@{table}!global\_\-wire\_\-params@{global\_\-wire\_\-params}}
+\index{global\_\-wire\_\-params@{global\_\-wire\_\-params}!table@{table}}
+\subsubsection[{global\_\-wire\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ dictionary {\bf table}$<$ tableType\_\-T $>$::{\bf global\_\-wire\_\-params}}}
+\label{classtable_afa4455260ca054710631a16d93ad1848}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+{"eperl": 0.1,
+                          "tperl": 0.4}
+\end{DoxyCode}
+\hypertarget{classtable_a9dce6b1c97baf3ee2ce1c6fe2e90cf78}{
+\index{table@{table}!global\_\-wire\_\-params@{global\_\-wire\_\-params}}
+\index{global\_\-wire\_\-params@{global\_\-wire\_\-params}!table@{table}}
+\subsubsection[{global\_\-wire\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf global\_\-wire\_\-params} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}global\_\-wire\_\-model\char`\"{}\mbox{]}}}
+\label{classtable_a9dce6b1c97baf3ee2ce1c6fe2e90cf78}
+\hypertarget{classtable_a628b981914a21493ea597a94f86d6a4e}{
+\index{table@{table}!height@{height}}
+\index{height@{height}!table@{table}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf height} = {\bf num\_\-rows}}}
+\label{classtable_a628b981914a21493ea597a94f86d6a4e}
+\hypertarget{classtable_aaf6197846462252e233815256c59795a}{
+\index{table@{table}!height@{height}}
+\index{height@{height}!table@{table}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf height} = floor\_\-sqrt\_\-pwr2({\bf total\_\-bits})}}
+\label{classtable_aaf6197846462252e233815256c59795a}
+\hypertarget{classtable_ac52d431b62e008aea842db9c5a74c826}{
+\index{table@{table}!l@{l}}
+\index{l@{l}!table@{table}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf l} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}technology\char`\"{}\mbox{]}}}
+\label{classtable_ac52d431b62e008aea842db9c5a74c826}
+\hypertarget{classtable_a1a42a6604769284e9187575b0abc876d}{
+\index{table@{table}!l@{l}}
+\index{l@{l}!table@{table}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ float {\bf table}$<$ tableType\_\-T $>$::{\bf l} = 0.022e-\/6}}
+\label{classtable_a1a42a6604769284e9187575b0abc876d}
+\hypertarget{classtable_a2a737b75a5ba5091935134df082e2c39}{
+\index{table@{table}!Nl@{Nl}}
+\index{Nl@{Nl}!table@{table}}
+\subsubsection[{Nl}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf Nl} = {\bf word\_\-width}}}
+\label{classtable_a2a737b75a5ba5091935134df082e2c39}
+\hypertarget{classtable_a14f0e7c4dcb9436645bd912ac804c094}{
+\index{table@{table}!num\_\-arrays@{num\_\-arrays}}
+\index{num\_\-arrays@{num\_\-arrays}!table@{table}}
+\subsubsection[{num\_\-arrays}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf num\_\-arrays} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}arrays\char`\"{}\mbox{]}}}
+\label{classtable_a14f0e7c4dcb9436645bd912ac804c094}
+\hypertarget{classtable_a38126dcd841a7cbcb52c1884827b131e}{
+\index{table@{table}!num\_\-cols@{num\_\-cols}}
+\index{num\_\-cols@{num\_\-cols}!table@{table}}
+\subsubsection[{num\_\-cols}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf num\_\-cols} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}}}
+\label{classtable_a38126dcd841a7cbcb52c1884827b131e}
+\hypertarget{classtable_aa31878a72f24f17c2100bc7e9acd96d0}{
+\index{table@{table}!num\_\-rows@{num\_\-rows}}
+\index{num\_\-rows@{num\_\-rows}!table@{table}}
+\subsubsection[{num\_\-rows}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf num\_\-rows} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}}}
+\label{classtable_aa31878a72f24f17c2100bc7e9acd96d0}
+\hypertarget{classtable_a64c900658131e38359a1f39fe0f2d489}{
+\index{table@{table}!num\_\-words@{num\_\-words}}
+\index{num\_\-words@{num\_\-words}!table@{table}}
+\subsubsection[{num\_\-words}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf num\_\-words} = {\bf num\_\-rows}}}
+\label{classtable_a64c900658131e38359a1f39fe0f2d489}
+\hypertarget{classtable_a1e48c66312066107052dac253aaedf6d}{
+\index{table@{table}!num\_\-words@{num\_\-words}}
+\index{num\_\-words@{num\_\-words}!table@{table}}
+\subsubsection[{num\_\-words}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf num\_\-words} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}}}
+\label{classtable_a1e48c66312066107052dac253aaedf6d}
+\hypertarget{classtable_a1ea493d4d5072b1d255e0d25d10f9cab}{
+\index{table@{table}!power@{power}}
+\index{power@{power}!table@{table}}
+\subsubsection[{power}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf power} = {\bf energy}$\ast${\bf freq}}}
+\label{classtable_a1ea493d4d5072b1d255e0d25d10f9cab}
+\hypertarget{classtable_a55b2044ce2664c572a3ad3bd658dcbfe}{
+\index{table@{table}!s\_\-table\_\-empty\_\-cyc@{s\_\-table\_\-empty\_\-cyc}}
+\index{s\_\-table\_\-empty\_\-cyc@{s\_\-table\_\-empty\_\-cyc}!table@{table}}
+\subsubsection[{s\_\-table\_\-empty\_\-cyc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf ScalarStat}\& {\bf table}$<$ tableType\_\-T $>$::{\bf s\_\-table\_\-empty\_\-cyc}}}
+\label{classtable_a55b2044ce2664c572a3ad3bd658dcbfe}
+\hypertarget{classtable_ab2e2f8d83bb377b91a283abcb90a36a7}{
+\index{table@{table}!s\_\-table\_\-full\_\-cyc@{s\_\-table\_\-full\_\-cyc}}
+\index{s\_\-table\_\-full\_\-cyc@{s\_\-table\_\-full\_\-cyc}!table@{table}}
+\subsubsection[{s\_\-table\_\-full\_\-cyc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf ScalarStat}\& {\bf table}$<$ tableType\_\-T $>$::{\bf s\_\-table\_\-full\_\-cyc}}}
+\label{classtable_ab2e2f8d83bb377b91a283abcb90a36a7}
+\hypertarget{classtable_a9535b93bb57e405b922fb45afdb75ad0}{
+\index{table@{table}!s\_\-table\_\-size\_\-rat@{s\_\-table\_\-size\_\-rat}}
+\index{s\_\-table\_\-size\_\-rat@{s\_\-table\_\-size\_\-rat}!table@{table}}
+\subsubsection[{s\_\-table\_\-size\_\-rat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf RatioStat}\& {\bf table}$<$ tableType\_\-T $>$::{\bf s\_\-table\_\-size\_\-rat}}}
+\label{classtable_a9535b93bb57e405b922fb45afdb75ad0}
+\hypertarget{classtable_af4623354d0c8319c4cb046c7b3e17ddb}{
+\index{table@{table}!tech\_\-params@{tech\_\-params}}
+\index{tech\_\-params@{tech\_\-params}!table@{table}}
+\subsubsection[{tech\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ dictionary {\bf table}$<$ tableType\_\-T $>$::{\bf tech\_\-params} = \{\}}}
+\label{classtable_af4623354d0c8319c4cb046c7b3e17ddb}
+\hypertarget{classtable_a965f2c5991540ea4e34dc5e9ece75b3f}{
+\index{table@{table}!total\_\-bits@{total\_\-bits}}
+\index{total\_\-bits@{total\_\-bits}!table@{table}}
+\subsubsection[{total\_\-bits}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf total\_\-bits} = {\bf num\_\-words}$\ast${\bf word\_\-width}}}
+\label{classtable_a965f2c5991540ea4e34dc5e9ece75b3f}
+\hypertarget{classtable_aebf2e2c6c4d0ec6026901ca8e6679a5d}{
+\index{table@{table}!wire\_\-model\_\-params@{wire\_\-model\_\-params}}
+\index{wire\_\-model\_\-params@{wire\_\-model\_\-params}!table@{table}}
+\subsubsection[{wire\_\-model\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ dictionary {\bf table}$<$ tableType\_\-T $>$::{\bf wire\_\-model\_\-params}}}
+\label{classtable_aebf2e2c6c4d0ec6026901ca8e6679a5d}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+{"pitch": 0.14,
+                         "width": 0.07,
+                         "height": 0.26,
+                         "thickness": 0.125,
+                         "l": l}
+\end{DoxyCode}
+\hypertarget{classtable_a26f8b3354769a96a7c51206b89d2a95e}{
+\index{table@{table}!wire\_\-model\_\-params@{wire\_\-model\_\-params}}
+\index{wire\_\-model\_\-params@{wire\_\-model\_\-params}!table@{table}}
+\subsubsection[{wire\_\-model\_\-params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf wire\_\-model\_\-params} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}wire\_\-model\char`\"{}\mbox{]}}}
+\label{classtable_a26f8b3354769a96a7c51206b89d2a95e}
+\hypertarget{classtable_aceb89bcee9f344f99b75379e82506882}{
+\index{table@{table}!word\_\-width@{word\_\-width}}
+\index{word\_\-width@{word\_\-width}!table@{table}}
+\subsubsection[{word\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ list {\bf table}$<$ tableType\_\-T $>$::{\bf word\_\-width} = {\bf yaml\_\-doc}\mbox{[}\char`\"{}array\char`\"{}\mbox{]}}}
+\label{classtable_aceb89bcee9f344f99b75379e82506882}
+\hypertarget{classtable_a82c0fbf4821eb05c66c0624547812497}{
+\index{table@{table}!word\_\-width@{word\_\-width}}
+\index{word\_\-width@{word\_\-width}!table@{table}}
+\subsubsection[{word\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ {\bf table}$<$ tableType\_\-T $>$::{\bf word\_\-width} = {\bf num\_\-cols}}}
+\label{classtable_a82c0fbf4821eb05c66c0624547812497}
+\hypertarget{classtable_a815376b65b49c50ba7ed9c5ced5ca4a4}{
+\index{table@{table}!wordline\_\-pitch@{wordline\_\-pitch}}
+\index{wordline\_\-pitch@{wordline\_\-pitch}!table@{table}}
+\subsubsection[{wordline\_\-pitch}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ int {\bf table}$<$ tableType\_\-T $>$::{\bf wordline\_\-pitch} = 1}}
+\label{classtable_a815376b65b49c50ba7ed9c5ced5ca4a4}
+\hypertarget{classtable_a5c3be16096865c6c55cfb6eebaad2cee}{
+\index{table@{table}!wordline\_\-wire\_\-model@{wordline\_\-wire\_\-model}}
+\index{wordline\_\-wire\_\-model@{wordline\_\-wire\_\-model}!table@{table}}
+\subsubsection[{wordline\_\-wire\_\-model}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf wordline\_\-wire\_\-model}}}
+\label{classtable_a5c3be16096865c6c55cfb6eebaad2cee}
+{\bfseries Initial value:}
+\begin{DoxyCode}
+models.WireModel(pitch=wordline_pitch,
+                                           width=wordline_pitch/2,
+                                           thickness=wire_model_params["thickness
+      "],
+                                           height=wire_model_params["height"],
+                                           l=l)
+\end{DoxyCode}
+\hypertarget{classtable_af711f0fa04be7ff6e233884b184cb339}{
+\index{table@{table}!yaml\_\-config\_\-file@{yaml\_\-config\_\-file}}
+\index{yaml\_\-config\_\-file@{yaml\_\-config\_\-file}!table@{table}}
+\subsubsection[{yaml\_\-config\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf yaml\_\-config\_\-file} = open(sys.argv\mbox{[}1\mbox{]})}}
+\label{classtable_af711f0fa04be7ff6e233884b184cb339}
+\hypertarget{classtable_a068029d2d6ede2fab66a603c83626ed1}{
+\index{table@{table}!yaml\_\-doc@{yaml\_\-doc}}
+\index{yaml\_\-doc@{yaml\_\-doc}!table@{table}}
+\subsubsection[{yaml\_\-doc}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T$>$ tuple {\bf table}$<$ tableType\_\-T $>$::{\bf yaml\_\-doc} = yaml.load({\bf yaml\_\-config\_\-file})}}
+\label{classtable_a068029d2d6ede2fab66a603c83626ed1}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8h}{table.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/energy/cache\_\-spice/scripts/\hyperlink{table_8py}{table.py}\item 
 /home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{table_8cpp}{table.cpp}\end{DoxyCompactItemize}

@@ -46,7 +46,7 @@ long int \hyperlink{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}{getReg} (
 \label{classinterfNode_a4ae9c453615eb4c03da34ba30268af39}
 
 \begin{DoxyCode}
-                                        {
+                                         {
         _reg = -1;
         _psudoReg = psudoReg;
         _edgeList_static  = new List<interfNode*>;
@@ -64,7 +64,7 @@ long int \hyperlink{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}{getReg} (
 \label{classinterfNode_a430159d7a4bbd766eea82acc3841277c}
 
 \begin{DoxyCode}
-                        {
+                         {
         delete _edgeList_static;
         delete _edgeList_dynamic;
 }
@@ -83,12 +83,12 @@ long int \hyperlink{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}{getReg} (
 \label{classinterfNode_ad6ed82efebee0dd2b0334aec5a7c0059}
 
 \begin{DoxyCode}
-                                         {
-        if (_neighborSet.find(node->getPsudoReg()) == _neighborSet.end()) {
-                _neighborSet.insert(node->getPsudoReg());
-                _edgeList_static->Append(node);
-                _edgeList_dynamic->Append(node);
-                node->addEdge(this);
+                                          {
+        if (_neighborSet.find (node->getPsudoReg ()) == _neighborSet.end ()) {
+                _neighborSet.insert (node->getPsudoReg ());
+                _edgeList_static->Append (node);
+                _edgeList_dynamic->Append (node);
+                node->addEdge (this);
         }
 }
 \end{DoxyCode}
@@ -113,29 +113,30 @@ Here is the caller graph for this function:
 \label{classinterfNode_ad2d5e57328c5f3fa8121f4ee8799b50d}
 
 \begin{DoxyCode}
-                                               {
+                                                {
         set<long int> usedRegSet, unusedRegSet;
-        for (int i = 0; i < _edgeList_static->NumElements(); i++) {
-                interfNode *node = _edgeList_static->Nth(i);
-                long int nodeReg = node->getReg();
-                if (nodeReg != -1) usedRegSet.insert(nodeReg);
+
+    /* FIND THE REGISTRE NAME NOT USED BY THE INTERFERING NODES */
+        for (int i = 0; i < _edgeList_static->NumElements (); i++) {
+                interfNode *node = _edgeList_static->Nth (i);
+                long int nodeReg = node->getReg ();
+                if (nodeReg != -1) usedRegSet.insert (nodeReg);
         }
-        std::set_difference(RFset.begin(), RFset.end(), usedRegSet.begin(), usedR
-      egSet.end(), std::inserter(unusedRegSet, unusedRegSet.begin()));
-        Assert(unusedRegSet.size() > 0 && "No register value found to assign.");
-        _reg = *(unusedRegSet.begin());
-        Assert(((_reg >= GRF_LO && _reg <= GRF_HI) || (_reg >= LRF_LO && _reg <= 
-      LRF_HI)) && "Invalid Register Value");
+
+        std::set_difference (RFset.begin (), RFset.end (), 
+                         usedRegSet.begin (), usedRegSet.end (), 
+                         std::inserter (unusedRegSet, unusedRegSet.begin ()));
+
+        Assert (unusedRegSet.size () > 0 && "No register value found to assign.")
+      ;
+        _reg = * (unusedRegSet.begin ());
+        Assert (((_reg >= GRF_LO && _reg <= GRF_HI) || 
+             (_reg >= LRF_LO && _reg <= LRF_HI)) && "Invalid Register Value");
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classinterfNode_ae7958792c61a6edc8f6789812425ac73}{
@@ -149,7 +150,7 @@ Here is the caller graph for this function:
 \label{classinterfNode_ae7958792c61a6edc8f6789812425ac73}
 
 \begin{DoxyCode}
-                                           {
+                                            {
         return _edgeList_dynamic;
 }
 \end{DoxyCode}
@@ -164,8 +165,8 @@ Here is the caller graph for this function:
 \label{classinterfNode_a849288bb063ab927d0938254066c5ce7}
 
 \begin{DoxyCode}
-                                {
-        return _neighborSet.size();
+                                 {
+        return _neighborSet.size ();
 }
 \end{DoxyCode}
 \hypertarget{classinterfNode_a139d1365e2b0eb15797c61f0f4d61464}{
@@ -179,7 +180,7 @@ Here is the caller graph for this function:
 \label{classinterfNode_a139d1365e2b0eb15797c61f0f4d61464}
 
 \begin{DoxyCode}
-                                 {
+                                  {
         return _psudoReg;
 }
 \end{DoxyCode}
@@ -199,9 +200,10 @@ Here is the caller graph for this function:
 \label{classinterfNode_a5c117c01d84f8323e7d304722bcac8fe}
 
 \begin{DoxyCode}
-                            {
+                             {
         return _reg;
-}\end{DoxyCode}
+}
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
@@ -218,12 +220,13 @@ Here is the caller graph for this function:
 \label{classinterfNode_a28de448897ec0c075e14f34c9aec4938}
 
 \begin{DoxyCode}
-                                                 {
-        long int nodePsudoReg = node->getPsudoReg();
-        for (int i = 0; i < _edgeList_dynamic->NumElements(); i++) {
-                if (nodePsudoReg == _edgeList_dynamic->Nth(i)->getPsudoReg()) {
-                        _neighborSet.erase(nodePsudoReg);
-                        _edgeList_dynamic->RemoveAt(i);
+                                                  {
+        long int nodePsudoReg = node->getPsudoReg ();
+        for (int i = 0; i < _edgeList_dynamic->NumElements (); i++) {
+                if (nodePsudoReg == _edgeList_dynamic->Nth (i)->getPsudoReg ()) {
+      
+                        _neighborSet.erase (nodePsudoReg);
+                        _edgeList_dynamic->RemoveAt (i);
                         break;
                 }
         }
@@ -250,23 +253,18 @@ Here is the caller graph for this function:
 \label{classinterfNode_a73af59beda246607573abffaf434c232}
 
 \begin{DoxyCode}
-                                 {
-        int neighborSize = _edgeList_dynamic->NumElements();
-        while (_edgeList_dynamic->NumElements() > 0) {
-                _edgeList_dynamic->Nth(0)->removeAneighbor(this);
-                _neighborSet.erase(_edgeList_dynamic->Nth(0)->getPsudoReg());
-                _edgeList_dynamic->RemoveAt(0);
+                                  {
+        int neighborSize = _edgeList_dynamic->NumElements ();
+        while (_edgeList_dynamic->NumElements () > 0) {
+                _edgeList_dynamic->Nth (0)->removeAneighbor (this);
+                _neighborSet.erase (_edgeList_dynamic->Nth (0)->getPsudoReg ());
+                _edgeList_dynamic->RemoveAt (0);
         }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 

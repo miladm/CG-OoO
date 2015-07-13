@@ -5,9 +5,16 @@ digraph G
   rankdir=LR;
   Node1 [label="instruction::getOpCode",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="make_basicblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__basicblock_8cpp.html#a765669fc41b8885a39c1ec0df0df96ca"];
+  Node2 [label="dot::defn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#af56f68484dcec4b943a6a77d261080a6"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
-  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="basicblock::printBb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a1599003c14b63f443c1ca3c48c34238e"];
+  Node3 [label="dot::runDot",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#a613147e95e44f245a63a5b08418c95f9"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="finish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="make_basicblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__basicblock_8cpp.html#adfa5d9160d675203db3e663d1f2f3849"];
+  Node6 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="basicblock::printBb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a1599003c14b63f443c1ca3c48c34238e"];
 }

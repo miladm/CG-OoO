@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/vliwScheduler.h Source File</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/vliwScheduler.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,62 +58,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/backend/vliwScheduler.h</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/vliwScheduler.h</div>  </div>
 </div>
 <div class="contents">
-<a href="vliwScheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
-<a name="l00002"></a>00002 <span class="comment"> *  vliwScheduler.h</span>
-<a name="l00003"></a>00003 <span class="comment"> *  vliwScheduler object. schedules the instructions into a VLIW schedule</span>
-<a name="l00004"></a>00004 <span class="comment"> ******************************************************************************/</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#ifndef _VLIWSCHEDULER_H_</span>
-<a name="l00007"></a>00007 <span class="preprocessor"></span><span class="preprocessor">#define _VLIWSCHEDULER_H_</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;../lib/list.h&quot;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;dependencyTable.h&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;quickSort.h&quot;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;phrase.h&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;parser.h&quot;</span>
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="keyword">class </span><a class="code" href="classinstruction.html">instruction</a>;
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="classvliwScheduler.html">00018</a> <span class="keyword">class </span><a class="code" href="classvliwScheduler.html">vliwScheduler</a> {
-<a name="l00019"></a>00019     <span class="keyword">public</span>:
-<a name="l00020"></a>00020         <a class="code" href="classvliwScheduler.html#a99727364e47615fde6a54426b135df7a">vliwScheduler</a>();
-<a name="l00021"></a>00021         <a class="code" href="classvliwScheduler.html#a845a2546d4f6eccf05a853c3f56f30d6">~vliwScheduler</a>();
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#afa9961197e83bf8ac47cc7f15232b70c">findMostCritIns</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a> *list, <span class="keywordtype">int</span> <a class="code" href="bkEnd_8cpp.html#a24ddb63d7b594cb1489ae68dfa66e584">cycle</a>, <span class="keywordtype">bool</span> UPLDhoisting);
-<a name="l00023"></a>00023         <span class="keywordtype">bool</span> <a class="code" href="classvliwScheduler.html#a29a8e438bea013f48b2cc7b3e672dfe6">scheduleIns</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* inList, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* outList, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="bkEnd_8cpp.html#a3709ef01c299a1b84a1b023b9a44d4bc">phraseID</a>);
-<a name="l00024"></a>00024         <span class="keywordtype">bool</span> <a class="code" href="classvliwScheduler.html#a6b42ca4f7436dc7dfac2848dabc10416">scheduleIns_1FU</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* inList, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* outList, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, <span class="keywordtype">long</span> <span class="keywordtype">int</span> phraseID);
-<a name="l00025"></a>00025         <span class="keywordtype">bool</span> <a class="code" href="classvliwScheduler.html#a0c1dd56c752aee739de1aa373fc16078">scheduleInsStream</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* inList, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, FILE* <a class="code" href="bkEnd_8cpp.html#a0e5f51d6a6b1d82437b223b600c984c2">reScheduleFile</a>, <span class="keywordtype">float</span> <a class="code" href="bkEnd_8cpp.html#a88cfebd9f1e296c291bf05c5a78a6177">unpredMemOpThreshold</a>);
-<a name="l00026"></a>00026         <span class="keywordtype">bool</span> <a class="code" href="classvliwScheduler.html#aab01a955d85779eeeddb36cf921e8e80">scheduleInsStream_1FU</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* inList, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, FILE* reScheduleFile);
-<a name="l00027"></a>00027         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#aa7078d3900e7edcb82304e988339d33a">sortLists</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a> *rootALUins, <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *rootMEMins, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, <span class="keywordtype">long</span> <span class="keywordtype">int</span> phraseID);
-<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#aae6254bfac1e348447643a0dec8cbf03">completeIns</a> (<span class="keywordtype">int</span> cycle,<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* list, <span class="keywordtype">bool</span> del);
-<a name="l00029"></a>00029         <a class="code" href="classinstruction.html">instruction</a>* <a class="code" href="classvliwScheduler.html#afd1ec0df4e12e892ef2e1d6cd5a1ad3c">setupNewIns</a>(<a class="code" href="classinstruction.html">instruction</a>* ins, <span class="keywordtype">int</span> cycle);
-<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#a9fde0b92fb06b843f278907413661df1">parseIns</a> (<span class="keywordtype">int</span> <a class="code" href="bkEnd_8cpp.html#a06a6e046fd7b9a66b03d334b1df5e3ad">ROBsize</a>, <a class="code" href="classparser.html">parser</a>* <a class="code" href="bkEnd_8cpp.html#a9b8e7669bda57879d8abc5234b2f0b19">parse</a>, <span class="keywordtype">int</span> cycle);
-<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#ae3dceea059708a0c576983d42eeeb929">delFromInsMap</a>(<a class="code" href="classinstruction.html">instruction</a>* ins);
-<a name="l00032"></a>00032         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#a003d398e327890ff6b77d565207f970d">insertToInsMap</a>(<a class="code" href="classinstruction.html">instruction</a>* newIns);
-<a name="l00033"></a>00033         <span class="keywordtype">int</span> <a class="code" href="classvliwScheduler.html#a730c35e836911d4e81eaccea4bee931d">getSizeOfInsMap</a>();
-<a name="l00034"></a>00034         <span class="keywordtype">void</span> <a class="code" href="classvliwScheduler.html#adc49e9c2b4208f4bf4fe3d1a465e409b">injectIns</a>(<a class="code" href="classinstruction.html">instruction</a>* ins);
-<a name="l00035"></a>00035         
-<a name="l00036"></a>00036         
-<a name="l00037"></a>00037         <span class="comment">//WAvefront Scheduling</span>
-<a name="l00038"></a>00038         <span class="keywordtype">bool</span> <a class="code" href="classvliwScheduler.html#a5abce2c71dce559d07f8f5de8f04c146">schedulePhraseinsStream</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* inList, <span class="keywordtype">int</span> cycle, <span class="keywordtype">bool</span> UPLDhoisting, FILE* reScheduleFile, <span class="keywordtype">float</span> unpredMemOpThreshold, <a class="code" href="classList.html">List&lt;phrase*&gt;</a>* phList);
-<a name="l00039"></a>00039         
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <span class="keyword">private</span>:
-<a name="l00042"></a>00042         <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *rootALUins;
-<a name="l00043"></a>00043         <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *rootMEMins;
-<a name="l00044"></a>00044         <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *outListTemp;
-<a name="l00045"></a>00045         <a class="code" href="classList.html">List&lt;int&gt;</a> *rootInsIndx;
-<a name="l00046"></a>00046         <span class="keywordtype">long</span> <span class="keywordtype">int</span> rootSize;
-<a name="l00047"></a>00047         <span class="keywordtype">long</span> <span class="keywordtype">int</span> phID;
-<a name="l00048"></a>00048         map&lt;long int,instruction*&gt; insMap;
-<a name="l00049"></a>00049         <span class="keywordtype">long</span> <span class="keywordtype">int</span> tempReg;
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#endif</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>
+<a href="vliwScheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001                      
+<a name="l00002"></a>00002      Â          ∂         µ         }             ç         ¡      
+<a name="l00003"></a>00003   µ         ±        ≠   ÄDEV  …   ÄINO  —   ÄSYN  Ÿ   ÄSV~  <a class="code" href="ino_2_8AppleDouble_2sysClock_8cpp.html#aeae2238f68c18f90893e28db0bcb893f">·</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ﬂ€ﬂ€Ä   ﬂ€                                                                 ΩÉ<span class="stringliteral">&quot;               ™</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -121,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

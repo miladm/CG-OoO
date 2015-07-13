@@ -16,13 +16,51 @@ Collaboration diagram for g\_\-variable:
 \item 
 \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}{getSquashSN} ()
 \item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324}{getOldSquashSN} ()
+\item 
 void \hyperlink{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}{resetSquashSN} ()
+\item 
+void \hyperlink{structg__variable_a506e184323be6e4c52b1394fb5aca614}{resetSquashType} ()
 \item 
 void \hyperlink{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}{setSquashSN} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} sn)
 \item 
 void \hyperlink{structg__variable_adc6b682b4875fa3af7d390099c93dc88}{setOldSquashSN} ()
 \item 
-bool \hyperlink{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}{isOnWrongPath} ()
+bool \hyperlink{structg__variable_a2faa8d56e7a81cb41aad7f3df5262344}{isSpeculationViolation} ()
+\item 
+void \hyperlink{structg__variable_abc024387ff924dbf4e9ed6b5542736c2}{setSquashType} (\hyperlink{global_2global_8h_a04ec550019a96c13610ad1f3269182af}{PIPE\_\-SQUASH\_\-TYPE} squash\_\-type)
+\item 
+\hyperlink{global_2global_8h_a04ec550019a96c13610ad1f3269182af}{PIPE\_\-SQUASH\_\-TYPE} \hyperlink{structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0}{getSquashType} ()
+\item 
+\hyperlink{classdynBasicblock}{dynBasicblock} $\ast$ \hyperlink{structg__variable_abd791f9496e5723f7347c56c01c661e3}{getNewCacheBB} ()
+\item 
+\hyperlink{classdynBasicblock}{dynBasicblock} $\ast$ \hyperlink{structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20}{getLastCacheBB} ()
+\item 
+void \hyperlink{structg__variable_a6c7ff60217a53698cce497bf705cd0c8}{insertFrontBBcache} (\hyperlink{classdynBasicblock}{dynBasicblock} $\ast$bb)
+\item 
+\hyperlink{classdynBasicblock}{dynBasicblock} $\ast$ \hyperlink{structg__variable_a919a79fc6f8adce82772a72d3e62a20b}{popBBcache} ()
+\item 
+bool \hyperlink{structg__variable_af56609b1e0566a976487eee39e0283ef}{isBBcacheNearEmpty} ()
+\item 
+bool \hyperlink{structg__variable_a2192ac9bd012be515c0d8d9fbea8b196}{isBBcacheEmpty} ()
+\item 
+\hyperlink{classbbInstruction}{bbInstruction} $\ast$ \hyperlink{structg__variable_a6c27ed49f59faca6b9629a98993ee33e}{getNewBBins} ()
+\item 
+\hyperlink{classblock}{block} $\ast$ \hyperlink{structg__variable_ac1662ac572ac7ec07e7f19117eedb872}{getNewCacheBlk} ()
+\item 
+\hyperlink{classblock}{block} $\ast$ \hyperlink{structg__variable_a326ca8b03f7572a3c402fb676b62213b}{getLastCacheBlk} ()
+\item 
+void \hyperlink{structg__variable_adaeb84094d83af19c60250b0ccbf37b0}{removeLastBlock} ()
+\item 
+void \hyperlink{structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b}{pushInsToCodeCache} ()
+\item 
+bool \hyperlink{structg__variable_afa7c4ed5cce9932b26d4a902e986e774}{isBlkCacheNearEmpty} ()
+\item 
+bool \hyperlink{structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0}{isBlkCacheEmpty} ()
+\item 
+\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{structg__variable_a5a35ada5b3465ce46d8e3badf53d720b}{getNewBlkIns} ()
+\item 
+void \hyperlink{structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4}{insertToCodeCache} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$newIns)
 \item 
 \hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{structg__variable_a8ba648162a8abae37194625703d094c9}{getNewCodeCacheIns} ()
 \item 
@@ -39,6 +77,8 @@ bool \hyperlink{structg__variable_a4b5f6627f388c34df7af5168a119778d}{isCodeCache
 \item 
 \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a619e353ba382aa0b346af08d3dc0729b}{g\_\-seq\_\-num}
 \item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a690c0db6b4c6d4ded41f24f25c011ca9}{g\_\-bb\_\-seq\_\-num}
+\item 
 unsigned long long \hyperlink{structg__variable_a8ab71de244f2279885143ea11f7e7a5c}{g\_\-seqnum}
 \item 
 unsigned long long \hyperlink{structg__variable_a9ab79f56074bb46d6ae7d797c52442f3}{g\_\-icount}
@@ -46,8 +86,6 @@ unsigned long long \hyperlink{structg__variable_a9ab79f56074bb46d6ae7d797c52442f
 unsigned \hyperlink{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}{g\_\-debug\_\-level}
 \item 
 unsigned \hyperlink{structg__variable_ac965e96976bbbeb71833c68438b5fc47}{g\_\-verbose\_\-level}
-\item 
-unsigned \hyperlink{structg__variable_aa7d9d96654c800965904eab03e9fde48}{g\_\-branch\_\-mispredict\_\-delay}
 \item 
 unsigned \hyperlink{structg__variable_a56cbb365fc7e39e093326334864e243a}{g\_\-wrong\_\-path\_\-count}
 \item 
@@ -57,17 +95,15 @@ unsigned \hyperlink{structg__variable_a8065e226bc2987122b831ffc1d58052a}{g\_\-ap
 \item 
 unsigned \hyperlink{structg__variable_a248d8225c555d7573d3c830af054e13e}{g\_\-pin\_\-signal\_\-count}
 \item 
-unsigned long \hyperlink{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}{insCount}
-\item 
 unsigned \hyperlink{structg__variable_a4e19c0e3b77b96a6130c215059fa7d53}{g\_\-recovery\_\-count}
 \item 
 unsigned \hyperlink{structg__variable_ac3a9cb982af4deac7d5d6183df424560}{g\_\-pintool\_\-signal\_\-count}
 \item 
-unsigned \hyperlink{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}{g\_\-wrong\_\-path\_\-number}
-\item 
 int \hyperlink{structg__variable_ac18a5c9f33e0c2731c83204eba76be37}{g\_\-context\_\-call\_\-depth}
 \item 
 BOOL \hyperlink{structg__variable_aeeef678f78f34f8743dc14c035ef56dd}{g\_\-wrong\_\-path}
+\item 
+BOOL \hyperlink{structg__variable_a72fd819583457322714db5dedb07fe69}{g\_\-was\_\-wp}
 \item 
 bool \hyperlink{structg__variable_a2527496ce273ca32855343e8401fb4f8}{g\_\-spec\_\-syscall}
 \item 
@@ -81,7 +117,9 @@ bool \hyperlink{structg__variable_a77b6c2a82a2eb4c8216123f75080ec16}{g\_\-enable
 \item 
 bool \hyperlink{structg__variable_a24cc6242b0cf003080328df4b4e3ddca}{g\_\-enable\_\-instrumentation}
 \item 
-long unsigned \hyperlink{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}{g\_\-simpInsCnt}
+bool \hyperlink{structg__variable_a5e3f674b76f6bccf4c537dda6184a9be}{g\_\-enable\_\-bkEnd}
+\item 
+\hyperlink{global_2global_8h_aa6308256cfa38997c75a56309db4fd1e}{SIMP} \hyperlink{structg__variable_a05056b9147b20e4beee1dbdacaced249}{g\_\-simpInsCnt}
 \item 
 long int \hyperlink{structg__variable_ad00b3634585f9cc7e89adb907114a290}{g\_\-traceCount}
 \item 
@@ -113,11 +151,13 @@ ADDRINT \hyperlink{structg__variable_a3dbb2ea81b5f338970379213c36590ee}{g\_\-pre
 \item 
 BOOL \hyperlink{structg__variable_a992a1e746b4ab8d8ef422b522300f769}{g\_\-taken}
 \item 
-\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}{g\_\-BBlist}
-\item 
 \hyperlink{classList}{List}$<$ string $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a527a8f416e63493c83e0f6e50a6bdc79}{g\_\-insList}
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a51bca1da5081c41f7769211509c0358e}{g\_\-codeCache}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classdynBasicblock}{dynBasicblock} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_a4e0c87db4791200f634d9730ec5dd419}{g\_\-bbCache}
+\item 
+\hyperlink{classList}{List}$<$ \hyperlink{classblock}{block} $\ast$ $>$ $\ast$ \hyperlink{structg__variable_aae812ea601e98de244787f6ae406f22b}{g\_\-blockCache}
 \item 
 int \hyperlink{structg__variable_aabbfa0530ffffdecf990fb2d64998f4e}{g\_\-insList\_\-indx}
 \item 
@@ -129,15 +169,19 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 \item 
 \hyperlink{classdynInstruction}{dynInstruction} \hyperlink{structg__variable_aa245bb5b2c0655d82e43c16d5ee4a284}{g\_\-insObj}
 \item 
-\hyperlink{classmessage}{message} \hyperlink{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}{msg}
-\item 
-\hyperlink{classstatistic}{statistic} \hyperlink{structg__variable_a548b9947f5c28cff1174da06598b4903}{stat}
+\hyperlink{global_2global_8h_a22f16908f3dc0da817d3473222229453}{SCHED\_\-MODE} \hyperlink{structg__variable_a7434e481853a0e26d1c95da57ca20608}{scheduling\_\-mode}
 \item 
 \hyperlink{global_2global_8h_a06d96fbb727831f9371a39d5486ed5e0}{PIPE\_\-STATE} \hyperlink{structg__variable_a16962c0660efbbd6683962d295e85607}{g\_\-pipe\_\-state}
+\item 
+\hyperlink{global_2global_8h_ab65a1cfe05166d06195718a9587d7b86}{CORE\_\-TYPE} \hyperlink{structg__variable_a60e72fea014eafd97f1889956c63ca7b}{g\_\-core\_\-type}
+\item 
+\hyperlink{global_2global_8h_a0685c5d42062f018dda85c9d62f3ac1f}{MEM\_\-MODEL} \hyperlink{structg__variable_af6a9403dc67f85282a59c6fac85d5d6f}{g\_\-mem\_\-model}
 \item 
 \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a5a33fdb5e89c73f560a2e4ced38ecbf5}{g\_\-squash\_\-seq\_\-num}
 \item 
 \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{structg__variable_a8d882e5b7f306bd36a428abece71acaf}{g\_\-old\_\-squash\_\-seq\_\-num}
+\item 
+\hyperlink{global_2global_8h_a04ec550019a96c13610ad1f3269182af}{PIPE\_\-SQUASH\_\-TYPE} \hyperlink{structg__variable_a61c1ea3f39d562de484c74ab8d5749a3}{g\_\-squash\_\-type}
 \end{DoxyCompactItemize}
 
 
@@ -154,23 +198,23 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 
 \begin{DoxyCode}
                  {
-        g_seq_num = 1;
+        g_seq_num = FIRST_INS_ID;
+        g_bb_seq_num = FIRST_BB_ID;
         g_seqnum = 1;
         g_icount = 0;
-        insCount = 0;
-        g_debug_level = DBG_SPEC; //DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC
-      |DBG_INSBUF;
+        g_debug_level = 0; //DBG_EXEC|DBG_UOP|DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|D
+      BG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;
         g_verbose_level = V_FRONTEND; //V_FRONTEND, V_BACKEND
-        g_branch_mispredict_delay = 20;
         g_wrong_path_count = 0;
         g_total_wrong_path_count = 0;
         g_app_signal_count = 0;
         g_pin_signal_count = 0;
         g_recovery_count = 0;
-        g_pintool_signal_count = 0;
-        g_wrong_path_number = 0;
+        g_pintool_signal_count = 0; //TODO delete this - not used - move other si
+      gnal vars to stat first
         g_context_call_depth = 0;
-        g_wrong_path = false;
+        g_wrong_path = false; /* ONLY THE INTIAL VALUE */
+        g_was_wp = false;
         g_spec_syscall = false;
         g_appEnd = false;
         g_inSimpoint = false;
@@ -180,21 +224,187 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
         g_codeCacheSize = 0;
         g_flushes = 0;
         g_enable_simpoint = true;
-        g_enable_wp = true;
-        g_enable_instrumentation = true;
+        g_enable_wp = false;
+        g_enable_instrumentation = false;
+        g_enable_bkEnd = false;
 
         g_pipe_state = PIPE_NORMAL;
         g_squash_seq_num = 0;
         g_old_squash_seq_num = 0;
+        g_squash_type = NO_MISPRED;
 
         g_insList_indx = 0;
         g_BBlist_indx = -1;
         numPBinList = 0;
+
+        g_core_type = IN_ORDER;
+        g_mem_model = NAIVE_SPECUL;
+        scheduling_mode = STATIC_SCH;
     }
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
+\hypertarget{structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20}{
+\index{g\_\-variable@{g\_\-variable}!getLastCacheBB@{getLastCacheBB}}
+\index{getLastCacheBB@{getLastCacheBB}!g_variable@{g\_\-variable}}
+\subsubsection[{getLastCacheBB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynBasicblock}$\ast$ g\_\-variable::getLastCacheBB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20}
+
+\begin{DoxyCode}
+                                     {
+        if (g_bbCache->NumElements () == 0) { return NULL;}
+        else {return g_bbCache->Last ();}
+    }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a326ca8b03f7572a3c402fb676b62213b}{
+\index{g\_\-variable@{g\_\-variable}!getLastCacheBlk@{getLastCacheBlk}}
+\index{getLastCacheBlk@{getLastCacheBlk}!g_variable@{g\_\-variable}}
+\subsubsection[{getLastCacheBlk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf block}$\ast$ g\_\-variable::getLastCacheBlk (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a326ca8b03f7572a3c402fb676b62213b}
+
+\begin{DoxyCode}
+                              {
+        if (g_blockCache->NumElements () == 0) {return NULL;}
+        else {return g_blockCache->Last ();}
+    }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a6c27ed49f59faca6b9629a98993ee33e}{
+\index{g\_\-variable@{g\_\-variable}!getNewBBins@{getNewBBins}}
+\index{getNewBBins@{getNewBBins}!g_variable@{g\_\-variable}}
+\subsubsection[{getNewBBins}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bbInstruction}$\ast$ g\_\-variable::getNewBBins (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a6c27ed49f59faca6b9629a98993ee33e}
+
+\begin{DoxyCode}
+                                  {
+        bbInstruction* newIns = new bbInstruction;
+        return newIns;
+    }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a5a35ada5b3465ce46d8e3badf53d720b}{
+\index{g\_\-variable@{g\_\-variable}!getNewBlkIns@{getNewBlkIns}}
+\index{getNewBlkIns@{getNewBlkIns}!g_variable@{g\_\-variable}}
+\subsubsection[{getNewBlkIns}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynInstruction}$\ast$ g\_\-variable::getNewBlkIns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a5a35ada5b3465ce46d8e3badf53d720b}
+
+\begin{DoxyCode}
+                                    {
+        dynInstruction* newIns = new dynInstruction;
+        return newIns;
+    }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_abd791f9496e5723f7347c56c01c661e3}{
+\index{g\_\-variable@{g\_\-variable}!getNewCacheBB@{getNewCacheBB}}
+\index{getNewCacheBB@{getNewCacheBB}!g_variable@{g\_\-variable}}
+\subsubsection[{getNewCacheBB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynBasicblock}$\ast$ g\_\-variable::getNewCacheBB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_abd791f9496e5723f7347c56c01c661e3}
+
+\begin{DoxyCode}
+                                    {
+        while (g_bbCache->NumElements () > 0 &&
+               g_bbCache->Last()->getBBsize () == 0) {
+            delete g_bbCache->Last();
+            g_bbCache->RemoveAt (g_bbCache->NumElements () - 1);
+        }
+        dynBasicblock* newBB = new dynBasicblock (scheduling_mode, "dynBasicblock
+      ");
+        g_bbCache->Append (newBB);
+        return newBB;
+    }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_ac1662ac572ac7ec07e7f19117eedb872}{
+\index{g\_\-variable@{g\_\-variable}!getNewCacheBlk@{getNewCacheBlk}}
+\index{getNewCacheBlk@{getNewCacheBlk}!g_variable@{g\_\-variable}}
+\subsubsection[{getNewCacheBlk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf block}$\ast$ g\_\-variable::getNewCacheBlk (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_ac1662ac572ac7ec07e7f19117eedb872}
+
+\begin{DoxyCode}
+                             {
+        while (g_blockCache->NumElements () > 0 &&
+               g_blockCache->Last()->getBlockSize () == 0) {
+            delete g_blockCache->Last();
+            g_blockCache->RemoveAt (g_blockCache->NumElements () - 1);
+        }
+        block* newBB = new block (scheduling_mode, "block");
+        g_blockCache->Append (newBB);
+        Assert (g_blockCache->NumElements () == 1);
+        return newBB;
+    }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{structg__variable_a8ba648162a8abae37194625703d094c9}{
 \index{g\_\-variable@{g\_\-variable}!getNewCodeCacheIns@{getNewCodeCacheIns}}
 \index{getNewCodeCacheIns@{getNewCodeCacheIns}!g_variable@{g\_\-variable}}
@@ -208,7 +418,7 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 \begin{DoxyCode}
                                           {
         dynInstruction* newIns = new dynInstruction;
-        g_codeCache->Append(newIns);
+        g_codeCache->Append (newIns);
         return newIns;
     }
 \end{DoxyCode}
@@ -217,6 +427,19 @@ int \hyperlink{structg__variable_a1b0b5933340788334ca1884e1e63707e}{numPBinList}
 Here is the call graph for this function:
 
 
+\hypertarget{structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324}{
+\index{g\_\-variable@{g\_\-variable}!getOldSquashSN@{getOldSquashSN}}
+\index{getOldSquashSN@{getOldSquashSN}!g_variable@{g\_\-variable}}
+\subsubsection[{getOldSquashSN}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} g\_\-variable::getOldSquashSN (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324}
+
+\begin{DoxyCode}
+{return g_old_squash_seq_num;}
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
@@ -233,11 +456,49 @@ Here is the caller graph for this function:
 \label{structg__variable_a366fb213b96fa81e166dbe60a16c3e4f}
 
 \begin{DoxyCode}
-{Assert (g_squash_seq_num > 0); return g_squash_seq_num;}
+{return g_squash_seq_num;}
 \end{DoxyCode}
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0}{
+\index{g\_\-variable@{g\_\-variable}!getSquashType@{getSquashType}}
+\index{getSquashType@{getSquashType}!g_variable@{g\_\-variable}}
+\subsubsection[{getSquashType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-SQUASH\_\-TYPE} g\_\-variable::getSquashType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0}
+
+\begin{DoxyCode}
+                                      {
+        return g_squash_type;
+    }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a6c7ff60217a53698cce497bf705cd0c8}{
+\index{g\_\-variable@{g\_\-variable}!insertFrontBBcache@{insertFrontBBcache}}
+\index{insertFrontBBcache@{insertFrontBBcache}!g_variable@{g\_\-variable}}
+\subsubsection[{insertFrontBBcache}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::insertFrontBBcache (
+\begin{DoxyParamCaption}
+\item[{{\bf dynBasicblock} $\ast$}]{bb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a6c7ff60217a53698cce497bf705cd0c8}
+
+\begin{DoxyCode}
+{ g_bbCache->InsertAt (bb, 0); }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}{
@@ -251,8 +512,32 @@ Here is the caller graph for this function:
 \label{structg__variable_ac6cd30370c34c5a0862aa9a4c56049db}
 
 \begin{DoxyCode}
-                                                    {
-        g_codeCache->InsertAt(ins, 0);
+{ g_codeCache->InsertAt (ins, 0); }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4}{
+\index{g\_\-variable@{g\_\-variable}!insertToCodeCache@{insertToCodeCache}}
+\index{insertToCodeCache@{insertToCodeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{insertToCodeCache}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::insertToCodeCache (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{newIns}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4}
+
+\begin{DoxyCode}
+                                                    { 
+        Assert (newIns != NULL); 
+        g_codeCache->Append (newIns);
     }
 \end{DoxyCode}
 
@@ -263,6 +548,78 @@ Here is the call graph for this function:
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{structg__variable_a2192ac9bd012be515c0d8d9fbea8b196}{
+\index{g\_\-variable@{g\_\-variable}!isBBcacheEmpty@{isBBcacheEmpty}}
+\index{isBBcacheEmpty@{isBBcacheEmpty}!g_variable@{g\_\-variable}}
+\subsubsection[{isBBcacheEmpty}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isBBcacheEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a2192ac9bd012be515c0d8d9fbea8b196}
+
+\begin{DoxyCode}
+{ return (g_bbCache->NumElements () == 0) ? true : false; }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_af56609b1e0566a976487eee39e0283ef}{
+\index{g\_\-variable@{g\_\-variable}!isBBcacheNearEmpty@{isBBcacheNearEmpty}}
+\index{isBBcacheNearEmpty@{isBBcacheNearEmpty}!g_variable@{g\_\-variable}}
+\subsubsection[{isBBcacheNearEmpty}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isBBcacheNearEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_af56609b1e0566a976487eee39e0283ef}
+
+\begin{DoxyCode}
+{ return (g_bbCache->NumElements () <= BB_NEAR_EMPTY_SIZE) ? true : false; }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0}{
+\index{g\_\-variable@{g\_\-variable}!isBlkCacheEmpty@{isBlkCacheEmpty}}
+\index{isBlkCacheEmpty@{isBlkCacheEmpty}!g_variable@{g\_\-variable}}
+\subsubsection[{isBlkCacheEmpty}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isBlkCacheEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0}
+
+\begin{DoxyCode}
+{ return (g_blockCache->NumElements () == 0) ? true : false; }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_afa7c4ed5cce9932b26d4a902e986e774}{
+\index{g\_\-variable@{g\_\-variable}!isBlkCacheNearEmpty@{isBlkCacheNearEmpty}}
+\index{isBlkCacheNearEmpty@{isBlkCacheNearEmpty}!g_variable@{g\_\-variable}}
+\subsubsection[{isBlkCacheNearEmpty}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isBlkCacheNearEmpty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_afa7c4ed5cce9932b26d4a902e986e774}
+
+\begin{DoxyCode}
+{ return (g_blockCache->NumElements () <= BLK_NEAR_EMPTY_SIZE) ? true : false; }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{structg__variable_a4b5f6627f388c34df7af5168a119778d}{
@@ -276,9 +633,26 @@ Here is the caller graph for this function:
 \label{structg__variable_a4b5f6627f388c34df7af5168a119778d}
 
 \begin{DoxyCode}
-                             {
-        bool result = g_codeCache->NumElements() == 0 ? true : false;
-        return result;
+{ return (g_codeCache->NumElements () == 0) ? true : false; }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_a2faa8d56e7a81cb41aad7f3df5262344}{
+\index{g\_\-variable@{g\_\-variable}!isSpeculationViolation@{isSpeculationViolation}}
+\index{isSpeculationViolation@{isSpeculationViolation}!g_variable@{g\_\-variable}}
+\subsubsection[{isSpeculationViolation}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isSpeculationViolation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a2faa8d56e7a81cb41aad7f3df5262344}
+
+\begin{DoxyCode}
+                                   {
+        return (getSquashSN () != getOldSquashSN ()) ? true : false;
     }
 \end{DoxyCode}
 
@@ -286,29 +660,26 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}{
-\index{g\_\-variable@{g\_\-variable}!isOnWrongPath@{isOnWrongPath}}
-\index{isOnWrongPath@{isOnWrongPath}!g_variable@{g\_\-variable}}
-\subsubsection[{isOnWrongPath}]{\setlength{\rightskip}{0pt plus 5cm}bool g\_\-variable::isOnWrongPath (
+\hypertarget{structg__variable_a919a79fc6f8adce82772a72d3e62a20b}{
+\index{g\_\-variable@{g\_\-variable}!popBBcache@{popBBcache}}
+\index{popBBcache@{popBBcache}!g_variable@{g\_\-variable}}
+\subsubsection[{popBBcache}]{\setlength{\rightskip}{0pt plus 5cm}{\bf dynBasicblock}$\ast$ g\_\-variable::popBBcache (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{structg__variable_afb2439358b8c746fc28eaadb0ac77b10}
+\label{structg__variable_a919a79fc6f8adce82772a72d3e62a20b}
 
 \begin{DoxyCode}
-                          {
-        return (g_squash_seq_num != g_old_squash_seq_num) ? true : false;
+                                 {
+        dynBasicblock* bb = g_bbCache->Nth (0); 
+        g_bbCache->RemoveAt (0); 
+        return bb;
     }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{structg__variable_abb078ae60bb65db485a0cc2382bd4457}{
@@ -322,8 +693,31 @@ Here is the caller graph for this function:
 \label{structg__variable_abb078ae60bb65db485a0cc2382bd4457}
 
 \begin{DoxyCode}
-                                    {
-        return g_codeCache->Nth(0);
+{ return g_codeCache->Nth (0); } //TODO inconsistent with pop of BB - fix
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b}{
+\index{g\_\-variable@{g\_\-variable}!pushInsToCodeCache@{pushInsToCodeCache}}
+\index{pushInsToCodeCache@{pushInsToCodeCache}!g_variable@{g\_\-variable}}
+\subsubsection[{pushInsToCodeCache}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::pushInsToCodeCache (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b}
+
+\begin{DoxyCode}
+                               {
+        Assert (g_blockCache->Last () != NULL);
+        block* blk = g_blockCache->Last ();
+        Assert (blk->getBlockSize () > 0);
+        while (blk->getBlockSize () > 0) {
+            insertToCodeCache (blk->popFront ());
+        }
     }
 \end{DoxyCode}
 
@@ -348,8 +742,31 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                              {
-        Assert (g_codeCache->NumElements() > 0);
-        g_codeCache->RemoveAt(0);
+        Assert (g_codeCache->NumElements () > 0);
+        g_codeCache->RemoveAt (0);
+    }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{structg__variable_adaeb84094d83af19c60250b0ccbf37b0}{
+\index{g\_\-variable@{g\_\-variable}!removeLastBlock@{removeLastBlock}}
+\index{removeLastBlock@{removeLastBlock}!g_variable@{g\_\-variable}}
+\subsubsection[{removeLastBlock}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::removeLastBlock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_adaeb84094d83af19c60250b0ccbf37b0}
+
+\begin{DoxyCode}
+                            {
+        Assert (g_blockCache->NumElements () == 1);
+        delete g_blockCache->Nth (0); 
+        g_blockCache->RemoveAt (0); 
+        Assert (g_blockCache->NumElements () == 0);
     }
 \end{DoxyCode}
 
@@ -373,7 +790,20 @@ Here is the caller graph for this function:
 \label{structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca}
 
 \begin{DoxyCode}
-{ g_squash_seq_num = 0; g_old_squash_seq_num = 0;}
+{g_squash_seq_num = 0; g_old_squash_seq_num = 0;}
+\end{DoxyCode}
+\hypertarget{structg__variable_a506e184323be6e4c52b1394fb5aca614}{
+\index{g\_\-variable@{g\_\-variable}!resetSquashType@{resetSquashType}}
+\index{resetSquashType@{resetSquashType}!g_variable@{g\_\-variable}}
+\subsubsection[{resetSquashType}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::resetSquashType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_a506e184323be6e4c52b1394fb5aca614}
+
+\begin{DoxyCode}
+{g_squash_type = NO_MISPRED;}
 \end{DoxyCode}
 
 
@@ -395,11 +825,6 @@ Here is the caller graph for this function:
             g_old_squash_seq_num = g_squash_seq_num;
     }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}{
 \index{g\_\-variable@{g\_\-variable}!setSquashSN@{setSquashSN}}
 \index{setSquashSN@{setSquashSN}!g_variable@{g\_\-variable}}
@@ -411,7 +836,7 @@ Here is the caller graph for this function:
 \label{structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16}
 
 \begin{DoxyCode}
-                                 { 
+                                 {
         Assert (sn > 0);
         if (g_squash_seq_num > 0 && sn < g_squash_seq_num) {
             g_squash_seq_num = sn;
@@ -420,11 +845,21 @@ Here is the caller graph for this function:
         }
     }
 \end{DoxyCode}
+\hypertarget{structg__variable_abc024387ff924dbf4e9ed6b5542736c2}{
+\index{g\_\-variable@{g\_\-variable}!setSquashType@{setSquashType}}
+\index{setSquashType@{setSquashType}!g_variable@{g\_\-variable}}
+\subsubsection[{setSquashType}]{\setlength{\rightskip}{0pt plus 5cm}void g\_\-variable::setSquashType (
+\begin{DoxyParamCaption}
+\item[{{\bf PIPE\_\-SQUASH\_\-TYPE}}]{squash\_\-type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{structg__variable_abc024387ff924dbf4e9ed6b5542736c2}
 
-
-Here is the caller graph for this function:
-
-
+\begin{DoxyCode}
+                                                      {
+        g_squash_type = squash_type;
+    }
+\end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
@@ -438,21 +873,26 @@ Here is the caller graph for this function:
 \index{g\_\-appEnd@{g\_\-appEnd}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-appEnd}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-appEnd}}}
 \label{structg__variable_ac0ace8e752b855d8a33cd9c9a5d62511}
-\hypertarget{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}{
-\index{g\_\-variable@{g\_\-variable}!g\_\-BBlist@{g\_\-BBlist}}
-\index{g\_\-BBlist@{g\_\-BBlist}!g_variable@{g\_\-variable}}
-\subsubsection[{g\_\-BBlist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf basicblock}$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-BBlist}}}
-\label{structg__variable_a1664c2b31146ab2b5f77464cd93f2cc8}
+\hypertarget{structg__variable_a690c0db6b4c6d4ded41f24f25c011ca9}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-bb\_\-seq\_\-num@{g\_\-bb\_\-seq\_\-num}}
+\index{g\_\-bb\_\-seq\_\-num@{g\_\-bb\_\-seq\_\-num}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-bb\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf g\_\-variable::g\_\-bb\_\-seq\_\-num}}}
+\label{structg__variable_a690c0db6b4c6d4ded41f24f25c011ca9}
+\hypertarget{structg__variable_a4e0c87db4791200f634d9730ec5dd419}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-bbCache@{g\_\-bbCache}}
+\index{g\_\-bbCache@{g\_\-bbCache}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-bbCache}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf dynBasicblock}$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-bbCache}}}
+\label{structg__variable_a4e0c87db4791200f634d9730ec5dd419}
 \hypertarget{structg__variable_a383af2308cefc8a72db47b1d7a41a702}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-BBlist\_\-indx@{g\_\-BBlist\_\-indx}}
 \index{g\_\-BBlist\_\-indx@{g\_\-BBlist\_\-indx}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-BBlist\_\-indx}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::g\_\-BBlist\_\-indx}}}
 \label{structg__variable_a383af2308cefc8a72db47b1d7a41a702}
-\hypertarget{structg__variable_aa7d9d96654c800965904eab03e9fde48}{
-\index{g\_\-variable@{g\_\-variable}!g\_\-branch\_\-mispredict\_\-delay@{g\_\-branch\_\-mispredict\_\-delay}}
-\index{g\_\-branch\_\-mispredict\_\-delay@{g\_\-branch\_\-mispredict\_\-delay}!g_variable@{g\_\-variable}}
-\subsubsection[{g\_\-branch\_\-mispredict\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-branch\_\-mispredict\_\-delay}}}
-\label{structg__variable_aa7d9d96654c800965904eab03e9fde48}
+\hypertarget{structg__variable_aae812ea601e98de244787f6ae406f22b}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-blockCache@{g\_\-blockCache}}
+\index{g\_\-blockCache@{g\_\-blockCache}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-blockCache}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf block}$\ast$$>$$\ast$ {\bf g\_\-variable::g\_\-blockCache}}}
+\label{structg__variable_aae812ea601e98de244787f6ae406f22b}
 \hypertarget{structg__variable_a51bca1da5081c41f7769211509c0358e}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-codeCache@{g\_\-codeCache}}
 \index{g\_\-codeCache@{g\_\-codeCache}!g_variable@{g\_\-variable}}
@@ -473,11 +913,21 @@ Here is the caller graph for this function:
 \index{g\_\-context\_\-call\_\-depth@{g\_\-context\_\-call\_\-depth}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-context\_\-call\_\-depth}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::g\_\-context\_\-call\_\-depth}}}
 \label{structg__variable_ac18a5c9f33e0c2731c83204eba76be37}
+\hypertarget{structg__variable_a60e72fea014eafd97f1889956c63ca7b}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-core\_\-type@{g\_\-core\_\-type}}
+\index{g\_\-core\_\-type@{g\_\-core\_\-type}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-core\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CORE\_\-TYPE} {\bf g\_\-variable::g\_\-core\_\-type}}}
+\label{structg__variable_a60e72fea014eafd97f1889956c63ca7b}
 \hypertarget{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-debug\_\-level@{g\_\-debug\_\-level}}
 \index{g\_\-debug\_\-level@{g\_\-debug\_\-level}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-debug\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-debug\_\-level}}}
 \label{structg__variable_a3359a225f5a683c6ef05eed7ac5a8490}
+\hypertarget{structg__variable_a5e3f674b76f6bccf4c537dda6184a9be}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-enable\_\-bkEnd@{g\_\-enable\_\-bkEnd}}
+\index{g\_\-enable\_\-bkEnd@{g\_\-enable\_\-bkEnd}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-enable\_\-bkEnd}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf g\_\-variable::g\_\-enable\_\-bkEnd}}}
+\label{structg__variable_a5e3f674b76f6bccf4c537dda6184a9be}
 \hypertarget{structg__variable_a24cc6242b0cf003080328df4b4e3ddca}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-enable\_\-instrumentation@{g\_\-enable\_\-instrumentation}}
 \index{g\_\-enable\_\-instrumentation@{g\_\-enable\_\-instrumentation}!g_variable@{g\_\-variable}}
@@ -563,6 +1013,11 @@ Here is the caller graph for this function:
 \index{g\_\-last\_\-len@{g\_\-last\_\-len}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-last\_\-len}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-last\_\-len}}}
 \label{structg__variable_a310b38dcf23edbd0a80618cbb9fc9e55}
+\hypertarget{structg__variable_af6a9403dc67f85282a59c6fac85d5d6f}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-mem\_\-model@{g\_\-mem\_\-model}}
+\index{g\_\-mem\_\-model@{g\_\-mem\_\-model}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-mem\_\-model}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MEM\_\-MODEL} {\bf g\_\-variable::g\_\-mem\_\-model}}}
+\label{structg__variable_af6a9403dc67f85282a59c6fac85d5d6f}
 \hypertarget{structg__variable_a8d882e5b7f306bd36a428abece71acaf}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-old\_\-squash\_\-seq\_\-num@{g\_\-old\_\-squash\_\-seq\_\-num}}
 \index{g\_\-old\_\-squash\_\-seq\_\-num@{g\_\-old\_\-squash\_\-seq\_\-num}!g_variable@{g\_\-variable}}
@@ -608,11 +1063,11 @@ Here is the caller graph for this function:
 \index{g\_\-seqnum@{g\_\-seqnum}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-seqnum}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long long {\bf g\_\-variable::g\_\-seqnum}}}
 \label{structg__variable_a8ab71de244f2279885143ea11f7e7a5c}
-\hypertarget{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}{
+\hypertarget{structg__variable_a05056b9147b20e4beee1dbdacaced249}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-simpInsCnt@{g\_\-simpInsCnt}}
 \index{g\_\-simpInsCnt@{g\_\-simpInsCnt}!g_variable@{g\_\-variable}}
-\subsubsection[{g\_\-simpInsCnt}]{\setlength{\rightskip}{0pt plus 5cm}long unsigned {\bf g\_\-variable::g\_\-simpInsCnt}}}
-\label{structg__variable_a9bef325956a77c8dc2080d7f6ea1a7a9}
+\subsubsection[{g\_\-simpInsCnt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SIMP} {\bf g\_\-variable::g\_\-simpInsCnt}}}
+\label{structg__variable_a05056b9147b20e4beee1dbdacaced249}
 \hypertarget{structg__variable_a2527496ce273ca32855343e8401fb4f8}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-spec\_\-syscall@{g\_\-spec\_\-syscall}}
 \index{g\_\-spec\_\-syscall@{g\_\-spec\_\-syscall}!g_variable@{g\_\-variable}}
@@ -623,6 +1078,11 @@ Here is the caller graph for this function:
 \index{g\_\-squash\_\-seq\_\-num@{g\_\-squash\_\-seq\_\-num}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-squash\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf g\_\-variable::g\_\-squash\_\-seq\_\-num}}}
 \label{structg__variable_a5a33fdb5e89c73f560a2e4ced38ecbf5}
+\hypertarget{structg__variable_a61c1ea3f39d562de484c74ab8d5749a3}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-squash\_\-type@{g\_\-squash\_\-type}}
+\index{g\_\-squash\_\-type@{g\_\-squash\_\-type}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-squash\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-SQUASH\_\-TYPE} {\bf g\_\-variable::g\_\-squash\_\-type}}}
+\label{structg__variable_a61c1ea3f39d562de484c74ab8d5749a3}
 \hypertarget{structg__variable_a992a1e746b4ab8d8ef422b522300f769}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-taken@{g\_\-taken}}
 \index{g\_\-taken@{g\_\-taken}!g_variable@{g\_\-variable}}
@@ -648,6 +1108,11 @@ Here is the caller graph for this function:
 \index{g\_\-verbose\_\-level@{g\_\-verbose\_\-level}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-verbose\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-verbose\_\-level}}}
 \label{structg__variable_ac965e96976bbbeb71833c68438b5fc47}
+\hypertarget{structg__variable_a72fd819583457322714db5dedb07fe69}{
+\index{g\_\-variable@{g\_\-variable}!g\_\-was\_\-wp@{g\_\-was\_\-wp}}
+\index{g\_\-was\_\-wp@{g\_\-was\_\-wp}!g_variable@{g\_\-variable}}
+\subsubsection[{g\_\-was\_\-wp}]{\setlength{\rightskip}{0pt plus 5cm}BOOL {\bf g\_\-variable::g\_\-was\_\-wp}}}
+\label{structg__variable_a72fd819583457322714db5dedb07fe69}
 \hypertarget{structg__variable_aeeef678f78f34f8743dc14c035ef56dd}{
 \index{g\_\-variable@{g\_\-variable}!g\_\-wrong\_\-path@{g\_\-wrong\_\-path}}
 \index{g\_\-wrong\_\-path@{g\_\-wrong\_\-path}!g_variable@{g\_\-variable}}
@@ -658,31 +1123,16 @@ Here is the caller graph for this function:
 \index{g\_\-wrong\_\-path\_\-count@{g\_\-wrong\_\-path\_\-count}!g_variable@{g\_\-variable}}
 \subsubsection[{g\_\-wrong\_\-path\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-wrong\_\-path\_\-count}}}
 \label{structg__variable_a56cbb365fc7e39e093326334864e243a}
-\hypertarget{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}{
-\index{g\_\-variable@{g\_\-variable}!g\_\-wrong\_\-path\_\-number@{g\_\-wrong\_\-path\_\-number}}
-\index{g\_\-wrong\_\-path\_\-number@{g\_\-wrong\_\-path\_\-number}!g_variable@{g\_\-variable}}
-\subsubsection[{g\_\-wrong\_\-path\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf g\_\-variable::g\_\-wrong\_\-path\_\-number}}}
-\label{structg__variable_adcc07b62ed94dbd9dc61ad8ca8b366a1}
-\hypertarget{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}{
-\index{g\_\-variable@{g\_\-variable}!insCount@{insCount}}
-\index{insCount@{insCount}!g_variable@{g\_\-variable}}
-\subsubsection[{insCount}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf g\_\-variable::insCount}}}
-\label{structg__variable_a4740d9b4ca63320866b2eda4bba01b86}
-\hypertarget{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}{
-\index{g\_\-variable@{g\_\-variable}!msg@{msg}}
-\index{msg@{msg}!g_variable@{g\_\-variable}}
-\subsubsection[{msg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf message} {\bf g\_\-variable::msg}}}
-\label{structg__variable_a59153de8e5186183f6a85ab0ae4e44c0}
 \hypertarget{structg__variable_a1b0b5933340788334ca1884e1e63707e}{
 \index{g\_\-variable@{g\_\-variable}!numPBinList@{numPBinList}}
 \index{numPBinList@{numPBinList}!g_variable@{g\_\-variable}}
 \subsubsection[{numPBinList}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf g\_\-variable::numPBinList}}}
 \label{structg__variable_a1b0b5933340788334ca1884e1e63707e}
-\hypertarget{structg__variable_a548b9947f5c28cff1174da06598b4903}{
-\index{g\_\-variable@{g\_\-variable}!stat@{stat}}
-\index{stat@{stat}!g_variable@{g\_\-variable}}
-\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf statistic} {\bf g\_\-variable::stat}}}
-\label{structg__variable_a548b9947f5c28cff1174da06598b4903}
+\hypertarget{structg__variable_a7434e481853a0e26d1c95da57ca20608}{
+\index{g\_\-variable@{g\_\-variable}!scheduling\_\-mode@{scheduling\_\-mode}}
+\index{scheduling\_\-mode@{scheduling\_\-mode}!g_variable@{g\_\-variable}}
+\subsubsection[{scheduling\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SCHED\_\-MODE} {\bf g\_\-variable::scheduling\_\-mode}}}
+\label{structg__variable_a7434e481853a0e26d1c95da57ca20608}
 
 
 The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}

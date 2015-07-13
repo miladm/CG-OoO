@@ -16,47 +16,23 @@ Collaboration diagram for dependencyTable:
 \item 
 \hyperlink{classdependencyTable_a0b227c520264190bae8782e4f9db593a}{$\sim$dependencyTable} ()
 \item 
-void \hyperlink{classdependencyTable_a2152aa2490daef06772595e126e6e024}{addAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+void \hyperlink{classdependencyTable_a2152aa2490daef06772595e126e6e024}{addAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
-void \hyperlink{classdependencyTable_abffec553d72068c891beb9fa8fe73440}{delAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+void \hyperlink{classdependencyTable_abffec553d72068c891beb9fa8fe73440}{delAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
-\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_ad5215d3493ae1b82e37e673b33fd6892}{addrLookup} (long int addr, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_ad5215d3493ae1b82e37e673b33fd6892}{addrLookup} (long int addr, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
-void \hyperlink{classdependencyTable_a8ef091ae6d3ca417958673d50fd9a8a6}{addReg} (long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+void \hyperlink{classdependencyTable_a09e8df2809062b427a8ff3494ecb853d}{addReg} (int indx, long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
-void \hyperlink{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}{delReg} (long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+void \hyperlink{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}{delReg} (long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
-\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_a38380b935c33267006d7242d1b72e62a}{regLookup} (long int reg, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
+\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_a38380b935c33267006d7242d1b72e62a}{regLookup} (long int reg, \hyperlink{dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
 \item 
 void \hyperlink{classdependencyTable_a68cb3b1cdf38c24d1bfd5913112f6f24}{addBr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
 \item 
 void \hyperlink{classdependencyTable_a6b94d787b12a3979b8b182c7e5bde07f}{delBr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{classdependencyTable_a7896f0b48411dcb469ebb2647b84541c}{brLookup} ()
-\item 
-void \hyperlink{classdependencyTable_a8ce45687a518285a6ff32081b8d44125}{flush\_\-depTables} ()
-\item 
-\hyperlink{classdependencyTable_abae7a5ee69f34dfca3d0b1195b773225}{dependencyTable} ()
-\item 
-\hyperlink{classdependencyTable_a0b227c520264190bae8782e4f9db593a}{$\sim$dependencyTable} ()
-\item 
-void \hyperlink{classdependencyTable_a2152aa2490daef06772595e126e6e024}{addAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-void \hyperlink{classdependencyTable_abffec553d72068c891beb9fa8fe73440}{delAddr} (long int addr, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_a2f5a21dac633c810831e4759445d7c47}{addrLookup} (long int addr, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-void \hyperlink{classdependencyTable_a09e8df2809062b427a8ff3494ecb853d}{addReg} (int indx, long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-void \hyperlink{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}{delReg} (long int reg, \hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classdependencyTable_a7fcd194616e3af22b0e9b498d49c721b}{regLookup} (long int reg, \hyperlink{backend_2dependencyTable_8h_ab390e08ed69004340ece1f911f48fd1b}{tableType} \hyperlink{classtable}{table})
-\item 
-void \hyperlink{classdependencyTable_a68cb3b1cdf38c24d1bfd5913112f6f24}{addBr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
-\item 
-void \hyperlink{classdependencyTable_a6b94d787b12a3979b8b182c7e5bde07f}{delBr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
-\item 
-\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{classdependencyTable_af2e98550ebaec57ff021def6d2af66b3}{brLookup} ()
 \item 
 void \hyperlink{classdependencyTable_a26f35c38c144c105d2bb6f695b902c0d}{addWr} (\hyperlink{classinstruction}{instruction} $\ast$ins)
 \item 
@@ -80,6 +56,7 @@ void \hyperlink{classdependencyTable_ac3577b47689d68032bbe9dfecdd35abd}{delWr} (
 \begin{DoxyCode}
                                  {
         branchList = new List<instruction*>;
+        memWrites = new List<instruction*>;
 }
 \end{DoxyCode}
 \hypertarget{classdependencyTable_a0b227c520264190bae8782e4f9db593a}{
@@ -95,26 +72,9 @@ void \hyperlink{classdependencyTable_ac3577b47689d68032bbe9dfecdd35abd}{delWr} (
 \begin{DoxyCode}
                                   {
         delete branchList;
+        delete memWrites;
 }
 \end{DoxyCode}
-\hypertarget{classdependencyTable_abae7a5ee69f34dfca3d0b1195b773225}{
-\index{dependencyTable@{dependencyTable}!dependencyTable@{dependencyTable}}
-\index{dependencyTable@{dependencyTable}!dependencyTable@{dependencyTable}}
-\subsubsection[{dependencyTable}]{\setlength{\rightskip}{0pt plus 5cm}dependencyTable::dependencyTable (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_abae7a5ee69f34dfca3d0b1195b773225}
-\hypertarget{classdependencyTable_a0b227c520264190bae8782e4f9db593a}{
-\index{dependencyTable@{dependencyTable}!$\sim$dependencyTable@{$\sim$dependencyTable}}
-\index{$\sim$dependencyTable@{$\sim$dependencyTable}!dependencyTable@{dependencyTable}}
-\subsubsection[{$\sim$dependencyTable}]{\setlength{\rightskip}{0pt plus 5cm}dependencyTable::$\sim$dependencyTable (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a0b227c520264190bae8782e4f9db593a}
 
 
 \subsection{Member Function Documentation}
@@ -151,31 +111,6 @@ void \hyperlink{classdependencyTable_ac3577b47689d68032bbe9dfecdd35abd}{delWr} (
         }
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_a2152aa2490daef06772595e126e6e024}{
-\index{dependencyTable@{dependencyTable}!addAddr@{addAddr}}
-\index{addAddr@{addAddr}!dependencyTable@{dependencyTable}}
-\subsubsection[{addAddr}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::addAddr (
-\begin{DoxyParamCaption}
-\item[{long int}]{addr, }
-\item[{{\bf instruction} $\ast$}]{ins, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a2152aa2490daef06772595e126e6e024}
-\hypertarget{classdependencyTable_a68cb3b1cdf38c24d1bfd5913112f6f24}{
-\index{dependencyTable@{dependencyTable}!addBr@{addBr}}
-\index{addBr@{addBr}!dependencyTable@{dependencyTable}}
-\subsubsection[{addBr}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::addBr (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction} $\ast$}]{ins}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a68cb3b1cdf38c24d1bfd5913112f6f24}
 \hypertarget{classdependencyTable_a68cb3b1cdf38c24d1bfd5913112f6f24}{
 \index{dependencyTable@{dependencyTable}!addBr@{addBr}}
 \index{addBr@{addBr}!dependencyTable@{dependencyTable}}
@@ -194,51 +129,6 @@ Here is the caller graph for this function:
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_a8ef091ae6d3ca417958673d50fd9a8a6}{
-\index{dependencyTable@{dependencyTable}!addReg@{addReg}}
-\index{addReg@{addReg}!dependencyTable@{dependencyTable}}
-\subsubsection[{addReg}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::addReg (
-\begin{DoxyParamCaption}
-\item[{long int}]{reg, }
-\item[{{\bf instruction} $\ast$}]{ins, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a8ef091ae6d3ca417958673d50fd9a8a6}
-
-\begin{DoxyCode}
-                                                                              {
-        Assert (table != MEM_READ && table != MEM_WRITE);
-
-        if (table == REG_WRITE) {
-                if (regWriteList.count(reg) > 0) {
-                        regWriteList.erase(reg);
-                        //if (reschedule == true) {ins->renameWriteReg(reg);} //N
-      OTE: comment it out if need to do recursive scheduling for missRate refinement
-                }
-                regWriteList.insert(pair<long int,instruction*>(reg,ins));
-                //printf("ADD: Address REG Map Size = %d\n", regWriteList.size())
-      ;
-        } else if (table == REG_READ) {
-                if (regReadList.count(reg) > 0) {
-                        regReadList.erase(reg);
-                }
-                regReadList.insert(pair<long int,instruction*>(reg,ins));
-                //printf("ADD: Address REG Map Size = %d\n", regReadList.size());
-      
-        }
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classdependencyTable_a09e8df2809062b427a8ff3494ecb853d}{
@@ -260,14 +150,18 @@ Here is the caller graph for this function:
         Assert (table != MEM_READ && table != MEM_WRITE);
 
         if (table == REG_WRITE) {
-                if (regWriteList.count(reg) > 0 || regReadList.count(reg) > 0) {
-                        regWriteList.erase(reg);
-                        ins->renameWriteReg(indx, reg);
-                } else if (regReadList.count(reg) > 0) {
-                        /*We assume that no regiter is ever read before having be
+//              if (regWriteList.count(reg) > 0 || regReadList.count(reg) > 0) { 
+      //TODO no lnoger ncessary in compiler I think
+//                      regWriteList.erase(reg);
+//                      ins->renameWriteReg(indx, reg);
+//              } else if (regReadList.count(reg) > 0) {
+//                      /*We assume that no regiter is ever read before having be
       en written B4*/
-                        printf ("\tERROR: Register Renaming Violation (%s, line: 
+//                      printf ("\tERROR: Register Renaming Violation (%s, line: 
       %d)\n", __FILE__, __LINE__);
+//              }
+                if (regWriteList.count(reg) > 0) {
+                        regWriteList.erase(reg);
                 }
                 regWriteList.insert(pair<long int,instruction*>(reg,ins));
                 //printf("ADD: Address REG Map Size = %d\n", regWriteList.size())
@@ -284,19 +178,9 @@ Here is the caller graph for this function:
 \end{DoxyCode}
 
 
-Here is the call graph for this function:
+Here is the caller graph for this function:
 
 
-\hypertarget{classdependencyTable_a2f5a21dac633c810831e4759445d7c47}{
-\index{dependencyTable@{dependencyTable}!addrLookup@{addrLookup}}
-\index{addrLookup@{addrLookup}!dependencyTable@{dependencyTable}}
-\subsubsection[{addrLookup}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction}$\ast$ dependencyTable::addrLookup (
-\begin{DoxyParamCaption}
-\item[{long int}]{addr, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a2f5a21dac633c810831e4759445d7c47}
 \hypertarget{classdependencyTable_ad5215d3493ae1b82e37e673b33fd6892}{
 \index{dependencyTable@{dependencyTable}!addrLookup@{addrLookup}}
 \index{addrLookup@{addrLookup}!dependencyTable@{dependencyTable}}
@@ -321,11 +205,6 @@ Here is the call graph for this function:
         }
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classdependencyTable_a26f35c38c144c105d2bb6f695b902c0d}{
 \index{dependencyTable@{dependencyTable}!addWr@{addWr}}
 \index{addWr@{addWr}!dependencyTable@{dependencyTable}}
@@ -366,20 +245,6 @@ Here is the caller graph for this function:
         return branchList;
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_af2e98550ebaec57ff021def6d2af66b3}{
-\index{dependencyTable@{dependencyTable}!brLookup@{brLookup}}
-\index{brLookup@{brLookup}!dependencyTable@{dependencyTable}}
-\subsubsection[{brLookup}]{\setlength{\rightskip}{0pt plus 5cm}{\bf List}$<${\bf instruction}$\ast$$>$$\ast$ dependencyTable::brLookup (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_af2e98550ebaec57ff021def6d2af66b3}
 \hypertarget{classdependencyTable_abffec553d72068c891beb9fa8fe73440}{
 \index{dependencyTable@{dependencyTable}!delAddr@{delAddr}}
 \index{delAddr@{delAddr}!dependencyTable@{dependencyTable}}
@@ -397,16 +262,16 @@ Here is the caller graph for this function:
         Assert (table != REG_WRITE && table != REG_READ);
         if (table == MEM_READ) {
                 if (memReadList.count(addr) > 0 &&
-                    memReadList.find(addr)->second->getInsID() == ins->getInsID()
-      ) {
+                    memReadList.find(addr)->second->getInsAddr() == ins->
+      getInsAddr()) {
                         memReadList.erase(addr);
                 }
                 //printf("DEL: Address READ Map Size = %d\n", memReadList.size())
       ;
         } else if (table == MEM_WRITE) {
                 if (memWriteList.count(addr) > 0 &&
-                    memWriteList.find(addr)->second->getInsID() == ins->getInsID(
-      )) {
+                    memWriteList.find(addr)->second->getInsAddr() == ins->
+      getInsAddr()) {
                         memWriteList.erase(addr);
                 }
                 //printf("DEL: Address WRITE Map Size = %d\n", memWriteList.size(
@@ -419,22 +284,6 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_abffec553d72068c891beb9fa8fe73440}{
-\index{dependencyTable@{dependencyTable}!delAddr@{delAddr}}
-\index{delAddr@{delAddr}!dependencyTable@{dependencyTable}}
-\subsubsection[{delAddr}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::delAddr (
-\begin{DoxyParamCaption}
-\item[{long int}]{addr, }
-\item[{{\bf instruction} $\ast$}]{ins, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_abffec553d72068c891beb9fa8fe73440}
 \hypertarget{classdependencyTable_a6b94d787b12a3979b8b182c7e5bde07f}{
 \index{dependencyTable@{dependencyTable}!delBr@{delBr}}
 \index{delBr@{delBr}!dependencyTable@{dependencyTable}}
@@ -449,7 +298,7 @@ Here is the caller graph for this function:
                                              {
         int initBrListSiz = branchList->NumElements();
         for (int i = 0; i < branchList->NumElements(); i++) {
-                if (branchList->Nth(i)->getInsID() == ins->getInsID()) {
+                if (branchList->Nth(i)->getInsAddr() == ins->getInsAddr()) {
                         branchList->RemoveAt(i);
                         break;
                 }
@@ -465,20 +314,6 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_a6b94d787b12a3979b8b182c7e5bde07f}{
-\index{dependencyTable@{dependencyTable}!delBr@{delBr}}
-\index{delBr@{delBr}!dependencyTable@{dependencyTable}}
-\subsubsection[{delBr}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::delBr (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction} $\ast$}]{ins}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a6b94d787b12a3979b8b182c7e5bde07f}
 \hypertarget{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}{
 \index{dependencyTable@{dependencyTable}!delReg@{delReg}}
 \index{delReg@{delReg}!dependencyTable@{dependencyTable}}
@@ -492,21 +327,21 @@ Here is the caller graph for this function:
 \label{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}
 
 \begin{DoxyCode}
-                                                                              {
+                                                                             {
         Assert (table != MEM_READ && table != MEM_WRITE);
 
         if (table == REG_WRITE) {
-                if (regWriteList.find(reg) != regWriteList.end() &&
-                    regWriteList.find(reg)->second->getInsID() == ins->getInsID()
-      ) {
+                if (regWriteList.count(reg) > 0 &&
+                    regWriteList.find(reg)->second->getInsAddr() == ins->
+      getInsAddr()) {
                         regWriteList.erase(reg);
                 }
                 //printf("DEL: Address REG Map Size = %d\n", regWriteList.size())
       ;
         } else if (table == REG_READ) {
-                if (regReadList.find(reg) != regReadList.end() &&
-                    regReadList.find(reg)->second->getInsID() == ins->getInsID())
-       {
+                if (regReadList.count(reg) > 0 &&
+                    regReadList.find(reg)->second->getInsAddr() == ins->
+      getInsAddr()) {
                         regReadList.erase(reg);
                 }
                 //printf("DEL: Address REG Map Size = %d\n", regReadList.size());
@@ -519,22 +354,6 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}{
-\index{dependencyTable@{dependencyTable}!delReg@{delReg}}
-\index{delReg@{delReg}!dependencyTable@{dependencyTable}}
-\subsubsection[{delReg}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::delReg (
-\begin{DoxyParamCaption}
-\item[{long int}]{reg, }
-\item[{{\bf instruction} $\ast$}]{ins, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a6057fc845371e5846048e7c7ede21cd8}
 \hypertarget{classdependencyTable_ac3577b47689d68032bbe9dfecdd35abd}{
 \index{dependencyTable@{dependencyTable}!delWr@{delWr}}
 \index{delWr@{delWr}!dependencyTable@{dependencyTable}}
@@ -559,38 +378,6 @@ Here is the caller graph for this function:
 
 
 Here is the call graph for this function:
-
-
-\hypertarget{classdependencyTable_a8ce45687a518285a6ff32081b8d44125}{
-\index{dependencyTable@{dependencyTable}!flush\_\-depTables@{flush\_\-depTables}}
-\index{flush\_\-depTables@{flush\_\-depTables}!dependencyTable@{dependencyTable}}
-\subsubsection[{flush\_\-depTables}]{\setlength{\rightskip}{0pt plus 5cm}void dependencyTable::flush\_\-depTables (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a8ce45687a518285a6ff32081b8d44125}
-
-\begin{DoxyCode}
-                                      {
-        //This step is redundant as all must already be zero in size
-        //(just a check to avoid accumulating bugs)
-        memReadList.clear();
-        memWriteList.clear();
-        regWriteList.clear();
-        regReadList.clear();
-        for (int i = 0; i < branchList->NumElements(); i++)
-                branchList->RemoveAt(i);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classdependencyTable_a38380b935c33267006d7242d1b72e62a}{
@@ -621,16 +408,6 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdependencyTable_a7fcd194616e3af22b0e9b498d49c721b}{
-\index{dependencyTable@{dependencyTable}!regLookup@{regLookup}}
-\index{regLookup@{regLookup}!dependencyTable@{dependencyTable}}
-\subsubsection[{regLookup}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction}$\ast$ dependencyTable::regLookup (
-\begin{DoxyParamCaption}
-\item[{long int}]{reg, }
-\item[{{\bf tableType}}]{table}
-\end{DoxyParamCaption}
-)}}
-\label{classdependencyTable_a7fcd194616e3af22b0e9b498d49c721b}
 \hypertarget{classdependencyTable_a39bafcbd00b248253d6a97c83954c15a}{
 \index{dependencyTable@{dependencyTable}!wrLookup@{wrLookup}}
 \index{wrLookup@{wrLookup}!dependencyTable@{dependencyTable}}
@@ -644,7 +421,8 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
                                                {
         return memWrites;
-}\end{DoxyCode}
+}
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
@@ -654,7 +432,5 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dependencyTable_8h}{dependencyTable.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dependencyTable_8h}{dependencyTable.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dependencyTable_8cpp}{dependencyTable.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dependencyTable_8cpp}{dependencyTable.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{dependencyTable_8h}{dependencyTable.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{dependencyTable_8cpp}{dependencyTable.cpp}\end{DoxyCompactItemize}

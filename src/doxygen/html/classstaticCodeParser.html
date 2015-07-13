@@ -82,64 +82,68 @@ Collaboration diagram for staticCodeParser:</div>
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>bbObj</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>insObj</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a5eaad2527b293e52712df9f2d29cdfef">staticCodeParser</a> (<a class="el" href="structg__variable.html">g_variable</a> *<a class="el" href="g__variable_8h.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>, <a class="el" href="classconfig.html">config</a> *<a class="el" href="pars_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a4658227c3db5eccd31b70d1c9ae70ce7">staticCodeParser</a> (<a class="el" href="classconfig.html">config</a> *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a21c3a8c803545fe616cf63879ed6e6df">~staticCodeParser</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a8faa5c05cefb98fbcee6b160392c0756">isNewBB</a> (ADDRINT insAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a87051ae0224cfa3278f1f395bb1d6ffd">getBrIns</a> (ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aa79cb891e4a6c1596410fbc025552e4b">getMemIns</a> (ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aad7f9347c84fad935e5c10e9654b9518">getIns</a> (ADDRINT insAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a9041ba47fb240605dbffac8546931d19">getBBheader</a> (ADDRINT bbAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aa26ce7946cda25e79e4e3c1562f426ee">BBhasHeader</a> (ADDRINT bbAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aea51c05ad3592ff1a56eb560c27ac9c5">getBB_top</a> (ADDRINT bbAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a4f97fe1c21b37d063ae129b5895f63c1">getBB_bottom</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aec2b31f34e15b47157a752d3259ace92">isInsIn_insMap</a> (ADDRINT insAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a141b5cea134e6e4acae6784d737daa5c">getInsObj</a> (ADDRINT insAddr)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#ad5a50456d0150c4ef57d7f3c946c6d8a">getRegisters</a> (<a class="el" href="global_2global_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a> insAddr, string registers)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a7ba0a025c42ec3ed5ea4067c1da2de09">hasIns</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstInstruction.html">stInstruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a88ad5a6c7c2a2853b911ecae21b381cc">getInsObj</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a4a3dc378e8a2c4cb40217fd8a8bcd06c">isNewBB</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a0d7e885fd3f9057bac42935d738dfaff">BBhasHeader</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a04ea5c52890f4896030198b971849dff">getBB_top</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a5d0490c503b1b8dfd8f99c7776af44fe">getBBheader</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#ace820cefde65b7acbb5364a2318407d8">getBB_bottom</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a1de5cb892555e03810874e3c1c84ac18">getBBinsList</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a641d60e35396652d9b92cb4553f90e52">hasStaticBB</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#a8dcb45a15aa2cb663fcac5e367acad03">bbHasBr</a> (ADDRINT)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ADDRINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstaticCodeParser.html#aaa38270129a1d97ec66aa413ea0f3985">getBBbr</a> (ADDRINT)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a5eaad2527b293e52712df9f2d29cdfef"></a><!-- doxytag: member="staticCodeParser::staticCodeParser" ref="a5eaad2527b293e52712df9f2d29cdfef" args="(g_variable *g_var, config *g_cfg)" -->
+<a class="anchor" id="a4658227c3db5eccd31b70d1c9ae70ce7"></a><!-- doxytag: member="staticCodeParser::staticCodeParser" ref="a4658227c3db5eccd31b70d1c9ae70ce7" args="(config *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">staticCodeParser::staticCodeParser </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structg__variable.html">g_variable</a> *&#160;</td>
-          <td class="paramname"><em>g_var</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classconfig.html">config</a> *&#160;</td>
-          <td class="paramname"><em>g_cfg</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>g_cfg</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                   {
-        _g_var = <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>;
-        _g_cfg = <a class="code" href="pars_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>;
-        <span class="keywordtype">char</span> *program_name = _g_cfg-&gt;<a class="code" href="classconfig.html#a9530da432f14dc0e96f794e13475e4be">getProgName</a>();
-        <span class="keywordtype">string</span> file = <span class="stringliteral">&quot;/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/&quot;</span>+string(program_name)+<span class="stringliteral">&quot;_obj.s&quot;</span>;
-        <span class="keywordflow">if</span> ((_inFile  = fopen(file.c_str(), <span class="stringliteral">&quot;r&quot;</span>)) == NULL) 
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the input static code file.&quot;</span>);
-        <span class="keywordflow">if</span> (g_var-&gt;<a class="code" href="structg__variable.html#ac965e96976bbbeb71833c68438b5fc47">g_verbose_level</a> &amp; <a class="code" href="global_2global_8h.html#a0ecd0897e84d3e1890e2ae6212092532">V_FRONTEND</a>) std::cout &lt;&lt; <span class="stringliteral">&quot;STATIC CODE FILE: &quot;</span> &lt;&lt; file.c_str() &lt;&lt; std::endl;
-        parse();
+<div class="fragment"><pre class="fragment">    : s_missing_static_bb_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (<span class="stringliteral">&quot;staticCodeParser&quot;</span>, <span class="stringliteral">&quot;s_missing_static_bb_cnt&quot;</span>, <span class="stringliteral">&quot;Number of times static version of a BB not existed.&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
+{
+        _g_cfg = <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>;
+    <span class="keywordtype">string</span> reg_alloc_mode_s, sch_mode_s;
+        <span class="keywordtype">string</span> bench_name = _g_cfg-&gt;<a class="code" href="classconfig.html#a9530da432f14dc0e96f794e13475e4be">getProgName</a> ();
+    <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a> sch_mode = _g_cfg-&gt;<a class="code" href="classconfig.html#acdfce653f4bad57644645e96aaa2a4cc">getSchMode</a> ();
+    <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a> reg_alloc_mode = _g_cfg-&gt;<a class="code" href="classconfig.html#aae32bca45b60d2f07c5c85f43de94435">getRegAllocMode</a> ();
+
+    <span class="keywordflow">if</span> (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236">NO_LIST_SCH</a>) sch_mode_s = <span class="stringliteral">&quot;no_list_sch&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>) sch_mode_s = <span class="stringliteral">&quot;list_sch&quot;</span>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;invalid scheduling mode&quot;</span>);
+
+    <span class="keywordflow">if</span> (reg_alloc_mode == <a class="code" href="sqlite3_8c.html#ab2cd20d9321c782db91b9414da0c23ee">GLOBAL</a>) reg_alloc_mode_s = <span class="stringliteral">&quot;global_reg&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reg_alloc_mode == <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43">LOCAL_GLOBAL</a>) reg_alloc_mode_s = <span class="stringliteral">&quot;local_global_reg&quot;</span>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;invalid reg allocation mode&quot;</span>);
+
+    <span class="keywordtype">string</span> in_dir (_g_cfg-&gt;<a class="code" href="classconfig.html#a9dd0b4405d19c26884b5db734d4e5bb7">getSfilePath</a> ());
+<span class="comment">//    string in_file_path = in_dir + &quot;/&quot; + reg_alloc_mode_s + &quot;/&quot; + sch_mode_s + &quot;/&quot; + string (bench_name) + &quot;_obj.s&quot;;</span>
+    <span class="keywordtype">string</span> in_file_path = in_dir + <span class="stringliteral">&quot;/bb/&quot;</span> + reg_alloc_mode_s + <span class="stringliteral">&quot;/&quot;</span> + sch_mode_s + <span class="stringliteral">&quot;/&quot;</span> + string (bench_name) + <span class="stringliteral">&quot;_50_bbSiz_obj.s&quot;</span>;
+        <span class="keywordflow">if</span> ( (_inFile  = fopen (in_file_path.c_str (), <span class="stringliteral">&quot;r&quot;</span>)) == NULL) 
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;Unable to open the input static code file.&quot;</span>);
+        <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#ac965e96976bbbeb71833c68438b5fc47">g_verbose_level</a> &amp; <a class="code" href="global_2global_8h.html#a0ecd0897e84d3e1890e2ae6212092532">V_FRONTEND</a>) cout &lt;&lt; <span class="stringliteral">&quot;STATIC CODE FILE: &quot;</span> &lt;&lt; in_file_path.c_str () &lt;&lt; endl;
+
+        parse ();
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef_cgraph.png" border="0" usemap="#classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef_cgraph" alt=""/></div>
-<map name="classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef_cgraph" id="classstaticCodeParser_a5eaad2527b293e52712df9f2d29cdfef_cgraph">
+<div class="center"><img src="classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7_cgraph.png" border="0" usemap="#classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7_cgraph" alt=""/></div>
+<map name="classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7_cgraph" id="classstaticCodeParser_a4658227c3db5eccd31b70d1c9ae70ce7_cgraph">
 </map>
 </div>
 </p>
@@ -159,14 +163,48 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
-        ;<span class="comment">//TODO iterate through the maps and delete objects</span>
+<div class="fragment"><pre class="fragment">                                     {
+    map&lt;ADDRINT, stInstruction*&gt;::iterator st_ins_it;
+    map&lt;ADDRINT, bbObj*&gt;::iterator bb_it;
+    <span class="keywordflow">for</span> (st_ins_it = _insObjMap.begin (); st_ins_it != _insObjMap.end (); st_ins_it++)
+        <span class="keyword">delete</span> st_ins_it-&gt;second;
+    for (bb_it = _bbMap.begin (); bb_it != _bbMap.end (); bb_it++)
+        <span class="keyword">delete</span> bb_it-&gt;second;
 }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="aa26ce7946cda25e79e4e3c1562f426ee"></a><!-- doxytag: member="staticCodeParser::BBhasHeader" ref="aa26ce7946cda25e79e4e3c1562f426ee" args="(ADDRINT bbAddr)" -->
+<a class="anchor" id="a8dcb45a15aa2cb663fcac5e367acad03"></a><!-- doxytag: member="staticCodeParser::bbHasBr" ref="a8dcb45a15aa2cb663fcac5e367acad03" args="(ADDRINT)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL staticCodeParser::bbHasBr </td>
+          <td>(</td>
+          <td class="paramtype">ADDRINT&#160;</td>
+          <td class="paramname"><em>bbAddr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                              {
+    <span class="keywordflow">return</span> _bbMap[bbAddr]-&gt;hasBr;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03_icgraph.png" border="0" usemap="#classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03_icgraph" id="classstaticCodeParser_a8dcb45a15aa2cb663fcac5e367acad03_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a0d7e885fd3f9057bac42935d738dfaff"></a><!-- doxytag: member="staticCodeParser::BBhasHeader" ref="a0d7e885fd3f9057bac42935d738dfaff" args="(ADDRINT)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -180,28 +218,19 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                 {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
+<div class="fragment"><pre class="fragment">                                                  {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
         <span class="keywordflow">return</span> _bbMap[bbAddr]-&gt;bbHasHeader;
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee_icgraph.png" border="0" usemap="#classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee_icgraph" id="classstaticCodeParser_aa26ce7946cda25e79e4e3c1562f426ee_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a4f97fe1c21b37d063ae129b5895f63c1"></a><!-- doxytag: member="staticCodeParser::getBB_bottom" ref="a4f97fe1c21b37d063ae129b5895f63c1" args="()" -->
+<a class="anchor" id="ace820cefde65b7acbb5364a2318407d8"></a><!-- doxytag: member="staticCodeParser::getBB_bottom" ref="ace820cefde65b7acbb5364a2318407d8" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string staticCodeParser::getBB_bottom </td>
+          <td class="memname">string staticCodeParser::getBB_bottom </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -209,19 +238,72 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
-        <span class="keywordtype">string</span> strg = (string(<span class="stringliteral">&quot;}\n&quot;</span>));
+<div class="fragment"><pre class="fragment">                                       {
+        <span class="keywordtype">string</span> strg = (string (<span class="stringliteral">&quot;}\n&quot;</span>));
         <span class="keywordflow">return</span> strg;
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="aea51c05ad3592ff1a56eb560c27ac9c5"></a><!-- doxytag: member="staticCodeParser::getBB_top" ref="aea51c05ad3592ff1a56eb560c27ac9c5" args="(ADDRINT bbAddr)" -->
+<a class="anchor" id="a04ea5c52890f4896030198b971849dff"></a><!-- doxytag: member="staticCodeParser::getBB_top" ref="a04ea5c52890f4896030198b971849dff" args="(ADDRINT)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string staticCodeParser::getBB_top </td>
+          <td class="memname">string staticCodeParser::getBB_top </td>
+          <td>(</td>
+          <td class="paramtype">ADDRINT&#160;</td>
+          <td class="paramname"><em>bbAddr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                  {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
+        stringstream ss;
+        ss &lt;&lt; bbAddr;
+        <span class="keywordtype">string</span> strg = (string (<span class="stringliteral">&quot;{,&quot;</span>) + ss.str () + string (<span class="stringliteral">&quot;,\n&quot;</span>)); <span class="comment">//TODO add a comma at the end of line</span>
+        <span class="keywordflow">return</span> strg;
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="aaa38270129a1d97ec66aa413ea0f3985"></a><!-- doxytag: member="staticCodeParser::getBBbr" ref="aaa38270129a1d97ec66aa413ea0f3985" args="(ADDRINT)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ADDRINT staticCodeParser::getBBbr </td>
+          <td>(</td>
+          <td class="paramtype">ADDRINT&#160;</td>
+          <td class="paramname"><em>bbAddr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                 {
+    <span class="keywordflow">return</span> _bbMap[bbAddr]-&gt;brAddr;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985_icgraph.png" border="0" usemap="#classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985_icgraph" id="classstaticCodeParser_aaa38270129a1d97ec66aa413ea0f3985_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a5d0490c503b1b8dfd8f99c7776af44fe"></a><!-- doxytag: member="staticCodeParser::getBBheader" ref="a5d0490c503b1b8dfd8f99c7776af44fe" args="(ADDRINT)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string staticCodeParser::getBBheader </td>
           <td>(</td>
           <td class="paramtype">ADDRINT&#160;</td>
           <td class="paramname"><em>bbAddr</em></td><td>)</td>
@@ -231,169 +313,53 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                    {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
-        ss &lt;&lt; bbAddr;
-        <span class="keywordtype">string</span> strg = (string(<span class="stringliteral">&quot;{,&quot;</span>) + ss.str() + string(<span class="stringliteral">&quot;,\n&quot;</span>)); <span class="comment">//TODO add a comma at the end of line</span>
-        <span class="keywordflow">return</span> strg;
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a9041ba47fb240605dbffac8546931d19"></a><!-- doxytag: member="staticCodeParser::getBBheader" ref="a9041ba47fb240605dbffac8546931d19" args="(ADDRINT bbAddr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string staticCodeParser::getBBheader </td>
-          <td>(</td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>bbAddr</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                      {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (bbAddr == _bbMap[bbAddr]-&gt;bbAddr &amp;&amp; <span class="stringliteral">&quot;Instruction is not the first instruction in BB&quot;</span>);
+        stringstream ss;
         ss &lt;&lt; _bbMap[bbAddr]-&gt;bbHeader;
-        <span class="keywordtype">string</span> strg = (string(<span class="stringliteral">&quot;H,&quot;</span>) + ss.str() + string(<span class="stringliteral">&quot;,\n&quot;</span>));
+        <span class="keywordtype">string</span> strg = (string (<span class="stringliteral">&quot;H,&quot;</span>) + ss.str () + string (<span class="stringliteral">&quot;,\n&quot;</span>));
         <span class="keywordflow">return</span> strg;
 }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_a9041ba47fb240605dbffac8546931d19_icgraph.png" border="0" usemap="#classstaticCodeParser_a9041ba47fb240605dbffac8546931d19_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_a9041ba47fb240605dbffac8546931d19_icgraph" id="classstaticCodeParser_a9041ba47fb240605dbffac8546931d19_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="a87051ae0224cfa3278f1f395bb1d6ffd"></a><!-- doxytag: member="staticCodeParser::getBrIns" ref="a87051ae0224cfa3278f1f395bb1d6ffd" args="(ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken)" -->
+<a class="anchor" id="a1de5cb892555e03810874e3c1c84ac18"></a><!-- doxytag: member="staticCodeParser::getBBinsList" ref="a1de5cb892555e03810874e3c1c84ac18" args="(ADDRINT)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string staticCodeParser::getBrIns </td>
+          <td class="memname">list&lt; <a class="el" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a> &gt; &amp; staticCodeParser::getBBinsList </td>
           <td>(</td>
           <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>insAddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">BOOL&#160;</td>
-          <td class="paramname"><em>hasFT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>tgAddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>ftAddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">BOOL&#160;</td>
-          <td class="paramname"><em>isTaken</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                                              {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(insAddr != 0);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
-        <span class="keywordflow">if</span> (_insMap.find(insAddr) != _insMap.end()) {
-                <span class="keywordtype">char</span> insType = _insMap[insAddr]-&gt;insType[0];
-                <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;j&#39;</span> || insType == <span class="charliteral">&#39;c&#39;</span> || insType == <span class="charliteral">&#39;b&#39;</span> || insType == <span class="charliteral">&#39;r&#39;</span>) {
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(tgAddr != 0 &amp;&amp; <span class="stringliteral">&quot;invalid branch dst address value.&quot;</span>);
-                        ss &lt;&lt; <span class="stringliteral">&quot;B&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; insAddr &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; isTaken  &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; tgAddr &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _insMap[insAddr]-&gt;registers;
-                } <span class="keywordflow">else</span> {
-                        <span class="comment">//Assert(true == false &amp;&amp; &quot;Unrecognized instruction type - expecting a branch instruction&quot;);</span>
-                        ss &lt;&lt; <span class="stringliteral">&quot;MILAD&quot;</span>;
-                }
-        } <span class="keywordflow">else</span> {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Didn&#39;t find the instruction stream&quot;</span>);
-        }
-        <span class="keywordtype">string</span> ins_str = (ss.str() + string(<span class="stringliteral">&quot;\n&quot;</span>));
-        <span class="keywordflow">return</span> ins_str;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd_icgraph.png" border="0" usemap="#classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd_icgraph" id="classstaticCodeParser_a87051ae0224cfa3278f1f395bb1d6ffd_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="aad7f9347c84fad935e5c10e9654b9518"></a><!-- doxytag: member="staticCodeParser::getIns" ref="aad7f9347c84fad935e5c10e9654b9518" args="(ADDRINT insAddr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string staticCodeParser::getIns </td>
-          <td>(</td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>insAddr</em></td><td>)</td>
+          <td class="paramname"><em>bbID</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                  {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(insAddr != 0);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
-        <span class="keywordflow">if</span> (_insMap.find(insAddr) != _insMap.end()) {
-                <span class="keywordtype">char</span> insType = _insMap[insAddr]-&gt;insType[0];
-                <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;o&#39;</span>) { <span class="comment">//A, D, F for ins-&gt;getType()</span>
-                        ss &lt;&lt; <span class="stringliteral">&quot;A&quot;</span> &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; insAddr &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _insMap[insAddr]-&gt;registers;
-                } <span class="keywordflow">else</span> {
-                        <span class="comment">//Assert(true == false &amp;&amp; &quot;Unrecognized instruction type - expecting a ALU instruction&quot;);</span>
-                        ss &lt;&lt; <span class="stringliteral">&quot;MILAD&quot;</span>;
-                }
-        } <span class="keywordflow">else</span> {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Didn&#39;t find the instruction stream&quot;</span>);
-        }
-        <span class="keywordtype">string</span> ins_str = (ss.str() + string(<span class="stringliteral">&quot;\n&quot;</span>));
-        <span class="keywordflow">return</span> ins_str;
+<div class="fragment"><pre class="fragment">                                                         {
+    <span class="keywordflow">if</span> (_bbMap.find(bbID) == _bbMap.end()) {
+        s_missing_static_bb_cnt++;
+    }
+    <span class="keywordflow">return</span> _bbMap[bbID]-&gt;bbInsList;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518_icgraph.png" border="0" usemap="#classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518_icgraph" id="classstaticCodeParser_aad7f9347c84fad935e5c10e9654b9518_icgraph">
+<div class="center"><img src="classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18_icgraph.png" border="0" usemap="#classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18_icgraph" id="classstaticCodeParser_a1de5cb892555e03810874e3c1c84ac18_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a141b5cea134e6e4acae6784d737daa5c"></a><!-- doxytag: member="staticCodeParser::getInsObj" ref="a141b5cea134e6e4acae6784d737daa5c" args="(ADDRINT insAddr)" -->
+<a class="anchor" id="a88ad5a6c7c2a2853b911ecae21b381cc"></a><!-- doxytag: member="staticCodeParser::getInsObj" ref="a88ad5a6c7c2a2853b911ecae21b381cc" args="(ADDRINT)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classdynInstruction.html">dynInstruction</a> * staticCodeParser::getInsObj </td>
+          <td class="memname"><a class="el" href="classstInstruction.html">stInstruction</a> * staticCodeParser::getInsObj </td>
           <td>(</td>
           <td class="paramtype">ADDRINT&#160;</td>
           <td class="paramname"><em>insAddr</em></td><td>)</td>
@@ -403,166 +369,27 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                           {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(_insObjMap.find(insAddr) != _insObjMap.end());
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_insObjMap.find (insAddr) != _insObjMap.end ());
         <span class="keywordflow">return</span> _insObjMap[insAddr];
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c_icgraph.png" border="0" usemap="#classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c_icgraph" id="classstaticCodeParser_a141b5cea134e6e4acae6784d737daa5c_icgraph">
+<div class="center"><img src="classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc_icgraph.png" border="0" usemap="#classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc_icgraph" id="classstaticCodeParser_a88ad5a6c7c2a2853b911ecae21b381cc_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="aa79cb891e4a6c1596410fbc025552e4b"></a><!-- doxytag: member="staticCodeParser::getMemIns" ref="aa79cb891e4a6c1596410fbc025552e4b" args="(ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr)" -->
+<a class="anchor" id="a7ba0a025c42ec3ed5ea4067c1da2de09"></a><!-- doxytag: member="staticCodeParser::hasIns" ref="a7ba0a025c42ec3ed5ea4067c1da2de09" args="(ADDRINT)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string staticCodeParser::getMemIns </td>
-          <td>(</td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>insAddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>memAccessSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>memAddr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                             {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(insAddr != 0);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
-        <span class="keywordflow">if</span> (_insMap.find(insAddr) != _insMap.end()) {
-                <span class="keywordtype">char</span> insType = _insMap[insAddr]-&gt;insType[0];
-                <span class="comment">//if (insType == &#39;W&#39; || insType == &#39;R&#39;) {</span>
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(memAddr != 0 &amp;&amp; <span class="stringliteral">&quot;invalid memory address value.&quot;</span>);
-                        <span class="comment">//Assert(_insMap[insAddr]-&gt;memAccessSize == memAccessSize &amp;&amp; &quot;Unexpected memory access size&quot;);</span>
-                        ss &lt;&lt; insType &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; memAddr &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; insAddr &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; memAccessSize &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _insMap[insAddr]-&gt;registers;
-                <span class="comment">//} else {</span>
-                        <span class="comment">//Assert(true == false &amp;&amp; &quot;Unrecognized instruction type - expecting a memory instruction&quot;);</span>
-                        ss &lt;&lt; <span class="stringliteral">&quot;MILAD&quot;</span>;
-                <span class="comment">//}</span>
-        } <span class="keywordflow">else</span> {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Didn&#39;t find the instruction stream&quot;</span>);
-        }
-        <span class="keywordtype">string</span> ins_str = (ss.str() + string(<span class="stringliteral">&quot;\n&quot;</span>));
-        <span class="keywordflow">return</span> ins_str;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b_icgraph.png" border="0" usemap="#classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b_icgraph" id="classstaticCodeParser_aa79cb891e4a6c1596410fbc025552e4b_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ad5a50456d0150c4ef57d7f3c946c6d8a"></a><!-- doxytag: member="staticCodeParser::getRegisters" ref="ad5a50456d0150c4ef57d7f3c946c6d8a" args="(ADDRS insAddr, string registers)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void staticCodeParser::getRegisters </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>&#160;</td>
-          <td class="paramname"><em>insAddr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>registers</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                   {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_insObjMap.find(insAddr) != _insObjMap.end());
-    <a class="code" href="classdynInstruction.html">dynInstruction</a>* ins = _insObjMap[insAddr];
-    <span class="keywordtype">int</span> scanStatus;
-    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {
-        <a class="code" href="global_2global_8h.html#a735ca3cb7fa17e60af6701a846722516">AR</a> reg;
-        <span class="keywordtype">int</span> typeTemp;
-        <span class="keywordtype">char</span> s[100];
-        scanStatus = sscanf (registers.c_str(), <span class="stringliteral">&quot;%u#%d,%s&quot;</span>, &amp;reg, &amp;typeTemp, s);
-        <span class="keywordflow">if</span> (scanStatus != 3) <span class="keywordflow">break</span>;
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(typeTemp == 1 || typeTemp == 2);
-        registers = string(s);
-        <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a> reg_axes_type = (typeTemp == 1 ? <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a> : <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>);
-        ins-&gt;setAR (reg, reg_axes_type);
-    }
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="aec2b31f34e15b47157a752d3259ace92"></a><!-- doxytag: member="staticCodeParser::isInsIn_insMap" ref="aec2b31f34e15b47157a752d3259ace92" args="(ADDRINT insAddr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool staticCodeParser::isInsIn_insMap </td>
-          <td>(</td>
-          <td class="paramtype">ADDRINT&#160;</td>
-          <td class="paramname"><em>insAddr</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                     {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(insAddr != 0);
-        std::stringstream <a class="code" href="uop__gen_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">ss</a>;
-        <span class="keywordflow">if</span> (_insMap.find(insAddr) != _insMap.end()) {
-                <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        } <span class="keywordflow">else</span> {
-                <span class="keywordflow">return</span> <span class="keyword">false</span>;
-        }
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92_icgraph.png" border="0" usemap="#classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92_icgraph" id="classstaticCodeParser_aec2b31f34e15b47157a752d3259ace92_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a8faa5c05cefb98fbcee6b160392c0756"></a><!-- doxytag: member="staticCodeParser::isNewBB" ref="a8faa5c05cefb98fbcee6b160392c0756" args="(ADDRINT insAddr)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool staticCodeParser::isNewBB </td>
+          <td class="memname">BOOL staticCodeParser::hasIns </td>
           <td>(</td>
           <td class="paramtype">ADDRINT&#160;</td>
           <td class="paramname"><em>insAddr</em></td><td>)</td>
@@ -572,19 +399,69 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                              {
-        <span class="keywordtype">bool</span> newBB = (_bbMap.find(insAddr) != _bbMap.end() ? <span class="keyword">true</span> : <span class="keyword">false</span>);
-        <span class="keywordflow">return</span> newBB;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (insAddr != 0);
+        <span class="keywordflow">return</span> (_insObjMap.find (insAddr) != _insObjMap.end ()) ? <span class="keyword">true</span> : <span class="keyword">false</span>;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756_icgraph.png" border="0" usemap="#classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756_icgraph" alt=""/></div>
-<map name="classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756_icgraph" id="classstaticCodeParser_a8faa5c05cefb98fbcee6b160392c0756_icgraph">
+<div class="center"><img src="classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09_icgraph.png" border="0" usemap="#classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09_icgraph" id="classstaticCodeParser_a7ba0a025c42ec3ed5ea4067c1da2de09_icgraph">
 </map>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a641d60e35396652d9b92cb4553f90e52"></a><!-- doxytag: member="staticCodeParser::hasStaticBB" ref="a641d60e35396652d9b92cb4553f90e52" args="(ADDRINT)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool staticCodeParser::hasStaticBB </td>
+          <td>(</td>
+          <td class="paramtype">ADDRINT&#160;</td>
+          <td class="paramname"><em>bbID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                {
+    <span class="keywordflow">return</span> (_bbMap.find(bbID) != _bbMap.end());
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52_icgraph.png" border="0" usemap="#classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52_icgraph" alt=""/></div>
+<map name="classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52_icgraph" id="classstaticCodeParser_a641d60e35396652d9b92cb4553f90e52_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4a3dc378e8a2c4cb40217fd8a8bcd06c"></a><!-- doxytag: member="staticCodeParser::isNewBB" ref="a4a3dc378e8a2c4cb40217fd8a8bcd06c" args="(ADDRINT)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL staticCodeParser::isNewBB </td>
+          <td>(</td>
+          <td class="paramtype">ADDRINT&#160;</td>
+          <td class="paramname"><em>insAddr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                               {
+        <span class="keywordtype">bool</span> newBB = (_bbMap.find (insAddr) != _bbMap.end () ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+        <span class="keywordflow">return</span> newBB;
+}
+</pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -597,7 +474,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -606,7 +483,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

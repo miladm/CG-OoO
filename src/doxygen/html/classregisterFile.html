@@ -87,50 +87,39 @@ Collaboration diagram for registerFile:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#aa9071035e97a10e7e76990c9b5e126fb">registerFile</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> rf_begin_num=1, <a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> rf_size=LARF_SIZE+GARF_SIZE, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> rd_port_cnt=8, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> wr_port_cnt=4, string rf_name=&quot;registerFile&quot;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a61390ea0709a40a1e48dac5133242c9d">registerFile</a> (<a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string rf_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a51d44388ce9baf55f5d0fc108198d915">~registerFile</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b">updateReg</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a2731695462957c3ac0a8888e7fce3bd3">reserveReg</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a67c6a74ba45a273b0c57e29fe9cfc4eb">isRegValid</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a6b9481a788749aabdc8488f60adb5cf7">isRegValidAndReady</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#af4bc17e8db0bd9a07fec85814e1d607f">isRegBusy</a> (<a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> regNum)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a9e487acbcecb5a905a4ee1c80adf48e4">resetRF</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a2f83eaee77e90587c8fabff35b6255c3">hasFreeRdPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a5c361b0e1c0ec3e6f08990b63ffae8db">hasFreeWrPort</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a47232ba732ea081d78cd43d0564e60a1">updateWireState</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#a218ab11def5221efa38b4fb84817c4a6">hasFreeWire</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregisterFile.html#ad2643ae67021e5dc1a2218b19093bdd0">getNumFreeWires</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa9071035e97a10e7e76990c9b5e126fb"></a><!-- doxytag: member="registerFile::registerFile" ref="aa9071035e97a10e7e76990c9b5e126fb" args="(PR rf_begin_num=1, PR rf_size=LARF_SIZE+GARF_SIZE, WIDTH rd_port_cnt=8, WIDTH wr_port_cnt=4, string rf_name=&quot;registerFile&quot;)" -->
+<a class="anchor" id="a61390ea0709a40a1e48dac5133242c9d"></a><!-- doxytag: member="registerFile::registerFile" ref="a61390ea0709a40a1e48dac5133242c9d" args="(sysClock *, const YAML::Node &amp;, string rf_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">registerFile::registerFile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a>&#160;</td>
-          <td class="paramname"><em>rf_begin_num</em> = <code>1</code>, </td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a>&#160;</td>
-          <td class="paramname"><em>rf_size</em> = <code>LARF_SIZE+GARF_SIZE</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>rd_port_cnt</em> = <code>8</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>wr_port_cnt</em> = <code>4</code>, </td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>rf_name</em> = <code>&quot;registerFile&quot;</code>&#160;</td>
+          <td class="paramname"><em>rf_name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -140,21 +129,27 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (rf_name),
-      _rf_size (rf_size),
-      _rf_begin_num (rf_begin_num),
-      _rf_end_num (rf_begin_num+rf_size-1),
-      _wr_port_cnt (wr_port_cnt),
-      _rd_port_cnt (rd_port_cnt)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a> (rf_name, clk),
+      _wr_port (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>, clk, root, rf_name + <span class="stringliteral">&quot;.wr_wire&quot;</span>),
+      _rd_port (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>, clk, root, rf_name + <span class="stringliteral">&quot;.rd_wire&quot;</span>)
 {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_rf_size &gt; 0);
+    <span class="comment">/* SETUP REGISTER DIMENSIONS */</span>
+    root[<span class="stringliteral">&quot;rf_size&quot;</span>] &gt;&gt; _rf_size;
+    root[<span class="stringliteral">&quot;rf_lo&quot;</span>] &gt;&gt; _rf_begin_num;
+    root[<span class="stringliteral">&quot;rf_hi&quot;</span>] &gt;&gt; _rf_end_num;
+
+    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> rd_wire_cnt, wr_wire_cnt;
+    root[<span class="stringliteral">&quot;rd_wire_cnt&quot;</span>] &gt;&gt; rd_wire_cnt;
+    root[<span class="stringliteral">&quot;wr_wire_cnt&quot;</span>] &gt;&gt; wr_wire_cnt;
+
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_rf_size &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (rd_wire_cnt == <a class="code" href="backend_2bb_2registerRename_8h.html#ae6576f1f0874ded45228a539ba66a0a4">RD_TO_WR_WIRE_CNT_RATIO</a> * wr_wire_cnt &amp;&amp; 
+            <span class="stringliteral">&quot;Must have twice as many read ports than write ports.&quot;</span>);
     <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> i = _rf_begin_num; i &lt; _rf_end_num; i++) {
         <a class="code" href="structregisterElement.html">registerElement</a>* reg = <span class="keyword">new</span> <a class="code" href="structregisterElement.html">registerElement</a> (i);
         _RF.insert (pair&lt;PR, registerElement*&gt; (i, reg));
     }
     _cycle = <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>;
-    _num_free_wr_port = _wr_port_cnt;
-    _num_free_rd_port = _rd_port_cnt;
 }
 </pre></div>
 </div>
@@ -182,93 +177,73 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2f83eaee77e90587c8fabff35b6255c3"></a><!-- doxytag: member="registerFile::hasFreeRdPort" ref="a2f83eaee77e90587c8fabff35b6255c3" args="(CYCLE, WIDTH)" -->
+<a class="anchor" id="ad2643ae67021e5dc1a2218b19093bdd0"></a><!-- doxytag: member="registerFile::getNumFreeWires" ref="ad2643ae67021e5dc1a2218b19093bdd0" args="(AXES_TYPE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool registerFile::hasFreeRdPort </td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> registerFile::getNumFreeWires </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>numRegRdPorts</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                {
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_rd_port_cnt &gt;= numRegRdPorts);
-    <span class="keywordflow">if</span> (_cycle &lt; now) {
-        _num_free_rd_port = _rd_port_cnt - numRegRdPorts;
-        _cycle = now;
-        <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
-        _num_free_rd_port -= numRegRdPorts;
-        <span class="keywordflow">if</span> (_num_free_rd_port &gt;= 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        <span class="keywordflow">else</span> <span class="keywordflow">return</span> <span class="keyword">false</span>;
-    }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<div class="fragment"><pre class="fragment">                                                        {
+    <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+        <span class="keywordflow">return</span> _rd_port.<a class="code" href="classwires.html#a6da822d9a831e60702cc74f43306e48a">getNumFreeWires</a> ();
+    <span class="keywordflow">else</span>
+        <span class="keywordflow">return</span> _wr_port.<a class="code" href="classwires.html#a6da822d9a831e60702cc74f43306e48a">getNumFreeWires</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_cgraph.png" border="0" usemap="#classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_cgraph" alt=""/></div>
+<map name="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_cgraph" id="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classregisterFile_a2f83eaee77e90587c8fabff35b6255c3_icgraph.png" border="0" usemap="#classregisterFile_a2f83eaee77e90587c8fabff35b6255c3_icgraph" alt=""/></div>
-<map name="classregisterFile_a2f83eaee77e90587c8fabff35b6255c3_icgraph" id="classregisterFile_a2f83eaee77e90587c8fabff35b6255c3_icgraph">
+<div class="center"><img src="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_icgraph.png" border="0" usemap="#classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_icgraph" alt=""/></div>
+<map name="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_icgraph" id="classregisterFile_ad2643ae67021e5dc1a2218b19093bdd0_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a5c361b0e1c0ec3e6f08990b63ffae8db"></a><!-- doxytag: member="registerFile::hasFreeWrPort" ref="a5c361b0e1c0ec3e6f08990b63ffae8db" args="(CYCLE)" -->
+<a class="anchor" id="a218ab11def5221efa38b4fb84817c4a6"></a><!-- doxytag: member="registerFile::hasFreeWire" ref="a218ab11def5221efa38b4fb84817c4a6" args="(AXES_TYPE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool registerFile::hasFreeWrPort </td>
+          <td class="memname">bool registerFile::hasFreeWire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>now</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                           {
-    <span class="keywordflow">if</span> (_cycle &lt; now) {
-        _num_free_wr_port = _wr_port_cnt;
-        _cycle = now;
-        <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
-        _num_free_wr_port--;
-        <span class="keywordflow">if</span> (_num_free_wr_port &gt; 0) {
-            <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        } <span class="keywordflow">else</span> {
-            <span class="comment">//Assert (true == false &amp;&amp; &quot;this feature may not work -look into it&quot;);</span>
-            <span class="keywordflow">return</span> <span class="keyword">false</span>;
-        }
-    }
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<div class="fragment"><pre class="fragment">                                                   {
+    <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+        <span class="keywordflow">return</span> _rd_port.<a class="code" href="classwires.html#a7fdda3374000eee688b3f9ea128dcc3a">hasFreeWire</a> ();
+    <span class="keywordflow">else</span>
+        <span class="keywordflow">return</span> _wr_port.<a class="code" href="classwires.html#a7fdda3374000eee688b3f9ea128dcc3a">hasFreeWire</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db_icgraph.png" border="0" usemap="#classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db_icgraph" alt=""/></div>
-<map name="classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db_icgraph" id="classregisterFile_a5c361b0e1c0ec3e6f08990b63ffae8db_icgraph">
+<div class="center"><img src="classregisterFile_a218ab11def5221efa38b4fb84817c4a6_cgraph.png" border="0" usemap="#classregisterFile_a218ab11def5221efa38b4fb84817c4a6_cgraph" alt=""/></div>
+<map name="classregisterFile_a218ab11def5221efa38b4fb84817c4a6_cgraph" id="classregisterFile_a218ab11def5221efa38b4fb84817c4a6_cgraph">
 </map>
 </div>
 </p>
@@ -291,7 +266,7 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                    {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
+<span class="preprocessor"></span>        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>
     <span class="keywordflow">return</span> (_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a> ? <span class="keyword">true</span> : <span class="keyword">false</span>);
@@ -308,12 +283,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a67c6a74ba45a273b0c57e29fe9cfc4eb"></a><!-- doxytag: member="registerFile::isRegValid" ref="a67c6a74ba45a273b0c57e29fe9cfc4eb" args="(PR reg)" -->
+<a class="anchor" id="a6b9481a788749aabdc8488f60adb5cf7"></a><!-- doxytag: member="registerFile::isRegValidAndReady" ref="a6b9481a788749aabdc8488f60adb5cf7" args="(PR reg)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool registerFile::isRegValid </td>
+          <td class="memname">bool registerFile::isRegValidAndReady </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a>&#160;</td>
           <td class="paramname"><em>reg</em></td><td>)</td>
@@ -325,13 +300,13 @@ Here is the caller graph for this function:</div>
 
 <p><p>NOTE: only works for INO </p>
 </p>
-<div class="fragment"><pre class="fragment">                                     {
+<div class="fragment"><pre class="fragment">                                             {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    <span class="keywordflow">if</span> (_RF[reg]-&gt;_axesedBefore == <span class="keyword">true</span>) {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state != <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a> &amp;&amp; 
+<span class="preprocessor"></span>        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state != <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a> &amp;&amp; 
                 <span class="stringliteral">&quot;Register must hold data to read from - call updateReg () first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    } <span class="keywordflow">else</span> {
@@ -345,8 +320,8 @@ Here is the caller graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb_icgraph.png" border="0" usemap="#classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb_icgraph" alt=""/></div>
-<map name="classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb_icgraph" id="classregisterFile_a67c6a74ba45a273b0c57e29fe9cfc4eb_icgraph">
+<div class="center"><img src="classregisterFile_a6b9481a788749aabdc8488f60adb5cf7_icgraph.png" border="0" usemap="#classregisterFile_a6b9481a788749aabdc8488f60adb5cf7_icgraph" alt=""/></div>
+<map name="classregisterFile_a6b9481a788749aabdc8488f60adb5cf7_icgraph" id="classregisterFile_a6b9481a788749aabdc8488f60adb5cf7_icgraph">
 </map>
 </div>
 </p>
@@ -369,8 +344,10 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                     {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367a12bc9328d9f135cbe49d5c3d13c42042">DONE_WRITE_REG</a> || _RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
+    <span class="keywordflow">if</span> (!(_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367a12bc9328d9f135cbe49d5c3d13c42042">DONE_WRITE_REG</a> || _RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>)) 
+        cout &lt;&lt; _RF[reg]-&gt;_reg_state;
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367a12bc9328d9f135cbe49d5c3d13c42042">DONE_WRITE_REG</a> || _RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    _RF[reg]-&gt;_reg_state = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a>;
 }
@@ -433,8 +410,8 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                    {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (reg &gt;= _rf_begin_num &amp;&amp; reg &lt;= _rf_end_num);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_RF[reg]-&gt;_reg_state == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    _RF[reg]-&gt;_reg_state = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367a12bc9328d9f135cbe49d5c3d13c42042">DONE_WRITE_REG</a>;
 }
@@ -450,9 +427,73 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a47232ba732ea081d78cd43d0564e60a1"></a><!-- doxytag: member="registerFile::updateWireState" ref="a47232ba732ea081d78cd43d0564e60a1" args="(AXES_TYPE, list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void registerFile::updateWireState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; string &gt;&#160;</td>
+          <td class="paramname"><em>wire_name</em> = <code>list&lt;string&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_wire</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                                                 {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (_cycle &lt; now) {
+        _wr_port.<a class="code" href="classwires.html#a647e11b30c29284d122ad2813d2dbe31">updateWireState</a> (wire_name, axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a> ? update_wire : <span class="keyword">false</span>);
+        _rd_port.<a class="code" href="classwires.html#a647e11b30c29284d122ad2813d2dbe31">updateWireState</a> (wire_name, axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a> ? update_wire : <span class="keyword">false</span>);
+        _cycle = now;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
+        <span class="keywordflow">if</span> (axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>)
+            _rd_port.<a class="code" href="classwires.html#a647e11b30c29284d122ad2813d2dbe31">updateWireState</a> (wire_name, update_wire);
+        <span class="keywordflow">else</span>
+            _wr_port.<a class="code" href="classwires.html#a647e11b30c29284d122ad2813d2dbe31">updateWireState</a> (wire_name, update_wire);
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_cgraph.png" border="0" usemap="#classregisterFile_a47232ba732ea081d78cd43d0564e60a1_cgraph" alt=""/></div>
+<map name="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_cgraph" id="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_icgraph.png" border="0" usemap="#classregisterFile_a47232ba732ea081d78cd43d0564e60a1_icgraph" alt=""/></div>
+<map name="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_icgraph" id="classregisterFile_a47232ba732ea081d78cd43d0564e60a1_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/ino/<a class="el" href="registerFile_8h_source.html">registerFile.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/ino/<a class="el" href="registerFile_8cpp.html">registerFile.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="registerFile_8h_source.html">registerFile.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="registerFile_8cpp.html">registerFile.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -460,7 +501,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -469,7 +510,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

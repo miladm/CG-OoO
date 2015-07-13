@@ -6,22 +6,22 @@
 
 {\ttfamily \#include $<$statistic.h$>$}
 
+
+
+Inheritance diagram for ScalarStat:
+
+
+Collaboration diagram for ScalarStat:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classScalarStat_a41eaf19b1c778d3e19a9f1c23e5d0f3b}{ScalarStat} (string, string, string, \hyperlink{global_2global_8h_add170db579327962a9c5e88de7751ca2}{SCALAR} init\_\-val=0, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO} print\_\-if\_\-zero=PRINT\_\-ZERO)
+\hyperlink{classScalarStat_a41eaf19b1c778d3e19a9f1c23e5d0f3b}{ScalarStat} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} init\_\-val=0, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO} print\_\-if\_\-zero=PRINT\_\-ZERO)
 \item 
 \hyperlink{classScalarStat_afca0d1be023ea2123dca632240949bef}{$\sim$ScalarStat} ()
 \item 
 void \hyperlink{classScalarStat_ad5767c33c892443a921514fda8b4e1f3}{print} ()
 \item 
-\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classScalarStat_abd392ea385ba6358fb6b4dbdc3a1ce32}{operator++} ()
-\item 
-\hyperlink{classScalarStat}{ScalarStat} \hyperlink{classScalarStat_adacc6227b07e70d8b6f6e870d204383d}{operator++} (int)
-\item 
-\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classScalarStat_a6d5fa9a76281d73053e1d68fe9394f4c}{operator-\/-\/} ()
-\item 
-\hyperlink{classScalarStat}{ScalarStat} \hyperlink{classScalarStat_acf2e5a20d1c53ada7c88463fc6d59a47}{operator-\/-\/} (int)
+void \hyperlink{classScalarStat_ad05dd73a4ebea8b146b05b4cb2fd66f5}{print} (ofstream $\ast$)
 \end{DoxyCompactItemize}
 
 
@@ -41,13 +41,8 @@ void \hyperlink{classScalarStat_ad5767c33c892443a921514fda8b4e1f3}{print} ()
 \label{classScalarStat_a41eaf19b1c778d3e19a9f1c23e5d0f3b}
 
 \begin{DoxyCode}
-                                                                                 
-                                                   {
-    _name = (class_name + ".") + param_name;
-    _ScalarStat = init_val;
-    _description = description;
-    _print_if_zero = print_if_zero;
-}
+    : stat (class_name, param_name, description, init_val, print_if_zero)
+{ }
 \end{DoxyCode}
 \hypertarget{classScalarStat_afca0d1be023ea2123dca632240949bef}{
 \index{ScalarStat@{ScalarStat}!$\sim$ScalarStat@{$\sim$ScalarStat}}
@@ -65,70 +60,6 @@ void \hyperlink{classScalarStat_ad5767c33c892443a921514fda8b4e1f3}{print} ()
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classScalarStat_abd392ea385ba6358fb6b4dbdc3a1ce32}{
-\index{ScalarStat@{ScalarStat}!operator++@{operator++}}
-\index{operator++@{operator++}!ScalarStat@{ScalarStat}}
-\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} \& ScalarStat::operator++ (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classScalarStat_abd392ea385ba6358fb6b4dbdc3a1ce32}
-
-\begin{DoxyCode}
-                                    {
-    _ScalarStat++;
-    return *this;
-}
-\end{DoxyCode}
-\hypertarget{classScalarStat_adacc6227b07e70d8b6f6e870d204383d}{
-\index{ScalarStat@{ScalarStat}!operator++@{operator++}}
-\index{operator++@{operator++}!ScalarStat@{ScalarStat}}
-\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} ScalarStat::operator++ (
-\begin{DoxyParamCaption}
-\item[{int}]{}
-\end{DoxyParamCaption}
-)}}
-\label{classScalarStat_adacc6227b07e70d8b6f6e870d204383d}
-
-\begin{DoxyCode}
-                                      {
-    _ScalarStat++;
-    return *this;
-}
-\end{DoxyCode}
-\hypertarget{classScalarStat_a6d5fa9a76281d73053e1d68fe9394f4c}{
-\index{ScalarStat@{ScalarStat}!operator-\/-\/@{operator-\/-\/}}
-\index{operator-\/-\/@{operator-\/-\/}!ScalarStat@{ScalarStat}}
-\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} \& ScalarStat::operator-\/-\/ (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classScalarStat_a6d5fa9a76281d73053e1d68fe9394f4c}
-
-\begin{DoxyCode}
-                                    {
-    _ScalarStat--;
-    return *this;
-}
-\end{DoxyCode}
-\hypertarget{classScalarStat_acf2e5a20d1c53ada7c88463fc6d59a47}{
-\index{ScalarStat@{ScalarStat}!operator-\/-\/@{operator-\/-\/}}
-\index{operator-\/-\/@{operator-\/-\/}!ScalarStat@{ScalarStat}}
-\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} ScalarStat::operator-\/-\/ (
-\begin{DoxyParamCaption}
-\item[{int}]{}
-\end{DoxyParamCaption}
-)}}
-\label{classScalarStat_acf2e5a20d1c53ada7c88463fc6d59a47}
-
-\begin{DoxyCode}
-                                      {
-    _ScalarStat--;
-    return *this;
-}
-\end{DoxyCode}
 \hypertarget{classScalarStat_ad5767c33c892443a921514fda8b4e1f3}{
 \index{ScalarStat@{ScalarStat}!print@{print}}
 \index{print@{print}!ScalarStat@{ScalarStat}}
@@ -141,9 +72,39 @@ void \hyperlink{classScalarStat_ad5767c33c892443a921514fda8b4e1f3}{print} ()
 
 \begin{DoxyCode}
                         {
-    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO))
-        cout << _name << ": " << _ScalarStat << "\t\t\t - " << _description << en
-      dl;
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+        cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << 
+      _description << endl;
+    }
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classScalarStat_ad05dd73a4ebea8b146b05b4cb2fd66f5}{
+\index{ScalarStat@{ScalarStat}!print@{print}}
+\index{print@{print}!ScalarStat@{ScalarStat}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void ScalarStat::print (
+\begin{DoxyParamCaption}
+\item[{ofstream $\ast$}]{\_\-out\_\-file}
+\end{DoxyParamCaption}
+)}}
+\label{classScalarStat_ad05dd73a4ebea8b146b05b4cb2fd66f5}
+
+
+Reimplemented in \hyperlink{classRatioStat_abd9ca8637577996d227733f1f84469fd}{RatioStat}, and \hyperlink{classEnergyStat_aa54d089bd5f60f6e75abacf102225203}{EnergyStat}.
+
+
+\begin{DoxyCode}
+                                           {
+    if (!(_ScalarStat == 0 && _print_if_zero == NO_PRINT_ZERO)) {
+        cout << "* " << _name << ": " << (DIGIT) _ScalarStat << "\t\t\t # " << 
+      _description << endl;
+        if (_enable_log_stat) (*_out_file) << "* " << _name << ": " << (DIGIT) 
+      _ScalarStat << "\t\t\t # " << _description << endl;
+    }
 }
 \end{DoxyCode}
 

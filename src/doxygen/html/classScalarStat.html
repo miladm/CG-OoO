@@ -66,20 +66,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ScalarStat Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="ScalarStat" -->
+<!-- doxytag: class="ScalarStat" --><!-- doxytag: inherits="stat" -->
 <p><code>#include &lt;<a class="el" href="statistic_8h_source.html">statistic.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for ScalarStat:</div>
+<div class="dyncontent">
+<div class="center"><img src="classScalarStat__inherit__graph.png" border="0" usemap="#ScalarStat_inherit__map" alt="Inheritance graph"/></div>
+<map name="ScalarStat_inherit__map" id="ScalarStat_inherit__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for ScalarStat:</div>
+<div class="dyncontent">
+<div class="center"><img src="classScalarStat__coll__graph.png" border="0" usemap="#ScalarStat_coll__map" alt="Collaboration graph"/></div>
+<map name="ScalarStat_coll__map" id="ScalarStat_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classScalarStat-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#a41eaf19b1c778d3e19a9f1c23e5d0f3b">ScalarStat</a> (string, string, string, <a class="el" href="global_2global_8h.html#add170db579327962a9c5e88de7751ca2">SCALAR</a> init_val=0, <a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero=PRINT_ZERO)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#a41eaf19b1c778d3e19a9f1c23e5d0f3b">ScalarStat</a> (string, string, string, <a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val=0, <a class="el" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero=PRINT_ZERO)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#afca0d1be023ea2123dca632240949bef">~ScalarStat</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#abd392ea385ba6358fb6b4dbdc3a1ce32">operator++</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#adacc6227b07e70d8b6f6e870d204383d">operator++</a> (int)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#a6d5fa9a76281d73053e1d68fe9394f4c">operator--</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#acf2e5a20d1c53ada7c88463fc6d59a47">operator--</a> (int)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScalarStat.html#ad05dd73a4ebea8b146b05b4cb2fd66f5">print</a> (ofstream *)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a41eaf19b1c778d3e19a9f1c23e5d0f3b"></a><!-- doxytag: member="ScalarStat::ScalarStat" ref="a41eaf19b1c778d3e19a9f1c23e5d0f3b" args="(string, string, string, SCALAR init_val=0, PRINT_ON_ZERO print_if_zero=PRINT_ZERO)" -->
@@ -107,7 +118,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#add170db579327962a9c5e88de7751ca2">SCALAR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>&#160;</td>
           <td class="paramname"><em>init_val</em> = <code>0</code>, </td>
         </tr>
         <tr>
@@ -124,12 +135,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                                                              {
-    _name = (class_name + <span class="stringliteral">&quot;.&quot;</span>) + param_name;
-    _ScalarStat = init_val;
-    _description = description;
-    _print_if_zero = print_if_zero;
-}
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classstat.html#ab89727a4198ffd032e194917596e156b">stat</a> (class_name, param_name, description, init_val, print_if_zero)
+{ }
 </pre></div>
 </div>
 </div>
@@ -151,88 +158,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="abd392ea385ba6358fb6b4dbdc3a1ce32"></a><!-- doxytag: member="ScalarStat::operator++" ref="abd392ea385ba6358fb6b4dbdc3a1ce32" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp; ScalarStat::operator++ </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
-    _ScalarStat++;
-    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="adacc6227b07e70d8b6f6e870d204383d"></a><!-- doxytag: member="ScalarStat::operator++" ref="adacc6227b07e70d8b6f6e870d204383d" args="(int)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a> ScalarStat::operator++ </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                      {
-    _ScalarStat++;
-    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a6d5fa9a76281d73053e1d68fe9394f4c"></a><!-- doxytag: member="ScalarStat::operator&#45;&#45;" ref="a6d5fa9a76281d73053e1d68fe9394f4c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a> &amp; ScalarStat::operator-- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
-    _ScalarStat--;
-    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="acf2e5a20d1c53ada7c88463fc6d59a47"></a><!-- doxytag: member="ScalarStat::operator&#45;&#45;" ref="acf2e5a20d1c53ada7c88463fc6d59a47" args="(int)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a> ScalarStat::operator-- </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                      {
-    _ScalarStat--;
-    <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-}
-</pre></div>
-</div>
-</div>
 <a class="anchor" id="ad5767c33c892443a921514fda8b4e1f3"></a><!-- doxytag: member="ScalarStat::print" ref="ad5767c33c892443a921514fda8b4e1f3" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -247,8 +172,43 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                        {
-    <span class="keywordflow">if</span> (!(_ScalarStat == 0 &amp;&amp; _print_if_zero == <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
-        cout &lt;&lt; _name &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; _ScalarStat &lt;&lt; <span class="stringliteral">&quot;\t\t\t - &quot;</span> &lt;&lt; _description &lt;&lt; endl;
+    <span class="keywordflow">if</span> (!(<a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> == 0 &amp;&amp; <a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a> == <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)) {
+        cout &lt;&lt; <span class="stringliteral">&quot;* &quot;</span> &lt;&lt; <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a> &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; (<a class="code" href="global_2global_8h.html#a86324862054fb559093503363fa6e32d">DIGIT</a>) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> &lt;&lt; <span class="stringliteral">&quot;\t\t\t # &quot;</span> &lt;&lt; <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a> &lt;&lt; endl;
+    }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classScalarStat_ad5767c33c892443a921514fda8b4e1f3_icgraph.png" border="0" usemap="#classScalarStat_ad5767c33c892443a921514fda8b4e1f3_icgraph" alt=""/></div>
+<map name="classScalarStat_ad5767c33c892443a921514fda8b4e1f3_icgraph" id="classScalarStat_ad5767c33c892443a921514fda8b4e1f3_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad05dd73a4ebea8b146b05b4cb2fd66f5"></a><!-- doxytag: member="ScalarStat::print" ref="ad05dd73a4ebea8b146b05b4cb2fd66f5" args="(ofstream *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScalarStat::print </td>
+          <td>(</td>
+          <td class="paramtype">ofstream *&#160;</td>
+          <td class="paramname"><em>_out_file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classRatioStat.html#abd9ca8637577996d227733f1f84469fd">RatioStat</a>, and <a class="el" href="classEnergyStat.html#aa54d089bd5f60f6e75abacf102225203">EnergyStat</a>.</p>
+<div class="fragment"><pre class="fragment">                                           {
+    <span class="keywordflow">if</span> (!(<a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> == 0 &amp;&amp; <a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a> == <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>)) {
+        cout &lt;&lt; <span class="stringliteral">&quot;* &quot;</span> &lt;&lt; <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a> &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; (<a class="code" href="global_2global_8h.html#a86324862054fb559093503363fa6e32d">DIGIT</a>) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> &lt;&lt; <span class="stringliteral">&quot;\t\t\t # &quot;</span> &lt;&lt; <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a> &lt;&lt; endl;
+        <span class="keywordflow">if</span> (<a class="code" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">_enable_log_stat</a>) (*_out_file) &lt;&lt; <span class="stringliteral">&quot;* &quot;</span> &lt;&lt; <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a> &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; (<a class="code" href="global_2global_8h.html#a86324862054fb559093503363fa6e32d">DIGIT</a>) <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a> &lt;&lt; <span class="stringliteral">&quot;\t\t\t # &quot;</span> &lt;&lt; <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a> &lt;&lt; endl;
+    }
 }
 </pre></div>
 </div>
@@ -263,7 +223,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -272,7 +232,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -15,32 +15,16 @@ Collaboration diagram for memory:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classmemory_a7fbe6b698c210120727c89f9b76ac24f}{memory} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-memory\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} memory\_\-width, string stage\_\-name)
+\hyperlink{classmemory_aa3d14e073d23a27348155f95e040862a}{memory} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-memory\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iROB, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} memory\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classmemory_ae5893b724ce22f38b776558384f21680}{$\sim$memory} ()
 \item 
-void \hyperlink{classmemory_ae667b5ac087faff10a52913146d6b627}{doMEMORY} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classmemory_a3c2b4025c057acb762cc6630f324d3dc}{memoryImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classmemory_a684c9f7770f14ce500c0bb3b2d34cfa5}{completeIns} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classmemory_a7b6cc36f06ee64246e6dfbda76a3cf34}{forward} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classmemory_a88818ea5e9263294dc5e1fef01fb068f}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classmemory_a2f2be279e08cd2180fb070a954fbc674}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classmemory_a43b452151bf034cd654a711b21078097}{manageSTbuffer} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classmemory_a12d98865ad7d63dd9010ff931a5806b2}{manageMEMbuffer} ()
-\item 
-void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
+void \hyperlink{classmemory_a5b12309e3a0e50f08be4f09dbd207e9f}{doMEMORY} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classmemory_a7fbe6b698c210120727c89f9b76ac24f}{
+\hypertarget{classmemory_aa3d14e073d23a27348155f95e040862a}{
 \index{memory@{memory}!memory@{memory}}
 \index{memory@{memory}!memory@{memory}}
 \subsubsection[{memory}]{\setlength{\rightskip}{0pt plus 5cm}memory::memory (
@@ -49,19 +33,23 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{memory\_\-to\_\-scheduler\_\-port, }
 \item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
 \item[{{\bf WIDTH}}]{memory\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classmemory_a7fbe6b698c210120727c89f9b76ac24f}
+\label{classmemory_aa3d14e073d23a27348155f95e040862a}
 
 \begin{DoxyCode}
-        : stage (memory_width, stage_name),
-      _mem_buff(20, 1, "mem_buff"),
-      _mshr(20, 4, 4, "MSHR"),
-      _st_buff(20, 4, 4, "stBuff"),
-      _L1 (1, 64, 32768),
-      _L2 (1, 64, 2097152),
-      _L3 (1, 64, 8388608),
+        : stage (memory_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pi
+      pe"]["memory"], clk),
+      _mem_buff (20, 1, clk, "mem_buff"),
+      _mshr (clk, g_cfg->_root["cpu"]["backend"]["table"]["mshr"], "MSHR"),
+      _st_buff (clk, g_cfg->_root["cpu"]["backend"]["table"]["st_buff"], "stBuff"
+      ),
+//      _L1 (1, 64, 32768),
+//      _L2 (1, 64, 2097152),
+//      _L3 (1, 64, 8388608),
+      _cache ("/home/milad/esc_project/svn/PARS/src/config/simple.yaml"),
       s_cache_miss_cnt (g_stats.newScalarStat (stage_name, "cache_miss_cnt", "Num
       ber of cache misses", 0, PRINT_ZERO)),
       s_cache_hit_cnt  (g_stats.newScalarStat (stage_name, "cache_hit_cnt", "Numb
@@ -96,322 +84,34 @@ void \hyperlink{classmemory_a8206d3f11dccb62eb978540807c30ae7}{manageMSHR} ()
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classmemory_a684c9f7770f14ce500c0bb3b2d34cfa5}{
-\index{memory@{memory}!completeIns@{completeIns}}
-\index{completeIns@{completeIns}!memory@{memory}}
-\subsubsection[{completeIns}]{\setlength{\rightskip}{0pt plus 5cm}void memory::completeIns (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a684c9f7770f14ce500c0bb3b2d34cfa5}
-
-\begin{DoxyCode}
-                                       {
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (_mem_buff.getBuffState (clk.now ()) == EMPTY_BUFF) break;
-        if (!_mem_buff.isReady (clk.now ())) break;
-        if (!g_RF_MGR.hasFreeWrPort (clk.now ())) break; //TODO too conservatice 
-      - only for load ins
-
-        /* COMPLETE INS */
-        dynInstruction* mem_ins = _mem_buff.popFront (clk.now ());
-        mem_ins->setPipeStage(COMPLETE);
-        // FORWARD DATA //_memory_to_schedule_port->pushBack(mem_ins, clk.now ())
-      ;
-        g_RF_MGR.writeToRF (mem_ins);
-        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
-      Write Complete mem ins", mem_ins->getInsID (), clk.now ());
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_ae667b5ac087faff10a52913146d6b627}{
+\hypertarget{classmemory_a5b12309e3a0e50f08be4f09dbd207e9f}{
 \index{memory@{memory}!doMEMORY@{doMEMORY}}
 \index{doMEMORY@{doMEMORY}!memory@{memory}}
 \subsubsection[{doMEMORY}]{\setlength{\rightskip}{0pt plus 5cm}void memory::doMEMORY (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classmemory_ae667b5ac087faff10a52913146d6b627}
+\label{classmemory_a5b12309e3a0e50f08be4f09dbd207e9f}
 
 \begin{DoxyCode}
-                                    {
-    dbg.print (DBG_MEMORY, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
-    /* STAT */
-    regStat (clk);
+                       {
+    /* STAT + DEBUG */
+    dbg.print (DBG_MEMORY, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ())
+      ;
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* WRITEBACK RESULT */
-    completeIns (clk);
+    completeIns ();
 
     /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
 
-    pipe_stall = memoryImpl (clk);
+    pipe_stall = memoryImpl ();
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_a7b6cc36f06ee64246e6dfbda76a3cf34}{
-\index{memory@{memory}!forward@{forward}}
-\index{forward@{forward}!memory@{memory}}
-\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}void memory::forward (
-\begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{ins, }
-\item[{{\bf CYCLE}}]{mem\_\-latency, }
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a7b6cc36f06ee64246e6dfbda76a3cf34}
-
-\begin{DoxyCode}
-                                                                           {
-#ifdef ASSERTION
-    Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
-#endif
-    if (_memory_to_scheduler_port->getBuffState (clk.now ()) == FULL_BUFF) return
-      ;
-    CYCLE cdb_ready_latency = mem_latency - 1;
-    Assert (cdb_ready_latency >= 0);
-    _memory_to_scheduler_port->pushBack (ins, clk.now (), cdb_ready_latency);
-    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Forw
-      ard wr ops of ins", ins->getInsID (), clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_a12d98865ad7d63dd9010ff931a5806b2}{
-\index{memory@{memory}!manageMEMbuffer@{manageMEMbuffer}}
-\index{manageMEMbuffer@{manageMEMbuffer}!memory@{memory}}
-\subsubsection[{manageMEMbuffer}]{\setlength{\rightskip}{0pt plus 5cm}void memory::manageMEMbuffer (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a12d98865ad7d63dd9010ff931a5806b2}
-\hypertarget{classmemory_a8206d3f11dccb62eb978540807c30ae7}{
-\index{memory@{memory}!manageMSHR@{manageMSHR}}
-\index{manageMSHR@{manageMSHR}!memory@{memory}}
-\subsubsection[{manageMSHR}]{\setlength{\rightskip}{0pt plus 5cm}void memory::manageMSHR (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a8206d3f11dccb62eb978540807c30ae7}
-
-\begin{DoxyCode}
-                         {
-    /* TODO */
-}
-\end{DoxyCode}
-\hypertarget{classmemory_a43b452151bf034cd654a711b21078097}{
-\index{memory@{memory}!manageSTbuffer@{manageSTbuffer}}
-\index{manageSTbuffer@{manageSTbuffer}!memory@{memory}}
-\subsubsection[{manageSTbuffer}]{\setlength{\rightskip}{0pt plus 5cm}void memory::manageSTbuffer (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a43b452151bf034cd654a711b21078097}
-
-\begin{DoxyCode}
-                                          {
-    while (true) {
-        /* CHECKS */
-        if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeWire (clk
-      , READ)) break;
-        //if (_dcache.getNumAvialablePorts () == 0) break;
-
-        /* MEM ACCESS */
-        dynInstruction* st_ins = _st_buff.popFront ();
-        Assert (st_ins->getNumRdAR () == 0 && "instruction must have been ready l
-      ong ago!");
-        CYCLE lat = (CYCLE) cacheCtrl (WRITE, //st_ins->getMemType (),
-                                       st_ins->getMemAddr (),
-                                       st_ins->getMemAxesSize(), 
-                                       &_L1, &_L2, &_L3);
-        (lat > L1_LATENCY) ? s_st_miss_cnt++ : s_st_hit_cnt++;
-        (lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
-        dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
-      Store to cach ins", st_ins->getInsID (), clk.now ());
-
-        /* UPDATE WIRES */
-        _st_buff.updateWireState (clk, READ);
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_a3c2b4025c057acb762cc6630f324d3dc}{
-\index{memory@{memory}!memoryImpl@{memoryImpl}}
-\index{memoryImpl@{memoryImpl}!memory@{memory}}
-\subsubsection[{memoryImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} memory::memoryImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a3c2b4025c057acb762cc6630f324d3dc}
-
-\begin{DoxyCode}
-                                               {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-
-    /* ACCESS MEMORY HIERARCHY */
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (_execution_to_memory_port->getBuffState (clk.now ()) == EMPTY_BUFF) b
-      reak;
-        if (!_execution_to_memory_port->isReady (clk.now ())) break;
-        //if (_dcache.getNumAvialablePorts () == 0) break; (TODO)
-        if (_mem_buff.getBuffState (clk.now ()) == FULL_BUFF) break;
-        dynInstruction* mem_ins = _execution_to_memory_port->getFront ();
-        if (mem_ins->getMemType () == STORE && 
-           (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
-      PIPE_FLUSH)) break;
-        if (mem_ins->getMemType () == STORE && 
-           (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWire (clk,
-       WRITE))) break;
-        if (mem_ins->getMemType () == LOAD &&
-           (_mshr.getTableState () == FULL_BUFF || !_mshr.hasFreeWire (clk, 
-      WRITE))) break; //TODO only on miss?
-
-        /* MEM ACCESS */
-        mem_ins = _execution_to_memory_port->popFront (clk.now ());
-        CYCLE axes_lat;
-        if (mem_ins->getMemType () == STORE) {
-            Assert (mem_ins->isOnWrongPath () == false);
-            _st_buff.pushBack (mem_ins);
-            axes_lat = g_eu_lat._st_buff_lat;
-            dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (
-      ), "Add to st_buff ins", mem_ins->getInsID (), clk.now ());
-        } else {
-            axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix
-       this line
-                                           mem_ins->getMemAddr (),
-                                           mem_ins->getMemAxesSize(),
-                                           &_L1, &_L2, &_L3);
-#ifdef ASSERTION
-            Assert(axes_lat > 0);
-#endif
-            forward (mem_ins, axes_lat, clk);
-            (axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++;
-            (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
-        }
-        _mem_buff.pushBack(mem_ins, clk.now (), axes_lat); //CAM array - check fo
-      r size limits (TODO)
-        //mem_ins->setPipeStage(MEM_ACCESS); happens in execute.cpp - remove from
-       here? (TODO)
-        dbg.print (DBG_MEMORY, "%s: %s %llu %s %u (cyc: %d)\n", _stage_name.c_str
-       (), "Add to mem_buff ins", mem_ins->getInsID (), "with lat", axes_lat, clk.now (
-      ));
-
-        /* UPDATE WIRES */
-        _st_buff.updateWireState (clk, WRITE);
-        _mshr.updateWireState (clk, WRITE);
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-    }
-
-    manageSTbuffer (clk);
-
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_a2f2be279e08cd2180fb070a954fbc674}{
-\index{memory@{memory}!regStat@{regStat}}
-\index{regStat@{regStat}!memory@{memory}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void memory::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a2f2be279e08cd2180fb070a954fbc674}
-
-\begin{DoxyCode}
-                                   {
-    _execution_to_memory_port->regStat (clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classmemory_a88818ea5e9263294dc5e1fef01fb068f}{
-\index{memory@{memory}!squash@{squash}}
-\index{squash@{squash}!memory@{memory}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void memory::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classmemory_a88818ea5e9263294dc5e1fef01fb068f}
-
-\begin{DoxyCode}
-                                  {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Memory Po
-      rts Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN ();
-    _memory_to_scheduler_port->flushPort (squashSeqNum, clk.now ());
-    _mem_buff.flushPort (squashSeqNum, clk.now ());
-    //_st_buff.flushTable ();
 }
 \end{DoxyCode}
 

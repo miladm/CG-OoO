@@ -66,15 +66,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">sysClock Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="sysClock" --><!-- doxytag: inherits="unit" -->
-<p><code>#include &lt;<a class="el" href="unit_2sysClock_8h_source.html">sysClock.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for sysClock:</div>
-<div class="dyncontent">
-<div class="center"><img src="classsysClock__inherit__graph.png" border="0" usemap="#sysClock_inherit__map" alt="Inheritance graph"/></div>
-<map name="sysClock_inherit__map" id="sysClock_inherit__map">
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<!-- doxytag: class="sysClock" -->
+<p><code>#include &lt;<a class="el" href="sysClock_8h_source.html">sysClock.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for sysClock:</div>
 <div class="dyncontent">
@@ -92,6 +85,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsysClock.html#a47d002f5ab53ea1cbe8f74f1569363ac">~sysClock</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsysClock.html#a1b83f5cc141338e61f66028ef040c242">tick</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsysClock.html#aae0f5778f4fece04609d6ece57f28870">getValue</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classScalarStat.html">ScalarStat</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsysClock.html#abbfb3713ab258a85b99f92135e0b8e08">getStatObj</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a03e1b7e12614ce9fba007f0a76849664"></a><!-- doxytag: member="sysClock::sysClock" ref="a03e1b7e12614ce9fba007f0a76849664" args="()" -->
@@ -107,8 +102,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (<span class="stringliteral">&quot;sysClock&quot;</span>),
-      _frequency(1),
+<div class="fragment"><pre class="fragment">    : _frequency (1),
+      _c_name (<span class="stringliteral">&quot;sysClock&quot;</span>),
       _clk_cycles (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (<span class="stringliteral">&quot;sysClock&quot;</span>, <span class="stringliteral">&quot;clk_cycles&quot;</span>, <span class="stringliteral">&quot;Total execution cycles&quot;</span>, <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
 {
         _clk = <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>;
@@ -130,8 +125,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a> (<span class="stringliteral">&quot;sysClock&quot;</span>),
-      _frequency(frequency),
+<div class="fragment"><pre class="fragment">    : _frequency(frequency),
+      _c_name (<span class="stringliteral">&quot;sysClock&quot;</span>),
       _clk_cycles (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (<span class="stringliteral">&quot;sysClock&quot;</span>, <span class="stringliteral">&quot;clk_cycles&quot;</span>, <span class="stringliteral">&quot;Total execution cycles&quot;</span>, <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
 {
         _clk = <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>;
@@ -157,6 +152,53 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="abbfb3713ab258a85b99f92135e0b8e08"></a><!-- doxytag: member="sysClock::getStatObj" ref="abbfb3713ab258a85b99f92135e0b8e08" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classScalarStat.html">ScalarStat</a> * sysClock::getStatObj </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                  {
+    <span class="keywordflow">return</span> &amp;_clk_cycles;
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="aae0f5778f4fece04609d6ece57f28870"></a><!-- doxytag: member="sysClock::getValue" ref="aae0f5778f4fece04609d6ece57f28870" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> sysClock::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                          {
+        <span class="keywordflow">return</span> <a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsysClock_aae0f5778f4fece04609d6ece57f28870_cgraph.png" border="0" usemap="#classsysClock_aae0f5778f4fece04609d6ece57f28870_cgraph" alt=""/></div>
+<map name="classsysClock_aae0f5778f4fece04609d6ece57f28870_cgraph" id="classsysClock_aae0f5778f4fece04609d6ece57f28870_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="af027a57c8bc3d0dab4fe5a0f870b7d20"></a><!-- doxytag: member="sysClock::now" ref="af027a57c8bc3d0dab4fe5a0f870b7d20" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -192,13 +234,26 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                     {
         _clk++;
     _clk_cycles++;
+    <span class="keywordflow">if</span> (_clk % <a class="code" href="sysClock_8h.html#a694c28564a59cc3a24a07d91c70c0cfc">RUNTIME_REPORT_INTERVAL</a> == 0) {
+        <span class="keywordflow">if</span> (<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#abe24c6843643f18ae5897b868f76e0e5">isWarmedUp</a> () || !<a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a25bf7a9e673f260e38e65633a0b3c0e9">warmUpEn</a> ()) _clk_cycles.<a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> ();
+        <span class="keywordflow">else</span> cout &lt;&lt; <span class="stringliteral">&quot;Warmup cycle: &quot;</span> &lt;&lt; _clk &lt;&lt; endl;
+    }
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>( _clk &lt; std::numeric_limits&lt;CYCLE&gt;::max() &amp;&amp;
+<span class="preprocessor"></span>        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>( _clk &lt; std::numeric_limits&lt;CYCLE&gt;::max() &amp;&amp;
                         _clk &gt; std::numeric_limits&lt;CYCLE&gt;::min() &amp;&amp;
                         <span class="stringliteral">&quot;The program sysClock reached the max vlue for CYCLE&quot;</span> );
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>}
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsysClock_a1b83f5cc141338e61f66028ef040c242_cgraph.png" border="0" usemap="#classsysClock_a1b83f5cc141338e61f66028ef040c242_cgraph" alt=""/></div>
+<map name="classsysClock_a1b83f5cc141338e61f66028ef040c242_cgraph" id="classsysClock_a1b83f5cc141338e61f66028ef040c242_cgraph">
+</map>
+</div>
+</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -211,8 +266,8 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2sysClock_8h_source.html">sysClock.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="unit_2sysClock_8cpp.html">sysClock.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="sysClock_8h_source.html">sysClock.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="sysClock_8cpp.html">sysClock.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -220,7 +275,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -229,7 +284,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

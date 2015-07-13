@@ -1,6 +1,6 @@
 \hypertarget{str_8cc}{
-\section{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc File Reference}
-\label{str_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc@{/home/milad/esc\_\-project/svn/PARS/src/frontend/lib/bp\_\-lib/str.cc}}
+\section{/home/milad/esc\_\-project/svn/PARS/src/lib/bp\_\-lib/str.cc File Reference}
+\label{str_8cc}\index{/home/milad/esc\_\-project/svn/PARS/src/lib/bp\_\-lib/str.cc@{/home/milad/esc\_\-project/svn/PARS/src/lib/bp\_\-lib/str.cc}}
 }
 {\ttfamily \#include $<$cctype$>$}\par
 {\ttfamily \#include $<$cstring$>$}\par
@@ -19,9 +19,9 @@ Include dependency graph for str.cc:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}{split\_\-first} (const string \&s, string \&lhs, string \&rhs, char \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+bool \hyperlink{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}{split\_\-first} (const string \&s, string \&\hyperlink{sqlite3_8c_a1632a2b0ef4f78b5e49dce83d8daad2a}{lhs}, string \&rhs, char c)
 \item 
-bool \hyperlink{str_8cc_a7456fc7734d6a6c388b66793e1aa9a09}{split\_\-last} (const string \&s, string \&lhs, string \&rhs, char \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+bool \hyperlink{str_8cc_a7456fc7734d6a6c388b66793e1aa9a09}{split\_\-last} (const string \&s, string \&\hyperlink{sqlite3_8c_a1632a2b0ef4f78b5e49dce83d8daad2a}{lhs}, string \&rhs, char c)
 \item 
 void \hyperlink{str_8cc_a4920c263841e88b19b75e6de265d79a8}{tokenize} (vector$<$ string $>$ \&v, const string \&s, char token, bool ignore)
 \item 
@@ -61,7 +61,7 @@ bool to_number<type>(const string &value, type &retval) \
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{str_8cc_a62ee5dab740541c091921011e05068c7}
 \begin{Desc}
-\item[\hyperlink{todo__todo000005}{Todo}]This function will not handle the smallest negative decimal value for a signed type \end{Desc}
+\item[\hyperlink{todo__todo000007}{Todo}]This function will not handle the smallest negative decimal value for a signed type \end{Desc}
 
 \begin{DoxyCode}
 {
@@ -268,6 +268,11 @@ bool to_number<type>(const string &value, type &retval) \
     return true;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{str_8cc_aab86b7382593ba3d88616f1b98eb2f16}{
 \index{str.cc@{str.cc}!split\_\-first@{split\_\-first}}
 \index{split\_\-first@{split\_\-first}!str.cc@{str.cc}}

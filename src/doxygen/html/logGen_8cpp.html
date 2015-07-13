@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/logGen.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;logGen.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="logGen_8h_source.html">logGen.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for logGen.cpp:</div>
 <div class="dyncontent">
@@ -75,10 +75,10 @@ Include dependency graph for logGen.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logGen_8cpp.html#a3c9356ef2e3ab77174c9b7708f6b8c15">writeToFile</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, string *program_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logGen_8cpp.html#a15a3e4233f6842dfceff939f0951dbb1">writeToFile</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, string *program_name, <a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a> sch_mode, <a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a> reg_alloc_mode, <a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a> cluster_mode, <a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> cluster_size)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a3c9356ef2e3ab77174c9b7708f6b8c15"></a><!-- doxytag: member="logGen.cpp::writeToFile" ref="a3c9356ef2e3ab77174c9b7708f6b8c15" args="(List&lt; basicblock * &gt; *bbList, string *program_name)" -->
+<a class="anchor" id="a15a3e4233f6842dfceff939f0951dbb1"></a><!-- doxytag: member="logGen.cpp::writeToFile" ref="a15a3e4233f6842dfceff939f0951dbb1" args="(List&lt; basicblock * &gt; *bbList, string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -92,7 +92,31 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">string *&#160;</td>
-          <td class="paramname"><em>program_name</em>&#160;</td>
+          <td class="paramname"><em>program_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a>&#160;</td>
+          <td class="paramname"><em>sch_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a>&#160;</td>
+          <td class="paramname"><em>reg_alloc_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>&#160;</td>
+          <td class="paramname"><em>cluster_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
+          <td class="paramname"><em>cluster_size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -102,44 +126,63 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                   {
-        FILE* <a class="code" href="bkEnd_8cpp.html#a58b968b0b4c5babf4eafd809481c7a9f">outFile</a>;
-        <span class="keywordflow">if</span> ((outFile  = fopen((<span class="stringliteral">&quot;/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;_obj.s&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL) 
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
-        
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =  0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                fprintf(outFile, <span class="stringliteral">&quot;{,%ld\n&quot;</span>, bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>());
-                <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#af49545fcc35042634fa48f78ca9f55cb">hasHeader</a>()) {
-                        fprintf(outFile, <span class="stringliteral">&quot;H,%ld\n&quot;</span>, bb-&gt;<a class="code" href="classbasicblock.html#aba106088c0783baf1a57018bbc091fe1">getBBbrHeader</a>());
+<div class="fragment"><pre class="fragment">                                                                                                                                                                     {
+    <span class="keywordtype">string</span> reg_alloc_mode_s, sch_mode_s, cluster_mode_s;
+    <span class="keywordflow">if</span> (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236">NO_LIST_SCH</a>) sch_mode_s = <span class="stringliteral">&quot;no_list_sch&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>) sch_mode_s = <span class="stringliteral">&quot;list_sch&quot;</span>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;invalid scheduling mode&quot;</span>);
+
+    <span class="keywordflow">if</span> (reg_alloc_mode == <a class="code" href="sqlite3_8c.html#ab2cd20d9321c782db91b9414da0c23ee">GLOBAL</a>) reg_alloc_mode_s = <span class="stringliteral">&quot;global_reg&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reg_alloc_mode == <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43">LOCAL_GLOBAL</a>) reg_alloc_mode_s = <span class="stringliteral">&quot;local_global_reg&quot;</span>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;invalid reg allocation mode&quot;</span>);
+
+    <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) cluster_mode_s = <span class="stringliteral">&quot;bb&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">SUPERBLOCK</a>) cluster_mode_s = <span class="stringliteral">&quot;sb&quot;</span>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce">PHRASEBLOCK</a>) cluster_mode_s = <span class="stringliteral">&quot;pb&quot;</span>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;invalid scheduling mode&quot;</span>);
+
+        FILE* outFile;
+    <span class="keywordtype">string</span> out_dir = <span class="stringliteral">&quot;/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/&quot;</span>;
+    <span class="keywordtype">char</span> cluster_size_s [30]; sprintf (cluster_size_s, <span class="stringliteral">&quot;%d&quot;</span>, cluster_size);
+    <span class="keywordtype">string</span> out_file_path = out_dir + cluster_mode_s + <span class="stringliteral">&quot;/&quot;</span> + reg_alloc_mode_s + <span class="stringliteral">&quot;/&quot;</span> + sch_mode_s + <span class="stringliteral">&quot;/&quot;</span> + (*program_name) + <span class="stringliteral">&quot;_&quot;</span> + cluster_size_s + <span class="stringliteral">&quot;_bbSiz_obj.s&quot;</span>;
+        <span class="keywordflow">if</span> ((outFile  = fopen (out_file_path.c_str (), <span class="stringliteral">&quot;w&quot;</span>)) == NULL) 
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
+    cout &lt;&lt; <span class="stringliteral">&quot;\t\tOUTPUT .s FILE: &quot;</span> &lt;&lt; out_file_path &lt;&lt; endl;
+
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =  0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                fprintf (outFile, <span class="stringliteral">&quot;{,%lx\n&quot;</span>, bb-&gt;<a class="code" href="classbasicblock.html#a71eb42838e461e58085faf79e8cf1607">getAddr</a> ());
+                <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#af49545fcc35042634fa48f78ca9f55cb">hasHeader</a> ()) {
+                        fprintf (outFile, <span class="stringliteral">&quot;H,%lx\n&quot;</span>, bb-&gt;<a class="code" href="classbasicblock.html#aba106088c0783baf1a57018bbc091fe1">getBBbrHeader</a> ());
                 }
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                        <a class="code" href="classinstruction.html">instruction</a>* ins = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
-                        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;M&#39;</span>) {
-                                <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a0eab1a0a392f17d7ec46e6dbf1ce21fb">isWrMemType</a>()) {
-                                        fprintf(outFile, <span class="stringliteral">&quot;W,-memAddr-,%ld,%d,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), ins-&gt;<a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a>(), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a>().c_str());
-                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#abf5f8947b16c91c4e21b82bec378008f">isRdMemType</a>()) {
-                                        fprintf(outFile, <span class="stringliteral">&quot;R,-memAddr-,%ld,%d,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), ins-&gt;<a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a>(), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a>().c_str());
+        <span class="keywordtype">int</span> list_size = (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>) ? bb-&gt;<a class="code" href="classbasicblock.html#a17c89777dbbfb909e6749330569066fc">getBbSize_ListSch</a> () : bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a> ();
+                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; list_size; j++) {
+                        <a class="code" href="classinstruction.html">instruction</a>* ins = (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>) ? bb-&gt;<a class="code" href="classbasicblock.html#a87440b1ddb945365a4d32b356756ae24">getInsList_ListSchedule</a> ()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (j) : bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a> ()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (j);
+                        <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;M&#39;</span>) {
+                                <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a0eab1a0a392f17d7ec46e6dbf1ce21fb">isWrMemType</a> ()) {
+                                        fprintf (outFile, <span class="stringliteral">&quot;W,%d,-memAddr-,%lx,%d,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a65493a2688efea847fc17e08df019af9">isUPLDdep</a> (), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> (), ins-&gt;<a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a> (), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a> ().c_str ());
+                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#abf5f8947b16c91c4e21b82bec378008f">isRdMemType</a> ()) {
+                                        fprintf (outFile, <span class="stringliteral">&quot;R,%d,-memAddr-,%lx,%d,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a65493a2688efea847fc17e08df019af9">isUPLDdep</a> (), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> (), ins-&gt;<a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a> (), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a> ().c_str ());
                                 } <span class="keywordflow">else</span> {
-                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;ERROR: A memory operation is either read or write&quot;</span>);
+                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;ERROR: A memory operation is either read or write&quot;</span>);
                                 }
-                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;c&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;r&#39;</span>) {
-                                fprintf(outFile, <span class="stringliteral">&quot;%c,%ld,-brTaken-,%ld,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>(), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), ins-&gt;<a class="code" href="classinstruction.html#ad9d2ab40d6cf65d68172316c37438497">getBrDst</a>(), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a>().c_str());
-                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>() == <span class="charliteral">&#39;o&#39;</span>) { <span class="comment">//A, D, F for ins-&gt;getType()</span>
-                                fprintf(outFile, <span class="stringliteral">&quot;%c,%ld,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>(), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a>().c_str());
+                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;j&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;c&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;b&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;r&#39;</span>) {
+                                fprintf (outFile, <span class="stringliteral">&quot;%c,%d,%lx,-brTaken-,%lx,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> (), ins-&gt;<a class="code" href="classinstruction.html#a65493a2688efea847fc17e08df019af9">isUPLDdep</a> (), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> (), ins-&gt;<a class="code" href="classinstruction.html#a600fd1454a34eca9a64057e3c019a795">getInsDstAddr</a> (), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a> ().c_str ());
+                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;o&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;n&#39;</span> || ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> () == <span class="charliteral">&#39;s&#39;</span>) { <span class="comment">/*-- A, D, F, N for ins-&gt;getType () --*/</span>
+                                fprintf (outFile, <span class="stringliteral">&quot;%c,%d,%lx,%s&quot;</span>, ins-&gt;<a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> (), ins-&gt;<a class="code" href="classinstruction.html#a65493a2688efea847fc17e08df019af9">isUPLDdep</a> (), ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> (), ins-&gt;<a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a> ().c_str ());
                         } <span class="keywordflow">else</span> {
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Unrecognized instruction type&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Unrecognized instruction type&quot;</span>);
                         }
                 }
-                fprintf(outFile, <span class="stringliteral">&quot;}\n&quot;</span>);
+                fprintf (outFile, <span class="stringliteral">&quot;}\n&quot;</span>);
         }
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_cgraph.png" border="0" usemap="#logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_cgraph" alt=""/></div>
-<map name="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_cgraph" id="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_cgraph">
+<div class="center"><img src="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_cgraph.png" border="0" usemap="#logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_cgraph" alt=""/></div>
+<map name="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_cgraph" id="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_cgraph">
 </map>
 </div>
 </p>
@@ -147,8 +190,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_icgraph.png" border="0" usemap="#logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_icgraph" alt=""/></div>
-<map name="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_icgraph" id="logGen_8cpp_a3c9356ef2e3ab77174c9b7708f6b8c15_icgraph">
+<div class="center"><img src="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_icgraph.png" border="0" usemap="#logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_icgraph" alt=""/></div>
+<map name="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_icgraph" id="logGen_8cpp_a15a3e4233f6842dfceff939f0951dbb1_icgraph">
 </map>
 </div>
 </p>
@@ -161,7 +204,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -170,7 +213,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

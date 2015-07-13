@@ -15,17 +15,7 @@
 \item 
 long int \hyperlink{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}{getRegNum} (const char $\ast$regName)
 \item 
-long int \hyperlink{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{getNumberOfRegs} ()
-\item 
-\hyperlink{classregFile_a26b519ea2a0de692fd1d48c8979183db}{regFile} ()
-\item 
-\hyperlink{classregFile_a81513a208df454517088a0b846e0ef77}{$\sim$regFile} ()
-\item 
-long int \hyperlink{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}{getRegNum} (const char $\ast$regName)
-\item 
-int \hyperlink{classregFile_ada6d017b75052f81cd667263792be866}{addToRegFile} (long int reg)
-\item 
-long int \hyperlink{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{getNumberOfRegs} ()
+long int \hyperlink{classregFile_aa00f4bf6c12df40865e52c6ea1f040be}{getSpecialRegNum} (const char $\ast$regName)
 \end{DoxyCompactItemize}
 
 
@@ -41,37 +31,12 @@ long int \hyperlink{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{getNumberOfR
 \label{classregFile_a26b519ea2a0de692fd1d48c8979183db}
 
 \begin{DoxyCode}
-{
-    numRegs = NUM_REGISTERS+INIT_RENAME_REG_NUM; //TODO this is NOT Accrate
-    //Construct the register file map
-    setupRegFile();
-    //initialize the register file status
-    for (int i = 0; i < NUM_REGISTERS; i++)
-        RFstatus[i] = -1;
+                  {
+    // CONSTRUCT THE REGISTER FILE MAP
+    setupRegFile ();
+    setupSpecialRegFile ();
 }
 \end{DoxyCode}
-\hypertarget{classregFile_a81513a208df454517088a0b846e0ef77}{
-\index{regFile@{regFile}!$\sim$regFile@{$\sim$regFile}}
-\index{$\sim$regFile@{$\sim$regFile}!regFile@{regFile}}
-\subsubsection[{$\sim$regFile}]{\setlength{\rightskip}{0pt plus 5cm}regFile::$\sim$regFile (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{classregFile_a81513a208df454517088a0b846e0ef77}
-
-\begin{DoxyCode}
-{}
-\end{DoxyCode}
-\hypertarget{classregFile_a26b519ea2a0de692fd1d48c8979183db}{
-\index{regFile@{regFile}!regFile@{regFile}}
-\index{regFile@{regFile}!regFile@{regFile}}
-\subsubsection[{regFile}]{\setlength{\rightskip}{0pt plus 5cm}regFile::regFile (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classregFile_a26b519ea2a0de692fd1d48c8979183db}
 \hypertarget{classregFile_a81513a208df454517088a0b846e0ef77}{
 \index{regFile@{regFile}!$\sim$regFile@{$\sim$regFile}}
 \index{$\sim$regFile@{$\sim$regFile}!regFile@{regFile}}
@@ -88,55 +53,6 @@ long int \hyperlink{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{getNumberOfR
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classregFile_ada6d017b75052f81cd667263792be866}{
-\index{regFile@{regFile}!addToRegFile@{addToRegFile}}
-\index{addToRegFile@{addToRegFile}!regFile@{regFile}}
-\subsubsection[{addToRegFile}]{\setlength{\rightskip}{0pt plus 5cm}int regFile::addToRegFile (
-\begin{DoxyParamCaption}
-\item[{long int}]{reg}
-\end{DoxyParamCaption}
-)}}
-\label{classregFile_ada6d017b75052f81cd667263792be866}
-
-\begin{DoxyCode}
-                                       {
-        string strReg = itos(reg);
-        RF.insert(pair<string,long int>(strReg,reg));
-}
-\end{DoxyCode}
-\hypertarget{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{
-\index{regFile@{regFile}!getNumberOfRegs@{getNumberOfRegs}}
-\index{getNumberOfRegs@{getNumberOfRegs}!regFile@{regFile}}
-\subsubsection[{getNumberOfRegs}]{\setlength{\rightskip}{0pt plus 5cm}long int regFile::getNumberOfRegs (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}
-\hypertarget{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{
-\index{regFile@{regFile}!getNumberOfRegs@{getNumberOfRegs}}
-\index{getNumberOfRegs@{getNumberOfRegs}!regFile@{regFile}}
-\subsubsection[{getNumberOfRegs}]{\setlength{\rightskip}{0pt plus 5cm}long int regFile::getNumberOfRegs (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}
-
-\begin{DoxyCode}
-                                  {
-        return numRegs;
-}
-\end{DoxyCode}
-\hypertarget{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}{
-\index{regFile@{regFile}!getRegNum@{getRegNum}}
-\index{getRegNum@{getRegNum}!regFile@{regFile}}
-\subsubsection[{getRegNum}]{\setlength{\rightskip}{0pt plus 5cm}long int regFile::getRegNum (
-\begin{DoxyParamCaption}
-\item[{const char $\ast$}]{regName}
-\end{DoxyParamCaption}
-)}}
-\label{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}
 \hypertarget{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}{
 \index{regFile@{regFile}!getRegNum@{getRegNum}}
 \index{getRegNum@{getRegNum}!regFile@{regFile}}
@@ -148,17 +64,36 @@ long int \hyperlink{classregFile_a5a3ddc553c8f4f94bc61b1ae318139cc}{getNumberOfR
 \label{classregFile_a8e27b1edd7cbb6d8820a73fb1d7d8c71}
 
 \begin{DoxyCode}
-                                               {
-        if (RF.count(regName) > 0)
-                return RF.find(regName)->second;
-        else if (atoi(regName) >= INIT_RENAME_REG_NUM) {
-                numRegs++;
-                return atoi(regName);
+                                                {
+        if (RF.count (regName) > 0) {
+                return RF.find (regName)->second;
+        } else {
+                return INVALID_REG;
         }
-        printf ("ERROR Reg: %s\n", regName);
-        Assert(true == false && "getRegNum () must not have reached this point");
-      
-        return 0; //for compiler
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classregFile_aa00f4bf6c12df40865e52c6ea1f040be}{
+\index{regFile@{regFile}!getSpecialRegNum@{getSpecialRegNum}}
+\index{getSpecialRegNum@{getSpecialRegNum}!regFile@{regFile}}
+\subsubsection[{getSpecialRegNum}]{\setlength{\rightskip}{0pt plus 5cm}long int regFile::getSpecialRegNum (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{regName}
+\end{DoxyParamCaption}
+)}}
+\label{classregFile_aa00f4bf6c12df40865e52c6ea1f040be}
+
+\begin{DoxyCode}
+                                                       {
+        if (SRF.count (regName) > 0) {
+                return SRF.find (regName)->second;
+        } else {
+                return INVALID_REG;
+        }
 }
 \end{DoxyCode}
 
@@ -170,7 +105,5 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2regFile_8h}{regFile.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2regFile_8h}{regFile.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2regFile_8cpp}{regFile.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2regFile_8cpp}{regFile.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{regFile_8h}{regFile.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{regFile_8cpp}{regFile.cpp}\end{DoxyCompactItemize}

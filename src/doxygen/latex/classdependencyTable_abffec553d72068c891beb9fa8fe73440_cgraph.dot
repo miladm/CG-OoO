@@ -5,5 +5,5 @@ digraph G
   rankdir=LR;
   Node1 [label="dependencyTable::delAddr",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="instruction::getInsID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#a0856c8a7411c298a51cd8d8d5e2f8b12"];
+  Node2 [label="instruction::getInsAddr",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39"];
 }

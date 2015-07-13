@@ -12,7 +12,7 @@ Collaboration diagram for exeUnit:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structexeUnit_af9048405bad98db15cdefb05bf7b842c}{exeUnit} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{bkEnd_8cpp_ada310e7f72b38fadd4b24d80ed3438ee}{start}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} latency, \hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}{EU\_\-TYPE} eu\_\-type)
+\hyperlink{structexeUnit_a119cfafaad440fc7fdca7a3665e5de65}{exeUnit} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} start, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} latency, \hyperlink{exeUnit_8h_a8184e36081fa22a84c7488c1eaeb0f5d}{EU\_\-TYPE} eu\_\-type, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&root)
 \item 
 \hyperlink{exeUnit_8h_ac578f59a761f9106ba1a8414e02ab6d8}{EU\_\-STATE} \hyperlink{structexeUnit_a739cfd78a98068a64fb2e807f49c4312}{getEUstate} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, bool limit\_\-eu\_\-state\_\-access)
 \item 
@@ -32,21 +32,23 @@ void \hyperlink{structexeUnit_a31fd51a344347d96c9be688de8e0f97a}{resetEU} ()
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structexeUnit_af9048405bad98db15cdefb05bf7b842c}{
+\hypertarget{structexeUnit_a119cfafaad440fc7fdca7a3665e5de65}{
 \index{exeUnit@{exeUnit}!exeUnit@{exeUnit}}
 \index{exeUnit@{exeUnit}!exeUnit@{exeUnit}}
 \subsubsection[{exeUnit}]{\setlength{\rightskip}{0pt plus 5cm}exeUnit::exeUnit (
 \begin{DoxyParamCaption}
 \item[{{\bf CYCLE}}]{start, }
 \item[{{\bf CYCLE}}]{latency, }
-\item[{{\bf EU\_\-TYPE}}]{eu\_\-type}
+\item[{{\bf EU\_\-TYPE}}]{eu\_\-type, }
+\item[{const {\bf YAML::Node} \&}]{root}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{structexeUnit_af9048405bad98db15cdefb05bf7b842c}
+\label{structexeUnit_a119cfafaad440fc7fdca7a3665e5de65}
 
 \begin{DoxyCode}
         : _eu_timer (start, latency),
-          _eu_type (eu_type)
+          _eu_type (eu_type),
+          _e_eu ("EU", root)
     {
         _eu_ins = NULL;
         _eu_state = AVAILABLE_EU;
@@ -68,11 +70,6 @@ void \hyperlink{structexeUnit_a31fd51a344347d96c9be688de8e0f97a}{resetEU} ()
 \begin{DoxyCode}
 {return _eu_ins;}
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{structexeUnit_a739cfd78a98068a64fb2e807f49c4312}{
 \index{exeUnit@{exeUnit}!getEUstate@{getEUstate}}
 \index{getEUstate@{getEUstate}!exeUnit@{exeUnit}}
@@ -127,11 +124,6 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
 {_eu_ins = NULL; _eu_state = AVAILABLE_EU;}
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{structexeUnit_a69498b2ca8353a14447a5596e768fc55}{
 \index{exeUnit@{exeUnit}!runEU@{runEU}}
 \index{runEU@{runEU}!exeUnit@{exeUnit}}
@@ -146,11 +138,12 @@ Here is the caller graph for this function:
                   {
         Assert (_eu_state == AVAILABLE_EU);
         _eu_state = RUNNING_EU;
+        _e_eu.euAccess ();
     }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{structexeUnit_ad9a4840a6956e01419327ba3123683dd}{
@@ -166,11 +159,6 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
 { Assert (_eu_ins == NULL); _eu_ins = ins;}
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 
 
 \subsection{Member Data Documentation}

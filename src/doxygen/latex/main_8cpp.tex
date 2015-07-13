@@ -14,10 +14,14 @@
 {\ttfamily \#include $<$math.h$>$}\par
 {\ttfamily \#include $<$list$>$}\par
 {\ttfamily \#include \char`\"{}registerAllocate.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}registerAllocate\_\-sb.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}make\_\-instruction.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}make\_\-basicblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}make\_\-subblock.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}make\_\-superblock.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}make\_\-phraseblock.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}annotateTrace.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}redundancy\_\-elim.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}dominator.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}config.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
@@ -30,44 +34,52 @@ Include dependency graph for main.cpp:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{main_8cpp_aa19325f885e34f56a1301ced479f8576}{finish} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$phBBList, std::string $\ast$program\_\-name)
+void \hyperlink{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}{init} ()
+\item 
+void \hyperlink{main_8cpp_a95cf23fdc260a92c373256cf79d940f2}{finish} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$phBBList, std::string $\ast$program\_\-name, \hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE} sch\_\-mode, \hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}{REG\_\-ALLOC\_\-MODE} reg\_\-alloc\_\-mode, \hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}{CLUSTER\_\-MODE} cluster\_\-mode, \hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} cluster\_\-size)
 \item 
 int \hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{main_8cpp_aa19325f885e34f56a1301ced479f8576}{
+\hypertarget{main_8cpp_a95cf23fdc260a92c373256cf79d940f2}{
 \index{main.cpp@{main.cpp}!finish@{finish}}
 \index{finish@{finish}!main.cpp@{main.cpp}}
 \subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void finish (
 \begin{DoxyParamCaption}
 \item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
 \item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{phBBList, }
-\item[{std::string $\ast$}]{program\_\-name}
+\item[{std::string $\ast$}]{program\_\-name, }
+\item[{{\bf SCH\_\-MODE}}]{sch\_\-mode, }
+\item[{{\bf REG\_\-ALLOC\_\-MODE}}]{reg\_\-alloc\_\-mode, }
+\item[{{\bf CLUSTER\_\-MODE}}]{cluster\_\-mode, }
+\item[{{\bf LENGTH}}]{cluster\_\-size}
 \end{DoxyParamCaption}
 )}}
-\label{main_8cpp_aa19325f885e34f56a1301ced479f8576}
+\label{main_8cpp_a95cf23fdc260a92c373256cf79d940f2}
 
 \begin{DoxyCode}
-                                                                                 
-                   {
+                                                             {
         /* STAT Generation Functions */
-        // printf("FILE NAME: %s\n", (*program_name).c_str());
-        StatBBSizeStat(bbList, program_name);
-        StatNum_interBB_and_intra_BB_regs(bbList, program_name);
+        // printf ("FILE NAME: %s\n", (*program_name).c_str ());
+        printf ("\tGenerate Stat\n");
+        StatBBSizeStat (bbList, program_name);
+        StatNum_interBB_and_intra_BB_regs (bbList, program_name);
         /* ------------------------- */
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                // printf("BB Size: %d\n", bbList->Nth(i)->getBbSize());
-                //bbList->Nth(i)->printBb();
+        for (int i = 0; i < bbList->NumElements (); i++) {
+                // printf ("BB Size: %d\n", bbList->Nth (i)->getBbSize ());
+                //bbList->Nth (i)->printBb ();
         }
-        dot cfg(0, program_name);
-        cfg.runDot(bbList);
-        dot cfg_phrase(1, program_name);
-        cfg_phrase.runDot(phBBList);
-        writeToFile(bbList, program_name);
-        // writeToFile(pbList, program_name);
-
+        printf ("\tMake .dot Files\n");
+        dot cfg (0, program_name);
+        cfg.runDot (bbList);
+        dot cfg_phrase (1, program_name);
+        cfg_phrase.runDot (phBBList);
+        printf ("\tMake .s File\n");
+        writeToFile (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode
+      , cluster_size);
+        // writeToFile (pbList, program_name, sch_mode, reg_alloc_mode);
 }
 \end{DoxyCode}
 
@@ -75,6 +87,26 @@ int \hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, cha
 Here is the call graph for this function:
 
 
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}{
+\index{main.cpp@{main.cpp}!init@{init}}
+\index{init@{init}!main.cpp@{main.cpp}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}
+
+\begin{DoxyCode}
+             {
+    Assert (OFFSET_LARGER_THAN_X86_REG_CNT > X86_REG_HI);
+}
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
@@ -93,11 +125,13 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
 {
-        Assert(argc == 2 && "USAGE: ./PhraseFormer <program_name>");
-        unsigned t0=clock(),t1;
+        Assert (argc == 6 && "USAGE: ./PhraseFormer <program_name> <reg_alloc_met
+      hod> <scheduling_method> <blocking_model> <cluster_size>");
+        long long unsigned t0 = clock (), t1;
         //SETUP VARIABLES
         List<instruction*>* insList = new List<instruction*>;
         List<basicblock*>* bbList   = new List<basicblock*>;
+//      List<basicblock*>* sbList = new List<basicblock*>;
         List<basicblock*>* phBBList = new List<basicblock*>;
         //Linst<phraseblock*> *phList = new List<phraseblock*>;
         map<int,variable*> varList;
@@ -111,53 +145,108 @@ Here is the caller graph for this function:
         set<ADDR> brDstSet;
         std::string program_name = argv[1];
 
-        printf("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_name
-      .c_str());
-        //init(argc, argv);
-        printf("- Configure Program -\n");
-        parse_config_file();
-        printf("- Parse Instructions -\n");
-        parse_instruction(insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccurac
-      yMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name);
-        printf("- Make Basic Blocks -\n");
-        make_basicblock(insList, bbList, varList, &brDstSet, &bbMap, &insAddrMap)
-      ;
-        printf("- Build Dominance Frontier -\n");
-        setup_dominance_frontier(bbList);
-        printf("- Build SSA -\n");
-        build_ssa_form(bbList, varList);
-        printf("- Register Allocation -\n");
-        allocate_register(bbList,insList);
-        // printf("- Make Phraesblocks -\n");
-        // phBBList = make_phraseblock(bbList, &brBiasMap, &bpAccuracyMap);
-        printf("- Annotate Trace -\n");
-        //annotateTrace_forBB(bbList, &insAddrMap, &program_name);
-        // annotateTrace_forPB(phBBList, &insAddrMap, &program_name);
+    /*-- REGISTER ALLOCATION MODE --*/
+        REG_ALLOC_MODE reg_alloc_mode;
+    cout << argv[2] << " " << argv[3] << endl;
+    if (strcmp (argv[2], "global_reg") == 0) reg_alloc_mode = GLOBAL;
+    else if (strcmp (argv[2], "local_global_reg") == 0) reg_alloc_mode = 
+      LOCAL_GLOBAL;
+    else Assert (0 && "Wrong register allocation mode specified");
+
+    /*-- STATIC CODE SCHEDULING MODE --*/
+    SCH_MODE sch_mode;
+    if (strcmp (argv[3], "list_sch") == 0) sch_mode = LIST_SCH;
+    else if (strcmp (argv[3], "no_list_sch") == 0) sch_mode = NO_LIST_SCH;
+    else Assert (0 && "Wrong static code scheduling mode specified");
+
+    /*-- CLUSTERING MODE --*/
+    CLUSTER_MODE cluster_mode;
+    if (strcmp (argv[4], "bb") == 0) cluster_mode = BASICBLOCK;
+    else if (strcmp (argv[4], "sb") == 0) cluster_mode = SUPERBLOCK;
+    else if (strcmp (argv[4], "pb") == 0) cluster_mode = PHRASEBLOCK;
+    else Assert (0 && "Wrong code clustering model");
+
+    /*-- CLUSTERING SIZE --*/
+    LENGTH cluster_size = atol (argv[5]);
+    Assert (cluster_size > 0 && "Invalid cluster size");
+
+//    Assert (! (sch_mode == LIST_SCH && reg_alloc_mode == GLOBAL)); /*-- BAD COM
+      BO --*/
+
+        printf ("-------------\nPROGRAM NAME: %s\n-------------\n\n", program_nam
+      e.c_str ());
+        init ();
+        printf ("- Configure Program -\n");
+        parse_config_file ();
+
+        printf ("- Parse Instructions -\n");
+        parse_instruction (insList, &insAddrMap, &brDstSet, &brBiasMap, &bpAccura
+      cyMap, &upldMap, memRdAddrMap, memWrAddrMap, &program_name, cluster_mode);
+
+    if (cluster_mode == BASICBLOCK) {
+            printf ("- Make Basic Blocks -\n");
+            make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAdd
+      rMap, cluster_size);
+    } else if (cluster_mode == SUPERBLOCK) {
+            printf ("- Make Superblocks -\n");
+            make_basicblock (insList, bbList, varList, &brDstSet, &bbMap, &insAdd
+      rMap, cluster_size);
+    } else if (cluster_mode == PHRASEBLOCK) {
+        Assert (0 && "this feature is unsupported for now");
+            printf ("- Make Phraseblocks -\n");
+//          make_phraesblock (insList, bbList, varList, &brDstSet, &bbMap, &insAd
+      drMap, cluster_size);
+    } else { Assert (0 && "unsupported option"); }
+
+        printf ("- Build Dominance Frontier -\n");
+        setup_dominance_frontier (bbList);
+
+        printf ("- Build SSA -\n");
+        build_ssa_form (bbList, varList);
+
+        printf ("- Register Allocation -\n");
+    if (cluster_mode == BASICBLOCK) {
+        allocate_register (bbList, insList, &insAddrMap, reg_alloc_mode, sch_mode
+      );
+    } else if (cluster_mode == SUPERBLOCK) {
+        allocate_register_sb (bbList, insList, &insAddrMap, reg_alloc_mode);
+            make_superblock (insList, bbList, varList, &brDstSet, &bbMap, &insAdd
+      rMap, cluster_size, sch_mode);
+    } else { Assert (0 && "unsupported option"); }
+        // printf ("- Make Phraesblocks -\n");
+        // phBBList = make_phraseblock (bbList, &brBiasMap, &bpAccuracyMap);
+
+        printf ("- Annotate Trace -\n");
+        //annotateTrace_forBB (bbList, &insAddrMap, &program_name);
+        // annotateTrace_forPB (phBBList, &insAddrMap, &program_name);
         /* remove the code below */
-        // printf("num BB's: %d\n", bbList->NumElements());
-        // for (int i =0 ; i < insList->NumElements(); i++) {
-        // //   if (insList->Nth(i)->isAlreadyAssignedArcRegs())
-        // //           ;// printf("GOOD\n");
+        // printf ("num BB's: %d\n", bbList->NumElements ());
+        // for (int i =0 ; i < insList->NumElements (); i++) {
+        // //   if (insList->Nth (i)->isAlreadyAssignedArcRegs ())
+        // //           ;// printf ("GOOD\n");
         // //   else    
-        // //           printf("SHIT\n");
-        //      instruction* ins = insList->Nth(i);
-        //      printf("%llx: ",ins->getInsAddr());
-        //      for (int i = 0; i < ins->getNumReadReg(); i++) {
-        //              printf("(%d->%d),",ins->getNthReadReg(i),ins->getReadRegS
-      ubscript(ins->getNthReadReg(i)));
+        // //           printf ("SHIT\n");
+        //      instruction* ins = insList->Nth (i);
+        //      printf ("%llx: ",ins->getInsAddr ());
+        //      for (int i = 0; i < ins->getNumReadReg (); i++) {
+        //              printf (" (%d->%d),",ins->getNthReadReg (i),ins->getReadR
+      egSubscript (ins->getNthReadReg (i)));
         //      }
-        //      for (int i = 0; i < ins->getNumWriteReg(); i++) {
-        //              printf("(%d->%d),",ins->getNthWriteReg(i),ins->getWriteRe
-      gSubscript(ins->getNthWriteReg(i)));
+        //      for (int i = 0; i < ins->getNumWriteReg (); i++) {
+        //              printf (" (%d->%d),",ins->getNthWriteReg (i),ins->getWrit
+      eRegSubscript (ins->getNthWriteReg (i)));
         //      }
-        //      printf("\n");
+        //      printf ("\n");
         // }
         /* ---------------------*/
-        printf("- Make Dot Files & Stat Data -\n");
-        finish(bbList, phBBList, &program_name);
-        t1=clock()-t0;
-        printf("\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minu
-      tes)\n-------------\n", ((float)t1)/CLOCKS_PER_SEC/60.0);
+        printf ("- Redundant MOV Op Elimination -\n");
+    movOpElimination (bbList, sch_mode);
+        printf ("- Make Dot Files & Stat Data -\n");
+        finish (bbList, phBBList, &program_name, sch_mode, reg_alloc_mode, cluste
+      r_mode, cluster_size);
+        t1 = clock () - t0;
+        printf ("\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Min
+      utes)\n-------------\n", (double)(t1 / CLOCKS_PER_SEC) / 60.0);
         return 0;
 }
 \end{DoxyCode}

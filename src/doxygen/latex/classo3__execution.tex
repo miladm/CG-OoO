@@ -15,55 +15,62 @@ Collaboration diagram for o3\_\-execution:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__execution_aa727dbc0730a04adac30d57796c7c769}{o3\_\-execution} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&scheduler\_\-to\_\-execution\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-memory\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} execution\_\-width, string stage\_\-name)
+\hyperlink{classo3__execution_afa2a91e452a8de5ce259b9b087d07404}{o3\_\-execution} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&scheduler\_\-to\_\-execution\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iROB, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} execution\_\-width, \hyperlink{classo3__memManager}{o3\_\-memManager} $\ast$LSQ\_\-MGR, \hyperlink{classo3__rfManager}{o3\_\-rfManager} $\ast$RF\_\-MGR, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classo3__execution_a33a63fc56bf57ef6a470fbad5af5efcc}{$\sim$o3\_\-execution} ()
 \item 
-void \hyperlink{classo3__execution_ad3e4a2e10bfcad9fa8c73b77c3b9fffb}{doEXECUTION} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classo3__execution_a590c0557a738cccb6ef7d8234743aa6f}{squashCtrl} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classo3__execution_a38bcffde43ee6d4935c251b47e52a85c}{squash} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classo3__execution_aef41940af13033c3736d7b6627efd39f}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classo3__execution_a2565c18ef20ce1e0ff72f5399831075a}{executionImpl} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-\hyperlink{unit_2stage_8h_a7de04de95175471455cf906d80af3968}{COMPLETE\_\-STATUS} \hyperlink{classo3__execution_ac6ce02086cf32b3554da1397ab35e714}{completeIns} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classo3__execution_abb15c03915098a0ff1b56969a667efe6}{resetRF} ()
-\item 
-void \hyperlink{classo3__execution_ae721d2652e94e7f38d74707ecde6c12e}{forward} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{classsysClock}{sysClock} \&)
+void \hyperlink{classo3__execution_a533f0e0e815b90e1eefb5de8fe16c61d}{doEXECUTION} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__execution_aa727dbc0730a04adac30d57796c7c769}{
+\hypertarget{classo3__execution_afa2a91e452a8de5ce259b9b087d07404}{
 \index{o3\_\-execution@{o3\_\-execution}!o3\_\-execution@{o3\_\-execution}}
 \index{o3\_\-execution@{o3\_\-execution}!o3_execution@{o3\_\-execution}}
 \subsubsection[{o3\_\-execution}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-execution::o3\_\-execution (
 \begin{DoxyParamCaption}
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{scheduler\_\-to\_\-execution\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{execution\_\-to\_\-scheduler\_\-port, }
-\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{execution\_\-to\_\-memory\_\-port, }
 \item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
 \item[{{\bf WIDTH}}]{execution\_\-width, }
+\item[{{\bf o3\_\-memManager} $\ast$}]{LSQ\_\-MGR, }
+\item[{{\bf o3\_\-rfManager} $\ast$}]{RF\_\-MGR, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__execution_aa727dbc0730a04adac30d57796c7c769}
+\label{classo3__execution_afa2a91e452a8de5ce259b9b087d07404}
 
 \begin{DoxyCode}
-        : stage (execution_width, stage_name)
+        : stage (execution_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_
+      pipe"]["execution"], clk),
+      s_pipe_state_hist (g_stats.newScalarHistStat (NUM_PIPE_STATE, stage_name, "
+      pipe_state_cnt", "Number of cycles in each squash stage", 0, PRINT_ZERO)),
+      s_eu_busy_state_hist (g_stats.newScalarHistStat ((LENGTH) execution_width, 
+      stage_name, "eu_busy_state_hist", "Number of cycles execution unit is busy", 0, 
+      PRINT_ZERO)),
+      s_pipe_state_hist_rat (g_stats.newRatioHistStat (clk->getStatObj (), (
+      LENGTH) NUM_PIPE_STATE, stage_name, "pipe_state_hist_rat", "Ratio of cycles in ea
+      ch squash stage / total cycles", 0, PRINT_ZERO)),
+      s_br_mispred_cnt (g_stats.newScalarStat (stage_name, "br_mispred_cnt", "Num
+      ber of branch mis-predict events", 0, PRINT_ZERO)),
+      s_mem_mispred_cnt (g_stats.newScalarStat (stage_name, "mem_mispred_cnt", "N
+      umber of memory mis-predict events", 0, PRINT_ZERO))
 {
+    /*-- CONFIG OBJS --*/
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+
     _scheduler_to_execution_port = &scheduler_to_execution_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
-    _execution_to_memory_port = &execution_to_memory_port;
     _iROB = iROB;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
+
+    /*-- SETUP EXECUTION UNITS --*/
     _aluExeUnits = new List<exeUnit*>;
     for (WIDTH i = 0; i < _stage_width; i++) {
-        exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU); //TODO make 
-      this config better with more EU types
+        exeUnit* newEU = new exeUnit (1,  _eu_lat._alu_lat, ALU_EU, root["eu"]["a
+      lu"]); //TODO make this config better with more EU types
         _aluExeUnits->Append (newEU);
     }
 }
@@ -89,336 +96,48 @@ Here is the call graph for this function:
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__execution_ac6ce02086cf32b3554da1397ab35e714}{
-\index{o3\_\-execution@{o3\_\-execution}!completeIns@{completeIns}}
-\index{completeIns@{completeIns}!o3_execution@{o3\_\-execution}}
-\subsubsection[{completeIns}]{\setlength{\rightskip}{0pt plus 5cm}{\bf COMPLETE\_\-STATUS} o3\_\-execution::completeIns (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_ac6ce02086cf32b3554da1397ab35e714}
-
-\begin{DoxyCode}
-                                                        {
-    g_var.setOldSquashSN ();
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        exeUnit* EU = _aluExeUnits->Nth (i);
-        dynInstruction* ins = EU->getEUins ();
-
-        /* CHECKS */
-        if (g_var.g_pipe_state == PIPE_FLUSH) break;
-      //if (ins != NULL && ins->getInsType () == MEM && 
-      //    _execution_to_memory_port->getBuffState (clk.now ()) == FULL_BUFF) br
-      eak; //TODO uselss now?
-        if (EU->getEUstate (clk.now (), true) != COMPLETE_EU) continue;
-
-        /* COMPLETE INS */
-        if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-            ins->setPipeStage (MEM_ACCESS);
-            g_LSQ_MGR.memAddrReady (ins); //TODO what should exactly happen here 
-      for LD's?
-            //_execution_to_memory_port->pushBack (ins, clk.now ());
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (
-      ), "Complete mem ins addr", ins->getInsID (), clk.now ());
-        } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) {
-            ins->setPipeStage (COMPLETE);
-            g_LSQ_MGR.memAddrReady (ins); //TODO what should exactly happen here 
-      for LD's?
-            g_GRF_MGR.completeRegs (ins); //TODO this sould not normally exist?
-            //_execution_to_memory_port->pushBack (ins, clk.now ());
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (
-      ), "Complete mem ins addr", ins->getInsID (), clk.now ());
-        } else {
-            //if (!g_GRF_MGR.hasFreeWrPort (clk.now ())) break; //TODO put this b
-      ack and clean up the assert for available EU
-            ins->setPipeStage (COMPLETE);
-            g_GRF_MGR.completeRegs (ins);
-            dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (
-      ), "Complete ins", ins->getInsID (), clk.now ());
-        }
-        EU->resetEU ();
-
-        /* SQUASH DETECT */
-        if (ins->isOnWrongPath ()) {
-            g_var.setSquashSN (ins->getInsID ());
-        }
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
-      , "Complete ins", ins->getInsID (), clk.now ());
-    }
-
-    if (g_var.isOnWrongPath()) {
-        dbg.print (DBG_EXECUTION, "%s: %s %llu %s (cyc: %d)\n", _stage_name.c_str
-       (), "Ins on Wrong Path (ins: ", g_var.getSquashSN (), ")", clk.now ());
-        return COMPLETE_SQUASH;
-    }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Ins on
-       Right Path", clk.now ());
-    return COMPLETE_NORMAL;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_ad3e4a2e10bfcad9fa8c73b77c3b9fffb}{
+\hypertarget{classo3__execution_a533f0e0e815b90e1eefb5de8fe16c61d}{
 \index{o3\_\-execution@{o3\_\-execution}!doEXECUTION@{doEXECUTION}}
 \index{doEXECUTION@{doEXECUTION}!o3_execution@{o3\_\-execution}}
 \subsubsection[{doEXECUTION}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::doEXECUTION (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_ad3e4a2e10bfcad9fa8c73b77c3b9fffb}
-
-\begin{DoxyCode}
-                                             {
-    dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.now ())
-      ;
-    /* STAT */
-    regStat (clk);
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-
-    /* WRITEBACK RESULT */
-    COMPLETE_STATUS cmpl_status;
-    cmpl_status = completeIns (clk);
-
-    /* EXECUTE INS */
-    if (cmpl_status == COMPLETE_NORMAL) {
-        pipe_stall = executionImpl (clk);
-    }
-
-    /* SQUASH CONTROL */
-    squashCtrl (clk);
-    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "P
-      IPELINE STATE:", g_var.g_pipe_state, clk.now ());
-
-    /* STAT */
-    if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
-    if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_a2565c18ef20ce1e0ff72f5399831075a}{
-\index{o3\_\-execution@{o3\_\-execution}!executionImpl@{executionImpl}}
-\index{executionImpl@{executionImpl}!o3_execution@{o3\_\-execution}}
-\subsubsection[{executionImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} o3\_\-execution::executionImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_a2565c18ef20ce1e0ff72f5399831075a}
-
-\begin{DoxyCode}
-                                                        {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
-      PIPE_FLUSH) break;
-        if (_scheduler_to_execution_port->getBuffState (clk.now ()) == 
-      EMPTY_BUFF) break;
-        if (!_scheduler_to_execution_port->isReady (clk.now ())) break;
-        exeUnit* EU = _aluExeUnits->Nth (i);
-        if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) continue;
-
-        /* EXE INS */
-        dynInstruction* ins = _scheduler_to_execution_port->popFront (clk.now ())
-      ;
-        EU->_eu_timer.setNewTime (clk.now ());
-        EU->setEUins (ins);
-        EU->runEU ();
-        ins->setPipeStage (EXECUTE);
-        forward (ins, EU->_eu_timer.getLatency (), clk);
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
-      , "Execute ins", ins->getInsID (), clk.now ());
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-    }
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_ae721d2652e94e7f38d74707ecde6c12e}{
-\index{o3\_\-execution@{o3\_\-execution}!forward@{forward}}
-\index{forward@{forward}!o3_execution@{o3\_\-execution}}
-\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::forward (
-\begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{ins, }
-\item[{{\bf CYCLE}}]{eu\_\-latency, }
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_ae721d2652e94e7f38d74707ecde6c12e}
-
-\begin{DoxyCode}
-                                                                                {
-      
-    if (_execution_to_scheduler_port->getBuffState (clk.now ()) == FULL_BUFF) ret
-      urn;
-    if (ins->getInsType () != MEM) {
-        CYCLE cdb_ready_latency = eu_latency - 1;
-        Assert (cdb_ready_latency >= 0);
-        _execution_to_scheduler_port->pushBack (ins, clk.now (), cdb_ready_latenc
-      y);
-        dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str ()
-      , "Forward wr ops of ins", ins->getInsID (), clk.now ());
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_aef41940af13033c3736d7b6627efd39f}{
-\index{o3\_\-execution@{o3\_\-execution}!regStat@{regStat}}
-\index{regStat@{regStat}!o3_execution@{o3\_\-execution}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_aef41940af13033c3736d7b6627efd39f}
-
-\begin{DoxyCode}
-                                         {
-    _scheduler_to_execution_port->regStat (clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_abb15c03915098a0ff1b56969a667efe6}{
-\index{o3\_\-execution@{o3\_\-execution}!resetRF@{resetRF}}
-\index{resetRF@{resetRF}!o3_execution@{o3\_\-execution}}
-\subsubsection[{resetRF}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::resetRF (
-\begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__execution_abb15c03915098a0ff1b56969a667efe6}
-\hypertarget{classo3__execution_a38bcffde43ee6d4935c251b47e52a85c}{
-\index{o3\_\-execution@{o3\_\-execution}!squash@{squash}}
-\index{squash@{squash}!o3_execution@{o3\_\-execution}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_a38bcffde43ee6d4935c251b47e52a85c}
+\label{classo3__execution_a533f0e0e815b90e1eefb5de8fe16c61d}
 
 \begin{DoxyCode}
-                                        {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "o3_execut
-      ion Ports Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN ();
-    _execution_to_scheduler_port->flushPort (squashSeqNum, clk.now ());
-    _execution_to_memory_port->flushPort (squashSeqNum, clk.now ());
-}
-\end{DoxyCode}
+                                {
+    /*-- STAT + DEBUG --*/
+    dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now (
+      ));
+    regStat ();
+    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
+    /*-- WRITEBACK RESULT --*/
+    COMPLETE_STATUS cmpl_status;
+    cmpl_status = completeIns ();
 
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__execution_a590c0557a738cccb6ef7d8234743aa6f}{
-\index{o3\_\-execution@{o3\_\-execution}!squashCtrl@{squashCtrl}}
-\index{squashCtrl@{squashCtrl}!o3_execution@{o3\_\-execution}}
-\subsubsection[{squashCtrl}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-execution::squashCtrl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__execution_a590c0557a738cccb6ef7d8234743aa6f}
-
-\begin{DoxyCode}
-                                            {
-    string state_switch;
-    if ((g_var.g_pipe_state == PIPE_NORMAL || g_var.g_pipe_state == 
-      PIPE_SQUASH_ROB) && 
-        g_var.g_squash_seq_num != g_var.g_old_squash_seq_num) {
-        g_var.g_pipe_state = PIPE_WAIT_FLUSH;
-        state_switch =  "PIPE_NORMAL -> PIPE_WAIT_FLUSH";
-    } else if (g_var.g_pipe_state == PIPE_NORMAL) {
-        g_var.resetSquashSN ();
-        return;
-    } else if (g_var.g_pipe_state == PIPE_WAIT_FLUSH) {
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            exeUnit* EU = _aluExeUnits->Nth (i);
-            if (EU->getEUstate (clk.now (), false) != AVAILABLE_EU) return;
-        }
-        g_var.g_pipe_state = PIPE_FLUSH;
-        state_switch =  "PIPE_WAIT_FLUSH -> PIPE_FLUSH";
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            exeUnit* EU = _aluExeUnits->Nth (i);
-            EU->resetEU ();
-        }
-        squash (clk);
-    } else if (g_var.g_pipe_state == PIPE_FLUSH) {
-        g_var.g_pipe_state = PIPE_DRAIN;
-        state_switch =  "PIPE_FLUSH -> PIPE_DRAIN";
-    } else if (g_var.g_pipe_state == PIPE_DRAIN && _iROB->hasFreeRdPort (clk.now 
-      ()) && 
-               _iROB->getFront()->getInsID () >= g_var.g_squash_seq_num) {
-        g_var.g_pipe_state = PIPE_SQUASH_ROB;
-        state_switch =  "PIPE_DRAIN -> PIPE_SQUASH_ROB";
-    } else if (g_var.g_pipe_state == PIPE_SQUASH_ROB && _iROB->getTableSize() == 
-      0) {
-        g_var.resetSquashSN ();
-        g_var.g_pipe_state = PIPE_NORMAL;
-        state_switch =  "PIPE_SQUASH_ROB -> PIPE_NORMAL";
-        g_GRF_MGR.squashRenameReg ();
-    } else {
-        return; /* No state change */
+    /*-- EXECUTE INS --*/
+    if (cmpl_status == COMPLETE_NORMAL) {
+        pipe_stall = executionImpl ();
     }
-    dbg.print (DBG_EXECUTION, "%s: %s (cyc: %d)\n", _stage_name.c_str (), state_s
-      witch.c_str(), clk.now ());
+
+    /*-- SQUASH CONTROL --*/
+    if (g_cfg->isEnSquash ()) squashCtrl ();
+    dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+               "PIPELINE STATE:", g_var.g_pipe_state, _clk->now ());
+
+    /*-- STAT --*/
+    s_pipe_state_hist[g_var.g_pipe_state]++;
+    s_pipe_state_hist_rat[g_var.g_pipe_state]++;
+    if (g_var.g_pipe_state != PIPE_NORMAL) s_squash_cycles++;
+    if (pipe_stall == PIPE_STALL) s_stall_cycles++;
+    for (WIDTH i = 0; i < _stage_width; i++) {
+        exeUnit* EU = _aluExeUnits->Nth (i);
+        if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) 
+            s_eu_busy_state_hist[i]++;
+    }
 }
 \end{DoxyCode}
 

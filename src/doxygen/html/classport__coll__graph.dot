@@ -5,6 +5,15 @@ digraph G
   Node1 [label="port\< queType_T \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node2 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="unit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classunit.html"];
-  Node3 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_port_empty_cyc\ns_port_full_cyc",fontname="Helvetica"];
-  Node3 [label="ScalarStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScalarStat.html"];
+  Node3 -> Node2 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_clk",fontname="Helvetica"];
+  Node3 [label="sysClock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classsysClock.html"];
+  Node4 -> Node3 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_clk_cycles",fontname="Helvetica"];
+  Node4 [label="ScalarStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classScalarStat.html"];
+  Node5 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="stat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstat.html"];
+  Node4 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_port_empty_cyc\ns_port_full_cyc",fontname="Helvetica"];
+  Node6 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="s_port_size_avg",fontname="Helvetica"];
+  Node6 [label="RatioStat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRatioStat.html"];
+  Node4 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node6 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="_divisor",fontname="Helvetica"];
 }

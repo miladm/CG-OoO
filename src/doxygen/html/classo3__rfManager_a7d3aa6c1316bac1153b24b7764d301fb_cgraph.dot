@@ -15,9 +15,11 @@ digraph G
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node6 [label="List::NumElements",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html#ac2e9d50f703b01bf643fa6ce50837c26"];
   Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="o3_registerRename::setAsAvailablePR",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#aae9d93d826236d42ba090d1d53ba62af"];
+  Node7 [label="table_energy::ramAccess",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable__energy.html#a4801169e0737ad9e13b21c3b1da5395c"];
   Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="o3_registerRename::update_cRAT",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#af8f4e3c178f20fbee9a17d5781cd8f84"];
+  Node8 [label="o3_registerRename::setAsAvailablePR",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#aae9d93d826236d42ba090d1d53ba62af"];
   Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="o3_registerRename::updatePRstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b"];
+  Node9 [label="o3_registerRename::update_cRAT",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#af8f4e3c178f20fbee9a17d5781cd8f84"];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="o3_registerRename::updatePRstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__registerRename.html#a6e6c35b5b477597e3eafed6def8c574b"];
 }

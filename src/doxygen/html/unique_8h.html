@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/unique.h File Reference</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/unique.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,89 +58,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/backend/unique.h File Reference</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/unique.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;instruction.h&quot;</code><br/>
-<code>#include &quot;../lib/list.h&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for unique.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="unique_8h__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8h" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8h" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8h">
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="unique_8h__dep__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8hdep" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8hdep" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2unique_8hdep">
-</map>
-</div>
-</div>
+
 <p><a href="unique_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unique_8h.html#a4f24879eadd196d7f7a5099e6fb6ba1b">unique</a> (<a class="el" href="classList.html">List</a>&lt; int &gt; *list)</td></tr>
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a4f24879eadd196d7f7a5099e6fb6ba1b"></a><!-- doxytag: member="unique.h::unique" ref="a4f24879eadd196d7f7a5099e6fb6ba1b" args="(List&lt; int &gt; *list)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void unique </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; int &gt; *&#160;</td>
-          <td class="paramname"><em>list</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                               {
-        <span class="keywordtype">int</span> listSize = list-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = listSize-2; i &gt;= 0; i--) {
-                <span class="keywordtype">int</span> prevIns = list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i+1);
-                <span class="keywordtype">int</span> thisIns = list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(prevIns &gt;= thisIns);
-                <span class="keywordflow">if</span> (prevIns == thisIns) {
-                        list-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i+1);
-                }
-        }
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_cgraph.png" border="0" usemap="#unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_cgraph" alt=""/></div>
-<map name="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_cgraph" id="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_icgraph.png" border="0" usemap="#unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_icgraph" alt=""/></div>
-<map name="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_icgraph" id="unique_8h_a4f24879eadd196d7f7a5099e6fb6ba1b_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -149,7 +81,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

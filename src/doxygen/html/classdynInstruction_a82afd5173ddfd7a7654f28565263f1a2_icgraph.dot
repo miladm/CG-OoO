@@ -5,17 +5,7 @@ digraph G
   rankdir=LR;
   Node1 [label="dynInstruction::getPRrdList",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="o3_scheduler::forwardFromCDB",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__scheduler.html#a13b34d2dae20e349ee7bb614d0d33d46"];
+  Node2 [label="o3_rfManager::checkReadyAgain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__rfManager.html#a785b7804c89faffdaee23e25c2cc3568"];
   Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="o3_rfManager::isReady",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="o3_scheduler::hasReadyInsInResStn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__scheduler.html#a46d9cb288bfbd52069935fa96d9de38f"];
-  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="o3_scheduler::schedulerImpl",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__scheduler.html#ade8fe27e00ac0430122634af01c0639c"];
-  Node5 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="o3_scheduler::doSCHEDULER",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__scheduler.html#a336443d7d6e8f6b892c7c71b97099e40"];
-  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node7 [label="o3_sysCore::runCore",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classo3__sysCore.html#ab97edaa7f8ea74d7315b71d7d03a736c"];
-  Node7 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node8 [label="oooBkEndRun",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$oooBkEnd_8h.html#aaa2cf7fe88073cf54894d48f17271d93"];
 }

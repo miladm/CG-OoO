@@ -5,11 +5,7 @@ digraph G
   rankdir=LR;
   Node1 [label="instruction::makeUniqueRegs",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="basicblock::renameAllInsRegs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a8493801bbd0b56aac41aa8cd2aedcea4"];
+  Node2 [label="instruction::renameAllInsRegs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinstruction.html#aac67c9bd51efdf37963fbfc5da8fb737"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="renameAndbuildDefUseSets",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a398558d22a764dcc2fdc74639b3f56c6"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node4 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662"];
-  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node3 [label="basicblock::renameAllInsRegs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a8493801bbd0b56aac41aa8cd2aedcea4"];
 }

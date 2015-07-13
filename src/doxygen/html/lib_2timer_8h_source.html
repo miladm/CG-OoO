@@ -81,34 +81,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00018"></a>00018                 _stop = _start + _latency;
 <a name="l00019"></a>00019             _valid = <span class="keyword">false</span>;
 <a name="l00020"></a>00020         }
-<a name="l00021"></a><a class="code" href="structtimer.html#a8ef56ed7aca8da1b60ac27d88377706d">00021</a>         <a class="code" href="structtimer.html#ae536faf93e02933cd025a6fbcbb48d0a">timer</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency) 
+<a name="l00021"></a><a class="code" href="structtimer.html#a8ef56ed7aca8da1b60ac27d88377706d">00021</a>         <a class="code" href="structtimer.html#ae536faf93e02933cd025a6fbcbb48d0a">timer</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency) 
 <a name="l00022"></a>00022                 : _latency (latency)
 <a name="l00023"></a>00023         {
-<a name="l00024"></a>00024                 <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(latency &gt;= 0 &amp;&amp; start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-<a name="l00025"></a>00025                 _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+<a name="l00024"></a>00024                 <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(latency &gt;= 0 &amp;&amp; start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+<a name="l00025"></a>00025                 _start = start;
 <a name="l00026"></a>00026                 _stop = _start + _latency;
 <a name="l00027"></a>00027             _valid = <span class="keyword">true</span>;
 <a name="l00028"></a>00028         }
-<a name="l00029"></a><a class="code" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">00029</a>         <span class="keywordtype">void</span> <a class="code" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">setNewTime</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>) {
-<a name="l00030"></a>00030                 <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-<a name="l00031"></a>00031                 _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+<a name="l00029"></a><a class="code" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">00029</a>         <span class="keywordtype">void</span> <a class="code" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">setNewTime</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start) {
+<a name="l00030"></a>00030                 <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+<a name="l00031"></a>00031                 _start = start;
 <a name="l00032"></a>00032                 _stop = _start + _latency;
 <a name="l00033"></a>00033             _valid = <span class="keyword">true</span>;
 <a name="l00034"></a>00034         }
-<a name="l00035"></a><a class="code" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">00035</a>         <span class="keywordtype">void</span> <a class="code" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">setNewTime</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency) {
-<a name="l00036"></a>00036                 <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-<a name="l00037"></a>00037                 _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+<a name="l00035"></a><a class="code" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">00035</a>         <span class="keywordtype">void</span> <a class="code" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">setNewTime</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency) {
+<a name="l00036"></a>00036                 <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+<a name="l00037"></a>00037                 _start = start;
 <a name="l00038"></a>00038             _latency = latency;
 <a name="l00039"></a>00039                 _stop = _start + _latency;
 <a name="l00040"></a>00040             _valid = <span class="keyword">true</span>;
 <a name="l00041"></a>00041         }
 <a name="l00042"></a><a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">00042</a>         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> () {
-<a name="l00043"></a>00043                 <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_stop &gt;= _start); 
-<a name="l00044"></a>00044             <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
+<a name="l00043"></a>00043                 <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_stop &gt;= _start); 
+<a name="l00044"></a>00044             <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
 <a name="l00045"></a>00045                 <span class="keywordflow">return</span> _stop;
 <a name="l00046"></a>00046         }
 <a name="l00047"></a><a class="code" href="structtimer.html#a5a00fe2116a5f1cadfed546dbd1929bb">00047</a>         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="structtimer.html#a5a00fe2116a5f1cadfed546dbd1929bb">getLatency</a> () {
-<a name="l00048"></a>00048             <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
+<a name="l00048"></a>00048             <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
 <a name="l00049"></a>00049                 <span class="keywordflow">return</span> _latency;
 <a name="l00050"></a>00050         }
 <a name="l00051"></a><a class="code" href="structtimer.html#a389d0c8235a4232f51397443debe03cb">00051</a>         <span class="keywordtype">bool</span> <a class="code" href="structtimer.html#a389d0c8235a4232f51397443debe03cb">isValidStopTime</a> () { <span class="keywordflow">return</span> _valid; }
@@ -128,7 +128,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -137,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

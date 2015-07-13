@@ -50,46 +50,46 @@ list \hyperlink{namespaceparse__x86_a0fb61b722a1498e50bf52375a7fb2fa8}{jmpOpLib}
 \label{namespaceparse__x86_ad838e5ea14a7b662e716b079640434f0}
 
 \begin{DoxyCode}
-125          :
-126   ## PASS 1
-127   assemblyInput = ioPath+fileName
-128   assemblyFile  = open(assemblyInput, 'r')        
-129   for line in assemblyFile:
-130     words = line.lstrip().rstrip().split()
-131     if len(words) > 0:
-132       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
-133       if matchObj:
-134         # print words[0]
-135         insAddr = words[0]
-136         insAddr = insAddr[:-1]
-137         inAddrLib.append(insAddr)
-138         findOp(line, insAddr)
-139   assemblyFile.close()
-140   ## PASS 2
-141   #global jmpDstLib
-142   #global jmpOpLib
-143   #global opCodeLib
-144   #assemblyInput = ioPath+fileName
-145   #assemblyFile  = open(assemblyInput, 'r')        
-146   #for line in assemblyFile:
-147   #  words = line.lstrip().rstrip().split()
-148   #  if len(words) > 0:
-149   #    matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
-150   #    if matchObj:
-151   #      #print words[0]
-152   #      insAddr = words[0]
-153   #      insAddr = insAddr[:-1]
-154   #      if insAddr in jmpOpLib:
-155   #        print line
-156   #        print '-end\n'
-157   #      elif insAddr in opCodeLib and opCodeLib[insAddr] == 'retq':
-158   #        print line
-159   #        print '----\n'
-160   #      elif insAddr in jmpDstLib:
-161   #        print '-start\n'
-162   #        print line
-163   #      else:
-164   #        print line
+130          :
+131   ## PASS 1
+132   assemblyInput = ioPath+fileName
+133   assemblyFile  = open(assemblyInput, 'r')        
+134   for line in assemblyFile:
+135     words = line.lstrip().rstrip().split()
+136     if len(words) > 0:
+137       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+138       if matchObj:
+139         # print words[0]
+140         insAddr = words[0]
+141         insAddr = insAddr[:-1]
+142         inAddrLib.append(insAddr)
+143         findOp(line, insAddr)
+144   assemblyFile.close()
+145   ## PASS 2
+146   #global jmpDstLib
+147   #global jmpOpLib
+148   #global opCodeLib
+149   #assemblyInput = ioPath+fileName
+150   #assemblyFile  = open(assemblyInput, 'r')        
+151   #for line in assemblyFile:
+152   #  words = line.lstrip().rstrip().split()
+153   #  if len(words) > 0:
+154   #    matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+155   #    if matchObj:
+156   #      #print words[0]
+157   #      insAddr = words[0]
+158   #      insAddr = insAddr[:-1]
+159   #      if insAddr in jmpOpLib:
+160   #        print line
+161   #        print '-end\n'
+162   #      elif insAddr in opCodeLib and opCodeLib[insAddr] == 'retq':
+163   #        print line
+164   #        print '----\n'
+165   #      elif insAddr in jmpDstLib:
+166   #        print '-start\n'
+167   #        print line
+168   #      else:
+169   #        print line
 
 \end{DoxyCode}
 
@@ -164,17 +164,22 @@ Here is the caller graph for this function:
 110                   print opCode
 111                   print insAddr
 112                   print line
-113         else:
-114           print 'o'
+113         elif opCode == 'nop':
+114           print 'n'
 115           print opCode
 116           print insAddr
 117           print line
-118         break #Avoid replicating an instruction many times in case of no match
-119 
-120         # done = True
-121         # break
-122   #if done == False:
-123   #  print line
+118         else:
+119           print 'o'
+120           print opCode
+121           print insAddr
+122           print line
+123         break #Avoid replicating an instruction many times in case of no match
+124 
+125         # done = True
+126         # break
+127   #if done == False:
+128   #  print line
 
 \end{DoxyCode}
 \hypertarget{namespaceparse__x86_a758dba9b6ef5bfb993964c7673c1a495}{
@@ -256,84 +261,84 @@ Here is the caller graph for this function:
 \label{namespaceparse__x86_a25693017cff430882e0561015d7cc616}
 
 \begin{DoxyCode}
-166            :
-167   insAddrMap = []
-168   ## PHRASE 1
-169   print 'Phase 1'
-170   assemblyInput = ioPath+fileName
-171   assemblyFile  = open(assemblyInput, 'r')        
-172   for line in assemblyFile:
-173     words = line.lstrip().rstrip().split()
-174     if len(words) > 0:
-175       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
-176       if matchObj:
-177         #print words[0]
-178         insAddr = words[0]
-179         insAddr = insAddr[:-1] #already a hex, without 0x
-180         print ''.join(('0x',insAddr))
-181         inAddrLib.append(''.join(('0x',insAddr)))
-182   assemblyFile.close()
-183   ## PHRASE 2
-184   print 'Phase 2'
-185   traceInput = '/scratch/tracesim/cs343_bzip_sb.out'
-186   # traceInput = '/Volumes/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblo
+171            :
+172   insAddrMap = []
+173   ## PHRASE 1
+174   print 'Phase 1'
+175   assemblyInput = ioPath+fileName
+176   assemblyFile  = open(assemblyInput, 'r')        
+177   for line in assemblyFile:
+178     words = line.lstrip().rstrip().split()
+179     if len(words) > 0:
+180       matchObj = re.match(r'[\da-f]+:', words[0], flags=0)
+181       if matchObj:
+182         #print words[0]
+183         insAddr = words[0]
+184         insAddr = insAddr[:-1] #already a hex, without 0x
+185         print ''.join(('0x',insAddr))
+186         inAddrLib.append(''.join(('0x',insAddr)))
+187   assemblyFile.close()
+188   ## PHRASE 2
+189   print 'Phase 2'
+190   traceInput = '/scratch/tracesim/cs343_bzip_sb.out'
+191   # traceInput = '/Volumes/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblo
       ck_frontend/pin/trace_static.out'
-187   traceFile  = open(traceInput, 'r')
-188   count = 0
-189   for line in traceFile:
-190     words = line.strip().split(',')
-191     if len(words) < 2:
-192       continue
-193     # if len(words) < 2:
-194     #   continue
-195     # if words[0] == 'P;':
-196     #   continue
-197     if words[0] == "R" or words[0] == "W":
-198       if hex(int(words[2])) not in insAddrMap:
-199         # print words[0],hex(int(words[2]))
-200         insAddrMap.append(hex(int(words[2]))) #conversion to hex adds 0x
-201     else:
-202       if hex(int(words[1])) not in insAddrMap:
-203         # print words[0],hex(int(words[1]))
-204         insAddrMap.append(hex(int(words[1]))) #conversion to hex adds 0x
-205     
-206   # for line in traceFile:
-207   #   count += 1
-208   #   if count == 100000:
-209   #     print 'beat',datetime.now()
-210   #     count = 0
-211   #   words = line.strip().split(',')
-212   #   if len(words) < 3:
-213   #     continue #avoid empty lines
-214   #   insType = words[0]
-215   #   insAddr = words[1]
-216   #   if insAddr not in insAddrMap:
-217   #     insAddrMap.append(insAddr)
-218   #   else:
-219   #     continue
-220   #   indx = 2
-221   #   memDestAddr = -1
-222   #   brDestAddr = -1
-223   #   taken_notTaken = -1
-224   #   # print insType
-225   #   if insType == 'R' or insType == 'W':
-226   #     memDestAddr = words[indx]
-227   #     indx = 3
-228   #   elif insType == 'B':
-229   #     taken_notTaken = words[indx]
-230   #     brDestAddr = words[indx+1]
-231   #     indx = 4
-232   #   for elem in words[indx:-1]:
-233   #     temp = elem.strip().split('#')
-234   #     register = temp[0]
-235   #     read_write = temp[1]
-236   #     # print 'registers: ',register,read_write
-237   # traceFile.close()
-238   print 'DIFF'
-239   for item in inAddrLib:
-240     if item not in insAddrMap:
-241       print item
-242     
+192   traceFile  = open(traceInput, 'r')
+193   count = 0
+194   for line in traceFile:
+195     words = line.strip().split(',')
+196     if len(words) < 2:
+197       continue
+198     # if len(words) < 2:
+199     #   continue
+200     # if words[0] == 'P;':
+201     #   continue
+202     if words[0] == "R" or words[0] == "W":
+203       if hex(int(words[2])) not in insAddrMap:
+204         # print words[0],hex(int(words[2]))
+205         insAddrMap.append(hex(int(words[2]))) #conversion to hex adds 0x
+206     else:
+207       if hex(int(words[1])) not in insAddrMap:
+208         # print words[0],hex(int(words[1]))
+209         insAddrMap.append(hex(int(words[1]))) #conversion to hex adds 0x
+210     
+211   # for line in traceFile:
+212   #   count += 1
+213   #   if count == 100000:
+214   #     print 'beat',datetime.now()
+215   #     count = 0
+216   #   words = line.strip().split(',')
+217   #   if len(words) < 3:
+218   #     continue #avoid empty lines
+219   #   insType = words[0]
+220   #   insAddr = words[1]
+221   #   if insAddr not in insAddrMap:
+222   #     insAddrMap.append(insAddr)
+223   #   else:
+224   #     continue
+225   #   indx = 2
+226   #   memDestAddr = -1
+227   #   brDestAddr = -1
+228   #   taken_notTaken = -1
+229   #   # print insType
+230   #   if insType == 'R' or insType == 'W':
+231   #     memDestAddr = words[indx]
+232   #     indx = 3
+233   #   elif insType == 'B':
+234   #     taken_notTaken = words[indx]
+235   #     brDestAddr = words[indx+1]
+236   #     indx = 4
+237   #   for elem in words[indx:-1]:
+238   #     temp = elem.strip().split('#')
+239   #     register = temp[0]
+240   #     read_write = temp[1]
+241   #     # print 'registers: ',register,read_write
+242   # traceFile.close()
+243   print 'DIFF'
+244   for item in inAddrLib:
+245     if item not in insAddrMap:
+246       print item
+247     
 
 \end{DoxyCode}
 

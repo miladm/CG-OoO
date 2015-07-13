@@ -85,6 +85,11 @@ Default branch predictor constructor.
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1}{
 \index{LocalBP@{LocalBP}!BTBUpdate@{BTBUpdate}}
@@ -96,7 +101,7 @@ Default branch predictor constructor.
 \end{DoxyParamCaption}
 )}}
 \label{classLocalBP_a6efe84f10a9141f20a9abeeaa1a76de1}
-Updates the branch predictor to Not Taken if a BTB entry is invalid or not found. 
+Updates the branch predictor to Not Taken if a \hyperlink{classBTB}{BTB} entry is invalid or not found. 
 \begin{DoxyParams}{Parameters}
 {\em branch\_\-addr} & The address of the branch to look up. \\
 \hline
@@ -113,6 +118,11 @@ Whether or not the branch is taken.
 // a BTB entry is invalid or not found.
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classLocalBP_ab884d4daf328f3284fe92c0ef3f5a37b}{
 \index{LocalBP@{LocalBP}!lookup@{lookup}}
 \index{lookup@{lookup}!LocalBP@{LocalBP}}
@@ -194,6 +204,11 @@ Whether or not the branch is taken.
 \begin{DoxyCode}
     { assert(bp_history == NULL); }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classLocalBP_a4d29b367b9ab3f0ab7250d1cce4b032b}{
 \index{LocalBP@{LocalBP}!update@{update}}
 \index{update@{update}!LocalBP@{LocalBP}}
@@ -233,6 +248,11 @@ Updates the branch predictor with the actual result of a branch.
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
