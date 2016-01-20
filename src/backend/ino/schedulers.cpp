@@ -56,7 +56,7 @@ PIPE_ACTIVITY scheduler::schedulerImpl () {
         if (!_iWindow.hasFreeWire (READ)) break;
         if (_scheduler_to_execution_port->getBuffState () == FULL_BUFF) break;
         dynInstruction* ins = _iWindow.getNth_unsafe (0);
-        _iWindow.ramAccess ();
+        _iWindow.ramAccess (); //READ
         if (!g_RF_MGR->hasFreeWire (READ, ins->getNumRdAR ())) break; /*-- INO SCHEDULING --*/
         if (!isReady (ins) || !g_RF_MGR->canReserveRF (ins)) break;
 
@@ -112,6 +112,8 @@ void scheduler::updateInsWin () {
         _iWindow.pushBack (ins);
         _iROB->pushBack (ins);
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
+
+        _iWindow.ramAccess (); //WRITE
 
         /* UPDATE WIRES */
         {

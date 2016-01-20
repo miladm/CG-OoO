@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00005"></a>00005 <span class="preprocessor">#ifndef _EXE_UNIT_H</span>
 <a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define _EXE_UNIT_H</span>
 <a name="l00007"></a>00007 <span class="preprocessor"></span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;unit.h&quot;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="unit_8h.html">unit.h</a>&quot;</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="dynInstruction_8h.html">dynInstruction.h</a>&quot;</span>
 <a name="l00010"></a>00010 
 <a name="l00011"></a><a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5da883dddb02c1460673bc1b19aa8c27ba7">00011</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5da135ec74119997c64ec05f8c4914a97a7">GENERIC_EU</a>, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5dacfccd38a6cdabbb1c23afad8d522658f">ALU_EU</a>, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5da1ff4f3eace1bbdf87c01560b4cb0d97f">FPU_EU</a>, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5da883dddb02c1460673bc1b19aa8c27ba7">MEM_EU</a>, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5da55bb18b30d5cf6d91613842568e172f5">BRU_EU</a>} <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a>;
@@ -80,10 +80,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00017"></a>00017           <a class="code" href="structexeUnitLat.html#a3eaf6d977e10668f9f9641601c2e155d">_fpu_lat</a> (5),
 <a name="l00018"></a>00018           <a class="code" href="structexeUnitLat.html#a56f987ed90a23321279e330e068262f8">_bru_lat</a> (1),
 <a name="l00019"></a>00019           <a class="code" href="structexeUnitLat.html#a2e0a0b29c7d4cd40492fe25740302c72">_st_buff_lat</a> (1),
-<a name="l00020"></a>00020           <a class="code" href="structexeUnitLat.html#a3c5ce17975afa47ae136e8355e328c3b">_l1_lat</a> (3),
-<a name="l00021"></a>00021           <a class="code" href="structexeUnitLat.html#a0a5e96d306ef23a2d69c8e97d62b27fd">_l2_lat</a> (12),
-<a name="l00022"></a>00022           <a class="code" href="structexeUnitLat.html#ae34f390b9e9b8e9d792a6656b801eca4">_l3_lat</a> (20),
-<a name="l00023"></a>00023           <a class="code" href="structexeUnitLat.html#a0478d29cba99e1c3849dceb6ecfca973">_mem_lat</a> (100)
+<a name="l00020"></a>00020           <a class="code" href="structexeUnitLat.html#a3c5ce17975afa47ae136e8355e328c3b">_l1_lat</a> (1),
+<a name="l00021"></a>00021           <a class="code" href="structexeUnitLat.html#a0a5e96d306ef23a2d69c8e97d62b27fd">_l2_lat</a> (1),
+<a name="l00022"></a>00022           <a class="code" href="structexeUnitLat.html#ae34f390b9e9b8e9d792a6656b801eca4">_l3_lat</a> (1),
+<a name="l00023"></a>00023           <a class="code" href="structexeUnitLat.html#a0478d29cba99e1c3849dceb6ecfca973">_mem_lat</a> (1)
 <a name="l00024"></a>00024     { }
 <a name="l00025"></a>00025 
 <a name="l00026"></a><a class="code" href="structexeUnitLat.html#a1c6fbd51db44097cab33015d4ee9dd81">00026</a>     <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="structexeUnitLat.html#a1c6fbd51db44097cab33015d4ee9dd81">_alu_lat</a>;
@@ -97,51 +97,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00034"></a>00034 };
 <a name="l00035"></a>00035 
 <a name="l00036"></a><a class="code" href="structexeUnit.html">00036</a> <span class="keyword">struct </span><a class="code" href="structexeUnit.html">exeUnit</a> {
-<a name="l00037"></a><a class="code" href="structexeUnit.html#af9048405bad98db15cdefb05bf7b842c">00037</a>     <a class="code" href="structexeUnit.html#af9048405bad98db15cdefb05bf7b842c">exeUnit</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> eu_type) 
+<a name="l00037"></a><a class="code" href="structexeUnit.html#a119cfafaad440fc7fdca7a3665e5de65">00037</a>     <a class="code" href="structexeUnit.html#a119cfafaad440fc7fdca7a3665e5de65">exeUnit</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency, <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> eu_type, <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; root) 
 <a name="l00038"></a>00038         : <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a> (start, latency),
-<a name="l00039"></a>00039           _eu_type (eu_type)
-<a name="l00040"></a>00040     {
-<a name="l00041"></a>00041         _eu_ins = NULL;
-<a name="l00042"></a>00042         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
-<a name="l00043"></a>00043     }
-<a name="l00044"></a><a class="code" href="structexeUnit.html#a739cfd78a98068a64fb2e807f49c4312">00044</a>     <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8">EU_STATE</a> <a class="code" href="structexeUnit.html#a739cfd78a98068a64fb2e807f49c4312">getEUstate</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, <span class="keywordtype">bool</span> limit_eu_state_access) {
-<a name="l00045"></a>00045         <span class="keywordflow">if</span> (!limit_eu_state_access) {
-<a name="l00046"></a>00046             <span class="keywordflow">return</span> _eu_state;
-<a name="l00047"></a>00047         } <span class="keywordflow">else</span> {
-<a name="l00048"></a>00048             <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a> &amp;&amp; now &gt;= <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a>.<a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> ()) {
-<a name="l00049"></a>00049                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542">COMPLETE_EU</a>;
-<a name="l00050"></a>00050             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>) {
-<a name="l00051"></a>00051                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>;
-<a name="l00052"></a>00052             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542">COMPLETE_EU</a>) {
-<a name="l00053"></a>00053                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
-<a name="l00054"></a>00054             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>) {
+<a name="l00039"></a>00039           _eu_type (eu_type),
+<a name="l00040"></a>00040           _e_eu (<span class="stringliteral">&quot;EU&quot;</span>, root)
+<a name="l00041"></a>00041     {
+<a name="l00042"></a>00042         _eu_ins = NULL;
+<a name="l00043"></a>00043         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
+<a name="l00044"></a>00044     }
+<a name="l00045"></a>00045 
+<a name="l00046"></a><a class="code" href="structexeUnit.html#a739cfd78a98068a64fb2e807f49c4312">00046</a>     <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8">EU_STATE</a> <a class="code" href="structexeUnit.html#a739cfd78a98068a64fb2e807f49c4312">getEUstate</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, <span class="keywordtype">bool</span> limit_eu_state_access) {
+<a name="l00047"></a>00047         <span class="keywordflow">if</span> (!limit_eu_state_access) {
+<a name="l00048"></a>00048             <span class="keywordflow">return</span> _eu_state;
+<a name="l00049"></a>00049         } <span class="keywordflow">else</span> {
+<a name="l00050"></a>00050             <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a> &amp;&amp; now &gt;= <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a>.<a class="code" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> ()) {
+<a name="l00051"></a>00051                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542">COMPLETE_EU</a>;
+<a name="l00052"></a>00052             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>) {
+<a name="l00053"></a>00053                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>;
+<a name="l00054"></a>00054             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a200f66777d03795c88a0c48dabbb6542">COMPLETE_EU</a>) {
 <a name="l00055"></a>00055                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
-<a name="l00056"></a>00056             } <span class="keywordflow">else</span> {
-<a name="l00057"></a>00057                 <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;invalid EU state&quot;</span>);
-<a name="l00058"></a>00058             }
-<a name="l00059"></a>00059             <span class="keywordflow">return</span> _eu_state;
-<a name="l00060"></a>00060         }
-<a name="l00061"></a>00061     }
-<a name="l00062"></a><a class="code" href="structexeUnit.html#a69498b2ca8353a14447a5596e768fc55">00062</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#a69498b2ca8353a14447a5596e768fc55">runEU</a> () {
-<a name="l00063"></a>00063         <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>);
-<a name="l00064"></a>00064         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>;
-<a name="l00065"></a>00065     }
-<a name="l00066"></a><a class="code" href="structexeUnit.html#ad9a4840a6956e01419327ba3123683dd">00066</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#ad9a4840a6956e01419327ba3123683dd">setEUins</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins) { <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_ins == NULL); _eu_ins = ins;}
-<a name="l00067"></a><a class="code" href="structexeUnit.html#a5414837e2e071fc0180c0326cc33370f">00067</a>     <a class="code" href="classdynInstruction.html">dynInstruction</a>* <a class="code" href="structexeUnit.html#a5414837e2e071fc0180c0326cc33370f">getEUins</a> () {<span class="keywordflow">return</span> _eu_ins;}
-<a name="l00068"></a><a class="code" href="structexeUnit.html#a31fd51a344347d96c9be688de8e0f97a">00068</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#a31fd51a344347d96c9be688de8e0f97a">resetEU</a> () {_eu_ins = NULL; _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;}
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070     <span class="keyword">public</span>:
-<a name="l00071"></a><a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">00071</a>         <a class="code" href="structtimer.html">timer</a> <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a>;
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     <span class="keyword">private</span>:
-<a name="l00074"></a>00074         <span class="keyword">const</span> <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> _eu_type;
-<a name="l00075"></a>00075         <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8">EU_STATE</a> _eu_state;
-<a name="l00076"></a>00076         <a class="code" href="classdynInstruction.html">dynInstruction</a>* _eu_ins;
-<a name="l00077"></a>00077 };
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 <span class="keyword">extern</span> <a class="code" href="structexeUnitLat.html">exeUnitLat</a> <a class="code" href="exeUnit_8cpp.html#a02b52478da6151a364f54791e40fb6a4">g_eu_lat</a>;
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 <span class="preprocessor">#endif</span>
+<a name="l00056"></a>00056             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>) {
+<a name="l00057"></a>00057                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
+<a name="l00058"></a>00058             } <span class="keywordflow">else</span> {
+<a name="l00059"></a>00059                 <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;invalid EU state&quot;</span>);
+<a name="l00060"></a>00060             }
+<a name="l00061"></a>00061             <span class="keywordflow">return</span> _eu_state;
+<a name="l00062"></a>00062         }
+<a name="l00063"></a>00063     }
+<a name="l00064"></a>00064 
+<a name="l00065"></a><a class="code" href="structexeUnit.html#a69498b2ca8353a14447a5596e768fc55">00065</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#a69498b2ca8353a14447a5596e768fc55">runEU</a> () {
+<a name="l00066"></a>00066         <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>);
+<a name="l00067"></a>00067         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>;
+<a name="l00068"></a>00068         _e_eu.<a class="code" href="classeu__energy.html#acccb63fcb43d3531d544a340ed352bdb">euAccess</a> ();
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00071"></a><a class="code" href="structexeUnit.html#ad9a4840a6956e01419327ba3123683dd">00071</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#ad9a4840a6956e01419327ba3123683dd">setEUins</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins) { <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_ins == NULL); _eu_ins = ins;}
+<a name="l00072"></a><a class="code" href="structexeUnit.html#a5414837e2e071fc0180c0326cc33370f">00072</a>     <a class="code" href="classdynInstruction.html">dynInstruction</a>* <a class="code" href="structexeUnit.html#a5414837e2e071fc0180c0326cc33370f">getEUins</a> () {<span class="keywordflow">return</span> _eu_ins;}
+<a name="l00073"></a><a class="code" href="structexeUnit.html#a31fd51a344347d96c9be688de8e0f97a">00073</a>     <span class="keywordtype">void</span> <a class="code" href="structexeUnit.html#a31fd51a344347d96c9be688de8e0f97a">resetEU</a> () {_eu_ins = NULL; _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;}
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     <span class="keyword">public</span>:
+<a name="l00076"></a><a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">00076</a>         <a class="code" href="structtimer.html">timer</a> <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a>;
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     <span class="keyword">private</span>:
+<a name="l00079"></a>00079         <span class="keyword">const</span> <a class="code" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> _eu_type;
+<a name="l00080"></a>00080         <a class="code" href="classeu__energy.html">eu_energy</a> _e_eu;
+<a name="l00081"></a>00081         <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8">EU_STATE</a> _eu_state;
+<a name="l00082"></a>00082         <a class="code" href="classdynInstruction.html">dynInstruction</a>* _eu_ins;
+<a name="l00083"></a>00083 };
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="keyword">extern</span> <a class="code" href="structexeUnitLat.html">exeUnitLat</a> <a class="code" href="exeUnit_8cpp.html#a02b52478da6151a364f54791e40fb6a4">g_eu_lat</a>;
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -149,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -158,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

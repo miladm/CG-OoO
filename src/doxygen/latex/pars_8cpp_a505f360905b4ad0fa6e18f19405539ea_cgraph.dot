@@ -5,5 +5,7 @@ digraph G
   rankdir=LR;
   Node1 [label="recover",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="memory_buffer::recover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmemory__buffer.html#aeba532b66854fbd90e6ea96e8ee36e74"];
+  Node2 [label="stat::getValue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstat.html#a466c0cff1754602817a62517d74a1d07"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="memory_buffer::recover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmemory__buffer.html#aeba532b66854fbd90e6ea96e8ee36e74"];
 }

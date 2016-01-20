@@ -67,16 +67,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="timer" -->
-<p><code>#include &lt;<a class="el" href="lib_2timer_8h_source.html">timer.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="timer_8h_source.html">timer.h</a>&gt;</code></p>
 
 <p><a href="structtimer-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#ae536faf93e02933cd025a6fbcbb48d0a">timer</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a8ef56ed7aca8da1b60ac27d88377706d">timer</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="el" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">setNewTime</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="el" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">setNewTime</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="el" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a8ef56ed7aca8da1b60ac27d88377706d">timer</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#abbf6863baf2cda80316b25a9943b3cd9">setNewTime</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a9d363616776c9e5acbfa0dab5c9ab2d0">setNewTime</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a5a974df09de3c943843cccb24bfdc2b3">getStopTime</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a5a00fe2116a5f1cadfed546dbd1929bb">getLatency</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtimer.html#a389d0c8235a4232f51397443debe03cb">isValidStopTime</a> ()</td></tr>
@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                : _latency (latency)
         {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(latency &gt;= 0 &amp;&amp; <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a> &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-                _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(latency &gt;= 0 &amp;&amp; start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+                _start = start;
                 _stop = _start + _latency;
             _valid = <span class="keyword">true</span>;
         }
@@ -153,19 +153,10 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                            {
-            <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
+            <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
                 <span class="keywordflow">return</span> _latency;
         }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structtimer_a5a00fe2116a5f1cadfed546dbd1929bb_icgraph.png" border="0" usemap="#structtimer_a5a00fe2116a5f1cadfed546dbd1929bb_icgraph" alt=""/></div>
-<map name="structtimer_a5a00fe2116a5f1cadfed546dbd1929bb_icgraph" id="structtimer_a5a00fe2116a5f1cadfed546dbd1929bb_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a5a974df09de3c943843cccb24bfdc2b3"></a><!-- doxytag: member="timer::getStopTime" ref="a5a974df09de3c943843cccb24bfdc2b3" args="()" -->
@@ -182,8 +173,8 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                             {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_stop &gt;= _start); 
-            <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_stop &gt;= _start); 
+            <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_valid == <span class="keyword">true</span>);
                 <span class="keywordflow">return</span> _stop;
         }
 </pre></div>
@@ -230,21 +221,12 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                      {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a> &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-                _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+                _start = start;
                 _stop = _start + _latency;
             _valid = <span class="keyword">true</span>;
         }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structtimer_abbf6863baf2cda80316b25a9943b3cd9_icgraph.png" border="0" usemap="#structtimer_abbf6863baf2cda80316b25a9943b3cd9_icgraph" alt=""/></div>
-<map name="structtimer_abbf6863baf2cda80316b25a9943b3cd9_icgraph" id="structtimer_abbf6863baf2cda80316b25a9943b3cd9_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a9d363616776c9e5acbfa0dab5c9ab2d0"></a><!-- doxytag: member="timer::setNewTime" ref="a9d363616776c9e5acbfa0dab5c9ab2d0" args="(CYCLE start, CYCLE latency)" -->
@@ -272,8 +254,8 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                     {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a> &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
-                _start = <a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>;
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(start &gt;= <a class="code" href="global_2global_8h.html#a46c241be3ec3f603b5b5e91f486f2eed">START_CYCLE</a>);
+                _start = start;
             _latency = latency;
                 _stop = _start + _latency;
             _valid = <span class="keyword">true</span>;
@@ -282,7 +264,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/lib/<a class="el" href="lib_2timer_8h_source.html">timer.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/lib/<a class="el" href="timer_8h_source.html">timer.h</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -290,7 +272,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -299,7 +281,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

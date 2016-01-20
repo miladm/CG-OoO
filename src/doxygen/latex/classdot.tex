@@ -12,24 +12,6 @@ Collaboration diagram for dot:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classdot_afca1c1f39b692528483b78569751068a}{dot} (int fileCode)
-\item 
-\hyperlink{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{$\sim$dot} ()
-\item 
-void \hyperlink{classdot_a23bb05ec40259de7239b166b664bfdb4}{runDot} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$list, int subGraphID)
-\item 
-void \hyperlink{classdot_a5841f9acea9e636b9630e8a2ebe25382}{init} ()
-\item 
-void \hyperlink{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{defn} ()
-\item 
-void \hyperlink{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{createSubGraph} (int subGraphID)
-\item 
-void \hyperlink{classdot_aac4be16ebdd60983177619a8b7df658f}{createGraph} ()
-\item 
-void \hyperlink{classdot_accd0278010df6b72404449831d51cd4e}{finish} ()
-\item 
-void \hyperlink{classdot_acc4e61396656da0a5a0ec085c88e414e}{closeBlock} ()
-\item 
 \hyperlink{classdot_af11dd579c7b133d259ac9fe60e7ae629}{dot} (int mode, string $\ast$program\_\-name)
 \item 
 \hyperlink{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{$\sim$dot} ()
@@ -38,64 +20,29 @@ void \hyperlink{classdot_a613147e95e44f245a63a5b08418c95f9}{runDot} (\hyperlink{
 \item 
 void \hyperlink{classdot_a5841f9acea9e636b9630e8a2ebe25382}{init} ()
 \item 
-void \hyperlink{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{defn} ()
+void \hyperlink{classdot_af56f68484dcec4b943a6a77d261080a6}{defn} (FILE $\ast$)
 \item 
-void \hyperlink{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{createSubGraph} (int subGraphID)
+void \hyperlink{classdot_a04dd7808d587869df22488a7e7a1835a}{createSubGraph} (int, FILE $\ast$)
 \item 
-void \hyperlink{classdot_aac4be16ebdd60983177619a8b7df658f}{createGraph} ()
+void \hyperlink{classdot_a34bd8df7c73a49901267dc3ca9209385}{createCFG} (FILE $\ast$)
 \item 
-void \hyperlink{classdot_accd0278010df6b72404449831d51cd4e}{finish} ()
+void \hyperlink{classdot_aa1638f8d762e0f431cef55da49e92ede}{createDT} (FILE $\ast$)
 \item 
-void \hyperlink{classdot_acc4e61396656da0a5a0ec085c88e414e}{closeBlock} ()
+void \hyperlink{classdot_ad7659526d6446a2065612898c6913a41}{finish} (FILE $\ast$)
 \item 
-void \hyperlink{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}{setupBox} (string color)
+void \hyperlink{classdot_a1ecb5d30b724c5f6bb49db212f3152de}{closeBlock} (FILE $\ast$)
 \item 
-void \hyperlink{classdot_ad5acf38fae453ba70cd1532ec2be4b36}{finishBox} ()
+void \hyperlink{classdot_a27540f28ccdbe6e62d32e727561fb185}{setupBox} (string, FILE $\ast$)
+\item 
+void \hyperlink{classdot_ac3912d5b73db012838fb8b37c1ed00bc}{finishBox} (FILE $\ast$)
+\item 
+void \hyperlink{classdot_af20dc816d263a9b3496d8241c339e235}{getInteriorBB} ()
+\item 
+void \hyperlink{classdot_acfd091941aef16273c4ebe92ef536742}{makeLink} (\hyperlink{classbasicblock}{basicblock} $\ast$, FILE $\ast$)
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classdot_afca1c1f39b692528483b78569751068a}{
-\index{dot@{dot}!dot@{dot}}
-\index{dot@{dot}!dot@{dot}}
-\subsubsection[{dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::dot (
-\begin{DoxyParamCaption}
-\item[{int}]{fileCode}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_afca1c1f39b692528483b78569751068a}
-
-\begin{DoxyCode}
-                     {
-        //char* hi = new char[10];
-        //itoa(fileCode, hi, 10);
-
-        if((_outFile=fopen("dotFiles/hi.dot", "w+")) == NULL) {
-            printf("ERROR: Cannot open file(s).\n");
-            exit(1);
-        }
-        init();
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-\hypertarget{classdot_a7c31a26ba233474fd5c7857bd3d8158f}{
-\index{dot@{dot}!$\sim$dot@{$\sim$dot}}
-\index{$\sim$dot@{$\sim$dot}!dot@{dot}}
-\subsubsection[{$\sim$dot}]{\setlength{\rightskip}{0pt plus 5cm}dot::$\sim$dot (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_a7c31a26ba233474fd5c7857bd3d8158f}
-
-\begin{DoxyCode}
-          {
-}
-\end{DoxyCode}
 \hypertarget{classdot_af11dd579c7b133d259ac9fe60e7ae629}{
 \index{dot@{dot}!dot@{dot}}
 \index{dot@{dot}!dot@{dot}}
@@ -108,23 +55,34 @@ Here is the call graph for this function:
 \label{classdot_af11dd579c7b133d259ac9fe60e7ae629}
 
 \begin{DoxyCode}
-                                       {
+                                        {
+    string out_dir = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/dotFi
+      les/";
         if (mode == 0) { //Make CFG
-                if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/Tr
-      aceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg.dot").c_str(), "w+"
-      )) == NULL) {
-                    Assert("Cannot open dot file(s).");
+        string cfg_file = out_dir + (*program_name) + "_cfg.dot";
+                if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
+                    Assert ("Cannot open dot file (s).");
+                }               
+
+        string dt_file = out_dir + (*program_name) + "_dt.dot";
+                if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
+                    Assert ("Cannot open dot file (s).");
                 }               
         } else if (mode = 1) { //Make Phrase CFG
-                if((_outFile=fopen(("/home/milad/esc_project/svn/memTraceMilad/Tr
-      aceSim/phraseblock_framework/dotFiles/"+(*program_name)+"_cfg_phrase.dot").c_str(
-      ), "w+")) == NULL) {
-                    Assert("Cannot open dot file(s).");
-                }               
+        string cfg_file = out_dir + (*program_name) + "_cfg_phrase.dot";
+                if ((_outFile=fopen (cfg_file.c_str (), "w+")) == NULL) {
+                    Assert ("Cannot open dot file (s).");
+                }
+
+        string dt_file = out_dir + (*program_name) + "_dt_phrase.dot";
+                if ((_outDomTreeFile=fopen (dt_file.c_str (), "w+")) == NULL) {
+                    Assert ("Cannot open dot file (s).");
+                }
         } else {
-                Assert("ILLEGAL Control Flow Graph file.");
+                Assert ("ILLEGAL Control Flow Graph file.");
         }
-        init();
+    _interiorBB = new List<basicblock*>;
+        init ();
 }
 \end{DoxyCode}
 
@@ -142,21 +100,27 @@ Here is the call graph for this function:
 )}}
 \label{classdot_a7c31a26ba233474fd5c7857bd3d8158f}
 
+\begin{DoxyCode}
+           {
+    delete _interiorBB;
+}
+\end{DoxyCode}
+
 
 \subsection{Member Function Documentation}
-\hypertarget{classdot_acc4e61396656da0a5a0ec085c88e414e}{
+\hypertarget{classdot_a1ecb5d30b724c5f6bb49db212f3152de}{
 \index{dot@{dot}!closeBlock@{closeBlock}}
 \index{closeBlock@{closeBlock}!dot@{dot}}
 \subsubsection[{closeBlock}]{\setlength{\rightskip}{0pt plus 5cm}void dot::closeBlock (
 \begin{DoxyParamCaption}
-{}
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_acc4e61396656da0a5a0ec085c88e414e}
+\label{classdot_a1ecb5d30b724c5f6bb49db212f3152de}
 
 \begin{DoxyCode}
-                     {
-        fprintf(_outFile, "\t}\n");
+                                   {
+        fprintf (outFile, "\t}\n");
 }
 \end{DoxyCode}
 
@@ -164,47 +128,32 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdot_acc4e61396656da0a5a0ec085c88e414e}{
-\index{dot@{dot}!closeBlock@{closeBlock}}
-\index{closeBlock@{closeBlock}!dot@{dot}}
-\subsubsection[{closeBlock}]{\setlength{\rightskip}{0pt plus 5cm}void dot::closeBlock (
+\hypertarget{classdot_a34bd8df7c73a49901267dc3ca9209385}{
+\index{dot@{dot}!createCFG@{createCFG}}
+\index{createCFG@{createCFG}!dot@{dot}}
+\subsubsection[{createCFG}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createCFG (
 \begin{DoxyParamCaption}
-{}
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_acc4e61396656da0a5a0ec085c88e414e}
-\hypertarget{classdot_aac4be16ebdd60983177619a8b7df658f}{
-\index{dot@{dot}!createGraph@{createGraph}}
-\index{createGraph@{createGraph}!dot@{dot}}
-\subsubsection[{createGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createGraph (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_aac4be16ebdd60983177619a8b7df658f}
-\hypertarget{classdot_aac4be16ebdd60983177619a8b7df658f}{
-\index{dot@{dot}!createGraph@{createGraph}}
-\index{createGraph@{createGraph}!dot@{dot}}
-\subsubsection[{createGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createGraph (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_aac4be16ebdd60983177619a8b7df658f}
+\label{classdot_a34bd8df7c73a49901267dc3ca9209385}
 
 \begin{DoxyCode}
-                      {
-        for (int i = 0; i < _list->NumElements(); i++) {
-                for (int j = 0; j < _list->Nth(i)->getNumAncestors(); j++) {
-                        if (_list->Nth(i)->getNthAncestor(j)->getMissrate() <= 
-      unpredMemOpThreshold) {
-                                fprintf(_outFile, "\t\tn%llu->n%llu[label=\"%d\"]
-      ;\n",_list->Nth(i)->getNthAncestor(j)->getInsAddr(),_list->Nth(i)->getInsAddr(),_
-      list->Nth(i)->getNthAncestor(j)->getMyPathLen());
+                                  {
+        for (int j = 0; j < _bBlist->NumElements (); j++) {
+                ADDR bbID = _bBlist->Nth (j)->getID ();
+                basicblock* bb = _bBlist->Nth (j);
+                for (int i = 0; i < bb->getNumDescendents (); i++) {
+                        if (bb->getLastInsDst () == -1) {
+                                fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\
+      "]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
+                        } else if (bb->getLastInsDst () == bb->getNthDescendent (
+      i)->getID ()) {
+                                fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\
+      "]\n", bbID, bb->getNthDescendent (i)->getID (), bb->getTakenBias ());  
                         } else {
-                                fprintf(_outFile, "\t\tn%llu->n%llu[label=\"%d\",
-      color=orangered];\n",_list->Nth(i)->getNthAncestor(j)->getInsAddr(),_list->Nth(i)
-      ->getInsAddr(),_list->Nth(i)->getNthAncestor(j)->getMyPathLen());
+                                fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\
+      "]\n", bbID, bb->getNthDescendent (i)->getID (), 1.0-bb->getTakenBias ());
                         }
                 }
         }
@@ -220,67 +169,161 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{
-\index{dot@{dot}!createSubGraph@{createSubGraph}}
-\index{createSubGraph@{createSubGraph}!dot@{dot}}
-\subsubsection[{createSubGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createSubGraph (
+\hypertarget{classdot_aa1638f8d762e0f431cef55da49e92ede}{
+\index{dot@{dot}!createDT@{createDT}}
+\index{createDT@{createDT}!dot@{dot}}
+\subsubsection[{createDT}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createDT (
 \begin{DoxyParamCaption}
-\item[{int}]{subGraphID}
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}
+\label{classdot_aa1638f8d762e0f431cef55da49e92ede}
 
 \begin{DoxyCode}
-                                       {
-        fprintf(_outFile, "\n\n");
-        fprintf(_outFile, "\tsubgraph cluster_%d {\n", subGraphID);
-        fprintf(_outFile, "\tlabel = \"Wavefront #%d\";\n", subGraphID);
+                                 {
+    getInteriorBB ();
+    for (int j = 0; j < _interiorBB->NumElements (); j++) {
+        basicblock* bb = _interiorBB->Nth (j);
+        ADDR bbID = bb->getID ();
+        makeLink (bb, outFile);
+    }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
 
 
-\hypertarget{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}{
+\hypertarget{classdot_a04dd7808d587869df22488a7e7a1835a}{
 \index{dot@{dot}!createSubGraph@{createSubGraph}}
 \index{createSubGraph@{createSubGraph}!dot@{dot}}
 \subsubsection[{createSubGraph}]{\setlength{\rightskip}{0pt plus 5cm}void dot::createSubGraph (
 \begin{DoxyParamCaption}
-\item[{int}]{subGraphID}
+\item[{int}]{subGraphID, }
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_a589a9b85d00d4072fd1eecf3b4b90bf0}
-\hypertarget{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{
-\index{dot@{dot}!defn@{defn}}
-\index{defn@{defn}!dot@{dot}}
-\subsubsection[{defn}]{\setlength{\rightskip}{0pt plus 5cm}void dot::defn (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}
-\hypertarget{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}{
-\index{dot@{dot}!defn@{defn}}
-\index{defn@{defn}!dot@{dot}}
-\subsubsection[{defn}]{\setlength{\rightskip}{0pt plus 5cm}void dot::defn (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_a0f2386ca3194247a3e8cb8bf05749a5e}
+\label{classdot_a04dd7808d587869df22488a7e7a1835a}
 
 \begin{DoxyCode}
-               {
-        for (int i = 0; i < _list->NumElements(); i++) {
-                if (_list->Nth(i)->getMissrate() <= unpredMemOpThreshold) {
-                        fprintf(_outFile, "\t\tn%llu[label=\"n%llu\"];\n",_list->
-      Nth(i)->getInsAddr(),_list->Nth(i)->getInsAddr());
-                } else {
-                        fprintf(_outFile, "\t\tn%llu[label=\"n%llu\",style=filled
-      ,fillcolor=orangered];\n",_list->Nth(i)->getInsAddr(),_list->Nth(i)->getInsAddr()
-      );
+                                                       {
+        fprintf (outFile, "\n\n");
+        fprintf (outFile, "\tsubgraph cluster_%d {\n", subGraphID);
+        fprintf (outFile, "\tlabel = \"Wavefront #%d\";\n", subGraphID);
+}
+\end{DoxyCode}
+\hypertarget{classdot_af56f68484dcec4b943a6a77d261080a6}{
+\index{dot@{dot}!defn@{defn}}
+\index{defn@{defn}!dot@{dot}}
+\subsubsection[{defn}]{\setlength{\rightskip}{0pt plus 5cm}void dot::defn (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{outFile}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_af56f68484dcec4b943a6a77d261080a6}
+
+\begin{DoxyCode}
+                             {
+        for (int j = 0; j < _bBlist->NumElements (); j++) {
+        basicblock* bb = _bBlist->Nth (j);
+                _insList = bb->getInsList ();
+                ADDR bbID = bb->getID ();
+                //if (bbID == 18446744073709551615) continue; //TODO remove/fix t
+      his problem
+                fprintf (outFile, "\t\"%llu\" ", bbID);
+                string color;
+                if (bb->isAPhraseblock ())  color.append ("lightgrey");
+                else                        color.append ("white");     
+                setupBox (color, outFile);
+                map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
+                if (phiFuncs.size () > 0) {
+                        for (map<long int, vector<long int> >::iterator it = phiF
+      uncs.begin (); it != phiFuncs.end (); it++) {
+                                vector<long int> phiVec;
+                                phiVec = it->second;
+                                fprintf (outFile, "\t\t<tr><td align=\"left\" por
+      t=\"r1\"> PHI: %d_ -- ",it->first);
+                                for (vector<long int>::iterator it2 = phiVec.begi
+      n (); it2 != phiVec.end (); it2++) {
+                                        fprintf (outFile, ",%d_%d", it->first,*it
+      2);                             
+                                }
+                                fprintf (outFile, "</td></tr>\n");
+                        }
                 }
+        /*-TODO delete this-*/
+                fprintf (outFile, "\t\t<tr><td align=\"left\" port=\"r1\"></td></
+      tr>\n");
+                                fprintf (outFile, "\t\t<tr><td align=\"left\" por
+      t=\"r1\"> IN/DEF: ");                           
+                set<long int> inset = bb->getInSet ();
+                                for (set<long int>::iterator it = inset.begin ();
+       it != inset.end (); it++) {
+                                    fprintf (outFile, ",%dI\n", *it);
+                                }
+                set<long int> defset = bb->getDefSet ();
+                                for (set<long int>::iterator it = defset.begin ()
+      ; it != defset.end (); it++) {
+                                    fprintf (outFile, ",%dD\n", *it);
+                                }
+                fprintf (outFile, "</td></tr>\n");                              
+        /* ---------------- */
+                for (int i = 0; i < _insList->NumElements (); i++) {
+            instruction* ins = _insList->Nth (i);
+                        ADDR insAddr = ins->getInsAddr ();
+                        double missRate = ins->getLdMissRate ();
+                        if (missRate > UPLD_THRESHOLD)
+                                fprintf (outFile, "\t\t<tr><td align=\"left\" por
+      t=\"r1\"> %llx, %s (UPLD-%.2f) </td></tr>\n", insAddr, ins->getOpCode (), missRat
+      e);
+                        else {
+                                fprintf (outFile, "\t\t<tr><td align=\"left\" por
+      t=\"r1\"> %llx, %s", insAddr, ins->getOpCode ());                               
+                bool enSpecialRegLog = true;
+                for (int j = 0; j < ins->getNumReg (); j++) {
+                    if (ins->getNthRegType (j) == READ) {
+                        fprintf (outFile, ",%dR\n", ins->getNthReg (j));
+                    } else {
+                        if (enSpecialRegLog) {
+                            /* WRITE SPECIAL REGISTER VALUES */
+                            enSpecialRegLog = false;
+                            for (int k = 0; k < ins->getNumSpecialReg (); k++) {
+                                if (ins->getNthSpecialRegType (k) == READ) {
+                                    fprintf (outFile, ",%dR\n", ins->
+      getNthSpecialReg (k));
+                                } else {
+                                    fprintf (outFile, ",%dW\n", ins->
+      getNthSpecialReg (k));
+                                }
+                            }
+                        }
+                        fprintf (outFile, ",%dW\n", ins->getNthReg (j));
+                    }
+                }
+                                fprintf (outFile, ",%s", ins->getInsAsm ());                            
+/*                              fprintf (outFile, "\t\t<tr><td align=\"left\" por
+      t=\"r1\"> %llx, %s", insAddr, _insList->Nth (i)->getOpCode ());                         
+                                for (int j = 0; j < _insList->Nth (i)->getNumRead
+      Reg (); j++) {
+                                        fprintf (outFile, ",%d_%dR", _insList->Nt
+      h (i)->getNthReadReg (j),_insList->Nth (i)->getReadRegSubscript (_insList->Nth (i
+      )->getNthReadReg (j)));                         
+                                }
+                                for (int j = 0; j < _insList->Nth (i)->getNumWrit
+      eReg (); j++) {
+                                        fprintf (outFile, ",%d_%dW", _insList->Nt
+      h (i)->getNthWriteReg (j),_insList->Nth (i)->getWriteRegSubscript (_insList->Nth 
+      (i)->getNthWriteReg (j)));                              
+                                }
+*/                              fprintf (outFile, "</td></tr>\n");
+                        }
+                }
+                finishBox (outFile);
         }
 }
 \end{DoxyCode}
@@ -294,76 +337,38 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdot_accd0278010df6b72404449831d51cd4e}{
+\hypertarget{classdot_ad7659526d6446a2065612898c6913a41}{
 \index{dot@{dot}!finish@{finish}}
 \index{finish@{finish}!dot@{dot}}
 \subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finish (
 \begin{DoxyParamCaption}
-{}
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_accd0278010df6b72404449831d51cd4e}
-\hypertarget{classdot_accd0278010df6b72404449831d51cd4e}{
-\index{dot@{dot}!finish@{finish}}
-\index{finish@{finish}!dot@{dot}}
-\subsubsection[{finish}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finish (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_accd0278010df6b72404449831d51cd4e}
+\label{classdot_ad7659526d6446a2065612898c6913a41}
 
 \begin{DoxyCode}
-                 {
-        fprintf(_outFile, "}\n");
-        //chdir("dotFiles");
-        //system("make");
-        //chdir("../");
-        fclose(_outFile);
+                               {
+        fprintf (outFile, "}\n");
+        //chdir ("dotFiles");
+        //system ("make");
+        //chdir ("../");
+        fclose (outFile);
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdot_ad5acf38fae453ba70cd1532ec2be4b36}{
+\hypertarget{classdot_ac3912d5b73db012838fb8b37c1ed00bc}{
 \index{dot@{dot}!finishBox@{finishBox}}
 \index{finishBox@{finishBox}!dot@{dot}}
 \subsubsection[{finishBox}]{\setlength{\rightskip}{0pt plus 5cm}void dot::finishBox (
 \begin{DoxyParamCaption}
-{}
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_ad5acf38fae453ba70cd1532ec2be4b36}
+\label{classdot_ac3912d5b73db012838fb8b37c1ed00bc}
 
 \begin{DoxyCode}
-                    {
-        fprintf(_outFile, "\t\t</table>> ];\n");
-}
-\end{DoxyCode}
-\hypertarget{classdot_a5841f9acea9e636b9630e8a2ebe25382}{
-\index{dot@{dot}!init@{init}}
-\index{init@{init}!dot@{dot}}
-\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void dot::init (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_a5841f9acea9e636b9630e8a2ebe25382}
-\hypertarget{classdot_a5841f9acea9e636b9630e8a2ebe25382}{
-\index{dot@{dot}!init@{init}}
-\index{init@{init}!dot@{dot}}
-\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void dot::init (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classdot_a5841f9acea9e636b9630e8a2ebe25382}
-
-\begin{DoxyCode}
-               {
-        fprintf(_outFile, "digraph G {\n");
+                                  {
+        fprintf (outFile, "\t\t</table>> ];\n");
 }
 \end{DoxyCode}
 
@@ -371,24 +376,88 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdot_a23bb05ec40259de7239b166b664bfdb4}{
-\index{dot@{dot}!runDot@{runDot}}
-\index{runDot@{runDot}!dot@{dot}}
-\subsubsection[{runDot}]{\setlength{\rightskip}{0pt plus 5cm}void dot::runDot (
+\hypertarget{classdot_af20dc816d263a9b3496d8241c339e235}{
+\index{dot@{dot}!getInteriorBB@{getInteriorBB}}
+\index{getInteriorBB@{getInteriorBB}!dot@{dot}}
+\subsubsection[{getInteriorBB}]{\setlength{\rightskip}{0pt plus 5cm}void dot::getInteriorBB (
 \begin{DoxyParamCaption}
-\item[{{\bf List}$<$ {\bf instruction} $\ast$ $>$ $\ast$}]{list, }
-\item[{int}]{subGraphID}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_a23bb05ec40259de7239b166b664bfdb4}
+\label{classdot_af20dc816d263a9b3496d8241c339e235}
 
 \begin{DoxyCode}
-                                                         {
-        _list = list;
-        createSubGraph(subGraphID);
-        defn();
-        createGraph();
-        closeBlock();
+                         {
+    for (int i = 0; i < _bBlist->NumElements (); i++) {
+        basicblock* bb = _bBlist->Nth (i);
+        if (bb->getSDominatorSize () == 0) {
+            _interiorBB->Append (bb);
+        }
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdot_a5841f9acea9e636b9630e8a2ebe25382}{
+\index{dot@{dot}!init@{init}}
+\index{init@{init}!dot@{dot}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void dot::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_a5841f9acea9e636b9630e8a2ebe25382}
+
+\begin{DoxyCode}
+                {
+        fprintf (_outFile, "digraph G {\n"
+                          "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines
+      =true overlap=false rankdir = \"LR\"];\n"
+                          "\tratio = auto;\n");
+
+        fprintf (_outDomTreeFile, "digraph G {\n"
+                          "\tgraph [fontsize=30 labelloc=\"t\" label=\"\" splines
+      =true overlap=false rankdir = \"LR\"];\n"
+                          "\tratio = auto;\n");
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdot_acfd091941aef16273c4ebe92ef536742}{
+\index{dot@{dot}!makeLink@{makeLink}}
+\index{makeLink@{makeLink}!dot@{dot}}
+\subsubsection[{makeLink}]{\setlength{\rightskip}{0pt plus 5cm}void dot::makeLink (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{bb, }
+\item[{FILE $\ast$}]{outFile}
+\end{DoxyParamCaption}
+)}}
+\label{classdot_acfd091941aef16273c4ebe92ef536742}
+
+\begin{DoxyCode}
+                                                 {
+    map<ADDR,basicblock*> children = bb->getChildren ();
+    map<ADDR,basicblock*>::iterator it;
+    for (it = children.begin (); it != children.end (); it++) {
+        basicblock* child = it->second;
+        fprintf (outFile, "\t%llu -> %llu[label = \"%.3f\"]\n", bb->getID (), chi
+      ld->getID (), 1.0-bb->getTakenBias ());
+    }
+    for (it = children.begin (); it != children.end (); it++) {
+        basicblock* child = it->second;
+        makeLink (child, outFile);
+    }
 }
 \end{DoxyCode}
 
@@ -412,12 +481,17 @@ Here is the caller graph for this function:
 \label{classdot_a613147e95e44f245a63a5b08418c95f9}
 
 \begin{DoxyCode}
-                                        {
+                                         {
         _bBlist = list;
-        //createSubGraph(subGraphID);
-        defn();
-        createGraph();
-        closeBlock();
+        //createSubGraph (subGraphID, _outFile);
+        defn (_outFile);
+        defn (_outDomTreeFile);
+
+        createCFG (_outFile);
+        createDT (_outDomTreeFile);
+
+        closeBlock (_outFile);
+        closeBlock (_outDomTreeFile);
 }
 \end{DoxyCode}
 
@@ -425,29 +499,38 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}{
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdot_a27540f28ccdbe6e62d32e727561fb185}{
 \index{dot@{dot}!setupBox@{setupBox}}
 \index{setupBox@{setupBox}!dot@{dot}}
 \subsubsection[{setupBox}]{\setlength{\rightskip}{0pt plus 5cm}void dot::setupBox (
 \begin{DoxyParamCaption}
-\item[{string}]{color}
+\item[{string}]{color, }
+\item[{FILE $\ast$}]{outFile}
 \end{DoxyParamCaption}
 )}}
-\label{classdot_ae8c40cee623a5b6e30e7cb4ddf2aff27}
+\label{classdot_a27540f28ccdbe6e62d32e727561fb185}
 
 \begin{DoxyCode}
-                               {
-        fprintf(_outFile, "[  style = \"filled\" penwidth = 1 fillcolor = \"%s\" 
+                                               {
+        fprintf (outFile, "[  style = \"filled\" penwidth = 1 fillcolor = \"%s\" 
       fontname = \"Courier New\" shape = \"Mrecord\"\n"
                            "\t\tlabel =<<table border=\"0\" cellborder=\"0\" cell
-      padding=\"3\" bgcolor=\"%s\">\n", color.c_str(), color.c_str());
+      padding=\"3\" bgcolor=\"%s\">\n", color.c_str (), color.c_str ());
 }
 \end{DoxyCode}
 
 
+Here is the caller graph for this function:
+
+
+
+
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dot_8h}{dot.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dot_8h}{dot.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2dot_8cpp}{dot.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2dot_8cpp}{dot.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{dot_8h}{dot.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{dot_8cpp}{dot.cpp}\end{DoxyCompactItemize}

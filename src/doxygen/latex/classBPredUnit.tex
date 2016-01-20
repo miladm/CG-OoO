@@ -17,6 +17,8 @@ struct {\bfseries PredictorHistory}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classBPredUnit_a4d632a2a34745803315809aedf2ce9b1}{BPredUnit} (DerivO3CPUParams $\ast$params)
+\item 
 const std::string \& \hyperlink{classBPredUnit_aeaaeb15f110f0ed58cc3161d6f6ace22}{name} () const 
 \item 
 void \hyperlink{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9b85}{regStats} ()
@@ -25,7 +27,7 @@ void \hyperlink{classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e}{switchOut} ()
 \item 
 void \hyperlink{classBPredUnit_a9011bcc9143d2396dfec49828484a645}{takeOverFrom} ()
 \item 
-bool \hyperlink{classBPredUnit_add836c4a521ed2bd12eca4d1dee13620}{predict} (DynInstPtr \&inst, TheISA::PCState \&pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool \&allPredStatic, int oracleBP)
+bool \hyperlink{classBPredUnit_ad37b550622b7ed76b55d80cc28700699}{predict} (DynInstPtr \&inst, TheISA::PCState \&pc, ThreadID tid, bool odbpStatic, bool predTaken, int positionInFetchGroup, int positionInLine, bool \&allPredStatic, int oracleBP, bool onlyLP)
 \item 
 void \hyperlink{classBPredUnit_a89690e897bb5661ee868f659a06515c9}{increase\_\-BP\_\-lookup} (int)
 \item 
@@ -45,7 +47,7 @@ void \hyperlink{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}{squash} (const
 \item 
 void \hyperlink{classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3}{BPSquash} (void $\ast$bp\_\-history)
 \item 
-bool \hyperlink{classBPredUnit_aafefe8c8d85f49d118e825fa0c1c0176}{BPLookup} (Addr instPC, void $\ast$\&bp\_\-history, int positionInFetchGroup, bool onDemand, bool \&choicePred)
+bool \hyperlink{classBPredUnit_af381979dadd608af5d4d5a235050f335}{BPLookup} (Addr instPC, void $\ast$\&bp\_\-history, int positionInFetchGroup, bool onDemand, bool \&choicePred, bool onlyLP)
 \item 
 void \hyperlink{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}{noBPLookup} (Addr instPC, void $\ast$\&bp\_\-history, int positionInLine)
 \item 
@@ -62,6 +64,8 @@ void \hyperlink{classBPredUnit_a16de9793a28ee07dcf26d89c03328555}{BPHistUpdate} 
 void \hyperlink{classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5}{BPHistGarbageCollect} (void $\ast$bp\_\-history)
 \item 
 void \hyperlink{classBPredUnit_a5afe025cde23c608d745e8daca63e8a6}{BTBUpdate} (Addr instPC, const TheISA::PCState \&target)
+\item 
+void \hyperlink{classBPredUnit_a6b7b489094d02552a2e1a81aab1ed280}{dump} ()
 \item 
 const std::string \& \hyperlink{classBPredUnit_aeaaeb15f110f0ed58cc3161d6f6ace22}{name} () const 
 \item 
@@ -114,7 +118,80 @@ void \hyperlink{classBPredUnit_a5afe025cde23c608d745e8daca63e8a6}{BTBUpdate} (Ad
 \subsection{Detailed Description}
 \subsubsection*{template$<$class Impl$>$class BPredUnit$<$ Impl $>$}
 
-Basically a wrapper class to hold both the branch predictor and the BTB. 
+BASICALLY A WRAPPER CLASS TO HOLD BOTH THE BRANCH PREDICTOR AND THE \hyperlink{classBTB}{BTB}.
+
+Basically a wrapper class to hold both the branch predictor and the \hyperlink{classBTB}{BTB}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classBPredUnit_a4d632a2a34745803315809aedf2ce9b1}{
+\index{BPredUnit@{BPredUnit}!BPredUnit@{BPredUnit}}
+\index{BPredUnit@{BPredUnit}!BPredUnit@{BPredUnit}}
+\subsubsection[{BPredUnit}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ {\bf BPredUnit}$<$ Impl $>$::{\bf BPredUnit} (
+\begin{DoxyParamCaption}
+\item[{DerivO3CPUParams $\ast$}]{params}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_a4d632a2a34745803315809aedf2ce9b1}
+
+\begin{DoxyParams}{Parameters}
+{\em params} & The params object, that has the size of the BP and \hyperlink{classBTB}{BTB}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+    : _name (params->name + ".BPredUnit"),
+      BTB (params->BTBEntries,
+          params->BTBTagSize,
+          params->instShiftAmt)
+{
+    // Setup the selected predictor.
+    if (params->predType == "local") {
+        localBP = new LocalBP (params->localPredictorSize,
+                              params->localCtrBits,
+                              params->instShiftAmt);
+        predictor = Local;
+    } else if (params->predType == "hybrid") {
+        hybridbp = new HybridBP (params->localPredictorSize,
+                                        params->localCtrBits,
+                                        params->globalPredictorSize,
+                                        params->globalHistoryBits,
+                                        params->globalCtrBits,
+                                        params->choicePredictorSize,
+                                        params->choiceCtrBits,
+                                        params->instShiftAmt,
+                                                                                p
+      arams->fetchWidth);
+        predictor = Hybrid;
+    } else if (params->predType == "hybrid_skew") {
+        hybridSkewbp = new HybridBPskew (params->localPredictorSize,
+                                        params->localCtrBits,
+                                        params->globalPredictorSize,
+                                        params->globalHistoryBits,
+                                        params->globalCtrBits,
+                                        params->choicePredictorSize,
+                                        params->choiceCtrBits,
+                                        params->instShiftAmt,
+                                                                                p
+      arams->fetchWidth);
+        predictor = HybridSkew;
+    } else {
+        fatal ("Invalid BP selected!");
+    }
+
+    for (int i=0; i < Impl::MaxThreads; i++)
+        RAS[i].init (params->RASSize);
+        
+        fetchWidth = params->fetchWidth;
+        instShiftAmt = params->instShiftAmt;
+        totalInstShiftAmt = instShiftAmt + (unsigned)log2 (fetchWidth);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
 
 \subsection{Member Function Documentation}
 \hypertarget{classBPredUnit_a282f0c689c4cedfb52221c1ce96b4084}{
@@ -147,7 +224,7 @@ Basically a wrapper class to hold both the branch predictor and the BTB.
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_a55a6608f958c4e70360c34bd48c57032}
-If a branch is not taken, because the BTB address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. 
+If a branch is not taken, because the \hyperlink{classBTB}{BTB} address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up the local predictor. \\
 \hline
@@ -158,16 +235,21 @@ If a branch is not taken, because the BTB address is invalid or missing, this fu
 \begin{DoxyCode}
 {
     if (predictor == Local) {
-        return localBP->BTBUpdate(instPC, bp_history);
+        return localBP->BTBUpdate (instPC, bp_history);
     } else if (predictor == Hybrid) {
-        return hybridbp->BTBUpdate(instPC, bp_history);
+        return hybridbp->BTBUpdate (instPC, bp_history);
     } else if (predictor == HybridSkew) {
-        return hybridSkewbp->BTBUpdate(instPC, bp_history);
+        return hybridSkewbp->BTBUpdate (instPC, bp_history);
     } else {
-        panic("Predictor type is unexpected value!");
+        panic ("Predictor type is unexpected value!");
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a55a6608f958c4e70360c34bd48c57032}{
 \index{BPredUnit@{BPredUnit}!BPBTBUpdate@{BPBTBUpdate}}
 \index{BPBTBUpdate@{BPBTBUpdate}!BPredUnit@{BPredUnit}}
@@ -178,7 +260,7 @@ If a branch is not taken, because the BTB address is invalid or missing, this fu
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_a55a6608f958c4e70360c34bd48c57032}
-If a branch is not taken, because the BTB address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. 
+If a branch is not taken, because the \hyperlink{classBTB}{BTB} address is invalid or missing, this function sets the appropriate counter in the global and local predictors to not taken. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up the local predictor. \\
 \hline
@@ -198,17 +280,22 @@ If a branch is not taken, because the BTB address is invalid or missing, this fu
 \begin{DoxyCode}
 {
     if (predictor == Local) {
-        assert(false && "this function is not supported for loacl prediction - (s
-      ee Milad!)");
+        assert (false && "this function is not supported for loacl prediction - (
+      see Milad!)");
     } else if (predictor == Hybrid) {
-        hybridbp->histGarbageCollect(bp_history);
+        hybridbp->histGarbageCollect (bp_history);
     } else if (predictor == HybridSkew) {
-        hybridSkewbp->histGarbageCollect(bp_history);
+        hybridSkewbp->histGarbageCollect (bp_history);
     } else {
-        panic("Predictor type is unexpected value!");
+        panic ("Predictor type is unexpected value!");
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a9268abcbddfdfd6e6a076ecd343a3de5}{
 \index{BPredUnit@{BPredUnit}!BPHistGarbageCollect@{BPHistGarbageCollect}}
 \index{BPHistGarbageCollect@{BPHistGarbageCollect}!BPredUnit@{BPredUnit}}
@@ -246,40 +333,22 @@ If a branch is not taken, because the BTB address is invalid or missing, this fu
 \begin{DoxyCode}
 {
     if (predictor == Local) {
-        assert(false && "this function is not supported for loacl prediction - (s
-      ee Milad!)");
+        assert (false && "this function is not supported for loacl prediction - (
+      see Milad!)");
     } else if (predictor == Hybrid) {
-        hybridbp->histUpdate(instPC, taken, bp_history, squashed);
+        hybridbp->histUpdate (instPC, taken, bp_history, squashed);
     } else if (predictor == HybridSkew) {
-        hybridSkewbp->histUpdate(instPC, taken, bp_history, squashed);
+        hybridSkewbp->histUpdate (instPC, taken, bp_history, squashed);
     } else {
-        panic("Predictor type is unexpected value!");
+        panic ("Predictor type is unexpected value!");
     }
 }
 \end{DoxyCode}
-\hypertarget{classBPredUnit_aafefe8c8d85f49d118e825fa0c1c0176}{
-\index{BPredUnit@{BPredUnit}!BPLookup@{BPLookup}}
-\index{BPLookup@{BPLookup}!BPredUnit@{BPredUnit}}
-\subsubsection[{BPLookup}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ bool {\bf BPredUnit}$<$ Impl $>$::BPLookup (
-\begin{DoxyParamCaption}
-\item[{Addr}]{instPC, }
-\item[{void $\ast$\&}]{bp\_\-history, }
-\item[{int}]{positionInFetchGroup, }
-\item[{bool}]{onDemand, }
-\item[{bool \&}]{choicePred}
-\end{DoxyParamCaption}
-)}}
-\label{classBPredUnit_aafefe8c8d85f49d118e825fa0c1c0176}
-Looks up a given PC in the BP to see if it is taken or not taken. 
-\begin{DoxyParams}{Parameters}
-{\em inst\_\-PC} & The PC to look up. \\
-\hline
-{\em bp\_\-history} & Pointer that will be set to an object that has the branch predictor state associated with the lookup. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Whether the branch is taken or not taken. 
-\end{DoxyReturn}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_aafefe8c8d85f49d118e825fa0c1c0176}{
 \index{BPredUnit@{BPredUnit}!BPLookup@{BPLookup}}
 \index{BPLookup@{BPLookup}!BPredUnit@{BPredUnit}}
@@ -321,6 +390,30 @@ Whether the branch is taken or not taken.
     }
 }
 \end{DoxyCode}
+\hypertarget{classBPredUnit_af381979dadd608af5d4d5a235050f335}{
+\index{BPredUnit@{BPredUnit}!BPLookup@{BPLookup}}
+\index{BPLookup@{BPLookup}!BPredUnit@{BPredUnit}}
+\subsubsection[{BPLookup}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ bool {\bf BPredUnit}$<$ Impl $>$::BPLookup (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC, }
+\item[{void $\ast$\&}]{bp\_\-history, }
+\item[{int}]{positionInFetchGroup, }
+\item[{bool}]{onDemand, }
+\item[{bool \&}]{choicePred, }
+\item[{bool}]{onlyLP}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_af381979dadd608af5d4d5a235050f335}
+Looks up a given PC in the BP to see if it is taken or not taken. 
+\begin{DoxyParams}{Parameters}
+{\em inst\_\-PC} & The PC to look up. \\
+\hline
+{\em bp\_\-history} & Pointer that will be set to an object that has the branch predictor state associated with the lookup. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the branch is taken or not taken. 
+\end{DoxyReturn}
 \hypertarget{classBPredUnit_a14a43c5f5bc8c64c07a075ce1608f9c3}{
 \index{BPredUnit@{BPredUnit}!BPSquash@{BPSquash}}
 \index{BPSquash@{BPSquash}!BPredUnit@{BPredUnit}}
@@ -353,16 +446,21 @@ Whether the branch is taken or not taken.
 \begin{DoxyCode}
 {
     if (predictor == Local) {
-        localBP->squash(bp_history);
+        localBP->squash (bp_history);
     } else if (predictor == Hybrid) {
-        hybridbp->squash(bp_history);
+        hybridbp->squash (bp_history);
     } else if (predictor == HybridSkew) {
-        hybridSkewbp->squash(bp_history);
+        hybridSkewbp->squash (bp_history);
     } else {
-        panic("Predictor type is unexpected value!");
+        panic ("Predictor type is unexpected value!");
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173}{
 \index{BPredUnit@{BPredUnit}!BPUncond@{BPUncond}}
 \index{BPUncond@{BPUncond}!BPredUnit@{BPredUnit}}
@@ -377,12 +475,17 @@ Whether the branch is taken or not taken.
 {
     // Only the hybrid predictor cares about unconditional branches.
     if (predictor == Hybrid) {
-        hybridbp->uncondBr(bp_history);
+        hybridbp->uncondBr (bp_history);
     } else if (predictor == HybridSkew) {
-        hybridSkewbp->uncondBr(bp_history);
+        hybridSkewbp->uncondBr (bp_history);
     }
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a24bfe00e5e8c2a318930a6474ed60173}{
 \index{BPredUnit@{BPredUnit}!BPUncond@{BPUncond}}
 \index{BPUncond@{BPUncond}!BPredUnit@{BPredUnit}}
@@ -421,17 +524,22 @@ Updates the BP with taken/not taken information.
 \begin{DoxyCode}
 {
     if (predictor == Local) {
-        localBP->update(instPC, taken, bp_history);
+        localBP->update (instPC, taken, bp_history);
     } else if (predictor == Hybrid) {
-        hybridbp->update(instPC, taken, bp_history, squashed);
+        hybridbp->update (instPC, taken, bp_history, squashed);
     } else if (predictor == HybridSkew) {
-        hybridSkewbp->update(instPC, taken, bp_history, squashed);
+        hybridSkewbp->update (instPC, taken, bp_history, squashed);
     } else {
-        panic("Predictor type is unexpected value!");
+        panic ("Predictor type is unexpected value!");
     }
-        increase_BP_lookup_and_update(1);
+        increase_BP_lookup_and_update (1);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a35c57ae0661f1d5dd2169e919741d47b}{
 \index{BPredUnit@{BPredUnit}!BPUpdate@{BPUpdate}}
 \index{BPUpdate@{BPUpdate}!BPredUnit@{BPredUnit}}
@@ -456,7 +564,7 @@ Updates the BP with taken/not taken information.
 \hline
 \end{DoxyParams}
 \begin{Desc}
-\item[\hyperlink{todo__todo000002}{Todo}]Make this update flexible enough to handle a global predictor. \end{Desc}
+\item[\hyperlink{todo__todo000003}{Todo}]Make this update flexible enough to handle a global predictor. \end{Desc}
 \hypertarget{classBPredUnit_a31024f2d92bfd7e778a790f4c6f61498}{
 \index{BPredUnit@{BPredUnit}!BTBLookup@{BTBLookup}}
 \index{BTBLookup@{BTBLookup}!BPredUnit@{BPredUnit}}
@@ -466,7 +574,7 @@ Updates the BP with taken/not taken information.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a31024f2d92bfd7e778a790f4c6f61498}
-Looks up a given PC in the BTB to get the predicted target. 
+Looks up a given PC in the \hyperlink{classBTB}{BTB} to get the predicted target. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up. \\
 \hline
@@ -492,7 +600,7 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a31024f2d92bfd7e778a790f4c6f61498}
-Looks up a given PC in the BTB to get the predicted target. 
+Looks up a given PC in the \hyperlink{classBTB}{BTB} to get the predicted target. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up. \\
 \hline
@@ -519,11 +627,11 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a5afe025cde23c608d745e8daca63e8a6}
-Updates the BTB with the target of a branch. 
+Updates the \hyperlink{classBTB}{BTB} with the target of a branch. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The branch's PC that will be updated. \\
 \hline
-{\em target\_\-PC} & The branch's target that will be added to the BTB. \\
+{\em target\_\-PC} & The branch's target that will be added to the \hyperlink{classBTB}{BTB}. \\
 \hline
 \end{DoxyParams}
 
@@ -545,11 +653,11 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a5afe025cde23c608d745e8daca63e8a6}
-Updates the BTB with the target of a branch. 
+Updates the \hyperlink{classBTB}{BTB} with the target of a branch. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The branch's PC that will be updated. \\
 \hline
-{\em target\_\-PC} & The branch's target that will be added to the BTB. \\
+{\em target\_\-PC} & The branch's target that will be added to the \hyperlink{classBTB}{BTB}. \\
 \hline
 \end{DoxyParams}
 
@@ -570,13 +678,13 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a66a1f6f9cdd28b38b005a666a9976ed7}
-Looks up a given PC in the BTB to see if a matching entry exists. 
+Looks up a given PC in the \hyperlink{classBTB}{BTB} to see if a matching entry exists. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Whether the BTB contains the given PC. 
+Whether the \hyperlink{classBTB}{BTB} contains the given PC. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
@@ -596,13 +704,13 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{classBPredUnit_a66a1f6f9cdd28b38b005a666a9976ed7}
-Looks up a given PC in the BTB to see if a matching entry exists. 
+Looks up a given PC in the \hyperlink{classBTB}{BTB} to see if a matching entry exists. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The PC to look up. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Whether the BTB contains the given PC. 
+Whether the \hyperlink{classBTB}{BTB} contains the given PC. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
@@ -613,6 +721,39 @@ Whether the BTB contains the given PC.
 Here is the call graph for this function:
 
 
+\hypertarget{classBPredUnit_a6b7b489094d02552a2e1a81aab1ed280}{
+\index{BPredUnit@{BPredUnit}!dump@{dump}}
+\index{dump@{dump}!BPredUnit@{BPredUnit}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::dump (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_a6b7b489094d02552a2e1a81aab1ed280}
+
+\begin{DoxyCode}
+{
+    HistoryIt pred_hist_it;
+
+    for (int i = 0; i < Impl::MaxThreads; ++i) {
+        if (!predHist[i].empty ()) {
+            pred_hist_it = predHist[i].begin ();
+
+            cprintf ("predHist[%i].size (): %i\n", i, predHist[i].size ());
+
+            while (pred_hist_it != predHist[i].end ()) {
+                cprintf ("[sn:%lli], PC:%#x, tid:%i, predTaken:%i, "
+                        "bpHistory:%#x\n",
+                        pred_hist_it->seqNum, pred_hist_it->pc,
+                        pred_hist_it->pred_hist_it->predTaken,
+                        pred_hist_it->bpHistory);
+                pred_hist_it++;
+            }
+            cprintf ("\n");
+        }
+    }
+}
+\end{DoxyCode}
 \hypertarget{classBPredUnit_a89690e897bb5661ee868f659a06515c9}{
 \index{BPredUnit@{BPredUnit}!increase\_\-BP\_\-lookup@{increase\_\-BP\_\-lookup}}
 \index{increase\_\-BP\_\-lookup@{increase\_\-BP\_\-lookup}!BPredUnit@{BPredUnit}}
@@ -661,6 +802,11 @@ Here is the call graph for this function:
   lookup_and_updates += lookupCnt;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classBPredUnit_a41ecb08c99f45538eaf1de4e184905b4}{
 \index{BPredUnit@{BPredUnit}!increase\_\-BTB\_\-lookup@{increase\_\-BTB\_\-lookup}}
 \index{increase\_\-BTB\_\-lookup@{increase\_\-BTB\_\-lookup}!BPredUnit@{BPredUnit}}
@@ -723,17 +869,6 @@ Here is the call graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}
-\hypertarget{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}{
-\index{BPredUnit@{BPredUnit}!noBPLookup@{noBPLookup}}
-\index{noBPLookup@{noBPLookup}!BPredUnit@{BPredUnit}}
-\subsubsection[{noBPLookup}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::noBPLookup (
-\begin{DoxyParamCaption}
-\item[{Addr}]{instPC, }
-\item[{void $\ast$\&}]{bp\_\-history, }
-\item[{int}]{positionInLine}
-\end{DoxyParamCaption}
-)}}
-\label{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}
 
 \begin{DoxyCode}
 {
@@ -752,6 +887,17 @@ Here is the call graph for this function:
     }
 }
 \end{DoxyCode}
+\hypertarget{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}{
+\index{BPredUnit@{BPredUnit}!noBPLookup@{noBPLookup}}
+\index{noBPLookup@{noBPLookup}!BPredUnit@{BPredUnit}}
+\subsubsection[{noBPLookup}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::noBPLookup (
+\begin{DoxyParamCaption}
+\item[{Addr}]{instPC, }
+\item[{void $\ast$\&}]{bp\_\-history, }
+\item[{int}]{positionInLine}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_af5b3e6db0cf1f00dee290e16765f28f8}
 \hypertarget{classBPredUnit_add836c4a521ed2bd12eca4d1dee13620}{
 \index{BPredUnit@{BPredUnit}!predict@{predict}}
 \index{predict@{predict}!BPredUnit@{BPredUnit}}
@@ -977,7 +1123,12 @@ Returns if the branch is taken or not.
     return pred_taken;
 }
 \end{DoxyCode}
-\hypertarget{classBPredUnit_add836c4a521ed2bd12eca4d1dee13620}{
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classBPredUnit_ad37b550622b7ed76b55d80cc28700699}{
 \index{BPredUnit@{BPredUnit}!predict@{predict}}
 \index{predict@{predict}!BPredUnit@{BPredUnit}}
 \subsubsection[{predict}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ bool {\bf BPredUnit}$<$ Impl $>$::predict (
@@ -990,10 +1141,11 @@ Returns if the branch is taken or not.
 \item[{int}]{positionInFetchGroup, }
 \item[{int}]{positionInLine, }
 \item[{bool \&}]{allPredStatic, }
-\item[{int}]{oracleBP}
+\item[{int}]{oracleBP, }
+\item[{bool}]{onlyLP}
 \end{DoxyParamCaption}
 )}}
-\label{classBPredUnit_add836c4a521ed2bd12eca4d1dee13620}
+\label{classBPredUnit_ad37b550622b7ed76b55d80cc28700699}
 Predicts whether or not the instruction is a taken branch, and the target of the branch if it is taken. 
 \begin{DoxyParams}{Parameters}
 {\em inst} & The branch instruction. \\
@@ -1015,7 +1167,11 @@ Returns if the branch is taken or not.
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9b85}
-Registers statistics. \hypertarget{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9b85}{
+Registers statistics. 
+\begin{DoxyCode}
+{ }
+\end{DoxyCode}
+\hypertarget{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9b85}{
 \index{BPredUnit@{BPredUnit}!regStats@{regStats}}
 \index{regStats@{regStats}!BPredUnit@{BPredUnit}}
 \subsubsection[{regStats}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::regStats (
@@ -1024,84 +1180,7 @@ Registers statistics. \hypertarget{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_a0cffcea165538b2e7fd554a92b8d9b85}
-Registers statistics. \hypertarget{classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b}{
-\index{BPredUnit@{BPredUnit}!squash@{squash}}
-\index{squash@{squash}!BPredUnit@{BPredUnit}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::squash (
-\begin{DoxyParamCaption}
-\item[{const InstSeqNum \&}]{squashed\_\-sn, }
-\item[{ThreadID}]{tid}
-\end{DoxyParamCaption}
-)}}
-\label{classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b}
-Squashes all outstanding updates until a given sequence number. 
-\begin{DoxyParams}{Parameters}
-{\em squashed\_\-sn} & The sequence number to squash any younger updates up until. \\
-\hline
-{\em tid} & The thread id. \\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyCode}
-{
-    History &pred_hist = predHist[tid];
-
-    while (!pred_hist.empty() &&
-           pred_hist.front().seqNum > squashed_sn) {
-        if (pred_hist.front().usedRAS) {
-            DPRINTF(Fetch, "BranchPred: [tid:%i]: Restoring top of RAS to: %i,"
-                    " target: %s.\n", tid,
-                    pred_hist.front().RASIndex, pred_hist.front().RASTarget);
-
-            RAS[tid].restore(pred_hist.front().RASIndex,
-                             pred_hist.front().RASTarget);
-        } else if(pred_hist.front().wasCall && pred_hist.front().validBTB) {
-            // Was a call but predicated false. Pop RAS here
-            DPRINTF(Fetch, "BranchPred: [tid: %i] Squashing"
-                    "  Call [sn:%i] PC: %s Popping RAS\n", tid,
-                    pred_hist.front().seqNum, pred_hist.front().pc);
-            RAS[tid].pop();
-        }
-
-        // This call should delete the bpHistory.
-        BPSquash(pred_hist.front().bpHistory);
-
-        DPRINTF(Fetch, "BranchPred: [tid:%i]: Removing history for [sn:%i] "
-                "PC %s.\n", tid, pred_hist.front().seqNum,
-                pred_hist.front().pc);
-
-        pred_hist.pop_front();
-
-        DPRINTF(Fetch, "[tid:%i]: predHist.size(): %i\n",
-                tid, predHist[tid].size());
-    }
-
-}
-\end{DoxyCode}
-\hypertarget{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}{
-\index{BPredUnit@{BPredUnit}!squash@{squash}}
-\index{squash@{squash}!BPredUnit@{BPredUnit}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::squash (
-\begin{DoxyParamCaption}
-\item[{const InstSeqNum \&}]{squashed\_\-sn, }
-\item[{const TheISA::PCState \&}]{corr\_\-target, }
-\item[{bool}]{actually\_\-taken, }
-\item[{ThreadID}]{tid}
-\end{DoxyParamCaption}
-)}}
-\label{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}
-Squashes all outstanding updates until a given sequence number, and corrects that sn's update with the proper address and taken/not taken. 
-\begin{DoxyParams}{Parameters}
-{\em squashed\_\-sn} & The sequence number to squash any younger updates up until. \\
-\hline
-{\em corr\_\-target} & The correct branch target. \\
-\hline
-{\em actually\_\-taken} & The correct branch direction. \\
-\hline
-{\em tid} & The thread id. \\
-\hline
-\end{DoxyParams}
-\hypertarget{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}{
+Registers statistics. \hypertarget{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}{
 \index{BPredUnit@{BPredUnit}!squash@{squash}}
 \index{squash@{squash}!BPredUnit@{BPredUnit}}
 \subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::squash (
@@ -1255,6 +1334,88 @@ Squashes all outstanding updates until a given sequence number.
 {\em tid} & The thread id. \\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyCode}
+{
+    History &pred_hist = predHist[tid];
+
+    while (!pred_hist.empty() &&
+           pred_hist.front().seqNum > squashed_sn) {
+        if (pred_hist.front().usedRAS) {
+            DPRINTF(Fetch, "BranchPred: [tid:%i]: Restoring top of RAS to: %i,"
+                    " target: %s.\n", tid,
+                    pred_hist.front().RASIndex, pred_hist.front().RASTarget);
+
+            RAS[tid].restore(pred_hist.front().RASIndex,
+                             pred_hist.front().RASTarget);
+        } else if(pred_hist.front().wasCall && pred_hist.front().validBTB) {
+            // Was a call but predicated false. Pop RAS here
+            DPRINTF(Fetch, "BranchPred: [tid: %i] Squashing"
+                    "  Call [sn:%i] PC: %s Popping RAS\n", tid,
+                    pred_hist.front().seqNum, pred_hist.front().pc);
+            RAS[tid].pop();
+        }
+
+        // This call should delete the bpHistory.
+        BPSquash(pred_hist.front().bpHistory);
+
+        DPRINTF(Fetch, "BranchPred: [tid:%i]: Removing history for [sn:%i] "
+                "PC %s.\n", tid, pred_hist.front().seqNum,
+                pred_hist.front().pc);
+
+        pred_hist.pop_front();
+
+        DPRINTF(Fetch, "[tid:%i]: predHist.size(): %i\n",
+                tid, predHist[tid].size());
+    }
+
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}{
+\index{BPredUnit@{BPredUnit}!squash@{squash}}
+\index{squash@{squash}!BPredUnit@{BPredUnit}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::squash (
+\begin{DoxyParamCaption}
+\item[{const InstSeqNum \&}]{squashed\_\-sn, }
+\item[{const TheISA::PCState \&}]{corr\_\-target, }
+\item[{bool}]{actually\_\-taken, }
+\item[{ThreadID}]{tid}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_a78e6f48f8a11db90daab850527d48aa7}
+Squashes all outstanding updates until a given sequence number, and corrects that sn's update with the proper address and taken/not taken. 
+\begin{DoxyParams}{Parameters}
+{\em squashed\_\-sn} & The sequence number to squash any younger updates up until. \\
+\hline
+{\em corr\_\-target} & The correct branch target. \\
+\hline
+{\em actually\_\-taken} & The correct branch direction. \\
+\hline
+{\em tid} & The thread id. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b}{
+\index{BPredUnit@{BPredUnit}!squash@{squash}}
+\index{squash@{squash}!BPredUnit@{BPredUnit}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Impl $>$ void {\bf BPredUnit}$<$ Impl $>$::squash (
+\begin{DoxyParamCaption}
+\item[{const InstSeqNum \&}]{squashed\_\-sn, }
+\item[{ThreadID}]{tid}
+\end{DoxyParamCaption}
+)}}
+\label{classBPredUnit_a94a04b4bdf8f6b9b3cf33882bc16067b}
+Squashes all outstanding updates until a given sequence number. 
+\begin{DoxyParams}{Parameters}
+{\em squashed\_\-sn} & The sequence number to squash any younger updates up until. \\
+\hline
+{\em tid} & The thread id. \\
+\hline
+\end{DoxyParams}
 \hypertarget{classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e}{
 \index{BPredUnit@{BPredUnit}!switchOut@{switchOut}}
 \index{switchOut@{switchOut}!BPredUnit@{BPredUnit}}
@@ -1273,6 +1434,20 @@ Squashes all outstanding updates until a given sequence number.
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_ac33c3d29c7b6aca9578fc416eb34e60e}
+
+\begin{DoxyCode}
+{
+    // Clear any state upon switch out.
+    for (int i = 0; i < Impl::MaxThreads; ++i) {
+        squash (0, i);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classBPredUnit_a9011bcc9143d2396dfec49828484a645}{
 \index{BPredUnit@{BPredUnit}!takeOverFrom@{takeOverFrom}}
 \index{takeOverFrom@{takeOverFrom}!BPredUnit@{BPredUnit}}
@@ -1291,6 +1466,20 @@ Squashes all outstanding updates until a given sequence number.
 \end{DoxyParamCaption}
 )}}
 \label{classBPredUnit_a9011bcc9143d2396dfec49828484a645}
+
+\begin{DoxyCode}
+{
+    // Can reset all predictor state, but it's not necessarily better
+    // than leaving it be.
+/*
+    for (int i = 0; i < Impl::MaxThreads; ++i)
+        RAS[i].reset ();
+
+    BP.reset ();
+    BTB.reset ();
+*/
+}
+\end{DoxyCode}
 \hypertarget{classBPredUnit_aa154b29fbf52ad49d89a046e94b53ac9}{
 \index{BPredUnit@{BPredUnit}!update@{update}}
 \index{update@{update}!BPredUnit@{BPredUnit}}
@@ -1358,7 +1547,7 @@ Tells the branch predictor to commit any updates until the given sequence number
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2bpred__unit_8h}{bpred\_\-unit.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/bp/\hyperlink{backend_2bp_2bpred__unit_8h}{bpred\_\-unit.h}\item 
 /home/milad/esc\_\-project/svn/PARS/src/forLater/\hyperlink{forLater_2bpred__unit_8h}{bpred\_\-unit.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2bpred__unit__ctr_8h}{bpred\_\-unit\_\-ctr.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/forLater/\hyperlink{forLater_2bpred__unit__ctr_8h}{bpred\_\-unit\_\-ctr.h}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/bp/\hyperlink{backend_2bp_2bpred__unit_8cpp}{bpred\_\-unit.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/\hyperlink{bpred__unit__ctr_8h}{bpred\_\-unit\_\-ctr.h}\end{DoxyCompactItemize}

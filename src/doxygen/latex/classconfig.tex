@@ -14,100 +14,72 @@ Collaboration diagram for config:
 \item 
 \hyperlink{classconfig_ab1b245308f26ce7979e4c37e93869706}{config} ()
 \item 
-\hyperlink{classconfig_a83e543efde26a3bd118757ddf1fa098f}{config} (char $\ast$, \hyperlink{structg__variable}{g\_\-variable} $\ast$)
+\hyperlink{classconfig_a2927ae142b867cba0bfcf3bd9b39760f}{config} (string, string, string)
 \item 
 \hyperlink{classconfig_a9b8b1ccf97780676a19296f72fee3aae}{$\sim$config} ()
 \item 
-bool \hyperlink{classconfig_ac94cb602566243ecb9f76d05cb3199fa}{parsePinPointFiles} (char $\ast$, char $\ast$)
+void \hyperlink{classconfig_a147b2e07b1e0849a4113997acd333e6a}{storeSimConfig} (ofstream $\ast$)
 \item 
 char $\ast$ \hyperlink{classconfig_a9530da432f14dc0e96f794e13475e4be}{getProgName} ()
 \item 
-void \hyperlink{classconfig_a130fd7b4a660ecb2a3522221427f5956}{verifyConfig} ()
+char $\ast$ \hyperlink{classconfig_a9dd0b4405d19c26884b5db734d4e5bb7}{getSfilePath} ()
+\item 
+string \hyperlink{classconfig_a7cccd557a2366138d69f2335acebb7eb}{getOutPath} ()
+\item 
+string \hyperlink{classconfig_a11cb0f8db74961c153d3637de5d842cc}{getProfilePath} ()
+\item 
+\hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE} \hyperlink{classconfig_acdfce653f4bad57644645e96aaa2a4cc}{getSchMode} ()
+\item 
+\hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}{REG\_\-ALLOC\_\-MODE} \hyperlink{classconfig_aae32bca45b60d2f07c5c85f43de94435}{getRegAllocMode} ()
+\item 
+\hyperlink{global_2global_8h_ab65a1cfe05166d06195718a9587d7b86}{CORE\_\-TYPE} \hyperlink{classconfig_a70f8fcc3a60527665fb2491e5d0b61c0}{getCoreType} ()
+\item 
+\hyperlink{global_2global_8h_a0685c5d42062f018dda85c9d62f3ac1f}{MEM\_\-MODEL} \hyperlink{classconfig_ab46ed06bcb9d53d8c45b0f327dd1b07a}{getMemModel} ()
+\item 
+\hyperlink{global_2global_8h_a66f26a0131462195055f25dc2fe952f8}{BP\_\-TYPE} \hyperlink{classconfig_a590b78c2b19952195de93fb8ccda10cc}{getBPtype} ()
+\item 
+int \hyperlink{classconfig_a251d502d37db7bd0ea6c268c55fb8956}{getNumEu} ()
+\item 
+long double \hyperlink{classconfig_a837d986a2972eaeae9c0b46c2566ecec}{getMaxInsCnt} ()
+\item 
+bool \hyperlink{classconfig_a92554ae5ad4d8db473c1894f2bd119fc}{isEnSquash} ()
+\item 
+bool \hyperlink{classconfig_ae927f81be9eec26997ccca2601c6cfc7}{isEnEuFwd} ()
+\item 
+bool \hyperlink{classconfig_a12202da8711bd354d5b1a98693c0efa8}{isEnMemFwd} ()
+\item 
+bool \hyperlink{classconfig_a36705d014a0017f1dcf0fdb11838a31b}{isEnFwd} ()
+\item 
+bool \hyperlink{classconfig_a7a0aeef57c716fc8c8b72cb31bfabcff}{isEnLogStat} ()
+\item 
+bool \hyperlink{classconfig_a14a41780de0d5bc586fd79a202eca047}{isEnProfiling} ()
+\item 
+void \hyperlink{classconfig_a359ca41b9b50c84a73c826bc896588b8}{setWarmedUp} ()
+\item 
+bool \hyperlink{classconfig_abe24c6843643f18ae5897b868f76e0e5}{isWarmedUp} ()
+\item 
+bool \hyperlink{classconfig_a25bf7a9e673f260e38e65633a0b3c0e9}{warmUpEn} ()
+\item 
+\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} \hyperlink{classconfig_ad4a483605bc08660247399a42137a2d2}{getLARF\_\-LO} ()
+\item 
+\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} \hyperlink{classconfig_aff59ff4ebcf158004d507e5eda2ebb47}{getLARF\_\-HI} ()
+\item 
+\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} \hyperlink{classconfig_ae53e27cfc1f32047f93dc51aab146c36}{getGARF\_\-LO} ()
+\item 
+\hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} \hyperlink{classconfig_a7771dd7ff24081e6035f2ddd77872417}{getGARF\_\-HI} ()
+\item 
+unsigned \hyperlink{classconfig_acfdbc61d57ab979c3bc2e3a45d3f88ad}{brMisspredDelay} ()
+\item 
+bool \hyperlink{classconfig_a0580212c629d1811cfeaf6d035518843}{isWrongPath} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std::map$<$ \hyperlink{global_2global_8h_a8de6a99590d1589b9e2eb7b208c517e8}{SIMP}, \hyperlink{global_2global_8h_ae8fb2e990993b1181540c8986c5d98e5}{SIMW} $>$ \hyperlink{classconfig_a66a2268284689ebce8e0fe2f87a2699d}{\_\-simpoint}
+std::map$<$ \hyperlink{global_2global_8h_aa6308256cfa38997c75a56309db4fd1e}{SIMP}, \hyperlink{global_2global_8h_ae8fb2e990993b1181540c8986c5d98e5}{SIMW} $>$ \hyperlink{classconfig_a66a2268284689ebce8e0fe2f87a2699d}{\_\-simpoint}
 \item 
 bool \hyperlink{classconfig_a2928e02fdf4716123e313e363e77875a}{\_\-use\_\-simpoint}
 \item 
-char \hyperlink{classconfig_adb1322ea6b15bd6c0387b2fe82e7c574}{param} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-char \hyperlink{classconfig_a344b61d2beb7dec897796ef42ed00010}{program\_\-name} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-FILE $\ast$ \hyperlink{classconfig_a3a5aaa62d616ead46e8b132c9305ea7f}{f\_\-config}
-\item 
-\hyperlink{structg__variable}{g\_\-variable} $\ast$ \hyperlink{classconfig_acfc11a499f94cd303747f5e58c447f36}{\_\-g\_\-var}
-\item 
-char \hyperlink{classconfig_a325327ce309f0152ce4e1a45bb097b09}{pinPoint\_\-s\_\-file} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-char \hyperlink{classconfig_afc8eae6d38b6e75182bb7a93c46542e3}{pinPoint\_\-w\_\-file} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-char \hyperlink{classconfig_a9101bb4e461cd4ec6012bb178eb3c392}{output\_\-w\_\-file} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-char \hyperlink{classconfig_ad0b1dacf1eb81162d514175543251908}{obj\_\-r\_\-file} \mbox{[}PARSE\_\-LEN\mbox{]}
-\item 
-\hyperlink{global_2global_8h_ab65a1cfe05166d06195718a9587d7b86}{core} \hyperlink{classconfig_a8d6774da02b8fae7f319212466d360ad}{coreType}
-\item 
-\hyperlink{global_2global_8h_a01e05efee3068c759b10b6181a6065e1}{brMode} \hyperlink{classconfig_a504ac31b890e1ae3ecf5ec1ab99621b3}{branchMode}
-\item 
-\hyperlink{global_2global_8h_a0685c5d42062f018dda85c9d62f3ac1f}{memModel} \hyperlink{classconfig_a8b53c1fcfcc74b75455423696309bf91}{memoryModel}
-\item 
-\hyperlink{global_2global_8h_a2bd5cbbaffd02af41175a938dc5da2f1}{rrMode} \hyperlink{classconfig_a2344640bb090fed4cf5e303c10028737}{regRenMode}
-\item 
-int \hyperlink{classconfig_ae2064ad29481d05bec60ff9a10775c8b}{num\_\-mem\_\-levels}
-\item 
-int \hyperlink{classconfig_a18d19c63e34e1d1bf73dce6d945ad624}{cache\_\-lat} \mbox{[}MEM\_\-HIGHERARCHY\mbox{]}
-\item 
-int \hyperlink{classconfig_a56fb441e18e865131359adfc0ea56c2a}{st\_\-lat}
-\item 
-int \hyperlink{classconfig_a881b8c04dd7ca3bf08cf1bc679608a2e}{alu\_\-count}
-\item 
-int \hyperlink{classconfig_aecfafe8bd9d2dc97abde0730d59f6f9d}{rob\_\-size}
-\item 
-int \hyperlink{classconfig_a60ce0b8af7c4fbe8839ccf4d46b5be60}{iwin\_\-size}
-\item 
-int \hyperlink{classconfig_a48b2da3ec3a4b6ea4660771f23ba1582}{pb\_\-win\_\-count}
-\item 
-int \hyperlink{classconfig_a5dde15659f2775908ca310ed84270a8d}{pb\_\-win\_\-size}
-\item 
-int \hyperlink{classconfig_a91da818c1e663a984f2a1590df385dc8}{fetch\_\-delay}
-\item 
-int \hyperlink{classconfig_ac32c79ca2541862ab10e332835726ac7}{bp\_\-delay}
-\item 
-int \hyperlink{classconfig_a872974c5580ad2deb7a383c11f089b68}{decode\_\-delay}
-\item 
-int \hyperlink{classconfig_aa72ae4e6e9040f2f1402b9b09bcbd026}{regren\_\-delay}
-\item 
-int \hyperlink{classconfig_a55776db7f0ec934f45511861b401d615}{issue\_\-delay}
-\item 
-int \hyperlink{classconfig_a44f960416e7b458fe0d8c9fb0712d905}{alu\_\-delay}
-\item 
-int \hyperlink{classconfig_a369164f22ea95fa960db882496fdb362}{complete\_\-delay}
-\item 
-int \hyperlink{classconfig_a19565b08815a3a80c62393a062255225}{wb\_\-delay}
-\item 
-int \hyperlink{classconfig_a33bd64d9413ee02e75e5417dc831c745}{fwd\_\-delay}
-\item 
-int \hyperlink{classconfig_aa1361f6a730b6a397cbc0eab017b8370}{bp\_\-width}
-\item 
-int \hyperlink{classconfig_a6c7d857d48cac72b22a8f92811a81332}{decode\_\-width}
-\item 
-int \hyperlink{classconfig_a296691b2dd0273f25096fde73677eff1}{issue\_\-width}
-\item 
-int \hyperlink{classconfig_aec11bf6374063a368b518d0e11eb6144}{dispatch\_\-width}
-\item 
-int \hyperlink{classconfig_ac81423700e2794fa5031ab254ff6204d}{commit\_\-width}
-\item 
-int \hyperlink{classconfig_a5ab3a47306812a67f78f54f7eacf3775}{squash\_\-width}
-\item 
-int \hyperlink{classconfig_a9ef7bd3b551d8830a5f9ef3ea8981324}{wb\_\-width}
-\item 
-int \hyperlink{classconfig_a8c866969fe846bf930fa583e0afb83b5}{pb\_\-win\_\-width}
-\item 
-int \hyperlink{classconfig_a7d5bdc81185bd8d0f4ae57333afc5a28}{regren\_\-width}
-\item 
-int \hyperlink{classconfig_ad709f7c23cd755ccccc73ae2214cc272}{fetch\_\-width}
+\hyperlink{classYAML_1_1Node}{YAML::Node} \hyperlink{classconfig_a225be0b4193c49568b32481edcd52418}{\_\-root}
 \end{DoxyCompactItemize}
 
 
@@ -123,207 +95,309 @@ int \hyperlink{classconfig_ad709f7c23cd755ccccc73ae2214cc272}{fetch\_\-width}
 \label{classconfig_ab1b245308f26ce7979e4c37e93869706}
 
 \begin{DoxyCode}
-               {
-        Assert(false && "This constructor is unsupported - config()");
-        coreType = OUT_OF_ORDER;
-        branchMode = dynPredBr;
-        memoryModel = TOTAL_ORDER;
-        //rrMode regRenMode = RR_ACTIVE; TODO put this line back
+                {
+        Assert (0 && "This constructor is unsupported - config ()");
+        _core_type = OUT_OF_ORDER;
+        _bp_type = PERFECT_BP;
+        _mem_model = TOTAL_ORDER;
+        //rrMode _reg_ren_mode = RR_ACTIVE; TODO put this line back
 }
 \end{DoxyCode}
-\hypertarget{classconfig_a83e543efde26a3bd118757ddf1fa098f}{
+\hypertarget{classconfig_a2927ae142b867cba0bfcf3bd9b39760f}{
 \index{config@{config}!config@{config}}
 \index{config@{config}!config@{config}}
 \subsubsection[{config}]{\setlength{\rightskip}{0pt plus 5cm}config::config (
 \begin{DoxyParamCaption}
-\item[{char $\ast$}]{cfg\_\-file, }
-\item[{{\bf g\_\-variable} $\ast$}]{g\_\-var}
+\item[{string}]{bench\_\-path, }
+\item[{string}]{config\_\-path, }
+\item[{string}]{out\_\-dir}
 \end{DoxyParamCaption}
 )}}
-\label{classconfig_a83e543efde26a3bd118757ddf1fa098f}
+\label{classconfig_a2927ae142b867cba0bfcf3bd9b39760f}
 
 \begin{DoxyCode}
-                                                 {
-        _g_var = g_var;
-        _g_var->msg.simStep("PARSING SIMULATION CONFIGURATIONS");
-        f_config = fopen (cfg_file,"r");
+                                                                     {
+    string yaml_file = out_dir + "/base.yaml";
+    ifstream fin (yaml_file);
+    YAML::Parser parser (fin);
+    parser.GetNextDocument (_root);
+
+
+    int prof_temp, wp_temp;
+    _root["cpu"]["frontend"]["profiling"] >> prof_temp;
+    _root["cpu"]["backend"]["rf"]["lrf"]["rf_lo"] >> _larf_lo;
+    _root["cpu"]["backend"]["rf"]["lrf"]["rf_hi"] >> _larf_hi;
+    _root["cpu"]["backend"]["rf"]["grf"]["a_lo"]  >> _garf_lo;
+    _root["cpu"]["backend"]["rf"]["grf"]["a_hi"]  >> _garf_hi;
+    _enable_profile = (bool)prof_temp;
+    _root["cpu"]["frontend"]["wrong_path"] >> wp_temp;
+    _enable_wp = (bool)wp_temp;
+    _root["cpu"]["frontend"]["br_misspred_delay"] >> _br_misspred_delay;
+
+
+    /* =========== ============ */
+    /* organzie this code  - hack */
+    _warmed_up = false;
+    _enable_warm_up = true;
+
+    /* =========== OLD CODE ============ */
+        g_msg.simStep ("PARSING SIMULATION CONFIGURATIONS");
+    string cfg_file_ext = ".cfg";
+    cout << config_path << endl;
+    _config_path  = config_path + cfg_file_ext;
+    _out_path = out_dir;
+    _profile_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/profil
+      e_files/ref"; //TODO tranfer to yaml
+    cout << _config_path << endl;
+    _bench_path   = bench_path + cfg_file_ext;
+        _f_sim_cfg    = fopen (_config_path.c_str (), "r");
+        _f_bench_cfg  = fopen (_bench_path.c_str (), "r");
+
+    /*-- BENCHMARK PARAMS --*/
         #ifdef ASSERTION
-        Assert(f_config != NULL);
+        Assert (_f_bench_cfg != NULL);
+        Assert (_f_sim_cfg != NULL);
         #endif
-        fscanf(f_config, "%s = \" %s \"\n", param, program_name);
+        fscanf (_f_bench_cfg, "%s = \" %s \"\n", _param, _program_name);
         #ifdef ASSERTION
-        Assert(strcmp(param,"APPLICATION")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"APPLICATION") == 0 && "Wrong Parameter parsed.");
+      
+        #endif
+        fscanf (_f_bench_cfg, "%s = \" %s \"", _param, pinPoint_s_file);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"PINPOINT_SIM_FILE") == 0 && "Wrong Parameter pars
+      ed.");
+        #endif
+        fscanf (_f_bench_cfg, "%s = \" %s \"", _param, pinPoint_w_file);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"PINPOINT_WEIGHT_FILE") == 0 && "Wrong Parameter p
+      arsed.");
+        #endif
+        Assert (parsePinPointFiles () == true && "No simpoint data parsed.");
+
+    /*-- SIMULATION PARAMS --*/
+        fscanf (_f_sim_cfg, "%s = %Lf\n", _param, &_max_ins_cnt);
+    _max_ins_cnt *= (float) MILLION;
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"MAX_INS_CNT") == 0 && "Wrong Parameter parsed.");
+      
         #endif
         int t_use_simpoint = -1;
-        fscanf(f_config, "%s = %d\n", param, &t_use_simpoint);
-        _use_simpoint = (bool)t_use_simpoint;
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &t_use_simpoint);
+        _use_simpoint =  (bool)t_use_simpoint;
         #ifdef ASSERTION
-        Assert(strcmp(param,"USE_SIMPOINT")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = \" %s \"", param, pinPoint_s_file);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"PINPOINT_SIM_FILE")==0 && "Wrong Parameter parsed.")
+        Assert (strcmp (_param,"USE_SIMPOINT") == 0 && "Wrong Parameter parsed.")
       ;
         #endif
-        fscanf(f_config, "%s = \" %s \"", param, pinPoint_w_file);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_log_stat);
         #ifdef ASSERTION
-        Assert(strcmp(param,"PINPOINT_WEIGHT_FILE")==0 && "Wrong Parameter parsed
+        Assert (strcmp (_param,"ENABLE_LOG_STAT") == 0 && "Wrong Parameter parsed
       .");
         #endif
-
-        //U-ARCH PARAMS
-        fscanf(f_config, "%s = %d\n", param, (int*)&coreType);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_sch_mode);
         #ifdef ASSERTION
-        Assert(strcmp(param,"CORE_TYPE")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"SCH_MODE") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, (int*)&branchMode);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_reg_alloc_mode);
         #ifdef ASSERTION
-        Assert(strcmp(param,"BRANCH_PRED_MODE")==0 && "Wrong Parameter parsed.");
-      
-        #endif
-        fscanf(f_config, "%s = %d\n", param, (int*)&memoryModel);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"MEM_MODEL")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &num_mem_levels);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"NUM_MEM_LEVELS")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &cache_lat[0]);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"L1_LATENCY")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &cache_lat[1]);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"L2_LATENCY")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &cache_lat[2]);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"L3_LATENCY")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &cache_lat[3]);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"DRAM_LATENCY")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &st_lat);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"STORE_LATENCY")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &alu_count);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"ALU_COUNT")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &rob_size);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"ROB_SIZE")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &iwin_size);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"iWIN_SIZE")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &pb_win_count);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"PB_WIN_COUNT")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &pb_win_size);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"PB_WIN_SIZE")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"REG_ALLOC_MODE") == 0 && "Wrong Parameter parsed.
+      ");
         #endif
 
-        //DELAYS
-        fscanf(f_config, "%s = %d\n", param, &fetch_delay);
+        /*-- U-ARCH PARAMS --*/
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_core_type);
         #ifdef ASSERTION
-        Assert(strcmp(param,"FETCH_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"CORE_TYPE") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &bp_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_bp_type);
         #ifdef ASSERTION
-        Assert(strcmp(param,"BP_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"BRANCH_PRED_MODE") == 0 && "Wrong Parameter parse
+      d.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &decode_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_mem_model);
         #ifdef ASSERTION
-        Assert(strcmp(param,"DECODE_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"MEM_MODEL") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &regren_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_squash);
         #ifdef ASSERTION
-        Assert(strcmp(param,"REGREN_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"ENABLE_SQUASH") == 0 && "Wrong Parameter parsed."
+      );
         #endif
-        fscanf(f_config, "%s = %d\n", param, &issue_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_eu_fwd);
         #ifdef ASSERTION
-        Assert(strcmp(param,"ISSUE_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"ENABLE_EU_FWD") == 0 && "Wrong Parameter parsed."
+      );
         #endif
-        fscanf(f_config, "%s = %d\n", param, &alu_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, (int*)&_enable_mem_fwd);
         #ifdef ASSERTION
-        Assert(strcmp(param,"ALU_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"ENABLE_MEM_FWD") == 0 && "Wrong Parameter parsed.
+      ");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &complete_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_num_eu);
         #ifdef ASSERTION
-        Assert(strcmp(param,"COMPLETE_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"NUM_EU") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &wb_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_num_mem_levels);
         #ifdef ASSERTION
-        Assert(strcmp(param,"WRITEBACK_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"NUM_MEM_LEVELS") == 0 && "Wrong Parameter parsed.
+      ");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &fwd_delay);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[0]);
         #ifdef ASSERTION
-        Assert(strcmp(param,"FORWARDING_DELAY")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"L1_LATENCY") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[1]);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"L2_LATENCY") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[2]);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"L3_LATENCY") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_cache_lat[3]);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"DRAM_LATENCY") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_st_lat);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"STORE_LATENCY") == 0 && "Wrong Parameter parsed."
+      );
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_alu_cnt);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"ALU_COUNT") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_rob_size);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"ROB_SIZE") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_iwin_size);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"iWIN_SIZE") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_cnt);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"PB_WIN_COUNT") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_size);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"PB_WIN_SIZE") == 0 && "Wrong Parameter parsed.");
       
         #endif
 
-        //UNIT WIDTHS
-        fscanf(f_config, "%s = %d\n", param, &bp_width);
+        /*-- DELAYS --*/
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fetch_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"BP_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"FETCH_DELAY") == 0 && "Wrong Parameter parsed.");
+      
         #endif
-        fscanf(f_config, "%s = %d\n", param, &decode_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_bp_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"DECODE_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"BP_DELAY") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &issue_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_decode_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"ISSUE_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"DECODE_DELAY") == 0 && "Wrong Parameter parsed.")
+      ;
         #endif
-        fscanf(f_config, "%s = %d\n", param, &dispatch_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_regren_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"DISPATCH_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"REGREN_DELAY") == 0 && "Wrong Parameter parsed.")
+      ;
         #endif
-        fscanf(f_config, "%s = %d\n", param, &commit_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_issue_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"COMMIT_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"ISSUE_DELAY") == 0 && "Wrong Parameter parsed.");
+      
         #endif
-        fscanf(f_config, "%s = %d\n", param, &squash_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_alu_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"SQUASH_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"ALU_DELAY") == 0 && "Wrong Parameter parsed.");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &wb_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_complete_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"WB_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"COMPLETE_DELAY") == 0 && "Wrong Parameter parsed.
+      ");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &pb_win_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_wb_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"PB_WIN_WIDTH")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"WRITEBACK_DELAY") == 0 && "Wrong Parameter parsed
+      .");
         #endif
-        fscanf(f_config, "%s = %d\n", param, &regren_width);
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fwd_delay);
         #ifdef ASSERTION
-        Assert(strcmp(param,"REGREN_WIDTH")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = %d\n", param, &fetch_width);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"FETCH_WIDTH")==0 && "Wrong Parameter parsed.");
-        #endif
-
-
-        fscanf(f_config, "%s = \" %s \"", param, output_w_file);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"OUTPUT_FILE")==0 && "Wrong Parameter parsed.");
-        #endif
-        fscanf(f_config, "%s = \" %s \"", param, obj_r_file);
-        #ifdef ASSERTION
-        Assert(strcmp(param,"OBJ_FILE")==0 && "Wrong Parameter parsed.");
+        Assert (strcmp (_param,"FORWARDING_DELAY") == 0 && "Wrong Parameter parse
+      d.");
         #endif
 
-        Assert(parsePinPointFiles(pinPoint_s_file, pinPoint_w_file) == true && "N
-      o simpoint data parsed.");
-        verifyConfig();
+        /*-- UNIT WIDTHS --*/
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_bp_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"BP_WIDTH") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_decode_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"DECODE_WIDTH") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_issue_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"ISSUE_WIDTH") == 0 && "Wrong Parameter parsed.");
+      
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_dispatch_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"DISPATCH_WIDTH") == 0 && "Wrong Parameter parsed.
+      ");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_commit_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"COMMIT_WIDTH") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_squash_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"SQUASH_WIDTH") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_wb_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"WB_WIDTH") == 0 && "Wrong Parameter parsed.");
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_pb_win_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"PB_WIN_WIDTH") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_regren_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"REGREN_WIDTH") == 0 && "Wrong Parameter parsed.")
+      ;
+        #endif
+        fscanf (_f_sim_cfg, "%s = %d\n", _param, &_fetch_width);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"FETCH_WIDTH") == 0 && "Wrong Parameter parsed.");
+      
+        #endif
+
+        fscanf (_f_sim_cfg, "%s = \" %s \"", _param, _s_file_root_path);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"S_FILE_PATH") == 0 && "Wrong Parameter parsed.");
+      
+        #endif
+        fscanf (_f_sim_cfg, "%s = \" %s \"", _param, output_w_file);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"OUTPUT_FILE") == 0 && "Wrong Parameter parsed.");
+      
+        #endif
+        fscanf (_f_sim_cfg, "%s = \" %s \"", _param, obj_r_file);
+        #ifdef ASSERTION
+        Assert (strcmp (_param,"OBJ_FILE") == 0 && "Wrong Parameter parsed.");
+        #endif
+
+        verifyConfig ();
 }
 \end{DoxyCode}
 
@@ -343,6 +417,198 @@ Here is the call graph for this function:
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classconfig_acfdbc61d57ab979c3bc2e3a45d3f88ad}{
+\index{config@{config}!brMisspredDelay@{brMisspredDelay}}
+\index{brMisspredDelay@{brMisspredDelay}!config@{config}}
+\subsubsection[{brMisspredDelay}]{\setlength{\rightskip}{0pt plus 5cm}unsigned config::brMisspredDelay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_acfdbc61d57ab979c3bc2e3a45d3f88ad}
+
+\begin{DoxyCode}
+{Assert (_enable_wp); return _br_misspred_delay;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a590b78c2b19952195de93fb8ccda10cc}{
+\index{config@{config}!getBPtype@{getBPtype}}
+\index{getBPtype@{getBPtype}!config@{config}}
+\subsubsection[{getBPtype}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BP\_\-TYPE} config::getBPtype (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a590b78c2b19952195de93fb8ccda10cc}
+
+\begin{DoxyCode}
+{return _bp_type;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a70f8fcc3a60527665fb2491e5d0b61c0}{
+\index{config@{config}!getCoreType@{getCoreType}}
+\index{getCoreType@{getCoreType}!config@{config}}
+\subsubsection[{getCoreType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CORE\_\-TYPE} config::getCoreType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a70f8fcc3a60527665fb2491e5d0b61c0}
+
+\begin{DoxyCode}
+{return _core_type;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a7771dd7ff24081e6035f2ddd77872417}{
+\index{config@{config}!getGARF\_\-HI@{getGARF\_\-HI}}
+\index{getGARF\_\-HI@{getGARF\_\-HI}!config@{config}}
+\subsubsection[{getGARF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AR} config::getGARF\_\-HI (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a7771dd7ff24081e6035f2ddd77872417}
+
+\begin{DoxyCode}
+{return _garf_hi;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_ae53e27cfc1f32047f93dc51aab146c36}{
+\index{config@{config}!getGARF\_\-LO@{getGARF\_\-LO}}
+\index{getGARF\_\-LO@{getGARF\_\-LO}!config@{config}}
+\subsubsection[{getGARF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AR} config::getGARF\_\-LO (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_ae53e27cfc1f32047f93dc51aab146c36}
+
+\begin{DoxyCode}
+{return _garf_lo;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_aff59ff4ebcf158004d507e5eda2ebb47}{
+\index{config@{config}!getLARF\_\-HI@{getLARF\_\-HI}}
+\index{getLARF\_\-HI@{getLARF\_\-HI}!config@{config}}
+\subsubsection[{getLARF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AR} config::getLARF\_\-HI (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_aff59ff4ebcf158004d507e5eda2ebb47}
+
+\begin{DoxyCode}
+{return _larf_hi;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_ad4a483605bc08660247399a42137a2d2}{
+\index{config@{config}!getLARF\_\-LO@{getLARF\_\-LO}}
+\index{getLARF\_\-LO@{getLARF\_\-LO}!config@{config}}
+\subsubsection[{getLARF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}{\bf AR} config::getLARF\_\-LO (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_ad4a483605bc08660247399a42137a2d2}
+
+\begin{DoxyCode}
+{return _larf_lo;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a837d986a2972eaeae9c0b46c2566ecec}{
+\index{config@{config}!getMaxInsCnt@{getMaxInsCnt}}
+\index{getMaxInsCnt@{getMaxInsCnt}!config@{config}}
+\subsubsection[{getMaxInsCnt}]{\setlength{\rightskip}{0pt plus 5cm}long double config::getMaxInsCnt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a837d986a2972eaeae9c0b46c2566ecec}
+
+\begin{DoxyCode}
+{return _max_ins_cnt;}
+\end{DoxyCode}
+\hypertarget{classconfig_ab46ed06bcb9d53d8c45b0f327dd1b07a}{
+\index{config@{config}!getMemModel@{getMemModel}}
+\index{getMemModel@{getMemModel}!config@{config}}
+\subsubsection[{getMemModel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MEM\_\-MODEL} config::getMemModel (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_ab46ed06bcb9d53d8c45b0f327dd1b07a}
+
+\begin{DoxyCode}
+{return _mem_model;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a251d502d37db7bd0ea6c268c55fb8956}{
+\index{config@{config}!getNumEu@{getNumEu}}
+\index{getNumEu@{getNumEu}!config@{config}}
+\subsubsection[{getNumEu}]{\setlength{\rightskip}{0pt plus 5cm}int config::getNumEu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a251d502d37db7bd0ea6c268c55fb8956}
+\hypertarget{classconfig_a7cccd557a2366138d69f2335acebb7eb}{
+\index{config@{config}!getOutPath@{getOutPath}}
+\index{getOutPath@{getOutPath}!config@{config}}
+\subsubsection[{getOutPath}]{\setlength{\rightskip}{0pt plus 5cm}string config::getOutPath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a7cccd557a2366138d69f2335acebb7eb}
+
+\begin{DoxyCode}
+{ return _out_path; }
+\end{DoxyCode}
+\hypertarget{classconfig_a11cb0f8db74961c153d3637de5d842cc}{
+\index{config@{config}!getProfilePath@{getProfilePath}}
+\index{getProfilePath@{getProfilePath}!config@{config}}
+\subsubsection[{getProfilePath}]{\setlength{\rightskip}{0pt plus 5cm}string config::getProfilePath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a11cb0f8db74961c153d3637de5d842cc}
+
+\begin{DoxyCode}
+{ return _profile_path; }
+\end{DoxyCode}
 \hypertarget{classconfig_a9530da432f14dc0e96f794e13475e4be}{
 \index{config@{config}!getProgName@{getProgName}}
 \index{getProgName@{getProgName}!config@{config}}
@@ -354,110 +620,298 @@ Here is the call graph for this function:
 \label{classconfig_a9530da432f14dc0e96f794e13475e4be}
 
 \begin{DoxyCode}
-                          {
-        return program_name;
-}
+{ return _program_name; }
 \end{DoxyCode}
 
 
 Here is the caller graph for this function:
 
 
-\hypertarget{classconfig_ac94cb602566243ecb9f76d05cb3199fa}{
-\index{config@{config}!parsePinPointFiles@{parsePinPointFiles}}
-\index{parsePinPointFiles@{parsePinPointFiles}!config@{config}}
-\subsubsection[{parsePinPointFiles}]{\setlength{\rightskip}{0pt plus 5cm}bool config::parsePinPointFiles (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{pinPoint\_\-s\_\-file, }
-\item[{char $\ast$}]{pinPoint\_\-w\_\-file}
-\end{DoxyParamCaption}
-)}}
-\label{classconfig_ac94cb602566243ecb9f76d05cb3199fa}
-
-\begin{DoxyCode}
-                                                                            {
-        _g_var->msg.simStep("PARSING PINPOINTS CONFIGURATIONS");
-        //TODO check if the file exists - assert if not
-        FILE* f_s_pinPoint = fopen(pinPoint_s_file, "r");
-        FILE* f_w_pinPoint = fopen(pinPoint_w_file, "r");
-        #ifdef ASSERTION
-        Assert(f_s_pinPoint != NULL);
-        Assert(f_w_pinPoint != NULL);
-        #endif
-        int s_id, w_id;
-        SIMP s_val; 
-        SIMW w_val;
-        while (fscanf(f_s_pinPoint,"%lu %d\n", &s_val, &s_id) != EOF && 
-                   fscanf(f_w_pinPoint,"%lf %d\n", &w_val, &w_id) != EOF) {
-                #ifdef ASSERTION
-                Assert(s_id == w_id && "simpoint and weight files mispatch.");
-                #endif
-                s_val = s_val * SIMP_WINDOW_SIZE;
-                _simpoint.insert(std::pair<SIMP,SIMW>(s_val,w_val));
-        }
-        //#ifdef DBG
-        cout << "** PinPoint Locations:\n";
-        map<SIMP,SIMW>::iterator it;
-        for (it = _simpoint.begin(); it != _simpoint.end(); it++) {
-                cout << it->first << " " << it->second << endl;
-        }
-        //#endif
-        return ((_simpoint.size() > 0) ? true : false);
-}
-\end{DoxyCode}
-\hypertarget{classconfig_a130fd7b4a660ecb2a3522221427f5956}{
-\index{config@{config}!verifyConfig@{verifyConfig}}
-\index{verifyConfig@{verifyConfig}!config@{config}}
-\subsubsection[{verifyConfig}]{\setlength{\rightskip}{0pt plus 5cm}void config::verifyConfig (
+\hypertarget{classconfig_aae32bca45b60d2f07c5c85f43de94435}{
+\index{config@{config}!getRegAllocMode@{getRegAllocMode}}
+\index{getRegAllocMode@{getRegAllocMode}!config@{config}}
+\subsubsection[{getRegAllocMode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf REG\_\-ALLOC\_\-MODE} config::getRegAllocMode (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classconfig_a130fd7b4a660ecb2a3522221427f5956}
+\label{classconfig_aae32bca45b60d2f07c5c85f43de94435}
 
 \begin{DoxyCode}
-                          {
-        _g_var->msg.simStep("VERIFYING CONFIGURATIONS");
-        Assert(num_mem_levels == MEM_HIGHERARCHY);
-        for (int i = 0; i < MEM_HIGHERARCHY; i++) {
-                Assert(cache_lat[i] > 0);}
-        Assert(st_lat > 0 && st_lat <= cache_lat[0]);
-        Assert(alu_count > 0);
-        Assert(rob_size > 0);
-        Assert(iwin_size > 0 && iwin_size <= rob_size);
-        Assert(pb_win_count > 0);
-        Assert(pb_win_size > 0);
-
-        Assert(fetch_delay > 0);
-        Assert(bp_delay > 0);
-        Assert(decode_delay > 0);
-        Assert(regren_delay > 0);
-        Assert(issue_delay > 0);
-        Assert(alu_delay > 0);
-        Assert(complete_delay > 0);
-        Assert(wb_delay > 0);
-        Assert(fwd_delay > 0);
-
-        Assert(bp_width > 0);
-        Assert(decode_width > 0);
-        Assert(issue_width > 0);
-        Assert(dispatch_width > 0);
-        Assert(commit_width > 0);
-        Assert(squash_width > 0);
-        Assert(wb_width > 0);
-        Assert(pb_win_width > 0);
-        Assert(regren_width > 0);
-        Assert(fetch_width > 0);
-}
+{ return _reg_alloc_mode; }
 \end{DoxyCode}
 
 
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_acdfce653f4bad57644645e96aaa2a4cc}{
+\index{config@{config}!getSchMode@{getSchMode}}
+\index{getSchMode@{getSchMode}!config@{config}}
+\subsubsection[{getSchMode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SCH\_\-MODE} config::getSchMode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_acdfce653f4bad57644645e96aaa2a4cc}
+
+\begin{DoxyCode}
+{ return _sch_mode; }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a9dd0b4405d19c26884b5db734d4e5bb7}{
+\index{config@{config}!getSfilePath@{getSfilePath}}
+\index{getSfilePath@{getSfilePath}!config@{config}}
+\subsubsection[{getSfilePath}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ config::getSfilePath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a9dd0b4405d19c26884b5db734d4e5bb7}
+
+\begin{DoxyCode}
+{ return _s_file_root_path; }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_ae927f81be9eec26997ccca2601c6cfc7}{
+\index{config@{config}!isEnEuFwd@{isEnEuFwd}}
+\index{isEnEuFwd@{isEnEuFwd}!config@{config}}
+\subsubsection[{isEnEuFwd}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnEuFwd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_ae927f81be9eec26997ccca2601c6cfc7}
+
+\begin{DoxyCode}
+{return _enable_eu_fwd;}
+\end{DoxyCode}
+\hypertarget{classconfig_a36705d014a0017f1dcf0fdb11838a31b}{
+\index{config@{config}!isEnFwd@{isEnFwd}}
+\index{isEnFwd@{isEnFwd}!config@{config}}
+\subsubsection[{isEnFwd}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnFwd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a36705d014a0017f1dcf0fdb11838a31b}
+
+\begin{DoxyCode}
+{return _enable_mem_fwd || _enable_eu_fwd;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a7a0aeef57c716fc8c8b72cb31bfabcff}{
+\index{config@{config}!isEnLogStat@{isEnLogStat}}
+\index{isEnLogStat@{isEnLogStat}!config@{config}}
+\subsubsection[{isEnLogStat}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnLogStat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a7a0aeef57c716fc8c8b72cb31bfabcff}
+
+\begin{DoxyCode}
+{return _enable_log_stat;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a12202da8711bd354d5b1a98693c0efa8}{
+\index{config@{config}!isEnMemFwd@{isEnMemFwd}}
+\index{isEnMemFwd@{isEnMemFwd}!config@{config}}
+\subsubsection[{isEnMemFwd}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnMemFwd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a12202da8711bd354d5b1a98693c0efa8}
+
+\begin{DoxyCode}
+{return _enable_mem_fwd;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a14a41780de0d5bc586fd79a202eca047}{
+\index{config@{config}!isEnProfiling@{isEnProfiling}}
+\index{isEnProfiling@{isEnProfiling}!config@{config}}
+\subsubsection[{isEnProfiling}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnProfiling (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a14a41780de0d5bc586fd79a202eca047}
+
+\begin{DoxyCode}
+{return _enable_profile;} //TODO put this to yaml
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a92554ae5ad4d8db473c1894f2bd119fc}{
+\index{config@{config}!isEnSquash@{isEnSquash}}
+\index{isEnSquash@{isEnSquash}!config@{config}}
+\subsubsection[{isEnSquash}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isEnSquash (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a92554ae5ad4d8db473c1894f2bd119fc}
+
+\begin{DoxyCode}
+{return _enable_squash;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_abe24c6843643f18ae5897b868f76e0e5}{
+\index{config@{config}!isWarmedUp@{isWarmedUp}}
+\index{isWarmedUp@{isWarmedUp}!config@{config}}
+\subsubsection[{isWarmedUp}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isWarmedUp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_abe24c6843643f18ae5897b868f76e0e5}
+
+\begin{DoxyCode}
+{return _warmed_up;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a0580212c629d1811cfeaf6d035518843}{
+\index{config@{config}!isWrongPath@{isWrongPath}}
+\index{isWrongPath@{isWrongPath}!config@{config}}
+\subsubsection[{isWrongPath}]{\setlength{\rightskip}{0pt plus 5cm}bool config::isWrongPath (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a0580212c629d1811cfeaf6d035518843}
+
+\begin{DoxyCode}
+{return _enable_wp;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a359ca41b9b50c84a73c826bc896588b8}{
+\index{config@{config}!setWarmedUp@{setWarmedUp}}
+\index{setWarmedUp@{setWarmedUp}!config@{config}}
+\subsubsection[{setWarmedUp}]{\setlength{\rightskip}{0pt plus 5cm}void config::setWarmedUp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a359ca41b9b50c84a73c826bc896588b8}
+
+\begin{DoxyCode}
+{_warmed_up = true;} /* TODO this bad hack - change it*/
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classconfig_a147b2e07b1e0849a4113997acd333e6a}{
+\index{config@{config}!storeSimConfig@{storeSimConfig}}
+\index{storeSimConfig@{storeSimConfig}!config@{config}}
+\subsubsection[{storeSimConfig}]{\setlength{\rightskip}{0pt plus 5cm}void config::storeSimConfig (
+\begin{DoxyParamCaption}
+\item[{ofstream $\ast$}]{\_\-out\_\-file}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a147b2e07b1e0849a4113997acd333e6a}
+
+\begin{DoxyCode}
+                                                {
+        time_t rawtime;
+        struct tm * timeinfo;
+        char sim_time [80];
+        time (&rawtime);
+        timeinfo = localtime (&rawtime);
+        strftime (sim_time, 80,"* DONE SIM @ %F %I:%M%p",timeinfo);
+        (*_out_file) << "* =========== =========== ===========" << endl;
+        (*_out_file) << sim_time << endl << endl;
+        (*_out_file) << "* CORE: " << _core_type << endl;
+        (*_out_file) << "* STAT_SCH_MODE: " << _sch_mode << endl;
+        (*_out_file) << "* REG_ALLOC_MODE: " << _reg_alloc_mode << endl;
+        (*_out_file) << "* BRANCH_PRED_MODE: " << _bp_type << endl;
+        (*_out_file) << "* MEM_MODEL: " << _mem_model << endl;
+        (*_out_file) << "* ENABLE_SQUASH: " << _enable_squash << endl;
+        (*_out_file) << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
+        (*_out_file) << "* ENABLE_MEM_FWD: " << _enable_mem_fwd << endl;
+        (*_out_file) << "* NUM_EU: " << _num_eu << endl;
+        (*_out_file) << "* MAX_INS_CNT: " << _max_ins_cnt << endl;
+        (*_out_file) << "* =========== =========== ===========" << endl << endl;
+        //TODO add mroe config params
+
+        cout << "* =========== =========== ===========" << endl;
+        cout << sim_time << endl << endl;
+        cout << "* CORE: " << _core_type << endl;
+        cout << "* STAT_SCH_MODE: " << _sch_mode << endl;
+        cout << "* REG_ALLOC_MODE: " << _reg_alloc_mode << endl;
+        cout << "* BRANCH_PRED_MODE: " << _bp_type << endl;
+        cout << "* MEM_MODEL: " << _mem_model << endl;
+        cout << "* ENABLE_SQUASH: " << _enable_squash << endl;
+        cout << "* ENABLE_EU_FWD: " << _enable_eu_fwd << endl;
+        cout << "* ENABLE_MEM_FWD: " << _enable_mem_fwd << endl;
+        cout << "* NUM_EU: " << _num_eu << endl;
+        cout << "* MAX_INS_CNT: " << _max_ins_cnt << endl;
+        cout << "* =========== =========== ===========" << endl << endl;
+}
+\end{DoxyCode}
+\hypertarget{classconfig_a25bf7a9e673f260e38e65633a0b3c0e9}{
+\index{config@{config}!warmUpEn@{warmUpEn}}
+\index{warmUpEn@{warmUpEn}!config@{config}}
+\subsubsection[{warmUpEn}]{\setlength{\rightskip}{0pt plus 5cm}bool config::warmUpEn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classconfig_a25bf7a9e673f260e38e65633a0b3c0e9}
+
+\begin{DoxyCode}
+{return _enable_warm_up;}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+
+
 \subsection{Member Data Documentation}
-\hypertarget{classconfig_acfc11a499f94cd303747f5e58c447f36}{
-\index{config@{config}!\_\-g\_\-var@{\_\-g\_\-var}}
-\index{\_\-g\_\-var@{\_\-g\_\-var}!config@{config}}
-\subsubsection[{\_\-g\_\-var}]{\setlength{\rightskip}{0pt plus 5cm}{\bf g\_\-variable}$\ast$ {\bf config::\_\-g\_\-var}}}
-\label{classconfig_acfc11a499f94cd303747f5e58c447f36}
+\hypertarget{classconfig_a225be0b4193c49568b32481edcd52418}{
+\index{config@{config}!\_\-root@{\_\-root}}
+\index{\_\-root@{\_\-root}!config@{config}}
+\subsubsection[{\_\-root}]{\setlength{\rightskip}{0pt plus 5cm}{\bf YAML::Node} {\bf config::\_\-root}}}
+\label{classconfig_a225be0b4193c49568b32481edcd52418}
 \hypertarget{classconfig_a66a2268284689ebce8e0fe2f87a2699d}{
 \index{config@{config}!\_\-simpoint@{\_\-simpoint}}
 \index{\_\-simpoint@{\_\-simpoint}!config@{config}}
@@ -468,196 +922,6 @@ Here is the caller graph for this function:
 \index{\_\-use\_\-simpoint@{\_\-use\_\-simpoint}!config@{config}}
 \subsubsection[{\_\-use\_\-simpoint}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf config::\_\-use\_\-simpoint}}}
 \label{classconfig_a2928e02fdf4716123e313e363e77875a}
-\hypertarget{classconfig_a881b8c04dd7ca3bf08cf1bc679608a2e}{
-\index{config@{config}!alu\_\-count@{alu\_\-count}}
-\index{alu\_\-count@{alu\_\-count}!config@{config}}
-\subsubsection[{alu\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::alu\_\-count}}}
-\label{classconfig_a881b8c04dd7ca3bf08cf1bc679608a2e}
-\hypertarget{classconfig_a44f960416e7b458fe0d8c9fb0712d905}{
-\index{config@{config}!alu\_\-delay@{alu\_\-delay}}
-\index{alu\_\-delay@{alu\_\-delay}!config@{config}}
-\subsubsection[{alu\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::alu\_\-delay}}}
-\label{classconfig_a44f960416e7b458fe0d8c9fb0712d905}
-\hypertarget{classconfig_ac32c79ca2541862ab10e332835726ac7}{
-\index{config@{config}!bp\_\-delay@{bp\_\-delay}}
-\index{bp\_\-delay@{bp\_\-delay}!config@{config}}
-\subsubsection[{bp\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::bp\_\-delay}}}
-\label{classconfig_ac32c79ca2541862ab10e332835726ac7}
-\hypertarget{classconfig_aa1361f6a730b6a397cbc0eab017b8370}{
-\index{config@{config}!bp\_\-width@{bp\_\-width}}
-\index{bp\_\-width@{bp\_\-width}!config@{config}}
-\subsubsection[{bp\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::bp\_\-width}}}
-\label{classconfig_aa1361f6a730b6a397cbc0eab017b8370}
-\hypertarget{classconfig_a504ac31b890e1ae3ecf5ec1ab99621b3}{
-\index{config@{config}!branchMode@{branchMode}}
-\index{branchMode@{branchMode}!config@{config}}
-\subsubsection[{branchMode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf brMode} {\bf config::branchMode}}}
-\label{classconfig_a504ac31b890e1ae3ecf5ec1ab99621b3}
-\hypertarget{classconfig_a18d19c63e34e1d1bf73dce6d945ad624}{
-\index{config@{config}!cache\_\-lat@{cache\_\-lat}}
-\index{cache\_\-lat@{cache\_\-lat}!config@{config}}
-\subsubsection[{cache\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::cache\_\-lat}\mbox{[}MEM\_\-HIGHERARCHY\mbox{]}}}
-\label{classconfig_a18d19c63e34e1d1bf73dce6d945ad624}
-\hypertarget{classconfig_ac81423700e2794fa5031ab254ff6204d}{
-\index{config@{config}!commit\_\-width@{commit\_\-width}}
-\index{commit\_\-width@{commit\_\-width}!config@{config}}
-\subsubsection[{commit\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::commit\_\-width}}}
-\label{classconfig_ac81423700e2794fa5031ab254ff6204d}
-\hypertarget{classconfig_a369164f22ea95fa960db882496fdb362}{
-\index{config@{config}!complete\_\-delay@{complete\_\-delay}}
-\index{complete\_\-delay@{complete\_\-delay}!config@{config}}
-\subsubsection[{complete\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::complete\_\-delay}}}
-\label{classconfig_a369164f22ea95fa960db882496fdb362}
-\hypertarget{classconfig_a8d6774da02b8fae7f319212466d360ad}{
-\index{config@{config}!coreType@{coreType}}
-\index{coreType@{coreType}!config@{config}}
-\subsubsection[{coreType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf core} {\bf config::coreType}}}
-\label{classconfig_a8d6774da02b8fae7f319212466d360ad}
-\hypertarget{classconfig_a872974c5580ad2deb7a383c11f089b68}{
-\index{config@{config}!decode\_\-delay@{decode\_\-delay}}
-\index{decode\_\-delay@{decode\_\-delay}!config@{config}}
-\subsubsection[{decode\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::decode\_\-delay}}}
-\label{classconfig_a872974c5580ad2deb7a383c11f089b68}
-\hypertarget{classconfig_a6c7d857d48cac72b22a8f92811a81332}{
-\index{config@{config}!decode\_\-width@{decode\_\-width}}
-\index{decode\_\-width@{decode\_\-width}!config@{config}}
-\subsubsection[{decode\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::decode\_\-width}}}
-\label{classconfig_a6c7d857d48cac72b22a8f92811a81332}
-\hypertarget{classconfig_aec11bf6374063a368b518d0e11eb6144}{
-\index{config@{config}!dispatch\_\-width@{dispatch\_\-width}}
-\index{dispatch\_\-width@{dispatch\_\-width}!config@{config}}
-\subsubsection[{dispatch\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::dispatch\_\-width}}}
-\label{classconfig_aec11bf6374063a368b518d0e11eb6144}
-\hypertarget{classconfig_a3a5aaa62d616ead46e8b132c9305ea7f}{
-\index{config@{config}!f\_\-config@{f\_\-config}}
-\index{f\_\-config@{f\_\-config}!config@{config}}
-\subsubsection[{f\_\-config}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf config::f\_\-config}}}
-\label{classconfig_a3a5aaa62d616ead46e8b132c9305ea7f}
-\hypertarget{classconfig_a91da818c1e663a984f2a1590df385dc8}{
-\index{config@{config}!fetch\_\-delay@{fetch\_\-delay}}
-\index{fetch\_\-delay@{fetch\_\-delay}!config@{config}}
-\subsubsection[{fetch\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::fetch\_\-delay}}}
-\label{classconfig_a91da818c1e663a984f2a1590df385dc8}
-\hypertarget{classconfig_ad709f7c23cd755ccccc73ae2214cc272}{
-\index{config@{config}!fetch\_\-width@{fetch\_\-width}}
-\index{fetch\_\-width@{fetch\_\-width}!config@{config}}
-\subsubsection[{fetch\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::fetch\_\-width}}}
-\label{classconfig_ad709f7c23cd755ccccc73ae2214cc272}
-\hypertarget{classconfig_a33bd64d9413ee02e75e5417dc831c745}{
-\index{config@{config}!fwd\_\-delay@{fwd\_\-delay}}
-\index{fwd\_\-delay@{fwd\_\-delay}!config@{config}}
-\subsubsection[{fwd\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::fwd\_\-delay}}}
-\label{classconfig_a33bd64d9413ee02e75e5417dc831c745}
-\hypertarget{classconfig_a55776db7f0ec934f45511861b401d615}{
-\index{config@{config}!issue\_\-delay@{issue\_\-delay}}
-\index{issue\_\-delay@{issue\_\-delay}!config@{config}}
-\subsubsection[{issue\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::issue\_\-delay}}}
-\label{classconfig_a55776db7f0ec934f45511861b401d615}
-\hypertarget{classconfig_a296691b2dd0273f25096fde73677eff1}{
-\index{config@{config}!issue\_\-width@{issue\_\-width}}
-\index{issue\_\-width@{issue\_\-width}!config@{config}}
-\subsubsection[{issue\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::issue\_\-width}}}
-\label{classconfig_a296691b2dd0273f25096fde73677eff1}
-\hypertarget{classconfig_a60ce0b8af7c4fbe8839ccf4d46b5be60}{
-\index{config@{config}!iwin\_\-size@{iwin\_\-size}}
-\index{iwin\_\-size@{iwin\_\-size}!config@{config}}
-\subsubsection[{iwin\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::iwin\_\-size}}}
-\label{classconfig_a60ce0b8af7c4fbe8839ccf4d46b5be60}
-\hypertarget{classconfig_a8b53c1fcfcc74b75455423696309bf91}{
-\index{config@{config}!memoryModel@{memoryModel}}
-\index{memoryModel@{memoryModel}!config@{config}}
-\subsubsection[{memoryModel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf memModel} {\bf config::memoryModel}}}
-\label{classconfig_a8b53c1fcfcc74b75455423696309bf91}
-\hypertarget{classconfig_ae2064ad29481d05bec60ff9a10775c8b}{
-\index{config@{config}!num\_\-mem\_\-levels@{num\_\-mem\_\-levels}}
-\index{num\_\-mem\_\-levels@{num\_\-mem\_\-levels}!config@{config}}
-\subsubsection[{num\_\-mem\_\-levels}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::num\_\-mem\_\-levels}}}
-\label{classconfig_ae2064ad29481d05bec60ff9a10775c8b}
-\hypertarget{classconfig_ad0b1dacf1eb81162d514175543251908}{
-\index{config@{config}!obj\_\-r\_\-file@{obj\_\-r\_\-file}}
-\index{obj\_\-r\_\-file@{obj\_\-r\_\-file}!config@{config}}
-\subsubsection[{obj\_\-r\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::obj\_\-r\_\-file}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_ad0b1dacf1eb81162d514175543251908}
-\hypertarget{classconfig_a9101bb4e461cd4ec6012bb178eb3c392}{
-\index{config@{config}!output\_\-w\_\-file@{output\_\-w\_\-file}}
-\index{output\_\-w\_\-file@{output\_\-w\_\-file}!config@{config}}
-\subsubsection[{output\_\-w\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::output\_\-w\_\-file}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_a9101bb4e461cd4ec6012bb178eb3c392}
-\hypertarget{classconfig_adb1322ea6b15bd6c0387b2fe82e7c574}{
-\index{config@{config}!param@{param}}
-\index{param@{param}!config@{config}}
-\subsubsection[{param}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::param}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_adb1322ea6b15bd6c0387b2fe82e7c574}
-\hypertarget{classconfig_a48b2da3ec3a4b6ea4660771f23ba1582}{
-\index{config@{config}!pb\_\-win\_\-count@{pb\_\-win\_\-count}}
-\index{pb\_\-win\_\-count@{pb\_\-win\_\-count}!config@{config}}
-\subsubsection[{pb\_\-win\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::pb\_\-win\_\-count}}}
-\label{classconfig_a48b2da3ec3a4b6ea4660771f23ba1582}
-\hypertarget{classconfig_a5dde15659f2775908ca310ed84270a8d}{
-\index{config@{config}!pb\_\-win\_\-size@{pb\_\-win\_\-size}}
-\index{pb\_\-win\_\-size@{pb\_\-win\_\-size}!config@{config}}
-\subsubsection[{pb\_\-win\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::pb\_\-win\_\-size}}}
-\label{classconfig_a5dde15659f2775908ca310ed84270a8d}
-\hypertarget{classconfig_a8c866969fe846bf930fa583e0afb83b5}{
-\index{config@{config}!pb\_\-win\_\-width@{pb\_\-win\_\-width}}
-\index{pb\_\-win\_\-width@{pb\_\-win\_\-width}!config@{config}}
-\subsubsection[{pb\_\-win\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::pb\_\-win\_\-width}}}
-\label{classconfig_a8c866969fe846bf930fa583e0afb83b5}
-\hypertarget{classconfig_a325327ce309f0152ce4e1a45bb097b09}{
-\index{config@{config}!pinPoint\_\-s\_\-file@{pinPoint\_\-s\_\-file}}
-\index{pinPoint\_\-s\_\-file@{pinPoint\_\-s\_\-file}!config@{config}}
-\subsubsection[{pinPoint\_\-s\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::pinPoint\_\-s\_\-file}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_a325327ce309f0152ce4e1a45bb097b09}
-\hypertarget{classconfig_afc8eae6d38b6e75182bb7a93c46542e3}{
-\index{config@{config}!pinPoint\_\-w\_\-file@{pinPoint\_\-w\_\-file}}
-\index{pinPoint\_\-w\_\-file@{pinPoint\_\-w\_\-file}!config@{config}}
-\subsubsection[{pinPoint\_\-w\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::pinPoint\_\-w\_\-file}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_afc8eae6d38b6e75182bb7a93c46542e3}
-\hypertarget{classconfig_a344b61d2beb7dec897796ef42ed00010}{
-\index{config@{config}!program\_\-name@{program\_\-name}}
-\index{program\_\-name@{program\_\-name}!config@{config}}
-\subsubsection[{program\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf config::program\_\-name}\mbox{[}PARSE\_\-LEN\mbox{]}}}
-\label{classconfig_a344b61d2beb7dec897796ef42ed00010}
-\hypertarget{classconfig_aa72ae4e6e9040f2f1402b9b09bcbd026}{
-\index{config@{config}!regren\_\-delay@{regren\_\-delay}}
-\index{regren\_\-delay@{regren\_\-delay}!config@{config}}
-\subsubsection[{regren\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::regren\_\-delay}}}
-\label{classconfig_aa72ae4e6e9040f2f1402b9b09bcbd026}
-\hypertarget{classconfig_a7d5bdc81185bd8d0f4ae57333afc5a28}{
-\index{config@{config}!regren\_\-width@{regren\_\-width}}
-\index{regren\_\-width@{regren\_\-width}!config@{config}}
-\subsubsection[{regren\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::regren\_\-width}}}
-\label{classconfig_a7d5bdc81185bd8d0f4ae57333afc5a28}
-\hypertarget{classconfig_a2344640bb090fed4cf5e303c10028737}{
-\index{config@{config}!regRenMode@{regRenMode}}
-\index{regRenMode@{regRenMode}!config@{config}}
-\subsubsection[{regRenMode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf rrMode} {\bf config::regRenMode}}}
-\label{classconfig_a2344640bb090fed4cf5e303c10028737}
-\hypertarget{classconfig_aecfafe8bd9d2dc97abde0730d59f6f9d}{
-\index{config@{config}!rob\_\-size@{rob\_\-size}}
-\index{rob\_\-size@{rob\_\-size}!config@{config}}
-\subsubsection[{rob\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::rob\_\-size}}}
-\label{classconfig_aecfafe8bd9d2dc97abde0730d59f6f9d}
-\hypertarget{classconfig_a5ab3a47306812a67f78f54f7eacf3775}{
-\index{config@{config}!squash\_\-width@{squash\_\-width}}
-\index{squash\_\-width@{squash\_\-width}!config@{config}}
-\subsubsection[{squash\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::squash\_\-width}}}
-\label{classconfig_a5ab3a47306812a67f78f54f7eacf3775}
-\hypertarget{classconfig_a56fb441e18e865131359adfc0ea56c2a}{
-\index{config@{config}!st\_\-lat@{st\_\-lat}}
-\index{st\_\-lat@{st\_\-lat}!config@{config}}
-\subsubsection[{st\_\-lat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::st\_\-lat}}}
-\label{classconfig_a56fb441e18e865131359adfc0ea56c2a}
-\hypertarget{classconfig_a19565b08815a3a80c62393a062255225}{
-\index{config@{config}!wb\_\-delay@{wb\_\-delay}}
-\index{wb\_\-delay@{wb\_\-delay}!config@{config}}
-\subsubsection[{wb\_\-delay}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::wb\_\-delay}}}
-\label{classconfig_a19565b08815a3a80c62393a062255225}
-\hypertarget{classconfig_a9ef7bd3b551d8830a5f9ef3ea8981324}{
-\index{config@{config}!wb\_\-width@{wb\_\-width}}
-\index{wb\_\-width@{wb\_\-width}!config@{config}}
-\subsubsection[{wb\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf config::wb\_\-width}}}
-\label{classconfig_a9ef7bd3b551d8830a5f9ef3ea8981324}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

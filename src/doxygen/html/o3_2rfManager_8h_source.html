@@ -70,29 +70,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00007"></a>00007 <span class="preprocessor"></span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &quot;../unit/unit.h&quot;</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include &quot;../unit/dynInstruction.h&quot;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;registerRename.h&quot;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;../unit/registerRename.h&quot;</span>
 <a name="l00011"></a>00011 
 <a name="l00012"></a><a class="code" href="classo3__rfManager.html">00012</a> <span class="keyword">class </span><a class="code" href="classo3__rfManager.html">o3_rfManager</a> : <span class="keyword">public</span> <a class="code" href="classunit.html">unit</a> {
 <a name="l00013"></a>00013         <span class="keyword">public</span>:
-<a name="l00014"></a>00014                 <a class="code" href="classo3__rfManager.html#a0abe0df5acbb3b9d1514b62d38647cff">o3_rfManager</a> (<span class="keywordtype">string</span> rf_name = <span class="stringliteral">&quot;o3_rfManager&quot;</span>);
+<a name="l00014"></a>00014                 <a class="code" href="classo3__rfManager.html#aeacfb1db7844c9f204b5b75ce38d671d">o3_rfManager</a> (<a class="code" href="classsysClock.html">sysClock</a>*, <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp;, <span class="keywordtype">string</span> rf_name = <span class="stringliteral">&quot;o3_rfManager&quot;</span>);
 <a name="l00015"></a>00015                 <a class="code" href="classo3__rfManager.html#a42a66fc34794ca6c7209f743557a2b3a">~o3_rfManager</a> ();
 <a name="l00016"></a>00016 
-<a name="l00017"></a>00017         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a95bfea851bf8107f208e550839749063">hasFreeWrPort</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now);
-<a name="l00018"></a>00018         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a0883b605da49fe18bf7a1a04219307ab">hasFreeRdPort</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> numRegRdPorts);
-<a name="l00019"></a>00019         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a023f3671f90123fe8749ff13606f273c">canRename</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
-<a name="l00020"></a>00020         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a702dcade81b3d2ccba4bae0ef8d7de30">renameRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
-<a name="l00021"></a>00021         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7">isReady</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#a06b8854ab37feb6b44166a8565dc447a">completeRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
-<a name="l00023"></a>00023         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#a7d3aa6c1316bac1153b24b7764d301fb">commitRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
-<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#ac8199decc9c7a881b2099a68711cced7">squashRenameReg</a> ();
+<a name="l00017"></a>00017         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a023f3671f90123fe8749ff13606f273c">canRename</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00018"></a>00018         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a702dcade81b3d2ccba4bae0ef8d7de30">renameRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00019"></a>00019         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a785b7804c89faffdaee23e25c2cc3568">checkReadyAgain</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00020"></a>00020         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7">isReady</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00021"></a>00021         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#a06b8854ab37feb6b44166a8565dc447a">completeRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#a7d3aa6c1316bac1153b24b7764d301fb">commitRegs</a> (<a class="code" href="classdynInstruction.html">dynInstruction</a>* ins);
+<a name="l00023"></a>00023         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#ac8199decc9c7a881b2099a68711cced7">squashRenameReg</a> ();
+<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#a55bbc6fec2cb3736926e27bf112d7365">regStat</a> ();
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026         <span class="keyword">private</span>:
-<a name="l00027"></a>00027         <a class="code" href="classo3__registerRename.html">o3_registerRename</a> _GRF;
-<a name="l00028"></a>00028 };
+<a name="l00026"></a>00026         <span class="comment">/*-- WIRES CTRL --*/</span>
+<a name="l00027"></a>00027         <span class="keywordtype">bool</span> <a class="code" href="classo3__rfManager.html#a7cfd1869c23bd1c4d6a5dc994ee29817">hasFreeWire</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>);
+<a name="l00028"></a>00028         <span class="keywordtype">void</span> <a class="code" href="classo3__rfManager.html#aeaf7e17c11cc6c75a342c3c32b25c546">updateWireState</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, <span class="keywordtype">bool</span> update_wire = <span class="keyword">false</span>);
 <a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="keyword">extern</span> <a class="code" href="classo3__rfManager.html">o3_rfManager</a> <a class="code" href="o3_2rfManager_8cpp.html#a4854625c830da92eb9831cbc4dbf4e3f">g_GRF_MGR</a>;
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="preprocessor">#endif</span>
+<a name="l00030"></a>00030         <span class="keyword">private</span>:
+<a name="l00031"></a>00031         <a class="code" href="classo3__registerRename.html">o3_registerRename</a> _GRF;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033         <span class="comment">/*-- ENERGY --*/</span>
+<a name="l00034"></a>00034         <a class="code" href="classtable__energy.html">table_energy</a> _e_rf;
+<a name="l00035"></a>00035         <a class="code" href="classtable__energy.html">table_energy</a> _e_rat;
+<a name="l00036"></a>00036         <a class="code" href="classtable__energy.html">table_energy</a> _e_apr; <span class="comment">/* AVIALBLE PR LIST */</span>
+<a name="l00037"></a>00037         <a class="code" href="classtable__energy.html">table_energy</a> _e_arst;
+<a name="l00038"></a>00038         <a class="code" href="classwire__energy.html">wire_energy</a> _e_w_rr;
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040         <span class="comment">/*-- STAT --*/</span>
+<a name="l00041"></a>00041         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_rf_not_ready_cnt;
+<a name="l00042"></a>00042         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_cant_rename_cnt;
+<a name="l00043"></a>00043         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_can_rename_cnt;
+<a name="l00044"></a>00044         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_unavailable_cnt;
+<a name="l00045"></a>00045 };
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="keyword">extern</span> <a class="code" href="classo3__rfManager.html">o3_rfManager</a>* <a class="code" href="o3_2rfManager_8cpp.html#ad6db8a141558ccc9b27f50d1fa8565d3">g_GRF_MGR</a>;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -100,7 +117,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,7 +126,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

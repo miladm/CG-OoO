@@ -15,22 +15,16 @@ Collaboration diagram for o3\_\-decode:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__decode_a1a08ce6eaa15d73ca989efcb4aff2eb5}{o3\_\-decode} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-schedule\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} decode\_\-width, string stage\_\-name)
+\hyperlink{classo3__decode_a761204715b555db8472ace215b02b0f9}{o3\_\-decode} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-schedule\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} decode\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classo3__decode_ac330314db5e6712640a594f0b9a424bf}{$\sim$o3\_\-decode} ()
 \item 
-void \hyperlink{classo3__decode_a15bf9466b893eb943e0bf245fb6513fa}{doDECODE} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classo3__decode_a4421fc831622c76327f75aa763538a0d}{decodeImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__decode_ab7338585819cf9e105ee595e6cb22e4b}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__decode_a925f874ac7b0ae24ff5946d468615017}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classo3__decode_a980898f3e4342b3440a14a73c7d76f0d}{doDECODE} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__decode_a1a08ce6eaa15d73ca989efcb4aff2eb5}{
+\hypertarget{classo3__decode_a761204715b555db8472ace215b02b0f9}{
 \index{o3\_\-decode@{o3\_\-decode}!o3\_\-decode@{o3\_\-decode}}
 \index{o3\_\-decode@{o3\_\-decode}!o3_decode@{o3\_\-decode}}
 \subsubsection[{o3\_\-decode}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-decode::o3\_\-decode (
@@ -38,13 +32,15 @@ void \hyperlink{classo3__decode_a925f874ac7b0ae24ff5946d468615017}{regStat} (\hy
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-decode\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{decode\_\-to\_\-schedule\_\-port, }
 \item[{{\bf WIDTH}}]{decode\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__decode_a1a08ce6eaa15d73ca989efcb4aff2eb5}
+\label{classo3__decode_a761204715b555db8472ace215b02b0f9}
 
 \begin{DoxyCode}
-        : stage (decode_width, stage_name)
+        : stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pip
+      e"]["decode"], clk)
           
 {
     _fetch_to_decode_port = &fetch_to_decode_port;
@@ -67,132 +63,33 @@ void \hyperlink{classo3__decode_a925f874ac7b0ae24ff5946d468615017}{regStat} (\hy
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__decode_a4421fc831622c76327f75aa763538a0d}{
-\index{o3\_\-decode@{o3\_\-decode}!decodeImpl@{decodeImpl}}
-\index{decodeImpl@{decodeImpl}!o3_decode@{o3\_\-decode}}
-\subsubsection[{decodeImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} o3\_\-decode::decodeImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__decode_a4421fc831622c76327f75aa763538a0d}
-
-\begin{DoxyCode}
-                                                  {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (_fetch_to_decode_port->getBuffState (clk.now ()) == EMPTY_BUFF) break
-      ;
-        if (!_fetch_to_decode_port->isReady (clk.now ())) break;
-        if (_decode_to_schedule_port->getBuffState (clk.now ()) == FULL_BUFF) bre
-      ak;
-
-        /* DECODE INS */
-        dynInstruction* ins = _fetch_to_decode_port->popFront (clk.now ());
-        ins->setPipeStage (DECODE);
-        _decode_to_schedule_port->pushBack (ins, clk.now ());
-        dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "D
-      ecode ins", ins->getInsID (), clk.now ());
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-    }
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__decode_a15bf9466b893eb943e0bf245fb6513fa}{
+\hypertarget{classo3__decode_a980898f3e4342b3440a14a73c7d76f0d}{
 \index{o3\_\-decode@{o3\_\-decode}!doDECODE@{doDECODE}}
 \index{doDECODE@{doDECODE}!o3_decode@{o3\_\-decode}}
 \subsubsection[{doDECODE}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-decode::doDECODE (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__decode_a15bf9466b893eb943e0bf245fb6513fa}
+\label{classo3__decode_a980898f3e4342b3440a14a73c7d76f0d}
 
 \begin{DoxyCode}
-                                       {
-    /* STAT + DEBUG */
-    dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.now ())
-      ;
-    regStat (clk);
+                          {
+    /*-- STAT + DEBUG --*/
+    dbg.print (DBG_FETCH, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->now (
+      ));
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) squash (clk);
-    if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
+    /*-- SQUASH HANDLING --*/
+    if (g_var.g_pipe_state == PIPE_FLUSH) squash ();
+    if (! (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
       PIPE_FLUSH)) {
-        pipe_stall = decodeImpl (clk);
+        pipe_stall = decodeImpl ();
     }
 
-    /* STAT */
+    /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__decode_a925f874ac7b0ae24ff5946d468615017}{
-\index{o3\_\-decode@{o3\_\-decode}!regStat@{regStat}}
-\index{regStat@{regStat}!o3_decode@{o3\_\-decode}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-decode::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__decode_a925f874ac7b0ae24ff5946d468615017}
-
-\begin{DoxyCode}
-                                      {
-    _fetch_to_decode_port->regStat (clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__decode_ab7338585819cf9e105ee595e6cb22e4b}{
-\index{o3\_\-decode@{o3\_\-decode}!squash@{squash}}
-\index{squash@{squash}!o3_decode@{o3\_\-decode}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-decode::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__decode_ab7338585819cf9e105ee595e6cb22e4b}
-
-\begin{DoxyCode}
-                                     {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Decode Po
-      rts Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN();
-    _decode_to_schedule_port->flushPort (squashSeqNum, clk.now ());
 }
 \end{DoxyCode}
 

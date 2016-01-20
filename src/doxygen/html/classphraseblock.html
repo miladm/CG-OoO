@@ -90,7 +90,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphraseblock.html#a5767e2bc45b4ab68c49be40c7522ecb7">phraseblock</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphraseblock.html#a4e6f347afd3bb1bb51a373cb15b40dc9">~phraseblock</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphraseblock.html#ab7605258ce67522bb3b894b4b7686271">loopToPhraseblock</a> (<a class="el" href="classloop.html">loop</a> *lp)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphraseblock.html#a23c7b3a1f2accfea9aeb1df6e983f7d5">PhraseblockToBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList_new, <a class="el" href="classloop.html">loop</a> *lp, <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> *phID)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classphraseblock.html#a23c7b3a1f2accfea9aeb1df6e983f7d5">PhraseblockToBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList_new, <a class="el" href="classloop.html">loop</a> *lp, <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> *phID)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a5767e2bc45b4ab68c49be40c7522ecb7"></a><!-- doxytag: member="phraseblock::phraseblock" ref="a5767e2bc45b4ab68c49be40c7522ecb7" args="()" -->
@@ -165,7 +165,7 @@ Public Member Functions</h2></td></tr>
                     bb-&gt;<a class="code" href="classbasicblock.html#afdffc2f38dc3e93c9125a1e4d205f4e9">getTakenBias</a>() &lt; <a class="code" href="binaryTranslator_2global_8h.html#a5b19e872c39de2e1e86de7d8edc1097e">WBB_UPPER_BOUND</a> &amp;&amp;
                     lp-&gt;<a class="code" href="classloop.html#aff5df3cffef530a6e4f81ecd4deed86e">isBbInLoop</a>(bb-&gt;<a class="code" href="classbasicblock.html#a8024f7c124db80125950b2582ee28e81">getFallThrough</a>()-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>()) &amp;&amp;
                         lp-&gt;<a class="code" href="classloop.html#aff5df3cffef530a6e4f81ecd4deed86e">isBbInLoop</a>(bb-&gt;<a class="code" href="classbasicblock.html#a4be1cedc2d2596df89d3b9f118c0e445">getTakenTarget</a>()-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>())) { <span class="comment">//TODO create macros for this boundires</span>
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bb-&gt;<a class="code" href="classbasicblock.html#a42700afdf9102a0f287690f4f8c487f9">getNumDescendents</a>() == 2 &amp;&amp; <span class="stringliteral">&quot;Invalid number of basicblock descendents\n&quot;</span>);
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(bb-&gt;<a class="code" href="classbasicblock.html#a42700afdf9102a0f287690f4f8c487f9">getNumDescendents</a>() == 2 &amp;&amp; <span class="stringliteral">&quot;Invalid number of basicblock descendents\n&quot;</span>);
                         wbbSet.<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>());
                         wbbCount++;
                 }
@@ -180,7 +180,7 @@ Public Member Functions</h2></td></tr>
                 }
                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numPhraseBlks; i++) {
                         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* bbList = _bBLists[i];
-                        <a class="code" href="classbasicblock.html">basicblock</a>* bbHead = lp-&gt;<a class="code" href="classloop.html#a30c7019f2202671a81d8a33f9a33593e">getLoopEntry</a>();
+                        <a class="code" href="classbasicblock.html">basicblock</a>* <a class="code" href="structbbHead.html">bbHead</a> = lp-&gt;<a class="code" href="classloop.html#a30c7019f2202671a81d8a33f9a33593e">getLoopEntry</a>();
                         lp-&gt;<a class="code" href="classloop.html#a49a50718778d9b23d51385a93aed10a8">resetVisitBits</a>();
                         <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbHead;
                         <span class="keywordtype">bool</span> break_loop = <span class="keyword">false</span>;
@@ -221,7 +221,7 @@ Public Member Functions</h2></td></tr>
                                                                 <span class="comment">//TODO: what do we do here?</span>
                                                         <span class="keywordflow">break</span>;
                                                 <span class="keywordflow">default</span>:
-                                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid number of WBB&#39;s. Aborting execution.&quot;</span>);
+                                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid number of WBB&#39;s. Aborting execution.&quot;</span>);
                                         }
                                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#a42700afdf9102a0f287690f4f8c487f9">getNumDescendents</a>() &gt;= 2 &amp;&amp; (lp-&gt;<a class="code" href="classloop.html#a550955b42ceff7c89445322abc564e28">isBbFallThrough</a>(bb-&gt;<a class="code" href="classbasicblock.html#a8024f7c124db80125950b2582ee28e81">getFallThrough</a>()-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>()) || lp-&gt;<a class="code" href="classloop.html#a550955b42ceff7c89445322abc564e28">isBbFallThrough</a>(bb-&gt;<a class="code" href="classbasicblock.html#a4be1cedc2d2596df89d3b9f118c0e445">getTakenTarget</a>()-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>()))) {
                                         <span class="keywordflow">if</span> (lp-&gt;<a class="code" href="classloop.html#a550955b42ceff7c89445322abc564e28">isBbFallThrough</a>(bb-&gt;<a class="code" href="classbasicblock.html#a8024f7c124db80125950b2582ee28e81">getFallThrough</a>()-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>()) &amp;&amp;
@@ -298,7 +298,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> *&#160;</td>
           <td class="paramname"><em>phID</em>&#160;</td>
         </tr>
         <tr>
@@ -318,31 +318,31 @@ Here is the caller graph for this function:</div>
                         <span class="comment">//Contruct the phraseblock BB</span>
                         <span class="comment">//TODO add the position index to the BB</span>
                         (*phID)++;
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                <a class="code" href="classbasicblock.html">basicblock</a>* nthBB = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
+                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); j++) {
+                                <a class="code" href="classbasicblock.html">basicblock</a>* nthBB = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(j);
                                 bb-&gt;<a class="code" href="classbasicblock.html#ab20f99e31cfc155ec00b9027f9c3d454">addBBtoPBList</a>(nthBB-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>());
                                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; nthBB-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); k++) {
-                                        bb-&gt;<a class="code" href="classbasicblock.html#a17a204547c41f4ba744ac49b1f375477">addIns</a>(nthBB-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(k), *phID);
+                                        bb-&gt;<a class="code" href="classbasicblock.html#a21556bff8a285d4098ce0762a1d9b69f">addIns</a>(nthBB-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(k), *phID);
                                 }
                         }
                         bb-&gt;<a class="code" href="classbasicblock.html#a1d85d5fd059f1658ce3c67357502ed71">setListIndx</a>(bbList_new-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
                         bbList_new-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(bb);
                         <span class="comment">//Contruct input/loop/output edges</span>
                         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* lpHeadAncestors = lp-&gt;<a class="code" href="classloop.html#a30c7019f2202671a81d8a33f9a33593e">getLoopEntry</a>()-&gt;<a class="code" href="classbasicblock.html#a006ea6066123e6c2a0ba76784dfcee1c">getAncestorList</a>();
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; lpHeadAncestors-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
+                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; lpHeadAncestors-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); j++) {
                                 <span class="comment">//lpHeadAncestors-&gt;Nth(j)-&gt;setDescendent(bb); //TODO this part is missing - must be completed</span>
                         }
                         <span class="comment">/* link fall through paths HERE */</span>
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; lp-&gt;<a class="code" href="classloop.html#a6d90e411616771613671b11dd58d380d">getFallThroughBBs</a>()-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                bb-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(lp-&gt;<a class="code" href="classloop.html#a6d90e411616771613671b11dd58d380d">getFallThroughBBs</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>));
+                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; lp-&gt;<a class="code" href="classloop.html#a6d90e411616771613671b11dd58d380d">getFallThroughBBs</a>()-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); j++) {
+                                bb-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a>(lp-&gt;<a class="code" href="classloop.html#a6d90e411616771613671b11dd58d380d">getFallThroughBBs</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(j));
                         }
                 }
                 <span class="comment">//Link phraseblocks together</span>
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(_phraseBBLists-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() == _numPhraseblocks &amp;&amp; <span class="stringliteral">&quot;Phrase-basic blocks are not made correctly&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(_phraseBBLists-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() == _numPhraseblocks &amp;&amp; <span class="stringliteral">&quot;Phrase-basic blocks are not made correctly&quot;</span>);
                 _numPhraseblocks = _phraseBBLists-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
                 <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _numPhraseblocks; i++) {
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; _numPhraseblocks; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                _phraseBBLists-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classbasicblock.html#aaede95419f42104aca674399aeef1a9b">setDescendent</a>(_phraseBBLists-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>));
+                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; _numPhraseblocks; j++) {
+                                _phraseBBLists-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classbasicblock.html#af05cd0f5ccbb4d0484b07d74e369de0d">setDescendent</a>(_phraseBBLists-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(j));
                         }
                 }
         }
@@ -377,7 +377,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -386,7 +386,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

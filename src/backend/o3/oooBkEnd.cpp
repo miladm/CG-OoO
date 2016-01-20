@@ -42,16 +42,16 @@ void oooBkEnd_init () {
     g_ooo_clk = new sysClock (1);
     _ooo_core = new o3_sysCore (g_ooo_clk, 
             bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_width,
-            fch_lat, 50, 
-            1, 50, 
-            bpu_lat, 50, 
-            dcd_lat, 50, 
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
             sch_lat, eu_width, 
-            1, 50, 
-            exe_lat, 50, 
-            1, 50, 
-            1, 50, 
-            1, 50);
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 
 void oooBkEnd_fini () {

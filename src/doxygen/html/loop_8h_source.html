@@ -71,32 +71,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;stdint.h&gt;</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00010"></a>00010 <span class="preprocessor">#include &quot;list.h&quot;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;basicblock.h&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="basicblock_8h.html">basicblock.h</a>&quot;</span>
 <a name="l00012"></a>00012 
 <a name="l00013"></a><a class="code" href="classloop.html">00013</a> <span class="keyword">class </span><a class="code" href="classloop.html">loop</a> : <span class="keyword">public</span> <a class="code" href="classbasicblock.html">basicblock</a> {
 <a name="l00014"></a>00014         <span class="keyword">public</span>:
-<a name="l00015"></a>00015                 <a class="code" href="classloop.html#a56aab74b3345d5731cd1243e2a41bc76">loop</a>(<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> loopEntryID, <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> loopExitID);
+<a name="l00015"></a>00015                 <a class="code" href="classloop.html#a56aab74b3345d5731cd1243e2a41bc76">loop</a>(<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> loopEntryID, <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> loopExitID);
 <a name="l00016"></a>00016                 <a class="code" href="classloop.html#aad652628bd3d921231b869db97e528ad">~loop</a>();
 <a name="l00017"></a>00017                 <span class="keywordtype">void</span> <a class="code" href="classloop.html#aa9324a68eb1fc3b86eabff7815132443">addBB</a>(<a class="code" href="classbasicblock.html">basicblock</a>* bb);
 <a name="l00018"></a>00018                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* <a class="code" href="classloop.html#af5ef5dd07e6d5b52f318320cc7d6b037">getLoop</a>();
-<a name="l00019"></a>00019                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <a class="code" href="classloop.html#a6abf8e7d6763e76673f8287fe15785d4">getLoopEntryID</a>();
+<a name="l00019"></a>00019                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classloop.html#a6abf8e7d6763e76673f8287fe15785d4">getLoopEntryID</a>();
 <a name="l00020"></a>00020                 <a class="code" href="classbasicblock.html">basicblock</a>* <a class="code" href="classloop.html#a30c7019f2202671a81d8a33f9a33593e">getLoopEntry</a>();
 <a name="l00021"></a>00021                 <span class="keywordtype">bool</span> <a class="code" href="classloop.html#a6a34ac2a05496bd2192638280e42c316">isInnerLoop</a>(<a class="code" href="classloop.html">loop</a>* lp);
 <a name="l00022"></a>00022                 <span class="keywordtype">int</span> <a class="code" href="classloop.html#a81113f34513c9e9ae41886ea150cbd3d">getNumBB</a>();
 <a name="l00023"></a>00023                 <a class="code" href="classbasicblock.html">basicblock</a>* <a class="code" href="classloop.html#a69d626e1bbfa64a45f3ddf805998967a">getNthBB</a>(<span class="keywordtype">int</span> indx);
-<a name="l00024"></a>00024                 <span class="keywordtype">bool</span> <a class="code" href="classloop.html#aff5df3cffef530a6e4f81ecd4deed86e">isBbInLoop</a>(<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> bbID);
+<a name="l00024"></a>00024                 <span class="keywordtype">bool</span> <a class="code" href="classloop.html#aff5df3cffef530a6e4f81ecd4deed86e">isBbInLoop</a>(<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> bbID);
 <a name="l00025"></a>00025                 <span class="keywordtype">void</span> <a class="code" href="classloop.html#a49a50718778d9b23d51385a93aed10a8">resetVisitBits</a>();
 <a name="l00026"></a>00026                 <span class="keywordtype">void</span> <a class="code" href="classloop.html#a20ecb89d8b7cb21867fe53c6ad56f0f4">findFallThroughBBs</a>();
 <a name="l00027"></a>00027                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* <a class="code" href="classloop.html#a6d90e411616771613671b11dd58d380d">getFallThroughBBs</a>();
-<a name="l00028"></a>00028                 <span class="keywordtype">bool</span> <a class="code" href="classloop.html#a550955b42ceff7c89445322abc564e28">isBbFallThrough</a>(<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> bbID);
+<a name="l00028"></a>00028                 <span class="keywordtype">bool</span> <a class="code" href="classloop.html#a550955b42ceff7c89445322abc564e28">isBbFallThrough</a>(<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> bbID);
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030         <span class="keyword">private</span>:
 <a name="l00031"></a>00031                 <span class="keywordtype">void</span> setOuterLoop(<a class="code" href="classloop.html">loop</a>* lp);
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *_loop;
 <a name="l00034"></a>00034                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *_fallThroughBBList;
-<a name="l00035"></a>00035                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> _loopEntryID;
-<a name="l00036"></a>00036                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> _loopExitID;
+<a name="l00035"></a>00035                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> _loopEntryID;
+<a name="l00036"></a>00036                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> _loopExitID;
 <a name="l00037"></a>00037                 <a class="code" href="classList.html">List&lt;loop*&gt;</a> *_innerLoops;
 <a name="l00038"></a>00038                 <a class="code" href="classList.html">List&lt;loop*&gt;</a> *_ourerLoops;
 <a name="l00039"></a>00039 };
@@ -109,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -118,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

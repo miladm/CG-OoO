@@ -75,19 +75,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;time.h&gt;</code><br/>
 <code>#include &lt;math.h&gt;</code><br/>
 <code>#include &lt;list&gt;</code><br/>
-<code>#include &quot;registerAllocate.h&quot;</code><br/>
-<code>#include &quot;make_instruction.h&quot;</code><br/>
-<code>#include &quot;make_basicblock.h&quot;</code><br/>
-<code>#include &quot;make_phraseblock.h&quot;</code><br/>
-<code>#include &quot;annotateTrace.h&quot;</code><br/>
-<code>#include &quot;dominator.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="registerAllocate_8h_source.html">registerAllocate.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="registerAllocate__sb_8h_source.html">registerAllocate_sb.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="make__instruction_8h_source.html">make_instruction.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="make__basicblock_8h_source.html">make_basicblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="make__subblock_8h_source.html">make_subblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="make__superblock_8h_source.html">make_superblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="make__phraseblock_8h_source.html">make_phraseblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="annotateTrace_8h_source.html">annotateTrace.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="redundancy__elim_8h_source.html">redundancy_elim.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dominator_8h_source.html">dominator.h</a>&quot;</code><br/>
 <code>#include &quot;config.h&quot;</code><br/>
 <code>#include &quot;global.h&quot;</code><br/>
-<code>#include &quot;logGen.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="logGen_8h_source.html">logGen.h</a>&quot;</code><br/>
 <code>#include &quot;list.h&quot;</code><br/>
-<code>#include &quot;stat.h&quot;</code><br/>
-<code>#include &quot;ssa.h&quot;</code><br/>
-<code>#include &quot;dot.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="stat_8h_source.html">stat.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="ssa_8h_source.html">ssa.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dot_8h_source.html">dot.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
@@ -98,11 +102,12 @@ Include dependency graph for main.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa19325f885e34f56a1301ced479f8576">finish</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *phBBList, std::string *program_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2">finish</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *phBBList, std::string *program_name, <a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a> sch_mode, <a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a> reg_alloc_mode, <a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a> cluster_mode, <a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> cluster_size)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="aa19325f885e34f56a1301ced479f8576"></a><!-- doxytag: member="main.cpp::finish" ref="aa19325f885e34f56a1301ced479f8576" args="(List&lt; basicblock * &gt; *bbList, List&lt; basicblock * &gt; *phBBList, std::string *program_name)" -->
+<a class="anchor" id="a95cf23fdc260a92c373256cf79d940f2"></a><!-- doxytag: member="main.cpp::finish" ref="a95cf23fdc260a92c373256cf79d940f2" args="(List&lt; basicblock * &gt; *bbList, List&lt; basicblock * &gt; *phBBList, std::string *program_name, SCH_MODE sch_mode, REG_ALLOC_MODE reg_alloc_mode, CLUSTER_MODE cluster_mode, LENGTH cluster_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -122,7 +127,31 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string *&#160;</td>
-          <td class="paramname"><em>program_name</em>&#160;</td>
+          <td class="paramname"><em>program_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a>&#160;</td>
+          <td class="paramname"><em>sch_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a>&#160;</td>
+          <td class="paramname"><em>reg_alloc_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>&#160;</td>
+          <td class="paramname"><em>cluster_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
+          <td class="paramname"><em>cluster_size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -132,30 +161,32 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                              {
+<div class="fragment"><pre class="fragment">                                                             {
         <span class="comment">/* STAT Generation Functions */</span>
-        <span class="comment">// printf(&quot;FILE NAME: %s\n&quot;, (*program_name).c_str());</span>
-        <a class="code" href="binaryTranslator_2stat_8cpp.html#a82694b42d0f920bca0288e0ea13e905e">StatBBSizeStat</a>(bbList, program_name);
-        <a class="code" href="binaryTranslator_2stat_8cpp.html#a08c02c88484628acfda48f7eb2308c93">StatNum_interBB_and_intra_BB_regs</a>(bbList, program_name);
+        <span class="comment">// printf (&quot;FILE NAME: %s\n&quot;, (*program_name).c_str ());</span>
+        printf (<span class="stringliteral">&quot;\tGenerate Stat\n&quot;</span>);
+        <a class="code" href="stat_8cpp.html#a82694b42d0f920bca0288e0ea13e905e">StatBBSizeStat</a> (bbList, program_name);
+        <a class="code" href="stat_8cpp.html#a08c02c88484628acfda48f7eb2308c93">StatNum_interBB_and_intra_BB_regs</a> (bbList, program_name);
         <span class="comment">/* ------------------------- */</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <span class="comment">// printf(&quot;BB Size: %d\n&quot;, bbList-&gt;Nth(i)-&gt;getBbSize());</span>
-                <span class="comment">//bbList-&gt;Nth(i)-&gt;printBb();</span>
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <span class="comment">// printf (&quot;BB Size: %d\n&quot;, bbList-&gt;Nth (i)-&gt;getBbSize ());</span>
+                <span class="comment">//bbList-&gt;Nth (i)-&gt;printBb ();</span>
         }
-        <a class="code" href="classdot.html">dot</a> <a class="code" href="namespaceparse__x86.html#ad838e5ea14a7b662e716b079640434f0">cfg</a>(0, program_name);
-        <a class="code" href="namespaceparse__x86.html#ad838e5ea14a7b662e716b079640434f0">cfg</a>.runDot(bbList);
-        <a class="code" href="classdot.html">dot</a> cfg_phrase(1, program_name);
-        cfg_phrase.runDot(phBBList);
-        <a class="code" href="logGen_8cpp.html#a3c9356ef2e3ab77174c9b7708f6b8c15">writeToFile</a>(bbList, program_name);
-        <span class="comment">// writeToFile(pbList, program_name);</span>
-
+        printf (<span class="stringliteral">&quot;\tMake .dot Files\n&quot;</span>);
+        <a class="code" href="classdot.html">dot</a> <a class="code" href="namespaceparse__x86.html#ad838e5ea14a7b662e716b079640434f0">cfg</a> (0, program_name);
+        <a class="code" href="namespaceparse__x86.html#ad838e5ea14a7b662e716b079640434f0">cfg</a>.runDot (bbList);
+        <a class="code" href="classdot.html">dot</a> cfg_phrase (1, program_name);
+        cfg_phrase.runDot (phBBList);
+        printf (<span class="stringliteral">&quot;\tMake .s File\n&quot;</span>);
+        <a class="code" href="logGen_8cpp.html#a15a3e4233f6842dfceff939f0951dbb1">writeToFile</a> (bbList, program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
+        <span class="comment">// writeToFile (pbList, program_name, sch_mode, reg_alloc_mode);</span>
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8cpp_aa19325f885e34f56a1301ced479f8576_cgraph.png" border="0" usemap="#main_8cpp_aa19325f885e34f56a1301ced479f8576_cgraph" alt=""/></div>
-<map name="main_8cpp_aa19325f885e34f56a1301ced479f8576_cgraph" id="main_8cpp_aa19325f885e34f56a1301ced479f8576_cgraph">
+<div class="center"><img src="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_cgraph.png" border="0" usemap="#main_8cpp_a95cf23fdc260a92c373256cf79d940f2_cgraph" alt=""/></div>
+<map name="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_cgraph" id="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_cgraph">
 </map>
 </div>
 </p>
@@ -163,8 +194,36 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="main_8cpp_aa19325f885e34f56a1301ced479f8576_icgraph.png" border="0" usemap="#main_8cpp_aa19325f885e34f56a1301ced479f8576_icgraph" alt=""/></div>
-<map name="main_8cpp_aa19325f885e34f56a1301ced479f8576_icgraph" id="main_8cpp_aa19325f885e34f56a1301ced479f8576_icgraph">
+<div class="center"><img src="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_icgraph.png" border="0" usemap="#main_8cpp_a95cf23fdc260a92c373256cf79d940f2_icgraph" alt=""/></div>
+<map name="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_icgraph" id="main_8cpp_a95cf23fdc260a92c373256cf79d940f2_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a02fd73d861ef2e4aabb38c0c9ff82947"></a><!-- doxytag: member="main.cpp::init" ref="a02fd73d861ef2e4aabb38c0c9ff82947" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">             {
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="binaryTranslator_2global_8h.html#af8c39c4dac726540182f347a66d09ec3">OFFSET_LARGER_THAN_X86_REG_CNT</a> &gt; <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a>);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947_icgraph.png" border="0" usemap="#main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947_icgraph" alt=""/></div>
+<map name="main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947_icgraph" id="main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947_icgraph">
 </map>
 </div>
 </p>
@@ -196,11 +255,12 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(argc == 2 &amp;&amp; <span class="stringliteral">&quot;USAGE: ./PhraseFormer &lt;program_name&gt;&quot;</span>);
-        <span class="keywordtype">unsigned</span> t0=clock(),t1;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (argc == 6 &amp;&amp; <span class="stringliteral">&quot;USAGE: ./PhraseFormer &lt;program_name&gt; &lt;reg_alloc_method&gt; &lt;scheduling_method&gt; &lt;blocking_model&gt; &lt;cluster_size&gt;&quot;</span>);
+        <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> t0 = clock (), t1;
         <span class="comment">//SETUP VARIABLES</span>
         <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* insList = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;instruction*&gt;</a>;
         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* bbList   = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
+<span class="comment">//      List&lt;basicblock*&gt;* sbList = new List&lt;basicblock*&gt;;</span>
         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* phBBList = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
         <span class="comment">//Linst&lt;phraseblock*&gt; *phList = new List&lt;phraseblock*&gt;;</span>
         map&lt;int,variable*&gt; varList;
@@ -214,47 +274,95 @@ Here is the caller graph for this function:</div>
         set&lt;ADDR&gt; brDstSet;
         std::string program_name = argv[1];
 
-        printf(<span class="stringliteral">&quot;-------------\nPROGRAM NAME: %s\n-------------\n\n&quot;</span>, program_name.c_str());
-        <span class="comment">//init(argc, argv);</span>
-        printf(<span class="stringliteral">&quot;- Configure Program -\n&quot;</span>);
-        <a class="code" href="binaryTranslator_2config_8cpp.html#ac828341c2a17efc2acfe41458414588f">parse_config_file</a>();
-        printf(<span class="stringliteral">&quot;- Parse Instructions -\n&quot;</span>);
-        <a class="code" href="make__instruction_8cpp.html#a2673a7cce171b34555a3a4249a0d61c8">parse_instruction</a>(insList, &amp;insAddrMap, &amp;brDstSet, &amp;brBiasMap, &amp;bpAccuracyMap, &amp;upldMap, memRdAddrMap, memWrAddrMap, &amp;program_name);
-        printf(<span class="stringliteral">&quot;- Make Basic Blocks -\n&quot;</span>);
-        <a class="code" href="make__basicblock_8cpp.html#a765669fc41b8885a39c1ec0df0df96ca">make_basicblock</a>(insList, bbList, varList, &amp;brDstSet, &amp;bbMap, &amp;insAddrMap);
-        printf(<span class="stringliteral">&quot;- Build Dominance Frontier -\n&quot;</span>);
-        <a class="code" href="dominator_8cpp.html#af9f49ffe6819033df685a4eb97ef74be">setup_dominance_frontier</a>(bbList);
-        printf(<span class="stringliteral">&quot;- Build SSA -\n&quot;</span>);
-        <a class="code" href="ssa_8cpp.html#a99d7839751286ac78c627aabd383cb51">build_ssa_form</a>(bbList, varList);
-        printf(<span class="stringliteral">&quot;- Register Allocation -\n&quot;</span>);
-        <a class="code" href="registerAllocate_8cpp.html#adaeef7e1cff31b45dd8d7d8adbcd1662">allocate_register</a>(bbList,insList);
-        <span class="comment">// printf(&quot;- Make Phraesblocks -\n&quot;);</span>
-        <span class="comment">// phBBList = make_phraseblock(bbList, &amp;brBiasMap, &amp;bpAccuracyMap);</span>
-        printf(<span class="stringliteral">&quot;- Annotate Trace -\n&quot;</span>);
-        <span class="comment">//annotateTrace_forBB(bbList, &amp;insAddrMap, &amp;program_name);</span>
-        <span class="comment">// annotateTrace_forPB(phBBList, &amp;insAddrMap, &amp;program_name);</span>
+    <span class="comment">/*-- REGISTER ALLOCATION MODE --*/</span>
+        <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a> reg_alloc_mode;
+    cout &lt;&lt; argv[2] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; argv[3] &lt;&lt; endl;
+    <span class="keywordflow">if</span> (strcmp (argv[2], <span class="stringliteral">&quot;global_reg&quot;</span>) == 0) reg_alloc_mode = <a class="code" href="sqlite3_8c.html#ab2cd20d9321c782db91b9414da0c23ee">GLOBAL</a>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp (argv[2], <span class="stringliteral">&quot;local_global_reg&quot;</span>) == 0) reg_alloc_mode = <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43">LOCAL_GLOBAL</a>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Wrong register allocation mode specified&quot;</span>);
+
+    <span class="comment">/*-- STATIC CODE SCHEDULING MODE --*/</span>
+    <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a> sch_mode;
+    <span class="keywordflow">if</span> (strcmp (argv[3], <span class="stringliteral">&quot;list_sch&quot;</span>) == 0) sch_mode = <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp (argv[3], <span class="stringliteral">&quot;no_list_sch&quot;</span>) == 0) sch_mode = <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236">NO_LIST_SCH</a>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Wrong static code scheduling mode specified&quot;</span>);
+
+    <span class="comment">/*-- CLUSTERING MODE --*/</span>
+    <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a> cluster_mode;
+    <span class="keywordflow">if</span> (strcmp (argv[4], <span class="stringliteral">&quot;bb&quot;</span>) == 0) cluster_mode = <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp (argv[4], <span class="stringliteral">&quot;sb&quot;</span>) == 0) cluster_mode = <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">SUPERBLOCK</a>;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp (argv[4], <span class="stringliteral">&quot;pb&quot;</span>) == 0) cluster_mode = <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce">PHRASEBLOCK</a>;
+    <span class="keywordflow">else</span> <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Wrong code clustering model&quot;</span>);
+
+    <span class="comment">/*-- CLUSTERING SIZE --*/</span>
+    <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> cluster_size = atol (argv[5]);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (cluster_size &gt; 0 &amp;&amp; <span class="stringliteral">&quot;Invalid cluster size&quot;</span>);
+
+<span class="comment">//    Assert (! (sch_mode == LIST_SCH &amp;&amp; reg_alloc_mode == GLOBAL)); /*-- BAD COMBO --*/</span>
+
+        printf (<span class="stringliteral">&quot;-------------\nPROGRAM NAME: %s\n-------------\n\n&quot;</span>, program_name.c_str ());
+        <a class="code" href="main_8cpp.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> ();
+        printf (<span class="stringliteral">&quot;- Configure Program -\n&quot;</span>);
+        <a class="code" href="binaryTranslator_2config_8cpp.html#ac828341c2a17efc2acfe41458414588f">parse_config_file</a> ();
+
+        printf (<span class="stringliteral">&quot;- Parse Instructions -\n&quot;</span>);
+        <a class="code" href="make__instruction_8cpp.html#abe7a2d116e3e54c66d70fff6e83b0bae">parse_instruction</a> (insList, &amp;insAddrMap, &amp;brDstSet, &amp;brBiasMap, &amp;bpAccuracyMap, &amp;upldMap, memRdAddrMap, memWrAddrMap, &amp;program_name, cluster_mode);
+
+    <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) {
+            printf (<span class="stringliteral">&quot;- Make Basic Blocks -\n&quot;</span>);
+            <a class="code" href="make__basicblock_8cpp.html#adfa5d9160d675203db3e663d1f2f3849">make_basicblock</a> (insList, bbList, varList, &amp;brDstSet, &amp;bbMap, &amp;insAddrMap, cluster_size);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">SUPERBLOCK</a>) {
+            printf (<span class="stringliteral">&quot;- Make Superblocks -\n&quot;</span>);
+            <a class="code" href="make__basicblock_8cpp.html#adfa5d9160d675203db3e663d1f2f3849">make_basicblock</a> (insList, bbList, varList, &amp;brDstSet, &amp;bbMap, &amp;insAddrMap, cluster_size);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce">PHRASEBLOCK</a>) {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;this feature is unsupported for now&quot;</span>);
+            printf (<span class="stringliteral">&quot;- Make Phraseblocks -\n&quot;</span>);
+<span class="comment">//          make_phraesblock (insList, bbList, varList, &amp;brDstSet, &amp;bbMap, &amp;insAddrMap, cluster_size);</span>
+    } <span class="keywordflow">else</span> { <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;unsupported option&quot;</span>); }
+
+        printf (<span class="stringliteral">&quot;- Build Dominance Frontier -\n&quot;</span>);
+        <a class="code" href="dominator_8cpp.html#af9f49ffe6819033df685a4eb97ef74be">setup_dominance_frontier</a> (bbList);
+
+        printf (<span class="stringliteral">&quot;- Build SSA -\n&quot;</span>);
+        <a class="code" href="ssa_8cpp.html#a99d7839751286ac78c627aabd383cb51">build_ssa_form</a> (bbList, varList);
+
+        printf (<span class="stringliteral">&quot;- Register Allocation -\n&quot;</span>);
+    <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>) {
+        <a class="code" href="registerAllocate_8cpp.html#a89206e9b97c233cca9ffa40229a32a77">allocate_register</a> (bbList, insList, &amp;insAddrMap, reg_alloc_mode, sch_mode);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (cluster_mode == <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">SUPERBLOCK</a>) {
+        <a class="code" href="registerAllocate__sb_8cpp.html#a1e5b368d21e81ce21247ba1614d0bc3f">allocate_register_sb</a> (bbList, insList, &amp;insAddrMap, reg_alloc_mode);
+            <a class="code" href="make__superblock_8cpp.html#a499b98fa166ddd7c784aca2c8a2c68b1">make_superblock</a> (insList, bbList, varList, &amp;brDstSet, &amp;bbMap, &amp;insAddrMap, cluster_size, sch_mode);
+    } <span class="keywordflow">else</span> { <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;unsupported option&quot;</span>); }
+        <span class="comment">// printf (&quot;- Make Phraesblocks -\n&quot;);</span>
+        <span class="comment">// phBBList = make_phraseblock (bbList, &amp;brBiasMap, &amp;bpAccuracyMap);</span>
+
+        printf (<span class="stringliteral">&quot;- Annotate Trace -\n&quot;</span>);
+        <span class="comment">//annotateTrace_forBB (bbList, &amp;insAddrMap, &amp;program_name);</span>
+        <span class="comment">// annotateTrace_forPB (phBBList, &amp;insAddrMap, &amp;program_name);</span>
         <span class="comment">/* remove the code below */</span>
-        <span class="comment">// printf(&quot;num BB&#39;s: %d\n&quot;, bbList-&gt;NumElements());</span>
-        <span class="comment">// for (int i =0 ; i &lt; insList-&gt;NumElements(); i++) {</span>
-        <span class="comment">// //   if (insList-&gt;Nth(i)-&gt;isAlreadyAssignedArcRegs())</span>
-        <span class="comment">// //           ;// printf(&quot;GOOD\n&quot;);</span>
+        <span class="comment">// printf (&quot;num BB&#39;s: %d\n&quot;, bbList-&gt;NumElements ());</span>
+        <span class="comment">// for (int i =0 ; i &lt; insList-&gt;NumElements (); i++) {</span>
+        <span class="comment">// //   if (insList-&gt;Nth (i)-&gt;isAlreadyAssignedArcRegs ())</span>
+        <span class="comment">// //           ;// printf (&quot;GOOD\n&quot;);</span>
         <span class="comment">// //   else    </span>
-        <span class="comment">// //           printf(&quot;SHIT\n&quot;);</span>
-        <span class="comment">//      instruction* ins = insList-&gt;Nth(i);</span>
-        <span class="comment">//      printf(&quot;%llx: &quot;,ins-&gt;getInsAddr());</span>
-        <span class="comment">//      for (int i = 0; i &lt; ins-&gt;getNumReadReg(); i++) {</span>
-        <span class="comment">//              printf(&quot;(%d-&gt;%d),&quot;,ins-&gt;getNthReadReg(i),ins-&gt;getReadRegSubscript(ins-&gt;getNthReadReg(i)));</span>
+        <span class="comment">// //           printf (&quot;SHIT\n&quot;);</span>
+        <span class="comment">//      instruction* ins = insList-&gt;Nth (i);</span>
+        <span class="comment">//      printf (&quot;%llx: &quot;,ins-&gt;getInsAddr ());</span>
+        <span class="comment">//      for (int i = 0; i &lt; ins-&gt;getNumReadReg (); i++) {</span>
+        <span class="comment">//              printf (&quot; (%d-&gt;%d),&quot;,ins-&gt;getNthReadReg (i),ins-&gt;getReadRegSubscript (ins-&gt;getNthReadReg (i)));</span>
         <span class="comment">//      }</span>
-        <span class="comment">//      for (int i = 0; i &lt; ins-&gt;getNumWriteReg(); i++) {</span>
-        <span class="comment">//              printf(&quot;(%d-&gt;%d),&quot;,ins-&gt;getNthWriteReg(i),ins-&gt;getWriteRegSubscript(ins-&gt;getNthWriteReg(i)));</span>
+        <span class="comment">//      for (int i = 0; i &lt; ins-&gt;getNumWriteReg (); i++) {</span>
+        <span class="comment">//              printf (&quot; (%d-&gt;%d),&quot;,ins-&gt;getNthWriteReg (i),ins-&gt;getWriteRegSubscript (ins-&gt;getNthWriteReg (i)));</span>
         <span class="comment">//      }</span>
-        <span class="comment">//      printf(&quot;\n&quot;);</span>
+        <span class="comment">//      printf (&quot;\n&quot;);</span>
         <span class="comment">// }</span>
         <span class="comment">/* ---------------------*/</span>
-        printf(<span class="stringliteral">&quot;- Make Dot Files &amp; Stat Data -\n&quot;</span>);
-        <a class="code" href="main_8cpp.html#aa19325f885e34f56a1301ced479f8576">finish</a>(bbList, phBBList, &amp;program_name);
-        t1=clock()-t0;
-        printf(<span class="stringliteral">&quot;\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minutes)\n-------------\n&quot;</span>, ((<span class="keywordtype">float</span>)t1)/CLOCKS_PER_SEC/60.0);
+        printf (<span class="stringliteral">&quot;- Redundant MOV Op Elimination -\n&quot;</span>);
+    <a class="code" href="redundancy__elim_8cpp.html#aef4b11c82a88e44d5584a6a436eee343">movOpElimination</a> (bbList, sch_mode);
+        printf (<span class="stringliteral">&quot;- Make Dot Files &amp; Stat Data -\n&quot;</span>);
+        <a class="code" href="main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2">finish</a> (bbList, phBBList, &amp;program_name, sch_mode, reg_alloc_mode, cluster_mode, cluster_size);
+        t1 = clock () - t0;
+        printf (<span class="stringliteral">&quot;\n-------------\nEXECUTION COMPLETED SUCCESSFULLY. (Time: %f Minutes)\n-------------\n&quot;</span>, (<span class="keywordtype">double</span>)(t1 / CLOCKS_PER_SEC) / 60.0);
         <span class="keywordflow">return</span> 0;
 }
 </pre></div>
@@ -275,7 +383,7 @@ Here is the call graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -284,7 +392,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

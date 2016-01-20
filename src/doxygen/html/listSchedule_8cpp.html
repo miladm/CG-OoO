@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/listSchedule.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;listSchedule.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="listSchedule_8h_source.html">listSchedule.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for listSchedule.cpp:</div>
 <div class="dyncontent">
@@ -119,7 +119,7 @@ Functions</h2></td></tr>
         } <span class="keywordflow">else</span> {
                 _critPathLen += ins-&gt;<a class="code" href="classinstruction.html#a842fd50e52a3e3d31fcf8b7a180a32bd">getLatency</a>();
         }
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_critPathLen &gt; 0);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_critPathLen &gt; 0);
         <span class="keywordflow">return</span> _critPathLen;
 }
 </pre></div>
@@ -164,21 +164,21 @@ Here is the caller graph for this function:</div>
         <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *insList       = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>();
         set&lt;ADDR&gt; scheduledIns;
         <span class="keywordtype">bool</span> scheduleIt = <span class="keyword">false</span>;
-        <span class="comment">// Replicate the BB instruction list</span>
+        <span class="comment">// REPLICATE THE BB INSTRUCTION LIST</span>
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                 insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#af6d861b0ad792c3136431c3ef99509ba">resetLongestPath</a>(); <span class="comment">//Added to alow Phraesblock listscheduling (not useful for BB-list scheduling)</span>
                 sortList-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i));
         }
-        <span class="comment">// Find the longest path for every instruction in BB</span>
+        <span class="comment">// FIND THE LONGEST PATH FOR EVERY INSTRUCTION IN BB</span>
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = sortList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1; i &gt;= 0; i--) {
                 <span class="keywordtype">int</span> lp = <a class="code" href="listSchedule_8cpp.html#aa79c6fb1ba7cac942c3f3df4b4adb0ff">findLongestPath</a>(sortList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i), bb);
                 sortList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#a46127cea18a5a4ec73566038a2454ecf">setLongestPath</a>(lp);
                 <span class="comment">// printf(&quot;lp for ins %llu: %d\n&quot;, sortList-&gt;Nth(i)-&gt;getInsAddr(), lp);</span>
     }
         <span class="comment">// printf(&quot;\n&quot;);</span>
-        <span class="comment">// Sort instruction list based on critical path length (high to low)</span>
-        <a class="code" href="backend_2quickSort_8cpp.html#a200d864344f989164a45f0cd735d82e6">quicksortLongestPath</a>(sortList,0,sortList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1);
-        <span class="comment">// List schedule instructions based on their data-dependency chains.</span>
+        <span class="comment">// SORT INSTRUCTION LIST BASED ON CRITICAL PATH LENGTH (HIGH TO LOW)</span>
+        <a class="code" href="quickSort_8cpp.html#a48781b84ce14fccda05b3081e6d5a196">quicksortLongestPath</a>(sortList,0,sortList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()-1);
+        <span class="comment">// LIST SCHEDULE INSTRUCTIONS BASED ON THEIR DATA-DEPENDENCY CHAINS.</span>
         <span class="keywordflow">while</span> (sortList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() != scheduledIns.size()) {
                 <span class="keywordtype">int</span> scheduleCounter = 0;
             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; sortList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() &amp;&amp; scheduleCounter &lt; <a class="code" href="binaryTranslator_2global_8h.html#a6741e5ed99f4591d0f0b717579594369">NUM_EU</a>; i++) {
@@ -186,8 +186,8 @@ Here is the caller graph for this function:</div>
                         <span class="keywordflow">if</span> (scheduledIns.find(ins-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) != scheduledIns.end()) <span class="keywordflow">continue</span>;
                         <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* ancestors = ins-&gt;<a class="code" href="classinstruction.html#af6165d6c8ba00c6806eda36e36cb3366">getAncestors</a>();
                         scheduleIt = <span class="keyword">true</span>;
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; ancestors-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                <a class="code" href="classinstruction.html">instruction</a>* anc = ancestors-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
+                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ancestors-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); j++) {
+                                <a class="code" href="classinstruction.html">instruction</a>* anc = ancestors-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(j);
                                 <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#afd299af5d08655c4fbd10221f5edb556">isInsAddrInBB</a>(anc-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) == <span class="keyword">true</span> &amp;&amp;
                                     scheduledIns.find(anc-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) == scheduledIns.end()) {
                                                 <span class="comment">// printf(&quot;hey &quot;);</span>
@@ -207,7 +207,7 @@ Here is the caller graph for this function:</div>
                         scheduledIns.insert(toBeSchedList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>());
                 toBeSchedList-&gt;<a class="code" href="classList.html#a03ba0aa559b433acbbe1a147cf9ca905">RemoveAll</a>();
         }
-        <span class="comment">// Store the list-scheduled list to BB class</span>
+        <span class="comment">// STORE THE LIST-SCHEDULED LIST TO BB CLASS</span>
     <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; listSchList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                 bb-&gt;<a class="code" href="classbasicblock.html#abb72488dac0d405735a4cf82a1cdd0ce">addToBB_ListSchedule</a>(listSchList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i));
                 <span class="comment">// printf(&quot;lp for ins %llu: %d\n&quot;, listSchList-&gt;Nth(i)-&gt;getInsAddr(), listSchList-&gt;Nth(i)-&gt;getLongestPath());</span>
@@ -244,7 +244,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -253,7 +253,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

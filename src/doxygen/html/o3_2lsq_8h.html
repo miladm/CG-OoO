@@ -60,13 +60,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Defines</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#define-members">Defines</a>  </div>
   <div class="headertitle">
 <div class="title">/home/milad/esc_project/svn/PARS/src/backend/o3/lsq.h File Reference</div>  </div>
 </div>
 <div class="contents">
 <div class="textblock"><code>#include &quot;../unit/table.h&quot;</code><br/>
+<code>#include &quot;../../global/g_variable.h&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for lsq.h:</div>
 <div class="dyncontent">
@@ -89,62 +89,20 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__lsqCAM.html">o3_lsqCAM</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="o3_2lsq_8h.html#a0b70db1c813a7c9e54a37742af005c18">SQ_SIZE</a>&#160;&#160;&#160;36</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="o3_2lsq_8h.html#aae3b0f5aecc2e3aef03fd39ef9aa46ff">LQ_SIZE</a>&#160;&#160;&#160;64</td></tr>
-<tr><td colspan="2"><h2><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a> { <a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, 
-<a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>
- }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="o3_2lsq_8h.html#a100015517f592a0768b17882a5ac3ec1">NO_WAW_ST_INS</a>&#160;&#160;&#160;0</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
-<a class="anchor" id="aae3b0f5aecc2e3aef03fd39ef9aa46ff"></a><!-- doxytag: member="lsq.h::LQ_SIZE" ref="aae3b0f5aecc2e3aef03fd39ef9aa46ff" args="" -->
+<a class="anchor" id="a100015517f592a0768b17882a5ac3ec1"></a><!-- doxytag: member="lsq.h::NO_WAW_ST_INS" ref="a100015517f592a0768b17882a5ac3ec1" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define LQ_SIZE&#160;&#160;&#160;64</td>
+          <td class="memname">#define NO_WAW_ST_INS&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a0b70db1c813a7c9e54a37742af005c18"></a><!-- doxytag: member="lsq.h::SQ_SIZE" ref="a0b70db1c813a7c9e54a37742af005c18" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SQ_SIZE&#160;&#160;&#160;36</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<hr/><h2>Enumeration Type Documentation</h2>
-<a class="anchor" id="a3bb5a7f1114a20672e012bf0dfe5fb24"></a><!-- doxytag: member="lsq.h::LSQ_ID" ref="a3bb5a7f1114a20672e012bf0dfe5fb24" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4"></a><!-- doxytag: member="LD_QU" ref="a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4" args="" -->LD_QU</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d"></a><!-- doxytag: member="ST_QU" ref="a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d" args="" -->ST_QU</em>&nbsp;</td><td>
-</td></tr>
-</table>
-</dd>
-</dl>
-<div class="fragment"><pre class="fragment">{<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>} <a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24">LSQ_ID</a>;
-</pre></div>
 </div>
 </div>
 </div>
@@ -153,7 +111,7 @@ Enumerations</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -162,7 +120,7 @@ Enumerations</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

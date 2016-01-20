@@ -10,8 +10,12 @@ import os
 import params
 import results_verif
 import custom_result as cr
+import math
 
 # INITIALIZE THE BENCHMARKS
+b_names_fancy = ["Perl", "Bzip2", "Gcc", "Mcf", \
+             "Gobmk", "Hmmer", "Sjeng", "Libquantum", \
+             "H264ref", "Omnetpp", "Astar", "Xalancbmk"]
 def init_bench (results_table):
   b_names = ["400.perlbench", "401.bzip2", "403.gcc", "429.mcf", \
              "445.gobmk", "456.hmmer", "458.sjeng", "462.libquantum", \
@@ -36,14 +40,14 @@ def init_files (b_names, mode, result_in_dir):
 def print_headers (result_out_dir, results_table):
   for result_param in results_table:
     if result_param == 'bench_names': continue
-    bench_names = results_table['bench_names']
+    bench_names = b_names_fancy
     out_path = result_out_dir + '/' + result_param + '.csv'
     if os.path.isfile (out_path): break
     pF_out = open (out_path, 'a')
     pF_out.write (' ' + ', ')
     for value in bench_names:
       pF_out.write (str (value) + ', ')
-    pF_out.write ("mean, \n")
+    pF_out.write ("Harm. Mean, \n")
     pF_out.close ()
     print out_path
 
@@ -82,7 +86,11 @@ def update_results_table (results_table, result_map):
 # UPDATE RESULT MAP FOR EACH INDIVIDUAL BENCHMARK
 def update_result_map (result_param, result_value, result_map):
   if result_param in result_map:
-    result_map[result_param] += float(result_value)
+    value = float(result_value)
+    if not math.isnan(value) and not math.isinf(value):
+        result_map[result_param] += value
+  else:
+    print "ERROR: Unknown result paramter:", result_param
 
 # READ THE SIMPOINTPOINT FILE AND ITS WEIGHTS
 def parseSimpointFiles (in_paths, results_table, result_map):
@@ -106,12 +114,13 @@ def parseSimpointFiles (in_paths, results_table, result_map):
       if len (tokens) > 2:
         result_param = tokens[1]
         result_value = 0
+        flag = False
         if result_param.startswith ( 'bbWinBuf' ): # SOME POST-PROCESSING
-          result_param = 'bbWinBuf' + result_param[11:]
+          result_param = 'bbWinBuf' + '.' + result_param[11:]
         elif result_param.startswith ( 'bbWindow' ): # SOME POST-PROCESSING
-          result_param = 'bbWindow' + result_param[11:]
+          result_param = 'bbWindow' + '.' + result_param[11:]
         elif result_param.startswith ( 'lrfManager' ): # SOME POST-PROCESSING
-          result_param = 'lrfManager' + result_param[13:]
+          result_param = 'lrfManager' + '.' + result_param[13:]
         if result_param[-1] != ':':
           result_param = tokens[2]
           result_param = tokens[1]+'.'+result_param[:-1]
@@ -134,8 +143,18 @@ def post_process_stat (result_map):
   cr.stage_energy (result_map)
   cr.core_energy (result_map)
 
+  cr.core_power (result_map)
+  cr.total_power (result_map)
+  cr.bipsqw (result_map)
+
+  cr.rename_energy (result_map)
+  cr.lsq_energy (result_map)
+  cr.grf_energy (result_map)
+  cr.lrf_energy (result_map)
+
   cr.ed (result_map)
   cr.ed2 (result_map)
+  cr.joul_per_op (result_map)
 
   cr.no_compute (result_map)
   cr.alu_compute (result_map)
@@ -145,6 +164,8 @@ def post_process_stat (result_map):
   cr.mem_accuracy (result_map)
 
   cr.wasted_ins_rat (result_map)
+  cr.cache_miss (result_map)
+  cr.window_size (result_map)
 
 
 ################

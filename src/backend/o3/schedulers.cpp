@@ -86,7 +86,8 @@ PIPE_ACTIVITY o3_scheduler::schedulerImpl () {
             _e_stage.ffAccess ();
             ins->setPipeStage (ISSUE);
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
-            _ResStns.Nth(j)->camAccess (); //TODO: this is for the update (move to right place); - wakeup logic
+            _ResStns.Nth(j)->ramAccess (); //READ INS FROM RES STN
+            _ResStns.Nth(j)->camAccess (ins->getNumWrAR () * 2); // WAKEUP - ASSUME 2 CAM / RS
 
             /*-- UPDATE WIRES --*/
             list<string> wires;
@@ -170,11 +171,13 @@ void o3_scheduler::updateResStns () {
             dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD INS", _clk->now ());
             ins = _decode_to_scheduler_port->popFront ();
             _e_stage.ffAccess ();
+            _ResStns.Nth(j)->ramAccess (); // WRITE INTO RES STN
             _RF_MGR->renameRegs (ins);
             ins->setPipeStage (DISPATCH);
             if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
             _ResStns.Nth(j)->pushBack (ins);
             _iROB->pushBack (ins);
+            _iROB->ramAccess ();
             dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Write iWin ins", ins->getInsID (), _clk->now ());
 
             /*-- UPDATE WIRES --*/

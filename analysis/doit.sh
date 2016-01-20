@@ -25,48 +25,53 @@ rm log.out
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/perfect_mem_br/o3_ino
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/perfect_mem/o3_ino_w1
 
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_1/bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_1/o3_ino
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/o3_ino
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_1/bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_1/o3_ino
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2/o3_ino
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/bb
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4/o3_ino
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/o3_ino
-
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/36_bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/18_bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/9_bb
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/3_bb
-
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_ino_multi_issue
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_ino_single_issue
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_skipahead
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8/o3_ino
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_2_bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_4_bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/width_size/width_8_bb
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/18_bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/9_bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/6_bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bbWin_cnt/3_bb
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_ino_multi_issue
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_ino_single_issue
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/1bw_skipahead
 ./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_ino_multi_issue
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_ino_single_issue
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_skipahead
-
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_2
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_3
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_4
-
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_1
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_3
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_9
-
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/1_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/2_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/4_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/8_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/1_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/2_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/4_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/8_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/1_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/2_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/4_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/8_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/1_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/2_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/4_eu
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/8_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_ino_single_issue
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_skipahead
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_2
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_3
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_4
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/multi_pass_issue/runahead_5
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_1
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_3
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/sgrf_cnt/sgrf_9
+#
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/1_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/2_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/4_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/1_bw/8_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/1_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/2_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/4_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/2_bw/8_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/1_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/2_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/4_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/3_bw/8_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/1_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/2_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/4_eu
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/bw_per_cluster/6_bw/8_eu

@@ -15,13 +15,13 @@ Collaboration diagram for dynInstruction:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}{dynInstruction} ()
+\hyperlink{classdynInstruction_a8a1f30fc17d64e9bea312210603dd778}{dynInstruction} (string class\_\-name=\char`\"{}dynInstruction\char`\"{})
 \item 
 \hyperlink{classdynInstruction_a133d35bbe8cd2afdf8f7c9618beb3759}{$\sim$dynInstruction} ()
 \item 
-void \hyperlink{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}{setInsAddr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} insAddr)
+void \hyperlink{classdynInstruction_a7e3e916d80cc3cb1bbd7cdf6524e9983}{setInsAddr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} ins\_\-addr)
 \item 
-void \hyperlink{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}{setInsID} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} seqNum)
+void \hyperlink{classdynInstruction_a6f7d683f2db0f9c0a0272128278b4fa3}{setInsID} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} seq\_\-num)
 \item 
 void \hyperlink{classdynInstruction_ae7c165e2f688432713ea575b2a5477fe}{setInsType} (\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{INS\_\-TYPE} insType)
 \item 
@@ -29,13 +29,13 @@ void \hyperlink{classdynInstruction_a27b7ba0720a85d516c3885bddf154765}{setAR} (\
 \item 
 void \hyperlink{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}{setPR} (\hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} pr, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type})
 \item 
-void \hyperlink{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}{setMemAtr} (\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType}, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} memAddr, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize, bool stackRd, bool stackWr)
+void \hyperlink{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}{setMemAtr} (\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType}, \hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} memAddr, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize, bool stackRd, bool stackWr)
 \item 
 void \hyperlink{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}{setMemAtr} (\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType}, \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} memAxesSize)
 \item 
-void \hyperlink{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}{setBrAtr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brFalThru, bool hasFalThru, bool brTaken, bool isCall, bool isRet, bool isJump, bool isDirBrOrCallOrJmp)
+void \hyperlink{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}{setBrAtr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, \hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brFalThru, bool hasFalThru, bool brTaken, bool isCall, bool isRet, bool isJump, bool isDirBrOrCallOrJmp)
 \item 
-void \hyperlink{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{setBrAtr} (\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, bool isCall, bool isRet, bool isJump)
+void \hyperlink{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{setBrAtr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} brTarget, bool isCall, bool isRet, bool isJump)
 \item 
 void \hyperlink{classdynInstruction_a0cb15d906e84b2efc8986b74edaf5adf}{setPipeStage} (\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{PIPE\_\-STAGE} insStage)
 \item 
@@ -45,19 +45,23 @@ void \hyperlink{classdynInstruction_a83a5077984f29a340de7bebc7e0b679c}{setLQstat
 \item 
 void \hyperlink{classdynInstruction_a794898f3f2f9a99de5f8ca4b8f8999c4}{setWrongPath} (bool is\_\-on\_\-wrong\_\-path)
 \item 
-\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a464da2601438384a3c00e85a814c3964}{getInsAddr} ()
+void \hyperlink{classdynInstruction_a2bad65ecd4bba5fea1ec26d1605a9677}{setMemViolation} ()
+\item 
+void \hyperlink{classdynInstruction_a3426a2abaef02c82f0c959143319586a}{setCacheAxes} ()
+\item 
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a464da2601438384a3c00e85a814c3964}{getInsAddr} ()
 \item 
 \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}{getInsID} ()
 \item 
 \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{INS\_\-TYPE} \hyperlink{classdynInstruction_a3a7025de98c539d8eaa06b40ac2e8cc8}{getInsType} ()
 \item 
-\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a611e3f3619160361cf317e05d2034288}{getMemAddr} ()
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a611e3f3619160361cf317e05d2034288}{getMemAddr} ()
 \item 
 \hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} \hyperlink{classdynInstruction_aee508d76a2e13461fce2299234894688}{getMemAxesSize} ()
 \item 
 \hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{classdynInstruction_a9f8a63685d0b28009957e60b7596b502}{getMemType} ()
 \item 
-\hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a50af30c57eb9ad1c546c4105db30fae4}{getBrTarget} ()
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a50af30c57eb9ad1c546c4105db30fae4}{getBrTarget} ()
 \item 
 \hyperlink{global_2global_8h_a6e7345a10544e77c7dfe6c4e5cb3ec97}{BR\_\-TYPE} \hyperlink{classdynInstruction_a3918eb83344b5343d06e0925cccd96a6}{getBrType} ()
 \item 
@@ -71,9 +75,19 @@ bool \hyperlink{classdynInstruction_a81de1dc10cdabcb8683a0b586b36144b}{isBrTaken
 \item 
 bool \hyperlink{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}{isOnWrongPath} ()
 \item 
+bool \hyperlink{classdynInstruction_a289ae3b586fcb93055a88557842b7c59}{isMemViolation} ()
+\item 
+bool \hyperlink{classdynInstruction_afe7f52780e92b78708201166c98f40c2}{isMemOrBrViolation} ()
+\item 
 \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_a73d8b75f5c68a4cb2a7f434d4b8d4143}{getNumRdAR} ()
 \item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_ac98229ee284df3ac8cb1e5e8d5ffaf94}{getTotNumRdAR} ()
+\item 
 \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_ad7fa2d930aa5ad7836d2c50c1ada3faa}{getNumRdPR} ()
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_a93e86651113b87fe71183d6b6946e4a8}{getNumWrPR} ()
+\item 
+\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} \hyperlink{classdynInstruction_a5a78c835af15909f0639408024aba2c7}{getNumWrAR} ()
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a735ca3cb7fa17e60af6701a846722516}{AR} $>$ $\ast$ \hyperlink{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}{getARrdList} ()
 \item 
@@ -83,30 +97,83 @@ bool \hyperlink{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}{isOnWrong
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{global_2global_8h_a54dcae2ba04c76c12afe113b706bd4dc}{PR} $>$ $\ast$ \hyperlink{classdynInstruction_a40d9f8a39500558a4dea5d41ce5d6442}{getPRwrList} ()
 \item 
-void \hyperlink{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}{copyRegsTo} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins)
+bool \hyperlink{classdynInstruction_ac32e54db50317ce6bd959d7a219a866f}{isCacheAxes} ()
+\item 
+bool \hyperlink{classdynInstruction_ac4959db7eaeb4cc6f2226e6a43662f72}{isUPLDdep} ()
+\item 
+void \hyperlink{classdynInstruction_a0468b48a3c41d462765528aff0341bef}{setUPLDdep} (bool)
 \item 
 void \hyperlink{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}{resetStates} ()
+\item 
+void \hyperlink{classdynInstruction_ab21390aeb598530b1d8641ed289157f6}{printReg} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a2de61048d8f382933606e1582a82ea16}{\_\-ins\_\-addr}
+\item 
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classdynInstruction_a83cdfa461d7b1c12c4f9d9d0c8b9d630}{\_\-seq\_\-num}
+\item 
+\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{INS\_\-TYPE} \hyperlink{classdynInstruction_a85cf6f4254516ea4286cc5d63bee54e6}{\_\-ins\_\-type}
+\item 
+bool \hyperlink{classdynInstruction_a68be14704fc772703ec5c2996ab157e6}{\_\-upld\_\-dep}
+\item 
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a27c4e2916461836ac4da8cba3174c72e}{\_\-brTarget}
+\item 
+bool \hyperlink{classdynInstruction_a572c8b5ba4b766337e601fe97b6dbba8}{\_\-brTaken}
+\item 
+\hyperlink{global_2global_8h_a6e7345a10544e77c7dfe6c4e5cb3ec97}{BR\_\-TYPE} \hyperlink{classdynInstruction_a2f263c6a90a6d1abcda8a3bb612c61ba}{\_\-brType}
+\item 
+\hyperlink{global_2global_8h_a430d9e51ff815ddfce06905ae7392e83}{BYTES} \hyperlink{classdynInstruction_a2064414260dc5c11e2b6af0f9974bec1}{\_\-memAxesSize}
+\item 
+\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} \hyperlink{classdynInstruction_a43307923466ce126bedd260e6fc3903a}{\_\-memAddr}
+\item 
+bool \hyperlink{classdynInstruction_ad6650905d355b9bd11821572eb5c449b}{\_\-stackRd}
+\item 
+bool \hyperlink{classdynInstruction_a8ae8b2d882d79e89310ebaedb9b6408f}{\_\-stackWr}
+\item 
+\hyperlink{global_2global_8h_a40bc49627faaf5adeed28388c6ffae9c}{MEM\_\-TYPE} \hyperlink{classdynInstruction_aa0a3ae202f13e486fe998bc7f4a600d3}{\_\-memType}
+\item 
+\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{PIPE\_\-STAGE} \hyperlink{classdynInstruction_ac7c0381d28c31b2f74785407a8098bd4}{\_\-insStage}
+\item 
+\hyperlink{global_2global_8h_af9e953470c71a91625fe1fc66f2dc49b}{SQ\_\-STATE} \hyperlink{classdynInstruction_a99a8a46f48d06ff4bc88499efc685906}{\_\-sq\_\-state}
+\item 
+\hyperlink{global_2global_8h_a49734aedeaf1d3f1c93c4778b3b62205}{LQ\_\-STATE} \hyperlink{classdynInstruction_a179ac0c388baa6a159cbdaa729901fd7}{\_\-lq\_\-state}
+\item 
+char \hyperlink{classdynInstruction_a9bc50b6337d7c7227dfd413514f3671b}{\_\-command} \mbox{[}INS\_\-STRING\_\-SIZE\mbox{]}
+\item 
+bool \hyperlink{classdynInstruction_a909bcf8228beba27acd3676dd0dfef91}{\_\-cache\_\-axes}
+\item 
+int \hyperlink{classdynInstruction_afe4d7e1374b7ce17dd6ba1458d88ba08}{\_\-hitLevel}
+\item 
+bool \hyperlink{classdynInstruction_a28e5ca3c362579c3b7d429c9cba8c17e}{\_\-is\_\-on\_\-wrong\_\-path}
+\item 
+bool \hyperlink{classdynInstruction_a236e3bf891dd2a04c13768fef697823a}{\_\-is\_\-mem\_\-violation}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}{
+\hypertarget{classdynInstruction_a8a1f30fc17d64e9bea312210603dd778}{
 \index{dynInstruction@{dynInstruction}!dynInstruction@{dynInstruction}}
 \index{dynInstruction@{dynInstruction}!dynInstruction@{dynInstruction}}
 \subsubsection[{dynInstruction}]{\setlength{\rightskip}{0pt plus 5cm}dynInstruction::dynInstruction (
 \begin{DoxyParamCaption}
-{}
+\item[{string}]{class\_\-name = {\ttfamily \char`\"{}dynInstruction\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classdynInstruction_a0f3a48343375c9e3205b7c09127e95f9}
+\label{classdynInstruction_a8a1f30fc17d64e9bea312210603dd778}
 
 \begin{DoxyCode}
-    : unit ("dynInstruction")
+    : unit (class_name)
 {
+    _memAddr = 0;
+        _seq_num = 0;
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
     _is_on_wrong_path = false;
+    _is_mem_violation = false;
+    _cache_axes = false;
 }
 \end{DoxyCode}
 \hypertarget{classdynInstruction_a133d35bbe8cd2afdf8f7c9618beb3759}{
@@ -125,46 +192,6 @@ void \hyperlink{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}{resetStat
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}{
-\index{dynInstruction@{dynInstruction}!copyRegsTo@{copyRegsTo}}
-\index{copyRegsTo@{copyRegsTo}!dynInstruction@{dynInstruction}}
-\subsubsection[{copyRegsTo}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::copyRegsTo (
-\begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{ins}
-\end{DoxyParamCaption}
-)}}
-\label{classdynInstruction_ad817b69f51a6c82fd7b9a13a9ab1b62e}
-
-\begin{DoxyCode}
-                                                    {
-    for (int i = 0; i < _p_rdReg.NumElements (); i++) {
-        PR reg = _p_rdReg.Nth (i);
-        ins->setPR (reg, READ);
-    }
-    for (int i = 0; i < _p_wrReg.NumElements (); i++) {
-        PR reg = _p_wrReg.Nth (i);
-        ins->setPR (reg, WRITE);
-    }
-    for (int i = 0; i < _a_rdReg.NumElements (); i++) {
-        AR reg = _a_rdReg.Nth (i);
-        ins->setAR (reg, READ);
-    }
-    for (int i = 0; i < _a_wrReg.NumElements (); i++) {
-        AR reg = _a_wrReg.Nth (i);
-        ins->setAR (reg, WRITE);
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}{
 \index{dynInstruction@{dynInstruction}!getARrdList@{getARrdList}}
 \index{getARrdList@{getARrdList}!dynInstruction@{dynInstruction}}
@@ -174,6 +201,10 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classdynInstruction_abdbaf4c07e390bbdaaed41a983774538}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a0185ac8576ac15f7c79b5d439223bd36}{bbInstruction}.
+
 
 \begin{DoxyCode}
 {return &_a_rdReg_waitList;}
@@ -192,6 +223,10 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classdynInstruction_aeba50fabf115b7f60ce7201df044201c}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a5939807fbbef5f2d1e5c295e2e23306e}{bbInstruction}.
+
 
 \begin{DoxyCode}
 {return &_a_wrReg;}
@@ -238,8 +273,13 @@ Here is the caller graph for this function:
 \label{classdynInstruction_a464da2601438384a3c00e85a814c3964}
 
 \begin{DoxyCode}
-{ return _insAddr; }
+{ return _ins_addr; }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}{
 \index{dynInstruction@{dynInstruction}!getInsID@{getInsID}}
 \index{getInsID@{getInsID}!dynInstruction@{dynInstruction}}
@@ -251,7 +291,7 @@ Here is the caller graph for this function:
 \label{classdynInstruction_ab38b8181f522daae77cb46d701fb5302}
 
 \begin{DoxyCode}
-{ return _seqNum; }
+{Assert (_seq_num > 0); return _seq_num; }
 \end{DoxyCode}
 
 
@@ -269,7 +309,7 @@ Here is the caller graph for this function:
 \label{classdynInstruction_a3a7025de98c539d8eaa06b40ac2e8cc8}
 
 \begin{DoxyCode}
-{ return _insType; }
+{ return _ins_type; }
 \end{DoxyCode}
 
 
@@ -330,11 +370,6 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
 { return _memAxesSize; }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classdynInstruction_a9f8a63685d0b28009957e60b7596b502}{
 \index{dynInstruction@{dynInstruction}!getMemType@{getMemType}}
 \index{getMemType@{getMemType}!dynInstruction@{dynInstruction}}
@@ -363,6 +398,10 @@ Here is the caller graph for this function:
 )}}
 \label{classdynInstruction_a73d8b75f5c68a4cb2a7f434d4b8d4143}
 
+
+Reimplemented in \hyperlink{classbbInstruction_a969e9e38a61787ffe1ebc78800b0106c}{bbInstruction}.
+
+
 \begin{DoxyCode}
 { return _a_rdReg_waitList.NumElements(); }
 \end{DoxyCode}
@@ -386,8 +425,34 @@ Here is the caller graph for this function:
 )}}
 \label{classdynInstruction_ad7fa2d930aa5ad7836d2c50c1ada3faa}
 
+
+Reimplemented in \hyperlink{classbbInstruction_a31982747335c627974c29817e119a95f}{bbInstruction}.
+
+
 \begin{DoxyCode}
 { return _p_rdReg_waitList.NumElements(); }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classdynInstruction_a5a78c835af15909f0639408024aba2c7}{
+\index{dynInstruction@{dynInstruction}!getNumWrAR@{getNumWrAR}}
+\index{getNumWrAR@{getNumWrAR}!dynInstruction@{dynInstruction}}
+\subsubsection[{getNumWrAR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} dynInstruction::getNumWrAR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a5a78c835af15909f0639408024aba2c7}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a4ea01d0f7eea9c58355d0f6b91fab3c7}{bbInstruction}.
+
+
+\begin{DoxyCode}
+{ return _a_wrReg.NumElements(); }
 \end{DoxyCode}
 
 
@@ -397,6 +462,28 @@ Here is the call graph for this function:
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{classdynInstruction_a93e86651113b87fe71183d6b6946e4a8}{
+\index{dynInstruction@{dynInstruction}!getNumWrPR@{getNumWrPR}}
+\index{getNumWrPR@{getNumWrPR}!dynInstruction@{dynInstruction}}
+\subsubsection[{getNumWrPR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} dynInstruction::getNumWrPR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a93e86651113b87fe71183d6b6946e4a8}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a1e9c4a6c941a92d9a000d63ff5223392}{bbInstruction}.
+
+
+\begin{DoxyCode}
+{ return _p_wrReg.NumElements(); }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classdynInstruction_aeb07269dfde7d142e72e13cda8060c29}{
@@ -427,6 +514,10 @@ Here is the caller graph for this function:
 )}}
 \label{classdynInstruction_a82afd5173ddfd7a7654f28565263f1a2}
 
+
+Reimplemented in \hyperlink{classbbInstruction_ac93c35a5e92fe451b25df18db5200d79}{bbInstruction}.
+
+
 \begin{DoxyCode}
 {return &_p_rdReg_waitList;}
 \end{DoxyCode}
@@ -444,6 +535,10 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classdynInstruction_a40d9f8a39500558a4dea5d41ce5d6442}
+
+
+Reimplemented in \hyperlink{classbbInstruction_ace80b858be3eccab5763a1ee0b2bcfc7}{bbInstruction}.
+
 
 \begin{DoxyCode}
 {return &_p_wrReg;}
@@ -476,6 +571,33 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classdynInstruction_ac98229ee284df3ac8cb1e5e8d5ffaf94}{
+\index{dynInstruction@{dynInstruction}!getTotNumRdAR@{getTotNumRdAR}}
+\index{getTotNumRdAR@{getTotNumRdAR}!dynInstruction@{dynInstruction}}
+\subsubsection[{getTotNumRdAR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf WIDTH} dynInstruction::getTotNumRdAR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ac98229ee284df3ac8cb1e5e8d5ffaf94}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a3a5829863ae2988e16cde77f70b94815}{bbInstruction}.
+
+
+\begin{DoxyCode}
+{ return _a_rdReg.NumElements(); }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classdynInstruction_a81de1dc10cdabcb8683a0b586b36144b}{
 \index{dynInstruction@{dynInstruction}!isBrTaken@{isBrTaken}}
 \index{isBrTaken@{isBrTaken}!dynInstruction@{dynInstruction}}
@@ -488,6 +610,60 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
 { return _brTaken; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ac32e54db50317ce6bd959d7a219a866f}{
+\index{dynInstruction@{dynInstruction}!isCacheAxes@{isCacheAxes}}
+\index{isCacheAxes@{isCacheAxes}!dynInstruction@{dynInstruction}}
+\subsubsection[{isCacheAxes}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isCacheAxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ac32e54db50317ce6bd959d7a219a866f}
+
+\begin{DoxyCode}
+{ Assert (getInsType () == MEM && getMemType () == LOAD); return _cache_axes;}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdynInstruction_afe7f52780e92b78708201166c98f40c2}{
+\index{dynInstruction@{dynInstruction}!isMemOrBrViolation@{isMemOrBrViolation}}
+\index{isMemOrBrViolation@{isMemOrBrViolation}!dynInstruction@{dynInstruction}}
+\subsubsection[{isMemOrBrViolation}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isMemOrBrViolation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_afe7f52780e92b78708201166c98f40c2}
+
+\begin{DoxyCode}
+{return (_is_mem_violation || _is_on_wrong_path);}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdynInstruction_a289ae3b586fcb93055a88557842b7c59}{
+\index{dynInstruction@{dynInstruction}!isMemViolation@{isMemViolation}}
+\index{isMemViolation@{isMemViolation}!dynInstruction@{dynInstruction}}
+\subsubsection[{isMemViolation}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isMemViolation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a289ae3b586fcb93055a88557842b7c59}
+
+\begin{DoxyCode}
+{return _is_mem_violation;}
 \end{DoxyCode}
 \hypertarget{classdynInstruction_a9e5d4f7401d24394fcc9b77d818798b6}{
 \index{dynInstruction@{dynInstruction}!isOnWrongPath@{isOnWrongPath}}
@@ -507,6 +683,56 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classdynInstruction_ac4959db7eaeb4cc6f2226e6a43662f72}{
+\index{dynInstruction@{dynInstruction}!isUPLDdep@{isUPLDdep}}
+\index{isUPLDdep@{isUPLDdep}!dynInstruction@{dynInstruction}}
+\subsubsection[{isUPLDdep}]{\setlength{\rightskip}{0pt plus 5cm}bool dynInstruction::isUPLDdep (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_ac4959db7eaeb4cc6f2226e6a43662f72}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a10157958920c0f3130022d92c423bcc7}{bbInstruction}.
+
+
+\begin{DoxyCode}
+{ return _upld_dep; }
+\end{DoxyCode}
+\hypertarget{classdynInstruction_ab21390aeb598530b1d8641ed289157f6}{
+\index{dynInstruction@{dynInstruction}!printReg@{printReg}}
+\index{printReg@{printReg}!dynInstruction@{dynInstruction}}
+\subsubsection[{printReg}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::printReg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classdynInstruction_ab21390aeb598530b1d8641ed289157f6}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a02a601ac0ac196dfe36e6931a0ff38af}{bbInstruction}.
+
+
+\begin{DoxyCode}
+                         {
+            cout << "REG:(r) ";
+            for (int i = 0; i < _a_rdReg.NumElements (); i++) {
+                cout << _a_rdReg.Nth (i) << " ";
+            }
+            cout << endl;
+            cout << "REG:(w) ";
+            for (int i = 0; i < _a_wrReg.NumElements (); i++) {
+                cout << _a_wrReg.Nth (i) << " ";
+            }
+            cout << endl;
+        }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}{
 \index{dynInstruction@{dynInstruction}!resetStates@{resetStates}}
 \index{resetStates@{resetStates}!dynInstruction@{dynInstruction}}
@@ -516,6 +742,10 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classdynInstruction_a9d4e4bce20dd4c1fd4d85270d828550e}
+
+
+Reimplemented in \hyperlink{classbbInstruction_ad5b6de258fe292d78d1444eab656ea59}{bbInstruction}.
+
 
 \begin{DoxyCode}
                                   {
@@ -528,9 +758,6 @@ Here is the caller graph for this function:
     while (_p_wrReg.NumElements () > 0) {
         _p_wrReg.RemoveAt(0);
     }
-  //for (int i = 0; i < _p_rdReg.NumElements(); i++) {
-  //    _p_rdReg_waitList.Append (_p_rdReg.Nth(i));
-  //}
 
     while (_a_rdReg_waitList.NumElements () > 0) {
         _a_rdReg_waitList.RemoveAt(0);
@@ -542,6 +769,8 @@ Here is the caller graph for this function:
     _insStage = NO_STAGE;
     _lq_state = LQ_NO_STATE;
     _sq_state = SQ_NO_STATE;
+    _is_mem_violation = false;
+    _cache_axes = false;
 }
 \end{DoxyCode}
 
@@ -565,6 +794,10 @@ Here is the caller graph for this function:
 )}}
 \label{classdynInstruction_a27b7ba0720a85d516c3885bddf154765}
 
+
+Reimplemented in \hyperlink{classbbInstruction_a33f6095efbff085107ef8977e347f2af}{bbInstruction}.
+
+
 \begin{DoxyCode}
                                                  {
     if  (type == READ) {
@@ -587,28 +820,6 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{
-\index{dynInstruction@{dynInstruction}!setBrAtr@{setBrAtr}}
-\index{setBrAtr@{setBrAtr}!dynInstruction@{dynInstruction}}
-\subsubsection[{setBrAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setBrAtr (
-\begin{DoxyParamCaption}
-\item[{{\bf ADDRS}}]{brTarget, }
-\item[{bool}]{isCall, }
-\item[{bool}]{isRet, }
-\item[{bool}]{isJump}
-\end{DoxyParamCaption}
-)}}
-\label{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}
-
-\begin{DoxyCode}
-                                                                                 
-        {
-    _brTarget = brTarget;
-    if (isJump) _brType = JMP;
-    else if (isCall) _brType = CALL;
-    else if (isRet) _brType = RET;
-}
-\end{DoxyCode}
 \hypertarget{classdynInstruction_ac71f51f5c4f207d4993acdfc0a2abbc1}{
 \index{dynInstruction@{dynInstruction}!setBrAtr@{setBrAtr}}
 \index{setBrAtr@{setBrAtr}!dynInstruction@{dynInstruction}}
@@ -643,19 +854,68 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}{
+\hypertarget{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}{
+\index{dynInstruction@{dynInstruction}!setBrAtr@{setBrAtr}}
+\index{setBrAtr@{setBrAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setBrAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setBrAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{brTarget, }
+\item[{bool}]{isCall, }
+\item[{bool}]{isRet, }
+\item[{bool}]{isJump}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a4d1879c3a2a4170fb103932044dc863f}
+
+\begin{DoxyCode}
+                                                                                 
+        {
+    _brTarget = brTarget;
+    if (isJump) _brType = JMP;
+    else if (isCall) _brType = CALL;
+    else if (isRet) _brType = RET;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a3426a2abaef02c82f0c959143319586a}{
+\index{dynInstruction@{dynInstruction}!setCacheAxes@{setCacheAxes}}
+\index{setCacheAxes@{setCacheAxes}!dynInstruction@{dynInstruction}}
+\subsubsection[{setCacheAxes}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setCacheAxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a3426a2abaef02c82f0c959143319586a}
+
+\begin{DoxyCode}
+                                   {
+    Assert (_cache_axes == false && getInsType () == MEM && getMemType () == 
+      LOAD);
+    _cache_axes = true;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classdynInstruction_a7e3e916d80cc3cb1bbd7cdf6524e9983}{
 \index{dynInstruction@{dynInstruction}!setInsAddr@{setInsAddr}}
 \index{setInsAddr@{setInsAddr}!dynInstruction@{dynInstruction}}
 \subsubsection[{setInsAddr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setInsAddr (
 \begin{DoxyParamCaption}
-\item[{{\bf ADDRS}}]{insAddr}
+\item[{{\bf ADDRS}}]{ins\_\-addr}
 \end{DoxyParamCaption}
 )}}
-\label{classdynInstruction_a0088b0057fb6a8dd41dee05d79387f7c}
+\label{classdynInstruction_a7e3e916d80cc3cb1bbd7cdf6524e9983}
 
 \begin{DoxyCode}
-                                              {
-        _insAddr = insAddr;
+                                               {
+        _ins_addr = ins_addr;
 }
 \end{DoxyCode}
 
@@ -663,22 +923,22 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}{
+\hypertarget{classdynInstruction_a6f7d683f2db0f9c0a0272128278b4fa3}{
 \index{dynInstruction@{dynInstruction}!setInsID@{setInsID}}
 \index{setInsID@{setInsID}!dynInstruction@{dynInstruction}}
 \subsubsection[{setInsID}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setInsID (
 \begin{DoxyParamCaption}
-\item[{{\bf INS\_\-ID}}]{seqNum}
+\item[{{\bf INS\_\-ID}}]{seq\_\-num}
 \end{DoxyParamCaption}
 )}}
-\label{classdynInstruction_a47de890f2ae5bb33e384a7c21a54fbec}
+\label{classdynInstruction_a6f7d683f2db0f9c0a0272128278b4fa3}
 
 \begin{DoxyCode}
-                                            {
+                                             {
 #ifdef ASSERTION
-    Assert (seqNum > 0);
+    Assert (seq_num > 0);
 #endif
-        _seqNum = seqNum;
+        _seq_num = seq_num;
 }
 \end{DoxyCode}
 
@@ -697,8 +957,8 @@ Here is the caller graph for this function:
 \label{classdynInstruction_ae7c165e2f688432713ea575b2a5477fe}
 
 \begin{DoxyCode}
-                                                 {
-        _insType = insType;
+                                                  {
+        _ins_type = ins_type;
 }
 \end{DoxyCode}
 
@@ -720,8 +980,8 @@ Here is the caller graph for this function:
                                                {
 #ifdef ASSERTION
     Assert (getMemType () == LOAD);
-    dbg.print (DBG_TEST, "%s: %d %d (cyc:)\n", _c_name.c_str (), state, _lq_state
-      );
+    dbg.print (DBG_TEST, "%s: %d %d (cyc:)\n", _c_name.c_str (), state, 
+      _lq_state);
     switch (state) {
         case LQ_ADDR_WAIT: Assert (_lq_state == LQ_NO_STATE); break;
         case LQ_PENDING_CACHE_DISPATCH: Assert (_lq_state == LQ_ADDR_WAIT); break
@@ -751,23 +1011,6 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}{
-\index{dynInstruction@{dynInstruction}!setMemAtr@{setMemAtr}}
-\index{setMemAtr@{setMemAtr}!dynInstruction@{dynInstruction}}
-\subsubsection[{setMemAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setMemAtr (
-\begin{DoxyParamCaption}
-\item[{{\bf MEM\_\-TYPE}}]{memType, }
-\item[{{\bf BYTES}}]{memAxesSize}
-\end{DoxyParamCaption}
-)}}
-\label{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}
-
-\begin{DoxyCode}
-                                                                   {
-    _memType = memType;
-    _memAxesSize = memAxesSize;
-}
-\end{DoxyCode}
 \hypertarget{classdynInstruction_a5751f811a01cf9f08e0b964db98a7c0e}{
 \index{dynInstruction@{dynInstruction}!setMemAtr@{setMemAtr}}
 \index{setMemAtr@{setMemAtr}!dynInstruction@{dynInstruction}}
@@ -796,6 +1039,43 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}{
+\index{dynInstruction@{dynInstruction}!setMemAtr@{setMemAtr}}
+\index{setMemAtr@{setMemAtr}!dynInstruction@{dynInstruction}}
+\subsubsection[{setMemAtr}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setMemAtr (
+\begin{DoxyParamCaption}
+\item[{{\bf MEM\_\-TYPE}}]{memType, }
+\item[{{\bf BYTES}}]{memAxesSize}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a2608f4e8ea89c4ea370f0dab131d78ba}
+
+\begin{DoxyCode}
+                                                                   {
+    _memType = memType;
+    _memAxesSize = memAxesSize;
+}
+\end{DoxyCode}
+\hypertarget{classdynInstruction_a2bad65ecd4bba5fea1ec26d1605a9677}{
+\index{dynInstruction@{dynInstruction}!setMemViolation@{setMemViolation}}
+\index{setMemViolation@{setMemViolation}!dynInstruction@{dynInstruction}}
+\subsubsection[{setMemViolation}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setMemViolation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a2bad65ecd4bba5fea1ec26d1605a9677}
+
+\begin{DoxyCode}
+                                      {
+/*-- 
+ * assert removed to enable having multiple ST instructions issuing
+ * mis-speculation o on a LD in the same cycle - a real scenario to support
+ * --*/
+    //Assert (_is_mem_violation == false);
+    _is_mem_violation = true;
+}
+\end{DoxyCode}
 \hypertarget{classdynInstruction_a0cb15d906e84b2efc8986b74edaf5adf}{
 \index{dynInstruction@{dynInstruction}!setPipeStage@{setPipeStage}}
 \index{setPipeStage@{setPipeStage}!dynInstruction@{dynInstruction}}
@@ -825,11 +1105,6 @@ Here is the caller graph for this function:
     _insStage = insStage;
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}{
 \index{dynInstruction@{dynInstruction}!setPR@{setPR}}
 \index{setPR@{setPR}!dynInstruction@{dynInstruction}}
@@ -840,6 +1115,10 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classdynInstruction_a86ac41fe463dde2aee30a22d8bc243ad}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a2972163579c17fa08555ee00d301694b}{bbInstruction}.
+
 
 \begin{DoxyCode}
                                                  {
@@ -898,6 +1177,28 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classdynInstruction_a0468b48a3c41d462765528aff0341bef}{
+\index{dynInstruction@{dynInstruction}!setUPLDdep@{setUPLDdep}}
+\index{setUPLDdep@{setUPLDdep}!dynInstruction@{dynInstruction}}
+\subsubsection[{setUPLDdep}]{\setlength{\rightskip}{0pt plus 5cm}void dynInstruction::setUPLDdep (
+\begin{DoxyParamCaption}
+\item[{bool}]{upld\_\-dep}
+\end{DoxyParamCaption}
+)}}
+\label{classdynInstruction_a0468b48a3c41d462765528aff0341bef}
+
+
+Reimplemented in \hyperlink{classbbInstruction_a4ac467d19da127ca6045346c075c97c5}{bbInstruction}.
+
+
+\begin{DoxyCode}
+{ _upld_dep = upld_dep; }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classdynInstruction_a794898f3f2f9a99de5f8ca4b8f8999c4}{
 \index{dynInstruction@{dynInstruction}!setWrongPath@{setWrongPath}}
 \index{setWrongPath@{setWrongPath}!dynInstruction@{dynInstruction}}
@@ -918,6 +1219,109 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classdynInstruction_a572c8b5ba4b766337e601fe97b6dbba8}{
+\index{dynInstruction@{dynInstruction}!\_\-brTaken@{\_\-brTaken}}
+\index{\_\-brTaken@{\_\-brTaken}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-brTaken}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-brTaken}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a572c8b5ba4b766337e601fe97b6dbba8}
+\hypertarget{classdynInstruction_a27c4e2916461836ac4da8cba3174c72e}{
+\index{dynInstruction@{dynInstruction}!\_\-brTarget@{\_\-brTarget}}
+\index{\_\-brTarget@{\_\-brTarget}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-brTarget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} {\bf dynInstruction::\_\-brTarget}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a27c4e2916461836ac4da8cba3174c72e}
+\hypertarget{classdynInstruction_a2f263c6a90a6d1abcda8a3bb612c61ba}{
+\index{dynInstruction@{dynInstruction}!\_\-brType@{\_\-brType}}
+\index{\_\-brType@{\_\-brType}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-brType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BR\_\-TYPE} {\bf dynInstruction::\_\-brType}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a2f263c6a90a6d1abcda8a3bb612c61ba}
+\hypertarget{classdynInstruction_a909bcf8228beba27acd3676dd0dfef91}{
+\index{dynInstruction@{dynInstruction}!\_\-cache\_\-axes@{\_\-cache\_\-axes}}
+\index{\_\-cache\_\-axes@{\_\-cache\_\-axes}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-cache\_\-axes}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-cache\_\-axes}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a909bcf8228beba27acd3676dd0dfef91}
+\hypertarget{classdynInstruction_a9bc50b6337d7c7227dfd413514f3671b}{
+\index{dynInstruction@{dynInstruction}!\_\-command@{\_\-command}}
+\index{\_\-command@{\_\-command}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-command}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf dynInstruction::\_\-command}\mbox{[}INS\_\-STRING\_\-SIZE\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a9bc50b6337d7c7227dfd413514f3671b}
+\hypertarget{classdynInstruction_afe4d7e1374b7ce17dd6ba1458d88ba08}{
+\index{dynInstruction@{dynInstruction}!\_\-hitLevel@{\_\-hitLevel}}
+\index{\_\-hitLevel@{\_\-hitLevel}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-hitLevel}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf dynInstruction::\_\-hitLevel}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_afe4d7e1374b7ce17dd6ba1458d88ba08}
+\hypertarget{classdynInstruction_a2de61048d8f382933606e1582a82ea16}{
+\index{dynInstruction@{dynInstruction}!\_\-ins\_\-addr@{\_\-ins\_\-addr}}
+\index{\_\-ins\_\-addr@{\_\-ins\_\-addr}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-ins\_\-addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} {\bf dynInstruction::\_\-ins\_\-addr}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a2de61048d8f382933606e1582a82ea16}
+\hypertarget{classdynInstruction_a85cf6f4254516ea4286cc5d63bee54e6}{
+\index{dynInstruction@{dynInstruction}!\_\-ins\_\-type@{\_\-ins\_\-type}}
+\index{\_\-ins\_\-type@{\_\-ins\_\-type}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-ins\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-TYPE} {\bf dynInstruction::\_\-ins\_\-type}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a85cf6f4254516ea4286cc5d63bee54e6}
+\hypertarget{classdynInstruction_ac7c0381d28c31b2f74785407a8098bd4}{
+\index{dynInstruction@{dynInstruction}!\_\-insStage@{\_\-insStage}}
+\index{\_\-insStage@{\_\-insStage}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-insStage}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-STAGE} {\bf dynInstruction::\_\-insStage}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_ac7c0381d28c31b2f74785407a8098bd4}
+\hypertarget{classdynInstruction_a236e3bf891dd2a04c13768fef697823a}{
+\index{dynInstruction@{dynInstruction}!\_\-is\_\-mem\_\-violation@{\_\-is\_\-mem\_\-violation}}
+\index{\_\-is\_\-mem\_\-violation@{\_\-is\_\-mem\_\-violation}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-is\_\-mem\_\-violation}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-is\_\-mem\_\-violation}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a236e3bf891dd2a04c13768fef697823a}
+\hypertarget{classdynInstruction_a28e5ca3c362579c3b7d429c9cba8c17e}{
+\index{dynInstruction@{dynInstruction}!\_\-is\_\-on\_\-wrong\_\-path@{\_\-is\_\-on\_\-wrong\_\-path}}
+\index{\_\-is\_\-on\_\-wrong\_\-path@{\_\-is\_\-on\_\-wrong\_\-path}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-is\_\-on\_\-wrong\_\-path}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-is\_\-on\_\-wrong\_\-path}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a28e5ca3c362579c3b7d429c9cba8c17e}
+\hypertarget{classdynInstruction_a179ac0c388baa6a159cbdaa729901fd7}{
+\index{dynInstruction@{dynInstruction}!\_\-lq\_\-state@{\_\-lq\_\-state}}
+\index{\_\-lq\_\-state@{\_\-lq\_\-state}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-lq\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf LQ\_\-STATE} {\bf dynInstruction::\_\-lq\_\-state}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a179ac0c388baa6a159cbdaa729901fd7}
+\hypertarget{classdynInstruction_a43307923466ce126bedd260e6fc3903a}{
+\index{dynInstruction@{dynInstruction}!\_\-memAddr@{\_\-memAddr}}
+\index{\_\-memAddr@{\_\-memAddr}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-memAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDRS} {\bf dynInstruction::\_\-memAddr}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a43307923466ce126bedd260e6fc3903a}
+\hypertarget{classdynInstruction_a2064414260dc5c11e2b6af0f9974bec1}{
+\index{dynInstruction@{dynInstruction}!\_\-memAxesSize@{\_\-memAxesSize}}
+\index{\_\-memAxesSize@{\_\-memAxesSize}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-memAxesSize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BYTES} {\bf dynInstruction::\_\-memAxesSize}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a2064414260dc5c11e2b6af0f9974bec1}
+\hypertarget{classdynInstruction_aa0a3ae202f13e486fe998bc7f4a600d3}{
+\index{dynInstruction@{dynInstruction}!\_\-memType@{\_\-memType}}
+\index{\_\-memType@{\_\-memType}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-memType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MEM\_\-TYPE} {\bf dynInstruction::\_\-memType}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_aa0a3ae202f13e486fe998bc7f4a600d3}
+\hypertarget{classdynInstruction_a83cdfa461d7b1c12c4f9d9d0c8b9d630}{
+\index{dynInstruction@{dynInstruction}!\_\-seq\_\-num@{\_\-seq\_\-num}}
+\index{\_\-seq\_\-num@{\_\-seq\_\-num}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-seq\_\-num}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} {\bf dynInstruction::\_\-seq\_\-num}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a83cdfa461d7b1c12c4f9d9d0c8b9d630}
+\hypertarget{classdynInstruction_a99a8a46f48d06ff4bc88499efc685906}{
+\index{dynInstruction@{dynInstruction}!\_\-sq\_\-state@{\_\-sq\_\-state}}
+\index{\_\-sq\_\-state@{\_\-sq\_\-state}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-sq\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SQ\_\-STATE} {\bf dynInstruction::\_\-sq\_\-state}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a99a8a46f48d06ff4bc88499efc685906}
+\hypertarget{classdynInstruction_ad6650905d355b9bd11821572eb5c449b}{
+\index{dynInstruction@{dynInstruction}!\_\-stackRd@{\_\-stackRd}}
+\index{\_\-stackRd@{\_\-stackRd}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-stackRd}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-stackRd}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_ad6650905d355b9bd11821572eb5c449b}
+\hypertarget{classdynInstruction_a8ae8b2d882d79e89310ebaedb9b6408f}{
+\index{dynInstruction@{dynInstruction}!\_\-stackWr@{\_\-stackWr}}
+\index{\_\-stackWr@{\_\-stackWr}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-stackWr}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-stackWr}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a8ae8b2d882d79e89310ebaedb9b6408f}
+\hypertarget{classdynInstruction_a68be14704fc772703ec5c2996ab157e6}{
+\index{dynInstruction@{dynInstruction}!\_\-upld\_\-dep@{\_\-upld\_\-dep}}
+\index{\_\-upld\_\-dep@{\_\-upld\_\-dep}!dynInstruction@{dynInstruction}}
+\subsubsection[{\_\-upld\_\-dep}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf dynInstruction::\_\-upld\_\-dep}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classdynInstruction_a68be14704fc772703ec5c2996ab157e6}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

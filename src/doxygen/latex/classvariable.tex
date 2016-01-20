@@ -26,7 +26,7 @@ int \hyperlink{classvariable_a53fb79e20c7ca14c872830461025c11c}{getNumAssignedBB
 \item 
 int \hyperlink{classvariable_a57838c6bf0ac170ee02a0e3a099aec35}{getC} ()
 \item 
-void \hyperlink{classvariable_ac570372e439e2d75875b8b2253069ce6}{setC} (int \hyperlink{_8AppleDouble_2sat__counter_8cpp_aa41808e37ba1ecae7ee6bde4a5c62f82}{c})
+void \hyperlink{classvariable_ac570372e439e2d75875b8b2253069ce6}{setC} (int c)
 \item 
 void \hyperlink{classvariable_a0d0cee61944333e78fecef0365d35cbe}{popFromStack} ()
 \item 
@@ -36,7 +36,12 @@ int \hyperlink{classvariable_a3f153f4bceb60929467548bd8885d61e}{getTopStack} ()
 \item 
 \hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classvariable_a3c88482acd58a7f9f38b5467d6edcff7}{getTopBbStack} ()
 \item 
-void \hyperlink{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}{popHackPushes} ()
+void \hyperlink{classvariable_aefa98b50d2a3135fe1141621f6f5d995}{popHackPushes} (int)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classvariable_a2d93d3b2fd7553f65c931b13aabe5504}{\_\-hackPushCount}
 \end{DoxyCompactItemize}
 
 
@@ -56,8 +61,8 @@ void \hyperlink{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}{popHackPushes} 
         Assert(var >= X86_REG_LO && var <= X86_REG_HI && "invalid x86 variable.")
       ;
         _var = var;
-        _c = 0;
-        _hackPushCount = 0;
+        _c = 1;
+        _hackPushCount = 1;
         bbList = new List<basicblock*>;
 }
 \end{DoxyCode}
@@ -111,6 +116,8 @@ Here is the call graph for this function:
 
 \begin{DoxyCode}
                    {
+    Assert (_c < LARGE_NUMBER && "SSA register conflict happens if larger than LA
+      RGE_NUMBER - consider increasing this number");
         return _c;
 }
 \end{DoxyCode}
@@ -218,7 +225,7 @@ Here is the caller graph for this function:
         if (_s.size() == 0) {
                 int k = getC();
                 _s.push_back(k);
-                setC(k+1);
+                setC(k + 1);
                 _hackPushCount++;
         } //means don't assign anything
         // if (_s.size() == 0) { printf("read stack: %d_-2\n", _var); return -2; 
@@ -249,23 +256,26 @@ Here is the call graph for this function:
         _s.pop_back();
 }
 \end{DoxyCode}
-\hypertarget{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}{
+\hypertarget{classvariable_aefa98b50d2a3135fe1141621f6f5d995}{
 \index{variable@{variable}!popHackPushes@{popHackPushes}}
 \index{popHackPushes@{popHackPushes}!variable@{variable}}
 \subsubsection[{popHackPushes}]{\setlength{\rightskip}{0pt plus 5cm}void variable::popHackPushes (
 \begin{DoxyParamCaption}
-{}
+\item[{int}]{counter}
 \end{DoxyParamCaption}
 )}}
-\label{classvariable_a8004cca5263b1d3a296e4c5481b6db2a}
+\label{classvariable_aefa98b50d2a3135fe1141621f6f5d995}
 
 \begin{DoxyCode}
-                             {
-        while (_hackPushCount > 0) {
+                                        {
+        while (counter > 0) {
+        counter--;
                 _hackPushCount--;
                 _s.pop_back();
+        Assert (_hackPushCount >= 0);
         }
-}\end{DoxyCode}
+}
+\end{DoxyCode}
 \hypertarget{classvariable_ae0d9d0c11701ccb08719cb5f27fa75e4}{
 \index{variable@{variable}!pushToStack@{pushToStack}}
 \index{pushToStack@{pushToStack}!variable@{variable}}
@@ -279,7 +289,7 @@ Here is the call graph for this function:
 \begin{DoxyCode}
                                 {
         // printf("pushing to stack %d_%d\n", _var, s);
-        Assert(s >= 0 && "Invalid s value inserted.");
+        Assert(s > 0 && "Invalid s value inserted.");
         _s.push_back(s);
 }
 \end{DoxyCode}
@@ -295,7 +305,9 @@ Here is the call graph for this function:
 
 \begin{DoxyCode}
                          {
-        Assert(c >= 0 && "Invalid c value inserted.");
+        Assert(c > 0 && "Invalid c value inserted.");
+    Assert (_c < LARGE_NUMBER && "SSA register conflict happens if larger than LA
+      RGE_NUMBER - consider increasing this number");
         _c = c;
 }
 \end{DoxyCode}
@@ -304,6 +316,14 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classvariable_a2d93d3b2fd7553f65c931b13aabe5504}{
+\index{variable@{variable}!\_\-hackPushCount@{\_\-hackPushCount}}
+\index{\_\-hackPushCount@{\_\-hackPushCount}!variable@{variable}}
+\subsubsection[{\_\-hackPushCount}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf variable::\_\-hackPushCount}}}
+\label{classvariable_a2d93d3b2fd7553f65c931b13aabe5504}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

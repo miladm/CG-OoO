@@ -2,41 +2,74 @@
 \section{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h File Reference}
 \label{pars_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h@{/home/milad/esc\_\-project/svn/PARS/src/frontend/pars.h}}
 }
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$signal.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$cassert$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$setjmp.h$>$}\par
+{\ttfamily \#include \char`\"{}pin.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}pin\_\-isa.H\char`\"{}}\par
+{\ttfamily \#include \char`\"{}instlib.H\char`\"{}}\par
+{\ttfamily \#include $<$bp\_\-lib/types.hh$>$}\par
+{\ttfamily \#include \char`\"{}../config.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}memlog.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}uOpGen.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}simpointTracker.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}staticCodeParser.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../global/global.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}../global/g\_\-variable.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/utility.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/profiler.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/message.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/statistic.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../lib/benchAddrRangeParser.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../energy/table\_\-energy.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../energy/wire\_\-energy.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/ino/inoBkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/o3/oooBkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/bb/bbBkEnd.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/dynInstruction.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}../backend/unit/dynBasicblock.h\char`\"{}}\par
 Include dependency graph for pars.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-VOID \hyperlink{pars_8h_ad31ce66601d158b499245c36353b1aef}{runPARS} (char $\ast$)
+VOID \hyperlink{pars_8h_a259638d20398dedc6dff32e11ad87f89}{pin\_\-\_\-parseConfig} (string, string, string)
 \item 
-VOID \hyperlink{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}{Init} (char $\ast$)
+VOID \hyperlink{pars_8h_a8bb213f2097111821bc9c5bd823a888b}{pin\_\-\_\-init} (string, string, string)
 \item 
-VOID \hyperlink{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}{Fini} (INT32, VOID $\ast$)
+VOID \hyperlink{pars_8h_ace0fa7dabd943b7f226518d8f2eceef8}{pin\_\-\_\-runPARS} (string, string, string)
 \item 
-VOID \hyperlink{pars_8h_a4254ddc7317164f6cb03afabf4b11770}{Instruction} (TRACE trace, VOID $\ast$val)
+VOID \hyperlink{pars_8h_a2975f88798b289232059994fbfb05926}{pin\_\-\_\-fini} (INT32, VOID $\ast$)
 \item 
-ADDRINT \hyperlink{pars_8h_a6c563e02c0b7b634beaaf53ada126817}{PredictAndUpdate} (ADDRINT \_\-\_\-pc, INT32 \_\-\_\-taken, ADDRINT tgt, ADDRINT fthru)
+VOID \hyperlink{pars_8h_ab0a8272b1f7008f664454551f542fd63}{pin\_\-\_\-instruction} (TRACE, VOID $\ast$)
 \item 
-VOID \hyperlink{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}{parseConfig} ()
+ADDRINT \hyperlink{pars_8h_a7a15f2a86ce80d2408aa5418bae869d4}{PredictAndUpdate} (ADDRINT, INT32, ADDRINT, ADDRINT, UINT32)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}{
-\index{pars.h@{pars.h}!Fini@{Fini}}
-\index{Fini@{Fini}!pars.h@{pars.h}}
-\subsubsection[{Fini}]{\setlength{\rightskip}{0pt plus 5cm}VOID Fini (
+\hypertarget{pars_8h_a2975f88798b289232059994fbfb05926}{
+\index{pars.h@{pars.h}!pin\_\-\_\-fini@{pin\_\-\_\-fini}}
+\index{pin\_\-\_\-fini@{pin\_\-\_\-fini}!pars.h@{pars.h}}
+\subsubsection[{pin\_\-\_\-fini}]{\setlength{\rightskip}{0pt plus 5cm}VOID pin\_\-\_\-fini (
 \begin{DoxyParamCaption}
 \item[{INT32}]{, }
 \item[{VOID $\ast$}]{}
 \end{DoxyParamCaption}
 )}}
-\label{pars_8h_ac0513a33ea062ab0b1e64a39b995f034}
+\label{pars_8h_a2975f88798b289232059994fbfb05926}
 
 \begin{DoxyCode}
 {
-    fclose(trace_static);
+    pin__doFinish ();
 }
 \end{DoxyCode}
 
@@ -49,53 +82,79 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}{
-\index{pars.h@{pars.h}!Init@{Init}}
-\index{Init@{Init}!pars.h@{pars.h}}
-\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}VOID Init (
+\hypertarget{pars_8h_a8bb213f2097111821bc9c5bd823a888b}{
+\index{pars.h@{pars.h}!pin\_\-\_\-init@{pin\_\-\_\-init}}
+\index{pin\_\-\_\-init@{pin\_\-\_\-init}!pars.h@{pars.h}}
+\subsubsection[{pin\_\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}VOID pin\_\-\_\-init (
 \begin{DoxyParamCaption}
-\item[{char $\ast$}]{}
+\item[{string}]{, }
+\item[{string}]{, }
+\item[{string}]{}
 \end{DoxyParamCaption}
 )}}
-\label{pars_8h_ac35d667fe7c066f63c862a9fbdfbdf73}
+\label{pars_8h_a8bb213f2097111821bc9c5bd823a888b}
 
 \begin{DoxyCode}
-{
-        parseConfig (cfgFile);
-        g_var.msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
+                                                                       {
+        pin__parseConfig (bench_path, config_path, out_dir);
+
+    _e_btb = new table_energy("BTB", g_cfg->_root["cpu"]["backend"]["table"]["BTB
+      "]);
+
+        g_msg.simStep ("SETUP BENCHMARK ADDRESS SPACE");
+    string bench_name = g_cfg->getProgName ();
+    bench_addr_space = new benchAddrRangeParser (bench_name);
+
+        g_msg.simStep ("SIMULATOR FRONTEND INITIALIZATION");
         PIN_SemaphoreInit (&semaphore0);
         PIN_SemaphoreInit (&semaphore1);
         PIN_SemaphoreClear (&semaphore0);
         PIN_SemaphoreClear (&semaphore1);
-    g_predictor  = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192, 2, 0);
-      
-        g_var.msg.simStep ("PARS COMPILED CODE");
-        g_staticCode = new staticCodeParser (&g_var, g_cfg);
+    btb = new BTB (4096, 16, 2);
+    if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        _e_table1 = new table_energy("tournament", g_cfg->_root["cpu"]["backend"]
+      ["bp"]["tournament"]);
+        _e_wire1 = new wire_energy("tournament.wire", g_cfg->_root["cpu"]["backen
+      d"]["bp"]["tournament"]);
+        g_tournament_bp = new TournamentBP (2048, 2, 2048, 11, 8192, 13, 2, 8192,
+       2, 0);
+    } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+        int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+        _e_table2 = new table_energy("2bc_gskew", g_cfg->_root["cpu"]["backend"][
+      "bp"]["bc_gskew"]);
+        _e_wire2 = new wire_energy("2bc_gskew.wire", g_cfg->_root["cpu"]["backend
+      "]["bp"]["bc_gskew"]);
+        g_2bcgskew_bp   = new HybridBPskew (8192, 2, 8192, 13, 2, 8192, 2, 0, wid
+      th);
+    } else {
+        Assert (0 && "Invalid BP type chosen");
+    }
 
-        g_var.msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
-        char const * dummy_argv[] = {"TraceSim", 
-                                 "-o", "/scratch/tracesim/specint2006/results/ooo
-      _listSch_dynBP_manyCache/401.bzip2.txt", 
-                                 "-i", "/scratch/tracesim/specint2006/bb_trace_ar
-      chReg/401.bzip2.trace", 
-                                 "-c", "1", "-n", "4", "-s", "1", "-y", "1", "-j"
-      , "1", "-w", "160", 
-                                 "-x", "/home/milad/esc_project/svn/memTraceMilad
-      /TraceSim/results/bzip2/wbb_skip_static_count_bzip2.csv", 
-                                 "-e", "num_wbb_bypassed_in_scheduling_each_ins",
-       
-                                 "-z", "/home/milad/esc_project/svn/memTraceMilad
-      /TraceSim/results/bzip2/branch_exe_count_map.csv", 
-                                 NULL};
-        int dummy_argc = sizeof (dummy_argv) / sizeof (char*) - 1;
+        g_msg.simStep ("PARS COMPILED CODE");
+    g_var.scheduling_mode = STATIC_SCH;//DYNAMIC_SCH;
         g_var.g_insList = new List<string*>;
         g_var.g_codeCache = new List<dynInstruction*>;
-        g_var.g_BBlist = new List<basicblock*>;
-        bkEnd_init (dummy_argc, dummy_argv, g_var); //TODO fix this line
-        bkEnd_heading (dummy_argc, dummy_argv); //TODO fix this line
-        //inoBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-        oooBkEnd_init (dummy_argc, dummy_argv); //TODO fix this line
-        g_var.msg.simStep ("START OF SIMULATION");
+        g_var.g_bbCache = new List<dynBasicblock*>;
+        g_var.g_blockCache = new List<block*>;
+    g_var.g_core_type = g_cfg->getCoreType ();
+    g_var.g_mem_model = g_cfg->getMemModel ();
+        g_staticCode = new staticCodeParser (g_cfg);
+    g_bbStat = new bbStat;
+
+        pin__uOpGenInit (*g_staticCode);
+
+    /* TODO take care of these cout's*/
+    cout << "CORE: " << g_var.g_core_type << endl;
+    cout << "MEM MODEL: " << g_var.g_mem_model << endl;
+    cout << "SCHEDULING MODE: " << g_var.scheduling_mode << endl;
+    cout << "BENCH: " << g_cfg->getProgName () << endl;
+
+        g_msg.simStep ("SIMULATOR BACKEND INITIALIZATION");
+    if (g_var.g_core_type == OUT_OF_ORDER) oooBkEnd_init ();
+    else if (g_var.g_core_type == IN_ORDER) inoBkEnd_init ();
+    else if (g_var.g_core_type == BASICBLOCK) bbBkEnd_init ();
+
+        g_msg.simStep ("START OF SIMULATION");
 }
 \end{DoxyCode}
 
@@ -108,70 +167,70 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{pars_8h_a4254ddc7317164f6cb03afabf4b11770}{
-\index{pars.h@{pars.h}!Instruction@{Instruction}}
-\index{Instruction@{Instruction}!pars.h@{pars.h}}
-\subsubsection[{Instruction}]{\setlength{\rightskip}{0pt plus 5cm}VOID Instruction (
+\hypertarget{pars_8h_ab0a8272b1f7008f664454551f542fd63}{
+\index{pars.h@{pars.h}!pin\_\-\_\-instruction@{pin\_\-\_\-instruction}}
+\index{pin\_\-\_\-instruction@{pin\_\-\_\-instruction}!pars.h@{pars.h}}
+\subsubsection[{pin\_\-\_\-instruction}]{\setlength{\rightskip}{0pt plus 5cm}VOID pin\_\-\_\-instruction (
 \begin{DoxyParamCaption}
-\item[{TRACE}]{trace, }
-\item[{VOID $\ast$}]{val}
+\item[{TRACE}]{, }
+\item[{VOID $\ast$}]{}
 \end{DoxyParamCaption}
 )}}
-\label{pars_8h_a4254ddc7317164f6cb03afabf4b11770}
+\label{pars_8h_ab0a8272b1f7008f664454551f542fd63}
 
 \begin{DoxyCode}
 {
-        if (!filter.SelectTrace (trace)) {
-                printf ("NOTE: SKIPPING TRACE\n");
-                return;
-        }
+    if (!filter.SelectTrace (trace)) {
+        printf ("NOTE: SKIPPING TRACE\n");
+        return;
+    }
 
-        for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bb
-      l))
+    //    bool first_bb = true;
+    for (BBL bbl = TRACE_BblHead (trace); BBL_Valid (bbl); bbl = BBL_Next (bbl))
+    {
+        //        if (g_var.g_enable_bkEnd) {
+        //            ADDRINT bb_addr = BBL_Address (bbl);
+        //            if (g_var.g_core_type == BASICBLOCK) {
+        //                if (first_bb) {
+        //                    first_bb = false;
+        //                    INS bb_head = BBL_InsHead (bbl);
+        //                    pin__get_bb_header (bb_addr, bb_head);
+        //                }
+        //                INS bb_tail = BBL_InsTail (bbl);
+        //                pin__get_bb_header (bb_addr, bb_tail);
+        //            } //TODO simpoint commands do not apply here - fix if put b
+      ack
+        //        }
+
+        BBL_InsertCall (bbl, IPOINT_BEFORE, (AFUNPTR) doBBcount, IARG_UINT32, BBL
+      _NumIns(bbl), IARG_END);
+
+        if (g_var.g_enable_instrumentation) 
         {
-                for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next
-       (ins))
-        {
-            ADDRINT pc = INS_Address (ins);
-            string diss =  INS_Disassemble (ins);
-            static unsigned long uid=0;
-            ++uid;
+            for (INS ins = BBL_InsHead (bbl); INS_Valid (ins); ins = INS_Next (in
+      s))
+            {
+                /* INSTRUMENT ONLY INSTRUCTIONS IN THE APPLICATION CODE */
+                if (!(INS_Address (ins) >= bench_addr_space->getStartAddr () && 
+                      INS_Address (ins) <= bench_addr_space->getEndAddr ())) cont
+      inue;
+
+                ADDRINT pc = INS_Address (ins);
+                string diss =  INS_Disassemble (ins);
+                static unsigned long uid=0;
+                ++uid;
 #ifdef G_I_INFO_EN
-            OPCODE opcode = INS_Opcode (ins);
-            bool is_call = INS_IsCall (ins);
-            bool is_ret = INS_IsRet (ins);
-            bool has_ft = INS_HasFallThrough (ins);
-            g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
-            if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,has_f
-      t);
+                OPCODE opcode = INS_Opcode (ins);
+                bool is_call = INS_IsCall (ins);
+                bool is_ret = INS_IsRet (ins);
+                bool has_ft = INS_HasFallThrough (ins);
+                g_i_info[uid] = i_info (pc,opcode,diss,is_call,is_ret,has_ft);
+                if (uid==0) g_i_info[0] = i_info (pc,opcode,diss,is_call,is_ret,h
+      as_ft);
 #endif
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doCount,
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpMemCount_,
-                    IARG_UINT32, INS_MemoryOperandCount (ins),
-                    IARG_END);
-            INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) doImpCallCount_,
-                    IARG_BOOL, INS_IsCall (ins),
-                    IARG_END);
-
-            if (g_var.g_enable_instrumentation) {
-                //cout << g_var.g_insCountRightPath << " instrumentation enabled\
-      n";
-                get_uop (ins);
-                //if (g_cfg->coreType == PHRASEBLOCK)
-                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageBBbuf
-      f,
-                //              IARG_ADDRINT, INS_Address (ins),
-                //              IARG_END);
-                //else {
-                //      INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) manageInsBu
-      ff,
-                //              IARG_ADDRINT, INS_Address (ins),
-                //              IARG_END);
-                //}
                 if (INS_IsMemoryWrite (ins)) {
-                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
-      x << pc << " " << diss << " [mem write]\n";
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << 
+      pc << " " << diss << " [mem write]\n";
                     INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) 
       GetMemWriteOrigValue,
                             IARG_UINT32, uid,
@@ -197,8 +256,8 @@ Here is the caller graph for this function:
                 }
                 /*
                    if (INS_IsMemoryRead (ins)) {
-                   if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << hex
-       << pc << " " << diss << " [mem read]\n";
+                   if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << p
+      c << " " << diss << " [mem read]\n";
                    INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) GetMemReadBypass
       ,
                    IARG_UINT32, uid,
@@ -209,18 +268,37 @@ Here is the caller graph for this function:
                    }
                    */
 
-                if (INS_IsBranchOrCall (ins)) {
-                    if (g_var.g_debug_level & DBG_INS) std::cout << "INS  " << he
-      x << pc << " " << diss << " [branch]\n";
-                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) 
+                if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+      
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (in
+      s) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedur
+      eCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << 
+      pc << " " << diss << " [branch]\n";
+                    if (INS_HasFallThrough (ins)) {
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) 
       HandleBranch,
+                                IARG_UINT32, uid,
+                                IARG_BRANCH_TAKEN,
+                                IARG_BRANCH_TARGET_ADDR, 
+                                IARG_FALLTHROUGH_ADDR,
+                                IARG_ADDRINT, INS_Address (ins),
+                                IARG_BOOL, INS_HasFallThrough (ins),
+                                IARG_UINT32, BBL_NumIns(bbl),
+                                IARG_END);
+                    }
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) HandleBra
+      nch,
                             IARG_UINT32, uid,
-                            IARG_CONTEXT,
                             IARG_BRANCH_TAKEN,
                             IARG_BRANCH_TARGET_ADDR, 
                             IARG_FALLTHROUGH_ADDR,
                             IARG_ADDRINT, INS_Address (ins),
                             IARG_BOOL, INS_HasFallThrough (ins),
+                            IARG_UINT32, BBL_NumIns(bbl),
                             IARG_END);
                 }
 
@@ -231,6 +309,27 @@ Here is the caller graph for this function:
                             IARG_END);
                 }
 
+                /* CREARE OPERATION OBJECTS FOR TEH BACKEWND */
+                if (g_var.g_enable_bkEnd) pin__getOp (ins);
+
+                /* HANDLE CHANGE OF CONTEXT */
+                if (INS_IsBranchOrCall (ins) || INS_IsDirectBranchOrCall (ins) ||
+      
+                        INS_IsFarRet (ins) || INS_IsRet (ins) || INS_IsSysret (in
+      s) || 
+                        INS_IsDirectFarJump (ins) || INS_IsFarJump (ins) ||
+                        INS_IsCall (ins) || INS_IsFarCall (ins) || INS_IsProcedur
+      eCall (ins) ||
+                        INS_IsDirectCall (ins) || INS_IsDirectBranch (ins)) {
+                    if (g_var.g_debug_level & DBG_INS) cout << "INS  " << hex << 
+      pc << " " << diss << " [branch]\n";
+                    if (INS_HasFallThrough (ins))
+                        INS_InsertCall (ins, IPOINT_AFTER, (AFUNPTR) 
+      HandleContext, IARG_CONTEXT, IARG_END);
+                    INS_InsertCall (ins, IPOINT_TAKEN_BRANCH, (AFUNPTR) 
+      HandleContext, IARG_CONTEXT, IARG_END);
+                }
+
                 INS_InsertCall (ins, IPOINT_BEFORE, (AFUNPTR) HandleInst,
                         IARG_UINT32, uid,
                         IARG_BOOL, INS_IsCall (ins),
@@ -239,7 +338,7 @@ Here is the caller graph for this function:
                         IARG_END);
             }
         }
-        }
+    }
 }
 \end{DoxyCode}
 
@@ -252,84 +351,52 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}{
-\index{pars.h@{pars.h}!parseConfig@{parseConfig}}
-\index{parseConfig@{parseConfig}!pars.h@{pars.h}}
-\subsubsection[{parseConfig}]{\setlength{\rightskip}{0pt plus 5cm}VOID parseConfig (
+\hypertarget{pars_8h_a259638d20398dedc6dff32e11ad87f89}{
+\index{pars.h@{pars.h}!pin\_\-\_\-parseConfig@{pin\_\-\_\-parseConfig}}
+\index{pin\_\-\_\-parseConfig@{pin\_\-\_\-parseConfig}!pars.h@{pars.h}}
+\subsubsection[{pin\_\-\_\-parseConfig}]{\setlength{\rightskip}{0pt plus 5cm}VOID pin\_\-\_\-parseConfig (
 \begin{DoxyParamCaption}
-{}
+\item[{string}]{, }
+\item[{string}]{, }
+\item[{string}]{}
 \end{DoxyParamCaption}
 )}}
-\label{pars_8h_ac9a2219044a9e8492ef4697ce24877b9}
-\hypertarget{pars_8h_a6c563e02c0b7b634beaaf53ada126817}{
-\index{pars.h@{pars.h}!PredictAndUpdate@{PredictAndUpdate}}
-\index{PredictAndUpdate@{PredictAndUpdate}!pars.h@{pars.h}}
-\subsubsection[{PredictAndUpdate}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT PredictAndUpdate (
-\begin{DoxyParamCaption}
-\item[{ADDRINT}]{\_\-\_\-pc, }
-\item[{INT32}]{\_\-\_\-taken, }
-\item[{ADDRINT}]{tgt, }
-\item[{ADDRINT}]{fthru}
-\end{DoxyParamCaption}
-)}}
-\label{pars_8h_a6c563e02c0b7b634beaaf53ada126817}
+\label{pars_8h_a259638d20398dedc6dff32e11ad87f89}
 
 \begin{DoxyCode}
-{
-    bool taken = __taken;
-    ADDRINT pc = __pc;
-    void *bp_hist = NULL;
-    bool pred = g_predictor->lookup (pc, bp_hist);
-    if (g_var.g_debug_level & DBG_BP) std::cout << "  prediction = " << (pred?"T"
-      :"N");
-        if (!g_var.g_wrong_path) {
-                if (g_var.g_debug_level & DBG_BP) std::cout << ", actual = " << (
-      taken?"T":"N") << " : "; 
-                if (pred != taken) {
-                    if (g_var.g_debug_level & DBG_BP) std::cout << "mispredicted!
-      \n";
-                        g_var.g_wrong_path = true;
-                        //printf ("\nSTART OF WRONG PATH\n");
-                        //fprintf (__outFile, "\nSTART OF WRONG PATH\n");
-                } else {
-                    if (g_var.g_debug_level & DBG_BP) std::cout << "correct predi
-      ction\n";
-                }
-                g_predictor->update (pc, taken, bp_hist, false);
-        } else {
-                if (g_var.g_debug_level & DBG_BP) std::cout << " on wrong path\n"
-      ;
-        }
-    return  pred ? tgt : fthru;
+                                                                              {
+        g_cfg = new config (bench_path, config_path, out_dir);
 }
 \end{DoxyCode}
 
 
-Here is the call graph for this function:
+Here is the caller graph for this function:
 
 
-\hypertarget{pars_8h_ad31ce66601d158b499245c36353b1aef}{
-\index{pars.h@{pars.h}!runPARS@{runPARS}}
-\index{runPARS@{runPARS}!pars.h@{pars.h}}
-\subsubsection[{runPARS}]{\setlength{\rightskip}{0pt plus 5cm}VOID runPARS (
+\hypertarget{pars_8h_ace0fa7dabd943b7f226518d8f2eceef8}{
+\index{pars.h@{pars.h}!pin\_\-\_\-runPARS@{pin\_\-\_\-runPARS}}
+\index{pin\_\-\_\-runPARS@{pin\_\-\_\-runPARS}!pars.h@{pars.h}}
+\subsubsection[{pin\_\-\_\-runPARS}]{\setlength{\rightskip}{0pt plus 5cm}VOID pin\_\-\_\-runPARS (
 \begin{DoxyParamCaption}
-\item[{char $\ast$}]{}
+\item[{string}]{, }
+\item[{string}]{, }
+\item[{string}]{}
 \end{DoxyParamCaption}
 )}}
-\label{pars_8h_ad31ce66601d158b499245c36353b1aef}
+\label{pars_8h_ace0fa7dabd943b7f226518d8f2eceef8}
 
 \begin{DoxyCode}
 {
-    Init (cfgFile);
+    pin__init (bench_path, config_path, out_dir);
 
-        // Register a routine that gets called every time the trace is inserted
+        // REGISTER A ROUTINE THAT GETS CALLED EVERY TIME THE TRACE IS INSERTED
     CODECACHE_AddTraceInsertedFunction (countTrace, 0);
-        // Register a routine that gets called every time the cache is full
+        // REGISTER A ROUTINE THAT GETS CALLED EVERY TIME THE CACHE IS FULL
         CODECACHE_AddFullCacheFunction (FlushOnFull, 0); 
 
         //Handle pin-generated exceptions
         PIN_AddInternalExceptionHandler (handlePinException,NULL);
-        //Handle application-generated exceptions
+        //HANDLE APPLICATION-GENERATED EXCEPTIONS
         PIN_InterceptSignal (SIGTRAP,signal_handler,NULL);
         PIN_UnblockSignal (SIGTRAP,TRUE);
         PIN_InterceptSignal (SIGILL,signal_handler,NULL);
@@ -343,16 +410,149 @@ Here is the call graph for this function:
         PIN_InterceptSignal (SIGABRT,signal_handler,NULL);
         PIN_UnblockSignal (SIGABRT,TRUE);
 
-        __outFile = fopen ("junky", "w");
-        uop_gen (__outFile, *g_staticCode);
-    TRACE_AddInstrumentFunction (Instruction, 0);
-    PIN_AddFiniFunction (Fini, 0);
+    TRACE_AddInstrumentFunction (pin__instruction, 0);
+    PIN_AddFiniFunction (pin__fini, 0);
 
     PIN_SpawnInternalThread (backEnd, rootThreadArg, 0, &rootThreadUid);
 
         filter.Activate ();
 
         start_pars = clock ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{pars_8h_a7a15f2a86ce80d2408aa5418bae869d4}{
+\index{pars.h@{pars.h}!PredictAndUpdate@{PredictAndUpdate}}
+\index{PredictAndUpdate@{PredictAndUpdate}!pars.h@{pars.h}}
+\subsubsection[{PredictAndUpdate}]{\setlength{\rightskip}{0pt plus 5cm}ADDRINT PredictAndUpdate (
+\begin{DoxyParamCaption}
+\item[{ADDRINT}]{, }
+\item[{INT32}]{, }
+\item[{ADDRINT}]{, }
+\item[{ADDRINT}]{, }
+\item[{UINT32}]{}
+\end{DoxyParamCaption}
+)}}
+\label{pars_8h_a7a15f2a86ce80d2408aa5418bae869d4}
+
+\begin{DoxyCode}
+{
+    bool taken = __taken;
+    ADDRINT pc = __pc;
+    void *bp_hist = NULL;
+    bool pred = taken;
+
+    /* ESTIMATE THE NUMBER OF LOOKUPS BY EACH BLOCK OF CODE - THIS WON'T WORK
+     * FOR THE CASE WHERE MORE THAN ONE BRANCH/CALL/JUMP/REG ARE IN THE BLOC */
+    int width; g_cfg->_root["cpu"]["backend"]["width"] >> width;
+    if (g_var.g_core_type == IN_ORDER) g_cfg->_root["cpu"]["backend"]["ino_pipe"]
+      ["fetch"]["width"] >> width;
+    else if (g_var.g_core_type == OUT_OF_ORDER) g_cfg->_root["cpu"]["backend"]["o
+      3_pipe"]["fetch"]["width"] >> width;
+    else if (g_var.g_core_type == BASICBLOCK) width = 1;
+    int num_lookup = int(ceil(float(_blkInsCnt) / width));
+    s_bpu_lookup_cnt += num_lookup;
+    Assert (num_lookup > 0);
+
+    /*-- WIRE ACCESSES --*/
+    list<string> wires;
+    for (int i = 0; i < num_lookup; i++) {
+        if (g_var.g_core_type == IN_ORDER) wires.push_back ("e_w_bp2cache_ino");
+        else if (g_var.g_core_type == OUT_OF_ORDER) wires.push_back ("e_w_bp2cach
+      e_o3");
+        else if (g_var.g_core_type == BASICBLOCK) wires.push_back ("e_w_bp2cache_
+      bb");
+    }
+
+    /*-- BP LOOKUP --*/
+    if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+        int num_tables = 3;
+        pred = g_tournament_bp->lookup (pc, bp_hist);
+        _e_table1->ramAccess (num_tables * num_lookup);
+        _e_wire1->wireAccess (wires);
+    } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+        int num_tables = 4;
+        pred = g_2bcgskew_bp->lookup (pc, bp_hist, (unsigned)0); //TODO the last 
+      element MUST NOT be 0
+        _e_table2->ramAccess (num_tables * num_lookup);
+        _e_wire2->wireAccess (wires);
+    } else {
+        Assert (0 && "Unsupported BP model");
+    }
+
+    /*-- BTB LOOKUP --*/
+    ADDRS pred_tgt = 0;
+    {
+        if (btb->valid (pc)) {
+            pred_tgt = btb->lookup (pc);
+        } else {
+            if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+                g_tournament_bp->BTBUpdate (pc, bp_hist);
+            } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+                g_2bcgskew_bp->BTBUpdate (pc, bp_hist);
+            }
+            pred = false;
+            pred_tgt = 0;
+        }
+        _e_btb->camAccess (num_lookup); /* ASSUMING SEQUENTIAL BP->BTB ACCESS */
+    }
+
+    /*-- BP UPDATE --*/
+    if (g_var.g_debug_level & DBG_BP) cout << "  prediction = " << (pred?"T":"N")
+      ;
+    if (!g_var.g_wrong_path) {
+        if (g_var.g_debug_level & DBG_BP) cout << ", actual = " << (taken?"T":"N"
+      ) << " : ";
+
+        if (pred != taken) { /* BP MISPRED */
+            if (g_var.g_debug_level & DBG_BP) cout << "mispredicted!\n";
+            g_var.g_wrong_path = true;
+            s_bp_misspred_cnt++;
+            if (taken && tgt != pred_tgt) {
+                /* ALSO UPDATE BTB  ON TAKEN */
+                btb->update (pc, tgt);
+                _e_btb->camAccess (1);
+                s_btb_misspred_cnt++;
+            }
+        } else if (taken && tgt != pred_tgt) { /* BTB MISPRED */
+            if (pred_tgt != 0) { /* AVOID STUPID ADDRESSES */
+                tgt = pred_tgt;
+                g_var.g_wrong_path = true;
+            }
+            btb->update (pc, tgt);
+            _e_btb->camAccess (1);
+            s_btb_misspred_cnt++;
+        } else {
+            if (g_var.g_debug_level & DBG_BP) cout << "correct prediction\n";
+        }
+
+        int num_tables = 2;
+        if (g_cfg->getBPtype () == GSHARE_LOCAL_BP) {
+            g_tournament_bp->update (pc, taken, bp_hist, false);
+            _e_table1->ramAccess (num_tables * num_lookup);
+        } else if (g_cfg->getBPtype () == BCG_SKEW_BP) {
+            g_2bcgskew_bp->update (pc, taken, bp_hist, false);
+            g_2bcgskew_bp->histUpdate (pc, taken, bp_hist, false);
+            _e_table2->ramAccess (num_tables * num_lookup);
+        }
+    } else {
+        if (g_var.g_debug_level & DBG_BP) cout << " on wrong path\n";
+    }
+
+    if (g_cfg->isEnProfiling ()) {
+        g_prof.update_br_profiler (__pc, taken);
+    }
+
+    return  pred ? tgt : fthru;
 }
 \end{DoxyCode}
 

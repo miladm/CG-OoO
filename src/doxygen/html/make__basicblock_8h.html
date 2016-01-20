@@ -68,9 +68,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;set&gt;</code><br/>
 <code>#include &lt;map&gt;</code><br/>
-<code>#include &quot;basicblock.h&quot;</code><br/>
-<code>#include &quot;variable.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="basicblock_8h_source.html">basicblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="variable_8h_source.html">variable.h</a>&quot;</code><br/>
 <code>#include &quot;global.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dependencySetup_8h_source.html">dependencySetup.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for make_basicblock.h:</div>
 <div class="dyncontent">
@@ -90,10 +91,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__basicblock_8h.html#ae13071ca805363d17217ae5518d560c8">make_basicblock</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList, std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *brDstSet, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__basicblock_8h.html#af8ef1a810423c3bd471888a5e3a6d97c">make_basicblock</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList, std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *brDstSet, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, <a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> cluster_size)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ae13071ca805363d17217ae5518d560c8"></a><!-- doxytag: member="make_basicblock.h::make_basicblock" ref="ae13071ca805363d17217ae5518d560c8" args="(List&lt; instruction * &gt; *insList, List&lt; basicblock * &gt; *bbList, map&lt; int, variable * &gt; &amp;varList, std::set&lt; ADDR &gt; *brDstSet, std::map&lt; ADDR, basicblock * &gt; *bbMap, map&lt; ADDR, instruction * &gt; *insAddrMap)" -->
+<a class="anchor" id="af8ef1a810423c3bd471888a5e3a6d97c"></a><!-- doxytag: member="make_basicblock.h::make_basicblock" ref="af8ef1a810423c3bd471888a5e3a6d97c" args="(List&lt; instruction * &gt; *insList, List&lt; basicblock * &gt; *bbList, map&lt; int, variable * &gt; &amp;varList, std::set&lt; ADDR &gt; *brDstSet, std::map&lt; ADDR, basicblock * &gt; *bbMap, map&lt; ADDR, instruction * &gt; *insAddrMap, LENGTH cluster_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -118,20 +119,26 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *&#160;</td>
+          <td class="paramtype">std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *&#160;</td>
           <td class="paramname"><em>brDstSet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
           <td class="paramname"><em>bbMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>insAddrMap</em>&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>insAddrMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
+          <td class="paramname"><em>cluster_size</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -150,7 +157,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -159,7 +166,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

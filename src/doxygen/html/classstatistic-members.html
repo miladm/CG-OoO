@@ -66,11 +66,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 This is the complete list of members for <a class="el" href="classstatistic.html">statistic</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="classstatistic.html#a75175df2e04fd107046dd6a9aa5356dd">dump</a>()</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstatistic.html#a5454149fac41c264c14ed73694a7c4e4">matchIns</a></td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstatistic.html#aed69957ac20a00f832a0b01f37029faa">missingInsList</a></td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#afa68a63b6c5511103123e9837a96c7ff">dumpSummary</a>()</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#aaf7c406588e46cae93e0158c0dbe8f86">newEnergyStat</a>(string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#ae12eb8930a20eb1c86c84fad36cfb2bf">newLeakageEnergyStat</a>(string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#ae549d19ee6776db84c3c7d7e2145d92a">newRatioHistStat</a>(ScalarStat *, LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a>(ScalarStat *, string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#ad4d85ebb5f4446c66911f0c141e11f1a">newScalarHistStat</a>(LENGTH, string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a>(string, string, string, SCALAR, PRINT_ON_ZERO)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classstatistic.html#ab87dfd0301135bd8385c390e21fd1034">noMatchIns</a></td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classstatistic.html#a3f28cad0a4699e3f2db3892b5556f4e7">statistic</a>()</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classstatistic.html#ac3129cf3eac1626c107314b93d6f5d12">updateStatMap</a>(string, string, stat *)</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classstatistic.html#a9edcb4dd9cdc09bdfe9a61d2f95654ca">~statistic</a>()</td><td><a class="el" href="classstatistic.html">statistic</a></td><td></td></tr>
 </table></div>
 <!-- window showing the filter options -->
@@ -78,7 +82,7 @@ This is the complete list of members for <a class="el" href="classstatistic.html
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -87,7 +91,7 @@ This is the complete list of members for <a class="el" href="classstatistic.html
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

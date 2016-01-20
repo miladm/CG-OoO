@@ -67,66 +67,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00004"></a>00004 <span class="preprocessor">#ifndef _GLOBAL_H</span>
 <a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#define _GLOBAL_H</span>
 <a name="l00006"></a>00006 <span class="preprocessor"></span>
-<a name="l00007"></a><a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">00007</a> <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>;
-<a name="l00008"></a><a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">00008</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0">none</a>, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>} <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a>;
-<a name="l00009"></a><a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">00009</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c">noType</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35">ALU</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a">FPU</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1">BR</a>} <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a>;
-<a name="l00010"></a><a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">00010</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54">LRF</a>, <a class="code" href="bkEnd_8cpp.html#af5a59016fe141b79dfa006fac24d657e">GRF</a>} <a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">regKind</a>;
-<a name="l00011"></a>00011 
-<a name="l00012"></a><a class="code" href="binaryTranslator_2global_8h.html#af8a3dc82520357052a935b31b2d51962">00012</a> <span class="preprocessor">#define CFG_STRING_SIZE 400</span>
-<a name="l00013"></a><a class="code" href="binaryTranslator_2global_8h.html#a2d7378feb9600bfab350b59ffa442991">00013</a> <span class="preprocessor"></span><span class="preprocessor">#define INS_STRING_SIZE 330</span>
-<a name="l00014"></a><a class="code" href="binaryTranslator_2global_8h.html#a3088356e3c44bedd210a9cc28246cf82">00014</a> <span class="preprocessor"></span><span class="preprocessor">#define REG_STRING_SIZE 20</span>
-<a name="l00015"></a><a class="code" href="binaryTranslator_2global_8h.html#a39e5885c044e32ec0145024bd99c1594">00015</a> <span class="preprocessor"></span><span class="preprocessor">#define OPCODE_STRING_SIZE 30</span>
-<a name="l00016"></a>00016 <span class="preprocessor"></span><span class="comment">//Found using: awk &#39; { if ( length &gt; x ) { x = length } }END{ print x }&#39; x86_opcode.txt</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="binaryTranslator_2global_8h.html#a09af7f6f05439583552ca729af9dc232">00018</a> <span class="preprocessor">#define UPLD_THRESHOLD 0.01</span>
-<a name="l00019"></a><a class="code" href="binaryTranslator_2global_8h.html#ab03221b2744b3969f9076d40f6dcef32">00019</a> <span class="preprocessor"></span><span class="preprocessor">#define WBB_LOWER_BOUND 0.1</span>
-<a name="l00020"></a><a class="code" href="binaryTranslator_2global_8h.html#a5b19e872c39de2e1e86de7d8edc1097e">00020</a> <span class="preprocessor"></span><span class="preprocessor">#define WBB_UPPER_BOUND 0.9</span>
-<a name="l00021"></a>00021 <span class="preprocessor"></span>
-<a name="l00022"></a>00022 <span class="comment">//DEBUG Flags</span>
-<a name="l00023"></a><a class="code" href="binaryTranslator_2global_8h.html#a1581dcc96e74323eac4fd2076d130d5a">00023</a> <span class="preprocessor">#define DEBUG_MAIN 0</span>
-<a name="l00024"></a><a class="code" href="binaryTranslator_2global_8h.html#abe30d718bad127b80ec29e14015266e3">00024</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_INS 0</span>
-<a name="l00025"></a><a class="code" href="binaryTranslator_2global_8h.html#a2dbada0a68b078321361284b7a9d0342">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_BB 0</span>
-<a name="l00026"></a><a class="code" href="binaryTranslator_2global_8h.html#acf9515d937decb706ea7ebbda3a150e9">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_PB 0</span>
-<a name="l00027"></a><a class="code" href="binaryTranslator_2global_8h.html#a61e8258fb37eadf049db0df07da08a57">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_RA 0</span>
-<a name="l00028"></a>00028 <span class="preprocessor"></span><span class="comment">// #define DEBUG_DOM 0</span>
-<a name="l00029"></a>00029 <span class="comment">// #define DEBUG_SSA 0</span>
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <span class="comment">//Data Dependency</span>
-<a name="l00032"></a><a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">00032</a> <span class="preprocessor">#define NUM_REGISTERS 40</span>
-<a name="l00033"></a><a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">00033</a> <span class="preprocessor"></span><span class="preprocessor">#define INIT_RENAME_REG_NUM 100 //TODO change this number - not </span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;map&gt;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a><a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">00009</a> <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>;
+<a name="l00010"></a><a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">00010</a> <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>;
+<a name="l00011"></a><a class="code" href="binaryTranslator_2global_8h.html#a2cdf00fd92f046898bc7876b66e10577">00011</a> <span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="binaryTranslator_2global_8h.html#a2cdf00fd92f046898bc7876b66e10577">SUB_BLK_ID</a>;
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">00013</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cab7e4e0120a041dbe6528b050c04269e0">none</a>, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>, <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>} <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">memType</a>;
+<a name="l00014"></a><a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">00014</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2dae1e1f2af0184ac5fa40380545412fc1c">noType</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2daf6ae22069d0427bb2d19adad213f2b35">ALU</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a">FPU</a>, <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1">BR</a>} <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2d">type</a>;
+<a name="l00015"></a><a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">00015</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54">LRF</a>, <a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038a3bc1a8c1e51890ee550a964766b76aab">GRF</a>} <a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">regKind</a>;
+<a name="l00016"></a><a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">00016</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="sqlite3_8c.html#ab2cd20d9321c782db91b9414da0c23ee">GLOBAL</a>, <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43">LOCAL_GLOBAL</a>} <a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a>;
+<a name="l00017"></a><a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">00017</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236">NO_LIST_SCH</a>, <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>} <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a>;
+<a name="l00018"></a><a class="code" href="binaryTranslator_2global_8h.html#a2537f310abf2bbaaa7f5f9f3c44b62ecaf2a47885650c5202d300f89c981bb0ed">00018</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#a2537f310abf2bbaaa7f5f9f3c44b62ecaf2a47885650c5202d300f89c981bb0ed">STORE_ORDER</a>, <a class="code" href="binaryTranslator_2global_8h.html#a2537f310abf2bbaaa7f5f9f3c44b62eca631a40f25a9ec3ac7a30dfb1c214faa7">LOAD_STORE_ORDER</a>} <a class="code" href="binaryTranslator_2global_8h.html#a2537f310abf2bbaaa7f5f9f3c44b62ec">MEM_SCH_MODE</a>;
+<a name="l00019"></a><a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">00019</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839">BASICBLOCK</a>, <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad">SUPERBLOCK</a>, <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce">PHRASEBLOCK</a>} <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>;
+<a name="l00020"></a><a class="code" href="binaryTranslator_2global_8h.html#ae3190c0c46d1384e80f94a61ad275092a4e02d2643bccf85934dcb483babedc42">00020</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="binaryTranslator_2global_8h.html#ae3190c0c46d1384e80f94a61ad275092a24d4461021a77c6ea717de433dea7d37">PUSH_TO_BOTTOM</a>, <a class="code" href="binaryTranslator_2global_8h.html#ae3190c0c46d1384e80f94a61ad275092a4e02d2643bccf85934dcb483babedc42">PUSH_TO_TOP</a>} <a class="code" href="binaryTranslator_2global_8h.html#ae3190c0c46d1384e80f94a61ad275092">PUSH_LOCATION</a>;
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="binaryTranslator_2global_8h.html#af8a3dc82520357052a935b31b2d51962">00022</a> <span class="preprocessor">#define CFG_STRING_SIZE 400</span>
+<a name="l00023"></a><a class="code" href="binaryTranslator_2global_8h.html#a2d7378feb9600bfab350b59ffa442991">00023</a> <span class="preprocessor"></span><span class="preprocessor">#define INS_STRING_SIZE 330</span>
+<a name="l00024"></a><a class="code" href="binaryTranslator_2global_8h.html#a3088356e3c44bedd210a9cc28246cf82">00024</a> <span class="preprocessor"></span><span class="preprocessor">#define REG_STRING_SIZE 20</span>
+<a name="l00025"></a><a class="code" href="binaryTranslator_2global_8h.html#a39e5885c044e32ec0145024bd99c1594">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define OPCODE_STRING_SIZE 30</span>
+<a name="l00026"></a><a class="code" href="binaryTranslator_2global_8h.html#a72e1d1d4b3243f4e7ec115f199298e34">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define LARGE_NUMBER 1000000000</span>
+<a name="l00027"></a><a class="code" href="binaryTranslator_2global_8h.html#af8c39c4dac726540182f347a66d09ec3">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define OFFSET_LARGER_THAN_X86_REG_CNT 100</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span><span class="comment">//Found using: awk &#39; { if ( length &gt; x ) { x = length } }END{ print x }&#39; x86_opcode.txt</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="comment">//PROFILING</span>
+<a name="l00031"></a><a class="code" href="binaryTranslator_2global_8h.html#a09af7f6f05439583552ca729af9dc232">00031</a> <span class="preprocessor">#define UPLD_THRESHOLD 0.01</span>
+<a name="l00032"></a><a class="code" href="binaryTranslator_2global_8h.html#ab03221b2744b3969f9076d40f6dcef32">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define WBB_LOWER_BOUND 0.1</span>
+<a name="l00033"></a><a class="code" href="binaryTranslator_2global_8h.html#a5b19e872c39de2e1e86de7d8edc1097e">00033</a> <span class="preprocessor"></span><span class="preprocessor">#define WBB_UPPER_BOUND 0.9</span>
 <a name="l00034"></a>00034 <span class="preprocessor"></span>
-<a name="l00035"></a>00035 <span class="comment">//Latencies</span>
-<a name="l00036"></a><a class="code" href="binaryTranslator_2global_8h.html#aeb4d8089eb3260321096eb086103e7db">00036</a> <span class="preprocessor">#define ALU_LATENCY 1</span>
-<a name="l00037"></a><a class="code" href="binaryTranslator_2global_8h.html#a753d700110906067fd49977b974bf796">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define FPU_LATENCY 5</span>
-<a name="l00038"></a><a class="code" href="binaryTranslator_2global_8h.html#a4bf4c1ea14b80c27d053c30d9f2c1ff7">00038</a> <span class="preprocessor"></span><span class="preprocessor">#define BR_LATENCY 3 //IF 1 cycles + ID 2 cycles (should be 5 for OOO?)</span>
-<a name="l00039"></a><a class="code" href="binaryTranslator_2global_8h.html#ad8c37508452198256fb620a3e34b1839">00039</a> <span class="preprocessor"></span><span class="preprocessor">#define L1_LATENCY 4</span>
-<a name="l00040"></a><a class="code" href="binaryTranslator_2global_8h.html#a309e83b9da517e9fbef1b90cf1f57f3c">00040</a> <span class="preprocessor"></span><span class="preprocessor">#define L2_LATENCY 20</span>
-<a name="l00041"></a><a class="code" href="binaryTranslator_2global_8h.html#a38203106c3880cd1424cc56c578d335a">00041</a> <span class="preprocessor"></span><span class="preprocessor">#define L3_LATENCY 40</span>
-<a name="l00042"></a><a class="code" href="binaryTranslator_2global_8h.html#a517bf62a403a62dce2971e32491251b6">00042</a> <span class="preprocessor"></span><span class="preprocessor">#define MEM_LATENCY 100</span>
-<a name="l00043"></a><a class="code" href="binaryTranslator_2global_8h.html#af265aead8a1318c386b4b55b36c56420">00043</a> <span class="preprocessor"></span><span class="preprocessor">#define MEM_HIGHERARCHY 4</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>
-<a name="l00045"></a>00045 <span class="comment">//Hardware Specifications</span>
-<a name="l00046"></a><a class="code" href="binaryTranslator_2global_8h.html#a6741e5ed99f4591d0f0b717579594369">00046</a> <span class="preprocessor">#define NUM_EU 4</span>
-<a name="l00047"></a>00047 <span class="preprocessor"></span>
-<a name="l00048"></a>00048 <span class="comment">//Resgiter Allocation</span>
-<a name="l00049"></a><a class="code" href="binaryTranslator_2global_8h.html#a439009ecbc93bf03dbcad21a260fadd1">00049</a> <span class="preprocessor">#define LRF_SIZE 2000</span>
-<a name="l00050"></a><a class="code" href="binaryTranslator_2global_8h.html#a1e255d0b78c91e7476d3ceb1aca76e52">00050</a> <span class="preprocessor"></span><span class="preprocessor">#define GRF_SIZE 6000</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a><a class="code" href="binaryTranslator_2global_8h.html#a0df157b433ce2c25de636f833235ff67">00052</a> <span class="preprocessor">#define LRF_LO 100</span>
-<a name="l00053"></a><a class="code" href="binaryTranslator_2global_8h.html#a8841809ce71f9f83fa05932902f582de">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define LRF_HI LRF_LO+LRF_SIZE-1</span>
-<a name="l00054"></a><a class="code" href="binaryTranslator_2global_8h.html#ac186716323578541a08e522a11236335">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define GRF_LO LRF_HI+1</span>
-<a name="l00055"></a><a class="code" href="binaryTranslator_2global_8h.html#a993553a4b5cc46fbb5c9e17fdb375289">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define GRF_HI GRF_LO+GRF_SIZE-1</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
-<a name="l00057"></a><a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">00057</a> <span class="preprocessor">#define X86_REG_LO 1</span>
-<a name="l00058"></a><a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">00058</a> <span class="preprocessor"></span><span class="preprocessor">#define X86_REG_HI 67</span>
+<a name="l00035"></a>00035 <span class="comment">//DEBUG FLAGS</span>
+<a name="l00036"></a><a class="code" href="binaryTranslator_2global_8h.html#a1581dcc96e74323eac4fd2076d130d5a">00036</a> <span class="preprocessor">#define DEBUG_MAIN 0</span>
+<a name="l00037"></a><a class="code" href="binaryTranslator_2global_8h.html#abe30d718bad127b80ec29e14015266e3">00037</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_INS 0</span>
+<a name="l00038"></a><a class="code" href="binaryTranslator_2global_8h.html#a2dbada0a68b078321361284b7a9d0342">00038</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_BB 0</span>
+<a name="l00039"></a><a class="code" href="binaryTranslator_2global_8h.html#acf9515d937decb706ea7ebbda3a150e9">00039</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_PB 0</span>
+<a name="l00040"></a><a class="code" href="binaryTranslator_2global_8h.html#a61e8258fb37eadf049db0df07da08a57">00040</a> <span class="preprocessor"></span><span class="preprocessor">#define DEBUG_RA 0</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span><span class="comment">// #define DEBUG_DOM 0</span>
+<a name="l00042"></a>00042 <span class="comment">// #define DEBUG_SSA 0</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="comment">//DATA DEPENDENCY</span>
+<a name="l00045"></a><a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">00045</a> <span class="preprocessor">#define NUM_REGISTERS 48</span>
+<a name="l00046"></a><a class="code" href="binaryTranslator_2global_8h.html#a7311cf48894c7f16bb1703eca5c929ea">00046</a> <span class="preprocessor"></span><span class="preprocessor">#define NUM_SPECIAL_REGISTERS 20</span>
+<a name="l00047"></a><a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">00047</a> <span class="preprocessor"></span><span class="preprocessor">#define INIT_RENAME_REG_NUM 100 //TODO change this number - not </span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
+<a name="l00049"></a>00049 <span class="comment">//LATENCIES</span>
+<a name="l00050"></a><a class="code" href="binaryTranslator_2global_8h.html#aeb4d8089eb3260321096eb086103e7db">00050</a> <span class="preprocessor">#define ALU_LATENCY 1</span>
+<a name="l00051"></a><a class="code" href="binaryTranslator_2global_8h.html#a753d700110906067fd49977b974bf796">00051</a> <span class="preprocessor"></span><span class="preprocessor">#define FPU_LATENCY 5</span>
+<a name="l00052"></a><a class="code" href="binaryTranslator_2global_8h.html#a4bf4c1ea14b80c27d053c30d9f2c1ff7">00052</a> <span class="preprocessor"></span><span class="preprocessor">#define BR_LATENCY 3 //IF 1 cycles + ID 2 cycles (should be 5 for OOO?)</span>
+<a name="l00053"></a><a class="code" href="binaryTranslator_2global_8h.html#ad8c37508452198256fb620a3e34b1839">00053</a> <span class="preprocessor"></span><span class="preprocessor">#define L1_LATENCY 4</span>
+<a name="l00054"></a><a class="code" href="binaryTranslator_2global_8h.html#a309e83b9da517e9fbef1b90cf1f57f3c">00054</a> <span class="preprocessor"></span><span class="preprocessor">#define L2_LATENCY 20</span>
+<a name="l00055"></a><a class="code" href="binaryTranslator_2global_8h.html#a38203106c3880cd1424cc56c578d335a">00055</a> <span class="preprocessor"></span><span class="preprocessor">#define L3_LATENCY 40</span>
+<a name="l00056"></a><a class="code" href="binaryTranslator_2global_8h.html#aaa3de89c93a646e85cfed82e13879e02">00056</a> <span class="preprocessor"></span><span class="preprocessor">#define ST_LATENCY 2 //To make it more high priority then ALU ops</span>
+<a name="l00057"></a><a class="code" href="binaryTranslator_2global_8h.html#a517bf62a403a62dce2971e32491251b6">00057</a> <span class="preprocessor"></span><span class="preprocessor">#define MEM_LATENCY 100</span>
+<a name="l00058"></a><a class="code" href="binaryTranslator_2global_8h.html#af265aead8a1318c386b4b55b36c56420">00058</a> <span class="preprocessor"></span><span class="preprocessor">#define MEM_HIGHERARCHY 4</span>
 <a name="l00059"></a>00059 <span class="preprocessor"></span>
-<a name="l00060"></a><a class="code" href="binaryTranslator_2global_8h.html#ac2e4520b753f883cd8050dbf1864db08">00060</a> <span class="preprocessor">#define INVALID_REG -1</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span>
-<a name="l00062"></a>00062 <span class="comment">//Phi Function</span>
-<a name="l00063"></a><a class="code" href="binaryTranslator_2global_8h.html#a382722368f23110d49ee8908aac999f8">00063</a> <span class="preprocessor">#define PHI_INS_ADDR 1</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span>
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
+<a name="l00060"></a>00060 <span class="comment">//HARDWARE SPECIFICATIONS</span>
+<a name="l00061"></a><a class="code" href="binaryTranslator_2global_8h.html#a6741e5ed99f4591d0f0b717579594369">00061</a> <span class="preprocessor">#define NUM_EU 4</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00063"></a>00063 <span class="comment">//RESGITER ALLOCATION</span>
+<a name="l00064"></a><a class="code" href="binaryTranslator_2global_8h.html#a439009ecbc93bf03dbcad21a260fadd1">00064</a> <span class="preprocessor">#define LRF_SIZE 20</span>
+<a name="l00065"></a><a class="code" href="binaryTranslator_2global_8h.html#a1e255d0b78c91e7476d3ceb1aca76e52">00065</a> <span class="preprocessor"></span><span class="preprocessor">#define GRF_SIZE 70</span>
+<a name="l00066"></a><a class="code" href="binaryTranslator_2global_8h.html#a24f16c6bb83f55dc3a9142491224179a">00066</a> <span class="preprocessor"></span><span class="preprocessor">#define SGRF_SIZE NUM_SPECIAL_REGISTERS</span>
+<a name="l00067"></a>00067 <span class="preprocessor"></span>
+<a name="l00068"></a><a class="code" href="binaryTranslator_2global_8h.html#a0df157b433ce2c25de636f833235ff67">00068</a> <span class="preprocessor">#define LRF_LO 100</span>
+<a name="l00069"></a><a class="code" href="binaryTranslator_2global_8h.html#a8841809ce71f9f83fa05932902f582de">00069</a> <span class="preprocessor"></span><span class="preprocessor">#define LRF_HI LRF_LO + LRF_SIZE - 1</span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span>
+<a name="l00071"></a><a class="code" href="binaryTranslator_2global_8h.html#ac186716323578541a08e522a11236335">00071</a> <span class="preprocessor">#define GRF_LO LRF_HI + 1</span>
+<a name="l00072"></a><a class="code" href="binaryTranslator_2global_8h.html#a993553a4b5cc46fbb5c9e17fdb375289">00072</a> <span class="preprocessor"></span><span class="preprocessor">#define GRF_HI GRF_LO + GRF_SIZE - 1</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span>
+<a name="l00074"></a><a class="code" href="binaryTranslator_2global_8h.html#afd2972fd0b013a84392d1a1be526b1b7">00074</a> <span class="preprocessor">#define SGRF_LO GRF_HI + 1</span>
+<a name="l00075"></a><a class="code" href="binaryTranslator_2global_8h.html#a4ea7512540280cac0cda2b05a250f37a">00075</a> <span class="preprocessor"></span><span class="preprocessor">#define SGRF_HI SGRF_LO + SGRF_SIZE - 1</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span>
+<a name="l00077"></a><a class="code" href="binaryTranslator_2global_8h.html#ad0d99983ddd73fa871db62f97d329bf7">00077</a> <span class="preprocessor">#define X86_SPECIAL_REG_LO 1</span>
+<a name="l00078"></a><a class="code" href="binaryTranslator_2global_8h.html#a776b3dafbef4f782b9223ca9b624f202">00078</a> <span class="preprocessor"></span><span class="preprocessor">#define X86_SPECIAL_REG_HI 20</span>
+<a name="l00079"></a><a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">00079</a> <span class="preprocessor"></span><span class="preprocessor">#define X86_REG_LO 21</span>
+<a name="l00080"></a><a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">00080</a> <span class="preprocessor"></span><span class="preprocessor">#define X86_REG_HI 68</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>
+<a name="l00082"></a><a class="code" href="binaryTranslator_2global_8h.html#ac2e4520b753f883cd8050dbf1864db08">00082</a> <span class="preprocessor">#define INVALID_REG -1</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span>
+<a name="l00084"></a>00084 <span class="comment">//PHI FUNCTION</span>
+<a name="l00085"></a><a class="code" href="binaryTranslator_2global_8h.html#a382722368f23110d49ee8908aac999f8">00085</a> <span class="preprocessor">#define PHI_INS_ADDR 1</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span>
+<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -134,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -143,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

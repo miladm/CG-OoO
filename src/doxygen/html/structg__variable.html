@@ -83,10 +83,29 @@ Collaboration diagram for g_variable:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a0b12751ab1f92b2345771c45290fc19e">g_variable</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a366fb213b96fa81e166dbe60a16c3e4f">getSquashSN</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a7dd2d6903bbab9282b0e8c25d2c95324">getOldSquashSN</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a0031c2dbd6463bf57b4d24335eb7b9ca">resetSquashSN</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a506e184323be6e4c52b1394fb5aca614">resetSquashType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a3bbe6f8c101d665e05c30ef1eb7c9a16">setSquashSN</a> (<a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> sn)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#adc6b682b4875fa3af7d390099c93dc88">setOldSquashSN</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#afb2439358b8c746fc28eaadb0ac77b10">isOnWrongPath</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a2faa8d56e7a81cb41aad7f3df5262344">isSpeculationViolation</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#abc024387ff924dbf4e9ed6b5542736c2">setSquashType</a> (<a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a> squash_type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a29591157526fb0dbc3b2f4d7d3d9b2b0">getSquashType</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynBasicblock.html">dynBasicblock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#abd791f9496e5723f7347c56c01c661e3">getNewCacheBB</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynBasicblock.html">dynBasicblock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a87e0d4278533d81d2ec6a4edd9fa1c20">getLastCacheBB</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a6c7ff60217a53698cce497bf705cd0c8">insertFrontBBcache</a> (<a class="el" href="classdynBasicblock.html">dynBasicblock</a> *bb)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynBasicblock.html">dynBasicblock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a919a79fc6f8adce82772a72d3e62a20b">popBBcache</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#af56609b1e0566a976487eee39e0283ef">isBBcacheNearEmpty</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a2192ac9bd012be515c0d8d9fbea8b196">isBBcacheEmpty</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbbInstruction.html">bbInstruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a6c27ed49f59faca6b9629a98993ee33e">getNewBBins</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classblock.html">block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac1662ac572ac7ec07e7f19117eedb872">getNewCacheBlk</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classblock.html">block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a326ca8b03f7572a3c402fb676b62213b">getLastCacheBlk</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#adaeb84094d83af19c60250b0ccbf37b0">removeLastBlock</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aaf1ffcbfc128bd4fab10f4f745356c9b">pushInsToCodeCache</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#afa7c4ed5cce9932b26d4a902e986e774">isBlkCacheNearEmpty</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a9e68ff9df2202d65d28f5f0d07d2e7d0">isBlkCacheEmpty</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a5a35ada5b3465ce46d8e3badf53d720b">getNewBlkIns</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a7816cdec0039f6a6dfb2c7a278aa0db4">insertToCodeCache</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *newIns)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a8ba648162a8abae37194625703d094c9">getNewCodeCacheIns</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac6cd30370c34c5a0862aa9a4c56049db">insertFrontCodeCache</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ab351194ce2a3de088813ae861c7e3d10">remFromCodeCache</a> ()</td></tr>
@@ -95,28 +114,28 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a619e353ba382aa0b346af08d3dc0729b">g_seq_num</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a690c0db6b4c6d4ded41f24f25c011ca9">g_bb_seq_num</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a8ab71de244f2279885143ea11f7e7a5c">g_seqnum</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a9ab79f56074bb46d6ae7d797c52442f3">g_icount</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac965e96976bbbeb71833c68438b5fc47">g_verbose_level</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aa7d9d96654c800965904eab03e9fde48">g_branch_mispredict_delay</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a56cbb365fc7e39e093326334864e243a">g_wrong_path_count</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a155baf9caa1600f209b109f6eebf50eb">g_total_wrong_path_count</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a8065e226bc2987122b831ffc1d58052a">g_app_signal_count</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a248d8225c555d7573d3c830af054e13e">g_pin_signal_count</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a4740d9b4ca63320866b2eda4bba01b86">insCount</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a4e19c0e3b77b96a6130c215059fa7d53">g_recovery_count</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac3a9cb982af4deac7d5d6183df424560">g_pintool_signal_count</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#adcc07b62ed94dbd9dc61ad8ca8b366a1">g_wrong_path_number</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac18a5c9f33e0c2731c83204eba76be37">g_context_call_depth</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a72fd819583457322714db5dedb07fe69">g_was_wp</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a2527496ce273ca32855343e8401fb4f8">g_spec_syscall</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ac0ace8e752b855d8a33cd9c9a5d62511">g_appEnd</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a1bfe24cfc139671202d50d3617bc3095">g_inSimpoint</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a1e6b96906fa24ada5ee9e969e65adb86">g_enable_simpoint</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a77b6c2a82a2eb4c8216123f75080ec16">g_enable_wp</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a24cc6242b0cf003080328df4b4e3ddca">g_enable_instrumentation</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a9bef325956a77c8dc2080d7f6ea1a7a9">g_simpInsCnt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a5e3f674b76f6bccf4c537dda6184a9be">g_enable_bkEnd</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#aa6308256cfa38997c75a56309db4fd1e">SIMP</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a05056b9147b20e4beee1dbdacaced249">g_simpInsCnt</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ad00b3634585f9cc7e89adb907114a290">g_traceCount</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aa65753112ddcc38c6ecea36b807a9a38">g_codeCacheSize</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a9849ae320434c4f9d060f131e24509fd">g_insCountRightPath</a></td></tr>
@@ -132,19 +151,22 @@ Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ADDRINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#ab5c10d6f80328bc1f3c99709d7d5db46">g_fthru</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ADDRINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a3dbb2ea81b5f338970379213c36590ee">g_pred_eip</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">BOOL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a992a1e746b4ab8d8ef422b522300f769">g_taken</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a1664c2b31146ab2b5f77464cd93f2cc8">g_BBlist</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; string * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a527a8f416e63493c83e0f6e50a6bdc79">g_insList</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classdynBasicblock.html">dynBasicblock</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classblock.html">block</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aabbfa0530ffffdecf990fb2d64998f4e">g_insList_indx</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a383af2308cefc8a72db47b1d7a41a702">g_BBlist_indx</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aa7824f9bbc1a8ff7548bcf42922c0c2b">g_ins</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a1b0b5933340788334ca1884e1e63707e">numPBinList</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classdynInstruction.html">dynInstruction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#aa245bb5b2c0655d82e43c16d5ee4a284">g_insObj</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmessage.html">message</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">msg</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstatistic.html">statistic</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a548b9947f5c28cff1174da06598b4903">stat</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a22f16908f3dc0da817d3473222229453">SCHED_MODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0">PIPE_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86">CORE_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a0685c5d42062f018dda85c9d62f3ac1f">MEM_MODEL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#af6a9403dc67f85282a59c6fac85d5d6f">g_mem_model</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_squash_type</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a0b12751ab1f92b2345771c45290fc19e"></a><!-- doxytag: member="g_variable::g_variable" ref="a0b12751ab1f92b2345771c45290fc19e" args="()" -->
@@ -161,46 +183,274 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                 {
-        <a class="code" href="structg__variable.html#a619e353ba382aa0b346af08d3dc0729b">g_seq_num</a> = 1;
+        <a class="code" href="structg__variable.html#a619e353ba382aa0b346af08d3dc0729b">g_seq_num</a> = <a class="code" href="global_2global_8h.html#aee60b1a2b661aa097e288c5f8396b821">FIRST_INS_ID</a>;
+        <a class="code" href="structg__variable.html#a690c0db6b4c6d4ded41f24f25c011ca9">g_bb_seq_num</a> = <a class="code" href="global_2global_8h.html#aad0670e2421f9c73e7c666fd0707890d">FIRST_BB_ID</a>;
         <a class="code" href="structg__variable.html#a8ab71de244f2279885143ea11f7e7a5c">g_seqnum</a> = 1;
         <a class="code" href="structg__variable.html#a9ab79f56074bb46d6ae7d797c52442f3">g_icount</a> = 0;
-        <a class="code" href="structg__variable.html#a4740d9b4ca63320866b2eda4bba01b86">insCount</a> = 0;
-        <a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> = <a class="code" href="global_2global_8h.html#a3f9deb0c2bed7b227e247fd9bf3b803b">DBG_SPEC</a>; <span class="comment">//DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF;</span>
+        <a class="code" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_debug_level</a> = 0; <span class="comment">//DBG_EXEC|DBG_UOP|DBG_SPEC|DBG_BP|DBG_EXEC|DBG_SPEC|DBG_WRITE_MEM|DBG_CC|DBG_INSBUF|DBG_UOP;</span>
         <a class="code" href="structg__variable.html#ac965e96976bbbeb71833c68438b5fc47">g_verbose_level</a> = <a class="code" href="global_2global_8h.html#a0ecd0897e84d3e1890e2ae6212092532">V_FRONTEND</a>; <span class="comment">//V_FRONTEND, V_BACKEND</span>
-        <a class="code" href="structg__variable.html#aa7d9d96654c800965904eab03e9fde48">g_branch_mispredict_delay</a> = 20;
         <a class="code" href="structg__variable.html#a56cbb365fc7e39e093326334864e243a">g_wrong_path_count</a> = 0;
         <a class="code" href="structg__variable.html#a155baf9caa1600f209b109f6eebf50eb">g_total_wrong_path_count</a> = 0;
         <a class="code" href="structg__variable.html#a8065e226bc2987122b831ffc1d58052a">g_app_signal_count</a> = 0;
         <a class="code" href="structg__variable.html#a248d8225c555d7573d3c830af054e13e">g_pin_signal_count</a> = 0;
         <a class="code" href="structg__variable.html#a4e19c0e3b77b96a6130c215059fa7d53">g_recovery_count</a> = 0;
-        <a class="code" href="structg__variable.html#ac3a9cb982af4deac7d5d6183df424560">g_pintool_signal_count</a> = 0;
-        <a class="code" href="structg__variable.html#adcc07b62ed94dbd9dc61ad8ca8b366a1">g_wrong_path_number</a> = 0;
+        <a class="code" href="structg__variable.html#ac3a9cb982af4deac7d5d6183df424560">g_pintool_signal_count</a> = 0; <span class="comment">//TODO delete this - not used - move other signal vars to stat first</span>
         <a class="code" href="structg__variable.html#ac18a5c9f33e0c2731c83204eba76be37">g_context_call_depth</a> = 0;
-        <a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a> = <span class="keyword">false</span>;
+        <a class="code" href="structg__variable.html#aeeef678f78f34f8743dc14c035ef56dd">g_wrong_path</a> = <span class="keyword">false</span>; <span class="comment">/* ONLY THE INTIAL VALUE */</span>
+        <a class="code" href="structg__variable.html#a72fd819583457322714db5dedb07fe69">g_was_wp</a> = <span class="keyword">false</span>;
         <a class="code" href="structg__variable.html#a2527496ce273ca32855343e8401fb4f8">g_spec_syscall</a> = <span class="keyword">false</span>;
         <a class="code" href="structg__variable.html#ac0ace8e752b855d8a33cd9c9a5d62511">g_appEnd</a> = <span class="keyword">false</span>;
         <a class="code" href="structg__variable.html#a1bfe24cfc139671202d50d3617bc3095">g_inSimpoint</a> = <span class="keyword">false</span>;
-        <a class="code" href="structg__variable.html#a9bef325956a77c8dc2080d7f6ea1a7a9">g_simpInsCnt</a> = 0;
+        <a class="code" href="structg__variable.html#a05056b9147b20e4beee1dbdacaced249">g_simpInsCnt</a> = 0;
         <a class="code" href="structg__variable.html#a9849ae320434c4f9d060f131e24509fd">g_insCountRightPath</a> = 0;
         <a class="code" href="structg__variable.html#ad00b3634585f9cc7e89adb907114a290">g_traceCount</a> = 0;
         <a class="code" href="structg__variable.html#aa65753112ddcc38c6ecea36b807a9a38">g_codeCacheSize</a> = 0;
         <a class="code" href="structg__variable.html#aee7d9a2652e4ea63755601664d7f2a00">g_flushes</a> = 0;
         <a class="code" href="structg__variable.html#a1e6b96906fa24ada5ee9e969e65adb86">g_enable_simpoint</a> = <span class="keyword">true</span>;
-        <a class="code" href="structg__variable.html#a77b6c2a82a2eb4c8216123f75080ec16">g_enable_wp</a> = <span class="keyword">true</span>;
-        <a class="code" href="structg__variable.html#a24cc6242b0cf003080328df4b4e3ddca">g_enable_instrumentation</a> = <span class="keyword">true</span>;
+        <a class="code" href="structg__variable.html#a77b6c2a82a2eb4c8216123f75080ec16">g_enable_wp</a> = <span class="keyword">false</span>;
+        <a class="code" href="structg__variable.html#a24cc6242b0cf003080328df4b4e3ddca">g_enable_instrumentation</a> = <span class="keyword">false</span>;
+        <a class="code" href="structg__variable.html#a5e3f674b76f6bccf4c537dda6184a9be">g_enable_bkEnd</a> = <span class="keyword">false</span>;
 
         <a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> = <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0a3f4651dbe8c459716c979ae0d7b3c07e">PIPE_NORMAL</a>;
         <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> = 0;
         <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a> = 0;
+        <a class="code" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_squash_type</a> = <a class="code" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182afa800625c65cc749ab390f05006c27ab82">NO_MISPRED</a>;
 
         <a class="code" href="structg__variable.html#aabbfa0530ffffdecf990fb2d64998f4e">g_insList_indx</a> = 0;
         <a class="code" href="structg__variable.html#a383af2308cefc8a72db47b1d7a41a702">g_BBlist_indx</a> = -1;
         <a class="code" href="structg__variable.html#a1b0b5933340788334ca1884e1e63707e">numPBinList</a> = 0;
+
+        <a class="code" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_core_type</a> = <a class="code" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86a689aa9fa926510a42fc190e81c65e794">IN_ORDER</a>;
+        <a class="code" href="structg__variable.html#af6a9403dc67f85282a59c6fac85d5d6f">g_mem_model</a> = <a class="code" href="global_2global_8h.html#a0685c5d42062f018dda85c9d62f3ac1fa48139f5b27c6473a71b469c1c45b8c94">NAIVE_SPECUL</a>;
+        <a class="code" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a> = <a class="code" href="global_2global_8h.html#a22f16908f3dc0da817d3473222229453a7a6daca46a8487bd8718ede9dc9f7fbb">STATIC_SCH</a>;
     }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a87e0d4278533d81d2ec6a4edd9fa1c20"></a><!-- doxytag: member="g_variable::getLastCacheBB" ref="a87e0d4278533d81d2ec6a4edd9fa1c20" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynBasicblock.html">dynBasicblock</a>* g_variable::getLastCacheBB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                     {
+        <span class="keywordflow">if</span> (<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) { <span class="keywordflow">return</span> NULL;}
+        <span class="keywordflow">else</span> {<span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();}
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_cgraph.png" border="0" usemap="#structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_cgraph" alt=""/></div>
+<map name="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_cgraph" id="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_icgraph.png" border="0" usemap="#structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_icgraph" alt=""/></div>
+<map name="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_icgraph" id="structg__variable_a87e0d4278533d81d2ec6a4edd9fa1c20_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a326ca8b03f7572a3c402fb676b62213b"></a><!-- doxytag: member="g_variable::getLastCacheBlk" ref="a326ca8b03f7572a3c402fb676b62213b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classblock.html">block</a>* g_variable::getLastCacheBlk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                              {
+        <span class="keywordflow">if</span> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) {<span class="keywordflow">return</span> NULL;}
+        <span class="keywordflow">else</span> {<span class="keywordflow">return</span> <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();}
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a326ca8b03f7572a3c402fb676b62213b_cgraph.png" border="0" usemap="#structg__variable_a326ca8b03f7572a3c402fb676b62213b_cgraph" alt=""/></div>
+<map name="structg__variable_a326ca8b03f7572a3c402fb676b62213b_cgraph" id="structg__variable_a326ca8b03f7572a3c402fb676b62213b_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a326ca8b03f7572a3c402fb676b62213b_icgraph.png" border="0" usemap="#structg__variable_a326ca8b03f7572a3c402fb676b62213b_icgraph" alt=""/></div>
+<map name="structg__variable_a326ca8b03f7572a3c402fb676b62213b_icgraph" id="structg__variable_a326ca8b03f7572a3c402fb676b62213b_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a6c27ed49f59faca6b9629a98993ee33e"></a><!-- doxytag: member="g_variable::getNewBBins" ref="a6c27ed49f59faca6b9629a98993ee33e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classbbInstruction.html">bbInstruction</a>* g_variable::getNewBBins </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                  {
+        <a class="code" href="classbbInstruction.html">bbInstruction</a>* newIns = <span class="keyword">new</span> <a class="code" href="classbbInstruction.html">bbInstruction</a>;
+        <span class="keywordflow">return</span> newIns;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a6c27ed49f59faca6b9629a98993ee33e_icgraph.png" border="0" usemap="#structg__variable_a6c27ed49f59faca6b9629a98993ee33e_icgraph" alt=""/></div>
+<map name="structg__variable_a6c27ed49f59faca6b9629a98993ee33e_icgraph" id="structg__variable_a6c27ed49f59faca6b9629a98993ee33e_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a5a35ada5b3465ce46d8e3badf53d720b"></a><!-- doxytag: member="g_variable::getNewBlkIns" ref="a5a35ada5b3465ce46d8e3badf53d720b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynInstruction.html">dynInstruction</a>* g_variable::getNewBlkIns </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                    {
+        <a class="code" href="classdynInstruction.html">dynInstruction</a>* newIns = <span class="keyword">new</span> <a class="code" href="classdynInstruction.html">dynInstruction</a>;
+        <span class="keywordflow">return</span> newIns;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a5a35ada5b3465ce46d8e3badf53d720b_icgraph.png" border="0" usemap="#structg__variable_a5a35ada5b3465ce46d8e3badf53d720b_icgraph" alt=""/></div>
+<map name="structg__variable_a5a35ada5b3465ce46d8e3badf53d720b_icgraph" id="structg__variable_a5a35ada5b3465ce46d8e3badf53d720b_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="abd791f9496e5723f7347c56c01c661e3"></a><!-- doxytag: member="g_variable::getNewCacheBB" ref="abd791f9496e5723f7347c56c01c661e3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynBasicblock.html">dynBasicblock</a>* g_variable::getNewCacheBB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                    {
+        <span class="keywordflow">while</span> (<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &gt; 0 &amp;&amp;
+               <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a>()-&gt;<a class="code" href="classdynBasicblock.html#a1d22549c79b7d5ec938b103ec8eb9f2a">getBBsize</a> () == 0) {
+            <span class="keyword">delete</span> <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a>();
+            <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1);
+        }
+        <a class="code" href="classdynBasicblock.html">dynBasicblock</a>* newBB = <span class="keyword">new</span> <a class="code" href="classdynBasicblock.html">dynBasicblock</a> (<a class="code" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a>, <span class="stringliteral">&quot;dynBasicblock&quot;</span>);
+        <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+        <span class="keywordflow">return</span> newBB;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_abd791f9496e5723f7347c56c01c661e3_cgraph.png" border="0" usemap="#structg__variable_abd791f9496e5723f7347c56c01c661e3_cgraph" alt=""/></div>
+<map name="structg__variable_abd791f9496e5723f7347c56c01c661e3_cgraph" id="structg__variable_abd791f9496e5723f7347c56c01c661e3_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_abd791f9496e5723f7347c56c01c661e3_icgraph.png" border="0" usemap="#structg__variable_abd791f9496e5723f7347c56c01c661e3_icgraph" alt=""/></div>
+<map name="structg__variable_abd791f9496e5723f7347c56c01c661e3_icgraph" id="structg__variable_abd791f9496e5723f7347c56c01c661e3_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac1662ac572ac7ec07e7f19117eedb872"></a><!-- doxytag: member="g_variable::getNewCacheBlk" ref="ac1662ac572ac7ec07e7f19117eedb872" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classblock.html">block</a>* g_variable::getNewCacheBlk </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                             {
+        <span class="keywordflow">while</span> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &gt; 0 &amp;&amp;
+               <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a>()-&gt;<a class="code" href="classblock.html#a9101647e0b327bae4656c19c9543b87d">getBlockSize</a> () == 0) {
+            <span class="keyword">delete</span> <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a>();
+            <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () - 1);
+        }
+        <a class="code" href="classblock.html">block</a>* newBB = <span class="keyword">new</span> <a class="code" href="classblock.html">block</a> (<a class="code" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">scheduling_mode</a>, <span class="stringliteral">&quot;block&quot;</span>);
+        <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newBB);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 1);
+        <span class="keywordflow">return</span> newBB;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_cgraph.png" border="0" usemap="#structg__variable_ac1662ac572ac7ec07e7f19117eedb872_cgraph" alt=""/></div>
+<map name="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_cgraph" id="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_icgraph.png" border="0" usemap="#structg__variable_ac1662ac572ac7ec07e7f19117eedb872_icgraph" alt=""/></div>
+<map name="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_icgraph" id="structg__variable_ac1662ac572ac7ec07e7f19117eedb872_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a8ba648162a8abae37194625703d094c9"></a><!-- doxytag: member="g_variable::getNewCodeCacheIns" ref="a8ba648162a8abae37194625703d094c9" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +466,7 @@ Public Attributes</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                          {
         <a class="code" href="classdynInstruction.html">dynInstruction</a>* newIns = <span class="keyword">new</span> <a class="code" href="classdynInstruction.html">dynInstruction</a>;
-        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(newIns);
+        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newIns);
         <span class="keywordflow">return</span> newIns;
     }
 </pre></div>
@@ -229,11 +479,28 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="a7dd2d6903bbab9282b0e8c25d2c95324"></a><!-- doxytag: member="g_variable::getOldSquashSN" ref="a7dd2d6903bbab9282b0e8c25d2c95324" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> g_variable::getOldSquashSN </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a>;}
+</pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structg__variable_a8ba648162a8abae37194625703d094c9_icgraph.png" border="0" usemap="#structg__variable_a8ba648162a8abae37194625703d094c9_icgraph" alt=""/></div>
-<map name="structg__variable_a8ba648162a8abae37194625703d094c9_icgraph" id="structg__variable_a8ba648162a8abae37194625703d094c9_icgraph">
+<div class="center"><img src="structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324_icgraph.png" border="0" usemap="#structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324_icgraph" alt=""/></div>
+<map name="structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324_icgraph" id="structg__variable_a7dd2d6903bbab9282b0e8c25d2c95324_icgraph">
 </map>
 </div>
 </p>
@@ -253,13 +520,68 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{<a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> &gt; 0); <span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a>;}
+<div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a>;}
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="structg__variable_a366fb213b96fa81e166dbe60a16c3e4f_icgraph.png" border="0" usemap="#structg__variable_a366fb213b96fa81e166dbe60a16c3e4f_icgraph" alt=""/></div>
 <map name="structg__variable_a366fb213b96fa81e166dbe60a16c3e4f_icgraph" id="structg__variable_a366fb213b96fa81e166dbe60a16c3e4f_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a29591157526fb0dbc3b2f4d7d3d9b2b0"></a><!-- doxytag: member="g_variable::getSquashType" ref="a29591157526fb0dbc3b2f4d7d3d9b2b0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a> g_variable::getSquashType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                      {
+        <span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_squash_type</a>;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0_icgraph.png" border="0" usemap="#structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0_icgraph" alt=""/></div>
+<map name="structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0_icgraph" id="structg__variable_a29591157526fb0dbc3b2f4d7d3d9b2b0_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a6c7ff60217a53698cce497bf705cd0c8"></a><!-- doxytag: member="g_variable::insertFrontBBcache" ref="a6c7ff60217a53698cce497bf705cd0c8" args="(dynBasicblock *bb)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::insertFrontBBcache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdynBasicblock.html">dynBasicblock</a> *&#160;</td>
+          <td class="paramname"><em>bb</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a8d86a82c138b259da6fa0d046aed985b">InsertAt</a> (bb, 0); }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a6c7ff60217a53698cce497bf705cd0c8_cgraph.png" border="0" usemap="#structg__variable_a6c7ff60217a53698cce497bf705cd0c8_cgraph" alt=""/></div>
+<map name="structg__variable_a6c7ff60217a53698cce497bf705cd0c8_cgraph" id="structg__variable_a6c7ff60217a53698cce497bf705cd0c8_cgraph">
 </map>
 </div>
 </p>
@@ -280,9 +602,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                    {
-        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a8d86a82c138b259da6fa0d046aed985b">InsertAt</a>(ins, 0);
-    }
+<div class="fragment"><pre class="fragment">{ <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a8d86a82c138b259da6fa0d046aed985b">InsertAt</a> (ins, 0); }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -304,6 +624,149 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a7816cdec0039f6a6dfb2c7a278aa0db4"></a><!-- doxytag: member="g_variable::insertToCodeCache" ref="a7816cdec0039f6a6dfb2c7a278aa0db4" args="(dynInstruction *newIns)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::insertToCodeCache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
+          <td class="paramname"><em>newIns</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                    { 
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (newIns != NULL); 
+        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a> (newIns);
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_cgraph.png" border="0" usemap="#structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_cgraph" alt=""/></div>
+<map name="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_cgraph" id="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_icgraph.png" border="0" usemap="#structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_icgraph" alt=""/></div>
+<map name="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_icgraph" id="structg__variable_a7816cdec0039f6a6dfb2c7a278aa0db4_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a2192ac9bd012be515c0d8d9fbea8b196"></a><!-- doxytag: member="g_variable::isBBcacheEmpty" ref="a2192ac9bd012be515c0d8d9fbea8b196" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g_variable::isBBcacheEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>; }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a2192ac9bd012be515c0d8d9fbea8b196_cgraph.png" border="0" usemap="#structg__variable_a2192ac9bd012be515c0d8d9fbea8b196_cgraph" alt=""/></div>
+<map name="structg__variable_a2192ac9bd012be515c0d8d9fbea8b196_cgraph" id="structg__variable_a2192ac9bd012be515c0d8d9fbea8b196_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af56609b1e0566a976487eee39e0283ef"></a><!-- doxytag: member="g_variable::isBBcacheNearEmpty" ref="af56609b1e0566a976487eee39e0283ef" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g_variable::isBBcacheNearEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &lt;= <a class="code" href="g__variable_8h.html#ae717611eed2e2152fece17389263d33d">BB_NEAR_EMPTY_SIZE</a>) ? <span class="keyword">true</span> : <span class="keyword">false</span>; }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_af56609b1e0566a976487eee39e0283ef_cgraph.png" border="0" usemap="#structg__variable_af56609b1e0566a976487eee39e0283ef_cgraph" alt=""/></div>
+<map name="structg__variable_af56609b1e0566a976487eee39e0283ef_cgraph" id="structg__variable_af56609b1e0566a976487eee39e0283ef_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e68ff9df2202d65d28f5f0d07d2e7d0"></a><!-- doxytag: member="g_variable::isBlkCacheEmpty" ref="a9e68ff9df2202d65d28f5f0d07d2e7d0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g_variable::isBlkCacheEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>; }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0_cgraph.png" border="0" usemap="#structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0_cgraph" alt=""/></div>
+<map name="structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0_cgraph" id="structg__variable_a9e68ff9df2202d65d28f5f0d07d2e7d0_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="afa7c4ed5cce9932b26d4a902e986e774"></a><!-- doxytag: member="g_variable::isBlkCacheNearEmpty" ref="afa7c4ed5cce9932b26d4a902e986e774" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g_variable::isBlkCacheNearEmpty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &lt;= <a class="code" href="g__variable_8h.html#af51dd0aa0f6fa95f1af790d7a5d88188">BLK_NEAR_EMPTY_SIZE</a>) ? <span class="keyword">true</span> : <span class="keyword">false</span>; }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_afa7c4ed5cce9932b26d4a902e986e774_cgraph.png" border="0" usemap="#structg__variable_afa7c4ed5cce9932b26d4a902e986e774_cgraph" alt=""/></div>
+<map name="structg__variable_afa7c4ed5cce9932b26d4a902e986e774_cgraph" id="structg__variable_afa7c4ed5cce9932b26d4a902e986e774_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a4b5f6627f388c34df7af5168a119778d"></a><!-- doxytag: member="g_variable::isCodeCacheEmpty" ref="a4b5f6627f388c34df7af5168a119778d" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -317,10 +780,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                             {
-        <span class="keywordtype">bool</span> result = <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() == 0 ? <span class="keyword">true</span> : <span class="keyword">false</span>;
-        <span class="keywordflow">return</span> result;
-    }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>; }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -331,23 +791,14 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structg__variable_a4b5f6627f388c34df7af5168a119778d_icgraph.png" border="0" usemap="#structg__variable_a4b5f6627f388c34df7af5168a119778d_icgraph" alt=""/></div>
-<map name="structg__variable_a4b5f6627f388c34df7af5168a119778d_icgraph" id="structg__variable_a4b5f6627f388c34df7af5168a119778d_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
-<a class="anchor" id="afb2439358b8c746fc28eaadb0ac77b10"></a><!-- doxytag: member="g_variable::isOnWrongPath" ref="afb2439358b8c746fc28eaadb0ac77b10" args="()" -->
+<a class="anchor" id="a2faa8d56e7a81cb41aad7f3df5262344"></a><!-- doxytag: member="g_variable::isSpeculationViolation" ref="a2faa8d56e7a81cb41aad7f3df5262344" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool g_variable::isOnWrongPath </td>
+          <td class="memname">bool g_variable::isSpeculationViolation </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
@@ -355,15 +806,45 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                          {
-        <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> != <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a>) ? <span class="keyword">true</span> : <span class="keyword">false</span>;
+<div class="fragment"><pre class="fragment">                                   {
+        <span class="keywordflow">return</span> (<a class="code" href="structg__variable.html#a366fb213b96fa81e166dbe60a16c3e4f">getSquashSN</a> () != <a class="code" href="structg__variable.html#a7dd2d6903bbab9282b0e8c25d2c95324">getOldSquashSN</a> ()) ? <span class="keyword">true</span> : <span class="keyword">false</span>;
     }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structg__variable_afb2439358b8c746fc28eaadb0ac77b10_icgraph.png" border="0" usemap="#structg__variable_afb2439358b8c746fc28eaadb0ac77b10_icgraph" alt=""/></div>
-<map name="structg__variable_afb2439358b8c746fc28eaadb0ac77b10_icgraph" id="structg__variable_afb2439358b8c746fc28eaadb0ac77b10_icgraph">
+<div class="center"><img src="structg__variable_a2faa8d56e7a81cb41aad7f3df5262344_cgraph.png" border="0" usemap="#structg__variable_a2faa8d56e7a81cb41aad7f3df5262344_cgraph" alt=""/></div>
+<map name="structg__variable_a2faa8d56e7a81cb41aad7f3df5262344_cgraph" id="structg__variable_a2faa8d56e7a81cb41aad7f3df5262344_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a919a79fc6f8adce82772a72d3e62a20b"></a><!-- doxytag: member="g_variable::popBBcache" ref="a919a79fc6f8adce82772a72d3e62a20b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynBasicblock.html">dynBasicblock</a>* g_variable::popBBcache </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                 {
+        <a class="code" href="classdynBasicblock.html">dynBasicblock</a>* bb = <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (0); 
+        <a class="code" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_bbCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (0); 
+        <span class="keywordflow">return</span> bb;
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_a919a79fc6f8adce82772a72d3e62a20b_cgraph.png" border="0" usemap="#structg__variable_a919a79fc6f8adce82772a72d3e62a20b_cgraph" alt=""/></div>
+<map name="structg__variable_a919a79fc6f8adce82772a72d3e62a20b_cgraph" id="structg__variable_a919a79fc6f8adce82772a72d3e62a20b_cgraph">
 </map>
 </div>
 </p>
@@ -383,9 +864,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                    {
-        <span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0);
-    }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (0); } <span class="comment">//TODO inconsistent with pop of BB - fix</span>
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -396,11 +875,44 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="aaf1ffcbfc128bd4fab10f4f745356c9b"></a><!-- doxytag: member="g_variable::pushInsToCodeCache" ref="aaf1ffcbfc128bd4fab10f4f745356c9b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::pushInsToCodeCache </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                               {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> () != NULL);
+        <a class="code" href="classblock.html">block</a>* blk = <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a6d48ac6d8dc07d30d726298dd60b5b03">Last</a> ();
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (blk-&gt;getBlockSize () &gt; 0);
+        <span class="keywordflow">while</span> (blk-&gt;getBlockSize () &gt; 0) {
+            <a class="code" href="structg__variable.html#a7816cdec0039f6a6dfb2c7a278aa0db4">insertToCodeCache</a> (blk-&gt;popFront ());
+        }
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_cgraph.png" border="0" usemap="#structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_cgraph" alt=""/></div>
+<map name="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_cgraph" id="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_cgraph">
+</map>
+</div>
+</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structg__variable_abb078ae60bb65db485a0cc2382bd4457_icgraph.png" border="0" usemap="#structg__variable_abb078ae60bb65db485a0cc2382bd4457_icgraph" alt=""/></div>
-<map name="structg__variable_abb078ae60bb65db485a0cc2382bd4457_icgraph" id="structg__variable_abb078ae60bb65db485a0cc2382bd4457_icgraph">
+<div class="center"><img src="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_icgraph.png" border="0" usemap="#structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_icgraph" alt=""/></div>
+<map name="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_icgraph" id="structg__variable_aaf1ffcbfc128bd4fab10f4f745356c9b_icgraph">
 </map>
 </div>
 </p>
@@ -421,8 +933,8 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                             {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() &gt; 0);
-        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(0);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () &gt; 0);
+        <a class="code" href="structg__variable.html#a51bca1da5081c41f7769211509c0358e">g_codeCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (0);
     }
 </pre></div>
 <p><div class="dynheader">
@@ -434,11 +946,42 @@ Here is the call graph for this function:</div>
 </div>
 </p>
 
+</div>
+</div>
+<a class="anchor" id="adaeb84094d83af19c60250b0ccbf37b0"></a><!-- doxytag: member="g_variable::removeLastBlock" ref="adaeb84094d83af19c60250b0ccbf37b0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::removeLastBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                            {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 1);
+        <span class="keyword">delete</span> <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (0); 
+        <a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a> (0); 
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_blockCache</a>-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> () == 0);
+    }
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_cgraph.png" border="0" usemap="#structg__variable_adaeb84094d83af19c60250b0ccbf37b0_cgraph" alt=""/></div>
+<map name="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_cgraph" id="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_cgraph">
+</map>
+</div>
+</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structg__variable_ab351194ce2a3de088813ae861c7e3d10_icgraph.png" border="0" usemap="#structg__variable_ab351194ce2a3de088813ae861c7e3d10_icgraph" alt=""/></div>
-<map name="structg__variable_ab351194ce2a3de088813ae861c7e3d10_icgraph" id="structg__variable_ab351194ce2a3de088813ae861c7e3d10_icgraph">
+<div class="center"><img src="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_icgraph.png" border="0" usemap="#structg__variable_adaeb84094d83af19c60250b0ccbf37b0_icgraph" alt=""/></div>
+<map name="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_icgraph" id="structg__variable_adaeb84094d83af19c60250b0ccbf37b0_icgraph">
 </map>
 </div>
 </p>
@@ -458,13 +1001,30 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> = 0; <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a> = 0;}
+<div class="fragment"><pre class="fragment">{<a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> = 0; <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a> = 0;}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a506e184323be6e4c52b1394fb5aca614"></a><!-- doxytag: member="g_variable::resetSquashType" ref="a506e184323be6e4c52b1394fb5aca614" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::resetSquashType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{<a class="code" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_squash_type</a> = <a class="code" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182afa800625c65cc749ab390f05006c27ab82">NO_MISPRED</a>;}
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca_icgraph.png" border="0" usemap="#structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca_icgraph" alt=""/></div>
-<map name="structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca_icgraph" id="structg__variable_a0031c2dbd6463bf57b4d24335eb7b9ca_icgraph">
+<div class="center"><img src="structg__variable_a506e184323be6e4c52b1394fb5aca614_icgraph.png" border="0" usemap="#structg__variable_a506e184323be6e4c52b1394fb5aca614_icgraph" alt=""/></div>
+<map name="structg__variable_a506e184323be6e4c52b1394fb5aca614_icgraph" id="structg__variable_a506e184323be6e4c52b1394fb5aca614_icgraph">
 </map>
 </div>
 </p>
@@ -488,15 +1048,6 @@ Here is the caller graph for this function:</div>
             <a class="code" href="structg__variable.html#a8d882e5b7f306bd36a428abece71acaf">g_old_squash_seq_num</a> = <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a>;
     }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structg__variable_adc6b682b4875fa3af7d390099c93dc88_icgraph.png" border="0" usemap="#structg__variable_adc6b682b4875fa3af7d390099c93dc88_icgraph" alt=""/></div>
-<map name="structg__variable_adc6b682b4875fa3af7d390099c93dc88_icgraph" id="structg__variable_adc6b682b4875fa3af7d390099c93dc88_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a3bbe6f8c101d665e05c30ef1eb7c9a16"></a><!-- doxytag: member="g_variable::setSquashSN" ref="a3bbe6f8c101d665e05c30ef1eb7c9a16" args="(INS_ID sn)" -->
@@ -513,8 +1064,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                 { 
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (sn &gt; 0);
+<div class="fragment"><pre class="fragment">                                 {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (sn &gt; 0);
         <span class="keywordflow">if</span> (<a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> &gt; 0 &amp;&amp; sn &lt; <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a>) {
             <a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> = sn;
         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_squash_seq_num</a> == 0) {
@@ -522,15 +1073,26 @@ Here is the caller graph for this function:</div>
         }
     }
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16_icgraph.png" border="0" usemap="#structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16_icgraph" alt=""/></div>
-<map name="structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16_icgraph" id="structg__variable_a3bbe6f8c101d665e05c30ef1eb7c9a16_icgraph">
-</map>
 </div>
-</p>
-
+</div>
+<a class="anchor" id="abc024387ff924dbf4e9ed6b5542736c2"></a><!-- doxytag: member="g_variable::setSquashType" ref="abc024387ff924dbf4e9ed6b5542736c2" args="(PIPE_SQUASH_TYPE squash_type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void g_variable::setSquashType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a>&#160;</td>
+          <td class="paramname"><em>squash_type</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                      {
+        <a class="code" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_squash_type</a> = squash_type;
+    }
+</pre></div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -560,12 +1122,25 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a1664c2b31146ab2b5f77464cd93f2cc8"></a><!-- doxytag: member="g_variable::g_BBlist" ref="a1664c2b31146ab2b5f77464cd93f2cc8" args="" -->
+<a class="anchor" id="a690c0db6b4c6d4ded41f24f25c011ca9"></a><!-- doxytag: member="g_variable::g_bb_seq_num" ref="a690c0db6b4c6d4ded41f24f25c011ca9" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classList.html">List</a>&lt;<a class="el" href="classbasicblock.html">basicblock</a>*&gt;* <a class="el" href="structg__variable.html#a1664c2b31146ab2b5f77464cd93f2cc8">g_variable::g_BBlist</a></td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> <a class="el" href="structg__variable.html#a690c0db6b4c6d4ded41f24f25c011ca9">g_variable::g_bb_seq_num</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4e0c87db4791200f634d9730ec5dd419"></a><!-- doxytag: member="g_variable::g_bbCache" ref="a4e0c87db4791200f634d9730ec5dd419" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classList.html">List</a>&lt;<a class="el" href="classdynBasicblock.html">dynBasicblock</a>*&gt;* <a class="el" href="structg__variable.html#a4e0c87db4791200f634d9730ec5dd419">g_variable::g_bbCache</a></td>
         </tr>
       </table>
 </div>
@@ -586,12 +1161,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="aa7d9d96654c800965904eab03e9fde48"></a><!-- doxytag: member="g_variable::g_branch_mispredict_delay" ref="aa7d9d96654c800965904eab03e9fde48" args="" -->
+<a class="anchor" id="aae812ea601e98de244787f6ae406f22b"></a><!-- doxytag: member="g_variable::g_blockCache" ref="aae812ea601e98de244787f6ae406f22b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned <a class="el" href="structg__variable.html#aa7d9d96654c800965904eab03e9fde48">g_variable::g_branch_mispredict_delay</a></td>
+          <td class="memname"><a class="el" href="classList.html">List</a>&lt;<a class="el" href="classblock.html">block</a>*&gt;* <a class="el" href="structg__variable.html#aae812ea601e98de244787f6ae406f22b">g_variable::g_blockCache</a></td>
         </tr>
       </table>
 </div>
@@ -651,12 +1226,38 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a60e72fea014eafd97f1889956c63ca7b"></a><!-- doxytag: member="g_variable::g_core_type" ref="a60e72fea014eafd97f1889956c63ca7b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#ab65a1cfe05166d06195718a9587d7b86">CORE_TYPE</a> <a class="el" href="structg__variable.html#a60e72fea014eafd97f1889956c63ca7b">g_variable::g_core_type</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3359a225f5a683c6ef05eed7ac5a8490"></a><!-- doxytag: member="g_variable::g_debug_level" ref="a3359a225f5a683c6ef05eed7ac5a8490" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned <a class="el" href="structg__variable.html#a3359a225f5a683c6ef05eed7ac5a8490">g_variable::g_debug_level</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5e3f674b76f6bccf4c537dda6184a9be"></a><!-- doxytag: member="g_variable::g_enable_bkEnd" ref="a5e3f674b76f6bccf4c537dda6184a9be" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structg__variable.html#a5e3f674b76f6bccf4c537dda6184a9be">g_variable::g_enable_bkEnd</a></td>
         </tr>
       </table>
 </div>
@@ -885,6 +1486,19 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="af6a9403dc67f85282a59c6fac85d5d6f"></a><!-- doxytag: member="g_variable::g_mem_model" ref="af6a9403dc67f85282a59c6fac85d5d6f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a0685c5d42062f018dda85c9d62f3ac1f">MEM_MODEL</a> <a class="el" href="structg__variable.html#af6a9403dc67f85282a59c6fac85d5d6f">g_variable::g_mem_model</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8d882e5b7f306bd36a428abece71acaf"></a><!-- doxytag: member="g_variable::g_old_squash_seq_num" ref="a8d882e5b7f306bd36a428abece71acaf" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -1002,12 +1616,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a9bef325956a77c8dc2080d7f6ea1a7a9"></a><!-- doxytag: member="g_variable::g_simpInsCnt" ref="a9bef325956a77c8dc2080d7f6ea1a7a9" args="" -->
+<a class="anchor" id="a05056b9147b20e4beee1dbdacaced249"></a><!-- doxytag: member="g_variable::g_simpInsCnt" ref="a05056b9147b20e4beee1dbdacaced249" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">long unsigned <a class="el" href="structg__variable.html#a9bef325956a77c8dc2080d7f6ea1a7a9">g_variable::g_simpInsCnt</a></td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#aa6308256cfa38997c75a56309db4fd1e">SIMP</a> <a class="el" href="structg__variable.html#a05056b9147b20e4beee1dbdacaced249">g_variable::g_simpInsCnt</a></td>
         </tr>
       </table>
 </div>
@@ -1034,6 +1648,19 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> <a class="el" href="structg__variable.html#a5a33fdb5e89c73f560a2e4ced38ecbf5">g_variable::g_squash_seq_num</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a61c1ea3f39d562de484c74ab8d5749a3"></a><!-- doxytag: member="g_variable::g_squash_type" ref="a61c1ea3f39d562de484c74ab8d5749a3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a04ec550019a96c13610ad1f3269182af">PIPE_SQUASH_TYPE</a> <a class="el" href="structg__variable.html#a61c1ea3f39d562de484c74ab8d5749a3">g_variable::g_squash_type</a></td>
         </tr>
       </table>
 </div>
@@ -1106,6 +1733,19 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a72fd819583457322714db5dedb07fe69"></a><!-- doxytag: member="g_variable::g_was_wp" ref="a72fd819583457322714db5dedb07fe69" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BOOL <a class="el" href="structg__variable.html#a72fd819583457322714db5dedb07fe69">g_variable::g_was_wp</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aeeef678f78f34f8743dc14c035ef56dd"></a><!-- doxytag: member="g_variable::g_wrong_path" ref="aeeef678f78f34f8743dc14c035ef56dd" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -1132,45 +1772,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="adcc07b62ed94dbd9dc61ad8ca8b366a1"></a><!-- doxytag: member="g_variable::g_wrong_path_number" ref="adcc07b62ed94dbd9dc61ad8ca8b366a1" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned <a class="el" href="structg__variable.html#adcc07b62ed94dbd9dc61ad8ca8b366a1">g_variable::g_wrong_path_number</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4740d9b4ca63320866b2eda4bba01b86"></a><!-- doxytag: member="g_variable::insCount" ref="a4740d9b4ca63320866b2eda4bba01b86" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long <a class="el" href="structg__variable.html#a4740d9b4ca63320866b2eda4bba01b86">g_variable::insCount</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a59153de8e5186183f6a85ab0ae4e44c0"></a><!-- doxytag: member="g_variable::msg" ref="a59153de8e5186183f6a85ab0ae4e44c0" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classmessage.html">message</a> <a class="el" href="structg__variable.html#a59153de8e5186183f6a85ab0ae4e44c0">g_variable::msg</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a1b0b5933340788334ca1884e1e63707e"></a><!-- doxytag: member="g_variable::numPBinList" ref="a1b0b5933340788334ca1884e1e63707e" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -1184,12 +1785,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a548b9947f5c28cff1174da06598b4903"></a><!-- doxytag: member="g_variable::stat" ref="a548b9947f5c28cff1174da06598b4903" args="" -->
+<a class="anchor" id="a7434e481853a0e26d1c95da57ca20608"></a><!-- doxytag: member="g_variable::scheduling_mode" ref="a7434e481853a0e26d1c95da57ca20608" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classstatistic.html">statistic</a> <a class="el" href="structg__variable.html#a548b9947f5c28cff1174da06598b4903">g_variable::stat</a></td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a22f16908f3dc0da817d3473222229453">SCHED_MODE</a> <a class="el" href="structg__variable.html#a7434e481853a0e26d1c95da57ca20608">g_variable::scheduling_mode</a></td>
         </tr>
       </table>
 </div>
@@ -1206,7 +1807,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1215,7 +1816,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

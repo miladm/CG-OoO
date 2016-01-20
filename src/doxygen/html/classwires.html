@@ -87,28 +87,34 @@ Collaboration diagram for wires:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a83cbfcb51f8312d7f7ba6de2aaf4bd2d">wires</a> (<a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, <a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, string wire_name=&quot;wire&quot;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a9f5bf25511e6a09362ee3e90c8ce2b08">wires</a> (<a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, <a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string wire_name=&quot;wire&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a9ab869c88f82f1b3176c3c24bcf003f8">~wires</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a771fb9276284f0780918b49484a66abf">hasFreeWire</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#ace9558373a8974248bf4d126574f0758">updateWireState</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a464c90345006d2077ba1023ba77b59f1">getNumFreeWire</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a7fdda3374000eee688b3f9ea128dcc3a">hasFreeWire</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a647e11b30c29284d122ad2813d2dbe31">updateWireState</a> (list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwires.html#a6da822d9a831e60702cc74f43306e48a">getNumFreeWires</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a83cbfcb51f8312d7f7ba6de2aaf4bd2d"></a><!-- doxytag: member="wires::wires" ref="a83cbfcb51f8312d7f7ba6de2aaf4bd2d" args="(WIDTH, AXES_TYPE, string wire_name=&quot;wire&quot;)" -->
+<a class="anchor" id="a9f5bf25511e6a09362ee3e90c8ce2b08"></a><!-- doxytag: member="wires::wires" ref="a9f5bf25511e6a09362ee3e90c8ce2b08" args="(AXES_TYPE, sysClock *, const YAML::Node &amp;, string wire_name=&quot;wire&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">wires::wires </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
+          <td class="paramname"><em>axes_type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -124,6 +130,32 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a> (wire_name, clk),
+      _axes_type (axes_type),
+      _wire_len (10),
+      _e_wire (wire_name, root),
+      s_unavailable_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (wire_name, <span class="stringliteral">&quot;unavailable_cnt&quot;</span>, <span class="stringliteral">&quot;Number of unavailable wire accesses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>))
+{
+    <span class="keywordflow">if</span> (_axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>) {
+        root[<span class="stringliteral">&quot;rd_wire_cnt&quot;</span>] &gt;&gt; _wire_cnt;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_axes_type == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>) {
+        root[<span class="stringliteral">&quot;wr_wire_cnt&quot;</span>] &gt;&gt; _wire_cnt;
+    } <span class="keywordflow">else</span> {
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;Invalid wire type&quot;</span>);
+    }
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_wire_cnt &gt; 0);
+
+    _cycle = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a9f5bf25511e6a09362ee3e90c8ce2b08_cgraph.png" border="0" usemap="#classwires_a9f5bf25511e6a09362ee3e90c8ce2b08_cgraph" alt=""/></div>
+<map name="classwires_a9f5bf25511e6a09362ee3e90c8ce2b08_cgraph" id="classwires_a9f5bf25511e6a09362ee3e90c8ce2b08_cgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -140,63 +172,161 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{}
+</pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a464c90345006d2077ba1023ba77b59f1"></a><!-- doxytag: member="wires::getNumFreeWire" ref="a464c90345006d2077ba1023ba77b59f1" args="(sysClock &amp;)" -->
+<a class="anchor" id="a6da822d9a831e60702cc74f43306e48a"></a><!-- doxytag: member="wires::getNumFreeWires" ref="a6da822d9a831e60702cc74f43306e48a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> wires::getNumFreeWire </td>
+          <td class="memname"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> wires::getNumFreeWires </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                              {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (_cycle &lt; now) {
+        <span class="keywordflow">return</span> _wire_cnt;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
+        <span class="keywordflow">return</span> _num_free_wire;
+    }
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
+    <span class="keywordflow">return</span> _wire_cnt;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a6da822d9a831e60702cc74f43306e48a_cgraph.png" border="0" usemap="#classwires_a6da822d9a831e60702cc74f43306e48a_cgraph" alt=""/></div>
+<map name="classwires_a6da822d9a831e60702cc74f43306e48a_cgraph" id="classwires_a6da822d9a831e60702cc74f43306e48a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a6da822d9a831e60702cc74f43306e48a_icgraph.png" border="0" usemap="#classwires_a6da822d9a831e60702cc74f43306e48a_icgraph" alt=""/></div>
+<map name="classwires_a6da822d9a831e60702cc74f43306e48a_icgraph" id="classwires_a6da822d9a831e60702cc74f43306e48a_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="a771fb9276284f0780918b49484a66abf"></a><!-- doxytag: member="wires::hasFreeWire" ref="a771fb9276284f0780918b49484a66abf" args="(sysClock &amp;)" -->
+<a class="anchor" id="a7fdda3374000eee688b3f9ea128dcc3a"></a><!-- doxytag: member="wires::hasFreeWire" ref="a7fdda3374000eee688b3f9ea128dcc3a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool wires::hasFreeWire </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                         {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (_cycle &lt; now) {
+        <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
+        <span class="keywordtype">bool</span> result = (_num_free_wire &gt; 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>;
+        <span class="keywordflow">if</span> (!result) s_unavailable_cnt++;
+        <span class="keywordflow">return</span> result;
+    }
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;should not have gotten here&quot;</span>);
+    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a7fdda3374000eee688b3f9ea128dcc3a_cgraph.png" border="0" usemap="#classwires_a7fdda3374000eee688b3f9ea128dcc3a_cgraph" alt=""/></div>
+<map name="classwires_a7fdda3374000eee688b3f9ea128dcc3a_cgraph" id="classwires_a7fdda3374000eee688b3f9ea128dcc3a_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a7fdda3374000eee688b3f9ea128dcc3a_icgraph.png" border="0" usemap="#classwires_a7fdda3374000eee688b3f9ea128dcc3a_icgraph" alt=""/></div>
+<map name="classwires_a7fdda3374000eee688b3f9ea128dcc3a_icgraph" id="classwires_a7fdda3374000eee688b3f9ea128dcc3a_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<a class="anchor" id="ace9558373a8974248bf4d126574f0758"></a><!-- doxytag: member="wires::updateWireState" ref="ace9558373a8974248bf4d126574f0758" args="(sysClock &amp;)" -->
+<a class="anchor" id="a647e11b30c29284d122ad2813d2dbe31"></a><!-- doxytag: member="wires::updateWireState" ref="a647e11b30c29284d122ad2813d2dbe31" args="(list&lt; string &gt; wire_name=list&lt; string &gt;(), bool update_wire=false)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void wires::updateWireState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">list&lt; string &gt;&#160;</td>
+          <td class="paramname"><em>wire_name</em> = <code>list&lt;string&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_wire</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                                     {
+    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now = <a class="code" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ();
+    <span class="keywordflow">if</span> (_cycle &lt; now) {
+        _num_free_wire = _wire_cnt - 1; <span class="comment">/*-- 1 for having used the wire once already --*/</span>
+        _cycle = now;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_num_free_wire &gt;= 0);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_cycle == now) {
+        _num_free_wire--;
+    }
+    <span class="keywordflow">if</span> (update_wire) 
+        _e_wire.<a class="code" href="classwire__energy.html#a44e92ccd312adf5dbce4641e5e3ea362">wireAccess</a> (wire_name);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a647e11b30c29284d122ad2813d2dbe31_cgraph.png" border="0" usemap="#classwires_a647e11b30c29284d122ad2813d2dbe31_cgraph" alt=""/></div>
+<map name="classwires_a647e11b30c29284d122ad2813d2dbe31_cgraph" id="classwires_a647e11b30c29284d122ad2813d2dbe31_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classwires_a647e11b30c29284d122ad2813d2dbe31_icgraph.png" border="0" usemap="#classwires_a647e11b30c29284d122ad2813d2dbe31_icgraph" alt=""/></div>
+<map name="classwires_a647e11b30c29284d122ad2813d2dbe31_icgraph" id="classwires_a647e11b30c29284d122ad2813d2dbe31_icgraph">
+</map>
+</div>
+</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="wires_8h_source.html">wires.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/backend/unit/<a class="el" href="wires_8cpp.html">wires.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -204,7 +334,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -213,7 +343,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

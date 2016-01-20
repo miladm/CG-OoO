@@ -15,57 +15,102 @@ Collaboration diagram for o3\_\-memManager:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}{o3\_\-memManager} ()
+\hyperlink{classo3__memManager_adafcb2964b462304f79aa5b2e1992998}{o3\_\-memManager} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string lsq\_\-name)
 \item 
 \hyperlink{classo3__memManager_a2e67f82384e5ee8a753332a347eac62f}{$\sim$o3\_\-memManager} ()
 \item 
-\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}{getTableState} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
+void \hyperlink{classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724}{regStat} ()
 \item 
-bool \hyperlink{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}{hasFreeWrPort} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classo3__memManager_a19302a13552a70cda08814dcfc0daa30}{getTableState} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
 \item 
-bool \hyperlink{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}{hasFreeRdPort} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+bool \hyperlink{classo3__memManager_a65290b7cff22c1fd282d3279f955e41c}{hasFreeWire} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE})
+\item 
+void \hyperlink{classo3__memManager_a3481a9cf94186793deb95874d4d25e3d}{updateWireState} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{AXES\_\-TYPE}, list$<$ string $>$ wire\_\-name=list$<$ string $>$(), bool update\_\-wire=false)
 \item 
 void \hyperlink{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}{pushBack} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
 \item 
 void \hyperlink{classo3__memManager_a401c114902989a9296444795c28cd5fb}{memAddrReady} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
 \item 
-bool \hyperlink{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}{issueToMem} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+bool \hyperlink{classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb}{issueToMem} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
 \item 
-bool \hyperlink{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}{commit} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{classsysClock}{sysClock} \&)
+bool \hyperlink{classo3__memManager_ae95cfddde7894d5cd3a865c857faba54}{commit} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
 \item 
 void \hyperlink{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}{squash} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
 \item 
-pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}{hasFinishedIns} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c}{hasFinishedIns} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
+\item 
+\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4}{getAxesLatency} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
 \item 
 bool \hyperlink{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}{hasCommitSt} ()
 \item 
-void \hyperlink{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}{delAfinishedSt} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+void \hyperlink{classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e}{delAfinishedSt} ()
 \item 
-bool \hyperlink{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}{isLQviolation} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+bool \hyperlink{classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d}{hasStToAddr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
+\item 
+pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc}{isLQviolation} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
 \item 
 void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeLd} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+\item 
+void \hyperlink{classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5}{forward} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}{
+\hypertarget{classo3__memManager_adafcb2964b462304f79aa5b2e1992998}{
 \index{o3\_\-memManager@{o3\_\-memManager}!o3\_\-memManager@{o3\_\-memManager}}
 \index{o3\_\-memManager@{o3\_\-memManager}!o3_memManager@{o3\_\-memManager}}
 \subsubsection[{o3\_\-memManager}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-memManager::o3\_\-memManager (
 \begin{DoxyParamCaption}
-{}
+\item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{memory\_\-to\_\-scheduler\_\-port, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{string}]{lsq\_\-name = {\ttfamily \char`\"{}o3\_\-memManager\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_ac2f65f772f531fa8c4a01fe6ef344bdf}
+\label{classo3__memManager_adafcb2964b462304f79aa5b2e1992998}
 
 \begin{DoxyCode}
-    : unit ("lsqManager"),
-      _L1 (1, 64, 32768),
-      _L2 (1, 64, 2097152),
-      _L3 (1, 64, 8388608),
-      _LQ (LQ_SIZE, 8, 4, "LQtable"),
-      _SQ (SQ_SIZE, 8, 4, "SQtable")
-{ }
+    : unit (lsq_name, clk),
+//      _L1 (1, 64, 32768),
+//      _L2 (1, 64, 2097152),
+//      _L3 (1, 64, 8388608),
+      _cache ("/home/milad/esc_project/svn/PARS/src/config/simple.yaml"),
+      _LQ (clk, g_cfg->_root["cpu"]["backend"]["table"]["LQ"], "LQ"),
+      _SQ (clk, g_cfg->_root["cpu"]["backend"]["table"]["SQ"], "SQ"),
+      _e_dtlb ("dtlb", g_cfg->_root["cpu"]["backend"]["mem"]["dtlb"]),
+      s_ld_cnt (g_stats.newScalarStat (lsq_name, "ld_cnt", "Number of load ops", 
+      0, PRINT_ZERO)),
+      s_cache_hit_cnt  (g_stats.newScalarStat (lsq_name, "cache_hit_cnt", "Number
+       of cache hits", 0, PRINT_ZERO)),
+      s_cache_miss_cnt (g_stats.newScalarStat (lsq_name, "cache_miss_cnt", "Numbe
+      r of cache misses", 0, PRINT_ZERO)),
+      s_cache_access_cnt (g_stats.newScalarStat (lsq_name, "cache_access", "Numbe
+      r of cache accesses", 0, PRINT_ZERO)),
+      s_ld_hit_cnt  (g_stats.newScalarStat (lsq_name, "ld_hit_cnt", "Number of lo
+      ad hits", 0, PRINT_ZERO)),
+      s_ld_miss_cnt (g_stats.newScalarStat (lsq_name, "ld_miss_cnt", "Number of l
+      oad misses", 0, PRINT_ZERO)),
+      s_st_miss_cnt (g_stats.newScalarStat (lsq_name, "st_miss_cnt", "Number of s
+      tore misses", 0, PRINT_ZERO)),
+      s_st_hit_cnt  (g_stats.newScalarStat (lsq_name, "st_hit_cnt", "Number of st
+      ore hits", 0, PRINT_ZERO)),
+      s_cache_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "cache_to_ld_fwd_cn
+      t", "Number of cache accesses", 0, PRINT_ZERO)),
+      s_st_to_ld_fwd_cnt (g_stats.newScalarStat (lsq_name, "st_to_ld_fwd_cnt", "N
+      umber of SQ -> LQ forwarding events", 0, PRINT_ZERO)),
+      s_st_to_ld_fwd_rat (g_stats.newRatioStat (&s_ld_cnt, lsq_name, "st_to_ld_fw
+      d_rat", "Rate of SQ -> LQ forwarding events / all load ops", 0, PRINT_ZERO)),
+      s_ld_miss_rat (g_stats.newRatioStat (&s_cache_to_ld_fwd_cnt, lsq_name, "ld_
+      miss_rat", "Load op miss rate", 0, PRINT_ZERO)),
+      s_mem_miss_rat (g_stats.newRatioStat (&s_cache_access_cnt, lsq_name, "mem_m
+      iss_rat", "Memory miss rate", 0, PRINT_ZERO)),
+      s_inflight_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name, "inf
+      light_ld_rat", "Number of in-flight LOAD instructions", 0, PRINT_ZERO)),
+      s_inflight_cache_ld_rat (g_stats.newRatioStat (clk->getStatObj (), lsq_name
+      , "inflight_cache_ld_rat", "Number of in-flight LOAD instructions in CACHES", 0, 
+      PRINT_ZERO))
+{ 
+    _memory_to_scheduler_port = &memory_to_scheduler_port;
+}
 \end{DoxyCode}
 \hypertarget{classo3__memManager_a2e67f82384e5ee8a753332a347eac62f}{
 \index{o3\_\-memManager@{o3\_\-memManager}!$\sim$o3\_\-memManager@{$\sim$o3\_\-memManager}}
@@ -83,39 +128,36 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}{
+\hypertarget{classo3__memManager_ae95cfddde7894d5cd3a865c857faba54}{
 \index{o3\_\-memManager@{o3\_\-memManager}!commit@{commit}}
 \index{commit@{commit}!o3_memManager@{o3\_\-memManager}}
 \subsubsection[{commit}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::commit (
 \begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{ins, }
-\item[{{\bf sysClock} \&}]{clk}
+\item[{{\bf dynInstruction} $\ast$}]{ins}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_a3a7d3249d284d0ebb297167b47ad8ce2}
+\label{classo3__memManager_ae95cfddde7894d5cd3a865c857faba54}
 
 \begin{DoxyCode}
-                                                              {
+                                               {
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         if (_LQ.getTableState () == EMPTY_BUFF) return false;
-        if (!_LQ.hasFreeRdPort (clk.now ())) return false;
+        if (!_LQ.hasFreeWire (READ)) return false;
+        dynInstruction* ld_ins = _LQ.popFront ();
+#ifdef ASSERTION
         Assert (ins->getLQstate () == LQ_COMPLETE);
-        //Assert (ins->getInsID () == _LQ.getFront()->getInsID ());
+        Assert (ld_ins->getInsID () == ins->getInsID ());
+#endif
+        _LQ.updateWireState (READ);
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting LD:"
       , ins->getInsID ());
-        dynInstruction* ld_ins = _LQ.popFront ();
-        Assert (ld_ins->getInsID () == ins->getInsID ());
     } else {
-        //TODO apply hardware costraints here
         Assert (ins->getSQstate () == SQ_COMPLETE);
         ins->setSQstate (SQ_COMMIT);
-        //Assert (ins->getInsID () == _SQ.getFront()->getInsID ());
+        _SQ.camAccess (); /* MUST FIND THE COMMITTING ST OPs */
         dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Commiting ST:"
       , ins->getInsID ());
-        //dynInstruction* st_ins = _SQ.popFront (); //TODO should it be in order?
-       don't think so
-        //Assert (st_ins->getInsID () == ins->getInsID ());
     }
     return true;
 }
@@ -123,11 +165,6 @@ void \hyperlink{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{completeL
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__memManager_aa2bb5f372b197474b76c8f6ae3531698}{
@@ -142,7 +179,60 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                                    {
+    /* NO ENERGY TRACKING HERE - HASFINISHEDINS () WILL COVER IT */
+    if (ins->getLQstate ()) s_inflight_cache_ld_rat--;
+    s_inflight_ld_rat--;
     ins->setLQstate (LQ_COMPLETE);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e}{
+\index{o3\_\-memManager@{o3\_\-memManager}!delAfinishedSt@{delAfinishedSt}}
+\index{delAfinishedSt@{delAfinishedSt}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{delAfinishedSt}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::delAfinishedSt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a7d75c416d7ce73b8b1bb2203b8ebdb4e}
+
+\begin{DoxyCode}
+                                    {
+    /* ENERGY OF THIS STEP IS ACCOUNTED FOR IN table CLASS */
+    _SQ.delFinishedMemAxes ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5}{
+\index{o3\_\-memManager@{o3\_\-memManager}!forward@{forward}}
+\index{forward@{forward}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{forward}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::forward (
+\begin{DoxyParamCaption}
+\item[{{\bf dynInstruction} $\ast$}]{ins, }
+\item[{{\bf CYCLE}}]{mem\_\-latency}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a9ccbaf680579ad2517f01a92dbe147e5}
+
+\begin{DoxyCode}
+                                                                   {
+#ifdef ASSERTION
+    Assert (ins->getInsType () == MEM && ins->getMemType() == LOAD);
+#endif
+    if (_memory_to_scheduler_port->getBuffState () == FULL_BUFF) return;
+    CYCLE cdb_ready_latency = mem_latency - 1;
+    Assert (cdb_ready_latency >= 0);
+    _memory_to_scheduler_port->pushBack (ins, cdb_ready_latency);
+    dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+               "Forward wr ops of ins", ins->getInsID (), _clk->now ());
 }
 \end{DoxyCode}
 
@@ -155,19 +245,44 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}{
-\index{o3\_\-memManager@{o3\_\-memManager}!delAfinishedSt@{delAfinishedSt}}
-\index{delAfinishedSt@{delAfinishedSt}!o3_memManager@{o3\_\-memManager}}
-\subsubsection[{delAfinishedSt}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::delAfinishedSt (
+\hypertarget{classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4}{
+\index{o3\_\-memManager@{o3\_\-memManager}!getAxesLatency@{getAxesLatency}}
+\index{getAxesLatency@{getAxesLatency}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{getAxesLatency}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CYCLE} o3\_\-memManager::getAxesLatency (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf dynInstruction} $\ast$}]{mem\_\-ins}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_ac7d368eb5062860954125ce0fbd3c3b9}
+\label{classo3__memManager_aeef4a4447f1777bb2a4c63920796c1a4}
 
 \begin{DoxyCode}
-                                             {
-    _SQ.delFinishedMemAxes (now);
+                                                            {
+    if (hasStToAddr (mem_ins->getMemAddr (), mem_ins->getInsID ())) {
+        s_st_to_ld_fwd_cnt++;
+        s_st_to_ld_fwd_rat++;
+        mem_ins->setLQstate (LQ_FWD_FROM_SQ);
+        CYCLE lat = g_eu_lat._st_buff_lat;
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->
+      getInsAddr (), lat); }
+        return lat;
+    //} else if () { /*TODO for MSHR */
+    } else {
+        if (mem_ins->getMemType () == LOAD) mem_ins->setCacheAxes ();
+        mem_ins->setLQstate (LQ_CACHE_WAIT);
+        CYCLE lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_READ);
+      
+        if (g_cfg->isEnProfiling ()) { g_prof.update_ld_profiler (mem_ins->
+      getInsAddr (), lat); }
+//        CYCLE lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix 
+      this line
+//                    mem_ins->getMemAddr (),
+//                    mem_ins->getMemAxesSize(),
+//                    &_L1, &_L2, &_L3);
+        s_cache_to_ld_fwd_cnt++;
+        s_inflight_cache_ld_rat += lat;
+        s_cache_access_cnt++;
+        return lat;
+    }
 }
 \end{DoxyCode}
 
@@ -193,20 +308,15 @@ Here is the caller graph for this function:
 \begin{DoxyCode}
                                                       {
     if (lsq_id == LD_QU) {
-        return _LQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+        return _LQ.getTableState ();
     } else {
-        return _SQ.getTableState (); //TODO set state to LQ_ADDR_WAIT
+        return _SQ.getTableState ();
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__memManager_a408c667a491a930d66fd1a0f7e8e9ec6}{
@@ -221,6 +331,8 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                  {
+    /* NO CAM ENERGY CONSUMED - ASSUMING HEAD OF QUE IS ALWAYS THE RESULT IF ANY 
+      */
     return _SQ.hasCommit ();
 }
 \end{DoxyCode}
@@ -229,30 +341,72 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}{
+\hypertarget{classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c}{
 \index{o3\_\-memManager@{o3\_\-memManager}!hasFinishedIns@{hasFinishedIns}}
 \index{hasFinishedIns@{hasFinishedIns}!o3_memManager@{o3\_\-memManager}}
 \subsubsection[{hasFinishedIns}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ bool, {\bf dynInstruction} $\ast$ $>$ o3\_\-memManager::hasFinishedIns (
 \begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_abf1656aba29cd17f3c223f0c2ee9ba16}
+\label{classo3__memManager_a8be15f63b5d876cb3ab99b7eec4c643c}
 
 \begin{DoxyCode}
-                                                                                 
-        {
+                                                                        {
     if (lsq_id == LD_QU) {
-        return _LQ.hasFinishedIns (lsq_id, now);
+        _LQ.camAccess ();
+        return _LQ.hasFinishedIns (lsq_id);
     } else {
-        return _SQ.hasFinishedIns (lsq_id, now);
+        _SQ.camAccess ();
+        return _SQ.hasFinishedIns (lsq_id);
     }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__memManager_a65290b7cff22c1fd282d3279f955e41c}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasFreeWire@{hasFreeWire}}
+\index{hasFreeWire@{hasFreeWire}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasFreeWire}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeWire (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a65290b7cff22c1fd282d3279f955e41c}
+
+\begin{DoxyCode}
+                                                                   {
+    if (lsq_id == LD_QU) {
+        return _LQ.hasFreeWire (axes_type);
+    } else {
+        return _SQ.hasFreeWire (axes_type);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d}{
+\index{o3\_\-memManager@{o3\_\-memManager}!hasStToAddr@{hasStToAddr}}
+\index{hasStToAddr@{hasStToAddr}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{hasStToAddr}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasStToAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{mem\_\-addr, }
+\item[{{\bf INS\_\-ID}}]{ins\_\-seq\_\-num}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_afcbdb28a588d6b0990761dfe751cb07d}
+
+\begin{DoxyCode}
+                                                                   {
+    _SQ.camAccess (); /* FIND ADDRESS ENERGY */
+    return _SQ.hasMemAddr (mem_addr, ins_seq_num);
 }
 \end{DoxyCode}
 
@@ -265,66 +419,36 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}{
-\index{o3\_\-memManager@{o3\_\-memManager}!hasFreeRdPort@{hasFreeRdPort}}
-\index{hasFreeRdPort@{hasFreeRdPort}!o3_memManager@{o3\_\-memManager}}
-\subsubsection[{hasFreeRdPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeRdPort (
-\begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
-\item[{{\bf CYCLE}}]{now}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__memManager_a71127b3f6545996a55cfa87735cb433f}
-
-\begin{DoxyCode}
-                                                           {
-    if (lsq_id == LD_QU) {
-        return _LQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
-    } else {
-        return _SQ.hasFreeRdPort (now); //TODO set state to LQ_ADDR_WAIT
-    }
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}{
-\index{o3\_\-memManager@{o3\_\-memManager}!hasFreeWrPort@{hasFreeWrPort}}
-\index{hasFreeWrPort@{hasFreeWrPort}!o3_memManager@{o3\_\-memManager}}
-\subsubsection[{hasFreeWrPort}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::hasFreeWrPort (
-\begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{, }
-\item[{{\bf CYCLE}}]{}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__memManager_af32030ab25dd729e0aa65a15e60ad562}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}{
+\hypertarget{classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc}{
 \index{o3\_\-memManager@{o3\_\-memManager}!isLQviolation@{isLQviolation}}
 \index{isLQviolation@{isLQviolation}!o3_memManager@{o3\_\-memManager}}
-\subsubsection[{isLQviolation}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::isLQviolation (
+\subsubsection[{isLQviolation}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ bool, {\bf dynInstruction} $\ast$ $>$ o3\_\-memManager::isLQviolation (
 \begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{st\_\-ins, }
-\item[{{\bf dynInstruction} $\ast$}]{ld\_\-ins}
+\item[{{\bf dynInstruction} $\ast$}]{st\_\-ins}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_ace575a2ddcf90ab36e6aa8399e5cd923}
+\label{classo3__memManager_afdb19a44895888ec99fb6495dccc1dcc}
 
 \begin{DoxyCode}
-                                                                                 
-      {
+                                                                                {
+      
+#ifdef ASSERTION
     Assert (st_ins->getMemType () == STORE);
     Assert (st_ins->getSQstate () == SQ_COMPLETE);
-    bool violation = _LQ.hasAnyCompleteLdFromAddr (st_ins->getMemAddr (), ld_ins)
-      ;
-    if (violation) Assert (ld_ins != NULL);
-    else Assert (ld_ins == NULL);
+#endif
+
+    INS_ID WAW_st_ins_sn = _SQ.hasAnyCompleteStFromAddr (st_ins->getMemAddr (), s
+      t_ins->getInsID ());
+    _SQ.camAccess ();
+    pair<bool, dynInstruction*> violation = _LQ.hasAnyCompleteLdFromAddr (st_ins-
+      >getMemAddr (), st_ins->getInsID (), WAW_st_ins_sn);
+    _LQ.camAccess ();
+
+#ifdef ASSERTION
+    if (violation.first) Assert (violation.second != NULL);
+    else Assert (violation.second == NULL);
+#endif
+
     return violation;
 }
 \end{DoxyCode}
@@ -333,60 +457,65 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}{
+\hypertarget{classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb}{
 \index{o3\_\-memManager@{o3\_\-memManager}!issueToMem@{issueToMem}}
 \index{issueToMem@{issueToMem}!o3_memManager@{o3\_\-memManager}}
 \subsubsection[{issueToMem}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-memManager::issueToMem (
 \begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__memManager_a9e44a6173a6b099fa6e7644960aac5cf}
+\label{classo3__memManager_a124d7a6a84cf5cbc75a171a773784fbb}
 
 \begin{DoxyCode}
-                                                        {
-    //TODO take all this block to lsqManager.cpp
+                                             {
     CYCLE axes_lat;
     dynInstruction* mem_ins;
     if (lsq_id == LD_QU) {
         mem_ins = _LQ.findPendingMemIns (LD_QU);
+        _LQ.camAccess ();
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
-        mem_ins->setLQstate (LQ_CACHE_WAIT);
-        axes_lat = (CYCLE) cacheCtrl (READ,  //stIns->getMemType (), TODO fix thi
-      s line
-                mem_ins->getMemAddr (),
-                mem_ins->getMemAxesSize(),
-                &_L1, &_L2, &_L3);
-        _LQ.setTimer (mem_ins, axes_lat, now); //TODO good API?
+        axes_lat = getAxesLatency (mem_ins);
+        _LQ.setTimer (mem_ins, axes_lat);
+        if (g_cfg->isEnMemFwd ()) forward (mem_ins, axes_lat);
+        if (axes_lat > L1_LATENCY) { 
+            s_ld_miss_cnt++; 
+            s_ld_miss_rat++;
+            s_mem_miss_rat++;
+        } else { s_ld_hit_cnt++; }
+        s_inflight_ld_rat += axes_lat;
+        s_ld_cnt++;
     } else {
         mem_ins = _SQ.findPendingMemIns (ST_QU);
+        _SQ.ramAccess (); /* GET THE OUTSTANDING COMMITED ST OP */
+        if (g_cfg->isEnSquash ()) Assert (mem_ins->isMemOrBrViolation() == false)
+      ;
         if (mem_ins == NULL) return false; /* NOTHING ISSUED */
         mem_ins->setSQstate (SQ_CACHE_DISPATCH);
-        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix th
-      is line
-                mem_ins->getMemAddr (),
-                mem_ins->getMemAxesSize(),
-                &_L1, &_L2, &_L3);
-        _SQ.setTimer (mem_ins, axes_lat, now);
+        axes_lat = _cache.request (mem_ins->getMemAddr (), false, REQUEST_WRITE);
+      
+//        axes_lat = (CYCLE) cacheCtrl (WRITE,  //stIns->getMemType (), TODO fix 
+      this line
+//                mem_ins->getMemAddr (),
+//                mem_ins->getMemAxesSize(),
+//                &_L1, &_L2, &_L3);
+        _SQ.setTimer (mem_ins, axes_lat);
+        if (axes_lat > L1_LATENCY) {
+            s_st_miss_cnt++;
+            s_mem_miss_rat++;
+        } else { s_st_hit_cnt++; }
+        s_cache_access_cnt++;
     }
+    (axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
 #ifdef ASSERTION
     Assert(axes_lat > 0);
 #endif
-    //(axes_lat > L1_LATENCY) ? s_ld_miss_cnt++ : s_ld_hit_cnt++; TODO put them b
-      ack
-    //(axes_lat > L1_LATENCY) ? s_cache_miss_cnt++ : s_cache_hit_cnt++;
     return true;
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__memManager_a401c114902989a9296444795c28cd5fb}{
@@ -403,19 +532,20 @@ Here is the caller graph for this function:
                                                      {
     if (ins->getMemType () == LOAD) {
         ins->setLQstate (LQ_PENDING_CACHE_DISPATCH);
+        _LQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _LQ.ramAccess (); /* ADDRESS WRITE ENERGY */
+        _e_dtlb.camAccess ();
     } else {
         ins->setSQstate (SQ_COMPLETE);
+        _SQ.camAccess (); /* FIND ADDRESS ENERGY */
+        _SQ.ramAccess (); /* ADDRESS WRITE ENERGY */
+        _e_dtlb.camAccess ();
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classo3__memManager_a7bfed5553c2212750ee610da67bc43e7}{
@@ -433,11 +563,11 @@ Here is the caller graph for this function:
     Assert (ins->getInsType () == MEM);
     if (ins->getMemType () == LOAD) {
         Assert (_LQ.getTableState () != FULL_BUFF);
-        _LQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _LQ.pushBack (ins);
         ins->setLQstate (LQ_ADDR_WAIT);
     } else {
         Assert (_SQ.getTableState () != FULL_BUFF);
-        _SQ.pushBack (ins); //TODO set state to LQ_ADDR_WAIT
+        _SQ.pushBack (ins);
         ins->setSQstate (SQ_ADDR_WAIT);
     }
 }
@@ -447,9 +577,25 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
+\hypertarget{classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724}{
+\index{o3\_\-memManager@{o3\_\-memManager}!regStat@{regStat}}
+\index{regStat@{regStat}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::regStat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a4b60f17893db95011c3ff8e6ac4f1724}
+
+\begin{DoxyCode}
+                             {
+    _LQ.regStat ();
+    _SQ.regStat ();
+}
+\end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 \hypertarget{classo3__memManager_afdb4d5b4146efa960976f66c3ccd358e}{
@@ -464,8 +610,39 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                                  {
+    dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "LQ SQUASH");
     _LQ.squash (squash_seq_num);
+    dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "SQ SQUASH");
     _SQ.squash (squash_seq_num);
+    _SQ.camAccess (); /* FIND INS ADDRESSES > SQUASH SN */
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classo3__memManager_a3481a9cf94186793deb95874d4d25e3d}{
+\index{o3\_\-memManager@{o3\_\-memManager}!updateWireState@{updateWireState}}
+\index{updateWireState@{updateWireState}!o3_memManager@{o3\_\-memManager}}
+\subsubsection[{updateWireState}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-memManager::updateWireState (
+\begin{DoxyParamCaption}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
+\item[{{\bf AXES\_\-TYPE}}]{axes\_\-type, }
+\item[{list$<$ string $>$}]{wire\_\-name = {\ttfamily list$<$string$>$()}, }
+\item[{bool}]{update\_\-wire = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__memManager_a3481a9cf94186793deb95874d4d25e3d}
+
+\begin{DoxyCode}
+                                                                                 
+                                      {
+    if (lsq_id == LD_QU) {
+        _LQ.updateWireState (axes_type, wire_name, update_wire);
+    } else {
+        _SQ.updateWireState (axes_type, wire_name, update_wire);
+    }
 }
 \end{DoxyCode}
 
@@ -475,12 +652,7 @@ Here is the call graph for this function:
 
 
 
-Here is the caller graph for this function:
-
-
-
-
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8h}{memManager.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{memManager_8cpp}{memManager.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2memManager_8h}{memManager.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/o3/\hyperlink{o3_2memManager_8cpp}{memManager.cpp}\end{DoxyCompactItemize}

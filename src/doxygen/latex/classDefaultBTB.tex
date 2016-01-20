@@ -40,11 +40,11 @@ void \hyperlink{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}{invalidate} (
 \end{DoxyParamCaption}
 )}}
 \label{classDefaultBTB_af3c58b594bc54e0b1f416d11c482bd60}
-Creates a BTB with the given number of entries, number of bits per tag, and instruction offset amount. 
+Creates a \hyperlink{classBTB}{BTB} with the given number of entries, number of bits per tag, and instruction offset amount. 
 \begin{DoxyParams}{Parameters}
-{\em numEntries} & Number of entries for the BTB. \\
+{\em numEntries} & Number of entries for the \hyperlink{classBTB}{BTB}. \\
 \hline
-{\em tagBits} & Number of bits for each tag in the BTB. \\
+{\em tagBits} & Number of bits for each tag in the \hyperlink{classBTB}{BTB}. \\
 \hline
 {\em instShiftAmt} & Offset amount for instructions to ignore alignment. \\
 \hline
@@ -76,6 +76,11 @@ Creates a BTB with the given number of entries, number of bits per tag, and inst
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
 \subsection{Member Function Documentation}
 \hypertarget{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}{
 \index{DefaultBTB@{DefaultBTB}!invalidate@{invalidate}}
@@ -86,7 +91,7 @@ Creates a BTB with the given number of entries, number of bits per tag, and inst
 \end{DoxyParamCaption}
 )}}
 \label{classDefaultBTB_a113bbc10686e3620f0f43ad1f5ba21b0}
-Invalidate a BTB entry 
+Invalidate a \hyperlink{classBTB}{BTB} entry 
 \begin{DoxyCode}
 {
     unsigned btb_idx = getIndex(instPC);
@@ -106,7 +111,7 @@ Invalidate a BTB entry
 \end{DoxyParamCaption}
 )}}
 \label{classDefaultBTB_ad21521b111945ccf058a3687ef720339}
-Looks up an address in the BTB. Must call \hyperlink{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{valid()} first on the address. 
+Looks up an address in the \hyperlink{classBTB}{BTB}. Must call \hyperlink{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{valid()} first on the address. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The address of the branch to look up. \\
 \hline
@@ -139,11 +144,6 @@ Returns the target of the branch.
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classDefaultBTB_a079bd92b539fb38fb658665a08b65974}{
 \index{DefaultBTB@{DefaultBTB}!reset@{reset}}
 \index{reset@{reset}!DefaultBTB@{DefaultBTB}}
@@ -172,7 +172,7 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classDefaultBTB_a554c0af23b92df168310e4edaf627c51}
-Updates the BTB with the target of a branch. 
+Updates the \hyperlink{classBTB}{BTB} with the target of a branch. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The address of the branch being updated. \\
 \hline
@@ -194,11 +194,6 @@ Updates the BTB with the target of a branch.
     btb[btb_idx].tag = getTag(instPC);
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}{
 \index{DefaultBTB@{DefaultBTB}!valid@{valid}}
 \index{valid@{valid}!DefaultBTB@{DefaultBTB}}
@@ -209,7 +204,7 @@ Here is the caller graph for this function:
 \end{DoxyParamCaption}
 )}}
 \label{classDefaultBTB_aaa68fd09a8bfbce33ad7be0d5b872953}
-Checks if a branch is in the BTB. 
+Checks if a branch is in the \hyperlink{classBTB}{BTB}. 
 \begin{DoxyParams}{Parameters}
 {\em inst\_\-PC} & The address of the branch to look up. \\
 \hline
@@ -217,7 +212,7 @@ Checks if a branch is in the BTB.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Whether or not the branch exists in the BTB. 
+Whether or not the branch exists in the \hyperlink{classBTB}{BTB}. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
@@ -246,7 +241,5 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{btb_8h}{btb.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__halfSA_8cpp}{cache\_\-halfSA.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{cache__singleWord_8cpp}{cache\_\-singleWord.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{btb_8cpp}{btb.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{forLater_2pred_2btb_8h}{btb.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{forLater_2pred_2btb_8cpp}{btb.cpp}\end{DoxyCompactItemize}

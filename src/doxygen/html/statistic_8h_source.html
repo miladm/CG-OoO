@@ -69,53 +69,160 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 <span class="preprocessor"></span>
 <a name="l00007"></a>00007 <span class="preprocessor">#include &lt;map&gt;</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include &lt;set&gt;</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;pin.H&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;pin_isa.H&quot;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;list.h&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
-<a name="l00015"></a>00015 
-<a name="l00016"></a><a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">00016</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>} <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>;
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="classScalarStat.html">00018</a> <span class="keyword">class </span><a class="code" href="classScalarStat.html">ScalarStat</a> {
-<a name="l00019"></a>00019     <span class="keyword">public</span>:
-<a name="l00020"></a>00020         <a class="code" href="classScalarStat.html#a41eaf19b1c778d3e19a9f1c23e5d0f3b">ScalarStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#add170db579327962a9c5e88de7751ca2">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
-<a name="l00021"></a><a class="code" href="classScalarStat.html#afca0d1be023ea2123dca632240949bef">00021</a>         <a class="code" href="classScalarStat.html#afca0d1be023ea2123dca632240949bef">~ScalarStat</a> () {}
-<a name="l00022"></a>00022         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> ();
-<a name="l00023"></a>00023         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; <a class="code" href="classScalarStat.html#abd392ea385ba6358fb6b4dbdc3a1ce32">operator++ </a>();
-<a name="l00024"></a>00024         <a class="code" href="classScalarStat.html">ScalarStat</a>  <a class="code" href="classScalarStat.html#abd392ea385ba6358fb6b4dbdc3a1ce32">operator++ </a>(<span class="keywordtype">int</span>);
-<a name="l00025"></a>00025         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; <a class="code" href="classScalarStat.html#a6d5fa9a76281d73053e1d68fe9394f4c">operator-- </a>();
-<a name="l00026"></a>00026         <a class="code" href="classScalarStat.html">ScalarStat</a>  <a class="code" href="classScalarStat.html#a6d5fa9a76281d73053e1d68fe9394f4c">operator-- </a>(<span class="keywordtype">int</span>);
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028     <span class="keyword">private</span>:
-<a name="l00029"></a>00029         <span class="keywordtype">string</span> _name;
-<a name="l00030"></a>00030         <span class="keywordtype">string</span> _description;
-<a name="l00031"></a>00031         <a class="code" href="global_2global_8h.html#add170db579327962a9c5e88de7751ca2">SCALAR</a> _ScalarStat;
-<a name="l00032"></a>00032         <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> _print_if_zero;
-<a name="l00033"></a>00033 };
-<a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="classstatistic.html">00035</a> <span class="keyword">class </span><a class="code" href="classstatistic.html">statistic</a> {
-<a name="l00036"></a>00036         <span class="keyword">public</span>:
-<a name="l00037"></a>00037                 <a class="code" href="classstatistic.html#a3f28cad0a4699e3f2db3892b5556f4e7">statistic</a> ();
-<a name="l00038"></a>00038                 <a class="code" href="classstatistic.html#a9edcb4dd9cdc09bdfe9a61d2f95654ca">~statistic</a> ();
-<a name="l00039"></a>00039         <span class="keywordtype">void</span> <a class="code" href="classstatistic.html#a75175df2e04fd107046dd6a9aa5356dd">dump</a> ();
-<a name="l00040"></a>00040         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; <a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#add170db579327962a9c5e88de7751ca2">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="keyword">private</span>:
-<a name="l00043"></a>00043         set&lt;ScalarStat*&gt; _ScalarStats;
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <span class="keyword">public</span>:
-<a name="l00046"></a>00046         <span class="comment">//TODO DELETE THESE</span>
-<a name="l00047"></a><a class="code" href="classstatistic.html#a5454149fac41c264c14ed73694a7c4e4">00047</a>                 <span class="keywordtype">int</span> <a class="code" href="classstatistic.html#a5454149fac41c264c14ed73694a7c4e4">matchIns</a>;
-<a name="l00048"></a><a class="code" href="classstatistic.html#ab87dfd0301135bd8385c390e21fd1034">00048</a>                 <span class="keywordtype">int</span> <a class="code" href="classstatistic.html#ab87dfd0301135bd8385c390e21fd1034">noMatchIns</a>;
-<a name="l00049"></a><a class="code" href="classstatistic.html#aed69957ac20a00f832a0b01f37029faa">00049</a>                 set&lt;ADDRINT&gt; <a class="code" href="classstatistic.html#aed69957ac20a00f832a0b01f37029faa">missingInsList</a>;
-<a name="l00050"></a>00050         <span class="comment">// TODO delete above</span>
-<a name="l00051"></a>00051 };
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053 <span class="keyword">extern</span> <a class="code" href="classstatistic.html">statistic</a> <a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>;
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <span class="preprocessor">#endif </span><span class="comment">/*_STATISTIC_H*/</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;list&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;time.h&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;pin.H&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;pin_isa.H&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;list.h&quot;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;../config.h&quot;</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">00022</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {<a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a448b74764f9e4804fc78aa30ea4f9f7f">NO_PRINT_ZERO</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>} <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>;
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="comment">/* **************************** *</span>
+<a name="l00025"></a>00025 <span class="comment"> * STAT</span>
+<a name="l00026"></a>00026 <span class="comment"> * **************************** */</span>
+<a name="l00027"></a><a class="code" href="classstat.html">00027</a> <span class="keyword">class </span><a class="code" href="classstat.html">stat</a> {
+<a name="l00028"></a>00028     <span class="keyword">public</span>:
+<a name="l00029"></a>00029         <a class="code" href="classstat.html#ab89727a4198ffd032e194917596e156b">stat</a> ();
+<a name="l00030"></a>00030         <a class="code" href="classstat.html#ab89727a4198ffd032e194917596e156b">stat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="classstat.html#aacfea127fcaab87cfb226e132ba4b23a">init</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00032"></a>00032         <a class="code" href="classstat.html#adb268824871b2f69d7b11003abf2fe6b">~stat</a> ();
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034         <span class="comment">/*-- GET FUNCS --*/</span>
+<a name="l00035"></a>00035         <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> <a class="code" href="classstat.html#a466c0cff1754602817a62517d74a1d07">getValue</a> ();
+<a name="l00036"></a>00036         <span class="keywordtype">string</span> <a class="code" href="classstat.html#af4666e7a7eac1259a222685465e086be">getName</a> ();
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038         <span class="comment">/*-- OPERATORS --*/</span>
+<a name="l00039"></a>00039         <a class="code" href="classstat.html">stat</a>&amp; <a class="code" href="classstat.html#ad4b4362a2144dd4510f927a2a4243314">operator++ </a>();
+<a name="l00040"></a>00040         <a class="code" href="classstat.html">stat</a>  <a class="code" href="classstat.html#ad4b4362a2144dd4510f927a2a4243314">operator++ </a>(<span class="keywordtype">int</span>);
+<a name="l00041"></a>00041         <a class="code" href="classstat.html">stat</a>&amp; <a class="code" href="classstat.html#ae2fd50f98dab5561bd987bcca24aa0fa">operator-- </a>();
+<a name="l00042"></a>00042         <a class="code" href="classstat.html">stat</a>  <a class="code" href="classstat.html#ae2fd50f98dab5561bd987bcca24aa0fa">operator-- </a>(<span class="keywordtype">int</span>);
+<a name="l00043"></a>00043         <a class="code" href="classstat.html">stat</a> <a class="code" href="classstat.html#ae5697e9246673d121c5d5f190582ec6a">operator+= </a>(<a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>);
+<a name="l00044"></a>00044         <a class="code" href="classstat.html">stat</a> <a class="code" href="classstat.html#abfceb9f1f9d7dd4405dae4d7856aa3a0">operator-= </a>(<a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>);
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046     <span class="keyword">protected</span>:
+<a name="l00047"></a><a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">00047</a>         <span class="keywordtype">string</span> <a class="code" href="classstat.html#a51eae1107b5388fb7823b00954228053">_name</a>;
+<a name="l00048"></a><a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">00048</a>         <span class="keywordtype">string</span> <a class="code" href="classstat.html#ac9613e6f886704c8582aa6d3ef82890c">_description</a>;
+<a name="l00049"></a><a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">00049</a>         <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> <a class="code" href="classstat.html#a9ac5680b65cf0f05de0494efcd7b1371">_ScalarStat</a>;
+<a name="l00050"></a><a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">00050</a>         <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> <a class="code" href="classstat.html#a29dc267b4bc24e2013069ca1164edfbf">_print_if_zero</a>;
+<a name="l00051"></a><a class="code" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">00051</a>         <span class="keywordtype">bool</span> <a class="code" href="classstat.html#ab9551cc95cb38f1e068f76383e082374">_enable_log_stat</a>;
+<a name="l00052"></a>00052 };
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="comment">/* **************************** *</span>
+<a name="l00055"></a>00055 <span class="comment"> * SCALAR STAT</span>
+<a name="l00056"></a>00056 <span class="comment"> * **************************** */</span>
+<a name="l00057"></a><a class="code" href="classScalarStat.html">00057</a> <span class="keyword">class </span><a class="code" href="classScalarStat.html">ScalarStat</a> : <span class="keyword">public</span> <a class="code" href="classstat.html">stat</a> {
+<a name="l00058"></a>00058     <span class="keyword">public</span>:
+<a name="l00059"></a>00059         <a class="code" href="classScalarStat.html#a41eaf19b1c778d3e19a9f1c23e5d0f3b">ScalarStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00060"></a><a class="code" href="classScalarStat.html#afca0d1be023ea2123dca632240949bef">00060</a>         <a class="code" href="classScalarStat.html#afca0d1be023ea2123dca632240949bef">~ScalarStat</a> () {}
+<a name="l00061"></a>00061         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> ();
+<a name="l00062"></a>00062         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> (ofstream*);
+<a name="l00063"></a>00063 };
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065 <span class="comment">/* **************************** *</span>
+<a name="l00066"></a>00066 <span class="comment"> * SCALAR HIST STAT</span>
+<a name="l00067"></a>00067 <span class="comment"> * **************************** */</span>
+<a name="l00068"></a><a class="code" href="classScalarHistStat.html">00068</a> <span class="keyword">class </span><a class="code" href="classScalarHistStat.html">ScalarHistStat</a> : <span class="keyword">public</span> <a class="code" href="classstat.html">stat</a> {
+<a name="l00069"></a>00069     <span class="keyword">public</span>:
+<a name="l00070"></a>00070         <a class="code" href="classScalarHistStat.html#a879fe3e16fac222d3312ea8134515e5e">ScalarHistStat</a> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00071"></a>00071         <a class="code" href="classScalarHistStat.html#af531c39fa5e20d9cbda48ede3c4c2eac">~ScalarHistStat</a> ();
+<a name="l00072"></a>00072         <a class="code" href="classstat.html">stat</a>&amp; <a class="code" href="classScalarHistStat.html#adbb4136e42b835c673a4eb3874c93561">operator[] </a>(<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>);
+<a name="l00073"></a>00073         <span class="keywordtype">void</span> <a class="code" href="classScalarHistStat.html#a8c59e8137ed17b81de09b7a0cd9b6487">print</a> (ofstream*);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     <span class="keyword">protected</span>:
+<a name="l00076"></a><a class="code" href="classScalarHistStat.html#aa2af1184ce33a2e05604c0e4eac095ec">00076</a>         <a class="code" href="classstat.html">stat</a>* <a class="code" href="classScalarHistStat.html#aa2af1184ce33a2e05604c0e4eac095ec">_scalar_arr_stat</a>;
+<a name="l00077"></a><a class="code" href="classScalarHistStat.html#a62717c9f85e1afa363dfab8e3471b4d6">00077</a>         <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> <a class="code" href="classScalarHistStat.html#a62717c9f85e1afa363dfab8e3471b4d6">_histogram_size</a>;
+<a name="l00078"></a>00078 };
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="comment">/* **************************** *</span>
+<a name="l00081"></a>00081 <span class="comment"> * RATIO STAT</span>
+<a name="l00082"></a>00082 <span class="comment"> * **************************** */</span>
+<a name="l00083"></a><a class="code" href="classRatioStat.html">00083</a> <span class="keyword">class </span><a class="code" href="classRatioStat.html">RatioStat</a> : <span class="keyword">public</span> <a class="code" href="classScalarStat.html">ScalarStat</a> {
+<a name="l00084"></a>00084     <span class="keyword">public</span>:
+<a name="l00085"></a>00085         <a class="code" href="classRatioStat.html#ac2413ed73b8805acef6a75842012ff5e">RatioStat</a> (<a class="code" href="classScalarStat.html">ScalarStat</a>* divisor, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00086"></a><a class="code" href="classRatioStat.html#ad7dbd36e4c0ceb7e5a018aadfa4b6d0d">00086</a>         <a class="code" href="classRatioStat.html#ad7dbd36e4c0ceb7e5a018aadfa4b6d0d">~RatioStat</a> () {}
+<a name="l00087"></a>00087         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> (ofstream*);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089     <span class="keyword">private</span>:
+<a name="l00090"></a>00090         <a class="code" href="classScalarStat.html">ScalarStat</a>* _divisor;
+<a name="l00091"></a>00091 };
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093 <span class="comment">/* **************************** *</span>
+<a name="l00094"></a>00094 <span class="comment"> * RATIO HIST STAT</span>
+<a name="l00095"></a>00095 <span class="comment"> * **************************** */</span>
+<a name="l00096"></a><a class="code" href="classRatioHistStat.html">00096</a> <span class="keyword">class </span><a class="code" href="classRatioHistStat.html">RatioHistStat</a> : <span class="keyword">public</span> <a class="code" href="classScalarHistStat.html">ScalarHistStat</a> {
+<a name="l00097"></a>00097     <span class="keyword">public</span>:
+<a name="l00098"></a>00098         <a class="code" href="classRatioHistStat.html#adf13bf5c0fcefb8bbdf16a1db3908605">RatioHistStat</a> (<a class="code" href="classScalarStat.html">ScalarStat</a>* divisor, <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00099"></a><a class="code" href="classRatioHistStat.html#af1e43844d067010fd06ecb92d4bdb1b6">00099</a>         <a class="code" href="classRatioHistStat.html#af1e43844d067010fd06ecb92d4bdb1b6">~RatioHistStat</a> () {}
+<a name="l00100"></a>00100         <span class="keywordtype">void</span> <a class="code" href="classRatioHistStat.html#a439fd25474d1bfa2a9bc2115ebb33da6">print</a> (ofstream*);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <span class="keyword">private</span>:
+<a name="l00103"></a>00103         <a class="code" href="classScalarStat.html">ScalarStat</a>* _divisor;
+<a name="l00104"></a>00104 };
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="comment">/* **************************** *</span>
+<a name="l00107"></a>00107 <span class="comment"> * EENRGY STAT</span>
+<a name="l00108"></a>00108 <span class="comment"> * **************************** */</span>
+<a name="l00109"></a><a class="code" href="classEnergyStat.html">00109</a> <span class="keyword">class </span><a class="code" href="classEnergyStat.html">EnergyStat</a> : <span class="keyword">public</span> <a class="code" href="classScalarStat.html">ScalarStat</a> {
+<a name="l00110"></a>00110     <span class="keyword">public</span>:
+<a name="l00111"></a>00111         <a class="code" href="classEnergyStat.html#a29c78ef224650e6eb810fc0836dc0264">EnergyStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00112"></a><a class="code" href="classEnergyStat.html#ab0f536c15b8bd8ec2496c264cb027627">00112</a>         <a class="code" href="classEnergyStat.html#ab0f536c15b8bd8ec2496c264cb027627">~EnergyStat</a> () {}
+<a name="l00113"></a>00113         <span class="keywordtype">void</span> <a class="code" href="classEnergyStat.html#a181951ac5b02a5a0a2471c0de9ead9d4">setEnergyPerAccess</a> (<a class="code" href="global_2global_8h.html#ac7a26e7498f0c33f4edb45e5aa459f53">PJ</a>);
+<a name="l00114"></a>00114         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> (ofstream*);
+<a name="l00115"></a>00115         <a class="code" href="global_2global_8h.html#ac7a26e7498f0c33f4edb45e5aa459f53">PJ</a> <a class="code" href="classEnergyStat.html#a356c7d89de116985c3947a9a7f2b8219">getEnergyValue</a> ();
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117     <span class="keyword">protected</span>:
+<a name="l00118"></a><a class="code" href="classEnergyStat.html#ab7d59e4ed9114449e29583155b39f935">00118</a>         <a class="code" href="global_2global_8h.html#ac7a26e7498f0c33f4edb45e5aa459f53">PJ</a> <a class="code" href="classEnergyStat.html#ab7d59e4ed9114449e29583155b39f935">_energy_per_access</a>;
+<a name="l00119"></a>00119 };
+<a name="l00120"></a>00120 
+<a name="l00121"></a><a class="code" href="classLeakageEnergyStat.html">00121</a> <span class="keyword">class </span><a class="code" href="classLeakageEnergyStat.html">LeakageEnergyStat</a> : <span class="keyword">public</span> <a class="code" href="classEnergyStat.html">EnergyStat</a> {
+<a name="l00122"></a>00122     <span class="keyword">public</span>:
+<a name="l00123"></a>00123         <a class="code" href="classLeakageEnergyStat.html#a4e5839beef5facc4fbfe25701da3fd75">LeakageEnergyStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a> init_val = 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a> print_if_zero = <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>);
+<a name="l00124"></a><a class="code" href="classLeakageEnergyStat.html#afbd8deef7db52e338947d98d37056f03">00124</a>         <a class="code" href="classLeakageEnergyStat.html#afbd8deef7db52e338947d98d37056f03">~LeakageEnergyStat</a> () {}
+<a name="l00125"></a>00125         <span class="keywordtype">void</span> <a class="code" href="classScalarStat.html#ad5767c33c892443a921514fda8b4e1f3">print</a> (ofstream*, map&lt;string, stat*&gt;&amp;);
+<a name="l00126"></a>00126         <a class="code" href="global_2global_8h.html#ac7a26e7498f0c33f4edb45e5aa459f53">PJ</a> <a class="code" href="classEnergyStat.html#a356c7d89de116985c3947a9a7f2b8219">getEnergyValue</a> (map&lt;string, stat*&gt;&amp;);
+<a name="l00127"></a>00127 };
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 <span class="comment">/* **************************** *</span>
+<a name="l00130"></a>00130 <span class="comment"> * STATISTIC</span>
+<a name="l00131"></a>00131 <span class="comment"> * **************************** */</span>
+<a name="l00132"></a><a class="code" href="classstatistic.html">00132</a> <span class="keyword">class </span><a class="code" href="classstatistic.html">statistic</a> {
+<a name="l00133"></a>00133         <span class="keyword">public</span>:
+<a name="l00134"></a>00134                 <a class="code" href="classstatistic.html#a3f28cad0a4699e3f2db3892b5556f4e7">statistic</a> ();
+<a name="l00135"></a>00135                 <a class="code" href="classstatistic.html#a9edcb4dd9cdc09bdfe9a61d2f95654ca">~statistic</a> ();
+<a name="l00136"></a>00136         <span class="keywordtype">void</span> <a class="code" href="classstatistic.html#a75175df2e04fd107046dd6a9aa5356dd">dump</a> ();
+<a name="l00137"></a>00137         <span class="keywordtype">void</span> <a class="code" href="classstatistic.html#afa68a63b6c5511103123e9837a96c7ff">dumpSummary</a> ();
+<a name="l00138"></a>00138         <a class="code" href="classScalarHistStat.html">ScalarHistStat</a>&amp; <a class="code" href="classstatistic.html#ad4d85ebb5f4446c66911f0c141e11f1a">newScalarHistStat</a> (<a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00139"></a>00139         <a class="code" href="classRatioHistStat.html">RatioHistStat</a>&amp; <a class="code" href="classstatistic.html#ae549d19ee6776db84c3c7d7e2145d92a">newRatioHistStat</a> (<a class="code" href="classScalarStat.html">ScalarStat</a>*, <a class="code" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00140"></a>00140         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; <a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00141"></a>00141         <a class="code" href="classRatioStat.html">RatioStat</a>&amp; <a class="code" href="classstatistic.html#a3cbaef36cc0ea9a2f7a400e01ce8aa6e">newRatioStat</a> (<a class="code" href="classScalarStat.html">ScalarStat</a>*, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00142"></a>00142         <a class="code" href="classEnergyStat.html">EnergyStat</a>&amp; <a class="code" href="classstatistic.html#aaf7c406588e46cae93e0158c0dbe8f86">newEnergyStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00143"></a>00143         <a class="code" href="classLeakageEnergyStat.html">LeakageEnergyStat</a>&amp; <a class="code" href="classstatistic.html#ae12eb8930a20eb1c86c84fad36cfb2bf">newLeakageEnergyStat</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="global_2global_8h.html#a72e6b2d6dce7827a0bbf126287d2035a">SCALAR</a>, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4">PRINT_ON_ZERO</a>);
+<a name="l00144"></a>00144         <span class="keywordtype">void</span> <a class="code" href="classstatistic.html#ac3129cf3eac1626c107314b93d6f5d12">updateStatMap</a> (<span class="keywordtype">string</span>, <span class="keywordtype">string</span>, <a class="code" href="classstat.html">stat</a>*);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146     <span class="keyword">private</span>:
+<a name="l00147"></a>00147         <span class="keywordtype">void</span> setupOutFile ();
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149     <span class="keyword">private</span>:
+<a name="l00150"></a>00150         list&lt;ScalarHistStat*&gt; _ScalarHistStats;
+<a name="l00151"></a>00151         list&lt;RatioHistStat*&gt; _RatioHistStats;
+<a name="l00152"></a>00152         list&lt;ScalarStat*&gt; _ScalarStats;
+<a name="l00153"></a>00153         list&lt;RatioStat*&gt; _RatioStats;
+<a name="l00154"></a>00154         list&lt;EnergyStat*&gt; _EnergyStats;
+<a name="l00155"></a>00155         list&lt;LeakageEnergyStat*&gt; _LeakageEnergyStats;
+<a name="l00156"></a>00156         ofstream _out_file;
+<a name="l00157"></a>00157         map&lt;string, stat*&gt; _statMap;
+<a name="l00158"></a>00158 };
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160 <span class="keyword">extern</span> <a class="code" href="classstatistic.html">statistic</a> <a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>;
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 <span class="preprocessor">#endif </span><span class="comment">/*_STATISTIC_H*/</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -123,7 +230,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -132,7 +239,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

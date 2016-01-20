@@ -15,21 +15,21 @@ Collaboration diagram for port$<$ queType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classport_aa397f17dedc41b12c65d9cfce47d5f5c}{port} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, string port\_\-name=\char`\"{}port\char`\"{})
+\hyperlink{classport_abcad2f2fb15e1d6b426f455d4e2d053d}{port} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{classsysClock}{sysClock} $\ast$, string port\_\-name=\char`\"{}port\char`\"{})
 \item 
 \hyperlink{classport_a51a6e901a1eac3a1c3fd35a140fecbfb}{$\sim$port} ()
 \item 
-\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a52ad1c5223f028930491b024f26467fa}{pushBack} (queType\_\-T ins, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a4c80b61961d7df8f30f5dc42bacd25e9}{pushBack} (queType\_\-T ins)
 \item 
-\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a7c709a92ed8525cf8a310b294e606267}{pushBack} (queType\_\-T ins, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} lat)
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a8660727a8dbc674388195c7abd543045}{pushBack} (queType\_\-T ins, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} lat)
 \item 
-queType\_\-T \hyperlink{classport_a95bf81afb2a6c03ac2272b3708322b74}{popFront} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+queType\_\-T \hyperlink{classport_a4fc45954f3836ec5d9d1808bdd8acff3}{popFront} ()
 \item 
-queType\_\-T \hyperlink{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}{popNextReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+queType\_\-T \hyperlink{classport_a4593f9dfb524f8d7958e03ab4a27cb4f}{popNextReady} ()
 \item 
-queType\_\-T \hyperlink{classport_ac1c1b53525c4c69eba7c28e59275e45f}{popNextReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+queType\_\-T \hyperlink{classport_a7645b2e6cc4f44937e8047fecd853c95}{popNextReadyNow} ()
 \item 
-void \hyperlink{classport_aec1749eb1d434806670ba00b669bad78}{delOldReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+void \hyperlink{classport_a9fe248323f061226103808bac3cb5118}{delOldReady} ()
 \item 
 queType\_\-T \hyperlink{classport_afe64047b4e7df87d4a031097ea159852}{getFront} ()
 \item 
@@ -37,47 +37,52 @@ queType\_\-T \hyperlink{classport_a53d30f96ac41c4f3a60174cd66b1656e}{getBack} ()
 \item 
 queType\_\-T \hyperlink{classport_aa102d5f7c3e925382f62a37d220888ff}{popBack} ()
 \item 
-\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} \hyperlink{classport_a7276424a4d3b305c198159f2ed6b7dab}{getBuffSize} ()
+\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH} \hyperlink{classport_a7276424a4d3b305c198159f2ed6b7dab}{getBuffSize} ()
 \item 
-\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_abf9be02812c2503eee69704a01b14145}{getBuffState} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+\hyperlink{global_2global_8h_a8bd4ea2582a6025c1cfe99bf9947489c}{BUFF\_\-STATE} \hyperlink{classport_a5ac9e7510e381b2c7fbd8e855648e58b}{getBuffState} ()
 \item 
-bool \hyperlink{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}{isReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+bool \hyperlink{classport_a28fc31d645ff4b03848e13ff5c912e94}{isReady} ()
 \item 
-bool \hyperlink{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}{isReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+bool \hyperlink{classport_aec7f88ae88183433edf77dd4523865e6}{isReadyNow} ()
 \item 
-bool \hyperlink{classport_a8930ed8cec58814709f4515a33d62141}{hasReady} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+bool \hyperlink{classport_a630281eec6c2a2b588a42216bc809208}{hasReady} ()
 \item 
-bool \hyperlink{classport_af03e53249eff9bb17c76531d3a72880f}{hasReadyNow} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} now)
+bool \hyperlink{classport_a6dc3713582d95197b5074d2d875e8f1d}{hasReadyNow} ()
 \item 
-void \hyperlink{classport_a58991733cd9bb95beb7303826b9b3d3f}{flushPort} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+void \hyperlink{classport_a8e8a09c748bf2e1b13e3f14c8629945f}{flushPort} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
 \item 
-void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+void \hyperlink{classport_a538ad968a8d02b2c673fb627094ef8bc}{searchNflushPort} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
+\item 
+void \hyperlink{classport_a1f3feb96d4c1b9a7935ced227dba2a79}{regStat} ()
 \end{DoxyCompactItemize}
 \subsubsection*{template$<$typename queType\_\-T$>$ class port$<$ queType\_\-T $>$}
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classport_aa397f17dedc41b12c65d9cfce47d5f5c}{
+\hypertarget{classport_abcad2f2fb15e1d6b426f455d4e2d053d}{
 \index{port@{port}!port@{port}}
 \index{port@{port}!port@{port}}
 \subsubsection[{port}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf port}$<$ queType\_\-T $>$::{\bf port} (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf CYCLE}}]{wire\_\-delay = {\ttfamily 1}, }
+\item[{{\bf LENGTH}}]{len, }
+\item[{{\bf CYCLE}}]{wire\_\-delay, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{port\_\-name = {\ttfamily \char`\"{}port$<$~queType\_\-T~$>$\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classport_aa397f17dedc41b12c65d9cfce47d5f5c}
+\label{classport_abcad2f2fb15e1d6b426f455d4e2d053d}
 
 \begin{DoxyCode}
-        : unit (port_name),
+        : unit (port_name, clk),
       _buff_len (len),
           _wire_delay (wire_delay),
       s_port_empty_cyc (g_stats.newScalarStat (port_name, "port_empty_cyc", "Numb
       er of cycles with port empty", 0, NO_PRINT_ZERO)),
-      s_port_full_cyc  (g_stats.newScalarStat (port_name, "port_full_cyc", "Numbe
-      r of cycles with port full", 0, NO_PRINT_ZERO))
+      s_port_full_cyc (g_stats.newScalarStat (port_name, "port_full_cyc", "Number
+       of cycles with port full", 0, NO_PRINT_ZERO)),
+      s_port_size_avg (g_stats.newRatioStat (clk->getStatObj (), port_name, "port
+      _size_avg", "Average port size/length", 0, NO_PRINT_ZERO))
 {
         Assert (_buff_len > 0 && _wire_delay > 0);
 }
@@ -98,68 +103,56 @@ void \hyperlink{classport_a966cfeb3b369ec22e8081275481abe32}{regStat} (\hyperlin
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classport_aec1749eb1d434806670ba00b669bad78}{
+\hypertarget{classport_a9fe248323f061226103808bac3cb5118}{
 \index{port@{port}!delOldReady@{delOldReady}}
 \index{delOldReady@{delOldReady}!port@{port}}
 \subsubsection[{delOldReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::delOldReady (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_aec1749eb1d434806670ba00b669bad78}
+\label{classport_a9fe248323f061226103808bac3cb5118}
 
 \begin{DoxyCode}
-                                            {
-    if (getBuffSize () > 0) return;
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () < now) {
-            _buff.erase(it);
-        }
+                                   {
+    CYCLE now = _clk->now ();
+//    if (getBuffSize () == 0) return;
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () < now) {
+            _buff.erase (it++);
+        } else { ++it; }
     }
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_a58991733cd9bb95beb7303826b9b3d3f}{
+\hypertarget{classport_a8e8a09c748bf2e1b13e3f14c8629945f}{
 \index{port@{port}!flushPort@{flushPort}}
 \index{flushPort@{flushPort}!port@{port}}
 \subsubsection[{flushPort}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::flushPort (
 \begin{DoxyParamCaption}
-\item[{{\bf INS\_\-ID}}]{elemSeqNum, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf INS\_\-ID}}]{elemSeqNum}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a58991733cd9bb95beb7303826b9b3d3f}
+\label{classport_a8e8a09c748bf2e1b13e3f14c8629945f}
 
 \begin{DoxyCode}
-                                                             {
-    if (getBuffSize() == 0) return;
-    queType_T elem = getBack();
+                                                  {
+    CYCLE now = _clk->now ();
+    if (getBuffSize () == 0) return;
+    queType_T elem = getBack ();
     while (elem->getInsID () >= elemSeqNum) {
         dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str (),
        
-                                                                "POP ins", elem->
-      getInsID (), 
-                                                                "FOR", elemSeqNum
-      , now);
-        popBack();
-        if (getBuffSize() == 0) break;
-        elem = getBack();
+                "POP ins", elem->getInsID (), "FOR", elemSeqNum, now);
+        popBack ();
+        if (getBuffSize () == 0) break;
+        elem = getBack ();
     }
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
 
 
 \hypertarget{classport_a53d30f96ac41c4f3a60174cd66b1656e}{
@@ -174,7 +167,7 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                     {
-    Assert(getBuffSize () > 0);
+    Assert (getBuffSize () > 0);
         return (_buff.back ())._dynIns;
 }
 \end{DoxyCode}
@@ -193,29 +186,29 @@ Here is the caller graph for this function:
         return (LENGTH) _buff.size ();
 }
 \end{DoxyCode}
-\hypertarget{classport_abf9be02812c2503eee69704a01b14145}{
+\hypertarget{classport_a5ac9e7510e381b2c7fbd8e855648e58b}{
 \index{port@{port}!getBuffState@{getBuffState}}
 \index{getBuffState@{getBuffState}!port@{port}}
 \subsubsection[{getBuffState}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::getBuffState (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_abf9be02812c2503eee69704a01b14145}
+\label{classport_a5ac9e7510e381b2c7fbd8e855648e58b}
 
 \begin{DoxyCode}
-                                                   {
-        if (getBuffSize () >= _buff_len) {
+                                          {
+    CYCLE now = _clk->now ();
+    Assert (getBuffSize () <= _buff_len);
+        if (getBuffSize () == _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
       ow);
         return FULL_BUFF;
-    }
-        else if (getBuffSize () == 0) {
+    } else if (getBuffSize () == 0) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
       now);
         return EMPTY_BUFF;
-    }
-        else {return AVAILABLE_BUFF;}
+    } else {return AVAILABLE_BUFF;}
 }
 \end{DoxyCode}
 
@@ -240,36 +233,31 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                      {
-    Assert(getBuffSize () > 0);
+    Assert (getBuffSize () > 0);
         return (_buff.front ())._dynIns;
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_a8930ed8cec58814709f4515a33d62141}{
+\hypertarget{classport_a630281eec6c2a2b588a42216bc809208}{
 \index{port@{port}!hasReady@{hasReady}}
 \index{hasReady@{hasReady}!port@{port}}
 \subsubsection[{hasReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::hasReady (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a8930ed8cec58814709f4515a33d62141}
+\label{classport_a630281eec6c2a2b588a42216bc809208}
 
 \begin{DoxyCode}
-                                         {
-    if (getBuffState (now) == EMPTY_BUFF) {
+                                {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
       now);
         return false;
     }
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () <= now)
-            return true;
+        if ( (*it)._delay.getStopTime () <= now) { return true; }
     }
     return false;
 }
@@ -279,26 +267,27 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classport_af03e53249eff9bb17c76531d3a72880f}{
+\hypertarget{classport_a6dc3713582d95197b5074d2d875e8f1d}{
 \index{port@{port}!hasReadyNow@{hasReadyNow}}
 \index{hasReadyNow@{hasReadyNow}!port@{port}}
 \subsubsection[{hasReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::hasReadyNow (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_af03e53249eff9bb17c76531d3a72880f}
+\label{classport_a6dc3713582d95197b5074d2d875e8f1d}
 
 \begin{DoxyCode}
-                                            {
-    if (getBuffState (now) == EMPTY_BUFF) {
+                                   {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
       now);
         return false;
     }
     typename list<BuffElement<queType_T> >::iterator it;
     for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () == now)
+        if ( (*it)._delay.getStopTime () == now)
             return true;
     }
     return false;
@@ -309,28 +298,26 @@ Here is the call graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}{
+\hypertarget{classport_a28fc31d645ff4b03848e13ff5c912e94}{
 \index{port@{port}!isReady@{isReady}}
 \index{isReady@{isReady}!port@{port}}
 \subsubsection[{isReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::isReady (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a57a6cc5a8388feaf7fd09bd9616f0ee7}
+\label{classport_a28fc31d645ff4b03848e13ff5c912e94}
 
 \begin{DoxyCode}
-                                        {
-    if (getBuffState (now) == EMPTY_BUFF) {
+                               {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
       now);
         return false;
     }
+    dbg.print (DBG_PORT, "%s: %s %d %d (cyc: %d)\n", _c_name.c_str (), "isReady -
+      ", _buff.front ()._delay.getStopTime (), getBuffState (), now);
         BuffElement<queType_T> frontBuff = _buff.front ();
         if (frontBuff._delay.getStopTime () <= now)
         return true;
@@ -342,24 +329,20 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}{
+\hypertarget{classport_aec7f88ae88183433edf77dd4523865e6}{
 \index{port@{port}!isReadyNow@{isReadyNow}}
 \index{isReadyNow@{isReadyNow}!port@{port}}
 \subsubsection[{isReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ bool {\bf port}$<$ queType\_\-T $>$::isReadyNow (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_ae59766c24fe4a05ba31cc6d2dc2eff42}
+\label{classport_aec7f88ae88183433edf77dd4523865e6}
 
 \begin{DoxyCode}
-                                           {
-    if (getBuffState (now) == EMPTY_BUFF) {
+                                  {
+    CYCLE now = _clk->now ();
+    if (getBuffState () == EMPTY_BUFF) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is EMPTY", 
       now);
         return false;
@@ -375,11 +358,6 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classport_aa102d5f7c3e925382f62a37d220888ff}{
 \index{port@{port}!popBack@{popBack}}
 \index{popBack@{popBack}!port@{port}}
@@ -392,33 +370,39 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                     {
-    Assert (getBuffSize () > 0 && "popFront () must not be used without isReady (
-      )");
-        queType_T dynIns = (_buff.back ())._dynIns;
-        _buff.pop_back ();
+    Assert (getBuffSize () > 0 && "popBack () must not be used without isReady ()
+      ");
+    queType_T dynIns = (_buff.back ())._dynIns;
+    _buff.pop_back ();
     return dynIns;
 }
 \end{DoxyCode}
-\hypertarget{classport_a95bf81afb2a6c03ac2272b3708322b74}{
+\hypertarget{classport_a4fc45954f3836ec5d9d1808bdd8acff3}{
 \index{port@{port}!popFront@{popFront}}
 \index{popFront@{popFront}!port@{port}}
 \subsubsection[{popFront}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popFront (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a95bf81afb2a6c03ac2272b3708322b74}
+\label{classport_a4fc45954f3836ec5d9d1808bdd8acff3}
 
 \begin{DoxyCode}
-                                              {
+                                     {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popFront () must not be used without isReady (
       )");
-        BuffElement<queType_T> frontBuff = _buff.front ();
-        if (frontBuff._delay.getStopTime () <= now)
-                return popFront ();
+    BuffElement<queType_T> frontBuff = _buff.front ();
+    if (frontBuff._delay.getStopTime () <= now) {
+        queType_T dynIns = (_buff.front ())._dynIns;
+        dbg.print (DBG_PORT, "%s: %s %llu (cyc: %d)\n", _c_name.c_str (), 
+                "POP ins", dynIns->getInsID (), now);
+        _buff.pop_front ();
+        return dynIns;
+    }
     Assert (true == false  && "popFront () must not be used without isReady ()");
       
-        return popFront (); //place holder
+    return popFront (); //place holder
 }
 \end{DoxyCode}
 
@@ -426,83 +410,75 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}{
+\hypertarget{classport_a4593f9dfb524f8d7958e03ab4a27cb4f}{
 \index{port@{port}!popNextReady@{popNextReady}}
 \index{popNextReady@{popNextReady}!port@{port}}
 \subsubsection[{popNextReady}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popNextReady (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_acf2f0e0dfd7a375c2c87780d4eaacc99}
+\label{classport_a4593f9dfb524f8d7958e03ab4a27cb4f}
 
 \begin{DoxyCode}
-                                                  {
+                                         {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasRe
       ady ()");
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () <= now) {
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () <= now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             return dynIns;
-        }
+        } else { ++it; }
     }
     Assert (true == false  && "popNextReady () must not be used without hasReady 
       ()");
         return popFront (); //place holder
 }
 \end{DoxyCode}
-\hypertarget{classport_ac1c1b53525c4c69eba7c28e59275e45f}{
+\hypertarget{classport_a7645b2e6cc4f44937e8047fecd853c95}{
 \index{port@{port}!popNextReadyNow@{popNextReadyNow}}
 \index{popNextReadyNow@{popNextReadyNow}!port@{port}}
 \subsubsection[{popNextReadyNow}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ queType\_\-T {\bf port}$<$ queType\_\-T $>$::popNextReadyNow (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_ac1c1b53525c4c69eba7c28e59275e45f}
+\label{classport_a7645b2e6cc4f44937e8047fecd853c95}
 
 \begin{DoxyCode}
-                                                     {
+                                            {
+    CYCLE now = _clk->now ();
     Assert (getBuffSize () > 0 && "popNextReady () must not be used without hasRe
       ady ()");
-    typename list<BuffElement<queType_T> >::iterator it;
-    for (it = _buff.begin (); it != _buff.end (); it++) {
-        if ((*it)._delay.getStopTime () == now) {
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        if ( (*it)._delay.getStopTime () == now) {
             queType_T dynIns = (*it)._dynIns;
-            _buff.erase(it);
+            _buff.erase (it++);
             return dynIns;
-        }
+        } else { ++it; }
     }
     Assert (true == false  && "popNextReady () must not be used without hasReady 
       ()");
         return popFront (); //place holder
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classport_a52ad1c5223f028930491b024f26467fa}{
+\hypertarget{classport_a4c80b61961d7df8f30f5dc42bacd25e9}{
 \index{port@{port}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!port@{port}}
 \subsubsection[{pushBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T$>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::pushBack (
 \begin{DoxyParamCaption}
-\item[{queType\_\-T}]{ins, }
-\item[{{\bf CYCLE}}]{now}
+\item[{queType\_\-T}]{ins}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a52ad1c5223f028930491b024f26467fa}
+\label{classport_a4c80b61961d7df8f30f5dc42bacd25e9}
 
 \begin{DoxyCode}
-                                                              {
+                                                   {
+    CYCLE now = _clk->now ();
         if (getBuffSize () >= _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
       ow);
@@ -523,20 +499,20 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classport_a7c709a92ed8525cf8a310b294e606267}{
+\hypertarget{classport_a8660727a8dbc674388195c7abd543045}{
 \index{port@{port}!pushBack@{pushBack}}
 \index{pushBack@{pushBack}!port@{port}}
 \subsubsection[{pushBack}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T$>$ {\bf BUFF\_\-STATE} {\bf port}$<$ queType\_\-T $>$::pushBack (
 \begin{DoxyParamCaption}
 \item[{queType\_\-T}]{ins, }
-\item[{{\bf CYCLE}}]{now, }
 \item[{{\bf CYCLE}}]{lat}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a7c709a92ed8525cf8a310b294e606267}
+\label{classport_a8660727a8dbc674388195c7abd543045}
 
 \begin{DoxyCode}
-                                                                         {
+                                                              {
+    CYCLE now = _clk->now ();
         if (getBuffSize () >= _buff_len) {
         dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _c_name.c_str (), "is FULL", n
       ow);
@@ -552,23 +528,24 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classport_a966cfeb3b369ec22e8081275481abe32}{
+\hypertarget{classport_a1f3feb96d4c1b9a7935ced227dba2a79}{
 \index{port@{port}!regStat@{regStat}}
 \index{regStat@{regStat}!port@{port}}
 \subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::regStat (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classport_a966cfeb3b369ec22e8081275481abe32}
+\label{classport_a1f3feb96d4c1b9a7935ced227dba2a79}
 
 \begin{DoxyCode}
-                                        {
-    if (getBuffState (now) == EMPTY_BUFF) {
+                               {
+    if (getBuffState () == EMPTY_BUFF) {
         s_port_empty_cyc++;
-    } else if (getBuffState (now) == FULL_BUFF) {
+    } else if (getBuffState () == FULL_BUFF) {
         s_port_full_cyc++;
     }
+    s_port_size_avg += getBuffSize ();
 }
 \end{DoxyCode}
 
@@ -576,9 +553,39 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
+\hypertarget{classport_a538ad968a8d02b2c673fb627094ef8bc}{
+\index{port@{port}!searchNflushPort@{searchNflushPort}}
+\index{searchNflushPort@{searchNflushPort}!port@{port}}
+\subsubsection[{searchNflushPort}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename queType\_\-T $>$ void {\bf port}$<$ queType\_\-T $>$::searchNflushPort (
+\begin{DoxyParamCaption}
+\item[{{\bf INS\_\-ID}}]{elemSeqNum}
+\end{DoxyParamCaption}
+)}}
+\label{classport_a538ad968a8d02b2c673fb627094ef8bc}
+
+\begin{DoxyCode}
+                                                         {
+    CYCLE now = _clk->now ();
+    typename list<BuffElement<queType_T> >::iterator it = _buff.begin ();
+    while (it != _buff.end ()) {
+        queType_T dynIns = (*it)._dynIns;
+        if (dynIns->getInsID () >= elemSeqNum) {
+            dbg.print (DBG_PORT, "%s: %s %llu %s %llu (cyc: %d)\n", _c_name.c_str
+       (), 
+                    "POP ins", dynIns->getInsID (), "FOR", elemSeqNum, now);
+            _buff.erase (it++);
+        } else { ++it; }
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2port_8h}{port.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2port_8cpp}{port.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{port_8h}{port.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{port_8cpp}{port.cpp}\end{DoxyCompactItemize}

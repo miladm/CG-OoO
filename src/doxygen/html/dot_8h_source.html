@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>dot.h Source File</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/binaryTranslator/dot.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -14,10 +14,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 --></script>
 <div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhArS&#160;<span id="projectnumber">1</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -40,44 +53,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">dot.h</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/dot.h</div>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00003"></a>00003 <span class="preprocessor">#include &quot;instruction.h&quot;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;list.h&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 
-<a name="l00007"></a><a class="code" href="classdot.html">00007</a> <span class="keyword">class </span><a class="code" href="classdot.html">dot</a> {
-<a name="l00008"></a>00008         <span class="keyword">public</span>:
-<a name="l00009"></a>00009                 <a class="code" href="classdot.html">dot</a>(<span class="keywordtype">int</span> fileCode);
-<a name="l00010"></a>00010                 ~<a class="code" href="classdot.html">dot</a>();
-<a name="l00011"></a>00011                 <span class="keywordtype">void</span> runDot(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>* list, <span class="keywordtype">int</span> subGraphID);
-<a name="l00012"></a>00012                 <span class="keywordtype">void</span> init();
-<a name="l00013"></a>00013                 <span class="keywordtype">void</span> defn();
-<a name="l00014"></a>00014                 <span class="keywordtype">void</span> createSubGraph(<span class="keywordtype">int</span> subGraphID);
-<a name="l00015"></a>00015                 <span class="keywordtype">void</span> createGraph();
-<a name="l00016"></a>00016                 <span class="keywordtype">void</span> finish();
-<a name="l00017"></a>00017                 <span class="keywordtype">void</span> closeBlock();
-<a name="l00018"></a>00018                 
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020         <span class="keyword">private</span>:
-<a name="l00021"></a>00021                 <span class="keywordtype">char</span>* _fillColor;
-<a name="l00022"></a>00022                 <span class="keywordtype">char</span>* _style;
-<a name="l00023"></a>00023                 <span class="keywordtype">char</span>* _nodeName;
-<a name="l00024"></a>00024                 <span class="keywordtype">char</span>* _nodeCode;
-<a name="l00025"></a>00025                 <span class="keywordtype">char</span>* _fontColor;
-<a name="l00026"></a>00026                 <span class="keywordtype">char</span>* _label;
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028                 <span class="keywordtype">string</span> fileName;
-<a name="l00029"></a>00029                 FILE* _outFile;
-<a name="l00030"></a>00030                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _list;
-<a name="l00031"></a>00031 };
+<a href="dot_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a name="l00002"></a>00002 <span class="comment"> *  dot.h</span>
+<a name="l00003"></a>00003 <span class="comment"> ******************************************************************************/</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#ifndef _DOT_H</span>
+<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define _DOT_H</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="instruction_8h.html">instruction.h</a>&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="basicblock_8h.html">basicblock.h</a>&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;list.h&quot;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="classdot.html">00016</a> <span class="keyword">class </span><a class="code" href="classdot.html">dot</a> {
+<a name="l00017"></a>00017         <span class="keyword">public</span>:
+<a name="l00018"></a>00018                 <a class="code" href="classdot.html#af11dd579c7b133d259ac9fe60e7ae629">dot</a> (<span class="keywordtype">int</span> mode, <span class="keywordtype">string</span> *program_name);
+<a name="l00019"></a>00019                 <a class="code" href="classdot.html#a7c31a26ba233474fd5c7857bd3d8158f">~dot</a> ();
+<a name="l00020"></a>00020                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a613147e95e44f245a63a5b08418c95f9">runDot</a> (<a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* list);
+<a name="l00021"></a>00021                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a5841f9acea9e636b9630e8a2ebe25382">init</a> ();
+<a name="l00022"></a>00022                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#af56f68484dcec4b943a6a77d261080a6">defn</a> (FILE*);
+<a name="l00023"></a>00023                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a04dd7808d587869df22488a7e7a1835a">createSubGraph</a> (<span class="keywordtype">int</span>, FILE*);
+<a name="l00024"></a>00024                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a34bd8df7c73a49901267dc3ca9209385">createCFG</a> (FILE*);
+<a name="l00025"></a>00025                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#aa1638f8d762e0f431cef55da49e92ede">createDT</a> (FILE*);
+<a name="l00026"></a>00026                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#ad7659526d6446a2065612898c6913a41">finish</a> (FILE*);
+<a name="l00027"></a>00027                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a1ecb5d30b724c5f6bb49db212f3152de">closeBlock</a> (FILE*);
+<a name="l00028"></a>00028                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#a27540f28ccdbe6e62d32e727561fb185">setupBox</a> (<span class="keywordtype">string</span>, FILE*);
+<a name="l00029"></a>00029                 <span class="keywordtype">void</span> <a class="code" href="classdot.html#ac3912d5b73db012838fb8b37c1ed00bc">finishBox</a> (FILE*);
+<a name="l00030"></a>00030         <span class="keywordtype">void</span> <a class="code" href="classdot.html#af20dc816d263a9b3496d8241c339e235">getInteriorBB</a> ();
+<a name="l00031"></a>00031         <span class="keywordtype">void</span> <a class="code" href="classdot.html#acfd091941aef16273c4ebe92ef536742">makeLink</a> (<a class="code" href="classbasicblock.html">basicblock</a>*, FILE*);
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033         <span class="keyword">private</span>:
+<a name="l00034"></a>00034                 <span class="keywordtype">char</span>* _fillColor;
+<a name="l00035"></a>00035                 <span class="keywordtype">char</span>* _style;
+<a name="l00036"></a>00036                 <span class="keywordtype">char</span>* _nodeName;
+<a name="l00037"></a>00037                 <span class="keywordtype">char</span>* _nodeCode;
+<a name="l00038"></a>00038                 <span class="keywordtype">char</span>* _fontColor;
+<a name="l00039"></a>00039                 <span class="keywordtype">char</span>* _label;
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041                 <span class="keywordtype">string</span> fileName;
+<a name="l00042"></a>00042                 FILE* _outFile;
+<a name="l00043"></a>00043                 FILE* _outDomTreeFile;
+<a name="l00044"></a>00044                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _insList;
+<a name="l00045"></a>00045                 <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* _bBlist;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>* _interiorBB;
+<a name="l00048"></a>00048 };
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -85,7 +118,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,7 +127,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 30 2014 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

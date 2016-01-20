@@ -87,20 +87,12 @@ Collaboration diagram for o3_memory:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#aa34c08bd63c8de093d6df7e9022045fe">o3_memory</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;execution_to_memory_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;memory_to_scheduler_port, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *<a class="el" href="backend_2parser_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> memory_width, string stage_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a24a824f5299e113cbebf8765efa2ab6d">o3_memory</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;execution_to_memory_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;memory_to_scheduler_port, <a class="el" href="classCAMtable.html">CAMtable</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; *iROB, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> memory_width, <a class="el" href="classo3__memManager.html">o3_memManager</a> *LSQ_MGR, <a class="el" href="classo3__rfManager.html">o3_rfManager</a> *RF_MGR, <a class="el" href="classsysClock.html">sysClock</a> *<a class="el" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>, string stage_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a084e09aa6674090d325f82ce9a184fa3">~o3_memory</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a14fb30065edbb1758d0e4c9ac3f92433">doMEMORY</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#ad44b31e95afd6e63f85401be8e58318d">memoryImpl</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#acbf1c9b78534fad182e6d2ac3453b98b">completeIns</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a755d83e89f2fc0d95db93d688c40b9a4">forward</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, <a class="el" href="classsysClock.html">sysClock</a> &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#ab2f9b9b56a73d1f14564f68680fc9fc4">squash</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a806f0676eb61e344a0feb87fd823779a">regStat</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a91a7367c72346b355709afddef9296bf">manageSTbuffer</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a826fdfa882dd202970984027e32e2c33">manageMEMbuffer</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#adcda5a9a18c362c89d469abd355ae1a1">manageMSHR</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__memory.html#a7d5b76cef5e2ba2ee6cefc71fb59ee87">doMEMORY</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aa34c08bd63c8de093d6df7e9022045fe"></a><!-- doxytag: member="o3_memory::o3_memory" ref="aa34c08bd63c8de093d6df7e9022045fe" args="(port&lt; dynInstruction * &gt; &amp;execution_to_memory_port, port&lt; dynInstruction * &gt; &amp;memory_to_scheduler_port, CAMtable&lt; dynInstruction * &gt; *iROB, WIDTH memory_width, string stage_name)" -->
+<a class="anchor" id="a24a824f5299e113cbebf8765efa2ab6d"></a><!-- doxytag: member="o3_memory::o3_memory" ref="a24a824f5299e113cbebf8765efa2ab6d" args="(port&lt; dynInstruction * &gt; &amp;execution_to_memory_port, port&lt; dynInstruction * &gt; &amp;memory_to_scheduler_port, CAMtable&lt; dynInstruction * &gt; *iROB, WIDTH memory_width, o3_memManager *LSQ_MGR, o3_rfManager *RF_MGR, sysClock *clk, string stage_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -131,6 +123,24 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classo3__memManager.html">o3_memManager</a> *&#160;</td>
+          <td class="paramname"><em>LSQ_MGR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classo3__rfManager.html">o3_rfManager</a> *&#160;</td>
+          <td class="paramname"><em>RF_MGR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>stage_name</em>&#160;</td>
         </tr>
@@ -142,20 +152,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a> (memory_width, stage_name),
-      _mem_buff(20, 1, <span class="stringliteral">&quot;mem_buff&quot;</span>),
-      _mshr(20, 4, 4, <span class="stringliteral">&quot;MSHR&quot;</span>),
-      _st_buff(20, 4, 4, <span class="stringliteral">&quot;stBuff&quot;</span>),
-      s_cache_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;cache_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of cache misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-      s_cache_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;cache_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of cache hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-      s_ld_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;ld_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of load misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-      s_ld_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;ld_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of load hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-      s_st_miss_cnt (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;st_miss_cnt&quot;</span>, <span class="stringliteral">&quot;Number of store misses&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>)),
-      s_st_hit_cnt  (<a class="code" href="statistic_8cpp.html#a208940ab2e55f0d86b59dd10a38f5261">g_stats</a>.<a class="code" href="classstatistic.html#afc9d7ba7128d7c3b7a70105fb829ab4f">newScalarStat</a> (stage_name, <span class="stringliteral">&quot;st_hit_cnt&quot;</span>, <span class="stringliteral">&quot;Number of store hits&quot;</span>, 0, <a class="code" href="statistic_8h.html#a007ca0df4ad593f8771581e5b51584f4a569ff1dfad1bd6f4d078a58e0a1e4ab4">PRINT_ZERO</a>))
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a> (memory_width, stage_name, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;o3_pipe&quot;</span>][<span class="stringliteral">&quot;memory&quot;</span>], clk),
+      _mshr(clk, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;table&quot;</span>][<span class="stringliteral">&quot;mshr&quot;</span>], <span class="stringliteral">&quot;MSHR&quot;</span>)
 {
     _execution_to_memory_port = &amp;execution_to_memory_port;
     _memory_to_scheduler_port = &amp;memory_to_scheduler_port;
-    _iROB = <a class="code" href="bkEnd_8cpp.html#ad73ae25f81e6e99482f3fbd5ba9664ce">iROB</a>;
+    _iROB = iROB;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
 }
 </pre></div>
 </div>
@@ -178,270 +182,42 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="acbf1c9b78534fad182e6d2ac3453b98b"></a><!-- doxytag: member="o3_memory::completeIns" ref="acbf1c9b78534fad182e6d2ac3453b98b" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::completeIns </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                          {
-
-    <span class="comment">/* COMPLETE LD INS */</span>
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-        <span class="comment">/* CHECKS */</span>
-        <span class="keywordflow">if</span> (<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a71127b3f6545996a55cfa87735cb433f">hasFreeRdPort</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
-        pair&lt;bool, dynInstruction*&gt; p = <a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#abf1656aba29cd17f3c223f0c2ee9ba16">hasFinishedIns</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-        <span class="keywordflow">if</span> (!p.first) <span class="keywordflow">break</span>;
-        <a class="code" href="classdynInstruction.html">dynInstruction</a>* finished_ld_ins = p.second;
-        <span class="comment">//if (_mem_buff.getBuffState (clk.now ()) == EMPTY_BUFF) break;</span>
-        <span class="comment">//if (!_mem_buff.isReady (clk.now ())) break;</span>
-        <span class="keywordflow">if</span> (!<a class="code" href="o3_2rfManager_8cpp.html#a4854625c830da92eb9831cbc4dbf4e3f">g_GRF_MGR</a>.<a class="code" href="classo3__rfManager.html#a95bfea851bf8107f208e550839749063">hasFreeWrPort</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO too conservatice - only for load ins (both ino and o3)</span>
-
-        <span class="comment">/* COMPLETE INS */</span>
-        <span class="comment">//dynInstruction* finished_ld_ins = _mem_buff.popFront (clk.now ());</span>
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (finished_ld_ins != NULL);
-        finished_ld_ins-&gt;<a class="code" href="classdynInstruction.html#a0cb15d906e84b2efc8986b74edaf5adf">setPipeStage</a>(<a class="code" href="global_2global_8h.html#a015eb90e0de9f16e87bd149d4b9ce959a00a900c9df90c74f75004b3dc04f173d">COMPLETE</a>);
-        <a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#aa2bb5f372b197474b76c8f6ae3531698">completeLd</a> (finished_ld_ins);
-        <a class="code" href="o3_2rfManager_8cpp.html#a4854625c830da92eb9831cbc4dbf4e3f">g_GRF_MGR</a>.<a class="code" href="classo3__rfManager.html#a06b8854ab37feb6b44166a8565dc447a">completeRegs</a> (finished_ld_ins);
-        <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Write Complete mem LD ins&quot;</span>, finished_ld_ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    }
-
-<span class="comment">//  /* COMPLETE ST INS */</span>
-<span class="comment">//  /* LSQ MIS-SPECULATION DETECTION */</span>
-<span class="comment">//  for (WIDTH i = 0; i &lt; _stage_width; i++) {</span>
-<span class="comment">//      /* CHECKS */</span>
-<span class="comment">//      if (g_LSQ_MGR.getTableState (ST_QU) == EMPTY_BUFF) break;</span>
-<span class="comment">//      if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;</span>
-<span class="comment">//      pair&lt;bool, dynInstruction*&gt; p = g_LSQ_MGR.hasFinishedIns (ST_QU, clk.now ());</span>
-<span class="comment">//      if (!p.first) break;</span>
-<span class="comment">//      delete p.second;</span>
-<span class="comment">//      dynInstruction* complete_st_ins = p.second;</span>
-
-<span class="comment">//      /* COMPLETE INS */</span>
-<span class="comment">//      //dynInstruction* complete_st_ins = _mem_buff.popFront (clk.now ());</span>
-<span class="comment">//      //TODO ST reaches here with one cycle delay!</span>
-<span class="comment">//      complete_st_ins-&gt;setPipeStage(COMPLETE); //TODO should it be here? if yes, then SQ must also take note of complete state of its ST entry</span>
-<span class="comment">//      dynInstruction* violating_ld_ins = NULL;</span>
-<span class="comment">//      if (g_LSQ_MGR.isLQviolation (complete_st_ins, violating_ld_ins)) {</span>
-<span class="comment">//          cout &lt;&lt; &quot;SQUASH LSQ\n&quot;;</span>
-<span class="comment">//          //g_LSQ_MGR.squash (violating_ld_ins);</span>
-<span class="comment">//          //TODO flush the pipeline</span>
-<span class="comment">//      }</span>
-<span class="comment">//      dbg.print (DBG_MEMORY, &quot;%s: %s %llu (cyc: %d)\n&quot;, _stage_name.c_str (), &quot;Write Complete mem LD ins&quot;, complete_st_ins-&gt;getInsID (), clk.now ());</span>
-<span class="comment">//  }</span>
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph.png" border="0" usemap="#classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph" alt=""/></div>
-<map name="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph" id="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph.png" border="0" usemap="#classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph" alt=""/></div>
-<map name="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph" id="classo3__memory_acbf1c9b78534fad182e6d2ac3453b98b_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a14fb30065edbb1758d0e4c9ac3f92433"></a><!-- doxytag: member="o3_memory::doMEMORY" ref="a14fb30065edbb1758d0e4c9ac3f92433" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a7d5b76cef5e2ba2ee6cefc71fb59ee87"></a><!-- doxytag: member="o3_memory::doMEMORY" ref="a7d5b76cef5e2ba2ee6cefc71fb59ee87" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void o3_memory::doMEMORY </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                       {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;** %s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <span class="comment">/* STAT */</span>
-    <a class="code" href="classo3__memory.html#a806f0676eb61e344a0feb87fd823779a">regStat</a> (clk);
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
-
-    <span class="comment">/* WRITEBACK RESULT */</span>
-    <a class="code" href="classo3__memory.html#acbf1c9b78534fad182e6d2ac3453b98b">completeIns</a> (clk);
-
-    <span class="comment">/* SQUASH HANDLING */</span>
-    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>) { <a class="code" href="classo3__memory.html#ab2f9b9b56a73d1f14564f68680fc9fc4">squash</a> (clk); }
-
-    pipe_stall = <a class="code" href="classo3__memory.html#ad44b31e95afd6e63f85401be8e58318d">memoryImpl</a> (clk);
-
-    <span class="comment">/* STAT */</span>
-    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph.png" border="0" usemap="#classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph" alt=""/></div>
-<map name="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph" id="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph.png" border="0" usemap="#classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph" alt=""/></div>
-<map name="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph" id="classo3__memory_a14fb30065edbb1758d0e4c9ac3f92433_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a755d83e89f2fc0d95db93d688c40b9a4"></a><!-- doxytag: member="o3_memory::forward" ref="a755d83e89f2fc0d95db93d688c40b9a4" args="(dynInstruction *, CYCLE, sysClock &amp;)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::forward </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classdynInstruction.html">dynInstruction</a> *&#160;</td>
-          <td class="paramname"><em>ins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>&#160;</td>
-          <td class="paramname"><em>mem_latency</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                              {
-<span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (ins-&gt;<a class="code" href="classdynInstruction.html#a3a7025de98c539d8eaa06b40ac2e8cc8">getInsType</a> () == <a class="code" href="binaryTranslator_2global_8h.html#a7aead736a07eaf25623ad7bfa1f0ee2da5c97a00bfd8be44565f64bcad8c179e2">MEM</a> &amp;&amp; ins-&gt;<a class="code" href="classdynInstruction.html#a9f8a63685d0b28009957e60b7596b502">getMemType</a>() == <a class="code" href="global_2global_8h.html#a40bc49627faaf5adeed28388c6ffae9ca972dbcdf74cff71e20bdcfb53be9c391">LOAD</a>);
-<span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>    <span class="keywordflow">if</span> (_memory_to_scheduler_port-&gt;<a class="code" href="classport.html#abf9be02812c2503eee69704a01b14145">getBuffState</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ()) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a>) <span class="keywordflow">return</span>;
-    <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> cdb_ready_latency = mem_latency - 1;
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (cdb_ready_latency &gt;= 0);
-    _memory_to_scheduler_port-&gt;<a class="code" href="classport.html#a52ad1c5223f028930491b024f26467fa">pushBack</a> (ins, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> (), cdb_ready_latency);
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;%s: %s %llu (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Forward wr ops of ins&quot;</span>, ins-&gt;<a class="code" href="classdynInstruction.html#ab38b8181f522daae77cb46d701fb5302">getInsID</a> (), clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph.png" border="0" usemap="#classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph" alt=""/></div>
-<map name="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph" id="classo3__memory_a755d83e89f2fc0d95db93d688c40b9a4_cgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a826fdfa882dd202970984027e32e2c33"></a><!-- doxytag: member="o3_memory::manageMEMbuffer" ref="a826fdfa882dd202970984027e32e2c33" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::manageMEMbuffer </td>
-          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<div class="fragment"><pre class="fragment">                          {
+    <span class="comment">/*-- STAT + DEBUG --*/</span>
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea55c0e74ea078a59af0f2143710c50073">DBG_MEMORY</a>, <span class="stringliteral">&quot;** %s: (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <a class="code" href="classstage.html#a2a24f2b2bce75ee75d7d03962eb0cd23">_clk</a>-&gt;<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+    regStat ();
+    <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
 
-</div>
-</div>
-<a class="anchor" id="adcda5a9a18c362c89d469abd355ae1a1"></a><!-- doxytag: member="o3_memory::manageMSHR" ref="adcda5a9a18c362c89d469abd355ae1a1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::manageMSHR </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                            {
-    <span class="comment">/* TODO */</span>
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a91a7367c72346b355709afddef9296bf"></a><!-- doxytag: member="o3_memory::manageSTbuffer" ref="a91a7367c72346b355709afddef9296bf" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::manageSTbuffer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                             {
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-        <span class="comment">/* CHECKS */</span>
-        <span class="keywordflow">if</span> (<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a71127b3f6545996a55cfa87735cb433f">hasFreeRdPort</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a408c667a491a930d66fd1a0f7e8e9ec6">hasCommitSt</a> ()) <span class="keywordflow">break</span>;
-        <span class="comment">//if (_st_buff.getTableState () == EMPTY_BUFF || !_st_buff.hasFreeRdPort (clk.now ())) break;</span>
-        <span class="comment">//if (_dcache.getNumAvialablePorts () == 0) break; //TODO put this back soon</span>
+    <span class="comment">/*-- WRITEBACK RESULT --*/</span>
+    completeIns ();
 
-        <span class="comment">/* MEM ACCESS FOR STORE */</span>
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a9e44a6173a6b099fa6e7644960aac5cf">issueToMem</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO of not successful, don&#39;t waste port BW and break</span>
-    }
+    <span class="comment">/*-- SQUASH HANDLING --*/</span>
+    <span class="keywordflow">if</span> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>) { squash (); }
 
-    <span class="comment">//TODO will this loop ever get a chance to not break?</span>
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-        <span class="comment">/* CHECKS */</span>
-        <span class="keywordflow">if</span> (<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24acb68ed32bf10b49563cb0abc1ee5966d">ST_QU</a>) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="comment">//if (!g_LSQ_MGR.hasFreeRdPort (ST_QU, clk.now ())) break;</span>
+    pipe_stall = memoryImpl ();
 
-        <span class="comment">/* DEALLOCATE SQ ENTRY */</span>
-        <a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#ac7d368eb5062860954125ce0fbd3c3b9">delAfinishedSt</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    }
+    <span class="comment">/*-- STAT --*/</span>
+    <span class="keywordflow">if</span> (pipe_stall == <a class="code" href="stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>) <a class="code" href="classstage.html#a257d798bacbed096d4e9879d4d47c207">s_stall_cycles</a>++;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph.png" border="0" usemap="#classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph" alt=""/></div>
-<map name="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph" id="classo3__memory_a91a7367c72346b355709afddef9296bf_cgraph">
+<div class="center"><img src="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_cgraph.png" border="0" usemap="#classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_cgraph" alt=""/></div>
+<map name="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_cgraph" id="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_cgraph">
 </map>
 </div>
 </p>
@@ -449,157 +225,8 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph.png" border="0" usemap="#classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph" alt=""/></div>
-<map name="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph" id="classo3__memory_a91a7367c72346b355709afddef9296bf_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ad44b31e95afd6e63f85401be8e58318d"></a><!-- doxytag: member="o3_memory::memoryImpl" ref="ad44b31e95afd6e63f85401be8e58318d" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> o3_memory::memoryImpl </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                  {
-    <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1">PIPE_ACTIVITY</a> pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1ababd97dbd28a43185ac1755f45556c61">PIPE_STALL</a>;
-
-    <span class="comment">/* ACCESS MEMORY HIERARCHY */</span>
-    <span class="keywordflow">for</span> (<a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> i = 0; i &lt; <a class="code" href="classstage.html#a758da5ef14d0eca96290d4feaad91302">_stage_width</a>; i++) {
-        <span class="comment">/* CHECKS */</span>
-        <span class="comment">//if (_execution_to_memory_port-&gt;getBuffState (clk.now ()) == EMPTY_BUFF) break;</span>
-        <span class="comment">//if (!_execution_to_memory_port-&gt;isReady (clk.now ())) break;</span>
-        <span class="keywordflow">if</span> (<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a19302a13552a70cda08814dcfc0daa30">getTableState</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>) == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cabec9c296867a3eb44a5a7057816eea0a">EMPTY_BUFF</a>) <span class="keywordflow">break</span>;
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a71127b3f6545996a55cfa87735cb433f">hasFreeRdPort</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO it is wrong taht despite the results of future if statements, this state machine workd - fix it</span>
-        <span class="comment">//if (_dcache.getNumAvialablePorts () == 0) break; (TODO)</span>
-        <span class="comment">//if (_mem_buff.getBuffState (clk.now ()) == FULL_BUFF) break;</span>
-        <span class="comment">//dynInstruction* mem_ins = _execution_to_memory_port-&gt;getFront ();</span>
-        <span class="comment">//if (mem_ins-&gt;getMemType () == STORE &amp;&amp; </span>
-        <span class="comment">//   (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH)) break;</span>
-        <span class="comment">//if (mem_ins-&gt;getMemType () == STORE &amp;&amp; </span>
-        <span class="comment">//   (_st_buff.getTableState () == FULL_BUFF || !_st_buff.hasFreeWrPort (clk.now ()))) break;</span>
-        <span class="keywordflow">if</span> (_mshr.<a class="code" href="classtable.html#abab8f70b8b32bb7342f5107edb328d18">getTableState</a> () == <a class="code" href="global_2global_8h.html#a8bd4ea2582a6025c1cfe99bf9947489cafeae99a92cd9658e9a1a4510c6447aa7">FULL_BUFF</a> || !_mshr.hasFreeWrPort (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>; <span class="comment">//TODO only on miss? here or in g_LSQ_MGR?</span>
-
-        <span class="comment">/* MEM ACCESS */</span>
-        <span class="keywordflow">if</span> (!<a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#a9e44a6173a6b099fa6e7644960aac5cf">issueToMem</a> (<a class="code" href="o3_2lsq_8h.html#a3bb5a7f1114a20672e012bf0dfe5fb24a834b6446467081dfa392a67fa33baed4">LD_QU</a>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ())) <span class="keywordflow">break</span>;
-        <span class="comment">//dbg.print (DBG_MEMORY, &quot;%s: %s %llu %s %u (cyc: %d)\n&quot;, _stage_name.c_str (), &quot;Add to mem_buff ins&quot;, mem_ins-&gt;getInsID (), &quot;with lat&quot;, axes_lat, clk.now ());</span>
-
-        <span class="comment">/* STAT */</span>
-        <a class="code" href="classstage.html#a41c52c3b31e0cd1729c3665bbacb4f5d">s_ins_cnt</a>++;
-        pipe_stall = <a class="code" href="unit_2stage_8h.html#ab00e4188e8b8974fecb1dfd12764cbb1a4c15bcb5a9038a4dcbb63b62fa88a48b">PIPE_BUSY</a>;
-    }
-
-    <a class="code" href="classo3__memory.html#a91a7367c72346b355709afddef9296bf">manageSTbuffer</a> (clk);
-
-    <span class="keywordflow">return</span> pipe_stall;
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph.png" border="0" usemap="#classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph" alt=""/></div>
-<map name="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph" id="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph.png" border="0" usemap="#classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph" alt=""/></div>
-<map name="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph" id="classo3__memory_ad44b31e95afd6e63f85401be8e58318d_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a806f0676eb61e344a0feb87fd823779a"></a><!-- doxytag: member="o3_memory::regStat" ref="a806f0676eb61e344a0feb87fd823779a" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::regStat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                      {
-    _execution_to_memory_port-&gt;<a class="code" href="classport.html#a966cfeb3b369ec22e8081275481abe32">regStat</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph.png" border="0" usemap="#classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph" alt=""/></div>
-<map name="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph" id="classo3__memory_a806f0676eb61e344a0feb87fd823779a_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph.png" border="0" usemap="#classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph" alt=""/></div>
-<map name="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph" id="classo3__memory_a806f0676eb61e344a0feb87fd823779a_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ab2f9b9b56a73d1f14564f68680fc9fc4"></a><!-- doxytag: member="o3_memory::squash" ref="ab2f9b9b56a73d1f14564f68680fc9fc4" args="(sysClock &amp;clk)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void o3_memory::squash </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                     {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> (<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5ea10182b8b2c6536a067d6600a73931d55">DBG_SQUASH</a>, <span class="stringliteral">&quot;%s: %s (cyc: %d)\n&quot;</span>, <a class="code" href="classstage.html#ad8500743b9a08a7d3b7a16e2c9ee7bca">_stage_name</a>.c_str (), <span class="stringliteral">&quot;Memory Ports Flush&quot;</span>, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a16962c0660efbbd6683962d295e85607">g_pipe_state</a> == <a class="code" href="global_2global_8h.html#a06d96fbb727831f9371a39d5486ed5e0af88ec60259d68745fb25611f4ee12f0b">PIPE_FLUSH</a>);
-    <a class="code" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> squashSeqNum = <a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>.<a class="code" href="structg__variable.html#a366fb213b96fa81e166dbe60a16c3e4f">getSquashSN</a> ();
-    _memory_to_scheduler_port-&gt;<a class="code" href="classport.html#a58991733cd9bb95beb7303826b9b3d3f">flushPort</a> (squashSeqNum, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    _mem_buff.<a class="code" href="classport.html#a58991733cd9bb95beb7303826b9b3d3f">flushPort</a> (squashSeqNum, clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
-    <a class="code" href="memManager_8cpp.html#a4b21284bf04b02121319f2329e9962e0">g_LSQ_MGR</a>.<a class="code" href="classo3__memManager.html#afdb4d5b4146efa960976f66c3ccd358e">squash</a> (squashSeqNum);
-    <span class="comment">//_st_buff.flushTable ();</span>
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph.png" border="0" usemap="#classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph" alt=""/></div>
-<map name="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph" id="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph.png" border="0" usemap="#classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph" alt=""/></div>
-<map name="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph" id="classo3__memory_ab2f9b9b56a73d1f14564f68680fc9fc4_icgraph">
+<div class="center"><img src="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_icgraph.png" border="0" usemap="#classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_icgraph" alt=""/></div>
+<map name="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_icgraph" id="classo3__memory_a7d5b76cef5e2ba2ee6cefc71fb59ee87_icgraph">
 </map>
 </div>
 </p>
@@ -616,7 +243,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -625,7 +252,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -65,7 +65,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/milad/esc_project/svn/PARS/src/backend/ino/inoBkEnd.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;inoBkEnd.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="inoBkEnd_8h_source.html">inoBkEnd.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for inoBkEnd.cpp:</div>
 <div class="dyncontent">
@@ -76,69 +76,21 @@ Include dependency graph for inoBkEnd.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#a7f7897adf2514facd31db95c4b90314d">inoBkEndRun</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#a008e3b2924f46240427e1efb7f79dfa9">inoBkEnd_init</a> (int argc, char const *argv[])</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#adbd74050d010a5640bb9452887281ebc">inoBkEndRun</a> (<a class="el" href="global_2global_8h.html#afd483fa40f0fa2b1ac067845b91f0c6e">FRONTEND_STATUS</a> frontend_status)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#a8881313a01355484010fedbf942197ac">inoBkEnd_init</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#a829925fbee4765360b2c6e01d3cbbd33">inoBkEnd_fini</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsysCore.html">sysCore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inoBkEnd_8cpp.html#afdbd2236dd55d4e4fdb2c573fe52392f">g_ino_clk</a></td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a008e3b2924f46240427e1efb7f79dfa9"></a><!-- doxytag: member="inoBkEnd.cpp::inoBkEnd_init" ref="a008e3b2924f46240427e1efb7f79dfa9" args="(int argc, char const *argv[])" -->
+<a class="anchor" id="a829925fbee4765360b2c6e01d3cbbd33"></a><!-- doxytag: member="inoBkEnd.cpp::inoBkEnd_fini" ref="a829925fbee4765360b2c6e01d3cbbd33" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void inoBkEnd_init </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char const *&#160;</td>
-          <td class="paramname"><em>argv</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                   {
-    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> ((<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5e">DBG_LEVEL</a>)0x1, <span class="stringliteral">&quot;Initializing Backend&quot;</span>); <span class="comment">//TODO fix this</span>
-    <a class="code" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a> = <span class="keyword">new</span> <a class="code" href="classsysCore.html">sysCore</a> (1, 4, 4, 4, 4, 4, 4, 4,
-                         2, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10, 
-                         1, 10);
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9_cgraph.png" border="0" usemap="#inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9_cgraph" alt=""/></div>
-<map name="inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9_cgraph" id="inoBkEnd_8cpp_a008e3b2924f46240427e1efb7f79dfa9_cgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="a7f7897adf2514facd31db95c4b90314d"></a><!-- doxytag: member="inoBkEnd.cpp::inoBkEndRun" ref="a7f7897adf2514facd31db95c4b90314d" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void inoBkEndRun </td>
+          <td class="memname">void inoBkEnd_fini </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -146,15 +98,130 @@ Here is the call graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                   {
-    <a class="code" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a>-&gt;<a class="code" href="classsysCore.html#a329e1539dcc7da668fb0d6237368922f">runCore</a>();
+<div class="fragment"><pre class="fragment">                      {
+    <span class="keyword">delete</span> <a class="code" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a>;
+    <span class="keyword">delete</span> <a class="code" href="inoBkEnd_8cpp.html#afdbd2236dd55d4e4fdb2c573fe52392f">g_ino_clk</a>;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="inoBkEnd_8cpp_a829925fbee4765360b2c6e01d3cbbd33_icgraph.png" border="0" usemap="#inoBkEnd_8cpp_a829925fbee4765360b2c6e01d3cbbd33_icgraph" alt=""/></div>
+<map name="inoBkEnd_8cpp_a829925fbee4765360b2c6e01d3cbbd33_icgraph" id="inoBkEnd_8cpp_a829925fbee4765360b2c6e01d3cbbd33_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8881313a01355484010fedbf942197ac"></a><!-- doxytag: member="inoBkEnd.cpp::inoBkEnd_init" ref="a8881313a01355484010fedbf942197ac" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inoBkEnd_init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                      {
+    <a class="code" href="debug_8cpp.html#a8501087f91c0a788a02fb968b56f2998">dbg</a>.<a class="code" href="classDEBUG.html#ab38f086785f7239084b735007297078a">print</a> ((<a class="code" href="global_2global_8h.html#a55beda23bcb31f80f05f5d3bf2864c5e">DBG_LEVEL</a>)0x1, <span class="stringliteral">&quot;Initializing Backend&quot;</span>); <span class="comment">//TODO fix this</span>
+    <span class="keywordtype">int</span> width, bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
+    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_width;
+
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; root = <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; pipe = root[<span class="stringliteral">&quot;ino_pipe&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; bpu = pipe[<span class="stringliteral">&quot;bp&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; fch = pipe[<span class="stringliteral">&quot;fetch&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; dcd = pipe[<span class="stringliteral">&quot;decode&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; sch = pipe[<span class="stringliteral">&quot;schedule&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; exe = pipe[<span class="stringliteral">&quot;execution&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; mem = pipe[<span class="stringliteral">&quot;memory&quot;</span>];
+    <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp; cmt = pipe[<span class="stringliteral">&quot;commit&quot;</span>];
+
+    bpu[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; bpu_lat; fch[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; fch_lat;
+    dcd[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; dcd_lat; sch[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; sch_lat;
+    exe[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; exe_lat; mem[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; mem_lat;
+    cmt[<span class="stringliteral">&quot;latency&quot;</span>] &gt;&gt; cmt_lat;
+
+    bpu[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; bpu_width; fch[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; fch_width;
+    dcd[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; dcd_width; sch[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; sch_width;
+    exe[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; exe_width; mem[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; mem_width;
+    cmt[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; cmt_width;
+    root[<span class="stringliteral">&quot;width&quot;</span>] &gt;&gt; width;
+    <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> eu_width;
+    root[<span class="stringliteral">&quot;eu&quot;</span>][<span class="stringliteral">&quot;alu&quot;</span>][<span class="stringliteral">&quot;count&quot;</span>] &gt;&gt; eu_width;
+
+    <a class="code" href="inoBkEnd_8cpp.html#afdbd2236dd55d4e4fdb2c573fe52392f">g_ino_clk</a> = <span class="keyword">new</span> <a class="code" href="classsysClock.html">sysClock</a> (1);
+    <a class="code" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a> = <span class="keyword">new</span> <a class="code" href="classsysCore.html">sysCore</a> (<a class="code" href="inoBkEnd_8cpp.html#afdbd2236dd55d4e4fdb2c573fe52392f">g_ino_clk</a>,
+            bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_width,
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
+            1, eu_width,  <span class="comment">//TODO sch_lat is replaced here - take care of it.</span>
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d_cgraph.png" border="0" usemap="#inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d_cgraph" alt=""/></div>
-<map name="inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d_cgraph" id="inoBkEnd_8cpp_a7f7897adf2514facd31db95c4b90314d_cgraph">
+<div class="center"><img src="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_cgraph.png" border="0" usemap="#inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_cgraph" alt=""/></div>
+<map name="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_cgraph" id="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_icgraph.png" border="0" usemap="#inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_icgraph" alt=""/></div>
+<map name="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_icgraph" id="inoBkEnd_8cpp_a8881313a01355484010fedbf942197ac_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="adbd74050d010a5640bb9452887281ebc"></a><!-- doxytag: member="inoBkEnd.cpp::inoBkEndRun" ref="adbd74050d010a5640bb9452887281ebc" args="(FRONTEND_STATUS frontend_status)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void inoBkEndRun </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="global_2global_8h.html#afd483fa40f0fa2b1ac067845b91f0c6e">FRONTEND_STATUS</a>&#160;</td>
+          <td class="paramname"><em>frontend_status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                  {
+    <a class="code" href="inoBkEnd_8cpp.html#af13d4a634c35e1786a57cbc6027cbebc">_core</a>-&gt;<a class="code" href="classsysCore.html#aaafa43a2951680e1fdc83769650d7bba">runCore</a>(frontend_status);
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_cgraph.png" border="0" usemap="#inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_cgraph" alt=""/></div>
+<map name="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_cgraph" id="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_icgraph.png" border="0" usemap="#inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_icgraph" alt=""/></div>
+<map name="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_icgraph" id="inoBkEnd_8cpp_adbd74050d010a5640bb9452887281ebc_icgraph">
 </map>
 </div>
 </p>
@@ -175,13 +242,26 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="afdbd2236dd55d4e4fdb2c573fe52392f"></a><!-- doxytag: member="inoBkEnd.cpp::g_ino_clk" ref="afdbd2236dd55d4e4fdb2c573fe52392f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsysClock.html">sysClock</a>* <a class="el" href="inoBkEnd_8cpp.html#afdbd2236dd55d4e4fdb2c573fe52392f">g_ino_clk</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -190,7 +270,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

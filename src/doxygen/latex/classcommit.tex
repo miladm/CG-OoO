@@ -15,22 +15,18 @@ Collaboration diagram for commit:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcommit_a41ac90052f6ff381357d12a0b30583a8}{commit} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&commit\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&commit\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} commit\_\-width, string stage\_\-name)
+\hyperlink{classcommit_a0dfedb170a782a4e32b587ed0afd0285}{commit} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&commit\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&commit\_\-to\_\-scheduler\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iROB, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iQUE, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} commit\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classcommit_a56b8656334cc14f0f7c9f8f0d7021417}{$\sim$commit} ()
 \item 
-void \hyperlink{classcommit_a9eb2bb492ac2b103102be4ef7d018e8b}{doCOMMIT} (\hyperlink{classsysClock}{sysClock} \&)
+void \hyperlink{classcommit_a29f74b9268950cc7c7b7f259793502d6}{doCOMMIT} ()
 \item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classcommit_a50f823d551a57bbaccde41c32737b737}{commitImpl} (\hyperlink{classsysClock}{sysClock} \&)
-\item 
-void \hyperlink{classcommit_afb05caa27f671bb59e3462e161c2c2f1}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classcommit_a5b183f343dbf7da45d795df16ef4b7bb}{squash} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classcommit_a41ac90052f6ff381357d12a0b30583a8}{
+\hypertarget{classcommit_a0dfedb170a782a4e32b587ed0afd0285}{
 \index{commit@{commit}!commit@{commit}}
 \index{commit@{commit}!commit@{commit}}
 \subsubsection[{commit}]{\setlength{\rightskip}{0pt plus 5cm}commit::commit (
@@ -38,20 +34,34 @@ void \hyperlink{classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad}{regStat} (\hyperl
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{commit\_\-to\_\-bp\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{commit\_\-to\_\-scheduler\_\-port, }
 \item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
+\item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iQUE, }
 \item[{{\bf WIDTH}}]{commit\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classcommit_a41ac90052f6ff381357d12a0b30583a8}
+\label{classcommit_a0dfedb170a782a4e32b587ed0afd0285}
 
 \begin{DoxyCode}
-        : stage (commit_width, stage_name),
+        : stage (commit_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pi
+      pe"]["commit"], clk),
       s_squash_ins_cnt (g_stats.newScalarStat ( _stage_name, "squash_ins_cnt", "N
-      umber of squashed instructions", 0, PRINT_ZERO))
+      umber of squashed instructions", 0, PRINT_ZERO)),
+      s_wp_ins_cnt (g_stats.newScalarStat (stage_name, "wp_ins_cnt", "Number of w
+      rong-path dynamic instructions in "+stage_name, 0, PRINT_ZERO)),
+      s_ins_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_INS_TYPE, stage_na
+      me, "ins_type_cnt", "Committed instruction type distribution", 0, PRINT_ZERO)),
+      s_mem_type_hist (g_stats.newScalarHistStat ((LENGTH) NUM_MEM_TYPE, stage_na
+      me, "mem_type_cnt", "Committed memory instruction type distribution", 0, 
+      PRINT_ZERO))
 {
         _commit_to_bp_port  = &commit_to_bp_port;
         _commit_to_scheduler_port = &commit_to_scheduler_port;
     _iROB = iROB;
+    _iQUE = iQUE;
+
+    _prev_ins_cnt = 0;
+    _prev_commit_cyc = START_CYCLE;
 }
 \end{DoxyCode}
 \hypertarget{classcommit_a56b8656334cc14f0f7c9f8f0d7021417}{
@@ -70,74 +80,29 @@ void \hyperlink{classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad}{regStat} (\hyperl
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classcommit_a50f823d551a57bbaccde41c32737b737}{
-\index{commit@{commit}!commitImpl@{commitImpl}}
-\index{commitImpl@{commitImpl}!commit@{commit}}
-\subsubsection[{commitImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} commit::commitImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classcommit_a50f823d551a57bbaccde41c32737b737}
-
-\begin{DoxyCode}
-                                               {
-    dbg.print (DBG_COMMIT, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (_iROB->getTableState () == EMPTY_BUFF) break;
-        if (!_iROB->hasFreeWire (clk, READ)) break;
-        dynInstruction* ins = _iROB->getFront ();
-        //Assert (ins->getNumRegRd () == 0 && "instruction must have been ready l
-      ong ago!");
-        if (ins->isOnWrongPath ()) break;
-        if (ins->getPipeStage () != COMPLETE) break;
-
-        /* COMMIT INS */
-        ins = _iROB->popFront();
-        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "
-      Commit ins", ins->getInsID (), clk.now ());
-        delete ins;
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-    }
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classcommit_a9eb2bb492ac2b103102be4ef7d018e8b}{
+\hypertarget{classcommit_a29f74b9268950cc7c7b7f259793502d6}{
 \index{commit@{commit}!doCOMMIT@{doCOMMIT}}
 \index{doCOMMIT@{doCOMMIT}!commit@{commit}}
 \subsubsection[{doCOMMIT}]{\setlength{\rightskip}{0pt plus 5cm}void commit::doCOMMIT (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classcommit_a9eb2bb492ac2b103102be4ef7d018e8b}
+\label{classcommit_a29f74b9268950cc7c7b7f259793502d6}
 
 \begin{DoxyCode}
-                                    {
+                       {
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
       PIPE_FLUSH)) {
-        pipe_stall = commitImpl (clk);
+        pipe_stall = commitImpl ();
     }
+
+    verifySim ();
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -145,56 +110,45 @@ Here is the caller graph for this function:
 \end{DoxyCode}
 
 
-Here is the call graph for this function:
-
-
-
-
 Here is the caller graph for this function:
 
 
-\hypertarget{classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad}{
-\index{commit@{commit}!regStat@{regStat}}
-\index{regStat@{regStat}!commit@{commit}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void commit::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classcommit_a207fab9b88bbf27cae6f6388aa6ef6ad}
-
-\begin{DoxyCode}
-                                   {
-    //_iROB->regStat (); TODO - fix this
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classcommit_afb05caa27f671bb59e3462e161c2c2f1}{
+\hypertarget{classcommit_a5b183f343dbf7da45d795df16ef4b7bb}{
 \index{commit@{commit}!squash@{squash}}
 \index{squash@{squash}!commit@{commit}}
 \subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void commit::squash (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classcommit_afb05caa27f671bb59e3462e161c2c2f1}
+\label{classcommit_a5b183f343dbf7da45d795df16ef4b7bb}
 
 \begin{DoxyCode}
-                                  {
+                     {
     dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ROB Flush
-      ", clk.now ());
+      ", _clk->now ());
     Assert (g_var.g_pipe_state == PIPE_SQUASH_ROB);
     if (_iROB->getTableSize() == 0) return;
     INS_ID squashSeqNum = g_var.getSquashSN ();
     dynInstruction* ins = NULL;
-    LENGTH start_indx = 0, stop_indx = _iROB->getTableSize() - 1;
-    for (LENGTH i = 0; i < _iROB->getTableSize(); i++) {
-        if (_iROB->getTableSize() == 0) break;
+    LENGTH start_indx = 0, stop_indx = _iQUE->getTableSize() - 1;
+    _e_stage.ffAccess (_stage_width);
+
+    /*-- SQUASH iROB --*/
+//    _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
+    for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
+        if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
+        if (ins->getInsID () < squashSeqNum) break;
+        _iROB->removeNth_unsafe (i);
+//        _iROB->ramAccess ();
+        s_squash_ins_cnt++;
+    }
+
+    /*-- SQUASH iQUE --*/
+    for (LENGTH i = 0; i < _iQUE->getTableSize(); i++) {
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->getPipeStage () != EXECUTE);// && ins->getPipeStage () != ME
       M_ACCESS);
         if (ins->getInsID () == squashSeqNum) {
@@ -208,23 +162,31 @@ Here is the caller graph for this function:
             }
         }
     }
-    Assert (_iROB->getTableSize() > stop_indx && stop_indx >= start_indx && start
-      _indx >= 0);
-    for (LENGTH i = _iROB->getTableSize() - 1; i > stop_indx; i--) {
-        if (_iROB->getTableSize() == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+    /* NOTE: WE DELETE INSTRUCTIONS IN IQUE THAT ARE NOT IN ROB */
+    Assert (_iQUE->getTableSize () > stop_indx && stop_indx >= start_indx && star
+      t_indx >= 0);
+
+    /* PUSH BACK INS'S THAT ARE NOT ON WRONG PATH */
+    for (LENGTH i = _iQUE->getTableSize() - 1; i > stop_indx; i--) {
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         ins->resetStates ();
         g_var.insertFrontCodeCache(ins);
-        _iROB->removeNth_unsafe (i);
-        s_squash_ins_cnt++;
+        _iQUE->removeNth_unsafe (i);
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Squash ins", ins->getInsID (), _clk->now ());
     }
+
+    /* DELETE INS THAT ARE ON WRONG PATH */
     for (LENGTH i = stop_indx; i >= start_indx; i--) {
-        if (_iROB->getTableSize() == 0) break;
-        ins = _iROB->getNth_unsafe (i);
+        if (_iQUE->getTableSize() == 0) break;
+        ins = _iQUE->getNth_unsafe (i);
         Assert (ins->isOnWrongPath () == true);
         Assert (ins->getInsID () >= squashSeqNum);
-        _iROB->removeNth_unsafe (i);
-        s_squash_ins_cnt++;
+        _iQUE->removeNth_unsafe (i);
+        s_wp_ins_cnt++;
+        dbg.print (DBG_COMMIT, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
+                "Squash ins", ins->getInsID (), _clk->now ());
         delete ins;
     }
 }

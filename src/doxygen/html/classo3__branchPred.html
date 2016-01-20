@@ -87,14 +87,14 @@ Collaboration diagram for o3_branchPred:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#ad491f8c1906fecc1336585bed1677079">o3_branchPred</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_bp_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;bp_to_fetch_port, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> bp_width, string stage_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#ad4d7447f4f755c074ad7ccb01b4184fd">o3_branchPred</a> (<a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;fetch_to_bp_port, <a class="el" href="classport.html">port</a>&lt; <a class="el" href="classdynInstruction.html">dynInstruction</a> * &gt; &amp;bp_to_fetch_port, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> bp_width, <a class="el" href="classsysClock.html">sysClock</a> *<a class="el" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>, string stage_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#ab497c6edb4266e04ae0b20969caeb525">~o3_branchPred</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#ab70a61011f52674364f5a24f276973b3">doBP</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#a41218ba2c469ee35610ed5b1af5e49c0">squash</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#a58f7e7a2260333813a3fa672eff86796">regStat</a> (<a class="el" href="classsysClock.html">sysClock</a> &amp;clk)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#a7f06389c8e205c2eba33c3727a542314">doBP</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#a255cd46c77b1600bd989938fcf0f6f70">squash</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classo3__branchPred.html#a39d33c191ad5a75b6fa1acf84d5c5044">regStat</a> ()</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad491f8c1906fecc1336585bed1677079"></a><!-- doxytag: member="o3_branchPred::o3_branchPred" ref="ad491f8c1906fecc1336585bed1677079" args="(port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, WIDTH bp_width, string stage_name)" -->
+<a class="anchor" id="ad4d7447f4f755c074ad7ccb01b4184fd"></a><!-- doxytag: member="o3_branchPred::o3_branchPred" ref="ad4d7447f4f755c074ad7ccb01b4184fd" args="(port&lt; dynInstruction * &gt; &amp;fetch_to_bp_port, port&lt; dynInstruction * &gt; &amp;bp_to_fetch_port, WIDTH bp_width, sysClock *clk, string stage_name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -119,6 +119,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>stage_name</em>&#160;</td>
         </tr>
@@ -130,7 +136,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#abc77b1bb1d0891e47dfaffe9b0203e8d">stage</a> (bp_width, stage_name)
+<div class="fragment"><pre class="fragment">        : <a class="code" href="classstage.html#af7798f81a3204e4415a4c8e546f2e25b">stage</a> (bp_width, stage_name, <a class="code" href="config_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>-&gt;<a class="code" href="classconfig.html#a225be0b4193c49568b32481edcd52418">_root</a>[<span class="stringliteral">&quot;cpu&quot;</span>][<span class="stringliteral">&quot;backend&quot;</span>][<span class="stringliteral">&quot;o3_pipe&quot;</span>][<span class="stringliteral">&quot;bp&quot;</span>], clk)
 { 
     _fetch_to_bp_port = &amp;fetch_to_bp_port;
     _bp_to_fetch_port = &amp;bp_to_fetch_port;
@@ -156,30 +162,29 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ab70a61011f52674364f5a24f276973b3"></a><!-- doxytag: member="o3_branchPred::doBP" ref="ab70a61011f52674364f5a24f276973b3" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a7f06389c8e205c2eba33c3727a542314"></a><!-- doxytag: member="o3_branchPred::doBP" ref="a7f06389c8e205c2eba33c3727a542314" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void o3_branchPred::doBP </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                       {
-    <span class="comment">/* STAT */</span>
-    <a class="code" href="classo3__branchPred.html#a58f7e7a2260333813a3fa672eff86796">regStat</a> (clk);
+<div class="fragment"><pre class="fragment">                          {
+    <span class="comment">/*-- STAT --*/</span>
+    <a class="code" href="classo3__branchPred.html#a39d33c191ad5a75b6fa1acf84d5c5044">regStat</a> ();
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_cgraph.png" border="0" usemap="#classo3__branchPred_ab70a61011f52674364f5a24f276973b3_cgraph" alt=""/></div>
-<map name="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_cgraph" id="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_cgraph">
+<div class="center"><img src="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_cgraph.png" border="0" usemap="#classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_cgraph" alt=""/></div>
+<map name="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_cgraph" id="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_cgraph">
 </map>
 </div>
 </p>
@@ -187,37 +192,38 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_icgraph.png" border="0" usemap="#classo3__branchPred_ab70a61011f52674364f5a24f276973b3_icgraph" alt=""/></div>
-<map name="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_icgraph" id="classo3__branchPred_ab70a61011f52674364f5a24f276973b3_icgraph">
+<div class="center"><img src="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_icgraph.png" border="0" usemap="#classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_icgraph" alt=""/></div>
+<map name="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_icgraph" id="classo3__branchPred_a7f06389c8e205c2eba33c3727a542314_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a58f7e7a2260333813a3fa672eff86796"></a><!-- doxytag: member="o3_branchPred::regStat" ref="a58f7e7a2260333813a3fa672eff86796" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a39d33c191ad5a75b6fa1acf84d5c5044"></a><!-- doxytag: member="o3_branchPred::regStat" ref="a39d33c191ad5a75b6fa1acf84d5c5044" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void o3_branchPred::regStat </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                          {
-    _fetch_to_bp_port-&gt;<a class="code" href="classport.html#a966cfeb3b369ec22e8081275481abe32">regStat</a> (clk.<a class="code" href="classsysClock.html#af027a57c8bc3d0dab4fe5a0f870b7d20">now</a> ());
+<div class="fragment"><pre class="fragment">                             {
+    _fetch_to_bp_port-&gt;<a class="code" href="classport.html#a1f3feb96d4c1b9a7935ced227dba2a79">regStat</a> ();
+    <a class="code" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a>.<a class="code" href="classstage__energy.html#a2fbc25d661f43c5877c8d89da6b17655">ffAccess</a> (); <span class="comment">//READ</span>
+    <a class="code" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a>.<a class="code" href="classstage__energy.html#a2fbc25d661f43c5877c8d89da6b17655">ffAccess</a> (); <span class="comment">//WRITE</span>
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_cgraph.png" border="0" usemap="#classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_cgraph" alt=""/></div>
-<map name="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_cgraph" id="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_cgraph">
+<div class="center"><img src="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_cgraph.png" border="0" usemap="#classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_cgraph" alt=""/></div>
+<map name="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_cgraph" id="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_cgraph">
 </map>
 </div>
 </p>
@@ -225,31 +231,40 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_icgraph.png" border="0" usemap="#classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_icgraph" alt=""/></div>
-<map name="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_icgraph" id="classo3__branchPred_a58f7e7a2260333813a3fa672eff86796_icgraph">
+<div class="center"><img src="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_icgraph.png" border="0" usemap="#classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_icgraph" alt=""/></div>
+<map name="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_icgraph" id="classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044_icgraph">
 </map>
 </div>
 </p>
 
 </div>
 </div>
-<a class="anchor" id="a41218ba2c469ee35610ed5b1af5e49c0"></a><!-- doxytag: member="o3_branchPred::squash" ref="a41218ba2c469ee35610ed5b1af5e49c0" args="(sysClock &amp;clk)" -->
+<a class="anchor" id="a255cd46c77b1600bd989938fcf0f6f70"></a><!-- doxytag: member="o3_branchPred::squash" ref="a255cd46c77b1600bd989938fcf0f6f70" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void o3_branchPred::squash </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> &amp;&#160;</td>
-          <td class="paramname"><em>clk</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                         {
+<div class="fragment"><pre class="fragment">                            {
+    <a class="code" href="classstage.html#abb5082df431c2858839d3b54ef049ff9">_e_stage</a>.<a class="code" href="classstage__energy.html#a2fbc25d661f43c5877c8d89da6b17655">ffAccess</a> ();
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70_cgraph.png" border="0" usemap="#classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70_cgraph" alt=""/></div>
+<map name="classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70_cgraph" id="classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -262,7 +277,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -271,7 +286,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

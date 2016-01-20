@@ -87,14 +87,14 @@ Collaboration diagram for RAMtable&lt; tableType_T &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRAMtable.html#ac55186de99f6f9330182bb2c54327468">RAMtable</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRAMtable.html#aedaaa4cfaa5e313536bc635915324763">RAMtable</a> (<a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRAMtable.html#af78b491a54d6846af06058d803beda1a">~RAMtable</a> ()</td></tr>
 </table>
 <h3>template&lt;typename tableType_T&gt;<br/>
  class RAMtable&lt; tableType_T &gt;</h3>
 
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac55186de99f6f9330182bb2c54327468"></a><!-- doxytag: member="RAMtable::RAMtable" ref="ac55186de99f6f9330182bb2c54327468" args="(LENGTH, WIDTH, WIDTH, string)" -->
+<a class="anchor" id="aedaaa4cfaa5e313536bc635915324763"></a><!-- doxytag: member="RAMtable::RAMtable" ref="aedaaa4cfaa5e313536bc635915324763" args="(sysClock *, const YAML::Node &amp;, string)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -103,20 +103,14 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classRAMtable.html">RAMtable</a>&lt; tableType_T &gt;::<a class="el" href="classRAMtable.html">RAMtable</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
-          <td class="paramname"><em>len</em> = <code>1</code>, </td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>rd_port_cnt</em> = <code>1</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>wr_port_cnt</em> = <code>1</code>, </td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -132,8 +126,7 @@ template&lt;typename tableType_T &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (len, <a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a3ece8311970558524e3ce42acdb5bd25">RAM_ARRAY</a>,
-                          wr_port_cnt, rd_port_cnt, table_name)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (<a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a3ece8311970558524e3ce42acdb5bd25">RAM_ARRAY</a>, clk, root, table_name)
 {}
 </pre></div>
 </div>
@@ -167,7 +160,7 @@ template&lt;typename tableType_T&gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -176,7 +169,7 @@ template&lt;typename tableType_T&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

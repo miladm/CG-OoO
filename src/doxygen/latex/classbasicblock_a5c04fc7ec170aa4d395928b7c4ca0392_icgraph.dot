@@ -5,7 +5,18 @@ digraph G
   rankdir=LR;
   Node1 [label="basicblock::getLastInsDst",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="make_basicblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__basicblock_8cpp.html#a765669fc41b8885a39c1ec0df0df96ca"];
+  Node2 [label="dot::createCFG",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#a34bd8df7c73a49901267dc3ca9209385"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node3 [label="dot::runDot",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdot.html#a613147e95e44f245a63a5b08418c95f9"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="finish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="basicblock::isThisBBfallThru",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ac0ddcb18b5f613710d5836025dd974cb"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="basicblock::addMovIns",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a8743005759ce892482aa942cf0aa114d"];
+  Node1 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="make_basicblock",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__basicblock_8cpp.html#adfa5d9160d675203db3e663d1f2f3849"];
+  Node8 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
 }

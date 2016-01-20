@@ -9,38 +9,90 @@ This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}{oooBkEnd\_\-init} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+void \hyperlink{oooBkEnd_8h_a1875dbec487b44c836dd7a93b545104f}{oooBkEnd\_\-init} ()
 \item 
-void \hyperlink{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}{oooBkEndRun} ()
+void \hyperlink{oooBkEnd_8h_a5ad2255009a882fb6f2a8769caf94264}{oooBkEndRun} (\hyperlink{global_2global_8h_afd483fa40f0fa2b1ac067845b91f0c6e}{FRONTEND\_\-STATUS})
+\item 
+void \hyperlink{oooBkEnd_8h_a79064ff84e3231b1d3e5505aa4e7e259}{oooBkEnd\_\-fini} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}{
+\hypertarget{oooBkEnd_8h_a79064ff84e3231b1d3e5505aa4e7e259}{
+\index{oooBkEnd.h@{oooBkEnd.h}!oooBkEnd\_\-fini@{oooBkEnd\_\-fini}}
+\index{oooBkEnd\_\-fini@{oooBkEnd\_\-fini}!oooBkEnd.h@{oooBkEnd.h}}
+\subsubsection[{oooBkEnd\_\-fini}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEnd\_\-fini (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{oooBkEnd_8h_a79064ff84e3231b1d3e5505aa4e7e259}
+
+\begin{DoxyCode}
+                      {
+    delete _ooo_core;
+    delete g_ooo_clk;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{oooBkEnd_8h_a1875dbec487b44c836dd7a93b545104f}{
 \index{oooBkEnd.h@{oooBkEnd.h}!oooBkEnd\_\-init@{oooBkEnd\_\-init}}
 \index{oooBkEnd\_\-init@{oooBkEnd\_\-init}!oooBkEnd.h@{oooBkEnd.h}}
 \subsubsection[{oooBkEnd\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEnd\_\-init (
 \begin{DoxyParamCaption}
-\item[{int}]{argc, }
-\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{oooBkEnd_8h_a310255971234b2af81175fcc914422d5}
+\label{oooBkEnd_8h_a1875dbec487b44c836dd7a93b545104f}
 
 \begin{DoxyCode}
-                                                   {
+                      {
     dbg.print ((DBG_LEVEL)0x1, "Initializing Backend"); //TODO fix this
-    _ooo_core = new o3_sysCore (1, 4, 32, 32, 32, 4, 4, 4,
-                            2, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10, 
-                            1, 10);
+    int width, bpu_lat, fch_lat, dcd_lat, sch_lat, exe_lat, mem_lat, cmt_lat;
+    WIDTH bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt_w
+      idth;
+
+    const YAML::Node& root = g_cfg->_root["cpu"]["backend"];
+    const YAML::Node& pipe = root["o3_pipe"];
+    const YAML::Node& bpu = pipe["bp"];
+    const YAML::Node& fch = pipe["fetch"];
+    const YAML::Node& dcd = pipe["decode"];
+    const YAML::Node& sch = pipe["schedule"];
+    const YAML::Node& exe = pipe["execution"];
+    const YAML::Node& mem = pipe["memory"];
+    const YAML::Node& cmt = pipe["commit"];
+
+    bpu["latency"] >> bpu_lat; fch["latency"] >> fch_lat;
+    dcd["latency"] >> dcd_lat; sch["latency"] >> sch_lat;
+    exe["latency"] >> exe_lat; mem["latency"] >> mem_lat;
+    cmt["latency"] >> cmt_lat;
+
+    bpu["width"] >> bpu_width; fch["width"] >> fch_width;
+    dcd["width"] >> dcd_width; sch["width"] >> sch_width;
+    exe["width"] >> exe_width; mem["width"] >> mem_width;
+    cmt["width"] >> cmt_width;
+    root["width"] >> width;
+    WIDTH eu_width;
+    root["eu"]["alu"]["count"] >> eu_width;
+
+    g_ooo_clk = new sysClock (1);
+    _ooo_core = new o3_sysCore (g_ooo_clk, 
+            bpu_width, fch_width, dcd_width, sch_width, exe_width, mem_width, cmt
+      _width,
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
+            sch_lat, eu_width, 
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 \end{DoxyCode}
 
@@ -53,23 +105,28 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}{
+\hypertarget{oooBkEnd_8h_a5ad2255009a882fb6f2a8769caf94264}{
 \index{oooBkEnd.h@{oooBkEnd.h}!oooBkEndRun@{oooBkEndRun}}
 \index{oooBkEndRun@{oooBkEndRun}!oooBkEnd.h@{oooBkEnd.h}}
 \subsubsection[{oooBkEndRun}]{\setlength{\rightskip}{0pt plus 5cm}void oooBkEndRun (
 \begin{DoxyParamCaption}
-{}
+\item[{{\bf FRONTEND\_\-STATUS}}]{}
 \end{DoxyParamCaption}
 )}}
-\label{oooBkEnd_8h_aaa2cf7fe88073cf54894d48f17271d93}
+\label{oooBkEnd_8h_a5ad2255009a882fb6f2a8769caf94264}
 
 \begin{DoxyCode}
-                   {
-    _ooo_core->runCore();
+                                                  {
+    _ooo_core->runCore(frontend_status);
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
 
 

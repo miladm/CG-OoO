@@ -46,16 +46,16 @@ void bbBkEnd_init () {
 	g_bb_clk = new sysClock (1);
     _bb_core = new bb_sysCore (g_bb_clk, 
             bpu_width, fch_width, dcd_width, eu_width, eu_width, mem_width, cmt_width, num_bbW,
-            fch_lat, 500, 
-            1, 500, 
-            bpu_lat, 500, 
-            dcd_lat, 500, 
+            fch_lat, 15, 
+            1, 15, 
+            bpu_lat, 15, 
+            dcd_lat, 15, 
             sch_lat, eu_per_blk,
-            1, 500, 
-            exe_lat, 500, 
-            1, 500, 
-            1, 500, 
-            1, 500);
+            1, 15, 
+            exe_lat, 15, 
+            1, 15, 
+            1, 15, 
+            1, 15);
 }
 
 void bbBkEnd_fini () {

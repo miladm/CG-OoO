@@ -9,35 +9,41 @@
 
 
 Inheritance diagram for unit:
+
+
+Collaboration diagram for unit:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classunit_a9352a15a3255ee768962e8b7e24c1e70}{unit} (string class\_\-name)
+\hyperlink{classunit_a9e6e30e101f4bb1539edb5da9957f4e5}{unit} (string class\_\-name, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}=NULL)
 \item 
 \hyperlink{classunit_a77adf9984db5764e2948b4c3184f2982}{$\sim$unit} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string \hyperlink{classunit_aedc80782c1a267e6141603399d9857b5}{\_\-c\_\-name}
+const string \hyperlink{classunit_a19c3877d889e74df91c2c54419b775a5}{\_\-c\_\-name}
+\item 
+\hyperlink{classsysClock}{sysClock} $\ast$ \hyperlink{classunit_aee2e1836cd47308b6f295ceeb62c1449}{\_\-clk}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classunit_a9352a15a3255ee768962e8b7e24c1e70}{
+\hypertarget{classunit_a9e6e30e101f4bb1539edb5da9957f4e5}{
 \index{unit@{unit}!unit@{unit}}
 \index{unit@{unit}!unit@{unit}}
 \subsubsection[{unit}]{\setlength{\rightskip}{0pt plus 5cm}unit::unit (
 \begin{DoxyParamCaption}
-\item[{string}]{class\_\-name}
+\item[{string}]{class\_\-name, }
+\item[{{\bf sysClock} $\ast$}]{clk = {\ttfamily NULL}}
 \end{DoxyParamCaption}
 )}}
-\label{classunit_a9352a15a3255ee768962e8b7e24c1e70}
+\label{classunit_a9e6e30e101f4bb1539edb5da9957f4e5}
 
 \begin{DoxyCode}
-                            {
-    _c_name = class_name;
-}
+     : _c_name (class_name),
+      _clk (clk)
+{ }
 \end{DoxyCode}
 \hypertarget{classunit_a77adf9984db5764e2948b4c3184f2982}{
 \index{unit@{unit}!$\sim$unit@{$\sim$unit}}
@@ -55,14 +61,19 @@ string \hyperlink{classunit_aedc80782c1a267e6141603399d9857b5}{\_\-c\_\-name}
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classunit_aedc80782c1a267e6141603399d9857b5}{
+\hypertarget{classunit_a19c3877d889e74df91c2c54419b775a5}{
 \index{unit@{unit}!\_\-c\_\-name@{\_\-c\_\-name}}
 \index{\_\-c\_\-name@{\_\-c\_\-name}!unit@{unit}}
-\subsubsection[{\_\-c\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf unit::\_\-c\_\-name}}}
-\label{classunit_aedc80782c1a267e6141603399d9857b5}
+\subsubsection[{\_\-c\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}const string {\bf unit::\_\-c\_\-name}}}
+\label{classunit_a19c3877d889e74df91c2c54419b775a5}
+\hypertarget{classunit_aee2e1836cd47308b6f295ceeb62c1449}{
+\index{unit@{unit}!\_\-clk@{\_\-clk}}
+\index{\_\-clk@{\_\-clk}!unit@{unit}}
+\subsubsection[{\_\-clk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sysClock}$\ast$ {\bf unit::\_\-clk}}}
+\label{classunit_aee2e1836cd47308b6f295ceeb62c1449}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2unit_8h}{unit.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2unit_8cpp}{unit.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_8h}{unit.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_8cpp}{unit.cpp}\end{DoxyCompactItemize}

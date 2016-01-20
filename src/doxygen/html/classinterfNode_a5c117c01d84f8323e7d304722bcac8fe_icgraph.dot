@@ -6,12 +6,4 @@ digraph G
   Node1 [label="interfNode::getReg",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="interfNode::assignReg",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classinterfNode.html#ad2d5e57328c5f3fa8121f4ee8799b50d"];
-  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="assign_global_registers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#ad793e858badbde1ceff1536fc3145c65"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662"];
-  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
-  Node2 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="assign_local_registers",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a66bb4ccca1dacd495fef9d58f1ed6620"];
 }

@@ -40,21 +40,23 @@ BOOL \hyperlink{signal__handler_8h_a5f145c9581fdc13b0459253871f0338a}{signal\_\-
 {
         g_var.g_pin_signal_count++;
     if (g_var.g_wrong_path) {
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
-       << PIN_GetExceptionCode (pExceptInfo) << " on wrong path " << std::endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " execption Info: " << P
-      IN_ExceptionToString (pExceptInfo) << endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " pin signal count = " <
-      < dec << g_var.g_pin_signal_count << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " caught signal " << dec << P
+      IN_GetExceptionCode (pExceptInfo) << " on wrong path " << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " execption Info: " << PIN_Ex
+      ceptionToString (pExceptInfo) << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " pin signal count = " << dec
+       << g_var.g_pin_signal_count << endl;
         recover ();
         PIN_ExecuteAt (&g_var.g_context);
+        if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << e
+      ndl;
     } else {
-        std::cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionC
-      ode (pExceptInfo) << " on correct path " << std::endl;
-        std::cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) <
-      < endl;
-        std::cout << " pin signal count = " << dec << g_var.g_pin_signal_count <<
-       std::endl;
+        cout << "ERROR for REAL: caught signal " << dec << PIN_GetExceptionCode (
+      pExceptInfo) << " on correct path " << endl;
+        cout << " execption Info: " << PIN_ExceptionToString (pExceptInfo) << end
+      l;
+        cout << " pin signal count = " << dec << g_var.g_pin_signal_count << endl
+      ;
     }
         return EHR_UNHANDLED;
 }
@@ -126,18 +128,20 @@ Here is the caller graph for this function:
       g_wrong_path << endl;
     g_var.g_app_signal_count++;
     if (g_var.g_wrong_path) {
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " caught signal " << dec
-       << sig << " on wrong path " << std::endl;
-        if (g_var.g_debug_level & DBG_SPEC) std::cout << " application signal cou
-      nt = " << dec << g_var.g_app_signal_count << std::endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " caught signal " << dec << s
+      ig << " on wrong path " << endl;
+        if (g_var.g_debug_level & DBG_SPEC) cout << " application signal count = 
+      " << dec << g_var.g_app_signal_count << endl;
         recover ();
-        PIN_SaveContext (&g_var.g_context,ctxt);
+        PIN_SaveContext (&g_var.g_context, ctxt);
+        if (g_var.g_debug_level & DBG_SPEC) cout << "Recovered from signal." << e
+      ndl;
         return FALSE;
     } else {
-        std::cout << "ERROR for REAL: caught signal " << dec << sig << " on corre
-      ct path " << std::endl;
-        std::cout << " application signal count = " << dec << g_var.
-      g_app_signal_count << std::endl;
+        cout << "ERROR for REAL: caught signal " << dec << sig << " on correct pa
+      th " << endl;
+        cout << " application signal count = " << dec << g_var.
+      g_app_signal_count << endl;
         return TRUE; // pass exception 
     }
 }

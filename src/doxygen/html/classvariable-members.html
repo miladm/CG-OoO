@@ -65,6 +65,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="classvariable.html">variable</a>, including all inherited members.<table>
+  <tr class="memlist"><td><a class="el" href="classvariable.html#a2d93d3b2fd7553f65c931b13aabe5504">_hackPushCount</a></td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#acab6f948f07a2935c12917a4a2a8c46a">addBB</a>(basicblock *bb)</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#a57838c6bf0ac170ee02a0e3a099aec35">getC</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#a1134c24e98e73b266b91d02eb253e031">getID</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
@@ -73,7 +74,7 @@ This is the complete list of members for <a class="el" href="classvariable.html"
   <tr class="memlist"><td><a class="el" href="classvariable.html#a3c88482acd58a7f9f38b5467d6edcff7">getTopBbStack</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#a3f153f4bceb60929467548bd8885d61e">getTopStack</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#a0d0cee61944333e78fecef0365d35cbe">popFromStack</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classvariable.html#a8004cca5263b1d3a296e4c5481b6db2a">popHackPushes</a>()</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classvariable.html#aefa98b50d2a3135fe1141621f6f5d995">popHackPushes</a>(int)</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#ae0d9d0c11701ccb08719cb5f27fa75e4">pushToStack</a>(int s)</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#ac570372e439e2d75875b8b2253069ce6">setC</a>(int c)</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classvariable.html#a0eaf13bf7764096058482fc8573673bb">variable</a>(long int var)</td><td><a class="el" href="classvariable.html">variable</a></td><td></td></tr>
@@ -84,7 +85,7 @@ This is the complete list of members for <a class="el" href="classvariable.html"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -93,7 +94,7 @@ This is the complete list of members for <a class="el" href="classvariable.html"
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

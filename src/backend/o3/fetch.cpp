@@ -23,6 +23,7 @@ o3_fetch::o3_fetch (port<dynInstruction*>& bp_to_fetch_port,
     _iROB = iROB;
     _insListIndx = 0;
     _switch_to_frontend = false;
+    _fetched_so_far = 0;
 }
 
 o3_fetch::~o3_fetch () {}
@@ -57,8 +58,6 @@ PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         if (isGoToFrontend (frontend_status)) { _switch_to_frontend = true; break;}
         if (g_var.isCodeCacheEmpty ()) {break;}
 		if (_fetch_to_decode_port->getBuffState () == FULL_BUFF) break;
-        if (i == 0)
-            _e_icache.ramAccess ();
 
         /*-- FETCH INS --*/
         dynInstruction* ins = g_var.popCodeCache();
@@ -74,6 +73,13 @@ PIPE_ACTIVITY o3_fetch::fetchImpl (FRONTEND_STATUS frontend_status) {
         s_ipc++;
         s_ins_cnt++;
         pipe_stall = PIPE_BUSY;
+
+        /*-- ENERGY --*/
+        _fetched_so_far++;
+        if (_fetched_so_far % _stage_width == 0) { 
+            _e_icache.ramAccess ();
+            _fetched_so_far = 0;
+        }
 	}
     return pipe_stall;
 }

@@ -68,8 +68,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;sstream&gt;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
-<code>#include &quot;annotateTrace.h&quot;</code><br/>
-<code>#include &quot;stat.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="annotateTrace_8h_source.html">annotateTrace.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="stat_8h_source.html">stat.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for annotateTrace.cpp:</div>
 <div class="dyncontent">
@@ -80,14 +80,14 @@ Include dependency graph for annotateTrace.cpp:</div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a19e7cab902c34c60fe97d5377fc58b36">dumpBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; &amp;bbHeaders)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a4ea14bccc7cc3ac11b499dcc35fddec8">storeToFile</a> (bool brFound, <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> brAddr, <a class="el" href="classbasicblock.html">basicblock</a> *bb, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &amp;dynBBMap, FILE *traceFileOutput)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#ae4ea4317760dacf2b9cbfd1b4484ccb2">storeToFile</a> (map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, bool &gt; &amp;brFoundMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &amp;brAddrMap, <a class="el" href="classbasicblock.html">basicblock</a> *bb, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; &amp;dynBBListMap, FILE *traceFileOutput)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#aee340b8af72c451e73ac304c015dfc5c">isNotRepeated</a> (<a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> insAddr, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a1886834b5b714acdb0775054212d3db9">findBB</a> (<a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> bbHead, <a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; *dynBBList)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#afb131832ec53a28a9d071765d3c3a7e4">removeBB</a> (<a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> bbHead, <a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; *dynBBList)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a1359aaee4cb6eba6fd6406cbc1f30773">annotateTrace_forBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, string *program_name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a054a8003f63a7861a5573448d57596cf">annotateTrace_forPB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *pbList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, string *program_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a19e7cab902c34c60fe97d5377fc58b36">dumpBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; &amp;bbHeaders)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a4ea14bccc7cc3ac11b499dcc35fddec8">storeToFile</a> (bool brFound, <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> brAddr, <a class="el" href="classbasicblock.html">basicblock</a> *bb, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &amp;dynBBMap, FILE *traceFileOutput)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#ae4ea4317760dacf2b9cbfd1b4484ccb2">storeToFile</a> (map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, bool &gt; &amp;brFoundMap, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &amp;brAddrMap, <a class="el" href="classbasicblock.html">basicblock</a> *bb, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; &amp;dynBBListMap, FILE *traceFileOutput)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#aee340b8af72c451e73ac304c015dfc5c">isNotRepeated</a> (<a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insAddr, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a1886834b5b714acdb0775054212d3db9">findBB</a> (<a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="el" href="structbbHead.html">bbHead</a>, <a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; *dynBBList)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#afb131832ec53a28a9d071765d3c3a7e4">removeBB</a> (<a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="el" href="structbbHead.html">bbHead</a>, <a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; *dynBBList)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a1359aaee4cb6eba6fd6406cbc1f30773">annotateTrace_forBB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, string *program_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="annotateTrace_8cpp.html#a054a8003f63a7861a5573448d57596cf">annotateTrace_forPB</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *pbList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, string *program_name)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a1359aaee4cb6eba6fd6406cbc1f30773"></a><!-- doxytag: member="annotateTrace.cpp::annotateTrace_forBB" ref="a1359aaee4cb6eba6fd6406cbc1f30773" args="(List&lt; basicblock * &gt; *bbList, map&lt; ADDR, instruction * &gt; *insAddrMap, string *program_name)" -->
@@ -103,7 +103,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
           <td class="paramname"><em>insAddrMap</em>, </td>
         </tr>
         <tr>
@@ -125,9 +125,9 @@ Functions</h2></td></tr>
                 <span class="keywordtype">int</span> size = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getBbSize();
         FILE *traceFileInput, *traceFileOutput;
         <span class="keywordflow">if</span> ((traceFileInput  = fopen((<span class="stringliteral">&quot;/scratch/tracesim/specint2006/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;.trace&quot;</span>).c_str(), <span class="stringliteral">&quot;r&quot;</span>)) == NULL) <span class="comment">//TODO PARAMETRIZE this line</span>
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the input file.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the input file.&quot;</span>);
         <span class="keywordflow">if</span> ((traceFileOutput  = fopen((<span class="stringliteral">&quot;/scratch/tracesim/specint2006/bb_trace_archReg/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;.trace&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL) <span class="comment">//TODO PARAMETRIZE this line</span>
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
         map&lt;ADDR, basicblock*&gt; bbHeaders;
         map&lt;int, int&gt; bbSizeHist;
 
@@ -140,7 +140,7 @@ Functions</h2></td></tr>
         <span class="comment">/* Walk through the trace */</span>
         <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> insCounter = 0, insSkipCounter = 0, bbSize = 0, printedInsCounter = 0, printedPhiInsCounter = 0;
         <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* insList = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;instruction*&gt;</a>;
-        <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> insAddr, brAddr, junk_addr, brDstAddr;
+        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insAddr, brAddr, junk_addr, brDstAddr;
         <span class="keywordtype">bool</span> new_bb = <span class="keyword">false</span>, new_pb = <span class="keyword">false</span>;
         <a class="code" href="classbasicblock.html">basicblock</a> *currentBB = NULL, *prevBB = NULL;
         <span class="keywordtype">char</span> insType, junk_s[1000];
@@ -148,7 +148,7 @@ Functions</h2></td></tr>
         <span class="keywordtype">int</span> brTaken = -1;
         <span class="comment">//Get rid of first line (blank line perhaps?)</span>
         <span class="keywordflow">if</span> (fgets (junk_s, 1000, traceFileInput) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Trace file is empty!&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Trace file is empty!&quot;</span>);
         <span class="keywordtype">bool</span> brFound = <span class="keyword">false</span>;
         fprintf(traceFileOutput, <span class="stringliteral">&quot;{\n&quot;</span>);
         <span class="keywordflow">while</span>((insType = fgetc (traceFileInput)) != EOF) {
@@ -157,11 +157,11 @@ Functions</h2></td></tr>
                         <span class="comment">/* TODO put these two lines back */</span>
                         <span class="comment">// insType = &#39;M&#39;;</span>
                         <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu,%llu&quot;</span>, &amp;junk_addr, &amp;insAddr) == EOF) 
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                         <span class="keywordflow">if</span> (fgets (junk_s, 1000, traceFileInput) == NULL) <span class="keywordflow">break</span>; <span class="comment">//grab the rest of line</span>
                         <span class="comment">// Eliminate trace instructions that are not mapped in the CFG</span>
                         <span class="keywordflow">if</span> (insAddrMap-&gt;find(insAddr) == insAddrMap-&gt;end()) {
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
                                 insSkipCounter++;
                                 <span class="keywordflow">continue</span>;
                                 <span class="comment">// printf(&quot;skipping instruction %llx\n&quot;, insAddr);</span>
@@ -182,17 +182,17 @@ Functions</h2></td></tr>
                         <span class="comment">// else insType = &#39;o&#39;;</span>
                         <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;B&#39;</span>) {
                                 <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu,%d,%llu&quot;</span>, &amp;insAddr, &amp;brTaken, &amp;brDstAddr) == EOF)
-                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;A&#39;</span> || insType == <span class="charliteral">&#39;F&#39;</span>) {
                                 <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu&quot;</span>, &amp;insAddr) == EOF)
-                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                         } <span class="keywordflow">else</span> {
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid Trace Instruction Type.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid Trace Instruction Type.&quot;</span>);
                         }
                         <span class="keywordflow">if</span> (fgets (junk_s, 1000, traceFileInput) == NULL) <span class="keywordflow">break</span>; <span class="comment">//grab the rest of line</span>
                         <span class="comment">// Eliminate trace instructions that are not mapped in the CFG</span>
                         <span class="keywordflow">if</span> (insAddrMap-&gt;find(insAddr) == insAddrMap-&gt;end()) {
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
                                 insSkipCounter++;
                                 <span class="keywordflow">continue</span>;
                         }
@@ -207,7 +207,7 @@ Functions</h2></td></tr>
                                 currentBB = bbHeaders[((*insAddrMap)[insAddr])-&gt;getMy_BB_id()];
                         }
                 }
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(currentBB-&gt;<a class="code" href="classbasicblock.html#afd299af5d08655c4fbd10221f5edb556">isInsAddrInBB</a>(insAddr) == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;Trace instruction does not belong to current BB.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(currentBB-&gt;<a class="code" href="classbasicblock.html#afd299af5d08655c4fbd10221f5edb556">isInsAddrInBB</a>(insAddr) == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;Trace instruction does not belong to current BB.&quot;</span>);
                 <span class="keywordflow">if</span> (new_bb) {
                         map&lt;ADDR,string&gt;::iterator it;
                         <span class="comment">// Print BB/PB Header</span>
@@ -216,12 +216,12 @@ Functions</h2></td></tr>
                         }
                         <span class="comment">// Store BB/PB Ins&#39;s</span>
                         <span class="keywordflow">if</span> (prevBB == NULL) prevBB = currentBB; <span class="comment">//for first BB</span>
-                        <span class="comment">// List&lt;instruction*&gt;* listSchBBList = prevBB-&gt;getInsList_ListSchedule();</span>
-                        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = prevBB-&gt;getInsList(); <span class="comment">//Replace this with above line for list-scheduling</span>
+                        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = prevBB-&gt;getInsList_ListSchedule();
+<span class="comment">//                      List&lt;instruction*&gt;* listSchBBList = prevBB-&gt;getInsList(); //Replace this with above line for list-scheduling</span>
                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; listSchBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                                 <span class="comment">// if (dynBBMap.find(listSchBBList-&gt;Nth(i)-&gt;getInsAddr()) == dynBBMap.end()) </span>
                                         <span class="comment">// printf(&quot;didn&#39;t find ins in map %d, %d, %d\n&quot;, dynBBMap.size(), listSchBBList-&gt;NumElements(), dynBBMap.size() &lt; listSchBBList-&gt;NumElements());</span>
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ab5e9dd71fbc48781b528341a9a371a95">isAlreadyAssignedArcRegs</a>() == <span class="keyword">true</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ab5e9dd71fbc48781b528341a9a371a95">isAlreadyAssignedArcRegs</a>() == <span class="keyword">true</span>);
                                 <span class="keywordflow">if</span> (listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>() == <a class="code" href="binaryTranslator_2global_8h.html#a382722368f23110d49ee8908aac999f8">PHI_INS_ADDR</a>) {
                                         fprintf(traceFileOutput, <span class="stringliteral">&quot;A,%d,%d#%d,%d#%d,\n&quot;</span>, <a class="code" href="binaryTranslator_2global_8h.html#a382722368f23110d49ee8908aac999f8">PHI_INS_ADDR</a>,listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#a7d49a66c0f3b426f1cf8fd335a5f3b6a">getNthArchReg</a>(0),listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a>(0),listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#a7d49a66c0f3b426f1cf8fd335a5f3b6a">getNthArchReg</a>(1),listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a>(1));
                                         printedInsCounter++;
@@ -268,7 +268,7 @@ Functions</h2></td></tr>
                 <span class="comment">// Crearte basicblock headers</span>
                 <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;B&#39;</span>) {
                         <span class="keywordflow">if</span> (brFound != <span class="keyword">false</span>) printf(<span class="stringliteral">&quot;%llu\n&quot;</span>, brAddr);
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(brFound == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for brFound variable.&quot;</span>);
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(brFound == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for brFound variable.&quot;</span>);
                         brFound = <span class="keyword">true</span>;
                         brAddr = insAddr;
                 }
@@ -282,7 +282,7 @@ Functions</h2></td></tr>
         printf(<span class="stringliteral">&quot;\tNumber of Trace Instructions Skipped: %lld (out of %lld)\n&quot;</span>, insSkipCounter, insCounter);
         printf(<span class="stringliteral">&quot;\tNumber of Trace Instructions Printed: %lld (out of %lld)\n&quot;</span>, printedInsCounter, insCounter-insSkipCounter);
         printf(<span class="stringliteral">&quot;\tNumber of Trace Phi Instructions Printed: %lld (out of %lld)\n&quot;</span>, printedPhiInsCounter, insCounter-printedPhiInsCounter);
-        <a class="code" href="binaryTranslator_2stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48">DynBBSizeStat</a>(bbSizeHist, program_name);
+        <a class="code" href="stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48">DynBBSizeStat</a>(bbSizeHist, program_name);
 }
 </pre></div>
 <p><div class="dynheader">
@@ -309,7 +309,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
           <td class="paramname"><em>insAddrMap</em>, </td>
         </tr>
         <tr>
@@ -331,9 +331,9 @@ Here is the call graph for this function:</div>
                 <span class="keywordtype">int</span> size = pbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getBbSize();
         FILE *traceFileInput, *traceFileOutput;
         <span class="keywordflow">if</span> ((traceFileInput  = fopen((<span class="stringliteral">&quot;/scratch/tracesim/specint2006/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;.trace&quot;</span>).c_str(), <span class="stringliteral">&quot;r&quot;</span>)) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the input file.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the input file.&quot;</span>);
         <span class="keywordflow">if</span> ((traceFileOutput  = fopen((<span class="stringliteral">&quot;/scratch/tracesim/specint2006/bb_trace/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;_pb.trace&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the output file.&quot;</span>);
         map&lt;ADDR, basicblock*&gt; bbHeaders;
         map&lt;ADDR, list&lt;basicblock*&gt; &gt; pbHeaders;
         map&lt;int, int&gt; bbSizeHist;
@@ -348,7 +348,7 @@ Here is the call graph for this function:</div>
                         } <span class="keywordflow">else</span> {
                                 list&lt;basicblock*&gt; lst;
                                 lst.push_back(bb);
-                                pbHeaders.insert(pair&lt;<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, list&lt;basicblock*&gt; &gt; (bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), lst));
+                                pbHeaders.insert(pair&lt;<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, list&lt;basicblock*&gt; &gt; (bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), lst));
                         }
                 } <span class="keywordflow">else</span> {
                         bbHeaders.insert(pair&lt;ADDR, basicblock*&gt; (bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>(), bb));
@@ -358,7 +358,7 @@ Here is the call graph for this function:</div>
         <span class="comment">/* Walk through the trace */</span>
         <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> insCounter = 0, insSkipCounter = 0, bbSize = 0, printedInsCounter = 0;
         <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* insList = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;instruction*&gt;</a>;
-        <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> insAddr, brAddr, junk_addr, brDstAddr, bbAddr, prevBbAddr;
+        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> insAddr, brAddr, junk_addr, brDstAddr, bbAddr, prevBbAddr;
         <span class="keywordtype">bool</span> new_bb = <span class="keyword">false</span>, new_pb = <span class="keyword">false</span>;
         <a class="code" href="classbasicblock.html">basicblock</a> *currentBB = NULL, *prevBB = NULL;
         <span class="comment">// List&lt;basicblock*&gt; *bb_list = new List&lt;basicblock*&gt;;</span>
@@ -375,7 +375,7 @@ Here is the call graph for this function:</div>
         <span class="keywordtype">int</span> brTaken = -1;
         <span class="comment">//Get rif of first line (blank line perhaps?)</span>
         <span class="keywordflow">if</span> (fgets (junk_s, 1000, traceFileInput) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Trace file is empty!&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Trace file is empty!&quot;</span>);
         <span class="keywordtype">bool</span> brFound = <span class="keyword">false</span>;
         fprintf(traceFileOutput, <span class="stringliteral">&quot;{\n&quot;</span>);
         <span class="keywordflow">while</span>((insType = fgetc (traceFileInput)) != EOF) {
@@ -385,25 +385,25 @@ Here is the call graph for this function:</div>
                         <span class="comment">/* TODO put these two lines back */</span>
                         <span class="comment">// insType = &#39;M&#39;;</span>
                         <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu,%llu&quot;</span>, &amp;junk_addr, &amp;insAddr) == EOF) 
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                 } <span class="keywordflow">else</span> {
                         <span class="comment">/* TODO put these two lines back */</span>
                         <span class="comment">// if (insType == &#39;B&#39;) insType = &#39;b&#39;;</span>
                         <span class="comment">// else insType = &#39;o&#39;;</span>
                         <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;B&#39;</span>) {
                                 <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu,%d,%llu&quot;</span>, &amp;insAddr, &amp;brTaken, &amp;brDstAddr) == EOF)
-                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;A&#39;</span> || insType == <span class="charliteral">&#39;F&#39;</span>) {
                                 <span class="keywordflow">if</span> (fscanf(traceFileInput, <span class="stringliteral">&quot;,%llu&quot;</span>, &amp;insAddr) == EOF)
-                                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
+                                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid end of line detected in trace file.&quot;</span>);
                         } <span class="keywordflow">else</span> {
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid Trace Instruction Type.&quot;</span>);
+                                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Invalid Trace Instruction Type.&quot;</span>);
                         }
                 }
                 <span class="keywordflow">if</span> (fgets (junk_s, 1000, traceFileInput) == NULL) <span class="keywordflow">break</span>; <span class="comment">//grab the rest of line</span>
                 <span class="comment">// Eliminate trace instructions that are not mapped in the CFG</span>
                 <span class="keywordflow">if</span> (insAddrMap-&gt;find(insAddr) == insAddrMap-&gt;end()) {
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(new_bb == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for new_bb flag.&quot;</span>);
                         insSkipCounter++;
                         <span class="keywordflow">continue</span>;
                         <span class="comment">// printf(&quot;skipping instruction %llx\n&quot;, insAddr);</span>
@@ -434,7 +434,7 @@ Here is the call graph for this function:</div>
                         }
                 }
                 
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(currentBB-&gt;<a class="code" href="classbasicblock.html#afd299af5d08655c4fbd10221f5edb556">isInsAddrInBB</a>(insAddr) == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;Trace instruction does not belong to current BB.&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(currentBB-&gt;<a class="code" href="classbasicblock.html#afd299af5d08655c4fbd10221f5edb556">isInsAddrInBB</a>(insAddr) == <span class="keyword">true</span> &amp;&amp; <span class="stringliteral">&quot;Trace instruction does not belong to current BB.&quot;</span>);
                 
                 <span class="keywordflow">if</span> (new_bb) {
                         <span class="keywordflow">if</span> (dynBBAddrList.size() &gt;= 20) {
@@ -455,7 +455,7 @@ Here is the call graph for this function:</div>
                                                                 pbDetected = <span class="keyword">false</span>;
                                                                 <span class="keywordflow">break</span>;
                                                         } <span class="keywordflow">else</span> {
-                                                                listOfBBforPBMap.insert(pair&lt;<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, map&lt;ADDR,string&gt; &gt; (bbHeadList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i), dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbIndx)));
+                                                                listOfBBforPBMap.insert(pair&lt;<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, map&lt;ADDR,string&gt; &gt; (bbHeadList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i), dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(bbIndx)));
                                                                 listOfBBforPB.push_back(bbHeadList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i));
                                                         }
                                                 }
@@ -542,7 +542,7 @@ Here is the call graph for this function:</div>
                 <span class="comment">// Crearte basicblock headers</span>
                 <span class="keywordflow">if</span> (insType == <span class="charliteral">&#39;B&#39;</span>) {
                         <span class="keywordflow">if</span> (brFound != <span class="keyword">false</span>) printf(<span class="stringliteral">&quot;%llu\n&quot;</span>, brAddr);
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(brFound == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for brFound variable.&quot;</span>);
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(brFound == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;Illegal value for brFound variable.&quot;</span>);
                         <span class="comment">// insType = &#39;b&#39;;</span>
                         brFound = <span class="keyword">true</span>;
                         brAddr = insAddr;
@@ -556,7 +556,7 @@ Here is the call graph for this function:</div>
         fprintf(traceFileOutput, <span class="stringliteral">&quot;}\n&quot;</span>);
         printf(<span class="stringliteral">&quot;\tNumber of Trace Instructions Skipped: %lld (out of %lld)\n&quot;</span>, insSkipCounter, insCounter);
         printf(<span class="stringliteral">&quot;\tNumber of Trace Instructions Printed: %lld (out of %lld)\n&quot;</span>, printedInsCounter, insCounter-insSkipCounter);
-        <a class="code" href="binaryTranslator_2stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48">DynBBSizeStat</a>(bbSizeHist, program_name);
+        <a class="code" href="stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48">DynBBSizeStat</a>(bbSizeHist, program_name);
 }
 </pre></div>
 <p><div class="dynheader">
@@ -589,7 +589,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; &amp;&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classbasicblock.html">basicblock</a> * &gt; &amp;&#160;</td>
           <td class="paramname"><em>bbHeaders</em>&#160;</td>
         </tr>
         <tr>
@@ -603,7 +603,7 @@ Here is the call graph for this function:</div>
 <div class="fragment"><pre class="fragment">                                                                                                        {
         <span class="keywordflow">if</span> (insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>() == 0) <span class="keywordflow">return</span>;
         printf(<span class="stringliteral">&quot;BB %llx\n&quot;</span>, insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr());
-        <span class="keywordflow">if</span> (bbHeaders.find(insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr()) == bbHeaders.end()) <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;SHIT&quot;</span>);
+        <span class="keywordflow">if</span> (bbHeaders.find(insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr()) == bbHeaders.end()) <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;SHIT&quot;</span>);
         <span class="comment">// basicblock* bb = findBB(bbList, insList-&gt;Nth(0)-&gt;getInsAddr());</span>
         <a class="code" href="classbasicblock.html">basicblock</a>* bb;
         { <span class="comment">//Find Basicblock</span>
@@ -612,11 +612,11 @@ Here is the call graph for this function:</div>
                         bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
                         <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>() == insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr()) <span class="keywordflow">goto</span> exit_point;
                 }
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Didn&#39;t find the bb&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Didn&#39;t find the bb&quot;</span>);
         }
         exit_point:
         <span class="keywordtype">int</span> listSize = insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
-        <span class="keywordflow">if</span> (bb == NULL || listSize != bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()) <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Wrong number of instructions&quot;</span>);
+        <span class="keywordflow">if</span> (bb == NULL || listSize != bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>()) <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Wrong number of instructions&quot;</span>);
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; listSize; i++) {
                 printf(<span class="stringliteral">&quot;%llx&quot;</span>, insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr());
                 <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>()-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>() != insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(0)-&gt;getInsAddr()) printf(<span class="stringliteral">&quot; SHOOT&quot;</span>);
@@ -644,13 +644,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">long int findBB </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>&#160;</td>
           <td class="paramname"><em>bbHead</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; *&#160;</td>
           <td class="paramname"><em>dynBBList</em>&#160;</td>
         </tr>
         <tr>
@@ -663,7 +663,7 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                                 {
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; dynBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <span class="keywordflow">if</span> ((dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).find(bbHead) != (dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).end()) {
+                <span class="keywordflow">if</span> ((dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).find(<a class="code" href="structbbHead.html">bbHead</a>) != (dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).end()) {
                 <span class="comment">//if ((*it).find(bbHead) != (*it).end()) { //TODO how do i identify this BB?</span>
                         <span class="keywordflow">return</span> i; 
                 }
@@ -689,7 +689,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">bool isNotRepeated </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>&#160;</td>
           <td class="paramname"><em>insAddr</em>, </td>
         </tr>
         <tr>
@@ -732,13 +732,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void removeBB </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>&#160;</td>
           <td class="paramname"><em>bbHead</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; *&#160;</td>
           <td class="paramname"><em>dynBBList</em>&#160;</td>
         </tr>
         <tr>
@@ -752,12 +752,12 @@ Here is the call graph for this function:</div>
 <div class="fragment"><pre class="fragment">                                                               {
         <span class="keywordtype">int</span> indx = 0;
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; dynBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <span class="keywordflow">if</span> ((dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).find(bbHead) != (dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).end()) {
+                <span class="keywordflow">if</span> ((dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).find(<a class="code" href="structbbHead.html">bbHead</a>) != (dynBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)).end()) {
                         dynBBList-&gt;<a class="code" href="classList.html#af17f72d263f90d53ea8501b5b1853470">RemoveAt</a>(i); 
                         <span class="keywordflow">return</span>;
                 }
         }
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Element was not removed from List of Map&quot;</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Element was not removed from List of Map&quot;</span>);
 }
 </pre></div>
 <p><div class="dynheader">
@@ -784,7 +784,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>&#160;</td>
           <td class="paramname"><em>brAddr</em>, </td>
         </tr>
         <tr>
@@ -796,7 +796,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &amp;&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &amp;&#160;</td>
           <td class="paramname"><em>dynBBMap</em>, </td>
         </tr>
         <tr>
@@ -819,7 +819,7 @@ Here is the caller graph for this function:</div>
         <span class="keywordflow">if</span> (brFound == <span class="keyword">true</span>) {
                 fprintf(traceFileOutput, <span class="stringliteral">&quot;H,%llu\n&quot;</span>, brAddr); <span class="comment">// TOOD Update this for phraseblock</span>
         }
-        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>();
+        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = bb-&gt;<a class="code" href="classbasicblock.html#a87440b1ddb945365a4d32b356756ae24">getInsList_ListSchedule</a>();
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; listSchBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                 <span class="keywordflow">if</span> (dynBBMap.find(listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()) != dynBBMap.end()) {
                         insCounter++;
@@ -861,13 +861,13 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void storeToFile </td>
           <td>(</td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, bool &gt; &amp;&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, bool &gt; &amp;&#160;</td>
           <td class="paramname"><em>brFoundMap</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>brAddrMap</em>, </td>
         </tr>
         <tr>
@@ -879,7 +879,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, string &gt; &gt; &amp;&#160;</td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, string &gt; &gt; &amp;&#160;</td>
           <td class="paramname"><em>dynBBListMap</em>, </td>
         </tr>
         <tr>
@@ -903,14 +903,14 @@ Here is the caller graph for this function:</div>
         <span class="comment">// }</span>
         <span class="comment">//Consolidate maps into one</span>
         map&lt;ADDR,string&gt; dynBBMap;
-        <span class="keywordflow">for</span> (map&lt;<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, map&lt;ADDR,string&gt; &gt;::iterator it = dynBBListMap.begin(); it != dynBBListMap.end(); it++) {
+        <span class="keywordflow">for</span> (map&lt;<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, map&lt;ADDR,string&gt; &gt;::iterator it = dynBBListMap.begin(); it != dynBBListMap.end(); it++) {
                 map&lt;ADDR,string&gt; dynBBMap_partial = it-&gt;second;
                 fprintf(traceFileOutput, <span class="stringliteral">&quot;hey0: %d\n&quot;</span>, dynBBMap_partial.size());
                 <span class="keywordflow">for</span> (map&lt;ADDR,string&gt;::iterator it2 = dynBBMap_partial.begin(); it2 != dynBBMap_partial.end(); it2++) {
                         dynBBMap.insert(pair&lt;ADDR,string&gt; (it2-&gt;first,it2-&gt;second));
                 }
         }
-        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>();
+        <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* listSchBBList = bb-&gt;<a class="code" href="classbasicblock.html#a87440b1ddb945365a4d32b356756ae24">getInsList_ListSchedule</a>();
         fprintf(traceFileOutput, <span class="stringliteral">&quot;hey1: %d - %d - %d\n&quot;</span>,dynBBMap.size(), bb-&gt;<a class="code" href="classbasicblock.html#a42862e82af55ea72dc2e69ad32f3df29">getBbSize</a>(), dynBBListMap.size());
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; listSchBBList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                 fprintf(traceFileOutput, <span class="stringliteral">&quot;%s&quot;</span>, (dynBBMap[listSchBBList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;<a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>()]).c_str());
@@ -939,7 +939,7 @@ Here is the call graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -948,7 +948,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

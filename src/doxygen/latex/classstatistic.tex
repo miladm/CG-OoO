@@ -15,16 +15,21 @@
 \item 
 void \hyperlink{classstatistic_a75175df2e04fd107046dd6a9aa5356dd}{dump} ()
 \item 
-\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}{newScalarStat} (string, string, string, \hyperlink{global_2global_8h_add170db579327962a9c5e88de7751ca2}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
-\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
-\begin{DoxyCompactItemize}
+void \hyperlink{classstatistic_afa68a63b6c5511103123e9837a96c7ff}{dumpSummary} ()
 \item 
-int \hyperlink{classstatistic_a5454149fac41c264c14ed73694a7c4e4}{matchIns}
+\hyperlink{classScalarHistStat}{ScalarHistStat} \& \hyperlink{classstatistic_ad4d85ebb5f4446c66911f0c141e11f1a}{newScalarHistStat} (\hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH}, string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
 \item 
-int \hyperlink{classstatistic_ab87dfd0301135bd8385c390e21fd1034}{noMatchIns}
+\hyperlink{classRatioHistStat}{RatioHistStat} \& \hyperlink{classstatistic_ae549d19ee6776db84c3c7d7e2145d92a}{newRatioHistStat} (\hyperlink{classScalarStat}{ScalarStat} $\ast$, \hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH}, string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
 \item 
-set$<$ ADDRINT $>$ \hyperlink{classstatistic_aed69957ac20a00f832a0b01f37029faa}{missingInsList}
+\hyperlink{classScalarStat}{ScalarStat} \& \hyperlink{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}{newScalarStat} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
+\item 
+\hyperlink{classRatioStat}{RatioStat} \& \hyperlink{classstatistic_a3cbaef36cc0ea9a2f7a400e01ce8aa6e}{newRatioStat} (\hyperlink{classScalarStat}{ScalarStat} $\ast$, string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
+\item 
+\hyperlink{classEnergyStat}{EnergyStat} \& \hyperlink{classstatistic_aaf7c406588e46cae93e0158c0dbe8f86}{newEnergyStat} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
+\item 
+\hyperlink{classLeakageEnergyStat}{LeakageEnergyStat} \& \hyperlink{classstatistic_ae12eb8930a20eb1c86c84fad36cfb2bf}{newLeakageEnergyStat} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR}, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO})
+\item 
+void \hyperlink{classstatistic_ac3129cf3eac1626c107314b93d6f5d12}{updateStatMap} (string, string, \hyperlink{classstat}{stat} $\ast$)
 \end{DoxyCompactItemize}
 
 
@@ -40,8 +45,7 @@ set$<$ ADDRINT $>$ \hyperlink{classstatistic_aed69957ac20a00f832a0b01f37029faa}{
 \label{classstatistic_a3f28cad0a4699e3f2db3892b5556f4e7}
 
 \begin{DoxyCode}
-                     {
-}
+{ }
 \end{DoxyCode}
 \hypertarget{classstatistic_a9edcb4dd9cdc09bdfe9a61d2f95654ca}{
 \index{statistic@{statistic}!$\sim$statistic@{$\sim$statistic}}
@@ -55,10 +59,32 @@ set$<$ ADDRINT $>$ \hyperlink{classstatistic_aed69957ac20a00f832a0b01f37029faa}{
 
 \begin{DoxyCode}
                       {
-    set<ScalarStat*>::iterator it;
-    for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
-        delete (*it);
+    {
+        list<ScalarHistStat*>::iterator it;
+        for (it = _ScalarHistStats.begin(); it != _ScalarHistStats.end(); it++) {
+      
+            delete (*it);
+        }
     }
+    {
+        list<RatioHistStat*>::iterator it;
+        for (it = _RatioHistStats.begin(); it != _RatioHistStats.end(); it++) {
+            delete (*it);
+        }
+    }
+    {
+        list<ScalarStat*>::iterator it;
+        for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
+            delete (*it);
+        }
+    }
+    {
+        list<RatioStat*>::iterator it;
+        for (it = _RatioStats.begin(); it != _RatioStats.end(); it++) {
+            delete (*it);
+        }
+    }
+    _out_file.close ();
 }
 \end{DoxyCode}
 
@@ -76,15 +102,275 @@ set$<$ ADDRINT $>$ \hyperlink{classstatistic_aed69957ac20a00f832a0b01f37029faa}{
 
 \begin{DoxyCode}
                       {
-    set<ScalarStat*>::iterator it;
-    for (it = _ScalarStats.begin(); it != _ScalarStats.end(); it++) {
-        (*it)->print ();
+    setupOutFile ();
+    {
+        list<ScalarHistStat*>::iterator it;
+        for (it = _ScalarHistStats.begin (); it != _ScalarHistStats.end (); it++)
+       {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
     }
+    {
+        list<RatioHistStat*>::iterator it;
+        for (it = _RatioHistStats.begin (); it != _RatioHistStats.end (); it++) {
+      
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+    {
+        list<ScalarStat*>::iterator it;
+        for (it = _ScalarStats.begin (); it != _ScalarStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+    {
+        list<RatioStat*>::iterator it;
+        for (it = _RatioStats.begin (); it != _RatioStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+    PJ total_energy = 0;
+    PJ dynamic_energy = 0;
+    PJ static_energy = 0;
+    { /* DYNAMIC ENERGY */
+        list<EnergyStat*>::iterator it;
+        for (it = _EnergyStats.begin (); it != _EnergyStats.end (); it++) {
+            (*it)->print (&_out_file);
+            PJ elem_energy = (*it)->getEnergyValue ();
+            dynamic_energy += elem_energy;
+            total_energy += elem_energy;
+        }
+
+        _out_file << endl;
+        cout << endl;
+    }
+    { /* LEAKAGE ENERGY */
+        list<LeakageEnergyStat*>::iterator it;
+        for (it = _LeakageEnergyStats.begin (); it != _LeakageEnergyStats.end ();
+       it++) {
+            (*it)->print (&_out_file, _statMap);
+            PJ elem_energy = (*it)->getEnergyValue (_statMap);
+            static_energy += elem_energy;
+            total_energy += elem_energy;
+        }
+
+        _out_file << endl;
+        cout << endl;
+    }
+
+    /*-- REPORT TOTAL ENERGY --*/
+    cout << "* STATIC Energy: " << static_energy << "\t\t\t # Static processor en
+      ergy (PJ)" << endl;
+    _out_file << "* STATIC Energy: " << static_energy << "\t\t\t # Static process
+      or energy (PJ)" << endl;
+
+    /*-- REPORT TOTAL ENERGY --*/
+    cout << "* DYNAMIC Energy: " << dynamic_energy << "\t\t\t # Dynamic processor
+       energy (PJ)" << endl;
+    _out_file << "* DYNAMIC Energy: " << dynamic_energy << "\t\t\t # Dynamic proc
+      essor energy (PJ)" << endl;
+
+    /*-- REPORT TOTAL ENERGY --*/
+    cout << "* TOTAL Energy: " << total_energy << "\t\t\t # Toal processor energy
+       (PJ)" << endl;
+    _out_file << "* TOTAL Energy: " << total_energy << "\t\t\t # Toal processor e
+      nergy (PJ)" << endl;
+
+    _out_file << endl;
+    cout << endl;
 }
 \end{DoxyCode}
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{classstatistic_afa68a63b6c5511103123e9837a96c7ff}{
+\index{statistic@{statistic}!dumpSummary@{dumpSummary}}
+\index{dumpSummary@{dumpSummary}!statistic@{statistic}}
+\subsubsection[{dumpSummary}]{\setlength{\rightskip}{0pt plus 5cm}void statistic::dumpSummary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_afa68a63b6c5511103123e9837a96c7ff}
+
+\begin{DoxyCode}
+                             {
+//    _enable_log_stat = false;
+    {
+        list<RatioStat*>::iterator it;
+        for (it = _RatioStats.begin (); it != _RatioStats.end (); it++) {
+            (*it)->print (&_out_file);
+        }
+        _out_file << endl;
+        cout << endl;
+    }
+//    _enable_log_stat = true;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstatistic_aaf7c406588e46cae93e0158c0dbe8f86}{
+\index{statistic@{statistic}!newEnergyStat@{newEnergyStat}}
+\index{newEnergyStat@{newEnergyStat}!statistic@{statistic}}
+\subsubsection[{newEnergyStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf EnergyStat} \& statistic::newEnergyStat (
+\begin{DoxyParamCaption}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_aaf7c406588e46cae93e0158c0dbe8f86}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                  {
+    EnergyStat* cnt = new EnergyStat (class_name, param_name, _description, init_
+      val, print_if_zero);
+    _EnergyStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstatistic_ae12eb8930a20eb1c86c84fad36cfb2bf}{
+\index{statistic@{statistic}!newLeakageEnergyStat@{newLeakageEnergyStat}}
+\index{newLeakageEnergyStat@{newLeakageEnergyStat}!statistic@{statistic}}
+\subsubsection[{newLeakageEnergyStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf LeakageEnergyStat} \& statistic::newLeakageEnergyStat (
+\begin{DoxyParamCaption}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_ae12eb8930a20eb1c86c84fad36cfb2bf}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                {
+    LeakageEnergyStat* cnt = new LeakageEnergyStat (class_name, param_name, _desc
+      ription, init_val, print_if_zero);
+    _LeakageEnergyStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstatistic_ae549d19ee6776db84c3c7d7e2145d92a}{
+\index{statistic@{statistic}!newRatioHistStat@{newRatioHistStat}}
+\index{newRatioHistStat@{newRatioHistStat}!statistic@{statistic}}
+\subsubsection[{newRatioHistStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RatioHistStat} \& statistic::newRatioHistStat (
+\begin{DoxyParamCaption}
+\item[{{\bf ScalarStat} $\ast$}]{divisor, }
+\item[{{\bf LENGTH}}]{histogram\_\-size, }
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_ae549d19ee6776db84c3c7d7e2145d92a}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                       
+                                   {
+    RatioHistStat* cnt = new RatioHistStat (divisor, histogram_size, class_name, 
+      param_name, _description, init_val, print_if_zero);
+    _RatioHistStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstatistic_a3cbaef36cc0ea9a2f7a400e01ce8aa6e}{
+\index{statistic@{statistic}!newRatioStat@{newRatioStat}}
+\index{newRatioStat@{newRatioStat}!statistic@{statistic}}
+\subsubsection[{newRatioStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RatioStat} \& statistic::newRatioStat (
+\begin{DoxyParamCaption}
+\item[{{\bf ScalarStat} $\ast$}]{divisor, }
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_a3cbaef36cc0ea9a2f7a400e01ce8aa6e}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                     {
+    RatioStat* cnt = new RatioStat (divisor, class_name, param_name, _description
+      , init_val, print_if_zero);
+    _RatioStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstatistic_ad4d85ebb5f4446c66911f0c141e11f1a}{
+\index{statistic@{statistic}!newScalarHistStat@{newScalarHistStat}}
+\index{newScalarHistStat@{newScalarHistStat}!statistic@{statistic}}
+\subsubsection[{newScalarHistStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarHistStat} \& statistic::newScalarHistStat (
+\begin{DoxyParamCaption}
+\item[{{\bf LENGTH}}]{histogram\_\-size, }
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{\_\-description, }
+\item[{{\bf SCALAR}}]{init\_\-val, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_ad4d85ebb5f4446c66911f0c141e11f1a}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                       
+                {
+    ScalarHistStat* cnt = new ScalarHistStat (histogram_size, class_name, param_n
+      ame, _description, init_val, print_if_zero);
+    _ScalarHistStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
+    return *cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classstatistic_afc9d7ba7128d7c3b7a70105fb829ab4f}{
@@ -106,28 +392,40 @@ Here is the caller graph for this function:
                                                                   {
     ScalarStat* cnt = new ScalarStat (class_name, param_name, _description, init_
       val, print_if_zero);
-    _ScalarStats.insert (cnt);
+    _ScalarStats.push_back (cnt);
+    updateStatMap (class_name, param_name, (stat*)cnt);
     return *cnt;
 }
 \end{DoxyCode}
 
 
-\subsection{Member Data Documentation}
-\hypertarget{classstatistic_a5454149fac41c264c14ed73694a7c4e4}{
-\index{statistic@{statistic}!matchIns@{matchIns}}
-\index{matchIns@{matchIns}!statistic@{statistic}}
-\subsubsection[{matchIns}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf statistic::matchIns}}}
-\label{classstatistic_a5454149fac41c264c14ed73694a7c4e4}
-\hypertarget{classstatistic_aed69957ac20a00f832a0b01f37029faa}{
-\index{statistic@{statistic}!missingInsList@{missingInsList}}
-\index{missingInsList@{missingInsList}!statistic@{statistic}}
-\subsubsection[{missingInsList}]{\setlength{\rightskip}{0pt plus 5cm}set$<$ADDRINT$>$ {\bf statistic::missingInsList}}}
-\label{classstatistic_aed69957ac20a00f832a0b01f37029faa}
-\hypertarget{classstatistic_ab87dfd0301135bd8385c390e21fd1034}{
-\index{statistic@{statistic}!noMatchIns@{noMatchIns}}
-\index{noMatchIns@{noMatchIns}!statistic@{statistic}}
-\subsubsection[{noMatchIns}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf statistic::noMatchIns}}}
-\label{classstatistic_ab87dfd0301135bd8385c390e21fd1034}
+Here is the call graph for this function:
+
+
+\hypertarget{classstatistic_ac3129cf3eac1626c107314b93d6f5d12}{
+\index{statistic@{statistic}!updateStatMap@{updateStatMap}}
+\index{updateStatMap@{updateStatMap}!statistic@{statistic}}
+\subsubsection[{updateStatMap}]{\setlength{\rightskip}{0pt plus 5cm}void statistic::updateStatMap (
+\begin{DoxyParamCaption}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{{\bf stat} $\ast$}]{statObj}
+\end{DoxyParamCaption}
+)}}
+\label{classstatistic_ac3129cf3eac1626c107314b93d6f5d12}
+
+\begin{DoxyCode}
+                                                                                 
+       {
+    string name = (class_name + ".") + param_name;
+    _statMap.insert (pair<string, stat*>(name, statObj));
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

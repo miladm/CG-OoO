@@ -69,7 +69,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;set&gt;</code><br/>
 <code>#include &lt;map&gt;</code><br/>
 <code>#include &lt;string.h&gt;</code><br/>
-<code>#include &quot;instruction.h&quot;</code><br/>
+<code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;sstream&gt;</code><br/>
+<code>#include &lt;fstream&gt;</code><br/>
+<code>#include &lt;iostream&gt;</code><br/>
+<code>#include &quot;<a class="el" href="instruction_8h_source.html">instruction.h</a>&quot;</code><br/>
 <code>#include &quot;config.h&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for make_instruction.h:</div>
@@ -90,10 +94,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__instruction_8h.html#a309ed69a3b3366fd30619da2256d05ea">parse_instruction</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *brDstSet, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *brBiasMap, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *bpAccuracyMap, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *upldMap, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &gt; &amp;memRdAddrMap, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &gt; &amp;memWrAddrMap, std::string *program_name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="make__instruction_8h.html#ade9ced15fecee85a6283b189233a895b">parse_instruction</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *, std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &gt; &amp;, std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &gt; &amp;, std::string *, <a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a309ed69a3b3366fd30619da2256d05ea"></a><!-- doxytag: member="make_instruction.h::parse_instruction" ref="a309ed69a3b3366fd30619da2256d05ea" args="(List&lt; instruction * &gt; *insList, map&lt; ADDR, instruction * &gt; *insAddrMap, std::set&lt; ADDR &gt; *brDstSet, std::map&lt; ADDR, double &gt; *brBiasMap, std::map&lt; ADDR, double &gt; *bpAccuracyMap, std::map&lt; ADDR, double &gt; *upldMap, std::map&lt; ADDR, set&lt; ADDR &gt; &gt; &amp;memRdAddrMap, std::map&lt; ADDR, set&lt; ADDR &gt; &gt; &amp;memWrAddrMap, std::string *program_name)" -->
+<a class="anchor" id="ade9ced15fecee85a6283b189233a895b"></a><!-- doxytag: member="make_instruction.h::parse_instruction" ref="ade9ced15fecee85a6283b189233a895b" args="(List&lt; instruction * &gt; *, map&lt; ADDR, instruction * &gt; *, std::set&lt; ADDR &gt; *, std::map&lt; ADDR, double &gt; *, std::map&lt; ADDR, double &gt; *, std::map&lt; ADDR, double &gt; *, std::map&lt; ADDR, set&lt; ADDR &gt; &gt; &amp;, std::map&lt; ADDR, set&lt; ADDR &gt; &gt; &amp;, std::string *, CLUSTER_MODE)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -101,55 +105,61 @@ Functions</h2></td></tr>
           <td class="memname">void parse_instruction </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>insList</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>insAddrMap</em>, </td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; *&#160;</td>
-          <td class="paramname"><em>brDstSet</em>, </td>
+          <td class="paramtype">std::set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; *&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *&#160;</td>
-          <td class="paramname"><em>brBiasMap</em>, </td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *&#160;</td>
-          <td class="paramname"><em>bpAccuracyMap</em>, </td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, double &gt; *&#160;</td>
-          <td class="paramname"><em>upldMap</em>, </td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, double &gt; *&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>memRdAddrMap</em>, </td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> &gt; &gt; &amp;&#160;</td>
-          <td class="paramname"><em>memWrAddrMap</em>, </td>
+          <td class="paramtype">std::map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, set&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> &gt; &gt; &amp;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string *&#160;</td>
-          <td class="paramname"><em>program_name</em>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -168,7 +178,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -177,7 +187,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

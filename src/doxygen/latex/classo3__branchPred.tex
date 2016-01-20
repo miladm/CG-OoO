@@ -15,20 +15,20 @@ Collaboration diagram for o3\_\-branchPred:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}{o3\_\-branchPred} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} bp\_\-width, string stage\_\-name)
+\hyperlink{classo3__branchPred_ad4d7447f4f755c074ad7ccb01b4184fd}{o3\_\-branchPred} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-bp\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&bp\_\-to\_\-fetch\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} bp\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classo3__branchPred_ab497c6edb4266e04ae0b20969caeb525}{$\sim$o3\_\-branchPred} ()
 \item 
-void \hyperlink{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}{doBP} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classo3__branchPred_a7f06389c8e205c2eba33c3727a542314}{doBP} ()
 \item 
-void \hyperlink{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70}{squash} ()
 \item 
-void \hyperlink{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044}{regStat} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}{
+\hypertarget{classo3__branchPred_ad4d7447f4f755c074ad7ccb01b4184fd}{
 \index{o3\_\-branchPred@{o3\_\-branchPred}!o3\_\-branchPred@{o3\_\-branchPred}}
 \index{o3\_\-branchPred@{o3\_\-branchPred}!o3_branchPred@{o3\_\-branchPred}}
 \subsubsection[{o3\_\-branchPred}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-branchPred::o3\_\-branchPred (
@@ -36,13 +36,15 @@ void \hyperlink{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{regStat} 
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-bp\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{bp\_\-to\_\-fetch\_\-port, }
 \item[{{\bf WIDTH}}]{bp\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__branchPred_ad491f8c1906fecc1336585bed1677079}
+\label{classo3__branchPred_ad4d7447f4f755c074ad7ccb01b4184fd}
 
 \begin{DoxyCode}
-        : stage (bp_width, stage_name)
+        : stage (bp_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_pipe"][
+      "bp"], clk)
 { 
     _fetch_to_bp_port = &fetch_to_bp_port;
     _bp_to_fetch_port = &bp_to_fetch_port;
@@ -64,20 +66,20 @@ void \hyperlink{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{regStat} 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}{
+\hypertarget{classo3__branchPred_a7f06389c8e205c2eba33c3727a542314}{
 \index{o3\_\-branchPred@{o3\_\-branchPred}!doBP@{doBP}}
 \index{doBP@{doBP}!o3_branchPred@{o3\_\-branchPred}}
 \subsubsection[{doBP}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::doBP (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__branchPred_ab70a61011f52674364f5a24f276973b3}
+\label{classo3__branchPred_a7f06389c8e205c2eba33c3727a542314}
 
 \begin{DoxyCode}
-                                       {
-    /* STAT */
-    regStat (clk);
+                          {
+    /*-- STAT --*/
+    regStat ();
 }
 \end{DoxyCode}
 
@@ -90,19 +92,21 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}{
+\hypertarget{classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044}{
 \index{o3\_\-branchPred@{o3\_\-branchPred}!regStat@{regStat}}
 \index{regStat@{regStat}!o3_branchPred@{o3\_\-branchPred}}
 \subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::regStat (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__branchPred_a58f7e7a2260333813a3fa672eff86796}
+\label{classo3__branchPred_a39d33c191ad5a75b6fa1acf84d5c5044}
 
 \begin{DoxyCode}
-                                          {
-    _fetch_to_bp_port->regStat (clk.now ());
+                             {
+    _fetch_to_bp_port->regStat ();
+    _e_stage.ffAccess (); //READ
+    _e_stage.ffAccess (); //WRITE
 }
 \end{DoxyCode}
 
@@ -115,20 +119,26 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}{
+\hypertarget{classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70}{
 \index{o3\_\-branchPred@{o3\_\-branchPred}!squash@{squash}}
 \index{squash@{squash}!o3_branchPred@{o3\_\-branchPred}}
 \subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-branchPred::squash (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__branchPred_a41218ba2c469ee35610ed5b1af5e49c0}
+\label{classo3__branchPred_a255cd46c77b1600bd989938fcf0f6f70}
 
 \begin{DoxyCode}
-                                         {
+                            {
+    _e_stage.ffAccess ();
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

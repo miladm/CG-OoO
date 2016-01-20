@@ -2,6 +2,8 @@
 \section{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h File Reference}
 \label{binaryTranslator_2global_8h}\index{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h@{/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/global.h}}
 }
+{\ttfamily \#include $<$map$>$}\par
+Include dependency graph for global.h:
 This graph shows which files directly or indirectly include this file:
 \subsection*{Defines}
 \begin{DoxyCompactItemize}
@@ -13,6 +15,10 @@ This graph shows which files directly or indirectly include this file:
 \#define \hyperlink{binaryTranslator_2global_8h_a3088356e3c44bedd210a9cc28246cf82}{REG\_\-STRING\_\-SIZE}~20
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a39e5885c044e32ec0145024bd99c1594}{OPCODE\_\-STRING\_\-SIZE}~30
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a72e1d1d4b3243f4e7ec115f199298e34}{LARGE\_\-NUMBER}~1000000000
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_af8c39c4dac726540182f347a66d09ec3}{OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT}~100
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a09af7f6f05439583552ca729af9dc232}{UPLD\_\-THRESHOLD}~0.01
 \item 
@@ -30,7 +36,9 @@ This graph shows which files directly or indirectly include this file:
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a61e8258fb37eadf049db0df07da08a57}{DEBUG\_\-RA}~0
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{NUM\_\-REGISTERS}~40
+\#define \hyperlink{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{NUM\_\-REGISTERS}~48
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a7311cf48894c7f16bb1703eca5c929ea}{NUM\_\-SPECIAL\_\-REGISTERS}~20
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_ad8311f5862e4dc4169d73a4247cda68a}{INIT\_\-RENAME\_\-REG\_\-NUM}~100
 \item 
@@ -46,27 +54,39 @@ This graph shows which files directly or indirectly include this file:
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a38203106c3880cd1424cc56c578d335a}{L3\_\-LATENCY}~40
 \item 
+\#define \hyperlink{binaryTranslator_2global_8h_aaa3de89c93a646e85cfed82e13879e02}{ST\_\-LATENCY}~2
+\item 
 \#define \hyperlink{binaryTranslator_2global_8h_a517bf62a403a62dce2971e32491251b6}{MEM\_\-LATENCY}~100
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_af265aead8a1318c386b4b55b36c56420}{MEM\_\-HIGHERARCHY}~4
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a6741e5ed99f4591d0f0b717579594369}{NUM\_\-EU}~4
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}{LRF\_\-SIZE}~2000
+\#define \hyperlink{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}{LRF\_\-SIZE}~20
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}{GRF\_\-SIZE}~6000
+\#define \hyperlink{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}{GRF\_\-SIZE}~70
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a24f16c6bb83f55dc3a9142491224179a}{SGRF\_\-SIZE}~NUM\_\-SPECIAL\_\-REGISTERS
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_a0df157b433ce2c25de636f833235ff67}{LRF\_\-LO}~100
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}{LRF\_\-HI}~LRF\_\-LO+LRF\_\-SIZE-\/1
+\#define \hyperlink{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}{LRF\_\-HI}~LRF\_\-LO + LRF\_\-SIZE -\/ 1
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}{GRF\_\-LO}~LRF\_\-HI+1
+\#define \hyperlink{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}{GRF\_\-LO}~LRF\_\-HI + 1
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}{GRF\_\-HI}~GRF\_\-LO+GRF\_\-SIZE-\/1
+\#define \hyperlink{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}{GRF\_\-HI}~GRF\_\-LO + GRF\_\-SIZE -\/ 1
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}{X86\_\-REG\_\-LO}~1
+\#define \hyperlink{binaryTranslator_2global_8h_afd2972fd0b013a84392d1a1be526b1b7}{SGRF\_\-LO}~GRF\_\-HI + 1
 \item 
-\#define \hyperlink{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}{X86\_\-REG\_\-HI}~67
+\#define \hyperlink{binaryTranslator_2global_8h_a4ea7512540280cac0cda2b05a250f37a}{SGRF\_\-HI}~SGRF\_\-LO + SGRF\_\-SIZE -\/ 1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ad0d99983ddd73fa871db62f97d329bf7}{X86\_\-SPECIAL\_\-REG\_\-LO}~1
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_a776b3dafbef4f782b9223ca9b624f202}{X86\_\-SPECIAL\_\-REG\_\-HI}~20
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}{X86\_\-REG\_\-LO}~21
+\item 
+\#define \hyperlink{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}{X86\_\-REG\_\-HI}~68
 \item 
 \#define \hyperlink{binaryTranslator_2global_8h_ac2e4520b753f883cd8050dbf1864db08}{INVALID\_\-REG}~-\/1
 \item 
@@ -75,7 +95,11 @@ This graph shows which files directly or indirectly include this file:
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef long unsigned \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}
+typedef long long unsigned int \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}
+\item 
+typedef long int \hyperlink{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{LENGTH}
+\item 
+typedef int \hyperlink{binaryTranslator_2global_8h_a2cdf00fd92f046898bc7876b66e10577}{SUB\_\-BLK\_\-ID}
 \end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -104,11 +128,39 @@ enum \hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{t
 \hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da4f863252f6ab44c188966c1aebb9928a}{FPU}, 
 \hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da60a57eed407e7df8eb3bf49f61a042c1}{BR}, 
 \hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da52a9b031766fa116251f70e65a84c01a}{ASSIGN}, 
-\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}{NOP}
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}{NOP}, 
+\par
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf2a96922809c2fc0a2534012a48fe81b}{bbHEAD}, 
+\hyperlink{global_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da066c60cffedc27405d047aee3d767ef3}{NUM\_\-INS\_\-TYPE}
  \}
 \item 
 enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{regKind} \{ \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038aa555381c65c9a390841149b92f275f54}{LRF}, 
 \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038a3bc1a8c1e51890ee550a964766b76aab}{GRF}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}{REG\_\-ALLOC\_\-MODE} \{ \hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}{GLOBAL}, 
+\hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}{LOCAL\_\-GLOBAL}, 
+\hyperlink{global_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}{GLOBAL}, 
+\hyperlink{global_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}{LOCAL\_\-GLOBAL}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE} \{ \hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}{NO\_\-LIST\_\-SCH}, 
+\hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}{LIST\_\-SCH}, 
+\hyperlink{global_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}{NO\_\-LIST\_\-SCH}, 
+\hyperlink{global_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}{LIST\_\-SCH}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ec}{MEM\_\-SCH\_\-MODE} \{ \hyperlink{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ecaf2a47885650c5202d300f89c981bb0ed}{STORE\_\-ORDER}, 
+\hyperlink{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62eca631a40f25a9ec3ac7a30dfb1c214faa7}{LOAD\_\-STORE\_\-ORDER}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}{CLUSTER\_\-MODE} \{ \hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839}{BASICBLOCK}, 
+\hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad}{SUPERBLOCK}, 
+\hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce}{PHRASEBLOCK}
+ \}
+\item 
+enum \hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}{PUSH\_\-LOCATION} \{ \hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a24d4461021a77c6ea717de433dea7d37}{PUSH\_\-TO\_\-BOTTOM}, 
+\hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a4e02d2643bccf85934dcb483babedc42}{PUSH\_\-TO\_\-TOP}
  \}
 \end{DoxyCompactItemize}
 
@@ -162,17 +214,17 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \hypertarget{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-HI@{GRF\_\-HI}}
 \index{GRF\_\-HI@{GRF\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{GRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-HI~GRF\_\-LO+GRF\_\-SIZE-\/1}}
+\subsubsection[{GRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-HI~GRF\_\-LO + GRF\_\-SIZE -\/ 1}}
 \label{binaryTranslator_2global_8h_a993553a4b5cc46fbb5c9e17fdb375289}
 \hypertarget{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-LO@{GRF\_\-LO}}
 \index{GRF\_\-LO@{GRF\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{GRF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-LO~LRF\_\-HI+1}}
+\subsubsection[{GRF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-LO~LRF\_\-HI + 1}}
 \label{binaryTranslator_2global_8h_ac186716323578541a08e522a11236335}
 \hypertarget{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!GRF\_\-SIZE@{GRF\_\-SIZE}}
 \index{GRF\_\-SIZE@{GRF\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{GRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-SIZE~6000}}
+\subsubsection[{GRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define GRF\_\-SIZE~70}}
 \label{binaryTranslator_2global_8h_a1e255d0b78c91e7476d3ceb1aca76e52}
 \hypertarget{binaryTranslator_2global_8h_ad8311f5862e4dc4169d73a4247cda68a}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!INIT\_\-RENAME\_\-REG\_\-NUM@{INIT\_\-RENAME\_\-REG\_\-NUM}}
@@ -204,10 +256,15 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \index{L3\_\-LATENCY@{L3\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
 \subsubsection[{L3\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define L3\_\-LATENCY~40}}
 \label{binaryTranslator_2global_8h_a38203106c3880cd1424cc56c578d335a}
+\hypertarget{binaryTranslator_2global_8h_a72e1d1d4b3243f4e7ec115f199298e34}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LARGE\_\-NUMBER@{LARGE\_\-NUMBER}}
+\index{LARGE\_\-NUMBER@{LARGE\_\-NUMBER}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{LARGE\_\-NUMBER}]{\setlength{\rightskip}{0pt plus 5cm}\#define LARGE\_\-NUMBER~1000000000}}
+\label{binaryTranslator_2global_8h_a72e1d1d4b3243f4e7ec115f199298e34}
 \hypertarget{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-HI@{LRF\_\-HI}}
 \index{LRF\_\-HI@{LRF\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{LRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-HI~LRF\_\-LO+LRF\_\-SIZE-\/1}}
+\subsubsection[{LRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-HI~LRF\_\-LO + LRF\_\-SIZE -\/ 1}}
 \label{binaryTranslator_2global_8h_a8841809ce71f9f83fa05932902f582de}
 \hypertarget{binaryTranslator_2global_8h_a0df157b433ce2c25de636f833235ff67}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-LO@{LRF\_\-LO}}
@@ -217,7 +274,7 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \hypertarget{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!LRF\_\-SIZE@{LRF\_\-SIZE}}
 \index{LRF\_\-SIZE@{LRF\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{LRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-SIZE~2000}}
+\subsubsection[{LRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define LRF\_\-SIZE~20}}
 \label{binaryTranslator_2global_8h_a439009ecbc93bf03dbcad21a260fadd1}
 \hypertarget{binaryTranslator_2global_8h_af265aead8a1318c386b4b55b36c56420}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM\_\-HIGHERARCHY@{MEM\_\-HIGHERARCHY}}
@@ -237,8 +294,18 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \hypertarget{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!NUM\_\-REGISTERS@{NUM\_\-REGISTERS}}
 \index{NUM\_\-REGISTERS@{NUM\_\-REGISTERS}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{NUM\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-REGISTERS~40}}
+\subsubsection[{NUM\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-REGISTERS~48}}
 \label{binaryTranslator_2global_8h_a5efff3a4a48efbf589e3a2320997d9b9}
+\hypertarget{binaryTranslator_2global_8h_a7311cf48894c7f16bb1703eca5c929ea}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NUM\_\-SPECIAL\_\-REGISTERS@{NUM\_\-SPECIAL\_\-REGISTERS}}
+\index{NUM\_\-SPECIAL\_\-REGISTERS@{NUM\_\-SPECIAL\_\-REGISTERS}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{NUM\_\-SPECIAL\_\-REGISTERS}]{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-SPECIAL\_\-REGISTERS~20}}
+\label{binaryTranslator_2global_8h_a7311cf48894c7f16bb1703eca5c929ea}
+\hypertarget{binaryTranslator_2global_8h_af8c39c4dac726540182f347a66d09ec3}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT@{OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT}}
+\index{OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT@{OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT}]{\setlength{\rightskip}{0pt plus 5cm}\#define OFFSET\_\-LARGER\_\-THAN\_\-X86\_\-REG\_\-CNT~100}}
+\label{binaryTranslator_2global_8h_af8c39c4dac726540182f347a66d09ec3}
 \hypertarget{binaryTranslator_2global_8h_a39e5885c044e32ec0145024bd99c1594}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!OPCODE\_\-STRING\_\-SIZE@{OPCODE\_\-STRING\_\-SIZE}}
 \index{OPCODE\_\-STRING\_\-SIZE@{OPCODE\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
@@ -254,6 +321,26 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \index{REG\_\-STRING\_\-SIZE@{REG\_\-STRING\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
 \subsubsection[{REG\_\-STRING\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-STRING\_\-SIZE~20}}
 \label{binaryTranslator_2global_8h_a3088356e3c44bedd210a9cc28246cf82}
+\hypertarget{binaryTranslator_2global_8h_a4ea7512540280cac0cda2b05a250f37a}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SGRF\_\-HI@{SGRF\_\-HI}}
+\index{SGRF\_\-HI@{SGRF\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{SGRF\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define SGRF\_\-HI~SGRF\_\-LO + SGRF\_\-SIZE -\/ 1}}
+\label{binaryTranslator_2global_8h_a4ea7512540280cac0cda2b05a250f37a}
+\hypertarget{binaryTranslator_2global_8h_afd2972fd0b013a84392d1a1be526b1b7}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SGRF\_\-LO@{SGRF\_\-LO}}
+\index{SGRF\_\-LO@{SGRF\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{SGRF\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define SGRF\_\-LO~GRF\_\-HI + 1}}
+\label{binaryTranslator_2global_8h_afd2972fd0b013a84392d1a1be526b1b7}
+\hypertarget{binaryTranslator_2global_8h_a24f16c6bb83f55dc3a9142491224179a}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SGRF\_\-SIZE@{SGRF\_\-SIZE}}
+\index{SGRF\_\-SIZE@{SGRF\_\-SIZE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{SGRF\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define SGRF\_\-SIZE~NUM\_\-SPECIAL\_\-REGISTERS}}
+\label{binaryTranslator_2global_8h_a24f16c6bb83f55dc3a9142491224179a}
+\hypertarget{binaryTranslator_2global_8h_aaa3de89c93a646e85cfed82e13879e02}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!ST\_\-LATENCY@{ST\_\-LATENCY}}
+\index{ST\_\-LATENCY@{ST\_\-LATENCY}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{ST\_\-LATENCY}]{\setlength{\rightskip}{0pt plus 5cm}\#define ST\_\-LATENCY~2}}
+\label{binaryTranslator_2global_8h_aaa3de89c93a646e85cfed82e13879e02}
 \hypertarget{binaryTranslator_2global_8h_a09af7f6f05439583552ca729af9dc232}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!UPLD\_\-THRESHOLD@{UPLD\_\-THRESHOLD}}
 \index{UPLD\_\-THRESHOLD@{UPLD\_\-THRESHOLD}!binaryTranslator/global.h@{binaryTranslator/global.h}}
@@ -272,24 +359,94 @@ enum \hyperlink{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{r
 \hypertarget{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-REG\_\-HI@{X86\_\-REG\_\-HI}}
 \index{X86\_\-REG\_\-HI@{X86\_\-REG\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{X86\_\-REG\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-HI~67}}
+\subsubsection[{X86\_\-REG\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-HI~68}}
 \label{binaryTranslator_2global_8h_ad6ace7808dd5d12870c420f892749521}
 \hypertarget{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-REG\_\-LO@{X86\_\-REG\_\-LO}}
 \index{X86\_\-REG\_\-LO@{X86\_\-REG\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{X86\_\-REG\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-LO~1}}
+\subsubsection[{X86\_\-REG\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-REG\_\-LO~21}}
 \label{binaryTranslator_2global_8h_ab6b4d7c8ddf9e95d192c13d22e831d05}
+\hypertarget{binaryTranslator_2global_8h_a776b3dafbef4f782b9223ca9b624f202}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-SPECIAL\_\-REG\_\-HI@{X86\_\-SPECIAL\_\-REG\_\-HI}}
+\index{X86\_\-SPECIAL\_\-REG\_\-HI@{X86\_\-SPECIAL\_\-REG\_\-HI}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{X86\_\-SPECIAL\_\-REG\_\-HI}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-SPECIAL\_\-REG\_\-HI~20}}
+\label{binaryTranslator_2global_8h_a776b3dafbef4f782b9223ca9b624f202}
+\hypertarget{binaryTranslator_2global_8h_ad0d99983ddd73fa871db62f97d329bf7}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!X86\_\-SPECIAL\_\-REG\_\-LO@{X86\_\-SPECIAL\_\-REG\_\-LO}}
+\index{X86\_\-SPECIAL\_\-REG\_\-LO@{X86\_\-SPECIAL\_\-REG\_\-LO}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{X86\_\-SPECIAL\_\-REG\_\-LO}]{\setlength{\rightskip}{0pt plus 5cm}\#define X86\_\-SPECIAL\_\-REG\_\-LO~1}}
+\label{binaryTranslator_2global_8h_ad0d99983ddd73fa871db62f97d329bf7}
 
 
 \subsection{Typedef Documentation}
-\hypertarget{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{
+\hypertarget{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!ADDR@{ADDR}}
 \index{ADDR@{ADDR}!binaryTranslator/global.h@{binaryTranslator/global.h}}
-\subsubsection[{ADDR}]{\setlength{\rightskip}{0pt plus 5cm}typedef long unsigned {\bf ADDR}}}
-\label{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}
+\subsubsection[{ADDR}]{\setlength{\rightskip}{0pt plus 5cm}typedef long long unsigned int {\bf ADDR}}}
+\label{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}
+\hypertarget{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LENGTH@{LENGTH}}
+\index{LENGTH@{LENGTH}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{LENGTH}]{\setlength{\rightskip}{0pt plus 5cm}typedef long int {\bf LENGTH}}}
+\label{binaryTranslator_2global_8h_a9f35cc405c37836572563f16d0302ba6}
+\hypertarget{binaryTranslator_2global_8h_a2cdf00fd92f046898bc7876b66e10577}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SUB\_\-BLK\_\-ID@{SUB\_\-BLK\_\-ID}}
+\index{SUB\_\-BLK\_\-ID@{SUB\_\-BLK\_\-ID}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{SUB\_\-BLK\_\-ID}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf SUB\_\-BLK\_\-ID}}}
+\label{binaryTranslator_2global_8h_a2cdf00fd92f046898bc7876b66e10577}
 
 
 \subsection{Enumeration Type Documentation}
+\hypertarget{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!CLUSTER\_\-MODE@{CLUSTER\_\-MODE}}
+\index{CLUSTER\_\-MODE@{CLUSTER\_\-MODE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{CLUSTER\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf CLUSTER\_\-MODE}}}
+\label{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BASICBLOCK@{BASICBLOCK}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!BASICBLOCK@{BASICBLOCK}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839}{
+BASICBLOCK}
+\label{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da5e4294a99a024193afa1db0f4f31a839}
+}]\index{SUPERBLOCK@{SUPERBLOCK}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SUPERBLOCK@{SUPERBLOCK}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad}{
+SUPERBLOCK}
+\label{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3da888c16433113ecad73e4139129c02aad}
+}]\index{PHRASEBLOCK@{PHRASEBLOCK}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!PHRASEBLOCK@{PHRASEBLOCK}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce}{
+PHRASEBLOCK}
+\label{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3dab412e5026ec6f31f806d09f8be9094ce}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{BASICBLOCK, SUPERBLOCK, PHRASEBLOCK} CLUSTER_MODE;
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ec}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!MEM\_\-SCH\_\-MODE@{MEM\_\-SCH\_\-MODE}}
+\index{MEM\_\-SCH\_\-MODE@{MEM\_\-SCH\_\-MODE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{MEM\_\-SCH\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf MEM\_\-SCH\_\-MODE}}}
+\label{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ec}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{STORE\_\-ORDER@{STORE\_\-ORDER}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!STORE\_\-ORDER@{STORE\_\-ORDER}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ecaf2a47885650c5202d300f89c981bb0ed}{
+STORE\_\-ORDER}
+\label{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62ecaf2a47885650c5202d300f89c981bb0ed}
+}]\index{LOAD\_\-STORE\_\-ORDER@{LOAD\_\-STORE\_\-ORDER}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LOAD\_\-STORE\_\-ORDER@{LOAD\_\-STORE\_\-ORDER}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62eca631a40f25a9ec3ac7a30dfb1c214faa7}{
+LOAD\_\-STORE\_\-ORDER}
+\label{binaryTranslator_2global_8h_a2537f310abf2bbaaa7f5f9f3c44b62eca631a40f25a9ec3ac7a30dfb1c214faa7}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{STORE_ORDER, LOAD_STORE_ORDER} MEM_SCH_MODE;
+\end{DoxyCode}
 \hypertarget{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!memType@{memType}}
 \index{memType@{memType}!binaryTranslator/global.h@{binaryTranslator/global.h}}
@@ -329,6 +486,60 @@ WRITE}
 \begin{DoxyCode}
 {none, READ, WRITE} memType;
 \end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!PUSH\_\-LOCATION@{PUSH\_\-LOCATION}}
+\index{PUSH\_\-LOCATION@{PUSH\_\-LOCATION}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{PUSH\_\-LOCATION}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf PUSH\_\-LOCATION}}}
+\label{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{PUSH\_\-TO\_\-BOTTOM@{PUSH\_\-TO\_\-BOTTOM}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!PUSH\_\-TO\_\-BOTTOM@{PUSH\_\-TO\_\-BOTTOM}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a24d4461021a77c6ea717de433dea7d37}{
+PUSH\_\-TO\_\-BOTTOM}
+\label{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a24d4461021a77c6ea717de433dea7d37}
+}]\index{PUSH\_\-TO\_\-TOP@{PUSH\_\-TO\_\-TOP}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!PUSH\_\-TO\_\-TOP@{PUSH\_\-TO\_\-TOP}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a4e02d2643bccf85934dcb483babedc42}{
+PUSH\_\-TO\_\-TOP}
+\label{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092a4e02d2643bccf85934dcb483babedc42}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{PUSH_TO_BOTTOM, PUSH_TO_TOP} PUSH_LOCATION;
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!REG\_\-ALLOC\_\-MODE@{REG\_\-ALLOC\_\-MODE}}
+\index{REG\_\-ALLOC\_\-MODE@{REG\_\-ALLOC\_\-MODE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{REG\_\-ALLOC\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf REG\_\-ALLOC\_\-MODE}}}
+\label{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{GLOBAL@{GLOBAL}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GLOBAL@{GLOBAL}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}{
+GLOBAL}
+\label{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}
+}]\index{LOCAL\_\-GLOBAL@{LOCAL\_\-GLOBAL}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LOCAL\_\-GLOBAL@{LOCAL\_\-GLOBAL}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}{
+LOCAL\_\-GLOBAL}
+\label{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}
+}]\index{GLOBAL@{GLOBAL}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!GLOBAL@{GLOBAL}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}{
+GLOBAL}
+\label{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264afde1bb5ef04b28059e61df449501f1c0}
+}]\index{LOCAL\_\-GLOBAL@{LOCAL\_\-GLOBAL}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LOCAL\_\-GLOBAL@{LOCAL\_\-GLOBAL}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}{
+LOCAL\_\-GLOBAL}
+\label{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264a84f1a709a4e72873b43d3788ef295f43}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{GLOBAL, LOCAL_GLOBAL} REG_ALLOC_MODE;
+\end{DoxyCode}
 \hypertarget{binaryTranslator_2global_8h_a8981b18ef48c0d2dbf747e5e63e46038}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!regKind@{regKind}}
 \index{regKind@{regKind}!binaryTranslator/global.h@{binaryTranslator/global.h}}
@@ -351,6 +562,37 @@ GRF}
 
 \begin{DoxyCode}
 {LRF, GRF} regKind;
+\end{DoxyCode}
+\hypertarget{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{
+\index{binaryTranslator/global.h@{binaryTranslator/global.h}!SCH\_\-MODE@{SCH\_\-MODE}}
+\index{SCH\_\-MODE@{SCH\_\-MODE}!binaryTranslator/global.h@{binaryTranslator/global.h}}
+\subsubsection[{SCH\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf SCH\_\-MODE}}}
+\label{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{NO\_\-LIST\_\-SCH@{NO\_\-LIST\_\-SCH}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NO\_\-LIST\_\-SCH@{NO\_\-LIST\_\-SCH}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}{
+NO\_\-LIST\_\-SCH}
+\label{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}
+}]\index{LIST\_\-SCH@{LIST\_\-SCH}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LIST\_\-SCH@{LIST\_\-SCH}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}{
+LIST\_\-SCH}
+\label{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}
+}]\index{NO\_\-LIST\_\-SCH@{NO\_\-LIST\_\-SCH}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NO\_\-LIST\_\-SCH@{NO\_\-LIST\_\-SCH}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}{
+NO\_\-LIST\_\-SCH}
+\label{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba89ff9066d984a2a32f81e307f27be236}
+}]\index{LIST\_\-SCH@{LIST\_\-SCH}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!LIST\_\-SCH@{LIST\_\-SCH}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}{
+LIST\_\-SCH}
+\label{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{NO_LIST_SCH, LIST_SCH} SCH_MODE;
 \end{DoxyCode}
 \hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{
 \index{binaryTranslator/global.h@{binaryTranslator/global.h}!type@{type}}
@@ -408,6 +650,14 @@ ASSIGN}
 \hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}{
 NOP}
 \label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf811bef354b292ff0713c50d7652c026}
+}]\index{bbHEAD@{bbHEAD}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!bbHEAD@{bbHEAD}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf2a96922809c2fc0a2534012a48fe81b}{
+bbHEAD}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2daf2a96922809c2fc0a2534012a48fe81b}
+}]\index{NUM\_\-INS\_\-TYPE@{NUM\_\-INS\_\-TYPE}!binaryTranslator/global.h@{binaryTranslator/global.h}}\index{binaryTranslator/global.h@{binaryTranslator/global.h}!NUM\_\-INS\_\-TYPE@{NUM\_\-INS\_\-TYPE}}\item[{\em 
+\hypertarget{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da066c60cffedc27405d047aee3d767ef3}{
+NUM\_\-INS\_\-TYPE}
+\label{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2da066c60cffedc27405d047aee3d767ef3}
 }]\end{description}
 \end{Desc}
 

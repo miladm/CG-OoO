@@ -11,9 +11,9 @@ This graph shows which files directly or indirectly include this file:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{annotateTrace_8h_a1359aaee4cb6eba6fd6406cbc1f30773}{annotateTrace\_\-forBB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
+void \hyperlink{annotateTrace_8h_a1359aaee4cb6eba6fd6406cbc1f30773}{annotateTrace\_\-forBB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
 \item 
-void \hyperlink{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}{annotateTrace\_\-forPB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
+void \hyperlink{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}{annotateTrace\_\-forPB} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, string $\ast$program\_\-name)
 \end{DoxyCompactItemize}
 
 
@@ -149,9 +149,9 @@ void \hyperlink{annotateTrace_8h_a3099323792a8316815c7adb8bc3aed50}{annotateTrac
                         }
                         // Store BB/PB Ins's
                         if (prevBB == NULL) prevBB = currentBB; //for first BB
-                        // List<instruction*>* listSchBBList = prevBB->getInsList
-      _ListSchedule();
-                        List<instruction*>* listSchBBList = prevBB->getInsList();
+                        List<instruction*>* listSchBBList = prevBB->getInsList_Li
+      stSchedule();
+//                      List<instruction*>* listSchBBList = prevBB->getInsList();
        //Replace this with above line for list-scheduling
                         for (int i = 0; i < listSchBBList->NumElements(); i++) {
                                 // if (dynBBMap.find(listSchBBList->Nth(i)->getIn

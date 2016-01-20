@@ -3,5 +3,5 @@ digraph G
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir=LR;
-  Node1 [label="LocalBP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classLocalBP.html"];
+  Node1 [label="Db",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structDb.html"];
 }

@@ -15,42 +15,45 @@ Collaboration diagram for o3\_\-lsqCAM:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__lsqCAM_a834f3e822c9d236ae72c40316f43b693}{o3\_\-lsqCAM} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} len=1, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} rd\_\-port\_\-cnt=1, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} wr\_\-port\_\-cnt=1, string table\_\-name=\char`\"{}LSQtable\char`\"{})
+\hyperlink{classo3__lsqCAM_a1ad55f822a48b91004a5081e88952362}{o3\_\-lsqCAM} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string)
 \item 
 \hyperlink{classo3__lsqCAM_a5bc53f5f972f4d902325bc702efe8491}{$\sim$o3\_\-lsqCAM} ()
 \item 
-\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc}{findPendingMemIns} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
+\hyperlink{classdynInstruction}{dynInstruction} $\ast$ \hyperlink{classo3__lsqCAM_a7db68789c8d9af13bbc9ec485b4972bc}{findPendingMemIns} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
 \item 
-void \hyperlink{classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197}{setTimer} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+void \hyperlink{classo3__lsqCAM_a25372198cf9ceb3037dd0d027006eb08}{setTimer} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
 \item 
 void \hyperlink{classo3__lsqCAM_a95e286b95f3651e40d57206eb2a41308}{squash} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
 \item 
-void \hyperlink{classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2}{delFinishedMemAxes} (\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+void \hyperlink{classo3__lsqCAM_aa7fdfa8e6591d754e194c7052e7e17d3}{delFinishedMemAxes} ()
 \item 
 bool \hyperlink{classo3__lsqCAM_ad3d6f79a7377317fc859080d337d428a}{hasCommit} ()
 \item 
-bool \hyperlink{classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83}{hasAnyCompleteLdFromAddr} (\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID}, \hyperlink{classdynInstruction}{dynInstruction} $\ast$)
+bool \hyperlink{classo3__lsqCAM_ac52c64978b8fbe0569bb67f0d77e2ec9}{hasMemAddr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
 \item 
-pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a}{hasFinishedIns} (\hyperlink{o3_2lsq_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID}, \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE})
+\hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID} \hyperlink{classo3__lsqCAM_ad0ef7ab14e36284321707f52bfe32d9f}{hasAnyCompleteStFromAddr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
+\item 
+pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__lsqCAM_a603e22c5cb8d5049e843de830158b4e4}{hasAnyCompleteLdFromAddr} (\hyperlink{binaryTranslator_2frontend_2stInstruction_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID}, \hyperlink{global_2global_8h_a1883c47d0023d0f200e1d86eced6a070}{INS\_\-ID})
+\item 
+pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperlink{classo3__lsqCAM_a08fc977c038420904ea7186c55515ae8}{hasFinishedIns} (\hyperlink{global_2global_8h_a3bb5a7f1114a20672e012bf0dfe5fb24}{LSQ\_\-ID})
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__lsqCAM_a834f3e822c9d236ae72c40316f43b693}{
+\hypertarget{classo3__lsqCAM_a1ad55f822a48b91004a5081e88952362}{
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!o3\_\-lsqCAM@{o3\_\-lsqCAM}}
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!o3_lsqCAM@{o3\_\-lsqCAM}}
 \subsubsection[{o3\_\-lsqCAM}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-lsqCAM::o3\_\-lsqCAM (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{string}]{table\_\-name = {\ttfamily \char`\"{}LSQtable\char`\"{}}}
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
+\item[{string}]{table\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__lsqCAM_a834f3e822c9d236ae72c40316f43b693}
+\label{classo3__lsqCAM_a1ad55f822a48b91004a5081e88952362}
 
 \begin{DoxyCode}
-    : CAMtable<dynInstruction*> (len, rd_port_cnt, wr_port_cnt, table_name)
+    : CAMtable<dynInstruction*> (clk, root, table_name)
 {}
 \end{DoxyCode}
 \hypertarget{classo3__lsqCAM_a5bc53f5f972f4d902325bc702efe8491}{
@@ -69,31 +72,34 @@ pair$<$ bool, \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \hyperl
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2}{
+\hypertarget{classo3__lsqCAM_aa7fdfa8e6591d754e194c7052e7e17d3}{
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!delFinishedMemAxes@{delFinishedMemAxes}}
 \index{delFinishedMemAxes@{delFinishedMemAxes}!o3_lsqCAM@{o3\_\-lsqCAM}}
 \subsubsection[{delFinishedMemAxes}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-lsqCAM::delFinishedMemAxes (
 \begin{DoxyParamCaption}
-\item[{{\bf CYCLE}}]{now}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__lsqCAM_a2aa5dc2ccb76d85e0c8df59a8dfe47f2}
+\label{classo3__lsqCAM_aa7fdfa8e6591d754e194c7052e7e17d3}
 
 \begin{DoxyCode}
-                                             {
+                                    {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         if (_table.Nth(i)->_delay.isValidStopTime () &&
             _table.Nth(i)->_delay.getStopTime () <= now) {
             Assert (getNth_unsafe (i)->getSQstate () == SQ_CACHE_DISPATCH);
             dynInstruction* ins = pullNth (i);
-            dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), "Found a fi
-      nished ST ins: ", ins->getInsID ());
+            dbg.print (DBG_MEMORY, "%s: %s %llu\n", _c_name.c_str (), 
+                       "Found a finished ST ins: ", ins->getInsID ());
             delete ins;
-            break; /* REMOVE ONE ELEM PER INVOCATION */
+            break; /*-- REMOVE ONE ELEM PER INVOCATION (pullNth DELETED OBJ'S MOR
+      E THAN ONE REM CAN CAUSE A BUG) --*/
         }
-        dbg.print (DBG_MEMORY, "%s: %s %ld %ld\n", _c_name.c_str (), "No finished
-       ST ins.", _table.Nth(0)->_delay.isValidStopTime (), now);
+        dbg.print (DBG_MEMORY, "%s: %s %ld (cyc: %ld)\n", _c_name.c_str (), 
+                   "No finished ST ins.", _table.Nth(0)->_delay.isValidStopTime (
+      ), now);
     }
 }
 \end{DoxyCode}
@@ -132,8 +138,8 @@ Here is the caller graph for this function:
         }
         dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No ST ins issued.")
       ;
-        return NULL; /* NOTHING ISSUED */
-    } else {
+        return NULL; /*-- NOTHING ISSUED --*/
+    } else { /*-- LD_QU --*/
         LENGTH table_size = _table.NumElements ();
         for (LENGTH i = 0; i < table_size; i++) {
             dynInstruction* ins = getNth_unsafe (i);
@@ -146,7 +152,7 @@ Here is the caller graph for this function:
         }
         dbg.print (DBG_MEMORY, "%s: %s\n", _c_name.c_str (), "No LD ins issued.")
       ;
-        return NULL; /* NOTHING ISSUED */
+        return NULL; /*-- NOTHING ISSUED --*/
     }
 }
 \end{DoxyCode}
@@ -160,40 +166,79 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83}{
+\hypertarget{classo3__lsqCAM_a603e22c5cb8d5049e843de830158b4e4}{
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!hasAnyCompleteLdFromAddr@{hasAnyCompleteLdFromAddr}}
 \index{hasAnyCompleteLdFromAddr@{hasAnyCompleteLdFromAddr}!o3_lsqCAM@{o3\_\-lsqCAM}}
-\subsubsection[{hasAnyCompleteLdFromAddr}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-lsqCAM::hasAnyCompleteLdFromAddr (
+\subsubsection[{hasAnyCompleteLdFromAddr}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ bool, {\bf dynInstruction} $\ast$ $>$ o3\_\-lsqCAM::hasAnyCompleteLdFromAddr (
 \begin{DoxyParamCaption}
-\item[{{\bf INS\_\-ID}}]{completed\_\-st\_\-mem\_\-addr, }
-\item[{{\bf dynInstruction} $\ast$}]{violating\_\-ld}
+\item[{{\bf ADDRS}}]{completed\_\-st\_\-mem\_\-addr, }
+\item[{{\bf INS\_\-ID}}]{lo\_\-seq\_\-num, }
+\item[{{\bf INS\_\-ID}}]{hi\_\-seq\_\-num}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__lsqCAM_ac3fca99875017c6639bfeccafe904c83}
+\label{classo3__lsqCAM_a603e22c5cb8d5049e843de830158b4e4}
 
 \begin{DoxyCode}
                                                                                  
-                         {
-    violating_ld = NULL;
+                                                       {
     LENGTH table_size = _table.NumElements ();
-    for (LENGTH i = table_size - 1; i >= 0; i--) {
+    if (table_size > 0 && hi_seq_num == NO_WAW_ST_INS) 
+        hi_seq_num = getNth_unsafe(table_size - 1)->getInsID ();
+    for (LENGTH i = table_size - 1; i > 0; i--) {
         dynInstruction* ins = getNth_unsafe (i);
+        if (ins->getInsID () > hi_seq_num) continue;
+        if (ins->getInsID () <= lo_seq_num) break;
         if (ins->getMemAddr () == completed_st_mem_addr) {
-            if (ins->getLQstate () == LQ_COMPLETE) {
-                violating_ld = ins;
-                return true; //TODO double cehck that this means a register write
-       has happened in the stage
+            if (ins->getLQstate () == LQ_COMPLETE && ins->isCacheAxes ()) {
+                return pair<bool, dynInstruction*> (true, ins); //TODO double ceh
+      ck that this means a register write has happened in the stage
             } else if (ins->getLQstate () == LQ_FWD_FROM_SQ ||
                        ins->getLQstate () == LQ_MSHR_WAIT ||
                        ins->getLQstate () == LQ_CACHE_WAIT) {
                 //TODO implement this block - FWD from SQ - return false 
-                //TODO check that at ADD_WAIT state, later on the value in SQ
+                //TODO check that at ADDR_WAIT state, later on the value in SQ
                 //will be picked up and so we don't have to worry about that
                 //here
             }
         }
     }
-    return false;
+    return pair<bool, dynInstruction*> (false, NULL);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classo3__lsqCAM_ad0ef7ab14e36284321707f52bfe32d9f}{
+\index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!hasAnyCompleteStFromAddr@{hasAnyCompleteStFromAddr}}
+\index{hasAnyCompleteStFromAddr@{hasAnyCompleteStFromAddr}!o3_lsqCAM@{o3\_\-lsqCAM}}
+\subsubsection[{hasAnyCompleteStFromAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf INS\_\-ID} o3\_\-lsqCAM::hasAnyCompleteStFromAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{completed\_\-st\_\-mem\_\-addr, }
+\item[{{\bf INS\_\-ID}}]{st\_\-seq\_\-num}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__lsqCAM_ad0ef7ab14e36284321707f52bfe32d9f}
+
+\begin{DoxyCode}
+                                                                                 
+               {
+    LENGTH table_size = _table.NumElements ();
+    for (LENGTH i = 0; i < table_size; i++) {
+        dynInstruction* st_ins = getNth_unsafe (i);
+        if (st_ins->getInsID () <= st_seq_num) continue;
+        if (st_ins->getSQstate () != SQ_COMPLETE) continue;
+        if (st_ins->getMemAddr () == completed_st_mem_addr) 
+            return st_ins->getInsID ();
+    }
+    return NO_WAW_ST_INS; /* NO MATCHING YOUNGER STORE WITH SAME MEM ADDR FOUND *
+      /
 }
 \end{DoxyCode}
 
@@ -237,19 +282,19 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a}{
+\hypertarget{classo3__lsqCAM_a08fc977c038420904ea7186c55515ae8}{
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!hasFinishedIns@{hasFinishedIns}}
 \index{hasFinishedIns@{hasFinishedIns}!o3_lsqCAM@{o3\_\-lsqCAM}}
 \subsubsection[{hasFinishedIns}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ bool, {\bf dynInstruction} $\ast$ $>$ o3\_\-lsqCAM::hasFinishedIns (
 \begin{DoxyParamCaption}
-\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf LSQ\_\-ID}}]{lsq\_\-id}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__lsqCAM_aad5ca9d9f84c657635d39de62e1ec32a}
+\label{classo3__lsqCAM_a08fc977c038420904ea7186c55515ae8}
 
 \begin{DoxyCode}
-                                                                               {
+                                                                    {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     if (lsq_id == LD_QU) {
         for (LENGTH i = 0; i < table_size; i++) {
@@ -260,8 +305,10 @@ Here is the caller graph for this function:
                  _table.Nth(i)->_delay.isValidStopTime () &&
                  _table.Nth(i)->_delay.getStopTime () <= now) {
                 CYCLE stop_time = _table.Nth(i)->_delay.getStopTime ();
-                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (
-      ), "Found a finished LD ins: ", ins->getInsID (), stop_time, now);
+                dbg.print (DBG_MEMORY, "%s: %s %llu %llu (cyc: %llu)\n", _c_name.
+      c_str (), 
+                           "Found a finished LD ins: ", ins->getInsID (), stop_ti
+      me, now);
                 return pair<bool, dynInstruction*> (true, ins);
             }
         }
@@ -275,8 +322,10 @@ Here is the caller graph for this function:
                 _table.Nth(i)->_delay.isValidStopTime () &&
                 _table.Nth(i)->_delay.getStopTime () <= now) {
                 CYCLE stop_time = _table.Nth(i)->_delay.getStopTime ();
-                dbg.print (DBG_MEMORY, "%s: %s %llu %llu %llu\n", _c_name.c_str (
-      ), "Found a finished ST ins: ", ins->getInsID (), stop_time, now);
+                dbg.print (DBG_MEMORY, "%s: %s %llu %llu (cyc: %llu)\n", _c_name.
+      c_str (), 
+                           "Found a finished ST ins: ", ins->getInsID (), stop_ti
+      me, now);
                 return pair<bool, dynInstruction*> (true, ins);
             }
         }
@@ -296,26 +345,64 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197}{
+\hypertarget{classo3__lsqCAM_ac52c64978b8fbe0569bb67f0d77e2ec9}{
+\index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!hasMemAddr@{hasMemAddr}}
+\index{hasMemAddr@{hasMemAddr}!o3_lsqCAM@{o3\_\-lsqCAM}}
+\subsubsection[{hasMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-lsqCAM::hasMemAddr (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDRS}}]{mem\_\-addr, }
+\item[{{\bf INS\_\-ID}}]{seq\_\-num}
+\end{DoxyParamCaption}
+)}}
+\label{classo3__lsqCAM_ac52c64978b8fbe0569bb67f0d77e2ec9}
+
+\begin{DoxyCode}
+                                                          {
+    LENGTH table_size = _table.NumElements ();
+    for (LENGTH i = table_size - 1; i >= 0; i--) {
+        dynInstruction* ins = getNth_unsafe (i);
+        PIPE_STAGE stage = ins->getPipeStage ();
+        if (seq_num <= ins->getInsID ()) continue;
+        if (g_var.g_mem_model == NAIVE_SPECUL &&
+         ! (stage == COMPLETE || stage == COMMIT)) continue;
+        if (ins->getMemAddr () == mem_addr) {
+            return true;
+        }
+    }
+    return false;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classo3__lsqCAM_a25372198cf9ceb3037dd0d027006eb08}{
 \index{o3\_\-lsqCAM@{o3\_\-lsqCAM}!setTimer@{setTimer}}
 \index{setTimer@{setTimer}!o3_lsqCAM@{o3\_\-lsqCAM}}
 \subsubsection[{setTimer}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-lsqCAM::setTimer (
 \begin{DoxyParamCaption}
 \item[{{\bf dynInstruction} $\ast$}]{elem, }
-\item[{{\bf CYCLE}}]{axes\_\-lat, }
-\item[{{\bf CYCLE}}]{now}
+\item[{{\bf CYCLE}}]{axes\_\-lat}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__lsqCAM_a12159149dc0b13cda6edfb1213ce6197}
+\label{classo3__lsqCAM_a25372198cf9ceb3037dd0d027006eb08}
 
 \begin{DoxyCode}
-                                                                         {
+                                                              {
+    CYCLE now = _clk->now ();
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = 0; i < table_size; i++) {
         dynInstruction* ins = getNth_unsafe (i);
         if (ins->getInsID () == elem->getInsID ()) {
-            dbg.print (DBG_MEMORY, "%s: %s %llu (lat: %d)\n", _c_name.c_str (), "
-      Set mem access lat. for ins:", ins->getInsID (), axes_lat);
+            dbg.print (DBG_MEMORY, "%s: %s %llu (lat: %d)\n", _c_name.c_str (), 
+                       "Set mem access lat. for ins:", ins->getInsID (), axes_lat
+      );
             _table.Nth(i)->_delay.setNewTime (now, axes_lat);
             Assert (_table.Nth(i)->_delay.isValidStopTime () == true);
             return;
@@ -348,9 +435,13 @@ Here is the caller graph for this function:
                                           {
     LENGTH table_size = _table.NumElements ();
     for (LENGTH i = table_size - 1; i >= 0; i--) {
-        if (getNth_unsafe (i)->getInsID () >= ins_seq_num) {
+        dynInstruction* ins = getNth_unsafe (i);
+        if (ins->getInsID () >= ins_seq_num) {
             delete _table.Nth (i);
             _table.RemoveAt (i);
+            dbg.print (DBG_MEMORY, "%s: %s %llu %s %llu\n", _c_name.c_str (), 
+                       "Removing ins:", ins->getInsID (), "due to", ins_seq_num);
+      
         } else {
             break;
         }

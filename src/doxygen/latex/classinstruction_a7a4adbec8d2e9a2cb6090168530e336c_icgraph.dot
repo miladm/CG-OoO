@@ -5,9 +5,17 @@ digraph G
   rankdir=LR;
   Node1 [label="instruction::setOpCode",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="basicblock::insertMOVop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a85e079721ac3397044a6148e4d5fc688"];
-  Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="parse_instruction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__instruction_8cpp.html#a2673a7cce171b34555a3a4249a0d61c8"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node2 [label="basicblock::insertMOVop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ae2ba97a932c305fcad17c91871d9b53c"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="basicblock::elimPhiFuncs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a654646ba23c51a6f9b5b8db818276d0b"];
+  Node2 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="basicblock::setupMOVop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ad33cd8a566195b2f3118abafbeffaf82"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="basicblock::update_locGlbSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#a04346052feca6f21451ab71050afe893"];
+  Node4 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="basicblock::update_locToGlb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classbasicblock.html#ad96c83ff578c7c8c9a2bcd74a2c26add"];
+  Node1 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="parse_instruction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$make__instruction_8cpp.html#abe7a2d116e3e54c66d70fff6e83b0bae"];
+  Node7 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
 }

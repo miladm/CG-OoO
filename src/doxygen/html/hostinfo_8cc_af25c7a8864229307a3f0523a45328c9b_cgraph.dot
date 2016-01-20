@@ -6,4 +6,6 @@ digraph G
   Node1 [label="memUsage",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="procInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hostinfo_8cc.html#af828f458b0892e2778f8ffb6ed6f0610"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="usage",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$hotfloorplan_8c.html#a53ec00d25dd1e351b7f781e5a638dcba"];
 }

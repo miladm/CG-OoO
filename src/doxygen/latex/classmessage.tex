@@ -14,6 +14,8 @@
 \hyperlink{classmessage_a3e20db9559213f6eb3dd15cd83af62be}{$\sim$message} ()
 \item 
 void \hyperlink{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}{simStep} (const char $\ast$msg)
+\item 
+void \hyperlink{classmessage_a8a9e32e26d42eb7a2a17e091d0d1cb29}{simEvent} (const char $\ast$fmt,...)
 \end{DoxyCompactItemize}
 
 
@@ -49,6 +51,30 @@ void \hyperlink{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}{simStep} (const 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classmessage_a8a9e32e26d42eb7a2a17e091d0d1cb29}{
+\index{message@{message}!simEvent@{simEvent}}
+\index{simEvent@{simEvent}!message@{message}}
+\subsubsection[{simEvent}]{\setlength{\rightskip}{0pt plus 5cm}void message::simEvent (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}
+\label{classmessage_a8a9e32e26d42eb7a2a17e091d0d1cb29}
+
+\begin{DoxyCode}
+                                            {
+    va_list args;
+    va_start (args,fmt);
+    vprintf (fmt,args);
+    va_end (args);
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classmessage_a39109936b8ee8b1fd569cf1212c15aeb}{
 \index{message@{message}!simStep@{simStep}}
 \index{simStep@{simStep}!message@{message}}
@@ -76,5 +102,5 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{message_8h}{message.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{message_8cpp}{message.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{lib_2message_8h}{message.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{lib_2message_8cpp}{message.cpp}\end{DoxyCompactItemize}

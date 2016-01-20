@@ -4,47 +4,50 @@
 }
 
 
-{\ttfamily \#include $<$stat.h$>$}
+{\ttfamily \#include $<$statistic.h$>$}
 
 
 
-Collaboration diagram for stat:
+Inheritance diagram for stat:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classstat_ab89727a4198ffd032e194917596e156b}{stat} ()
 \item 
+\hyperlink{classstat_abe66f5d22b8d2da86c0dd0dded862189}{stat} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} init\_\-val=0, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO} print\_\-if\_\-zero=PRINT\_\-ZERO)
+\item 
+void \hyperlink{classstat_aacfea127fcaab87cfb226e132ba4b23a}{init} (string, string, string, \hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} init\_\-val=0, \hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO} print\_\-if\_\-zero=PRINT\_\-ZERO)
+\item 
 \hyperlink{classstat_adb268824871b2f69d7b11003abf2fe6b}{$\sim$stat} ()
 \item 
-void \hyperlink{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}{setMemAddr} (uint64\_\-t memAddr)
+\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} \hyperlink{classstat_a466c0cff1754602817a62517d74a1d07}{getValue} ()
 \item 
-void \hyperlink{classstat_a534c0aacb73143316373470a70aece20}{setRegister} (int $\ast$r, int $\ast$rt)
+string \hyperlink{classstat_af4666e7a7eac1259a222685465e086be}{getName} ()
 \item 
-void \hyperlink{classstat_aac993b5bfa99506a46b3bd02382613ed}{setType} (\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type} insType)
+\hyperlink{classstat}{stat} \& \hyperlink{classstat_ad4b4362a2144dd4510f927a2a4243314}{operator++} ()
 \item 
-void \hyperlink{classstat_ac78f327016771d7189a0dd9e7709d7ce}{setStatus} (\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{status} insStatus, int \hyperlink{vliwScheduler_8cpp_a1f4871d45089b039d95d3832dd123827}{cycle}, int latency)
+\hyperlink{classstat}{stat} \hyperlink{classstat_a685468cc920d73914ee5f319ab61bdc5}{operator++} (int)
 \item 
-void \hyperlink{classstat_ae3663029f693d0bd7279007a96b61fd1}{setMemType} (\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} readORwrite)
+\hyperlink{classstat}{stat} \& \hyperlink{classstat_ae2fd50f98dab5561bd987bcca24aa0fa}{operator-\/-\/} ()
 \item 
-\hyperlink{binaryTranslator_2global_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type} \hyperlink{classstat_ad6c243f8915182cc7f3af301714cf6b2}{getType} ()
+\hyperlink{classstat}{stat} \hyperlink{classstat_a8c5a7ec08fb94918564dee66a3ecb260}{operator-\/-\/} (int)
 \item 
-\hyperlink{global_2global_8h_a015eb90e0de9f16e87bd149d4b9ce959}{status} \hyperlink{classstat_af85423f8423fc110dc995e0da6d56f58}{getStatus} ()
+\hyperlink{classstat}{stat} \hyperlink{classstat_ae5697e9246673d121c5d5f190582ec6a}{operator+=} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR})
 \item 
-int \hyperlink{classstat_a404f63a716c9853ebe824b2103ac6dbb}{getLatency} ()
+\hyperlink{classstat}{stat} \hyperlink{classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0}{operator-\/=} (\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR})
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}{getCompleteCycle} ()
+string \hyperlink{classstat_a51eae1107b5388fb7823b00954228053}{\_\-name}
 \item 
-int \hyperlink{classstat_aca46365b8adad2b91b5626f51e85e22a}{getIssueCycle} ()
+string \hyperlink{classstat_ac9613e6f886704c8582aa6d3ef82890c}{\_\-description}
 \item 
-int \hyperlink{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}{getMyReg} (int i)
+\hyperlink{global_2global_8h_a72e6b2d6dce7827a0bbf126287d2035a}{SCALAR} \hyperlink{classstat_a9ac5680b65cf0f05de0494efcd7b1371}{\_\-ScalarStat}
 \item 
-int \hyperlink{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}{getNumReg} ()
+\hyperlink{statistic_8h_a007ca0df4ad593f8771581e5b51584f4}{PRINT\_\-ON\_\-ZERO} \hyperlink{classstat_a29dc267b4bc24e2013069ca1164edfbf}{\_\-print\_\-if\_\-zero}
 \item 
-uint64\_\-t \hyperlink{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}{getMemAddr} ()
-\item 
-int \hyperlink{classstat_a2060522133fb74689cb730a13d83efb2}{getMyRegType} (int i)
-\item 
-\hyperlink{binaryTranslator_2global_8h_a94b8423a23b95a7adac22848b81e7c0c}{memType} \hyperlink{classstat_a471c26c51591a16712ce553b56047484}{getMemType} ()
+bool \hyperlink{classstat_ab9551cc95cb38f1e068f76383e082374}{\_\-enable\_\-log\_\-stat}
 \end{DoxyCompactItemize}
 
 
@@ -58,6 +61,33 @@ int \hyperlink{classstat_a2060522133fb74689cb730a13d83efb2}{getMyRegType} (int i
 \end{DoxyParamCaption}
 )}}
 \label{classstat_ab89727a4198ffd032e194917596e156b}
+
+\begin{DoxyCode}
+{ }
+\end{DoxyCode}
+\hypertarget{classstat_abe66f5d22b8d2da86c0dd0dded862189}{
+\index{stat@{stat}!stat@{stat}}
+\index{stat@{stat}!stat@{stat}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}stat::stat (
+\begin{DoxyParamCaption}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{description, }
+\item[{{\bf SCALAR}}]{init\_\-val = {\ttfamily 0}, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero = {\ttfamily PRINT\_\-ZERO}}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_abe66f5d22b8d2da86c0dd0dded862189}
+
+\begin{DoxyCode}
+{
+    _name = (class_name + ".") + param_name;
+    _description = description;
+    _ScalarStat = init_val;
+    _print_if_zero = print_if_zero;
+    _enable_log_stat = true;
+}
+\end{DoxyCode}
 \hypertarget{classstat_adb268824871b2f69d7b11003abf2fe6b}{
 \index{stat@{stat}!$\sim$stat@{$\sim$stat}}
 \index{$\sim$stat@{$\sim$stat}!stat@{stat}}
@@ -65,175 +95,239 @@ int \hyperlink{classstat_a2060522133fb74689cb730a13d83efb2}{getMyRegType} (int i
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+)}}
 \label{classstat_adb268824871b2f69d7b11003abf2fe6b}
 
 \begin{DoxyCode}
-{/*nothing for now*/}
+{ }
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}{
-\index{stat@{stat}!getCompleteCycle@{getCompleteCycle}}
-\index{getCompleteCycle@{getCompleteCycle}!stat@{stat}}
-\subsubsection[{getCompleteCycle}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getCompleteCycle (
+\hypertarget{classstat_af4666e7a7eac1259a222685465e086be}{
+\index{stat@{stat}!getName@{getName}}
+\index{getName@{getName}!stat@{stat}}
+\subsubsection[{getName}]{\setlength{\rightskip}{0pt plus 5cm}string stat::getName (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classstat_adac51f4d495bd7bbfccd1f5c616a2a83}
-\hypertarget{classstat_aca46365b8adad2b91b5626f51e85e22a}{
-\index{stat@{stat}!getIssueCycle@{getIssueCycle}}
-\index{getIssueCycle@{getIssueCycle}!stat@{stat}}
-\subsubsection[{getIssueCycle}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getIssueCycle (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_aca46365b8adad2b91b5626f51e85e22a}
-\hypertarget{classstat_a404f63a716c9853ebe824b2103ac6dbb}{
-\index{stat@{stat}!getLatency@{getLatency}}
-\index{getLatency@{getLatency}!stat@{stat}}
-\subsubsection[{getLatency}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getLatency (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a404f63a716c9853ebe824b2103ac6dbb}
-\hypertarget{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}{
-\index{stat@{stat}!getMemAddr@{getMemAddr}}
-\index{getMemAddr@{getMemAddr}!stat@{stat}}
-\subsubsection[{getMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}uint64\_\-t stat::getMemAddr (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a6d940fc0fc3e5e81c4dbf30b788b2d82}
-\hypertarget{classstat_a471c26c51591a16712ce553b56047484}{
-\index{stat@{stat}!getMemType@{getMemType}}
-\index{getMemType@{getMemType}!stat@{stat}}
-\subsubsection[{getMemType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf memType} stat::getMemType (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a471c26c51591a16712ce553b56047484}
-\hypertarget{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}{
-\index{stat@{stat}!getMyReg@{getMyReg}}
-\index{getMyReg@{getMyReg}!stat@{stat}}
-\subsubsection[{getMyReg}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getMyReg (
-\begin{DoxyParamCaption}
-\item[{int}]{i}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a2edaa23547adbe0aaedc0e16cc1cf080}
-\hypertarget{classstat_a2060522133fb74689cb730a13d83efb2}{
-\index{stat@{stat}!getMyRegType@{getMyRegType}}
-\index{getMyRegType@{getMyRegType}!stat@{stat}}
-\subsubsection[{getMyRegType}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getMyRegType (
-\begin{DoxyParamCaption}
-\item[{int}]{i}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a2060522133fb74689cb730a13d83efb2}
-\hypertarget{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}{
-\index{stat@{stat}!getNumReg@{getNumReg}}
-\index{getNumReg@{getNumReg}!stat@{stat}}
-\subsubsection[{getNumReg}]{\setlength{\rightskip}{0pt plus 5cm}int stat::getNumReg (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a2e1a144e384d03f66d2ace6e2aa8fe00}
-\hypertarget{classstat_af85423f8423fc110dc995e0da6d56f58}{
-\index{stat@{stat}!getStatus@{getStatus}}
-\index{getStatus@{getStatus}!stat@{stat}}
-\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf status} stat::getStatus (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_af85423f8423fc110dc995e0da6d56f58}
-\hypertarget{classstat_ad6c243f8915182cc7f3af301714cf6b2}{
-\index{stat@{stat}!getType@{getType}}
-\index{getType@{getType}!stat@{stat}}
-\subsubsection[{getType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf type} stat::getType (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_ad6c243f8915182cc7f3af301714cf6b2}
-\hypertarget{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}{
-\index{stat@{stat}!setMemAddr@{setMemAddr}}
-\index{setMemAddr@{setMemAddr}!stat@{stat}}
-\subsubsection[{setMemAddr}]{\setlength{\rightskip}{0pt plus 5cm}void instruction::setMemAddr (
-\begin{DoxyParamCaption}
-\item[{uint64\_\-t}]{memAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_acaa589d5c6e90c0d7fe55ea5a80c39cd}
+\label{classstat_af4666e7a7eac1259a222685465e086be}
 
 \begin{DoxyCode}
-                                             {
-        _memAddr = memAddr;
-        //if (debug) printf("addr = %lx\n", _memAddr);
+                      {
+    return _name;
 }
 \end{DoxyCode}
-\hypertarget{classstat_ae3663029f693d0bd7279007a96b61fd1}{
-\index{stat@{stat}!setMemType@{setMemType}}
-\index{setMemType@{setMemType}!stat@{stat}}
-\subsubsection[{setMemType}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setMemType (
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstat_a466c0cff1754602817a62517d74a1d07}{
+\index{stat@{stat}!getValue@{getValue}}
+\index{getValue@{getValue}!stat@{stat}}
+\subsubsection[{getValue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SCALAR} stat::getValue (
 \begin{DoxyParamCaption}
-\item[{{\bf memType}}]{readORwrite}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classstat_ae3663029f693d0bd7279007a96b61fd1}
-\hypertarget{classstat_a534c0aacb73143316373470a70aece20}{
-\index{stat@{stat}!setRegister@{setRegister}}
-\index{setRegister@{setRegister}!stat@{stat}}
-\subsubsection[{setRegister}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setRegister (
-\begin{DoxyParamCaption}
-\item[{int $\ast$}]{r, }
-\item[{int $\ast$}]{rt}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_a534c0aacb73143316373470a70aece20}
-\hypertarget{classstat_ac78f327016771d7189a0dd9e7709d7ce}{
-\index{stat@{stat}!setStatus@{setStatus}}
-\index{setStatus@{setStatus}!stat@{stat}}
-\subsubsection[{setStatus}]{\setlength{\rightskip}{0pt plus 5cm}void instruction::setStatus (
-\begin{DoxyParamCaption}
-\item[{{\bf status}}]{insStatus, }
-\item[{int}]{cycle, }
-\item[{int}]{latency}
-\end{DoxyParamCaption}
-)}}
-\label{classstat_ac78f327016771d7189a0dd9e7709d7ce}
+\label{classstat_a466c0cff1754602817a62517d74a1d07}
 
 \begin{DoxyCode}
-                                         {
-        //Assert(insStatus != NULL);
-        _insStatus = insStatus;
-        if (_insStatus == issue) {
-                _issueCycle  = cycle;
-                _latency     = latency;
-                _completeCycle = cycle + latency;
-        }
+                       {
+    return _ScalarStat;
 }
 \end{DoxyCode}
-\hypertarget{classstat_aac993b5bfa99506a46b3bd02382613ed}{
-\index{stat@{stat}!setType@{setType}}
-\index{setType@{setType}!stat@{stat}}
-\subsubsection[{setType}]{\setlength{\rightskip}{0pt plus 5cm}void stat::setType (
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstat_aacfea127fcaab87cfb226e132ba4b23a}{
+\index{stat@{stat}!init@{init}}
+\index{init@{init}!stat@{stat}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void stat::init (
 \begin{DoxyParamCaption}
-\item[{{\bf type}}]{insType}
+\item[{string}]{class\_\-name, }
+\item[{string}]{param\_\-name, }
+\item[{string}]{description, }
+\item[{{\bf SCALAR}}]{init\_\-val = {\ttfamily 0}, }
+\item[{{\bf PRINT\_\-ON\_\-ZERO}}]{print\_\-if\_\-zero = {\ttfamily PRINT\_\-ZERO}}
 \end{DoxyParamCaption}
 )}}
-\label{classstat_aac993b5bfa99506a46b3bd02382613ed}
+\label{classstat_aacfea127fcaab87cfb226e132ba4b23a}
+
+\begin{DoxyCode}
+{
+    _name = (class_name + ".") + param_name;
+    _description = description;
+    _ScalarStat = init_val;
+    _print_if_zero = print_if_zero;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classstat_ad4b4362a2144dd4510f927a2a4243314}{
+\index{stat@{stat}!operator++@{operator++}}
+\index{operator++@{operator++}!stat@{stat}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} \& stat::operator++ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ad4b4362a2144dd4510f927a2a4243314}
+
+\begin{DoxyCode}
+                        {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat++;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstat_a685468cc920d73914ee5f319ab61bdc5}{
+\index{stat@{stat}!operator++@{operator++}}
+\index{operator++@{operator++}!stat@{stat}}
+\subsubsection[{operator++}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} stat::operator++ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a685468cc920d73914ee5f319ab61bdc5}
+
+\begin{DoxyCode}
+                          {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat++;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstat_ae5697e9246673d121c5d5f190582ec6a}{
+\index{stat@{stat}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!stat@{stat}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} stat::operator+= (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ae5697e9246673d121c5d5f190582ec6a}
+
+\begin{DoxyCode}
+                                 {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat += val;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstat_a8c5a7ec08fb94918564dee66a3ecb260}{
+\index{stat@{stat}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!stat@{stat}}
+\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} stat::operator-\/-\/ (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_a8c5a7ec08fb94918564dee66a3ecb260}
+
+\begin{DoxyCode}
+                          {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat--;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstat_ae2fd50f98dab5561bd987bcca24aa0fa}{
+\index{stat@{stat}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!stat@{stat}}
+\subsubsection[{operator-\/-\/}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} \& stat::operator-\/-\/ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_ae2fd50f98dab5561bd987bcca24aa0fa}
+
+\begin{DoxyCode}
+                        {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat--;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0}{
+\index{stat@{stat}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!stat@{stat}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf stat} stat::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{{\bf SCALAR}}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{classstat_abfceb9f1f9d7dd4405dae4d7856aa3a0}
+
+\begin{DoxyCode}
+                                 {
+    if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _ScalarStat -= val;
+    return *this;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classstat_ac9613e6f886704c8582aa6d3ef82890c}{
+\index{stat@{stat}!\_\-description@{\_\-description}}
+\index{\_\-description@{\_\-description}!stat@{stat}}
+\subsubsection[{\_\-description}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf stat::\_\-description}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstat_ac9613e6f886704c8582aa6d3ef82890c}
+\hypertarget{classstat_ab9551cc95cb38f1e068f76383e082374}{
+\index{stat@{stat}!\_\-enable\_\-log\_\-stat@{\_\-enable\_\-log\_\-stat}}
+\index{\_\-enable\_\-log\_\-stat@{\_\-enable\_\-log\_\-stat}!stat@{stat}}
+\subsubsection[{\_\-enable\_\-log\_\-stat}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf stat::\_\-enable\_\-log\_\-stat}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstat_ab9551cc95cb38f1e068f76383e082374}
+\hypertarget{classstat_a51eae1107b5388fb7823b00954228053}{
+\index{stat@{stat}!\_\-name@{\_\-name}}
+\index{\_\-name@{\_\-name}!stat@{stat}}
+\subsubsection[{\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf stat::\_\-name}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstat_a51eae1107b5388fb7823b00954228053}
+\hypertarget{classstat_a29dc267b4bc24e2013069ca1164edfbf}{
+\index{stat@{stat}!\_\-print\_\-if\_\-zero@{\_\-print\_\-if\_\-zero}}
+\index{\_\-print\_\-if\_\-zero@{\_\-print\_\-if\_\-zero}!stat@{stat}}
+\subsubsection[{\_\-print\_\-if\_\-zero}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PRINT\_\-ON\_\-ZERO} {\bf stat::\_\-print\_\-if\_\-zero}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstat_a29dc267b4bc24e2013069ca1164edfbf}
+\hypertarget{classstat_a9ac5680b65cf0f05de0494efcd7b1371}{
+\index{stat@{stat}!\_\-ScalarStat@{\_\-ScalarStat}}
+\index{\_\-ScalarStat@{\_\-ScalarStat}!stat@{stat}}
+\subsubsection[{\_\-ScalarStat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SCALAR} {\bf stat::\_\-ScalarStat}\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classstat_a9ac5680b65cf0f05de0494efcd7b1371}
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2stat_8h}{stat.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2stat_8cpp}{stat.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{statistic_8h}{statistic.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/lib/\hyperlink{statistic_8cpp}{statistic.cpp}\end{DoxyCompactItemize}

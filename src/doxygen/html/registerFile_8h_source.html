@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/ino/registerFile.h Source File</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/unit/registerFile.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,7 +58,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/backend/ino/registerFile.h</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/unit/registerFile.h</div>  </div>
 </div>
 <div class="contents">
 <a href="registerFile_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
@@ -68,50 +68,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00005"></a>00005 <span class="preprocessor">#ifndef _REGISTER_FILE_H</span>
 <a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define _REGISTER_FILE_H</span>
 <a name="l00007"></a>00007 <span class="preprocessor"></span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;../unit/unit.h&quot;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="structregisterElement.html">00010</a> <span class="keyword">struct </span><a class="code" href="structregisterElement.html">registerElement</a> {
-<a name="l00011"></a><a class="code" href="structregisterElement.html#a1246da827cec9a45751b171c4002a500">00011</a>     <a class="code" href="structregisterElement.html#a1246da827cec9a45751b171c4002a500">registerElement</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg) 
-<a name="l00012"></a>00012         : <a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">_reg</a> (reg)
-<a name="l00013"></a>00013     {
-<a name="l00014"></a>00014         <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>;
-<a name="l00015"></a>00015         <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a> = <span class="keyword">false</span>;
-<a name="l00016"></a>00016     }
-<a name="l00017"></a><a class="code" href="structregisterElement.html#a53d14efb73b0cb41643fd5f58e4c1d71">00017</a>     <span class="keywordtype">void</span> <a class="code" href="structregisterElement.html#a53d14efb73b0cb41643fd5f58e4c1d71">resetReg</a> () {
-<a name="l00018"></a>00018         <span class="keywordflow">if</span> (<a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a>) <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>;
-<a name="l00019"></a>00019         <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a> = <span class="keyword">false</span>;
-<a name="l00020"></a>00020     }
-<a name="l00021"></a><a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">00021</a>     <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> <a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">_reg</a>;
-<a name="l00022"></a><a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">00022</a>     <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367">REG_STATE</a> <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a>;
-<a name="l00023"></a><a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">00023</a>     <span class="keywordtype">bool</span> <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a>;
-<a name="l00024"></a>00024 };
-<a name="l00025"></a>00025 
-<a name="l00026"></a><a class="code" href="classregisterFile.html">00026</a> <span class="keyword">class </span><a class="code" href="classregisterFile.html">registerFile</a> : <span class="keyword">public</span> <a class="code" href="classunit.html">unit</a> {
-<a name="l00027"></a>00027         <span class="keyword">public</span>:
-<a name="l00028"></a>00028                 <a class="code" href="classregisterFile.html#aa9071035e97a10e7e76990c9b5e126fb">registerFile</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> rf_begin_num = 1, <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> rf_size = <a class="code" href="global_2global_8h.html#a064a8a90a275556a49967a83743fc722">LARF_SIZE</a>+<a class="code" href="global_2global_8h.html#abb6fa1eb58412310e7c5f901ef22988e">GARF_SIZE</a>, 
-<a name="l00029"></a>00029                       <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> rd_port_cnt = 8, <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> wr_port_cnt = 4, <span class="keywordtype">string</span> rf_name = <span class="stringliteral">&quot;registerFile&quot;</span>);
-<a name="l00030"></a>00030                 <a class="code" href="classregisterFile.html#a51d44388ce9baf55f5d0fc108198d915">~registerFile</a> ();
-<a name="l00031"></a>00031                 <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b">updateReg</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
-<a name="l00032"></a>00032                 <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a2731695462957c3ac0a8888e7fce3bd3">reserveReg</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
-<a name="l00033"></a>00033                 <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#a67c6a74ba45a273b0c57e29fe9cfc4eb">isRegValid</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
-<a name="l00034"></a>00034                 <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#af4bc17e8db0bd9a07fec85814e1d607f">isRegBusy</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> regNum);
-<a name="l00035"></a>00035         <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a9e487acbcecb5a905a4ee1c80adf48e4">resetRF</a> ();
-<a name="l00036"></a>00036         <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#a2f83eaee77e90587c8fabff35b6255c3">hasFreeRdPort</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>, <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>);
-<a name="l00037"></a>00037         <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#a5c361b0e1c0ec3e6f08990b63ffae8db">hasFreeWrPort</a> (<a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a>);
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="unit_8h.html">unit.h</a>&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="wires_8h.html">wires.h</a>&quot;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a><a class="code" href="registerFile_8h.html#ae6576f1f0874ded45228a539ba66a0a4">00011</a> <span class="preprocessor">#define RD_TO_WR_WIRE_CNT_RATIO 2</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a><a class="code" href="structregisterElement.html">00013</a> <span class="keyword">struct </span><a class="code" href="structregisterElement.html">registerElement</a> {
+<a name="l00014"></a><a class="code" href="structregisterElement.html#a1246da827cec9a45751b171c4002a500">00014</a>     <a class="code" href="structregisterElement.html#a1246da827cec9a45751b171c4002a500">registerElement</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg) 
+<a name="l00015"></a>00015         : <a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">_reg</a> (reg)
+<a name="l00016"></a>00016     {
+<a name="l00017"></a>00017         <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>;
+<a name="l00018"></a>00018         <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a> = <span class="keyword">false</span>;
+<a name="l00019"></a>00019     }
+<a name="l00020"></a><a class="code" href="structregisterElement.html#a53d14efb73b0cb41643fd5f58e4c1d71">00020</a>     <span class="keywordtype">void</span> <a class="code" href="structregisterElement.html#a53d14efb73b0cb41643fd5f58e4c1d71">resetReg</a> () {
+<a name="l00021"></a>00021         <span class="keywordflow">if</span> (<a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> == <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367ac6ab20b262eafee9bfe194d5157b7af8">WAIT_ON_WRITE_REG</a>) <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a> = <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367afc893a9b0159f3c4e976ca391b5598ab">NO_VAL_REG</a>;
+<a name="l00022"></a>00022         <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a> = <span class="keyword">false</span>;
+<a name="l00023"></a>00023     }
+<a name="l00024"></a><a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">00024</a>     <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> <a class="code" href="structregisterElement.html#a4693e64de38fe55ae199c92f246ac518">_reg</a>;
+<a name="l00025"></a><a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">00025</a>     <a class="code" href="global_2global_8h.html#a5af3088253955183e5b855e244a48367">REG_STATE</a> <a class="code" href="structregisterElement.html#ac9fe8172b609245e132ba12a0ea815ba">_reg_state</a>;
+<a name="l00026"></a><a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">00026</a>     <span class="keywordtype">bool</span> <a class="code" href="structregisterElement.html#a62ca0df1f9f090ad0077ecd55d736009">_axesedBefore</a>;
+<a name="l00027"></a>00027 };
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="classregisterFile.html">00029</a> <span class="keyword">class </span><a class="code" href="classregisterFile.html">registerFile</a> : <span class="keyword">public</span> <a class="code" href="classunit.html">unit</a> {
+<a name="l00030"></a>00030         <span class="keyword">public</span>:
+<a name="l00031"></a>00031                 <a class="code" href="classregisterFile.html#a61390ea0709a40a1e48dac5133242c9d">registerFile</a> (<a class="code" href="classsysClock.html">sysClock</a>*, <span class="keyword">const</span> <a class="code" href="classYAML_1_1Node.html">YAML::Node</a>&amp;, <span class="keywordtype">string</span> rf_name);
+<a name="l00032"></a>00032                 <a class="code" href="classregisterFile.html#a51d44388ce9baf55f5d0fc108198d915">~registerFile</a> ();
+<a name="l00033"></a>00033                 <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a57aa14508810da286ee60ef6cd033d6b">updateReg</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
+<a name="l00034"></a>00034                 <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a2731695462957c3ac0a8888e7fce3bd3">reserveReg</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
+<a name="l00035"></a>00035                 <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#a6b9481a788749aabdc8488f60adb5cf7">isRegValidAndReady</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> reg);
+<a name="l00036"></a>00036                 <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#af4bc17e8db0bd9a07fec85814e1d607f">isRegBusy</a> (<a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> regNum);
+<a name="l00037"></a>00037         <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a9e487acbcecb5a905a4ee1c80adf48e4">resetRF</a> ();
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039         <span class="keyword">private</span>:
-<a name="l00040"></a>00040                 map&lt;PR, registerElement*&gt; _RF;
-<a name="l00041"></a>00041         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> _cycle;
-<a name="l00042"></a>00042         <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_size;
-<a name="l00043"></a>00043         <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_begin_num;
-<a name="l00044"></a>00044         <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_end_num;
-<a name="l00045"></a>00045         <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> _wr_port_cnt;
-<a name="l00046"></a>00046         <span class="keyword">const</span> <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> _rd_port_cnt;
-<a name="l00047"></a>00047         <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> _num_free_wr_port;
-<a name="l00048"></a>00048         <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> _num_free_rd_port;
-<a name="l00049"></a>00049 };
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="preprocessor">#endif</span>
+<a name="l00039"></a>00039         <span class="comment">/* WIRE CTRL */</span>
+<a name="l00040"></a>00040         <span class="keywordtype">void</span> <a class="code" href="classregisterFile.html#a47232ba732ea081d78cd43d0564e60a1">updateWireState</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>, list&lt;string&gt; wire_name = list&lt;string&gt;(), <span class="keywordtype">bool</span> update_wire = <span class="keyword">false</span>);
+<a name="l00041"></a>00041         <span class="keywordtype">bool</span> <a class="code" href="classregisterFile.html#a218ab11def5221efa38b4fb84817c4a6">hasFreeWire</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>);
+<a name="l00042"></a>00042         <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> <a class="code" href="classregisterFile.html#ad2643ae67021e5dc1a2218b19093bdd0">getNumFreeWires</a> (<a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0c">AXES_TYPE</a>);
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044         <span class="keyword">private</span>:
+<a name="l00045"></a>00045                 map&lt;PR, registerElement*&gt; _RF;
+<a name="l00046"></a>00046         <a class="code" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> _cycle;
+<a name="l00047"></a>00047         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_size;
+<a name="l00048"></a>00048         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_begin_num;
+<a name="l00049"></a>00049         <a class="code" href="global_2global_8h.html#a54dcae2ba04c76c12afe113b706bd4dc">PR</a> _rf_end_num;
+<a name="l00050"></a>00050         <a class="code" href="classwires.html">wires</a> _wr_port;
+<a name="l00051"></a>00051         <a class="code" href="classwires.html">wires</a> _rd_port;
+<a name="l00052"></a>00052 };
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -119,7 +122,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -128,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

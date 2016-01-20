@@ -15,22 +15,16 @@ Collaboration diagram for decode:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classdecode_ab0005a9e70d29e5d47a907f33c704e7b}{decode} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-schedule\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} decode\_\-width, string stage\_\-name)
+\hyperlink{classdecode_af9060ee8f6ed23ee503bc7750cfb2a6f}{decode} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&fetch\_\-to\_\-decode\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-schedule\_\-port, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} decode\_\-width, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classdecode_a4a0499a33c3e1465a0863b976f6b4c5a}{$\sim$decode} ()
 \item 
-void \hyperlink{classdecode_a387fdd64ecb79472fad23d4190b80516}{doDECODE} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classdecode_a4971894a17f1aca1f8a562774949dd1e}{decodeImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classdecode_afed951843a1cc2c9f9f044caa7c009f1}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classdecode_aa9758b61373caf22cabe72ed17006385}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
+void \hyperlink{classdecode_a9500bb806276fb1632a2b3da82f153b0}{doDECODE} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classdecode_ab0005a9e70d29e5d47a907f33c704e7b}{
+\hypertarget{classdecode_af9060ee8f6ed23ee503bc7750cfb2a6f}{
 \index{decode@{decode}!decode@{decode}}
 \index{decode@{decode}!decode@{decode}}
 \subsubsection[{decode}]{\setlength{\rightskip}{0pt plus 5cm}decode::decode (
@@ -38,14 +32,15 @@ void \hyperlink{classdecode_aa9758b61373caf22cabe72ed17006385}{regStat} (\hyperl
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{fetch\_\-to\_\-decode\_\-port, }
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{decode\_\-to\_\-schedule\_\-port, }
 \item[{{\bf WIDTH}}]{decode\_\-width, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classdecode_ab0005a9e70d29e5d47a907f33c704e7b}
+\label{classdecode_af9060ee8f6ed23ee503bc7750cfb2a6f}
 
 \begin{DoxyCode}
-        : stage (decode_width, stage_name)
-          
+        : stage (decode_width, stage_name, g_cfg->_root["cpu"]["backend"]["ino_pi
+      pe"]["decode"], clk)
 {
     _fetch_to_decode_port = &fetch_to_decode_port;
         _decode_to_schedule_port  = &decode_to_schedule_port;
@@ -67,131 +62,33 @@ void \hyperlink{classdecode_aa9758b61373caf22cabe72ed17006385}{regStat} (\hyperl
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classdecode_a4971894a17f1aca1f8a562774949dd1e}{
-\index{decode@{decode}!decodeImpl@{decodeImpl}}
-\index{decodeImpl@{decodeImpl}!decode@{decode}}
-\subsubsection[{decodeImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} decode::decodeImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classdecode_a4971894a17f1aca1f8a562774949dd1e}
-
-\begin{DoxyCode}
-                                               {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-    for (WIDTH i = 0; i < _stage_width; i++) {
-        /* CHECKS */
-        if (_fetch_to_decode_port->getBuffState (clk.now ()) == EMPTY_BUFF) break
-      ;
-        if (!_fetch_to_decode_port->isReady (clk.now ())) break;
-        if (_decode_to_schedule_port->getBuffState (clk.now ()) == FULL_BUFF) bre
-      ak;
-
-        /* DECODE INS */
-        dynInstruction* ins = _fetch_to_decode_port->popFront (clk.now ());
-        ins->setPipeStage (DECODE);
-        _decode_to_schedule_port->pushBack (ins, clk.now ());
-        dbg.print (DBG_FETCH, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "D
-      ecode ins", ins->getInsID (), clk.now ());
-
-        /* STAT */
-        s_ins_cnt++;
-        pipe_stall = PIPE_BUSY;
-    }
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdecode_a387fdd64ecb79472fad23d4190b80516}{
+\hypertarget{classdecode_a9500bb806276fb1632a2b3da82f153b0}{
 \index{decode@{decode}!doDECODE@{doDECODE}}
 \index{doDECODE@{doDECODE}!decode@{decode}}
 \subsubsection[{doDECODE}]{\setlength{\rightskip}{0pt plus 5cm}void decode::doDECODE (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classdecode_a387fdd64ecb79472fad23d4190b80516}
+\label{classdecode_a9500bb806276fb1632a2b3da82f153b0}
 
 \begin{DoxyCode}
-                                    {
-    dbg.print (DBG_DECODE, "%s: (cyc: %d)\n", _stage_name.c_str (), clk.now ());
+                       {
+    dbg.print (DBG_DECODE, "%s: (cyc: %d)\n", _stage_name.c_str (), _clk->now ())
+      ;
     /* STAT */
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
     /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) squash (clk);
+    if (g_var.g_pipe_state == PIPE_FLUSH) squash ();
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
       PIPE_FLUSH)) {
-        pipe_stall = decodeImpl (clk);
+        pipe_stall = decodeImpl ();
     }
 
     /* STAT */
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdecode_aa9758b61373caf22cabe72ed17006385}{
-\index{decode@{decode}!regStat@{regStat}}
-\index{regStat@{regStat}!decode@{decode}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void decode::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classdecode_aa9758b61373caf22cabe72ed17006385}
-
-\begin{DoxyCode}
-                                   {
-    _fetch_to_decode_port->regStat (clk.now ());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classdecode_afed951843a1cc2c9f9f044caa7c009f1}{
-\index{decode@{decode}!squash@{squash}}
-\index{squash@{squash}!decode@{decode}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void decode::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classdecode_afed951843a1cc2c9f9f044caa7c009f1}
-
-\begin{DoxyCode}
-                                  {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Decode Po
-      rts Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN();
-    _decode_to_schedule_port->flushPort (squashSeqNum, clk.now ());
 }
 \end{DoxyCode}
 

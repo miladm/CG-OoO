@@ -15,11 +15,14 @@ digraph G
   Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
   Node6 [label="table::pushBack",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable.html#a8810ab4eeba365c36687d4c6c02fe1f6"];
   Node6 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
-  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
-  Node7 [label="dynInstruction::setLQstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c"];
-  Node7 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
-  Node7 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="table::ramAccess",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable.html#a8ea206be96142eafa4eb46fe4a910292"];
+  Node7 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
   Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
-  Node8 [label="dynInstruction::setSQstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088"];
+  Node8 [label="dynInstruction::setLQstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#a83a5077984f29a340de7bebc7e0b679c"];
   Node8 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="dynInstruction::setSQstate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classdynInstruction.html#a7fc66de5e3f826f515e41029619e2088"];
+  Node9 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
 }

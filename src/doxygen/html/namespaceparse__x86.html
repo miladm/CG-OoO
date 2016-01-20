@@ -99,46 +99,46 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment"><a name="l00125"></a>00125          :
-<a name="l00126"></a>00126   <span class="comment">## PASS 1</span>
-<a name="l00127"></a>00127   assemblyInput = ioPath+fileName
-<a name="l00128"></a>00128   assemblyFile  = open(assemblyInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)        </span>
-<a name="l00129"></a>00129 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> assemblyFile:
-<a name="l00130"></a>00130     words = line.lstrip().rstrip().split()
-<a name="l00131"></a>00131     <span class="keywordflow">if</span> len(words) &gt; 0:
-<a name="l00132"></a>00132       matchObj = re.match(<span class="stringliteral">r&#39;[\da-f]+:&#39;</span>, words[0], flags=0)
-<a name="l00133"></a>00133       <span class="keywordflow">if</span> matchObj:
-<a name="l00134"></a>00134         <span class="comment"># print words[0]</span>
-<a name="l00135"></a>00135         insAddr = words[0]
-<a name="l00136"></a>00136         insAddr = insAddr[:-1]
-<a name="l00137"></a>00137         inAddrLib.append(insAddr)
-<a name="l00138"></a>00138         findOp(line, insAddr)
-<a name="l00139"></a>00139   assemblyFile.close()
-<a name="l00140"></a>00140   <span class="comment">## PASS 2</span>
-<a name="l00141"></a>00141   <span class="comment">#global jmpDstLib</span>
-<a name="l00142"></a>00142   <span class="comment">#global jmpOpLib</span>
-<a name="l00143"></a>00143   <span class="comment">#global opCodeLib</span>
-<a name="l00144"></a>00144   <span class="comment">#assemblyInput = ioPath+fileName</span>
-<a name="l00145"></a>00145   <span class="comment">#assemblyFile  = open(assemblyInput, &#39;r&#39;)        </span>
-<a name="l00146"></a>00146   <span class="comment">#for line in assemblyFile:</span>
-<a name="l00147"></a>00147   <span class="comment">#  words = line.lstrip().rstrip().split()</span>
-<a name="l00148"></a>00148   <span class="comment">#  if len(words) &gt; 0:</span>
-<a name="l00149"></a>00149   <span class="comment">#    matchObj = re.match(r&#39;[\da-f]+:&#39;, words[0], flags=0)</span>
-<a name="l00150"></a>00150   <span class="comment">#    if matchObj:</span>
-<a name="l00151"></a>00151   <span class="comment">#      #print words[0]</span>
-<a name="l00152"></a>00152   <span class="comment">#      insAddr = words[0]</span>
-<a name="l00153"></a>00153   <span class="comment">#      insAddr = insAddr[:-1]</span>
-<a name="l00154"></a>00154   <span class="comment">#      if insAddr in jmpOpLib:</span>
-<a name="l00155"></a>00155   <span class="comment">#        print line</span>
-<a name="l00156"></a>00156   <span class="comment">#        print &#39;-end\n&#39;</span>
-<a name="l00157"></a>00157   <span class="comment">#      elif insAddr in opCodeLib and opCodeLib[insAddr] == &#39;retq&#39;:</span>
-<a name="l00158"></a>00158   <span class="comment">#        print line</span>
-<a name="l00159"></a>00159   <span class="comment">#        print &#39;----\n&#39;</span>
-<a name="l00160"></a>00160   <span class="comment">#      elif insAddr in jmpDstLib:</span>
-<a name="l00161"></a>00161   <span class="comment">#        print &#39;-start\n&#39;</span>
-<a name="l00162"></a>00162   <span class="comment">#        print line</span>
-<a name="l00163"></a>00163   <span class="comment">#      else:</span>
-<a name="l00164"></a>00164   <span class="comment">#        print line</span>
+<div class="fragment"><pre class="fragment"><a name="l00130"></a>00130          :
+<a name="l00131"></a>00131   <span class="comment">## PASS 1</span>
+<a name="l00132"></a>00132   assemblyInput = ioPath+fileName
+<a name="l00133"></a>00133   assemblyFile  = open(assemblyInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)        </span>
+<a name="l00134"></a>00134 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> assemblyFile:
+<a name="l00135"></a>00135     words = line.lstrip().rstrip().split()
+<a name="l00136"></a>00136     <span class="keywordflow">if</span> len(words) &gt; 0:
+<a name="l00137"></a>00137       matchObj = re.match(<span class="stringliteral">r&#39;[\da-f]+:&#39;</span>, words[0], flags=0)
+<a name="l00138"></a>00138       <span class="keywordflow">if</span> matchObj:
+<a name="l00139"></a>00139         <span class="comment"># print words[0]</span>
+<a name="l00140"></a>00140         insAddr = words[0]
+<a name="l00141"></a>00141         insAddr = insAddr[:-1]
+<a name="l00142"></a>00142         inAddrLib.append(insAddr)
+<a name="l00143"></a>00143         findOp(line, insAddr)
+<a name="l00144"></a>00144   assemblyFile.close()
+<a name="l00145"></a>00145   <span class="comment">## PASS 2</span>
+<a name="l00146"></a>00146   <span class="comment">#global jmpDstLib</span>
+<a name="l00147"></a>00147   <span class="comment">#global jmpOpLib</span>
+<a name="l00148"></a>00148   <span class="comment">#global opCodeLib</span>
+<a name="l00149"></a>00149   <span class="comment">#assemblyInput = ioPath+fileName</span>
+<a name="l00150"></a>00150   <span class="comment">#assemblyFile  = open(assemblyInput, &#39;r&#39;)        </span>
+<a name="l00151"></a>00151   <span class="comment">#for line in assemblyFile:</span>
+<a name="l00152"></a>00152   <span class="comment">#  words = line.lstrip().rstrip().split()</span>
+<a name="l00153"></a>00153   <span class="comment">#  if len(words) &gt; 0:</span>
+<a name="l00154"></a>00154   <span class="comment">#    matchObj = re.match(r&#39;[\da-f]+:&#39;, words[0], flags=0)</span>
+<a name="l00155"></a>00155   <span class="comment">#    if matchObj:</span>
+<a name="l00156"></a>00156   <span class="comment">#      #print words[0]</span>
+<a name="l00157"></a>00157   <span class="comment">#      insAddr = words[0]</span>
+<a name="l00158"></a>00158   <span class="comment">#      insAddr = insAddr[:-1]</span>
+<a name="l00159"></a>00159   <span class="comment">#      if insAddr in jmpOpLib:</span>
+<a name="l00160"></a>00160   <span class="comment">#        print line</span>
+<a name="l00161"></a>00161   <span class="comment">#        print &#39;-end\n&#39;</span>
+<a name="l00162"></a>00162   <span class="comment">#      elif insAddr in opCodeLib and opCodeLib[insAddr] == &#39;retq&#39;:</span>
+<a name="l00163"></a>00163   <span class="comment">#        print line</span>
+<a name="l00164"></a>00164   <span class="comment">#        print &#39;----\n&#39;</span>
+<a name="l00165"></a>00165   <span class="comment">#      elif insAddr in jmpDstLib:</span>
+<a name="l00166"></a>00166   <span class="comment">#        print &#39;-start\n&#39;</span>
+<a name="l00167"></a>00167   <span class="comment">#        print line</span>
+<a name="l00168"></a>00168   <span class="comment">#      else:</span>
+<a name="l00169"></a>00169   <span class="comment">#        print line</span>
 
 </pre></div>
 <p><div class="dynheader">
@@ -230,17 +230,22 @@ Here is the caller graph for this function:</div>
 <a name="l00110"></a>00110 <span class="stringliteral">                  </span><span class="keywordflow">print</span> opCode
 <a name="l00111"></a>00111                   <span class="keywordflow">print</span> insAddr
 <a name="l00112"></a>00112                   <span class="keywordflow">print</span> line
-<a name="l00113"></a>00113         <span class="keywordflow">else</span>:
-<a name="l00114"></a>00114           <span class="keywordflow">print</span> <span class="stringliteral">&#39;o&#39;</span>
+<a name="l00113"></a>00113         <span class="keywordflow">elif</span> opCode == <span class="stringliteral">&#39;nop&#39;</span>:
+<a name="l00114"></a>00114           <span class="keywordflow">print</span> <span class="stringliteral">&#39;n&#39;</span>
 <a name="l00115"></a>00115           <span class="keywordflow">print</span> opCode
 <a name="l00116"></a>00116           <span class="keywordflow">print</span> insAddr
 <a name="l00117"></a>00117           <span class="keywordflow">print</span> line
-<a name="l00118"></a>00118         <span class="keywordflow">break</span> <span class="comment">#Avoid replicating an instruction many times in case of no match</span>
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120         <span class="comment"># done = True</span>
-<a name="l00121"></a>00121         <span class="comment"># break</span>
-<a name="l00122"></a>00122   <span class="comment">#if done == False:</span>
-<a name="l00123"></a>00123   <span class="comment">#  print line</span>
+<a name="l00118"></a>00118         <span class="keywordflow">else</span>:
+<a name="l00119"></a>00119           <span class="keywordflow">print</span> <span class="stringliteral">&#39;o&#39;</span>
+<a name="l00120"></a>00120           <span class="keywordflow">print</span> opCode
+<a name="l00121"></a>00121           <span class="keywordflow">print</span> insAddr
+<a name="l00122"></a>00122           <span class="keywordflow">print</span> line
+<a name="l00123"></a>00123         <span class="keywordflow">break</span> <span class="comment">#Avoid replicating an instruction many times in case of no match</span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125         <span class="comment"># done = True</span>
+<a name="l00126"></a>00126         <span class="comment"># break</span>
+<a name="l00127"></a>00127   <span class="comment">#if done == False:</span>
+<a name="l00128"></a>00128   <span class="comment">#  print line</span>
 
 </pre></div>
 </div>
@@ -340,83 +345,83 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment"><a name="l00166"></a>00166            :
-<a name="l00167"></a>00167   insAddrMap = []
-<a name="l00168"></a>00168   <span class="comment">## PHRASE 1</span>
-<a name="l00169"></a>00169   <span class="keywordflow">print</span> <span class="stringliteral">&#39;Phase 1&#39;</span>
-<a name="l00170"></a>00170   assemblyInput = ioPath+fileName
-<a name="l00171"></a>00171   assemblyFile  = open(assemblyInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)        </span>
-<a name="l00172"></a>00172 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> assemblyFile:
-<a name="l00173"></a>00173     words = line.lstrip().rstrip().split()
-<a name="l00174"></a>00174     <span class="keywordflow">if</span> len(words) &gt; 0:
-<a name="l00175"></a>00175       matchObj = re.match(<span class="stringliteral">r&#39;[\da-f]+:&#39;</span>, words[0], flags=0)
-<a name="l00176"></a>00176       <span class="keywordflow">if</span> matchObj:
-<a name="l00177"></a>00177         <span class="comment">#print words[0]</span>
-<a name="l00178"></a>00178         insAddr = words[0]
-<a name="l00179"></a>00179         insAddr = insAddr[:-1] <span class="comment">#already a hex, without 0x</span>
-<a name="l00180"></a>00180         <span class="keywordflow">print</span> <span class="stringliteral">&#39;&#39;</span>.join((<span class="stringliteral">&#39;0x&#39;</span>,insAddr))
-<a name="l00181"></a>00181         inAddrLib.append(<span class="stringliteral">&#39;&#39;</span>.join((<span class="stringliteral">&#39;0x&#39;</span>,insAddr)))
-<a name="l00182"></a>00182   assemblyFile.close()
-<a name="l00183"></a>00183   <span class="comment">## PHRASE 2</span>
-<a name="l00184"></a>00184   <span class="keywordflow">print</span> <span class="stringliteral">&#39;Phase 2&#39;</span>
-<a name="l00185"></a>00185   traceInput = <span class="stringliteral">&#39;/scratch/tracesim/cs343_bzip_sb.out&#39;</span>
-<a name="l00186"></a>00186   <span class="comment"># traceInput = &#39;/Volumes/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_frontend/pin/trace_static.out&#39;</span>
-<a name="l00187"></a>00187   traceFile  = open(traceInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
-<a name="l00188"></a>00188 <span class="stringliteral">  count = 0</span>
-<a name="l00189"></a>00189 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> traceFile:
-<a name="l00190"></a>00190     words = line.strip().split(<span class="stringliteral">&#39;,&#39;</span>)
-<a name="l00191"></a>00191     <span class="keywordflow">if</span> len(words) &lt; 2:
-<a name="l00192"></a>00192       <span class="keywordflow">continue</span>
-<a name="l00193"></a>00193     <span class="comment"># if len(words) &lt; 2:</span>
-<a name="l00194"></a>00194     <span class="comment">#   continue</span>
-<a name="l00195"></a>00195     <span class="comment"># if words[0] == &#39;P;&#39;:</span>
-<a name="l00196"></a>00196     <span class="comment">#   continue</span>
-<a name="l00197"></a>00197     <span class="keywordflow">if</span> words[0] == <span class="stringliteral">&quot;</span><span class="stringliteral">R&quot; or words[0] == &quot;</span>W&quot;:
-<a name="l00198"></a>00198       <span class="keywordflow">if</span> hex(int(words[2])) <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
-<a name="l00199"></a>00199         <span class="comment"># print words[0],hex(int(words[2]))</span>
-<a name="l00200"></a>00200         insAddrMap.append(hex(int(words[2]))) <span class="comment">#conversion to hex adds 0x</span>
-<a name="l00201"></a>00201     <span class="keywordflow">else</span>:
-<a name="l00202"></a>00202       <span class="keywordflow">if</span> hex(int(words[1])) <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
-<a name="l00203"></a>00203         <span class="comment"># print words[0],hex(int(words[1]))</span>
-<a name="l00204"></a>00204         insAddrMap.append(hex(int(words[1]))) <span class="comment">#conversion to hex adds 0x</span>
-<a name="l00205"></a>00205     
-<a name="l00206"></a>00206   <span class="comment"># for line in traceFile:</span>
-<a name="l00207"></a>00207   <span class="comment">#   count += 1</span>
-<a name="l00208"></a>00208   <span class="comment">#   if count == 100000:</span>
-<a name="l00209"></a>00209   <span class="comment">#     print &#39;beat&#39;,datetime.now()</span>
-<a name="l00210"></a>00210   <span class="comment">#     count = 0</span>
-<a name="l00211"></a>00211   <span class="comment">#   words = line.strip().split(&#39;,&#39;)</span>
-<a name="l00212"></a>00212   <span class="comment">#   if len(words) &lt; 3:</span>
-<a name="l00213"></a>00213   <span class="comment">#     continue #avoid empty lines</span>
-<a name="l00214"></a>00214   <span class="comment">#   insType = words[0]</span>
-<a name="l00215"></a>00215   <span class="comment">#   insAddr = words[1]</span>
-<a name="l00216"></a>00216   <span class="comment">#   if insAddr not in insAddrMap:</span>
-<a name="l00217"></a>00217   <span class="comment">#     insAddrMap.append(insAddr)</span>
-<a name="l00218"></a>00218   <span class="comment">#   else:</span>
-<a name="l00219"></a>00219   <span class="comment">#     continue</span>
-<a name="l00220"></a>00220   <span class="comment">#   indx = 2</span>
-<a name="l00221"></a>00221   <span class="comment">#   memDestAddr = -1</span>
-<a name="l00222"></a>00222   <span class="comment">#   brDestAddr = -1</span>
-<a name="l00223"></a>00223   <span class="comment">#   taken_notTaken = -1</span>
-<a name="l00224"></a>00224   <span class="comment">#   # print insType</span>
-<a name="l00225"></a>00225   <span class="comment">#   if insType == &#39;R&#39; or insType == &#39;W&#39;:</span>
-<a name="l00226"></a>00226   <span class="comment">#     memDestAddr = words[indx]</span>
-<a name="l00227"></a>00227   <span class="comment">#     indx = 3</span>
-<a name="l00228"></a>00228   <span class="comment">#   elif insType == &#39;B&#39;:</span>
-<a name="l00229"></a>00229   <span class="comment">#     taken_notTaken = words[indx]</span>
-<a name="l00230"></a>00230   <span class="comment">#     brDestAddr = words[indx+1]</span>
-<a name="l00231"></a>00231   <span class="comment">#     indx = 4</span>
-<a name="l00232"></a>00232   <span class="comment">#   for elem in words[indx:-1]:</span>
-<a name="l00233"></a>00233   <span class="comment">#     temp = elem.strip().split(&#39;#&#39;)</span>
-<a name="l00234"></a>00234   <span class="comment">#     register = temp[0]</span>
-<a name="l00235"></a>00235   <span class="comment">#     read_write = temp[1]</span>
-<a name="l00236"></a>00236   <span class="comment">#     # print &#39;registers: &#39;,register,read_write</span>
-<a name="l00237"></a>00237   <span class="comment"># traceFile.close()</span>
-<a name="l00238"></a>00238   <span class="keywordflow">print</span> <span class="stringliteral">&#39;DIFF&#39;</span>
-<a name="l00239"></a>00239   <span class="keywordflow">for</span> item <span class="keywordflow">in</span> inAddrLib:
-<a name="l00240"></a>00240     <span class="keywordflow">if</span> item <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
-<a name="l00241"></a>00241       <span class="keywordflow">print</span> item
-<a name="l00242"></a>00242     
+<div class="fragment"><pre class="fragment"><a name="l00171"></a>00171            :
+<a name="l00172"></a>00172   insAddrMap = []
+<a name="l00173"></a>00173   <span class="comment">## PHRASE 1</span>
+<a name="l00174"></a>00174   <span class="keywordflow">print</span> <span class="stringliteral">&#39;Phase 1&#39;</span>
+<a name="l00175"></a>00175   assemblyInput = ioPath+fileName
+<a name="l00176"></a>00176   assemblyFile  = open(assemblyInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)        </span>
+<a name="l00177"></a>00177 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> assemblyFile:
+<a name="l00178"></a>00178     words = line.lstrip().rstrip().split()
+<a name="l00179"></a>00179     <span class="keywordflow">if</span> len(words) &gt; 0:
+<a name="l00180"></a>00180       matchObj = re.match(<span class="stringliteral">r&#39;[\da-f]+:&#39;</span>, words[0], flags=0)
+<a name="l00181"></a>00181       <span class="keywordflow">if</span> matchObj:
+<a name="l00182"></a>00182         <span class="comment">#print words[0]</span>
+<a name="l00183"></a>00183         insAddr = words[0]
+<a name="l00184"></a>00184         insAddr = insAddr[:-1] <span class="comment">#already a hex, without 0x</span>
+<a name="l00185"></a>00185         <span class="keywordflow">print</span> <span class="stringliteral">&#39;&#39;</span>.join((<span class="stringliteral">&#39;0x&#39;</span>,insAddr))
+<a name="l00186"></a>00186         inAddrLib.append(<span class="stringliteral">&#39;&#39;</span>.join((<span class="stringliteral">&#39;0x&#39;</span>,insAddr)))
+<a name="l00187"></a>00187   assemblyFile.close()
+<a name="l00188"></a>00188   <span class="comment">## PHRASE 2</span>
+<a name="l00189"></a>00189   <span class="keywordflow">print</span> <span class="stringliteral">&#39;Phase 2&#39;</span>
+<a name="l00190"></a>00190   traceInput = <span class="stringliteral">&#39;/scratch/tracesim/cs343_bzip_sb.out&#39;</span>
+<a name="l00191"></a>00191   <span class="comment"># traceInput = &#39;/Volumes/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_frontend/pin/trace_static.out&#39;</span>
+<a name="l00192"></a>00192   traceFile  = open(traceInput, <span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
+<a name="l00193"></a>00193 <span class="stringliteral">  count = 0</span>
+<a name="l00194"></a>00194 <span class="stringliteral">  </span><span class="keywordflow">for</span> line <span class="keywordflow">in</span> traceFile:
+<a name="l00195"></a>00195     words = line.strip().split(<span class="stringliteral">&#39;,&#39;</span>)
+<a name="l00196"></a>00196     <span class="keywordflow">if</span> len(words) &lt; 2:
+<a name="l00197"></a>00197       <span class="keywordflow">continue</span>
+<a name="l00198"></a>00198     <span class="comment"># if len(words) &lt; 2:</span>
+<a name="l00199"></a>00199     <span class="comment">#   continue</span>
+<a name="l00200"></a>00200     <span class="comment"># if words[0] == &#39;P;&#39;:</span>
+<a name="l00201"></a>00201     <span class="comment">#   continue</span>
+<a name="l00202"></a>00202     <span class="keywordflow">if</span> words[0] == <span class="stringliteral">&quot;</span><span class="stringliteral">R&quot; or words[0] == &quot;</span>W&quot;:
+<a name="l00203"></a>00203       <span class="keywordflow">if</span> hex(int(words[2])) <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
+<a name="l00204"></a>00204         <span class="comment"># print words[0],hex(int(words[2]))</span>
+<a name="l00205"></a>00205         insAddrMap.append(hex(int(words[2]))) <span class="comment">#conversion to hex adds 0x</span>
+<a name="l00206"></a>00206     <span class="keywordflow">else</span>:
+<a name="l00207"></a>00207       <span class="keywordflow">if</span> hex(int(words[1])) <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
+<a name="l00208"></a>00208         <span class="comment"># print words[0],hex(int(words[1]))</span>
+<a name="l00209"></a>00209         insAddrMap.append(hex(int(words[1]))) <span class="comment">#conversion to hex adds 0x</span>
+<a name="l00210"></a>00210     
+<a name="l00211"></a>00211   <span class="comment"># for line in traceFile:</span>
+<a name="l00212"></a>00212   <span class="comment">#   count += 1</span>
+<a name="l00213"></a>00213   <span class="comment">#   if count == 100000:</span>
+<a name="l00214"></a>00214   <span class="comment">#     print &#39;beat&#39;,datetime.now()</span>
+<a name="l00215"></a>00215   <span class="comment">#     count = 0</span>
+<a name="l00216"></a>00216   <span class="comment">#   words = line.strip().split(&#39;,&#39;)</span>
+<a name="l00217"></a>00217   <span class="comment">#   if len(words) &lt; 3:</span>
+<a name="l00218"></a>00218   <span class="comment">#     continue #avoid empty lines</span>
+<a name="l00219"></a>00219   <span class="comment">#   insType = words[0]</span>
+<a name="l00220"></a>00220   <span class="comment">#   insAddr = words[1]</span>
+<a name="l00221"></a>00221   <span class="comment">#   if insAddr not in insAddrMap:</span>
+<a name="l00222"></a>00222   <span class="comment">#     insAddrMap.append(insAddr)</span>
+<a name="l00223"></a>00223   <span class="comment">#   else:</span>
+<a name="l00224"></a>00224   <span class="comment">#     continue</span>
+<a name="l00225"></a>00225   <span class="comment">#   indx = 2</span>
+<a name="l00226"></a>00226   <span class="comment">#   memDestAddr = -1</span>
+<a name="l00227"></a>00227   <span class="comment">#   brDestAddr = -1</span>
+<a name="l00228"></a>00228   <span class="comment">#   taken_notTaken = -1</span>
+<a name="l00229"></a>00229   <span class="comment">#   # print insType</span>
+<a name="l00230"></a>00230   <span class="comment">#   if insType == &#39;R&#39; or insType == &#39;W&#39;:</span>
+<a name="l00231"></a>00231   <span class="comment">#     memDestAddr = words[indx]</span>
+<a name="l00232"></a>00232   <span class="comment">#     indx = 3</span>
+<a name="l00233"></a>00233   <span class="comment">#   elif insType == &#39;B&#39;:</span>
+<a name="l00234"></a>00234   <span class="comment">#     taken_notTaken = words[indx]</span>
+<a name="l00235"></a>00235   <span class="comment">#     brDestAddr = words[indx+1]</span>
+<a name="l00236"></a>00236   <span class="comment">#     indx = 4</span>
+<a name="l00237"></a>00237   <span class="comment">#   for elem in words[indx:-1]:</span>
+<a name="l00238"></a>00238   <span class="comment">#     temp = elem.strip().split(&#39;#&#39;)</span>
+<a name="l00239"></a>00239   <span class="comment">#     register = temp[0]</span>
+<a name="l00240"></a>00240   <span class="comment">#     read_write = temp[1]</span>
+<a name="l00241"></a>00241   <span class="comment">#     # print &#39;registers: &#39;,register,read_write</span>
+<a name="l00242"></a>00242   <span class="comment"># traceFile.close()</span>
+<a name="l00243"></a>00243   <span class="keywordflow">print</span> <span class="stringliteral">&#39;DIFF&#39;</span>
+<a name="l00244"></a>00244   <span class="keywordflow">for</span> item <span class="keywordflow">in</span> inAddrLib:
+<a name="l00245"></a>00245     <span class="keywordflow">if</span> item <span class="keywordflow">not</span> <span class="keywordflow">in</span> insAddrMap:
+<a name="l00246"></a>00246       <span class="keywordflow">print</span> item
+<a name="l00247"></a>00247     
 
 </pre></div>
 </div>
@@ -532,7 +537,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -541,7 +546,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

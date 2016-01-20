@@ -73,20 +73,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;set&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;map&gt;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;instruction.h&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;config.h&quot;</span>
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="keywordtype">void</span> <a class="code" href="make__instruction_8cpp.html#a2673a7cce171b34555a3a4249a0d61c8">parse_instruction</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a> *insList,
-<a name="l00017"></a>00017                                            map&lt;ADDR,instruction*&gt; *insAddrMap,
-<a name="l00018"></a>00018                        std::set&lt;ADDR&gt; *brDstSet,
-<a name="l00019"></a>00019                                            std::map&lt;ADDR, double&gt; *brBiasMap,
-<a name="l00020"></a>00020                                            std::map&lt;ADDR, double&gt; *bpAccuracyMap,
-<a name="l00021"></a>00021                                            std::map&lt;ADDR, double&gt; *upldMap,
-<a name="l00022"></a>00022                                            std::map&lt;<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>,set&lt;ADDR&gt; &gt; &amp;memRdAddrMap,
-<a name="l00023"></a>00023                                            std::map&lt;<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>,set&lt;ADDR&gt; &gt; &amp;memWrAddrMap,
-<a name="l00024"></a>00024                                            std::string *program_name);
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="preprocessor">#endif</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;fstream&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="instruction_8h.html">instruction.h</a>&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;config.h&quot;</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="keywordtype">void</span> <a class="code" href="make__instruction_8cpp.html#abe7a2d116e3e54c66d70fff6e83b0bae">parse_instruction</a>(<a class="code" href="classList.html">List&lt;instruction*&gt;</a>*,
+<a name="l00021"></a>00021                                            map&lt;ADDR,instruction*&gt;*,
+<a name="l00022"></a>00022                        std::set&lt;ADDR&gt;*,
+<a name="l00023"></a>00023                                            std::map&lt;ADDR, double&gt;*,
+<a name="l00024"></a>00024                                            std::map&lt;ADDR, double&gt;*,
+<a name="l00025"></a>00025                                            std::map&lt;ADDR, double&gt;*,
+<a name="l00026"></a>00026                                            std::map&lt;<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>,set&lt;ADDR&gt; &gt;&amp;,
+<a name="l00027"></a>00027                                            std::map&lt;<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>,set&lt;ADDR&gt; &gt;&amp;,
+<a name="l00028"></a>00028                                            std::string*,
+<a name="l00029"></a>00029                        <a class="code" href="binaryTranslator_2global_8h.html#af9119e90106116692c2c7bc54461ed3d">CLUSTER_MODE</a>);
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -94,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -103,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

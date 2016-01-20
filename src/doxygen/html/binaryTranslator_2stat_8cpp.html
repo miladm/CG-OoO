@@ -69,8 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Include dependency graph for stat.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2stat_8cpp" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2stat_8cpp" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2stat_8cpp">
-</map>
+<!-- MAP 0 -->
 </div>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -106,19 +105,20 @@ Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                                   {
         FILE *statOutputFile;
-        <span class="keywordflow">if</span> ((statOutputFile  = fopen((<span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;_DynBBSizeHist_stat.csv&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
+    <span class="keywordtype">string</span> file_name = stat_path + <span class="stringliteral">&quot;/&quot;</span> + (*program_name) + <span class="stringliteral">&quot;_DynBBSizeHist_stat.csv&quot;</span>;
+        <span class="keywordflow">if</span> ((statOutputFile  = fopen(file_name.c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
         <span class="keywordflow">for</span> (map&lt;int,int&gt;::iterator it = bbSizeHist.begin(); it != bbSizeHist.end(); it++) {
                 fprintf(statOutputFile, <span class="stringliteral">&quot;%d, %d\n&quot;</span>, it-&gt;first, it-&gt;second);
         }
+    printf (<span class="stringliteral">&quot;\t\tDynBBSizeHist: %s\n&quot;</span>, file_name.c_str ());
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48_icgraph.png" border="0" usemap="#binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48_icgraph" alt=""/></div>
-<map name="binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48_icgraph" id="binaryTranslator_2stat_8cpp_ab157f0e7c21ee60b5b4212d99e5cfa48_icgraph">
-</map>
+<!-- MAP 1 -->
 </div>
 </p>
 
@@ -160,21 +160,22 @@ Here is the caller graph for this function:</div>
                         bbSizeDensity[size] = 1;
         }
         FILE *statOutputFile;
-        <span class="keywordflow">if</span> ((statOutputFile  = fopen((<span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;_StatBBSizeCDF_stat.csv&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
+    <span class="keywordtype">string</span> file_name = stat_path + <span class="stringliteral">&quot;/&quot;</span> + (*program_name) + <span class="stringliteral">&quot;_StatBBSizeCDF_stat.csv&quot;</span>;
+        <span class="keywordflow">if</span> ((statOutputFile  = fopen(file_name.c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
         <span class="keywordtype">float</span> cdf = 0.0;
         <span class="keywordflow">for</span> (map&lt;int,int&gt;::iterator it = bbSizeDensity.begin(); it != bbSizeDensity.end(); it++) {
                 cdf += (float)it-&gt;second / (<span class="keywordtype">float</span>)bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>();
                 fprintf(statOutputFile, <span class="stringliteral">&quot;%d, %f\n&quot;</span>, it-&gt;first, cdf);
         }
+    printf (<span class="stringliteral">&quot;\t\tStatBBSizeCDF: %s\n&quot;</span>, file_name.c_str ());
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_cgraph.png" border="0" usemap="#binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_cgraph" alt=""/></div>
-<map name="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_cgraph" id="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_cgraph">
-</map>
+<!-- MAP 2 -->
 </div>
 </p>
 
@@ -182,8 +183,7 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_icgraph.png" border="0" usemap="#binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_icgraph" alt=""/></div>
-<map name="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_icgraph" id="binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e_icgraph">
-</map>
+<!-- MAP 3 -->
 </div>
 </p>
 
@@ -219,8 +219,8 @@ Here is the caller graph for this function:</div>
         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
                 <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* insList = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>();
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> ++) {
-                        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
+                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); j ++) {
+                        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(j);
                         <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* ancestors = ins-&gt;<a class="code" href="classinstruction.html#a90450afccd1b4b07bd28b2ee8aabdf6d">getRegAncestors</a>();
                         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; ancestors-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); k++) {
                                 <a class="code" href="classinstruction.html">instruction</a> *anc = ancestors-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(k);
@@ -232,18 +232,18 @@ Here is the caller graph for this function:</div>
                         }
                 }
         }
-        <span class="keywordflow">if</span> ((statOutputFile  = fopen((<span class="stringliteral">&quot;/home/milad/esc_project/svn/memTraceMilad/TraceSim/phraseblock_framework/output_files/&quot;</span>+(*program_name)+<span class="stringliteral">&quot;_inter_n_intra_BB_reg_stat.txt&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
+        <span class="keywordflow">if</span> ((statOutputFile  = fopen((stat_path + <span class="stringliteral">&quot;/&quot;</span> + (*program_name) + <span class="stringliteral">&quot;_inter_n_intra_BB_reg_stat.txt&quot;</span>).c_str(), <span class="stringliteral">&quot;w&quot;</span>)) == NULL)
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="stringliteral">&quot;Unable to open the statistics output file.&quot;</span>);
 
         fprintf(statOutputFile, <span class="stringliteral">&quot;Avg. Num INTRA-BB Regs: %f\n&quot;</span>, (<span class="keywordtype">float</span>)num_intraBB_regs/(<span class="keywordtype">float</span>)bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
         fprintf(statOutputFile, <span class="stringliteral">&quot;Avg. Num INTER-BB Regs: %f\n&quot;</span>, (<span class="keywordtype">float</span>)num_interBB_regs/(<span class="keywordtype">float</span>)bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
-}</pre></div>
+}
+</pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_cgraph.png" border="0" usemap="#binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_cgraph" alt=""/></div>
-<map name="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_cgraph" id="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_cgraph">
-</map>
+<!-- MAP 4 -->
 </div>
 </p>
 
@@ -251,8 +251,7 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_icgraph.png" border="0" usemap="#binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_icgraph" alt=""/></div>
-<map name="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_icgraph" id="binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93_icgraph">
-</map>
+<!-- MAP 5 -->
 </div>
 </p>
 
@@ -264,7 +263,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -273,7 +272,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

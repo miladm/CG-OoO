@@ -60,13 +60,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#define-members">Defines</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/ssa.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;ssa.h&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="ssa_8h_source.html">ssa.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ssa.cpp:</div>
 <div class="dyncontent">
@@ -80,7 +79,6 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a27946f3e650b0cd16c36dd3ce519fc1d">ZERO_ITER</a>&#160;&#160;&#160;0</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#abdfff53c843c32229bd5cfb0fd094026">findDomEntryPoints</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *interiorBB)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a2407eaf38be9d17167c4361072082608">buildDefUseSets</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#adb27c228bf508415dafc026ebbc822d3">buildVarList</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a64b325828ea51414e2809f54af3302a2">phi_func_placement</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList)</td></tr>
@@ -88,9 +86,6 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9">search</a> (<a class="el" href="classbasicblock.html">basicblock</a> *bb, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a804de8f00b7ea9e5487315dc9ff01d77">ssa_renaming</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a99d7839751286ac78c627aabd383cb51">build_ssa_form</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, map&lt; int, <a class="el" href="classvariable.html">variable</a> * &gt; &amp;varList)</td></tr>
-<tr><td colspan="2"><h2><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ssa_8cpp.html#a617a47c70795bcff659815ad0efd2266">counter</a> = 0</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a27946f3e650b0cd16c36dd3ce519fc1d"></a><!-- doxytag: member="ssa.cpp::ZERO_ITER" ref="a27946f3e650b0cd16c36dd3ce519fc1d" args="" -->
@@ -131,17 +126,17 @@ Variables</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                            {
-        printf(<span class="stringliteral">&quot;\tBuild Def-Use Sets\n&quot;</span>);
-        <a class="code" href="ssa_8cpp.html#a2407eaf38be9d17167c4361072082608">buildDefUseSets</a>(bbList);
-        printf(<span class="stringliteral">&quot;\tBuild Variable Def Lists From DefSets\n&quot;</span>);
-        <a class="code" href="ssa_8cpp.html#adb27c228bf508415dafc026ebbc822d3">buildVarList</a>(bbList,varList);
-        printf(<span class="stringliteral">&quot;\tBuild Phi-Funcations\n&quot;</span>);
-        <a class="code" href="ssa_8cpp.html#a64b325828ea51414e2809f54af3302a2">phi_func_placement</a>(bbList, varList);
-        printf(<span class="stringliteral">&quot;\tRun SSA Renaming\n&quot;</span>);
-        <a class="code" href="ssa_8cpp.html#a804de8f00b7ea9e5487315dc9ff01d77">ssa_renaming</a>(bbList, varList);
-        printf(<span class="stringliteral">&quot;\tDistroy VarList\n&quot;</span>);
-        <span class="keywordflow">for</span> (map&lt;int,variable*&gt;::iterator it = varList.begin(); it != varList.end(); it++) {
+<div class="fragment"><pre class="fragment">                                                                             {
+        printf (<span class="stringliteral">&quot;\tBuild Def-Use Sets\n&quot;</span>);
+        <a class="code" href="ssa_8cpp.html#a2407eaf38be9d17167c4361072082608">buildDefUseSets</a> (bbList);
+        printf (<span class="stringliteral">&quot;\tBuild Variable Def Lists From DefSets\n&quot;</span>);
+        <a class="code" href="ssa_8cpp.html#adb27c228bf508415dafc026ebbc822d3">buildVarList</a> (bbList,varList);
+        printf (<span class="stringliteral">&quot;\tBuild Phi-Funcations\n&quot;</span>);
+        <a class="code" href="ssa_8cpp.html#a64b325828ea51414e2809f54af3302a2">phi_func_placement</a> (bbList, varList);
+        printf (<span class="stringliteral">&quot;\tRun SSA Renaming\n&quot;</span>);
+        <a class="code" href="ssa_8cpp.html#a804de8f00b7ea9e5487315dc9ff01d77">ssa_renaming</a> (bbList, varList);
+        printf (<span class="stringliteral">&quot;\tDistroy VarList\n&quot;</span>);
+        <span class="keywordflow">for</span> (map&lt;int,variable*&gt;::iterator it = varList.begin (); it != varList.end (); it++) {
                 <span class="keyword">delete</span> it-&gt;second;
         }
 }
@@ -180,9 +175,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                {
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =0 ; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++)
-                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;setupDefUseSets();
+<div class="fragment"><pre class="fragment">                                                 {
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =0 ; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++)
+                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;setupDefUseSets ();
 }
 </pre></div>
 <p><div class="dynheader">
@@ -230,28 +225,27 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                                           {
-        <span class="comment">// Build the variables list</span>
+        <span class="comment">/* BUILD THE VARIABLES LIST FOR X86 REGISTERS */</span>
         <span class="keywordflow">for</span> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> i = <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a>; i &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a>; i++) {
-                <a class="code" href="classvariable.html">variable</a> *var = <span class="keyword">new</span> <a class="code" href="classvariable.html">variable</a>(i);
-                varList.insert(pair&lt;int,variable*&gt;(i,var));
+                <a class="code" href="classvariable.html">variable</a> *var = <span class="keyword">new</span> <a class="code" href="classvariable.html">variable</a> (i);
+                varList.insert (pair&lt;int,variable*&gt; (i,var));
         }
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                set&lt;long int&gt; defSet = bb-&gt;<a class="code" href="classbasicblock.html#a208aa13365196998e48936c287242a77">getDefSet</a>(); <span class="comment">//NOTE: some variables are &quot;somehow&quot; never defined in x86!</span>
-                <span class="keywordflow">for</span> (set&lt;long int&gt;::iterator it = defSet.begin(); it != defSet.end(); it++) {
-                        <span class="keywordflow">if</span> (!((*it) &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; (*it) &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a>))
-                                printf(<span class="stringliteral">&quot;ERROR: %d\n&quot;</span>,*it);
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>((*it) &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; (*it) &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a> &amp;&amp; <span class="stringliteral">&quot;invalid x86 variable.&quot;</span>);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                set&lt;long int&gt; defSet = bb-&gt;<a class="code" href="classbasicblock.html#a208aa13365196998e48936c287242a77">getDefSet</a> (); <span class="comment">//NOTE: some variables are &quot;somehow&quot; never defined in x86!</span>
+        set&lt;long int&gt;::iterator it;
+                <span class="keywordflow">for</span> (it = defSet.begin (); it != defSet.end (); it++) {
+                        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ((*it) &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; (*it) &lt;= <a class="code" href="binaryTranslator_2global_8h.html#ad6ace7808dd5d12870c420f892749521">X86_REG_HI</a> &amp;&amp; <span class="stringliteral">&quot;Invalid x86 variable.&quot;</span>);
                         <span class="keywordtype">int</span> varIndx = *it;
-                        varList[varIndx]-&gt;addBB(bb);
+                        varList[varIndx]-&gt;addBB (bb);
                 }
 <span class="preprocessor">                #ifdef DEBUG_SSA</span>
-<span class="preprocessor"></span>                printf(<span class="stringliteral">&quot;def set: %d\n&quot;</span>,defSet.size());
+<span class="preprocessor"></span>                printf (<span class="stringliteral">&quot;def set: %d\n&quot;</span>,defSet.size ());
 <span class="preprocessor">                #endif</span>
 <span class="preprocessor"></span>        }
         <span class="comment">// Stat on x86 reg definitions in a program.</span>
-        <span class="comment">// for (map&lt;int,variable*&gt;::iterator it = varList.begin(); it != varList.end(); it++) {</span>
-                <span class="comment">// printf(&quot;%d\n&quot;, it-&gt;second-&gt;getNumAssignedBB());</span>
+        <span class="comment">// for (map&lt;int,variable*&gt;::iterator it = varList.begin (); it != varList.end (); it++) {</span>
+                <span class="comment">// printf (&quot;%d\n&quot;, it-&gt;second-&gt;getNumAssignedBB ());</span>
         <span class="comment">// }</span>
 }
 </pre></div>
@@ -269,59 +263,6 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ssa_8cpp_adb27c228bf508415dafc026ebbc822d3_icgraph.png" border="0" usemap="#ssa_8cpp_adb27c228bf508415dafc026ebbc822d3_icgraph" alt=""/></div>
 <map name="ssa_8cpp_adb27c228bf508415dafc026ebbc822d3_icgraph" id="ssa_8cpp_adb27c228bf508415dafc026ebbc822d3_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="abdfff53c843c32229bd5cfb0fd094026"></a><!-- doxytag: member="ssa.cpp::findDomEntryPoints" ref="abdfff53c843c32229bd5cfb0fd094026" args="(List&lt; basicblock * &gt; *bbList, List&lt; basicblock * &gt; *interiorBB)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void findDomEntryPoints </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>bbList</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>interiorBB</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                  {
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {       
-                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <span class="keywordflow">if</span> (bb-&gt;<a class="code" href="classbasicblock.html#ab3f5925d649492e0a3e73f4f9075ca7d">getSDominatorSize</a>() == 0) {
-                        interiorBB-&gt;<a class="code" href="classList.html#a473190098e38206d0125b0737245e613">Append</a>(bb);
-                }
-        }
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_cgraph.png" border="0" usemap="#ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_cgraph" alt=""/></div>
-<map name="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_cgraph" id="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_icgraph.png" border="0" usemap="#ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_icgraph" alt=""/></div>
-<map name="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_icgraph" id="ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026_icgraph">
 </map>
 </div>
 </p>
@@ -352,34 +293,36 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                                {
+<div class="fragment"><pre class="fragment">                                                                                 {
         map&lt;ADDR,int&gt; hasAlready, work;
         map&lt;ADDR,basicblock*&gt; W;
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                hasAlready.insert(pair&lt;ADDR,int&gt;(bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>(),<a class="code" href="ssa_8cpp.html#a27946f3e650b0cd16c36dd3ce519fc1d">ZERO_ITER</a>));
-                work.insert(pair&lt;ADDR,int&gt;(bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>(),<a class="code" href="ssa_8cpp.html#a27946f3e650b0cd16c36dd3ce519fc1d">ZERO_ITER</a>));
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a> *bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                hasAlready.insert (pair&lt;ADDR,int&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (),<a class="code" href="ssa_8cpp.html#a27946f3e650b0cd16c36dd3ce519fc1d">ZERO_ITER</a>));
+                work.insert (pair&lt;ADDR,int&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (),<a class="code" href="ssa_8cpp.html#a27946f3e650b0cd16c36dd3ce519fc1d">ZERO_ITER</a>));
         }
         <span class="keywordtype">int</span> iterCount = 0;
-        <span class="keywordflow">for</span> (map&lt;int,variable*&gt;::iterator it = varList.begin(); it != varList.end(); it++) {
+    map&lt;int,variable*&gt;::iterator it;
+        <span class="keywordflow">for</span> (it = varList.begin (); it != varList.end (); it++) {
                 iterCount++;
                 <a class="code" href="classvariable.html">variable</a> *var = it-&gt;second;
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; var-&gt;<a class="code" href="classvariable.html#a53fb79e20c7ca14c872830461025c11c">getNumAssignedBB</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = var-&gt;<a class="code" href="classvariable.html#a651a5439b34d9eae8ceacca7ecbfc3e8">getNthAssignedBB</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
-                        work[bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>()] = iterCount;
-                        W.insert(pair&lt;ADDR,basicblock*&gt;(bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>(),bb));
+                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; var-&gt;<a class="code" href="classvariable.html#a53fb79e20c7ca14c872830461025c11c">getNumAssignedBB</a> (); j++) {
+                        <a class="code" href="classbasicblock.html">basicblock</a> *bb = var-&gt;<a class="code" href="classvariable.html#a651a5439b34d9eae8ceacca7ecbfc3e8">getNthAssignedBB</a> (j);
+                        work[bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> ()] = iterCount;
+                        W.insert (pair&lt;ADDR,basicblock*&gt; (bb-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> (),bb));
                 }
-                <span class="keywordflow">while</span> (W.size() != 0) {
-                        <a class="code" href="classbasicblock.html">basicblock</a>* X = (W.begin())-&gt;second;
-                        W.erase(W.begin());
-                        map&lt;ADDR,basicblock*&gt; xDF = X-&gt;<a class="code" href="classbasicblock.html#a3f8fdaf67559becd35119c53a47791c6">getDF</a>();
-                        <span class="keywordflow">for</span> (map&lt;ADDR,basicblock*&gt;::iterator Y = xDF.begin(); Y != xDF.end(); Y++) {
+                <span class="keywordflow">while</span> (W.size () != 0) {
+                        <a class="code" href="classbasicblock.html">basicblock</a>* X = (W.begin ())-&gt;second;
+                        W.erase (W.begin ());
+                        map&lt;ADDR,basicblock*&gt; xDF = X-&gt;<a class="code" href="classbasicblock.html#a3f8fdaf67559becd35119c53a47791c6">getDF</a> ();
+            map&lt;ADDR,basicblock*&gt;::iterator Y;
+                        <span class="keywordflow">for</span> (Y = xDF.begin (); Y != xDF.end (); Y++) {
                                 <span class="keywordflow">if</span> (hasAlready[Y-&gt;first] &lt; iterCount) {
-                                        (Y-&gt;second)-&gt;insertPhiFunc(var-&gt;<a class="code" href="classvariable.html#a1134c24e98e73b266b91d02eb253e031">getID</a>());
+                                        (Y-&gt;second)-&gt;insertPhiFunc (var-&gt;<a class="code" href="classvariable.html#a1134c24e98e73b266b91d02eb253e031">getID</a> ());
                                         hasAlready[Y-&gt;first] = iterCount;
                                         <span class="keywordflow">if</span> (work[Y-&gt;first] &lt; iterCount) {
                                                 work[Y-&gt;first] = iterCount;
-                                                W.insert(pair&lt;ADDR,basicblock*&gt;((Y-&gt;second)-&gt;getID(),Y-&gt;second));
+                                                W.insert (pair&lt;ADDR,basicblock*&gt; ((Y-&gt;second)-&gt;getID (),Y-&gt;second));
                                         }
                                 }
                         }
@@ -431,78 +374,115 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                         {
-        <span class="comment">// if (!bb-&gt;isVisited()) {</span>
-                bb-&gt;<a class="code" href="classbasicblock.html#adb3d7c691e7974f77619409fe4a24335">setAsVisited</a>();
-                <span class="comment">// printf(&quot;================================%d\n&quot;, counter++);</span>
-                <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *insList = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a>();
-                <span class="comment">//TODO: check if the block is visited</span>
-                <span class="comment">//Process assignment operations</span>
-                <span class="comment">//Process phi operations</span>
-                map&lt;long int, vector&lt;long int&gt; &gt; phiFuncs = bb-&gt;<a class="code" href="classbasicblock.html#a3b5148a1563478d689e1e3796ebd7dba">getPhiFuncs</a>();
-                <span class="keywordflow">for</span> (map&lt;<span class="keywordtype">long</span> <span class="keywordtype">int</span>, vector&lt;long int&gt; &gt;::iterator it = phiFuncs.begin(); it != phiFuncs.end(); it++) {
-                        <span class="keywordtype">int</span> var = it-&gt;first;
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                        <span class="keywordtype">int</span> k = varList[var]-&gt;getC();
-                        bb-&gt;<a class="code" href="classbasicblock.html#a8b4180d38d685e0def92a4512ab4f1ce">setPhiWriteVar</a>(var, k);
-                        varList[var]-&gt;pushToStack(k);
-                        varList[var]-&gt;setC(k+1);
+<div class="fragment"><pre class="fragment">                                                          {
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (!bb-&gt;<a class="code" href="classbasicblock.html#ad40cc70b314779ab7d0990813d3053d4">isVisited</a> () &amp;&amp; <span class="stringliteral">&quot;An attempt to revisit a block in SSA&quot;</span>);
+    bb-&gt;<a class="code" href="classbasicblock.html#adb3d7c691e7974f77619409fe4a24335">setAsVisited</a> ();
+
+    <a class="code" href="classList.html">List&lt;instruction*&gt;</a> *insList = bb-&gt;<a class="code" href="classbasicblock.html#adc40d816c82feedc1f7027fc29470d90">getInsList</a> ();
+    map&lt;int, int&gt; hackPushes;
+    map&lt;long int, vector&lt;long int&gt; &gt; phiFuncs = bb-&gt;<a class="code" href="classbasicblock.html#a3b5148a1563478d689e1e3796ebd7dba">getPhiFuncs</a> ();
+
+    <span class="comment">/* ASSIGN DESTINATION SSA REGISTER TO PHI-FUNCTIONS */</span>
+    map&lt;long int, vector&lt;long int&gt; &gt;::iterator phiFunc;
+    <span class="keywordflow">for</span> (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+        <span class="keywordtype">int</span> var = phiFunc-&gt;first;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+        <span class="keywordtype">int</span> k = varList[var]-&gt;getC ();
+        bb-&gt;<a class="code" href="classbasicblock.html#af5afec059922ab19cf93f9f84f5c85ed">setPhiWriteVar</a> (var, k);
+        varList[var]-&gt;pushToStack (k);
+        varList[var]-&gt;setC (k + 1);
+    }
+
+    <span class="comment">/* ASSIGN SSA REGISTERS TO REGULAR INSTRUCTIONS */</span>
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> (); j++) {
+            <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>) {
+                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+                <span class="keywordtype">int</span> v1 = varList[var]-&gt;_hackPushCount;
+                <span class="keywordtype">int</span> subscript = varList[var]-&gt;getTopStack ();
+                <span class="keywordflow">if</span> (varList[var]-&gt;_hackPushCount - v1 == 1) {
+                    <span class="keywordflow">if</span> (hackPushes.find (var) == hackPushes.end ()) 
+                        hackPushes.insert(pair&lt;int, int&gt; (var, 1));
+                    <span class="keywordflow">else</span> 
+                        hackPushes[var]++;
                 }
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; ins-&gt;<a class="code" href="classinstruction.html#ae0a1ee97e6ba7920c41dd35f97b1715a">getNumReadReg</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a0a5ddbb986096245d7742472c49d14b2">getNthReadReg</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                                ins-&gt;<a class="code" href="classinstruction.html#a093ff19f17baaf84d4539ea395468265">setReadVar</a>(var, varList[var]-&gt;getTopStack());
-                        }
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = 0; <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> &lt; ins-&gt;<a class="code" href="classinstruction.html#a293a8975be22485ec002ef7cc0466d0a">getNumWriteReg</a>(); <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>++) {
-                                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a29e8de9d3cd22cee464512f9bbc1972c">getNthWriteReg</a>(<a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a>);
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                                <span class="keywordtype">int</span> k = varList[var]-&gt;getC();
-                                ins-&gt;<a class="code" href="classinstruction.html#a67c584522eaa68d46a495170ce8a3bbd">setWriteVar</a>(var, k);
-                                varList[var]-&gt;pushToStack(k);
-                                varList[var]-&gt;setC(k+1);
-                        }
+                ins-&gt;<a class="code" href="classinstruction.html#a093ff19f17baaf84d4539ea395468265">setReadVar</a> (var, subscript);
+            }
+        }
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> (); j++) {
+            <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>) {
+                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+                <span class="keywordtype">int</span> k = varList[var]-&gt;getC ();
+                ins-&gt;<a class="code" href="classinstruction.html#a67c584522eaa68d46a495170ce8a3bbd">setWriteVar</a> (var, k);
+                varList[var]-&gt;pushToStack (k);
+                varList[var]-&gt;setC (k + 1);
+            }
+        }
+    }
+
+    <span class="comment">/*--</span>
+<span class="comment">     * SET SSA VALUES OF EACH VARIABLE FROM this BB TO EACH OF ITS</span>
+<span class="comment">     * DESCENDENTS (RHS of PHI-FUNCTION). WE WANT TO HAVE AS MANY ELEMENET</span>
+<span class="comment">     * IN TEH PHI-VECTOR AS THE NUMBER OF ANCESTORS OF THE BB. THEN EVERY</span>
+<span class="comment">     * ANCESTOR MUST COME AND FILL IN THE HOLE</span>
+<span class="comment">     --*/</span>
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bb-&gt;<a class="code" href="classbasicblock.html#a42700afdf9102a0f287690f4f8c487f9">getNumDescendents</a> (); i++) {
+        <a class="code" href="classbasicblock.html">basicblock</a>* Y = bb-&gt;<a class="code" href="classbasicblock.html#a571a65129ed999a167803d516cb9455e">getNthDescendent</a> (i);
+        <span class="keywordtype">int</span> j = <a class="code" href="ssa_8cpp.html#ad51f0106de926496f1a6b24bfd21bc32">whichPred</a> (Y, bb);
+        map&lt;long int, vector&lt;long int&gt; &gt; phiFuncs = Y-&gt;<a class="code" href="classbasicblock.html#a3b5148a1563478d689e1e3796ebd7dba">getPhiFuncs</a> ();
+        <span class="keywordflow">for</span> (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+            <span class="keywordtype">int</span> var = phiFunc-&gt;first;
+            <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+            <span class="keywordtype">int</span> v1 = varList[var]-&gt;_hackPushCount;
+            <span class="keywordtype">int</span> subscript = varList[var]-&gt;getTopStack ();
+            <span class="keywordflow">if</span> (varList[var]-&gt;_hackPushCount - v1 == 1) {
+                <span class="keywordflow">if</span> (hackPushes.find (var) == hackPushes.end ()) 
+                    hackPushes.insert(pair&lt;int, int&gt; (var, 1));
+                <span class="keywordflow">else</span> 
+                    hackPushes[var]++;
+            }
+            Y-&gt;<a class="code" href="classbasicblock.html#ab9ce3574fe056958ce66401602c0c9a9">replaceNthPhiOperand</a> (var, j, subscript); <span class="comment">//TODO correct?</span>
+        }
+    }
+
+    <span class="comment">/* SEARCH EVERY CHILD OF this BB IN THE DOMINATOR TREE */</span>
+    map&lt;ADDR,basicblock*&gt; children = bb-&gt;<a class="code" href="classbasicblock.html#a6dde8501c965eb860dcc5bf63fcb06f2">getChildren</a> ();
+    map&lt;ADDR,basicblock*&gt;::iterator child;
+    <span class="keywordflow">for</span> (child = children.begin (); child != children.end (); child++) {
+        <a class="code" href="classbasicblock.html">basicblock</a>* Y = child-&gt;second;
+        <a class="code" href="ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9">search</a> (Y, varList);
+    }
+
+    <span class="comment">/* CLEAN THE STACKES THAT HAD A DEFINITION DONE BY this BB */</span>
+    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> (); j++) {
+            <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0ca61aa7ff70b76bff0fda378cf61d6afbc">WRITE</a>) {
+                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+                varList[var]-&gt;popFromStack ();
+            }
+        }
+        <span class="comment">/* THIS IS ANOTHER PART OF THE STACK HACK */</span>
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> (); j++) {
+            <span class="keywordflow">if</span> (ins-&gt;<a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (j) == <a class="code" href="binaryTranslator_2global_8h.html#a94b8423a23b95a7adac22848b81e7c0cacb9be765f361bb7efb9073730aac92c6">READ</a>) {
+                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (j);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (varList.find (var) != varList.end ());
+                <span class="keywordflow">if</span> (hackPushes.find (var) != hackPushes.end ()) {
+                    varList[var]-&gt;popHackPushes (hackPushes[var]);
+                    hackPushes.erase (var);
                 }
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bb-&gt;<a class="code" href="classbasicblock.html#a42700afdf9102a0f287690f4f8c487f9">getNumDescendents</a>(); i++) {
-                        <a class="code" href="classbasicblock.html">basicblock</a>* Y = bb-&gt;<a class="code" href="classbasicblock.html#a571a65129ed999a167803d516cb9455e">getNthDescendent</a>(i);
-                        <span class="keywordtype">int</span> <a class="code" href="uop__gen_8cpp.html#ab4f6b3aed51d8a9b2ada1ad5390fb569">j</a> = <a class="code" href="ssa_8cpp.html#ad51f0106de926496f1a6b24bfd21bc32">whichPred</a>(Y, bb);
-                        map&lt;long int, vector&lt;long int&gt; &gt; phiFuncs = Y-&gt;<a class="code" href="classbasicblock.html#a3b5148a1563478d689e1e3796ebd7dba">getPhiFuncs</a>();
-                        <span class="keywordflow">for</span> (map&lt;<span class="keywordtype">long</span> <span class="keywordtype">int</span>, vector&lt;long int&gt; &gt;::iterator it = phiFuncs.begin(); it != phiFuncs.end(); it++) {
-                                <span class="keywordtype">int</span> var = it-&gt;first;
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                                <span class="comment">//TODO see if j ever larger than 0</span>
-                                <span class="comment">//we want to have as many elemenet in teh phi-vector as the number of ancestors of the BB. Then every ancestor must come and fill in the hole</span>
-                                Y-&gt;<a class="code" href="classbasicblock.html#a129efbec925894799b11962ee9ec8b72">replaceNthPhiOperand</a>(var,j,varList[var]-&gt;getTopStack()); <span class="comment">//TODO correct?</span>
-                        }
-                }
-                map&lt;ADDR,basicblock*&gt; children = bb-&gt;<a class="code" href="classbasicblock.html#a6dde8501c965eb860dcc5bf63fcb06f2">getChildren</a>();
-                <span class="keywordflow">for</span> (map&lt;ADDR,basicblock*&gt;::iterator it = children.begin(); it != children.end(); it++) {
-                <span class="comment">// for (int i = 0; i &lt; bb-&gt;getNumChildren(); i++) {</span>
-                        <span class="comment">// printf(&quot;children\n&quot;);</span>
-                        <a class="code" href="classbasicblock.html">basicblock</a>* Y = it-&gt;second;<span class="comment">// bb-&gt;getNthChild(i);</span>
-                        <a class="code" href="ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9">search</a>(Y,varList);
-                }
-                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                        <a class="code" href="classinstruction.html">instruction</a> *ins = insList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#a293a8975be22485ec002ef7cc0466d0a">getNumWriteReg</a>(); j++) {
-                                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#ad7dce7bff9bfecd11b0e7119738d0994">getNthOldWriteReg</a>(j);
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                                varList[var]-&gt;popFromStack();
-                        }
-                        <span class="comment">// This is another part of the stack hack</span>
-                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; ins-&gt;<a class="code" href="classinstruction.html#ae0a1ee97e6ba7920c41dd35f97b1715a">getNumReadReg</a>(); j++) {
-                                <span class="keywordtype">int</span> var = ins-&gt;<a class="code" href="classinstruction.html#a0a5ddbb986096245d7742472c49d14b2">getNthReadReg</a>(j);
-                                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(varList.find(var) != varList.end());
-                                varList[var]-&gt;popHackPushes();
-                        }
-                }
-                <span class="keywordflow">for</span> (map&lt;<span class="keywordtype">long</span> <span class="keywordtype">int</span>, vector&lt;long int&gt; &gt;::iterator it = phiFuncs.begin(); it != phiFuncs.end(); it++) {
-                        <span class="keywordtype">int</span> var = it-&gt;first;
-                        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
-                        varList[var]-&gt;popFromStack();
-                }
-        <span class="comment">// }</span>
+            }
+        }
+    }
+    <span class="keywordflow">for</span> (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+        <span class="keywordtype">int</span> var = phiFunc-&gt;first;
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (var &lt;= X86_REG_HI &amp;&amp; var &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ab6b4d7c8ddf9e95d192c13d22e831d05">X86_REG_LO</a> &amp;&amp; <span class="stringliteral">&quot;Invalid register value&quot;</span>);
+        varList[var]-&gt;popFromStack ();
+    }
 }
 </pre></div>
 <p><div class="dynheader">
@@ -549,19 +529,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                          {
+<div class="fragment"><pre class="fragment">                                                                           {
         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *interiorBB = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
-        <a class="code" href="ssa_8cpp.html#abdfff53c843c32229bd5cfb0fd094026">findDomEntryPoints</a>(bbList, interiorBB); <span class="comment">//TODO: this is done twice (another time in reg-allocation - fix it)</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++)
-                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;setAsUnvisited();
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; interiorBB-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a>* bbHead = interiorBB-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
+        findDomEntryPoints (bbList, interiorBB);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++)
+                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;setAsUnvisited ();
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; interiorBB-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* <a class="code" href="structbbHead.html">bbHead</a> = interiorBB-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
                 <a class="code" href="ssa_8cpp.html#af9593c92c3c4713e11388054c46aa5e9">search</a> (bbHead, varList);
         }
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <span class="keywordflow">if</span> (bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;isVisited() == <span class="keyword">false</span>) printf(<span class="stringliteral">&quot;unvisited BB ID: %llx,%d,%d\n&quot;</span>, bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getID(), bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;getNumAncestors(), bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;numNonBackEdgeAncestors());
-                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;setAsUnvisited();
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <span class="keywordflow">if</span> (!bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;isVisited ()) 
+            printf (<span class="stringliteral">&quot;Unvisited BB ID: %llx,%d,%d\n&quot;</span>, bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;getID (), 
+                                                     bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;getNumAncestors (), 
+                                                     bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;numNonBackEdgeAncestors ());
+                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;setAsUnvisited ();
         }
+    <span class="keyword">delete</span> interiorBB;
 }
 </pre></div>
 <p><div class="dynheader">
@@ -608,13 +592,13 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                            {
-        <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> bbID = X-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>();
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Y-&gt;<a class="code" href="classbasicblock.html#af95ff01c9b4eb7a12cd58558771c92b2">getNumAncestors</a>(); i++) {
-                <span class="keywordflow">if</span> (Y-&gt;<a class="code" href="classbasicblock.html#a24ef17acb451da40eb9ecca3a05c9fb3">getNthAncestor</a>(i)-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a>() == bbID)
+<div class="fragment"><pre class="fragment">                                             {
+        <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> bbID = X-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> ();
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Y-&gt;<a class="code" href="classbasicblock.html#af95ff01c9b4eb7a12cd58558771c92b2">getNumAncestors</a> (); i++) {
+                <span class="keywordflow">if</span> (Y-&gt;<a class="code" href="classbasicblock.html#a24ef17acb451da40eb9ecca3a05c9fb3">getNthAncestor</a> (i)-&gt;<a class="code" href="classbasicblock.html#aff434c369968fe5fb3151d8ec00665b4">getID</a> () == bbID)
                         <span class="keywordflow">return</span> i;
         }
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;CFG Fault. The BB ancesor was not found.&quot;</span>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (0 &amp;&amp; <span class="stringliteral">&quot;CFG Fault. The BB ancesor was not found.&quot;</span>);
 }
 </pre></div>
 <p><div class="dynheader">
@@ -637,27 +621,13 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a617a47c70795bcff659815ad0efd2266"></a><!-- doxytag: member="ssa.cpp::counter" ref="a617a47c70795bcff659815ad0efd2266" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="ssa_8cpp.html#a617a47c70795bcff659815ad0efd2266">counter</a> = 0</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -666,7 +636,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

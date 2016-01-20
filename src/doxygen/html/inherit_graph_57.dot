@@ -3,5 +3,13 @@ digraph G
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir=LR;
-  Node1 [label="stat_frontEnd",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstat__frontEnd.html"];
+  Node1 [label="energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classenergy.html"];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="eu_energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classeu__energy.html"];
+  Node1 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="stage_energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstage__energy.html"];
+  Node1 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="table_energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classtable__energy.html"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="wire_energy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classwire__energy.html"];
 }

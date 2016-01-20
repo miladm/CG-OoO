@@ -87,7 +87,7 @@ Collaboration diagram for FIFOtable&lt; tableType_T &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFIFOtable.html#ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c">FIFOtable</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFIFOtable.html#ad31e696f0f7c3d4b8ebf5720e6a84deb">FIFOtable</a> (<a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFIFOtable.html#aed7aeb790ce1f0fbb429d645597554b5">~FIFOtable</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFIFOtable.html#a96f42bb7a9f9b845970893bfe95ed2fb">getFront</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFIFOtable.html#ace3286538766dfa4499d149767ac153f">popFront</a> ()</td></tr>
@@ -96,7 +96,7 @@ Public Member Functions</h2></td></tr>
  class FIFOtable&lt; tableType_T &gt;</h3>
 
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c"></a><!-- doxytag: member="FIFOtable::FIFOtable" ref="ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c" args="(LENGTH, WIDTH, WIDTH, string)" -->
+<a class="anchor" id="ad31e696f0f7c3d4b8ebf5720e6a84deb"></a><!-- doxytag: member="FIFOtable::FIFOtable" ref="ad31e696f0f7c3d4b8ebf5720e6a84deb" args="(sysClock *, const YAML::Node &amp;, string)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -105,20 +105,14 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classFIFOtable.html">FIFOtable</a>&lt; tableType_T &gt;::<a class="el" href="classFIFOtable.html">FIFOtable</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
-          <td class="paramname"><em>len</em> = <code>1</code>, </td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>rd_port_cnt</em> = <code>1</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>wr_port_cnt</em> = <code>1</code>, </td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -134,8 +128,7 @@ template&lt;typename tableType_T &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (len, <a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a535bae6b21f94453622b851d17bbe150">FIFO_ARRAY</a>,
-                          wr_port_cnt, rd_port_cnt, table_name)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (<a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a535bae6b21f94453622b851d17bbe150">FIFO_ARRAY</a>, clk, root, table_name)
 {}
 </pre></div>
 </div>
@@ -177,12 +170,22 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                              {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>    <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
+<span class="preprocessor"></span>    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8bb35d49306464551659d08e8495527f">fifoAccess</a> ();
+    <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb_cgraph.png" border="0" usemap="#classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb_cgraph" alt=""/></div>
+<map name="classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb_cgraph" id="classFIFOtable_a96f42bb7a9f9b845970893bfe95ed2fb_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="ace3286538766dfa4499d149767ac153f"></a><!-- doxytag: member="FIFOtable::popFront" ref="ace3286538766dfa4499d149767ac153f" args="()" -->
@@ -202,20 +205,21 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                              {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    tableType_T dyIns = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
     <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0);
     <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (0);
+    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8bb35d49306464551659d08e8495527f">fifoAccess</a> ();
     <span class="keywordflow">return</span> dyIns;
 }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classFIFOtable_ace3286538766dfa4499d149767ac153f_icgraph.png" border="0" usemap="#classFIFOtable_ace3286538766dfa4499d149767ac153f_icgraph" alt=""/></div>
-<map name="classFIFOtable_ace3286538766dfa4499d149767ac153f_icgraph" id="classFIFOtable_ace3286538766dfa4499d149767ac153f_icgraph">
+<div class="center"><img src="classFIFOtable_ace3286538766dfa4499d149767ac153f_cgraph.png" border="0" usemap="#classFIFOtable_ace3286538766dfa4499d149767ac153f_cgraph" alt=""/></div>
+<map name="classFIFOtable_ace3286538766dfa4499d149767ac153f_cgraph" id="classFIFOtable_ace3286538766dfa4499d149767ac153f_cgraph">
 </map>
 </div>
 </p>
@@ -232,7 +236,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -241,7 +245,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

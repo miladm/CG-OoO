@@ -73,61 +73,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;iostream&gt;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;sstream&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;pin.H&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;pin_isa.H&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;../global/g_variable.h&quot;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;../config.h&quot;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a><a class="code" href="staticCodeParser_8h.html#a006a3392751ba12a7e28e756d337f53b">00019</a> <span class="preprocessor">#define MAX_NUM_uOP_PER_INS 3</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span>
-<a name="l00021"></a><a class="code" href="classstaticCodeParser.html">00021</a> <span class="keyword">class </span><a class="code" href="classstaticCodeParser.html">staticCodeParser</a> {
-<a name="l00022"></a>00022 <span class="keyword">public</span>:
-<a name="l00023"></a>00023         <a class="code" href="classstaticCodeParser.html#a5eaad2527b293e52712df9f2d29cdfef">staticCodeParser</a>(<a class="code" href="structg__variable.html">g_variable</a> *<a class="code" href="g__variable_8cpp.html#adfd3dddc03cc8a61d5ba0f266d7caeaa">g_var</a>, <a class="code" href="classconfig.html">config</a> *<a class="code" href="pars_8cpp.html#ac300c5dd1553141a19aac3739ab59c78">g_cfg</a>); <span class="comment">//TODO add: benchmark name, path, core type</span>
-<a name="l00024"></a>00024         <a class="code" href="classstaticCodeParser.html#a21c3a8c803545fe616cf63879ed6e6df">~staticCodeParser</a>();
-<a name="l00025"></a>00025         <span class="keywordtype">bool</span> <a class="code" href="classstaticCodeParser.html#a8faa5c05cefb98fbcee6b160392c0756">isNewBB</a>(ADDRINT insAddr);
-<a name="l00026"></a>00026         std::string <a class="code" href="classstaticCodeParser.html#a87051ae0224cfa3278f1f395bb1d6ffd">getBrIns</a>(ADDRINT insAddr, BOOL hasFT, ADDRINT tgAddr, ADDRINT ftAddr, BOOL isTaken);
-<a name="l00027"></a>00027         std::string <a class="code" href="classstaticCodeParser.html#aa79cb891e4a6c1596410fbc025552e4b">getMemIns</a>(ADDRINT insAddr, ADDRINT memAccessSize, ADDRINT memAddr);
-<a name="l00028"></a>00028         std::string <a class="code" href="classstaticCodeParser.html#aad7f9347c84fad935e5c10e9654b9518">getIns</a>(ADDRINT insAddr);
-<a name="l00029"></a>00029         std::string <a class="code" href="classstaticCodeParser.html#a9041ba47fb240605dbffac8546931d19">getBBheader</a>(ADDRINT bbAddr);
-<a name="l00030"></a>00030         BOOL <a class="code" href="classstaticCodeParser.html#aa26ce7946cda25e79e4e3c1562f426ee">BBhasHeader</a>(ADDRINT bbAddr);
-<a name="l00031"></a>00031         std::string <a class="code" href="classstaticCodeParser.html#aea51c05ad3592ff1a56eb560c27ac9c5">getBB_top</a>(ADDRINT bbAddr); <span class="comment">//TODO eliminate this function</span>
-<a name="l00032"></a>00032         std::string <a class="code" href="classstaticCodeParser.html#a4f97fe1c21b37d063ae129b5895f63c1">getBB_bottom</a>(); <span class="comment">//TODO eliminate this function</span>
-<a name="l00033"></a>00033         <span class="keywordtype">bool</span> <a class="code" href="classstaticCodeParser.html#aec2b31f34e15b47157a752d3259ace92">isInsIn_insMap</a>(ADDRINT insAddr);
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035         <a class="code" href="classdynInstruction.html">dynInstruction</a>* <a class="code" href="classstaticCodeParser.html#a141b5cea134e6e4acae6784d737daa5c">getInsObj</a>(ADDRINT insAddr);
-<a name="l00036"></a>00036     <span class="keywordtype">void</span> <a class="code" href="classstaticCodeParser.html#ad5a50456d0150c4ef57d7f3c946c6d8a">getRegisters</a>(<a class="code" href="global_2global_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a> insAddr, <span class="keywordtype">string</span> registers);
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="keyword">private</span>:
-<a name="l00039"></a>00039         <span class="keywordtype">void</span> parse();
-<a name="l00040"></a>00040         <span class="keywordtype">void</span> makeNewIns(<span class="keywordtype">char</span> insType, ADDRINT insAddr, ADDRINT brDest, <span class="keywordtype">string</span> registers, ADDRINT memAccessSize);
-<a name="l00041"></a>00041         <span class="keywordtype">void</span> makeNewBB(ADDRINT bbAddr);
-<a name="l00042"></a>00042         <span class="keywordtype">void</span> addToBB(ADDRINT insAddr, ADDRINT bbAddr);
-<a name="l00043"></a>00043         <span class="keywordtype">void</span> addBBheader(ADDRINT insAddr, ADDRINT bbAddr);
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045         <span class="keyword">struct </span>insObj{
-<a name="l00046"></a>00046                 <span class="keywordtype">string</span> ins_str;
-<a name="l00047"></a>00047                 <span class="keywordtype">string</span> registers;
-<a name="l00048"></a>00048                 ADDRINT memAccessSize;
-<a name="l00049"></a>00049                 ADDRINT insAddr;
-<a name="l00050"></a>00050                 ADDRINT brDest;
-<a name="l00051"></a>00051                 <span class="keywordtype">char</span> insType[<a class="code" href="staticCodeParser_8h.html#a006a3392751ba12a7e28e756d337f53b">MAX_NUM_uOP_PER_INS</a>];
-<a name="l00052"></a>00052         };
-<a name="l00053"></a>00053         <span class="keyword">struct </span>bbObj{
-<a name="l00054"></a>00054                 std::list&lt;ADDRINT&gt; bbInsSet;
-<a name="l00055"></a>00055                 ADDRINT bbAddr;
-<a name="l00056"></a>00056                 ADDRINT bbHeader;
-<a name="l00057"></a>00057                 BOOL bbHasHeader;
-<a name="l00058"></a>00058         };
-<a name="l00059"></a>00059         map&lt;ADDRINT,insObj*&gt; _insMap;
-<a name="l00060"></a>00060         map&lt;ADDRINT,dynInstruction*&gt; _insObjMap;
-<a name="l00061"></a>00061         map&lt;ADDRINT,bbObj*&gt; _bbMap;
-<a name="l00062"></a>00062         FILE* _inFile;
-<a name="l00063"></a>00063         <a class="code" href="structg__variable.html">g_variable</a> * _g_var;
-<a name="l00064"></a>00064         <a class="code" href="classconfig.html">config</a> * _g_cfg;
-<a name="l00065"></a>00065 };
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="preprocessor">#endif</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;pin.H&quot;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;pin_isa.H&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;../global/g_variable.h&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;../global/global.h&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;../config.h&quot;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;../lib/statistic.h&quot;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="staticCodeParser_8h.html#a006a3392751ba12a7e28e756d337f53b">00021</a> <span class="preprocessor">#define MAX_NUM_uOP_PER_INS 3</span>
+<a name="l00022"></a>00022 <span class="preprocessor"></span>
+<a name="l00023"></a><a class="code" href="classstaticCodeParser.html">00023</a> <span class="keyword">class </span><a class="code" href="classstaticCodeParser.html">staticCodeParser</a> {
+<a name="l00024"></a>00024     <span class="keyword">public</span>:
+<a name="l00025"></a>00025         <a class="code" href="classstaticCodeParser.html#a4658227c3db5eccd31b70d1c9ae70ce7">staticCodeParser</a> (<a class="code" href="classconfig.html">config</a>*); <span class="comment">//TODO add: benchmark name, path, core type</span>
+<a name="l00026"></a>00026         <a class="code" href="classstaticCodeParser.html#a21c3a8c803545fe616cf63879ed6e6df">~staticCodeParser</a> ();
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028         <span class="comment">/*-- INS FUNCTIONS --*/</span>
+<a name="l00029"></a>00029         BOOL <a class="code" href="classstaticCodeParser.html#a7ba0a025c42ec3ed5ea4067c1da2de09">hasIns</a> (ADDRINT);
+<a name="l00030"></a>00030         <a class="code" href="classstInstruction.html">stInstruction</a>* <a class="code" href="classstaticCodeParser.html#a88ad5a6c7c2a2853b911ecae21b381cc">getInsObj</a> (ADDRINT);
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032         <span class="comment">/*-- BB FUNCTIONS --*/</span>
+<a name="l00033"></a>00033         BOOL <a class="code" href="classstaticCodeParser.html#a4a3dc378e8a2c4cb40217fd8a8bcd06c">isNewBB</a> (ADDRINT);
+<a name="l00034"></a>00034         BOOL <a class="code" href="classstaticCodeParser.html#a0d7e885fd3f9057bac42935d738dfaff">BBhasHeader</a> (ADDRINT);
+<a name="l00035"></a>00035         <span class="keywordtype">string</span> <a class="code" href="classstaticCodeParser.html#a04ea5c52890f4896030198b971849dff">getBB_top</a> (ADDRINT); <span class="comment">//TODO eliminate this function</span>
+<a name="l00036"></a>00036         <span class="keywordtype">string</span> <a class="code" href="classstaticCodeParser.html#a5d0490c503b1b8dfd8f99c7776af44fe">getBBheader</a> (ADDRINT);
+<a name="l00037"></a>00037         <span class="keywordtype">string</span> <a class="code" href="classstaticCodeParser.html#ace820cefde65b7acbb5364a2318407d8">getBB_bottom</a> (); <span class="comment">//TODO eliminate this function</span>
+<a name="l00038"></a>00038         list&lt;ADDRS&gt;&amp; <a class="code" href="classstaticCodeParser.html#a1de5cb892555e03810874e3c1c84ac18">getBBinsList</a> (ADDRINT);
+<a name="l00039"></a>00039         <span class="keywordtype">bool</span> <a class="code" href="classstaticCodeParser.html#a641d60e35396652d9b92cb4553f90e52">hasStaticBB</a> (ADDRINT);
+<a name="l00040"></a>00040         BOOL <a class="code" href="classstaticCodeParser.html#a8dcb45a15aa2cb663fcac5e367acad03">bbHasBr</a> (ADDRINT);
+<a name="l00041"></a>00041         ADDRINT <a class="code" href="classstaticCodeParser.html#aaa38270129a1d97ec66aa413ea0f3985">getBBbr</a> (ADDRINT);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keyword">private</span>:
+<a name="l00044"></a>00044         <span class="keywordtype">void</span> parse ();
+<a name="l00045"></a>00045         <span class="keywordtype">void</span> getRegisters (<a class="code" href="binaryTranslator_2frontend_2stInstruction_8h.html#a7ea74bb9ffd2e4d41550ae2383dd25bc">ADDRS</a>, <span class="keywordtype">string</span>);
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         <span class="comment">/*-- INS FUNCTIONS --*/</span>
+<a name="l00048"></a>00048         <span class="keywordtype">void</span> makeNewIns (<span class="keywordtype">char</span>, ADDRINT, ADDRINT, <span class="keywordtype">string</span>, ADDRINT, <span class="keywordtype">bool</span>);
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050         <span class="comment">/*-- BB FUNCTIONS --*/</span>
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> makeNewBB (ADDRINT);
+<a name="l00052"></a>00052         <span class="keywordtype">void</span> addToBB (ADDRINT, ADDRINT, <span class="keywordtype">char</span>);
+<a name="l00053"></a>00053         <span class="keywordtype">void</span> addBBheader (ADDRINT, ADDRINT);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055     <span class="keyword">private</span>:
+<a name="l00056"></a>00056         <span class="keyword">struct </span>bbObj{
+<a name="l00057"></a>00057             bbObj () {
+<a name="l00058"></a>00058                 hasBr = <span class="keyword">false</span>;
+<a name="l00059"></a>00059                 brAddr = 0;
+<a name="l00060"></a>00060             }
+<a name="l00061"></a>00061             list&lt;ADDRS&gt; bbInsList;
+<a name="l00062"></a>00062             ADDRINT bbAddr;
+<a name="l00063"></a>00063             ADDRINT bbHeader;
+<a name="l00064"></a>00064             BOOL bbHasHeader;
+<a name="l00065"></a>00065             BOOL hasBr;
+<a name="l00066"></a>00066             ADDRINT brAddr;
+<a name="l00067"></a>00067         };
+<a name="l00068"></a>00068         map&lt;ADDRINT, stInstruction*&gt; _insObjMap;
+<a name="l00069"></a>00069         map&lt;ADDRINT, bbObj*&gt; _bbMap;
+<a name="l00070"></a>00070         FILE* _inFile;
+<a name="l00071"></a>00071         <a class="code" href="classconfig.html">config</a> * _g_cfg;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073         <span class="comment">/*-- STAT --*/</span>
+<a name="l00074"></a>00074         <a class="code" href="classScalarStat.html">ScalarStat</a>&amp; s_missing_static_bb_cnt;
+<a name="l00075"></a>00075 };
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -135,7 +145,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -144,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

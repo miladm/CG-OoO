@@ -5,10 +5,4 @@ digraph G
   rankdir=LR;
   Node1 [label="interfNode::addEdge",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="make_interference_nodes_network",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8cpp.html#a44ba610b0d634eb37dc4a1228f9fe6d7"];
-  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="allocate_register",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662"];
-  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
 }

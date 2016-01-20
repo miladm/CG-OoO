@@ -15,7 +15,7 @@ Collaboration diagram for loop:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classloop_a56aab74b3345d5731cd1243e2a41bc76}{loop} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} loopEntryID, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} loopExitID)
+\hyperlink{classloop_a56aab74b3345d5731cd1243e2a41bc76}{loop} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} loopEntryID, \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} loopExitID)
 \item 
 \hyperlink{classloop_aad652628bd3d921231b869db97e528ad}{$\sim$loop} ()
 \item 
@@ -23,7 +23,7 @@ void \hyperlink{classloop_aa9324a68eb1fc3b86eabff7815132443}{addBB} (\hyperlink{
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$ \hyperlink{classloop_af5ef5dd07e6d5b52f318320cc7d6b037}{getLoop} ()
 \item 
-\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} \hyperlink{classloop_a6abf8e7d6763e76673f8287fe15785d4}{getLoopEntryID} ()
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classloop_a6abf8e7d6763e76673f8287fe15785d4}{getLoopEntryID} ()
 \item 
 \hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classloop_a30c7019f2202671a81d8a33f9a33593e}{getLoopEntry} ()
 \item 
@@ -33,7 +33,7 @@ int \hyperlink{classloop_a81113f34513c9e9ae41886ea150cbd3d}{getNumBB} ()
 \item 
 \hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classloop_a69d626e1bbfa64a45f3ddf805998967a}{getNthBB} (int indx)
 \item 
-bool \hyperlink{classloop_aff5df3cffef530a6e4f81ecd4deed86e}{isBbInLoop} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} bbID)
+bool \hyperlink{classloop_aff5df3cffef530a6e4f81ecd4deed86e}{isBbInLoop} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} bbID)
 \item 
 void \hyperlink{classloop_a49a50718778d9b23d51385a93aed10a8}{resetVisitBits} ()
 \item 
@@ -41,7 +41,7 @@ void \hyperlink{classloop_a20ecb89d8b7cb21867fe53c6ad56f0f4}{findFallThroughBBs}
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$ \hyperlink{classloop_a6d90e411616771613671b11dd58d380d}{getFallThroughBBs} ()
 \item 
-bool \hyperlink{classloop_a550955b42ceff7c89445322abc564e28}{isBbFallThrough} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} bbID)
+bool \hyperlink{classloop_a550955b42ceff7c89445322abc564e28}{isBbFallThrough} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} bbID)
 \end{DoxyCompactItemize}
 
 
@@ -176,11 +176,12 @@ Here is the caller graph for this function:
                                            {
         //Assert(_fallThroughBBList->NumElements() > 0 && "No loop fallthrough fo
       und");
-        if (_fallThroughBBList->NumElements() <= 0) printf("\tWARNING: No loop fa
-      llthrough found in loop %llx\n", getLoopEntryID()); //TOOD bring this back to an 
-      assert soon
+        if (_fallThroughBBList->NumElements() <= 0) printf("\t\tWARNING: No loop 
+      fallthrough found in loop %llx\n", getLoopEntryID()); //TOOD bring this back to a
+      n assert soon
         return _fallThroughBBList;
-}\end{DoxyCode}
+}
+\end{DoxyCode}
 
 
 Here is the call graph for this function:

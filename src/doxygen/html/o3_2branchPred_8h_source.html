@@ -72,21 +72,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00009"></a>00009 
 <a name="l00010"></a><a class="code" href="classo3__branchPred.html">00010</a> <span class="keyword">class </span><a class="code" href="classo3__branchPred.html">o3_branchPred</a> : <span class="keyword">protected</span> <a class="code" href="classstage.html">stage</a> {
 <a name="l00011"></a>00011         <span class="keyword">public</span>:
-<a name="l00012"></a>00012                 <a class="code" href="classo3__branchPred.html#ad491f8c1906fecc1336585bed1677079">o3_branchPred</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; fetch_to_bp_port, 
+<a name="l00012"></a>00012                 <a class="code" href="classo3__branchPred.html#ad4d7447f4f755c074ad7ccb01b4184fd">o3_branchPred</a> (<a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; fetch_to_bp_port, 
 <a name="l00013"></a>00013                                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>&amp; bp_to_fetch_port, 
 <a name="l00014"></a>00014                                 <a class="code" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a> bp_width,
-<a name="l00015"></a>00015                                 <span class="keywordtype">string</span> stage_name);
-<a name="l00016"></a>00016                 <a class="code" href="classo3__branchPred.html#ab497c6edb4266e04ae0b20969caeb525">~o3_branchPred</a> ();
-<a name="l00017"></a>00017                 <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#ab70a61011f52674364f5a24f276973b3">doBP</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00018"></a>00018         <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#a41218ba2c469ee35610ed5b1af5e49c0">squash</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00019"></a>00019         <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#a58f7e7a2260333813a3fa672eff86796">regStat</a> (<a class="code" href="classsysClock.html">sysClock</a>&amp; clk);
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021         <span class="keyword">private</span>:
-<a name="l00022"></a>00022                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _fetch_to_bp_port;
-<a name="l00023"></a>00023                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _bp_to_fetch_port;
-<a name="l00024"></a>00024 };
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="preprocessor">#endif</span>
+<a name="l00015"></a>00015                     <a class="code" href="classsysClock.html">sysClock</a>* <a class="code" href="g__objs_8h.html#afc4784c140eed1743728e83840e91c12">clk</a>,
+<a name="l00016"></a>00016                                 <span class="keywordtype">string</span> stage_name);
+<a name="l00017"></a>00017                 <a class="code" href="classo3__branchPred.html#ab497c6edb4266e04ae0b20969caeb525">~o3_branchPred</a> ();
+<a name="l00018"></a>00018                 <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#a7f06389c8e205c2eba33c3727a542314">doBP</a> ();
+<a name="l00019"></a>00019         <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#a255cd46c77b1600bd989938fcf0f6f70">squash</a> ();
+<a name="l00020"></a>00020         <span class="keywordtype">void</span> <a class="code" href="classo3__branchPred.html#a39d33c191ad5a75b6fa1acf84d5c5044">regStat</a> ();
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022         <span class="keyword">private</span>:
+<a name="l00023"></a>00023                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _fetch_to_bp_port;
+<a name="l00024"></a>00024                 <a class="code" href="classport.html">port&lt;dynInstruction*&gt;</a>* _bp_to_fetch_port;
+<a name="l00025"></a>00025 };
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -94,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -103,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

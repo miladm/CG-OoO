@@ -8,9 +8,6 @@
 
 
 
-Inheritance diagram for sysClock:
-
-
 Collaboration diagram for sysClock:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -24,6 +21,10 @@ Collaboration diagram for sysClock:
 void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
 \item 
 \hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{classsysClock_af027a57c8bc3d0dab4fe5a0f870b7d20}{now} ()
+\item 
+\hyperlink{global_2global_8h_a7e19a550ec11d1ed921deb20c22efb5b}{CYCLE} \hyperlink{classsysClock_aae0f5778f4fece04609d6ece57f28870}{getValue} ()
+\item 
+\hyperlink{classScalarStat}{ScalarStat} $\ast$ \hyperlink{classsysClock_abbfb3713ab258a85b99f92135e0b8e08}{getStatObj} ()
 \end{DoxyCompactItemize}
 
 
@@ -39,8 +40,8 @@ void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
 \label{classsysClock_a03e1b7e12614ce9fba007f0a76849664}
 
 \begin{DoxyCode}
-        : unit ("sysClock"),
-      _frequency(1),
+    : _frequency (1),
+      _c_name ("sysClock"),
       _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execut
       ion cycles", START_CYCLE, PRINT_ZERO))
 {
@@ -58,8 +59,8 @@ void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
 \label{classsysClock_aa1cf0d6b04c1f7cd46cc1763cdaa6825}
 
 \begin{DoxyCode}
-        : unit ("sysClock"),
-      _frequency(frequency),
+    : _frequency(frequency),
+      _c_name ("sysClock"),
       _clk_cycles (g_stats.newScalarStat ("sysClock", "clk_cycles", "Total execut
       ion cycles", START_CYCLE, PRINT_ZERO))
 {
@@ -82,6 +83,41 @@ void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classsysClock_abbfb3713ab258a85b99f92135e0b8e08}{
+\index{sysClock@{sysClock}!getStatObj@{getStatObj}}
+\index{getStatObj@{getStatObj}!sysClock@{sysClock}}
+\subsubsection[{getStatObj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScalarStat} $\ast$ sysClock::getStatObj (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_abbfb3713ab258a85b99f92135e0b8e08}
+
+\begin{DoxyCode}
+                                  {
+    return &_clk_cycles;
+}
+\end{DoxyCode}
+\hypertarget{classsysClock_aae0f5778f4fece04609d6ece57f28870}{
+\index{sysClock@{sysClock}!getValue@{getValue}}
+\index{getValue@{getValue}!sysClock@{sysClock}}
+\subsubsection[{getValue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf CYCLE} sysClock::getValue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classsysClock_aae0f5778f4fece04609d6ece57f28870}
+
+\begin{DoxyCode}
+                          {
+        return now ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classsysClock_af027a57c8bc3d0dab4fe5a0f870b7d20}{
 \index{sysClock@{sysClock}!now@{now}}
 \index{now@{now}!sysClock@{sysClock}}
@@ -111,6 +147,10 @@ void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
                      {
         _clk++;
     _clk_cycles++;
+    if (_clk % RUNTIME_REPORT_INTERVAL == 0) {
+        if (g_cfg->isWarmedUp () || !g_cfg->warmUpEn ()) _clk_cycles.print ();
+        else cout << "Warmup cycle: " << _clk << endl;
+    }
 #ifdef ASSERTION
         Assert( _clk < std::numeric_limits<CYCLE>::max() &&
                         _clk > std::numeric_limits<CYCLE>::min() &&
@@ -120,6 +160,11 @@ void \hyperlink{classsysClock_a1b83f5cc141338e61f66028ef040c242}{tick} ()
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+
+
 Here is the caller graph for this function:
 
 
@@ -127,5 +172,5 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2sysClock_8h}{sysClock.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{unit_2sysClock_8cpp}{sysClock.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{sysClock_8h}{sysClock.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/unit/\hyperlink{sysClock_8cpp}{sysClock.cpp}\end{DoxyCompactItemize}

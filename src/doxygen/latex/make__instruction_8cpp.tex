@@ -12,12 +12,12 @@ Include dependency graph for make\_\-instruction.cpp:
 \item 
 void \hyperlink{make__instruction_8cpp_a1985023947a640496fdfa3654d726c9a}{parseRegisters} (\hyperlink{classinstruction}{instruction} $\ast$newIns, FILE $\ast$input\_\-assembly)
 \item 
-void \hyperlink{make__instruction_8cpp_a2673a7cce171b34555a3a4249a0d61c8}{parse\_\-instruction} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $\ast$brDstSet, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$brBiasMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$bpAccuracyMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, double $>$ $\ast$upldMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $>$ \&memRdAddrMap, map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $>$ \&memWrAddrMap, std::string $\ast$program\_\-name)
+void \hyperlink{make__instruction_8cpp_abe7a2d116e3e54c66d70fff6e83b0bae}{parse\_\-instruction} (\hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insList, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$insAddrMap, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $\ast$brDstSet, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$brBiasMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$bpAccuracyMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, double $>$ $\ast$upldMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $>$ \&memRdAddrMap, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, set$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $>$ \&memWrAddrMap, std::string $\ast$program\_\-name, \hyperlink{binaryTranslator_2global_8h_af9119e90106116692c2c7bc54461ed3d}{CLUSTER\_\-MODE} cluster\_\-mode)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{make__instruction_8cpp_a2673a7cce171b34555a3a4249a0d61c8}{
+\hypertarget{make__instruction_8cpp_abe7a2d116e3e54c66d70fff6e83b0bae}{
 \index{make\_\-instruction.cpp@{make\_\-instruction.cpp}!parse\_\-instruction@{parse\_\-instruction}}
 \index{parse\_\-instruction@{parse\_\-instruction}!make_instruction.cpp@{make\_\-instruction.cpp}}
 \subsubsection[{parse\_\-instruction}]{\setlength{\rightskip}{0pt plus 5cm}void parse\_\-instruction (
@@ -30,181 +30,299 @@ void \hyperlink{make__instruction_8cpp_a2673a7cce171b34555a3a4249a0d61c8}{parse\
 \item[{map$<$ {\bf ADDR}, double $>$ $\ast$}]{upldMap, }
 \item[{map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{memRdAddrMap, }
 \item[{map$<$ {\bf ADDR}, set$<$ {\bf ADDR} $>$ $>$ \&}]{memWrAddrMap, }
-\item[{std::string $\ast$}]{program\_\-name}
+\item[{std::string $\ast$}]{program\_\-name, }
+\item[{{\bf CLUSTER\_\-MODE}}]{cluster\_\-mode}
 \end{DoxyParamCaption}
 )}}
-\label{make__instruction_8cpp_a2673a7cce171b34555a3a4249a0d61c8}
+\label{make__instruction_8cpp_abe7a2d116e3e54c66d70fff6e83b0bae}
 
 \begin{DoxyCode}
-                                                                 {
+                                               {
         char c[INS_STRING_SIZE], ins[INS_STRING_SIZE];
-        ADDR insAddr, brDst;
+        ADDR insAddr, insFallThru, insDst, brDst;
+        bool hasFallThru, hasDst;
         FILE * input_assembly;
-        // dependencyTable* depTables = new dependencyTable; /* DISABLED */
-        // if ((input_assembly = fopen(input_asm_file, "r")) == NULL) {
-        if ((input_assembly = fopen(("/home/milad/esc_project/svn/memTraceMilad/T
-      raceSim/phraseblock_framework/input_files/"+(*program_name)+".s").c_str(), "r")) 
-      == NULL) {
-                Assert("Cannot open assembly file.");
-        }
         FILE * input_brBias;
-        if ((input_brBias = fopen(("/home/milad/esc_project/svn/memTraceMilad/Tra
-      ceSim/phraseblock_framework/input_files/"+(*program_name)+"_bias.csv").c_str(), "
-      r")) == NULL) {
-                Assert("Cannot open branch bias file.");
-        }
         FILE * input_bpAccuracy;
-        if ((input_bpAccuracy = fopen(("/home/milad/esc_project/svn/memTraceMilad
-      /TraceSim/phraseblock_framework/input_files/"+(*program_name)+"_bpAccuracy.csv").
-      c_str(), "r")) == NULL) {
-                Assert("Cannot open branch prediction accuracy file.");
-        }
         FILE * input_upld;
-        if ((input_upld = fopen("input_files/input_upld.csv", "r")) == NULL) {
-                Assert("Cannot open unpred load ops file.");
-        }
-
         FILE * input_mem;
-        if ((input_mem = fopen("frontend/mem_trace.csv", "r")) == NULL) {
-                Assert("Cannot open mem addresses file.");
+
+        // if ((input_assembly = fopen (input_asm_file, "r")) == NULL) {
+
+    string input_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/in
+      put_files/";
+    string profile_path = "/home/milad/esc_project/svn/PARS/src/binaryTranslator/
+      profile_files/ref/";
+
+    /* ASSSEMBLY FILE FETCH */
+        if ((input_assembly = fopen ((input_path + (*program_name) + ".s").c_str 
+      (), "r")) == NULL) {
+                Assert (0 && "Cannot open assembly file.");
         }
 
-        //Parse branch bias numbers
-        printf("\tRead branch bias profile file: %s\n", ("input_files/"+(*program
-      _name)+"_bias.csv").c_str());
-        while (1) {
-                ADDR addr;
-                double bias;
-                if (fscanf(input_brBias, "%lx, %lf\n", &addr, &bias) == EOF) brea
-      k;
-                brBiasMap->insert(pair<ADDR, double> (addr,bias));
+    /* BRANCH BIAS FILE FETCH */
+    ostringstream lo_wbb, hi_wbb;
+    lo_wbb << WBB_LOWER_BOUND;
+    hi_wbb << WBB_UPPER_BOUND;
+    string file_ext = "_wbb_" + lo_wbb.str () + "_" + hi_wbb.str () + ".csv";
+        if ((input_brBias = fopen ((profile_path + (*program_name) + file_ext).c_
+      str (), "r")) == NULL) {
+                printf ("\tWARNING: Cannot open branch bias file.\n");
+//              Assert (0 && "Cannot open branch bias file.\n");
         }
-        //Parse branch prediction numbers
-        printf("\tRead branch prediction accuracy profile file: %s\n", ("input_fi
-      les/"+(*program_name)+"_bpAccuracy.csv").c_str());
-        while (1) {
-                ADDR addr;
-                double accuracy;
-                if (fscanf(input_bpAccuracy, "%lx, %lf\n", &addr, &accuracy) == E
-      OF) break;
-                bpAccuracyMap->insert(pair<ADDR, double> (addr,accuracy));
+
+    /* BRANCH ACCURACY FILE FETCH */
+//    ostringstream upld_thr;
+//    upld_thr << UPLD_THRESHOLD;
+//    file_ext = "_upld_" + upld_thr.str () + ".csv";
+//      if ((input_bpAccuracy = fopen ((input_path + (*program_name) + file_ext).
+      c_str (), "r")) == NULL) {
+//              Assert (0 && "Cannot open branch prediction accuracy file.");
+//      }
+
+    /* UPLD FILE FETCH */
+    ostringstream upld_thr;
+    upld_thr << UPLD_THRESHOLD;
+    file_ext = "_upld_" + upld_thr.str () + ".csv";
+        input_upld = fopen ((profile_path + (*program_name) + file_ext).c_str (),
+       "r");
+        if (input_upld == NULL) {
+                printf ("\tWARNING: Cannot open UPLD ops file.\n");
+//              Assert (0 && "Cannot open UPLD ops file.");
         }
-        //Parse unpredictable load numbers
-        printf("\tRead UPLD profile file: input_files/input_upld.csv\n");
-        while (1) {
-                ADDR addr;
-                double missRate;
-                if (fscanf(input_upld, "(%ld, %lf)\n", &addr, &missRate) == EOF) 
-      break;
-                upldMap->insert(pair<ADDR, double> (addr,missRate));
-                
+
+    /* MEMORY TRACE FILE FETCH */
+        if ((input_mem = fopen ("frontend/mem_trace.csv", "r")) == NULL) {
+                Assert (0 && "Cannot open mem addresses file.");
         }
+
+        /* PARSE BRANCH BIAS NUMBERS */
+    if (input_brBias != NULL) {
+        printf ("\tRead branch BIAS profile file\n");
+        while (1) {
+            ADDR addr;
+            double bias;
+            int taken, br;
+            if (fscanf (input_brBias, "%lx,%lf,%d,%d\n", &addr, &bias, &taken, &b
+      r) == EOF) break;
+            brBiasMap->insert (pair<ADDR, double> (addr,bias));
+        }
+    } else {
+        printf ("\tWARNING: BIAS profile file NOT read.\n");
+    }
+
+        /* PARSE BRANCH PREDICTION NUMBERS */
+//      printf ("\tRead branch prediction accuracy profile file\n");
+//      while (1) {
+//              ADDR addr;
+//              double accuracy;
+//              if (fscanf (input_bpAccuracy, "%lx, %lf\n", &addr, &accuracy) == 
+      EOF) break;
+//              bpAccuracyMap->insert (pair<ADDR, double> (addr,accuracy));
+//      }
+
+        /* PARSE UNPREDICTABLE LOAD NUMBERS */
+    if (input_upld != NULL) {
+        printf ("\tRead UPLD profile file\n");
+        while (1) {
+            ADDR addr;
+            double missRate;
+            int miss_ld, ld;
+            if (fscanf (input_upld, "%lx, %lf,%d,%d\n", &addr, &missRate, &miss_l
+      d, &ld) == EOF) break;
+            upldMap->insert (pair<ADDR, double> (addr, missRate));
+        }
+    } else {
+        printf ("\tWARNING: UPLD profile file NOT read.\n");
+    }
+
         //Parse memory access addresses
         // while (1) {
         //      ADDR insAddr, dataAddr;
         //      char type;
-        //      if (fscanf(input_mem, "%llx: %c %llx\n", &insAddr, &type, &dataAd
-      dr) == EOF) break;
+        //      if (fscanf (input_mem, "%llx: %c %llx\n", &insAddr, &type, &dataA
+      ddr) == EOF) break;
         //      if (type == 'R') {
-        //              memRdAddrMap[insAddr].insert(dataAddr);
+        //              memRdAddrMap[insAddr].insert (dataAddr);
         //      } else if (type == 'W') {
-        //              memWrAddrMap[insAddr].insert(dataAddr);
+        //              memWrAddrMap[insAddr].insert (dataAddr);
         //      } else {
-        //              Assert("Invalid memory address access type.");
+        //              Assert (0 && "Invalid memory address access type.");
         //      }
         // }
-        //Parse assembly instructions
+
+        /* PARSE ASSEMBLY INSTRUCTIONS */
+        printf ("\tRead X86 .s file: %s\n", ("input_files/"+ (*program_name) + ".
+      s").c_str ());
         while (1) {
-                // printf("---\n");
                 instruction *newIns = new instruction;
-                while(1) {
-                        if (fgets(c, OPCODE_STRING_SIZE, input_assembly) == NULL)
-       break;
-                        // printf("debug: insType: %s\n", c);
+                while (1) {
+                        if (fgets (c, OPCODE_STRING_SIZE, input_assembly) == NULL
+      ) break;
+                        // printf ("debug: insType: %s\n", c);
                         if (c[0] == 'j'  || c[0] == 'b'|| c[0] == 'c' || c[0] == 
-      'r' || c[0] == 'o') {
-                                //Find instruction type
-                                newIns->setType(c[0]);                          
+      'r'  || c[0] == 'o'|| c[0] == 'n' || c[0] == 's') {
+                                /* SET INSTRUCTION TYPE */
+                                newIns->setType (c[0]);
                         } else if (c[0] == 'R' || c[0] == 'W') {
-                                //Find if instruction is a memory op
+                                /* SET IF INSTRUCTION IS A MEMORY OP */
                                 int memAccessSize = -1;
-                                if (c[0] == 'W') newIns->setWrMemType();
-                                else if (c[0] == 'R') newIns->setRdMemType();
-                                if (fscanf(input_assembly, "%d\n", &memAccessSize
-      ) == EOF) break;
-                                newIns->setMemAccessSize(memAccessSize);
-                                newIns->setType('M');//TODO: must not set if alre
-      ady set
+                                if (c[0] == 'W') newIns->setWrMemType ();
+                                else if (c[0] == 'R') newIns->setRdMemType ();
+                                if (fscanf (input_assembly, "%d\n", &memAccessSiz
+      e) == EOF) break;
+                                newIns->setMemAccessSize (memAccessSize);
+                                newIns->setType ('M');//TODO: must not set if alr
+      eady set
                         } else if (c[0] == '#') {
-                                //Set the instruction opcode mnemonic
-                                newIns->setOpCode(c);
+                                /* SET THE INSTRUCTION OPCODE MNEMONIC */
+                                newIns->setOpCode (c);
                                 break;
                         } else {
-                                Assert("Instruction Type was not recognized.");
+                                Assert (0 && "Instruction Type was not recognized
+      .");
                         }
                 }
-                //Set instruction disassembled code
-                if (fgets(ins, INS_STRING_SIZE, input_assembly) == NULL) break;
-                newIns->setInsAsm(ins);
-                // printf("debug: ASM: %s\n", ins);
-                //Set instruction address
-                if (fscanf(input_assembly, "%llx\n", &insAddr) == EOF) break;
-                newIns->setInsAddr(insAddr);
-                // printf("debug: insAddr = %llx\n", insAddr);
-                //Setup instruction branch destination/bias/accuracy information
-                if (newIns->getType() == 'j'  || newIns->getType() == 'b'|| newIn
-      s->getType() == 'c') {
-                        if (fscanf(input_assembly, "%llx\n", &brDst) == EOF) brea
-      k;
-                        newIns->setBrDst(brDst);
-                        brDstSet->insert(brDst);
-                        //Setup branch prediction accuracy information
-                        if (bpAccuracyMap->find(insAddr) != bpAccuracyMap->end())
-       {
-                                newIns->setBPaccuracy((*bpAccuracyMap)[insAddr]);
-      
-                        } else if (newIns->getType() == 'b') {
-                                ;// printf("ERROR: branch instruction prediction 
-      accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
-                                //exit(1);
-                        }
-                        //Setup branch bias information
-                        if (brBiasMap->find(insAddr) != brBiasMap->end()) {
-                                newIns->setBrTakenBias((*brBiasMap)[insAddr]);
-                        } else if (newIns->getType() == 'b') {
-                                ;// printf("ERROR: branch instruction bias not fo
-      und! (%s, line: %d)\n" , __FILE__, __LINE__);
-                                //exit(1);
-                        }
-                } else if (newIns->getType() == 'M') {
-                        if (memRdAddrMap.find(insAddr) != memRdAddrMap.end()) {
-                                newIns->setRdAddrSet(memRdAddrMap[insAddr]);
-                        } 
-                        if (memWrAddrMap.find(insAddr) != memWrAddrMap.end()) {
-                                newIns->setWrAddrSet(memWrAddrMap[insAddr]);
-                        }
-                }
-                //Set miss-rate if instruction is a UPLD
-                if (upldMap->find(insAddr) != upldMap->end() && newIns->
-      isRdMemType() == true) {
-                        newIns->setLdMissRate((*upldMap)[insAddr]);
-                }
-                //Set instruction registers (read & write)
-                parseRegisters(newIns, input_assembly);
-                // newIns->setOpCode(opCode); done somewhere else
-                insList->Append(newIns);
-                insAddrMap->insert(pair<ADDR, instruction*> (newIns->getInsAddr()
-      , newIns));
-                // newIns->dependencyTableCheck(depTables); /* DISABLED */
+
+                /* SET INSTRUCTION DISASSEMBLED CODE */
+                if (fgets (ins, INS_STRING_SIZE, input_assembly) == NULL) break;
+                newIns->setInsAsm (ins);
+                // printf ("debug: ASM: %s\n", ins);
+
+                /* SET INSTRUCTION ADDRESS */
+                if (fscanf (input_assembly, "%llx\n", &insAddr) == EOF) break;
+                newIns->setInsAddr (insAddr);
+                // printf ("debug: insAddr = %llx\n", insAddr);
+
+        /* SET INSTRUCTION FALL-THROUGH */
+        insFallThru = 0;
+                if (fscanf (input_assembly, "%d\n", &hasFallThru) == EOF) break;
+                if (hasFallThru) {if (fscanf (input_assembly, "%llx\n", &insFallT
+      hru) == EOF) break;}
+                newIns->setInsFallThruAddr (insFallThru, hasFallThru);
+
+        /* SET INSTRUCTION DESTIATION */
+        insDst = 0;
+                if (fscanf (input_assembly, "%d\n", &hasDst) == EOF) break;
+        if (hasDst) {if (fscanf (input_assembly, "%llx\n", &insDst) == EOF) break
+      ;}
+                newIns->setInsDstAddr (insDst, hasDst);
+
+                /* SETUP INSTRUCTION BRANCH DESTINATION INFORMATION */
+                if (newIns->getType () == 'j' || newIns->getType () == 'b' || new
+      Ins->getType () == 'c') {
+                        /* SETUP BB START SET */
+                        if (newIns->hasDst ()) 
+                brDstSet->insert (newIns->getInsDstAddr ());
+                        if (newIns->hasFallThru () && 
+                (newIns->getType () == 'b' || newIns->getType () == 'c')) 
+                brDstSet->insert (newIns->getInsFallThruAddr ());
         }
 
-        //Close files
-        fclose(input_assembly);
-        fclose(input_brBias);
-        fclose(input_bpAccuracy);
-        fclose(input_upld);
-        fclose(input_mem);
-}\end{DoxyCode}
+                /* SETUP INSTRUCTION BRANCH BIAS/ACCURACY INFORMATION */
+                if (newIns->getType () == 'j' || newIns->getType () == 'b' || new
+      Ins->getType () == 'c') {
+                        /* SETUP BRANCH PREDICTION ACCURACY INFORMATION */
+//                      if (bpAccuracyMap->find (insAddr) != bpAccuracyMap->end (
+      )) {
+//                              newIns->setBPaccuracy ((*bpAccuracyMap)[insAddr])
+      ;
+//                      } else if (newIns->getType () == 'b') {
+//                              ;// printf ("\t\tERROR: branch instruction predic
+      tion accuracy not found! (%s, line: %d)\n" , __FILE__, __LINE__);
+//                              //exit (1);
+//                      }
+
+                        /* SETUP BRANCH BIAS INFORMATION */
+                        if (brBiasMap->find (insAddr) != brBiasMap->end ()) {
+                                newIns->setBrTakenBias ((*brBiasMap)[insAddr]);
+                        } else if (newIns->getType () == 'b') {
+                                ;// printf ("\t\tERROR: branch instruction bias n
+      ot found! (%s, line: %d)\n" , __FILE__, __LINE__);
+                                //exit (1);
+                        }
+                }
+
+        if (newIns->getType () == 'M') {
+                        if (memRdAddrMap.find (insAddr) != memRdAddrMap.end ()) {
+      
+                                newIns->setRdAddrSet (memRdAddrMap[insAddr]);
+                        } 
+                        if (memWrAddrMap.find (insAddr) != memWrAddrMap.end ()) {
+      
+                                newIns->setWrAddrSet (memWrAddrMap[insAddr]);
+                        }
+                }
+
+                /* SET MISS-RATE IF INSTRUCTION IS A UPLD */
+                if (upldMap->find (insAddr) != upldMap->end () && newIns->
+      isRdMemType () == true) {
+                        newIns->setLdMissRate ((*upldMap)[insAddr]);
+            newIns->setUPLDins ();
+                }
+
+                /* SET INSTRUCTION REGISTERS (READ & WRITE) */
+                parseRegisters (newIns, input_assembly);
+                // newIns->setOpCode (opCode); done somewhere else
+                insList->Append (newIns);
+                insAddrMap->insert (pair<ADDR, instruction*> (newIns->getInsAddr 
+      (), newIns));
+        }
+
+    
+    /* 
+     * - IF AN INSTRUCTION NEXT INS IS NOT IN THE INSLIST, CLEAN THE INS ENTRIED
+     * - THIS CLEANS UP THE DESTINATION OF CALL INSTRUCTIONS
+     */
+    int num_missing_ins = 0;
+    for (int i = 0; i < insList->NumElements (); i++) {
+        ADDR dst, fallThru;
+        instruction* ins = insList->Nth (i);
+        if (ins->hasDst ()) {
+            dst = ins->getInsDstAddr ();
+            if (insAddrMap->find (dst) == insAddrMap->end ()) {
+                ins->resetInsDst (); num_missing_ins++;
+            }
+        }
+        if (ins->hasFallThru ()) {
+            fallThru = ins->getInsFallThruAddr ();
+            if (insAddrMap->find (fallThru) == insAddrMap->end ()) {
+                ins->resetInsFallThru (); num_missing_ins++;
+            }
+        }
+    }
+        printf ("\t\tWARNING: Number of missing instructions in insList: %d\n", n
+      um_missing_ins);
+
+    for (int i = 0; i < insList->NumElements (); i++) {
+        ADDR dst, fallThru;
+        instruction* ins = insList->Nth (i);
+
+        /* FIND DESTINATION POINTERS */
+        if (ins->hasDst ()) {
+            dst = ins->getInsDstAddr ();
+            Assert (insAddrMap->find (dst) != insAddrMap->end ());
+            instruction* dst_ins = (*insAddrMap)[dst];
+            ins->setInsDst (dst_ins);
+        }
+
+        /* FIND FALL-THROUGH POINTERS */
+        if (ins->hasFallThru ()) {
+            fallThru = ins->getInsFallThruAddr ();
+            Assert (insAddrMap->find (fallThru) != insAddrMap->end ());
+            instruction* fallThru_ins = (*insAddrMap)[fallThru];
+            ins->setInsFallThru (fallThru_ins);
+        }
+    }
+
+        /* CLOSE FILES */
+        fclose (input_assembly);
+    if (input_brBias != NULL) { fclose (input_brBias); }
+//      fclose (input_bpAccuracy);
+    if (input_upld != NULL) { fclose (input_upld); }
+        fclose (input_mem);
+}
+\end{DoxyCode}
 
 
 Here is the call graph for this function:
@@ -227,23 +345,34 @@ Here is the caller graph for this function:
 \label{make__instruction_8cpp_a1985023947a640496fdfa3654d726c9a}
 
 \begin{DoxyCode}
-                                                               {
+                                                                {
         regFile* RF = new regFile;
         char reg[REG_STRING_SIZE];
         int read_write = 0;
-        long int regCode;
-        while(1) {
-                if (fgets(reg, REG_STRING_SIZE, input_assembly) == NULL) Assert("
-      Register name not found");
-                if (reg[0] == '-') break; //some ops have no reg
-                if (fscanf(input_assembly, "%d\n", &read_write) == EOF) Assert("R
-      egister type not found");
-                reg[strlen(reg) - 1] = 0; //cut out newline
-                regCode = RF->getRegNum(reg);
+        long int regCode, specialRegCode;
+
+        while (true) {
+                if (fgets (reg, REG_STRING_SIZE, input_assembly) == NULL) 
+            Assert (0 && "Register name not found");
+                if (reg[0] == '-') break; //SOME OPS HAVE NO REG
+
+                if (fscanf (input_assembly, "%d\n", &read_write) == EOF) 
+            Assert (0 && "Register type not found");
+                reg[strlen (reg) - 1] = 0; //CUT OUT NEWLINE
+
+                regCode = RF->getRegNum (reg);
+                specialRegCode = RF->getSpecialRegNum (reg);
+        Assert ((regCode == INVALID_REG || specialRegCode == INVALID_REG) && 
+                "One of the two fields must return invalid");
+
                 if (regCode != INVALID_REG) {
-                        newIns->setRegister(&regCode, &read_write);
-                }
-                // printf("debug: %d, %d, %s\n", read_write, regCode, reg);
+                        newIns->setRegister (&regCode, &read_write);
+        } else if (specialRegCode != INVALID_REG) {
+                        newIns->setSpecialRegister (&specialRegCode, &read_write)
+      ;
+        } else {
+            printf ("\t\tWARNING: Unrecorgnized register %s\n", reg);
+        }
         }
         delete RF;
 }

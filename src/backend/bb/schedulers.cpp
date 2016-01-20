@@ -113,8 +113,8 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         //TODO put this code where it belongs 
         WIDTH num_glb_update = ins->getNumWrPR () * getNumBusyWin (); //TODO mus replace with a loop thru all BBWin's - wake up logic
         WIDTH num_loc_update = ins->getNumWrLAR ();
-        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_glb_update);
-        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_loc_update);
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_glb_update * 2); //ASSUME 2 CAM / BWIN
+        _busy_bbWin[ready_bbWin_indx]->_win_buf.camAccess (num_loc_update * 2); //ASSUME 2 CAM / BWIN 
         //---------------------------------------
 
         /*-- UPDATE RESOURCES --*/
@@ -270,6 +270,7 @@ void bb_scheduler::updatebbWindows () {
         ins->setBBWinID (_bbWin_on_fetch->_id);
         ins = _decode_to_scheduler_port->popFront ();
         _e_stage.ffAccess ();
+        _bbWin_on_fetch->_win.ramAccess ();
         _RF_MGR->renameRegs (ins);
         ins->setPipeStage (DISPATCH);
         if (ins->getInsType () == MEM) _LSQ_MGR->pushBack (ins);
@@ -296,6 +297,7 @@ void bb_scheduler::updateBBROB (dynBasicblock* bb) {
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
                 "Adding new BB to BBROB", _clk->now ());
         _bbROB->pushBack (bb);
+        _bbROB->ramAccess ();
     } else {
         dynBasicblock* rob_tail_bb = _bbROB->getLast ();
 #ifdef ASSERTION
@@ -305,6 +307,7 @@ void bb_scheduler::updateBBROB (dynBasicblock* bb) {
             dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), 
                     "Adding new BB to BBROB", _clk->now ());
             _bbROB->pushBack (bb);
+            _bbROB->ramAccess ();
         }
     }
 }

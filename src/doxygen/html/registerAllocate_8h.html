@@ -66,11 +66,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><code>#include &lt;list&gt;</code><br/>
 <code>#include &lt;set&gt;</code><br/>
+<code>#include &lt;map&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &quot;global.h&quot;</code><br/>
-<code>#include &quot;interfNode.h&quot;</code><br/>
-<code>#include &quot;basicblock.h&quot;</code><br/>
-<code>#include &quot;instruction.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="interfNode_8h_source.html">interfNode.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="basicblock_8h_source.html">basicblock.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="instruction_8h_source.html">instruction.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="listSchedule_8h_source.html">listSchedule.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dependencySetup_8h_source.html">dependencySetup.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for registerAllocate.h:</div>
 <div class="dyncontent">
@@ -90,11 +93,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="registerAllocate_8h.html#ab17f7974a10ba13bb9b6fe833492f957">findInteriorPoints</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *interiorBB)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="registerAllocate_8h.html#adaeef7e1cff31b45dd8d7d8adbcd1662">allocate_register</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="registerAllocate_8h.html#a89206e9b97c233cca9ffa40229a32a77">allocate_register</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *bbList, <a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *insList, map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *insAddrMap, <a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a> reg_alloc_mode, <a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a> sch_mode)</td></tr>
 </table>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="adaeef7e1cff31b45dd8d7d8adbcd1662"></a><!-- doxytag: member="registerAllocate.h::allocate_register" ref="adaeef7e1cff31b45dd8d7d8adbcd1662" args="(List&lt; basicblock * &gt; *bbList, List&lt; instruction * &gt; *insList)" -->
+<a class="anchor" id="a89206e9b97c233cca9ffa40229a32a77"></a><!-- doxytag: member="registerAllocate.h::allocate_register" ref="a89206e9b97c233cca9ffa40229a32a77" args="(List&lt; basicblock * &gt; *bbList, List&lt; instruction * &gt; *insList, map&lt; ADDR, instruction * &gt; *insAddrMap, REG_ALLOC_MODE reg_alloc_mode, SCH_MODE sch_mode)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -108,7 +110,25 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>insList</em>&#160;</td>
+          <td class="paramname"><em>insList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">map&lt; <a class="el" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>insAddrMap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a>&#160;</td>
+          <td class="paramname"><em>reg_alloc_mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651b">SCH_MODE</a>&#160;</td>
+          <td class="paramname"><em>sch_mode</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -118,54 +138,72 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                               {
+<div class="fragment"><pre class="fragment">                                           {
         <a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *interiorBB = <span class="keyword">new</span> <a class="code" href="classList.html">List&lt;basicblock*&gt;</a>;
-        map&lt;long int,interfNode*&gt; locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
-        printf(<span class="stringliteral">&quot;\tPhi-Function Elimination\n&quot;</span>);
-        <span class="keywordtype">int</span> numInsInsertion = <a class="code" href="registerAllocate_8cpp.html#aa1b9aef4bd270d92ee493acef4c5cffa">eliminatePhiFuncs</a>(bbList);
-        printf(<span class="stringliteral">&quot;\tSSA Rename &amp; Build Def/Use Set\n&quot;</span>);
-        <a class="code" href="registerAllocate_8cpp.html#a398558d22a764dcc2fdc74639b3f56c6">renameAndbuildDefUseSets</a>(bbList); <span class="comment">//TODO: make sure this step does not impact next step</span>
-        printf(<span class="stringliteral">&quot;\tLiveness Analysis\n&quot;</span>);
-        <a class="code" href="registerAllocate_8cpp.html#a890d083ac7d418402e1acbcda4930e1b">livenessAnalysis</a>(bbList);
-        printf(<span class="stringliteral">&quot;\tFind Graph Entry Points\n&quot;</span>);
-        <a class="code" href="registerAllocate_8cpp.html#a3511145027350bf1c4fab3a22f79be40">findEntryPoints</a>(bbList, interiorBB);
+        map&lt;long int,interfNode*&gt; localIntfNodeMap, globalIntfNodeMap, allIntfNodeMap;
+
+    setupValidBBs (bbList);
+
+        printf (<span class="stringliteral">&quot;\tPhi-Function Elimination\n&quot;</span>);
+        <span class="keywordtype">int</span> numInsInsertion = eliminatePhiFuncs (bbList, insAddrMap);
+
+        printf (<span class="stringliteral">&quot;\tSSA Rename &amp; Build Def/Use Set\n&quot;</span>);
+        renameAndbuildDefUseSets (bbList); <span class="comment">//TODO: make sure this step does not impact next step</span>
+
+        printf (<span class="stringliteral">&quot;\tLiveness Analysis\n&quot;</span>);
+        livenessAnalysis (bbList, reg_alloc_mode, insAddrMap);
+
+    setupValidBBs (bbList);
+
+        printf (<span class="stringliteral">&quot;\tFind Graph Entry Points\n&quot;</span>);
+        findEntryPoints (bbList, interiorBB);
+
+
+        <span class="comment">/* PERFORM LIST SCHEDULING ON BB */</span>
+    printf (<span class="stringliteral">&quot;\tSetup Dependency Table\n&quot;</span>);
+    <a class="code" href="dependencySetup_8cpp.html#a7c05c8220cddb4275f92c359277516d2">dependencySetup</a> (bbList, insList);
+    <span class="keywordflow">if</span> (sch_mode == <a class="code" href="binaryTranslator_2global_8h.html#a81dba944bc61f5b25a3513766ef6651ba1819a01f0bbc877893855c99bb83a09c">LIST_SCH</a>) {
+        printf (<span class="stringliteral">&quot;\tRun List Scheduling\n&quot;</span>);
+        <span class="keywordflow">for</span>  (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+            <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+            <a class="code" href="listSchedule_8cpp.html#af9a47861fb738dfb09aa240667f01b1e">listSchedule</a> (bb); <span class="comment">//why does this affect BB structure?</span>
+        }
+    }
+
         <span class="comment">//TODO is the block below okay? needed?</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++)
-                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i)-&gt;setAsUnvisited();
-        printf(<span class="stringliteral">&quot;\tBuild Interference Graph &amp; Run Register Assignment\n&quot;</span>);
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; interiorBB-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {
-                <a class="code" href="classbasicblock.html">basicblock</a>* bbHead = interiorBB-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                locallIntfNodeMap.clear();
-                globalIntfNodeMap.clear();
-                allIntfNodeMap.clear();
-                <a class="code" href="registerAllocate_8cpp.html#a44ba610b0d634eb37dc4a1228f9fe6d7">make_interference_nodes_network</a>(bbHead, globalIntfNodeMap, locallIntfNodeMap,allIntfNodeMap);
-                <span class="keywordflow">for</span> (map&lt;long int,interfNode*&gt;::iterator it = locallIntfNodeMap.begin(); it != locallIntfNodeMap.end(); it++) {
-                        <span class="keywordflow">if</span> (globalIntfNodeMap.find(it-&gt;first) != globalIntfNodeMap.end()) printf(<span class="stringliteral">&quot;*SHIIIIIIIIT+++++++\n&quot;</span>);
-                }
-                <span class="keywordflow">for</span> (map&lt;long int,interfNode*&gt;::iterator it = globalIntfNodeMap.begin(); it != globalIntfNodeMap.end(); it++) {
-                        <span class="keywordflow">if</span> (locallIntfNodeMap.find(it-&gt;first) != locallIntfNodeMap.end()) printf(<span class="stringliteral">&quot;SHIIIIIIIIT+++++++\n&quot;</span>);
-                }
-                <span class="comment">// printf(&quot;sizes: %d,%d,%d\n&quot;,allIntfNodeMap.size(),globalIntfNodeMap.size(),locallIntfNodeMap.size());</span>
-                <a class="code" href="registerAllocate_8cpp.html#ad793e858badbde1ceff1536fc3145c65">assign_global_registers</a>(locallIntfNodeMap, globalIntfNodeMap, allIntfNodeMap);
-                <span class="comment">// printf(&quot;sizes: %d,%d,%d\n&quot;,allIntfNodeMap.size(),globalIntfNodeMap.size(),locallIntfNodeMap.size());</span>
-                <a class="code" href="registerAllocate_8cpp.html#aaf92c40633364d00817ec3f029a77f3c">set_arch_reg_for_all_ins</a>(bbHead, allIntfNodeMap);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++)
+                bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i)-&gt;setAsUnvisited ();
+
+        printf (<span class="stringliteral">&quot;\tBuild Interference Graph &amp; Run Register Assignment\n&quot;</span>);
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; interiorBB-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {
+                <a class="code" href="classbasicblock.html">basicblock</a>* <a class="code" href="structbbHead.html">bbHead</a> = interiorBB-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                localIntfNodeMap.clear ();
+                globalIntfNodeMap.clear ();
+                allIntfNodeMap.clear ();
+                make_interference_nodes_network (bbHead, globalIntfNodeMap, localIntfNodeMap,allIntfNodeMap, reg_alloc_mode);
+                assign_global_registers (localIntfNodeMap, globalIntfNodeMap, allIntfNodeMap);
+                set_arch_reg_for_all_ins (bbHead, allIntfNodeMap);
         }
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>(); i++) {       
-                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(i);
-                <span class="comment">// Assert(bb-&gt;isVisited()); //all BB must be visited by now //TODO put this back ASAP</span>
-                bb-&gt;<a class="code" href="classbasicblock.html#a810b34c12cbddff700700341734ddc5d">setAsUnvisited</a>();
-                <span class="comment">// printf(&quot;%llx, %d\n&quot;, bb-&gt;getID(),    bb-&gt;getLiveVarSize());</span>
-                <span class="comment">// bb-&gt;getLiveVarSize();</span>
+    printf (<span class="stringliteral">&quot;\tNumber of BB NOT register allocated: %d\n&quot;</span>, <a class="code" href="registerAllocate_8cpp.html#a466c60f5f66a6ed75275b7ef0b5639ce">num_bb_not_reg_allocated</a>);
+
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; bbList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> (); i++) {      
+                <a class="code" href="classbasicblock.html">basicblock</a>* bb = bbList-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a> (i);
+                <span class="comment">// Assert (bb-&gt;isVisited ()); //all BB must be visited by now //TODO put this back ASAP</span>
+                bb-&gt;<a class="code" href="classbasicblock.html#a810b34c12cbddff700700341734ddc5d">setAsUnvisited</a> ();
         }
-        printf(<span class="stringliteral">&quot;\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n&quot;</span>,numInsInsertion,insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a>());
+
+        printf (<span class="stringliteral">&quot;\tNumber of Phi MOV instructions: %d added to the %d static program instructions\n&quot;</span>, numInsInsertion, insList-&gt;<a class="code" href="classList.html#ac2e9d50f703b01bf643fa6ce50837c26">NumElements</a> ());
+        printf (<span class="stringliteral">&quot;\tMAX number of global/local live variables: %d / %d\n&quot;</span>, liveGlbMaxSize, <a class="code" href="registerAllocate_8cpp.html#a4637bb0648db7cd474ffb94fa1947641">liveLclMaxSize</a>);
+        printf (<span class="stringliteral">&quot;\tLocal Registers Allocated: %d | Global Registers Allocated: %d\n&quot;</span>, <a class="code" href="registerAllocate_8cpp.html#a673108b2f13004921ba02e4b9e547b8f">localRegCnt</a>, <a class="code" href="registerAllocate_8cpp.html#a413a23e1a5783b12b217051d472bbd6c">globalRegCnt</a>);
+
         <span class="keyword">delete</span> interiorBB;
 }
 </pre></div>
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_cgraph.png" border="0" usemap="#registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_cgraph" alt=""/></div>
-<map name="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_cgraph" id="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_cgraph">
+<div class="center"><img src="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_cgraph.png" border="0" usemap="#registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_cgraph" alt=""/></div>
+<map name="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_cgraph" id="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_cgraph">
 </map>
 </div>
 </p>
@@ -173,38 +211,11 @@ Here is the call graph for this function:</div>
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_icgraph.png" border="0" usemap="#registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_icgraph" alt=""/></div>
-<map name="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_icgraph" id="registerAllocate_8h_adaeef7e1cff31b45dd8d7d8adbcd1662_icgraph">
+<div class="center"><img src="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_icgraph.png" border="0" usemap="#registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_icgraph" alt=""/></div>
+<map name="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_icgraph" id="registerAllocate_8h_a89206e9b97c233cca9ffa40229a32a77_icgraph">
 </map>
 </div>
 </p>
-
-</div>
-</div>
-<a class="anchor" id="ab17f7974a10ba13bb9b6fe833492f957"></a><!-- doxytag: member="registerAllocate.h::findInteriorPoints" ref="ab17f7974a10ba13bb9b6fe833492f957" args="(List&lt; basicblock * &gt; *bbList, List&lt; basicblock * &gt; *interiorBB)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void findInteriorPoints </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>bbList</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classbasicblock.html">basicblock</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>interiorBB</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
 
 </div>
 </div>
@@ -214,7 +225,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -223,7 +234,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

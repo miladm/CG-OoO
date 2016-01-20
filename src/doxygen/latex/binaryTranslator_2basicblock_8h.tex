@@ -5,17 +5,57 @@
 {\ttfamily \#include $<$stdint.h$>$}\par
 {\ttfamily \#include $<$stdlib.h$>$}\par
 {\ttfamily \#include $<$set$>$}\par
+{\ttfamily \#include $<$list$>$}\par
 {\ttfamily \#include $<$map$>$}\par
 {\ttfamily \#include $<$vector$>$}\par
 {\ttfamily \#include $<$algorithm$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
 {\ttfamily \#include \char`\"{}list.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}global.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}instruction.h\char`\"{}}\par
 {\ttfamily \#include \char`\"{}phrase.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}stats.h\char`\"{}}\par
 Include dependency graph for basicblock.h:
+% FIG 0
 This graph shows which files directly or indirectly include this file:
+% FIG 1
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \hyperlink{classsub__block}{sub\_\-block}
+\item 
 class \hyperlink{classbasicblock}{basicblock}
 \end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fe}{REACHING\_\-TYPE} \{ \hyperlink{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0}{BR\_\-DST}, 
+\hyperlink{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0}{NO\_\-BR\_\-DST}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fe}{
+\index{binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}!REACHING\_\-TYPE@{REACHING\_\-TYPE}}
+\index{REACHING\_\-TYPE@{REACHING\_\-TYPE}!binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}}
+\subsubsection[{REACHING\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf REACHING\_\-TYPE}}}
+\label{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fe}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BR\_\-DST@{BR\_\-DST}!binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}}\index{binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}!BR\_\-DST@{BR\_\-DST}}\item[{\em 
+\hypertarget{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0}{
+BR\_\-DST}
+\label{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0}
+}]\index{NO\_\-BR\_\-DST@{NO\_\-BR\_\-DST}!binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}}\index{binaryTranslator/basicblock.h@{binaryTranslator/basicblock.h}!NO\_\-BR\_\-DST@{NO\_\-BR\_\-DST}}\item[{\em 
+\hypertarget{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0}{
+NO\_\-BR\_\-DST}
+\label{binaryTranslator_2basicblock_8h_ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0}
+}]\end{description}
+\end{Desc}
+
+
+\begin{DoxyCode}
+{BR_DST, NO_BR_DST} REACHING_TYPE;
+\end{DoxyCode}

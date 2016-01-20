@@ -15,30 +15,16 @@ Collaboration diagram for o3\_\-scheduler:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classo3__scheduler_a5aa72000043c2ff5cf065160560da9be}{o3\_\-scheduler} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&scheduler\_\-to\_\-execution\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$\hyperlink{backend_2parser_8cpp_ad73ae25f81e6e99482f3fbd5ba9664ce}{iROB}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} scheduler\_\-width, string stage\_\-name)
+\hyperlink{classo3__scheduler_adc3f3ae0730ab28d14f0b3cadcbd6830}{o3\_\-scheduler} (\hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&decode\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&execution\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&memory\_\-to\_\-scheduler\_\-port, \hyperlink{classport}{port}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ \&scheduler\_\-to\_\-execution\_\-port, \hyperlink{classCAMtable}{CAMtable}$<$ \hyperlink{classdynInstruction}{dynInstruction} $\ast$ $>$ $\ast$iROB, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} scheduler\_\-width, \hyperlink{classo3__memManager}{o3\_\-memManager} $\ast$LSQ\_\-MGR, \hyperlink{classo3__rfManager}{o3\_\-rfManager} $\ast$RF\_\-MGR, \hyperlink{classsysClock}{sysClock} $\ast$\hyperlink{g__objs_8h_afc4784c140eed1743728e83840e91c12}{clk}, string stage\_\-name)
 \item 
 \hyperlink{classo3__scheduler_ad9624ab36caacb50f844098a32b1fa94}{$\sim$o3\_\-scheduler} ()
 \item 
-void \hyperlink{classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40}{doSCHEDULER} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c}{squash} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-\hyperlink{unit_2stage_8h_ab00e4188e8b8974fecb1dfd12764cbb1}{PIPE\_\-ACTIVITY} \hyperlink{classo3__scheduler_ade8fe27e00ac0430122634af01c0639c}{schedulerImpl} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692}{updateResStns} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a}{manageCDB} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46}{forwardFromCDB} (\hyperlink{classdynInstruction}{dynInstruction} $\ast$ins, \hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-void \hyperlink{classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43}{regStat} (\hyperlink{classsysClock}{sysClock} \&clk)
-\item 
-bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyInsInResStn} (\hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH} resStnId, \hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH} \&readyInsIndx)
+void \hyperlink{classo3__scheduler_a37acf664732fcc9b2a346a12fc26f7be}{doSCHEDULER} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classo3__scheduler_a5aa72000043c2ff5cf065160560da9be}{
+\hypertarget{classo3__scheduler_adc3f3ae0730ab28d14f0b3cadcbd6830}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!o3\_\-scheduler@{o3\_\-scheduler}}
 \index{o3\_\-scheduler@{o3\_\-scheduler}!o3_scheduler@{o3\_\-scheduler}}
 \subsubsection[{o3\_\-scheduler}]{\setlength{\rightskip}{0pt plus 5cm}o3\_\-scheduler::o3\_\-scheduler (
@@ -49,25 +35,44 @@ bool \hyperlink{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{hasReadyIn
 \item[{{\bf port}$<$ {\bf dynInstruction} $\ast$ $>$ \&}]{scheduler\_\-to\_\-execution\_\-port, }
 \item[{{\bf CAMtable}$<$ {\bf dynInstruction} $\ast$ $>$ $\ast$}]{iROB, }
 \item[{{\bf WIDTH}}]{scheduler\_\-width, }
+\item[{{\bf o3\_\-memManager} $\ast$}]{LSQ\_\-MGR, }
+\item[{{\bf o3\_\-rfManager} $\ast$}]{RF\_\-MGR, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
 \item[{string}]{stage\_\-name}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__scheduler_a5aa72000043c2ff5cf065160560da9be}
+\label{classo3__scheduler_adc3f3ae0730ab28d14f0b3cadcbd6830}
 
 \begin{DoxyCode}
-        : stage (issue_width, stage_name)
+        : stage (scheduler_width, stage_name, g_cfg->_root["cpu"]["backend"]["o3_
+      pipe"]["schedule"], clk),
+      s_mem_fwd_cnt (g_stats.newScalarStat (stage_name, "mem_fwd_cnt", "Number of
+       memory forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
+      s_alu_fwd_cnt (g_stats.newScalarStat (stage_name, "alu_fwd_cnt", "Number of
+       ALU forwarding events" + stage_name, 0, NO_PRINT_ZERO)),
+      s_rf_struct_hazrd_cnt (g_stats.newScalarStat (stage_name, "rf_struct_hazrd_
+      cnt", "Number of RF structural READ hazards", 0, PRINT_ZERO)),
+      s_ins_cluster_hist (g_stats.newScalarHistStat ((LENGTH) MAX_INS_SEQ_LEN, st
+      age_name, "ins_cluster_hist", "Instruction cluter size histogram", 0, PRINT_ZERO)
+      )
 {
     _decode_to_scheduler_port = &decode_to_scheduler_port;
     _execution_to_scheduler_port = &execution_to_scheduler_port;
     _memory_to_scheduler_port = &memory_to_scheduler_port;
     _scheduler_to_execution_port  = &scheduler_to_execution_port;
     _iROB = iROB;
-    _num_res_stns = 4;
+    _num_res_stns = 1;
+    _LSQ_MGR = LSQ_MGR;
+    _RF_MGR = RF_MGR;
+
+    _prev_ins_sn = 0;
+    _sequence_length = 0;
+
     for (WIDTH i = 0; i < _num_res_stns; i++) {
         ostringstream rs_num;
         rs_num << i;
-        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(8, 8, 8
-      , "ResStn_"+rs_num.str ());
+        CAMtable<dynInstruction*>* resStn = new CAMtable<dynInstruction*>(_clk, 
+      g_cfg->_root["cpu"]["backend"]["table"]["resStn"], "ResStn_" + rs_num.str ());
         _ResStns.Append(resStn);
     }
 }
@@ -102,358 +107,34 @@ Here is the call graph for this function:
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40}{
+\hypertarget{classo3__scheduler_a37acf664732fcc9b2a346a12fc26f7be}{
 \index{o3\_\-scheduler@{o3\_\-scheduler}!doSCHEDULER@{doSCHEDULER}}
 \index{doSCHEDULER@{doSCHEDULER}!o3_scheduler@{o3\_\-scheduler}}
 \subsubsection[{doSCHEDULER}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::doSCHEDULER (
 \begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{classo3__scheduler_a336443d7d6e8f6b892c7c71b97099e40}
+\label{classo3__scheduler_a37acf664732fcc9b2a346a12fc26f7be}
 
 \begin{DoxyCode}
-                                             {
-    /* STAT + DEBUG */
-    dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), clk.
+                                {
+    /*-- STAT + DEBUG --*/
+    dbg.print (DBG_SCHEDULER, "** %s: (cyc: %d)\n", _stage_name.c_str (), _clk->
       now ());
-    regStat (clk);
+    regStat ();
     PIPE_ACTIVITY pipe_stall = PIPE_STALL;
 
-    /* SQUASH HANDLING */
-    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (clk); }
+    /*-- SQUASH HANDLING --*/
+    if (g_var.g_pipe_state == PIPE_FLUSH) { squash (); }
     if (!(g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == 
       PIPE_FLUSH)) {
-        pipe_stall = schedulerImpl (clk);
+        pipe_stall = schedulerImpl ();
     }
+    if (g_cfg->isEnFwd ()) manageCDB ();
 
-    /* STAT */
+    /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!forwardFromCDB@{forwardFromCDB}}
-\index{forwardFromCDB@{forwardFromCDB}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{forwardFromCDB}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::forwardFromCDB (
-\begin{DoxyParamCaption}
-\item[{{\bf dynInstruction} $\ast$}]{ins, }
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a13b34d2dae20e349ee7bb614d0d33d46}
-
-\begin{DoxyCode}
-                                                                     {
-    { /* FWD FROM EXE STAGE */
-        if (_execution_to_scheduler_port->getBuffState (clk.now ()) == 
-      EMPTY_BUFF) return;
-        List<PR>* rd_reg_list = ins->getPRrdList ();
-        List<dynInstruction*> fwd_list;
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace wi
-      th exe_num_EU
-            if (!_execution_to_scheduler_port->isReadyNow (clk.now ())) break;
-            dynInstruction* fwd_ins = _execution_to_scheduler_port->popFront (clk
-      .now ());
-            fwd_list.Append (fwd_ins);
-        }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
-            dynInstruction* fwd_ins = fwd_list.Nth (i);
-            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
-            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                PR rd_reg = rd_reg_list->Nth (j);
-                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
-                    PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                    }
-                }
-            }
-        }
-        _execution_to_scheduler_port->delOldReady (clk.now ()); /* Only FWD what 
-      is on CDB now */
-    }
-
-    { /* FWD FROM MEM STAGE */
-        if (_memory_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) r
-      eturn;
-        List<PR>* rd_reg_list = ins->getPRrdList ();
-        List<dynInstruction*> fwd_list;
-        for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace wi
-      th exe_num_EU
-            if (!_memory_to_scheduler_port->hasReadyNow (clk.now ())) break;
-            dynInstruction* fwd_ins = _memory_to_scheduler_port->popNextReadyNow 
-      (clk.now ());
-            fwd_list.Append (fwd_ins);
-        }
-        for (WIDTH i = 0; i < fwd_list.NumElements (); i++) {
-            dynInstruction* fwd_ins = fwd_list.Nth (i);
-            List<PR>* wr_reg_list = fwd_ins->getPRwrList ();
-            for (int j = rd_reg_list->NumElements () - 1; j >= 0; j--) {
-                PR rd_reg = rd_reg_list->Nth (j);
-                for (int k = wr_reg_list->NumElements () - 1; k >= 0; k--) {
-                    PR wr_reg = wr_reg_list->Nth (k);
-                    if (rd_reg == wr_reg) {
-                        rd_reg_list->RemoveAt(j);
-                    }
-                }
-            }
-        }
-        _memory_to_scheduler_port->delOldReady (clk.now ()); /* Only FWD what is 
-      on CDB now */
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-\hypertarget{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!hasReadyInsInResStn@{hasReadyInsInResStn}}
-\index{hasReadyInsInResStn@{hasReadyInsInResStn}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{hasReadyInsInResStn}]{\setlength{\rightskip}{0pt plus 5cm}bool o3\_\-scheduler::hasReadyInsInResStn (
-\begin{DoxyParamCaption}
-\item[{{\bf WIDTH}}]{resStnId, }
-\item[{{\bf LENGTH} \&}]{readyInsIndx}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a46d9cb288bfbd52069935fa96d9de38f}
-
-\begin{DoxyCode}
-                                                                            {
-    for (WIDTH i = 0; i < _ResStns.Nth(resStnId)->getTableSize(); i++) {
-        dynInstruction* ins = _ResStns.Nth(resStnId)->getNth_unsafe (i);
-        readyInsIndx = i;
-        if (!g_GRF_MGR.isReady (ins)) continue;
-        else return true;
-    }
-    return false;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!manageCDB@{manageCDB}}
-\index{manageCDB@{manageCDB}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{manageCDB}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::manageCDB (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a5dfd1ae3623b060e60867808e78b224a}
-
-\begin{DoxyCode}
-                                           {
-    if (_execution_to_scheduler_port->getBuffState (clk.now ()) == EMPTY_BUFF) re
-      turn;
-    for (WIDTH i = 0; i < _stage_width; i++) { //TODO _stage_width replace with e
-      xe_num_EU
-        if (_execution_to_scheduler_port->isReady (clk.now ()))
-            _execution_to_scheduler_port->popFront (clk.now ());
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!regStat@{regStat}}
-\index{regStat@{regStat}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{regStat}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::regStat (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a3ca0bc2505c006ce212a82f58b243e43}
-
-\begin{DoxyCode}
-                                         {
-    _decode_to_scheduler_port->regStat (clk.now ());
-    _execution_to_scheduler_port->regStat (clk.now ());
-    _memory_to_scheduler_port->regStat (clk.now ());
-    for (WIDTH j = 0; j < _num_res_stns; j++) {
-        _ResStns.Nth(j)->regStat ();
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_ade8fe27e00ac0430122634af01c0639c}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!schedulerImpl@{schedulerImpl}}
-\index{schedulerImpl@{schedulerImpl}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{schedulerImpl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PIPE\_\-ACTIVITY} o3\_\-scheduler::schedulerImpl (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_ade8fe27e00ac0430122634af01c0639c}
-
-\begin{DoxyCode}
-                                                        {
-    PIPE_ACTIVITY pipe_stall = PIPE_STALL;
-
-    updateResStns (clk);
-
-    /* READ FROM INS WINDOW */
-    for (WIDTH j = 0; j < _num_res_stns; j++) {
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            /* CHECKS */
-            if (_scheduler_to_execution_port->getBuffState (clk.now ()) == 
-      FULL_BUFF) break;
-            if (_ResStns.Nth(j)->getTableState () == EMPTY_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeRdPort (clk.now ())) continue;
-            LENGTH readyInsIndx;
-            if (!hasReadyInsInResStn (j, readyInsIndx)) break;
-            dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (readyInsIndx);
-            if (!g_GRF_MGR.hasFreeRdPort (clk.now (), ins->getNumRdPR ())) break;
-      
-            //forwardFromCDB (ins, clk); TODO - made execution worse - WHY?!
-
-            /* READ INS WIN */
-            ins = _ResStns.Nth(j)->pullNextReady (readyInsIndx);
-            ins->setPipeStage (ISSUE);
-            _scheduler_to_execution_port->pushBack (ins, clk.now ());
-            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_st
-      r (), "Issue ins", ins->getInsID (), clk.now ());
-
-            /* STAT */
-            s_ins_cnt++;
-            pipe_stall = PIPE_BUSY;
-        }
-    }
-
-    manageCDB (clk);
-
-    return pipe_stall;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!squash@{squash}}
-\index{squash@{squash}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::squash (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a53e17bdeda48c023a7f24e6871eeed4c}
-
-\begin{DoxyCode}
-                                        {
-    dbg.print (DBG_SQUASH, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Scheduler
-       Ports Flush", clk.now ());
-    Assert (g_var.g_pipe_state == PIPE_FLUSH);
-    INS_ID squashSeqNum = g_var.getSquashSN ();
-    _scheduler_to_execution_port->flushPort (squashSeqNum, clk.now ());
-    for (WIDTH j = 0; j < _num_res_stns; j++) {
-        for (int i = (int)_ResStns.Nth(j)->getTableSize() - 1; i >= 0; i--) {
-            if (_ResStns.Nth(j)->getTableSize() == 0) break;
-            dynInstruction* ins = _ResStns.Nth(j)->getNth_unsafe (i);
-            if (ins->getInsID () >= squashSeqNum) {
-                _ResStns.Nth(j)->removeNth_unsafe (i);
-            }
-        }
-    }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692}{
-\index{o3\_\-scheduler@{o3\_\-scheduler}!updateResStns@{updateResStns}}
-\index{updateResStns@{updateResStns}!o3_scheduler@{o3\_\-scheduler}}
-\subsubsection[{updateResStns}]{\setlength{\rightskip}{0pt plus 5cm}void o3\_\-scheduler::updateResStns (
-\begin{DoxyParamCaption}
-\item[{{\bf sysClock} \&}]{clk}
-\end{DoxyParamCaption}
-)}}
-\label{classo3__scheduler_a3eaa3373cbbd123523a9cbf4d7326692}
-
-\begin{DoxyCode}
-                                               {
-    for (WIDTH j = 0; j < _num_res_stns; j++) {
-        for (WIDTH i = 0; i < _stage_width; i++) {
-            /* CHECKS */
-            if (_iROB->getTableState () == FULL_BUFF) break;
-            if (!_iROB->hasFreeWrPort (clk.now ())) break;
-            if (_ResStns.Nth(j)->getTableState () == FULL_BUFF) continue;
-            if (!_ResStns.Nth(j)->hasFreeWrPort (clk.now ())) continue;
-            if (_decode_to_scheduler_port->getBuffState (clk.now ()) == 
-      EMPTY_BUFF) break;
-            if (!_decode_to_scheduler_port->isReady (clk.now ())) break;
-            dynInstruction* ins = _decode_to_scheduler_port->getFront ();
-            if (!g_GRF_MGR.canRename (ins)) break;
-            if (ins->getInsType () == MEM && ins->getMemType () == LOAD) {
-                if (g_LSQ_MGR.getTableState (LD_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWrPort (LD_QU, clk.now ())) break;
-            } else if (ins->getInsType () == MEM && ins->getMemType () == STORE) 
-      {
-                if (g_LSQ_MGR.getTableState (ST_QU) == FULL_BUFF) break;
-                if (!g_LSQ_MGR.hasFreeWrPort (ST_QU, clk.now ())) break;
-            }
-
-            /* WRITE INTO RES STN */
-            dbg.print (DBG_PORT, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "ADD
-       INS", clk.now ());
-            ins = _decode_to_scheduler_port->popFront (clk.now ());
-            g_GRF_MGR.renameRegs (ins);
-            ins->setPipeStage (DISPATCH);
-            if (ins->getInsType () == MEM) g_LSQ_MGR.pushBack (ins);
-            _ResStns.Nth(j)->pushBack (ins);
-            _iROB->pushBack (ins);
-            dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_st
-      r (), "Write iWin ins", ins->getInsID (), clk.now ());
-        }
-    }
 }
 \end{DoxyCode}
 

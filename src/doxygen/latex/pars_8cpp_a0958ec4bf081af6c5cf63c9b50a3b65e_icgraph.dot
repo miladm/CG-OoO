@@ -7,9 +7,9 @@ digraph G
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
   Node2 [label="GetMemWriteOrigValue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8cpp.html#acb954ff3c5105a038d6722b6debb2056"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="Instruction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#a4254ddc7317164f6cb03afabf4b11770"];
+  Node3 [label="pin__instruction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#ab0a8272b1f7008f664454551f542fd63"];
   Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node4 [label="runPARS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#ad31ce66601d158b499245c36353b1aef"];
+  Node4 [label="pin__runPARS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#ace0fa7dabd943b7f226518d8f2eceef8"];
   Node4 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
   Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main__pars_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
 }

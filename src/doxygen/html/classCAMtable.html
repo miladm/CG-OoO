@@ -87,19 +87,20 @@ Collaboration diagram for CAMtable&lt; tableType_T &gt;:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a45eb83cb39ff8272d50612a1f5f6f85b">CAMtable</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, <a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>, string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a11e9beacdac67a01e521e468f38ced59">CAMtable</a> (<a class="el" href="classsysClock.html">sysClock</a> *, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;, string)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a5d8003f0fb86c270c65674efa53b1172">~CAMtable</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a07cd94cd88b502e5b0e2699b8762f560">pullNextReady</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#abef54f1e30ed42845d48c98917de32e1">getNth</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> indx)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a9644548c43e912d1cd1d0431fc5179e9">pullNth</a> (<a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a> indx)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a07cd94cd88b502e5b0e2699b8762f560">pullNextReady</a> (<a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#abef54f1e30ed42845d48c98917de32e1">getNth</a> (<a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> indx)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a9644548c43e912d1cd1d0431fc5179e9">pullNth</a> (<a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a> indx)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a1111b552094db836302ac5ce0671794a">getFront</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a5e19b284c54893d488fb7eae5f84aa13">popFront</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tableType_T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCAMtable.html#a0bc1956b7e4c93f753232e42241162e5">getLast</a> ()</td></tr>
 </table>
 <h3>template&lt;typename tableType_T&gt;<br/>
  class CAMtable&lt; tableType_T &gt;</h3>
 
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a45eb83cb39ff8272d50612a1f5f6f85b"></a><!-- doxytag: member="CAMtable::CAMtable" ref="a45eb83cb39ff8272d50612a1f5f6f85b" args="(LENGTH, WIDTH, WIDTH, string)" -->
+<a class="anchor" id="a11e9beacdac67a01e521e468f38ced59"></a><!-- doxytag: member="CAMtable::CAMtable" ref="a11e9beacdac67a01e521e468f38ced59" args="(sysClock *, const YAML::Node &amp;, string)" -->
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -108,20 +109,14 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classCAMtable.html">CAMtable</a>&lt; tableType_T &gt;::<a class="el" href="classCAMtable.html">CAMtable</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
-          <td class="paramname"><em>len</em> = <code>1</code>, </td>
+          <td class="paramtype"><a class="el" href="classsysClock.html">sysClock</a> *&#160;</td>
+          <td class="paramname"><em>clk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>rd_port_cnt</em> = <code>1</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a6fa2e24b8a418fa215e183264cbea3aa">WIDTH</a>&#160;</td>
-          <td class="paramname"><em>wr_port_cnt</em> = <code>1</code>, </td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -137,8 +132,7 @@ template&lt;typename tableType_T &gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (len, <a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a20ab95ad25d6332d32321f1af5860c3c">CAM_ARRAY</a>,
-                          wr_port_cnt, rd_port_cnt, table_name)
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classtable.html">table&lt;tableType_T&gt;</a> (<a class="code" href="table_8h.html#ae42c42cf2da8a8d43c157d91ad4f3158a20ab95ad25d6332d32321f1af5860c3c">CAM_ARRAY</a>, clk, root, table_name)
 {}
 </pre></div>
 </div>
@@ -180,17 +174,53 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                             {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
+<span class="preprocessor"></span>    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> ();
+    <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
 }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph.png" border="0" usemap="#classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph" alt=""/></div>
-<map name="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph" id="classCAMtable_a1111b552094db836302ac5ce0671794a_icgraph">
+<div class="center"><img src="classCAMtable_a1111b552094db836302ac5ce0671794a_cgraph.png" border="0" usemap="#classCAMtable_a1111b552094db836302ac5ce0671794a_cgraph" alt=""/></div>
+<map name="classCAMtable_a1111b552094db836302ac5ce0671794a_cgraph" id="classCAMtable_a1111b552094db836302ac5ce0671794a_cgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a0bc1956b7e4c93f753232e42241162e5"></a><!-- doxytag: member="CAMtable::getLast" ref="a0bc1956b7e4c93f753232e42241162e5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename tableType_T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">tableType_T <a class="el" href="classCAMtable.html">CAMtable</a>&lt; tableType_T &gt;::getLast </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                            {
+<span class="preprocessor">#ifdef ASSERTION</span>
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>); <span class="comment">//TODO - don&#39;t think this is needed, is it?</span>
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> ();
+    <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Last()-&gt;_element;
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a0bc1956b7e4c93f753232e42241162e5_cgraph.png" border="0" usemap="#classCAMtable_a0bc1956b7e4c93f753232e42241162e5_cgraph" alt=""/></div>
+<map name="classCAMtable_a0bc1956b7e4c93f753232e42241162e5_cgraph" id="classCAMtable_a0bc1956b7e4c93f753232e42241162e5_cgraph">
 </map>
 </div>
 </p>
@@ -206,7 +236,7 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname">tableType_T <a class="el" href="classCAMtable.html">CAMtable</a>&lt; tableType_T &gt;::getNth </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
           <td class="paramname"><em>indx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -215,12 +245,22 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                      {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>     <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (indx)-&gt;_element;
+<span class="preprocessor"></span>    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+    <span class="keywordflow">return</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (indx)-&gt;_element;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_abef54f1e30ed42845d48c98917de32e1_cgraph.png" border="0" usemap="#classCAMtable_abef54f1e30ed42845d48c98917de32e1_cgraph" alt=""/></div>
+<map name="classCAMtable_abef54f1e30ed42845d48c98917de32e1_cgraph" id="classCAMtable_abef54f1e30ed42845d48c98917de32e1_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a5e19b284c54893d488fb7eae5f84aa13"></a><!-- doxytag: member="CAMtable::popFront" ref="a5e19b284c54893d488fb7eae5f84aa13" args="()" -->
@@ -240,15 +280,25 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                             {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
 <span class="preprocessor"></span>    tableType_T dyIns = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0)-&gt;_element;
     <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (0);
     <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (0);
+    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> ();
     <span class="keywordflow">return</span> dyIns;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_cgraph.png" border="0" usemap="#classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_cgraph" alt=""/></div>
+<map name="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_cgraph" id="classCAMtable_a5e19b284c54893d488fb7eae5f84aa13_cgraph">
+</map>
+</div>
+</p>
+
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -269,7 +319,7 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname">tableType_T <a class="el" href="classCAMtable.html">CAMtable</a>&lt; tableType_T &gt;::pullNextReady </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
           <td class="paramname"><em>next_ins_indx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -280,14 +330,15 @@ template&lt;typename tableType_T &gt; </div>
     tableType_T obj = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (next_ins_indx)-&gt;_element;
     <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (next_ins_indx);
     <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (next_ins_indx);
+    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a8ea206be96142eafa4eb46fe4a910292">ramAccess</a> ();
     <span class="keywordflow">return</span> obj;
 }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph.png" border="0" usemap="#classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph" alt=""/></div>
-<map name="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph" id="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_icgraph">
+<div class="center"><img src="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_cgraph.png" border="0" usemap="#classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_cgraph" alt=""/></div>
+<map name="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_cgraph" id="classCAMtable_a07cd94cd88b502e5b0e2699b8762f560_cgraph">
 </map>
 </div>
 </p>
@@ -303,7 +354,7 @@ template&lt;typename tableType_T &gt; </div>
         <tr>
           <td class="memname">tableType_T <a class="el" href="classCAMtable.html">CAMtable</a>&lt; tableType_T &gt;::pullNth </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#ad7ec63c69447a2b630929c8e0197860d">LENGTH</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="binaryTranslator_2global_8h.html#a9f35cc405c37836572563f16d0302ba6">LENGTH</a>&#160;</td>
           <td class="paramname"><em>indx</em></td><td>)</td>
           <td></td>
         </tr>
@@ -312,14 +363,25 @@ template&lt;typename tableType_T &gt; </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                       {
 <span class="preprocessor">#ifdef ASSERTION</span>
-<span class="preprocessor"></span>    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
-    <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>-&gt;getNumFreeWire (clk) &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
+<span class="preprocessor"></span>    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.NumElements () &gt; 0);
+    <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> ( <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_rd_port</a>.getNumFreeWires () &gt; 0 &amp;&amp; <span class="stringliteral">&quot;must have checked the available ports count first&quot;</span>);
 <span class="preprocessor">#endif</span>
-<span class="preprocessor"></span>     tableType_T elem = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth(indx)-&gt;_element;
-     <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (indx);
-     <span class="keywordflow">return</span> elem;
+<span class="preprocessor"></span>    tableType_T elem = <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth(indx)-&gt;_element;
+    <span class="keyword">delete</span> <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.Nth (indx);
+    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_table</a>.RemoveAt (indx);
+    <a class="code" href="classtable.html">table&lt;tableType_T&gt;::_e_table</a>.<a class="code" href="classtable.html#a5f6cd1dbedfb060cf94410b8cd3ecb0f">camAccess</a> ();
+    <span class="keywordflow">return</span> elem;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCAMtable_a9644548c43e912d1cd1d0431fc5179e9_cgraph.png" border="0" usemap="#classCAMtable_a9644548c43e912d1cd1d0431fc5179e9_cgraph" alt=""/></div>
+<map name="classCAMtable_a9644548c43e912d1cd1d0431fc5179e9_cgraph" id="classCAMtable_a9644548c43e912d1cd1d0431fc5179e9_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -332,7 +394,7 @@ template&lt;typename tableType_T &gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -341,7 +403,7 @@ template&lt;typename tableType_T &gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

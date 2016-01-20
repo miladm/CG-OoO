@@ -15,7 +15,7 @@ Collaboration diagram for FIFOtable$<$ tableType\_\-T $>$:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}{FIFOtable} (\hyperlink{global_2global_8h_ad7ec63c69447a2b630929c8e0197860d}{LENGTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, \hyperlink{global_2global_8h_a6fa2e24b8a418fa215e183264cbea3aa}{WIDTH}, string)
+\hyperlink{classFIFOtable_ad31e696f0f7c3d4b8ebf5720e6a84deb}{FIFOtable} (\hyperlink{classsysClock}{sysClock} $\ast$, const \hyperlink{classYAML_1_1Node}{YAML::Node} \&, string)
 \item 
 \hyperlink{classFIFOtable_aed7aeb790ce1f0fbb429d645597554b5}{$\sim$FIFOtable} ()
 \item 
@@ -28,22 +28,20 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}{
+\hypertarget{classFIFOtable_ad31e696f0f7c3d4b8ebf5720e6a84deb}{
 \index{FIFOtable@{FIFOtable}!FIFOtable@{FIFOtable}}
 \index{FIFOtable@{FIFOtable}!FIFOtable@{FIFOtable}}
 \subsubsection[{FIFOtable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename tableType\_\-T $>$ {\bf FIFOtable}$<$ tableType\_\-T $>$::{\bf FIFOtable} (
 \begin{DoxyParamCaption}
-\item[{{\bf LENGTH}}]{len = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{rd\_\-port\_\-cnt = {\ttfamily 1}, }
-\item[{{\bf WIDTH}}]{wr\_\-port\_\-cnt = {\ttfamily 1}, }
+\item[{{\bf sysClock} $\ast$}]{clk, }
+\item[{const {\bf YAML::Node} \&}]{root, }
 \item[{string}]{table\_\-name = {\ttfamily \char`\"{}FIFOtable$<$~tableType\_\-T~$>$\char`\"{}}}
 \end{DoxyParamCaption}
 )}}
-\label{classFIFOtable_ad5ff5e6a3e0bf0b409f8b6d6ab5e4a5c}
+\label{classFIFOtable_ad31e696f0f7c3d4b8ebf5720e6a84deb}
 
 \begin{DoxyCode}
-    : table<tableType_T> (len, FIFO_ARRAY,
-                          wr_port_cnt, rd_port_cnt, table_name)
+    : table<tableType_T> (FIFO_ARRAY, clk, root, table_name)
 {}
 \end{DoxyCode}
 \hypertarget{classFIFOtable_aed7aeb790ce1f0fbb429d645597554b5}{
@@ -76,12 +74,18 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
                                               {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
-       checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have ch
+      ecked the available ports count first");
 #endif
+    table<tableType_T>::_e_table.fifoAccess ();
     return table<tableType_T>::_table.Nth (0)->_element;
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classFIFOtable_ace3286538766dfa4499d149767ac153f}{
 \index{FIFOtable@{FIFOtable}!popFront@{popFront}}
 \index{popFront@{popFront}!FIFOtable@{FIFOtable}}
@@ -96,18 +100,19 @@ tableType\_\-T \hyperlink{classFIFOtable_ace3286538766dfa4499d149767ac153f}{popF
                                               {
 #ifdef ASSERTION
     Assert (table<tableType_T>::_table.NumElements () > 0);
-    Assert ( table<tableType_T>::_rd_port->getNumFreeWire (clk) > 0 && "must have
-       checked the available ports count first");
+    Assert ( table<tableType_T>::_rd_port.getNumFreeWires () > 0 && "must have ch
+      ecked the available ports count first");
 #endif
     tableType_T dyIns = table<tableType_T>::_table.Nth (0)->_element;
     delete table<tableType_T>::_table.Nth (0);
     table<tableType_T>::_table.RemoveAt (0);
+    table<tableType_T>::_e_table.fifoAccess ();
     return dyIns;
 }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
+Here is the call graph for this function:
 
 
 

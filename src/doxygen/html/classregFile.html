@@ -67,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="regFile" -->
-<p><code>#include &lt;<a class="el" href="backend_2regFile_8h_source.html">regFile.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="regFile_8h_source.html">regFile.h</a>&gt;</code></p>
 
 <p><a href="classregFile-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -76,12 +76,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a26b519ea2a0de692fd1d48c8979183db">regFile</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a81513a208df454517088a0b846e0ef77">~regFile</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a8e27b1edd7cbb6d8820a73fb1d7d8c71">getRegNum</a> (const char *regName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a5a3ddc553c8f4f94bc61b1ae318139cc">getNumberOfRegs</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a26b519ea2a0de692fd1d48c8979183db">regFile</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a81513a208df454517088a0b846e0ef77">~regFile</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a8e27b1edd7cbb6d8820a73fb1d7d8c71">getRegNum</a> (const char *regName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#ada6d017b75052f81cd667263792be866">addToRegFile</a> (long int reg)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#a5a3ddc553c8f4f94bc61b1ae318139cc">getNumberOfRegs</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classregFile.html#aa00f4bf6c12df40865e52c6ea1f040be">getSpecialRegNum</a> (const char *regName)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a26b519ea2a0de692fd1d48c8979183db"></a><!-- doxytag: member="regFile::regFile" ref="a26b519ea2a0de692fd1d48c8979183db" args="()" -->
@@ -97,48 +92,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    numRegs = <a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">NUM_REGISTERS</a>+<a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">INIT_RENAME_REG_NUM</a>; <span class="comment">//TODO this is NOT Accrate</span>
-    <span class="comment">//Construct the register file map</span>
-    setupRegFile();
-    <span class="comment">//initialize the register file status</span>
-    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="binaryTranslator_2global_8h.html#a5efff3a4a48efbf589e3a2320997d9b9">NUM_REGISTERS</a>; i++)
-        RFstatus[i] = -1;
+<div class="fragment"><pre class="fragment">                  {
+    <span class="comment">// CONSTRUCT THE REGISTER FILE MAP</span>
+    setupRegFile ();
+    setupSpecialRegFile ();
 }
 </pre></div>
-</div>
-</div>
-<a class="anchor" id="a81513a208df454517088a0b846e0ef77"></a><!-- doxytag: member="regFile::~regFile" ref="a81513a208df454517088a0b846e0ef77" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">regFile::~regFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">{}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a26b519ea2a0de692fd1d48c8979183db"></a><!-- doxytag: member="regFile::regFile" ref="a26b519ea2a0de692fd1d48c8979183db" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">regFile::regFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
 </div>
 </div>
 <a class="anchor" id="a81513a208df454517088a0b846e0ef77"></a><!-- doxytag: member="regFile::~regFile" ref="a81513a208df454517088a0b846e0ef77" args="()" -->
@@ -159,62 +118,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ada6d017b75052f81cd667263792be866"></a><!-- doxytag: member="regFile::addToRegFile" ref="ada6d017b75052f81cd667263792be866" args="(long int reg)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int regFile::addToRegFile </td>
-          <td>(</td>
-          <td class="paramtype">long int&#160;</td>
-          <td class="paramname"><em>reg</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                       {
-        <span class="keywordtype">string</span> strReg = itos(reg);
-        RF.insert(pair&lt;string,long int&gt;(strReg,reg));
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a5a3ddc553c8f4f94bc61b1ae318139cc"></a><!-- doxytag: member="regFile::getNumberOfRegs" ref="a5a3ddc553c8f4f94bc61b1ae318139cc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long int regFile::getNumberOfRegs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5a3ddc553c8f4f94bc61b1ae318139cc"></a><!-- doxytag: member="regFile::getNumberOfRegs" ref="a5a3ddc553c8f4f94bc61b1ae318139cc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long int regFile::getNumberOfRegs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                  {
-        <span class="keywordflow">return</span> numRegs;
-}
-</pre></div>
-</div>
-</div>
 <a class="anchor" id="a8e27b1edd7cbb6d8820a73fb1d7d8c71"></a><!-- doxytag: member="regFile::getRegNum" ref="a8e27b1edd7cbb6d8820a73fb1d7d8c71" args="(const char *regName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -229,33 +132,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8e27b1edd7cbb6d8820a73fb1d7d8c71"></a><!-- doxytag: member="regFile::getRegNum" ref="a8e27b1edd7cbb6d8820a73fb1d7d8c71" args="(const char *regName)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">long int regFile::getRegNum </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>regName</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                               {
-        <span class="keywordflow">if</span> (RF.count(regName) &gt; 0)
-                <span class="keywordflow">return</span> RF.find(regName)-&gt;second;
-        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (atoi(regName) &gt;= <a class="code" href="binaryTranslator_2global_8h.html#ad8311f5862e4dc4169d73a4247cda68a">INIT_RENAME_REG_NUM</a>) {
-                numRegs++;
-                <span class="keywordflow">return</span> atoi(regName);
+<div class="fragment"><pre class="fragment">                                                {
+        <span class="keywordflow">if</span> (RF.count (regName) &gt; 0) {
+                <span class="keywordflow">return</span> RF.find (regName)-&gt;second;
+        } <span class="keywordflow">else</span> {
+                <span class="keywordflow">return</span> <a class="code" href="binaryTranslator_2global_8h.html#ac2e4520b753f883cd8050dbf1864db08">INVALID_REG</a>;
         }
-        printf (<span class="stringliteral">&quot;ERROR Reg: %s\n&quot;</span>, regName);
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a>(<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;getRegNum () must not have reached this point&quot;</span>);
-        <span class="keywordflow">return</span> 0; <span class="comment">//for compiler</span>
 }
 </pre></div>
 <p><div class="dynheader">
@@ -269,11 +151,42 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="aa00f4bf6c12df40865e52c6ea1f040be"></a><!-- doxytag: member="regFile::getSpecialRegNum" ref="aa00f4bf6c12df40865e52c6ea1f040be" args="(const char *regName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int regFile::getSpecialRegNum </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>regName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                       {
+        <span class="keywordflow">if</span> (SRF.count (regName) &gt; 0) {
+                <span class="keywordflow">return</span> SRF.find (regName)-&gt;second;
+        } <span class="keywordflow">else</span> {
+                <span class="keywordflow">return</span> <a class="code" href="binaryTranslator_2global_8h.html#ac2e4520b753f883cd8050dbf1864db08">INVALID_REG</a>;
+        }
+}
+</pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classregFile_aa00f4bf6c12df40865e52c6ea1f040be_icgraph.png" border="0" usemap="#classregFile_aa00f4bf6c12df40865e52c6ea1f040be_icgraph" alt=""/></div>
+<map name="classregFile_aa00f4bf6c12df40865e52c6ea1f040be_icgraph" id="classregFile_aa00f4bf6c12df40865e52c6ea1f040be_icgraph">
+</map>
+</div>
+</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2regFile_8h_source.html">regFile.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="binaryTranslator_2regFile_8h_source.html">regFile.h</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/backend/<a class="el" href="backend_2regFile_8cpp.html">regFile.cpp</a></li>
-<li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="binaryTranslator_2regFile_8cpp.html">regFile.cpp</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="regFile_8h_source.html">regFile.h</a></li>
+<li>/home/milad/esc_project/svn/PARS/src/binaryTranslator/<a class="el" href="regFile_8cpp.html">regFile.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -281,7 +194,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -290,7 +203,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

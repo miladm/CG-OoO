@@ -73,136 +73,231 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;stdint.h&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
 <a name="l00012"></a>00012 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;set&gt;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;map&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;sstream&gt;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;list.h&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;global.h&quot;</span>
-<a name="l00021"></a>00021 <span class="comment">// #include &quot;registerRename.h&quot;</span>
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">class </span><a class="code" href="classdependencyTable.html">dependencyTable</a>; <span class="comment">/*used in another version of C compiler*/</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="keyword">class </span><a class="code" href="classinstruction.html">instruction</a> {
-<a name="l00026"></a>00026         <span class="keyword">public</span>:
-<a name="l00027"></a>00027                 <a class="code" href="classinstruction.html#a2e0bfed549166dbfa1ce77ec084ea310">instruction</a>();
-<a name="l00028"></a>00028                 <a class="code" href="classinstruction.html#a4f9c54b6376cf77565179728fa6f68fa">~instruction</a>();
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a7a4adbec8d2e9a2cb6090168530e336c">setOpCode</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *);
-<a name="l00031"></a>00031                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ac39145295a94852d0a3efe8c8247473d">setInsAddr</a>(<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>);
-<a name="l00032"></a>00032                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aeeee9fa55e89a75f59d160c0aad34a52">setBrDst</a>(<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a>);
-<a name="l00033"></a>00033                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae28df36b635c5359fa48a6476eebc425">setInsAsm</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *);
-<a name="l00034"></a>00034                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ad9c7d979b5f4b00189973e47caa3411f">setType</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>);
-<a name="l00035"></a>00035                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aabc818127836c8403b9c691985ca6d14">setBrTakenBias</a>(<span class="keywordtype">double</span> brBias);
-<a name="l00036"></a>00036                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a613fd5dcaabf9a68596545679b17ffd8">setBPaccuracy</a>(<span class="keywordtype">double</span> bpAccuracy);
-<a name="l00037"></a>00037                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a5052a04bf5db0d0e1519eb54f343bdc6">setLdMissRate</a>(<span class="keywordtype">double</span> missRate);
-<a name="l00038"></a>00038                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a456de8aa26ff79d2b7cd203f7c59f2cb">setRegister</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> *r, <span class="keywordtype">int</span> *rt);
-<a name="l00039"></a>00039                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a093ff19f17baaf84d4539ea395468265">setReadVar</a>(<span class="keywordtype">int</span> var, <span class="keywordtype">int</span> subscript);
-<a name="l00040"></a>00040                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a67c584522eaa68d46a495170ce8a3bbd">setWriteVar</a>(<span class="keywordtype">int</span> var, <span class="keywordtype">int</span> subscript);
-<a name="l00041"></a>00041                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a8e201444f39b8a779022284e280fdf23">setArchReg</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> r);
-<a name="l00042"></a>00042                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a1a85e010b731e20bcd25310a26eabd98">setWrMemType</a>();
-<a name="l00043"></a>00043                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a0d47af8822438b6e838c08dbd31cc02c">setRdMemType</a>();
-<a name="l00044"></a>00044                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a4e1387f9782160c95597c81694ec0775">setMemAccessSize</a>(<span class="keywordtype">int</span> memSize); <span class="comment">//in bytes</span>
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046                 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classinstruction.html#a47d6ca18417d4f185495eb9be2844f07">getOpCode</a>();
-<a name="l00047"></a>00047                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a>();
-<a name="l00048"></a>00048                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <a class="code" href="classinstruction.html#ad9d2ab40d6cf65d68172316c37438497">getBrDst</a>();
-<a name="l00049"></a>00049                 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classinstruction.html#a9404c158382339e863846837c9b252aa">getInsAsm</a>();
-<a name="l00050"></a>00050                 <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a>();
-<a name="l00051"></a>00051                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#ac2be260e8fce5e0615bd68bed97cb591">getBrTakenBias</a>();
-<a name="l00052"></a>00052                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#a023333937041baf6bc2985c94f88c9e5">getBPaccuracy</a>();
-<a name="l00053"></a>00053                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#a14d57791b666452fdb91973e35c39c2e">getLdMissRate</a>();
-<a name="l00054"></a>00054                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a842fd50e52a3e3d31fcf8b7a180a32bd">getLatency</a>();
-<a name="l00055"></a>00055                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a>(<span class="keywordtype">int</span> i);
-<a name="l00056"></a>00056                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a>(<span class="keywordtype">int</span> i);
-<a name="l00057"></a>00057                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7d49a66c0f3b426f1cf8fd335a5f3b6a">getNthArchReg</a>(<span class="keywordtype">int</span> indx);
-<a name="l00058"></a>00058                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#ad7dce7bff9bfecd11b0e7119738d0994">getNthOldWriteReg</a>(<span class="keywordtype">int</span> i);
-<a name="l00059"></a>00059                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a0a5ddbb986096245d7742472c49d14b2">getNthReadReg</a>(<span class="keywordtype">int</span> i);
-<a name="l00060"></a>00060                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a29e8de9d3cd22cee464512f9bbc1972c">getNthWriteReg</a>(<span class="keywordtype">int</span> i);
-<a name="l00061"></a>00061                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aabb46003e886f87cd3bc918f05a3682f">removeNthRegister</a>(<span class="keywordtype">int</span> i);
-<a name="l00062"></a>00062                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a>();
-<a name="l00063"></a>00063                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#ae0a1ee97e6ba7920c41dd35f97b1715a">getNumReadReg</a>();
-<a name="l00064"></a>00064                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a293a8975be22485ec002ef7cc0466d0a">getNumWriteReg</a>();
-<a name="l00065"></a>00065                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7824d148fcdeb6a1b7cafd68a7ce99ef">getReadRegSubscript</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> var);
-<a name="l00066"></a>00066                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a1253eafd0173b6daef17fed2311c6bcf">getWriteRegSubscript</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> var);
-<a name="l00067"></a>00067                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae406e3e00f408b7b54510867c88b1b5d">makeUniqueRegs</a>();
-<a name="l00068"></a>00068                 <span class="keywordtype">string</span> <a class="code" href="classinstruction.html#acd4f756120e0bd6cdb127715c295a5e7">getRegisterStr</a>(); <span class="comment">//legacy code</span>
-<a name="l00069"></a>00069                 <span class="keywordtype">string</span> <a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a>();
-<a name="l00070"></a>00070                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a>(); <span class="comment">//in bytes</span>
-<a name="l00071"></a>00071                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#abf5f8947b16c91c4e21b82bec378008f">isRdMemType</a>();
-<a name="l00072"></a>00072                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a0eab1a0a392f17d7ec46e6dbf1ce21fb">isWrMemType</a>();
-<a name="l00073"></a>00073                 
-<a name="l00074"></a>00074                 <span class="comment">/* Dependency checking methods */</span>
-<a name="l00075"></a>00075                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#ad1af63e7f1bfa160b0719027c2a0b8ce">getDependents</a>();
-<a name="l00076"></a>00076                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#af6165d6c8ba00c6806eda36e36cb3366">getAncestors</a>();
-<a name="l00077"></a>00077                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#a90450afccd1b4b07bd28b2ee8aabdf6d">getRegAncestors</a>();
-<a name="l00078"></a>00078                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab2ba6828f1256186a787d933a6ca0868">setAsDependent</a>(<a class="code" href="classinstruction.html">instruction</a>* ins);
-<a name="l00079"></a>00079                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aee7e55cf32812b46267a22bcb53da670">setAsAncestor</a>(<a class="code" href="classinstruction.html">instruction</a>* ins);
-<a name="l00080"></a>00080                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab89bab28eb321e32fddfb44354c8245f">setAsRegAncestor</a>(<a class="code" href="classinstruction.html">instruction</a>* ins);
-<a name="l00081"></a>00081                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab21a5713ecebfd1b6b6c8aeed06e4679">dependencyTableCheck</a>(<a class="code" href="classdependencyTable.html">dependencyTable</a> *<a class="code" href="bkEnd_8cpp.html#ab1dae06b10269a1b683512c8ecb25def">depTables</a>);
-<a name="l00082"></a>00082                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ab367eab50dc74c47b70de127fc633c9b">isInsRepeated</a>(<a class="code" href="classinstruction.html">instruction</a>* ins, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>*ancestors);
-<a name="l00083"></a>00083                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a379cbb0fb6bbe15168c6eac05a37114f">setRdAddrSet</a>(set&lt;ADDR&gt; &amp;addrSet);
-<a name="l00084"></a>00084                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a8928d9fe638fd7307606fac71a31b681">setWrAddrSet</a>(set&lt;ADDR&gt; &amp;addrSet);
-<a name="l00085"></a>00085                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a2e29e3536ad20c65b6c7b76ba6e37ad8">getNumAncestors</a>();
-<a name="l00086"></a>00086                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#adb8073eb7167fc23a3c846db8129b068">getNumDependents</a>();
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088                 <span class="comment">/* Register Renaming */</span>
-<a name="l00089"></a>00089             <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a696b4ec387bfeb56d4266d08e7bb1627">renameWriteReg</a>(<span class="keywordtype">int</span> indx, <span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);                                                                                                                       
-<a name="l00090"></a>00090             <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae9760e334e7829c4f8504bc8436e2dfb">renameReadReg</a>(<span class="keywordtype">int</span> indx, <span class="keywordtype">long</span> <span class="keywordtype">int</span> renReg);                                                                                                           
-<a name="l00091"></a>00091             <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a35b2a3db2dc9a22bbdcbce797d510c85">getRenamedReg</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);                                                                                                                    
-<a name="l00092"></a>00092             <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a8d938a7c74c2bd36d0e5565cf933d9d5">isRepeated</a>(<a class="code" href="classinstruction.html">instruction</a>* temp, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>*ancestors);                                                                                        
-<a name="l00093"></a>00093                 
-<a name="l00094"></a>00094                 <span class="comment">/* BB/PB Related */</span>
-<a name="l00095"></a>00095                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#adc11181683114bd444eff11f1a810c89">isLongestPathSet</a>();
-<a name="l00096"></a>00096                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#af4d93f837096be4e0dd2fe8951b1114e">getLongestPath</a>();
-<a name="l00097"></a>00097                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#af6d861b0ad792c3136431c3ef99509ba">resetLongestPath</a>();
-<a name="l00098"></a>00098                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a46127cea18a5a4ec73566038a2454ecf">setLongestPath</a>(<span class="keywordtype">int</span> longestPath);
-<a name="l00099"></a>00099                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#af78c579e9c3b74dfc72c5bbfb573deab">setMy_BBorPB_id</a> (<a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <span class="keywordtype">id</span>);
-<a name="l00100"></a>00100                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <a class="code" href="classinstruction.html#aee7e5e20a8bbb42a9efe26289a40eb89">getMy_BB_id</a>();
-<a name="l00101"></a>00101                 set&lt;ADDR&gt; <a class="code" href="classinstruction.html#a0e94c2270b46d453299f66a72b7c80de">getMy_PB_id</a>();
-<a name="l00102"></a>00102                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> <a class="code" href="classinstruction.html#a36e1dd2192e97d1c771be8d0f0779d8c">getMy_first_PB_id</a>();
-<a name="l00103"></a>00103                 
-<a name="l00104"></a>00104                 <span class="comment">/* Reg Allocation */</span>
-<a name="l00105"></a>00105                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a729d403d579a7f910a6ebfd6500ad5e9">allocatedRegister</a>(<span class="keywordtype">long</span> <span class="keywordtype">int</span> r_allocated, <a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">regKind</a> rk);
-<a name="l00106"></a>00106                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ab5e9dd71fbc48781b528341a9a371a95">isAlreadyAssignedArcRegs</a>();
-<a name="l00107"></a>00107                 
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109         <span class="keyword">private</span>:
-<a name="l00110"></a>00110                 <span class="keywordtype">char</span> _opCode[<a class="code" href="binaryTranslator_2global_8h.html#a39e5885c044e32ec0145024bd99c1594">OPCODE_STRING_SIZE</a>];
-<a name="l00111"></a>00111                 <span class="keywordtype">char</span> _command[<a class="code" href="binaryTranslator_2global_8h.html#a2d7378feb9600bfab350b59ffa442991">INS_STRING_SIZE</a>];
-<a name="l00112"></a>00112         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r;  <span class="comment">//SSA Register List</span>
-<a name="l00113"></a>00113         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_read;  <span class="comment">//SSA Register List</span>
-<a name="l00114"></a>00114         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_write;  <span class="comment">//SSA Register List</span>
-<a name="l00115"></a>00115         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_write_old;  <span class="comment">//SSA Register List (not renamed by SSA)</span>
-<a name="l00116"></a>00116         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_allocated;  <span class="comment">//Register List</span>
-<a name="l00117"></a>00117         <a class="code" href="classList.html">List&lt;int&gt;</a> *_rt; <span class="comment">//Register Type List</span>
-<a name="l00118"></a>00118                 <a class="code" href="classList.html">List&lt;regKind&gt;</a> *_rk; <span class="comment">//Register Kind (LRF=0 vs. GRF=1)</span>
-<a name="l00119"></a>00119                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#ac1dd06cf09542ab004237f1dddd1da02">_ancestors</a>;
-<a name="l00120"></a>00120                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#a50304cae9052c65b138274a96edfbca0">_dependents</a>;
-<a name="l00121"></a>00121                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _regAncestors;
-<a name="l00122"></a>00122                 map&lt;int,int&gt; _readVar;
-<a name="l00123"></a>00123                 map&lt;int,int&gt; _writeVar;
-<a name="l00124"></a>00124                 map&lt;long int,long int&gt; writeRegRenMap;
-<a name="l00125"></a>00125             map&lt;long int,long int&gt; readRegRenMap;
-<a name="l00126"></a>00126         set&lt;ADDR&gt; _memRdAddr;
-<a name="l00127"></a>00127         set&lt;ADDR&gt; _memWrAddr;
-<a name="l00128"></a>00128                 set&lt;ADDR&gt; _myBBs;
-<a name="l00129"></a>00129                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> _insAddr;
-<a name="l00130"></a>00130                 <a class="code" href="binaryTranslator_2global_8h.html#aa4557b0650cb21e57e3e4623410832c6">ADDR</a> _brDst;
-<a name="l00131"></a>00131                 <span class="keywordtype">int</span> _latency;
-<a name="l00132"></a>00132                 <span class="keywordtype">int</span> _memSize;
-<a name="l00133"></a>00133                 <span class="keywordtype">int</span> _longestPath;
-<a name="l00134"></a>00134                 <span class="keywordtype">bool</span> _memRead;
-<a name="l00135"></a>00135                 <span class="keywordtype">bool</span> _memWrite;
-<a name="l00136"></a>00136                 <span class="keywordtype">char</span> _insType;
-<a name="l00137"></a>00137                 <span class="keywordtype">double</span> _brBias;
-<a name="l00138"></a>00138                 <span class="keywordtype">double</span> _bpAccuracy;
-<a name="l00139"></a>00139                 <span class="keywordtype">double</span> _missRate;
-<a name="l00140"></a>00140 };
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142 <span class="preprocessor">#endif</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;algorithm&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;sstream&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;set&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;map&gt;</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;list.h&quot;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;global.h&quot;</span>
+<a name="l00022"></a>00022 <span class="comment">// #include &quot;registerRename.h&quot;</span>
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="keyword">class </span><a class="code" href="classdependencyTable.html">dependencyTable</a>; <span class="comment">/*USED IN ANOTHER VERSION OF C COMPILER*/</span>
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="classinstruction.html">00026</a> <span class="keyword">class </span><a class="code" href="classinstruction.html">instruction</a> {
+<a name="l00027"></a>00027         <span class="keyword">public</span>:
+<a name="l00028"></a>00028                 <a class="code" href="classinstruction.html#a2e0bfed549166dbfa1ce77ec084ea310">instruction</a> ();
+<a name="l00029"></a>00029                 <a class="code" href="classinstruction.html#a4f9c54b6376cf77565179728fa6f68fa">~instruction</a> ();
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a7a4adbec8d2e9a2cb6090168530e336c">setOpCode</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> *);
+<a name="l00032"></a>00032                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#affb2525016712f3bac93120d4d81961d">setInsAddr</a> (<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>);
+<a name="l00033"></a>00033                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a3ee6f1e5c349643f6734df78619c86f9">setInsDstAddr</a> (<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <span class="keywordtype">bool</span>);
+<a name="l00034"></a>00034                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab0119dd691b88e7cedb51d4f48c829a9">setInsFallThruAddr</a> (<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>, <span class="keywordtype">bool</span>);
+<a name="l00035"></a>00035                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a7cd565022bab4e05dfe1e0b4637731d5">setInsDst</a> (<a class="code" href="classinstruction.html">instruction</a>*);
+<a name="l00036"></a>00036                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#afb8fdf4968223005eaf2eb18709f2ce5">setInsFallThru</a> (<a class="code" href="classinstruction.html">instruction</a>*);
+<a name="l00037"></a>00037                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae28df36b635c5359fa48a6476eebc425">setInsAsm</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> *);
+<a name="l00038"></a>00038                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aa6ff7d5323483cf18c10687ed8c1dc73">setType</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>);
+<a name="l00039"></a>00039                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aabc818127836c8403b9c691985ca6d14">setBrTakenBias</a> (<span class="keywordtype">double</span> brBias);
+<a name="l00040"></a>00040                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a613fd5dcaabf9a68596545679b17ffd8">setBPaccuracy</a> (<span class="keywordtype">double</span> bpAccuracy);
+<a name="l00041"></a>00041                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a5052a04bf5db0d0e1519eb54f343bdc6">setLdMissRate</a> (<span class="keywordtype">double</span> missRate);
+<a name="l00042"></a>00042                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a456de8aa26ff79d2b7cd203f7c59f2cb">setRegister</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> *r, <span class="keywordtype">int</span> *rt);
+<a name="l00043"></a>00043                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a3623f439924f86cba8f9e115e19e7514">setSSAregister</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> *r, <span class="keywordtype">int</span> *rt);
+<a name="l00044"></a>00044                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae171d8892a0c330d2fa475346e321724">setSpecialRegister</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> *r, <span class="keywordtype">int</span> *rt);
+<a name="l00045"></a>00045                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a093ff19f17baaf84d4539ea395468265">setReadVar</a> (<span class="keywordtype">int</span> var, <span class="keywordtype">int</span> subscript);
+<a name="l00046"></a>00046                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a67c584522eaa68d46a495170ce8a3bbd">setWriteVar</a> (<span class="keywordtype">int</span> var, <span class="keywordtype">int</span> subscript);
+<a name="l00047"></a>00047                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a8e201444f39b8a779022284e280fdf23">setArchReg</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> r);
+<a name="l00048"></a>00048                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a1a85e010b731e20bcd25310a26eabd98">setWrMemType</a> ();
+<a name="l00049"></a>00049                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a0d47af8822438b6e838c08dbd31cc02c">setRdMemType</a> ();
+<a name="l00050"></a>00050                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab36280a1a2cd3339e45c8271deaa23d0">setMemAccessSize</a> (<span class="keywordtype">int</span> memSize); <span class="comment">//in bytes</span>
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052                 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classinstruction.html#a47d6ca18417d4f185495eb9be2844f07">getOpCode</a> ();
+<a name="l00053"></a>00053                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aadbc60fe35dec68a1a8589cfc9fcc022">resetInsDst</a> ();
+<a name="l00054"></a>00054                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ac796f0f05fa4011d7c05c2155020c5bb">resetInsFallThru</a> ();
+<a name="l00055"></a>00055                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classinstruction.html#ac1fabe854c85726785052c7a5ebf6d39">getInsAddr</a> ();
+<a name="l00056"></a>00056                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classinstruction.html#a600fd1454a34eca9a64057e3c019a795">getInsDstAddr</a> ();
+<a name="l00057"></a>00057                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classinstruction.html#a6b94ce0e75e6676de23c2a87a19eecd3">getInsFallThruAddr</a> ();
+<a name="l00058"></a>00058                 <a class="code" href="classinstruction.html">instruction</a>* <a class="code" href="classinstruction.html#a989b1f1fcfe6b80e1566f035e408b03d">getInsFallThru</a> ();
+<a name="l00059"></a>00059                 <a class="code" href="classinstruction.html">instruction</a>* <a class="code" href="classinstruction.html#a1e19a31455d12c43d0f48d071f3e0e5c">getInsDst</a> ();
+<a name="l00060"></a>00060                 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classinstruction.html#a9404c158382339e863846837c9b252aa">getInsAsm</a> ();
+<a name="l00061"></a>00061                 <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="classinstruction.html#a47623362d505a662b974624f81288389">getType</a> ();
+<a name="l00062"></a>00062                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#ac2be260e8fce5e0615bd68bed97cb591">getBrTakenBias</a> ();
+<a name="l00063"></a>00063                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#a023333937041baf6bc2985c94f88c9e5">getBPaccuracy</a> ();
+<a name="l00064"></a>00064                 <span class="keywordtype">double</span> <a class="code" href="classinstruction.html#a14d57791b666452fdb91973e35c39c2e">getLdMissRate</a> ();
+<a name="l00065"></a>00065                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a842fd50e52a3e3d31fcf8b7a180a32bd">getLatency</a> ();
+<a name="l00066"></a>00066                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a9701f53aafaf1b2298378665059cef33">getNthRegType</a> (<span class="keywordtype">int</span> i);
+<a name="l00067"></a>00067                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a4210fe4a5a94f67cdcd7c25075e8f23b">getNthSpecialRegType</a> (<span class="keywordtype">int</span> i);
+<a name="l00068"></a>00068                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a54412da0ee022e05101d4fb92ee879b9">getNthReg</a> (<span class="keywordtype">int</span> i);
+<a name="l00069"></a>00069                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a9f05970767f31d158fdb6beb0ae6a3df">getNthSpecialReg</a> (<span class="keywordtype">int</span> i);
+<a name="l00070"></a>00070         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aa52dbeed6a59d58a132a885cfabc70fb">replaceWriteArchReg</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span>, <span class="keywordtype">long</span> <span class="keywordtype">int</span>);
+<a name="l00071"></a>00071                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7d49a66c0f3b426f1cf8fd335a5f3b6a">getNthArchReg</a> (<span class="keywordtype">int</span> indx);
+<a name="l00072"></a>00072                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#ad7dce7bff9bfecd11b0e7119738d0994">getNthOldWriteReg</a> (<span class="keywordtype">int</span> i);
+<a name="l00073"></a>00073                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a0a5ddbb986096245d7742472c49d14b2">getNthReadReg</a> (<span class="keywordtype">int</span> i);
+<a name="l00074"></a>00074                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a29e8de9d3cd22cee464512f9bbc1972c">getNthWriteReg</a> (<span class="keywordtype">int</span> i);
+<a name="l00075"></a>00075                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aabb46003e886f87cd3bc918f05a3682f">removeNthRegister</a> (<span class="keywordtype">int</span> i);
+<a name="l00076"></a>00076                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#af64e1265e882da7e152bd47cb7794c3b">getNumReg</a> ();
+<a name="l00077"></a>00077                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#ae0a1ee97e6ba7920c41dd35f97b1715a">getNumReadReg</a> ();
+<a name="l00078"></a>00078                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a293a8975be22485ec002ef7cc0466d0a">getNumWriteReg</a> ();
+<a name="l00079"></a>00079                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a123544344e4578778985e3b6a34dea8c">getNumSpecialReg</a> ();
+<a name="l00080"></a>00080                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7824d148fcdeb6a1b7cafd68a7ce99ef">getReadRegSubscript</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> var);
+<a name="l00081"></a>00081                 <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a1253eafd0173b6daef17fed2311c6bcf">getWriteRegSubscript</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> var);
+<a name="l00082"></a>00082                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae406e3e00f408b7b54510867c88b1b5d">makeUniqueRegs</a> ();
+<a name="l00083"></a>00083                 <span class="keywordtype">string</span> <a class="code" href="classinstruction.html#acd4f756120e0bd6cdb127715c295a5e7">getRegisterStr</a> (); <span class="comment">//legacy code</span>
+<a name="l00084"></a>00084                 <span class="keywordtype">string</span> <a class="code" href="classinstruction.html#a4cbd72801622336cca5bf1061f3cda6a">getArchRegisterStr</a> ();
+<a name="l00085"></a>00085                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a7811c2dd5418e30c53d2da2460e0d47c">getMemAccessSize</a> (); <span class="comment">//in bytes</span>
+<a name="l00086"></a>00086                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#abf5f8947b16c91c4e21b82bec378008f">isRdMemType</a> ();
+<a name="l00087"></a>00087                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a0eab1a0a392f17d7ec46e6dbf1ce21fb">isWrMemType</a> ();
+<a name="l00088"></a>00088                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ac0f0a724c1207fd9c2aad8897f3c9842">hasDst</a> ();
+<a name="l00089"></a>00089                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a2d7b01a0443263782d84906eb8c35ccc">hasFallThru</a> ();
+<a name="l00090"></a>00090                 
+<a name="l00091"></a>00091                 <span class="comment">/* DEPENDENCY CHECKING METHODS */</span>
+<a name="l00092"></a>00092                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#ad1af63e7f1bfa160b0719027c2a0b8ce">getDependents</a> ();
+<a name="l00093"></a>00093                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#af6165d6c8ba00c6806eda36e36cb3366">getAncestors</a> ();
+<a name="l00094"></a>00094                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* <a class="code" href="classinstruction.html#a90450afccd1b4b07bd28b2ee8aabdf6d">getRegAncestors</a> ();
+<a name="l00095"></a>00095                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab2ba6828f1256186a787d933a6ca0868">setAsDependent</a> (<a class="code" href="classinstruction.html">instruction</a>* ins);
+<a name="l00096"></a>00096                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aee7e55cf32812b46267a22bcb53da670">setAsAncestor</a> (<a class="code" href="classinstruction.html">instruction</a>* ins);
+<a name="l00097"></a>00097                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab89bab28eb321e32fddfb44354c8245f">setAsRegAncestor</a> (<a class="code" href="classinstruction.html">instruction</a>* ins);
+<a name="l00098"></a>00098                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab21a5713ecebfd1b6b6c8aeed06e4679">dependencyTableCheck</a> (<a class="code" href="classdependencyTable.html">dependencyTable</a> *depTables);
+<a name="l00099"></a>00099                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ab367eab50dc74c47b70de127fc633c9b">isInsRepeated</a> (<a class="code" href="classinstruction.html">instruction</a>* ins, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>*ancestors);
+<a name="l00100"></a>00100                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a379cbb0fb6bbe15168c6eac05a37114f">setRdAddrSet</a> (set&lt;ADDR&gt; &amp;addrSet);
+<a name="l00101"></a>00101                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a8928d9fe638fd7307606fac71a31b681">setWrAddrSet</a> (set&lt;ADDR&gt; &amp;addrSet);
+<a name="l00102"></a>00102                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a2e29e3536ad20c65b6c7b76ba6e37ad8">getNumAncestors</a> ();
+<a name="l00103"></a>00103                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#adb8073eb7167fc23a3c846db8129b068">getNumDependents</a> ();
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105         <span class="comment">/* UPLD DEPENDENCE */</span>
+<a name="l00106"></a>00106         <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a65493a2688efea847fc17e08df019af9">isUPLDdep</a> ();
+<a name="l00107"></a>00107         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a9e341ec4d383ed7a70104164904651f2">setUPLDdep</a> ();
+<a name="l00108"></a>00108         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#adcf44cfcb7a8c267da71a1ef7b2f4b91">setUPLDins</a> ();
+<a name="l00109"></a>00109         <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ab54ef1118b6422bd1f953b9244b64f10">updateUPLDbit</a> ();
+<a name="l00110"></a>00110         <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a4e7c293557754da06684c7b04c4aaf5c">isUPLD</a> ();
+<a name="l00111"></a>00111         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#abce03a3d46f53f28cdeed1f77638e74f">assignUPLDroot</a> (<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a>);
+<a name="l00112"></a>00112         set&lt;ADDR&gt; <a class="code" href="classinstruction.html#a31ab0646fc31903f5b192cfc5b7e3aa8">getUPLDroots</a> ();
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114                 <span class="comment">/* REGISTER RENAMING */</span>
+<a name="l00115"></a>00115             <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aabd61e186e80af7dd343e0f142741ed6">renameWriteReg</a> (<span class="keywordtype">int</span> indx, <span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);                                                                                                                       
+<a name="l00116"></a>00116             <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ae9760e334e7829c4f8504bc8436e2dfb">renameReadReg</a> (<span class="keywordtype">int</span> indx, <span class="keywordtype">long</span> <span class="keywordtype">int</span> renReg);                                                                                                           
+<a name="l00117"></a>00117             <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a35b2a3db2dc9a22bbdcbce797d510c85">getRenamedReg</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);                                                                                                                    
+<a name="l00118"></a>00118             <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a8d938a7c74c2bd36d0e5565cf933d9d5">isRepeated</a> (<a class="code" href="classinstruction.html">instruction</a>* temp, <a class="code" href="classList.html">List&lt;instruction*&gt;</a>*ancestors);                                                                                        
+<a name="l00119"></a>00119                 
+<a name="l00120"></a>00120                 <span class="comment">/* BB/PB RELATED */</span>
+<a name="l00121"></a>00121                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#adc11181683114bd444eff11f1a810c89">isLongestPathSet</a> ();
+<a name="l00122"></a>00122                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#af4d93f837096be4e0dd2fe8951b1114e">getLongestPath</a> ();
+<a name="l00123"></a>00123                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#af6d861b0ad792c3136431c3ef99509ba">resetLongestPath</a> ();
+<a name="l00124"></a>00124                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a46127cea18a5a4ec73566038a2454ecf">setLongestPath</a> (<span class="keywordtype">int</span> longestPath);
+<a name="l00125"></a>00125                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#af78c579e9c3b74dfc72c5bbfb573deab">setMy_BBorPB_id</a> (<a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <span class="keywordtype">id</span>);
+<a name="l00126"></a>00126                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aba1a4de7cc3e25e0090c69c51b15d6b4">resetMy_BBorPB_id</a> ();
+<a name="l00127"></a>00127                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classinstruction.html#aee7e5e20a8bbb42a9efe26289a40eb89">getMy_BB_id</a> ();
+<a name="l00128"></a>00128                 set&lt;ADDR&gt; <a class="code" href="classinstruction.html#a0e94c2270b46d453299f66a72b7c80de">getMy_PB_id</a> ();
+<a name="l00129"></a>00129                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> <a class="code" href="classinstruction.html#a36e1dd2192e97d1c771be8d0f0779d8c">getMy_first_PB_id</a> ();
+<a name="l00130"></a>00130                 
+<a name="l00131"></a>00131                 <span class="comment">/* REG ALLOCATION */</span>
+<a name="l00132"></a>00132                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a729d403d579a7f910a6ebfd6500ad5e9">allocatedRegister</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> r_allocated, <a class="code" href="binaryTranslator_2global_8h.html#a8981b18ef48c0d2dbf747e5e63e46038">regKind</a> rk);
+<a name="l00133"></a>00133                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#ab5e9dd71fbc48781b528341a9a371a95">isAlreadyAssignedArcRegs</a> ();
+<a name="l00134"></a>00134                 
+<a name="l00135"></a>00135                 <span class="comment">/* DATA-FLOW ANALYSIS */</span>
+<a name="l00136"></a>00136     <span class="keyword">private</span>:
+<a name="l00137"></a>00137                 <span class="keywordtype">void</span> replaceDefSetElem (<span class="keywordtype">long</span> <span class="keywordtype">int</span>, <span class="keywordtype">long</span> <span class="keywordtype">int</span>);
+<a name="l00138"></a>00138                 <span class="keywordtype">void</span> replaceUseSetElem (<span class="keywordtype">long</span> <span class="keywordtype">int</span>, <span class="keywordtype">long</span> <span class="keywordtype">int</span>);
+<a name="l00139"></a>00139                 <span class="keywordtype">void</span> updateDefSet (<span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);
+<a name="l00140"></a>00140                 <span class="keywordtype">void</span> updateUseSet (<span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);
+<a name="l00141"></a>00141                 <span class="keywordtype">void</span> updateLocalRegSet ();
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143     <span class="keyword">public</span>:
+<a name="l00144"></a>00144         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a7c5699deabae9d06e77ca5f9a6368e1b">setup_locGlbUseSet</a> (set&lt;long int&gt;&amp;);
+<a name="l00145"></a>00145         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ab4d650144a6a91370a440977b6c67a9a">setup_locGlbDefSet</a> (set&lt;long int&gt;&amp;);
+<a name="l00146"></a>00146         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a33901636d2350a413a4d245f6d16e6a6">update_locGlbSet</a> (set&lt;long int&gt;&amp;, std::map&lt;int, long int&gt;&amp;, std::map&lt;int, long int&gt;&amp;, <span class="keywordtype">int</span>);
+<a name="l00147"></a>00147         set&lt;long int&gt; <a class="code" href="classinstruction.html#ae25624ad14ee474a22819a8831732ec6">setup_locToGlbUseSet</a> (set&lt;long int&gt;&amp;, set&lt;long int&gt;&amp;);
+<a name="l00148"></a>00148         set&lt;long int&gt; <a class="code" href="classinstruction.html#a057247b6632a4fa3eb672d7b7bcb85b1">setup_locToGlbDefSet</a> (set&lt;long int&gt;&amp;);
+<a name="l00149"></a>00149         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a8c177bf836da2d16fca731375b07fc35">update_locToGlbSet</a> (set&lt;long int&gt;&amp;, std::map&lt;int, long int&gt;&amp;, std::map&lt;int, long int&gt;&amp;, <span class="keywordtype">int</span>);
+<a name="l00150"></a>00150         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#af50b9f329ee94315d1fbff3a151cbd45">setupLocSet</a> (<a class="code" href="binaryTranslator_2global_8h.html#ae3190c0c46d1384e80f94a61ad275092">PUSH_LOCATION</a>);
+<a name="l00151"></a>00151                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a173a23e5f292232055dec69475b3fd92">update_InOutSet</a> (<a class="code" href="binaryTranslator_2global_8h.html#a78dd04e0a4364ff551d83095f9bc0264">REG_ALLOC_MODE</a>, set&lt;long int&gt;&amp;, <span class="keywordtype">bool</span>);
+<a name="l00152"></a>00152         set&lt;long int&gt; <a class="code" href="classinstruction.html#aaba4ffcf984873d13a0ecea71a0ebad3">update_locToGlb</a> (set&lt;long int&gt;&amp;, set&lt;long int&gt;&amp;);
+<a name="l00153"></a>00153         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#a7c577242cd5b190a00a9f433222b8e0b">resetSets</a> ();
+<a name="l00154"></a>00154                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#ad8aba4b11bc32a8e52866c79c8dc47e6">setupDefUseSets</a> ();
+<a name="l00155"></a>00155                 <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#aac67c9bd51efdf37963fbfc5da8fb737">renameAllInsRegs</a> ();
+<a name="l00156"></a>00156                 set&lt;long int&gt; <a class="code" href="classinstruction.html#ab9bf2478b915e5b209d671afd85f0519">getInSet</a> ();
+<a name="l00157"></a>00157                 set&lt;long int&gt; <a class="code" href="classinstruction.html#adf7cb55183c08b9f5a04d798847e2564">getOutSet</a> ();
+<a name="l00158"></a>00158                 set&lt;long int&gt; <a class="code" href="classinstruction.html#a3dcec0ff81cf6877120874d4f81d3f96">getUseSet</a> ();
+<a name="l00159"></a>00159                 set&lt;long int&gt; <a class="code" href="classinstruction.html#a20123ce67f40f03e304b71660a69ae37">getDefSet</a> ();
+<a name="l00160"></a>00160                 set&lt;long int&gt; <a class="code" href="classinstruction.html#aea1abd278018fcde9421574191dff2be">getLocalRegSet</a> ();
+<a name="l00161"></a>00161                 <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a81b2460340a76935143e7dc03a8be7da">isInLocalRegSet</a> (<span class="keywordtype">long</span> <span class="keywordtype">int</span> reg);
+<a name="l00162"></a><a class="code" href="classinstruction.html#a387c647a12b4ce2a04d01fdc92d9f87a">00162</a>                 <span class="keywordtype">int</span> <a class="code" href="classinstruction.html#a387c647a12b4ce2a04d01fdc92d9f87a">getLiveVarSize</a> () { <span class="keywordflow">return</span> _inSet.size ()+_defSet.size (); }
+<a name="l00163"></a>00163         <span class="keywordtype">void</span> <a class="code" href="classinstruction.html#acd7b6fdbe6803ae7cddfc81c9afa9c50">setInsertedMovOp</a> ();
+<a name="l00164"></a>00164         <span class="keywordtype">bool</span> <a class="code" href="classinstruction.html#a0e1d97e3a863986a9691164517b155b8">isInsertedMovOp</a> ();
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167         <span class="keyword">private</span>:
+<a name="l00168"></a>00168                 <span class="keywordtype">char</span> _opCode[<a class="code" href="binaryTranslator_2global_8h.html#a39e5885c044e32ec0145024bd99c1594">OPCODE_STRING_SIZE</a>];
+<a name="l00169"></a>00169                 <span class="keywordtype">char</span> _command[<a class="code" href="binaryTranslator_2global_8h.html#a2d7378feb9600bfab350b59ffa442991">INS_STRING_SIZE</a>];
+<a name="l00170"></a>00170                 set&lt;ADDR&gt; _myBBs;
+<a name="l00171"></a>00171                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> _insAddr;
+<a name="l00172"></a>00172         <span class="keywordtype">bool</span> _upld_dep;
+<a name="l00173"></a>00173         <span class="keywordtype">bool</span> _upld_ins;
+<a name="l00174"></a>00174         set&lt;ADDR&gt; _upld_roots;
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176         <span class="comment">/* REGS */</span>
+<a name="l00177"></a>00177         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r; <span class="comment">//SSA REGISTER LIST</span>
+<a name="l00178"></a>00178         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_sr; <span class="comment">//SPECIAL REGISTER LIST</span>
+<a name="l00179"></a>00179         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_read; <span class="comment">//SSA REGISTER LIST</span>
+<a name="l00180"></a>00180         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_write; <span class="comment">//SSA REGISTER LIST</span>
+<a name="l00181"></a>00181         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_write_old; <span class="comment">//SSA REGISTER LIST (NOT RENAMED BY SSA)</span>
+<a name="l00182"></a>00182         <a class="code" href="classList.html">List&lt;long int&gt;</a> *_r_allocated; <span class="comment">//REGISTER LIST</span>
+<a name="l00183"></a>00183         <a class="code" href="classList.html">List&lt;int&gt;</a> *_rt; <span class="comment">//REGISTER TYPE LIST</span>
+<a name="l00184"></a>00184         <a class="code" href="classList.html">List&lt;int&gt;</a> *_srt; <span class="comment">//SPECIAL REGISTER TYPE LIST</span>
+<a name="l00185"></a>00185                 <a class="code" href="classList.html">List&lt;regKind&gt;</a> *_rk; <span class="comment">//REGISTER KIND (LRF=0 VS. GRF=1)</span>
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187         <span class="comment">/* DATA DEPENDENCIES */</span>
+<a name="l00188"></a>00188                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _ancestors;
+<a name="l00189"></a>00189                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _dependents;
+<a name="l00190"></a>00190                 <a class="code" href="classList.html">List&lt;instruction*&gt;</a>* _regAncestors;
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192         <span class="comment">/* SSA */</span>
+<a name="l00193"></a>00193                 map&lt;int,int&gt; _readVar;
+<a name="l00194"></a>00194                 map&lt;int,int&gt; _writeVar;
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196         <span class="comment">/* MEM */</span>
+<a name="l00197"></a>00197                 map&lt;long int,long int&gt; writeRegRenMap;
+<a name="l00198"></a>00198             map&lt;long int,long int&gt; readRegRenMap;
+<a name="l00199"></a>00199         set&lt;ADDR&gt; _memRdAddr;
+<a name="l00200"></a>00200         set&lt;ADDR&gt; _memWrAddr;
+<a name="l00201"></a>00201                 <span class="keywordtype">int</span> _memSize;
+<a name="l00202"></a>00202                 <span class="keywordtype">bool</span> _memRead;
+<a name="l00203"></a>00203                 <span class="keywordtype">bool</span> _memWrite;
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205         <span class="comment">/* NEXT INS&#39;s */</span>
+<a name="l00206"></a>00206                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> _insDstAddr;
+<a name="l00207"></a>00207                 <a class="code" href="binaryTranslator_2global_8h.html#a8bb6b77b3aab51e3a8d1866dd5861225">ADDR</a> _insFallThruAddr;
+<a name="l00208"></a>00208                 <a class="code" href="classinstruction.html">instruction</a>* _insDst;
+<a name="l00209"></a>00209                 <a class="code" href="classinstruction.html">instruction</a>* _insFallThru;
+<a name="l00210"></a>00210                 <span class="keywordtype">bool</span> _hasDst;
+<a name="l00211"></a>00211                 <span class="keywordtype">bool</span> _hasFallThru;
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213         <span class="comment">/* SCHEDULING */</span>
+<a name="l00214"></a>00214                 <span class="keywordtype">int</span> _latency;
+<a name="l00215"></a>00215                 <span class="keywordtype">int</span> _longestPath;
+<a name="l00216"></a>00216                 <span class="keywordtype">char</span> _insType;
+<a name="l00217"></a>00217                 <span class="keywordtype">double</span> _brBias;
+<a name="l00218"></a>00218                 <span class="keywordtype">double</span> _bpAccuracy;
+<a name="l00219"></a>00219                 <span class="keywordtype">double</span> _missRate;
+<a name="l00220"></a>00220         <a class="code" href="binaryTranslator_2global_8h.html#a2537f310abf2bbaaa7f5f9f3c44b62ec">MEM_SCH_MODE</a> _mem_sch_mode;
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222         <span class="comment">/* INSETED MOV BY THIS COMPILER */</span>
+<a name="l00223"></a>00223         <span class="keywordtype">bool</span> _is_inserted_mov_op;
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225         <span class="comment">/* LIVENESS */</span>
+<a name="l00226"></a>00226                 std::set&lt;long int&gt; _useSet;
+<a name="l00227"></a>00227                 std::set&lt;long int&gt; _defSet;
+<a name="l00228"></a>00228                 std::set&lt;long int&gt; _inSet;
+<a name="l00229"></a>00229                 std::set&lt;long int&gt; _outSet;
+<a name="l00230"></a>00230                 std::set&lt;long int&gt; _localRegSet;
+<a name="l00231"></a>00231                 std::set&lt;long int&gt; _bbUseSet;
+<a name="l00232"></a>00232                 std::set&lt;long int&gt; _bbDefSet;
+<a name="l00233"></a>00233                 std::set&lt;long int&gt; _insLocDefSet;
+<a name="l00234"></a>00234                 std::set&lt;long int&gt; _insMultiUseSet;
+<a name="l00235"></a>00235 };
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -210,7 +305,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -219,7 +314,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

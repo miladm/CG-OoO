@@ -173,8 +173,8 @@ Public Member Functions</h2></td></tr>
       instShiftAmt(_instShiftAmt),
       fetchWidth(_fetchWidth)
 {
-    <span class="keywordflow">if</span> (!isPowerOf2(localPredictorSize)) {
-        fatal(<span class="stringliteral">&quot;Invalid local predictor size!\n&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(localPredictorSize)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Invalid local predictor size!\n&quot;</span>);
     }
 
     <span class="comment">//Setup the array of counters for the local predictor</span>
@@ -185,8 +185,8 @@ Public Member Functions</h2></td></tr>
 
     <span class="comment">//localPredictorMask = floorPow2(localPredictorSize) - 1;</span>
 
-    <span class="keywordflow">if</span> (!isPowerOf2(globalPredictorSize)) {
-        fatal(<span class="stringliteral">&quot;Invalid global predictor size!\n&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(globalPredictorSize)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Invalid global predictor size!\n&quot;</span>);
     }
 
     <span class="comment">//Setup the array of counters for the global predictor</span>
@@ -200,8 +200,8 @@ Public Member Functions</h2></td></tr>
     <span class="comment">// Setup the global history mask</span>
     globalHistoryMask = (1 &lt;&lt; globalHistoryBits) - 1;
 
-    <span class="keywordflow">if</span> (!isPowerOf2(choicePredictorSize)) {
-        fatal(<span class="stringliteral">&quot;Invalid choice predictor size!\n&quot;</span>);
+    <span class="keywordflow">if</span> (!<a class="code" href="intmath_8h.html#a4cb14d80e2dcc88ff8443e9420c26126">isPowerOf2</a>(choicePredictorSize)) {
+        <a class="code" href="util_8c.html#a0f652fc98ffe05ea6bf52ced076a02aa">fatal</a>(<span class="stringliteral">&quot;Invalid choice predictor size!\n&quot;</span>);
     }
 
     <span class="comment">//Setup the array of counters for the choice predictor</span>
@@ -214,9 +214,18 @@ Public Member Functions</h2></td></tr>
     threshold = (1 &lt;&lt; (localCtrBits - 1)) - 1;
 
         <span class="comment">//Shift amount is dependent on the fetch width and the instruction size in bytes</span>
-        totalInstShiftAmt = instShiftAmt + (unsigned)log2(fetchWidth);
+        totalInstShiftAmt = instShiftAmt + (unsigned)<a class="code" href="namespacearray.html#a4da2c69671f9dc2be88b1b8fdf0bf3b8">log2</a>(fetchWidth);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a7c16ca06091c02d049ec629439adc861_cgraph.png" border="0" usemap="#classHybridBP_a7c16ca06091c02d049ec629439adc861_cgraph" alt=""/></div>
+<map name="classHybridBP_a7c16ca06091c02d049ec629439adc861_cgraph" id="classHybridBP_a7c16ca06091c02d049ec629439adc861_cgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
@@ -244,7 +253,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Updates the branch predictor to Not Taken if a BTB entry is invalid or not found. </p>
+<p>Updates the branch predictor to Not Taken if a <a class="el" href="classBTB.html">BTB</a> entry is invalid or not found. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">branch_addr</td><td>The address of the branch to look up. </td></tr>
@@ -258,6 +267,15 @@ Public Member Functions</h2></td></tr>
     globalHistory = globalHistory &amp; (globalHistoryMask - 1);
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a89edda03644e8f68ff703b4452569186_icgraph.png" border="0" usemap="#classHybridBP_a89edda03644e8f68ff703b4452569186_icgraph" alt=""/></div>
+<map name="classHybridBP_a89edda03644e8f68ff703b4452569186_icgraph" id="classHybridBP_a89edda03644e8f68ff703b4452569186_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a198dcbee6554ca9471fba00734e31319"></a><!-- doxytag: member="HybridBP::computeChoiceIndex" ref="a198dcbee6554ca9471fba00734e31319" args="(Addr branch_addr, unsigned positionInFetchGroup)" -->
@@ -401,6 +419,15 @@ Here is the caller graph for this function:</div>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a42988126b43e89e1ec5fb5a1985a0a36_icgraph.png" border="0" usemap="#classHybridBP_a42988126b43e89e1ec5fb5a1985a0a36_icgraph" alt=""/></div>
+<map name="classHybridBP_a42988126b43e89e1ec5fb5a1985a0a36_icgraph" id="classHybridBP_a42988126b43e89e1ec5fb5a1985a0a36_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a057bdd611cf2f46e8465df5376a72efb"></a><!-- doxytag: member="HybridBP::histUpdate" ref="a057bdd611cf2f46e8465df5376a72efb" args="(Addr &amp;branch_addr, bool taken, void *bp_history, bool squashed)" -->
@@ -456,6 +483,15 @@ Here is the caller graph for this function:</div>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a057bdd611cf2f46e8465df5376a72efb_icgraph.png" border="0" usemap="#classHybridBP_a057bdd611cf2f46e8465df5376a72efb_icgraph" alt=""/></div>
+<map name="classHybridBP_a057bdd611cf2f46e8465df5376a72efb_icgraph" id="classHybridBP_a057bdd611cf2f46e8465df5376a72efb_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a6aef367656e0d8c3b964bfb4e69858fa"></a><!-- doxytag: member="HybridBP::lookup" ref="a6aef367656e0d8c3b964bfb4e69858fa" args="(Addr &amp;branch_addr, void *&amp;bp_history, unsigned positionInFetchGroup, bool onDemand, bool &amp;choice)" -->
@@ -679,6 +715,15 @@ Here is the call graph for this function:</div>
     <span class="keyword">delete</span> history;
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_aa69f90a513749a5ef74eb9e1bc2582a5_icgraph.png" border="0" usemap="#classHybridBP_aa69f90a513749a5ef74eb9e1bc2582a5_icgraph" alt=""/></div>
+<map name="classHybridBP_aa69f90a513749a5ef74eb9e1bc2582a5_icgraph" id="classHybridBP_aa69f90a513749a5ef74eb9e1bc2582a5_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a298bbbcf380b81292e158a5d880073d4"></a><!-- doxytag: member="HybridBP::uncondBr" ref="a298bbbcf380b81292e158a5d880073d4" args="(void *&amp;bp_history)" -->
@@ -722,6 +767,15 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classHybridBP_a298bbbcf380b81292e158a5d880073d4_cgraph.png" border="0" usemap="#classHybridBP_a298bbbcf380b81292e158a5d880073d4_cgraph" alt=""/></div>
 <map name="classHybridBP_a298bbbcf380b81292e158a5d880073d4_cgraph" id="classHybridBP_a298bbbcf380b81292e158a5d880073d4_cgraph">
+</map>
+</div>
+</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a298bbbcf380b81292e158a5d880073d4_icgraph.png" border="0" usemap="#classHybridBP_a298bbbcf380b81292e158a5d880073d4_icgraph" alt=""/></div>
+<map name="classHybridBP_a298bbbcf380b81292e158a5d880073d4_icgraph" id="classHybridBP_a298bbbcf380b81292e158a5d880073d4_icgraph">
 </map>
 </div>
 </p>
@@ -826,6 +880,15 @@ Here is the call graph for this function:</div>
     }
 }
 </pre></div>
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classHybridBP_a61c2bdd85d221b11539524613e2f4ca5_icgraph.png" border="0" usemap="#classHybridBP_a61c2bdd85d221b11539524613e2f4ca5_icgraph" alt=""/></div>
+<map name="classHybridBP_a61c2bdd85d221b11539524613e2f4ca5_icgraph" id="classHybridBP_a61c2bdd85d221b11539524613e2f4ca5_icgraph">
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="aa5cd12f887d1f51947dc37cdad283124"></a><!-- doxytag: member="HybridBP::updateGlobalHistNotTaken" ref="aa5cd12f887d1f51947dc37cdad283124" args="()" -->
@@ -898,7 +961,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -907,7 +970,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -7,4 +7,6 @@ digraph G
   Node2 [label="vector\< long int \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node3 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="bbList",fontname="Helvetica"];
   Node3 [label="List\< basicblock * \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classList.html"];
+  Node4 -> Node3 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="elems",fontname="Helvetica"];
+  Node4 [label="vector\< basicblock * \>",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
 }

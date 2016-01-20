@@ -81,7 +81,7 @@ Collaboration diagram for exeUnit:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#af9048405bad98db15cdefb05bf7b842c">exeUnit</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> <a class="el" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency, <a class="el" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> eu_type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#a119cfafaad440fc7fdca7a3665e5de65">exeUnit</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> start, <a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> latency, <a class="el" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a> eu_type, const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;root)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8">EU_STATE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#a739cfd78a98068a64fb2e807f49c4312">getEUstate</a> (<a class="el" href="global_2global_8h.html#a7e19a550ec11d1ed921deb20c22efb5b">CYCLE</a> now, bool limit_eu_state_access)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#a69498b2ca8353a14447a5596e768fc55">runEU</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#ad9a4840a6956e01419327ba3123683dd">setEUins</a> (<a class="el" href="classdynInstruction.html">dynInstruction</a> *ins)</td></tr>
@@ -92,7 +92,7 @@ Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtimer.html">timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="af9048405bad98db15cdefb05bf7b842c"></a><!-- doxytag: member="exeUnit::exeUnit" ref="af9048405bad98db15cdefb05bf7b842c" args="(CYCLE start, CYCLE latency, EU_TYPE eu_type)" -->
+<a class="anchor" id="a119cfafaad440fc7fdca7a3665e5de65"></a><!-- doxytag: member="exeUnit::exeUnit" ref="a119cfafaad440fc7fdca7a3665e5de65" args="(CYCLE start, CYCLE latency, EU_TYPE eu_type, const YAML::Node &amp;root)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -112,7 +112,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="exeUnit_8h.html#a8184e36081fa22a84c7488c1eaeb0f5d">EU_TYPE</a>&#160;</td>
-          <td class="paramname"><em>eu_type</em>&#160;</td>
+          <td class="paramname"><em>eu_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classYAML_1_1Node.html">YAML::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>root</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -122,8 +128,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a> (<a class="code" href="bkEnd_8cpp.html#ada310e7f72b38fadd4b24d80ed3438ee">start</a>, latency),
-          _eu_type (eu_type)
+<div class="fragment"><pre class="fragment">        : <a class="code" href="structexeUnit.html#a5dc187ea49bad94bbea24f18232500dd">_eu_timer</a> (start, latency),
+          _eu_type (eu_type),
+          _e_eu (<span class="stringliteral">&quot;EU&quot;</span>, root)
     {
         _eu_ins = NULL;
         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
@@ -147,15 +154,6 @@ Public Attributes</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> _eu_ins;}
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structexeUnit_a5414837e2e071fc0180c0326cc33370f_icgraph.png" border="0" usemap="#structexeUnit_a5414837e2e071fc0180c0326cc33370f_icgraph" alt=""/></div>
-<map name="structexeUnit_a5414837e2e071fc0180c0326cc33370f_icgraph" id="structexeUnit_a5414837e2e071fc0180c0326cc33370f_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a739cfd78a98068a64fb2e807f49c4312"></a><!-- doxytag: member="exeUnit::getEUstate" ref="a739cfd78a98068a64fb2e807f49c4312" args="(CYCLE now, bool limit_eu_state_access)" -->
@@ -195,7 +193,7 @@ Here is the caller graph for this function:</div>
             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>) {
                 _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;
             } <span class="keywordflow">else</span> {
-                <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;invalid EU state&quot;</span>);
+                <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (<span class="keyword">true</span> == <span class="keyword">false</span> &amp;&amp; <span class="stringliteral">&quot;invalid EU state&quot;</span>);
             }
             <span class="keywordflow">return</span> _eu_state;
         }
@@ -236,15 +234,6 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{_eu_ins = NULL; _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>;}
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structexeUnit_a31fd51a344347d96c9be688de8e0f97a_icgraph.png" border="0" usemap="#structexeUnit_a31fd51a344347d96c9be688de8e0f97a_icgraph" alt=""/></div>
-<map name="structexeUnit_a31fd51a344347d96c9be688de8e0f97a_icgraph" id="structexeUnit_a31fd51a344347d96c9be688de8e0f97a_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <a class="anchor" id="a69498b2ca8353a14447a5596e768fc55"></a><!-- doxytag: member="exeUnit::runEU" ref="a69498b2ca8353a14447a5596e768fc55" args="()" -->
@@ -261,15 +250,16 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                  {
-        <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>);
+        <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_state == <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8a6d8cd31475c379f1c6c1f5eed59d01ba">AVAILABLE_EU</a>);
         _eu_state = <a class="code" href="exeUnit_8h.html#ac578f59a761f9106ba1a8414e02ab6d8abaa88824a2aa0e2b7ca75d82b4bfd616">RUNNING_EU</a>;
+        _e_eu.<a class="code" href="classeu__energy.html#acccb63fcb43d3531d544a340ed352bdb">euAccess</a> ();
     }
 </pre></div>
 <p><div class="dynheader">
-Here is the caller graph for this function:</div>
+Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="structexeUnit_a69498b2ca8353a14447a5596e768fc55_icgraph.png" border="0" usemap="#structexeUnit_a69498b2ca8353a14447a5596e768fc55_icgraph" alt=""/></div>
-<map name="structexeUnit_a69498b2ca8353a14447a5596e768fc55_icgraph" id="structexeUnit_a69498b2ca8353a14447a5596e768fc55_icgraph">
+<div class="center"><img src="structexeUnit_a69498b2ca8353a14447a5596e768fc55_cgraph.png" border="0" usemap="#structexeUnit_a69498b2ca8353a14447a5596e768fc55_cgraph" alt=""/></div>
+<map name="structexeUnit_a69498b2ca8353a14447a5596e768fc55_cgraph" id="structexeUnit_a69498b2ca8353a14447a5596e768fc55_cgraph">
 </map>
 </div>
 </p>
@@ -290,17 +280,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <a class="code" href="backend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_ins == NULL); _eu_ins = ins;}
+<div class="fragment"><pre class="fragment">{ <a class="code" href="binaryTranslator_2frontend_2utility_8h.html#aab1e54dcc40192f9704e8b252635450f">Assert</a> (_eu_ins == NULL); _eu_ins = ins;}
 </pre></div>
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="structexeUnit_ad9a4840a6956e01419327ba3123683dd_icgraph.png" border="0" usemap="#structexeUnit_ad9a4840a6956e01419327ba3123683dd_icgraph" alt=""/></div>
-<map name="structexeUnit_ad9a4840a6956e01419327ba3123683dd_icgraph" id="structexeUnit_ad9a4840a6956e01419327ba3123683dd_icgraph">
-</map>
-</div>
-</p>
-
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
@@ -326,7 +307,7 @@ Here is the caller graph for this function:</div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -335,7 +316,7 @@ Here is the caller graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

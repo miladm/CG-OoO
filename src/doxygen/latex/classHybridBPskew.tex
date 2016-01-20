@@ -24,6 +24,36 @@ unsigned \hyperlink{classHybridBPskew_a4009eae987557a103d5846cd32e30333}{compute
 \item 
 unsigned \hyperlink{classHybridBPskew_a70b7b53463dd2cd4a6394266ea3c2ee3}{computeChoiceIndex} (Addr branch\_\-addr, unsigned positionInFetchGroup)
 \item 
+bool \hyperlink{classHybridBPskew_a27e2268df7da826fefe75f1a490bce11}{lookup} (Addr \&branch\_\-addr, void $\ast$\&bp\_\-history, unsigned positionInFetchGroup)
+\item 
+void \hyperlink{classHybridBPskew_a1dbffb30d1d0f0c4c8e6a8f1084e68e4}{uncondBr} (void $\ast$\&bp\_\-history)
+\item 
+void \hyperlink{classHybridBPskew_a5ceeff1b2e0cc39822346b1cd8fbab80}{BTBUpdate} (Addr \&branch\_\-addr, void $\ast$\&bp\_\-history)
+\item 
+void \hyperlink{classHybridBPskew_a4fb73465bf70ab821401f3d47e44fc91}{update} (Addr \&branch\_\-addr, bool taken, void $\ast$bp\_\-history, bool squashed)
+\item 
+void \hyperlink{classHybridBPskew_a5e73e9324e87d820712789f33100e5f4}{histUpdate} (Addr \&branch\_\-addr, bool taken, void $\ast$bp\_\-history, bool squashed)
+\item 
+void \hyperlink{classHybridBPskew_a4c3aa89615af200ad553461f20de8315}{histGarbageCollect} (void $\ast$bp\_\-history)
+\item 
+void \hyperlink{classHybridBPskew_a44db53115e8b3ccff2d9b7785c96f380}{squash} (void $\ast$bp\_\-history)
+\item 
+unsigned \hyperlink{classHybridBPskew_aa00b0494fe8fc804dd6ef9c1abf89c9d}{readGlobalHist} ()
+\item 
+void \hyperlink{classHybridBPskew_a9c1a201e37cbba10055ff63b9e072a69}{updateGlobalHistTaken} ()
+\item 
+void \hyperlink{classHybridBPskew_a07095043813d5f59978c0708efa58bd4}{updateGlobalHistNotTaken} ()
+\item 
+\hyperlink{classHybridBPskew_a039896cdd3566d98247bf7b871766cc9}{HybridBPskew} (unsigned localPredictorSize, unsigned localCtrBits, unsigned globalPredictorSize, unsigned globalHistoryBits, unsigned globalCtrBits, unsigned choicePredictorSize, unsigned choiceCtrBits, unsigned instShiftAmt, unsigned fetchWidth)
+\item 
+unsigned \hyperlink{classHybridBPskew_ae8b356ac60f229ce92086836420a1d11}{computeLocalIndex} (Addr branch\_\-addr, unsigned positionInFetchGroup)
+\item 
+unsigned \hyperlink{classHybridBPskew_a2d3c53348902a29d3315dcec78e12a99}{computeGlobalIndex0} (Addr branch\_\-addr, unsigned positionInFetchGroup)
+\item 
+unsigned \hyperlink{classHybridBPskew_a4009eae987557a103d5846cd32e30333}{computeGlobalIndex1} (Addr branch\_\-addr, unsigned positionInFetchGroup)
+\item 
+unsigned \hyperlink{classHybridBPskew_a70b7b53463dd2cd4a6394266ea3c2ee3}{computeChoiceIndex} (Addr branch\_\-addr, unsigned positionInFetchGroup)
+\item 
 bool \hyperlink{classHybridBPskew_a582ad543f9fc90c933eb2c740de572ec}{lookup} (Addr \&branch\_\-addr, void $\ast$\&bp\_\-history, unsigned positionInFetchGroup, bool onDemand, bool \&choice)
 \item 
 void \hyperlink{classHybridBPskew_a1dbffb30d1d0f0c4c8e6a8f1084e68e4}{uncondBr} (void $\ast$\&bp\_\-history)
@@ -82,26 +112,26 @@ Default branch predictor constructor.
       fetchWidth(_fetchWidth)
 {
     if (!isPowerOf2(localPredictorSize)) {
-        fatal("Invalid local predictor size!\n");
+        Assert (0 && "Invalid local predictor size!\n");
     }
 
     //Setup the array of counters for the local predictor
     localCtrs.resize(localPredictorSize);
 
-    for (int i = 0; i < localPredictorSize; ++i)
+    for (int i = 0; i < (int)localPredictorSize; ++i)
         localCtrs[i].setBits(localCtrBits);
 
     //localPredictorMask = floorPow2(localPredictorSize) - 1;
 
     if (!isPowerOf2(globalPredictorSize)) {
-        fatal("Invalid global predictor size!\n");
+        Assert (0 && "Invalid global predictor size!\n");
     }
 
     //Setup the array of counters for the global predictor
     globalCtrs0.resize(globalPredictorSize);
     globalCtrs1.resize(globalPredictorSize);
 
-    for (int i = 0; i < globalPredictorSize; ++i) {
+    for (int i = 0; i < (int)globalPredictorSize; ++i) {
         globalCtrs0[i].setBits(globalCtrBits);
         globalCtrs1[i].setBits(globalCtrBits);
         }
@@ -112,13 +142,13 @@ Default branch predictor constructor.
     globalHistoryMask = (1 << globalHistoryBits) - 1;
 
     if (!isPowerOf2(choicePredictorSize)) {
-        fatal("Invalid choice predictor size!\n");
+        Assert (0 && "Invalid choice predictor size!\n");
     }
 
     //Setup the array of counters for the choice predictor
     choiceCtrs.resize(choicePredictorSize);
 
-    for (int i = 0; i < choicePredictorSize; ++i)
+    for (int i = 0; i <(int) choicePredictorSize; ++i)
         choiceCtrs[i].setBits(choiceCtrBits);
 
     // @todo: Allow for different thresholds between the predictors.
@@ -134,6 +164,28 @@ Default branch predictor constructor.
 \end{DoxyCode}
 
 
+Here is the call graph for this function:
+
+
+\hypertarget{classHybridBPskew_a039896cdd3566d98247bf7b871766cc9}{
+\index{HybridBPskew@{HybridBPskew}!HybridBPskew@{HybridBPskew}}
+\index{HybridBPskew@{HybridBPskew}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{HybridBPskew}]{\setlength{\rightskip}{0pt plus 5cm}HybridBPskew::HybridBPskew (
+\begin{DoxyParamCaption}
+\item[{unsigned}]{localPredictorSize, }
+\item[{unsigned}]{localCtrBits, }
+\item[{unsigned}]{globalPredictorSize, }
+\item[{unsigned}]{globalHistoryBits, }
+\item[{unsigned}]{globalCtrBits, }
+\item[{unsigned}]{choicePredictorSize, }
+\item[{unsigned}]{choiceCtrBits, }
+\item[{unsigned}]{instShiftAmt, }
+\item[{unsigned}]{fetchWidth}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a039896cdd3566d98247bf7b871766cc9}
+Default branch predictor constructor. 
+
 \subsection{Member Function Documentation}
 \hypertarget{classHybridBPskew_a5ceeff1b2e0cc39822346b1cd8fbab80}{
 \index{HybridBPskew@{HybridBPskew}!BTBUpdate@{BTBUpdate}}
@@ -145,7 +197,7 @@ Default branch predictor constructor.
 \end{DoxyParamCaption}
 )}}
 \label{classHybridBPskew_a5ceeff1b2e0cc39822346b1cd8fbab80}
-Updates the branch predictor to Not Taken if a BTB entry is invalid or not found. 
+Updates the branch predictor to Not Taken if a \hyperlink{classBTB}{BTB} entry is invalid or not found. 
 \begin{DoxyParams}{Parameters}
 {\em branch\_\-addr} & The address of the branch to look up. \\
 \hline
@@ -162,7 +214,42 @@ Whether or not the branch is taken.
     globalHistory = globalHistory & (globalHistoryMask - 1);
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classHybridBPskew_a5ceeff1b2e0cc39822346b1cd8fbab80}{
+\index{HybridBPskew@{HybridBPskew}!BTBUpdate@{BTBUpdate}}
+\index{BTBUpdate@{BTBUpdate}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{BTBUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::BTBUpdate (
+\begin{DoxyParamCaption}
+\item[{Addr \&}]{branch\_\-addr, }
+\item[{void $\ast$\&}]{bp\_\-history}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a5ceeff1b2e0cc39822346b1cd8fbab80}
+Updates the branch predictor to Not Taken if a \hyperlink{classBTB}{BTB} entry is invalid or not found. 
+\begin{DoxyParams}{Parameters}
+{\em branch\_\-addr} & The address of the branch to look up. \\
+\hline
+{\em bp\_\-history} & Pointer to any bp history state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the branch is taken. 
+\end{DoxyReturn}
 \hypertarget{classHybridBPskew_a70b7b53463dd2cd4a6394266ea3c2ee3}{
+\index{HybridBPskew@{HybridBPskew}!computeChoiceIndex@{computeChoiceIndex}}
+\index{computeChoiceIndex@{computeChoiceIndex}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{computeChoiceIndex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::computeChoiceIndex (
+\begin{DoxyParamCaption}
+\item[{Addr}]{branch\_\-addr, }
+\item[{unsigned}]{positionInFetchGroup}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a70b7b53463dd2cd4a6394266ea3c2ee3}
+this unit computes the address index to the BP based on the EV8 predictor Milad \hypertarget{classHybridBPskew_a70b7b53463dd2cd4a6394266ea3c2ee3}{
 \index{HybridBPskew@{HybridBPskew}!computeChoiceIndex@{computeChoiceIndex}}
 \index{computeChoiceIndex@{computeChoiceIndex}!HybridBPskew@{HybridBPskew}}
 \subsubsection[{computeChoiceIndex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::computeChoiceIndex (
@@ -213,6 +300,26 @@ this unit computes the address index to the BP based on the EV8 predictor Milad
         return indx;
 }
 \end{DoxyCode}
+\hypertarget{classHybridBPskew_a2d3c53348902a29d3315dcec78e12a99}{
+\index{HybridBPskew@{HybridBPskew}!computeGlobalIndex0@{computeGlobalIndex0}}
+\index{computeGlobalIndex0@{computeGlobalIndex0}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{computeGlobalIndex0}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::computeGlobalIndex0 (
+\begin{DoxyParamCaption}
+\item[{Addr}]{branch\_\-addr, }
+\item[{unsigned}]{positionInFetchGroup}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a2d3c53348902a29d3315dcec78e12a99}
+this unit computes the address index to the BP based on the EV8 predictor Milad \hypertarget{classHybridBPskew_a4009eae987557a103d5846cd32e30333}{
+\index{HybridBPskew@{HybridBPskew}!computeGlobalIndex1@{computeGlobalIndex1}}
+\index{computeGlobalIndex1@{computeGlobalIndex1}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{computeGlobalIndex1}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::computeGlobalIndex1 (
+\begin{DoxyParamCaption}
+\item[{Addr}]{branch\_\-addr, }
+\item[{unsigned}]{positionInFetchGroup}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a4009eae987557a103d5846cd32e30333}
 \hypertarget{classHybridBPskew_a4009eae987557a103d5846cd32e30333}{
 \index{HybridBPskew@{HybridBPskew}!computeGlobalIndex1@{computeGlobalIndex1}}
 \index{computeGlobalIndex1@{computeGlobalIndex1}!HybridBPskew@{HybridBPskew}}
@@ -264,7 +371,17 @@ this unit computes the address index to the BP based on the EV8 predictor Milad
 Here is the caller graph for this function:
 
 
-\hypertarget{classHybridBPskew_a4c3aa89615af200ad553461f20de8315}{
+\hypertarget{classHybridBPskew_ae8b356ac60f229ce92086836420a1d11}{
+\index{HybridBPskew@{HybridBPskew}!computeLocalIndex@{computeLocalIndex}}
+\index{computeLocalIndex@{computeLocalIndex}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{computeLocalIndex}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::computeLocalIndex (
+\begin{DoxyParamCaption}
+\item[{Addr}]{branch\_\-addr, }
+\item[{unsigned}]{positionInFetchGroup}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_ae8b356ac60f229ce92086836420a1d11}
+this unit computes the address index to the BP based on the EV8 predictor Milad \hypertarget{classHybridBPskew_a4c3aa89615af200ad553461f20de8315}{
 \index{HybridBPskew@{HybridBPskew}!histGarbageCollect@{histGarbageCollect}}
 \index{histGarbageCollect@{histGarbageCollect}!HybridBPskew@{HybridBPskew}}
 \subsubsection[{histGarbageCollect}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::histGarbageCollect (
@@ -283,6 +400,20 @@ Here is the caller graph for this function:
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classHybridBPskew_a4c3aa89615af200ad553461f20de8315}{
+\index{HybridBPskew@{HybridBPskew}!histGarbageCollect@{histGarbageCollect}}
+\index{histGarbageCollect@{histGarbageCollect}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{histGarbageCollect}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::histGarbageCollect (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{bp\_\-history}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a4c3aa89615af200ad553461f20de8315}
 \hypertarget{classHybridBPskew_a5e73e9324e87d820712789f33100e5f4}{
 \index{HybridBPskew@{HybridBPskew}!histUpdate@{histUpdate}}
 \index{histUpdate@{histUpdate}!HybridBPskew@{HybridBPskew}}
@@ -317,6 +448,23 @@ Here is the caller graph for this function:
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classHybridBPskew_a5e73e9324e87d820712789f33100e5f4}{
+\index{HybridBPskew@{HybridBPskew}!histUpdate@{histUpdate}}
+\index{histUpdate@{histUpdate}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{histUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::histUpdate (
+\begin{DoxyParamCaption}
+\item[{Addr \&}]{branch\_\-addr, }
+\item[{bool}]{taken, }
+\item[{void $\ast$}]{bp\_\-history, }
+\item[{bool}]{squashed}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a5e73e9324e87d820712789f33100e5f4}
 \hypertarget{classHybridBPskew_a582ad543f9fc90c933eb2c740de572ec}{
 \index{HybridBPskew@{HybridBPskew}!lookup@{lookup}}
 \index{lookup@{lookup}!HybridBPskew@{HybridBPskew}}
@@ -416,6 +564,107 @@ Whether or not the branch is taken.
 Here is the call graph for this function:
 
 
+\hypertarget{classHybridBPskew_a27e2268df7da826fefe75f1a490bce11}{
+\index{HybridBPskew@{HybridBPskew}!lookup@{lookup}}
+\index{lookup@{lookup}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{lookup}]{\setlength{\rightskip}{0pt plus 5cm}bool HybridBPskew::lookup (
+\begin{DoxyParamCaption}
+\item[{Addr \&}]{branch\_\-addr, }
+\item[{void $\ast$\&}]{bp\_\-history, }
+\item[{unsigned}]{positionInFetchGroup}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a27e2268df7da826fefe75f1a490bce11}
+Looks up the given address in the branch predictor and returns a true/false value as to whether it is taken. Also creates a BPHistory object to store any state it will need on squash/update. 
+\begin{DoxyParams}{Parameters}
+{\em branch\_\-addr} & The address of the branch to look up. \\
+\hline
+{\em bp\_\-history} & Pointer that will be set to the BPHistory object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the branch is taken. 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+{
+    unsigned local_predictor_idx;
+    unsigned choice_predictor_idx;
+
+    bool local_prediction;
+    bool global_prediction;
+    bool choice_prediction;
+
+    BPHistory *history = new BPHistory;
+
+    //Lookup in the local predictor to get its branch prediction
+    local_predictor_idx = computeLocalIndex(branch_addr, positionInFetchGroup);
+    local_prediction = localCtrs[local_predictor_idx].read() > threshold;
+
+    //Lookup in the global predictor to get its branch prediction
+    global_prediction = gSkewPredict(branch_addr, bp_history, positionInFetchGrou
+      p, history);
+
+    //Lookup in the choice predictor to see which one to use
+    choice_predictor_idx = computeChoiceIndex(branch_addr, positionInFetchGroup);
+      
+    choice_prediction = choiceCtrs[choice_predictor_idx].read() > threshold;
+
+    // Create BPHistory and pass it back to be recorded.
+    history->choicePredictorIdx = choice_predictor_idx;
+    history->localPredictorIdx  = local_predictor_idx;
+    history->globalHistory = globalHistory;
+    history->localPredTaken = local_prediction;
+    history->globalPredTaken = global_prediction;
+    history->globalUsed = choice_prediction;
+    bp_history = (void *)history;
+
+    assert(globalHistory < globalPredictorSize);
+    assert(positionInFetchGroup >= 0);
+    assert(positionInFetchGroup < fetchWidth);
+    assert(local_predictor_idx < localPredictorSize);
+
+    // Commented code is for doing speculative update of counters and
+    // all histories.
+        bool prediction;
+    if (choice_prediction) {
+        if (global_prediction) {
+                        updateGlobalHistTaken();
+                        prediction = true;
+        } else {
+                        updateGlobalHistNotTaken();
+                        prediction = false;
+        }
+    } else {
+        if (local_prediction) {
+                        updateGlobalHistTaken();
+                        prediction = true;
+        } else {
+                        updateGlobalHistNotTaken();
+                        prediction = false;
+        }
+    }
+  //Addr tempPC = ((branch_addr>>totalInstShiftAmt)<<totalInstShiftAmt)+((Addr)po
+      w(instShiftAmt,2))*(fetchWidth-1); //Create the addr of last ins in cacheline
+  //if (prediction == true) { //TAKEN
+  //    updateGlobalHistTaken();
+  //} else if (branch_addr == tempPC && prediction == false) {
+  //    updateGlobalHistNotTaken();
+  //}
+    /* testing if local predictor functions right */
+    return prediction;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classHybridBPskew_ab10e5603326fd6eae8d8cdd106a625ef}{
 \index{HybridBPskew@{HybridBPskew}!onDemandBr@{onDemandBr}}
 \index{onDemandBr@{onDemandBr}!HybridBPskew@{HybridBPskew}}
@@ -457,6 +706,19 @@ Returns the global history.
 \begin{DoxyCode}
 { return globalHistory; }
 \end{DoxyCode}
+\hypertarget{classHybridBPskew_aa00b0494fe8fc804dd6ef9c1abf89c9d}{
+\index{HybridBPskew@{HybridBPskew}!readGlobalHist@{readGlobalHist}}
+\index{readGlobalHist@{readGlobalHist}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{readGlobalHist}]{\setlength{\rightskip}{0pt plus 5cm}unsigned HybridBPskew::readGlobalHist (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{classHybridBPskew_aa00b0494fe8fc804dd6ef9c1abf89c9d}
+Returns the global history. 
+\begin{DoxyCode}
+{ return globalHistory; }
+\end{DoxyCode}
 \hypertarget{classHybridBPskew_a44db53115e8b3ccff2d9b7785c96f380}{
 \index{HybridBPskew@{HybridBPskew}!squash@{squash}}
 \index{squash@{squash}!HybridBPskew@{HybridBPskew}}
@@ -483,6 +745,39 @@ Restores the global branch history on a squash.
     delete history;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classHybridBPskew_a44db53115e8b3ccff2d9b7785c96f380}{
+\index{HybridBPskew@{HybridBPskew}!squash@{squash}}
+\index{squash@{squash}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{squash}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::squash (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{bp\_\-history}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a44db53115e8b3ccff2d9b7785c96f380}
+Restores the global branch history on a squash. 
+\begin{DoxyParams}{Parameters}
+{\em bp\_\-history} & Pointer to the BPHistory object that has the previous global branch history in it. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classHybridBPskew_a1dbffb30d1d0f0c4c8e6a8f1084e68e4}{
+\index{HybridBPskew@{HybridBPskew}!uncondBr@{uncondBr}}
+\index{uncondBr@{uncondBr}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{uncondBr}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::uncondBr (
+\begin{DoxyParamCaption}
+\item[{void $\ast$\&}]{bp\_\-history}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a1dbffb30d1d0f0c4c8e6a8f1084e68e4}
+Records that there was an unconditional branch, and modifies the bp history to point to an object that has the previous global history stored in it. 
+\begin{DoxyParams}{Parameters}
+{\em bp\_\-history} & Pointer that will be set to the BPHistory object. \\
+\hline
+\end{DoxyParams}
 \hypertarget{classHybridBPskew_a1dbffb30d1d0f0c4c8e6a8f1084e68e4}{
 \index{HybridBPskew@{HybridBPskew}!uncondBr@{uncondBr}}
 \index{uncondBr@{uncondBr}!HybridBPskew@{HybridBPskew}}
@@ -522,6 +817,11 @@ Records that there was an unconditional branch, and modifies the bp history to p
 
 
 Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
 
 
 \hypertarget{classHybridBPskew_a4fb73465bf70ab821401f3d47e44fc91}{
@@ -571,12 +871,12 @@ Updates the branch predictor with the actual result of a branch.
       ,
                             // decerement the counter.  Otherwise increment the c
       ounter
-                            if (!history->globalUsed && history->choicePredictorI
-      dx != invalidPredictorIndex) {
+                            if (!history->globalUsed && (int)history->choicePredi
+      ctorIdx != invalidPredictorIndex) {
                                 choiceCtrs[history->choicePredictorIdx].decrement
       ();
-                            } else if (history->globalUsed && history->choicePred
-      ictorIdx != invalidPredictorIndex) {
+                            } else if (history->globalUsed && (int)history->choic
+      ePredictorIdx != invalidPredictorIndex) {
                                 choiceCtrs[history->choicePredictorIdx].increment
       ();
                             }
@@ -584,42 +884,42 @@ Updates the branch predictor with the actual result of a branch.
                         if (!history->globalUsed) {
                            //Strengthen bimodal
                                 if (taken) {
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex)
                                                 localCtrs[history->localPredictor
       Idx].increment();
                                 } else {
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex)
                                            localCtrs[history->localPredictorIdx].
       decrement();
                                 }
                         } else {
                            //Strengthen gskew
                                 if (taken) {
-                                        if (history->globalPredictorIdx0 != inval
-      idPredictorIndex && history->global0used)
+                                        if ((int)history->globalPredictorIdx0 != 
+      invalidPredictorIndex && history->global0used)
                                                 globalCtrs0[history->globalPredic
       torIdx0].increment();
-                                        if (history->globalPredictorIdx1 != inval
-      idPredictorIndex && history->global1used)
+                                        if ((int)history->globalPredictorIdx1 != 
+      invalidPredictorIndex && history->global1used)
                                                 globalCtrs1[history->globalPredic
       torIdx1].increment();
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex && history->localused)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex && history->localused)
                                                 localCtrs[history->localPredictor
       Idx].increment();
                                 } else {
-                                        if (history->globalPredictorIdx0 != inval
-      idPredictorIndex && history->global0used)
+                                        if ((int)history->globalPredictorIdx0 != 
+      invalidPredictorIndex && history->global0used)
                                                 globalCtrs0[history->globalPredic
       torIdx0].decrement();
-                                        if (history->globalPredictorIdx1 != inval
-      idPredictorIndex && history->global1used)
+                                        if ((int)history->globalPredictorIdx1 != 
+      invalidPredictorIndex && history->global1used)
                                                 globalCtrs1[history->globalPredic
       torIdx1].decrement();
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex && history->localused)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex && history->localused)
                                                 localCtrs[history->localPredictor
       Idx].decrement();
                                 }
@@ -630,29 +930,29 @@ Updates the branch predictor with the actual result of a branch.
       {
                                 //strengthen all predictors
                                 if (taken) {
-                                        if (history->globalPredictorIdx0 != inval
-      idPredictorIndex)
+                                        if ((int)history->globalPredictorIdx0 != 
+      invalidPredictorIndex)
                                                 globalCtrs0[history->globalPredic
       torIdx0].increment();
-                                        if (history->globalPredictorIdx1 != inval
-      idPredictorIndex)
+                                        if ((int)history->globalPredictorIdx1 != 
+      invalidPredictorIndex)
                                                 globalCtrs1[history->globalPredic
       torIdx1].increment();
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex)
                                                 localCtrs[history->localPredictor
       Idx].increment();
                                 } else {
-                                        if (history->globalPredictorIdx0 != inval
-      idPredictorIndex)
+                                        if ((int)history->globalPredictorIdx0 != 
+      invalidPredictorIndex)
                                                 globalCtrs0[history->globalPredic
       torIdx0].decrement();
-                                        if (history->globalPredictorIdx1 != inval
-      idPredictorIndex)
+                                        if ((int)history->globalPredictorIdx1 != 
+      invalidPredictorIndex)
                                                 globalCtrs1[history->globalPredic
       torIdx1].decrement();
-                                        if (history->localPredictorIdx != invalid
-      PredictorIndex)
+                                        if ((int)history->localPredictorIdx != in
+      validPredictorIndex)
                                                 localCtrs[history->localPredictor
       Idx].decrement();
                                 }
@@ -662,54 +962,54 @@ Updates the branch predictor with the actual result of a branch.
       come,
                                 // decerement the counter.  Otherwise increment t
       he counter
-                                if (!history->globalUsed && history->choicePredic
-      torIdx != invalidPredictorIndex) {
+                                if (!history->globalUsed && (int)history->choiceP
+      redictorIdx != invalidPredictorIndex) {
                                     choiceCtrs[history->choicePredictorIdx].incre
       ment();
-                                } else if (history->globalUsed && history->choice
-      PredictorIdx != invalidPredictorIndex) {
+                                } else if (history->globalUsed && (int)history->c
+      hoicePredictorIdx != invalidPredictorIndex) {
                                     choiceCtrs[history->choicePredictorIdx].decre
       ment();
                                 }
                                 if (history->globalUsed) {
                                    //Strengthen bimodal when gskew fails
                                         if (taken) {
-                                                if (history->localPredictorIdx !=
-       invalidPredictorIndex)
+                                                if ((int)history->localPredictorI
+      dx != invalidPredictorIndex)
                                                         localCtrs[history->localP
       redictorIdx].increment();
                                         } else {
-                                                if (history->localPredictorIdx !=
-       invalidPredictorIndex)
+                                                if ((int)history->localPredictorI
+      dx != invalidPredictorIndex)
                                                    localCtrs[history->localPredic
       torIdx].decrement();
                                         }
                                 } else {
                                    //Strengthen gskew when bimodal fails
                                         if (taken) {
-                                                if (history->globalPredictorIdx0 
-      != invalidPredictorIndex && history->global0used)
+                                                if ((int)history->globalPredictor
+      Idx0 != invalidPredictorIndex && history->global0used)
                                                         globalCtrs0[history->glob
       alPredictorIdx0].increment();
-                                                if (history->globalPredictorIdx1 
-      != invalidPredictorIndex && history->global1used)
+                                                if ((int)history->globalPredictor
+      Idx1 != invalidPredictorIndex && history->global1used)
                                                         globalCtrs1[history->glob
       alPredictorIdx1].increment();
-                                                if (history->localPredictorIdx !=
-       invalidPredictorIndex && history->localused)
+                                                if ((int)history->localPredictorI
+      dx != invalidPredictorIndex && history->localused)
                                                         localCtrs[history->localP
       redictorIdx].increment();
                                         } else {
-                                                if (history->globalPredictorIdx0 
-      != invalidPredictorIndex && history->global0used)
+                                                if ((int)history->globalPredictor
+      Idx0 != invalidPredictorIndex && history->global0used)
                                                         globalCtrs0[history->glob
       alPredictorIdx0].decrement();
-                                                if (history->globalPredictorIdx1 
-      != invalidPredictorIndex && history->global1used)
+                                                if ((int)history->globalPredictor
+      Idx1 != invalidPredictorIndex && history->global1used)
                                                         globalCtrs1[history->glob
       alPredictorIdx1].decrement();
-                                                if (history->localPredictorIdx !=
-       invalidPredictorIndex && history->localused)
+                                                if ((int)history->localPredictorI
+      dx != invalidPredictorIndex && history->localused)
                                                         localCtrs[history->localP
       redictorIdx].decrement();
                                         }
@@ -722,6 +1022,34 @@ Updates the branch predictor with the actual result of a branch.
     }
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classHybridBPskew_a4fb73465bf70ab821401f3d47e44fc91}{
+\index{HybridBPskew@{HybridBPskew}!update@{update}}
+\index{update@{update}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::update (
+\begin{DoxyParamCaption}
+\item[{Addr \&}]{branch\_\-addr, }
+\item[{bool}]{taken, }
+\item[{void $\ast$}]{bp\_\-history, }
+\item[{bool}]{squashed}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a4fb73465bf70ab821401f3d47e44fc91}
+Updates the branch predictor with the actual result of a branch. 
+\begin{DoxyParams}{Parameters}
+{\em branch\_\-addr} & The address of the branch to update. \\
+\hline
+{\em taken} & Whether or not the branch was taken. \\
+\hline
+{\em bp\_\-history} & Pointer to the BPHistory object that was created when the branch was predicted. \\
+\hline
+{\em squashed} & is set when this function is called during a squash operation. \\
+\hline
+\end{DoxyParams}
 \hypertarget{classHybridBPskew_a07095043813d5f59978c0708efa58bd4}{
 \index{HybridBPskew@{HybridBPskew}!updateGlobalHistNotTaken@{updateGlobalHistNotTaken}}
 \index{updateGlobalHistNotTaken@{updateGlobalHistNotTaken}!HybridBPskew@{HybridBPskew}}
@@ -743,7 +1071,25 @@ Updates global history as not taken.
 Here is the caller graph for this function:
 
 
-\hypertarget{classHybridBPskew_a9c1a201e37cbba10055ff63b9e072a69}{
+\hypertarget{classHybridBPskew_a07095043813d5f59978c0708efa58bd4}{
+\index{HybridBPskew@{HybridBPskew}!updateGlobalHistNotTaken@{updateGlobalHistNotTaken}}
+\index{updateGlobalHistNotTaken@{updateGlobalHistNotTaken}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{updateGlobalHistNotTaken}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::updateGlobalHistNotTaken (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a07095043813d5f59978c0708efa58bd4}
+Updates global history as not taken. \hypertarget{classHybridBPskew_a9c1a201e37cbba10055ff63b9e072a69}{
+\index{HybridBPskew@{HybridBPskew}!updateGlobalHistTaken@{updateGlobalHistTaken}}
+\index{updateGlobalHistTaken@{updateGlobalHistTaken}!HybridBPskew@{HybridBPskew}}
+\subsubsection[{updateGlobalHistTaken}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::updateGlobalHistTaken (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classHybridBPskew_a9c1a201e37cbba10055ff63b9e072a69}
+Updates global history as taken. \hypertarget{classHybridBPskew_a9c1a201e37cbba10055ff63b9e072a69}{
 \index{HybridBPskew@{HybridBPskew}!updateGlobalHistTaken@{updateGlobalHistTaken}}
 \index{updateGlobalHistTaken@{updateGlobalHistTaken}!HybridBPskew@{HybridBPskew}}
 \subsubsection[{updateGlobalHistTaken}]{\setlength{\rightskip}{0pt plus 5cm}void HybridBPskew::updateGlobalHistTaken (
@@ -768,5 +1114,7 @@ Here is the caller graph for this function:
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{hybrid__skew_8h}{hybrid\_\-skew.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{hybrid__skew_8cpp}{hybrid\_\-skew.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/backend/bp/\hyperlink{backend_2bp_2hybrid__skew_8h}{hybrid\_\-skew.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{forLater_2pred_2hybrid__skew_8h}{hybrid\_\-skew.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/backend/bp/\hyperlink{backend_2bp_2hybrid__skew_8cpp}{hybrid\_\-skew.cpp}\item 
+/home/milad/esc\_\-project/svn/PARS/src/forLater/pred/\hyperlink{forLater_2pred_2hybrid__skew_8cpp}{hybrid\_\-skew.cpp}\end{DoxyCompactItemize}

@@ -5,5 +5,11 @@ digraph G
   rankdir=LR;
   Node1 [label="config::getProgName",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="staticCodeParser::staticCodeParser",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstaticCodeParser.html#a5eaad2527b293e52712df9f2d29cdfef"];
+  Node2 [label="pin__init",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#a8bb213f2097111821bc9c5bd823a888b"];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="pin__runPARS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$pars_8h.html#ace0fa7dabd943b7f226518d8f2eceef8"];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main__pars_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="staticCodeParser::staticCodeParser",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classstaticCodeParser.html#a4658227c3db5eccd31b70d1c9ae70ce7"];
 }

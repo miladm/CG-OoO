@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>stat.h Source File</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/binaryTranslator/stat.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -14,10 +14,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 --></script>
 <div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">PhArS&#160;<span id="projectnumber">1</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -40,62 +53,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">stat.h</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/stat.h</div>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
+<a href="stat_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*******************************************************************************</span>
 <a name="l00002"></a>00002 <span class="comment"> *  stat.h</span>
 <a name="l00003"></a>00003 <span class="comment"> ******************************************************************************/</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#ifndef _STAT_H</span>
-<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#define _STAT_H</span>
-<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#include &lt;stdint.h&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="classstat.html">00010</a> <span class="keyword">class </span><a class="code" href="classstat.html">stat</a> {
-<a name="l00011"></a>00011     <span class="keyword">public</span>:
-<a name="l00012"></a>00012         <a class="code" href="classstat.html">stat</a>();
-<a name="l00013"></a>00013         ~<a class="code" href="classstat.html">stat</a>(){<span class="comment">/*nothing for now*/</span>}
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015         <span class="keywordtype">void</span> setMemAddr(uint64_t memAddr);
-<a name="l00016"></a>00016         <span class="keywordtype">void</span> setRegister(<span class="keywordtype">int</span> *r, <span class="keywordtype">int</span> *rt);
-<a name="l00017"></a>00017         <span class="keywordtype">void</span> setType(type insType);
-<a name="l00018"></a>00018         <span class="keywordtype">void</span> setStatus(status insStatus, <span class="keywordtype">int</span> cycle, <span class="keywordtype">int</span> latency);
-<a name="l00019"></a>00019         <span class="keywordtype">void</span> setMemType(memType readORwrite);
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021         type getType();
-<a name="l00022"></a>00022         status getStatus();
-<a name="l00023"></a>00023         <span class="keywordtype">int</span> getLatency();
-<a name="l00024"></a>00024         <span class="keywordtype">int</span> getCompleteCycle();
-<a name="l00025"></a>00025         <span class="keywordtype">int</span> getIssueCycle();
-<a name="l00026"></a>00026         <span class="keywordtype">int</span> getMyReg(<span class="keywordtype">int</span> i);
-<a name="l00027"></a>00027         <span class="keywordtype">int</span> getNumReg();
-<a name="l00028"></a>00028         uint64_t getMemAddr ();
-<a name="l00029"></a>00029         <span class="keywordtype">int</span> getMyRegType(<span class="keywordtype">int</span> i);
-<a name="l00030"></a>00030         memType getMemType();
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032     <span class="keyword">private</span>:
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034         <span class="comment">//convention:</span>
-<a name="l00035"></a>00035         <span class="comment">//_r* = -1: means reg is not assigned a value (fresh)</span>
-<a name="l00036"></a>00036         <span class="comment">//_r* = -2: means reg is invalid</span>
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038         <a class="code" href="classList.html">List&lt;int*&gt;</a> *_r;  <span class="comment">//Register List</span>
-<a name="l00039"></a>00039         <a class="code" href="classList.html">List&lt;int*&gt;</a> *_rt; <span class="comment">//Register Type List</span>
-<a name="l00040"></a>00040         uint64_t _memAddr;
-<a name="l00041"></a>00041         <span class="keywordtype">int</span> _issueCycle;
-<a name="l00042"></a>00042         <span class="keywordtype">int</span> _completeCycle;
-<a name="l00043"></a>00043         <span class="keywordtype">int</span> _latency;
-<a name="l00044"></a>00044         type _insType;
-<a name="l00045"></a>00045         status _insStatus;
-<a name="l00046"></a>00046         memType _readORwrite;
-<a name="l00047"></a>00047 };
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="preprocessor">#endif</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#ifndef _STAT_H</span>
+<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define _STAT_H</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;map&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="basicblock_8h.html">basicblock.h</a>&quot;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;list.h&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="keywordtype">void</span> <a class="code" href="stat_8cpp.html#a82694b42d0f920bca0288e0ea13e905e">StatBBSizeStat</a>(<a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *bbList, <span class="keywordtype">string</span> *program_name);
+<a name="l00015"></a>00015 <span class="keywordtype">void</span> <a class="code" href="stat_8cpp.html#ab157f0e7c21ee60b5b4212d99e5cfa48">DynBBSizeStat</a>(map&lt;int,int&gt; &amp;bbSizeHist, <span class="keywordtype">string</span> *program_name);
+<a name="l00016"></a>00016 <span class="keywordtype">void</span> <a class="code" href="stat_8cpp.html#a08c02c88484628acfda48f7eb2308c93">StatNum_interBB_and_intra_BB_regs</a>(<a class="code" href="classList.html">List&lt;basicblock*&gt;</a> *bbList, <span class="keywordtype">string</span> *program_name);
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -103,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -112,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 30 2014 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

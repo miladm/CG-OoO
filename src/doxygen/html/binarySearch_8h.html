@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/binarySearch.h File Reference</title>
+<title>PhArS: /home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/binarySearch.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -58,176 +58,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">/home/milad/esc_project/svn/PARS/src/backend/binarySearch.h File Reference</div>  </div>
+<div class="title">/home/milad/esc_project/svn/PARS/src/backend/.AppleDouble/binarySearch.h File Reference</div>  </div>
 </div>
 <div class="contents">
-<div class="textblock"><code>#include &quot;../lib/list.h&quot;</code><br/>
-<code>#include &quot;../global/global.h&quot;</code><br/>
-<code>#include &quot;instruction.h&quot;</code><br/>
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for binarySearch.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="binarySearch_8h__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8h" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8h" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8h">
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="binarySearch_8h__dep__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8hdep" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8hdep" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2backend_2binarySearch_8hdep">
-</map>
-</div>
-</div>
+
 <p><a href="binarySearch_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binarySearch_8h.html#a30ed210f0a1157716fcf899daeb3f89f">binarySearch</a> (<a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *list, <a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a> id, int low, int high)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binarySearch_8h.html#ab772b4fc9d0446d4992eda752cc1c9f8">binarySearch</a> (<a class="el" href="classList.html">List</a>&lt; int &gt; *list, int id, int low, int high)</td></tr>
 </table>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a30ed210f0a1157716fcf899daeb3f89f"></a><!-- doxytag: member="binarySearch.h::binarySearch" ref="a30ed210f0a1157716fcf899daeb3f89f" args="(List&lt; instruction * &gt; *list, INS_ID id, int low, int high)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int binarySearch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; <a class="el" href="classinstruction.html">instruction</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="global_2global_8h.html#a1883c47d0023d0f200e1d86eced6a070">INS_ID</a>&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>low</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>high</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                         {
-        <span class="keywordflow">if</span> (high &lt; low)
-                <span class="keywordflow">return</span> -1; <span class="comment">// not found</span>
-
-        <span class="keywordtype">int</span> mid = low + (high - low) / 2;
-
-        <span class="keywordflow">if</span> (list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(mid)-&gt;getInsID() &gt; id)
-                <span class="keywordflow">return</span> <a class="code" href="binarySearch_8cpp.html#a30ed210f0a1157716fcf899daeb3f89f">binarySearch</a>(list, <span class="keywordtype">id</span>, low, mid-1);
-        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(mid)-&gt;getInsID() &lt; id)
-                <span class="keywordflow">return</span> <a class="code" href="binarySearch_8cpp.html#a30ed210f0a1157716fcf899daeb3f89f">binarySearch</a>(list, <span class="keywordtype">id</span>, mid+1, high);
-        <span class="keywordflow">else</span>
-                <span class="keywordflow">return</span> mid; <span class="comment">// found - array index is returned</span>
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_cgraph.png" border="0" usemap="#binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_cgraph" alt=""/></div>
-<map name="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_cgraph" id="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_cgraph">
-</map>
-</div>
-</p>
-
-<p><div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_icgraph.png" border="0" usemap="#binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_icgraph" alt=""/></div>
-<map name="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_icgraph" id="binarySearch_8h_a30ed210f0a1157716fcf899daeb3f89f_icgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
-<a class="anchor" id="ab772b4fc9d0446d4992eda752cc1c9f8"></a><!-- doxytag: member="binarySearch.h::binarySearch" ref="ab772b4fc9d0446d4992eda752cc1c9f8" args="(List&lt; int &gt; *list, int id, int low, int high)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int binarySearch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classList.html">List</a>&lt; int &gt; *&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>low</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>high</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                             {
-        <span class="keywordflow">if</span> (high &lt; low)
-                <span class="keywordflow">return</span> -1; <span class="comment">// not found</span>
-
-        <span class="keywordtype">int</span> mid = low + (high - low) / 2;
-
-        <span class="keywordflow">if</span> (list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(mid) &gt; id)
-                <span class="keywordflow">return</span> <a class="code" href="binarySearch_8cpp.html#a30ed210f0a1157716fcf899daeb3f89f">binarySearch</a>(list, <span class="keywordtype">id</span>, low, mid-1);
-        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (list-&gt;<a class="code" href="classList.html#a5eb964816de33c85e1d46658ddf8c6c4">Nth</a>(mid) &lt; id)
-                <span class="keywordflow">return</span> <a class="code" href="binarySearch_8cpp.html#a30ed210f0a1157716fcf899daeb3f89f">binarySearch</a>(list, <span class="keywordtype">id</span>, mid+1, high);
-        <span class="keywordflow">else</span>
-                <span class="keywordflow">return</span> mid; <span class="comment">// found - array index is returned</span>
-}
-</pre></div>
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="binarySearch_8h_ab772b4fc9d0446d4992eda752cc1c9f8_cgraph.png" border="0" usemap="#binarySearch_8h_ab772b4fc9d0446d4992eda752cc1c9f8_cgraph" alt=""/></div>
-<map name="binarySearch_8h_ab772b4fc9d0446d4992eda752cc1c9f8_cgraph" id="binarySearch_8h_ab772b4fc9d0446d4992eda752cc1c9f8_cgraph">
-</map>
-</div>
-</p>
-
-</div>
-</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -236,7 +81,7 @@ Here is the call graph for this function:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

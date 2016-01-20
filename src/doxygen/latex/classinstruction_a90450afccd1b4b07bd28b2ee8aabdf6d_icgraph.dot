@@ -5,9 +5,9 @@ digraph G
   rankdir=LR;
   Node1 [label="instruction::getRegAncestors",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="StatNum_interBB_and_intra_BB_regs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$binaryTranslator_2stat_8h.html#a08c02c88484628acfda48f7eb2308c93"];
+  Node2 [label="StatNum_interBB_and_intra_BB_regs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$stat_8h.html#a08c02c88484628acfda48f7eb2308c93"];
   Node2 -> Node3 [dir=back,color="midnightblue",fontsize="10",style="solid"];
-  Node3 [label="finish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#aa19325f885e34f56a1301ced479f8576"];
+  Node3 [label="finish",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a95cf23fdc260a92c373256cf79d940f2"];
   Node3 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid"];
   Node4 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97"];
 }

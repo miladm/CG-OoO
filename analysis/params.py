@@ -27,6 +27,7 @@ def init_params (result_map):
   result_map['iROB.e_ram'] = 0.0
   result_map['iROB.e_leak'] = 0.0
   result_map['rfManager.e_ram'] = 0.0
+  result_map['rfManager.e_leak'] = 0.0
   result_map['registerFile.rd_wire.e_wire'] = 0.0
   result_map['registerFile.wr_wire.e_wire'] = 0.0
   result_map['registerFile.rr.wire.e_w_cache2rr'] = 0.0
@@ -128,6 +129,10 @@ def init_params (result_map):
   result_map['memory.e_leak'] = 0.0
   result_map['commit.e_ff'] = 0.0
   result_map['commit.e_leak'] = 0.0
+  # SQUASH
+  result_map['execution.squash_cycles'] = 0.0
+  result_map['commit.squash_ins_cnt'] = 0.0
+  result_map['commit.squash_bb_cnt'] = 0.0
   # FOR PERFORMANCE MEASUREMENT
   result_map['commit.ipc'] = 0.0
   result_map['execution.ipc'] = 0.0
@@ -148,10 +153,22 @@ def init_params (result_map):
   result_map['SQ.size_rat'] = 0.0
   result_map['pars.wp_ins_cnt_avg'] = 0.0
   result_map['commit.num_waste_ins'] = 0.0
+  result_map['lsqManager.cache_miss_cnt'] = 0.0
+  result_map['lsqManager.cache_hit_cnt'] = 0.0
+  result_map['lsqManager.inflight_ld_rat'] = 0.0
+  result_map['lsqManager.inflight_cache_ld_rat'] = 0.0
+  result_map['lsqManager.st_to_ld_fwd_rat'] = 0.0
+  result_map['memory.cache_miss_cnt'] = 0.0
+  result_map['memory.cache_hit_cnt'] = 0.0
+  result_map['commit.bb_size_avg'] = 0.0
+  result_map['ResStn_0.size_rat'] = 0.0
   # AGGREGATE MEASUREMENTS
   result_map['fetch'] = 0.0
   result_map['decode-rename'] = 0.0
   result_map['issue'] = 0.0
+  result_map['issue_ram'] = 0.0
+  result_map['issue_cam'] = 0.0
+  result_map['issue_rest'] = 0.0
   result_map['execute'] = 0.0
   result_map['memory'] = 0.0
   result_map['l2-l3'] = 0.0
@@ -159,14 +176,26 @@ def init_params (result_map):
   result_map['rf'] = 0.0
   result_map['wire'] = 0.0
   result_map['stage-reg'] = 0.0
+  result_map['JPOp'] = 0.0
   result_map['ED'] = 0.0
+  result_map['ED2'] = 0.0
   result_map['no-compute'] = 0.0
   result_map['alu-compute'] = 0.0
   result_map['mem-compute'] = 0.0
-  result_map['bp-accuracy'] = 0.0
+  result_map['bpu-accuracy'] = 0.0
+  result_map['bpu'] = 0.0
   result_map['mem-accuracy'] = 0.0
   result_map['wasted_ins_rat'] = 0.0
   result_map['core.Energy'] = 0.0
+  result_map['cache_miss_rat'] = 0.0
+  result_map['lrf.Energy'] = 0.0
+  result_map['grf.Energy'] = 0.0
+  result_map['rename.Energy'] = 0.0
+  result_map['lsq.Energy'] = 0.0
+  result_map['TOTAL.Power'] = 0.0
+  result_map['core.Power'] = 0.0
+  result_map['bipsqw'] = 0.0
+  result_map['window_avg_aize'] = 0.0
   # AREA
   result_map['area'] = 0.0
 

@@ -59,7 +59,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">/home/milad/esc_project/svn/PARS/src/binaryTranslator/basicblock.h File Reference</div>  </div>
 </div>
@@ -67,41 +68,71 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;set&gt;</code><br/>
+<code>#include &lt;list&gt;</code><br/>
 <code>#include &lt;map&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;algorithm&gt;</code><br/>
+<code>#include &lt;iostream&gt;</code><br/>
 <code>#include &quot;list.h&quot;</code><br/>
 <code>#include &quot;global.h&quot;</code><br/>
 <code>#include &quot;instruction.h&quot;</code><br/>
 <code>#include &quot;phrase.h&quot;</code><br/>
+<code>#include &quot;stats.h&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for basicblock.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2basicblock_8h__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8h" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8h" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8h">
-</map>
+<!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="binaryTranslator_2basicblock_8h__dep__incl.png" border="0" usemap="#_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8hdep" alt=""/></div>
-<map name="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8hdep" id="_2home_2milad_2esc__project_2svn_2PARS_2src_2binaryTranslator_2basicblock_8hdep">
-</map>
+<!-- MAP 1 -->
 </div>
 </div>
 <p><a href="binaryTranslator_2basicblock_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsub__block.html">sub_block</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbasicblock.html">basicblock</a></td></tr>
+<tr><td colspan="2"><h2><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fe">REACHING_TYPE</a> { <a class="el" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0">BR_DST</a>, 
+<a class="el" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0">NO_BR_DST</a>
+ }</td></tr>
 </table>
+<hr/><h2>Enumeration Type Documentation</h2>
+<a class="anchor" id="ad7598ead73b3381457b65e7370c3d2fe"></a><!-- doxytag: member="basicblock.h::REACHING_TYPE" ref="ad7598ead73b3381457b65e7370c3d2fe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fe">REACHING_TYPE</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0"></a><!-- doxytag: member="BR_DST" ref="ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0" args="" -->BR_DST</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0"></a><!-- doxytag: member="NO_BR_DST" ref="ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0" args="" -->NO_BR_DST</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+<div class="fragment"><pre class="fragment">{<a class="code" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6ee5ea3af82f994b233c11db30e8a1f0">BR_DST</a>, <a class="code" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fea6fe00ebe5e51aee00fd7ac460d1c95e0">NO_BR_DST</a>} <a class="code" href="binaryTranslator_2basicblock_8h.html#ad7598ead73b3381457b65e7370c3d2fe">REACHING_TYPE</a>;
+</pre></div>
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -110,7 +141,7 @@ Classes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

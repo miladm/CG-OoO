@@ -65,12 +65,13 @@ void memory::completeIns () {
         // FORWARD DATA //_memory_to_schedule_port->pushBack(mem_ins, _clk->now ());
         g_RF_MGR->writeToRF (mem_ins);
         g_RF_MGR->updateWireState (WRITE, mem_ins->getNumWrAR (), true, true);
-        _iROB->ramAccess (); /* NOTIFY THE INSTRUCTION IS COMPLETE */
+//        _iROB->ramAccess (); /* NOTIFY THE INSTRUCTION IS COMPLETE */
         dbg.print (DBG_MEMORY, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), 
                    "Write Complete mem ins", mem_ins->getInsID (), _clk->now ());
+
+        _e_stage.ffAccess ();
     }
 
-    _e_stage.ffAccess ();
 }
 
 PIPE_ACTIVITY memory::memoryImpl () {

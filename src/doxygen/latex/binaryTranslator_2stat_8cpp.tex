@@ -4,6 +4,7 @@
 }
 {\ttfamily \#include \char`\"{}stat.h\char`\"{}}\par
 Include dependency graph for stat.cpp:
+% FIG 0
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -30,19 +31,21 @@ void \hyperlink{binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93}{S
 \begin{DoxyCode}
                                                                    {
         FILE *statOutputFile;
-        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
-      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_DynBBSizeHist_sta
-      t.csv").c_str(), "w")) == NULL)
+    string file_name = stat_path + "/" + (*program_name) + "_DynBBSizeHist_stat.c
+      sv";
+        if ((statOutputFile  = fopen(file_name.c_str(), "w")) == NULL)
                 Assert("Unable to open the statistics output file.");
         for (map<int,int>::iterator it = bbSizeHist.begin(); it != bbSizeHist.end
       (); it++) {
                 fprintf(statOutputFile, "%d, %d\n", it->first, it->second);
         }
+    printf ("\t\tDynBBSizeHist: %s\n", file_name.c_str ());
 }
 \end{DoxyCode}
 
 
 Here is the caller graph for this function:
+% FIG 1
 
 
 \hypertarget{binaryTranslator_2stat_8cpp_a82694b42d0f920bca0288e0ea13e905e}{
@@ -69,9 +72,9 @@ Here is the caller graph for this function:
                         bbSizeDensity[size] = 1;
         }
         FILE *statOutputFile;
-        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
-      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_StatBBSizeCDF_sta
-      t.csv").c_str(), "w")) == NULL)
+    string file_name = stat_path + "/" + (*program_name) + "_StatBBSizeCDF_stat.c
+      sv";
+        if ((statOutputFile  = fopen(file_name.c_str(), "w")) == NULL)
                 Assert("Unable to open the statistics output file.");
         float cdf = 0.0;
         for (map<int,int>::iterator it = bbSizeDensity.begin(); it != bbSizeDensi
@@ -79,16 +82,19 @@ Here is the caller graph for this function:
                 cdf += (float)it->second / (float)bbList->NumElements();
                 fprintf(statOutputFile, "%d, %f\n", it->first, cdf);
         }
+    printf ("\t\tStatBBSizeCDF: %s\n", file_name.c_str ());
 }
 \end{DoxyCode}
 
 
 Here is the call graph for this function:
+% FIG 2
 
 
 
 
 Here is the caller graph for this function:
+% FIG 3
 
 
 \hypertarget{binaryTranslator_2stat_8cpp_a08c02c88484628acfda48f7eb2308c93}{
@@ -123,23 +129,25 @@ Here is the caller graph for this function:
                         }
                 }
         }
-        if ((statOutputFile  = fopen(("/home/milad/esc_project/svn/memTraceMilad/
-      TraceSim/phraseblock_framework/output_files/"+(*program_name)+"_inter_n_intra_BB_
-      reg_stat.txt").c_str(), "w")) == NULL)
+        if ((statOutputFile  = fopen((stat_path + "/" + (*program_name) + "_inter
+      _n_intra_BB_reg_stat.txt").c_str(), "w")) == NULL)
                 Assert("Unable to open the statistics output file.");
 
         fprintf(statOutputFile, "Avg. Num INTRA-BB Regs: %f\n", (float)num_intraB
       B_regs/(float)bbList->NumElements());
         fprintf(statOutputFile, "Avg. Num INTER-BB Regs: %f\n", (float)num_interB
       B_regs/(float)bbList->NumElements());
-}\end{DoxyCode}
+}
+\end{DoxyCode}
 
 
 Here is the call graph for this function:
+% FIG 4
 
 
 
 
 Here is the caller graph for this function:
+% FIG 5
 
 

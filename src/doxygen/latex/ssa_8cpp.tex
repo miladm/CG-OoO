@@ -12,8 +12,6 @@ Include dependency graph for ssa.cpp:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}{findDomEntryPoints} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, \hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$interiorBB)
-\item 
 void \hyperlink{ssa_8cpp_a2407eaf38be9d17167c4361072082608}{buildDefUseSets} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
 \item 
 void \hyperlink{ssa_8cpp_adb27c228bf508415dafc026ebbc822d3}{buildVarList} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
@@ -27,11 +25,6 @@ void \hyperlink{ssa_8cpp_af9593c92c3c4713e11388054c46aa5e9}{search} (\hyperlink{
 void \hyperlink{ssa_8cpp_a804de8f00b7ea9e5487315dc9ff01d77}{ssa\_\-renaming} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
 \item 
 void \hyperlink{ssa_8cpp_a99d7839751286ac78c627aabd383cb51}{build\_\-ssa\_\-form} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList, map$<$ int, \hyperlink{classvariable}{variable} $\ast$ $>$ \&varList)
-\end{DoxyCompactItemize}
-\subsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-int \hyperlink{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}{counter} = 0
 \end{DoxyCompactItemize}
 
 
@@ -56,18 +49,18 @@ int \hyperlink{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}{counter} = 0
 \label{ssa_8cpp_a99d7839751286ac78c627aabd383cb51}
 
 \begin{DoxyCode}
-                                                                            {
-        printf("\tBuild Def-Use Sets\n");
-        buildDefUseSets(bbList);
-        printf("\tBuild Variable Def Lists From DefSets\n");
-        buildVarList(bbList,varList);
-        printf("\tBuild Phi-Funcations\n");
-        phi_func_placement(bbList, varList);
-        printf("\tRun SSA Renaming\n");
-        ssa_renaming(bbList, varList);
-        printf("\tDistroy VarList\n");
-        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
-      (); it++) {
+                                                                             {
+        printf ("\tBuild Def-Use Sets\n");
+        buildDefUseSets (bbList);
+        printf ("\tBuild Variable Def Lists From DefSets\n");
+        buildVarList (bbList,varList);
+        printf ("\tBuild Phi-Funcations\n");
+        phi_func_placement (bbList, varList);
+        printf ("\tRun SSA Renaming\n");
+        ssa_renaming (bbList, varList);
+        printf ("\tDistroy VarList\n");
+        for (map<int,variable*>::iterator it = varList.begin (); it != varList.en
+      d (); it++) {
                 delete it->second;
         }
 }
@@ -93,9 +86,9 @@ Here is the caller graph for this function:
 \label{ssa_8cpp_a2407eaf38be9d17167c4361072082608}
 
 \begin{DoxyCode}
-                                                {
-        for (int i =0 ; i < bbList->NumElements(); i++)
-                bbList->Nth(i)->setupDefUseSets();
+                                                 {
+        for (int i =0 ; i < bbList->NumElements (); i++)
+                bbList->Nth (i)->setupDefUseSets ();
 }
 \end{DoxyCode}
 
@@ -121,65 +114,31 @@ Here is the caller graph for this function:
 
 \begin{DoxyCode}
                                                                            {
-        // Build the variables list
+        /* BUILD THE VARIABLES LIST FOR X86 REGISTERS */
         for (long int i = X86_REG_LO; i <= X86_REG_HI; i++) {
-                variable *var = new variable(i);
-                varList.insert(pair<int,variable*>(i,var));
+                variable *var = new variable (i);
+                varList.insert (pair<int,variable*> (i,var));
         }
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                basicblock* bb = bbList->Nth(i);
-                set<long int> defSet = bb->getDefSet(); //NOTE: some variables ar
-      e "somehow" never defined in x86!
-                for (set<long int>::iterator it = defSet.begin(); it != defSet.en
-      d(); it++) {
-                        if (!((*it) >= X86_REG_LO && (*it) <= X86_REG_HI))
-                                printf("ERROR: %d\n",*it);
-                        Assert((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "inv
-      alid x86 variable.");
+        for (int i = 0; i < bbList->NumElements (); i++) {
+                basicblock* bb = bbList->Nth (i);
+                set<long int> defSet = bb->getDefSet (); //NOTE: some variables a
+      re "somehow" never defined in x86!
+        set<long int>::iterator it;
+                for (it = defSet.begin (); it != defSet.end (); it++) {
+                        Assert ((*it) >= X86_REG_LO && (*it) <= X86_REG_HI && "In
+      valid x86 variable.");
                         int varIndx = *it;
-                        varList[varIndx]->addBB(bb);
+                        varList[varIndx]->addBB (bb);
                 }
                 #ifdef DEBUG_SSA
-                printf("def set: %d\n",defSet.size());
+                printf ("def set: %d\n",defSet.size ());
                 #endif
         }
         // Stat on x86 reg definitions in a program.
-        // for (map<int,variable*>::iterator it = varList.begin(); it != varList.
-      end(); it++) {
-                // printf("%d\n", it->second->getNumAssignedBB());
+        // for (map<int,variable*>::iterator it = varList.begin (); it != varList
+      .end (); it++) {
+                // printf ("%d\n", it->second->getNumAssignedBB ());
         // }
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}{
-\index{ssa.cpp@{ssa.cpp}!findDomEntryPoints@{findDomEntryPoints}}
-\index{findDomEntryPoints@{findDomEntryPoints}!ssa.cpp@{ssa.cpp}}
-\subsubsection[{findDomEntryPoints}]{\setlength{\rightskip}{0pt plus 5cm}void findDomEntryPoints (
-\begin{DoxyParamCaption}
-\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{bbList, }
-\item[{{\bf List}$<$ {\bf basicblock} $\ast$ $>$ $\ast$}]{interiorBB}
-\end{DoxyParamCaption}
-)}}
-\label{ssa_8cpp_abdfff53c843c32229bd5cfb0fd094026}
-
-\begin{DoxyCode}
-                                                                                 
-       {
-        for (int i = 0; i < bbList->NumElements(); i++) {       
-                basicblock* bb = bbList->Nth(i);
-                if (bb->getSDominatorSize() == 0) {
-                        interiorBB->Append(bb);
-                }
-        }
 }
 \end{DoxyCode}
 
@@ -204,39 +163,39 @@ Here is the caller graph for this function:
 \label{ssa_8cpp_a64b325828ea51414e2809f54af3302a2}
 
 \begin{DoxyCode}
-                                                                                {
-      
+                                                                                 
+      {
         map<ADDR,int> hasAlready, work;
         map<ADDR,basicblock*> W;
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                basicblock *bb = bbList->Nth(i);
-                hasAlready.insert(pair<ADDR,int>(bb->getID(),ZERO_ITER));
-                work.insert(pair<ADDR,int>(bb->getID(),ZERO_ITER));
+        for (int i = 0; i < bbList->NumElements (); i++) {
+                basicblock *bb = bbList->Nth (i);
+                hasAlready.insert (pair<ADDR,int> (bb->getID (),ZERO_ITER));
+                work.insert (pair<ADDR,int> (bb->getID (),ZERO_ITER));
         }
         int iterCount = 0;
-        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
-      (); it++) {
+    map<int,variable*>::iterator it;
+        for (it = varList.begin (); it != varList.end (); it++) {
                 iterCount++;
                 variable *var = it->second;
-                for (int j = 0; j < var->getNumAssignedBB(); j++) {
-                        basicblock *bb = var->getNthAssignedBB(j);
-                        work[bb->getID()] = iterCount;
-                        W.insert(pair<ADDR,basicblock*>(bb->getID(),bb));
+                for (int j = 0; j < var->getNumAssignedBB (); j++) {
+                        basicblock *bb = var->getNthAssignedBB (j);
+                        work[bb->getID ()] = iterCount;
+                        W.insert (pair<ADDR,basicblock*> (bb->getID (),bb));
                 }
-                while (W.size() != 0) {
-                        basicblock* X = (W.begin())->second;
-                        W.erase(W.begin());
-                        map<ADDR,basicblock*> xDF = X->getDF();
-                        for (map<ADDR,basicblock*>::iterator Y = xDF.begin(); Y !
-      = xDF.end(); Y++) {
+                while (W.size () != 0) {
+                        basicblock* X = (W.begin ())->second;
+                        W.erase (W.begin ());
+                        map<ADDR,basicblock*> xDF = X->getDF ();
+            map<ADDR,basicblock*>::iterator Y;
+                        for (Y = xDF.begin (); Y != xDF.end (); Y++) {
                                 if (hasAlready[Y->first] < iterCount) {
-                                        (Y->second)->insertPhiFunc(var->getID());
-      
+                                        (Y->second)->insertPhiFunc (var->getID ()
+      );
                                         hasAlready[Y->first] = iterCount;
                                         if (work[Y->first] < iterCount) {
                                                 work[Y->first] = iterCount;
-                                                W.insert(pair<ADDR,basicblock*>((
-      Y->second)->getID(),Y->second));
+                                                W.insert (pair<ADDR,basicblock*> 
+      ((Y->second)->getID (),Y->second));
                                         }
                                 }
                         }
@@ -266,93 +225,122 @@ Here is the caller graph for this function:
 \label{ssa_8cpp_af9593c92c3c4713e11388054c46aa5e9}
 
 \begin{DoxyCode}
-                                                         {
-        // if (!bb->isVisited()) {
-                bb->setAsVisited();
-                // printf("================================%d\n", counter++);
-                List<instruction*> *insList = bb->getInsList();
-                //TODO: check if the block is visited
-                //Process assignment operations
-                //Process phi operations
-                map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs();
-                for (map<long int, vector<long int> >::iterator it = phiFuncs.beg
-      in(); it != phiFuncs.end(); it++) {
-                        int var = it->first;
-                        Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid
-       register value");
-                        int k = varList[var]->getC();
-                        bb->setPhiWriteVar(var, k);
-                        varList[var]->pushToStack(k);
-                        varList[var]->setC(k+1);
+                                                          {
+    Assert (!bb->isVisited () && "An attempt to revisit a block in SSA");
+    bb->setAsVisited ();
+
+    List<instruction*> *insList = bb->getInsList ();
+    map<int, int> hackPushes;
+    map<long int, vector<long int> > phiFuncs = bb->getPhiFuncs ();
+
+    /* ASSIGN DESTINATION SSA REGISTER TO PHI-FUNCTIONS */
+    map<long int, vector<long int> >::iterator phiFunc;
+    for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+        int var = phiFunc->first;
+        Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value
+      ");
+        int k = varList[var]->getC ();
+        bb->setPhiWriteVar (var, k);
+        varList[var]->pushToStack (k);
+        varList[var]->setC (k + 1);
+    }
+
+    /* ASSIGN SSA REGISTERS TO REGULAR INSTRUCTIONS */
+    for (int i = 0; i < insList->NumElements (); i++) {
+        instruction *ins = insList->Nth (i);
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == READ) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid regist
+      er value");
+                int v1 = varList[var]->_hackPushCount;
+                int subscript = varList[var]->getTopStack ();
+                if (varList[var]->_hackPushCount - v1 == 1) {
+                    if (hackPushes.find (var) == hackPushes.end ()) 
+                        hackPushes.insert(pair<int, int> (var, 1));
+                    else 
+                        hackPushes[var]++;
                 }
-                for (int i = 0; i < insList->NumElements(); i++) {
-                        instruction *ins = insList->Nth(i);
-                        for (int j = 0; j < ins->getNumReadReg(); j++) {
-                                int var = ins->getNthReadReg(j);
-                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
-      "Invalid register value");
-                                ins->setReadVar(var, varList[var]->getTopStack())
-      ;
-                        }
-                        for (int j = 0; j < ins->getNumWriteReg(); j++) {
-                                int var = ins->getNthWriteReg(j);
-                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
-      "Invalid register value");
-                                int k = varList[var]->getC();
-                                ins->setWriteVar(var, k);
-                                varList[var]->pushToStack(k);
-                                varList[var]->setC(k+1);
-                        }
+                ins->setReadVar (var, subscript);
+            }
+        }
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid regist
+      er value");
+                int k = varList[var]->getC ();
+                ins->setWriteVar (var, k);
+                varList[var]->pushToStack (k);
+                varList[var]->setC (k + 1);
+            }
+        }
+    }
+
+    /*--
+     * SET SSA VALUES OF EACH VARIABLE FROM this BB TO EACH OF ITS
+     * DESCENDENTS (RHS of PHI-FUNCTION). WE WANT TO HAVE AS MANY ELEMENET
+     * IN TEH PHI-VECTOR AS THE NUMBER OF ANCESTORS OF THE BB. THEN EVERY
+     * ANCESTOR MUST COME AND FILL IN THE HOLE
+     --*/
+    for (int i = 0; i < bb->getNumDescendents (); i++) {
+        basicblock* Y = bb->getNthDescendent (i);
+        int j = whichPred (Y, bb);
+        map<long int, vector<long int> > phiFuncs = Y->getPhiFuncs ();
+        for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) 
+      {
+            int var = phiFunc->first;
+            Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register v
+      alue");
+            int v1 = varList[var]->_hackPushCount;
+            int subscript = varList[var]->getTopStack ();
+            if (varList[var]->_hackPushCount - v1 == 1) {
+                if (hackPushes.find (var) == hackPushes.end ()) 
+                    hackPushes.insert(pair<int, int> (var, 1));
+                else 
+                    hackPushes[var]++;
+            }
+            Y->replaceNthPhiOperand (var, j, subscript); //TODO correct?
+        }
+    }
+
+    /* SEARCH EVERY CHILD OF this BB IN THE DOMINATOR TREE */
+    map<ADDR,basicblock*> children = bb->getChildren ();
+    map<ADDR,basicblock*>::iterator child;
+    for (child = children.begin (); child != children.end (); child++) {
+        basicblock* Y = child->second;
+        search (Y, varList);
+    }
+
+    /* CLEAN THE STACKES THAT HAD A DEFINITION DONE BY this BB */
+    for (int i = 0; i < insList->NumElements (); i++) {
+        instruction *ins = insList->Nth (i);
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                int var = ins->getNthReg (j);
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid regist
+      er value");
+                varList[var]->popFromStack ();
+            }
+        }
+        /* THIS IS ANOTHER PART OF THE STACK HACK */
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == READ) {
+                int var = ins->getNthReg (j);
+                Assert (varList.find (var) != varList.end ());
+                if (hackPushes.find (var) != hackPushes.end ()) {
+                    varList[var]->popHackPushes (hackPushes[var]);
+                    hackPushes.erase (var);
                 }
-                for (int i = 0; i < bb->getNumDescendents(); i++) {
-                        basicblock* Y = bb->getNthDescendent(i);
-                        int j = whichPred(Y, bb);
-                        map<long int, vector<long int> > phiFuncs = Y->
-      getPhiFuncs();
-                        for (map<long int, vector<long int> >::iterator it = phiF
-      uncs.begin(); it != phiFuncs.end(); it++) {
-                                int var = it->first;
-                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
-      "Invalid register value");
-                                //TODO see if j ever larger than 0
-                                //we want to have as many elemenet in teh phi-vec
-      tor as the number of ancestors of the BB. Then every ancestor must come and fill 
-      in the hole
-                                Y->replaceNthPhiOperand(var,j,varList[var]->getTo
-      pStack()); //TODO correct?
-                        }
-                }
-                map<ADDR,basicblock*> children = bb->getChildren();
-                for (map<ADDR,basicblock*>::iterator it = children.begin(); it !=
-       children.end(); it++) {
-                // for (int i = 0; i < bb->getNumChildren(); i++) {
-                        // printf("children\n");
-                        basicblock* Y = it->second;// bb->getNthChild(i);
-                        search(Y,varList);
-                }
-                for (int i = 0; i < insList->NumElements(); i++) {
-                        instruction *ins = insList->Nth(i);
-                        for (int j = 0; j < ins->getNumWriteReg(); j++) {
-                                int var = ins->getNthOldWriteReg(j);
-                                Assert(var <= X86_REG_HI && var >= X86_REG_LO && 
-      "Invalid register value");
-                                varList[var]->popFromStack();
-                        }
-                        // This is another part of the stack hack
-                        for (int j = 0; j < ins->getNumReadReg(); j++) {
-                                int var = ins->getNthReadReg(j);
-                                Assert(varList.find(var) != varList.end());
-                                varList[var]->popHackPushes();
-                        }
-                }
-                for (map<long int, vector<long int> >::iterator it = phiFuncs.beg
-      in(); it != phiFuncs.end(); it++) {
-                        int var = it->first;
-                        Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid
-       register value");
-                        varList[var]->popFromStack();
-                }
-        // }
+            }
+        }
+    }
+    for (phiFunc = phiFuncs.begin (); phiFunc != phiFuncs.end (); phiFunc++) {
+        int var = phiFunc->first;
+        Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid register value
+      ");
+        varList[var]->popFromStack ();
+    }
 }
 \end{DoxyCode}
 
@@ -377,22 +365,25 @@ Here is the caller graph for this function:
 \label{ssa_8cpp_a804de8f00b7ea9e5487315dc9ff01d77}
 
 \begin{DoxyCode}
-                                                                          {
+                                                                           {
         List<basicblock*> *interiorBB = new List<basicblock*>;
-        findDomEntryPoints(bbList, interiorBB); //TODO: this is done twice (anoth
-      er time in reg-allocation - fix it)
-        for (int i = 0; i < bbList->NumElements(); i++)
-                bbList->Nth(i)->setAsUnvisited();
-        for (int i = 0; i < interiorBB->NumElements(); i++) {
-                basicblock* bbHead = interiorBB->Nth(i);
+        findDomEntryPoints (bbList, interiorBB);
+        for (int i = 0; i < bbList->NumElements (); i++)
+                bbList->Nth (i)->setAsUnvisited ();
+        for (int i = 0; i < interiorBB->NumElements (); i++) {
+                basicblock* bbHead = interiorBB->Nth (i);
                 search (bbHead, varList);
         }
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                if (bbList->Nth(i)->isVisited() == false) printf("unvisited BB ID
-      : %llx,%d,%d\n", bbList->Nth(i)->getID(), bbList->Nth(i)->getNumAncestors(), bbLi
-      st->Nth(i)->numNonBackEdgeAncestors());
-                bbList->Nth(i)->setAsUnvisited();
+        for (int i = 0; i < bbList->NumElements (); i++) {
+                if (!bbList->Nth (i)->isVisited ()) 
+            printf ("Unvisited BB ID: %llx,%d,%d\n", bbList->Nth (i)->getID (), 
+                                                     bbList->Nth (i)->getNumAnces
+      tors (), 
+                                                     bbList->Nth (i)->numNonBackE
+      dgeAncestors ());
+                bbList->Nth (i)->setAsUnvisited ();
         }
+    delete interiorBB;
 }
 \end{DoxyCode}
 
@@ -417,13 +408,13 @@ Here is the caller graph for this function:
 \label{ssa_8cpp_ad51f0106de926496f1a6b24bfd21bc32}
 
 \begin{DoxyCode}
-                                            {
-        ADDR bbID = X->getID();
-        for (int i = 0; i < Y->getNumAncestors(); i++) {
-                if (Y->getNthAncestor(i)->getID() == bbID)
+                                             {
+        ADDR bbID = X->getID ();
+        for (int i = 0; i < Y->getNumAncestors (); i++) {
+                if (Y->getNthAncestor (i)->getID () == bbID)
                         return i;
         }
-        Assert(true == false && "CFG Fault. The BB ancesor was not found.");
+        Assert (0 && "CFG Fault. The BB ancesor was not found.");
 }
 \end{DoxyCode}
 
@@ -436,11 +427,3 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-
-
-\subsection{Variable Documentation}
-\hypertarget{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}{
-\index{ssa.cpp@{ssa.cpp}!counter@{counter}}
-\index{counter@{counter}!ssa.cpp@{ssa.cpp}}
-\subsubsection[{counter}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf counter} = 0}}
-\label{ssa_8cpp_a617a47c70795bcff659815ad0efd2266}

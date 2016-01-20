@@ -29,18 +29,18 @@ void \hyperlink{ssa_8h_a99d7839751286ac78c627aabd383cb51}{build\_\-ssa\_\-form} 
 \label{ssa_8h_a99d7839751286ac78c627aabd383cb51}
 
 \begin{DoxyCode}
-                                                                            {
-        printf("\tBuild Def-Use Sets\n");
-        buildDefUseSets(bbList);
-        printf("\tBuild Variable Def Lists From DefSets\n");
-        buildVarList(bbList,varList);
-        printf("\tBuild Phi-Funcations\n");
-        phi_func_placement(bbList, varList);
-        printf("\tRun SSA Renaming\n");
-        ssa_renaming(bbList, varList);
-        printf("\tDistroy VarList\n");
-        for (map<int,variable*>::iterator it = varList.begin(); it != varList.end
-      (); it++) {
+                                                                             {
+        printf ("\tBuild Def-Use Sets\n");
+        buildDefUseSets (bbList);
+        printf ("\tBuild Variable Def Lists From DefSets\n");
+        buildVarList (bbList,varList);
+        printf ("\tBuild Phi-Funcations\n");
+        phi_func_placement (bbList, varList);
+        printf ("\tRun SSA Renaming\n");
+        ssa_renaming (bbList, varList);
+        printf ("\tDistroy VarList\n");
+        for (map<int,variable*>::iterator it = varList.begin (); it != varList.en
+      d (); it++) {
                 delete it->second;
         }
 }

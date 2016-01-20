@@ -90,13 +90,13 @@ void commit::squash () {
     _e_stage.ffAccess (_stage_width);
 
     /*-- SQUASH iROB --*/
-    _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
+//    _iROB->ramAccess (); /* SQUASH INS HOLDS INDEX TO ITS ROB ENTRY */
     for (LENGTH i = _iROB->getTableSize () - 1; i >= 0; i--) {
         if (_iROB->getTableSize () == 0) break;
         ins = _iROB->getNth_unsafe (i);
         if (ins->getInsID () < squashSeqNum) break;
         _iROB->removeNth_unsafe (i);
-        _iROB->ramAccess ();
+//        _iROB->ramAccess ();
         s_squash_ins_cnt++;
     }
 

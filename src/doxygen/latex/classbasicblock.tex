@@ -19,63 +19,71 @@ Collaboration diagram for basicblock:
 \item 
 \hyperlink{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}{$\sim$basicblock} ()
 \item 
-void \hyperlink{classbasicblock_ad7aa6001155731e9af6347220d48d702}{addToBB} (string $\ast$ins, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} insAddr)
-\item 
-void \hyperlink{classbasicblock_ad741200a033f41ca0e08dadbbbc82060}{addToBB} (\hyperlink{classinstruction}{instruction} $\ast$ins)
-\item 
-void \hyperlink{classbasicblock_ac2bbc450fee2f47da180fe67b515ace3}{addBBheader} (string $\ast$header, \hyperlink{global_2global_8h_a7ea74bb9ffd2e4d41550ae2383dd25bc}{ADDRS} bbAddr)
-\item 
-bool \hyperlink{classbasicblock_a2acbd3c9e5af1bcfc60ed44827126d90}{hasBBheader} ()
-\item 
-int \hyperlink{classbasicblock_a435d01a9a4869893c0a8eaaf4f62cd22}{getNumBBIns\_\-o} ()
-\item 
-int \hyperlink{classbasicblock_a40ff2e382e333d5515bd55508b49247a}{getNumBBIns\_\-s} ()
-\item 
-string $\ast$ \hyperlink{classbasicblock_ac215ec20abf70ad5a3a6e4c086a529de}{getNthBBIns\_\-s} (int indx)
-\item 
-\hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classbasicblock_ae37c61e43378f8cf5e5b116217c295b1}{getNthBBIns\_\-o} (int indx)
-\item 
-bool \hyperlink{classbasicblock_aa3e4afae3ad78659454d5747931ee455}{isBBcomplete} ()
-\item 
-\hyperlink{classbasicblock_ac6d735b981c1d367ad93f62ab0394974}{basicblock} ()
-\item 
-\hyperlink{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}{$\sim$basicblock} ()
-\item 
 \hyperlink{classbasicblock}{basicblock} \& \hyperlink{classbasicblock_a7fee16556188be2c9501c1062589e7a6}{operator=} (const \hyperlink{classbasicblock}{basicblock} \&bb)
 \item 
 void \hyperlink{classbasicblock_a8f58f53b0f1ab88f2909116193cfa953}{transferPointersToNewList} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
 \item 
-void \hyperlink{classbasicblock_a17a204547c41f4ba744ac49b1f375477}{addIns} (\hyperlink{classinstruction}{instruction} $\ast$ins)
+void \hyperlink{classbasicblock_a21556bff8a285d4098ce0762a1d9b69f}{addIns} (\hyperlink{classinstruction}{instruction} $\ast$, \hyperlink{basicblock_8h_ad7598ead73b3381457b65e7370c3d2fe}{REACHING\_\-TYPE})
 \item 
-void \hyperlink{classbasicblock_a881f41cc184c5aafa1e0881bb67f6868}{addIns} (\hyperlink{classinstruction}{instruction} $\ast$ins, \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} ID)
+void \hyperlink{classbasicblock_a3bf11ce1881fbbbd5697888543c5a267}{addIns} (\hyperlink{classinstruction}{instruction} $\ast$, \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR})
 \item 
-\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} \hyperlink{classbasicblock_a5c04fc7ec170aa4d395928b7c4ca0392}{getLastInsDst} ()
+void \hyperlink{classbasicblock_ae4243cd796c3c03447b58d6fdd2743a5}{forceAssignBBID} ()
+\item 
+void \hyperlink{classbasicblock_a14279cf8fb23e94f8cd03f8aeacbde21}{updateBBID} ()
+\item 
+bool \hyperlink{classbasicblock_ac0ddcb18b5f613710d5836025dd974cb}{isThisBBfallThru} (\hyperlink{classbasicblock}{basicblock} $\ast$)
+\item 
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_a5c04fc7ec170aa4d395928b7c4ca0392}{getLastInsDst} ()
+\item 
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_afe5fbc2aaf3764ecffed166a014a9016}{getLastInsFallThru} ()
 \item 
 \hyperlink{classinstruction}{instruction} $\ast$ \hyperlink{classbasicblock_a99fb16d14456bb07b0033a0489ced872}{getLastIns} ()
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{classbasicblock_adc40d816c82feedc1f7027fc29470d90}{getInsList} ()
 \item 
-bool \hyperlink{classbasicblock_afd299af5d08655c4fbd10221f5edb556}{isInsAddrInBB} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} insAddr)
+bool \hyperlink{classbasicblock_afd299af5d08655c4fbd10221f5edb556}{isInsAddrInBB} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} insAddr)
+\item 
+void \hyperlink{classbasicblock_ab7adcaad4e1c148578c9ee7c419ebabc}{brDependencyTableCheck} ()
 \item 
 void \hyperlink{classbasicblock_a1599003c14b63f443c1ca3c48c34238e}{printBb} ()
 \item 
 int \hyperlink{classbasicblock_a42862e82af55ea72dc2e69ad32f3df29}{getBbSize} ()
 \item 
-\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} \hyperlink{classbasicblock_aff434c369968fe5fb3151d8ec00665b4}{getID} ()
+int \hyperlink{classbasicblock_a17c89777dbbfb909e6749330569066fc}{getBbSize\_\-ListSch} ()
 \item 
-void \hyperlink{classbasicblock_a08a435779d5c69e560f81d76511033f8}{setBBbrHeader} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} brAddr)
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_aff434c369968fe5fb3151d8ec00665b4}{getID} ()
 \item 
-\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} \hyperlink{classbasicblock_aba106088c0783baf1a57018bbc091fe1}{getBBbrHeader} ()
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_a71eb42838e461e58085faf79e8cf1607}{getAddr} ()
+\item 
+void \hyperlink{classbasicblock_a08a435779d5c69e560f81d76511033f8}{setBBbrHeader} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} brAddr)
+\item 
+void \hyperlink{classbasicblock_a75c5a313363a9d2ad89133d3fa9c9b2d}{resetBBbrHeader} ()
+\item 
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_aba106088c0783baf1a57018bbc091fe1}{getBBbrHeader} ()
 \item 
 bool \hyperlink{classbasicblock_af49545fcc35042634fa48f78ca9f55cb}{hasHeader} ()
 \item 
-void \hyperlink{classbasicblock_ad97dd41248a01abbf1baa313845ff526}{setFallThrough} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_adb0ccbb0bd5d36fd05fbeb80b2e47494}{getBBtail} ()
 \item 
-void \hyperlink{classbasicblock_af0d0269f9c9a3b52062170c667f436b2}{setTakenTarget} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+bool \hyperlink{classbasicblock_ac6c9417ec2fdc2795a8d2ece003bd253}{hasFallThrough} ()
 \item 
-void \hyperlink{classbasicblock_aaede95419f42104aca674399aeef1a9b}{setDescendent} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+void \hyperlink{classbasicblock_acf97e4fe55cfcd74ac0b0d6532e2e291}{setFallThrough} (\hyperlink{classbasicblock}{basicblock} $\ast$)
 \item 
-void \hyperlink{classbasicblock_a731087012c909b6d3875fa6fb5731bab}{setAncestor} (\hyperlink{classbasicblock}{basicblock} $\ast$bb)
+void \hyperlink{classbasicblock_a595a0a54024fca0c88de5b56388e06de}{resetFallThrough} ()
+\item 
+bool \hyperlink{classbasicblock_a935cd5566e8d7bed3764b7920f7ee200}{hasTakenTarget} ()
+\item 
+void \hyperlink{classbasicblock_a0fba29b7f9e057f174698cfb0564873e}{setTakenTarget} (\hyperlink{classbasicblock}{basicblock} $\ast$)
+\item 
+void \hyperlink{classbasicblock_a1194e61470d8e910c31dd03df0328da7}{resetTakenTarget} ()
+\item 
+void \hyperlink{classbasicblock_af05cd0f5ccbb4d0484b07d74e369de0d}{setDescendent} (\hyperlink{classbasicblock}{basicblock} $\ast$)
+\item 
+void \hyperlink{classbasicblock_a30cba20ee229efa0e17706a78a42fa13}{resetDescendents} ()
+\item 
+void \hyperlink{classbasicblock_abd5ac29c38d0f84eb5dccc87a269cc28}{setAncestor} (\hyperlink{classbasicblock}{basicblock} $\ast$)
+\item 
+void \hyperlink{classbasicblock_aae9d33169e6428c1cf8fa63f02fdff0c}{resetAncestor} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR})
 \item 
 \hyperlink{classbasicblock}{basicblock} $\ast$ \hyperlink{classbasicblock_aae1b2e9429abfe8474fb5f1bc5a204b2}{getNxtBB} ()
 \item 
@@ -101,11 +109,15 @@ void \hyperlink{classbasicblock_a810b34c12cbddff700700341734ddc5d}{setAsUnvisite
 \item 
 bool \hyperlink{classbasicblock_ad40cc70b314779ab7d0990813d3053d4}{isVisited} ()
 \item 
+bool \hyperlink{classbasicblock_ac254c6b6e38f968418e9239f5eebcee2}{isRegAllocated} ()
+\item 
+void \hyperlink{classbasicblock_a58e5eb2ef1760113614b7d29007d5b56}{setRegAllocated} ()
+\item 
 bool \hyperlink{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}{setDominators} ()
 \item 
-map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_aec14cf5254976daec791c62e1b684ecf}{getDominators} ()
+map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_aec14cf5254976daec791c62e1b684ecf}{getDominators} ()
 \item 
-bool \hyperlink{classbasicblock_a9e417b7d2b2cb87281b4c8ed1b10d566}{setDominators} (map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \&intersection)
+bool \hyperlink{classbasicblock_a9e417b7d2b2cb87281b4c8ed1b10d566}{setDominators} (map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \&intersection)
 \item 
 bool \hyperlink{classbasicblock_aafd371f1d5701ae15546178a153ca23d}{setDominators} (\hyperlink{classList}{List}$<$ \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ $\ast$bbList)
 \item 
@@ -119,15 +131,17 @@ void \hyperlink{classbasicblock_abb47633a30d4722992c2d961a4a4ad14}{addChild} (\h
 \item 
 int \hyperlink{classbasicblock_a150ce672b4864265713b242b74b3ca30}{getChildrenSize} ()
 \item 
-map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_a6dde8501c965eb860dcc5bf63fcb06f2}{getChildren} ()
+map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_a6dde8501c965eb860dcc5bf63fcb06f2}{getChildren} ()
 \item 
-map$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_a3f8fdaf67559becd35119c53a47791c6}{getDF} ()
+map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classbasicblock}{basicblock} $\ast$ $>$ \hyperlink{classbasicblock_a3f8fdaf67559becd35119c53a47791c6}{getDF} ()
+\item 
+void \hyperlink{classbasicblock_a7a9a81a5902f8cddcc52edadd266d703}{resetDF} ()
 \item 
 void \hyperlink{classbasicblock_abfaebb9413fe26d42607c09949e9d5cb}{addToDFset} (\hyperlink{classbasicblock}{basicblock} $\ast$node)
 \item 
-bool \hyperlink{classbasicblock_a026b949adeca19875d0a8a43784d2c9d}{isInIDom} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} nodeID)
+bool \hyperlink{classbasicblock_a026b949adeca19875d0a8a43784d2c9d}{isInIDom} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} nodeID)
 \item 
-bool \hyperlink{classbasicblock_ab16dc9da49df4b6bf4c6573bfb31217a}{isASDominator} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} nodeID)
+bool \hyperlink{classbasicblock_ab16dc9da49df4b6bf4c6573bfb31217a}{isASDominator} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} nodeID)
 \item 
 int \hyperlink{classbasicblock_ab3f5925d649492e0a3e73f4f9075ca7d}{getSDominatorSize} ()
 \item 
@@ -135,7 +149,7 @@ bool \hyperlink{classbasicblock_a0da29a0f57618d2a13bfdfc9926319b9}{isBackEdge} (
 \item 
 void \hyperlink{classbasicblock_a46149b611069f8c2f1328311ea4b7803}{setupBackEdge} ()
 \item 
-\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} \hyperlink{classbasicblock_a0aa9e7f9af5171d5cd4bad3503cc45c8}{getBackEdgeDest} ()
+\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \hyperlink{classbasicblock_a0aa9e7f9af5171d5cd4bad3503cc45c8}{getBackEdgeDest} ()
 \item 
 int \hyperlink{classbasicblock_a4e6b8abafbdff3155477bdefd7546ef9}{getNumBackEdgeSource} ()
 \item 
@@ -155,19 +169,19 @@ bool \hyperlink{classbasicblock_ad5a6467f9a1628c658671d2f432cbeba}{getAllasDomin
 \item 
 void \hyperlink{classbasicblock_a11c8e9c8e6e38864552bafcd041e7a08}{setAllasDominators} (bool domSetIsAll)
 \item 
-void \hyperlink{classbasicblock_a1aeb2fc7325b987bced690cabf8d296d}{insertPhiFunc} (long int var)
+void \hyperlink{classbasicblock_a933ceb18fc747c182520337b85c4f9da}{insertPhiFunc} (long int)
 \item 
 map$<$ long int, vector$<$ long int $>$ $>$ \hyperlink{classbasicblock_a3b5148a1563478d689e1e3796ebd7dba}{getPhiFuncs} ()
 \item 
-void \hyperlink{classbasicblock_a129efbec925894799b11962ee9ec8b72}{replaceNthPhiOperand} (long int var, int indx, long int subscript)
+void \hyperlink{classbasicblock_ab9ce3574fe056958ce66401602c0c9a9}{replaceNthPhiOperand} (long int, int, long int)
 \item 
-void \hyperlink{classbasicblock_a8b4180d38d685e0def92a4512ab4f1ce}{setPhiWriteVar} (long int var, long int subscript)
+void \hyperlink{classbasicblock_af5afec059922ab19cf93f9f84f5c85ed}{setPhiWriteVar} (long int, long int)
 \item 
-void \hyperlink{classbasicblock_a86973a86f54f7d42ee2e3871a0ff47e1}{insertMOVop} ()
+int \hyperlink{classbasicblock_a654646ba23c51a6f9b5b8db818276d0b}{elimPhiFuncs} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \&, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$)
 \item 
-int \hyperlink{classbasicblock_a27c168ce65c2d5ead06682ea41af8473}{elimPhiFuncs} ()
+void \hyperlink{classbasicblock_ae2ba97a932c305fcad17c91871d9b53c}{insertMOVop} (long int, long int, long int, long int, \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR})
 \item 
-void \hyperlink{classbasicblock_a85e079721ac3397044a6148e4d5fc688}{insertMOVop} (long int dst\_\-var, long int dst\_\-subs, long int src\_\-var, long int src\_\-subs)
+void \hyperlink{classbasicblock_ac4515bd617542ca0596df9864afd0aee}{addMovIns} (\hyperlink{classinstruction}{instruction} $\ast$)
 \item 
 float \hyperlink{classbasicblock_afdffc2f38dc3e93c9125a1e4d205f4e9}{getTakenBias} ()
 \item 
@@ -175,9 +189,9 @@ int \hyperlink{classbasicblock_a17c48156a5eefea6d8ca831dced719e3}{getListIndx} (
 \item 
 void \hyperlink{classbasicblock_a1d85d5fd059f1658ce3c67357502ed71}{setListIndx} (int listIndx)
 \item 
-void \hyperlink{classbasicblock_ab20f99e31cfc155ec00b9027f9c3d454}{addBBtoPBList} (\hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} bbID)
+void \hyperlink{classbasicblock_ab20f99e31cfc155ec00b9027f9c3d454}{addBBtoPBList} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} bbID)
 \item 
-\hyperlink{classList}{List}$<$ \hyperlink{binaryTranslator_2global_8h_aa4557b0650cb21e57e3e4623410832c6}{ADDR} $>$ $\ast$ \hyperlink{classbasicblock_a4a68932d0628e028f4c5877cb888654c}{getBBListForPB} ()
+\hyperlink{classList}{List}$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} $>$ $\ast$ \hyperlink{classbasicblock_a4a68932d0628e028f4c5877cb888654c}{getBBListForPB} ()
 \item 
 bool \hyperlink{classbasicblock_a88276960d345d6849dbe02c9debbb94e}{isAPhraseblock} ()
 \item 
@@ -187,13 +201,33 @@ void \hyperlink{classbasicblock_abb72488dac0d405735a4cf82a1cdd0ce}{addToBB\_\-Li
 \item 
 \hyperlink{classList}{List}$<$ \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$ \hyperlink{classbasicblock_a87440b1ddb945365a4d32b356756ae24}{getInsList\_\-ListSchedule} ()
 \item 
-void \hyperlink{classbasicblock_aa30a3590075a3c30fa5406e3cf81a2e1}{updateDefSet} (long int reg)
+void \hyperlink{classbasicblock_a7ee1e79e21404965709f314b56baa695}{setsupStats} ()
 \item 
-void \hyperlink{classbasicblock_a13aad72bd6dce3b9d6fd47dd324504d3}{updateUseSet} (long int reg)
+void \hyperlink{classbasicblock_ae8a4cc290c3d290b04073649bd1ab28f}{reportStats} ()
 \item 
-void \hyperlink{classbasicblock_abae11bf0376749457259a6d2a2ef8fe7}{updateLocalRegSet} ()
+void \hyperlink{classbasicblock_acafc046132a9107cbad5adcb1e013ffa}{findRootUPLD} ()
 \item 
-bool \hyperlink{classbasicblock_af543b2aba60aec6408825fe513736a8d}{update\_\-InOutSet} ()
+void \hyperlink{classbasicblock_a8f8234c300c0027293da7ea7b710d29c}{markUPLDroot} (\hyperlink{classinstruction}{instruction} $\ast$, \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR})
+\item 
+void \hyperlink{classbasicblock_ab238bfd0637d2761092e86e6517d3320}{markUPLDroots} ()
+\item 
+void \hyperlink{classbasicblock_aa5067cede8627ae1c7109fe33c9c440c}{makeSubBlocks} ()
+\item 
+void \hyperlink{classbasicblock_a688f53e1f072393e2a972974b57be536}{insertMOVop} (map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$, long int, long int, \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \&, int, \hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}{PUSH\_\-LOCATION})
+\item 
+void \hyperlink{classbasicblock_a8743005759ce892482aa942cf0aa114d}{addMovIns} (\hyperlink{classinstruction}{instruction} $\ast$, int, \hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}{PUSH\_\-LOCATION})
+\item 
+int \hyperlink{classbasicblock_ae97e01492662bce4919253c165c674bd}{redundantMovOpElim} (\hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE})
+\item 
+int \hyperlink{classbasicblock_ad5edb15079fcd7c2dd0e7e78185d9826}{deadMovOpElim} (\hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE})
+\item 
+int \hyperlink{classbasicblock_a91953b5e5abf82c6623ca043b2424336}{overwrittenMovOpElim} (\hyperlink{binaryTranslator_2global_8h_a81dba944bc61f5b25a3513766ef6651b}{SCH\_\-MODE})
+\item 
+bool \hyperlink{classbasicblock_a0dbb44100534178477e2a33ee1c34134}{update\_\-InOutSet} (\hyperlink{binaryTranslator_2global_8h_a78dd04e0a4364ff551d83095f9bc0264}{REG\_\-ALLOC\_\-MODE})
+\item 
+void \hyperlink{classbasicblock_a04346052feca6f21451ab71050afe893}{update\_\-locGlbSet} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \&, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$)
+\item 
+int \hyperlink{classbasicblock_ad96c83ff578c7c8c9a2bcd74a2c26add}{update\_\-locToGlb} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \&, map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$)
 \item 
 void \hyperlink{classbasicblock_a828499c93c05d54ff789feed38051428}{setupDefUseSets} ()
 \item 
@@ -203,24 +237,17 @@ set$<$ long int $>$ \hyperlink{classbasicblock_a449cfdd7832d738451da0d773f45a120
 \item 
 set$<$ long int $>$ \hyperlink{classbasicblock_a208aa13365196998e48936c287242a77}{getDefSet} ()
 \item 
+void \hyperlink{classbasicblock_a9d7e049bd37a23efb5e9ea1d230dc2bc}{resetSets} ()
+\item 
+void \hyperlink{classbasicblock_ad33cd8a566195b2f3118abafbeffaf82}{setupMOVop} (\hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR} \&, std::map$<$ \hyperlink{binaryTranslator_2global_8h_a8bb6b77b3aab51e3a8d1866dd5861225}{ADDR}, \hyperlink{classinstruction}{instruction} $\ast$ $>$ $\ast$, std::map$<$ int, long int $>$ \&, std::map$<$ int, long int $>$ \&, \hyperlink{binaryTranslator_2global_8h_ae3190c0c46d1384e80f94a61ad275092}{PUSH\_\-LOCATION})
+\item 
 set$<$ long int $>$ \hyperlink{classbasicblock_ab2b0c4f29f9d14e0073ca924f4beefab}{getLocalRegSet} ()
 \item 
 bool \hyperlink{classbasicblock_afe08d56238e85bb143c4a0bb79c585b1}{isInLocalRegSet} (long int reg)
 \item 
+void \hyperlink{classbasicblock_abae11bf0376749457259a6d2a2ef8fe7}{updateLocalRegSet} ()
+\item 
 int \hyperlink{classbasicblock_a656948a155ce6ed622a31581c4d3c2f0}{getLiveVarSize} ()
-\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-std::set$<$ long int $>$ \hyperlink{classbasicblock_aaff8e15dfe5fa007a97965f5d5c6e8da}{\_\-useSet}
-\item 
-std::set$<$ long int $>$ \hyperlink{classbasicblock_a10324f2866495c2fbd24b7c8e05af7be}{\_\-defSet}
-\item 
-std::set$<$ long int $>$ \hyperlink{classbasicblock_ac93c3bff2754390b7d24d44a652f1dfa}{\_\-inSet}
-\item 
-std::set$<$ long int $>$ \hyperlink{classbasicblock_ac9145f343d3538730f25fe0469420ba8}{\_\-outSet}
-\item 
-std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419e48b8}{\_\-localRegSet}
 \end{DoxyCompactItemize}
 
 
@@ -236,13 +263,29 @@ std::set$<$ long int $>$ \hyperlink{classbasicblock_aad1405bed7911414e0ed1332419
 \label{classbasicblock_ac6d735b981c1d367ad93f62ab0394974}
 
 \begin{DoxyCode}
-                       {
-        _s_insList = new List<string*>;
-        _o_insList = new List<instruction*>;
-        _insAddrList = new List<ADDRS>;
-        _BBheader = NULL;
-        _hasBBheader = false;
-        _bbAddr = 0;
+                        {
+        bbID = -1; // PLACE HOLDER
+    _bbAddr = -1; // PLACE HOLDER
+        _listIndx = -1; // PLACE HOLDER
+        _visited = false;
+        _regAllocated = false;
+        _entryPoint = false;
+        _domSetIsAll = false;
+        _hasBrHeader = false;
+        _brHeaderAddr = 0;
+        _backEdgeDest = -1;
+        _fallThroughBB = NULL;
+        _takenTargetBB = NULL;
+    _sub_blk_id = 0;
+        _bbListForPhraseblock = new List<ADDR>;
+        _phList                           = new List<phrase*>;
+        _insList              = new List<instruction*>;
+        _insList_orig         = new List<instruction*>;
+        _insListSchList       = new List<instruction*>;
+        _ancestorBbList       = new List<basicblock*>;
+        _descendantBbList     = new List<basicblock*>;
+        _backEdgeSourceBbList = new List<basicblock*>;
+    _upld_roots           = new List<instruction*>;
 }
 \end{DoxyCode}
 
@@ -261,72 +304,21 @@ Here is the caller graph for this function:
 \label{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}
 
 \begin{DoxyCode}
-                        {
-        if (_s_insList->NumElements() != _insAddrList->NumElements()) 
-                cout << _s_insList->NumElements() << " " <<  _insAddrList->
-      NumElements() << endl;
-        Assert(_s_insList->NumElements() == _insAddrList->NumElements());
-        for (int i = _s_insList->NumElements()-1; i >= 0; i--) {
-                delete _s_insList->Nth(i);
-        }
-        for (int i = _o_insList->NumElements()-1; i >= 0; i--) {
-                delete _o_insList->Nth(i);
-        }
-        delete _s_insList;
-        delete _o_insList;
-        delete _insAddrList;
+                         {
+        delete _phList;
+        delete _insList;
+        delete _insList_orig;
+        delete _insListSchList;
+        delete _ancestorBbList;
+        delete _descendantBbList;
+        delete _backEdgeSourceBbList;
+        delete _bbListForPhraseblock;
+    delete _upld_roots;
 }
 \end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-\hypertarget{classbasicblock_ac6d735b981c1d367ad93f62ab0394974}{
-\index{basicblock@{basicblock}!basicblock@{basicblock}}
-\index{basicblock@{basicblock}!basicblock@{basicblock}}
-\subsubsection[{basicblock}]{\setlength{\rightskip}{0pt plus 5cm}basicblock::basicblock (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_ac6d735b981c1d367ad93f62ab0394974}
-\hypertarget{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}{
-\index{basicblock@{basicblock}!$\sim$basicblock@{$\sim$basicblock}}
-\index{$\sim$basicblock@{$\sim$basicblock}!basicblock@{basicblock}}
-\subsubsection[{$\sim$basicblock}]{\setlength{\rightskip}{0pt plus 5cm}basicblock::$\sim$basicblock (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_a9825a2fafc3b7203bdfe2b0da687bf7d}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classbasicblock_ac2bbc450fee2f47da180fe67b515ace3}{
-\index{basicblock@{basicblock}!addBBheader@{addBBheader}}
-\index{addBBheader@{addBBheader}!basicblock@{basicblock}}
-\subsubsection[{addBBheader}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addBBheader (
-\begin{DoxyParamCaption}
-\item[{string $\ast$}]{header, }
-\item[{{\bf ADDRS}}]{bbAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_ac2bbc450fee2f47da180fe67b515ace3}
-
-\begin{DoxyCode}
-                                                         {
-        Assert(header != NULL);
-        _BBheader = header;
-        _hasBBheader = true;
-        _bbAddr = bbAddr;
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classbasicblock_ab20f99e31cfc155ec00b9027f9c3d454}{
 \index{basicblock@{basicblock}!addBBtoPBList@{addBBtoPBList}}
 \index{addBBtoPBList@{addBBtoPBList}!basicblock@{basicblock}}
@@ -338,8 +330,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_ab20f99e31cfc155ec00b9027f9c3d454}
 
 \begin{DoxyCode}
-                                        {
-        _bbListForPhraseblock->Append(bbID);
+                                         {
+        _bbListForPhraseblock->Append (bbID);
 }
 \end{DoxyCode}
 
@@ -363,8 +355,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_abb47633a30d4722992c2d961a4a4ad14}
 
 \begin{DoxyCode}
-                                           {
-        _childrenMap.insert(pair<ADDR,basicblock*>(child->getID(), child));
+                                            {
+        _childrenMap.insert (pair<ADDR,basicblock*> (child->getID (), child));
 }
 \end{DoxyCode}
 
@@ -377,55 +369,7 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a17a204547c41f4ba744ac49b1f375477}{
-\index{basicblock@{basicblock}!addIns@{addIns}}
-\index{addIns@{addIns}!basicblock@{basicblock}}
-\subsubsection[{addIns}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addIns (
-\begin{DoxyParamCaption}
-\item[{{\bf instruction} $\ast$}]{ins}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_a17a204547c41f4ba744ac49b1f375477}
-
-\begin{DoxyCode}
-                                        {
-        _insList->Append(ins);
-        _insAddrList.insert(ins->getInsAddr());
-        if (_insList->NumElements() == 1) {
-                bbID = ins->getInsAddr();
-                Assert(bbID > 0 && "Invalid basicblock ID assigned.");
-        }
-        ins->setMy_BBorPB_id(getID());
-        //Update Use Set & Def Set
-        // int counter = 0;
-        // for (int i = 0; i < ins->getNumReg(); i++) {
-        //      if (ins->getNthRegType(i) == READ && _defSet.find(ins->getNthReg(
-      i)) == _defSet.end()) {
-        //              //second condition avoids ud-chains within a BB from prop
-      agating
-        //              updateUseSet(ins->getNthReg(i));
-        //      } else if (ins->getNthRegType(i) == WRITE) {
-        //                      updateDefSet(ins->getNthReg(i));
-        //      } else {
-        //              // updateLocalRegSet(ins->getNthReg(i));
-        //              counter++;
-        //      }
-        // }
-        // printf ("%d, %d, %f\n", ins->getNumReg(), counter, (double)counter/(do
-      uble)ins->getNumReg());
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_a881f41cc184c5aafa1e0881bb67f6868}{
+\hypertarget{classbasicblock_a3bf11ce1881fbbbd5697888543c5a267}{
 \index{basicblock@{basicblock}!addIns@{addIns}}
 \index{addIns@{addIns}!basicblock@{basicblock}}
 \subsubsection[{addIns}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addIns (
@@ -434,34 +378,35 @@ Here is the caller graph for this function:
 \item[{{\bf ADDR}}]{ID}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a881f41cc184c5aafa1e0881bb67f6868}
+\label{classbasicblock_a3bf11ce1881fbbbd5697888543c5a267}
 
 \begin{DoxyCode}
-                                                 {
-        _insList->Append(ins);
-        _insAddrList.insert(ins->getInsAddr());
-        if (_insList->NumElements() == 1) {
+                                                  {
+        _insList->Append (ins);
+        _insAddrList.insert (ins->getInsAddr ());
+        if  (_insList->NumElements () == 1) {
                 bbID = ID;
-                Assert(bbID > 0 && "Invalid basicblock ID assigned.");
+        _bbAddr = bbID;
+                Assert (bbID > 0 && "Invalid basicblock ID assigned.");
         }
-        ins->setMy_BBorPB_id(getID());
+        ins->setMy_BBorPB_id (getID ());
         //Update Use Set & Def Set
         // int counter = 0;
-        // for (int i = 0; i < ins->getNumReg(); i++) {
-        //      if (ins->getNthRegType(i) == READ && _defSet.find(ins->getNthReg(
-      i)) == _defSet.end()) {
+        // for  (int i = 0; i < ins->getNumReg (); i++) {
+        //      if  (ins->getNthRegType (i) == READ && _defSet.find (ins->getNthR
+      eg (i)) == _defSet.end ()) {
         //              //second condition avoids ud-chains within a BB from prop
       agating
-        //              updateUseSet(ins->getNthReg(i));
-        //      } else if (ins->getNthRegType(i) == WRITE) {
-        //                      updateDefSet(ins->getNthReg(i));
+        //              updateUseSet (ins->getNthReg (i));
+        //      } else if  (ins->getNthRegType (i) == WRITE) {
+        //                      updateDefSet (ins->getNthReg (i));
         //      } else {
-        //              // updateLocalRegSet(ins->getNthReg(i));
+        //              // updateLocalRegSet (ins->getNthReg (i));
         //              counter++;
         //      }
         // }
-        // printf ("%d, %d, %f\n", ins->getNumReg(), counter, (double)counter/(do
-      uble)ins->getNumReg());
+        // printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/
+       (double)ins->getNumReg ());
 }
 \end{DoxyCode}
 
@@ -469,43 +414,47 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classbasicblock_ad741200a033f41ca0e08dadbbbc82060}{
-\index{basicblock@{basicblock}!addToBB@{addToBB}}
-\index{addToBB@{addToBB}!basicblock@{basicblock}}
-\subsubsection[{addToBB}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addToBB (
+\hypertarget{classbasicblock_a21556bff8a285d4098ce0762a1d9b69f}{
+\index{basicblock@{basicblock}!addIns@{addIns}}
+\index{addIns@{addIns}!basicblock@{basicblock}}
+\subsubsection[{addIns}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addIns (
 \begin{DoxyParamCaption}
-\item[{{\bf instruction} $\ast$}]{ins}
+\item[{{\bf instruction} $\ast$}]{ins, }
+\item[{{\bf REACHING\_\-TYPE}}]{reach\_\-type}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_ad741200a033f41ca0e08dadbbbc82060}
+\label{classbasicblock_a21556bff8a285d4098ce0762a1d9b69f}
 
 \begin{DoxyCode}
-                                         {
-        Assert(ins != NULL);
-        _o_insList->Append(ins);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-\hypertarget{classbasicblock_ad7aa6001155731e9af6347220d48d702}{
-\index{basicblock@{basicblock}!addToBB@{addToBB}}
-\index{addToBB@{addToBB}!basicblock@{basicblock}}
-\subsubsection[{addToBB}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addToBB (
-\begin{DoxyParamCaption}
-\item[{string $\ast$}]{ins, }
-\item[{{\bf ADDRS}}]{insAddr}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_ad7aa6001155731e9af6347220d48d702}
-
-\begin{DoxyCode}
-                                                   {
-        Assert(ins != NULL);
-        _s_insList->Append(ins);
-        _insAddrList->Append(insAddr);
+                                                                   {
+        _insList->Append (ins);
+        _insList_orig->Append (ins);
+        _insAddrList.insert (ins->getInsAddr ());
+        if  (bbID == -1 &&
+         (reach_type == BR_DST || 
+          ins->getType () != 'n')) {
+                bbID = ins->getInsAddr ();
+                _bbAddr = bbID;
+                Assert (bbID > 0 && "Invalid basicblock ID assigned.");
+        }
+        ins->setMy_BBorPB_id (getID ());
+        //Update Use Set & Def Set
+        // int counter = 0;
+        // for  (int i = 0; i < ins->getNumReg (); i++) {
+        //      if  (ins->getNthRegType (i) == READ && _defSet.find (ins->getNthR
+      eg (i)) == _defSet.end ()) {
+        //              //second condition avoids ud-chains within a BB from prop
+      agating
+        //              updateUseSet (ins->getNthReg (i));
+        //      } else if  (ins->getNthRegType (i) == WRITE) {
+        //                      updateDefSet (ins->getNthReg (i));
+        //      } else {
+        //              // updateLocalRegSet (ins->getNthReg (i));
+        //              counter++;
+        //      }
+        // }
+        // printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/
+       (double)ins->getNumReg ());
 }
 \end{DoxyCode}
 
@@ -516,6 +465,193 @@ Here is the call graph for this function:
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ac4515bd617542ca0596df9864afd0aee}{
+\index{basicblock@{basicblock}!addMovIns@{addMovIns}}
+\index{addMovIns@{addMovIns}!basicblock@{basicblock}}
+\subsubsection[{addMovIns}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addMovIns (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ac4515bd617542ca0596df9864afd0aee}
+
+\begin{DoxyCode}
+                                            {
+    instruction* last_ins = _insList->Last ();
+
+    /* AVOID MISSING BB'S THAT END WITH A STUPID NOP */
+    if (_insList->NumElements () > 1 &&
+        last_ins->getType () == 'n' && 
+        _insList->Nth(_insList->NumElements() - 2)->getType() != 'n')
+        last_ins = _insList->Nth (_insList->NumElements() - 2);
+
+    if (last_ins->getType () == 'r' || last_ins->getType () == 'c' || last_ins->
+      getType () == 's' || 
+        last_ins->getType () == 'j' || last_ins->getType () == 'b') {
+        /* PUSH THE INS TO THE SECOND TO LAST SPOT IN INSLIST */
+        _insList->InsertAt (ins, _insList->NumElements () - 1);
+        _insList_orig->InsertAt (ins, _insList->NumElements () - 1);
+
+        /* CONNECT UP INSTRUCTIONS */
+        instruction* top_ins;
+        if (_insList->NumElements () >= 3) {
+            top_ins = _insList->Nth (_insList->NumElements () - 3);
+//            Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+            if (top_ins->getType () == 'j') {
+                top_ins->resetInsDst ();
+                top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                top_ins->setInsDst (ins);
+            } else {
+                top_ins->resetInsFallThru ();
+                top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                top_ins->setInsFallThru (ins);
+            }
+        } else {
+            for (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                basicblock* anc = _ancestorBbList->Nth(i);
+                instruction* top_ins = anc->getLastIns ();
+                if (isThisBBfallThru (anc)) {
+                    top_ins->resetInsFallThru ();
+                    top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                    top_ins->setInsFallThru (ins);
+                } else {
+                    top_ins->resetInsDst ();
+                    top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                    top_ins->setInsDst (ins);
+                }
+            }
+            updateBBID ();
+        }
+        instruction* bottom_ins = _insList->Nth (_insList->NumElements () - 1);
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+    } else {
+        /* PUSH THE INS TO THE LAST SPOT IN INSLIST */
+        _insList->Append (ins);
+        _insList_orig->Append (ins);
+
+        /* CONNECT UP INSTRUCTIONS */
+        instruction* top_ins = _insList->Nth (_insList->NumElements () - 2);
+        instruction* bottom_ins = _insList->Nth(_insList->NumElements () - 2)->ge
+      tInsFallThru ();
+        Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+        top_ins->resetInsFallThru ();
+        top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+        top_ins->setInsFallThru (ins);
+    }
+        ins->setMy_BBorPB_id (getID ());
+    _insAddrList.insert (ins->getInsAddr ());
+//    Assert (bbID != -1);
+//    ins->setMy_BBorPB_id (getID ()); TODO don't think this is necessary
+    //Update Use Set & Def Set
+    // int counter = 0;
+    // for  (int i = 0; i < ins->getNumReg (); i++) {
+    //  if  (ins->getNthRegType (i) == READ && _defSet.find (ins->getNthReg (i)) 
+      == _defSet.end ()) {
+    //          //second condition avoids ud-chains within a BB from propagating
+    //          updateUseSet (ins->getNthReg (i));
+    //  } else if  (ins->getNthRegType (i) == WRITE) {
+    //                          updateDefSet (ins->getNthReg (i));
+    //  } else {
+    //          // updateLocalRegSet (ins->getNthReg (i));
+    //          counter++;
+    //  }
+    // }
+    // printf  ("%d, %d, %f\n", ins->getNumReg (), counter,  (double)counter/ (do
+      uble)ins->getNumReg ());
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a8743005759ce892482aa942cf0aa114d}{
+\index{basicblock@{basicblock}!addMovIns@{addMovIns}}
+\index{addMovIns@{addMovIns}!basicblock@{basicblock}}
+\subsubsection[{addMovIns}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::addMovIns (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins, }
+\item[{int}]{indx, }
+\item[{{\bf PUSH\_\-LOCATION}}]{push\_\-location}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a8743005759ce892482aa942cf0aa114d}
+
+\begin{DoxyCode}
+                                                                                 
+        {
+    instruction* last_ins = _insList->Last ();
+
+    Assert (ins->getType () != 'r' && ins->getType () != 'c' && 
+            ins->getType () != 's' && ins->getType () != 'j' && ins->getType () !
+      = 'b');
+    Assert (_insList->NumElements () >= 2);
+    Assert (indx < _insList->NumElements ());
+
+    /* CONNECT UP INSTRUCTIONS */
+    if (push_location == PUSH_TO_TOP) {
+        Assert (indx >= 0);
+        if (indx == 0) {
+            for (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                basicblock* anc = _ancestorBbList->Nth(i);
+                instruction* top_ins = anc->getLastIns ();
+                if (isThisBBfallThru (anc)) {
+                    top_ins->resetInsFallThru ();
+                    top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+                    top_ins->setInsFallThru (ins);
+                } else {
+                    top_ins->resetInsDst ();
+                    top_ins->setInsDstAddr (ins->getInsAddr (), true);
+                    top_ins->setInsDst (ins);
+                }
+            }
+            updateBBID ();
+        } else {
+            instruction* top_ins = _insList->Nth (indx - 1);
+            top_ins->resetInsFallThru ();
+            top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+            top_ins->setInsFallThru (ins);
+        }
+        instruction* bottom_ins = _insList->Nth(indx)->getInsFallThru ();
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+    } else if (push_location == PUSH_TO_BOTTOM) {
+        Assert (indx > 0);
+        instruction* top_ins = _insList->Nth (indx - 1);
+        instruction* bottom_ins = _insList->Nth(indx - 1)->getInsFallThru ();
+        Assert (top_ins->hasFallThru () && !top_ins->hasDst ());
+        ins->setInsFallThruAddr (bottom_ins->getInsAddr (), true);
+        ins->setInsFallThru (bottom_ins);
+        top_ins->resetInsFallThru ();
+        top_ins->setInsFallThruAddr (ins->getInsAddr (), true);
+        top_ins->setInsFallThru (ins);
+    } else {
+        Assert (0 && "Invalid insetion relative location");
+    }
+
+    /* PUSH THE INS TO THE LAST SPOT IN INSLIST */
+    _insList->InsertAt (ins, indx);
+    _insList_orig->InsertAt (ins, indx);
+
+    if (push_location == PUSH_TO_TOP && indx == 0) { updateBBID (); }
+
+    ins->setMy_BBorPB_id (getID ());
+    _insAddrList.insert (ins->getInsAddr ());
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classbasicblock_abb72488dac0d405735a4cf82a1cdd0ce}{
@@ -529,10 +665,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_abb72488dac0d405735a4cf82a1cdd0ce}
 
 \begin{DoxyCode}
-                                                      {
-        Assert(isInsAddrInBB(ins->getInsAddr()) == true && "Instruction does not 
-      belong to this BB"); //this can be a heavy check. Remove it? Useful?
-        _insListSchList->Append(ins);
+                                                       {
+        Assert (isInsAddrInBB (ins->getInsAddr ()) == true && "Instruction does n
+      ot belong to this BB"); //this can be a heavy check. Remove it? Useful?
+        _insListSchList->Append (ins);
 }
 \end{DoxyCode}
 
@@ -556,8 +692,9 @@ Here is the caller graph for this function:
 \label{classbasicblock_abfaebb9413fe26d42607c09949e9d5cb}
 
 \begin{DoxyCode}
-                                            {
-        _dominanceFrontier.insert(pair<ADDR,basicblock*>(node->getID(), node));
+                                             {
+        _dominanceFrontier.insert (pair<ADDR,basicblock*> (node->getID (), node))
+      ;
 }
 \end{DoxyCode}
 
@@ -581,25 +718,25 @@ Here is the caller graph for this function:
 \label{classbasicblock_af48f1b1d1c2618185cf63aa36098092c}
 
 \begin{DoxyCode}
-                                    {
+                                     {
         phrase* ph = NULL;
-        for (int i = 0; i < _insList->NumElements(); i++) {
-                instruction* ins = _insList->Nth(i);
-                if (ins->getNumAncestors() > 1 || ins->getNumDependents() > 1 || 
-      _phList->NumElements() == 0) {
+        for  (int i = 0; i < _insList->NumElements (); i++) {
+                instruction* ins = _insList->Nth (i);
+                if  (ins->getNumAncestors () > 1 || ins->getNumDependents () > 1 
+      || _phList->NumElements () == 0) {
                         ph = new phrase;
-                        _phList->Append(ph);
-                        ph->addIns(ins);
+                        _phList->Append (ph);
+                        ph->addIns (ins);
                 } else {
-                        ph->addIns(ins);
+                        ph->addIns (ins);
                 }
         }
-        printf("debug: BB %llx Size: %d - Phrases (%d): ", getID(), _insList->
-      NumElements(), _phList->NumElements());
-        for (int i = 0; i < _phList->NumElements(); i++) {
-                printf("%d, ", _phList->Nth(i)->phSize());
+        printf ("debug: BB %llx Size: %d - Phrases  (%d): ", getID (), _insList->
+      NumElements (), _phList->NumElements ());
+        for  (int i = 0; i < _phList->NumElements (); i++) {
+                printf ("%d, ", _phList->Nth (i)->phSize ());
         }
-        printf("\n");
+        printf ("\n");
 }
 \end{DoxyCode}
 
@@ -610,6 +747,41 @@ Here is the call graph for this function:
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ab7adcaad4e1c148578c9ee7c419ebabc}{
+\index{basicblock@{basicblock}!brDependencyTableCheck@{brDependencyTableCheck}}
+\index{brDependencyTableCheck@{brDependencyTableCheck}!basicblock@{basicblock}}
+\subsubsection[{brDependencyTableCheck}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::brDependencyTableCheck (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ab7adcaad4e1c148578c9ee7c419ebabc}
+
+\begin{DoxyCode}
+                                         {
+    List<instruction*>* brList = new List<instruction*>;
+    for (int i = _insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = _insList->Nth (i);
+            if ((ins->getType () == 'j' || ins->getType () == 'c' || 
+                 ins->getType () == 'r' || ins->getType () == 'b'))
+            brList->Append (ins);
+        for (int j = 0; j < brList->NumElements (); j++) {
+            instruction* br = brList->Nth (j);
+            if (br->getInsAddr () == ins->getInsAddr ()) continue;
+            ins->setAsDependent (br);
+            br->setAsAncestor (ins);
+//            br->setAsBrAncestor (ins);
+//            ins->setAsBrDependent (br);
+        }
+    }
+    delete brList;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classbasicblock_a8e7863ba06ca7f2418f1f423e6f71e8a}{
@@ -623,11 +795,11 @@ Here is the caller graph for this function:
 \label{classbasicblock_a8e7863ba06ca7f2418f1f423e6f71e8a}
 
 \begin{DoxyCode}
-                              {
-        for (map<ADDR,basicblock*>::iterator it = _parentsMap.begin(); it != _par
-      entsMap.end(); it++) {
+                               {
+        for  (map<ADDR,basicblock*>::iterator it = _parentsMap.begin (); it != _p
+      arentsMap.end (); it++) {
                 basicblock *myIdom = it->second;
-                myIdom->addChild(this);
+                myIdom->addChild (this);
         }
 }
 \end{DoxyCode}
@@ -652,23 +824,30 @@ Here is the caller graph for this function:
 \label{classbasicblock_a668baef0263404790b8b03e336b96dda}
 
 \begin{DoxyCode}
-                                          {
+                                           {
         map<ADDR,basicblock*> _notParentsMap;
-        for (map<ADDR,basicblock*>::iterator it1 = _sDominatorMap.begin(); it1 !=
-       _sDominatorMap.end(); it1++) {
-                for (map<ADDR,basicblock*>::iterator it2 = _sDominatorMap.begin()
-      ; it2 != _sDominatorMap.end(); it2++) {
-                        if (it1->first == it2->first) continue;
-                        if (it2->second->isASDominator(it1->first) == true)
-                                _notParentsMap.insert(pair<ADDR,basicblock*>(it1-
-      >first, it1->second));
+    map<ADDR,basicblock*>::iterator it1, it2;
+
+    /* FIND THE DOMINATORS THAT ARE NOT IMMEDIATE DOMINATORS */
+        for  (it1 = _sDominatorMap.begin (); it1 != _sDominatorMap.end (); it1++)
+       {
+                for  (it2 = _sDominatorMap.begin (); it2 != _sDominatorMap.end ()
+      ; it2++) {
+                        if  (it1->first == it2->first) continue;
+                        if  (it1->second->isASDominator (it2->first) == false) {
+                                _notParentsMap.insert (pair<ADDR,basicblock*> (it
+      1->first, it1->second));
+                break; /* it1 NOT AN idom */
+            }
                 }
         }
-        set_difference(_sDominatorMap.begin(),_sDominatorMap.end(),_notParentsMap
-      .begin(),_notParentsMap.end(),std::inserter(_parentsMap, _parentsMap.begin()));
-        for (map<ADDR,basicblock*>::iterator it1 = _parentsMap.begin(); it1 != _p
-      arentsMap.end(); it1++)
-                _idomSet.insert(it1->first);
+
+    /* EXTRACT THE IMMEDIATE DOMINATORS */
+        set_difference (_sDominatorMap.begin (), _sDominatorMap.end (),
+                    _notParentsMap.begin (), _notParentsMap.end (),
+                    std::inserter (_parentsMap, _parentsMap.begin ()));
+        for  (it1 = _parentsMap.begin (); it1 != _parentsMap.end (); it1++)
+                _idomSet.insert (it1->first);
 }
 \end{DoxyCode}
 
@@ -687,11 +866,12 @@ Here is the caller graph for this function:
 \label{classbasicblock_ad88c3d7891025016b9de9f3bfb2b3ddb}
 
 \begin{DoxyCode}
-                                  {
+                                   {
         map<ADDR,basicblock*> self;
-        self.insert(pair<ADDR,basicblock*>(getID(),this));      
-        set_difference(_dominatorMap.begin(),_dominatorMap.end(),self.begin(),sel
-      f.end(),std::inserter(_sDominatorMap, _sDominatorMap.begin()));
+        self.insert (pair<ADDR,basicblock*> (getID (),this));   
+        set_difference (_dominatorMap.begin (), _dominatorMap.end (),
+                    self.begin (), self.end (),
+                    std::inserter (_sDominatorMap, _sDominatorMap.begin ()));
 }
 \end{DoxyCode}
 
@@ -704,43 +884,87 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a27c168ce65c2d5ead06682ea41af8473}{
-\index{basicblock@{basicblock}!elimPhiFuncs@{elimPhiFuncs}}
-\index{elimPhiFuncs@{elimPhiFuncs}!basicblock@{basicblock}}
-\subsubsection[{elimPhiFuncs}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::elimPhiFuncs (
+\hypertarget{classbasicblock_ad5edb15079fcd7c2dd0e7e78185d9826}{
+\index{basicblock@{basicblock}!deadMovOpElim@{deadMovOpElim}}
+\index{deadMovOpElim@{deadMovOpElim}!basicblock@{basicblock}}
+\subsubsection[{deadMovOpElim}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::deadMovOpElim (
 \begin{DoxyParamCaption}
-{}
+\item[{{\bf SCH\_\-MODE}}]{sch\_\-mode}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a27c168ce65c2d5ead06682ea41af8473}
+\label{classbasicblock_ad5edb15079fcd7c2dd0e7e78185d9826}
 
 \begin{DoxyCode}
-                             {
-        map<long int, vector<long int> >::iterator it0;
-        int temp = 0;
-        for (it0 = _phiFuncMap.begin(); it0 != _phiFuncMap.end(); it0++) {
-                int var = it0->first;
-                vector<long int> phiVector = it0->second;
-                Assert(var <= X86_REG_HI && var >= X86_REG_LO && "Invalid registe
-      r value");
-                Assert(_phiDestMap.find(var) != _phiDestMap.end());
-                int renameToSub = _phiDestMap[var];
-                Assert(phiVector.size() == getNumAncestors() && "The two vectors 
-      must have equal size.");
-                int indx = 0;
-                vector<long int>::iterator it1;
-                for (it1 = phiVector.begin(); it1 != phiVector.end(); it1++) {
-                        int subscript = *it1;
-                        basicblock* NthAncestor = getNthAncestor(indx);
-                        //printf("values: %d=>%d, %d\n",var,renameToSub,subscript
-      );
-                        NthAncestor->insertMOVop(var,renameToSub,var,subscript);
-                        indx++;
-                }
-                temp = phiVector.size();
+                                                {
+    List<instruction*>* insList = NULL;
+    map<long int, instruction*> producers;
+    map<long int, list<instruction*> > consumers;
+    map<ADDR, instruction*> removeList;
+    map<ADDR, int> insIndx;
+    int remove_cnt = 0;
+
+    /* PICK THE RIGHT LIST TO PROCESS */
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        insIndx[ins->getInsAddr ()] = i;
+        for (int j = 0; j < ins->getNumReg (); j++) {
+            if (ins->getNthRegType (j) == WRITE) {
+                producers[ins->getNthArchReg(j)] = ins;
+            } else if (ins->getNthRegType (j) == READ) {
+                consumers[ins->getNthArchReg(j)].push_back (ins);
+            }
         }
-        //repost the number of MOV isntructions inserted.
-        return temp*_phiFuncMap.size();
+    }
+
+    /* MARK THE INSTRUCTIONS TO BE REMOVED */
+    map<long int, list<instruction*> >::iterator it;
+    for (it = consumers.begin (); it != consumers.end (); it++) {
+        long int use_reg = it->first;
+        instruction* front_ins = it->second.front ();
+        if (it->second.size () == 1 &&
+            front_ins->isInsertedMovOp () &&
+            producers.find (use_reg) != producers.end () &&
+            insIndx[front_ins->getInsAddr ()] > insIndx[producers[use_reg]->getIn
+      sAddr ()])
+        {
+            removeList.insert (pair<ADDR, instruction*> (front_ins->getInsAddr ()
+      , front_ins));
+        }
+    }
+
+    /* REMOVE REDUNDANT INSTRUCTIONS */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        ADDR ins_addr = ins->getInsAddr ();
+        if (removeList.find (ins_addr) != removeList.end ()) {
+            Assert (ins->isInsertedMovOp ());
+            long int wr_reg = -1, rd_reg = -1;
+            for (int j = 0; j < ins->getNumReg (); j++) {
+                if (ins->getNthRegType (j) == WRITE) wr_reg = ins->getNthArchReg 
+      (j);
+                else if (ins->getNthRegType (j) == READ) rd_reg = ins->
+      getNthArchReg (j);
+            }
+            Assert (wr_reg > 0 && rd_reg > 0);
+            Assert (producers.find (rd_reg) != producers.end ());
+            instruction* def_ins = producers[rd_reg];
+            def_ins->replaceWriteArchReg (rd_reg, wr_reg);
+            delete ins;
+            insList->RemoveAt (i);
+            remove_cnt++;
+        }
+    }
+
+    return remove_cnt;
 }
 \end{DoxyCode}
 
@@ -748,6 +972,132 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
+\hypertarget{classbasicblock_a654646ba23c51a6f9b5b8db818276d0b}{
+\index{basicblock@{basicblock}!elimPhiFuncs@{elimPhiFuncs}}
+\index{elimPhiFuncs@{elimPhiFuncs}!basicblock@{basicblock}}
+\subsubsection[{elimPhiFuncs}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::elimPhiFuncs (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDR} \&}]{phiAddrOffset, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a654646ba23c51a6f9b5b8db818276d0b}
+
+\begin{DoxyCode}
+                                                                                 
+          {
+        map<long int, vector<long int> >::iterator it0;
+        int temp = 0;
+        for  (it0 = _phiFuncMap.begin (); it0 != _phiFuncMap.end (); it0++) {
+                int var = it0->first;
+                vector<long int> phiVector = it0->second;
+                Assert (var <= X86_REG_HI && var >= X86_REG_LO && "Invalid regist
+      er value");
+                Assert (_phiDestMap.find (var) != _phiDestMap.end ());
+                int renameToSub = _phiDestMap[var];
+                Assert (phiVector.size () == getNumAncestors () && "The two vecto
+      rs must have equal size.");
+                int indx = 0;
+                vector<long int>::iterator it1;
+                for  (it1 = phiVector.begin (); it1 != phiVector.end (); it1++) {
+      
+                        int subscript = *it1;
+                        basicblock* NthAncestor = getNthAncestor (indx);
+            ADDR insAddr = PHI_INS_ADDR + phiAddrOffset++;
+            Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new 
+      MOV ins address already exists.");
+                        NthAncestor->insertMOVop (var, renameToSub, var, subscrip
+      t, insAddr);
+//                      NthAncestor->genMOVop (var, renameToSub, var, subscript, 
+      phiAddrOffset);
+                        indx++;
+                }
+                temp = phiVector.size ();
+        }
+
+        /* REPORT THE NUMBER OF MOV ISNTRUCTIONS INSERTED */
+        return temp*_phiFuncMap.size ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_acafc046132a9107cbad5adcb1e013ffa}{
+\index{basicblock@{basicblock}!findRootUPLD@{findRootUPLD}}
+\index{findRootUPLD@{findRootUPLD}!basicblock@{basicblock}}
+\subsubsection[{findRootUPLD}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::findRootUPLD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_acafc046132a9107cbad5adcb1e013ffa}
+
+\begin{DoxyCode}
+                               {
+    for (int i = 0; i < _insList->NumElements (); i++) {
+        instruction* ins = _insList->Nth (i);
+        if (ins->isUPLD () && !ins->isUPLDdep ()) 
+            _upld_roots->Append (ins);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ae4243cd796c3c03447b58d6fdd2743a5}{
+\index{basicblock@{basicblock}!forceAssignBBID@{forceAssignBBID}}
+\index{forceAssignBBID@{forceAssignBBID}!basicblock@{basicblock}}
+\subsubsection[{forceAssignBBID}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::forceAssignBBID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ae4243cd796c3c03447b58d6fdd2743a5}
+
+\begin{DoxyCode}
+                                  {
+        if  (bbID == -1 && _insList->NumElements () > 0) {
+                bbID = _insList->Nth (0)->getInsAddr ();
+                _bbAddr = bbID;
+                Assert (bbID > 0 && "Invalid basicblock ID assigned.");
+        }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a71eb42838e461e58085faf79e8cf1607}{
+\index{basicblock@{basicblock}!getAddr@{getAddr}}
+\index{getAddr@{getAddr}!basicblock@{basicblock}}
+\subsubsection[{getAddr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDR} basicblock::getAddr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a71eb42838e461e58085faf79e8cf1607}
+
+\begin{DoxyCode}
+                          {
+        Assert (_bbAddr > 0 && "_bbAddr must be larger than zero.");
+    return _bbAddr;
+}
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
@@ -764,7 +1114,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_ad5a6467f9a1628c658671d2f432cbeba}
 
 \begin{DoxyCode}
-                                    {
+                                     {
         return _domSetIsAll;
 }
 \end{DoxyCode}
@@ -784,7 +1134,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a006ea6066123e6c2a0ba76784dfcee1c}
 
 \begin{DoxyCode}
-                                               {
+                                                {
         return _ancestorBbList;
 }
 \end{DoxyCode}
@@ -804,8 +1154,9 @@ Here is the caller graph for this function:
 \label{classbasicblock_a0aa9e7f9af5171d5cd4bad3503cc45c8}
 
 \begin{DoxyCode}
-                                 {
-        Assert(_backEdgeDest > 0 && "Back edge destination address is invalid");
+                                  {
+        Assert (_backEdgeDest > 0 && "Back edge destination address is invalid");
+      
         return _backEdgeDest;
 }
 \end{DoxyCode}
@@ -825,7 +1176,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a20313080c67808c6db8fc8c311ba5165}
 
 \begin{DoxyCode}
-                                                     {
+                                                      {
         return _backEdgeSourceBbList;
 }
 \end{DoxyCode}
@@ -840,9 +1191,9 @@ Here is the caller graph for this function:
 \label{classbasicblock_aba106088c0783baf1a57018bbc091fe1}
 
 \begin{DoxyCode}
-                               {
-        Assert(_hasBrHeader == true && "You forgot to check if BB has a header in
-       the first place.");
+                                {
+        Assert (_hasBrHeader == true && "You forgot to check if BB has a header i
+      n the first place.");
         return _brHeaderAddr;
 }
 \end{DoxyCode}
@@ -862,7 +1213,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a4a68932d0628e028f4c5877cb888654c}
 
 \begin{DoxyCode}
-                                       {
+                                        {
         return _bbListForPhraseblock;
 }
 \end{DoxyCode}
@@ -877,8 +1228,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a42862e82af55ea72dc2e69ad32f3df29}
 
 \begin{DoxyCode}
-                          {
-        return _insList->NumElements();
+                           {
+        return _insList->NumElements ();
 }
 \end{DoxyCode}
 
@@ -889,6 +1240,51 @@ Here is the call graph for this function:
 
 
 Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a17c89777dbbfb909e6749330569066fc}{
+\index{basicblock@{basicblock}!getBbSize\_\-ListSch@{getBbSize\_\-ListSch}}
+\index{getBbSize\_\-ListSch@{getBbSize\_\-ListSch}!basicblock@{basicblock}}
+\subsubsection[{getBbSize\_\-ListSch}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::getBbSize\_\-ListSch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a17c89777dbbfb909e6749330569066fc}
+
+\begin{DoxyCode}
+                                   {
+        return _insListSchList->NumElements ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_adb0ccbb0bd5d36fd05fbeb80b2e47494}{
+\index{basicblock@{basicblock}!getBBtail@{getBBtail}}
+\index{getBBtail@{getBBtail}!basicblock@{basicblock}}
+\subsubsection[{getBBtail}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDR} basicblock::getBBtail (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_adb0ccbb0bd5d36fd05fbeb80b2e47494}
+
+\begin{DoxyCode}
+                             {
+    return _insList->Last ()->getInsAddr ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
 
 
 \hypertarget{classbasicblock_a6dde8501c965eb860dcc5bf63fcb06f2}{
@@ -902,7 +1298,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a6dde8501c965eb860dcc5bf63fcb06f2}
 
 \begin{DoxyCode}
-                                              {
+                                               {
         return _childrenMap;
 }
 \end{DoxyCode}
@@ -922,15 +1318,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_a150ce672b4864265713b242b74b3ca30}
 
 \begin{DoxyCode}
-                                {
-        return _childrenMap.size();
+                                 {
+        return _childrenMap.size ();
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classbasicblock_a208aa13365196998e48936c287242a77}{
 \index{basicblock@{basicblock}!getDefSet@{getDefSet}}
 \index{getDefSet@{getDefSet}!basicblock@{basicblock}}
@@ -942,7 +1333,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a208aa13365196998e48936c287242a77}
 
 \begin{DoxyCode}
-                                    {
+                                     {
         return _defSet;
 }
 \end{DoxyCode}
@@ -962,7 +1353,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_afac9781fe5c67f0d3f983d60e468dc8d}
 
 \begin{DoxyCode}
-                                                 {
+                                                  {
         return _descendantBbList;
 }
 \end{DoxyCode}
@@ -977,8 +1368,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a3f8fdaf67559becd35119c53a47791c6}
 
 \begin{DoxyCode}
-                                        {
-        // printf("DEBUG: dom frontier: %d\n", _dominanceFrontier.size());
+                                         {
+        // printf ("DEBUG: dom frontier: %d\n", _dominanceFrontier.size ());
         return _dominanceFrontier;
 }
 \end{DoxyCode}
@@ -998,7 +1389,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_aec14cf5254976daec791c62e1b684ecf}
 
 \begin{DoxyCode}
-                                                 {
+                                                  {
         return _dominatorMap;
 }
 \end{DoxyCode}
@@ -1018,8 +1409,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a8024f7c124db80125950b2582ee28e81}
 
 \begin{DoxyCode}
-                                       {
-        Assert(_fallThroughBB != NULL && "_fallThroughBB must not be NULL");
+                                        {
+        Assert (_fallThroughBB != NULL && "_fallThroughBB must not be NULL");
         return _fallThroughBB;
 }
 \end{DoxyCode}
@@ -1039,8 +1430,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_aff434c369968fe5fb3151d8ec00665b4}
 
 \begin{DoxyCode}
-                       {
-        Assert(bbID > 0 && "bbID must be larger than zero.");
+                        {
+        Assert (bbID > 0 && "bbID must be larger than zero.");
         return bbID;
 }
 \end{DoxyCode}
@@ -1060,7 +1451,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a449cfdd7832d738451da0d773f45a120}
 
 \begin{DoxyCode}
-                                   {
+                                    {
         return _inSet;
 }
 \end{DoxyCode}
@@ -1080,7 +1471,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_adc40d816c82feedc1f7027fc29470d90}
 
 \begin{DoxyCode}
-                                           {
+                                            {
         return _insList;
 }
 \end{DoxyCode}
@@ -1100,15 +1491,16 @@ Here is the caller graph for this function:
 \label{classbasicblock_a87440b1ddb945365a4d32b356756ae24}
 
 \begin{DoxyCode}
-                                                        {
-        Assert(_insListSchList->NumElements() == _insList->NumElements() && "List
-      -scheduled list is incomplete"); //this can be a heavy check. Remove it? Useful?
+                                                         {
+//      Assert (_insListSchList->NumElements () == _insList->NumElements () && "L
+      ist-scheduled list is incomplete"); //this can be a heavy check. Remove it? Usefu
+      l?
         return _insListSchList;
 }
 \end{DoxyCode}
 
 
-Here is the call graph for this function:
+Here is the caller graph for this function:
 
 
 \hypertarget{classbasicblock_a99fb16d14456bb07b0033a0489ced872}{
@@ -1122,9 +1514,9 @@ Here is the call graph for this function:
 \label{classbasicblock_a99fb16d14456bb07b0033a0489ced872}
 
 \begin{DoxyCode}
-                                    {
-        Assert(_insList->NumElements()> 0 && "BB size is zero.");
-        return _insList->Nth(_insList->NumElements()-1);
+                                     {
+        Assert (_insList->NumElements () > 0 && "BB size is zero.");
+        return _insList->Last ();
 }
 \end{DoxyCode}
 
@@ -1148,9 +1540,35 @@ Here is the caller graph for this function:
 \label{classbasicblock_a5c04fc7ec170aa4d395928b7c4ca0392}
 
 \begin{DoxyCode}
-                               {
-        Assert(_insList->NumElements()> 0 && "BB size is zero.");
-        return _insList->Nth(_insList->NumElements()-1)->getBrDst();
+                                {
+        Assert (_insList->NumElements () > 0 && "BB size is zero.");
+        return _insList->Last()->getInsDstAddr ();
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_afe5fbc2aaf3764ecffed166a014a9016}{
+\index{basicblock@{basicblock}!getLastInsFallThru@{getLastInsFallThru}}
+\index{getLastInsFallThru@{getLastInsFallThru}!basicblock@{basicblock}}
+\subsubsection[{getLastInsFallThru}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ADDR} basicblock::getLastInsFallThru (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_afe5fbc2aaf3764ecffed166a014a9016}
+
+\begin{DoxyCode}
+                                     {
+        Assert (_insList->NumElements () > 0 && "BB size is zero.");
+        return _insList->Last()->getInsFallThruAddr ();
 }
 \end{DoxyCode}
 
@@ -1174,8 +1592,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a17c48156a5eefea6d8ca831dced719e3}
 
 \begin{DoxyCode}
-                            {
-        Assert(_listIndx >= 0 && "Invlid list index value");
+                             {
+        Assert (_listIndx >= 0 && "Invlid list index value");
         return _listIndx;
 }
 \end{DoxyCode}
@@ -1195,14 +1613,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a656948a155ce6ed622a31581c4d3c2f0}
 
 \begin{DoxyCode}
-                                     {
-                        // for (set<long int>::iterator it = _inSet.begin(); it !
-      = _inSet.end(); it++) {
-                        //      printf(", %ld", *it);
-                        // }
-                        // printf("\n");
-                        return _inSet.size()+_defSet.size();
-                }
+{ return _inSet.size () + _defSet.size (); }
 \end{DoxyCode}
 \hypertarget{classbasicblock_ab2b0c4f29f9d14e0073ca924f4beefab}{
 \index{basicblock@{basicblock}!getLocalRegSet@{getLocalRegSet}}
@@ -1215,15 +1626,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_ab2b0c4f29f9d14e0073ca924f4beefab}
 
 \begin{DoxyCode}
-                                         {
+                                          {
         return _localRegSet;
 }
 \end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
 \hypertarget{classbasicblock_a24ef17acb451da40eb9ecca3a05c9fb3}{
 \index{basicblock@{basicblock}!getNthAncestor@{getNthAncestor}}
 \index{getNthAncestor@{getNthAncestor}!basicblock@{basicblock}}
@@ -1235,10 +1641,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_a24ef17acb451da40eb9ecca3a05c9fb3}
 
 \begin{DoxyCode}
-                                               {
-        Assert(_ancestorBbList->NumElements() > indx && indx >= 0 && "BB size is 
-      smaller than indx.");
-        return _ancestorBbList->Nth(indx);
+                                                {
+        Assert (_ancestorBbList->NumElements () > indx && indx >= 0 && "BB size i
+      s smaller than indx.");
+        return _ancestorBbList->Nth (indx);
 }
 \end{DoxyCode}
 
@@ -1262,58 +1668,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a7c5a3da3287691450420e3a6cf3105b1}
 
 \begin{DoxyCode}
-                                                  {
-        return _backEdgeSourceBbList->Nth(i);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_ae37c61e43378f8cf5e5b116217c295b1}{
-\index{basicblock@{basicblock}!getNthBBIns\_\-o@{getNthBBIns\_\-o}}
-\index{getNthBBIns\_\-o@{getNthBBIns\_\-o}!basicblock@{basicblock}}
-\subsubsection[{getNthBBIns\_\-o}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instruction} $\ast$ basicblock::getNthBBIns\_\-o (
-\begin{DoxyParamCaption}
-\item[{int}]{indx}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_ae37c61e43378f8cf5e5b116217c295b1}
-
-\begin{DoxyCode}
-                                               {
-        return _o_insList->Nth(indx);
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_ac215ec20abf70ad5a3a6e4c086a529de}{
-\index{basicblock@{basicblock}!getNthBBIns\_\-s@{getNthBBIns\_\-s}}
-\index{getNthBBIns\_\-s@{getNthBBIns\_\-s}!basicblock@{basicblock}}
-\subsubsection[{getNthBBIns\_\-s}]{\setlength{\rightskip}{0pt plus 5cm}string $\ast$ basicblock::getNthBBIns\_\-s (
-\begin{DoxyParamCaption}
-\item[{int}]{indx}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_ac215ec20abf70ad5a3a6e4c086a529de}
-
-\begin{DoxyCode}
-                                          {
-        return _s_insList->Nth(indx);
+                                                   {
+        return _backEdgeSourceBbList->Nth (i);
 }
 \end{DoxyCode}
 
@@ -1337,10 +1693,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_a571a65129ed999a167803d516cb9455e}
 
 \begin{DoxyCode}
-                                                 {
-        Assert(_descendantBbList->NumElements() > indx && indx >= 0 && "BB size i
-      s smaller than indx.");
-        return _descendantBbList->Nth(indx);
+                                                  {
+        Assert (_descendantBbList->NumElements () > indx && indx >= 0 && "BB size
+       is smaller than indx.");
+        return _descendantBbList->Nth (indx);
 }
 \end{DoxyCode}
 
@@ -1364,8 +1720,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_af95ff01c9b4eb7a12cd58558771c92b2}
 
 \begin{DoxyCode}
-                                {
-        return _ancestorBbList->NumElements();
+                                 {
+        return _ancestorBbList->NumElements ();
 }
 \end{DoxyCode}
 
@@ -1389,58 +1745,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a4e6b8abafbdff3155477bdefd7546ef9}
 
 \begin{DoxyCode}
-                                     {
-        return _backEdgeSourceBbList->NumElements();
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_a435d01a9a4869893c0a8eaaf4f62cd22}{
-\index{basicblock@{basicblock}!getNumBBIns\_\-o@{getNumBBIns\_\-o}}
-\index{getNumBBIns\_\-o@{getNumBBIns\_\-o}!basicblock@{basicblock}}
-\subsubsection[{getNumBBIns\_\-o}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::getNumBBIns\_\-o (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_a435d01a9a4869893c0a8eaaf4f62cd22}
-
-\begin{DoxyCode}
-                              {
-        return _o_insList->NumElements();
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_a40ff2e382e333d5515bd55508b49247a}{
-\index{basicblock@{basicblock}!getNumBBIns\_\-s@{getNumBBIns\_\-s}}
-\index{getNumBBIns\_\-s@{getNumBBIns\_\-s}!basicblock@{basicblock}}
-\subsubsection[{getNumBBIns\_\-s}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::getNumBBIns\_\-s (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_a40ff2e382e333d5515bd55508b49247a}
-
-\begin{DoxyCode}
-                              {
-        return _s_insList->NumElements();
+                                      {
+        return _backEdgeSourceBbList->NumElements ();
 }
 \end{DoxyCode}
 
@@ -1464,8 +1770,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a42700afdf9102a0f287690f4f8c487f9}
 
 \begin{DoxyCode}
-                                  {
-        return _descendantBbList->NumElements();
+                                   {
+        return _descendantBbList->NumElements ();
 }
 \end{DoxyCode}
 
@@ -1489,19 +1795,19 @@ Here is the caller graph for this function:
 \label{classbasicblock_aae1b2e9429abfe8474fb5f1bc5a204b2}
 
 \begin{DoxyCode}
-                                 {
-        Assert (getTakenBias() >= 0.0 && getTakenBias() <= 1.0 && "Invalid bias v
-      alue\n");
-        if (getTakenBias() > WBB_LOWER_BOUND && 
-                getTakenBias() < WBB_UPPER_BOUND) {
-                        printf("\tWARNING: There is no clear answer for the next 
-      BB (%s, line: %d)\n",__FILE__, __LINE__);
-                        printf("%llx\n", getID()); //TODO remove this line
+                                  {
+        Assert  (getTakenBias () >= 0.0 && getTakenBias () <= 1.0 && "Invalid bia
+      s value\n");
+        if  (getTakenBias () > WBB_LOWER_BOUND && 
+                getTakenBias () < WBB_UPPER_BOUND) {
+                        printf ("\t\tWARNING: There is no clear answer for the ne
+      xt BB  (%s, line: %d)\n",__FILE__, __LINE__);
+                        printf ("%llx\n", getID ()); //TODO remove this line
                         return NULL; //Best action @ this point: give up
-        } else if (getTakenBias() <= 0.1) {
-                return getFallThrough();
+        } else if  (getTakenBias () <= 0.1) {
+                return getFallThrough ();
         } else {
-                return getTakenTarget();
+                return getTakenTarget ();
         }
 }
 \end{DoxyCode}
@@ -1526,7 +1832,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a3b5148a1563478d689e1e3796ebd7dba}
 
 \begin{DoxyCode}
-                                                         {
+                                                          {
         return _phiFuncMap;
 }
 \end{DoxyCode}
@@ -1546,8 +1852,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_ab3f5925d649492e0a3e73f4f9075ca7d}
 
 \begin{DoxyCode}
-                                  {
-        return _sDominatorMap.size();
+                                   {
+        return _sDominatorMap.size ();
 }
 \end{DoxyCode}
 
@@ -1566,8 +1872,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_afdffc2f38dc3e93c9125a1e4d205f4e9}
 
 \begin{DoxyCode}
-                               {
-        return getLastIns()->getBrTakenBias();
+                                {
+        return getLastIns ()->getBrTakenBias ();
 }
 \end{DoxyCode}
 
@@ -1591,8 +1897,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a4be1cedc2d2596df89d3b9f118c0e445}
 
 \begin{DoxyCode}
-                                       {
-        Assert(_takenTargetBB != NULL && "_takenTargetBB must not be NULL");
+                                        {
+        Assert (_takenTargetBB != NULL && "_takenTargetBB must not be NULL");
         return _takenTargetBB;
 }
 \end{DoxyCode}
@@ -1601,21 +1907,26 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a2acbd3c9e5af1bcfc60ed44827126d90}{
-\index{basicblock@{basicblock}!hasBBheader@{hasBBheader}}
-\index{hasBBheader@{hasBBheader}!basicblock@{basicblock}}
-\subsubsection[{hasBBheader}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::hasBBheader (
+\hypertarget{classbasicblock_ac6c9417ec2fdc2795a8d2ece003bd253}{
+\index{basicblock@{basicblock}!hasFallThrough@{hasFallThrough}}
+\index{hasFallThrough@{hasFallThrough}!basicblock@{basicblock}}
+\subsubsection[{hasFallThrough}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::hasFallThrough (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a2acbd3c9e5af1bcfc60ed44827126d90}
+\label{classbasicblock_ac6c9417ec2fdc2795a8d2ece003bd253}
 
 \begin{DoxyCode}
-                             {
-        return _hasBBheader;
+                                 { return (_fallThroughBB == NULL) ? false : true
+      ;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
 \hypertarget{classbasicblock_af49545fcc35042634fa48f78ca9f55cb}{
 \index{basicblock@{basicblock}!hasHeader@{hasHeader}}
 \index{hasHeader@{hasHeader}!basicblock@{basicblock}}
@@ -1627,7 +1938,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_af49545fcc35042634fa48f78ca9f55cb}
 
 \begin{DoxyCode}
-                           {
+                            {
         return _hasBrHeader;
 }
 \end{DoxyCode}
@@ -1636,21 +1947,25 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a86973a86f54f7d42ee2e3871a0ff47e1}{
-\index{basicblock@{basicblock}!insertMOVop@{insertMOVop}}
-\index{insertMOVop@{insertMOVop}!basicblock@{basicblock}}
-\subsubsection[{insertMOVop}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::insertMOVop (
+\hypertarget{classbasicblock_a935cd5566e8d7bed3764b7920f7ee200}{
+\index{basicblock@{basicblock}!hasTakenTarget@{hasTakenTarget}}
+\index{hasTakenTarget@{hasTakenTarget}!basicblock@{basicblock}}
+\subsubsection[{hasTakenTarget}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::hasTakenTarget (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a86973a86f54f7d42ee2e3871a0ff47e1}
+\label{classbasicblock_a935cd5566e8d7bed3764b7920f7ee200}
+
+\begin{DoxyCode}
+{ return (_takenTargetBB == NULL) ? false : true; }
+\end{DoxyCode}
 
 
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a85e079721ac3397044a6148e4d5fc688}{
+\hypertarget{classbasicblock_ae2ba97a932c305fcad17c91871d9b53c}{
 \index{basicblock@{basicblock}!insertMOVop@{insertMOVop}}
 \index{insertMOVop@{insertMOVop}!basicblock@{basicblock}}
 \subsubsection[{insertMOVop}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::insertMOVop (
@@ -1658,36 +1973,41 @@ Here is the caller graph for this function:
 \item[{long int}]{dst\_\-var, }
 \item[{long int}]{dst\_\-subs, }
 \item[{long int}]{src\_\-var, }
-\item[{long int}]{src\_\-subs}
+\item[{long int}]{src\_\-subs, }
+\item[{{\bf ADDR}}]{insAddr}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a85e079721ac3397044a6148e4d5fc688}
+\label{classbasicblock_ae2ba97a932c305fcad17c91871d9b53c}
 
 \begin{DoxyCode}
                                                                                  
-                          {
+                                         {
         instruction* newIns = new instruction;
         //TODO do all the bells and whistles for adding an ins.
-        newIns->setType('o');
-        newIns->setOpCode("#MOV\n");
-        newIns->setInsAddr(PHI_INS_ADDR); //this is just a psudo instruction addr
-      ess.
+        newIns->setType ('o');
+        newIns->setOpCode ("#MOV\n");
+        newIns->setInsAddr (insAddr);
+    newIns->setInsertedMovOp ();
         int type = READ;
-        newIns->setRegister(&src_var, &type);
-        newIns->setReadVar(src_var,src_subs);
+        newIns->setRegister (&src_var, &type);
+        newIns->setReadVar (src_var,src_subs);
         type = WRITE;
-        newIns->setRegister(&dst_var, &type);
-        newIns->setWriteVar(dst_var,dst_subs);
-        // newIns->makeUniqueRegs(); //THIS STEP is done later (don't put back)
+        newIns->setRegister (&dst_var, &type);
+        newIns->setWriteVar (dst_var,dst_subs);
+    newIns->setupDefUseSets ();
+    for  (int j = 0; j < newIns->getNumReg (); j++) {
+        if  (newIns->getNthRegType (j) == WRITE) {
+            updateDefSet (newIns->getNthReg (j));
+        }
+    }
+        // newIns->makeUniqueRegs (); //THIS STEP is done later  (don't put back)
+      
 
         // If the last BB instruction is a branch/jump/return, hist to the secodn
        to last position
         //TODO: check if the phi-function is associated with neither of branch/ju
       mp/return
-        //Since I run a trace and dump the whole BB during BB-annotation, I don't
-       have to worry about
-        //the points made above.
-        addIns(newIns); // _insList->Append(newIns);
+        addMovIns (newIns); // _insList->Append (newIns);
 }
 \end{DoxyCode}
 
@@ -1695,7 +2015,59 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classbasicblock_a1aeb2fc7325b987bced690cabf8d296d}{
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a688f53e1f072393e2a972974b57be536}{
+\index{basicblock@{basicblock}!insertMOVop@{insertMOVop}}
+\index{insertMOVop@{insertMOVop}!basicblock@{basicblock}}
+\subsubsection[{insertMOVop}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::insertMOVop (
+\begin{DoxyParamCaption}
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{long int}]{dst\_\-reg, }
+\item[{long int}]{src\_\-reg, }
+\item[{{\bf ADDR} \&}]{addrOffset, }
+\item[{int}]{indx, }
+\item[{{\bf PUSH\_\-LOCATION}}]{push\_\-location}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a688f53e1f072393e2a972974b57be536}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                  {
+    ADDR insAddr = PHI_INS_ADDR + addrOffset++;
+    Assert (insAddrMap->find (insAddr) == insAddrMap->end () && "The new MOV ins 
+      address already exists.");
+
+    /* GENERATE AND INSERT THE MOV OP */
+        instruction* newIns = new instruction;
+        newIns->setType ('o');
+        newIns->setOpCode ("#MOV\n");
+        newIns->setInsAddr (insAddr);
+    newIns->setInsertedMovOp ();
+        int type = READ;
+        newIns->setSSAregister (&src_reg, &type);
+        type = WRITE;
+        newIns->setSSAregister (&dst_reg, &type);
+    newIns->setupDefUseSets ();
+    newIns->setupLocSet (push_location);
+    for  (int j = 0; j < newIns->getNumReg (); j++) {
+        if  (newIns->getNthRegType (j) == WRITE) {
+            updateDefSet (newIns->getNthReg (j));
+        }
+    }
+    addMovIns (newIns, indx, push_location);
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_a933ceb18fc747c182520337b85c4f9da}{
 \index{basicblock@{basicblock}!insertPhiFunc@{insertPhiFunc}}
 \index{insertPhiFunc@{insertPhiFunc}!basicblock@{basicblock}}
 \subsubsection[{insertPhiFunc}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::insertPhiFunc (
@@ -1703,20 +2075,20 @@ Here is the call graph for this function:
 \item[{long int}]{var}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a1aeb2fc7325b987bced690cabf8d296d}
+\label{classbasicblock_a933ceb18fc747c182520337b85c4f9da}
 
 \begin{DoxyCode}
-                                           {
-        Assert(var >= X86_REG_LO && var <= X86_REG_HI && "invalid x86 variable.")
-      ;
+                                            {
+        Assert (var >= X86_REG_LO && var <= X86_REG_HI && "invalid x86 variable."
+      );
         // Add as many variables as there are ancestors for this basicblock
-        if (_phiFuncMap.find(var) == _phiFuncMap.end()) {
+        if  (_phiFuncMap.find (var) == _phiFuncMap.end ()) {
                 vector<long int> phiVector; //one vector per variable
                 vector<basicblock*> phiBbVector; //one vector per variable
-                _phiFuncMap.insert(pair<long int, vector<long int> >(var,phiVecto
-      r));
-                for (int i = 0; i < getNumAncestors(); i++) {
-                        _phiFuncMap[var].push_back(var);
+                _phiFuncMap.insert (pair<long int, vector<long int> > (var,phiVec
+      tor));
+                for  (int i = 0; i < getNumAncestors (); i++) {
+                        _phiFuncMap[var].push_back (var);
                 }
         }
 }
@@ -1737,12 +2109,9 @@ Here is the call graph for this function:
 \label{classbasicblock_a88276960d345d6849dbe02c9debbb94e}
 
 \begin{DoxyCode}
-                                {
-        if (_bbListForPhraseblock->NumElements() == 0) {
-                return false;
-        } else {
-                return true;
-        }
+                                 {
+        if  (_bbListForPhraseblock->NumElements () == 0) { return false;
+        } else { return true; }
 }
 \end{DoxyCode}
 
@@ -1766,11 +2135,10 @@ Here is the caller graph for this function:
 \label{classbasicblock_ab16dc9da49df4b6bf4c6573bfb31217a}
 
 \begin{DoxyCode}
-                                          {
-        if (_sDominatorMap.find(nodeID) == _sDominatorMap.end())
-                return false;
-        else
-                return true;
+                                           {
+        if  (_sDominatorMap.find (nodeID) == _sDominatorMap.end ()) return false;
+      
+        else return true;
 }
 \end{DoxyCode}
 
@@ -1789,44 +2157,16 @@ Here is the caller graph for this function:
 \label{classbasicblock_a0da29a0f57618d2a13bfdfc9926319b9}
 
 \begin{DoxyCode}
-                            {
-        for (int i = 0; i < getNumDescendents(); i++) {
-                if (_dominatorMap.find(getNthDescendent(i)->getID()) != _dominato
-      rMap.end()) {
+                             {
+        for  (int i = 0; i < getNumDescendents (); i++) {
+                if  (_dominatorMap.find (getNthDescendent (i)->getID ()) != _domi
+      natorMap.end ()) {
                         return true;
                 } else {
                         return false;
                 }
         }
         return false;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_aa3e4afae3ad78659454d5747931ee455}{
-\index{basicblock@{basicblock}!isBBcomplete@{isBBcomplete}}
-\index{isBBcomplete@{isBBcomplete}!basicblock@{basicblock}}
-\subsubsection[{isBBcomplete}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::isBBcomplete (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_aa3e4afae3ad78659454d5747931ee455}
-
-\begin{DoxyCode}
-                              {
-        for (int i = 0; i < getNumBBIns_o(); i++) {
-                if (getNthBBIns_o(i)->getStatus() != complete) return false;
-        }
-        return true;
 }
 \end{DoxyCode}
 
@@ -1850,7 +2190,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a81b824d2e109bb3b9484eb021fdd0a80}
 
 \begin{DoxyCode}
-                              {
+                               {
         return _entryPoint;
 }
 \end{DoxyCode}
@@ -1870,11 +2210,9 @@ Here is the caller graph for this function:
 \label{classbasicblock_a026b949adeca19875d0a8a43784d2c9d}
 
 \begin{DoxyCode}
-                                     {
-        if (_idomSet.find(nodeID) == _idomSet.end())
-                return false;
-        else
-                return true;
+                                      {
+        if  (_idomSet.find (nodeID) == _idomSet.end ()) return false;
+        else return true;
 }
 \end{DoxyCode}
 
@@ -1893,8 +2231,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_afe08d56238e85bb143c4a0bb79c585b1}
 
 \begin{DoxyCode}
-                                             {
-        if (_localRegSet.find(reg) == _localRegSet.end())
+                                              {
+        if  (_localRegSet.find (reg) == _localRegSet.end ())
                 return false;
         else
                 return true;
@@ -1911,12 +2249,74 @@ Here is the caller graph for this function:
 \label{classbasicblock_afd299af5d08655c4fbd10221f5edb556}
 
 \begin{DoxyCode}
-                                           {
-        Assert(_insAddrList.size() > 0);
-        if (_insAddrList.find(insAddr) != _insAddrList.end()) return true;
+                                            {
+        Assert (_insAddrList.size () > 0);
+        if  (_insAddrList.find (insAddr) != _insAddrList.end ()) return true;
         else return false;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ac254c6b6e38f968418e9239f5eebcee2}{
+\index{basicblock@{basicblock}!isRegAllocated@{isRegAllocated}}
+\index{isRegAllocated@{isRegAllocated}!basicblock@{basicblock}}
+\subsubsection[{isRegAllocated}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::isRegAllocated (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ac254c6b6e38f968418e9239f5eebcee2}
+
+\begin{DoxyCode}
+                                 {
+        return _regAllocated;
+}
+\end{DoxyCode}
+\hypertarget{classbasicblock_ac0ddcb18b5f613710d5836025dd974cb}{
+\index{basicblock@{basicblock}!isThisBBfallThru@{isThisBBfallThru}}
+\index{isThisBBfallThru@{isThisBBfallThru}!basicblock@{basicblock}}
+\subsubsection[{isThisBBfallThru}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::isThisBBfallThru (
+\begin{DoxyParamCaption}
+\item[{{\bf basicblock} $\ast$}]{anc}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ac0ddcb18b5f613710d5836025dd974cb}
+
+\begin{DoxyCode}
+                                                  {
+    instruction* last_ins = anc->getLastIns ();
+    if (last_ins->hasFallThru () && anc->getLastInsFallThru () == getID ()) { ret
+      urn true; }
+    else if (last_ins->hasDst () && anc->getLastInsDst () == getID ()) { return f
+      alse; }
+    else {
+//        Assert (0 && "This BB is falsely not present as the fallthru or dst of 
+      its ancestor");
+        printf ("\tWARNING: This BB is falsely not present as the fallthru or dst
+       of its ancestor - hack-fixing it for now\n");
+        /* TODO - THE CODE BELOW IS JUST A HACK TO GET THINGS RUNNING - THIS COND
+      UTION MUST NEVER HAPPEN */
+        if (last_ins->hasFallThru () && anc->getLastInsFallThru () != getID ()) {
+      
+            instruction* ins = anc->getLastIns (); /* a hack */
+            ins->setInsFallThruAddr (getID (), true);
+            return true;
+        } else if (last_ins->hasDst () && anc->getLastInsDst () != getID ()) {
+            instruction* ins = anc->getLastIns (); /* a hack */
+            ins->setInsDstAddr (getID (), true);
+            return false;
+        }
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -1933,10 +2333,69 @@ Here is the caller graph for this function:
 \label{classbasicblock_ad40cc70b314779ab7d0990813d3053d4}
 
 \begin{DoxyCode}
-                           {
+                            {
         return _visited;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_aa5067cede8627ae1c7109fe33c9c440c}{
+\index{basicblock@{basicblock}!makeSubBlocks@{makeSubBlocks}}
+\index{makeSubBlocks@{makeSubBlocks}!basicblock@{basicblock}}
+\subsubsection[{makeSubBlocks}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::makeSubBlocks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_aa5067cede8627ae1c7109fe33c9c440c}
+
+\begin{DoxyCode}
+                                {
+    for (int i = 0; i < _insList->NumElements (); i++) {
+        bool found_sub_blk = false;
+        instruction* ins = _insList->Nth (i);
+        set<ADDR> upld_roots = ins->getUPLDroots ();
+        map<SUB_BLK_ID, sub_block*>::iterator it;
+        for (it = sub_blk_map.begin (); it != sub_blk_map.end (); it++) {
+                set<SUB_BLK_ID> upld_diff1, upld_diff2;
+            set<ADDR> blk_upld_roots = it->second->_upld_set;
+                std::set_difference (upld_roots.begin (), upld_roots.end (), 
+                    blk_upld_roots.begin (), blk_upld_roots.end (), 
+                    std::inserter (upld_diff1, upld_diff1.begin ()));
+                std::set_difference (blk_upld_roots.begin (), blk_upld_roots.end 
+      (), 
+                    upld_roots.begin (), upld_roots.end (),
+                    std::inserter (upld_diff2, upld_diff2.begin ()));
+            if (upld_diff1.size () == 0 && upld_diff2.size () == 0) {
+                if (_upld_roots->NumElements () > 0) cout << "(" << it->first << 
+      ", " << hex << ins->getInsAddr ()  << dec << ") ";
+                it->second->_insList->Append (ins);
+                found_sub_blk = true;
+                break;
+            }
+        }
+        if (!found_sub_blk) {
+            sub_block* sub_blk = new sub_block;
+            sub_blk->_upld_set = upld_roots;
+            sub_blk->_insList->Append (ins);
+            sub_blk->_id = _sub_blk_id; //TODO initialize vaiable in constructor
+            sub_blk_map.insert (pair<SUB_BLK_ID, sub_block*>(_sub_blk_id++, sub_b
+      lk));
+            cout << _sub_blk_id - 1 << " ";
+            if (_upld_roots->NumElements () > 0) cout << "(" << _sub_blk_id - 1 <
+      < ", " << hex << ins->getInsAddr ()  << dec << ") ";
+        }
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -1953,10 +2412,71 @@ Here is the caller graph for this function:
 \label{classbasicblock_a3da24f399435a4ba33a464925d4ded05}
 
 \begin{DoxyCode}
-                                  {
+                                   {
         _entryPoint = true;
 }
 \end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a8f8234c300c0027293da7ea7b710d29c}{
+\index{basicblock@{basicblock}!markUPLDroot@{markUPLDroot}}
+\index{markUPLDroot@{markUPLDroot}!basicblock@{basicblock}}
+\subsubsection[{markUPLDroot}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::markUPLDroot (
+\begin{DoxyParamCaption}
+\item[{{\bf instruction} $\ast$}]{ins, }
+\item[{{\bf ADDR}}]{upld\_\-id}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a8f8234c300c0027293da7ea7b710d29c}
+
+\begin{DoxyCode}
+                                                             {
+    List<instruction*>* dependents = ins->getDependents ();
+    for (int i = 0; i < dependents->NumElements (); i++) {
+        instruction* decs = dependents->Nth (i);
+        if (decs->getMy_BB_id () == getID ()) {
+            decs->assignUPLDroot (upld_id);
+            markUPLDroot (decs, upld_id);
+        }
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ab238bfd0637d2761092e86e6517d3320}{
+\index{basicblock@{basicblock}!markUPLDroots@{markUPLDroots}}
+\index{markUPLDroots@{markUPLDroots}!basicblock@{basicblock}}
+\subsubsection[{markUPLDroots}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::markUPLDroots (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ab238bfd0637d2761092e86e6517d3320}
+
+\begin{DoxyCode}
+                                {
+    for (int i = 0; i < _upld_roots->NumElements (); i++) {
+        instruction* upld = _upld_roots->Nth (i);
+        markUPLDroot (upld, upld->getInsAddr ());
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -1973,25 +2493,25 @@ Here is the caller graph for this function:
 \label{classbasicblock_ad05a1a1f24dfb10d2c637065eaea2835}
 
 \begin{DoxyCode}
-                                        {
+                                         {
         int count = 0;
         //NOTE: this is only a hack to get some loops recognized. should not be a
        universal solution
-        if (_ancestorBbList->NumElements() == _descendantBbList->NumElements() &&
-      
-            _ancestorBbList->NumElements() == 1 &&
-        _ancestorBbList->Nth(0)->getID() == _descendantBbList->Nth(0)->getID()) {
-      
+        if  (_ancestorBbList->NumElements () == _descendantBbList->NumElements ()
+       &&
+            _ancestorBbList->NumElements () == 1 &&
+        _ancestorBbList->Nth (0)->getID () == _descendantBbList->Nth (0)->getID (
+      )) {
                 return 0;
         }
         //NOTE: this is only a hack to get some loops recognized. should not be a
        universal solution
-        for (int i = 0; i < _ancestorBbList->NumElements(); i++) {
-                if (_ancestorBbList->Nth(i)->getID() < getID()) {
+        for  (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                if  (_ancestorBbList->Nth (i)->getID () < getID ()) {
                         count++;
                 }
         }
-        // printf("%llx, %d\n", getID(), count);
+        // printf ("%llx, %d\n", getID (), count);
         return count;
 }
 \end{DoxyCode}
@@ -2016,11 +2536,13 @@ Here is the caller graph for this function:
 \label{classbasicblock_a7fee16556188be2c9501c1062589e7a6}
 
 \begin{DoxyCode}
-                                                       { //TODO: UPDATE THIS FUNC
-      TION
+                                                        { //TODO: UPDATE THIS FUN
+      CTION
         bbID = bb.bbID;
+        _bbAddr = bb._bbAddr;
         _listIndx = bb._listIndx;
         _visited = bb._visited;
+        _regAllocated = bb._regAllocated;
         _entryPoint = bb._entryPoint;
         _domSetIsAll = bb._domSetIsAll;
         _backEdgeDest = bb._backEdgeDest;
@@ -2029,6 +2551,7 @@ Here is the caller graph for this function:
         _bbListForPhraseblock = bb._bbListForPhraseblock;
         _phList                           = bb._phList;
         _insList              = bb._insList;
+        _insList_orig         = bb._insList_orig;
         _insListSchList           = bb._insListSchList;
         _ancestorBbList       = bb._ancestorBbList;
         _descendantBbList     = bb._descendantBbList;
@@ -2039,6 +2562,60 @@ Here is the caller graph for this function:
         return *this;
 }
 \end{DoxyCode}
+\hypertarget{classbasicblock_a91953b5e5abf82c6623ca043b2424336}{
+\index{basicblock@{basicblock}!overwrittenMovOpElim@{overwrittenMovOpElim}}
+\index{overwrittenMovOpElim@{overwrittenMovOpElim}!basicblock@{basicblock}}
+\subsubsection[{overwrittenMovOpElim}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::overwrittenMovOpElim (
+\begin{DoxyParamCaption}
+\item[{{\bf SCH\_\-MODE}}]{sch\_\-mode}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a91953b5e5abf82c6623ca043b2424336}
+
+\begin{DoxyCode}
+                                                       {
+    List<instruction*>* insList = NULL;
+    map<long int, instruction*> producers;
+    int remove_cnt = 0;
+
+    /* PICK THE RIGHT LIST TO PROCESS */
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        if (ins->isInsertedMovOp ()) {
+            for (int j = 0; j < ins->getNumReg (); j++) {
+                if (ins->getNthRegType (j) == WRITE) {
+                    long int reg = ins->getNthArchReg (j);
+                    if (producers.find (reg) == producers.end ()) {
+                        producers.insert (pair<long int, instruction*>(reg, ins))
+      ;
+                        break; //assuming one write operand
+                    } else {
+                        delete ins;
+                        insList->RemoveAt (i);
+                        remove_cnt++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return remove_cnt;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 \hypertarget{classbasicblock_a1599003c14b63f443c1ca3c48c34238e}{
 \index{basicblock@{basicblock}!printBb@{printBb}}
 \index{printBb@{printBb}!basicblock@{basicblock}}
@@ -2050,12 +2627,56 @@ Here is the caller graph for this function:
 \label{classbasicblock_a1599003c14b63f443c1ca3c48c34238e}
 
 \begin{DoxyCode}
-                         {
-        printf("\n--BB ID: %llx\n", bbID);
-        for (int i = 0; i < _insList->NumElements(); i++) {
-                printf("%llx, %s\n", _insList->Nth(i)->getInsAddr(), _insList->
-      Nth(i)->getOpCode());
+                          {
+        printf ("\n--BB ID: %llx\n", bbID);
+        for  (int i = 0; i < _insList->NumElements (); i++) {
+                printf ("%llx, %s\n", _insList->Nth (i)->getInsAddr (), _insList-
+      >Nth (i)->getOpCode ());
         }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_ae97e01492662bce4919253c165c674bd}{
+\index{basicblock@{basicblock}!redundantMovOpElim@{redundantMovOpElim}}
+\index{redundantMovOpElim@{redundantMovOpElim}!basicblock@{basicblock}}
+\subsubsection[{redundantMovOpElim}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::redundantMovOpElim (
+\begin{DoxyParamCaption}
+\item[{{\bf SCH\_\-MODE}}]{sch\_\-mode}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ae97e01492662bce4919253c165c674bd}
+
+\begin{DoxyCode}
+                                                     {
+    /* PICK THE RIGHT LIST TO PROCESS */
+    List<instruction*>* insList = NULL;
+    if (sch_mode == LIST_SCH) {
+        insList = _insListSchList;
+    } else if (sch_mode == NO_LIST_SCH) {
+        insList = _insList;
+    } else {
+        Assert (0 && "invalid scheduling model");
+    }
+
+    /* FIND CONSUMES AND PRODUCERS IN THIS BLOCK */
+    int remove_cnt = 0;
+    for (int i = insList->NumElements () - 1; i >= 0; i--) {
+        instruction* ins = insList->Nth (i);
+        if (ins->isInsertedMovOp ()) {
+            Assert (ins->getNumReg () == 2 && "The MOV instruction must have two 
+      regiters");
+            if (ins->getNthArchReg (0) == ins->getNthArchReg (1)) {
+                delete insList->Nth (i);
+                insList->RemoveAt (i);
+                remove_cnt++;
+            }
+        }
+    }
+    return remove_cnt;
 }
 \end{DoxyCode}
 
@@ -2074,29 +2695,79 @@ Here is the call graph for this function:
 \label{classbasicblock_a8493801bbd0b56aac41aa8cd2aedcea4}
 
 \begin{DoxyCode}
-                                  {
-        _defSet.clear();
-        _useSet.clear();
-        for (int i =0 ; i < _insList->NumElements(); i++) {
-                instruction* ins = _insList->Nth(i);
-                ins->makeUniqueRegs();
-                //printf("ins %llx\n",ins->getInsAddr());
-                for (int j = 0; j < ins->getNumReg(); j++) {
-                        long int reg = ins->getNthReg(j);
-                        //printf("reg: %ld\n",reg);
-                        if (ins->getNthRegType(j) == READ) {// && _defSet.find(in
-      s->getNthReg(i)) == _defSet.end()) { TODO: what to do with this line?
-                                //second condition avoids ud-chains within a BB f
+                                   {
+        _defSet.clear ();
+        _useSet.clear ();
+        for  (int i = 0; i < _insList->NumElements (); i++) {
+                instruction* ins = _insList->Nth (i);
+        ins->renameAllInsRegs ();
+                for  (int j = 0; j < ins->getNumReg (); j++) {
+                        long int reg = ins->getNthReg (j);
+//                      if  (ins->getNthRegType (j) == READ) {// && _defSet.find 
+      (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
+//                              //second condition avoids ud-chains within a BB f
       rom propagating
-                                updateUseSet(reg);
-                        } else if (ins->getNthRegType(j) == WRITE) {
-                                updateDefSet(reg);
-                        } else {
-                                Assert(true == false && "Invalid register type");
-      
+//                              updateUseSet (reg);
+//                      } else if  (ins->getNthRegType (j) == WRITE) {
+                        if  (ins->getNthRegType (j) == WRITE) {
+                                updateDefSet (reg);
+//                      } else {
+//                              Assert (0 && "Invalid register type");
                         }
                 }
         }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_ab9ce3574fe056958ce66401602c0c9a9}{
+\index{basicblock@{basicblock}!replaceNthPhiOperand@{replaceNthPhiOperand}}
+\index{replaceNthPhiOperand@{replaceNthPhiOperand}!basicblock@{basicblock}}
+\subsubsection[{replaceNthPhiOperand}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::replaceNthPhiOperand (
+\begin{DoxyParamCaption}
+\item[{long int}]{var, }
+\item[{int}]{indx, }
+\item[{long int}]{subscript}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ab9ce3574fe056958ce66401602c0c9a9}
+
+\begin{DoxyCode}
+                                                                                 
+      {
+                _phiFuncMap[var].at (indx) = subscript;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ae8a4cc290c3d290b04073649bd1ab28f}{
+\index{basicblock@{basicblock}!reportStats@{reportStats}}
+\index{reportStats@{reportStats}!basicblock@{basicblock}}
+\subsubsection[{reportStats}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::reportStats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ae8a4cc290c3d290b04073649bd1ab28f}
+
+\begin{DoxyCode}
+                              {
+    if (_stats.upld_cnt > 0) 
+        cout << hex << getID ()  << " " << dec 
+        << _stats.upld_cnt << " " 
+        << _stats.upld_dep_cnt << " " 
+        << _stats.upld_n_dep_cnt << " " 
+        << _insList->NumElements () << " " 
+        << (double)_stats.upld_cnt / _insList->NumElements () << " "
+        << (double)_stats.upld_dep_cnt / _insList->NumElements () << " "
+        << (double)_stats.upld_n_dep_cnt / (_stats.upld_cnt-1)
+        << endl;
 }
 \end{DoxyCode}
 
@@ -2109,23 +2780,163 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a129efbec925894799b11962ee9ec8b72}{
-\index{basicblock@{basicblock}!replaceNthPhiOperand@{replaceNthPhiOperand}}
-\index{replaceNthPhiOperand@{replaceNthPhiOperand}!basicblock@{basicblock}}
-\subsubsection[{replaceNthPhiOperand}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::replaceNthPhiOperand (
+\hypertarget{classbasicblock_aae9d33169e6428c1cf8fa63f02fdff0c}{
+\index{basicblock@{basicblock}!resetAncestor@{resetAncestor}}
+\index{resetAncestor@{resetAncestor}!basicblock@{basicblock}}
+\subsubsection[{resetAncestor}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetAncestor (
 \begin{DoxyParamCaption}
-\item[{long int}]{var, }
-\item[{int}]{indx, }
-\item[{long int}]{subscript}
+\item[{{\bf ADDR}}]{bbID}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a129efbec925894799b11962ee9ec8b72}
+\label{classbasicblock_aae9d33169e6428c1cf8fa63f02fdff0c}
 
 \begin{DoxyCode}
-                                                                                {
-      
-                _phiFuncMap[var].at(indx) = subscript;
+                                         {
+    for (int i = _ancestorBbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* anc = _ancestorBbList->Nth (i);
+        if (anc->getID () == bbID)
+            _ancestorBbList->RemoveAt (i);
+    }
 }
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a75c5a313363a9d2ad89133d3fa9c9b2d}{
+\index{basicblock@{basicblock}!resetBBbrHeader@{resetBBbrHeader}}
+\index{resetBBbrHeader@{resetBBbrHeader}!basicblock@{basicblock}}
+\subsubsection[{resetBBbrHeader}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetBBbrHeader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a75c5a313363a9d2ad89133d3fa9c9b2d}
+
+\begin{DoxyCode}
+                                  {
+        _brHeaderAddr = 0;
+        _hasBrHeader = false;
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a30cba20ee229efa0e17706a78a42fa13}{
+\index{basicblock@{basicblock}!resetDescendents@{resetDescendents}}
+\index{resetDescendents@{resetDescendents}!basicblock@{basicblock}}
+\subsubsection[{resetDescendents}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetDescendents (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a30cba20ee229efa0e17706a78a42fa13}
+
+\begin{DoxyCode}
+                                   {
+    for (int i = _descendantBbList->NumElements () - 1; i >= 0; i--) {
+        basicblock* desc = _descendantBbList->Nth (i);
+        desc->resetAncestor (getID ());
+        _descendantBbList->RemoveAt (i);
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a7a9a81a5902f8cddcc52edadd266d703}{
+\index{basicblock@{basicblock}!resetDF@{resetDF}}
+\index{resetDF@{resetDF}!basicblock@{basicblock}}
+\subsubsection[{resetDF}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetDF (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a7a9a81a5902f8cddcc52edadd266d703}
+
+\begin{DoxyCode}
+                          {
+        _dominanceFrontier.clear ();
+}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a595a0a54024fca0c88de5b56388e06de}{
+\index{basicblock@{basicblock}!resetFallThrough@{resetFallThrough}}
+\index{resetFallThrough@{resetFallThrough}!basicblock@{basicblock}}
+\subsubsection[{resetFallThrough}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetFallThrough (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a595a0a54024fca0c88de5b56388e06de}
+
+\begin{DoxyCode}
+{ _fallThroughBB = NULL; }
+\end{DoxyCode}
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a9d7e049bd37a23efb5e9ea1d230dc2bc}{
+\index{basicblock@{basicblock}!resetSets@{resetSets}}
+\index{resetSets@{resetSets}!basicblock@{basicblock}}
+\subsubsection[{resetSets}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetSets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a9d7e049bd37a23efb5e9ea1d230dc2bc}
+
+\begin{DoxyCode}
+                            {
+        _defSet.clear ();
+        _useSet.clear ();
+    _outSet.clear ();
+    _inSet.clear ();
+    _localRegSet.clear ();
+        for  (int i = 0; i < _insList->NumElements (); i++) {
+                instruction* ins = _insList->Nth (i);
+        ins->resetSets ();
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_a1194e61470d8e910c31dd03df0328da7}{
+\index{basicblock@{basicblock}!resetTakenTarget@{resetTakenTarget}}
+\index{resetTakenTarget@{resetTakenTarget}!basicblock@{basicblock}}
+\subsubsection[{resetTakenTarget}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::resetTakenTarget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a1194e61470d8e910c31dd03df0328da7}
+
+\begin{DoxyCode}
+{ _takenTargetBB = NULL; }
 \end{DoxyCode}
 
 
@@ -2143,7 +2954,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a11c8e9c8e6e38864552bafcd041e7a08}
 
 \begin{DoxyCode}
-                                                    {
+                                                     {
         _domSetIsAll = domSetIsAll;
 }
 \end{DoxyCode}
@@ -2152,7 +2963,7 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a731087012c909b6d3875fa6fb5731bab}{
+\hypertarget{classbasicblock_abd5ac29c38d0f84eb5dccc87a269cc28}{
 \index{basicblock@{basicblock}!setAncestor@{setAncestor}}
 \index{setAncestor@{setAncestor}!basicblock@{basicblock}}
 \subsubsection[{setAncestor}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setAncestor (
@@ -2160,11 +2971,11 @@ Here is the caller graph for this function:
 \item[{{\bf basicblock} $\ast$}]{bb}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a731087012c909b6d3875fa6fb5731bab}
+\label{classbasicblock_abd5ac29c38d0f84eb5dccc87a269cc28}
 
 \begin{DoxyCode}
-                                           {
-        _ancestorBbList->Append(bb);
+                                            {
+        _ancestorBbList->Append (bb);
 }
 \end{DoxyCode}
 
@@ -2188,8 +2999,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a26f134ff2983953107999162e764c52a}
 
 \begin{DoxyCode}
-                                                   {
-        _backEdgeSourceBbList->Append(bb);
+                                                    {
+        _backEdgeSourceBbList->Append (bb);
 }
 \end{DoxyCode}
 
@@ -2213,7 +3024,7 @@ Here is the caller graph for this function:
 \label{classbasicblock_a810b34c12cbddff700700341734ddc5d}
 
 \begin{DoxyCode}
-                                {
+                                 {
         _visited = false;
 }
 \end{DoxyCode}
@@ -2233,8 +3044,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_adb3d7c691e7974f77619409fe4a24335}
 
 \begin{DoxyCode}
-                              {
-        Assert(_visited == false && "BB must not have been visited");
+                               {
+        Assert (_visited == false && "BB must not have been visited");
         _visited = true;
 }
 \end{DoxyCode}
@@ -2254,13 +3065,18 @@ Here is the caller graph for this function:
 \label{classbasicblock_a08a435779d5c69e560f81d76511033f8}
 
 \begin{DoxyCode}
-                                          {
-        Assert(brAddr > 0);
+                                           {
+        Assert (brAddr >= 0);
         _brHeaderAddr = brAddr;
         _hasBrHeader = true;
 }
 \end{DoxyCode}
-\hypertarget{classbasicblock_aaede95419f42104aca674399aeef1a9b}{
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_af05cd0f5ccbb4d0484b07d74e369de0d}{
 \index{basicblock@{basicblock}!setDescendent@{setDescendent}}
 \index{setDescendent@{setDescendent}!basicblock@{basicblock}}
 \subsubsection[{setDescendent}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setDescendent (
@@ -2268,12 +3084,45 @@ Here is the caller graph for this function:
 \item[{{\bf basicblock} $\ast$}]{bb}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_aaede95419f42104aca674399aeef1a9b}
+\label{classbasicblock_af05cd0f5ccbb4d0484b07d74e369de0d}
 
 \begin{DoxyCode}
-                                             {
-        _descendantBbList->Append(bb);
-        bb->setAncestor(this); //Create duplex links
+                                              {
+        _descendantBbList->Append (bb);
+        bb->setAncestor (this); //Create duplex links
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}{
+\index{basicblock@{basicblock}!setDominators@{setDominators}}
+\index{setDominators@{setDominators}!basicblock@{basicblock}}
+\subsubsection[{setDominators}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::setDominators (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}
+
+\begin{DoxyCode}
+                                {
+        // Assert (_dominatorMap.size () == 0 && "set size must be zero initially
+      .");
+        if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
+                _dominatorSet.insert (getID ());
+                _dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));
+        } else {
+                return false;//Assert (0 && "Invalid dominator set.");
+        }
+        return true;
 }
 \end{DoxyCode}
 
@@ -2297,33 +3146,33 @@ Here is the caller graph for this function:
 \label{classbasicblock_a9e417b7d2b2cb87281b4c8ed1b10d566}
 
 \begin{DoxyCode}
-                                                                  {
+                                                                   {
         map<ADDR,basicblock*> oldMap = _dominatorMap;
-        _dominatorMap.clear();
+        _dominatorMap.clear ();
         _dominatorMap = intersection;
-        if (_dominatorMap.find(getID()) == _dominatorMap.end()) {
-                _dominatorSet.insert(getID());
-                _dominatorMap.insert(pair<ADDR, basicblock*>(getID(), this));
+        if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
+                _dominatorSet.insert (getID ());
+                _dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));
         }
-        for (map<ADDR,basicblock*>::iterator it = _dominatorMap.begin(); it != _d
-      ominatorMap.end(); it++) {
-                _dominatorSet.insert(it->first);
+
+        for  (map<ADDR,basicblock*>::iterator it = _dominatorMap.begin (); it != 
+      _dominatorMap.end (); it++) {
+                _dominatorSet.insert (it->first);
         }
-        if (oldMap.size() != _dominatorMap.size()) {
+
+        if  (oldMap.size () != _dominatorMap.size ()) {
                 return true;
         } else {
-                map<ADDR,basicblock*>::iterator it1, it2;
-                for (it1 = _dominatorMap.begin(), it2 = oldMap.begin(); it1 != _d
-      ominatorMap.end(); it1++, it2++) {
-                        if (*it1 != *it2) {
-                                return true;
-                        }
+                map<ADDR,basicblock*>::iterator it1;
+                for  (it1 = _dominatorMap.begin (); it1 != _dominatorMap.end (); 
+      it1++) {
+            if (oldMap.find (it1->first) == oldMap.end ()) return true;
                 }
                 return false;
         }
-        //it = set_intersection (oldSet.begin(), oldSet.end(), _dominatorSet.begi
-      n(), _dominatorSet.end(), out.begin());
-        //if (int(it - out.begin()) != 0) {
+        //it = set_intersection  (oldSet.begin (), oldSet.end (), _dominatorSet.b
+      egin (), _dominatorSet.end (), out.begin ());
+        //if  (int (it - out.begin ()) != 0) {
         //      return true;
         //} else {
         //      return false;
@@ -2346,18 +3195,20 @@ Here is the call graph for this function:
 \label{classbasicblock_aafd371f1d5701ae15546178a153ca23d}
 
 \begin{DoxyCode}
-                                                        {
-        Assert(_dominatorMap.size() == 0 && "set size must be zero initially.");
-        if (_dominatorMap.find(getID()) == _dominatorMap.end()) {
-                _dominatorSet.insert(getID());
-                _dominatorMap.insert(pair<ADDR, basicblock*>(getID(), this));
+                                                         {
+        Assert (_dominatorMap.size () == 0 && "set size must be zero initially.")
+      ;
+        if  (_dominatorMap.find (getID ()) == _dominatorMap.end ()) {
+                _dominatorSet.insert (getID ());
+                _dominatorMap.insert (pair<ADDR, basicblock*> (getID (), this));
         }
-        for (int i = 0; i < bbList->NumElements(); i++) {
-                basicblock* bb = bbList->Nth(i);
-                if (_dominatorMap.find(bb->getID()) == _dominatorMap.end()) {
-                        _dominatorSet.insert(bb->getID());
-                        _dominatorMap.insert(pair<ADDR, basicblock*>(bb->getID(),
-       bb));
+        for  (int i = 0; i < bbList->NumElements (); i++) {
+                basicblock* bb = bbList->Nth (i);
+                if  (_dominatorMap.find (bb->getID ()) == _dominatorMap.end ()) {
+      
+                        _dominatorSet.insert (bb->getID ());
+                        _dominatorMap.insert (pair<ADDR, basicblock*> (bb->getID 
+      (), bb));
                 }
         }
         return true;
@@ -2368,41 +3219,7 @@ Here is the call graph for this function:
 Here is the call graph for this function:
 
 
-\hypertarget{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}{
-\index{basicblock@{basicblock}!setDominators@{setDominators}}
-\index{setDominators@{setDominators}!basicblock@{basicblock}}
-\subsubsection[{setDominators}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::setDominators (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_aae21234b7ccd801b037a3a26a11d44e7}
-
-\begin{DoxyCode}
-                               {
-        // Assert(_dominatorMap.size() == 0 && "set size must be zero initially."
-      );
-        if (_dominatorMap.find(getID()) == _dominatorMap.end()) {
-                _dominatorSet.insert(getID());
-                _dominatorMap.insert(pair<ADDR, basicblock*>(getID(), this));
-        } else {
-                return false;//Assert(true == false && "Invalid dominator set.");
-      
-        }
-        return true;
-}
-\end{DoxyCode}
-
-
-Here is the call graph for this function:
-
-
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_ad97dd41248a01abbf1baa313845ff526}{
+\hypertarget{classbasicblock_acf97e4fe55cfcd74ac0b0d6532e2e291}{
 \index{basicblock@{basicblock}!setFallThrough@{setFallThrough}}
 \index{setFallThrough@{setFallThrough}!basicblock@{basicblock}}
 \subsubsection[{setFallThrough}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setFallThrough (
@@ -2410,11 +3227,11 @@ Here is the caller graph for this function:
 \item[{{\bf basicblock} $\ast$}]{bb}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_ad97dd41248a01abbf1baa313845ff526}
+\label{classbasicblock_acf97e4fe55cfcd74ac0b0d6532e2e291}
 
 \begin{DoxyCode}
-                                              {
-        Assert(_fallThroughBB == NULL);
+                                               {
+        Assert (_fallThroughBB == NULL);
         _fallThroughBB = bb;
 }
 \end{DoxyCode}
@@ -2434,8 +3251,8 @@ Here is the caller graph for this function:
 \label{classbasicblock_a1d85d5fd059f1658ce3c67357502ed71}
 
 \begin{DoxyCode}
-                                         {
-        Assert(listIndx >= 0 && "Invlid list index value");
+                                          {
+        Assert (listIndx >= 0 && "Invlid list index value");
         _listIndx = listIndx;
 }
 \end{DoxyCode}
@@ -2444,7 +3261,7 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_a8b4180d38d685e0def92a4512ab4f1ce}{
+\hypertarget{classbasicblock_af5afec059922ab19cf93f9f84f5c85ed}{
 \index{basicblock@{basicblock}!setPhiWriteVar@{setPhiWriteVar}}
 \index{setPhiWriteVar@{setPhiWriteVar}!basicblock@{basicblock}}
 \subsubsection[{setPhiWriteVar}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setPhiWriteVar (
@@ -2453,11 +3270,11 @@ Here is the caller graph for this function:
 \item[{long int}]{subscript}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_a8b4180d38d685e0def92a4512ab4f1ce}
+\label{classbasicblock_af5afec059922ab19cf93f9f84f5c85ed}
 
 \begin{DoxyCode}
-                                                                {
-        _phiDestMap.insert(pair<long int, long int>(var,subscript));
+                                                                 {
+        _phiDestMap.insert (pair<long int, long int> (var,subscript));
 }
 \end{DoxyCode}
 
@@ -2465,7 +3282,52 @@ Here is the caller graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_af0d0269f9c9a3b52062170c667f436b2}{
+\hypertarget{classbasicblock_a58e5eb2ef1760113614b7d29007d5b56}{
+\index{basicblock@{basicblock}!setRegAllocated@{setRegAllocated}}
+\index{setRegAllocated@{setRegAllocated}!basicblock@{basicblock}}
+\subsubsection[{setRegAllocated}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setRegAllocated (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a58e5eb2ef1760113614b7d29007d5b56}
+
+\begin{DoxyCode}
+                                  {
+        _regAllocated = true;
+}
+\end{DoxyCode}
+\hypertarget{classbasicblock_a7ee1e79e21404965709f314b56baa695}{
+\index{basicblock@{basicblock}!setsupStats@{setsupStats}}
+\index{setsupStats@{setsupStats}!basicblock@{basicblock}}
+\subsubsection[{setsupStats}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setsupStats (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a7ee1e79e21404965709f314b56baa695}
+
+\begin{DoxyCode}
+                              {
+    for (int i = 0; i < _insList->NumElements (); i++) {
+        instruction* ins = _insList->Nth (i);
+        if (ins->isUPLD ()) _stats.upld_cnt++;
+        if (ins->isUPLDdep ()) _stats.upld_dep_cnt++;
+        if (ins->isUPLDdep () && ins->isUPLD ()) _stats.upld_n_dep_cnt++;
+    }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_a0fba29b7f9e057f174698cfb0564873e}{
 \index{basicblock@{basicblock}!setTakenTarget@{setTakenTarget}}
 \index{setTakenTarget@{setTakenTarget}!basicblock@{basicblock}}
 \subsubsection[{setTakenTarget}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setTakenTarget (
@@ -2473,11 +3335,11 @@ Here is the caller graph for this function:
 \item[{{\bf basicblock} $\ast$}]{bb}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_af0d0269f9c9a3b52062170c667f436b2}
+\label{classbasicblock_a0fba29b7f9e057f174698cfb0564873e}
 
 \begin{DoxyCode}
-                                              {
-        Assert(_takenTargetBB == NULL);
+                                               {
+        Assert (_takenTargetBB == NULL);
         _takenTargetBB = bb;
 }
 \end{DoxyCode}
@@ -2497,14 +3359,14 @@ Here is the caller graph for this function:
 \label{classbasicblock_a46149b611069f8c2f1328311ea4b7803}
 
 \begin{DoxyCode}
-                               {
-        for (int i = 0; i < getNumDescendents(); i++) {
-                if (_dominatorMap.find(getNthDescendent(i)->getID()) != _dominato
-      rMap.end()) {
-                        _backEdgeDest = getNthDescendent(i)->getID();
-                        Assert(_backEdgeDest > 0 && "Invalid back edge destinatio
-      n assignment.");
-                        getNthDescendent(i)->setAsBackEdgeSource(this);
+                                {
+        for  (int i = 0; i < getNumDescendents (); i++) {
+                if  (_dominatorMap.find (getNthDescendent (i)->getID ()) != _domi
+      natorMap.end ()) {
+                        _backEdgeDest = getNthDescendent (i)->getID ();
+                        Assert (_backEdgeDest > 0 && "Invalid back edge destinati
+      on assignment.");
+                        getNthDescendent (i)->setAsBackEdgeSource (this);
                 }
         }
 }
@@ -2530,23 +3392,66 @@ Here is the caller graph for this function:
 \label{classbasicblock_a828499c93c05d54ff789feed38051428}
 
 \begin{DoxyCode}
-                                 {
-        for (int i =0 ; i < _insList->NumElements(); i++) {
-                instruction* ins = _insList->Nth(i);
-                for (int j = 0; j < ins->getNumReg(); j++) {
-                        if (ins->getNthRegType(j) == READ) {// && _defSet.find(in
-      s->getNthReg(i)) == _defSet.end()) { TODO: what to do with this line?
-                                //second condition avoids ud-chains within a BB f
+                                  {
+        for  (int i =0 ; i < _insList->NumElements (); i++) {
+                instruction* ins = _insList->Nth (i);
+        ins->setupDefUseSets ();
+        //TODO upgrade this by getting def and use sets from instructions
+                for  (int j = 0; j < ins->getNumReg (); j++) {
+//                      if  (ins->getNthRegType (j) == READ) {// && _defSet.find 
+      (ins->getNthReg (i)) == _defSet.end ()) { TODO: what to do with this line?
+//                              //second condition avoids ud-chains within a BB f
       rom propagating
-                                updateUseSet(ins->getNthReg(j));
-                        } else if (ins->getNthRegType(j) == WRITE) {
-                                updateDefSet(ins->getNthReg(j));
-                        } else {
-                                Assert(true == false && "Invalid register type");
-      
+//                              updateUseSet (ins->getNthReg (j));
+//                      } else if  (ins->getNthRegType (j) == WRITE) {
+                        if  (ins->getNthRegType (j) == WRITE) {
+                                updateDefSet (ins->getNthReg (j));
+//                      } else {
+//                              Assert (0 && "Invalid register type");
                         }
                 }
         }
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+
+
+Here is the caller graph for this function:
+
+
+\hypertarget{classbasicblock_ad33cd8a566195b2f3118abafbeffaf82}{
+\index{basicblock@{basicblock}!setupMOVop@{setupMOVop}}
+\index{setupMOVop@{setupMOVop}!basicblock@{basicblock}}
+\subsubsection[{setupMOVop}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::setupMOVop (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDR} \&}]{addrOffset, }
+\item[{std::map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap, }
+\item[{std::map$<$ int, long int $>$ \&}]{srcRegs, }
+\item[{std::map$<$ int, long int $>$ \&}]{dstRegs, }
+\item[{{\bf PUSH\_\-LOCATION}}]{push\_\-location}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ad33cd8a566195b2f3118abafbeffaf82}
+
+\begin{DoxyCode}
+                                                                                 
+                                                                                       
+                     {
+    Assert (dstRegs.size () == srcRegs.size ());
+    std::map<int, long int>::reverse_iterator it;
+    for (it = srcRegs.rbegin (); it != srcRegs.rend (); ++it) {
+        int indx = it->first;
+        Assert (srcRegs.find (indx) != srcRegs.end ());
+        Assert (dstRegs.find (indx) != dstRegs.end ());
+        long int src_reg = it->second;
+        long int dst_reg = dstRegs[indx];
+        insertMOVop (insAddrMap, dst_reg, src_reg, addrOffset, indx, push_locatio
+      n);
+    }
 }
 \end{DoxyCode}
 
@@ -2570,32 +3475,32 @@ Here is the caller graph for this function:
 \label{classbasicblock_a8f58f53b0f1ab88f2909116193cfa953}
 
 \begin{DoxyCode}
-                                                                    {
-        for (int i = 0; i < _ancestorBbList->NumElements(); i++) {
-                int listIndx = _ancestorBbList->Nth(i)->getListIndx();
-                _ancestorBbList->RemoveAt(i);
-                _ancestorBbList->InsertAt(bbList->Nth(listIndx), i); //TODO check
-       if the index inserts at the right spot
-        }
-        for (int i = 0; i < _descendantBbList->NumElements(); i++) {
-                int listIndx = _descendantBbList->Nth(i)->getListIndx();
-                _descendantBbList->RemoveAt(i);
-                _descendantBbList->InsertAt(bbList->Nth(listIndx), i); //TODO che
+                                                                     {
+        for  (int i = 0; i < _ancestorBbList->NumElements (); i++) {
+                int listIndx = _ancestorBbList->Nth (i)->getListIndx ();
+                _ancestorBbList->RemoveAt (i);
+                _ancestorBbList->InsertAt (bbList->Nth (listIndx), i); //TODO che
       ck if the index inserts at the right spot
         }
-        for (int i = 0; i < _backEdgeSourceBbList->NumElements(); i++) {
-                int listIndx = _backEdgeSourceBbList->Nth(i)->getListIndx();
-                _backEdgeSourceBbList->RemoveAt(i);
-                _backEdgeSourceBbList->InsertAt(bbList->Nth(listIndx), i); //TODO
-       check if the index inserts at the right spot
+        for  (int i = 0; i < _descendantBbList->NumElements (); i++) {
+                int listIndx = _descendantBbList->Nth (i)->getListIndx ();
+                _descendantBbList->RemoveAt (i);
+                _descendantBbList->InsertAt (bbList->Nth (listIndx), i); //TODO c
+      heck if the index inserts at the right spot
         }
-        if (_fallThroughBB != NULL) {
-                int listIndx = _fallThroughBB->getListIndx();
-                _fallThroughBB = bbList->Nth(listIndx); 
+        for  (int i = 0; i < _backEdgeSourceBbList->NumElements (); i++) {
+                int listIndx = _backEdgeSourceBbList->Nth (i)->getListIndx ();
+                _backEdgeSourceBbList->RemoveAt (i);
+                _backEdgeSourceBbList->InsertAt (bbList->Nth (listIndx), i); //TO
+      DO check if the index inserts at the right spot
         }
-        if (_takenTargetBB != NULL) {
-                int listIndx = _takenTargetBB->getListIndx();
-                _takenTargetBB = bbList->Nth(listIndx);         
+        if  (_fallThroughBB != NULL) {
+                int listIndx = _fallThroughBB->getListIndx ();
+                _fallThroughBB = bbList->Nth (listIndx);        
+        }
+        if  (_takenTargetBB != NULL) {
+                int listIndx = _takenTargetBB->getListIndx ();
+                _takenTargetBB = bbList->Nth (listIndx);                
         }
 }
 \end{DoxyCode}
@@ -2609,50 +3514,54 @@ Here is the call graph for this function:
 Here is the caller graph for this function:
 
 
-\hypertarget{classbasicblock_af543b2aba60aec6408825fe513736a8d}{
+\hypertarget{classbasicblock_a0dbb44100534178477e2a33ee1c34134}{
 \index{basicblock@{basicblock}!update\_\-InOutSet@{update\_\-InOutSet}}
 \index{update\_\-InOutSet@{update\_\-InOutSet}!basicblock@{basicblock}}
 \subsubsection[{update\_\-InOutSet}]{\setlength{\rightskip}{0pt plus 5cm}bool basicblock::update\_\-InOutSet (
 \begin{DoxyParamCaption}
-{}
+\item[{{\bf REG\_\-ALLOC\_\-MODE}}]{reg\_\-alloc\_\-mode}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_af543b2aba60aec6408825fe513736a8d}
+\label{classbasicblock_a0dbb44100534178477e2a33ee1c34134}
 
 \begin{DoxyCode}
-                                 {
-        int outSetSize = _outSet.size();
-        int inSetSize = _inSet.size();
-        // Update _outSet
-        for (int i = 0; i < getNumDescendents(); i++) {
-                set<long int> tempSet;
-                tempSet.clear();
-                basicblock *successor = getNthDescendent(i);
-                set<long int> succInSet;
-                vector<long int> result;
-                succInSet = successor->getInSet();
-                std::set_union(succInSet.begin(), succInSet.end(), _outSet.begin(
-      ), _outSet.end(), std::inserter(tempSet, tempSet.begin()));
-                _outSet = tempSet;
-                // printf("%d,%d\n",succInSet.size(),_outSet.size());
-        }
-        // Update _inSet
-        set<long int> result1,result2;
-        std::set_difference(_outSet.begin(), _outSet.end(), _defSet.begin(), 
-      _defSet.end(), std::inserter(result1, result1.begin()));
-        std::set_difference(_useSet.begin(), _useSet.end(), _defSet.begin(), 
-      _defSet.end(), std::inserter(result2, result2.begin()));
-        std::set_union(result1.begin(), result1.end(), result2.begin(), result2.e
-      nd(), std::inserter(_inSet, _inSet.begin()));
-        // printf("%d,%d,%d\n",_useSet.size(),_inSet.size(),_outSet.size());
+                                                               {
+        int outSetSize = _outSet.size ();
+        int inSetSize = _inSet.size ();
 
-        // Has there been a change in the BB sets?
-        bool change;
-        if (outSetSize != _outSet.size() || inSetSize != _inSet.size())
-                change = true;
-        else
-                change = false;
-        return change;
+    bool intra_bb_change = false;
+    do {
+        intra_bb_change = false;
+        int ins_list_size = _insList->NumElements ();
+            set<long int> bbDefSet, temp;
+        for  (int i =  0; i < ins_list_size; i++) {
+            temp.clear ();
+            instruction* ins = _insList->Nth (i);
+            bool isLastInsInBB = (i == (ins_list_size - 1)) ? true : false;
+            bool is_intra_bb_change = ins->update_InOutSet (reg_alloc_mode, bbDef
+      Set, isLastInsInBB);
+            if (is_intra_bb_change) intra_bb_change = true;
+            /* COMPUTE BB DEF SET SO FAR */
+            set<long int> defSet = ins->getDefSet ();
+                std::set_union (defSet.begin (), defSet.end (), 
+                            bbDefSet.begin (), bbDefSet.end (), 
+                            std::inserter (temp, temp.begin ()));
+            bbDefSet = temp;
+        }
+    } while (intra_bb_change);
+
+    /* SET INSET AND OUTSET OF THE BB */
+    _inSet = _insList->Nth(0)->getInSet ();
+    _outSet = _insList->Last()->getOutSet ();
+
+        /* ANY CHANGE IN THE BB SETS? */
+        bool inter_bb_change;
+        if  (outSetSize != _outSet.size () || inSetSize != _inSet.size ()) {
+                inter_bb_change = true;
+    } else {
+                inter_bb_change = false;
+    }
+        return inter_bb_change;
 }
 \end{DoxyCode}
 
@@ -2660,26 +3569,166 @@ Here is the caller graph for this function:
 Here is the call graph for this function:
 
 
-
-
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_aa30a3590075a3c30fa5406e3cf81a2e1}{
-\index{basicblock@{basicblock}!updateDefSet@{updateDefSet}}
-\index{updateDefSet@{updateDefSet}!basicblock@{basicblock}}
-\subsubsection[{updateDefSet}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::updateDefSet (
+\hypertarget{classbasicblock_a04346052feca6f21451ab71050afe893}{
+\index{basicblock@{basicblock}!update\_\-locGlbSet@{update\_\-locGlbSet}}
+\index{update\_\-locGlbSet@{update\_\-locGlbSet}!basicblock@{basicblock}}
+\subsubsection[{update\_\-locGlbSet}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::update\_\-locGlbSet (
 \begin{DoxyParamCaption}
-\item[{long int}]{reg}
+\item[{{\bf ADDR} \&}]{addrOffset, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap}
 \end{DoxyParamCaption}
 )}}
-\label{classbasicblock_aa30a3590075a3c30fa5406e3cf81a2e1}
+\label{classbasicblock_a04346052feca6f21451ab71050afe893}
 
 \begin{DoxyCode}
-                                          {
-        _defSet.insert(reg);
+                                                                                 
+            {
+    set<long int> bbDefSet, bbUseSet, temp0;
+    int ins_list_size = _insList->NumElements ();
+
+    /* SETUP BBDEFSET FOR EACH INSTRUCTION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        temp0.clear ();
+        instruction* ins = _insList->Nth (i);
+        ins->setup_locGlbDefSet (bbDefSet);
+        set<long int> defSet = ins->getDefSet ();
+        std::set_union (defSet.begin (), defSet.end (),
+                bbDefSet.begin (), bbDefSet.end (), 
+                std::inserter (temp0, temp0.begin ()));
+        bbDefSet = temp0;
+    }
+
+    /* SETUP BBUSESET FOR EACH INSTRUCTION */
+    for  (int i = ins_list_size - 1; i >= 0; i--) {
+        temp0.clear ();
+        instruction* ins = _insList->Nth (i);
+        ins->setup_locGlbUseSet (bbUseSet);
+        set<long int> useSet = ins->getUseSet ();
+        std::set_union (useSet.begin (), useSet.end (), 
+                bbUseSet.begin (), bbUseSet.end (), 
+                std::inserter (temp0, temp0.begin ()));
+        bbUseSet = temp0;
+    }
+
+    /* UPDATE THE LOCALREGSET OF EACH INSTRUCTIONS BASED ON LOCGGLB INFORMATION *
+      /
+    map<int, long int> movOpSrcRegs, movOpDstRegs;
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        ins->update_locGlbSet (_outSet, movOpSrcRegs, movOpDstRegs, i);
+        cout << " " << hex << ins->getInsAddr () << dec << endl;
+    }
+    setupMOVop (addrOffset, insAddrMap, movOpSrcRegs, movOpDstRegs, 
+      PUSH_TO_BOTTOM);
 }
 \end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_ad96c83ff578c7c8c9a2bcd74a2c26add}{
+\index{basicblock@{basicblock}!update\_\-locToGlb@{update\_\-locToGlb}}
+\index{update\_\-locToGlb@{update\_\-locToGlb}!basicblock@{basicblock}}
+\subsubsection[{update\_\-locToGlb}]{\setlength{\rightskip}{0pt plus 5cm}int basicblock::update\_\-locToGlb (
+\begin{DoxyParamCaption}
+\item[{{\bf ADDR} \&}]{addrOffset, }
+\item[{map$<$ {\bf ADDR}, {\bf instruction} $\ast$ $>$ $\ast$}]{insAddrMap}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_ad96c83ff578c7c8c9a2bcd74a2c26add}
+
+\begin{DoxyCode}
+                                                                                 
+          {
+    set<long int> bbUseSet, bbMultiUseSet, temp0;
+    int ins_list_size = _insList->NumElements ();
+    int counter = 0;
+
+    /* SETUP BBUSESET FOR EACH INSTRUCTION */
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        set<long int> insMultiUseSet = ins->setup_locToGlbUseSet (bbUseSet, _inSe
+      t);
+        counter += insMultiUseSet.size ();
+
+        /* SETUP BBMULTIUSESET */
+        std::set_union (insMultiUseSet.begin (), insMultiUseSet.end (),
+                        bbMultiUseSet.begin (), bbMultiUseSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbMultiUseSet = temp0;
+        temp0.clear ();
+
+        /* SETUP BBUSESET */
+        set<long int> useSet = ins->getUseSet ();
+        std::set_union (useSet.begin (), useSet.end (),
+                        bbUseSet.begin (), bbUseSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbUseSet = temp0;
+        temp0.clear ();
+    }
+
+    /* SETUP BBDEFSET FOR EACH INSTRUCTION */
+    temp0.clear ();
+    set<long int> bbLocDefSet;
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        set<long int> insUseSet = ins->getUseSet ();
+        set<long int> insLocDefSet = ins->setup_locToGlbDefSet (bbMultiUseSet);
+
+        /* SETUP BBMULTIUSESET */
+        std::set_difference (bbMultiUseSet.begin (), bbMultiUseSet.end (),
+                              insUseSet.begin (), insUseSet.end (), 
+                              std::inserter (temp0, temp0.begin ()));
+        bbMultiUseSet = temp0;
+        temp0.clear ();
+
+        /* SETUP BBUSESET */
+        std::set_union (insLocDefSet.begin (), insLocDefSet.end (),
+                        bbLocDefSet.begin (), bbLocDefSet.end (), 
+                        std::inserter (temp0, temp0.begin ()));
+        bbLocDefSet = temp0;
+        temp0.clear ();
+    }
+
+    /* RENAME REGISTERS TO CREATE THE GLOBAL TO LOCAL ALLOCATION */
+    std::map<int, long int> movOpSrcRegs, movOpDstRegs;
+    for  (int i = 0; i < ins_list_size; i++) {
+        instruction* ins = _insList->Nth (i);
+        ins->update_locToGlbSet (bbLocDefSet, movOpSrcRegs, movOpDstRegs, i);
+        cout << hex << ins->getInsAddr () << dec << endl;
+    }
+    setupMOVop (addrOffset, insAddrMap, movOpSrcRegs, movOpDstRegs, PUSH_TO_TOP);
+      
+    return counter;
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
+\hypertarget{classbasicblock_a14279cf8fb23e94f8cd03f8aeacbde21}{
+\index{basicblock@{basicblock}!updateBBID@{updateBBID}}
+\index{updateBBID@{updateBBID}!basicblock@{basicblock}}
+\subsubsection[{updateBBID}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::updateBBID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classbasicblock_a14279cf8fb23e94f8cd03f8aeacbde21}
+
+\begin{DoxyCode}
+                             {
+    bbID = _insList->Nth (0)->getInsAddr ();
+    Assert (bbID > 0 && "Invalid basicblock ID assigned.");
+}
+\end{DoxyCode}
+
+
+Here is the call graph for this function:
+
+
 
 
 Here is the caller graph for this function:
@@ -2696,92 +3745,38 @@ Here is the caller graph for this function:
 \label{classbasicblock_abae11bf0376749457259a6d2a2ef8fe7}
 
 \begin{DoxyCode}
-                                   {
-        Assert(_localRegSet.size() == 0 && "The local register set must be empty 
-      at this point.");
+                                    {
+        Assert (_localRegSet.size () == 0 && "The local register set must be empt
+      y at this point.");
         //The commented code makes write-registers that are never read be assigne
       d in GRF        
         //std::set<long int> _defUseIntersection;
-        //std::set_intersection(_defSet.begin(), _defSet.end(), _useSet.begin(), 
-      _useSet.end(), std::inserter(_defUseIntersection, _defUseIntersection.begin()));
-        //std::set_difference(_defUseIntersection.begin(), _defUseIntersection.en
-      d(), _outSet.begin(), _outSet.end(), std::inserter(_localRegSet, _localRegSet.beg
-      in()));
-        std::set_difference(_defSet.begin(), _defSet.end(), _outSet.begin(), 
-      _outSet.end(), std::inserter(_localRegSet, _localRegSet.begin()));
+        //std::set_intersection (_defSet.begin (), _defSet.end (), _useSet.begin 
+      (), _useSet.end (), std::inserter (_defUseIntersection, _defUseIntersection.begin
+       ()));
+        //std::set_difference (_defUseIntersection.begin (), _defUseIntersection.
+      end (), _outSet.begin (), _outSet.end (), std::inserter (_localRegSet, _localRegS
+      et.begin ()));
+//      std::set_difference (_defSet.begin (), _defSet.end (), _outSet.begin (), 
+      _outSet.end (), std::inserter (_localRegSet, _localRegSet.begin ()));
 /* debug        
-        printf("local set ratio:, %f\n", (double)_localRegSet.size()/(double)(_in
-      Set.size()+_defSet.size()));
+        printf ("local set ratio:, %f\n",  (double)_localRegSet.size ()/ (double)
+       (_inSet.size ()+_defSet.size ()));
         std::set<long int> test1,test2;
-        std::set_union(_outSet.begin(), _outSet.end(), _useSet.begin(), _useSet.e
-      nd(), std::inserter(test1, test1.begin()));
-        std::set_difference(_defSet.begin(), _defSet.end(), test1.begin(), test1.
-      end(), std::inserter(test2, test2.begin()));
-        for (set<long int>::iterator it = test2.begin(); it != test2.end(); it++)
-       {
-                printf("stale register: %d\n",(*it)%100);
+        std::set_union (_outSet.begin (), _outSet.end (), _useSet.begin (), _useS
+      et.end (), std::inserter (test1, test1.begin ()));
+        std::set_difference (_defSet.begin (), _defSet.end (), test1.begin (), te
+      st1.end (), std::inserter (test2, test2.begin ()));
+        for  (set<long int>::iterator it = test2.begin (); it != test2.end (); it
+      ++) {
+                printf ("stale register: %d\n", (*it)%100);
         }
 */
 }
 \end{DoxyCode}
 
 
-Here is the caller graph for this function:
-
-
-\hypertarget{classbasicblock_a13aad72bd6dce3b9d6fd47dd324504d3}{
-\index{basicblock@{basicblock}!updateUseSet@{updateUseSet}}
-\index{updateUseSet@{updateUseSet}!basicblock@{basicblock}}
-\subsubsection[{updateUseSet}]{\setlength{\rightskip}{0pt plus 5cm}void basicblock::updateUseSet (
-\begin{DoxyParamCaption}
-\item[{long int}]{reg}
-\end{DoxyParamCaption}
-)}}
-\label{classbasicblock_a13aad72bd6dce3b9d6fd47dd324504d3}
-
-\begin{DoxyCode}
-                                          {
-        _useSet.insert(reg);
-}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function:
-
-
-
-
-\subsection{Member Data Documentation}
-\hypertarget{classbasicblock_a10324f2866495c2fbd24b7c8e05af7be}{
-\index{basicblock@{basicblock}!\_\-defSet@{\_\-defSet}}
-\index{\_\-defSet@{\_\-defSet}!basicblock@{basicblock}}
-\subsubsection[{\_\-defSet}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$long int$>$ {\bf basicblock::\_\-defSet}}}
-\label{classbasicblock_a10324f2866495c2fbd24b7c8e05af7be}
-\hypertarget{classbasicblock_ac93c3bff2754390b7d24d44a652f1dfa}{
-\index{basicblock@{basicblock}!\_\-inSet@{\_\-inSet}}
-\index{\_\-inSet@{\_\-inSet}!basicblock@{basicblock}}
-\subsubsection[{\_\-inSet}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$long int$>$ {\bf basicblock::\_\-inSet}}}
-\label{classbasicblock_ac93c3bff2754390b7d24d44a652f1dfa}
-\hypertarget{classbasicblock_aad1405bed7911414e0ed1332419e48b8}{
-\index{basicblock@{basicblock}!\_\-localRegSet@{\_\-localRegSet}}
-\index{\_\-localRegSet@{\_\-localRegSet}!basicblock@{basicblock}}
-\subsubsection[{\_\-localRegSet}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$long int$>$ {\bf basicblock::\_\-localRegSet}}}
-\label{classbasicblock_aad1405bed7911414e0ed1332419e48b8}
-\hypertarget{classbasicblock_ac9145f343d3538730f25fe0469420ba8}{
-\index{basicblock@{basicblock}!\_\-outSet@{\_\-outSet}}
-\index{\_\-outSet@{\_\-outSet}!basicblock@{basicblock}}
-\subsubsection[{\_\-outSet}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$long int$>$ {\bf basicblock::\_\-outSet}}}
-\label{classbasicblock_ac9145f343d3538730f25fe0469420ba8}
-\hypertarget{classbasicblock_aaff8e15dfe5fa007a97965f5d5c6e8da}{
-\index{basicblock@{basicblock}!\_\-useSet@{\_\-useSet}}
-\index{\_\-useSet@{\_\-useSet}!basicblock@{basicblock}}
-\subsubsection[{\_\-useSet}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<$long int$>$ {\bf basicblock::\_\-useSet}}}
-\label{classbasicblock_aaff8e15dfe5fa007a97965f5d5c6e8da}
-
-
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2basicblock_8h}{basicblock.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2basicblock_8h}{basicblock.h}\item 
-/home/milad/esc\_\-project/svn/PARS/src/backend/\hyperlink{backend_2basicblock_8cpp}{basicblock.cpp}\item 
-/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{binaryTranslator_2basicblock_8cpp}{basicblock.cpp}\end{DoxyCompactItemize}
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{basicblock_8h}{basicblock.h}\item 
+/home/milad/esc\_\-project/svn/PARS/src/binaryTranslator/\hyperlink{basicblock_8cpp}{basicblock.cpp}\end{DoxyCompactItemize}

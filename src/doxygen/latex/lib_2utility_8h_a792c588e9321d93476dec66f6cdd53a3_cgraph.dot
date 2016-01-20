@@ -5,5 +5,5 @@ digraph G
   rankdir=LR;
   Node1 [label="PrintDebug",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
-  Node2 [label="IsDebugOn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$backend_2utility_8cpp.html#a07f87be0a7c65a41d29ddfca31d0cb89"];
+  Node2 [label="IsDebugOn",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$binaryTranslator_2frontend_2utility_8cpp.html#a07f87be0a7c65a41d29ddfca31d0cb89"];
 }

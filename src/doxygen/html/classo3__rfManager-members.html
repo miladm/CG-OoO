@@ -65,17 +65,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 This is the complete list of members for <a class="el" href="classo3__rfManager.html">o3_rfManager</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classunit.html#aedc80782c1a267e6141603399d9857b5">_c_name</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#a19c3877d889e74df91c2c54419b775a5">_c_name</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#aee2e1836cd47308b6f295ceeb62c1449">_clk</a></td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a023f3671f90123fe8749ff13606f273c">canRename</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a785b7804c89faffdaee23e25c2cc3568">checkReadyAgain</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a7d3aa6c1316bac1153b24b7764d301fb">commitRegs</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a06b8854ab37feb6b44166a8565dc447a">completeRegs</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a0883b605da49fe18bf7a1a04219307ab">hasFreeRdPort</a>(CYCLE now, WIDTH numRegRdPorts)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a95bfea851bf8107f208e550839749063">hasFreeWrPort</a>(CYCLE now)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a7cfd1869c23bd1c4d6a5dc994ee29817">hasFreeWire</a>(AXES_TYPE, WIDTH)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a9b85902c553b147228d0bb3b57280ca7">isReady</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a0abe0df5acbb3b9d1514b62d38647cff">o3_rfManager</a>(string rf_name=&quot;o3_rfManager&quot;)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#aeacfb1db7844c9f204b5b75ce38d671d">o3_rfManager</a>(sysClock *, const YAML::Node &amp;, string rf_name=&quot;o3_rfManager&quot;)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a55bbc6fec2cb3736926e27bf112d7365">regStat</a>()</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a702dcade81b3d2ccba4bae0ef8d7de30">renameRegs</a>(dynInstruction *ins)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#ac8199decc9c7a881b2099a68711cced7">squashRenameReg</a>()</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classunit.html#a9352a15a3255ee768962e8b7e24c1e70">unit</a>(string class_name)</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classunit.html#a9e6e30e101f4bb1539edb5da9957f4e5">unit</a>(string class_name, sysClock *clk=NULL)</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#aeaf7e17c11cc6c75a342c3c32b25c546">updateWireState</a>(AXES_TYPE, WIDTH, bool update_wire=false)</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classo3__rfManager.html#a42a66fc34794ca6c7209f743557a2b3a">~o3_rfManager</a>()</td><td><a class="el" href="classo3__rfManager.html">o3_rfManager</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classunit.html#a77adf9984db5764e2948b4c3184f2982">~unit</a>()</td><td><a class="el" href="classunit.html">unit</a></td><td></td></tr>
 </table></div>
@@ -84,7 +87,7 @@ This is the complete list of members for <a class="el" href="classo3__rfManager.
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -93,7 +96,7 @@ This is the complete list of members for <a class="el" href="classo3__rfManager.
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Jul 18 2014 for PhArS by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Jul 13 2015 for PhArS by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
