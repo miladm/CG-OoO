@@ -1,0 +1,676 @@
+---
+cpu: 
+    general: 
+       assertion: enable
+       debug: 0xFFFFF
+       stat_detail: EXTENSIVE       #OPTIONS: EXTENSIVE, SUMMARY
+       stat_file: #NOTE: files must not be included in this file
+       runtime_init:
+           bench_name_in: RUNTIM_GEN
+           bench_path_in: RUNTIM_GEN
+           simpoint_w_file_in: RUNTIM_GEN
+           simpoint_s_file_in: RUNTIM_GEN
+           static_code_file_in: RUNTIM_GEN
+           stat_file_out: RUNTIME_GEN
+           debug_file_out: RUNTIME_GEN
+
+    frontend: 
+       gen_uop: enable
+       instrumentation: enable
+       sim_point: enable
+       simpoint_file: 
+       code_cache_size_thr: 100 #TODO be considerate of BB_NEAR_EMPTY_SIZE param
+       profiling: 0
+       wrong_path: 1
+       br_misspred_delay: 20     #NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
+
+    backend: 
+       core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
+       width: 4 #TODO use it?
+       lrf: enable
+       squash: enable
+       mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
+
+       bp:
+           type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW
+           bim:
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               instShiftAmt: 0
+               e_cam: 0
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
+               w_wire: 1
+           g_share:
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               instShiftAmt: 0
+               e_cam: 0
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
+               w_wire: 1
+           tournament:
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               choicePredictorSize: 8192
+               choiceCtrBits: 2
+               instShiftAmt: 0
+               e_cam: 0
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
+               w_wire: 1
+           bc_gskew:                             #TODO: take _ out + fix this list when added this predictor
+               localPredictorSize: 2048
+               localCtrBits: 2
+               localHistoryTableSize: 2048
+               localHistoryBits: 11
+               globalPredictorSize: 8192
+               globalHistoryBits: 13
+               globalCtrBits: 2
+               choicePredictorSize: 8192
+               choiceCtrBits: 2
+               instShiftAmt: 0
+               e_cam: 0
+               e_ram: 4.060768125e-1
+               e_leak: 1.476e-2
+               e_w_bp2cache_ino: 1.37e-1
+               e_w_bp2cache_o3: 3.75e-1
+               e_w_bp2cache_bb: 3.28e-1
+               w_wire: 1
+
+       rf:
+           simple:
+               rf_size: 90
+               rf_lo: 120
+               rf_hi: 209
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
+               name: SIMPLE_RF
+               cout: 1
+               e_cam: 0
+               e_ram: 2.534607
+               e_leak: 4.939e-3
+               e_w_eu2simplerf: 1.22e-1
+               e_w_cache2rf: 2.38E-01
+               w_wire: 1
+           lrf:
+               rf_size: 20
+               rf_lo: 100
+               rf_hi: 119
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
+               name: LRF
+               cout: 9 #NOTE equal to the number of BBWINDOWS
+               e_cam: 0
+               e_ram: 3.10289e-1
+               e_leak: 1.098e-3
+               e_w_eu2lrf: 3.85e-2
+               w_wire: 1
+           grf:
+               segmnt_cnt: 9 # Specify the number of GRF segments (1 is a unified GRF)
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 162 # RENAME REGS
+               r_lo: 210
+               r_hi: 371
+               p_size: 252
+               p_lo: 1
+               p_hi: 252
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
+               name: GRF
+               cout: 1
+               e_cam: 0
+               e_ram: 7.649056
+               e_leak: 1.476e-2
+               e_w_eu2grf: 8.90e-2
+               w_wire: 1
+           rf:
+               a_size: 90
+               a_lo: 120
+               a_hi: 209
+               r_size: 162 # RENAME REGS
+               r_lo: 210
+               r_hi: 371
+               p_size: 252
+               p_lo: 1
+               p_hi: 252
+               rd_wire_cnt: 32
+               wr_wire_cnt: 16
+               name: RF
+               cout: 1
+               e_cam: 0
+               e_ram: 7.649056
+               e_leak: 1.476e-2
+               e_w_eu2rf: 1.02e-1
+               w_wire: 1
+           arst:
+               e_cam: 0
+               e_ram: 0
+               e_leak: 0
+           apr:
+               e_cam: 0
+               e_ram: 0.677302
+               e_leak: 1.098e-3
+           rat:
+               e_cam: 0
+               e_ram: 1.170876
+               e_leak: 5.703e-4
+               e_w_cache2rr: 8.42e-2
+               w_wire: 1
+           garst:
+               e_cam: 0
+               e_ram: 0
+               e_leak: 0
+           gapr:
+               e_cam: 0
+               e_ram: 0.402384
+               e_leak: 1.098e-3
+           grat:
+               e_cam: 0
+               e_ram: 1.069866
+               e_leak: 5.703e-4
+               e_w_cache2rr: 2.43e-1
+               w_wire: 1
+ 
+       space:
+            global_arch:
+                size: 80
+                start: 117
+                end: 196
+                name: GARF
+            global_phys:
+                size: 200
+                start: 1
+                end: 200
+                name: GPRF
+            local:
+                size: 17
+                start: 100
+                end: 116
+                name: LRF
+
+       table: 
+            QUE:
+                size: 2000
+                count: 1
+                rd_wire_cnt: 2000
+                wr_wire_cnt: 2000
+                e_cam: 0
+                e_ram: 0
+                e_leak: 0
+                e_wire: 0
+                w_wire: 0
+                name: bbQUE
+                type: FIFO
+            bbROB: 
+                size: 100
+                count: 1
+                rd_wire_cnt: 100
+                wr_wire_cnt: 100
+                e_cam: 0
+                e_ram: 0.112165
+                e_leak: 4.718e-5
+                e_w_eu2brob: 1.18e-2
+                e_w_rr2brob: 5.58e-2
+                w_wire: 1
+                name: bbROB
+                type: RAM
+            inoROB: 
+                size: 50
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0
+                e_ram: 8.7344e-2
+                e_leak: 4.718e-5
+                e_wire: 0
+                w_wire: 64
+                name: ROB
+                type: RAM
+            o3ROB: 
+                size: 180
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0
+                e_ram: 0.608496
+                e_leak: 1.764e-3
+                e_w_eu2rob: 2.02e-2
+                e_w_rr2rob: 6.05e-2
+                w_wire: 1
+                name: ROB
+                type: RAM
+            LQ:
+                size: 200
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 2.204357
+                e_ram: 1.236428
+                e_leak: 1.0861E-2
+                e_w_rr2lsq_o3: 3.10e-2
+                e_w_rr2lsq_bb: 6.86e-2
+                e_w_lsq2rf: 9.68e-2
+                e_w_lsq2rob: 2.95e-2
+                e_w_lsq2lrf: 5.70e-2
+                e_w_lsq2grf: 6.88e-2
+                e_w_lsq2brob: 3.02e-2
+                e_w_eu2lsq_o3: 3.63e-2
+                e_w_eu2lsq_bb: 2.90e-2
+                e_w_cache2lsq_o3: 1.06e-1
+                e_w_cache2lsq_bb: 1.77e-1
+                w_wire: 1
+                name: LQ
+                type: CAM
+            SQ:
+                size: 200
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 1.315326
+                e_ram: 1.620642
+                e_leak: 7.786E-3
+                e_w_rr2lsq_o3: 3.10e-2
+                e_w_rr2lsq_bb: 6.86e-2
+                e_w_lsq2rf: 9.68e-2
+                e_w_lsq2rob: 2.95e-2
+                e_w_lsq2lrf: 5.70e-2
+                e_w_lsq2grf: 6.88e-2
+                e_w_lsq2brob: 3.02e-2
+                e_w_eu2lsq_o3: 3.63e-2
+                e_w_eu2lsq_bb: 2.90e-2
+                e_w_cache2lsq_o3: 1.06e-1
+                e_w_cache2lsq_bb: 1.77e-1
+                w_wire: 1
+                name: SQ
+                type: CAM
+            resStn:
+                size: 120
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 3.210155
+                e_cam2: 1.184757
+                e_ram: 6.923552
+                e_leak: 1.9794E-2    # combination of RAM/CAM tables
+                e_w_rs2eu: 6.99e-2
+                e_w_rr2rs: 1.27e-1
+                w_wire: 1
+                name: resStn
+                type: FIFO
+            bbWindow:
+                size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
+                count: 9
+                runahead_issue_en: 1
+                runahead_issue_cnt: 4
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
+                e_cam: 0
+                e_ram: 0.439745
+                e_leak: 6.983e-4
+                e_w_iq2eu: 5e-3
+                e_w_rr2iq: 7.37e-2
+                w_wire: 1
+                name: bbWindow_ #TODO get rid of _
+                type: FIFO
+            bbWinBuf:
+                size: 4    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
+                count: 9    #NOTE equal to the number of BBWINDOWS
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
+                e_cam: 4.713e-2
+                e_ram: 6.0493e-1
+                e_leak: 1.47944E-3
+                w_wire: 1
+                name: bbWinBuf_ #TODO get rid of _
+                type: CAM
+            iWindow: #only for INO
+                size: 50
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0
+                e_ram: 9.58076e-1
+                e_leak: 2.536e-3
+                e_w_cache2win: 1.11e-1
+                e_w_win2eu: 6.85e-2
+                w_wire: 1
+                name: iWindow
+                type: FIFO
+            mshr:
+                size: 20
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0        #TODO develop this
+                e_ram: 0        #TODO develop this
+                e_leak: 0       #TODO
+                e_wire: 0       # for now
+                w_wire: 64
+                name: MSHR
+                type: RAM
+            st_buff: #only for INO
+                size: 20
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0.763521
+                e_ram: 1.160567
+                e_leak: 1.098e-3
+                e_wire: 0       # for now
+                w_wire: 64
+                name: st_buff
+                type: FIFO
+            ras: 
+                size: 16
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0
+                e_ram: 0.633863
+                e_leak: 0       #TODO
+                e_wire: 0       # for now
+                w_wire: 64
+                name: RAS
+                type: RAM
+            BTB: 
+                size: 4096
+                count: 1
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
+                e_cam: 0.087126e3
+                e_ram: 0
+                e_leak: 4.514E-2
+                e_wire: 0   # TODO already counted in BP?
+                w_wire: 64
+                name: BTB
+                type: CAM
+
+       eu:
+           alu:
+               count: 12
+               count_per_blk: 4
+               latency: 1
+               e_eu: 1.040
+               e_leak: 0 #TODO
+           fpu:
+               count: 0
+               count_per_blk: 0
+               latency: 5
+               e_eu: 8.800
+               e_leak: 0 #TODO
+           memu:
+               count: 0
+               count_per_blk: 0
+               latency: 1
+               e_eu: 1.040
+               e_leak: 0 #TODO
+           bru:
+               count: 0
+               count_per_blk: 0
+               latency: 4
+               e_eu: 1.040
+               e_leak: 0 #TODO
+
+       ino_pipe:
+           bp:
+               width: 1
+               latency: 1
+               name: branchPred
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           fetch:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 1
+               name: fetch
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           decode:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 1
+               name: decode
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           schedule:
+               width: 4
+               latency: 1
+               name: schedule
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           execution:
+               width: 4
+               latency: 1 #TODO what does it mean for FPU?
+               name: execution
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           memory:
+               width: 1
+               latency: 1
+               name: memory
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           commit:
+               width: 4
+               latency: 1
+               name: commit
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+       
+       o3_pipe:
+           bp:
+               width: 1
+               latency: 1
+               name: branchPred
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           fetch:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
+               name: fetch
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           decode:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
+               name: decode
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           schedule:
+               width: 4
+               latency: 2
+               name: schedule
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           execution:
+               width: 4
+               latency: 1 #TODO what does it mean for FPU?
+               name: execution
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           memory:
+               width: 1
+               latency: 1
+               name: memory
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           commit:
+               width: 4
+               latency: 1
+               name: commit
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+       
+       bb_pipe:
+           bp:
+               width: 1
+               latency: 1
+               name: branchPred
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           fetch:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
+               name: fetch
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           decode:
+               width: 4 #TODO Gets doubled in code - fix it
+               latency: 3
+               name: decode
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           schedule:
+               width: 12
+               latency: 2
+               name: schedule
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           execution:
+               width: 12
+               latency: 1 #TODO what does it mean for FPU?
+               name: execution
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           memory:
+               width: 1
+               latency: 1
+               name: memory
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+           commit:
+               width: 4
+               latency: 1
+               name: commit
+               e_ff: 5.864e-1
+               e_leak: 5.864e-2
+       
+       port:
+           fetch_to_decode:
+               delay: 2
+               length: 10
+               name: fetch_to_decode
+           fetch_to_bp:
+               delay: 1
+               length: 10
+               name: fetch_to_bp
+           bp_to_fetch:
+               delay: 1
+               length: 10
+               name: bp_to_fetch
+           decode_to_scheduler:
+               delay: 1
+               length: 10
+               name: decode_to_scheduler
+           scheduler_to_execution:
+               delay: 1
+               length: 10
+               name: scheduler_to_execution
+           execution_to_scheduler:
+               delay: 1
+               length: 10
+               name: execution_to_scheduler
+           execution_to_memory:
+               delay: 1
+               length: 10
+               name: execution_to_memory
+           memory_to_scheduler:
+               delay: 1
+               length: 10
+               name: memory_to_scheduler
+           commit_to_bp:
+               delay: 1
+               length: 10
+               name: commit_to_bp
+           commit_to_scheduler:
+               delay: 1
+               length: 10
+               name: commit_to_scheduler
+           commit_to_scheduler: #TODO for INO only
+               delay: 1
+               length: 20
+               name: mem_buff
+       
+       mem:
+           itlb:
+               e_ram: 0
+               e_cam: 2.341
+               e_wire: 0    # TODO for now
+               w_wire: 64
+           dtlb:
+               e_ram: 0
+               e_cam: 2.133
+               e_wire: 0    # TODO for now
+               w_wire: 64
+           l1_i_0:
+               sa: 1 # Set Associativity
+               size: 32768
+               line_size: 64
+               latency: 3
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 1
+               e_ram: 0.042957e3
+               e_leak: 2.13505E-1 #current the sum of i-cache and itlb
+               name: L1
+           L1:
+               sa: 1 # Set Associativity
+               size: 32768
+               line_size: 64
+               latency: 3
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
+               name: L1
+           L2:
+               sa: 1 # Set Associativity
+               size: 2097152
+               line_size: 64
+               latency: 12
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
+               name: L2
+           L3:
+               sa: 1 # Set Associativity
+               size: 8388688
+               line_size: 64
+               latency: 20
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
+               name: L3
+           MEM:
+               sa: 1 # Set Associativity
+               size: 0 #TODO need this one?
+               line_size: 64
+               latency: 100
+               num_port: 1
+               e_wire: 0    # TODO for now
+               w_wire: 64
+               name: MEM
+
+compiler:
+   lrf: enable
+   schedule: disable
+   dot: disable
+
+#       s_file: "/home/milad/esc_project/svn/PARS/src/binaryTranslator/output_files/"+string (program_name)+"_obj.s"
