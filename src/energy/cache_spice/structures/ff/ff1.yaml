@@ -1,0 +1,2 @@
+arrays: 
+    num_array: 1 # number of stage elements (each element is a 64bit FF)

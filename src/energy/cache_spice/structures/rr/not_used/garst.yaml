@@ -1,0 +1,30 @@
+arrays: 
+    num_array: 4 # number of tables
+
+array:
+    word_width: 7 # output width in bits
+    num_words: 32 # number of words, each word is word_width wide
+    num_rows: 0 # number of rows
+    num_cols: 0 # number of columns
+    cin: 12 # maximum input capacitance in terms of lambda, don't change this
+
+# SRAM cell model parameters
+# lambda = min feature size = 0.5*technology node
+cell_model:
+    rd_port: 1 # number of read ports (must be 1 at least)
+    wr_port: 1 # number of write ports
+    cin: 8 # wordline transistor input capacitance in terms of lambda
+    w: 16 # width (along wordline) in lambda
+    h: 40 # height (along bitline) in lambda
+
+# local wire parameters
+wire_model:
+    pitch: 0.14 # width + spacing in um
+    width: 0.07 # spacing in um
+    height: 0.26 # from next lower layer in um
+    thickness: 0.125 # vertical dimension thickness in um
+
+# global wire parameters
+global_wire_model:
+    eperl: 0.08 # energy/bit/mm in pJ/mm, assuming a activity factor of 0.25
+    tperl: 0.3 # delay per mm in ns/mm

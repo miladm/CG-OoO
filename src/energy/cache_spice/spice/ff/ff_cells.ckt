@@ -1,0 +1,29 @@
+.subckt nand2 a b y vdd_l
+mp1    y  a  vdd_l  vdd_l  pmos L=1 W='Wp'
+mp2    y  b  vdd_l  vdd_l  pmos L=1 W='Wp'
+mn1    y  a  n1     0      nmos L=1 W='Wn'
+mn2    n1 b  0      0      nmos L=1 W='Wn'
+.ends
+
+.subckt nand3 a b c y vdd_l
+mp1    y  a  vdd_l  vdd_l  pmos L=1 W='Wp'
+mp2    y  b  vdd_l  vdd_l  pmos L=1 W='Wp'
+mp3    y  c  vdd_l  vdd_l  pmos L=1 W='Wp'
+mn1    y  a  n1     0      nmos L=1 W='Wn3'
+mn2    n1 b  n2     0      nmos L=1 W='Wn3'
+mn3    n2 c  0      0      nmos L=1 W='Wn3'
+.ends
+
+** Library name: ff
+** Cell name: ff
+.subckt flfp inl clk y vddg
+xnand1     o4  o2  o1    vddg  nand2
+xnand2     o1  clk  o2   vddg  nand2
+xnand3     o2  o4  clk  o3   vddg  nand3
+xnand4     o3  inl  o4     vddg  nand2
+xnand5     o2  o6  y      vddg  nand2
+xnand6     o5  o3  o6    vddg  nand2
+.ends
+
+** 64 FF's modeled here
+xa j1 clk y vddgl flfp M=64

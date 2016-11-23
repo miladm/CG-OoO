@@ -1,0 +1,200 @@
+
+iWindow
+WL Energy:  1.992e-13
+CAM Energy:  4.129052e-12
+Energy =  2.535452e-12
+Power @ 2GHz =  0.005070904
+Size =  ['0.345 mm ', '0.035 mm ']
+Area =  ['0.012143e-6 m^2 ']
+
+resStn_cam
+WL Energy:  1.001e-13
+CAM Energy:  4.08806e-12
+Energy =  8.8486e-13
+Power @ 2GHz =  0.00176972
+Size =  ['0.141 mm ', '0.563 mm ']
+Area =  ['0.079299e-6 m^2 ']
+
+resStn_cam2
+WL Energy:  2.422e-14
+CAM Energy:  1.184757e-12
+Energy =  4.09717e-13
+Power @ 2GHz =  0.000819434
+Size =  ['0.035 mm ', '0.563 mm ']
+Area =  ['0.019825e-6 m^2 ']
+
+resStn_ram
+WL Energy:  3.603e-13
+CAM Energy:  1.4168497e-11
+Energy =  2.638897e-12
+Power @ 2GHz =  0.005277794
+Size =  ['0.479 mm ', '0.563 mm ']
+Area =  ['0.269615e-6 m^2 ']
+
+bbWindow
+WL Energy:  3.158e-14
+CAM Energy:  5.02905e-13
+Energy =  4.39745e-13
+Power @ 2GHz =  0.00087949
+Size =  ['0.088 mm ', '0.009 mm ']
+Area =  ['0.000774e-6 m^2 ']
+
+rob
+WL Energy:  3.6364e-14
+CAM Energy:  8.99408e-13
+Energy =  6.08496e-13
+Power @ 2GHz =  0.001216992
+Size =  ['0.218 mm ', '0.035 mm ']
+Area =  ['0.007682e-6 m^2 ']
+
+bbRob
+WL Energy:  6.958e-15
+CAM Energy:  1.26081e-13
+Energy =  1.12165e-13
+Power @ 2GHz =  0.00022433
+Size =  ['0.043 mm ', '0.009 mm ']
+Area =  ['0.000379e-6 m^2 ']
+
+grat
+WL Energy:  1.097e-13
+CAM Energy:  1.947466e-12
+Energy =  1.069866e-12
+Power @ 2GHz =  0.002139732
+Size =  ['0.227 mm ', '0.211 mm ']
+Area =  ['0.047951e-6 m^2 ']
+
+grf
+WL Energy:  2.025e-13
+CAM Energy:  1.3435419e-11
+Energy =  6.955419e-12
+Power @ 2GHz =  0.013910838
+Size =  ['3.608 mm ', '3.379 mm ']
+Area =  ['12.192154e-6 m^2 ']
+
+garst
+WL Energy:  2.5636e-14
+CAM Energy:  6.5405e-13
+Energy =  6.02778e-13
+Power @ 2GHz =  0.001205556
+Size =  ['0.299 mm ', '0.009 mm ']
+Area =  ['0.002633e-6 m^2 ']
+
+gapr
+WL Energy:  2.5732e-14
+CAM Energy:  4.53848e-13
+Energy =  4.02384e-13
+Power @ 2GHz =  0.000804768
+Size =  ['0.151 mm ', '0.009 mm ']
+Area =  ['0.001332e-6 m^2 ']
+
+simple_rf
+WL Energy:  2.006e-13
+CAM Energy:  9.368736e-12
+Energy =  7.763936e-12
+Power @ 2GHz =  0.015527872
+Size =  ['7.211 mm ', '0.845 mm ']
+Area =  ['6.091616e-6 m^2 ']
+
+lrf
+WL Energy:  9.211e-13
+CAM Energy:  9.503454e-12
+Energy =  2.134654e-12
+Power @ 2GHz =  0.004269308
+Size =  ['0.452 mm ', '0.282 mm ']
+Area =  ['0.127373e-6 m^2 ']
+
+rat
+WL Energy:  1.228e-13
+CAM Energy:  2.153276e-12
+Energy =  1.170876e-12
+Power @ 2GHz =  0.002341752
+Size =  ['0.255 mm ', '0.211 mm ']
+Area =  ['0.053898e-6 m^2 ']
+
+rf
+WL Energy:  2.099e-13
+CAM Energy:  1.415442e-11
+Energy =  7.43762e-12
+Power @ 2GHz =  0.01487524
+Size =  ['7.212 mm ', '3.379 mm ']
+Area =  ['24.372412e-6 m^2 ']
+
+arst
+WL Energy:  2.9072e-14
+CAM Energy:  7.37352e-13
+Energy =  5.04776e-13
+Power @ 2GHz =  0.001009552
+Size =  ['0.176 mm ', '0.035 mm ']
+Area =  ['0.006195e-6 m^2 ']
+
+apr
+WL Energy:  3.2372e-14
+CAM Energy:  7.42046e-13
+Energy =  6.77302e-13
+Power @ 2GHz =  0.001354604
+Size =  ['0.341 mm ', '0.009 mm ']
+Area =  ['0.003005e-6 m^2 ']
+
+lq_cam
+WL Energy:  4.852e-14
+CAM Energy:  2.204357e-12
+Energy =  6.51717e-13
+Power @ 2GHz =  0.001303434
+Size =  ['0.088 mm ', '0.141 mm ']
+Area =  ['0.012390e-6 m^2 ']
+
+lq_ram
+WL Energy:  9.462e-14
+CAM Energy:  4.264268e-12
+Energy =  1.236428e-12
+Power @ 2GHz =  0.002472856
+Size =  ['0.176 mm ', '0.141 mm ']
+Area =  ['0.024843e-6 m^2 ']
+
+sq_cam
+WL Energy:  6.155e-14
+CAM Energy:  1.315326e-12
+Energy =  8.22926e-13
+Power @ 2GHz =  0.001645852
+Size =  ['0.171 mm ', '0.035 mm ']
+Area =  ['0.006009e-6 m^2 ']
+
+sq_ram
+WL Energy:  1.222e-13
+CAM Energy:  2.598242e-12
+Energy =  1.620642e-12
+Power @ 2GHz =  0.003241284
+Size =  ['0.348 mm ', '0.035 mm ']
+Area =  ['0.012236e-6 m^2 ']
+
+st_buff_cam
+WL Energy:  2.271e-14
+CAM Energy:  7.63521e-13
+Energy =  5.81841e-13
+Power @ 2GHz =  0.001163682
+Size =  ['0.030 mm ', '0.018 mm ']
+Area =  ['0.000527e-6 m^2 ']
+
+st_buff_ram
+WL Energy:  3.446e-13
+CAM Energy:  3.917367e-12
+Energy =  1.160567e-12
+Power @ 2GHz =  0.002321134
+Size =  ['0.340 mm ', '0.141 mm ']
+Area =  ['0.047827e-6 m^2 ']
+
+bp
+WL Energy:  7.247e-15
+CAM Energy:  5.6606125e-13
+Energy =  3.3415725e-13
+Power @ 2GHz =  0.0006683145
+Size =  ['0.172 mm ', '0.141 mm ']
+Area =  ['0.024285e-6 m^2 ']
+
+ras
+WL Energy:  4.98e-14
+CAM Energy:  1.032263e-12
+Energy =  6.33863e-13
+Power @ 2GHz =  0.001267726
+Size =  ['0.086 mm ', '0.035 mm ']
+Area =  ['0.003036e-6 m^2 ']

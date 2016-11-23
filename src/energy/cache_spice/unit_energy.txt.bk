@@ -1,0 +1,183 @@
+
+iWindow
+WL Energy:  1.992e-13
+CAM Energy:  4.129052e-12
+Delay =  2.8304e-10 Energy =  2.535452e-12
+Size =  ['0.345 mm ', '0.035 mm ']
+
+resStn_cam
+WL Energy:  1.001e-13
+CAM Energy:  4.08806e-12
+Delay =  6.8304e-10 Energy =  8.8486e-13
+Size =  ['0.141 mm ', '0.563 mm ']
+
+resStn_cam2
+WL Energy:  2.422e-14
+CAM Energy:  1.184757e-12
+Delay =  5.792e-10 Energy =  4.09717e-13
+Size =  ['0.035 mm ', '0.563 mm ']
+
+resStn_ram
+WL Energy:  3.603e-13
+CAM Energy:  1.4168497e-11
+Delay =  8.3082e-10 Energy =  2.638897e-12
+Size =  ['0.479 mm ', '0.563 mm ']
+
+bbWindow
+WL Energy:  3.158e-14
+CAM Energy:  5.02905e-13
+Delay =  3.0606e-10 Energy =  4.39745e-13
+Size =  ['0.088 mm ', '0.009 mm ']
+
+rob
+WL Energy:  3.6364e-14
+CAM Energy:  8.99408e-13
+Delay =  3.0615e-10 Energy =  6.08496e-13
+Size =  ['0.218 mm ', '0.035 mm ']
+
+bbRob
+WL Energy:  6.958e-15
+CAM Energy:  1.26081e-13
+Delay =  2.794e-10 Energy =  1.12165e-13
+Size =  ['0.043 mm ', '0.009 mm ']
+
+grat
+WL Energy:  1.097e-13
+CAM Energy:  1.947466e-12
+Delay =  4.7876e-10 Energy =  1.069866e-12
+Size =  ['0.227 mm ', '0.211 mm ']
+
+grf
+WL Energy:  8.849e-13
+CAM Energy:  3.3958648e-11
+Delay =  1.45272e-09 Energy =  5.641848e-12
+Size =  ['0.905 mm ', '0.845 mm ']
+
+garst
+WL Energy:  2.5636e-14
+CAM Energy:  6.5405e-13
+Delay =  3.0206e-10 Energy =  6.02778e-13
+Size =  ['0.299 mm ', '0.009 mm ']
+
+gapr
+WL Energy:  2.5732e-14
+CAM Energy:  4.53848e-13
+Delay =  2.7427e-10 Energy =  4.02384e-13
+Size =  ['0.151 mm ', '0.009 mm ']
+
+simple_rf
+WL Energy:  8.724e-13
+CAM Energy:  1.4764243e-11
+Delay =  1.69689e-09 Energy =  7.785043e-12
+Size =  ['1.804 mm ', '0.211 mm ']
+
+lrf
+WL Energy:  4.011e-14
+CAM Energy:  9.40218e-13
+Delay =  2.7824e-10 Energy =  6.19338e-13
+Size =  ['0.058 mm ', '0.035 mm ']
+
+rat
+WL Energy:  1.228e-13
+CAM Energy:  2.153276e-12
+Delay =  4.931e-10 Energy =  1.170876e-12
+Size =  ['0.255 mm ', '0.211 mm ']
+
+rf
+WL Energy:  8.748e-13
+CAM Energy:  3.5961456e-11
+Delay =  1.763e-09 Energy =  7.967856e-12
+Size =  ['1.806 mm ', '0.845 mm ']
+
+arst
+WL Energy:  2.9072e-14
+CAM Energy:  7.37352e-13
+Delay =  2.9941e-10 Energy =  5.04776e-13
+Size =  ['0.176 mm ', '0.035 mm ']
+
+apr
+WL Energy:  3.2372e-14
+CAM Energy:  7.42046e-13
+Delay =  3.0531e-10 Energy =  6.77302e-13
+Size =  ['0.341 mm ', '0.009 mm ']
+
+lq_cam
+WL Energy:  4.852e-14
+CAM Energy:  2.204357e-12
+Delay =  3.6736e-10 Energy =  6.51717e-13
+Size =  ['0.088 mm ', '0.141 mm ']
+
+lq_ram
+WL Energy:  9.462e-14
+CAM Energy:  4.264268e-12
+Delay =  3.8947e-10 Energy =  1.236428e-12
+Size =  ['0.176 mm ', '0.141 mm ']
+
+sq_cam
+WL Energy:  6.155e-14
+CAM Energy:  1.315326e-12
+Delay =  3.5936e-10 Energy =  8.22926e-13
+Size =  ['0.171 mm ', '0.035 mm ']
+
+sq_ram
+WL Energy:  1.222e-13
+CAM Energy:  2.598242e-12
+Delay =  3.9715e-10 Energy =  1.620642e-12
+Size =  ['0.348 mm ', '0.035 mm ']
+
+st_buff_cam
+WL Energy:  2.271e-14
+CAM Energy:  7.63521e-13
+Delay =  2.3188e-10 Energy =  5.81841e-13
+Size =  ['0.030 mm ', '0.018 mm ']
+
+st_buff_ram
+WL Energy:  3.446e-13
+CAM Energy:  3.917367e-12
+Delay =  3.652e-10 Energy =  1.160567e-12
+Size =  ['0.340 mm ', '0.141 mm ']
+
+bp
+WL Energy:  7.247e-15
+CAM Energy:  5.6606125e-13
+Delay =  4.4687e-10 Energy =  3.3415725e-13
+Size =  ['0.172 mm ', '0.141 mm ']
+
+ras
+WL Energy:  4.98e-14
+CAM Energy:  1.032263e-12
+Delay =  2.8304e-10 Energy =  6.33863e-13
+Size =  ['0.086 mm ', '0.035 mm ']
+
+btb
+AM Energy:  6.092013e-12
+WL Energy:  5.048e-14
+CAM Energy:  7.699108e-12
+Dimensions = 0.732160 mm x 1.126400 mm
+E/access = 0.012141 nJ
+  Data Mat energy  = 0.001238 nJ
+  Data Wire energy = 0.005731 nJ
+Tag Array Latency = 1.368346 ns
+Data Array Latency = 1.427526 ns
+
+itlb
+AM Energy:  4.163363e-12
+WL Energy:  8.366e-15
+CAM Energy:  1.428051e-12
+Dimensions = 0.035200 mm x 0.563200 mm
+E/access = 0.002341 nJ
+  Data Mat energy  = 0.000357 nJ
+    Data Wire energy = 0.000180 nJ
+Tag Array Latency = 0.510020 ns
+Data Array Latency = 0.796930 nsitlb
+
+dtlb
+AM Energy:  3.448184e-12
+WL Energy:  8.366e-15
+CAM Energy:  1.428051e-12
+Dimensions = 0.017600 mm x 0.563200 mm
+E/access = 0.002133 nJ
+  Data Mat energy  = 0.000357 nJ
+    Data Wire energy = 0.000180 nJ
+Tag Array Latency = 0.423740 ns
+Data Array Latency = 0.796930 nsdtlb

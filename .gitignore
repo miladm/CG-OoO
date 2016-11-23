@@ -1,20 +1,14 @@
-<<<<<<< HEAD
 *.AppleDouble*
 *.svn*
 .nfs*
 *.o
 .*.swp
 *junk*
-=======
 # all spice output files
 *0
-
 # all python class files
 *.pyc
-
 # all log files
 *.log
-
 # vim swap files
 *.swp
->>>>>>> 90e3363bacd219dfaa6db1af55e394d7817221aa
