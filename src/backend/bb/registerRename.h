@@ -54,12 +54,14 @@ class bb_registerRename : public unit {
         bool hasFreeWire (AXES_TYPE);
         WIDTH getNumFreeWires (AXES_TYPE);
 
+        /* MISC */
+        WIDTH PR2APRindx (PR pr);
+
         /* STAT */
         void getStat ();
 
     private:
         WIDTH blkIndx2APRindx (BB_ID);
-        WIDTH PR2APRindx (PR pr);
 
 	private:
         CYCLE _cycle;

@@ -48,7 +48,11 @@ class bb_rfManager : public unit {
         ScalarStat& s_rf_not_ready_cnt;
         ScalarStat& s_lrf_not_ready_cnt;
         ScalarStat& s_grf_not_ready_cnt;
+        ScalarStat& s_grf_long_latency_cyc_cnt;
         ScalarStat& s_lrf_busy_cnt;
+
+        /*-- GRF COMM LATENCY --*/
+        CYCLE _long_lat_grf_cycle;
 };
 
 #endif

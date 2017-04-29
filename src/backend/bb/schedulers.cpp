@@ -214,9 +214,9 @@ bool bb_scheduler::isReady (bbInstruction* ins) {
         if (_RF_MGR->isReady (ins)) return true;
         bool done_any_fwd = forwardFromCDB (ins);
         bool is_ready = _RF_MGR->checkReadyAgain (ins);
-#ifdef ASSERTION
-        Assert ((is_ready && done_any_fwd) || (!is_ready && !done_any_fwd));
-#endif
+//#ifdef ASSERTION
+//        Assert ((is_ready && done_any_fwd) || (!is_ready && !done_any_fwd));
+//#endif
         return is_ready;
     } else {
         if (_RF_MGR->isReady (ins)) return true;
@@ -367,6 +367,10 @@ bool bb_scheduler::forwardFromCDB (bbInstruction* ins) {
     bool en_global_fwd = false;
     bool en_local_fwd = false;
     bool done_any_fwd = false;
+
+    if (num_global_match == 0 && num_local_match == 0) 
+        return done_any_fwd;
+
     List<bbInstruction*> alu_fwd_list, mem_fwd_list;
 
     { /*-- FWD FROM EXE STAGE --*/

@@ -10,8 +10,10 @@ bb_rfManager::bb_rfManager (WIDTH num_bbWin, sysClock* clk, const YAML::Node& ro
       s_rf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "rf_not_ready_cnt", "Number of RF operand-not-ready events", 0, PRINT_ZERO)),
       s_lrf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "lrf_not_ready_cnt", "Number of LRF read operand-not-ready events", 0, PRINT_ZERO)),
       s_grf_not_ready_cnt (g_stats.newScalarStat (rfm_name, "grf_not_ready_cnt", "Number of GRF read operand-not-ready events", 0, PRINT_ZERO)),
+      s_grf_long_latency_cyc_cnt (g_stats.newScalarStat (rfm_name, "grf_long_latency_cyc_cnt", "Number of cycles that GRF is not ready due to comm. latency", 0, PRINT_ZERO)),
       s_lrf_busy_cnt (g_stats.newScalarStat (rfm_name, "lrf_busy_cnt", "Number of LRF write operand-not-ready events", 0, PRINT_ZERO))
 { 
+    _long_lat_grf_cycle = START_CYCLE;
     for (int i = 0; i < num_bbWin; i++) {
         ostringstream bbWin_id;
         bbWin_id << i;
@@ -105,6 +107,17 @@ bool bb_rfManager::isReady (bbInstruction* ins) {
             _LRF_MGRS[bbWin_id]->_e_table.ramAccess (ins->getTotNumRdLAR ());
             _GRF_MGR._e_rf.ramAccess (ins->getTotNumRdAR ()); /* TODO this is convervation - not cnting FWD */
         }
+
+        /* STAT ON GRF COMM LATENCY */
+        if (!grf_ready && 
+            lrf_ready && 
+            ins->isGRFCommLatency(_clk->now ()) &&
+            ins->getPRrdList ()->NumElements() == 0 &&
+            _long_lat_grf_cycle < _clk->now ()) {
+            s_grf_long_latency_cyc_cnt++;
+            _long_lat_grf_cycle = _clk->now ();
+        }
+
         return (grf_ready && lrf_ready);
     } else if (g_cfg->getRegAllocMode () == GLOBAL) {
         if (grf_ready) {

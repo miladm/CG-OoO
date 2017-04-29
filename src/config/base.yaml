@@ -117,14 +117,15 @@ cpu:
                rd_wire_cnt: 32
                wr_wire_cnt: 16
                name: LRF
-               cout: 2 #NOTE equal to the number of BBWINDOWS
+               cout: 9 #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                e_cam: 0
                e_ram: 3.10289e-1
                e_leak: 1.098e-3
                e_w_eu2lrf: 3.85e-2
                w_wire: 1
            grf:
-               segmnt_cnt: 2 # Specify the number of GRF segments (1 is a unified GRF)
+               segmnt_cnt: 9 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
+               comm_delay_en: 0 #OPTIONS: 0 or 1
                a_size: 90
                a_lo: 120
                a_hi: 209
@@ -319,7 +320,7 @@ cpu:
                 type: FIFO
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 2
+                count: 9
                 runahead_issue_en: 1
                 runahead_issue_cnt: 4
                 rd_wire_cnt: 4
@@ -334,7 +335,7 @@ cpu:
                 type: FIFO
             bbWinBuf:
                 size: 4    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 2    #NOTE equal to the number of BBWINDOWS
+                count: 9    #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 4.713e-2
@@ -407,7 +408,7 @@ cpu:
 
        eu:
            alu:
-               count: 4
+               count: 12
                count_per_blk: 4
                latency: 1
                e_eu: 1.040

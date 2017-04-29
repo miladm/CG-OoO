@@ -14,8 +14,12 @@ bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& ro
       _e_w_rr (rf_name + ".rr.wire", root["grat"]),
       s_cant_rename_cnt (g_stats.newScalarStat (rf_name, "cant_rename_cnt", "Number of failed reg. rename attempts", 0, NO_PRINT_ZERO)),
       s_can_rename_cnt (g_stats.newScalarStat (rf_name, "can_rename_cnt", "Number of success reg. rename attempts", 0, NO_PRINT_ZERO)),
-      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO))
-{ }
+      s_unavailable_cnt (g_stats.newScalarStat (rf_name, "unavailable_cnt", "Number of unavailable wire accesses", 0, NO_PRINT_ZERO)),
+      s_grf_lat_cnt (g_stats.newScalarStat (rf_name, "grf_lat_cnt", "Number of far GRF segment READs", 0, NO_PRINT_ZERO)),
+      s_grf_no_lat_cnt (g_stats.newScalarStat (rf_name, "grf_no_lat_cnt ", "Number of nearby GRF segment READs", 0, NO_PRINT_ZERO))
+{ 
+    root["grf"]["comm_delay_en"] >> _comm_delay_en;
+}
 
 bb_grfManager::~bb_grfManager () { }
 
@@ -29,13 +33,18 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
                     "Reg", reg, "is invlid", _clk->now ());
             return false; /*-- OPERAND NOT AVAILABLE --*/
         } else {
+            if (_comm_delay_en == 1 && !isGrfNearby (ins, reg)) {
+                ins->setGRFCommLatency(_clk->now ());
+            }
             p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
 
-    if (p_rdReg_list->NumElements () == 0) {
+    if (p_rdReg_list->NumElements () == 0 &&
+        (_comm_delay_en == 0 || 
+         (_comm_delay_en == 1 && !ins->isGRFCommLatency(_clk->now ())))) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
-                "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
+                    "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /*-- ALL OPERANDS AVAILABLE --*/
     }
 
@@ -55,7 +64,9 @@ bool bb_grfManager::checkReadyAgain (bbInstruction* ins) {
         }
     }
 
-    if (p_rdReg_list->NumElements () == 0) {
+    if (p_rdReg_list->NumElements () == 0 &&
+        (_comm_delay_en == 0 || 
+         (_comm_delay_en == 1 && !ins->isGRFCommLatency(_clk->now ())))) {
         dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are ready", _clk->now ());
         return true; /*-- ALL OPERANDS AVAILABLE --*/
@@ -177,6 +188,27 @@ void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, lis
     for (WIDTH i = 0; i < numRegWires; i++) {
         _GRF.updateWireState (axes_type, wire_name, update_wire);
     }
+}
+
+bool bb_grfManager::isGrfNearby (bbInstruction* ins, PR pr) {
+    WIDTH bb_grf_segmnt_indx = ins->getBBWinID ();
+    WIDTH pr_grf_segmnt_indx = _GRF.PR2APRindx (pr);
+
+    /* CHECK FOR EQUALITY ONLY - FOR NOW */
+    /* NOTE: THIS CODE ASSUMES #SEGMENTS = #BBs */
+    if ((bb_grf_segmnt_indx == pr_grf_segmnt_indx) ||
+        (bb_grf_segmnt_indx + 1 == pr_grf_segmnt_indx) ||
+        (bb_grf_segmnt_indx + 2 == pr_grf_segmnt_indx)) {
+        s_grf_no_lat_cnt++;
+        dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+                "Global operand of ins", ins->getInsID (), "are nearby", _clk->now ());
+        return true;
+    }
+    s_grf_lat_cnt++;
+    dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
+            "Global operand of ins", ins->getInsID (), "are far away", _clk->now ());
+    return false;
+
 }
 
 void bb_grfManager::getStat () {

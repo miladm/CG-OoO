@@ -1,7 +1,7 @@
-SL Energy:  1.2744e-13
-CAM Energy:  2.26006e-13
-Leakage Energy:  4.718e-17
-Energy =  9.8566e-14
-Power @ 2GHz =  0.000197132
-Size =  ['0.031 mm ', '0.035 mm ']
-Area =  ['0.001084e-6 m^2 ']
+SL Energy:  4.0264e-12
+CAM Energy:  7.3604e-12
+Leakage Energy:  7.356e-15
+Energy =  3.334e-12
+Power @ 2GHz =  0.006668
+Size =  ['0.115 mm ', '0.035 mm ']
+Area =  ['0.004058e-6 m^2 ']

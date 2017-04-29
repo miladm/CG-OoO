@@ -2,7 +2,7 @@ arrays:
     num_array: 1 # number of tables
 
 array:
-    word_width: 22 # output width in bits
+    word_width: 86 # output width in bits
     num_words: 16 # number of words, each word is word_width wide
     num_cols: 0 # number of columns
     num_rows: 0 # number of rows

@@ -21,6 +21,7 @@ class bbInstruction : public dynInstruction {
         void setBB (dynBasicblock* bb);
         void setAR (AR ar, AXES_TYPE type);
         void setPR (PR pr, AXES_TYPE type);
+        void setGRFCommLatency(CYCLE cycle);
 
         /*-- GET INS ATRIBUTES --*/
         dynBasicblock* getBB ();
@@ -39,6 +40,7 @@ class bbInstruction : public dynInstruction {
         List<PR>* getPRwrList ();
         List<AR>* getLARrdList ();
         List<AR>* getLARwrList ();
+        bool isGRFCommLatency(CYCLE cycle);
 
         /*-- UPLD --*/
         bool isUPLDdep ();
@@ -82,6 +84,10 @@ class bbInstruction : public dynInstruction {
         List<AR> _p_rdReg;
         List<AR> _p_wrReg;
         List<AR> _p_rdReg_waitList;
+
+        /*-- GRF COMM LATENCY MODEL --*/
+        bool _add_grf_comm_latency;
+        CYCLE _add_grf_comm_latency_cycle;
 };
 
 #endif

@@ -25,6 +25,9 @@ class bb_grfManager : public unit {
         /* WIRES CTRL */
         bool hasFreeWire (AXES_TYPE, WIDTH);
         void updateWireState (AXES_TYPE, WIDTH, list<string> wire_name = list<string>(), bool update_wire = false);
+
+        /* MISC */
+        bool isGrfNearby (bbInstruction*, PR);
     
         void getStat ();
 
@@ -44,6 +47,12 @@ class bb_grfManager : public unit {
         ScalarStat& s_cant_rename_cnt;
         ScalarStat& s_can_rename_cnt;
         ScalarStat& s_unavailable_cnt;
+        ScalarStat& s_grf_lat_cnt;
+        ScalarStat& s_grf_no_lat_cnt;
+
+        /*-- MISC --*/
+        int _comm_delay_en;
+        bool _add_grf_comm_latency;
 };
 
 #endif
