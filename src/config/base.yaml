@@ -25,7 +25,7 @@ cpu:
        br_misspred_delay: 20     #NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
 
     backend: 
-       core: BASICBLOCK            #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
+       core: BASICBLOCK          #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
        width: 4 #TODO use it?
        lrf: enable
        squash: enable
@@ -114,8 +114,8 @@ cpu:
                rf_size: 20
                rf_lo: 100
                rf_hi: 119
-               rd_wire_cnt: 32
-               wr_wire_cnt: 16
+               rd_wire_cnt: 4
+               wr_wire_cnt: 2
                name: LRF
                cout: 9 #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                e_cam: 0
@@ -125,7 +125,7 @@ cpu:
                w_wire: 1
            grf:
                segmnt_cnt: 9 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
-               comm_delay_en: 0 #OPTIONS: 0 or 1
+               comm_delay_en: 1 #OPTIONS: 0 or 1
                a_size: 90
                a_lo: 120
                a_hi: 209
@@ -135,8 +135,8 @@ cpu:
                p_size: 252
                p_lo: 1
                p_hi: 252
-               rd_wire_cnt: 32
-               wr_wire_cnt: 16
+               rd_wire_cnt: 36
+               wr_wire_cnt: 18
                name: GRF
                cout: 1
                e_cam: 0
@@ -154,8 +154,8 @@ cpu:
                p_size: 252
                p_lo: 1
                p_hi: 252
-               rd_wire_cnt: 32
-               wr_wire_cnt: 16
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name: RF
                cout: 1
                e_cam: 0
@@ -223,10 +223,10 @@ cpu:
                 name: bbQUE
                 type: FIFO
             bbROB: 
-                size: 100
+                size: 13
                 count: 1
-                rd_wire_cnt: 100
-                wr_wire_cnt: 100
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.112165
                 e_leak: 4.718e-5
@@ -250,8 +250,8 @@ cpu:
             o3ROB: 
                 size: 180
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.608496
                 e_leak: 1.764e-3
@@ -261,10 +261,10 @@ cpu:
                 name: ROB
                 type: RAM
             LQ:
-                size: 200
+                size: 64
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 2.204357
                 e_ram: 1.236428
                 e_leak: 1.0861E-2
@@ -283,10 +283,10 @@ cpu:
                 name: LQ
                 type: CAM
             SQ:
-                size: 200
+                size: 32
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 1.315326
                 e_ram: 1.620642
                 e_leak: 7.786E-3
@@ -305,10 +305,10 @@ cpu:
                 name: SQ
                 type: CAM
             resStn:
-                size: 120
+                size: 64
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 3.210155
                 e_cam2: 1.184757
                 e_ram: 6.923552
@@ -384,8 +384,8 @@ cpu:
             ras: 
                 size: 16
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.633863
                 e_leak: 0       #TODO
@@ -396,8 +396,8 @@ cpu:
             BTB: 
                 size: 4096
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0.087126e3
                 e_ram: 0
                 e_leak: 4.514E-2
@@ -452,13 +452,13 @@ cpu:
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            schedule:
-               width: 4
+               width: 12
                latency: 1
                name: schedule
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            execution:
-               width: 4
+               width: 12
                latency: 1 #TODO what does it mean for FPU?
                name: execution
                e_ff: 5.864e-1

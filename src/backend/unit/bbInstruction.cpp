@@ -118,7 +118,7 @@ REG_TYPE bbInstruction::getARtype (AR a_reg) {
 
 bool bbInstruction::isGRFCommLatency(CYCLE now) {
     if (_add_grf_comm_latency == false || 
-        _add_grf_comm_latency_cycle < now) {
+        _add_grf_comm_latency_cycle < now) { /* 1 CYCLE COMM DELAY */
         return false;
     }
     return true;

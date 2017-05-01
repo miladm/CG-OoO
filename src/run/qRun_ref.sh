@@ -24,7 +24,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/6_bb'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_ino_multi_issue'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust'
+#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/multi_pass_issue/runahead_3'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bw_per_cluster/1_bw/1_eu'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/width_size/width_1/o3_ino'
@@ -43,8 +44,8 @@ FILE=$OUT_PATH/README
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
-#echo "Copying the YAML config file to output dir"
-#cp $CFG_PATH/base.yaml $OUT_PATH/.
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE
@@ -83,3 +84,4 @@ qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/s
 cd "$BENCH_INPUT/471.omnetpp/ref/input/"
 echo "$BENCH_INPUT/471.omnetpp/ref/input/"
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_omnetpp    $RUN_DIR/run.sh -b $CFG_PATH/471.omnetpp  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/471.omnetpp/471.omnetpp -d omnetpp.ini
+cd -
