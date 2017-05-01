@@ -452,13 +452,13 @@ cpu:
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            schedule:
-               width: 12
+               width: 4
                latency: 1
                name: schedule
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            execution:
-               width: 12
+               width: 4
                latency: 1 #TODO what does it mean for FPU?
                name: execution
                e_ff: 5.864e-1
