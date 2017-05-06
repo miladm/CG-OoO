@@ -135,7 +135,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 pair<bool, bbInstruction*> p = _LSQ_MGR->isLQviolation (ins);
                 bool is_violation = p.first;
                 violating_ld_ins = p.second;
-                _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
+                _bbROB->ram2Access (); /* INS COMPLETE NOTICE */
                 /*-- SQUASH DETECTION --*/
                 if (is_violation) { 
                     violating_ld_ins->setMemViolation ();
@@ -149,7 +149,7 @@ COMPLETE_STATUS bb_execution::completeIns () {
                 _RF_MGR->completeRegs (ins);
                 _RF_MGR->updateWireState (WRITE, ins, true);
                 _bbROB->updateWireState (WRITE, wires, true);
-                _bbROB->ramAccess (); /* INS COMPLETE NOTICE */
+                _bbROB->ram2Access (); /* INS COMPLETE NOTICE */
                 dbg.print (DBG_EXECUTION, "%s: %s %llu (cyc: %d)\n", 
                         _stage_name.c_str (), "Complete ins", ins->getInsID (), _clk->now ());
             }

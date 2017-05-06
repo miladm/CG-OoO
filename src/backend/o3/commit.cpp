@@ -92,6 +92,7 @@ PIPE_ACTIVITY o3_commit::commitImpl () {
 
         /*-- UPDATE WIRES --*/
         _iROB->updateWireState (READ);
+        _iROB->ramAccess (); /* REMOVE INS FROM ROB AND MARK REGISTERS NON-SPECULATIVE */
 
         /*-- STAT --*/
         s_ipc++;

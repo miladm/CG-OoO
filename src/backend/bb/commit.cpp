@@ -118,6 +118,7 @@ PIPE_ACTIVITY bb_commit::commitImpl () {
 
         /*-- UPDATE WIRES --*/
         _bbROB->updateWireState (READ);
+        _bbROB->ramAccess (); /* REMOVE INS FROM BBROB AND MARK REGISTERS NON-SPECULATIVE */
 
         /*-- STAT --*/
         s_bb_cnt++;

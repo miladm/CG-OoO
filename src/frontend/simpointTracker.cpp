@@ -104,7 +104,7 @@ inline BOOL simpleMode (UINT32 bb_ins_cnt)
             }
         } else { /* OUTSIDE SIM */
             if (!warmUpEn) {
-                if (g_var.g_insCountRightPath >= (FAST_FWD_WINDOW_SIZE - 5 * MILLION)) { /* WARMUP SIM */
+                if (g_var.g_insCountRightPath >= (FAST_FWD_WINDOW_SIZE - 6 * MILLION)) { /* WARMUP SIM */
                     g_msg.simEvent ("\nSIM WARMUP\n");
                     warmUpEn = true;
 				    if (g_cfg->isWrongPath ()) g_var.g_enable_wp = true;

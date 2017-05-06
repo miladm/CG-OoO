@@ -2,8 +2,8 @@ arrays:
     num_array: 1 # number of tables
 
 array:
-    word_width: 11 # output width in bits
-    num_words: 200 # number of words, each word is word_width wide
+    word_width: 17 # output width in bits
+    num_words: 180 # number of words, each word is word_width wide
     num_rows: 0 # number of rows
     num_cols: 0 # number of columns
     cin: 12 # maximum input capacitance in terms of lambda, don't change this

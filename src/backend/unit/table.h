@@ -55,6 +55,7 @@ class table : public unit {
         void camAccess (SCALAR num_access = 1);
         void cam2Access (SCALAR num_access = 1);
         void ramAccess (SCALAR num_access = 1);
+        void ram2Access (SCALAR num_access = 1);
         void fifoAccess (SCALAR num_access = 1);
 
     public:

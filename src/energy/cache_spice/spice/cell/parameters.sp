@@ -1,2 +1,2 @@
-.param Nw=86
-.param Nh=16
+.param Nw=32
+.param Nh=4

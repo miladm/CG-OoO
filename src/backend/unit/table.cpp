@@ -147,6 +147,11 @@ void table<tableType_T>::ramAccess (SCALAR num_access) {
 }
 
 template <typename tableType_T>
+void table<tableType_T>::ram2Access (SCALAR num_access) {
+    table<tableType_T>::_e_table.ram2Access (num_access);
+}
+
+template <typename tableType_T>
 void table<tableType_T>::fifoAccess (SCALAR num_access) {
     table<tableType_T>::_e_table.fifoAccess (num_access);
 }

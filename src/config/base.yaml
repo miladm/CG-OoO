@@ -100,8 +100,8 @@ cpu:
                rf_size: 90
                rf_lo: 120
                rf_hi: 209
-               rd_wire_cnt: 32
-               wr_wire_cnt: 16
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name: SIMPLE_RF
                cout: 1
                e_cam: 0
@@ -228,8 +228,9 @@ cpu:
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
-                e_ram: 0.112165
-                e_leak: 4.718e-5
+                e_ram: 3.334
+                e_ram2: 2.59
+                e_leak: 7.356e-3
                 e_w_eu2brob: 1.18e-2
                 e_w_rr2brob: 5.58e-2
                 w_wire: 1
@@ -238,8 +239,8 @@ cpu:
             inoROB: 
                 size: 50
                 count: 1
-                rd_wire_cnt: 16
-                wr_wire_cnt: 16
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 8.7344e-2
                 e_leak: 4.718e-5
@@ -253,8 +254,8 @@ cpu:
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 0
-                e_ram: 0.608496
-                e_leak: 1.764e-3
+                e_ram: 4.066
+                e_leak: 7.356e-3
                 e_w_eu2rob: 2.02e-2
                 e_w_rr2rob: 6.05e-2
                 w_wire: 1
@@ -267,7 +268,7 @@ cpu:
                 wr_wire_cnt: 4
                 e_cam: 2.204357
                 e_ram: 1.236428
-                e_leak: 1.0861E-2
+                e_leak: 1.0861e-2
                 e_w_rr2lsq_o3: 3.10e-2
                 e_w_rr2lsq_bb: 6.86e-2
                 e_w_lsq2rf: 9.68e-2
@@ -347,8 +348,8 @@ cpu:
             iWindow: #only for INO
                 size: 10
                 count: 1
-                rd_wire_cnt: 8
-                wr_wire_cnt: 8
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 4.38934e-1
                 e_leak: 1.397e-3
@@ -540,13 +541,13 @@ cpu:
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            schedule:
-               width: 4
+               width: 12
                latency: 2
                name: schedule
                e_ff: 5.864e-1
                e_leak: 5.864e-2
            execution:
-               width: 4
+               width: 12
                latency: 1 #TODO what does it mean for FPU?
                name: execution
                e_ff: 5.864e-1
