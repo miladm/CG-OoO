@@ -24,8 +24,8 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/6_bb'
-#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_2exeLat'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
+#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/multi_pass_issue/runahead_3'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bw_per_cluster/1_bw/1_eu'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/width_size/width_1/o3_ino'
@@ -44,8 +44,8 @@ FILE=$OUT_PATH/README
 mkdir $OUT_PATH
 mkdir $QSUB_OUT_PATH
 
-#echo "Copying the YAML config file to output dir"
-#cp $CFG_PATH/base.yaml $OUT_PATH/.
+echo "Copying the YAML config file to output dir"
+cp $CFG_PATH/base.yaml $OUT_PATH/.
 
 ###########################################
 # ADDING README FILE

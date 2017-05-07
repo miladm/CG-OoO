@@ -8,7 +8,7 @@
 #echo; echo resStn_cam2
 #python table.py ../structures/insWin/resStn_cam2.yaml > resStn_cam2.e
 #echo; echo resStn_ram
-#python table.py ../structures/insWin/resStn_ram.yaml > resStn_ram.e
+python table.py ../structures/insWin/resStn_ram.yaml > resStn_ram_64.e
 
 # echo; echo iWindow
 # python table.py ../structures/insWin/iWindow.yaml > ../structures/insWin/iWindow.e
@@ -30,7 +30,7 @@
 # echo; echo inoRob
 # python table.py ../structures/rob/inoRob.yaml > ../structures/rob/inoRob.e
 # echo; echo bbRob
- python table.py ../structures/rob/bbRob.yaml > ../structures/rob/bbRob.e
+# python table.py ../structures/rob/bbRob.yaml > ../structures/rob/bbRob.e
 # 
 # echo; echo grat
 # python table.py ../structures/rr/grat_128.yaml > ../structures/rr/grat_128.e

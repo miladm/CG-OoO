@@ -25,11 +25,11 @@ cpu:
        br_misspred_delay: 20     #NOTE: THIS IS A SENSITIVE NUMBER - CAHNGE IT WITH CAUTION
 
     backend: 
-       core: BASICBLOCK          #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
+       core: OUT_OF_ORDER        #OPTIONS: IN_ORDER, OUT_OF_ORDER, BASICBLOCK
        width: 4 #TODO use it?
        lrf: enable
        squash: enable
-       mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
+       mem_model: NAIVE_SPECUL   #OPTIONS: PERFECT, NAIVE_SPECUL
 
        bp:
            type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW
@@ -312,7 +312,7 @@ cpu:
                 wr_wire_cnt: 4
                 e_cam: 3.210155
                 e_cam2: 1.184757
-                e_ram: 6.923552
+                e_ram: 4.8439
                 e_leak: 1.9794E-2    # combination of RAM/CAM tables
                 e_w_rs2eu: 6.99e-2
                 e_w_rr2rs: 1.27e-1
