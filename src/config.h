@@ -62,10 +62,12 @@ class config {
     private:
 		bool parsePinPointFiles ();
 		void verifyConfig ();
+        void findLargestSimpoint ();
 
     public:
 		std::map<SIMP,SIMW> _simpoint;
 		bool _use_simpoint;
+        SIMP fast_fwd_ins_cnt;
 
 	private:
 		char _param[PARSE_LEN]; 

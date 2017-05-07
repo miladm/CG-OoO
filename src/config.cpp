@@ -337,7 +337,26 @@ bool config::parsePinPointFiles () {
         g_msg.simEvent ("%llu %f\n", it->second, it->first );
 	}
 	//#endif
+
+    findLargestSimpoint (); //A HACK
+
 	return  ( (_simpoint.size () > 0) ? true : false);
+}
+
+// A HACK TO GET THE MOST IMPORTANT SIMPOINT FOR SIMPLE SIMULATION
+void config::findLargestSimpoint () {
+    fast_fwd_ins_cnt = FAST_FWD_WINDOW_SIZE;
+    SIMW max_prob = 0.0;
+    if (_simpoint.size () > 0) {
+        map<SIMP, SIMW>::iterator it;
+        for  (it = _simpoint.begin (); it != _simpoint.end (); it++) {
+            if (it->second > max_prob) {
+                fast_fwd_ins_cnt = it->first;
+                max_prob = it->second;
+            }
+        }
+    }
+    cout << "MOST IMPORTANT SIMPOINT: " << fast_fwd_ins_cnt << endl;
 }
 
 void config::storeSimConfig (ofstream* _out_file) {
