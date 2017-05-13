@@ -52,6 +52,7 @@ class bb_grfManager : public unit {
 
         /*-- MISC --*/
         int _comm_delay_en;
+        int _cluster_size;
         bool _add_grf_comm_latency;
 };
 

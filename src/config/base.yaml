@@ -126,6 +126,7 @@ cpu:
            grf:
                segmnt_cnt: 9 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
                comm_delay_en: 1 #OPTIONS: 0 or 1
+               cluster_size: 3
                a_size: 90
                a_lo: 120
                a_hi: 209
@@ -323,9 +324,9 @@ cpu:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 9
                 runahead_issue_en: 1
-                runahead_issue_cnt: 4
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                runahead_issue_cnt: 6
+                rd_wire_cnt: 6
+                wr_wire_cnt: 6
                 e_cam: 0
                 e_ram: 0.439745
                 e_leak: 6.983e-4

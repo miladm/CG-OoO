@@ -19,6 +19,7 @@ bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& ro
       s_grf_no_lat_cnt (g_stats.newScalarStat (rf_name, "grf_no_lat_cnt ", "Number of nearby GRF segment READs", 0, NO_PRINT_ZERO))
 { 
     root["grf"]["comm_delay_en"] >> _comm_delay_en;
+    root["grf"]["cluster_size"] >> _cluster_size;
 }
 
 bb_grfManager::~bb_grfManager () { }
@@ -196,9 +197,11 @@ bool bb_grfManager::isGrfNearby (bbInstruction* ins, PR pr) {
 
     /* CHECK FOR EQUALITY ONLY - FOR NOW */
     /* NOTE: THIS CODE ASSUMES #SEGMENTS = #BBs */
-    if ((bb_grf_segmnt_indx == pr_grf_segmnt_indx) ||
-        (bb_grf_segmnt_indx + 1 == pr_grf_segmnt_indx) ||
-        (bb_grf_segmnt_indx + 2 == pr_grf_segmnt_indx)) {
+    int bb_grf_segmnt_indx_lo = bb_grf_segmnt_indx;
+    int bb_grf_segmnt_indx_hi = bb_grf_segmnt_indx + (_cluster_size - 1);
+
+    if (bb_grf_segmnt_indx_lo >= pr_grf_segmnt_indx &&
+        bb_grf_segmnt_indx_hi <= pr_grf_segmnt_indx) {
         s_grf_no_lat_cnt++;
         dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are nearby", _clk->now ());
@@ -208,7 +211,6 @@ bool bb_grfManager::isGrfNearby (bbInstruction* ins, PR pr) {
     dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Global operand of ins", ins->getInsID (), "are far away", _clk->now ());
     return false;
-
 }
 
 void bb_grfManager::getStat () {
