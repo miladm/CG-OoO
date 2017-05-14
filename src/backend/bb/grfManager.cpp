@@ -20,6 +20,7 @@ bb_grfManager::bb_grfManager (sysClock* clk, WIDTH blk_cnt, const YAML::Node& ro
 { 
     root["grf"]["comm_delay_en"] >> _comm_delay_en;
     root["grf"]["cluster_size"] >> _cluster_size;
+    root["grf"]["segmnt_cnt"] >> _grf_segmnt_cnt;
 }
 
 bb_grfManager::~bb_grfManager () { }
@@ -192,25 +193,43 @@ void bb_grfManager::updateWireState (AXES_TYPE axes_type, WIDTH numRegWires, lis
 }
 
 bool bb_grfManager::isGrfNearby (bbInstruction* ins, PR pr) {
+    bool in_cluster = true;
     WIDTH bb_grf_segmnt_indx = ins->getBBWinID ();
     WIDTH pr_grf_segmnt_indx = _GRF.PR2APRindx (pr);
 
     /* CHECK FOR EQUALITY ONLY - FOR NOW */
     /* NOTE: THIS CODE ASSUMES #SEGMENTS = #BBs */
     int bb_grf_segmnt_indx_lo = bb_grf_segmnt_indx;
-    int bb_grf_segmnt_indx_hi = bb_grf_segmnt_indx + (_cluster_size - 1);
+    int bb_grf_segmnt_indx_hi = (bb_grf_segmnt_indx + (_cluster_size - 1)) % _grf_segmnt_cnt;
 
-    if (bb_grf_segmnt_indx_lo >= pr_grf_segmnt_indx &&
-        bb_grf_segmnt_indx_hi <= pr_grf_segmnt_indx) {
+    int bb_grf_segmnt_indx_lower_bound = -1;
+    int bb_grf_segmnt_indx_upper_bound = -1;
+
+    if (bb_grf_segmnt_indx_lo <= bb_grf_segmnt_indx_hi) {
+        bb_grf_segmnt_indx_lower_bound = bb_grf_segmnt_indx_lo;
+        bb_grf_segmnt_indx_upper_bound = bb_grf_segmnt_indx_hi;
+        in_cluster = true;
+    } else {
+        bb_grf_segmnt_indx_lower_bound = bb_grf_segmnt_indx_hi + 1;
+        bb_grf_segmnt_indx_upper_bound = bb_grf_segmnt_indx_lo - 1;
+        in_cluster = false;
+    }
+
+#ifdef ASSERTION
+    Assert (bb_grf_segmnt_indx_lower_bound  > -1);
+    Assert (bb_grf_segmnt_indx_upper_bound  > -1);
+#endif
+
+    if (pr_grf_segmnt_indx >= bb_grf_segmnt_indx_lower_bound && pr_grf_segmnt_indx <= bb_grf_segmnt_indx_upper_bound) {
         s_grf_no_lat_cnt++;
         dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
                 "Global operand of ins", ins->getInsID (), "are nearby", _clk->now ());
-        return true;
+        return in_cluster;
     }
     s_grf_lat_cnt++;
     dbg.print (DBG_G_REG_FILES, "%s: %s %d s (cyc: %d)\n", _c_name.c_str (), 
             "Global operand of ins", ins->getInsID (), "are far away", _clk->now ());
-    return false;
+    return !in_cluster;
 }
 
 void bb_grfManager::getStat () {

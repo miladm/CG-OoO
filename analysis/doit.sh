@@ -3,7 +3,7 @@ RESULTS_DIR=/scratch/milad/qsub_outputs/perf_sim_test
 # REMOVE OLD LOG FILE
 rm log.out
 
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/test
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem
 
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/backend_cfg/bb1
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/backend_cfg/bb2

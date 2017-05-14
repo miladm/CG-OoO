@@ -117,27 +117,27 @@ cpu:
                rd_wire_cnt: 4
                wr_wire_cnt: 2
                name: LRF
-               cout: 9 #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
+               cout: 12 #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                e_cam: 0
                e_ram: 3.10289e-1
                e_leak: 1.098e-3
                e_w_eu2lrf: 3.85e-2
                w_wire: 1
            grf:
-               segmnt_cnt: 9 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
+               segmnt_cnt: 12 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
                comm_delay_en: 1 #OPTIONS: 0 or 1
-               cluster_size: 3
-               a_size: 90
-               a_lo: 120
+               cluster_size: 4
+               a_size: 96 #90
+               a_lo: 114 #120
                a_hi: 209
-               r_size: 162 # RENAME REGS
+               r_size: 246 #162 # RENAME REGS
                r_lo: 210
-               r_hi: 371
-               p_size: 252
+               r_hi: 455 #371
+               p_size: 336
                p_lo: 1
-               p_hi: 252
-               rd_wire_cnt: 36
-               wr_wire_cnt: 18
+               p_hi: 336
+               rd_wire_cnt: 48 #36
+               wr_wire_cnt: 24 #18
                name: GRF
                cout: 1
                e_cam: 0
@@ -322,11 +322,11 @@ cpu:
                 type: FIFO
             bbWindow:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 9
+                count: 12
                 runahead_issue_en: 1
-                runahead_issue_cnt: 6
-                rd_wire_cnt: 6
-                wr_wire_cnt: 6
+                runahead_issue_cnt: 4
+                rd_wire_cnt: 4
+                wr_wire_cnt: 4
                 e_cam: 0
                 e_ram: 0.439745
                 e_leak: 6.983e-4
@@ -337,7 +337,7 @@ cpu:
                 type: FIFO
             bbWinBuf:
                 size: 4    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
-                count: 9    #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
+                count: 12    #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                 rd_wire_cnt: 4
                 wr_wire_cnt: 4
                 e_cam: 4.713e-2
