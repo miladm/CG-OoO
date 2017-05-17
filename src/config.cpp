@@ -350,7 +350,7 @@ void config::findLargestSimpoint () {
     if (_simpoint.size () > 0) {
         map<SIMP, SIMW>::iterator it;
         for  (it = _simpoint.begin (); it != _simpoint.end (); it++) {
-            if (it->second > max_prob) {
+            if (it->second > max_prob && it->first < 1e11) {
                 fast_fwd_ins_cnt = it->first;
                 max_prob = it->second;
             }

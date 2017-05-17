@@ -24,7 +24,7 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/6_bb'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_3cluster_9bw_12eu/runahead_2'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_3cluster_9bw_12eu/runahead_6/test'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_skipaheadWakupEnergySave'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/ino_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
@@ -72,7 +72,7 @@ mkdir $QSUB_OUT_PATH
 
 # QSUB
 #qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_gcc        $RUN_DIR/run_gcc.sh -b $CFG_PATH/403.gcc        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/403.gcc/403.gcc $BENCH_INPUT/403.gcc/ref/input/scilab.i $QSUB_OUT_PATH/gcc_out.o
-qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_mcf        $RUN_DIR/run.sh -b $CFG_PATH/429.mcf        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/ref/input/inp.in
+#qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_mcf        $RUN_DIR/run.sh -b $CFG_PATH/429.mcf        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/ref/input/inp.in
 #qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_bzip2      $RUN_DIR/run.sh -b $CFG_PATH/401.bzip2      -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/401.bzip2/401.bzip2 $BENCH_INPUT/401.bzip2/ref/input/input.source 64
 #qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_hmmer      $RUN_DIR/run.sh -b $CFG_PATH/456.hmmer      -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/456.hmmer/456.hmmer $BENCH_INPUT/456.hmmer/ref/input/nph3.hmm $BENCH_INPUT/456.hmmer/ref/input/swiss41
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_sjeng      $RUN_DIR/run.sh -b $CFG_PATH/458.sjeng      -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/458.sjeng/458.sjeng $BENCH_INPUT/458.sjeng/ref/input/ref.txt
@@ -83,7 +83,7 @@ qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/s
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_xalancbmk  $RUN_DIR/run.sh -b $CFG_PATH/483.xalancbmk  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/483.xalancbmk/483.xalancbmk -v $BENCH_INPUT/483.xalancbmk/ref/input/t5.xml $BENCH_INPUT/483.xalancbmk/ref/input/xalanc.xsl
 #qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_perlbench  $RUN_DIR/run.sh -b $CFG_PATH/400.perlbench  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/400.perlbench/400.perlbench -I $BENCH_INPUT/400.perlbench/all/input/lib/ $BENCH_INPUT/400.perlbench/ref/input/checkspam.pl 2500 5 25 11 150 1 1 1 1
 
-cd "$BENCH_INPUT/471.omnetpp/ref/input/"
-echo "$BENCH_INPUT/471.omnetpp/ref/input/"
-qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_omnetpp    $RUN_DIR/run.sh -b $CFG_PATH/471.omnetpp  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/471.omnetpp/471.omnetpp -d omnetpp.ini
-cd -
+#cd "$BENCH_INPUT/471.omnetpp/ref/input/"
+#echo "$BENCH_INPUT/471.omnetpp/ref/input/"
+#qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_omnetpp    $RUN_DIR/run.sh -b $CFG_PATH/471.omnetpp  -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/471.omnetpp/471.omnetpp -d omnetpp.ini
+#cd -

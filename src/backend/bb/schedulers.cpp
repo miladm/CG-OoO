@@ -141,6 +141,10 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
     }
 
+    /*-- UPDATE READINESS FOR ALL RUNAHEAD ENTRIES - PROPERRLY HANDLING GRF
+     * COMM LATENCY --*/
+    updateReadinessForAll();
+
     return pipe_stall;
 }
 
@@ -226,6 +230,38 @@ bool bb_scheduler::isReady (bbInstruction* ins) {
 
 bool bb_scheduler::runaheadPermit (bbInstruction* ins) {
     return (_runahead_issue_en && ins->getBB()->runaheadPermit ());
+}
+
+void bb_scheduler::updateReadinessForAll () {
+    map<WIDTH, bbWindow*>::iterator it;
+    map<BB_ID,WIDTH> sorted_busy_bbWin;
+
+    /*-- SORT BASED ON BASICBLOCK AGE --*/
+    for (it= _busy_bbWin.begin (); it != _busy_bbWin.end (); it++) {
+        WIDTH bbWin_id = it->first;
+        bbWindow* bbWin = it->second;
+        if (bbWin->_win.getTableState () == EMPTY_BUFF) { continue; }
+        BB_ID bb_id = bbWin->_win.getNth_unsafe(0)->getBB()->getBBID ();
+        sorted_busy_bbWin.insert (pair<BB_ID, WIDTH> (bb_id, bbWin_id));
+    }
+
+    /* FIND READY INS */
+    map<BB_ID, WIDTH>::iterator bbWinEntry;
+    for (bbWinEntry = sorted_busy_bbWin.begin (); bbWinEntry != sorted_busy_bbWin.end (); bbWinEntry++) {
+        WIDTH bbWin_id = bbWinEntry->second;
+        bbWindow* bbWin = _busy_bbWin[bbWin_id];
+//        if (!bbWin->_win.hasFreeWire (READ)) {continue;}
+        if ((bbWin->getNumIssued () + bbWin->getIssueIndx ()) >= _runahead_issue_cnt) {continue;}
+        for (int i = bbWin->getIssueIndx (); i < (_runahead_issue_cnt-bbWin->getNumIssued ()); i++) {
+            if (i >= bbWin->_win.getTableSize ()) break;
+            bbInstruction* ins = bbWin->_win.getNth_unsafe (i);
+            if (runaheadPermit (ins)) {
+                _RF_MGR->isReady (ins);
+            }
+            dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
+                    "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
+        }
+    }
 }
 
 /*-- WRITE INTO BB WINDOW --*/

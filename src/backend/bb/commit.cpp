@@ -275,7 +275,7 @@ void bb_commit::memMispredSquash () {
         Assert (bb1->getBBID () == bb2->getBBID () && "Mem Squash may have caused an offset in bbQUE and bbROB");
     }
 
-    if (prev_bb != NULL) prev_bb->revokeRunaheadPermit ();
+    if (prev_bb != NULL) prev_bb->revokeRunaheadPermit (); //RUN THE BB IN ORDER
 }
 
 /*-- DELETE INSTRUCTION OBJ --*/
