@@ -252,12 +252,10 @@ void bb_scheduler::updateReadinessForAll () {
         bbWindow* bbWin = _busy_bbWin[bbWin_id];
 //        if (!bbWin->_win.hasFreeWire (READ)) {continue;}
         if ((bbWin->getNumIssued () + bbWin->getIssueIndx ()) >= _runahead_issue_cnt) {continue;}
-        for (int i = bbWin->getIssueIndx (); i < (_runahead_issue_cnt-bbWin->getNumIssued ()); i++) {
+        for (int i = bbWin->getIssueIndx (); i < _runahead_issue_cnt; i++) {
             if (i >= bbWin->_win.getTableSize ()) break;
             bbInstruction* ins = bbWin->_win.getNth_unsafe (i);
-            if (runaheadPermit (ins)) {
-                _RF_MGR->isReady (ins);
-            }
+            _RF_MGR->isReady (ins);
             dbg.print (DBG_SCHEDULER, "%s: %s %d (cyc: %d)\n", _stage_name.c_str (), 
                     "Found ready ins in BBWin", bbWin_id, _clk->now ()); 
         }

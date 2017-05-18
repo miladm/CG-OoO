@@ -24,7 +24,7 @@
 #OUT_PATH='/scratch/milad/qsub_outputs/perf_sim_test/multi_bb_fetch/width_size/width_4_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/6_bb'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_3cluster_9bw_12eu/runahead_6/test'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_3cluster_9bw_12eu/runahead_4/test'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_skipaheadWakupEnergySave'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/ino_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
