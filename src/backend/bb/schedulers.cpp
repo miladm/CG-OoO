@@ -77,6 +77,9 @@ void bb_scheduler::doSCHEDULER () {
     }
     if (g_cfg->isEnFwd ()) manageCDB ();
 
+    /*-- UPDATE READINESS FOR ALL RUNAHEAD ENTRIES - PROPERRLY HANDLING GRF
+     * COMM LATENCY --*/
+    updateReadinessForAll();
 
     /*-- STAT --*/
     if (pipe_stall == PIPE_STALL) s_stall_cycles++;
@@ -105,7 +108,14 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         _busy_bbWin[ready_bbWin_indx]->issueInc ();
         _RF_MGR->reserveRF (ins);
         ins = _busy_bbWin[ready_bbWin_indx]->_win.pullNth (ready_ins_indx);
-        _scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->pushBack (ins);
+
+        // NO REGISTER RENAMING FOR PURELY LOCAL OPERATIONS
+        if (ins->getTotNumRdAR () == 0 && ins->getNumWrAR () == 0) {
+            _scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->pushBack (ins, 1);
+        } else {
+            _scheduler_to_execution_port->Nth(getIssuePortIndx(ready_bbWin_indx))->pushBack (ins);
+        }
+
         ins->setPipeStage (ISSUE);
         _e_stage.ffAccess ();
         dbg.print (DBG_SCHEDULER, "%s: %s %llu (cyc: %d)\n", _stage_name.c_str (), "Issue ins", ins->getInsID (), _clk->now ());
@@ -140,10 +150,6 @@ PIPE_ACTIVITY bb_scheduler::schedulerImpl () {
         pipe_stall = PIPE_BUSY;
         dbg.print (DBG_SCHEDULER, "%s: %s (cyc: %d)\n", _stage_name.c_str (), "Issue ", _clk->now ());
     }
-
-    /*-- UPDATE READINESS FOR ALL RUNAHEAD ENTRIES - PROPERRLY HANDLING GRF
-     * COMM LATENCY --*/
-    updateReadinessForAll();
 
     return pipe_stall;
 }
@@ -187,6 +193,7 @@ bool bb_scheduler::hasReadyInsInBBWins (LENGTH &ready_bbWin_indx) {
             //        bbWin->_win.ramAccess (); //assume this step is free for now - TODO
             if (ins->getInsType () == MEM && ins->getMemType () == LOAD && bbWin->isStoreBypassed ()) {/* MEM RAW AVOIDANCE IN BB */
                 s_no_ld_bypass++;
+                _RF_MGR->isReady (ins); //UPDATE READINESS OF GLOBAL OPERANDS - GRF COMM SUPPORT
                 if (runaheadPermit (ins)) {
                     bbWin->issueIndxInc ();
                     bbWin->recordStallRdWrReg (ins);

@@ -222,14 +222,14 @@ PIPE_ACTIVITY bb_execution::executionImpl () {
             /*-- CHECKS --*/
             if (g_var.g_pipe_state == PIPE_WAIT_FLUSH || g_var.g_pipe_state == PIPE_FLUSH) break;
             if (_scheduler_to_execution_port->Nth(j)->getBuffState () == EMPTY_BUFF) break;
-            if (!_scheduler_to_execution_port->Nth(j)->isReady ()) break;
-            bbInstruction* ins = _scheduler_to_execution_port->Nth(j)->getFront ();
+            if (!_scheduler_to_execution_port->Nth(j)->hasReady ()) break;
+            bbInstruction* ins; // = _scheduler_to_execution_port->Nth(j)->getFront ();
             WIDTH eu_indx = getEUindx (j, i);
             exeUnit* EU = _aluExeUnits->Nth (eu_indx);
             if (EU->getEUstate (_clk->now (), false) != AVAILABLE_EU) continue;
 
             /*-- EXE INS --*/
-            ins = _scheduler_to_execution_port->Nth(j)->popFront ();
+            ins = _scheduler_to_execution_port->Nth(j)->popNextReady ();
             _e_stage.ffAccess (); //READ FROM PREV STAGE
             _e_stage.ffAccess (); //WRITE TO NEXT STAGE
             EU->_eu_timer.setNewTime (_clk->now ());

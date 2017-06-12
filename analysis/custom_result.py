@@ -33,6 +33,14 @@ def bp_energy (result_map):
     energy += result_map['branchPred.e_ff']
     energy += result_map['branchPred.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['bpu.epo'] = epo
+    result_map['bpu.power'] = energy
     result_map['bpu'] = energy
 
 def fetch_energy (result_map):
@@ -44,6 +52,14 @@ def fetch_energy (result_map):
     energy += result_map['l1_i_0.e_leak']
     energy += result_map['itlb.e_cam']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['fetch.epo'] = epo
+    result_map['fetch.power'] = energy
     result_map['fetch'] = energy
 
 def decode_rr_energy (result_map):
@@ -62,6 +78,14 @@ def decode_rr_energy (result_map):
     energy += result_map['decode.e_ff']
     energy += result_map['decode.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['decode-rename.epo'] = epo
+    result_map['decode-rename.power'] = energy
     result_map['decode-rename'] = energy
 
 def rename_energy (result_map):
@@ -85,6 +109,14 @@ def issue_energy (result_map):
     energy += issue_energy_ram (result_map)
     energy += issue_energy_rest (result_map)
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['issue.epo'] = epo
+    result_map['issue.power'] = energy
     result_map['issue'] = energy
 
 def issue_energy_cam (result_map):
@@ -139,6 +171,14 @@ def execute_energy (result_map):
     energy += result_map['execution.e_ff']
     energy += result_map['execution.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['execute.epo'] = epo
+    result_map['execute.power'] = energy
     result_map['execute'] = energy
 
 def memory_energy (result_map):
@@ -180,6 +220,14 @@ def memory_energy (result_map):
     energy += result_map['l3_0.e_ram']
     energy += result_map['l3_0.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['memory.epo'] = epo
+    result_map['memory.power'] = energy
     result_map['memory'] = energy
 
 def lsq_energy (result_map):
@@ -210,6 +258,14 @@ def l2_l3_energy (result_map):
     energy += result_map['l3_0.e_ram']
     energy += result_map['l3_0.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['l2-l3.epo'] = epo
+    result_map['l2-l3.power'] = energy
     result_map['l2-l3'] = energy
 
 def commit_energy (result_map):
@@ -229,6 +285,14 @@ def commit_energy (result_map):
     energy += result_map['commit.e_ff']
     energy += result_map['commit.e_leak']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['commit.epo'] = epo
+    result_map['commit.power'] = energy
     result_map['commit'] = energy
 
 def rf_energy (result_map):
@@ -254,6 +318,14 @@ def rf_energy (result_map):
     energy += result_map['LQ.rd_wire.e_w_lsq2lrf']
     energy += result_map['LQ.rd_wire.e_w_lsq2grf']
 
+    cycle_time  = 0.5e-9 #second
+    delay       = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
+    power       = energy / float(delay)
+    epo         = energy / float(all_ops)
+
+    result_map['rf.epo'] = epo
+    result_map['rf.power'] = energy
     result_map['rf'] = energy
 
 def wire_energy (result_map):
@@ -346,6 +418,7 @@ def core_power (result_map):
     energy = 0
     cycle_time = 0.5e-9 #second
     delay = result_map['sysClock.clk_cycles'] * cycle_time
+    all_ops     = result_map['commit.ins_cnt']
 
     energy += result_map['TOTAL.Energy']
     energy -= result_map['l1_d_0.e_ram']
@@ -359,6 +432,7 @@ def core_power (result_map):
 
     power = energy / delay
     result_map['core.Power'] = power
+    result_map['core.epo'] = energy / float(all_ops)
 
 def total_power (result_map):
     energy = 0
@@ -367,8 +441,12 @@ def total_power (result_map):
 
     energy += result_map['TOTAL.Energy']
 
-    power = energy / delay
+    power = energy / float(delay)
     result_map['TOTAL.Power'] = power
+
+    all_ops = result_map['commit.ins_cnt']
+    epo = energy / float(all_ops)
+    result_map['TOTAL.EPO'] = epo
 
 # LRF / GRF
 def lrf_energy (result_map):

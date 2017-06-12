@@ -346,11 +346,12 @@ bool config::parsePinPointFiles () {
 // A HACK TO GET THE MOST IMPORTANT SIMPOINT FOR SIMPLE SIMULATION
 void config::findLargestSimpoint () {
     fast_fwd_ins_cnt = FAST_FWD_WINDOW_SIZE;
-    SIMW max_prob = 0.0;
+    SIMW max_prob = -1.0;
     if (_simpoint.size () > 0) {
         map<SIMP, SIMW>::iterator it;
         for  (it = _simpoint.begin (); it != _simpoint.end (); it++) {
-            if (it->second > max_prob && it->first < 1e11) {
+//            if (it->second > max_prob && it->first < 1e11 && it->first > 0) {
+            if (it->second > max_prob && it->first > 0) {
                 fast_fwd_ins_cnt = it->first;
                 max_prob = it->second;
             }

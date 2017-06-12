@@ -28,12 +28,13 @@ bb_grfManager::~bb_grfManager () { }
 /*-- ARE ALL READ OPERANDS READY? --*/
 bool bb_grfManager::isReady (bbInstruction* ins) {
     List<AR>* p_rdReg_list = ins->getPRrdList ();
+    bool has_invalid_operand = false;
     for (int i = p_rdReg_list->NumElements () - 1; i >= 0; i--) {
         AR reg = p_rdReg_list->Nth (i);
         if (!_GRF.isPRvalid (reg)) {
             dbg.print (DBG_G_REG_FILES, "%s: %s %d %s (cyc: %d)\n", _c_name.c_str (), 
                     "Reg", reg, "is invlid", _clk->now ());
-            return false; /*-- OPERAND NOT AVAILABLE --*/
+            has_invalid_operand = true; /*-- OPERAND NOT AVAILABLE --*/
         } else {
             if (_comm_delay_en == 1 && !isGrfNearby (ins, reg)) {
                 ins->setGRFCommLatency(_clk->now ());
@@ -41,6 +42,8 @@ bool bb_grfManager::isReady (bbInstruction* ins) {
             p_rdReg_list->RemoveAt (i); /*-- OPTIMIZATION --*/
         }
     }
+    if (has_invalid_operand)
+        return false;
 
     if (p_rdReg_list->NumElements () == 0 &&
         (_comm_delay_en == 0 || 
