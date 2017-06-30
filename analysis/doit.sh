@@ -3,9 +3,14 @@ RESULTS_DIR=/scratch/milad/qsub_outputs/perf_sim_test
 # REMOVE OLD LOG FILE
 rm log.out
 
-./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_12wide
+./call_run.sh $RESULTS_DIR/multi_bb_fetch/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_skipaheadWakupEnergySave
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/taco_rebuttal_runs/multi_pass_issue_1cluster_4bw_4eu/runahead_5
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/taco_rebuttal_runs/multi_pass_issue_3cluster_12bw_12eu/runahead_5
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/taco_rebuttal_runs/multi_pass_issue_1cluster_4bw_4eu/runahead_5
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/taco_rebuttal_runs/width_size/width_4/bb
+#./call_run.sh $RESULTS_DIR/multi_bb_fetch/taco_rebuttal_runs/sgrf_cnt/sgrf_12
 
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/backend_cfg/bb1
 #./call_run.sh $RESULTS_DIR/multi_bb_fetch/backend_cfg/bb2

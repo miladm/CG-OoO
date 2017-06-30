@@ -26,6 +26,7 @@ def init_params (result_map):
   result_map['iROB.wr_wire.e_w_rr2rob'] = 0.0
   result_map['iROB.e_ram'] = 0.0
   result_map['iROB.e_leak'] = 0.0
+  result_map['iROB.size_rat'] = 0.0
   result_map['rfManager.e_ram'] = 0.0
   result_map['rfManager.e_leak'] = 0.0
   result_map['registerFile.rd_wire.e_wire'] = 0.0

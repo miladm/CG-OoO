@@ -25,10 +25,10 @@
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/sgrf_cnt/sgrf_1'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/bbWin_cnt/6_bb'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/width_size/width_4/bb'
-#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_2cluster_8bw_12eu/no_runahead'
-OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/sgrf_cnt/sgrf_6'
+#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/multi_pass_issue_1cluster_4bw_4eu/runahead_5'
+#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/sgrf_cnt/sgrf_3'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/o3_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_12wide'
-#OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_skipaheadWakupEnergySave'
+OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/9bw_skipahead4_w_grf_lat_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem_skipaheadWakupEnergySave'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/taco_rebuttal_runs/bw_per_cluster/1_bw/8_eu'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/spec_dyn_effect/ino_port_adjust_withFWD_longFastFWDandWarmup_speculativeMem'
 #OUT_PATH='/home/milad/esc_project/svn/PARS/src/output/multi_pass_issue/runahead_3'
@@ -73,7 +73,7 @@ mkdir $QSUB_OUT_PATH
  fi
 ###########################################
 
-##### QSUB
+###### QSUB
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_gcc        $RUN_DIR/run_gcc.sh -b $CFG_PATH/403.gcc        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/403.gcc/403.gcc $BENCH_INPUT/403.gcc/ref/input/scilab.i $QSUB_OUT_PATH/gcc_out.o
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_mcf        $RUN_DIR/run.sh -b $CFG_PATH/429.mcf        -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/429.mcf/429.mcf $BENCH_INPUT/429.mcf/ref/input/inp.in
 qsub -p -2.00 -e $QSUB_OUT_PATH -o $QSUB_OUT_PATH -V -l p=16 -pe smp 1 -S /bin/sh -N re_bzip2      $RUN_DIR/run.sh -b $CFG_PATH/401.bzip2      -c $CFG_PATH/$CFG_FILE -o $OUT_PATH -- $BENCH_EXEC/401.bzip2/401.bzip2 $BENCH_INPUT/401.bzip2/ref/input/input.source 64

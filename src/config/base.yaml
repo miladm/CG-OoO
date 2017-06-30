@@ -114,8 +114,8 @@ cpu:
                rf_size: 20
                rf_lo: 100
                rf_hi: 119
-               rd_wire_cnt: 4
-               wr_wire_cnt: 2
+               rd_wire_cnt: 8
+               wr_wire_cnt: 4
                name: LRF
                cout: 12 #NOTE EQUAL TO THE NUMBER OF BBWINDOWS
                e_cam: 0
@@ -124,18 +124,18 @@ cpu:
                e_w_eu2lrf: 3.85e-2
                w_wire: 1
            grf:
-               segmnt_cnt: 12 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
+               segmnt_cnt: 6 # SPECIFY THE NUMBER OF GRF SEGMENTS (1 is a unified GRF)
                comm_delay_en: 1 #OPTIONS: 0 or 1
                cluster_size: 4
                a_size: 96 #90
                a_lo: 114 #120
                a_hi: 209
-               r_size: 246 #162 # RENAME REGS
+               r_size: 252 #162 # RENAME REGS
                r_lo: 210
-               r_hi: 455 #371
-               p_size: 336
+               r_hi: 461 #371
+               p_size: 348
                p_lo: 1
-               p_hi: 336
+               p_hi: 348
                rd_wire_cnt: 48 #36
                wr_wire_cnt: 24 #18
                name: GRF
@@ -224,10 +224,10 @@ cpu:
                 name: bbQUE
                 type: FIFO
             bbROB: 
-                size: 13
+                size: 30
                 count: 1
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                rd_wire_cnt: 16
+                wr_wire_cnt: 16
                 e_cam: 0
                 e_ram: 3.334
                 e_ram2: 2.59
@@ -324,9 +324,9 @@ cpu:
                 size: 60    # MUST BE >= THE BB SIZE COMPILER GENERATES FOR SIM CORRECTNESS
                 count: 12
                 runahead_issue_en: 1
-                runahead_issue_cnt: 4
-                rd_wire_cnt: 4
-                wr_wire_cnt: 4
+                runahead_issue_cnt: 5
+                rd_wire_cnt: 5
+                wr_wire_cnt: 5
                 e_cam: 0
                 e_ram: 0.439745
                 e_leak: 6.983e-4

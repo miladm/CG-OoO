@@ -138,6 +138,8 @@ def parseSimpointFiles (in_paths, results_table, result_map):
 
 # POST PROCESS DATA AND GENERATE RICHER STATS
 def post_process_stat (result_map):
+  cr.postProcessEnergies(result_map)
+
   cr.stages (result_map)
   cr.wire_energy (result_map)
   cr.stage_energy (result_map)
@@ -145,6 +147,8 @@ def post_process_stat (result_map):
 
   cr.core_power (result_map)
   cr.total_power (result_map)
+  cr.dynamic_power (result_map)
+  cr.static_power (result_map)
   cr.bipsqw (result_map)
 
   cr.rename_energy (result_map)
