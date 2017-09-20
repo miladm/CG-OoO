@@ -30,6 +30,7 @@ cpu:
        lrf: enable
        squash: enable
        mem_model: PERFECT          #OPTIONS: PERFECT, NAIVE_SPECUL
+       lsq_model: 0                #0: Unified, 1: Segmented
 
        bp:
            type: TOURNAMENT        #OPTIONS: BIM, G_SHARE, TOURNAMENT, 2BC_GSKEW

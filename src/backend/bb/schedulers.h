@@ -66,6 +66,9 @@ class bb_scheduler : protected stage {
         List<bbWindow*> _avail_bbWin;
         map<WIDTH, bbWindow*> _busy_bbWin;
 
+        /*-- LSQ Mode --*/
+        LSQ_MODE _lsq_model;
+
         /*-- RUNAHEAD MODE PARAMS --*/
         WIDTH _runahead_issue_cnt;
         bool _runahead_issue_en;

@@ -39,6 +39,7 @@ bb_scheduler::bb_scheduler (port<bbInstruction*>& decode_to_scheduler_port,
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["rd_wire_cnt"] >> rd_wire_cnt;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["runahead_issue_cnt"] >> _runahead_issue_cnt;
     g_cfg->_root["cpu"]["backend"]["table"]["bbWindow"]["runahead_issue_en"] >> temp;
+    g_cfg->_root["cpu"]["backend"]["lsq_model"] >> (LSQ_MODE)_lsq_model;
     _runahead_issue_en = (bool)temp;
     if (!_runahead_issue_en) _runahead_issue_cnt = 1;
 #ifdef ASSERTION
@@ -366,7 +367,10 @@ void bb_scheduler::setBBWisAvail (WIDTH bbWin_id) {
 }
 
 bool bb_scheduler::hasAnAvailBBWin () {
-    return (_avail_bbWin.NumElements () == 0) ? false : true;
+    if (_lsq_model == UNIFIED_LSQ) {
+        return (_avail_bbWin.NumElements () == 0) ? false : true;
+    } else { //SEGMENTED_LSQ
+    }
 }
 
 bbWindow* bb_scheduler::getAnAvailBBWin () {
