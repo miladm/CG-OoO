@@ -11,8 +11,3 @@ For more about CG-OoO execution model, visit our [CG-OoO Paper](https://dl.acm.o
 
 * Setup Pintool
 * Build the simulator
-
-### Who do I talk to? ###
-
-* Milad Mohammad: milad-at-alumni-dot-stanford-dot-edu
-
