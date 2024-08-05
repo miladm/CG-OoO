@@ -1,12 +1,10 @@
-PhArS: Phraseblock Architecture Simulator
+PhArS: Phraseblock CPU Architecture Simulator and Compiler Backend
 
 # README #
 
-This README documents the steps necessary to get this application up and running.
+In this repo you find several CPU architecture models including an Out-of-order (OoO), in-order (InO), and coarse-grain out-of-order (GC-OoO). The exception model takes advantage of the Pin Tool instrumentation API. You also find a detailed energy modeling solution for each CPU subcomponent.
 
-### What is this repository for? ###
-
-* Milad's thesis research project (phraseblock execution simulator).
+For more about CG-OoO execution model, visit our paper: https://dl.acm.org/doi/abs/10.1145/3151034
 
 ### How do I get set up? ###
 
