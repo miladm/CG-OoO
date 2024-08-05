@@ -1,4 +1,4 @@
-## CG-OoO: A Phraseblock CPU Architecture Simulator and Compiler Backend
+## CG-OoO: An Energy Aware, High Performance CPU Architecture & Compiler
 
 # README #
 
