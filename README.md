@@ -1,4 +1,4 @@
-## PhArS: A Phraseblock CPU Architecture Simulator and Compiler Backend
+## PhArS: A Phraseblock CPU Architecture Simulator and Compiler Backend for CG-OoO
 
 # README #
 
