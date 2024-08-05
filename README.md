@@ -7,7 +7,7 @@ In this repo you find several CPU architecture models including an Out-of-order 
 # PUBLICATION #
 For more about CG-OoO execution model, visit our [CG-OoO Paper](https://dl.acm.org/doi/abs/10.1145/3151034)
 
-### How do I get set up? ###
+### SETUP ###
 
 * Setup Pintool
 * Build the simulator
